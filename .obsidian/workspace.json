@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "scientific-visualization/SKILL.md",
+                "file": "deep-research/SKILL.md",
                 "mode": "source",
                 "source": false
               },
@@ -182,6 +182,11 @@
   },
   "active": "c25c73382b1c0ad4",
   "lastOpenFiles": [
+    "deep-research.md",
+    "academic-pipeline.md",
+    "academic-paper.md",
+    "pdf.md",
+    "scientific-visualization/SKILL.md",
     "scientific-visualization.md",
     "polars-bio/SKILL.md",
     "polars-bio.md",
@@ -189,7 +194,6 @@
     "Untitled 2.canvas",
     "my-personal-note.md",
     "zzz-old-skill.md",
-    "academic-paper.md",
     "skills.base",
     "Untitled 1.canvas",
     "recipes/literature-review.md",
@@ -209,10 +213,6 @@
     "zarr-python.md",
     "xlsx.md",
     "what-if-oracle.md",
-    "wgs-prs.md",
-    "wes-clinical-report-es.md",
-    "wes-clinical-report-en.md",
-    "vibe-research-workflow.md",
     "README.md~",
     "maps"
   ]
