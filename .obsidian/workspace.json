@@ -11,10 +11,14 @@
             "id": "dff766aca3421b80",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "bulk-rnaseq.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "bulk-rnaseq"
             }
           }
         ]
@@ -178,6 +182,13 @@
   },
   "active": "dff766aca3421b80",
   "lastOpenFiles": [
+    "README.md~",
+    "4913",
+    "install-skills.sh~",
+    "install-skills.sh",
+    "bulk-rnaseq/SKILL.md",
+    "bulk-rnaseq.md",
+    "scientific-visualization.md",
     "pymc/SKILL.md",
     "pymc.md",
     "deep-research/SKILL.md",
@@ -186,7 +197,6 @@
     "academic-paper.md",
     "pdf.md",
     "scientific-visualization/SKILL.md",
-    "scientific-visualization.md",
     "polars-bio/SKILL.md",
     "polars-bio.md",
     "profile-report.md",
@@ -206,10 +216,6 @@
     "recipes/index.md",
     "recipes",
     "academic-paper/SKILL.md",
-    "maps/academic-pipelines.md",
-    "pyzotero/SKILL.md",
-    "scanpy.md",
-    "README.md~",
     "maps"
   ]
 }

@@ -3,6 +3,12 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
 - managed by vercel's skills
 - place at `~/.agents/skills`
 
+## Setup
+```bash
+git clone git@github.com:stanfish06/my-skills.git ~/.agent/skills
+cd ~/.agent/skills && ./install-skills.sh
+```
+
 ## Navigation
 
 - **[index.md](index.md)** — start here: all skills grouped into 18 domains, plus an A–Z list.
