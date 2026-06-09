@@ -45,6 +45,8 @@ This skill should be used when working with:
 
 TorchDrug **0.2.1** (latest on PyPI, July 2023) requires **Python 3.7–3.10** and **PyTorch 1.8–2.0**. Install PyTorch and `torch-scatter` / `torch-cluster` first (wheel URL depends on your PyTorch and CUDA versions — see [installation docs](https://torchdrug.ai/docs/installation.html)).
 
+> **⚠ Compatibility warning (as of June 2026):** TorchDrug has had no new release since July 2023. The package declares `python_requires=">=3.7,<3.11"`, so **it cannot be installed on Python 3.11 or newer** (which are today's standard defaults). PyTorch 2.1+ is also untested. If your environment uses Python 3.11+ you will need to pin to Python 3.10 (e.g. `uv venv --python 3.10`) or consider an actively-maintained alternative such as [DeepChem](https://github.com/deepchem/deepchem).
+
 ```bash
 uv pip install torch
 # Match torch/CUDA in the URL, e.g. torch-2.0.0+cu118 or cpu
@@ -458,4 +460,3 @@ Navigate to the appropriate reference file based on your task:
 8. **Technical details** → `core_concepts.md`
 
 Each reference provides comprehensive coverage of its domain with examples, best practices, and common use cases.
-
