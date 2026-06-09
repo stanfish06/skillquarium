@@ -27,6 +27,22 @@ TODAY = date.today().isoformat()
 FORCE_ALIASES = "--force-aliases" in sys.argv
 # delete root wrapper notes whose skill folder no longer exists (orphans).
 PRUNE = "--prune" in sys.argv
+# rewrite .obsidian/graph.json color groups + filter (run with the graph CLOSED,
+# or Obsidian will overwrite it from memory).
+GRAPH = "--graph" in sys.argv
+
+# distinct graph colors per domain (24-bit RGB ints), keyed by category key.
+PALETTE = {
+    "genomics-variants": 15079755, "single-cell-rnaseq": 3978315,
+    "proteomics-metabolomics": 16769305, "drug-discovery-chem": 4416472,
+    "sequence-phylogenetics": 16089649, "bio-databases-platforms": 9510580,
+    "clinical-medical": 4379892, "imaging-signals": 15741670, "ml-ai": 12578629,
+    "data-science-compute": 16432852, "quantum-physics": 4626832,
+    "research-writing": 14466815, "academic-pipelines": 10117924,
+    "literature-discovery": 16775880, "documents-office": 8388608,
+    "cloud-devops": 11206595, "vault-meta": 8421376, "reasoning-ideation": 117,
+}
+GRAPH_SEARCH = "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc"
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
 
 # acronyms too generic to be useful aliases
@@ -319,8 +335,34 @@ def emit_alias_block(aliases):
     return out
 
 
+def update_graph():
+    """Rewrite graph.json color groups + filter, preserving all other settings."""
+    import json
+    path = os.path.join(ROOT, ".obsidian", "graph.json")
+    cfg = {}
+    if os.path.isfile(path):
+        try:
+            cfg = json.load(open(path, encoding="utf-8"))
+        except (OSError, ValueError):
+            cfg = {}
+    if cfg.get("close") is False:
+        print("WARNING: graph.json says the Graph view is OPEN; close it first or "
+              "Obsidian may overwrite these colors.", file=sys.stderr)
+    cfg["search"] = GRAPH_SEARCH
+    cfg["showOrphans"] = False
+    cfg["colorGroups"] = [
+        {"query": f"tag:#domain/{key}", "color": {"a": 1, "rgb": PALETTE[key]}}
+        for key, *_ in CATEGORIES if key in PALETTE
+    ]
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(cfg, f, indent=2)
+    print(f"graph.json: wrote {len(cfg['colorGroups'])} color groups + filter")
+
+
 def main():
     os.makedirs(MAPS_DIR, exist_ok=True)
+    if GRAPH:
+        update_graph()
     title_by_key = {k: t for k, t, _, _, _ in CATEGORIES}
     key_by_skill, assigned = {}, {}
     for key, title, scope, related, skills in CATEGORIES:

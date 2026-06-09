@@ -11,10 +11,14 @@
             "id": "c25c73382b1c0ad4",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "polars-bio/SKILL.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SKILL"
             }
           }
         ]
@@ -178,6 +182,9 @@
   },
   "active": "c25c73382b1c0ad4",
   "lastOpenFiles": [
+    "polars-bio.md",
+    "profile-report.md",
+    "Untitled 2.canvas",
     "my-personal-note.md",
     "zzz-old-skill.md",
     "academic-paper.md",
@@ -206,8 +213,6 @@
     "vibe-research-workflow.md",
     "venue-templates.md",
     "vcf-annotator.md",
-    "variant-annotation.md",
-    "vaex.md",
     "README.md~",
     "maps"
   ]
