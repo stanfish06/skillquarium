@@ -1,0 +1,97 @@
+name: Update skills + rebuild
+
+# Pulls the latest version of every skill from its upstream source using the
+# Vercel skills CLI (`npx skills update -g`), then rebuilds the navigation layer
+# and commits any changes back.
+#
+# How CI reconstructs the CLI's global layout
+# -------------------------------------------
+# The skills CLI installs "global" skills into its canonical dir,
+# $HOME/.agents/skills, and records provenance (source repo, path, ref, hash)
+# in $HOME/.agents/.skill-lock.json — which lives ABOVE this repo and so is not
+# part of it. We therefore keep a committed snapshot at
+# .skill-vault/skill-lock.json and, in CI, rebuild the layout by symlinking the
+# canonical dir to this checkout and restoring the lock next to it. The CLI then
+# updates this repo in place.
+#
+# Source coverage
+# ---------------
+#   * sourceType: github (HTTPS, e.g. K-Dense-AI/scientific-agent-skills,
+#     vercel-labs/skills) update automatically via the GitHub API + GITHUB_TOKEN.
+#   * sourceType: git (SSH "git@github.com:..." remotes) only update if you add
+#     an optional SKILLS_SSH_KEY secret (a read-capable deploy/SSH key).
+#     Without it those sources are skipped; the run still succeeds.
+
+on:
+  schedule:
+    - cron: "17 6 * * *" # daily at 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vault-write
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Configure SSH for git@ skill sources (optional)
+        env:
+          SKILLS_SSH_KEY: ${{ secrets.SKILLS_SSH_KEY }}
+        if: ${{ env.SKILLS_SSH_KEY != '' }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.ssh"
+          printf '%s\n' "$SKILLS_SSH_KEY" > "$HOME/.ssh/id_ed25519"
+          chmod 600 "$HOME/.ssh/id_ed25519"
+          ssh-keyscan -t rsa,ed25519 github.com >> "$HOME/.ssh/known_hosts" 2>/dev/null
+
+      - name: Update all global skills from upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: "true"
+        run: |
+          set -euo pipefail
+          # The CLI's canonical global skills dir is $HOME/.agents/skills.
+          # Point it at this checkout so the update rewrites the repo in place,
+          # and restore the committed provenance lock beside it.
+          mkdir -p "$HOME/.agents"
+          ln -sfn "$GITHUB_WORKSPACE" "$HOME/.agents/skills"
+          cp "$GITHUB_WORKSPACE/.skill-vault/skill-lock.json" "$HOME/.agents/.skill-lock.json"
+
+          npx -y skills@latest update -g -y
+
+          # Persist the refreshed lock back into the committed snapshot.
+          cp "$HOME/.agents/.skill-lock.json" "$GITHUB_WORKSPACE/.skill-vault/skill-lock.json"
+
+      - name: Rebuild navigation layer
+        run: python3 .skill-vault/build.py
+
+      - name: Commit updated skills + index
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "All skills already up to date — nothing to commit."
+          else
+            git commit -m "chore(skills): update from upstream + rebuild index [skip ci]"
+            git push
+          fi

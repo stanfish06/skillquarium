@@ -1,0 +1,48 @@
+name: Rebuild vault index
+
+# Regenerates the human/Obsidian navigation layer (per-skill wrapper notes,
+# domain maps, and index.md) from the SKILL.md files whenever you push.
+# Fast and deterministic — it only runs .skill-vault/build.py and commits the
+# result back. It never touches the upstream-managed <skill>/SKILL.md files.
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - ".obsidian/**"      # Obsidian editor state churn shouldn't trigger CI
+      - ".github/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Shared with update-skills.yml so the two workflows never push concurrently.
+concurrency:
+  group: vault-write
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild navigation layer
+        run: python3 .skill-vault/build.py
+
+      - name: Commit regenerated files
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Navigation index already up to date — nothing to commit."
+          else
+            git commit -m "chore(vault): rebuild navigation index [skip ci]"
+            git push
+          fi
