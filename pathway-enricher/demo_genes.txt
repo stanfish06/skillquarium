@@ -1,0 +1,27 @@
+# Alzheimer's Disease hallmark / GWAS genes — demo data for pathway-enricher
+# Source: GWAS Catalog + Lambert et al. (2013), Bellenguez et al. (2022)
+APP
+APOE
+PSEN1
+PSEN2
+BIN1
+CLU
+TREM2
+ABCA7
+CR1
+MS4A6A
+PICALM
+SORL1
+EPHA1
+CD33
+CD2AP
+FERMT2
+SLC24A4
+RIN3
+INPP5D
+MEF2C
+NME8
+ZCWPW1
+CELF1
+HLA-DRB5
+PTK2B

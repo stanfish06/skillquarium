@@ -1,0 +1,30 @@
+test_id: sort1_dual_modality_eqtl_pqtl_ldl
+gene_symbol: SORT1
+ensembl_id: ENSG00000134243
+gwas_outcome_accession: GCST90269602
+gwas_outcome_label: cholesterol in medium VLDL
+lead_variant_id: "1_109274968_G_T"
+lead_rsid: rs12740374
+lead_position_grch38: 109274968
+chromosome: "1"
+window_bp: 1000000
+
+exposures_covered:
+  - kind: eqtl_catalogue
+    dataset_id: QTD000276
+    label: GTEx minor salivary gland ge-eQTL
+    quant_method: ge
+  - kind: ukb_ppp
+    synapse_id: syn51469328
+    ancestry: EUR
+    label: UKB-PPP EUR SORT1 plasma sortilin (Sun 2023)
+
+ot_release: "26.03"
+gwas_catalog_capture_date: "2026-05-15"
+eqtl_catalogue_release: v7+
+
+# Provenance is the originating project's commit (opaque to ClawBio
+# readers; kept as audit trail for the fixture capture).
+git_sha_at_capture: b8e138520cc9d9cac633ab5c90db662bd8b6af9e
+captured_at_utc: "2026-05-15T18:07:03Z"
+captured_by: build-session

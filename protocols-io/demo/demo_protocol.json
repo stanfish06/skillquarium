@@ -1,0 +1,44 @@
+{
+  "payload": {
+    "id": 12001,
+    "title": "Total RNA Extraction from Tissue (TRIzol)",
+    "uri": "total-rna-extraction-trizol-demo",
+    "doi": "dx.doi.org/10.17504/protocols.io.demo1",
+    "published_on": 1600000000,
+    "created_on": 1599000000,
+    "public": true,
+    "peer_reviewed": 1,
+    "creator": {"name": "Demo Researcher", "username": "demo-researcher"},
+    "authors": [
+      {"name": "Demo Researcher", "affiliation": "ClawBio University"}
+    ],
+    "description": "A standard TRIzol-based total RNA extraction protocol suitable for most tissue types. Yields high-quality RNA for downstream RT-qPCR, RNA-seq, and microarray analysis.",
+    "guidelines": "Work in an RNase-free environment. Use filter tips throughout.",
+    "before_start": "Pre-chill centrifuge to 4\u00b0C. Prepare 75% ethanol with DEPC-treated water.",
+    "warning": "TRIzol contains phenol and guanidine isothiocyanate \u2014 use in a fume hood.",
+    "materials": [
+      {"name": "TRIzol Reagent", "vendor": {"name": "Thermo Fisher"}, "sku": "15596026"},
+      {"name": "Chloroform", "vendor": {"name": "Sigma-Aldrich"}, "sku": "C2432"},
+      {"name": "Isopropanol", "vendor": {"name": "Sigma-Aldrich"}, "sku": "I9516"},
+      {"name": "75% Ethanol (DEPC-treated)", "vendor": {"name": "In-house"}, "sku": ""},
+      {"name": "DEPC-treated water", "vendor": {"name": "Thermo Fisher"}, "sku": "AM9920"}
+    ],
+    "stats": {
+      "number_of_views": 4520,
+      "number_of_steps": 8,
+      "number_of_exports": 312,
+      "number_of_votes": 18
+    },
+    "steps": [
+      {"step": "Homogenise 50\u2013100 mg tissue in 1 mL TRIzol Reagent using a tissue homogeniser. Pipette up and down until fully lysed."},
+      {"step": "Incubate homogenate at room temperature for 5 minutes to permit complete dissociation of nucleoprotein complexes."},
+      {"step": "Add 200 \u00b5L chloroform per 1 mL TRIzol. Cap securely and shake vigorously for 15 seconds. Incubate 2\u20133 minutes at RT."},
+      {"step": "Centrifuge at 12,000 \u00d7 g for 15 minutes at 4\u00b0C. The mixture separates into a lower red phenol-chloroform phase, an interphase, and a colourless upper aqueous phase containing RNA."},
+      {"step": "Transfer the aqueous phase (~500 \u00b5L) to a fresh RNase-free tube. Avoid disturbing the interphase."},
+      {"step": "Add 500 \u00b5L isopropanol. Mix by inversion and incubate 10 minutes at RT. Centrifuge 12,000 \u00d7 g for 10 minutes at 4\u00b0C. RNA pellet should be visible."},
+      {"step": "Discard supernatant. Wash pellet with 1 mL 75% ethanol. Vortex briefly, centrifuge 7,500 \u00d7 g for 5 minutes at 4\u00b0C. Repeat wash once."},
+      {"step": "Air-dry pellet for 5\u201310 minutes (do not over-dry). Resuspend in 30\u201350 \u00b5L DEPC-treated water. Incubate 55\u00b0C for 10 minutes to dissolve. Quantify by NanoDrop; expect A260/A280 \u2265 1.8."}
+    ]
+  },
+  "status_code": 0
+}

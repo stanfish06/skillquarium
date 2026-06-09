@@ -1,0 +1,43 @@
+schema_version: "1.0"
+
+# SORT1 pQTL: UKB-PPP European (discovery) plasma cis-pQTL × cholesterol-VLDL GWAS.
+# Protein-side companion to the SORT1 dual-modality canonical demo
+# (paired with 02_eqtl_catalogue_x_gwas_catalog/ which renders the eQTL
+# side from GTEx minor salivary gland).
+#
+# This demo uses source: ukb_ppp (v1.3 addition). The UKB-PPP fetcher
+# checks for a bundled regional slice FIRST; if present (the case for
+# this SORT1 EUR window) it loads anonymously. The PAT path is only
+# triggered for queries outside the bundled cohort.
+
+lead:
+  variant_id: "1_109274968_G_T"
+  chromosome: "1"
+  position_bp: 109274968
+  window_bp: 1000000
+
+exposure:
+  trait_label: "SORT1 plasma sortilin from UKB-PPP European (discovery)"
+  gene_symbol: SORT1
+  fetch:
+    source: ukb_ppp
+    protein_label: SORT1
+    ancestry: EUR
+
+outcome:
+  trait_label: "cholesterol in medium VLDL"
+  fetch:
+    source: gwas_catalog
+    accession: GCST90269602
+
+ld:
+  source: 1000g_phase3_grch38
+  super_pop: EUR
+  region_vcf_path: null
+
+gene_track:
+  source: gencode_v39
+  gtf_path: null
+
+provenance:
+  ot_release: "26.03"

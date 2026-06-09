@@ -1,0 +1,65 @@
+well_id,detection_plate,perturbation_type,compound_id,compound_name,dose_um,clinical_phase,moa
+A01,PLATE_01,vehicle_control,DMSO,DMSO,0.0,,vehicle
+A02,PLATE_01,vehicle_control,DMSO,DMSO,0.0,,vehicle
+A03,PLATE_01,vehicle_control,DMSO,DMSO,0.0,,vehicle
+A04,PLATE_01,vehicle_control,DMSO,DMSO,0.0,,vehicle
+A05,PLATE_01,vehicle_control,DMSO,DMSO,0.0,,vehicle
+A06,PLATE_01,vehicle_control,DMSO,DMSO,0.0,,vehicle
+A07,PLATE_01,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+A08,PLATE_01,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+A09,PLATE_01,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+A10,PLATE_01,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+A11,PLATE_01,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+A12,PLATE_01,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+B01,PLATE_01,experimental_treatment,BRD-0001,Drug_0001,2.5,Phase 2,unknown
+B02,PLATE_01,experimental_treatment,BRD-0002,Drug_0002,2.5,Phase 2,unknown
+B03,PLATE_01,experimental_treatment,BRD-0003,Drug_0003,2.5,Launched,kinase inhibitor
+B04,PLATE_01,experimental_treatment,BRD-0004,Drug_0004,2.5,Phase 2,unknown
+B05,PLATE_01,experimental_treatment,BRD-0005,Drug_0005,2.5,Phase 2,unknown
+B06,PLATE_01,experimental_treatment,BRD-0006,Drug_0006,2.5,Launched,unknown
+B07,PLATE_01,experimental_treatment,BRD-0007,Drug_0007,2.5,Phase 2,kinase inhibitor
+B08,PLATE_01,experimental_treatment,BRD-0008,Drug_0008,2.5,Phase 2,unknown
+B09,PLATE_01,experimental_treatment,BRD-0009,Drug_0009,2.5,Launched,unknown
+B10,PLATE_01,experimental_treatment,BRD-0010,Drug_0010,2.5,Phase 2,unknown
+B11,PLATE_01,experimental_treatment,BRD-0011,Drug_0011,2.5,Phase 2,unknown
+B12,PLATE_01,experimental_treatment,BRD-0012,Drug_0012,2.5,Launched,unknown
+C01,PLATE_01,experimental_treatment,BRD-0013,Drug_0013,2.5,Phase 2,unknown
+C02,PLATE_01,experimental_treatment,BRD-0014,Drug_0014,2.5,Phase 2,unknown
+C03,PLATE_01,experimental_treatment,BRD-0015,Drug_0015,2.5,Launched,kinase inhibitor
+C04,PLATE_01,experimental_treatment,BRD-0016,Drug_0016,2.5,Phase 2,unknown
+C05,PLATE_01,experimental_treatment,BRD-0017,Drug_0017,2.5,Phase 2,unknown
+C06,PLATE_01,experimental_treatment,BRD-0018,Drug_0018,2.5,Launched,unknown
+C07,PLATE_01,experimental_treatment,BRD-0019,Drug_0019,2.5,Phase 2,unknown
+C08,PLATE_01,experimental_treatment,BRD-0020,Drug_0020,2.5,Phase 2,unknown
+C09,PLATE_02,vehicle_control,DMSO,DMSO,0.0,,vehicle
+C10,PLATE_02,vehicle_control,DMSO,DMSO,0.0,,vehicle
+C11,PLATE_02,vehicle_control,DMSO,DMSO,0.0,,vehicle
+C12,PLATE_02,vehicle_control,DMSO,DMSO,0.0,,vehicle
+D01,PLATE_02,vehicle_control,DMSO,DMSO,0.0,,vehicle
+D02,PLATE_02,vehicle_control,DMSO,DMSO,0.0,,vehicle
+D03,PLATE_02,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+D04,PLATE_02,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+D05,PLATE_02,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+D06,PLATE_02,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+D07,PLATE_02,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+D08,PLATE_02,positive_control,POS,Bortezomib,10.0,Launched,proteasome inhibitor
+D09,PLATE_02,experimental_treatment,BRD-0001,Drug_0001,2.5,Phase 2,unknown
+D10,PLATE_02,experimental_treatment,BRD-0002,Drug_0002,2.5,Phase 2,unknown
+D11,PLATE_02,experimental_treatment,BRD-0003,Drug_0003,2.5,Launched,kinase inhibitor
+D12,PLATE_02,experimental_treatment,BRD-0004,Drug_0004,2.5,Phase 2,unknown
+E01,PLATE_02,experimental_treatment,BRD-0005,Drug_0005,2.5,Phase 2,unknown
+E02,PLATE_02,experimental_treatment,BRD-0006,Drug_0006,2.5,Launched,unknown
+E03,PLATE_02,experimental_treatment,BRD-0007,Drug_0007,2.5,Phase 2,kinase inhibitor
+E04,PLATE_02,experimental_treatment,BRD-0008,Drug_0008,2.5,Phase 2,unknown
+E05,PLATE_02,experimental_treatment,BRD-0009,Drug_0009,2.5,Launched,unknown
+E06,PLATE_02,experimental_treatment,BRD-0010,Drug_0010,2.5,Phase 2,unknown
+E07,PLATE_02,experimental_treatment,BRD-0011,Drug_0011,2.5,Phase 2,unknown
+E08,PLATE_02,experimental_treatment,BRD-0012,Drug_0012,2.5,Launched,unknown
+E09,PLATE_02,experimental_treatment,BRD-0013,Drug_0013,2.5,Phase 2,unknown
+E10,PLATE_02,experimental_treatment,BRD-0014,Drug_0014,2.5,Phase 2,unknown
+E11,PLATE_02,experimental_treatment,BRD-0015,Drug_0015,2.5,Launched,kinase inhibitor
+E12,PLATE_02,experimental_treatment,BRD-0016,Drug_0016,2.5,Phase 2,unknown
+F01,PLATE_02,experimental_treatment,BRD-0017,Drug_0017,2.5,Phase 2,unknown
+F02,PLATE_02,experimental_treatment,BRD-0018,Drug_0018,2.5,Launched,unknown
+F03,PLATE_02,experimental_treatment,BRD-0019,Drug_0019,2.5,Phase 2,unknown
+F04,PLATE_02,experimental_treatment,BRD-0020,Drug_0020,2.5,Phase 2,unknown

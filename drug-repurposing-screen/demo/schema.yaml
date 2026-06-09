@@ -1,0 +1,23 @@
+name: demo_toy_screen
+screen_topology: primary_only
+paths:
+  primary_readout: readouts/primary.csv
+  treatment_info: metadata/treatment_info.csv
+  sample_info: metadata/sample_info.csv
+  features_dir: features
+columns:
+  sample_id: sample_id
+  well_id: well_id
+  perturbation_type: perturbation_type
+  detection_plate: detection_plate
+  compound_id: compound_id
+  compound_name: compound_name
+controls:
+  negative: vehicle_control
+  positive: positive_control
+qc:
+  ssmd_cutoff: 1.5
+hit_calling:
+  viability_cutoff: 0.5
+  robust_z_cutoff: -2.0
+  min_samples: 2

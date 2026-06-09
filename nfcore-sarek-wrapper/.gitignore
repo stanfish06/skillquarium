@@ -1,0 +1,20 @@
+# Python bytecode / test & lint caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Nextflow run state. The wrapper launches Nextflow with cwd = the user's
+# --output directory (never here); these guard against stray dev runs inside
+# the skill leaking framework bookkeeping into the repo.
+.nextflow/
+.nextflow.log
+work/
+
+# Run outputs: the wrapper writes results and the reproducibility bundle to the
+# --output directory, not into the skill. (The tracked reproducibility/*.json
+# files are shipped reference data, not run output.)
+output/
+
+# macOS
+.DS_Store

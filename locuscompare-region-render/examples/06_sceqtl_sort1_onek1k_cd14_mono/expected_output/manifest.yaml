@@ -1,0 +1,37 @@
+skill: locuscompare
+version: 0.1.0
+lead_variant_id: 1_109274968_G_T
+lead_rs_id: null
+n_pairs: 2886
+n_palindromic_excluded: 378
+plot_path: 1_109274968_G_T_full_locuscompare.png
+notes: []
+render_block:
+  ot_release: '26.03'
+  exposure_source: eqtl_catalogue
+  exposure_source_release: v7+
+  exposure_study_id: QTD000609
+  exposure_protein_label: ''
+  exposure_ancestry: ''
+  exposure_ancestry_label: ''
+  exposure_harmonisation_version: ''
+  outcome_source: gwas_catalog_harmonised
+  outcome_source_release: '2026-05-24'
+  outcome_study_id: GCST90269602
+  outcome_harmonisation_version: ''
+  ld_panel: 1000g_phase3_v5b_grch38_basic
+  ld_panel_super_pop: EUR
+  ld_panel_version: 5b_remote_2019_03_12
+  plink_version: PLINK v1.90p 64-bit (6 Sep 2023)
+  window_bp: 1000000
+  lead_variant_id: 1_109274968_G_T
+  n_pairs: 2886
+  n_palindromic_excluded: 378
+  scatter_downsampled: false
+  scatter_downsample_target: 5000
+  ancestry_caveats:
+  - OneK1K sceQTL signal at SORT1 may be sparse in CD14+ monocytes; the renderer may
+    degrade to Tier-1 if there are fewer than 5 joinable variants.
+  data_source_warnings: []
+  plot_artifact: 1_109274968_G_T_full_locuscompare.png
+  fetched_at: '2026-05-24T16:45:57Z'

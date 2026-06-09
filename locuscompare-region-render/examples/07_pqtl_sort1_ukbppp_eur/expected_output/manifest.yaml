@@ -1,0 +1,35 @@
+skill: locuscompare
+version: 0.1.0
+lead_variant_id: 1_109274968_G_T
+lead_rs_id: null
+n_pairs: 4606
+n_palindromic_excluded: 635
+plot_path: 1_109274968_G_T_full_locuscompare.png
+notes: []
+render_block:
+  ot_release: '26.03'
+  exposure_source: ukb_ppp
+  exposure_source_release: UKB-PPP r1 2023 (Sun 2023)
+  exposure_study_id: syn51469328
+  exposure_protein_label: SORT1 (Q99523, OID20213)
+  exposure_ancestry: EUR
+  exposure_ancestry_label: European (discovery)
+  exposure_harmonisation_version: ''
+  outcome_source: gwas_catalog_harmonised
+  outcome_source_release: '2026-05-24'
+  outcome_study_id: GCST90269602
+  outcome_harmonisation_version: ''
+  ld_panel: 1000g_phase3_v5b_grch38_basic
+  ld_panel_super_pop: EUR
+  ld_panel_version: 5b_remote_2019_03_12
+  plink_version: PLINK v1.90p 64-bit (6 Sep 2023)
+  window_bp: 1000000
+  lead_variant_id: 1_109274968_G_T
+  n_pairs: 4606
+  n_palindromic_excluded: 635
+  scatter_downsampled: false
+  scatter_downsample_target: 5000
+  ancestry_caveats: []
+  data_source_warnings: []
+  plot_artifact: 1_109274968_G_T_full_locuscompare.png
+  fetched_at: '2026-05-24T16:46:01Z'

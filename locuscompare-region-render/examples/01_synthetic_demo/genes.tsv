@@ -1,0 +1,4 @@
+gene_symbol	start	end	strand	biotype
+DEMOGENE_A	100000	200000	+	protein_coding
+DEMOGENE_B	450000	550000	-	protein_coding
+DEMOGENE_C	800000	900000	+	protein_coding

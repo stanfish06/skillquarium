@@ -1,0 +1,11 @@
+# Synthetic demo data for hla-typing
+# Format: TSV with header
+# This is NOT real patient data
+# Description: HLA allele typing from WGS/WES VCF data
+#
+# chrom	pos	ref	alt	genotype
+chr6	29942470	A	G	0/1
+chr6	31353872	C	T	1/1
+chr6	32609227	G	A	0/1
+chr6	32631934	T	C	0/0
+chr6	32659879	A	C	0/1

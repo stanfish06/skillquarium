@@ -1,0 +1,85 @@
+[
+  {
+    "id": 10241,
+    "name": "CRISPR Screen — BRCA1 sgRNA Library (Batch 3)",
+    "created_at": "2026-01-08T09:14:22Z",
+    "updated_at": "2026-02-17T16:44:01Z",
+    "tags": [
+      {"name": "CRISPR"},
+      {"name": "functional-screen"},
+      {"name": "breast-cancer"}
+    ],
+    "data_fields": [
+      {"label": "Cell Line", "field_type": "default", "value": "MCF7"},
+      {"label": "Library Size", "field_type": "numeric", "value": "18423"},
+      {"label": "MOI", "field_type": "numeric", "value": "0.3"},
+      {"label": "Timepoint", "field_type": "default", "value": "D0, D7, D14, D21"},
+      {"label": "Sequencing Platform", "field_type": "default", "value": "Illumina NovaSeq 6000"},
+      {"label": "Analysis Status", "field_type": "default", "value": "Complete — MAGeCK v0.5.9"}
+    ],
+    "protocols": [
+      {"id": 3301, "name": "Lentiviral sgRNA Library Transduction"},
+      {"id": 3302, "name": "Puromycin Selection (48h)"},
+      {"id": 3303, "name": "Genomic DNA Extraction + Amplicon-seq"}
+    ],
+    "comments": [
+      {"text": "D14 replicate 2 had low reads — excluded from final analysis.", "created_at": "2026-02-10T11:22:00Z"},
+      {"text": "MAGeCK output and volcano plots saved to /data/crispr_screen/batch3/", "created_at": "2026-02-17T16:44:01Z"}
+    ]
+  },
+  {
+    "id": 10187,
+    "name": "scTIP-seq Timecourse — Doxycycline-inducible MYC",
+    "created_at": "2025-11-03T14:07:55Z",
+    "updated_at": "2026-01-29T10:15:40Z",
+    "tags": [
+      {"name": "single-cell"},
+      {"name": "chromatin"},
+      {"name": "MYC"},
+      {"name": "timecourse"}
+    ],
+    "data_fields": [
+      {"label": "Cell Line", "field_type": "default", "value": "U2OS-iMYC"},
+      {"label": "Timepoints", "field_type": "default", "value": "0h, 6h, 24h, 72h post-dox"},
+      {"label": "Cells per Timepoint", "field_type": "numeric", "value": "50000"},
+      {"label": "Antibody", "field_type": "default", "value": "anti-H3K27ac (Abcam ab4729)"},
+      {"label": "Sequencing Depth", "field_type": "numeric", "value": "400000000"},
+      {"label": "Pipeline", "field_type": "default", "value": "Seurat 5.1 / Signac 1.12"}
+    ],
+    "protocols": [
+      {"id": 3310, "name": "scTIP-seq Cell Fixation & Permeabilisation"},
+      {"id": 3311, "name": "Antibody Incubation & Tagmentation"},
+      {"id": 3312, "name": "10x Chromium Library Prep v3.1"}
+    ],
+    "comments": [
+      {"text": "72h timepoint shows clear MYC-driven enhancer activation at TERT locus.", "created_at": "2026-01-22T09:05:00Z"}
+    ]
+  },
+  {
+    "id": 10099,
+    "name": "RNA Extraction Validation — TRIzol vs RNeasy",
+    "created_at": "2025-09-15T08:30:10Z",
+    "updated_at": "2025-10-02T13:45:22Z",
+    "tags": [
+      {"name": "QC"},
+      {"name": "RNA"},
+      {"name": "method-comparison"}
+    ],
+    "data_fields": [
+      {"label": "Sample Type", "field_type": "default", "value": "Mouse liver, n=6"},
+      {"label": "RIN (TRIzol)", "field_type": "numeric", "value": "9.1"},
+      {"label": "RIN (RNeasy)", "field_type": "numeric", "value": "9.4"},
+      {"label": "260/280 (TRIzol)", "field_type": "numeric", "value": "1.92"},
+      {"label": "260/280 (RNeasy)", "field_type": "numeric", "value": "2.05"},
+      {"label": "Yield preference", "field_type": "default", "value": "RNeasy preferred — higher purity"}
+    ],
+    "protocols": [
+      {"id": 3280, "name": "TRIzol RNA Extraction"},
+      {"id": 3281, "name": "Qiagen RNeasy Plus Mini Kit"},
+      {"id": 3282, "name": "Agilent Bioanalyzer RNA 6000 Nano QC"}
+    ],
+    "comments": [
+      {"text": "SOP updated: RNeasy is now standard for all downstream sequencing.", "created_at": "2025-10-02T13:45:22Z"}
+    ]
+  }
+]

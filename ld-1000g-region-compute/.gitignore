@@ -1,0 +1,20 @@
+# Cache for 1000G region VCFs (fetched on-demand from EBI FTP).
+*.tbi
+*.tsv.gz
+*.vcf.gz
+*.vcf.gz.tbi
+
+# plink2 intermediate / output files
+*.pvar
+*.pgen
+*.psam
+*.log
+
+# Run outputs (skill writes manifest/pairs/report to --output dir, not here).
+runs/
+output/
+out/
+
+# Python bytecode
+__pycache__/
+*.pyc

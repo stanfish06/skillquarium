@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "id": 30756,
+      "title": "Tree Mapping for Leaf Collection (Megantic Only)",
+      "uri": "tree-mapping-for-leaf-collection-megantic-only-baaciaaw",
+      "doi": "dx.doi.org/10.17504/protocols.io.baaciaaw",
+      "published_on": 1586383032,
+      "created_on": 1575912496,
+      "number_of_steps": 11,
+      "creator": {"name": "Vellend Cabo", "username": "vellend-cabo"},
+      "public": true,
+      "peer_reviewed": 0
+    },
+    {
+      "id": 8503,
+      "title": "Gene calling with Prodigal",
+      "uri": "gene-calling-with-prodigal-kixcufn",
+      "doi": "dx.doi.org/10.17504/protocols.io.kixcufn",
+      "published_on": 1509493090,
+      "created_on": 1509493000,
+      "number_of_steps": 3,
+      "creator": {"name": "Matt Sullivan Lab", "username": "matt-sullivan"},
+      "public": true,
+      "peer_reviewed": 1
+    },
+    {
+      "id": 872,
+      "title": "Lysis Buffer (20 mL)",
+      "uri": "lysis-buffer-20-ml-c4gytv",
+      "doi": "dx.doi.org/10.17504/protocols.io.c4gytv",
+      "published_on": 1487372466,
+      "created_on": 1434670606,
+      "number_of_steps": 3,
+      "creator": {"name": "Celina Gomez", "username": "celina-gomez"},
+      "public": true,
+      "peer_reviewed": 0
+    },
+    {
+      "id": 12001,
+      "title": "Total RNA Extraction from Tissue (TRIzol)",
+      "uri": "total-rna-extraction-trizol-demo",
+      "doi": "dx.doi.org/10.17504/protocols.io.demo1",
+      "published_on": 1600000000,
+      "created_on": 1599000000,
+      "number_of_steps": 8,
+      "creator": {"name": "Demo Researcher", "username": "demo-researcher"},
+      "public": true,
+      "peer_reviewed": 1
+    },
+    {
+      "id": 15002,
+      "title": "RNA Quality Assessment with Bioanalyzer",
+      "uri": "rna-quality-bioanalyzer-demo",
+      "doi": "dx.doi.org/10.17504/protocols.io.demo2",
+      "published_on": 1610000000,
+      "created_on": 1609000000,
+      "number_of_steps": 5,
+      "creator": {"name": "QC Specialist", "username": "qc-specialist"},
+      "public": true,
+      "peer_reviewed": 0
+    }
+  ],
+  "pagination": {
+    "current_page": 1,
+    "total_pages": 1,
+    "total_results": 5,
+    "page_size": 10
+  }
+}

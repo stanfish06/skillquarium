@@ -1,0 +1,2 @@
+# Synthetic empty test input for hla-typing
+# No data lines follow

@@ -1,0 +1,17 @@
+# Cache directories (per-region GENCODE / sumstats slices, fetched on-demand).
+*.tbi
+*.tsv.gz
+*.tsv.gz.tbi
+*.vcf.gz
+
+# Run outputs (skill writes plot/manifest/report to --output dir, not here).
+runs/
+output/
+out/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Matplotlib
+*.png.cache

@@ -1,0 +1,10 @@
+name: ukb-ppp-region-fetch
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python>=3.10
+  - requests>=2.28
+  - pip
+  - pip:
+      - synapseclient>=3.0  # only on PyPI; not in conda-forge as of 2026-05

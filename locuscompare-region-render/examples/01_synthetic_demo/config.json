@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "lead": {
+    "variant_id": "1_500000_A_T",
+    "chromosome": "1",
+    "position_bp": 500000,
+    "window_bp": 1000000
+  },
+  "exposure": {
+    "trait_label": "Synthetic exposure (ENSG_DEMO_EXPRESSION)",
+    "gene_symbol": "DEMOGENE_B",
+    "sumstats_path": "exposure.tsv"
+  },
+  "outcome": {
+    "trait_label": "Synthetic outcome (DEMO_TRAIT)",
+    "sumstats_path": "outcome.tsv"
+  },
+  "ld": {
+    "source": "synthetic",
+    "ld_matrix_path": "ld_matrix.tsv"
+  },
+  "gene_track": {
+    "source": "synthetic",
+    "genes_path": "genes.tsv"
+  },
+  "harmonisation": {
+    "exclude_palindromic": true
+  }
+}

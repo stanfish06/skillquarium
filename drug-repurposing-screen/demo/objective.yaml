@@ -1,0 +1,18 @@
+name: Approved compounds selective in IBD organoid context
+compound_filters:
+  clinical_phase:
+  - Launched
+  - Phase 2
+  - Phase 3
+target_context:
+  sample_info_query: context == 'context_A'
+off_target_context:
+  sample_info_query: context == 'context_B'
+selectivity:
+  prefer: context_dependent
+priority_weights:
+  selectivity: 0.3
+  biomarker_strength: 0.25
+  clinical_phase: 0.2
+  mechanism_novelty: 0.15
+  phenocopy_support: 0.1

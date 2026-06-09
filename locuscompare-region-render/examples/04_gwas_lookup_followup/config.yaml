@@ -1,0 +1,56 @@
+schema_version: "1.0"
+
+# Chains with ClawBio's `gwas-lookup` skill. After looking up an interesting
+# rsID across 9 databases, gwas-lookup returns CSV tables of associations
+# (gwas_associations.csv, eqtl_associations.csv, etc.). Pick a co-localizing
+# (GWAS, eQTL) pair and render its regional LocusCompare here.
+#
+# Typical workflow:
+#   python clawbio.py run gwas-lookup --rsid rs646776 --output runs/gwas_lookup/
+#   # Inspect runs/gwas_lookup/tables/{gwas_associations,eqtl_associations}.csv
+#   # Pick the strongest co-localizing pair, write this config, render:
+#   python skills/locuscompare-region-render/cli.py \
+#       --input examples/04_gwas_lookup_followup/config.yaml \
+#       --output runs/locuscompare_rs646776/
+
+# Lead variant carried over from the gwas-lookup query (rsID -> chr_pos_ref_alt
+# resolution is in gwas_lookup's resolved variant table).
+lead:
+  variant_id: "1_109274968_G_T"   # rs646776 in GRCh38 chr_pos_ref_alt form
+  chromosome: "1"
+  position_bp: 109274968
+  window_bp: 1000000
+
+# Exposure side: gwas-lookup's `eqtl_associations.csv` listed
+# (study=QTD000276, gene_name=SORT1, p=8e-30, beta=+0.602) as the strongest
+# eQTL hit at this variant.
+exposure:
+  trait_label: "SORT1 expression — minor salivary gland (eQTL Cat QTD000276)"
+  fetch:
+    source: eqtl_catalogue
+    dataset_id: QTD000276
+    molecular_trait_id: ENSG00000134243
+
+# Outcome side: gwas-lookup's `gwas_associations.csv` flagged
+# (study_accession=GCST90269602, trait="cholesterol in medium VLDL", p=2e-50)
+# as the strongest GWAS hit at this variant.
+outcome:
+  trait_label: "cholesterol in medium VLDL"
+  fetch:
+    source: gwas_catalog
+    accession: GCST90269602
+
+# Provenance: which gwas-lookup run produced the (study, study) pairing
+provenance:
+  gwas_lookup_run_dir: "runs/gwas_lookup/"
+  rsid_queried: "rs646776"
+
+ld:
+  source: 1000g_phase3_grch38
+  super_pop: EUR
+
+gene_track:
+  source: gencode_v39
+
+harmonisation:
+  exclude_palindromic: true

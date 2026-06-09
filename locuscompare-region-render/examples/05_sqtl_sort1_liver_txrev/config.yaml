@@ -1,0 +1,48 @@
+schema_version: "1.0"
+
+# SORT1 sQTL: GTEx liver txrev (transcript-usage) splicing-QTL x cholesterol-VLDL GWAS.
+# Transcript-usage flavour of the canonical 1p13.3 LDL/CHD locus.
+#
+# OT studyId: gtex_txrev_liver_ensg00000134243 (the canonical OT QTL studyId
+# format for an eQTL Catalogue sQTL row).
+# eQTL Cat dataset: QTD000269 (verified live 2026-05-15).
+#
+# Quant-method choice: txrev (transcript-usage) was selected over leafcutter
+# (intron-excision) because the GTEx liver leafcutter credible-set file
+# (QTD000270.cc.tsv.gz) does not retain any SORT1 splice cluster in this
+# region; the four leafcutter clusters in chr1:108.77M-109.77M belong to
+# GSTM1 and a neighbour. txrev is the canonical eQTL Catalogue
+# splicing-QTL semantic and DOES retain SORT1 (transcripts ENST00000483508
+# + ENST00000538502) in the credible set.
+
+lead:
+  variant_id: "1_109274968_G_T"
+  chromosome: "1"
+  position_bp: 109274968
+  window_bp: 1000000
+
+exposure:
+  trait_label: "SORT1 transcript usage in GTEx liver (txrev)"
+  gene_symbol: SORT1
+  fetch:
+    source: eqtl_catalogue
+    dataset_id: QTD000269
+    molecular_trait_id: ENSG00000134243
+
+outcome:
+  trait_label: "cholesterol in medium VLDL"
+  fetch:
+    source: gwas_catalog
+    accession: GCST90269602
+
+ld:
+  source: 1000g_phase3_grch38
+  super_pop: EUR
+  region_vcf_path: null
+
+gene_track:
+  source: gencode_v39
+  gtf_path: null
+
+provenance:
+  ot_release: "26.03"

@@ -1,0 +1,10 @@
+{
+  "description": "Synthetic toy repurposing screen (10 samples, 20 compounds, 2 plates)",
+  "selective_compounds": [
+    "BRD-0003",
+    "BRD-0007",
+    "BRD-0015"
+  ],
+  "target_context": "context_A (IBD organoid)",
+  "reference_context": "context_B (fibroblast)"
+}

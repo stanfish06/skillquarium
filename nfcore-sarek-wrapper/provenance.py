@@ -1,0 +1,683 @@
+# nfcore-sarek-wrapper / provenance.py
+"""Reproducibility bundle writer for nf-core/sarek runs.
+
+Writes the canonical bundle into ``<output_dir>/reproducibility/``:
+
+    samplesheet.valid.csv          (copied from caller-provided path)
+    params.yaml                    (copied from caller-provided path)
+    commands.sh                    (copied from caller-provided path)
+    manifest.json                  (generated)
+    checksums.sha256               (generated — outputs minus work/.nextflow/reproducibility/logs)
+    environment.yml                (generated — minimal conda spec)
+    pipeline_source.json           (generated)
+    parameters.json                (generated — full params snapshot)
+    samplesheet.json               (generated — SamplesheetReport serialised)
+    outputs.json                   (generated — OutputsReport serialised; skipped pre-run)
+    tool_versions.json             (generated — parsed from the published versions YAML if present)
+    compatibility_policy.json      (copied from skills/.../reproducibility/)
+
+All JSONs use ``indent=2, sort_keys=True``.  All paths in JSONs are POSIX
+strings, and paths under ``output_dir`` are written as relative POSIX paths.
+
+``load_manifest`` is used by the orchestrator to perform resume-drift checks
+against ``compatibility_policy.json``.  Missing fields in older manifests are
+treated as ``None``/``False`` per the policy's ``legacy_field_defaults`` map.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import glob
+import json
+import re
+import shutil
+import sys
+from dataclasses import dataclass, field, fields, is_dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable
+
+_SKILL_DIR = Path(__file__).resolve().parent
+if str(_SKILL_DIR) in sys.path:
+    sys.path.remove(str(_SKILL_DIR))
+sys.path.insert(0, str(_SKILL_DIR))
+
+
+def _purge_foreign_bare_modules(*names: str) -> None:
+    for name in names:
+        module = sys.modules.get(name)
+        module_file = Path(getattr(module, "__file__", "") or "")
+        if (
+            module is not None
+            and _SKILL_DIR not in module_file.parents
+            and module_file != _SKILL_DIR / f"{name}.py"
+        ):
+            sys.modules.pop(name, None)
+
+
+_purge_foreign_bare_modules("errors", "schemas", "preflight")
+
+from schemas import DEFAULT_ALIGNER, DEFAULT_STEP, SKILL_NAME, SKILL_VERSION  # noqa: E402
+
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
+#: Reference path params hashed/recorded into the manifest.  Mirrors
+#: ``preflight.REFERENCE_PATH_PARAMS`` — see test_reference_path_params_parity.
+REFERENCE_PATH_PARAMS: tuple[str, ...] = (
+    "fasta", "fasta_fai", "dict",
+    "bwa", "bwamem2", "dragmap",
+    "dbsnp", "dbsnp_tbi",
+    "known_indels", "known_indels_tbi",
+    "known_snps", "known_snps_tbi",
+    "germline_resource", "germline_resource_tbi",
+    "pon", "pon_tbi",
+    "intervals",
+    "ascat_alleles", "ascat_loci", "ascat_loci_gc", "ascat_loci_rt",
+    "chr_dir", "mappability",
+    "msisensor2_models", "msisensorpro_scan",
+    "ngscheckmate_bed",
+    "sentieon_dnascope_model",
+    "snpeff_cache", "vep_cache",
+    "dbnsfp", "dbnsfp_tbi",
+    "mastermind_file",
+    "phenotypes_file", "phenotypes_file_tbi",
+    "spliceai_snv", "spliceai_snv_tbi", "spliceai_indel", "spliceai_indel_tbi",
+    "bcftools_annotations", "bcftools_annotations_tbi", "bcftools_header_lines",
+    "condel_config", "cnvkit_reference", "cf_chrom_len",
+    "bbsplit_fasta_list", "bbsplit_index",
+    "bcftools_columns", "snpsift_databases",
+    "varlociraptor_scenario_tumor_only",
+    "varlociraptor_scenario_somatic",
+    "varlociraptor_scenario_germline",
+    "multiqc_config", "multiqc_logo", "multiqc_methods_description",
+    "igenomes_base",
+)
+_REFERENCE_PATH_PATTERN_PARAMS = frozenset({"known_indels", "known_indels_tbi"})
+
+_CHECKSUM_BUF_SIZE = 64 * 1024  # 64 KB stream chunk
+_LARGE_FILE_THRESHOLD = 500 * 1024 * 1024  # 500 MB — still hash, but stream
+
+# Directories under <output_dir> we never include in checksums.sha256.
+# ``reproducibility`` (which now also holds ``logs/``) carries the bundle itself;
+# ``logs`` is listed explicitly too as a defensive guard against execution logs
+# leaking into the manifest from any non-default layout.
+_CHECKSUM_EXCLUDE_DIRS: tuple[str, ...] = ("work", ".nextflow", "reproducibility", "logs")
+_CHECKSUM_EXCLUDE_SUFFIXES: tuple[str, ...] = (".log",)
+
+
+# ---------------------------------------------------------------------------
+# Public dataclass
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class ProvenanceBundle:
+    bundle_dir: Path
+    manifest_path: Path
+    files_written: list[Path]
+    warnings: list[str] = field(default_factory=list)
+
+
+# ---------------------------------------------------------------------------
+# Hashing primitives
+# ---------------------------------------------------------------------------
+
+
+def _sha256_file(path: Path) -> str:
+    """Streamed SHA-256 of a file's bytes."""
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        while True:
+            chunk = handle.read(_CHECKSUM_BUF_SIZE)
+            if not chunk:
+                break
+            digest.update(chunk)
+    return f"sha256:{digest.hexdigest()}"
+
+
+def compute_params_checksum(params: dict[str, Any]) -> str:
+    """Return ``sha256:<hex>`` of the canonical JSON dump of ``params``.
+
+    Sort keys + ``default=str`` make the output stable across reorderings and
+    across Path-valued entries.
+    """
+    canonical = json.dumps(params, sort_keys=True, default=str, separators=(",", ":"))
+    digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    return f"sha256:{digest}"
+
+
+def compute_samplesheet_checksum(samplesheet_csv: Path) -> str:
+    """SHA-256 of the normalised samplesheet file bytes."""
+    return _sha256_file(Path(samplesheet_csv))
+
+
+def _glob_reference_pattern(pattern: str) -> list[Path]:
+    """Resolve basic Nextflow-style glob patterns, including `{a,b}` groups."""
+    expanded = [pattern]
+    brace_re = re.compile(r"\{([^{}]+)\}")
+    while any(brace_re.search(item) for item in expanded):
+        next_expanded: list[str] = []
+        for item in expanded:
+            match = brace_re.search(item)
+            if match is None:
+                next_expanded.append(item)
+                continue
+            for alternative in match.group(1).split(","):
+                next_expanded.append(item[:match.start()] + alternative + item[match.end():])
+        expanded = next_expanded
+    return sorted({Path(match) for item in expanded for match in glob.glob(item)})
+
+
+def _sha256_directory(path: Path) -> str:
+    """Hash a reference directory deterministically from relative names and file contents."""
+    digest = hashlib.sha256()
+    for child in sorted(p for p in path.rglob("*") if p.is_file()):
+        digest.update(child.relative_to(path).as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(_sha256_file(child).encode("ascii"))
+        digest.update(b"\n")
+    return f"sha256:{digest.hexdigest()}"
+
+
+def compute_reference_checksums(params: dict[str, Any]) -> dict[str, str]:
+    """For each reference param: pass URIs through, hash local files, mark missing.
+
+    URIs (anything containing ``://``) are stored verbatim — they document the
+    intent of the run but cannot be locally hashed. Local files are hashed.
+    The official ``known_indels{,_tbi}`` pattern parameters are hashed over
+    their sorted resolved file set. Existing local directories are hashed
+    recursively so index/cache content changes invalidate resume.
+    """
+    out: dict[str, str] = {}
+    for name in REFERENCE_PATH_PARAMS:
+        raw = params.get(name)
+        if raw is None or raw == "":
+            continue
+        if raw is False or (isinstance(raw, str) and raw.strip().lower() == "false"):
+            out[name] = "<disabled>"
+            continue
+        s = str(raw)
+        if "://" in s:
+            out[name] = s
+            continue
+        if name in _REFERENCE_PATH_PATTERN_PARAMS and (glob.has_magic(s) or ("{" in s and "}" in s)):
+            matches = [p for p in _glob_reference_pattern(s) if p.is_file()]
+            if matches:
+                digest = hashlib.sha256()
+                for matched in matches:
+                    digest.update(matched.as_posix().encode("utf-8"))
+                    digest.update(b"\0")
+                    digest.update(_sha256_file(matched).encode("ascii"))
+                    digest.update(b"\n")
+                out[name] = f"sha256:{digest.hexdigest()}"
+            else:
+                out[name] = "<missing>"
+            continue
+        path = Path(s)
+        if path.is_file():
+            out[name] = _sha256_file(path)
+        elif path.is_dir():
+            out[name] = _sha256_directory(path)
+        else:
+            out[name] = "<missing>"
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Path helpers
+# ---------------------------------------------------------------------------
+
+
+def _to_posix(path: Path | str) -> str:
+    return Path(str(path)).as_posix()
+
+
+def _relativise(path: Path, anchor: Path, *, warnings: list[str]) -> str:
+    """Return ``path`` as a POSIX string relative to ``anchor`` when possible.
+
+    If the path is outside ``anchor`` we keep it absolute and append a warning
+    so the caller can see we deviated from the relative-path policy.
+    """
+    p = Path(path)
+    try:
+        return p.resolve().relative_to(anchor.resolve()).as_posix()
+    except ValueError:
+        warnings.append(
+            f"Path is outside output_dir; kept absolute: {p.as_posix()}"
+        )
+        return p.as_posix()
+
+
+def _json_safe(value: Any, *, anchor: Path | None = None, warnings: list[str] | None = None) -> Any:
+    """Recursively convert dataclasses / Paths / sets into JSON-safe primitives.
+
+    When ``anchor`` is provided, ``Path`` instances that resolve under it are
+    rendered as relative POSIX strings.  Otherwise paths are stringified as
+    absolute POSIX.
+    """
+    if warnings is None:
+        warnings = []
+    if is_dataclass(value) and not isinstance(value, type):
+        return {f.name: _json_safe(getattr(value, f.name), anchor=anchor, warnings=warnings) for f in fields(value)}
+    if isinstance(value, Path):
+        if anchor is not None:
+            return _relativise(value, anchor, warnings=warnings)
+        return value.as_posix()
+    if isinstance(value, dict):
+        return {str(k): _json_safe(v, anchor=anchor, warnings=warnings) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(item, anchor=anchor, warnings=warnings) for item in value]
+    if isinstance(value, set):
+        return sorted(_json_safe(item, anchor=anchor, warnings=warnings) for item in value)
+    return value
+
+
+def _dump_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n",
+        encoding="utf-8",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Sub-file builders
+# ---------------------------------------------------------------------------
+
+
+def _build_pipeline_source_payload(pipeline_source: Any) -> dict[str, Any]:
+    """Normalise either a ``PipelineSource`` dataclass or a plain dict."""
+    if pipeline_source is None:
+        return {}
+    if is_dataclass(pipeline_source) and not isinstance(pipeline_source, type):
+        raw = {f.name: getattr(pipeline_source, f.name) for f in fields(pipeline_source)}
+    elif isinstance(pipeline_source, dict):
+        raw = dict(pipeline_source)
+    else:
+        # Fall back to attribute access — best effort.
+        raw = {
+            "source_kind": getattr(pipeline_source, "source_kind", None),
+            "resolved_version": getattr(pipeline_source, "resolved_version", None),
+            "resolved_uri": getattr(pipeline_source, "resolved_uri", None),
+            "local_path": getattr(pipeline_source, "local_path", None),
+        }
+    # Cast Path values to POSIX strings up-front.
+    for key, val in list(raw.items()):
+        if isinstance(val, Path):
+            raw[key] = val.as_posix()
+    return raw
+
+
+def _build_parameters_payload(params: dict[str, Any]) -> dict[str, Any]:
+    return _json_safe(params)
+
+
+def _build_samplesheet_payload(report: Any, *, output_dir: Path | None = None, warnings: list[str] | None = None) -> dict[str, Any]:
+    if report is None:
+        return {}
+    return _json_safe(report, anchor=output_dir, warnings=warnings)
+
+
+def _build_outputs_payload(report: Any, *, output_dir: Path, warnings: list[str]) -> dict[str, Any]:
+    return _json_safe(report, anchor=output_dir, warnings=warnings)
+
+
+def _build_tool_versions_payload(output_dir: Path, *, warnings: list[str]) -> dict[str, Any]:
+    pipeline_info = output_dir / "upstream" / "results" / "pipeline_info"
+    # Sarek 3.8.1's workflow writes the nf-core-named file; the rendered
+    # output documentation names it generically. Accept both published forms.
+    candidates = (
+        pipeline_info / "nf_core_sarek_software_mqc_versions.yml",
+        pipeline_info / "software_versions.yml",
+    )
+    candidate = next((path for path in candidates if path.is_file()), None)
+    if candidate is None:
+        return {}
+    try:
+        import yaml  # type: ignore
+    except Exception:  # pragma: no cover — yaml is a runtime dependency of sarek
+        warnings.append("PyYAML unavailable; tool_versions.json left as {}.")
+        return {}
+    try:
+        with candidate.open("r", encoding="utf-8") as handle:
+            data = yaml.safe_load(handle) or {}
+    except Exception as exc:  # malformed YAML → degrade gracefully
+        warnings.append(f"Could not parse {candidate.as_posix()}: {exc}")
+        return {}
+    if not isinstance(data, dict):
+        warnings.append(
+            f"{candidate.name} did not parse to a dict; got {type(data).__name__}."
+        )
+        return {}
+    return data
+
+
+def _build_environment_yml(
+    *,
+    nextflow_version: str | None,
+    warnings: list[str],
+) -> str:
+    nf_dep = f"nextflow={nextflow_version}" if nextflow_version else "nextflow"
+    if not nextflow_version:
+        warnings.append(
+            "nextflow_version not provided; environment.yml lists nextflow without pin."
+        )
+    lines = [
+        "name: claw-sarek",
+        "channels:",
+        "  - conda-forge",
+        "  - bioconda",
+        "dependencies:",
+        "  - python=3.11",
+        f"  - {nf_dep}",
+        "  - openjdk=17",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Manifest
+# ---------------------------------------------------------------------------
+
+
+def _attr(obj: Any, name: str, default: Any = None) -> Any:
+    if obj is None:
+        return default
+    if isinstance(obj, dict):
+        return obj.get(name, default)
+    return getattr(obj, name, default)
+
+
+def _intervals_hash(params: dict[str, Any]) -> str | None:
+    intervals = params.get("intervals")
+    if not intervals:
+        return None
+    s = str(intervals)
+    if "://" in s:
+        return s
+    path = Path(s)
+    if path.is_file():
+        return _sha256_file(path)
+    return None
+
+
+def _samplesheet_analysis_mode(report: Any) -> str | None:
+    if report is None:
+        return None
+    if isinstance(report, dict):
+        return report.get("analysis_mode")
+    return getattr(report, "analysis_mode", None)
+
+
+def _tool_tokens(raw: Any) -> list[str]:
+    if not raw:
+        return []
+    if isinstance(raw, str):
+        return [token.strip() for token in raw.split(",") if token.strip()]
+    return [str(token).strip() for token in raw if str(token).strip()]
+
+
+def _build_manifest(
+    *,
+    params: dict[str, Any],
+    samplesheet_report: Any,
+    pipeline_source: Any,
+    samplesheet_checksum: str,
+    params_checksum: str,
+    reference_checksums: dict[str, str],
+    resume_used: bool,
+    arm: bool,
+    spark: bool,
+    gpu: bool,
+    wes: bool,
+    profile: str,
+    java_version: str | None,
+    nextflow_version: str | None,
+    generated_at: str,
+) -> dict[str, Any]:
+    ps_payload = _build_pipeline_source_payload(pipeline_source)
+    tools = sorted(set(_tool_tokens(params.get("tools"))))
+    skip_tools = sorted(set(_tool_tokens(params.get("skip_tools"))))
+
+    return {
+        "schema_version": 1,
+        "skill_name": SKILL_NAME,
+        "skill_version": SKILL_VERSION,
+        "generated_at": generated_at,
+        "pipeline_source": ps_payload,
+        "step": params.get("step") or DEFAULT_STEP,
+        "aligner": params.get("aligner") or DEFAULT_ALIGNER,
+        "tools": tools,
+        "skip_tools": skip_tools,
+        "analysis_mode": _samplesheet_analysis_mode(samplesheet_report),
+        "joint_germline": bool(params.get("joint_germline", False)),
+        "joint_mutect2": bool(params.get("joint_mutect2", False)),
+        "wes": bool(wes or params.get("wes", False)),
+        "intervals_hash": _intervals_hash(params),
+        "profile": profile,
+        "arm": bool(arm),
+        "spark": bool(spark),
+        "gpu": bool(gpu),
+        "resume_used": bool(resume_used),
+        "java_version": java_version,
+        "nextflow_version": nextflow_version,
+        "params_checksum": params_checksum,
+        "samplesheet_checksum": samplesheet_checksum,
+        "reference_checksums": reference_checksums,
+    }
+
+
+def load_manifest(bundle_dir: Path) -> dict | None:
+    """Read ``manifest.json`` for resume-drift comparison.
+
+    Returns ``None`` if the file is absent.  Older bundles may miss newer
+    keys — callers (typically ``preflight``) should consult
+    ``compatibility_policy.json`` for ``legacy_field_defaults`` and treat any
+    missing field as the documented default.
+    """
+    p = Path(bundle_dir) / "manifest.json"
+    if not p.is_file():
+        return None
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+
+
+# ---------------------------------------------------------------------------
+# Checksums file
+# ---------------------------------------------------------------------------
+
+
+def _iter_checksum_paths(output_dir: Path) -> Iterable[Path]:
+    output_dir = output_dir.resolve()
+    for path in sorted(output_dir.rglob("*")):
+        if not path.is_file():
+            continue
+        try:
+            rel = path.resolve().relative_to(output_dir)
+        except ValueError:
+            continue
+        parts = rel.parts
+        if parts and parts[0] in _CHECKSUM_EXCLUDE_DIRS:
+            continue
+        if path.suffix in _CHECKSUM_EXCLUDE_SUFFIXES:
+            continue
+        yield path
+
+
+def _write_checksums_file(
+    *,
+    output_dir: Path,
+    target: Path,
+    outputs_report_present: bool,
+) -> None:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if not outputs_report_present:
+        target.write_text(
+            "# checksums.sha256 — outputs not parsed (pre-run / --check); file intentionally empty.\n",
+            encoding="utf-8",
+        )
+        return
+
+    lines: list[str] = []
+    for path in _iter_checksum_paths(output_dir):
+        digest_with_prefix = _sha256_file(path)
+        # Strip the "sha256:" prefix so the file conforms to the BSD/coreutils
+        # ``sha256sum -c`` syntax: "<hex>  <relative_path>".
+        hex_digest = digest_with_prefix.split(":", 1)[1]
+        rel = path.resolve().relative_to(output_dir.resolve()).as_posix()
+        lines.append(f"{hex_digest}  {rel}")
+    target.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
+# Public entry-point
+# ---------------------------------------------------------------------------
+
+
+def write_provenance_bundle(
+    *,
+    output_dir: Path,
+    skill_dir: Path,
+    samplesheet_csv_src: Path,
+    params_yaml_src: Path,
+    commands_sh_src: Path,
+    params: dict[str, Any],
+    samplesheet_report: Any,
+    pipeline_source: Any,
+    outputs_report: Any | None,
+    resume_used: bool = False,
+    arm: bool = False,
+    spark: bool = False,
+    gpu: bool = False,
+    wes: bool = False,
+    profile: str = "docker",
+    java_version: str | None = None,
+    nextflow_version: str | None = None,
+) -> ProvenanceBundle:
+    """Materialise the full reproducibility bundle under ``output_dir``."""
+    warnings: list[str] = []
+    written: list[Path] = []
+
+    output_dir = Path(output_dir).resolve()
+    skill_dir = Path(skill_dir).resolve()
+    bundle_dir = output_dir / "reproducibility"
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+
+    # ---- 1. copy caller-provided artefacts -------------------------------
+    for src, target_name in (
+        (Path(samplesheet_csv_src), "samplesheet.valid.csv"),
+        (Path(params_yaml_src), "params.yaml"),
+        (Path(commands_sh_src), "commands.sh"),
+    ):
+        target = bundle_dir / target_name
+        try:
+            shutil.copyfile(src, target)
+            written.append(target)
+        except (OSError, shutil.SameFileError) as exc:
+            warnings.append(f"Could not copy {src.as_posix()} → {target.name}: {exc}")
+
+    # ---- 2. compatibility_policy.json — copied from skill_dir ------------
+    cp_src = skill_dir / "reproducibility" / "compatibility_policy.json"
+    cp_dst = bundle_dir / "compatibility_policy.json"
+    if cp_src.is_file():
+        shutil.copyfile(cp_src, cp_dst)
+        written.append(cp_dst)
+    else:
+        warnings.append(
+            f"compatibility_policy.json not found at {cp_src.as_posix()}; bundle will be missing it."
+        )
+
+    # ---- 3. JSON snapshots ------------------------------------------------
+    parameters_path = bundle_dir / "parameters.json"
+    _dump_json(parameters_path, _build_parameters_payload(params))
+    written.append(parameters_path)
+
+    samplesheet_json_path = bundle_dir / "samplesheet.json"
+    _dump_json(samplesheet_json_path, _build_samplesheet_payload(samplesheet_report, output_dir=output_dir, warnings=warnings))
+    written.append(samplesheet_json_path)
+
+    pipeline_source_path = bundle_dir / "pipeline_source.json"
+    _dump_json(pipeline_source_path, _build_pipeline_source_payload(pipeline_source))
+    written.append(pipeline_source_path)
+
+    tool_versions_path = bundle_dir / "tool_versions.json"
+    _dump_json(tool_versions_path, _build_tool_versions_payload(output_dir, warnings=warnings))
+    written.append(tool_versions_path)
+
+    if outputs_report is not None:
+        outputs_path = bundle_dir / "outputs.json"
+        _dump_json(
+            outputs_path,
+            _build_outputs_payload(outputs_report, output_dir=output_dir, warnings=warnings),
+        )
+        written.append(outputs_path)
+    else:
+        warnings.append("outputs_report=None; outputs.json was not written.")
+
+    # ---- 4. environment.yml ----------------------------------------------
+    env_path = bundle_dir / "environment.yml"
+    env_path.write_text(
+        _build_environment_yml(nextflow_version=nextflow_version, warnings=warnings),
+        encoding="utf-8",
+    )
+    written.append(env_path)
+
+    # ---- 5. manifest.json ------------------------------------------------
+    params_checksum = compute_params_checksum(params)
+    samplesheet_checksum = compute_samplesheet_checksum(Path(samplesheet_csv_src))
+    reference_checksums = compute_reference_checksums(params)
+    generated_at = datetime.now(timezone.utc).isoformat()
+
+    manifest = _build_manifest(
+        params=params,
+        samplesheet_report=samplesheet_report,
+        pipeline_source=pipeline_source,
+        samplesheet_checksum=samplesheet_checksum,
+        params_checksum=params_checksum,
+        reference_checksums=reference_checksums,
+        resume_used=resume_used,
+        arm=arm,
+        spark=spark,
+        gpu=gpu,
+        wes=wes,
+        profile=profile,
+        java_version=java_version,
+        nextflow_version=nextflow_version,
+        generated_at=generated_at,
+    )
+    manifest_path = bundle_dir / "manifest.json"
+    _dump_json(manifest_path, manifest)
+    written.append(manifest_path)
+
+    # ---- 6. checksums.sha256 (written LAST so it's not self-referential) -
+    checksum_path = bundle_dir / "checksums.sha256"
+    _write_checksums_file(
+        output_dir=output_dir,
+        target=checksum_path,
+        outputs_report_present=outputs_report is not None,
+    )
+    written.append(checksum_path)
+
+    return ProvenanceBundle(
+        bundle_dir=bundle_dir,
+        manifest_path=manifest_path,
+        files_written=written,
+        warnings=warnings,
+    )
+
+
+__all__ = [
+    "ProvenanceBundle",
+    "REFERENCE_PATH_PARAMS",
+    "compute_params_checksum",
+    "compute_reference_checksums",
+    "compute_samplesheet_checksum",
+    "load_manifest",
+    "write_provenance_bundle",
+]

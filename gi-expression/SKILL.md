@@ -1,0 +1,186 @@
+---
+name: gi-expression
+description: >-
+  Predict tissue / cell-type expression (log TPM + TPM) from a 9,198 bp
+  TSS-centered DNA sequence using the Genomic Intelligence G0 Expression
+  model, via the hosted /v1/tasks/expression/predict API. The model is
+  conditioned on a free-text cell-type / assay description.
+version: 0.1.0
+author: ClawBio + Genomic Intelligence
+domain: genomics
+license: MIT
+tags: [genomics, expression, RNA-seq, TPM, sequence-to-expression, dna-lm, gi-api]
+
+inputs:
+  - name: input_file
+    type: file
+    format: [fa, fasta, fna]
+    description: Single-record FASTA. The expression model expects exactly 9,198 bp centered on the TSS, gene-sense (RC minus-strand genes).
+    required: false
+
+outputs:
+  - name: report
+    type: file
+    format: md
+    description: Markdown report — predicted log(TPM+1), TPM, model + timing.
+  - name: result
+    type: file
+    format: json
+    description: Full `{data, meta}` response.
+  - name: reproducibility
+    type: directory
+    description: 'command.sh + environment.json.'
+
+dependencies:
+  python: ">=3.10"
+  packages:
+    - requests>=2.31
+
+demo_data:
+  - path: example_data/expression_hbb_k562.fa
+    description: HBB (β-globin) TSS-centered 9,198 bp window, reverse-complemented to gene-sense. K562 is the demo cell context — HBB is highly expressed in K562 erythroleukemia.
+
+endpoints:
+  cli: python skills/gi-expression/gi_expression.py --input {input_file} --output {output_dir}
+
+metadata:
+  openclaw:
+    requires:
+      bins: [python3]
+      env: []
+      config: []
+    always: false
+    emoji: "🧪"
+    homepage: https://docs.genomicintelligence.ai
+    os: [darwin, linux]
+    install:
+      - kind: pip
+        package: requests
+        bins: []
+    trigger_keywords:
+      - expression prediction
+      - predict expression
+      - sequence to expression
+      - TPM prediction
+      - cell type expression
+      - tissue expression
+      - RNA-seq prediction
+      - gi expression
+      - G0 expression
+      - genomic intelligence expression
+---
+
+# 🧪 gi-expression
+
+You are **gi-expression**, a ClawBio agent that calls the **Genomic Intelligence** sequence-to-expression model. Given a TSS-centered 9,198 bp window and a cell-type description, it returns predicted expression (log TPM + TPM).
+
+> ⚠️ **Remote inference — opt-in required.** Unlike most ClawBio skills, this skill uploads your FASTA sequence to the hosted Genomic Intelligence API at `https://api.genomicintelligence.ai`. Prefer a browser? The same models run interactively at <https://genomicintelligence.ai>. **Do not submit identifiable patient data** without an appropriate data-use agreement. Key setup: see [Authentication](#authentication) below.
+
+## Trigger
+
+**Fire this skill when the user says any of:**
+- "predict expression for this gene / sequence"
+- "what's the expression of this region in [cell type]?"
+- "sequence-to-expression prediction"
+- "TPM prediction", "log TPM prediction"
+- "gi-expression", "G0 expression"
+
+**Do NOT fire when:**
+- The user has counts / RNA-seq output and wants differential expression → `rnaseq-de`
+- The user wants tissue annotation / GTEx lookup → use external resources
+
+## Why This Exists
+
+- **Without it**: Sequence-to-expression models (Enformer / Borzoi / G0 Expression) need GPU + private weights + careful 9-kbp windowing.
+- **With it**: One CLI call → expression prediction conditioned on free-text cell-type description, in <1 s.
+- **Why ClawBio**: Private weights, hosted. ClawBio's reproducibility bundle + chaining (`gi-promoter` → `gi-expression` → `rnaseq-de` interpretation).
+
+## API Backed
+
+`POST https://api.genomicintelligence.ai/v1/tasks/expression/predict` — default model `g0-expression`.
+
+## Workflow
+
+1. **Parse**: single-record FASTA (must be 9,198 bp, TSS-centered, gene-sense).
+2. **Build options**: `{"description": "assay term name is polyA plus RNA-seq. biosample summary is Homo sapiens K562."}` by default; override via `--description "..."`.
+3. **POST** to `/v1/tasks/expression/predict`.
+4. **Render**: `report.md` (headline log TPM) + `result.json` + `reproducibility/`.
+
+## CLI Reference
+
+```bash
+# Demo — HBB in K562
+python skills/gi-expression/gi_expression.py --demo --output /tmp/gi-expression-demo
+
+# Custom cell-type description
+python skills/gi-expression/gi_expression.py \
+  --input my_tss_window.fa \
+  --description "assay term name is polyA plus RNA-seq. biosample summary is Homo sapiens liver." \
+  --output report_dir
+
+# Via ClawBio runner
+python clawbio.py run gi-expression --demo
+```
+
+## Authentication
+
+The skill requires a Genomic Intelligence partner key in `GI_API_KEY`. Resolution order:
+
+1. `--api-key <value>` CLI flag (explicit override).
+2. `GI_API_KEY` environment variable.
+3. Otherwise: the skill raises a `RuntimeError` pointing here.
+
+### Quick start — ClawBio hackathon key
+
+A shared hackathon-tier key ships in `.env.example` at the repo root (50 concurrent / 120 rpm, opt-in only). From wherever the ClawBio files live on your machine:
+
+```bash
+# Repo root (git clone) — or ~/.claude/plugins/cache/clawbio/clawbio/<version>/ for plugin installs
+cp .env.example .env
+set -a && source .env && set +a
+```
+
+### Production / heavier use
+
+Request an individual key at **contact@genomicintelligence.ai**, then:
+
+```bash
+export GI_API_KEY=gi_yourkeyhere
+```
+
+## Demo
+
+```bash
+python clawbio.py run gi-expression --demo
+```
+
+Bundled fixture is HBB centered on its canonical TSS, RC'd to gene-sense. With the K562 description, expect ~2.86 log(TPM+1) ≈ 16 TPM (HBB is highly expressed in K562 erythroleukemia).
+
+## Gotchas
+
+- **Sequence length is rigid: 9,198 bp.** Anything else fails 422 validation. Center on the TSS.
+- **Gene-sense is mandatory.** Minus-strand genes need reverse-complementing — same posture as the GI testing fixtures. Without RC, HBB returns ~0.4 log(TPM+1) instead of ~2.89.
+- **`description` is required.** The model is conditioned on it; "assay term name is polyA plus RNA-seq. biosample summary is Homo sapiens [tissue]." is the canonical format.
+- **TPM scale is not absolute** across tissues — useful as a relative ranking within a cell type, not as a precise count prediction.
+- **Hackathon key is shared** — `GI_API_KEY` for heavier use.
+
+## Output Structure
+
+```
+output_dir/
+├── report.md
+├── result.json
+└── reproducibility/
+    ├── command.sh
+    └── environment.json
+```
+
+## Integration with Bio Orchestrator
+
+Routes here on: "predict expression", "sequence to expression", "TPM prediction", "cell-type expression".
+
+Chains with: `gi-promoter` → `gi-expression` (validate predicted promoters by predicting downstream expression), `rnaseq-de` (compare predicted expression to measured DE results), `variant-annotation` (compare ref/alt sequence expression for promoter / 5'UTR variants).
+
+## Safety
+
+Research tool. Not a clinical assay. Predictions are model outputs, not measurements.

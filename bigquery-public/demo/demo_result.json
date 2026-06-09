@@ -1,0 +1,37 @@
+{
+  "project_id": "clawbio-demo",
+  "job_id": "demo_job_shakespeare_top_words",
+  "total_bytes_processed": 58500,
+  "columns": [
+    "corpus",
+    "word",
+    "word_count"
+  ],
+  "rows": [
+    {
+      "corpus": "hamlet",
+      "word": "the",
+      "word_count": 993
+    },
+    {
+      "corpus": "hamlet",
+      "word": "and",
+      "word_count": 860
+    },
+    {
+      "corpus": "hamlet",
+      "word": "to",
+      "word_count": 742
+    },
+    {
+      "corpus": "hamlet",
+      "word": "of",
+      "word_count": 669
+    },
+    {
+      "corpus": "hamlet",
+      "word": "i",
+      "word_count": 633
+    }
+  ]
+}

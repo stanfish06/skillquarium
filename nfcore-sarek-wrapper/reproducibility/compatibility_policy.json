@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "resume_drift_fields": [
+    "step",
+    "aligner",
+    "tools",
+    "skip_tools",
+    "analysis_mode",
+    "joint_germline",
+    "joint_mutect2",
+    "wes",
+    "profile",
+    "pipeline_source.source_kind",
+    "pipeline_source.resolved_version",
+    "params_checksum",
+    "reference_checksums",
+    "samplesheet_checksum"
+  ],
+  "legacy_field_defaults": {
+    "spark": false,
+    "gpu": false,
+    "wes": false,
+    "joint_germline": false,
+    "joint_mutect2": false,
+    "skip_tools": []
+  },
+  "ignored_during_drift": [
+    "generated_at",
+    "java_version",
+    "nextflow_version",
+    "arm",
+    "gpu",
+    "spark"
+  ]
+}

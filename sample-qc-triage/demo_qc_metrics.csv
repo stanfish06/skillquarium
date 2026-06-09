@@ -1,0 +1,6 @@
+sample_id,batch,total_reads,mapped_pct,duplicate_pct,mitochondrial_pct,contamination_pct,complexity_score,expected_sex,observed_sex,fingerprint_match_pct
+CB_QC_001,A,50000000,96.2,12.0,4.1,0.3,0.91,F,F,99.8
+CB_QC_002,A,48000000,95.8,13.5,4.8,0.5,0.89,M,M,99.6
+CB_QC_003,A,22000000,88.5,44.0,13.2,0.8,0.42,F,F,98.9
+CB_QC_004,B,51000000,91.0,16.0,7.4,8.5,0.82,M,M,98.2
+CB_QC_005,C,15000000,72.0,28.0,18.5,2.1,0.65,F,M,91.4

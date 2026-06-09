@@ -1,0 +1,116 @@
+[
+  {
+    "id": 3301,
+    "name": "Lentiviral sgRNA Library Transduction",
+    "created_at": "2025-06-12T10:00:00Z",
+    "updated_at": "2026-01-05T08:20:00Z",
+    "version": 3,
+    "steps": [
+      {
+        "position": 1,
+        "title": "Prepare cells",
+        "body": "Seed 2×10⁵ target cells per well in a 6-well plate 24 h before transduction. Use complete DMEM + 10% FBS."
+      },
+      {
+        "position": 2,
+        "title": "Thaw viral library",
+        "body": "Thaw sgRNA lentiviral library aliquot on ice. Use a MOI of 0.3 to ensure single-integration events."
+      },
+      {
+        "position": 3,
+        "title": "Transduction",
+        "body": "Add library to cells in fresh medium containing 8 μg/mL polybrene. Centrifuge at 1000 × g, 32°C, 2 h (spinoculation). Replace medium after 6 h."
+      },
+      {
+        "position": 4,
+        "title": "Puromycin selection",
+        "body": "48 h post-transduction, begin puromycin selection at empirically determined kill curve concentration (typically 2 μg/mL). Maintain for 5 days."
+      },
+      {
+        "position": 5,
+        "title": "Harvest Day 0 sample",
+        "body": "Pellet ≥500× library-representation cells. Freeze at −80°C for gDNA extraction. This is the T0 reference."
+      }
+    ],
+    "inventory_fields": [
+      {"label": "sgRNA Library (lentiviral)", "resource_id": 5501},
+      {"label": "Polybrene", "resource_id": 5502},
+      {"label": "Puromycin", "resource_id": 5503}
+    ]
+  },
+  {
+    "id": 3310,
+    "name": "scTIP-seq Cell Fixation & Permeabilisation",
+    "created_at": "2025-08-20T14:00:00Z",
+    "updated_at": "2025-12-01T09:10:00Z",
+    "version": 2,
+    "steps": [
+      {
+        "position": 1,
+        "title": "Wash cells",
+        "body": "Harvest cells by trypsinisation. Wash twice with ice-cold PBS. Count and adjust to 1×10⁶ cells/mL."
+      },
+      {
+        "position": 2,
+        "title": "Fixation",
+        "body": "Fix cells in 1% formaldehyde / PBS for 5 min at room temperature with gentle rotation. Quench with 125 mM glycine for 5 min."
+      },
+      {
+        "position": 3,
+        "title": "Permeabilisation",
+        "body": "Resuspend in digitonin buffer (0.01% digitonin, 20 mM HEPES pH 7.5, 150 mM NaCl, 0.5 mM spermidine + protease inhibitors). Incubate on ice 10 min."
+      },
+      {
+        "position": 4,
+        "title": "Wash & bead conjugation",
+        "body": "Wash twice with digitonin buffer. Add ConA-coated magnetic beads (10 μL per 1×10⁵ cells). Incubate 10 min at 4°C."
+      }
+    ],
+    "inventory_fields": [
+      {"label": "Formaldehyde 37%", "resource_id": 5510},
+      {"label": "Digitonin (Sigma D141)", "resource_id": 5511},
+      {"label": "ConA magnetic beads", "resource_id": 5512},
+      {"label": "Protease inhibitor cocktail", "resource_id": 5513}
+    ]
+  },
+  {
+    "id": 3280,
+    "name": "TRIzol RNA Extraction",
+    "created_at": "2024-03-10T09:00:00Z",
+    "updated_at": "2025-09-16T11:30:00Z",
+    "version": 5,
+    "steps": [
+      {
+        "position": 1,
+        "title": "Homogenise",
+        "body": "Add 1 mL TRIzol per 50–100 mg tissue or per 1×10⁷ cells. Pipette vigorously until homogeneous."
+      },
+      {
+        "position": 2,
+        "title": "Phase separation",
+        "body": "Add 200 μL chloroform. Vortex 15 s. Centrifuge 12,000 × g, 4°C, 15 min. Transfer aqueous (upper) phase."
+      },
+      {
+        "position": 3,
+        "title": "Precipitation",
+        "body": "Add 500 μL isopropanol. Mix and incubate −20°C, 30 min. Centrifuge 12,000 × g, 4°C, 10 min. Discard supernatant."
+      },
+      {
+        "position": 4,
+        "title": "Wash",
+        "body": "Wash pellet with 1 mL 75% ethanol. Vortex briefly. Centrifuge 7,500 × g, 4°C, 5 min. Air-dry 5–10 min."
+      },
+      {
+        "position": 5,
+        "title": "Resuspend",
+        "body": "Dissolve RNA in RNase-free water (30–50 μL). Incubate 55°C, 10 min. Quantify by Nanodrop and Bioanalyzer."
+      }
+    ],
+    "inventory_fields": [
+      {"label": "TRIzol Reagent", "resource_id": 5520},
+      {"label": "Chloroform", "resource_id": 5521},
+      {"label": "Isopropanol", "resource_id": 5522},
+      {"label": "RNase-free water", "resource_id": 5523}
+    ]
+  }
+]

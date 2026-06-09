@@ -1,0 +1,42 @@
+schema_version: "1.0"
+
+# SORT1 sceQTL: OneK1K CD14+ monocytes ge-sceQTL × cholesterol-VLDL GWAS.
+# Single-cell flavour of the canonical 1p13.3 SORT1 locus.
+#
+# OT studyId: onek1k_ge_cd14_mono_ensg00000134243.
+# eQTL Cat dataset: QTD000609 (verified live 2026-05-15).
+
+lead:
+  variant_id: "1_109274968_G_T"
+  chromosome: "1"
+  position_bp: 109274968
+  window_bp: 1000000
+
+exposure:
+  trait_label: "SORT1 expression in OneK1K CD14+ monocytes"
+  gene_symbol: SORT1
+  fetch:
+    source: eqtl_catalogue
+    dataset_id: QTD000609
+    molecular_trait_id: ENSG00000134243
+
+outcome:
+  trait_label: "cholesterol in medium VLDL"
+  fetch:
+    source: gwas_catalog
+    accession: GCST90269602
+
+ld:
+  source: 1000g_phase3_grch38
+  super_pop: EUR
+  region_vcf_path: null
+
+gene_track:
+  source: gencode_v39
+  gtf_path: null
+
+provenance:
+  ot_release: "26.03"
+
+caveats:
+  - "OneK1K sceQTL signal at SORT1 may be sparse in CD14+ monocytes; the renderer may degrade to Tier-1 if there are fewer than 5 joinable variants."

@@ -1,0 +1,48 @@
+schema_version: "1.0"
+
+# Chains with ClawBio's `fine-mapping` skill. After fine-mapping has run on
+# both an exposure and an outcome locus, its `tables/` outputs already
+# contain the harmonised sumstats slice it operated on. Point locuscompare
+# at those slices directly — no re-fetching needed.
+#
+# Typical workflow:
+#   python clawbio.py run fine-mapping --sumstats exposure_full.tsv \
+#       --chr 1 --start 109000000 --end 110000000 --output runs/finemap_exposure/
+#   python clawbio.py run fine-mapping --sumstats outcome_full.tsv \
+#       --chr 1 --start 109000000 --end 110000000 --output runs/finemap_outcome/
+#   python skills/locuscompare-region-render/cli.py \
+#       --input skills/locuscompare-region-render/examples/chains/finemapping_chain/config.yaml \
+#       --output runs/locuscompare_chain/
+
+lead:
+  variant_id: "1_109274968_G_T"
+  chromosome: "1"
+  position_bp: 109274968
+  window_bp: 1000000
+
+exposure:
+  trait_label: "Exposure (fine-mapped credible sets — ../runs/finemap_exposure/)"
+  # The fine-mapping skill writes the input slice it operated on to
+  # `<output>/inputs/locus.tsv` after harmonising columns. locuscompare
+  # consumes that file directly.
+  sumstats_path: "../runs/finemap_exposure/inputs/locus.tsv"
+
+outcome:
+  trait_label: "Outcome (fine-mapped credible sets — ../runs/finemap_outcome/)"
+  sumstats_path: "../runs/finemap_outcome/inputs/locus.tsv"
+
+ld:
+  source: 1000g_phase3_grch38
+  super_pop: EUR
+
+gene_track:
+  source: gencode_v39
+
+harmonisation:
+  exclude_palindromic: true
+
+# Optional: locuscompare can ingest fine-mapping's PIPs to highlight
+# credible-set members in the Manhattans + scatter.
+fine_mapping_outputs:
+  exposure_pips_path: "../runs/finemap_exposure/tables/pips.tsv"
+  outcome_pips_path: "../runs/finemap_outcome/tables/pips.tsv"

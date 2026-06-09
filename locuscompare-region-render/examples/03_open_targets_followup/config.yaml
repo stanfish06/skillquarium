@@ -1,0 +1,60 @@
+schema_version: "1.0"
+
+# OT-followup case: user found this row in an Open Targets coloc query.
+# OT row provenance:
+#   target.colocalisation:
+#     left_studyId:   GCST90499945 (Saturated fatty acids / total fatty acids %; Zoodsma 2025)
+#     right_studyId:  gtex_tx_skin_sun_exposed_enst00000559340
+#     h4:             0.965
+#     numberColocalisingVariants: 31
+#     colocalisationMethod: COLOC_PIP_ECAVIAR
+#     lead_variant:   19_11113815_A_G
+#   See ot_row.json in this directory for the verbatim OT row.
+#
+# Resolution recipe (see README.md for full text):
+#   right_studyId -> eqtl_catalogue dataset_id  (QTD000318 = GTEx tx skin_sun_exposed)
+#   left_studyId  -> gwas_catalog accession    (already in OT-native form: GCST90499945)
+#
+# Biology: LDLR (low-density lipoprotein receptor) clears LDL particles from
+# circulation; it also contributes to broader lipid-fraction balance via
+# lipoprotein turnover. OT coloc between LDLR cis-eQTL (skin tissue,
+# transcript-level quant) and the Zoodsma 2025 fatty-acid-composition GWAS
+# at chr19:11.1 Mb (the LDLR locus) provides mechanistic evidence for LDLR
+# regulatory influence on circulating fatty-acid composition.
+
+lead:
+  variant_id: "19_11113815_A_G"
+  chromosome: "19"
+  position_bp: 11113815
+  window_bp: 1000000
+
+exposure:
+  trait_label: "LDLR transcript expression - skin, sun-exposed (gtex_tx)"
+  gene_symbol: "LDLR"
+  fetch:
+    source: eqtl_catalogue
+    dataset_id: QTD000318
+    molecular_trait_id: ENSG00000130164
+
+outcome:
+  trait_label: "Saturated fatty acids / total fatty acids % (Zoodsma 2025)"
+  fetch:
+    source: gwas_catalog
+    accession: GCST90499945
+
+ld:
+  source: 1000g_phase3_grch38
+  super_pop: EUR
+
+gene_track:
+  source: gencode_v39
+
+harmonisation:
+  exclude_palindromic: true
+
+# Provenance metadata gets carried into the manifest's caveats block
+provenance:
+  ot_release: "26.03"
+  ot_left_study_id: "GCST90499945"
+  ot_right_study_id: "gtex_tx_skin_sun_exposed_enst00000559340"
+  ot_h4: 0.965

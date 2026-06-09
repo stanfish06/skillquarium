@@ -1,0 +1,13 @@
+# Run outputs (skill writes manifest / variants / report to --output dir, not here).
+runs/
+output/
+out/
+
+# Synapse tar / regenie download intermediates if a user points the cache here.
+*.tar
+*.regenie.gz
+*.regenie.gz.tbi
+
+# Python bytecode
+__pycache__/
+*.pyc
