@@ -25,6 +25,8 @@ TODAY = date.today().isoformat()
 # one-time: regenerate aliases even if a wrapper already has an aliases key.
 # Do NOT use after you have hand-curated aliases.
 FORCE_ALIASES = "--force-aliases" in sys.argv
+# delete root wrapper notes whose skill folder no longer exists (orphans).
+PRUNE = "--prune" in sys.argv
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
 
 # acronyms too generic to be useful aliases
@@ -447,9 +449,32 @@ def main():
     with open(os.path.join(ROOT, "index.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(I))
 
+    # ---- prune orphaned wrappers ------------------------------------------
+    pruned = []
+    if PRUNE:
+        keep = set(on_disk) | {"index", "README"}
+        for f in os.listdir(ROOT):
+            if not f.endswith(".md") or f.startswith("."):
+                continue
+            name = f[:-3]
+            if name in keep:
+                continue
+            p = os.path.join(ROOT, f)
+            try:
+                txt = open(p, encoding="utf-8").read()
+            except OSError:
+                continue
+            # only delete files that are clearly generated wrappers
+            if re.search(r"^source:\s*.+/SKILL\.md\s*$", txt, re.MULTILINE) or PERSONAL_MARKER in txt:
+                os.remove(p)
+                pruned.append(name)
+        if pruned:
+            print(f"PRUNED {len(pruned)} orphan wrapper(s): {', '.join(sorted(pruned))}",
+                  file=sys.stderr)
+
     edge_count = sum(len(v) for v in related.values()) // 2
     print(f"OK: {total} wrappers, {len(CATEGORIES)} maps, {edge_count} related-links, "
-          f"unsorted={len(unsorted)}")
+          f"unsorted={len(unsorted)}, pruned={len(pruned)}")
 
 
 if __name__ == "__main__":

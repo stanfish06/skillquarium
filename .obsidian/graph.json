@@ -1,149 +1,22 @@
 {
-  "collapse-filter": true,
-  "search": "",
+  "collapse-filter": false,
+  "search": "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": true,
-  "colorGroups": [
-    {
-      "query": "tag:#domain/genomics-variants",
-      "color": {
-        "a": 1,
-        "rgb": 15079755
-      }
-    },
-    {
-      "query": "tag:#domain/single-cell-rnaseq",
-      "color": {
-        "a": 1,
-        "rgb": 3978315
-      }
-    },
-    {
-      "query": "tag:#domain/proteomics-metabolomics",
-      "color": {
-        "a": 1,
-        "rgb": 16769305
-      }
-    },
-    {
-      "query": "tag:#domain/drug-discovery-chem",
-      "color": {
-        "a": 1,
-        "rgb": 4416472
-      }
-    },
-    {
-      "query": "tag:#domain/sequence-phylogenetics",
-      "color": {
-        "a": 1,
-        "rgb": 16089649
-      }
-    },
-    {
-      "query": "tag:#domain/bio-databases-platforms",
-      "color": {
-        "a": 1,
-        "rgb": 9510580
-      }
-    },
-    {
-      "query": "tag:#domain/clinical-medical",
-      "color": {
-        "a": 1,
-        "rgb": 4379892
-      }
-    },
-    {
-      "query": "tag:#domain/imaging-signals",
-      "color": {
-        "a": 1,
-        "rgb": 15741670
-      }
-    },
-    {
-      "query": "tag:#domain/ml-ai",
-      "color": {
-        "a": 1,
-        "rgb": 12578629
-      }
-    },
-    {
-      "query": "tag:#domain/data-science-compute",
-      "color": {
-        "a": 1,
-        "rgb": 16432852
-      }
-    },
-    {
-      "query": "tag:#domain/quantum-physics",
-      "color": {
-        "a": 1,
-        "rgb": 4626832
-      }
-    },
-    {
-      "query": "tag:#domain/research-writing",
-      "color": {
-        "a": 1,
-        "rgb": 14466815
-      }
-    },
-    {
-      "query": "tag:#domain/academic-pipelines",
-      "color": {
-        "a": 1,
-        "rgb": 10117924
-      }
-    },
-    {
-      "query": "tag:#domain/literature-discovery",
-      "color": {
-        "a": 1,
-        "rgb": 16775880
-      }
-    },
-    {
-      "query": "tag:#domain/documents-office",
-      "color": {
-        "a": 1,
-        "rgb": 8388608
-      }
-    },
-    {
-      "query": "tag:#domain/cloud-devops",
-      "color": {
-        "a": 1,
-        "rgb": 11206595
-      }
-    },
-    {
-      "query": "tag:#domain/vault-meta",
-      "color": {
-        "a": 1,
-        "rgb": 8421376
-      }
-    },
-    {
-      "query": "tag:#domain/reasoning-ideation",
-      "color": {
-        "a": 1,
-        "rgb": 117
-      }
-    }
-  ],
-  "collapse-display": true,
+  "collapse-color-groups": false,
+  "colorGroups": [],
+  "collapse-display": false,
   "showArrow": false,
   "textFadeMultiplier": 0,
   "nodeSizeMultiplier": 1,
   "lineSizeMultiplier": 1,
-  "collapse-forces": true,
+  "collapse-forces": false,
   "centerStrength": 0.518713248970312,
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.0877914951989025,
-  "close": false
+  "scale": 0.19753086419753063,
+  "close": true
 }

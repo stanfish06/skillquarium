@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f30135616efc2808",
+        "id": "2deb0401035ba915",
         "type": "tabs",
         "children": [
           {
-            "id": "7d47dc1a4e99e7d6",
+            "id": "c25c73382b1c0ad4",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -176,8 +176,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "7d47dc1a4e99e7d6",
+  "active": "c25c73382b1c0ad4",
   "lastOpenFiles": [
+    "my-personal-note.md",
+    "zzz-old-skill.md",
+    "academic-paper.md",
     "skills.base",
     "Untitled 1.canvas",
     "recipes/literature-review.md",
@@ -191,7 +194,6 @@
     "recipes/index.md",
     "recipes",
     "academic-paper/SKILL.md",
-    "academic-paper.md",
     "maps/academic-pipelines.md",
     "pyzotero/SKILL.md",
     "scanpy.md",
@@ -206,7 +208,6 @@
     "vcf-annotator.md",
     "variant-annotation.md",
     "vaex.md",
-    "usfiscaldata.md",
     "README.md~",
     "maps"
   ]

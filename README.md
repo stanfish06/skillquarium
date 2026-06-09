@@ -24,5 +24,16 @@ python3 .skill-vault/build.py
 ```
 
 Your edits are preserved: the `## Notes` section of each wrapper and any `status`,
-`rating`, or `aliases` you set in frontmatter survive a rebuild. To re-seed aliases
-from scratch (before you have curated any), run `python3 .skill-vault/build.py --force-aliases`.
+`rating`, or `aliases` you set in frontmatter survive a rebuild.
+
+Flags:
+
+- `--prune` — delete root wrapper notes whose skill folder no longer exists (only
+  touches generated wrappers; hand-written root notes without a `source:` line are kept).
+- `--force-aliases` — re-seed aliases from scratch (don't use after curating aliases).
+
+The Obsidian graph is filtered (in `.obsidian/graph.json`) to show only the navigation
+layer — wrapper, map, recipe, and index notes — so raw files inside skill folders
+(`SKILL.md`, `references/*`, scripts) don't appear as isolated nodes. To see everything
+again, clear the search box in Graph view's filter; to also show each `SKILL.md`, add
+`OR file:SKILL.md` to that search.
