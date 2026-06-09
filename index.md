@@ -8,7 +8,7 @@ created: 2026-06-09
 
 # Skills Index
 
-A navigable map of the **264 agent skills** in this vault, grouped into 18 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
+A navigable map of the **266 agent skills** in this vault, grouped into 18 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
 
 > [!tip] How to navigate
 > - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).
@@ -72,11 +72,11 @@ Microscopy and pathology images, medical imaging, electrophysiology, flow cytome
 
 [bids](bids.md), [cell-detection](cell-detection.md), [flowio](flowio.md), [histolab](histolab.md), [imaging-data-commons](imaging-data-commons.md), [neurokit2](neurokit2.md) … [see all 9 →](maps/imaging-signals.md)
 
-### [Machine Learning & AI](maps/ml-ai.md)  ·  11 skills
+### [Machine Learning & AI](maps/ml-ai.md)  ·  13 skills
 
 General ML/DL frameworks, model interpretability, RL, graph learning, and scientific model hubs.
 
-[aeon](aeon.md), [hugging-science](hugging-science.md), [pufferlib](pufferlib.md), [pytorch-lightning](pytorch-lightning.md), [scikit-learn](scikit-learn.md), [shap](shap.md) … [see all 11 →](maps/ml-ai.md)
+[aeon](aeon.md), [hugging-science](hugging-science.md), [pufferlib](pufferlib.md), [pufferlib-v2](pufferlib-v2.md), [pufferlib-v3](pufferlib-v3.md), [pytorch-lightning](pytorch-lightning.md) … [see all 13 →](maps/ml-ai.md)
 
 ### [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  20 skills
 
@@ -177,7 +177,7 @@ Multi-perspective deliberation, brainstorming, hypothesis generation, idea evalu
 [obsidian-bases](obsidian-bases.md) · [obsidian-cli](obsidian-cli.md) · [obsidian-markdown](obsidian-markdown.md) · [omero-integration](omero-integration.md) · [omics-target-evidence-mapper](omics-target-evidence-mapper.md) · [open-notebook](open-notebook.md) · [opentrons-integration](opentrons-integration.md) · [optimize-for-gpu](optimize-for-gpu.md)
 
 **P**
-[pacsomatic](pacsomatic.md) · [paper-2-web](paper-2-web.md) · [paper-lookup](paper-lookup.md) · [paperzilla](paperzilla.md) · [parallel-web](parallel-web.md) · [pathml](pathml.md) · [pathway-enricher](pathway-enricher.md) · [pathway-enrichment](pathway-enrichment.md) · [pdf](pdf.md) · [peer-review](peer-review.md) · [pennylane](pennylane.md) · [pharmgx-reporter](pharmgx-reporter.md) · [phylogenetics](phylogenetics.md) · [phylogenetics-builder](phylogenetics-builder.md) · [polars](polars.md) · [polars-bio](polars-bio.md) · [pptx](pptx.md) · [pptx-posters](pptx-posters.md) · [pre-submission-reviewer](pre-submission-reviewer.md) · [primekg](primekg.md) · [profile-report](profile-report.md) · [proteomics-clock](proteomics-clock.md) · [proteomics-de](proteomics-de.md) · [protocols-io](protocols-io.md) · [protocolsio-integration](protocolsio-integration.md) · [pubmed-summariser](pubmed-summariser.md) · [pufferlib](pufferlib.md) · [pydeseq2](pydeseq2.md) · [pydicom](pydicom.md) · [pyhealth](pyhealth.md) · [pylabrobot](pylabrobot.md) · [pymatgen](pymatgen.md) · [pymc](pymc.md) · [pymoo](pymoo.md) · [pyopenms](pyopenms.md) · [pysam](pysam.md) · [pytdc](pytdc.md) · [pytorch-lightning](pytorch-lightning.md) · [pyzotero](pyzotero.md)
+[pacsomatic](pacsomatic.md) · [paper-2-web](paper-2-web.md) · [paper-lookup](paper-lookup.md) · [paperzilla](paperzilla.md) · [parallel-web](parallel-web.md) · [pathml](pathml.md) · [pathway-enricher](pathway-enricher.md) · [pathway-enrichment](pathway-enrichment.md) · [pdf](pdf.md) · [peer-review](peer-review.md) · [pennylane](pennylane.md) · [pharmgx-reporter](pharmgx-reporter.md) · [phylogenetics](phylogenetics.md) · [phylogenetics-builder](phylogenetics-builder.md) · [polars](polars.md) · [polars-bio](polars-bio.md) · [pptx](pptx.md) · [pptx-posters](pptx-posters.md) · [pre-submission-reviewer](pre-submission-reviewer.md) · [primekg](primekg.md) · [profile-report](profile-report.md) · [proteomics-clock](proteomics-clock.md) · [proteomics-de](proteomics-de.md) · [protocols-io](protocols-io.md) · [protocolsio-integration](protocolsio-integration.md) · [pubmed-summariser](pubmed-summariser.md) · [pufferlib](pufferlib.md) · [pufferlib-v2](pufferlib-v2.md) · [pufferlib-v3](pufferlib-v3.md) · [pydeseq2](pydeseq2.md) · [pydicom](pydicom.md) · [pyhealth](pyhealth.md) · [pylabrobot](pylabrobot.md) · [pymatgen](pymatgen.md) · [pymc](pymc.md) · [pymoo](pymoo.md) · [pyopenms](pyopenms.md) · [pysam](pysam.md) · [pytdc](pytdc.md) · [pytorch-lightning](pytorch-lightning.md) · [pyzotero](pyzotero.md)
 
 **Q**
 [qiskit](qiskit.md) · [qutip](qutip.md)
