@@ -1,0 +1,59 @@
+filters:
+  and:
+    - file.hasTag("skill")
+    - file.ext == "md"
+formulas:
+  open_skill: link(source, "SKILL.md")
+properties:
+  file.name:
+    displayName: Skill
+  status:
+    displayName: Status
+  domain:
+    displayName: Domain
+  rating:
+    displayName: Rating
+  aliases:
+    displayName: Aliases
+  formula.open_skill:
+    displayName: Source
+views:
+  - type: table
+    name: All skills
+    groupBy:
+      property: domain
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - rating
+      - aliases
+      - formula.open_skill
+  - type: table
+    name: My toolkit
+    filters:
+      and:
+        - status != "untried"
+    order:
+      - file.name
+      - status
+      - rating
+      - domain
+  - type: table
+    name: Favorites
+    filters:
+      and:
+        - status == "favorite"
+    order:
+      - file.name
+      - rating
+      - domain
+      - formula.open_skill
+  - type: cards
+    name: By domain (cards)
+    groupBy:
+      property: domain
+      direction: ASC
+    order:
+      - file.name
+      - status
