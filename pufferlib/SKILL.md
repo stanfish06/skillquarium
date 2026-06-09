@@ -9,6 +9,12 @@ metadata:
 
 # PufferLib - High-Performance Reinforcement Learning
 
+> [!WARNING]
+> **This skill describes the PufferLib v1.x API, which was broken by the v2.0.0 (Dec 2024) and v3.0.0 (Jun 2025) releases.**
+> The `PuffeRL` trainer class and the `trainer.evaluate()` / `trainer.train()` / `trainer.mean_and_log()` methods shown in this skill **no longer exist** in `pufferlib>=2.0.0`. Installing the current PyPI package (`pip install pufferlib`) will cause `ImportError: cannot import name 'PuffeRL'`.
+>
+> Pin to `pufferlib==1.0.0` to use this skill as written, or see issue [#8](https://github.com/stanfish06/my-skills/issues/8) for the planned update to the v3.x API.
+
 ## Overview
 
 PufferLib is a high-performance reinforcement learning library designed for fast parallel environment simulation and training. It achieves training at millions of steps per second through optimized vectorization, native multi-agent support, and efficient PPO implementation (PuffeRL). The library provides the Ocean suite of 20+ environments and seamless integration with Gymnasium, PettingZoo, and specialized RL frameworks.
@@ -432,4 +438,3 @@ uv pip install pufferlib
 - Official docs: https://puffer.ai/docs.html
 - GitHub: https://github.com/PufferAI/PufferLib
 - Discord: Community support available
-
