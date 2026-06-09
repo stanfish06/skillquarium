@@ -1,8 +1,12 @@
 ---
 title: research-grants
+aliases:
+  - research grants
 tags:
   - skill
   - domain/research-writing
+domain: research-writing
+status: untried
 source: research-grants/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Write competitive research proposals for NSF, NIH, DOE, and DARPA. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.
 
-**Source:** [research-grants/SKILL.md](research-grants/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [research-grants/SKILL.md](research-grants/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

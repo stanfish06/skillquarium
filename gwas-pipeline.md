@@ -1,8 +1,14 @@
 ---
 title: gwas-pipeline
+aliases:
+  - PLINK
+  - REGENIE
+  - gwas pipeline
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: gwas-pipeline/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +18,7 @@ created: 2026-06-09
 > [!info] What it does
 > End-to-end GWAS automation wrapping PLINK2 for genotype QC and REGENIE for two-step whole-genome regression association testing. Produces Manhattan plots, QQ plots, clumped lead variants, and structured summary statistics.
 
-**Source:** [gwas-pipeline/SKILL.md](gwas-pipeline/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [gwas-pipeline/SKILL.md](gwas-pipeline/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

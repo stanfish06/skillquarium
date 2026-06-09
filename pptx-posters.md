@@ -1,8 +1,12 @@
 ---
 title: pptx-posters
+aliases:
+  - pptx posters
 tags:
   - skill
   - domain/research-writing
+domain: research-writing
+status: untried
 source: pptx-posters/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Create research posters using HTML/CSS that can be exported to PDF or PPTX. Use this skill ONLY when the user explicitly requests PowerPoint/PPTX poster format. For standard research posters, use latex-posters instead. This skill provides modern web-based poster design with responsive layouts and easy visual integration.
 
-**Source:** [pptx-posters/SKILL.md](pptx-posters/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [pptx-posters/SKILL.md](pptx-posters/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

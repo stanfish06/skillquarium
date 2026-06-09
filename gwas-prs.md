@@ -1,8 +1,12 @@
 ---
 title: gwas-prs
+aliases:
+  - gwas prs
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: gwas-prs/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Calculate polygenic risk scores from DTC genetic data using the PGS Catalog
 
-**Source:** [gwas-prs/SKILL.md](gwas-prs/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [gwas-prs/SKILL.md](gwas-prs/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

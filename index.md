@@ -8,13 +8,19 @@ created: 2026-06-09
 
 # Skills Index
 
-A navigable map of the **264 agent skills** in this vault, grouped into 18 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes.
+A navigable map of the **264 agent skills** in this vault, grouped into 18 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
 
 > [!tip] How to navigate
-> - Browse a **domain map** below for grouped, cross-linked skills.
-> - Jump to any skill via the **A–Z list** at the bottom.
-> - Each skill note links to its source `SKILL.md` and to related skills.
-> - Open Obsidian **Graph view** to see index, maps, and skills connect.
+> - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).
+> - **Browse a domain:** open a map below for grouped, cross-linked skills.
+> - **Filter by attribute:** open [skills.base](skills.base) to sort/filter by domain, status, rating.
+> - **Navigate by goal:** see [Workflows & recipes](recipes/index.md).
+> - **See connections:** Obsidian Graph view is color-grouped by domain.
+
+## Quick access
+
+- [Filterable table — skills.base](skills.base)  ·  sort & filter all skills by domain / status / rating
+- [Workflows & recipes](recipes/index.md)  ·  goal-oriented chains of skills
 
 ## Browse by domain
 

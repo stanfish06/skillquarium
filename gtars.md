@@ -3,6 +3,8 @@ title: gtars
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: gtars/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > High-performance toolkit for genomic interval analysis in Rust with Python bindings. Use when working with genomic regions, BED files, coverage tracks, overlap detection, tokenization for ML models, or fragment analysis in computational genomics and machine learning applications.
 
-**Source:** [gtars/SKILL.md](gtars/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [gtars/SKILL.md](gtars/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,13 @@
 ---
 title: methylation-clock
+aliases:
+  - epigenetic age
+  - methylation clock
 tags:
   - skill
   - domain/clinical-medical
+domain: clinical-medical
+status: untried
 source: methylation-clock/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +17,7 @@ created: 2026-06-09
 > [!info] What it does
 > Compute epigenetic age from DNA methylation arrays using PyAging clocks from GEO accessions or local files.
 
-**Source:** [methylation-clock/SKILL.md](methylation-clock/SKILL.md)  ·  **Domain:** [Clinical, Medical & Pharmacogenomics](maps/clinical-medical.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [methylation-clock/SKILL.md](methylation-clock/SKILL.md)  ·  **Domain:** [Clinical, Medical & Pharmacogenomics](maps/clinical-medical.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -3,6 +3,8 @@ title: biopython
 tags:
   - skill
   - domain/sequence-phylogenetics
+domain: sequence-phylogenetics
+status: untried
 source: biopython/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Comprehensive molecular biology toolkit. Use for sequence manipulation, file parsing (FASTA/GenBank/PDB), phylogenetics, and programmatic NCBI/PubMed access (Bio.Entrez). Best for batch processing, custom bioinformatics pipelines, BLAST automation. For quick lookups use gget; for multi-service integration use bioservices.
 
-**Source:** [biopython/SKILL.md](biopython/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [biopython/SKILL.md](biopython/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

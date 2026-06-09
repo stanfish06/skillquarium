@@ -1,8 +1,12 @@
 ---
 title: imaging-data-commons
+aliases:
+  - imaging data commons
 tags:
   - skill
   - domain/imaging-signals
+domain: imaging-signals
+status: untried
 source: imaging-data-commons/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Query and download public cancer imaging data from NCI Imaging Data Commons using idc-index. Use for accessing large-scale radiology (CT, MR, PET) and pathology datasets for AI training or research. No authentication required. Query by metadata, visualize in browser, check licenses.
 
-**Source:** [imaging-data-commons/SKILL.md](imaging-data-commons/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [imaging-data-commons/SKILL.md](imaging-data-commons/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

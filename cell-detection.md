@@ -1,8 +1,12 @@
 ---
 title: cell-detection
+aliases:
+  - cell detection
 tags:
   - skill
   - domain/imaging-signals
+domain: imaging-signals
+status: untried
 source: cell-detection/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Cell segmentation in fluorescence microscopy images. Supports Cellpose/cpsam (Cellpose 4.0) with additional backends planned. Produces segmentation masks, per-cell morphology metrics (area, diameter, centroid, eccentricity), overlay figures, and a report.md.
 
-**Source:** [cell-detection/SKILL.md](cell-detection/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [cell-detection/SKILL.md](cell-detection/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

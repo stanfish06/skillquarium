@@ -1,8 +1,12 @@
 ---
 title: polars-bio
+aliases:
+  - polars bio
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: polars-bio/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames. Overlap, nearest, merge, coverage, complement, subtract for BED/VCF/BAM/GFF intervals. Streaming, cloud-native, faster bioframe alternative.
 
-**Source:** [polars-bio/SKILL.md](polars-bio/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [polars-bio/SKILL.md](polars-bio/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,12 @@
 ---
 title: multiqc-reporter
+aliases:
+  - multiqc reporter
 tags:
   - skill
   - domain/sequence-phylogenetics
+domain: sequence-phylogenetics
+status: untried
 source: multiqc-reporter/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Aggregates QC reports from any bioinformatics tool outputs (FastQC, fastp, STAR, Picard, samtools, etc.) into a single MultiQC HTML report plus a ClawBio markdown summary with per-sample QC metrics.
 
-**Source:** [multiqc-reporter/SKILL.md](multiqc-reporter/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [multiqc-reporter/SKILL.md](multiqc-reporter/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

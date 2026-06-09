@@ -3,6 +3,8 @@ title: anndata
 tags:
   - skill
   - domain/single-cell-rnaseq
+domain: single-cell-rnaseq
+status: untried
 source: anndata/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Data structure for annotated matrices in single-cell analysis. Use when working with .h5ad files or integrating with the scverse ecosystem. This is the data format skill—for analysis workflows use scanpy; for probabilistic models use scvi-tools; for population-scale queries use cellxgene-census.
 
-**Source:** [anndata/SKILL.md](anndata/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [anndata/SKILL.md](anndata/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

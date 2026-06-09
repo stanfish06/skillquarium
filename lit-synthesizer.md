@@ -1,8 +1,12 @@
 ---
 title: lit-synthesizer
+aliases:
+  - lit synthesizer
 tags:
   - skill
   - domain/literature-discovery
+domain: literature-discovery
+status: untried
 source: lit-synthesizer/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Search PubMed and bioRxiv for bioinformatics literature, synthesise results into a structured report, and build a citation graph — all locally, with a reproducibility bundle.
 
-**Source:** [lit-synthesizer/SKILL.md](lit-synthesizer/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](maps/literature-discovery.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [lit-synthesizer/SKILL.md](lit-synthesizer/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](maps/literature-discovery.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,15 @@
 ---
 title: market-research-reports
+aliases:
+  - market research reports
+  - McKinsey
+  - BCG
+  - Gartner
 tags:
   - skill
   - domain/documents-office
+domain: documents-office
+status: untried
 source: market-research-reports/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +19,7 @@ created: 2026-06-09
 > [!info] What it does
 > Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner). Features professional LaTeX formatting, extensive visual generation with scientific-schematics and generate-image, deep integration with research-lookup for data gathering, and multi-framework strategic analysis including Porter's Five Forces, PESTLE, SWOT, TAM/SAM/SOM, and BCG Matrix.
 
-**Source:** [market-research-reports/SKILL.md](market-research-reports/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [market-research-reports/SKILL.md](market-research-reports/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

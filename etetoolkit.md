@@ -1,8 +1,12 @@
 ---
 title: etetoolkit
+aliases:
+  - ETE
 tags:
   - skill
   - domain/sequence-phylogenetics
+domain: sequence-phylogenetics
+status: untried
 source: etetoolkit/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics.
 
-**Source:** [etetoolkit/SKILL.md](etetoolkit/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [etetoolkit/SKILL.md](etetoolkit/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

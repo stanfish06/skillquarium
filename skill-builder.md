@@ -1,8 +1,13 @@
 ---
 title: skill-builder
+aliases:
+  - skill builder
+  - YAML
 tags:
   - skill
   - domain/vault-meta
+domain: vault-meta
+status: untried
 source: skill-builder/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +17,7 @@ created: 2026-06-09
 > [!info] What it does
 > Scaffold a new ClawBio skill from a spec file (JSON/YAML) or interactively — generates SKILL.md, Python skeleton, tests, and updates catalog.json
 
-**Source:** [skill-builder/SKILL.md](skill-builder/SKILL.md)  ·  **Domain:** [Vault, Skills & Workflow Meta](maps/vault-meta.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [skill-builder/SKILL.md](skill-builder/SKILL.md)  ·  **Domain:** [Vault, Skills & Workflow Meta](maps/vault-meta.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

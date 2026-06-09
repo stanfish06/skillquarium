@@ -3,6 +3,8 @@ title: matplotlib
 tags:
   - skill
   - domain/data-science-compute
+domain: data-science-compute
+status: untried
 source: matplotlib/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, creating novel plot types, or integrating with specific scientific workflows. Export to PNG/PDF/SVG for publication. For quick statistical plots use seaborn; for interactive plots use plotly; for publication-ready multi-panel figures with journal styling, use scientific-visualization.
 
-**Source:** [matplotlib/SKILL.md](matplotlib/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [matplotlib/SKILL.md](matplotlib/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

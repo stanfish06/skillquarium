@@ -1,8 +1,12 @@
 ---
 title: nextflow
+aliases:
+  - nf-core
 tags:
   - skill
   - domain/cloud-devops
+domain: cloud-devops
+status: untried
 source: nextflow/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Build, run, and debug Nextflow data pipelines and nf-core workflows end to end. Use whenever the user mentions Nextflow, nf-core, .nf files, nextflow.config, DSL2, processes/channels/operators, samplesheets, or wants to run a community pipeline (e.g. nf-core/rnaseq, nf-core/sarek), write or test a module/subworkflow with nf-test, configure executors/containers (Docker, Singularity/Apptainer, Conda, Wave), scale a workflow to HPC/SLURM or cloud (AWS Batch, Google Batch, Azure, Kubernetes), or debug a failed/-resume run. Make sure to use this skill for any reproducible scientific/bioinformatics workflow work even if the user does not say the word "Nextflow", and for authoring nf-core-compliant pipelines, modules, configs, and linting.
 
-**Source:** [nextflow/SKILL.md](nextflow/SKILL.md)  ·  **Domain:** [Cloud, Infra & MLOps](maps/cloud-devops.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [nextflow/SKILL.md](nextflow/SKILL.md)  ·  **Domain:** [Cloud, Infra & MLOps](maps/cloud-devops.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

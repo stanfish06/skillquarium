@@ -1,8 +1,12 @@
 ---
 title: statistical-analysis
+aliases:
+  - statistical analysis
 tags:
   - skill
   - domain/data-science-compute
+domain: data-science-compute
+status: untried
 source: statistical-analysis/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Guided statistical analysis with test selection and reporting. Use when you need help choosing appropriate tests for your data, assumption checking, power analysis, and APA-formatted results. Best for academic research reporting, test selection guidance. For implementing specific models programmatically use statsmodels.
 
-**Source:** [statistical-analysis/SKILL.md](statistical-analysis/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [statistical-analysis/SKILL.md](statistical-analysis/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

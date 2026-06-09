@@ -1,8 +1,13 @@
 ---
 title: scanpy
+aliases:
+  - single cell
+  - scRNA-seq
 tags:
   - skill
   - domain/single-cell-rnaseq
+domain: single-cell-rnaseq
+status: untried
 source: scanpy/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +17,7 @@ created: 2026-06-09
 > [!info] What it does
 > Standard single-cell RNA-seq analysis pipeline. Use for QC, normalization, dimensionality reduction (PCA/UMAP/t-SNE), clustering, differential expression, visualization, and converting R-friendly single-cell formats such as Seurat or SingleCellExperiment RDS files into h5ad for Scanpy. Best for exploratory scRNA-seq analysis with established workflows. For deep learning models use scvi-tools; for data format questions use anndata.
 
-**Source:** [scanpy/SKILL.md](scanpy/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [scanpy/SKILL.md](scanpy/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 
@@ -27,4 +32,3 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
-

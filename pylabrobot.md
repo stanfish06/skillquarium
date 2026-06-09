@@ -3,6 +3,8 @@ title: pylabrobot
 tags:
   - skill
   - domain/bio-databases-platforms
+domain: bio-databases-platforms
+status: untried
 source: pylabrobot/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Vendor-agnostic lab automation framework. Use when controlling multiple equipment types (Hamilton, Tecan, Opentrons, plate readers, pumps) or needing unified programming across different vendors. Best for complex workflows, multi-vendor setups, simulation. For Opentrons-only protocols with official API, opentrons-integration may be simpler.
 
-**Source:** [pylabrobot/SKILL.md](pylabrobot/SKILL.md)  ·  **Domain:** [Bio Databases, Lab & Cloud Platforms](maps/bio-databases-platforms.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [pylabrobot/SKILL.md](pylabrobot/SKILL.md)  ·  **Domain:** [Bio Databases, Lab & Cloud Platforms](maps/bio-databases-platforms.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -3,6 +3,8 @@ title: qiskit
 tags:
   - skill
   - domain/quantum-physics
+domain: quantum-physics
+status: untried
 source: qiskit/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > IBM quantum computing framework. Use when targeting IBM Quantum hardware, working with Qiskit Runtime for production workloads, or needing IBM optimization tools. Best for IBM hardware execution, quantum error mitigation, and enterprise quantum computing. For Google hardware use cirq; for gradient-based quantum ML use pennylane; for open quantum system simulations use qutip.
 
-**Source:** [qiskit/SKILL.md](qiskit/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](maps/quantum-physics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [qiskit/SKILL.md](qiskit/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](maps/quantum-physics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

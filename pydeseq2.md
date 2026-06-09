@@ -1,8 +1,12 @@
 ---
 title: pydeseq2
+aliases:
+  - DESeq2
 tags:
   - skill
   - domain/single-cell-rnaseq
+domain: single-cell-rnaseq
+status: untried
 source: pydeseq2/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Differential gene expression analysis for bulk RNA-seq with PyDESeq2, including formulaic designs, Wald tests, FDR correction, LFC shrinkage, and result visualization.
 
-**Source:** [pydeseq2/SKILL.md](pydeseq2/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [pydeseq2/SKILL.md](pydeseq2/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

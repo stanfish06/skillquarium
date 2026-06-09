@@ -1,8 +1,12 @@
 ---
 title: sample-qc-triage
+aliases:
+  - sample qc triage
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: sample-qc-triage/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Deterministic multi-sample QC triage for identity, sex, contamination, and batch-shift outliers
 
-**Source:** [sample-qc-triage/SKILL.md](sample-qc-triage/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [sample-qc-triage/SKILL.md](sample-qc-triage/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

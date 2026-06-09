@@ -3,6 +3,8 @@ title: qutip
 tags:
   - skill
   - domain/quantum-physics
+domain: quantum-physics
+status: untried
 source: qutip/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Quantum physics simulation library for open quantum systems. Use when studying master equations, Lindblad dynamics, decoherence, quantum optics, or cavity QED. Best for physics research, open system dynamics, and educational simulations. NOT for circuit-based quantum computing—use qiskit, cirq, or pennylane for quantum algorithms and hardware execution.
 
-**Source:** [qutip/SKILL.md](qutip/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](maps/quantum-physics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [qutip/SKILL.md](qutip/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](maps/quantum-physics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

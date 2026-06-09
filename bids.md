@@ -3,6 +3,8 @@ title: bids
 tags:
   - skill
   - domain/imaging-signals
+domain: imaging-signals
+status: untried
 source: bids/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Use this skill when working with Brain Imaging Data Structure (BIDS) datasets: organizing neuroscience and biomedical data (MRI, EEG, MEG, iEEG, PET, microscopy, NIRS, motion capture, EMG, MR spectroscopy, behavioral), querying BIDS layouts, validating compliance, converting DICOM to BIDS, writing metadata sidecars, or creating BIDS derivatives.
 
-**Source:** [bids/SKILL.md](bids/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [bids/SKILL.md](bids/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

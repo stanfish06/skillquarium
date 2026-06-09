@@ -3,6 +3,8 @@ title: markitdown
 tags:
   - skill
   - domain/documents-office
+domain: documents-office
+status: untried
 source: markitdown/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Convert files and office documents to Markdown. Supports PDF, DOCX, PPTX, XLSX, images (with OCR), audio (with transcription), HTML, CSV, JSON, XML, ZIP, YouTube URLs, EPubs and more.
 
-**Source:** [markitdown/SKILL.md](markitdown/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [markitdown/SKILL.md](markitdown/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,12 @@
 ---
 title: seq-wrangler
+aliases:
+  - seq wrangler
 tags:
   - skill
   - domain/sequence-phylogenetics
+domain: sequence-phylogenetics
+status: untried
 source: seq-wrangler/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > NGS read QC, alignment, and BAM processing pipeline. Wraps FastQC, BWA/Bowtie2/Minimap2, SAMtools, and MultiQC for automated read-to-BAM workflows.
 
-**Source:** [seq-wrangler/SKILL.md](seq-wrangler/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [seq-wrangler/SKILL.md](seq-wrangler/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,13 @@
 ---
 title: umap-learn
+aliases:
+  - UMAP
+  - umap learn
 tags:
   - skill
   - domain/ml-ai
+domain: ml-ai
+status: untried
 source: umap-learn/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +17,7 @@ created: 2026-06-09
 > [!info] What it does
 > Use UMAP-learn for nonlinear dimensionality reduction, 2D/3D embeddings, clustering preprocessing, supervised or semi-supervised UMAP, DensMAP, AlignedUMAP, and Parametric UMAP workflows.
 
-**Source:** [umap-learn/SKILL.md](umap-learn/SKILL.md)  ·  **Domain:** [Machine Learning & AI](maps/ml-ai.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [umap-learn/SKILL.md](umap-learn/SKILL.md)  ·  **Domain:** [Machine Learning & AI](maps/ml-ai.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

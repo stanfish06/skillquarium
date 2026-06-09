@@ -3,6 +3,8 @@ title: seaborn
 tags:
   - skill
   - domain/data-science-compute
+domain: data-science-compute
+status: untried
 source: seaborn/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and categorical comparisons with attractive defaults. Best for box plots, violin plots, pair plots, heatmaps. Built on matplotlib. For interactive plots use plotly; for publication styling use scientific-visualization.
 
-**Source:** [seaborn/SKILL.md](seaborn/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [seaborn/SKILL.md](seaborn/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

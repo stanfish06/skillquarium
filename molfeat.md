@@ -3,6 +3,8 @@ title: molfeat
 tags:
   - skill
   - domain/drug-discovery-chem
+domain: drug-discovery-chem
+status: untried
 source: molfeat/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Molecular featurization for ML (100+ featurizers). ECFP, MACCS, descriptors, pretrained models (ChemBERTa), convert SMILES to features, for QSAR and molecular ML.
 
-**Source:** [molfeat/SKILL.md](molfeat/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [molfeat/SKILL.md](molfeat/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

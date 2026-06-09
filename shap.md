@@ -3,6 +3,8 @@ title: shap
 tags:
   - skill
   - domain/ml-ai
+domain: ml-ai
+status: untried
 source: shap/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Model interpretability and explainability using SHAP (SHapley Additive exPlanations). Use this skill when explaining machine learning model predictions, computing feature importance, generating SHAP plots (waterfall, beeswarm, bar, scatter, force, heatmap), debugging models, analyzing model bias or fairness, comparing models, or implementing explainable AI. Works with tree-based models (XGBoost, LightGBM, Random Forest), deep learning (TensorFlow, PyTorch), linear models, and any black-box model.
 
-**Source:** [shap/SKILL.md](shap/SKILL.md)  ·  **Domain:** [Machine Learning & AI](maps/ml-ai.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [shap/SKILL.md](shap/SKILL.md)  ·  **Domain:** [Machine Learning & AI](maps/ml-ai.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,12 @@
 ---
 title: bioconductor-bridge
+aliases:
+  - bioconductor bridge
 tags:
   - skill
   - domain/sequence-phylogenetics
+domain: sequence-phylogenetics
+status: untried
 source: bioconductor-bridge/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager.
 
-**Source:** [bioconductor-bridge/SKILL.md](bioconductor-bridge/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [bioconductor-bridge/SKILL.md](bioconductor-bridge/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

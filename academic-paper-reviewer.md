@@ -1,8 +1,12 @@
 ---
 title: academic-paper-reviewer
+aliases:
+  - academic paper reviewer
 tags:
   - skill
   - domain/academic-pipelines
+domain: academic-pipelines
+status: untried
 source: academic-paper-reviewer/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Multi-perspective academic paper review with dynamic reviewer personas. Simulates 5 independent reviewers (EIC + 3 peer reviewers + Devil's Advocate) with field-specific expertise. Supports full review, re-review (verification), quick assessment, methodology focus, Socratic guided, and calibration modes. Triggers on: review paper, peer review, manuscript review, referee report, review my paper, critique paper, simulate review, editorial review, calibrate reviewer, reviewer calibration, measure reviewer accuracy.
 
-**Source:** [academic-paper-reviewer/SKILL.md](academic-paper-reviewer/SKILL.md)  ·  **Domain:** [Academic Paper & Nature Pipelines](maps/academic-pipelines.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [academic-paper-reviewer/SKILL.md](academic-paper-reviewer/SKILL.md)  ·  **Domain:** [Academic Paper & Nature Pipelines](maps/academic-pipelines.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

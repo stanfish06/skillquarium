@@ -1,8 +1,14 @@
 ---
 title: arboreto
+aliases:
+  - GRNs
+  - GRNBoost2
+  - GENIE3
 tags:
   - skill
   - domain/single-cell-rnaseq
+domain: single-cell-rnaseq
+status: untried
 source: arboreto/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +18,7 @@ created: 2026-06-09
 > [!info] What it does
 > Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3). Use when analyzing transcriptomics data (bulk RNA-seq, single-cell RNA-seq) to identify transcription factor-target gene relationships and regulatory interactions. Supports distributed computation for large-scale datasets.
 
-**Source:** [arboreto/SKILL.md](arboreto/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [arboreto/SKILL.md](arboreto/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

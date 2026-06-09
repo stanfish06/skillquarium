@@ -1,8 +1,14 @@
 ---
 title: generate-image
+aliases:
+  - generate image
+  - FLUX
+  - Gemini
 tags:
   - skill
   - domain/documents-office
+domain: documents-office
+status: untried
 source: generate-image/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +18,7 @@ created: 2026-06-09
 > [!info] What it does
 > Generate or edit images using AI models (FLUX, Gemini). Use for general-purpose image generation including photos, illustrations, artwork, visual assets, concept art, and any image that isn't a technical diagram or schematic. For flowcharts, circuits, pathways, and technical diagrams, use the scientific-schematics skill instead.
 
-**Source:** [generate-image/SKILL.md](generate-image/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [generate-image/SKILL.md](generate-image/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

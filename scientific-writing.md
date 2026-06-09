@@ -1,8 +1,12 @@
 ---
 title: scientific-writing
+aliases:
+  - scientific writing
 tags:
   - skill
   - domain/research-writing
+domain: research-writing
+status: untried
 source: scientific-writing/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Core skill for the deep research and writing tool. Write scientific manuscripts in full paragraphs (never bullet points). Use two-stage process with (1) section outlines with key points using research-lookup then (2) convert to flowing prose. IMRAD structure, citations (APA/AMA/Vancouver), figures/tables, reporting guidelines (CONSORT/STROBE/PRISMA), for research papers and journal submissions.
 
-**Source:** [scientific-writing/SKILL.md](scientific-writing/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [scientific-writing/SKILL.md](scientific-writing/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

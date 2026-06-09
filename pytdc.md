@@ -3,6 +3,8 @@ title: pytdc
 tags:
   - skill
   - domain/drug-discovery-chem
+domain: drug-discovery-chem
+status: untried
 source: pytdc/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Therapeutics Data Commons. AI-ready drug discovery datasets (ADME, toxicity, DTI), benchmarks, scaffold splits, molecular oracles, for therapeutic ML and pharmacological prediction.
 
-**Source:** [pytdc/SKILL.md](pytdc/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [pytdc/SKILL.md](pytdc/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

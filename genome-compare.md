@@ -1,8 +1,13 @@
 ---
 title: genome-compare
+aliases:
+  - genome compare
+  - PGP-1
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: genome-compare/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +17,7 @@ created: 2026-06-09
 > [!info] What it does
 > Compare your genome to George Church (PGP-1) and estimate ancestry composition via IBS and EM admixture
 
-**Source:** [genome-compare/SKILL.md](genome-compare/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [genome-compare/SKILL.md](genome-compare/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

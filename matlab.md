@@ -3,6 +3,8 @@ title: matlab
 tags:
   - skill
   - domain/data-science-compute
+domain: data-science-compute
+status: untried
 source: matlab/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing. Use when writing MATLAB/Octave scripts for linear algebra, signal processing, image processing, differential equations, optimization, statistics, or creating scientific visualizations. Also use when the user needs help with MATLAB syntax, functions, or wants to convert between MATLAB and Python code. Scripts can be executed with MATLAB or the open-source GNU Octave interpreter.
 
-**Source:** [matlab/SKILL.md](matlab/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [matlab/SKILL.md](matlab/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

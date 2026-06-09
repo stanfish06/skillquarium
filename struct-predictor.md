@@ -1,8 +1,14 @@
 ---
 title: struct-predictor
+aliases:
+  - Boltz
+  - AlphaFold
+  - struct predictor
 tags:
   - skill
   - domain/drug-discovery-chem
+domain: drug-discovery-chem
+status: untried
 source: struct-predictor/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +18,7 @@ created: 2026-06-09
 > [!info] What it does
 > Protein structure prediction with Boltz-2. Accepts YAML inputs (single protein or multi-chain complex), runs boltz predict, extracts per-residue pLDDT and PAE confidence, and writes a markdown report with figures.
 
-**Source:** [struct-predictor/SKILL.md](struct-predictor/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [struct-predictor/SKILL.md](struct-predictor/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

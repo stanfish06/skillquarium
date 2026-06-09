@@ -1,8 +1,12 @@
 ---
 title: clinical-variant-reporter
+aliases:
+  - clinical variant reporter
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: clinical-variant-reporter/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Classify germline variants from VCF/BCF files according to the ACMG/AMP 2015 28-criteria evidence framework and generate clinical-grade interpretation reports with per-variant evidence audit trails and ACMG SF v3.2 secondary findings screening.
 
-**Source:** [clinical-variant-reporter/SKILL.md](clinical-variant-reporter/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [clinical-variant-reporter/SKILL.md](clinical-variant-reporter/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,12 @@
 ---
 title: bgpt-mcp
+aliases:
+  - bgpt mcp
 tags:
   - skill
   - domain/literature-discovery
+domain: literature-discovery
+status: untried
 source: bgpt-mcp/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Search scientific papers via the BGPT MCP server and retrieve structured experimental data — methods, results, conclusions, quality scores, and 25+ metadata fields per paper.
 
-**Source:** [bgpt-mcp/SKILL.md](bgpt-mcp/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](maps/literature-discovery.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [bgpt-mcp/SKILL.md](bgpt-mcp/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](maps/literature-discovery.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

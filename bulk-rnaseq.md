@@ -1,8 +1,16 @@
 ---
 title: bulk-rnaseq
+aliases:
+  - bulk rnaseq
+  - FastQC
+  - STAR
+  - Salmon
+  - featureCounts
 tags:
   - skill
   - domain/single-cell-rnaseq
+domain: single-cell-rnaseq
+status: untried
 source: bulk-rnaseq/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +20,7 @@ created: 2026-06-09
 > [!info] What it does
 > End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles a gene-level counts matrix, then hands off to differential expression (pydeseq2), pathway/GSEA enrichment (pathway-enrichment), and publication figures (scientific-visualization). Use whenever the user has bulk RNA-seq reads or quant output and wants a complete, reproducible differential-expression workflow — e.g. "analyze my RNA-seq", "FASTQ to DESeq2", "run nf-core/rnaseq", "STAR/Salmon quantification", "build a counts matrix for DESeq2", or "go from reads to differentially expressed genes and enriched pathways". Routes between an nf-core/rnaseq (Nextflow) path and a standalone STAR/Salmon path, and covers experimental design, strandedness, and QC gates. For single-cell RNA-seq use the scanpy skill instead.
 
-**Source:** [bulk-rnaseq/SKILL.md](bulk-rnaseq/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [bulk-rnaseq/SKILL.md](bulk-rnaseq/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

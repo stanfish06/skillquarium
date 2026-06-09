@@ -1,8 +1,13 @@
 ---
 title: esm
+aliases:
+  - ESMFold
+  - ESM3
 tags:
   - skill
   - domain/drug-discovery-chem
+domain: drug-discovery-chem
+status: untried
 source: esm/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +17,7 @@ created: 2026-06-09
 > [!info] What it does
 > Use when working directly with the `esm` Python SDK, ESM3 or ESMC model IDs, Forge/Biohub inference clients, or ESMFold2 folding workflows.
 
-**Source:** [esm/SKILL.md](esm/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [esm/SKILL.md](esm/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -3,6 +3,8 @@ title: pennylane
 tags:
   - skill
   - domain/quantum-physics
+domain: quantum-physics
+status: untried
 source: pennylane/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > Hardware-agnostic quantum ML framework with automatic differentiation. Use when training quantum circuits via gradients, building hybrid quantum-classical models, or needing device portability across IBM/Google/Rigetti/IonQ. Best for variational algorithms (VQE, QAOA), quantum neural networks, and integration with PyTorch or JAX. For hardware-specific optimizations use qiskit (IBM) or cirq (Google); for open quantum systems use qutip.
 
-**Source:** [pennylane/SKILL.md](pennylane/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](maps/quantum-physics.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [pennylane/SKILL.md](pennylane/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](maps/quantum-physics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -1,8 +1,12 @@
 ---
 title: data-extractor
+aliases:
+  - data extractor
 tags:
   - skill
   - domain/literature-discovery
+domain: literature-discovery
+status: untried
 source: data-extractor/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Extract numerical data from scientific figure images using Claude vision + OpenCV calibration. Supports 26+ plot types including bar charts, scatter plots, forest plots, Kaplan-Meier curves, box plots, and more.
 
-**Source:** [data-extractor/SKILL.md](data-extractor/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](maps/literature-discovery.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [data-extractor/SKILL.md](data-extractor/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](maps/literature-discovery.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

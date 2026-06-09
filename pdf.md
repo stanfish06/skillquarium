@@ -3,6 +3,8 @@ title: pdf
 tags:
   - skill
   - domain/documents-office
+domain: documents-office
+status: untried
 source: pdf/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +14,7 @@ created: 2026-06-09
 > [!info] What it does
 > PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis.
 
-**Source:** [pdf/SKILL.md](pdf/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [pdf/SKILL.md](pdf/SKILL.md)  ·  **Domain:** [Documents, Office & Media](maps/documents-office.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

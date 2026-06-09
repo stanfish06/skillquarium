@@ -1,8 +1,12 @@
 ---
 title: mendelian-randomisation
+aliases:
+  - mendelian randomisation
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: mendelian-randomisation/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Two-sample Mendelian Randomisation from GWAS summary statistics with IVW, MR-Egger, weighted median/mode, and full sensitivity analysis (Cochran Q, Egger intercept, Steiger, F-statistic, leave-one-out).
 
-**Source:** [mendelian-randomisation/SKILL.md](mendelian-randomisation/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [mendelian-randomisation/SKILL.md](mendelian-randomisation/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

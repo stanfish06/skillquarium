@@ -1,8 +1,13 @@
 ---
 title: variant-annotation
+aliases:
+  - VEP
+  - variant annotation
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: variant-annotation/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +17,7 @@ created: 2026-06-09
 > [!info] What it does
 > Annotate VCF variants with Ensembl VEP REST, ClinVar significance, gnomAD/population frequency context, and prioritized variant ranking.
 
-**Source:** [variant-annotation/SKILL.md](variant-annotation/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [variant-annotation/SKILL.md](variant-annotation/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

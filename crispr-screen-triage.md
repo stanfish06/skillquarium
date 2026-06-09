@@ -1,8 +1,12 @@
 ---
 title: crispr-screen-triage
+aliases:
+  - crispr screen triage
 tags:
   - skill
   - domain/drug-discovery-chem
+domain: drug-discovery-chem
+status: untried
 source: crispr-screen-triage/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Deterministic CRISPR screen hit ranking from local guide-level count tables
 
-**Source:** [crispr-screen-triage/SKILL.md](crispr-screen-triage/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [crispr-screen-triage/SKILL.md](crispr-screen-triage/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](maps/drug-discovery-chem.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

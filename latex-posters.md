@@ -1,8 +1,12 @@
 ---
 title: latex-posters
+aliases:
+  - latex posters
 tags:
   - skill
   - domain/research-writing
+domain: research-writing
+status: untried
 source: latex-posters/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Create professional research posters in LaTeX using beamerposter, tikzposter, or baposter. Support for conference presentations, academic posters, and scientific communication. Includes layout design, color schemes, multi-column formats, figure integration, and poster-specific best practices for visual communication.
 
-**Source:** [latex-posters/SKILL.md](latex-posters/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [latex-posters/SKILL.md](latex-posters/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

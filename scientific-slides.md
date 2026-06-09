@@ -1,8 +1,12 @@
 ---
 title: scientific-slides
+aliases:
+  - scientific slides
 tags:
   - skill
   - domain/research-writing
+domain: research-writing
+status: untried
 source: scientific-slides/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +16,7 @@ created: 2026-06-09
 > [!info] What it does
 > Build slide decks and presentations for research talks. Use this for making PowerPoint slides, conference presentations, seminar talks, research presentations, thesis defense slides, or any scientific talk. Provides slide structure, design templates, timing guidance, and visual validation. Works with PowerPoint and LaTeX Beamer.
 
-**Source:** [scientific-slides/SKILL.md](scientific-slides/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [scientific-slides/SKILL.md](scientific-slides/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

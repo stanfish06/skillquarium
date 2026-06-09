@@ -1,8 +1,15 @@
 ---
 title: gwas-lookup
+aliases:
+  - gwas lookup
+  - UKB
+  - FinnGen
+  - BBJ
 tags:
   - skill
   - domain/genomics-variants
+domain: genomics-variants
+status: untried
 source: gwas-lookup/SKILL.md
 created: 2026-06-09
 ---
@@ -12,7 +19,7 @@ created: 2026-06-09
 > [!info] What it does
 > Federated variant lookup across 9 genomic databases — GWAS Catalog, Open Targets, PheWeb (UKB, FinnGen, BBJ), GTEx, eQTL Catalogue, and more.
 
-**Source:** [gwas-lookup/SKILL.md](gwas-lookup/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Index:** [Skills Index](index.md)
+**Source:** [gwas-lookup/SKILL.md](gwas-lookup/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](maps/genomics-variants.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 
