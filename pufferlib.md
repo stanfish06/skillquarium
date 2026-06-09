@@ -18,6 +18,8 @@ created: 2026-06-09
 
 ## Related skills
 
+- [pufferlib-v2](pufferlib-v2.md) — PufferLib 2.x reinforcement learning workflows for the Dec 2024 API generation
+- [pufferlib-v3](pufferlib-v3.md) — PufferLib 3.x reinforcement learning workflows for the Jun 2025 API generation
 - [stable-baselines3](stable-baselines3.md) — Production-ready reinforcement learning algorithms (PPO, SAC, DQN, TD3, DDPG, A2C) with scikit-learn-like API
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

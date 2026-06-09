@@ -11,9 +11,9 @@ metadata:
 
 > [!WARNING]
 > **This skill describes the PufferLib v1.x API, which was broken by the v2.0.0 (Dec 2024) and v3.0.0 (Jun 2025) releases.**
-> The `PuffeRL` trainer class and the `trainer.evaluate()` / `trainer.train()` / `trainer.mean_and_log()` methods shown in this skill **no longer exist** in `pufferlib>=2.0.0`. Installing the current PyPI package (`pip install pufferlib`) will cause `ImportError: cannot import name 'PuffeRL'`.
+> The top-level `from pufferlib import PuffeRL` import and the v1 constructor pattern shown below are incompatible with `pufferlib>=2.0.0`. Installing a newer PyPI package and following this skill as written can cause `ImportError: cannot import name 'PuffeRL'` or trainer signature/configuration errors.
 >
-> Pin to `pufferlib==1.0.0` to use this skill as written, or see issue [#8](https://github.com/stanfish06/my-skills/issues/8) for the planned update to the v3.x API.
+> Pin to `pufferlib==1.0.0` to use this skill as written. For newer code, use the dedicated `pufferlib-v2` skill for `pufferlib>=2.0,<3.0` or the `pufferlib-v3` skill for `pufferlib>=3.0,<4.0`.
 
 ## Overview
 

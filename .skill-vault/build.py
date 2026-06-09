@@ -139,7 +139,7 @@ CATEGORIES = [
      "General ML/DL frameworks, model interpretability, RL, graph learning, and scientific model hubs.",
      ["data-science-compute", "drug-discovery-chem", "cloud-devops"],
      ["scikit-learn", "pytorch-lightning", "transformers", "shap", "stable-baselines3", "pufferlib",
-      "torch-geometric", "umap-learn", "aeon", "timesfm-forecasting", "hugging-science"]),
+      "pufferlib-v2", "pufferlib-v3", "torch-geometric", "umap-learn", "aeon", "timesfm-forecasting", "hugging-science"]),
 
     ("data-science-compute", "Data Science, Stats & Scientific Computing",
      "DataFrames, big-data tooling, statistics, optimization, simulation, geospatial, and plotting.",
