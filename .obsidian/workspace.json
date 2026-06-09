@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "polars-bio/SKILL.md",
+                "file": "scientific-visualization/SKILL.md",
                 "mode": "source",
                 "source": false
               },
@@ -182,6 +182,8 @@
   },
   "active": "c25c73382b1c0ad4",
   "lastOpenFiles": [
+    "scientific-visualization.md",
+    "polars-bio/SKILL.md",
     "polars-bio.md",
     "profile-report.md",
     "Untitled 2.canvas",
@@ -211,8 +213,6 @@
     "wes-clinical-report-es.md",
     "wes-clinical-report-en.md",
     "vibe-research-workflow.md",
-    "venue-templates.md",
-    "vcf-annotator.md",
     "README.md~",
     "maps"
   ]
