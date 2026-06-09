@@ -137,34 +137,34 @@
       "updatedAt": "2026-06-09T11:23:24.781Z"
     },
     "citation-management": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/citation-management/SKILL.md",
-      "skillFolderHash": "57b16ef3db744bc47523ce6d10582850b3bb5f434f5a8b015d26343a6170ebad",
+      "skillFolderHash": "583e7b30c7b200df74e45a2ce16415e070d0e69b",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.781Z",
-      "updatedAt": "2026-06-09T11:27:10.631Z"
+      "updatedAt": "2026-06-09T12:47:58.341Z"
     },
     "clinical-decision-support": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/clinical-decision-support/SKILL.md",
-      "skillFolderHash": "6476724d9c4af5088cd159abdff42d655f59bb69e3cc49d8c3600501c7a47ab1",
+      "skillFolderHash": "547704555c1414d57aa55933217809cef0ccf53b",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.781Z",
-      "updatedAt": "2026-06-09T11:27:10.634Z"
+      "updatedAt": "2026-06-09T12:47:58.343Z"
     },
     "clinical-reports": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/clinical-reports/SKILL.md",
-      "skillFolderHash": "58e41adfc9bf932050ff54895977f8fbc7cfcdc2b4566493caae261dd1e7d1e2",
+      "skillFolderHash": "ae9ef7d24b4231e62fe4cde21a3f88e4d34f34fe",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.782Z",
-      "updatedAt": "2026-06-09T11:27:10.636Z"
+      "updatedAt": "2026-06-09T12:47:58.346Z"
     },
     "cobrapy": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -266,13 +266,13 @@
       "updatedAt": "2026-06-09T11:23:24.785Z"
     },
     "docx": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/document-skills/docx/SKILL.md",
-      "skillFolderHash": "4d8d43d99c634acad4c5494f5058fe41da17abc1d184da8d49bdf06305ab3009",
+      "skillFolderHash": "d402386a781e386f8ecd9a264568581a2af82b9b",
       "installedAt": "2026-06-09T11:23:24.785Z",
-      "updatedAt": "2026-06-09T11:27:10.669Z"
+      "updatedAt": "2026-06-09T12:47:58.348Z"
     },
     "esm": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -329,13 +329,13 @@
       "updatedAt": "2026-06-09T11:23:24.787Z"
     },
     "generate-image": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/generate-image/SKILL.md",
-      "skillFolderHash": "664a5e080cb5091a0de8574a43ee099461e1a91f8fbbed401661e46702b42976",
+      "skillFolderHash": "f745a7af1bc56d207b7892a344936a34ec9fe60b",
       "installedAt": "2026-06-09T11:23:24.787Z",
-      "updatedAt": "2026-06-09T11:27:10.669Z"
+      "updatedAt": "2026-06-09T12:47:58.353Z"
     },
     "geniml": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -437,14 +437,14 @@
       "updatedAt": "2026-06-09T11:23:24.790Z"
     },
     "hypothesis-generation": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/hypothesis-generation/SKILL.md",
-      "skillFolderHash": "3f8a63ae0cf153eb152417d4c3aa7369e70ce3c3d76fd2b7263889256d870c7a",
+      "skillFolderHash": "812d4125962420f7dbf53c49eaae47acafab0924",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.790Z",
-      "updatedAt": "2026-06-09T11:27:10.637Z"
+      "updatedAt": "2026-06-09T12:47:58.354Z"
     },
     "imaging-data-commons": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -456,13 +456,13 @@
       "updatedAt": "2026-06-09T11:23:24.791Z"
     },
     "infographics": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/infographics/SKILL.md",
-      "skillFolderHash": "300a549ca7d5d989600669b56105ed18dd6a82421f31df0c2fa1fc65c4b4501d",
+      "skillFolderHash": "fb09c99c6216e62c42f22789d4f1205cb916eaa7",
       "installedAt": "2026-06-09T11:23:24.791Z",
-      "updatedAt": "2026-06-09T11:27:10.670Z"
+      "updatedAt": "2026-06-09T12:47:58.355Z"
     },
     "iso-13485-certification": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -501,14 +501,14 @@
       "updatedAt": "2026-06-09T11:23:24.793Z"
     },
     "latex-posters": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/latex-posters/SKILL.md",
-      "skillFolderHash": "45a016a44b36f58a5eb986315e0e7dd059b0486dd886022e7b9847aa590143b4",
+      "skillFolderHash": "6a837588ba8419859dc4b04a48d3ab2bbd07d295",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.793Z",
-      "updatedAt": "2026-06-09T11:27:10.638Z"
+      "updatedAt": "2026-06-09T12:47:58.355Z"
     },
     "liteparse": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -520,14 +520,14 @@
       "updatedAt": "2026-06-09T11:23:24.794Z"
     },
     "literature-review": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/literature-review/SKILL.md",
-      "skillFolderHash": "cf5c95d245104e81f62578268f047fc9ee3afb214ac5e2132e4355346088630f",
+      "skillFolderHash": "9e49a3403d57f3341ba6792d5b59745259021d71",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.795Z",
-      "updatedAt": "2026-06-09T11:27:10.639Z"
+      "updatedAt": "2026-06-09T12:47:58.356Z"
     },
     "markdown-mermaid-writing": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -539,23 +539,23 @@
       "updatedAt": "2026-06-09T11:23:24.795Z"
     },
     "market-research-reports": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/market-research-reports/SKILL.md",
-      "skillFolderHash": "0593e3f7ed6b773b78306f7bf27df25f9bf320209d185b53281416600b4af7a5",
+      "skillFolderHash": "870fe3b76486136dde0b93b68fed0ef600830eb6",
       "installedAt": "2026-06-09T11:23:24.795Z",
-      "updatedAt": "2026-06-09T11:27:10.671Z"
+      "updatedAt": "2026-06-09T12:47:58.357Z"
     },
     "markitdown": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/markitdown/SKILL.md",
-      "skillFolderHash": "2f5a663e88f112dea8e7bdae3cfb4c57e03fd2ff82d7bf1a6e1e6d2b0c3a6fc2",
+      "skillFolderHash": "c34901af08a5dac40ec9035b4706e5c09c91d1b7",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.796Z",
-      "updatedAt": "2026-06-09T11:27:10.640Z"
+      "updatedAt": "2026-06-09T12:47:58.359Z"
     },
     "matchms": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -720,13 +720,13 @@
       "updatedAt": "2026-06-09T11:23:24.805Z"
     },
     "parallel-web": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/parallel-web/SKILL.md",
-      "skillFolderHash": "11d4717251541f9567df2624b6884a67a65be5ba8c04d6172cf592958dc333c8",
+      "skillFolderHash": "6b622f75e992333dd647a989fbe7ee5f3634f506",
       "installedAt": "2026-06-09T11:23:24.805Z",
-      "updatedAt": "2026-06-09T11:27:10.672Z"
+      "updatedAt": "2026-06-09T12:47:58.362Z"
     },
     "pathml": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -747,23 +747,23 @@
       "updatedAt": "2026-06-09T11:23:24.806Z"
     },
     "pdf": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/document-skills/pdf/SKILL.md",
-      "skillFolderHash": "f7deffe52835c18156c54cd245cdb509308eefd0fb867ca15680f0d23a233d5b",
+      "skillFolderHash": "32d6ac1b49d3e133917b76c14a7f06b72e408ec0",
       "installedAt": "2026-06-09T11:23:24.807Z",
-      "updatedAt": "2026-06-09T11:27:10.672Z"
+      "updatedAt": "2026-06-09T12:47:58.349Z"
     },
     "peer-review": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/peer-review/SKILL.md",
-      "skillFolderHash": "ee9e27da54689b003a37d1d8a272d973db00cf97b313121f79953fdb11511d33",
+      "skillFolderHash": "9a9e1464eafc28861de36f9fb1dea6c3fd0dc11a",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.807Z",
-      "updatedAt": "2026-06-09T11:27:10.641Z"
+      "updatedAt": "2026-06-09T12:47:58.363Z"
     },
     "pennylane": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -802,22 +802,22 @@
       "updatedAt": "2026-06-09T11:23:24.809Z"
     },
     "pptx": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/document-skills/pptx/SKILL.md",
-      "skillFolderHash": "f0952465e7d878f50f3fce14690bf27821ce8207806ff17417571c3d7cbecffd",
+      "skillFolderHash": "c73661acb72a7af139143848cd8c212afdd3ea21",
       "installedAt": "2026-06-09T11:23:24.810Z",
-      "updatedAt": "2026-06-09T11:27:10.674Z"
+      "updatedAt": "2026-06-09T12:47:58.350Z"
     },
     "pptx-posters": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/pptx-posters/SKILL.md",
-      "skillFolderHash": "2462495ea750519ac6f0d53a523d5480a757682641d9610c4087d0ce2990a438",
+      "skillFolderHash": "bf7a733dbbc1fa3aedc84e7baacbce5a11f5cd2a",
       "installedAt": "2026-06-09T11:23:24.810Z",
-      "updatedAt": "2026-06-09T11:27:10.675Z"
+      "updatedAt": "2026-06-09T12:47:58.364Z"
     },
     "primekg": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -982,24 +982,24 @@
       "updatedAt": "2026-06-09T11:23:24.818Z"
     },
     "research-grants": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/research-grants/SKILL.md",
-      "skillFolderHash": "d5512b79d442989f6f823ad8ee6385524031a25c958f70631f267a696aeeae49",
+      "skillFolderHash": "580d0f8c084cc3e2981528ed58259697f8e67cd4",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.819Z",
-      "updatedAt": "2026-06-09T11:27:10.643Z"
+      "updatedAt": "2026-06-09T12:47:58.365Z"
     },
     "research-lookup": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/research-lookup/SKILL.md",
-      "skillFolderHash": "c861a86654be0a04d08aa7070cf46ee18b9c265b184bd95bc302b5f41781dd11",
+      "skillFolderHash": "fafc091cc87465fe8ede64aaf0109d83525ba31a",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.819Z",
-      "updatedAt": "2026-06-09T11:27:10.643Z"
+      "updatedAt": "2026-06-09T12:47:58.366Z"
     },
     "rowan": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1038,34 +1038,34 @@
       "updatedAt": "2026-06-09T11:23:24.821Z"
     },
     "scientific-critical-thinking": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/scientific-critical-thinking/SKILL.md",
-      "skillFolderHash": "bd85473ce643692630f68e2308107b2cff08b10018d49dffc93044109f021bc2",
+      "skillFolderHash": "131ff76f5a82688326c22f5da7d3addd075ffd93",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.822Z",
-      "updatedAt": "2026-06-09T11:27:10.644Z"
+      "updatedAt": "2026-06-09T12:47:58.366Z"
     },
     "scientific-schematics": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/scientific-schematics/SKILL.md",
-      "skillFolderHash": "ea188c0f34e4245b029395d412058a09bfac66073d9897f08182ef166144c2be",
+      "skillFolderHash": "5e217d5e81a6820af8544160791144c80716c441",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.823Z",
-      "updatedAt": "2026-06-09T11:27:10.645Z"
+      "updatedAt": "2026-06-09T12:47:58.367Z"
     },
     "scientific-slides": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/scientific-slides/SKILL.md",
-      "skillFolderHash": "3fa8e5a961d225f587015bc656b702da57098a68e3d50a77307a70a3aaf89e40",
+      "skillFolderHash": "698e294a9edd469951d895d7298970a0180ef3d1",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.823Z",
-      "updatedAt": "2026-06-09T11:27:10.646Z"
+      "updatedAt": "2026-06-09T12:47:58.367Z"
     },
     "scientific-visualization": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1077,14 +1077,14 @@
       "updatedAt": "2026-06-09T11:23:24.824Z"
     },
     "scientific-writing": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/scientific-writing/SKILL.md",
-      "skillFolderHash": "750b45d1a8b817d2ce1d663798ee3d5ab644aebe1467b1dee29844e7b276aadd",
+      "skillFolderHash": "6045d4bdcb6427182291b5661819b26867b0ad06",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.824Z",
-      "updatedAt": "2026-06-09T11:27:10.647Z"
+      "updatedAt": "2026-06-09T12:47:58.368Z"
     },
     "scikit-bio": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1240,14 +1240,14 @@
       "updatedAt": "2026-06-09T11:23:24.836Z"
     },
     "treatment-plans": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/treatment-plans/SKILL.md",
-      "skillFolderHash": "e3a903e643d532154fe6b461d19d443c18384dc64df2a28b7ab5b645a8de4bbf",
+      "skillFolderHash": "fddf9e065b2aa7f910ba696db86fc5e4afa06620",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.837Z",
-      "updatedAt": "2026-06-09T11:27:10.648Z"
+      "updatedAt": "2026-06-09T12:47:58.369Z"
     },
     "umap-learn": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1277,14 +1277,14 @@
       "updatedAt": "2026-06-09T11:23:24.840Z"
     },
     "venue-templates": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/venue-templates/SKILL.md",
-      "skillFolderHash": "4b437036532b75666c0dad48c43ea86d0f442b92bfcb1f1ae357f2ee6bce7db9",
+      "skillFolderHash": "cdd80e16cacdfef127c847fb44bb1df38c961d47",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:23:24.841Z",
-      "updatedAt": "2026-06-09T11:27:10.650Z"
+      "updatedAt": "2026-06-09T12:47:58.370Z"
     },
     "what-if-oracle": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1296,13 +1296,13 @@
       "updatedAt": "2026-06-09T11:23:24.842Z"
     },
     "xlsx": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/document-skills/xlsx/SKILL.md",
-      "skillFolderHash": "81640be6ec731994c0233e05a0d0e5ae43f67259aa16ce2a4c7f2e971dfe7f6d",
+      "skillFolderHash": "4f8caaa4bc324cd65969633fca5389f6b4ffd2f9",
       "installedAt": "2026-06-09T11:23:24.842Z",
-      "updatedAt": "2026-06-09T11:27:10.675Z"
+      "updatedAt": "2026-06-09T12:47:58.352Z"
     },
     "zarr-python": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1314,1081 +1314,1081 @@
       "updatedAt": "2026-06-09T11:23:24.843Z"
     },
     "defuddle": {
-      "source": "git@github.com:kepano/obsidian-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/defuddle/SKILL.md",
-      "skillFolderHash": "0ed68bc3e818ba0e6b8d192357ea3daaf552a3893f8854e7fd43c06831f91323",
+      "skillFolderHash": "db0b775af7e7d603f59fa2b67bdef615baf1a48f",
       "installedAt": "2026-06-09T11:24:36.250Z",
-      "updatedAt": "2026-06-09T11:24:36.250Z"
+      "updatedAt": "2026-06-09T12:45:35.292Z"
     },
     "json-canvas": {
-      "source": "git@github.com:kepano/obsidian-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/json-canvas/SKILL.md",
-      "skillFolderHash": "56cbac74a93e4fba97f4d44bccfdeaae89e545b223f47df392c7705e01e6c543",
+      "skillFolderHash": "9df7971db7ffebf96f2a207840b9f4765aa11b04",
       "installedAt": "2026-06-09T11:24:36.251Z",
-      "updatedAt": "2026-06-09T11:24:36.251Z"
+      "updatedAt": "2026-06-09T12:45:35.293Z"
     },
     "obsidian-bases": {
-      "source": "git@github.com:kepano/obsidian-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/obsidian-bases/SKILL.md",
-      "skillFolderHash": "65db029661f38daadc8b8eb755bd7b96011336f49bdc11e966ec7fd157d8f125",
+      "skillFolderHash": "f3330f27de4d7907ead57d0f48672f4d3280bb77",
       "installedAt": "2026-06-09T11:24:36.252Z",
-      "updatedAt": "2026-06-09T11:24:36.252Z"
+      "updatedAt": "2026-06-09T12:44:37.279Z"
     },
     "obsidian-cli": {
-      "source": "git@github.com:kepano/obsidian-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/obsidian-cli/SKILL.md",
-      "skillFolderHash": "f46ae626875f7e47c410c2ee93896c4526024ebe127719e8fb430261b5677edc",
+      "skillFolderHash": "96254a554e480359de7b685571876f2e7f9ba57d",
       "installedAt": "2026-06-09T11:24:36.254Z",
-      "updatedAt": "2026-06-09T11:24:36.254Z"
+      "updatedAt": "2026-06-09T12:45:35.296Z"
     },
     "obsidian-markdown": {
-      "source": "git@github.com:kepano/obsidian-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/obsidian-markdown/SKILL.md",
-      "skillFolderHash": "0f47297035d7824e7bf0f1984e8145a59a123e2258b5d54c9ac9642f9f77e177",
+      "skillFolderHash": "4723197c6dc59abc29819da87863b1ac20b96095",
       "installedAt": "2026-06-09T11:24:36.255Z",
-      "updatedAt": "2026-06-09T11:24:36.255Z"
+      "updatedAt": "2026-06-09T12:45:35.297Z"
     },
     "academic-paper": {
-      "source": "git@github.com:Imbad0202/academic-research-skills",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Imbad0202/academic-research-skills",
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "6618378f9c29799ed12350f139f01a5ec256ae5a44c5978c7a0a18a96e682527",
+      "skillFolderHash": "4b51b6f2dfc1a8f90a709d50e3347705047a7623",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-06-09T11:25:31.104Z"
+      "updatedAt": "2026-06-09T12:46:19.065Z"
     },
     "academic-paper-reviewer": {
-      "source": "git@github.com:Imbad0202/academic-research-skills",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Imbad0202/academic-research-skills",
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "fb0f24bb34cd1146582b72281c085e8c4389bed8ace839933ff3fd4126e91a82",
+      "skillFolderHash": "a76ec84ae361526789f035c13f0386dda7d390e6",
       "installedAt": "2026-06-09T11:25:31.106Z",
-      "updatedAt": "2026-06-09T11:25:31.106Z"
+      "updatedAt": "2026-06-09T12:46:19.067Z"
     },
     "academic-pipeline": {
-      "source": "git@github.com:Imbad0202/academic-research-skills",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Imbad0202/academic-research-skills",
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "b169418af0fb1fc175b743dd81e1766a3e6479781558e64859ed5116a07cb163",
+      "skillFolderHash": "539de0a2149052cef049fe2f088152664d75cc1f",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-09T11:25:31.109Z"
+      "updatedAt": "2026-06-09T12:46:19.070Z"
     },
     "deep-research": {
-      "source": "git@github.com:Imbad0202/academic-research-skills",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Imbad0202/academic-research-skills",
+      "source": "Imbad0202/academic-research-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "9558315d3c763473b37b194f72f284ec8b5f23b1327fcba1ab45af4ff5962b48",
+      "skillFolderHash": "7d89f95bedfef2a09156d09d2646a4e46581676a",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-06-09T11:25:31.112Z"
+      "updatedAt": "2026-06-09T12:46:19.071Z"
     },
     "nature-academic-search": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-academic-search/SKILL.md",
-      "skillFolderHash": "c0d295b0c3e32dfc9ab45fe3aed35ec8e45444f951904075536926fc49c08d9b",
+      "skillFolderHash": "ea96df5d26a88bd0a3767f8fe6a99fb4a5d4eda2",
       "installedAt": "2026-06-09T11:26:33.282Z",
-      "updatedAt": "2026-06-09T11:26:33.282Z"
+      "updatedAt": "2026-06-09T12:46:34.988Z"
     },
     "nature-citation": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-citation/SKILL.md",
-      "skillFolderHash": "3b9cc2fce2c4180c1d8f3bcdf11ca95403a7af7fd63d53268d8d6ba48c441baf",
+      "skillFolderHash": "cfcf2860afa5945348d130672d78e9fade3e9943",
       "installedAt": "2026-06-09T11:26:33.285Z",
-      "updatedAt": "2026-06-09T11:26:33.285Z"
+      "updatedAt": "2026-06-09T12:46:34.990Z"
     },
     "nature-data": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-data/SKILL.md",
-      "skillFolderHash": "2495eceadbe23bc80a65d6ac00aabff212bfd1dbb521d8bb41ad7b643a88c7ea",
+      "skillFolderHash": "c42a6f112f0b3940faf7c0ee7ce254b88439393a",
       "installedAt": "2026-06-09T11:26:33.288Z",
-      "updatedAt": "2026-06-09T11:26:33.288Z"
+      "updatedAt": "2026-06-09T12:46:34.992Z"
     },
     "nature-figure": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-figure/SKILL.md",
-      "skillFolderHash": "6eb70bcf42c7a14dd6ff4493c66c4f7e7b5347aa2e8a75226a62490faaba00bd",
+      "skillFolderHash": "210a163e565e735ddbc0139a6268f74974ea37f0",
       "installedAt": "2026-06-09T11:26:33.311Z",
-      "updatedAt": "2026-06-09T11:26:33.311Z"
+      "updatedAt": "2026-06-09T12:46:34.993Z"
     },
     "nature-paper2ppt": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-paper2ppt/SKILL.md",
-      "skillFolderHash": "56d313d3dd9b757da5d9949a15c81fbe4872004664714cc8fbe7fced54ebd54d",
+      "skillFolderHash": "6de8e69eefb55825f974c970623dc428cecb67bf",
       "installedAt": "2026-06-09T11:26:33.312Z",
-      "updatedAt": "2026-06-09T11:26:33.312Z"
+      "updatedAt": "2026-06-09T12:46:34.994Z"
     },
     "nature-polishing": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-polishing/SKILL.md",
-      "skillFolderHash": "4abb631f9a848998582f40f4679b3d2a53a900eaf7ecc3c9eb0ce75f16411d00",
+      "skillFolderHash": "901a57a9f1544ad1a167d74cdce3ef0d252b7435",
       "installedAt": "2026-06-09T11:26:33.313Z",
-      "updatedAt": "2026-06-09T11:26:33.313Z"
+      "updatedAt": "2026-06-09T12:46:34.996Z"
     },
     "nature-reader": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reader/SKILL.md",
-      "skillFolderHash": "3d5e1955467a108054d83f1b999d1199aaa765f54b09b3a4e12c53198c5cc3b5",
+      "skillFolderHash": "1129273065e5555d4a31a9c88c604a586f1e3868",
       "installedAt": "2026-06-09T11:26:33.314Z",
-      "updatedAt": "2026-06-09T11:26:33.314Z"
+      "updatedAt": "2026-06-09T12:46:34.997Z"
     },
     "nature-response": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-response/SKILL.md",
-      "skillFolderHash": "690975c417a86c717e0770cefd95de36dda630d05977c3873020c62974c3820d",
+      "skillFolderHash": "499801e95472d906b945655dd3163fc6b8f3f628",
       "installedAt": "2026-06-09T11:26:33.315Z",
-      "updatedAt": "2026-06-09T11:26:33.315Z"
+      "updatedAt": "2026-06-09T12:46:34.998Z"
     },
     "nature-reviewer": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reviewer/SKILL.md",
-      "skillFolderHash": "465543a9bad4efd55a8773b5eab11af04ea83687e2f5213f0582a3df2b7b82ef",
+      "skillFolderHash": "da8ba9c70ab04cfbecb41b6d8522ec93c555f2ae",
       "installedAt": "2026-06-09T11:26:33.316Z",
-      "updatedAt": "2026-06-09T11:26:33.316Z"
+      "updatedAt": "2026-06-09T12:46:34.999Z"
     },
     "nature-writing": {
-      "source": "git@github.com:Yuan1z0825/nature-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:Yuan1z0825/nature-skills.git",
+      "source": "Yuan1z0825/nature-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-writing/SKILL.md",
-      "skillFolderHash": "367cc66eb0554c9f6e10b4f036590dfb7fff848c349f6839747f18a183da78f3",
+      "skillFolderHash": "70006b822163938173eb72c6e6328af3901f110b",
       "installedAt": "2026-06-09T11:26:33.318Z",
-      "updatedAt": "2026-06-09T11:26:33.318Z"
+      "updatedAt": "2026-06-09T12:46:35.000Z"
     },
     "paper-2-web": {
-      "source": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:K-Dense-AI/claude-scientific-writer.git",
+      "source": "K-Dense-AI/claude-scientific-writer",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/paper-2-web/SKILL.md",
-      "skillFolderHash": "88e91cb123c4b56e59c23df4cfb74a6b0a1da924697b80d55873fdabc8fc0071",
+      "skillFolderHash": "42778e05e7d5112f1c9846f844efc3645c13bb5f",
       "pluginName": "claude-scientific-writer",
       "installedAt": "2026-06-09T11:27:10.640Z",
-      "updatedAt": "2026-06-09T11:27:10.640Z"
+      "updatedAt": "2026-06-09T12:47:58.361Z"
     },
     "benchmark-paper-template": {
-      "source": "git@github.com:HKUSTDial/Supervisor-Skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:HKUSTDial/Supervisor-Skills.git",
+      "source": "HKUSTDial/Supervisor-Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/HKUSTDial/Supervisor-Skills.git",
       "skillPath": "plugins/phd-research/skills/benchmark-paper-template/SKILL.md",
-      "skillFolderHash": "e0289ec14408ad288660352f7e4841d4de0955024408212a543c59a1ba90c3ae",
+      "skillFolderHash": "3d0add27a1889cf69af384583b00b95c4981f5b5",
       "installedAt": "2026-06-09T11:28:10.903Z",
-      "updatedAt": "2026-06-09T11:28:10.903Z"
+      "updatedAt": "2026-06-09T12:46:13.657Z"
     },
     "figure-designer": {
-      "source": "git@github.com:HKUSTDial/Supervisor-Skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:HKUSTDial/Supervisor-Skills.git",
+      "source": "HKUSTDial/Supervisor-Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/HKUSTDial/Supervisor-Skills.git",
       "skillPath": "plugins/phd-research/skills/figure-designer/SKILL.md",
-      "skillFolderHash": "a1cc5bfec813d3b441cab6f8bf12d89ac8eea91315ea1df55272a86574d8afcf",
+      "skillFolderHash": "5fd289312bc322097ab54f5d733fdd5edb65d9e0",
       "installedAt": "2026-06-09T11:28:10.904Z",
-      "updatedAt": "2026-06-09T11:28:10.904Z"
+      "updatedAt": "2026-06-09T12:46:13.658Z"
     },
     "idea-evaluator": {
-      "source": "git@github.com:HKUSTDial/Supervisor-Skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:HKUSTDial/Supervisor-Skills.git",
+      "source": "HKUSTDial/Supervisor-Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/HKUSTDial/Supervisor-Skills.git",
       "skillPath": "plugins/phd-research/skills/idea-evaluator/SKILL.md",
-      "skillFolderHash": "52693957b4cd09a5ac0a999741d95323d9512c7446ffb5b4d6404cc3901af90a",
+      "skillFolderHash": "36c92cb997873599e0496b24ac4d86d10eaf6447",
       "installedAt": "2026-06-09T11:28:10.905Z",
-      "updatedAt": "2026-06-09T11:28:10.905Z"
+      "updatedAt": "2026-06-09T12:46:13.660Z"
     },
     "intro-drafter": {
-      "source": "git@github.com:HKUSTDial/Supervisor-Skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:HKUSTDial/Supervisor-Skills.git",
+      "source": "HKUSTDial/Supervisor-Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/HKUSTDial/Supervisor-Skills.git",
       "skillPath": "plugins/phd-research/skills/intro-drafter/SKILL.md",
-      "skillFolderHash": "b2b100e1fcc1b79109db68b59f81809b82080d13aface38b5d04a0a381af5d33",
+      "skillFolderHash": "0c533b645189d1d93b67fd696a96c1c11d2ed31f",
       "installedAt": "2026-06-09T11:28:10.906Z",
-      "updatedAt": "2026-06-09T11:28:10.906Z"
+      "updatedAt": "2026-06-09T12:46:13.661Z"
     },
     "pre-submission-reviewer": {
-      "source": "git@github.com:HKUSTDial/Supervisor-Skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:HKUSTDial/Supervisor-Skills.git",
+      "source": "HKUSTDial/Supervisor-Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/HKUSTDial/Supervisor-Skills.git",
       "skillPath": "plugins/phd-research/skills/pre-submission-reviewer/SKILL.md",
-      "skillFolderHash": "8358c1f050578d4a5c9e9e55240e2a6bc583a90ea3ec1e730c82409854983b77",
+      "skillFolderHash": "84a86d95ac49880b7d239ebb3de45be620f1f707",
       "installedAt": "2026-06-09T11:28:10.906Z",
-      "updatedAt": "2026-06-09T11:28:10.906Z"
+      "updatedAt": "2026-06-09T12:46:13.662Z"
     },
     "tech-paper-template": {
-      "source": "git@github.com:HKUSTDial/Supervisor-Skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:HKUSTDial/Supervisor-Skills.git",
+      "source": "HKUSTDial/Supervisor-Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/HKUSTDial/Supervisor-Skills.git",
       "skillPath": "plugins/phd-research/skills/tech-paper-template/SKILL.md",
-      "skillFolderHash": "32ebac081c731015a32e0023023e1e3c7035f0748443ec32eb2715c5c2dea518",
+      "skillFolderHash": "7dd9e502f17b1b838679edebbae31b4bff22a781",
       "installedAt": "2026-06-09T11:28:10.908Z",
-      "updatedAt": "2026-06-09T11:28:10.908Z"
+      "updatedAt": "2026-06-09T12:46:13.663Z"
     },
     "vibe-research-workflow": {
-      "source": "git@github.com:HKUSTDial/Supervisor-Skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:HKUSTDial/Supervisor-Skills.git",
+      "source": "HKUSTDial/Supervisor-Skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/HKUSTDial/Supervisor-Skills.git",
       "skillPath": "plugins/phd-research/skills/vibe-research-workflow/SKILL.md",
-      "skillFolderHash": "80636864d5d0c7bb5404cb8b6dbfe7974b248539f68620fe588d8aa364bfd0be",
+      "skillFolderHash": "a9acd461bfcff0d58afafac4205f716e24d2a027",
       "installedAt": "2026-06-09T11:28:10.909Z",
-      "updatedAt": "2026-06-09T11:28:10.909Z"
+      "updatedAt": "2026-06-09T12:46:13.665Z"
     },
     "affinity-proteomics": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/affinity-proteomics/SKILL.md",
-      "skillFolderHash": "0efcd74ab3a668c41fd6a85ccac50d0eb8163d0139d7fafbfb812322701b03e9",
+      "skillFolderHash": "df383e3de0e8c85378feb8bec3e3ed9b1bf936dc",
       "installedAt": "2026-06-09T11:30:14.150Z",
-      "updatedAt": "2026-06-09T11:30:14.150Z"
+      "updatedAt": "2026-06-09T12:47:15.905Z"
     },
     "analyze-fasta": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/analyze-fasta/SKILL.md",
-      "skillFolderHash": "e16e6ee2a8aae7ee163f92eea0eb15af226376f10bdcb489f854b017d2fa0217",
+      "skillFolderHash": "73fb26ff81fe2f765dad31b557457075b85978dd",
       "installedAt": "2026-06-09T11:30:14.151Z",
-      "updatedAt": "2026-06-09T11:30:14.151Z"
+      "updatedAt": "2026-06-09T12:47:15.907Z"
     },
     "archaic-introgression": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/archaic-introgression/SKILL.md",
-      "skillFolderHash": "fc9eef7192281fc67d15b15d8519988dab45dadc2a79ce9bd8f5edaf0a49dda0",
+      "skillFolderHash": "8441e2b63da105fadeb6ff1a81b55fea7ec29657",
       "installedAt": "2026-06-09T11:30:14.152Z",
-      "updatedAt": "2026-06-09T11:30:14.152Z"
+      "updatedAt": "2026-06-09T12:47:15.910Z"
     },
     "article-data-fetcher": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/article-data-fetcher/SKILL.md",
-      "skillFolderHash": "bf16767e24ea7053afe49a48941b578f97d4a7a18d8c53524575f4aabab07be6",
+      "skillFolderHash": "9bb8fa1a32e667c0c3a0996b71278b980f253bc1",
       "installedAt": "2026-06-09T11:30:14.153Z",
-      "updatedAt": "2026-06-09T11:30:14.153Z"
+      "updatedAt": "2026-06-09T12:47:15.911Z"
     },
     "bgpt-mcp": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/bgpt-mcp/SKILL.md",
-      "skillFolderHash": "504ec76aa7ded747b202938ee61afb35ec0f987bab0b5c59cf1182f61c3edd3f",
+      "skillFolderHash": "d4460822464ffb02c41003e3356058d2152bf465",
       "installedAt": "2026-06-09T11:30:14.153Z",
-      "updatedAt": "2026-06-09T11:30:14.153Z"
+      "updatedAt": "2026-06-09T12:47:15.912Z"
     },
     "bigquery-public": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/bigquery-public/SKILL.md",
-      "skillFolderHash": "51bda021b8131b330d282b81dbe7c73e7ab4fd2ba6de4892a11dcf36d16315df",
+      "skillFolderHash": "00bada80a84f8b3879597f0bc4019b35f1c2f3a2",
       "installedAt": "2026-06-09T11:30:14.154Z",
-      "updatedAt": "2026-06-09T11:30:14.154Z"
+      "updatedAt": "2026-06-09T12:47:15.912Z"
     },
     "bio-orchestrator": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/bio-orchestrator/SKILL.md",
-      "skillFolderHash": "174998591dc3ae922d6ef3181d0126b9d5e425ddaaafff38081415ea2ae78b00",
+      "skillFolderHash": "cd1da529ea4aecb62fd6d91820c25b97ee3e2f6f",
       "installedAt": "2026-06-09T11:30:14.155Z",
-      "updatedAt": "2026-06-09T11:30:14.155Z"
+      "updatedAt": "2026-06-09T12:47:15.913Z"
     },
     "bioconductor-bridge": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/bioconductor-bridge/SKILL.md",
-      "skillFolderHash": "92cd1787ab95c6d47b257e24e6429bcad2aed6038ce51fc6d9ef43014a61bccd",
+      "skillFolderHash": "6194071191c5fd4586c6b17f35b7c7553cac7013",
       "installedAt": "2026-06-09T11:30:14.156Z",
-      "updatedAt": "2026-06-09T11:30:14.156Z"
+      "updatedAt": "2026-06-09T12:47:15.914Z"
     },
     "bioqc-mcp": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/bioqc-mcp/SKILL.md",
-      "skillFolderHash": "6c306a93a49ff5731896703d5d9ec82263b2818739b862eb2aa7fd550beffb03",
+      "skillFolderHash": "842f1ddf915adfb742a2e6c3f94cd5b71946a36d",
       "installedAt": "2026-06-09T11:30:14.156Z",
-      "updatedAt": "2026-06-09T11:30:14.156Z"
+      "updatedAt": "2026-06-09T12:47:15.915Z"
     },
     "busco-assessor": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/busco-assessor/SKILL.md",
-      "skillFolderHash": "64c830db50724b7eff93e663e1bb7086e43efa3f6828bb548af472a842284ddd",
+      "skillFolderHash": "c9269ca943c58f945d9b535ff7562d99b44ec8c2",
       "installedAt": "2026-06-09T11:30:14.157Z",
-      "updatedAt": "2026-06-09T11:30:14.157Z"
+      "updatedAt": "2026-06-09T12:47:15.916Z"
     },
     "cell-detection": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/cell-detection/SKILL.md",
-      "skillFolderHash": "95ccc77a53065a024a68a89af387f8b81e29bb5a0c2701ef96075014861ef5f9",
+      "skillFolderHash": "ada36f7d4dfc1aee1981b9236e8b460a290e9944",
       "installedAt": "2026-06-09T11:30:14.158Z",
-      "updatedAt": "2026-06-09T11:30:14.158Z"
+      "updatedAt": "2026-06-09T12:47:15.917Z"
     },
     "claw-ancestry-pca": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/claw-ancestry-pca/SKILL.md",
-      "skillFolderHash": "37ecc706f5bb225a033c36947610613d707cd3a0dece6d26ca248048c88d387b",
+      "skillFolderHash": "23b63782d4745d7c9544d82fba4f3fd6a47b28d5",
       "installedAt": "2026-06-09T11:30:14.159Z",
-      "updatedAt": "2026-06-09T11:30:14.159Z"
+      "updatedAt": "2026-06-09T12:47:15.919Z"
     },
     "claw-metagenomics": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/claw-metagenomics/SKILL.md",
-      "skillFolderHash": "550e28a37e6c6ab53395df9c6ac763fd516a88a6060af9b1838ad5008921de8b",
+      "skillFolderHash": "00b72bdc979ef89d743b9d6ab52de02921e71a85",
       "installedAt": "2026-06-09T11:30:14.160Z",
-      "updatedAt": "2026-06-09T11:30:14.160Z"
+      "updatedAt": "2026-06-09T12:47:15.920Z"
     },
     "claw-semantic-sim": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/claw-semantic-sim/SKILL.md",
-      "skillFolderHash": "7a44540d1437aa05724720fb0381889aba87d658b6667e3a7484a8f67e3fb044",
+      "skillFolderHash": "7850a9aad6b4e73e3e7ccdaed7aa7659cb217411",
       "installedAt": "2026-06-09T11:30:14.160Z",
-      "updatedAt": "2026-06-09T11:30:14.160Z"
+      "updatedAt": "2026-06-09T12:47:15.921Z"
     },
     "clawpathy-autoresearch": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/clawpathy_autoresearch/SKILL.md",
-      "skillFolderHash": "9dff74c92d2029ec9e738bbb14c8a3d9d61da4669b0327eb173dc49cade9137e",
+      "skillFolderHash": "54d718f49e43e38c1091c31835bb9a4a39dd0fb0",
       "installedAt": "2026-06-09T11:30:14.162Z",
-      "updatedAt": "2026-06-09T11:30:14.162Z"
+      "updatedAt": "2026-06-09T12:47:15.922Z"
     },
     "clinical-trial-finder": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/clinical-trial-finder/SKILL.md",
-      "skillFolderHash": "44bfb6a39259e8a5a1d4ff0fd757bffbe3d2451fbb0bf09507b817773493abe0",
+      "skillFolderHash": "4284933e8974f72e2e740cb94d3e6c06a9b1ced0",
       "installedAt": "2026-06-09T11:30:14.163Z",
-      "updatedAt": "2026-06-09T11:30:14.163Z"
+      "updatedAt": "2026-06-09T12:47:15.923Z"
     },
     "clinical-variant-reporter": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/clinical-variant-reporter/SKILL.md",
-      "skillFolderHash": "5b1d3b936063f719476be216c7bfedb7c12e37b323afa99547bb4d7ce9877847",
+      "skillFolderHash": "d8afb5e5ac4bf36b2a546fe272ffb5bed2849178",
       "installedAt": "2026-06-09T11:30:14.164Z",
-      "updatedAt": "2026-06-09T11:30:14.164Z"
+      "updatedAt": "2026-06-09T12:47:15.923Z"
     },
     "clinpgx": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/clinpgx/SKILL.md",
-      "skillFolderHash": "7a5da78715d62d695deb7698c49f1e34423056832de79112bdc8dbff5ea45eb3",
+      "skillFolderHash": "e0293af321aa46a9bd7e6ea88a2bf0639c4f16cc",
       "installedAt": "2026-06-09T11:30:14.165Z",
-      "updatedAt": "2026-06-09T11:30:14.165Z"
+      "updatedAt": "2026-06-09T12:47:15.924Z"
     },
     "crispr-screen-triage": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/crispr-screen-triage/SKILL.md",
-      "skillFolderHash": "a564610a5bd76e92c70ba023cdaa2c4595a7fdfa108f0824774cbafdadcc0752",
+      "skillFolderHash": "9be4bb63644662c84e2029ce25f5d338b9df1ffe",
       "installedAt": "2026-06-09T11:30:14.166Z",
-      "updatedAt": "2026-06-09T11:30:14.166Z"
+      "updatedAt": "2026-06-09T12:47:15.924Z"
     },
     "data-extractor": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/data-extractor/SKILL.md",
-      "skillFolderHash": "96cf784df3655e02260cc555bc4fe28d722934dcd138f9e38d07ee107390cebd",
+      "skillFolderHash": "07b9017d940f44766a4729c9ba3ea0419aea1653",
       "installedAt": "2026-06-09T11:30:14.167Z",
-      "updatedAt": "2026-06-09T11:30:14.167Z"
+      "updatedAt": "2026-06-09T12:47:15.925Z"
     },
     "de-summary": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/de-summary/SKILL.md",
-      "skillFolderHash": "cb126094b4c4701822f8ddb0a26a4f8759b14613049030c6f9501de72740f7c0",
+      "skillFolderHash": "31acf0c38fec95f5d807e87183b37a75cc87730b",
       "installedAt": "2026-06-09T11:30:14.167Z",
-      "updatedAt": "2026-06-09T11:30:14.167Z"
+      "updatedAt": "2026-06-09T12:47:15.926Z"
     },
     "diff-visualizer": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/diff-visualizer/SKILL.md",
-      "skillFolderHash": "6ba8dcb3cd41708c0903f0d7366bb797245b26e3c27f500fbe7f194506cde408",
+      "skillFolderHash": "5e2db76910db875063158bd2dc31121413d665ff",
       "installedAt": "2026-06-09T11:30:14.168Z",
-      "updatedAt": "2026-06-09T11:30:14.168Z"
+      "updatedAt": "2026-06-09T12:47:15.926Z"
     },
     "dnasp": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/dnasp/SKILL.md",
-      "skillFolderHash": "0ebe6bc54c71249b787b3f820cc3a09aaffd0b15ef246e6e81a5d1f98fd82e4a",
+      "skillFolderHash": "e7dc031ca5d9a322df2f481683f2a2e2808f651c",
       "installedAt": "2026-06-09T11:30:14.169Z",
-      "updatedAt": "2026-06-09T11:30:14.169Z"
+      "updatedAt": "2026-06-09T12:47:15.927Z"
     },
     "drug-photo": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/drug-photo/SKILL.md",
-      "skillFolderHash": "be28273cf42f3b2ccb47fad62b47598c8678b85f443f53e0e947dddde2341748",
+      "skillFolderHash": "deea9077936b4760ab9ad8df1ef71ef8664a3f27",
       "installedAt": "2026-06-09T11:30:14.171Z",
-      "updatedAt": "2026-06-09T11:30:14.171Z"
+      "updatedAt": "2026-06-09T12:47:15.927Z"
     },
     "drug-repurposing-screen": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/drug-repurposing-screen/SKILL.md",
-      "skillFolderHash": "1c934f20794f1ca5acdab1fb0cfbca9fa69c80731f6aee3478f3d2eaa3c33cba",
+      "skillFolderHash": "e12256c66f5048f4d6d15bbb0b2d4fd7bf40bb88",
       "installedAt": "2026-06-09T11:30:14.172Z",
-      "updatedAt": "2026-06-09T11:30:14.172Z"
+      "updatedAt": "2026-06-09T12:47:15.928Z"
     },
     "eqtl-catalogue-region-fetch": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/eqtl-catalogue-region-fetch/SKILL.md",
-      "skillFolderHash": "04ab098f1431dc109608eb371dc41cae1a9f6d87fb21b94b67dc48b8f3f24adf",
+      "skillFolderHash": "d86f4e65dd590c5a1694832cd31e12c38334081f",
       "installedAt": "2026-06-09T11:30:14.173Z",
-      "updatedAt": "2026-06-09T11:30:14.173Z"
+      "updatedAt": "2026-06-09T12:47:15.929Z"
     },
     "equity-scorer": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/equity-scorer/SKILL.md",
-      "skillFolderHash": "0260534f723c265223c0b6117d3d5b64e84727fd5afe4ec7ba11b221f887756c",
+      "skillFolderHash": "495e3c3d4f65352ddee50811de73c36db04c7e5d",
       "installedAt": "2026-06-09T11:30:14.173Z",
-      "updatedAt": "2026-06-09T11:30:14.173Z"
+      "updatedAt": "2026-06-09T12:47:15.930Z"
     },
     "fastreer": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/fastreer/SKILL.md",
-      "skillFolderHash": "6af38e39e9a7fb57efbfe113a9ba6b93fc26377f598762e78e3cbd0f808d2421",
+      "skillFolderHash": "61c32d43301cad0680f2a4095fe1aae88b821623",
       "installedAt": "2026-06-09T11:30:14.174Z",
-      "updatedAt": "2026-06-09T11:30:14.174Z"
+      "updatedAt": "2026-06-09T12:47:15.930Z"
     },
     "fine-mapping": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/fine-mapping/SKILL.md",
-      "skillFolderHash": "44b76b11420aefcac974d0ebedf768f6b3f9e4119c840a9e39bd9768605661fd",
+      "skillFolderHash": "bb0026acac2084507549ab1bf9021669a8577503",
       "installedAt": "2026-06-09T11:30:14.175Z",
-      "updatedAt": "2026-06-09T11:30:14.175Z"
+      "updatedAt": "2026-06-09T12:47:15.931Z"
     },
     "flow-bio": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/flow-bio/SKILL.md",
-      "skillFolderHash": "bef6bdaef237c9abaada5d531585f1bfd5a8f40a62eb25c055805ece748a4066",
+      "skillFolderHash": "77986980b3e2b4334bbee901acd90c08e0a9b032",
       "installedAt": "2026-06-09T11:30:14.175Z",
-      "updatedAt": "2026-06-09T11:30:14.175Z"
+      "updatedAt": "2026-06-09T12:47:15.932Z"
     },
     "galaxy-bridge": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/galaxy-bridge/SKILL.md",
-      "skillFolderHash": "19eadfdbea97b9103a5eafea66a72d933532683003e9f936dc6d685438b84823",
+      "skillFolderHash": "dcd869baa56768f3d87c509f409c9dd82eb9f6f0",
       "installedAt": "2026-06-09T11:30:14.208Z",
-      "updatedAt": "2026-06-09T11:30:14.208Z"
+      "updatedAt": "2026-06-09T12:47:15.933Z"
     },
     "genome-compare": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/genome-compare/SKILL.md",
-      "skillFolderHash": "a15fbe59ffc2e4ffab626abd8ba2a39869141e351ee3c614d67906aeee7c5845",
+      "skillFolderHash": "c398b2e3d800e1e8c2caa0e33ec0d3e76e4160cb",
       "installedAt": "2026-06-09T11:30:14.219Z",
-      "updatedAt": "2026-06-09T11:30:14.219Z"
+      "updatedAt": "2026-06-09T12:47:15.933Z"
     },
     "genome-match": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/genome-match/SKILL.md",
-      "skillFolderHash": "0da9b80c9e35fb64baa67d2007c127a816a664e3df15184970f72011ca2c8ee4",
+      "skillFolderHash": "eb8f1f889bfa5709e5890726593b27cf8176265b",
       "installedAt": "2026-06-09T11:30:14.220Z",
-      "updatedAt": "2026-06-09T11:30:14.220Z"
+      "updatedAt": "2026-06-09T12:47:15.934Z"
     },
     "gi-annotation": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-annotation/SKILL.md",
-      "skillFolderHash": "9328e90f8cfacf06b116770666ca84188df03fa43195c50c3963d4cb0fed45c6",
+      "skillFolderHash": "3a75dd6b540b635db2f4f8a02316614a02470a70",
       "installedAt": "2026-06-09T11:30:14.222Z",
-      "updatedAt": "2026-06-09T11:30:14.222Z"
+      "updatedAt": "2026-06-09T12:47:15.935Z"
     },
     "gi-chromatin": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-chromatin/SKILL.md",
-      "skillFolderHash": "fe768c54de6e4dfd2351d40db7b9422b0375f0cd5d1e63b1aabe883686a310da",
+      "skillFolderHash": "bc8ec50d76e94565b1961b22357d5a60a4826a9b",
       "installedAt": "2026-06-09T11:30:14.223Z",
-      "updatedAt": "2026-06-09T11:30:14.223Z"
+      "updatedAt": "2026-06-09T12:47:15.935Z"
     },
     "gi-enhancer": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-enhancer/SKILL.md",
-      "skillFolderHash": "c5bf469418852f5716c4f39ec7502e233f6cd5ead72c0aac339cbc894c821832",
+      "skillFolderHash": "049922d4aa9dcef84189609f675be09633a1ffa8",
       "installedAt": "2026-06-09T11:30:14.223Z",
-      "updatedAt": "2026-06-09T11:30:14.223Z"
+      "updatedAt": "2026-06-09T12:47:15.936Z"
     },
     "gi-expression": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-expression/SKILL.md",
-      "skillFolderHash": "eba6df9811929feda5ecdd29850c5b922d531da1a9987f7ba5e9258a528d9636",
+      "skillFolderHash": "f47c472953be443b8959d50d578fa3608e1d02e9",
       "installedAt": "2026-06-09T11:30:14.224Z",
-      "updatedAt": "2026-06-09T11:30:14.224Z"
+      "updatedAt": "2026-06-09T12:47:15.937Z"
     },
     "gi-promoter": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-promoter/SKILL.md",
-      "skillFolderHash": "7effb5cd24ba971eb9018c8f131f5855227bf1e35227d222fcd1a846a24ca362",
+      "skillFolderHash": "f51ae64786719a033ab3221ec36a9f7fbe30f168",
       "installedAt": "2026-06-09T11:30:14.225Z",
-      "updatedAt": "2026-06-09T11:30:14.225Z"
+      "updatedAt": "2026-06-09T12:47:15.937Z"
     },
     "gi-splice": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-splice/SKILL.md",
-      "skillFolderHash": "b77f6ec4e6bcd23e47ac089b256d19d1a08e6aaff2ffe1db2e75b25d9918b813",
+      "skillFolderHash": "a585c7d33f382f5655b71deed277cc378b8fe687",
       "installedAt": "2026-06-09T11:30:14.226Z",
-      "updatedAt": "2026-06-09T11:30:14.226Z"
+      "updatedAt": "2026-06-09T12:47:15.938Z"
     },
     "gwas-catalog-region-fetch": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gwas-catalog-region-fetch/SKILL.md",
-      "skillFolderHash": "ad0cd0716c5b4bbb1189b432039f14d19406dcbb790450ffeb6478336e7c244a",
+      "skillFolderHash": "6e4280f19193b988d441ecf947357392938d5ed5",
       "installedAt": "2026-06-09T11:30:14.226Z",
-      "updatedAt": "2026-06-09T11:30:14.226Z"
+      "updatedAt": "2026-06-09T12:47:15.939Z"
     },
     "gwas-lookup": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gwas-lookup/SKILL.md",
-      "skillFolderHash": "345c297130d5931037250638e001e301a0ba2c84ad068d2a04f417279db66035",
+      "skillFolderHash": "e03d317cdfe3978d481770906b9c54d9cf26cb54",
       "installedAt": "2026-06-09T11:30:14.228Z",
-      "updatedAt": "2026-06-09T11:30:14.228Z"
+      "updatedAt": "2026-06-09T12:47:15.939Z"
     },
     "gwas-pipeline": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gwas-pipeline/SKILL.md",
-      "skillFolderHash": "8f2008b736d75823b4b5fa21877650c77ce7a3f985702a1c6e8cd5e217eb3bc7",
+      "skillFolderHash": "413df4242e13907ba1770d8318a0797b9e6080aa",
       "installedAt": "2026-06-09T11:30:14.229Z",
-      "updatedAt": "2026-06-09T11:30:14.229Z"
+      "updatedAt": "2026-06-09T12:47:15.940Z"
     },
     "gwas-prs": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gwas-prs/SKILL.md",
-      "skillFolderHash": "6ffd03d89eb0211c8fd04911e5c126175e4349b3dfeff92874ee27327060a7ff",
+      "skillFolderHash": "74932e9860287c3121677e2522ded1f3cacd150b",
       "installedAt": "2026-06-09T11:30:14.230Z",
-      "updatedAt": "2026-06-09T11:30:14.230Z"
+      "updatedAt": "2026-06-09T12:47:15.940Z"
     },
     "hla-typing": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/hla-typing/SKILL.md",
-      "skillFolderHash": "70bc5c8511899617bc9a8cdb9d0755edf5406a2d9f18053ba0d63d8f81d47810",
+      "skillFolderHash": "d7b626d74d49ca961672b5ed87b26e70e8ad35d3",
       "installedAt": "2026-06-09T11:30:14.230Z",
-      "updatedAt": "2026-06-09T11:30:14.230Z"
+      "updatedAt": "2026-06-09T12:47:15.941Z"
     },
     "illumina-bridge": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/illumina-bridge/SKILL.md",
-      "skillFolderHash": "0812d5042cdeb47be5057392d96a75d912e919b0843c76bbb264669e1242f0ec",
+      "skillFolderHash": "85dea02f93e3ace3b034494089b8fa71d060c5bf",
       "installedAt": "2026-06-09T11:30:14.231Z",
-      "updatedAt": "2026-06-09T11:30:14.231Z"
+      "updatedAt": "2026-06-09T12:47:15.942Z"
     },
     "labstep": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/labstep/SKILL.md",
-      "skillFolderHash": "0fc155ad4620202a36e5454eae27ac90ec6256556042c3de14312dc8d1eb3f68",
+      "skillFolderHash": "8fd2f328a6023a83b3f61f7662bdcd90b08014d9",
       "installedAt": "2026-06-09T11:30:14.232Z",
-      "updatedAt": "2026-06-09T11:30:14.232Z"
+      "updatedAt": "2026-06-09T12:47:15.942Z"
     },
     "ld-1000g-region-compute": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/ld-1000g-region-compute/SKILL.md",
-      "skillFolderHash": "3a8edb836f576e4254ff135a0867ce13d94330de2fc77d7ee565b691da7f4620",
+      "skillFolderHash": "1f48b5a8f448af64f9155868bfe5583da4e92158",
       "installedAt": "2026-06-09T11:30:14.233Z",
-      "updatedAt": "2026-06-09T11:30:14.233Z"
+      "updatedAt": "2026-06-09T12:47:15.943Z"
     },
     "lit-synthesizer": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/lit-synthesizer/SKILL.md",
-      "skillFolderHash": "92218fb0ef0f01fa3b52eeb2a19f58fc92101473f82beb91d0032828a21589d6",
+      "skillFolderHash": "ed9343e7e73e83c01aca4b650affc6d7cac9d631",
       "installedAt": "2026-06-09T11:30:14.233Z",
-      "updatedAt": "2026-06-09T11:30:14.233Z"
+      "updatedAt": "2026-06-09T12:47:15.944Z"
     },
     "locuscompare-region-render": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/locuscompare-region-render/SKILL.md",
-      "skillFolderHash": "0d1bb37c86db647485d65279986faad75c33e22793ca97a5e36efcdd1035d98a",
+      "skillFolderHash": "f79bf545d027f05e6e0886b4ec8ae04a879b25d3",
       "installedAt": "2026-06-09T11:30:14.236Z",
-      "updatedAt": "2026-06-09T11:30:14.236Z"
+      "updatedAt": "2026-06-09T12:47:15.945Z"
     },
     "marker-dominance-mapper": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/marker-dominance-mapper/SKILL.md",
-      "skillFolderHash": "2c90dbfbfc6204ba316b655f3422e1ee76b53e044faecab6005a965fdcdfdc4b",
+      "skillFolderHash": "5fd26537d89ee2477c84bc646d142e72ecc86c2f",
       "installedAt": "2026-06-09T11:30:14.237Z",
-      "updatedAt": "2026-06-09T11:30:14.237Z"
+      "updatedAt": "2026-06-09T12:47:15.945Z"
     },
     "mendelian-randomisation": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/mendelian-randomisation/SKILL.md",
-      "skillFolderHash": "b71cddff7491322beec2e6c8b17fb05f58f7bd098e7b22df8b7c79710f2e42fa",
+      "skillFolderHash": "38e49fdc8dd2a6376005b36f1ece6885b432ce89",
       "installedAt": "2026-06-09T11:30:14.238Z",
-      "updatedAt": "2026-06-09T11:30:14.238Z"
+      "updatedAt": "2026-06-09T12:47:15.946Z"
     },
     "methylation-clock": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/methylation-clock/SKILL.md",
-      "skillFolderHash": "a81c2afe4a32ac041d34546e3f7aef5cc49a457e85fb0d3ba77293070658f775",
+      "skillFolderHash": "ca61e58f37285875388d9b5b3c2726601f52b562",
       "installedAt": "2026-06-09T11:30:14.245Z",
-      "updatedAt": "2026-06-09T11:30:14.245Z"
+      "updatedAt": "2026-06-09T12:47:15.947Z"
     },
     "multiqc-reporter": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/multiqc-reporter/SKILL.md",
-      "skillFolderHash": "44affa684cacb260950b9d11dfa24f19a189061ab65976441a7a1b43caa06087",
+      "skillFolderHash": "7bf980356ed3c05eb7035e85dd3190a55fe09d36",
       "installedAt": "2026-06-09T11:30:14.246Z",
-      "updatedAt": "2026-06-09T11:30:14.246Z"
+      "updatedAt": "2026-06-09T12:47:15.947Z"
     },
     "ncbi-datasets": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/ncbi-datasets/SKILL.md",
-      "skillFolderHash": "3b6ccc4a109bbfef8aaa57ff3dea49019de8ad302d3c1994901b7e4db94d2a8d",
+      "skillFolderHash": "cb81f7ae02990c444cf0f56a1e7f0c97c0ae645d",
       "installedAt": "2026-06-09T11:30:14.247Z",
-      "updatedAt": "2026-06-09T11:30:14.247Z"
+      "updatedAt": "2026-06-09T12:47:15.948Z"
     },
     "nfcore-rnaseq-wrapper": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-rnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "4b972fd675a0bd819c2334f5ad903ca1026e0544212d6df9cbcaaba54ea7b324",
+      "skillFolderHash": "e06a34d9faca44f7a057659fcfb8fd2b2bd4a684",
       "installedAt": "2026-06-09T11:30:14.248Z",
-      "updatedAt": "2026-06-09T11:30:14.248Z"
+      "updatedAt": "2026-06-09T12:47:15.948Z"
     },
     "nfcore-sarek-wrapper": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-sarek-wrapper/SKILL.md",
-      "skillFolderHash": "42b7b64b723c2a761ffe5fccadf752d8431f79504b96716843ca2916faca190a",
+      "skillFolderHash": "9954d084c2308d6971956ea39537541f24fd7251",
       "installedAt": "2026-06-09T11:30:14.250Z",
-      "updatedAt": "2026-06-09T11:30:14.250Z"
+      "updatedAt": "2026-06-09T12:47:15.949Z"
     },
     "nfcore-scrnaseq-wrapper": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "f5f61ed58dd97d5d7fb45020b43001f23cd8565ca6011736fa663a21e3931200",
+      "skillFolderHash": "6193114323ce4d19864503e3ac715e8dd9d6eb0d",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-06-09T11:30:14.252Z"
+      "updatedAt": "2026-06-09T12:47:15.950Z"
     },
     "nutrigx-advisor": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nutrigx-advisor/SKILL.md",
-      "skillFolderHash": "26872c31707d17658061dfc800101d34c1147f71cf24cd538b270792ab440f33",
+      "skillFolderHash": "8f5a5d9a959e70fe59559d1c041d0b05960721f6",
       "installedAt": "2026-06-09T11:30:14.254Z",
-      "updatedAt": "2026-06-09T11:30:14.254Z"
+      "updatedAt": "2026-06-09T12:47:15.950Z"
     },
     "omics-target-evidence-mapper": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/omics-target-evidence-mapper/SKILL.md",
-      "skillFolderHash": "bed70f30dcec3710cafad7e7dc2a37fd43faab7e1d1a818c8cd9f0ca2995ce77",
+      "skillFolderHash": "d50ec0ce273c9a3a821f407df823b88dc6abb920",
       "installedAt": "2026-06-09T11:30:14.256Z",
-      "updatedAt": "2026-06-09T11:30:14.256Z"
+      "updatedAt": "2026-06-09T12:47:15.951Z"
     },
     "pathway-enricher": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/pathway-enricher/SKILL.md",
-      "skillFolderHash": "194153162257579863cc6ea39bf72c6e05dd95f421f74cae3f353c41a59bca65",
+      "skillFolderHash": "1a21355607e614c763a1685bac3736104876bf63",
       "installedAt": "2026-06-09T11:30:14.258Z",
-      "updatedAt": "2026-06-09T11:30:14.258Z"
+      "updatedAt": "2026-06-09T12:47:15.951Z"
     },
     "pharmgx-reporter": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/pharmgx-reporter/SKILL.md",
-      "skillFolderHash": "aa0dd18312cdd0a8d0de52db3ae9838c4c24fd65c14d275aff834186d6eb7696",
+      "skillFolderHash": "7e4ebd01922dc95468cff6d0d46218bc789f91e7",
       "installedAt": "2026-06-09T11:30:14.260Z",
-      "updatedAt": "2026-06-09T11:30:14.260Z"
+      "updatedAt": "2026-06-09T12:47:15.952Z"
     },
     "phylogenetics-builder": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/phylogenetics-builder/SKILL.md",
-      "skillFolderHash": "cf061ad895722919bbf1030fcf847a9125a0336ee359883f29b95669664b5c8a",
+      "skillFolderHash": "1bd4392134ef5872187f79a7bb6cf6f632506194",
       "installedAt": "2026-06-09T11:30:14.261Z",
-      "updatedAt": "2026-06-09T11:30:14.261Z"
+      "updatedAt": "2026-06-09T12:47:15.953Z"
     },
     "profile-report": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/profile-report/SKILL.md",
-      "skillFolderHash": "2cec6b15fd5a1f1a8ef12145d8201b6462fd786c8f6a8024d750c8446453121b",
+      "skillFolderHash": "d2bfb03772098f39b7260be67429085017a60880",
       "installedAt": "2026-06-09T11:30:14.262Z",
-      "updatedAt": "2026-06-09T11:30:14.262Z"
+      "updatedAt": "2026-06-09T12:47:15.953Z"
     },
     "proteomics-clock": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/proteomics-clock/SKILL.md",
-      "skillFolderHash": "b9058d6fb38f18d3583049a0780ae9e348e14436764ae8509e913a15c0025a91",
+      "skillFolderHash": "d96ccc528b82fc86313c57974db8f8484441e85f",
       "installedAt": "2026-06-09T11:30:14.262Z",
-      "updatedAt": "2026-06-09T11:30:14.262Z"
+      "updatedAt": "2026-06-09T12:47:15.954Z"
     },
     "proteomics-de": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/proteomics-de/SKILL.md",
-      "skillFolderHash": "3aa79f6a8a7f4d2387efbac21ad7dcb97115268ac1247d66b2e2cfd9432c9826",
+      "skillFolderHash": "f1147adf9b36f347850bae120a897b1f5e2d04c8",
       "installedAt": "2026-06-09T11:30:14.264Z",
-      "updatedAt": "2026-06-09T11:30:14.264Z"
+      "updatedAt": "2026-06-09T12:47:15.955Z"
     },
     "protocols-io": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/protocols-io/SKILL.md",
-      "skillFolderHash": "7ecda2f91aba8a1efc00a309d0e0bf26a34f7ffdd48c83e5dd04574d99e6e840",
+      "skillFolderHash": "574ccf3721d39213b311180130bb4f60a6623325",
       "installedAt": "2026-06-09T11:30:14.265Z",
-      "updatedAt": "2026-06-09T11:30:14.265Z"
+      "updatedAt": "2026-06-09T12:47:15.955Z"
     },
     "pubmed-summariser": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/pubmed-summariser/SKILL.md",
-      "skillFolderHash": "b281c6edd4f5397eec9d6e8c99bb3a365dc928f87eaea5dbdacdcf8395dad3de",
+      "skillFolderHash": "dfd021871c09913f87a979083712e96a2b3abc27",
       "installedAt": "2026-06-09T11:30:14.265Z",
-      "updatedAt": "2026-06-09T11:30:14.265Z"
+      "updatedAt": "2026-06-09T12:47:15.956Z"
     },
     "rare-disease-rnaseq": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/rare-disease-rnaseq/SKILL.md",
-      "skillFolderHash": "c193255c46235d4fbc3fd1a35ebbfcdef295d2380fd162a95fbbcd4979f35890",
+      "skillFolderHash": "1daba16244c89231104af1ee16652e5d24552ba2",
       "installedAt": "2026-06-09T11:30:14.266Z",
-      "updatedAt": "2026-06-09T11:30:14.266Z"
+      "updatedAt": "2026-06-09T12:47:15.956Z"
     },
     "recombinator": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/recombinator/SKILL.md",
-      "skillFolderHash": "b21e67548dec048c971aada44dcd9b7f4645a6ddd4e0593798e20d51ff0302ea",
+      "skillFolderHash": "a85ed56b8f43e231824625a4957611086fe000a4",
       "installedAt": "2026-06-09T11:30:14.267Z",
-      "updatedAt": "2026-06-09T11:30:14.267Z"
+      "updatedAt": "2026-06-09T12:47:15.957Z"
     },
     "repro-enforcer": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/repro-enforcer/SKILL.md",
-      "skillFolderHash": "6eb9e3c9ba3f27c88176804e4c3d39090a72f54c77ab72cc152b4a1a4b5f5004",
+      "skillFolderHash": "79713baae29c2a5409c818f1e858d848d070237a",
       "installedAt": "2026-06-09T11:30:14.267Z",
-      "updatedAt": "2026-06-09T11:30:14.267Z"
+      "updatedAt": "2026-06-09T12:47:15.957Z"
     },
     "rnaseq-de": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/rnaseq-de/SKILL.md",
-      "skillFolderHash": "aa12b44c67d42f41415a125c35485981ae5fb9a9c2c82d8cc45dfb99ddc52a83",
+      "skillFolderHash": "135be4cd147bbc9de714c783146cb91838bfb48f",
       "installedAt": "2026-06-09T11:30:14.268Z",
-      "updatedAt": "2026-06-09T11:30:14.268Z"
+      "updatedAt": "2026-06-09T12:47:15.958Z"
     },
     "sample-qc-triage": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/sample-qc-triage/SKILL.md",
-      "skillFolderHash": "a0f4c445fa32889a17d1a30fc6565eee5b68fdcbdada525817cf7081990e534d",
+      "skillFolderHash": "01b778c763965d6176ecbbb6b9599bb648018d4b",
       "installedAt": "2026-06-09T11:30:14.269Z",
-      "updatedAt": "2026-06-09T11:30:14.269Z"
+      "updatedAt": "2026-06-09T12:47:15.959Z"
     },
     "scrna-embedding": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/scrna-embedding/SKILL.md",
-      "skillFolderHash": "03d0f8501843619984dc4e0844af128e23b35ae69d2aa3297e32efd552a33981",
+      "skillFolderHash": "b891e2273a21643f4debf4bdc987586d7cee5a3f",
       "installedAt": "2026-06-09T11:30:14.270Z",
-      "updatedAt": "2026-06-09T11:30:14.270Z"
+      "updatedAt": "2026-06-09T12:47:15.959Z"
     },
     "scrna-orchestrator": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/scrna-orchestrator/SKILL.md",
-      "skillFolderHash": "95bb5815fe126546967ce56f627f98b6b7e07c2365fb86429e1e09e3847630ed",
+      "skillFolderHash": "86153e2da8969d8b348978656874e081ad228492",
       "installedAt": "2026-06-09T11:30:14.270Z",
-      "updatedAt": "2026-06-09T11:30:14.270Z"
+      "updatedAt": "2026-06-09T12:47:15.960Z"
     },
     "seq-wrangler": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/seq-wrangler/SKILL.md",
-      "skillFolderHash": "f43df738a0346573198ea72d011f4d42268889582e8a7b9fdb7802811b863ebc",
+      "skillFolderHash": "82a08586bea2492c50a61ce10f366d7efe52e2c4",
       "installedAt": "2026-06-09T11:30:14.271Z",
-      "updatedAt": "2026-06-09T11:30:14.271Z"
+      "updatedAt": "2026-06-09T12:47:15.960Z"
     },
     "skill-builder": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/skill-builder/SKILL.md",
-      "skillFolderHash": "f998dca6d38912baea2410e7f75bfe36416c65568a4fc4183e50192cb3ede771",
+      "skillFolderHash": "92fef84db1ff8da30164748314cd02f1c5219dea",
       "installedAt": "2026-06-09T11:30:14.272Z",
-      "updatedAt": "2026-06-09T11:30:14.272Z"
+      "updatedAt": "2026-06-09T12:47:15.961Z"
     },
     "soul2dna": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/soul2dna/SKILL.md",
-      "skillFolderHash": "88e1237ec3b3aa0ead3d22d05769addfdddb60c690f1d3a1948a7d10e8af03c8",
+      "skillFolderHash": "dbbce3039479b42064ada172007f959f151397e8",
       "installedAt": "2026-06-09T11:30:14.273Z",
-      "updatedAt": "2026-06-09T11:30:14.273Z"
+      "updatedAt": "2026-06-09T12:47:15.962Z"
     },
     "struct-predictor": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/struct-predictor/SKILL.md",
-      "skillFolderHash": "5cae4d095c395bbc756a9251ce89d3fea7fda86d80149ffcfdf7400e965f0efb",
+      "skillFolderHash": "8ca59a1bcd5bedda62fd243569fcc24b7239e802",
       "installedAt": "2026-06-09T11:30:14.273Z",
-      "updatedAt": "2026-06-09T11:30:14.273Z"
+      "updatedAt": "2026-06-09T12:47:15.962Z"
     },
     "target-validation-scorer": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/target-validation-scorer/SKILL.md",
-      "skillFolderHash": "032f37096ed4ba80a73548151c03bb32b3ce31a756d687a1c3396bb618d38ca6",
+      "skillFolderHash": "1a871ac3bbe12ae350b2bd7daac66545c35b3de3",
       "installedAt": "2026-06-09T11:30:14.274Z",
-      "updatedAt": "2026-06-09T11:30:14.274Z"
+      "updatedAt": "2026-06-09T12:47:15.963Z"
     },
     "turingdb-graph": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/turingdb-graph/SKILL.md",
-      "skillFolderHash": "378ee71e919d4615c3e05b1ec6fc0dbacd6486501feab5c6281bc84d7b02b131",
+      "skillFolderHash": "de669f436e63f7cd962fd4a7b8b167577e0322b6",
       "installedAt": "2026-06-09T11:30:14.275Z",
-      "updatedAt": "2026-06-09T11:30:14.275Z"
+      "updatedAt": "2026-06-09T12:47:15.964Z"
     },
     "ukb-navigator": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/ukb-navigator/SKILL.md",
-      "skillFolderHash": "4bf8abfbb2d0681fdaea8b1c35e5f4a5526b1a3a9172967e4df7d62f664713b4",
+      "skillFolderHash": "bcd916d130c58a56dc48c4b9e42747340459652f",
       "installedAt": "2026-06-09T11:30:14.276Z",
-      "updatedAt": "2026-06-09T11:30:14.276Z"
+      "updatedAt": "2026-06-09T12:47:15.964Z"
     },
     "ukb-ppp-region-fetch": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/ukb-ppp-region-fetch/SKILL.md",
-      "skillFolderHash": "7f192ad72d7dc313b6283d3b83cb41a0339a22ed6423918cadfe360702357588",
+      "skillFolderHash": "69a4fc1c0582e5f9073b1fd7657be8a15eee7e7f",
       "installedAt": "2026-06-09T11:30:14.277Z",
-      "updatedAt": "2026-06-09T11:30:14.277Z"
+      "updatedAt": "2026-06-09T12:47:15.965Z"
     },
     "variant-annotation": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/variant-annotation/SKILL.md",
-      "skillFolderHash": "2cd738dd87fa484dfe0a16b650cf3eabdba0ba401f96a9b3acda4bc417634f81",
+      "skillFolderHash": "573af0465591acbbcb8001923cc0bf2482988bc0",
       "installedAt": "2026-06-09T11:30:14.278Z",
-      "updatedAt": "2026-06-09T11:30:14.278Z"
+      "updatedAt": "2026-06-09T12:47:15.965Z"
     },
     "vcf-annotator": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/vcf-annotator/SKILL.md",
-      "skillFolderHash": "f2e3354cb22cb3bab8634157301fd0eb9a66ba46c564af4324b619bc81e75259",
+      "skillFolderHash": "4f88691e2739ec0e7be0e683c0d1b60ecaa7239e",
       "installedAt": "2026-06-09T11:30:14.279Z",
-      "updatedAt": "2026-06-09T11:30:14.279Z"
+      "updatedAt": "2026-06-09T12:47:15.966Z"
     },
     "wes-clinical-report-en": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/wes-clinical-report-en/SKILL.md",
-      "skillFolderHash": "f27324c92d183b0e2ccd7128dcc5c43fbe0766977f6a32b7d372ed091a6f6b4b",
+      "skillFolderHash": "8fe20b474a0c9933b9ab13310fe7272a63f53211",
       "installedAt": "2026-06-09T11:30:14.279Z",
-      "updatedAt": "2026-06-09T11:30:14.279Z"
+      "updatedAt": "2026-06-09T12:47:15.967Z"
     },
     "wes-clinical-report-es": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/wes-clinical-report-es/SKILL.md",
-      "skillFolderHash": "c1b71258825991e1a2186deda124f65d8ce7a1d88eb404de6ac1f3d929ad45cd",
+      "skillFolderHash": "8e788125559b41f84ffa5ff9dcce0cbdfcb5d614",
       "installedAt": "2026-06-09T11:30:14.280Z",
-      "updatedAt": "2026-06-09T11:30:14.280Z"
+      "updatedAt": "2026-06-09T12:47:15.968Z"
     },
     "wgs-prs": {
-      "source": "git@github.com:ClawBio/ClawBio.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:ClawBio/ClawBio.git",
+      "source": "ClawBio/ClawBio",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/wgs-prs/SKILL.md",
-      "skillFolderHash": "871ced1d8d283e194f12db13a8976820a8080d59007cccb5a3f0f61dadbac34e",
+      "skillFolderHash": "90cec36f4ab992d31dfeb7f613ad742d93e6c419",
       "installedAt": "2026-06-09T11:30:14.281Z",
-      "updatedAt": "2026-06-09T11:30:14.281Z"
+      "updatedAt": "2026-06-09T12:47:15.968Z"
     },
     "aws-agentic-ai": {
-      "source": "git@github.com:zxkane/aws-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:zxkane/aws-skills.git",
+      "source": "zxkane/aws-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zxkane/aws-skills.git",
       "skillPath": "plugins/aws-agentic-ai/skills/aws-agentic-ai/SKILL.md",
-      "skillFolderHash": "676db19b502609c08aac0685f5429b49b329311abbc8627f3c0aa738920c363f",
+      "skillFolderHash": "c69945468dc9a948ef4a29fa3c0ba2d5537b55ea",
       "pluginName": "aws-agentic-ai",
       "installedAt": "2026-06-09T11:30:50.456Z",
-      "updatedAt": "2026-06-09T11:30:50.456Z"
+      "updatedAt": "2026-06-09T12:48:21.089Z"
     },
     "aws-cdk-development": {
-      "source": "git@github.com:zxkane/aws-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:zxkane/aws-skills.git",
+      "source": "zxkane/aws-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zxkane/aws-skills.git",
       "skillPath": "plugins/aws-cdk/skills/aws-cdk-development/SKILL.md",
-      "skillFolderHash": "bdb896d637c43cd0065b7eadbce835e07273dee9f5fde2bf9b9f34526f2e284f",
+      "skillFolderHash": "c0d0f99e6ddb5c6a265c86d30be80cc8bde7283c",
       "pluginName": "aws-cdk",
       "installedAt": "2026-06-09T11:30:50.458Z",
-      "updatedAt": "2026-06-09T11:30:50.458Z"
+      "updatedAt": "2026-06-09T12:48:21.085Z"
     },
     "aws-mcp-setup": {
-      "source": "git@github.com:zxkane/aws-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:zxkane/aws-skills.git",
+      "source": "zxkane/aws-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zxkane/aws-skills.git",
       "skillPath": "plugins/aws-common/skills/aws-mcp-setup/SKILL.md",
-      "skillFolderHash": "cdf23df0439e432514e6b8122227356a8ce3b3ac5296f64bad6e6ffd2c34e7fa",
+      "skillFolderHash": "6025164e75c62254a3a99b40f78d3dd61bbb1e77",
       "pluginName": "aws-common",
       "installedAt": "2026-06-09T11:30:50.459Z",
-      "updatedAt": "2026-06-09T11:30:50.459Z"
+      "updatedAt": "2026-06-09T12:48:21.083Z"
     },
     "aws-cost-operations": {
-      "source": "git@github.com:zxkane/aws-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:zxkane/aws-skills.git",
+      "source": "zxkane/aws-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zxkane/aws-skills.git",
       "skillPath": "plugins/aws-cost-ops/skills/aws-cost-operations/SKILL.md",
-      "skillFolderHash": "c3b1e4e88c8007d0795743376137b1b85489144774eca68cafa340b360227445",
+      "skillFolderHash": "b600f0d28c238987e7cb73f68522081d0df7895c",
       "pluginName": "aws-cost-ops",
       "installedAt": "2026-06-09T11:30:50.460Z",
-      "updatedAt": "2026-06-09T11:30:50.460Z"
+      "updatedAt": "2026-06-09T12:48:21.087Z"
     },
     "aws-serverless-eda": {
-      "source": "git@github.com:zxkane/aws-skills.git",
-      "sourceType": "git",
-      "sourceUrl": "git@github.com:zxkane/aws-skills.git",
+      "source": "zxkane/aws-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/zxkane/aws-skills.git",
       "skillPath": "plugins/serverless-eda/skills/aws-serverless-eda/SKILL.md",
-      "skillFolderHash": "e7784abe477ca933771a77ca51122b83a88670838fb02cc6fb53f03f4687fde3",
+      "skillFolderHash": "743451efd3e678560b1b10f81df5267beb9b803c",
       "pluginName": "serverless-eda",
       "installedAt": "2026-06-09T11:30:50.463Z",
-      "updatedAt": "2026-06-09T11:30:50.463Z"
+      "updatedAt": "2026-06-09T12:48:21.088Z"
     }
   },
   "dismissed": {

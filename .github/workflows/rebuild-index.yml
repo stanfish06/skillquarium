@@ -44,5 +44,5 @@ jobs:
             echo "Navigation index already up to date — nothing to commit."
           else
             git commit -m "chore(vault): rebuild navigation index [skip ci]"
-            git push
+            git push || { git pull --rebase origin master && git push; }
           fi

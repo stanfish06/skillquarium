@@ -44,18 +44,24 @@ the repo and isn't committed. CI reconstructs that layout from the snapshot:
 mkdir -p "$HOME/.agents"
 ln -sfn "$GITHUB_WORKSPACE" "$HOME/.agents/skills"      # canonical dir -> checkout
 cp .skill-vault/skill-lock.json "$HOME/.agents/.skill-lock.json"
-npx -y skills@latest update -g -y                        # updates the repo in place
+npx -y skills@1.5.10 update -g -y                        # updates the repo in place (pinned)
 cp "$HOME/.agents/.skill-lock.json" .skill-vault/skill-lock.json
 ```
 
 ### Source coverage in CI
 
-- `sourceType: github` (HTTPS, e.g. `K-Dense-AI/scientific-agent-skills`,
-  `vercel-labs/skills`) update automatically via the GitHub API + `GITHUB_TOKEN`.
-- `sourceType: git` (SSH `git@github.com:…` remotes, e.g. `ClawBio`,
-  `nature-skills`) only update if you add a repo secret **`SKILLS_SSH_KEY`** (a
-  read-capable SSH/deploy key). Without it those sources are skipped and the run
-  still succeeds.
+`skills update` only auto-updates skills whose lock entry is **`sourceType: github`**
+(installed via `owner/repo` or an https GitHub URL): it diffs each skill's folder
+hash against the GitHub API and reinstalls the ones that changed. Skills installed
+from raw `git@github.com:…`/SSH remotes (`sourceType: git`) or local paths are
+**not** auto-updated by the CLI — so every skill in this vault is kept as a `github`
+source. If you later add a skill from an SSH remote, convert it once with
+
+```sh
+npx skills add <owner/repo> -s <skill> -g -y   # re-tracks it as a github source
+```
+
+`GITHUB_TOKEN` is only used to raise the API rate limit; all current sources are public.
 
 ## Keeping the lock snapshot fresh
 

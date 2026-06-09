@@ -16,11 +16,13 @@ name: Update skills + rebuild
 #
 # Source coverage
 # ---------------
-#   * sourceType: github (HTTPS, e.g. K-Dense-AI/scientific-agent-skills,
-#     vercel-labs/skills) update automatically via the GitHub API + GITHUB_TOKEN.
-#   * sourceType: git (SSH "git@github.com:..." remotes) only update if you add
-#     an optional SKILLS_SSH_KEY secret (a read-capable deploy/SSH key).
-#     Without it those sources are skipped; the run still succeeds.
+# `skills update` only auto-updates skills whose lock entry is sourceType
+# "github" (installed via owner/repo or an https GitHub URL): it diffs the skill
+# folder hash via the GitHub API and reinstalls the ones that changed. Skills
+# added from raw "git@github.com:..."/SSH remotes (sourceType "git") or local
+# paths are NOT auto-updated by the CLI, so this vault deliberately keeps every
+# skill as a github source (see .skill-vault/skill-lock.json). GITHUB_TOKEN is
+# used only to raise the API rate limit; all current sources are public.
 
 on:
   schedule:
@@ -50,17 +52,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Configure SSH for git@ skill sources (optional)
-        env:
-          SKILLS_SSH_KEY: ${{ secrets.SKILLS_SSH_KEY }}
-        if: ${{ env.SKILLS_SSH_KEY != '' }}
-        run: |
-          set -euo pipefail
-          mkdir -p "$HOME/.ssh"
-          printf '%s\n' "$SKILLS_SSH_KEY" > "$HOME/.ssh/id_ed25519"
-          chmod 600 "$HOME/.ssh/id_ed25519"
-          ssh-keyscan -t rsa,ed25519 github.com >> "$HOME/.ssh/known_hosts" 2>/dev/null
-
       - name: Update all global skills from upstream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -75,13 +66,17 @@ jobs:
           ln -sfn "$GITHUB_WORKSPACE" "$HOME/.agents/skills"
           cp "$GITHUB_WORKSPACE/.skill-vault/skill-lock.json" "$HOME/.agents/.skill-lock.json"
 
-          npx -y skills@latest update -g -y
+          # Pinned for reproducibility; bump deliberately. `update -g` only
+          # touches github-sourced global skills; `-y` makes it non-interactive.
+          npx -y skills@1.5.10 update -g -y
 
           # Persist the refreshed lock back into the committed snapshot.
           cp "$HOME/.agents/.skill-lock.json" "$GITHUB_WORKSPACE/.skill-vault/skill-lock.json"
 
       - name: Rebuild navigation layer
-        run: python3 .skill-vault/build.py
+        # --prune drops wrapper notes for skills removed upstream (and their
+        # personal notes). Safe here because this job is the upstream-sync path.
+        run: python3 .skill-vault/build.py --prune
 
       - name: Commit updated skills + index
         run: |
@@ -93,5 +88,6 @@ jobs:
             echo "All skills already up to date — nothing to commit."
           else
             git commit -m "chore(skills): update from upstream + rebuild index [skip ci]"
-            git push
+            # Re-sync before pushing in case master advanced since checkout.
+            git push || { git pull --rebase origin master && git push; }
           fi
