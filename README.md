@@ -3,6 +3,18 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
 - managed by vercel's skills
 - place at `~/.agents/skills`
 
+## Screenshot
+<table width="100%">
+  <tr>
+    <th>Graph</th>
+  </tr>
+  <tr>
+     <td width="100%">
+       <img src="./screenshot.png" width="600" />
+     </td>
+  </tr>
+</table>
+
 ## Setup
 ```bash
 git clone git@github.com:stanfish06/my-skills.git ~/.agent/skills
