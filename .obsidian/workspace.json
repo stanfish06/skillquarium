@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "pyzotero/SKILL.md",
+                "file": "academic-paper/SKILL.md",
                 "mode": "source",
                 "source": false
               },
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "pyzotero/SKILL.md",
+                "file": "academic-paper/SKILL.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "pyzotero/SKILL.md",
+                "file": "academic-paper/SKILL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "pyzotero/SKILL.md",
+                "file": "academic-paper/SKILL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -185,14 +185,33 @@
   },
   "active": "7d47dc1a4e99e7d6",
   "lastOpenFiles": [
-    "README.md~",
-    "README.md",
-    "pyzotero/references/authentication.md",
+    "academic-paper.md",
+    "maps/academic-pipelines.md",
     "pyzotero/SKILL.md",
-    "markdown-mermaid-writing/references/mermaid_style_guide.md",
-    "galaxy-bridge/galaxy_skills/bakta.md",
-    "galaxy-bridge/galaxy_skills/INDEX.md",
-    "galaxy-bridge/galaxy_skills/augustus.md",
-    "academic-paper/agents/abstract_bilingual_agent.md"
+    "scanpy.md",
+    "zarr-python.md",
+    "xlsx.md",
+    "what-if-oracle.md",
+    "wgs-prs.md",
+    "wes-clinical-report-es.md",
+    "wes-clinical-report-en.md",
+    "vibe-research-workflow.md",
+    "venue-templates.md",
+    "vcf-annotator.md",
+    "variant-annotation.md",
+    "vaex.md",
+    "usfiscaldata.md",
+    "umap-learn.md",
+    "ukb-ppp-region-fetch.md",
+    "ukb-navigator.md",
+    "turingdb-graph.md",
+    "treatment-plans.md",
+    "transformers.md",
+    "torchdrug.md",
+    "torch-geometric.md",
+    "timesfm-forecasting.md",
+    "tiledbvcf.md",
+    "README.md~",
+    "maps"
   ]
 }

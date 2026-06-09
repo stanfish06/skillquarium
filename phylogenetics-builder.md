@@ -1,0 +1,23 @@
+---
+title: phylogenetics-builder
+tags:
+  - skill
+  - domain/sequence-phylogenetics
+source: phylogenetics-builder/SKILL.md
+created: 2026-06-09
+---
+
+# phylogenetics-builder
+
+> [!info] What it does
+> Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2.
+
+**Source:** [phylogenetics-builder/SKILL.md](phylogenetics-builder/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Index:** [Skills Index](index.md)
+
+## Related skills
+
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+
+%% ---8<--- personal notes below are preserved on re-run ---8<--- %%
+
+## Notes

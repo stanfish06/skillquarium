@@ -1,0 +1,32 @@
+---
+title: Literature Search & Knowledge Discovery
+tags:
+  - skill-map
+created: 2026-06-09
+---
+
+# Literature Search & Knowledge Discovery
+
+> [!abstract] Scope
+> Paper search across databases, web research, content extraction, and knowledge bases.
+
+[Back to Skill Index](../index.md)
+
+**Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Documents, Office & Media](documents-office.md)
+
+## Skills (14)
+
+- [bgpt-mcp](../bgpt-mcp.md) — Search scientific papers via the BGPT MCP server and retrieve structured experimental data — methods, results, conclusions, quality scores, and 25+ metadata fields per paper
+- [bgpt-paper-search](../bgpt-paper-search.md) — Search scientific papers and retrieve structured experimental data extracted from full-text studies via the BGPT MCP server
+- [claw-semantic-sim](../claw-semantic-sim.md) — Semantic Similarity Index for disease research literature using PubMedBERT embeddings
+- [data-extractor](../data-extractor.md) — Extract numerical data from scientific figure images using Claude vision + OpenCV calibration
+- [defuddle](../defuddle.md) — Extract clean markdown content from web pages using Defuddle CLI, removing clutter and navigation to save tokens
+- [exa-search](../exa-search.md) — Web toolkit powered by Exa, tuned for scientific and technical content
+- [lit-synthesizer](../lit-synthesizer.md) — Search PubMed and bioRxiv for bioinformatics literature, synthesise results into a structured report, and build a citation graph — all locally, with a reproducibility bundle
+- [literature-review](../literature-review.md) — Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.)
+- [open-notebook](../open-notebook.md) — Self-hosted, open-source alternative to Google NotebookLM for AI-powered research and document analysis
+- [paper-lookup](../paper-lookup.md) — Search 10 academic paper databases via REST APIs for research papers, preprints, and scholarly articles
+- [paperzilla](../paperzilla.md) — Chat with your agent about projects, recommendations, and canonical papers in Paperzilla
+- [parallel-web](../parallel-web.md) — All-in-one web toolkit powered by parallel-cli, with a strong emphasis on academic and scientific sources
+- [pubmed-summariser](../pubmed-summariser.md) — Search PubMed for a gene name or disease term and generate a structured research briefing of the top recent English-language papers
+- [research-lookup](../research-lookup.md) — Look up current research information using parallel-cli search (primary, fast web search) or the Parallel Chat API (deep research)
