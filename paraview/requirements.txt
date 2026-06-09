@@ -1,0 +1,3 @@
+# ParaView skill requirements
+# Note: paraview itself is expected to be installed separately via conda or ParaView binaries
+psutil>=5.9.0

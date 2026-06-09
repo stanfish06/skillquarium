@@ -20,8 +20,10 @@ created: 2026-06-09
 
 - [cellxgene-census](cellxgene-census.md) — Query the CZ CELLxGENE Census programmatically for versioned public single-cell and spatial transcriptomics data
 - [scanpy](scanpy.md) — Standard single-cell RNA-seq analysis pipeline
+- [scirpy-immune-repertoire](scirpy-immune-repertoire.md) — Single-cell immune receptor analysis with Scirpy for scanpy, anndata, and scvi-tools projects
 - [scrna-embedding](scrna-embedding.md) — Local scVI/scANVI-based single-cell latent embedding and batch-aware integration from raw-count .h5ad or 10x Matrix Market input, with stable integrated AnnData export for downstream...
 - [scvi-tools](scvi-tools.md) — Deep generative models for single-cell omics
+- [spatialdata-squidpy](spatialdata-squidpy.md) — Spatial omics workflows with SpatialData and Squidpy alongside scanpy, anndata, and napari-viz
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

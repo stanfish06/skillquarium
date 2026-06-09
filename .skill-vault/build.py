@@ -41,6 +41,8 @@ PALETTE = {
     "research-writing": 14466815, "academic-pipelines": 10117924,
     "literature-discovery": 16775880, "documents-office": 8388608,
     "cloud-devops": 11206595, "vault-meta": 8421376, "reasoning-ideation": 117,
+    "web-automation-frontend": 5832703, "analytics-engineering": 16753920,
+    "security-auditing": 13382451,
 }
 GRAPH_SEARCH = "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc"
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
@@ -67,6 +69,14 @@ SYNONYMS = {
     "umap-learn": ["UMAP"], "geopandas": ["GIS"], "pysam": ["samtools"],
     "ncbi-datasets": ["NCBI"], "literature-review": ["systematic review"],
     "consciousness-council": ["panel", "council"], "diffdock": ["docking"],
+    "spatialdata-squidpy": ["SpatialData", "Squidpy", "Visium", "Xenium"],
+    "harmonypy": ["Harmony"], "scirpy-immune-repertoire": ["Scirpy", "TCR", "BCR"],
+    "pybedtools": ["BEDTools"], "colabfold": ["AlphaFold2", "ColabFold"],
+    "fragpipe-pyteomics-proteomics": ["FragPipe", "MSFragger", "Pyteomics"],
+    "cellpose-stardist-bioimage": ["Cellpose", "StarDist"],
+    "monai-medical-imaging-ai": ["MONAI"], "llm-observability-evals": ["Langfuse", "Phoenix"],
+    "llm-agent-security-redteam": ["OWASP LLM Top 10", "prompt injection"],
+    "xarray-pandera-duckdb": ["xarray", "Pandera", "DuckDB"],
 }
 
 # ---------------------------------------------------------------------------
@@ -82,7 +92,8 @@ CATEGORIES = [
       "ukb-ppp-region-fetch", "locuscompare-region-render", "hla-typing", "archaic-introgression",
       "dnasp", "fastreer", "tiledbvcf", "pysam", "wgs-prs", "sample-qc-triage", "equity-scorer",
       "claw-ancestry-pca", "genome-compare", "genome-match", "recombinator", "soul2dna",
-      "geniml", "gtars", "polars-bio", "nfcore-sarek-wrapper", "pacsomatic", "marker-dominance-mapper"]),
+      "geniml", "gtars", "polars-bio", "nfcore-sarek-wrapper", "pacsomatic",
+      "marker-dominance-mapper", "pybedtools"]),
 
     ("single-cell-rnaseq", "Single-Cell, RNA-seq & Functional Genomics",
      "scRNA-seq and bulk RNA-seq pipelines, differential expression, and pathway/network analysis.",
@@ -90,12 +101,14 @@ CATEGORIES = [
      ["scanpy", "anndata", "scvi-tools", "scvelo", "cellxgene-census", "scrna-embedding",
       "scrna-orchestrator", "nfcore-scrnaseq-wrapper", "bulk-rnaseq", "rnaseq-de", "pydeseq2",
       "nfcore-rnaseq-wrapper", "rare-disease-rnaseq", "de-summary", "diff-visualizer", "arboreto",
-      "deeptools", "pathway-enricher", "pathway-enrichment"]),
+      "deeptools", "pathway-enricher", "pathway-enrichment", "spatialdata-squidpy",
+      "harmonypy", "scirpy-immune-repertoire"]),
 
     ("proteomics-metabolomics", "Proteomics & Metabolomics",
      "Mass-spec and affinity proteomics, metabolomics spectral analysis, and glycoengineering.",
      ["single-cell-rnaseq", "drug-discovery-chem", "sequence-phylogenetics"],
-     ["proteomics-de", "proteomics-clock", "affinity-proteomics", "pyopenms", "matchms", "glycoengineering"]),
+     ["proteomics-de", "proteomics-clock", "affinity-proteomics", "pyopenms", "matchms",
+      "glycoengineering", "fragpipe-pyteomics-proteomics"]),
 
     ("drug-discovery-chem", "Drug Discovery, Cheminformatics & Structural Biology",
      "Small-molecule and protein modeling: cheminformatics, docking, structure prediction, and target validation.",
@@ -103,7 +116,7 @@ CATEGORIES = [
      ["rdkit", "datamol", "deepchem", "molfeat", "medchem", "pytdc", "torchdrug", "diffdock",
       "struct-predictor", "esm", "molecular-dynamics", "cobrapy", "rowan", "adaptyv",
       "target-validation-scorer", "drug-repurposing-screen", "depmap", "crispr-screen-triage",
-      "omics-target-evidence-mapper"]),
+      "omics-target-evidence-mapper", "colabfold", "vmd-mdanalysis-viz"]),
 
     ("sequence-phylogenetics", "Sequence Analysis, NGS & Phylogenetics",
      "Sequence toolkits, read QC/alignment, phylogenetic inference, and sequence-to-function models.",
@@ -133,7 +146,8 @@ CATEGORIES = [
      "Microscopy and pathology images, medical imaging, electrophysiology, flow cytometry, and biosignals.",
      ["clinical-medical", "ml-ai", "bio-databases-platforms"],
      ["cell-detection", "histolab", "pathml", "pydicom", "neuropixels-analysis", "flowio",
-      "neurokit2", "bids", "imaging-data-commons"]),
+      "neurokit2", "bids", "imaging-data-commons", "cellpose-cell-segmentation",
+      "cellpose-stardist-bioimage", "monai-medical-imaging-ai", "napari-viz"]),
 
     ("ml-ai", "Machine Learning & AI",
      "General ML/DL frameworks, model interpretability, RL, graph learning, and scientific model hubs.",
@@ -143,10 +157,12 @@ CATEGORIES = [
 
     ("data-science-compute", "Data Science, Stats & Scientific Computing",
      "DataFrames, big-data tooling, statistics, optimization, simulation, geospatial, and plotting.",
-     ["ml-ai", "quantum-physics", "research-writing"],
+     ["ml-ai", "quantum-physics", "research-writing", "analytics-engineering"],
      ["polars", "dask", "vaex", "zarr-python", "networkx", "sympy", "matlab", "statsmodels",
       "statistical-analysis", "scikit-survival", "pymc", "pymoo", "simpy", "geomaster", "geopandas",
-      "exploratory-data-analysis", "optimize-for-gpu", "usfiscaldata", "matplotlib", "seaborn"]),
+      "exploratory-data-analysis", "optimize-for-gpu", "usfiscaldata", "matplotlib", "seaborn",
+      "xarray", "pandera-validation", "xarray-pandera-duckdb", "attach-db", "duckdb-docs",
+      "install-duckdb", "query", "read-file", "paraview", "ttk-viz"]),
 
     ("quantum-physics", "Quantum, Physics & Materials",
      "Quantum computing frameworks, open quantum systems, astronomy, fluid dynamics, and materials science.",
@@ -155,7 +171,8 @@ CATEGORIES = [
 
     ("research-writing", "Scientific Writing, Figures & Publishing",
      "Manuscript writing, figures and schematics, posters/slides, reference management, and pre-submission review.",
-     ["academic-pipelines", "literature-discovery", "documents-office", "reasoning-ideation"],
+     ["academic-pipelines", "literature-discovery", "documents-office", "reasoning-ideation",
+      "web-automation-frontend"],
      ["scientific-writing", "scientific-visualization", "scientific-slides", "scientific-schematics",
       "scientific-critical-thinking", "citation-management", "peer-review", "research-grants",
       "venue-templates", "latex-posters", "pptx-posters", "paper-2-web", "markdown-mermaid-writing",
@@ -183,23 +200,56 @@ CATEGORIES = [
       "market-research-reports"]),
 
     ("cloud-devops", "Cloud, Infra & MLOps",
-     "AWS architecture and operations, serverless GPU compute, the Hugging Face CLI, and Nextflow pipelines.",
-     ["ml-ai", "bio-databases-platforms", "vault-meta"],
+     "AWS architecture and operations, serverless GPU compute, developer infrastructure, the Hugging Face CLI, and workflow pipelines.",
+     ["ml-ai", "bio-databases-platforms", "vault-meta", "analytics-engineering", "security-auditing"],
      ["aws-agentic-ai", "aws-cdk-development", "aws-cost-operations", "aws-mcp-setup",
-      "aws-serverless-eda", "modal", "hf-cli", "nextflow"]),
+      "aws-serverless-eda", "modal", "hf-cli", "nextflow", "snakemake-workflow-engine",
+      "e2b-sandbox", "devcontainer-setup", "modern-python"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",
-     ["cloud-devops", "reasoning-ideation"],
+     ["cloud-devops", "reasoning-ideation", "security-auditing"],
      ["obsidian-markdown", "obsidian-bases", "obsidian-cli", "json-canvas", "skill-builder",
       "find-skills", "autoskill", "clawpathy-autoresearch", "repro-enforcer", "bio-orchestrator",
-      "get-available-resources"]),
+      "get-available-resources", "mcp-builder", "auditing-skills"]),
 
     ("reasoning-ideation", "Reasoning, Ideation & Decision",
      "Multi-perspective deliberation, brainstorming, hypothesis generation, idea evaluation, and scenario analysis.",
      ["research-writing", "academic-pipelines", "vault-meta"],
      ["consciousness-council", "what-if-oracle", "dhdna-profiler", "scientific-brainstorming",
       "hypothesis-generation", "idea-evaluator", "vibe-research-workflow", "hypogenic"]),
+
+    ("web-automation-frontend", "Web Automation, Frontend & Design",
+     "Browser automation, Playwright testing, frontend design guidance, React/Next.js patterns, Figma workflows, and design-to-code loops.",
+     ["cloud-devops", "documents-office", "research-writing", "analytics-engineering"],
+     ["agent-browser", "agentcore", "core", "dogfood", "electron", "slack", "vercel-sandbox",
+      "playwright-cli", "playwright-best-practices", "webapp-testing", "frontend-design",
+      "web-design-guidelines", "vercel-composition-patterns", "vercel-react-best-practices",
+      "vercel-react-view-transitions", "figma-use", "figma-generate-design",
+      "figma-generate-library", "figma-implement-design"]),
+
+    ("analytics-engineering", "Analytics Engineering & LLM Operations",
+     "dbt analytics engineering, semantic layers, warehouse querying, lineage diagrams, LLM observability, prompt tracing, and evaluation workflows.",
+     ["data-science-compute", "cloud-devops", "ml-ai", "security-auditing"],
+     ["adding-dbt-unit-test", "answering-natural-language-questions-with-dbt",
+      "building-dbt-semantic-layer", "configuring-dbt-mcp-server", "creating-mermaid-dbt-dag",
+      "fetching-dbt-docs", "running-dbt-commands", "troubleshooting-dbt-job-errors",
+      "using-dbt-for-analytics-engineering", "working-with-dbt-mesh",
+      "migrating-dbt-core-to-fusion", "migrating-dbt-project-across-platforms",
+      "langfuse", "phoenix-cli", "phoenix-evals", "llm-observability-evals"]),
+
+    ("security-auditing", "Security & Auditing",
+     "Secure development, code auditing, static analysis, SARIF, fuzzing, agent security, supply-chain risk, and smart-contract review helpers.",
+     ["cloud-devops", "vault-meta", "analytics-engineering", "web-automation-frontend"],
+     ["llm-agent-security-redteam", "audit-context-building", "audit-prep-assistant",
+      "code-maturity-assessor", "secure-workflow-guide", "differential-review", "gh-cli",
+      "codeql", "sarif-parsing", "semgrep", "semgrep-rule-creator", "property-based-testing",
+      "c-review", "constant-time-analysis", "constant-time-testing", "harness-writing",
+      "coverage-analysis", "fuzzing-dictionary", "fuzzing-obstacles", "libfuzzer",
+      "cargo-fuzz", "atheris", "ossfuzz", "aflpp", "supply-chain-risk-auditor",
+      "agentic-actions-auditor", "insecure-defaults", "sharp-edges", "variant-analysis",
+      "zeroize-audit", "fp-check", "guidelines-advisor", "entry-point-analyzer",
+      "token-integration-analyzer", "spec-to-code-compliance"]),
 ]
 
 

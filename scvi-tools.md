@@ -24,7 +24,9 @@ created: 2026-06-09
 
 - [anndata](anndata.md) — Data structure for annotated matrices in single-cell analysis
 - [cellxgene-census](cellxgene-census.md) — Query the CZ CELLxGENE Census programmatically for versioned public single-cell and spatial transcriptomics data
+- [harmonypy](harmonypy.md) — Harmony batch correction for single-cell data in scanpy workflows, with scvi-tools as the heavier alternative
 - [scanpy](scanpy.md) — Standard single-cell RNA-seq analysis pipeline
+- [scirpy-immune-repertoire](scirpy-immune-repertoire.md) — Single-cell immune receptor analysis with Scirpy for scanpy, anndata, and scvi-tools projects
 - [scvelo](scvelo.md) — RNA velocity analysis with scVelo. Estimate cell state transitions from unspliced/spliced mRNA dynamics, infer trajectory directions, compute latent time, and identify driver genes in...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

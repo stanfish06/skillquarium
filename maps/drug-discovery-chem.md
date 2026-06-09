@@ -14,10 +14,11 @@ created: 2026-06-09
 
 **Related maps:** [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Machine Learning & AI](ml-ai.md)
 
-## Skills (19)
+## Skills (21)
 
 - [adaptyv](../adaptyv.md) — How to use the Adaptyv Bio Foundry API and Python SDK for protein experiment design, submission, and results retrieval
 - [cobrapy](../cobrapy.md) — Constraint-based metabolic modeling (COBRA)
+- [colabfold](../colabfold.md) — Fast AlphaFold2/ColabFold protein structure prediction
 - [crispr-screen-triage](../crispr-screen-triage.md) — Deterministic CRISPR screen hit ranking from local guide-level count tables
 - [datamol](../datamol.md) — Pythonic wrapper around RDKit with simplified interface and sensible defaults
 - [deepchem](../deepchem.md) — Molecular ML with diverse featurizers and pre-built datasets
@@ -35,3 +36,4 @@ created: 2026-06-09
 - [struct-predictor](../struct-predictor.md) — Protein structure prediction with Boltz-2
 - [target-validation-scorer](../target-validation-scorer.md) — Evidence-grounded target validation scoring with GO/NO-GO decisions for drug discovery campaigns
 - [torchdrug](../torchdrug.md) — PyTorch-native graph neural networks for molecules and proteins
+- [vmd-mdanalysis-viz](../vmd-mdanalysis-viz.md) — Headless molecular visualization and trajectory analysis with VMD, MDAnalysis, and GROMACS

@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [dask](dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
+- [xarray](xarray.md) — N-dimensional labeled arrays and datasets in Python
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

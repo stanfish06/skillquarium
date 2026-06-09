@@ -24,6 +24,7 @@ created: 2026-06-09
 - [latchbio-integration](latchbio-integration.md) — Latch platform for bioinformatics workflows
 - [pacsomatic](pacsomatic.md) — Operator toolkit for nf-core/pacsomatic matched tumor-normal workflows from BAM inputs
 - [repro-enforcer](repro-enforcer.md) — Export any bioinformatics analysis as a reproducible bundle with Conda environment, Singularity container definition, and Nextflow pipeline
+- [snakemake-workflow-engine](snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

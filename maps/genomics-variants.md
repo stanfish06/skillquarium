@@ -14,7 +14,7 @@ created: 2026-06-09
 
 **Related maps:** [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Clinical, Medical & Pharmacogenomics](clinical-medical.md)
 
-## Skills (33)
+## Skills (34)
 
 - [archaic-introgression](../archaic-introgression.md) — Detect Neanderthal and Denisovan introgression segments from modern human genomes
 - [claw-ancestry-pca](../claw-ancestry-pca.md) — Ancestry decomposition PCA against the Simons Genome Diversity Project
@@ -40,6 +40,7 @@ created: 2026-06-09
 - [nfcore-sarek-wrapper](../nfcore-sarek-wrapper.md) — ClawBio wrapper around nf-core/sarek 3.8.1 covering mapping through annotation for germline, tumor-only, and somatic paired analyses
 - [pacsomatic](../pacsomatic.md) — Operator toolkit for nf-core/pacsomatic matched tumor-normal workflows from BAM inputs
 - [polars-bio](../polars-bio.md) — High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames
+- [pybedtools](../pybedtools.md) — Python genomic interval arithmetic with BEDTools, complementing pysam, polars, and query for downstream tables
 - [pysam](../pysam.md) — Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines
 - [recombinator](../recombinator.md) — Produce offspring genomes from parent pairs via meiotic recombination, mutation, and clinical evaluation
 - [sample-qc-triage](../sample-qc-triage.md) — Deterministic multi-sample QC triage for identity, sex, contamination, and batch-shift outliers

@@ -20,6 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [core](core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
 - [research-lookup](research-lookup.md) — Look up current research information using parallel-cli search (primary, fast web search) or the Parallel Chat API (deep research)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

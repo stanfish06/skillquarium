@@ -12,7 +12,7 @@ created: 2026-06-09
 
 [Back to Skill Index](../index.md)
 
-**Related maps:** [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Literature Search & Knowledge Discovery](literature-discovery.md) | [Documents, Office & Media](documents-office.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md)
+**Related maps:** [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Literature Search & Knowledge Discovery](literature-discovery.md) | [Documents, Office & Media](documents-office.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Web Automation, Frontend & Design](web-automation-frontend.md)
 
 ## Skills (20)
 

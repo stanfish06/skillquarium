@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [figma-generate-design](figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

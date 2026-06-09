@@ -18,6 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [fragpipe-pyteomics-proteomics](fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
 - [pyopenms](pyopenms.md) — Complete mass spectrometry analysis platform
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

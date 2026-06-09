@@ -19,6 +19,7 @@ created: 2026-06-09
 ## Related skills
 
 - [histolab](histolab.md) — Lightweight WSI tile extraction and preprocessing
+- [monai-medical-imaging-ai](monai-medical-imaging-ai.md) — Medical imaging deep learning with MONAI, PyTorch, pydicom, pathml, histolab, and napari-viz
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

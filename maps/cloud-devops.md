@@ -8,19 +8,23 @@ created: 2026-06-09
 # Cloud, Infra & MLOps
 
 > [!abstract] Scope
-> AWS architecture and operations, serverless GPU compute, the Hugging Face CLI, and Nextflow pipelines.
+> AWS architecture and operations, serverless GPU compute, developer infrastructure, the Hugging Face CLI, and workflow pipelines.
 
 [Back to Skill Index](../index.md)
 
-**Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md)
+**Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md)
 
-## Skills (8)
+## Skills (12)
 
 - [aws-agentic-ai](../aws-agentic-ai.md) — AWS Bedrock AgentCore comprehensive expert for deploying and managing AI agents at scale
 - [aws-cdk-development](../aws-cdk-development.md) — AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python
 - [aws-cost-operations](../aws-cost-operations.md) — AWS cost optimization, monitoring, and operational excellence expert
 - [aws-mcp-setup](../aws-mcp-setup.md) — Configure AWS MCP servers for documentation search and API access
 - [aws-serverless-eda](../aws-serverless-eda.md) — AWS serverless and event-driven architecture expert based on Well-Architected Framework
+- [devcontainer-setup](../devcontainer-setup.md) — Creates devcontainers with Claude Code, language-specific tooling (Python/Node/Rust/Go), and persistent volumes
+- [e2b-sandbox](../e2b-sandbox.md) — Guide for creating and managing E2B sandboxes using ComputeSDK
 - [hf-cli](../hf-cli.md) — Hugging Face Hub CLI (`hf`) for downloading, uploading, and managing models, datasets, spaces, buckets, repos, papers, jobs, and more on the Hugging Face Hub
 - [modal](../modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
+- [modern-python](../modern-python.md) — Configures Python projects with modern tooling (uv, ruff, ty)
 - [nextflow](../nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
+- [snakemake-workflow-engine](../snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines

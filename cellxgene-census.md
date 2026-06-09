@@ -22,6 +22,7 @@ created: 2026-06-09
 ## Related skills
 
 - [anndata](anndata.md) — Data structure for annotated matrices in single-cell analysis
+- [query](query.md) — Run SQL queries against the attached DuckDB database or ad-hoc against files
 - [scanpy](scanpy.md) — Standard single-cell RNA-seq analysis pipeline
 - [scvi-tools](scvi-tools.md) — Deep generative models for single-cell omics
 
