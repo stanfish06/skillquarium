@@ -8,7 +8,7 @@ created: 2026-06-10
 
 # Skills Index
 
-A navigable map of the **390 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
+A navigable map of the **391 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
 
 > [!tip] How to navigate
 > - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).
@@ -120,11 +120,11 @@ AWS architecture and operations, serverless GPU compute, developer infrastructur
 
 [aws-agentic-ai](aws-agentic-ai.md), [aws-cdk-development](aws-cdk-development.md), [aws-cost-operations](aws-cost-operations.md), [aws-mcp-setup](aws-mcp-setup.md), [aws-serverless-eda](aws-serverless-eda.md), [conda-bioconda](conda-bioconda.md) … [see all 13 →](maps/cloud-devops.md)
 
-### [Software Development & Engineering](maps/software-dev.md)  ·  18 skills
+### [Software Development & Engineering](maps/software-dev.md)  ·  19 skills
 
 General software-engineering methodology and tooling: TDD, debugging, code review, planning, git worktrees, plus core app primitives (pytest, Docker, FastAPI, CI).
 
-[brainstorming](brainstorming.md), [dispatching-parallel-agents](dispatching-parallel-agents.md), [docker](docker.md), [executing-plans](executing-plans.md), [fastapi](fastapi.md), [finishing-a-development-branch](finishing-a-development-branch.md) … [see all 18 →](maps/software-dev.md)
+[brainstorming](brainstorming.md), [dispatching-parallel-agents](dispatching-parallel-agents.md), [docker](docker.md), [executing-plans](executing-plans.md), [fastapi](fastapi.md), [finishing-a-development-branch](finishing-a-development-branch.md) … [see all 19 →](maps/software-dev.md)
 
 ### [Vault, Skills & Workflow Meta](maps/vault-meta.md)  ·  13 skills
 
@@ -198,7 +198,7 @@ Secure development, code auditing, static analysis, SARIF, fuzzing, agent securi
 [napari-viz](napari-viz.md) · [nature-academic-search](nature-academic-search.md) · [nature-citation](nature-citation.md) · [nature-data](nature-data.md) · [nature-figure](nature-figure.md) · [nature-paper2ppt](nature-paper2ppt.md) · [nature-polishing](nature-polishing.md) · [nature-reader](nature-reader.md) · [nature-response](nature-response.md) · [nature-reviewer](nature-reviewer.md) · [nature-writing](nature-writing.md) · [ncbi-datasets](ncbi-datasets.md) · [networkx](networkx.md) · [neurokit2](neurokit2.md) · [neuropixels-analysis](neuropixels-analysis.md) · [nextflow](nextflow.md) · [nfcore-rnaseq-wrapper](nfcore-rnaseq-wrapper.md) · [nfcore-sarek-wrapper](nfcore-sarek-wrapper.md) · [nfcore-scrnaseq-wrapper](nfcore-scrnaseq-wrapper.md) · [ngs-cli-toolkit](ngs-cli-toolkit.md) · [nutrigx-advisor](nutrigx-advisor.md)
 
 **O**
-[obsidian-bases](obsidian-bases.md) · [obsidian-cli](obsidian-cli.md) · [obsidian-markdown](obsidian-markdown.md) · [omero-integration](omero-integration.md) · [omics-target-evidence-mapper](omics-target-evidence-mapper.md) · [open-notebook](open-notebook.md) · [opentrons-integration](opentrons-integration.md) · [optimize-for-gpu](optimize-for-gpu.md) · [ossfuzz](ossfuzz.md)
+[obsidian-bases](obsidian-bases.md) · [obsidian-cli](obsidian-cli.md) · [obsidian-markdown](obsidian-markdown.md) · [omero-integration](omero-integration.md) · [omics-target-evidence-mapper](omics-target-evidence-mapper.md) · [open-notebook](open-notebook.md) · [opensrc](opensrc.md) · [opentrons-integration](opentrons-integration.md) · [optimize-for-gpu](optimize-for-gpu.md) · [ossfuzz](ossfuzz.md)
 
 **P**
 [pacsomatic](pacsomatic.md) · [pandera-validation](pandera-validation.md) · [paper-2-web](paper-2-web.md) · [paper-lookup](paper-lookup.md) · [paperzilla](paperzilla.md) · [parallel-web](parallel-web.md) · [paraview](paraview.md) · [pathml](pathml.md) · [pathway-enricher](pathway-enricher.md) · [pathway-enrichment](pathway-enrichment.md) · [pdf](pdf.md) · [peer-review](peer-review.md) · [pennylane](pennylane.md) · [pharmgx-reporter](pharmgx-reporter.md) · [phoenix-cli](phoenix-cli.md) · [phoenix-evals](phoenix-evals.md) · [phylogenetics](phylogenetics.md) · [phylogenetics-builder](phylogenetics-builder.md) · [playwright-best-practices](playwright-best-practices.md) · [playwright-cli](playwright-cli.md) · [polars](polars.md) · [polars-bio](polars-bio.md) · [pptx](pptx.md) · [pptx-posters](pptx-posters.md) · [pre-submission-reviewer](pre-submission-reviewer.md) · [primekg](primekg.md) · [profile-report](profile-report.md) · [property-based-testing](property-based-testing.md) · [proteomics-clock](proteomics-clock.md) · [proteomics-de](proteomics-de.md) · [protocols-io](protocols-io.md) · [protocolsio-integration](protocolsio-integration.md) · [pubmed-summariser](pubmed-summariser.md) · [pufferlib](pufferlib.md) · [pufferlib-v2](pufferlib-v2.md) · [pufferlib-v3](pufferlib-v3.md) · [pybedtools](pybedtools.md) · [pydeseq2](pydeseq2.md) · [pydicom](pydicom.md) · [pyhealth](pyhealth.md) · [pylabrobot](pylabrobot.md) · [pymatgen](pymatgen.md) · [pymc](pymc.md) · [pymoo](pymoo.md) · [pyopenms](pyopenms.md) · [pysam](pysam.md) · [pytdc](pytdc.md) · [pytest](pytest.md) · [pytorch-lightning](pytorch-lightning.md) · [pyzotero](pyzotero.md)

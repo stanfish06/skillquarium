@@ -14,7 +14,7 @@ created: 2026-06-10
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md)
 
-## Skills (18)
+## Skills (19)
 
 - [brainstorming](../brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
 - [dispatching-parallel-agents](../dispatching-parallel-agents.md) — Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies
@@ -23,6 +23,7 @@ created: 2026-06-10
 - [fastapi](../fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [finishing-a-development-branch](../finishing-a-development-branch.md) — Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for...
 - [github-actions-ci](../github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
+- [opensrc](../opensrc.md) — Give coding agents the actual source code of any dependency
 - [pytest](../pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
 - [receiving-code-review](../receiving-code-review.md) — Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification...
 - [requesting-code-review](../requesting-code-review.md) — Use when completing tasks, implementing major features, or before merging to verify work meets requirements
