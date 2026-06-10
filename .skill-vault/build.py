@@ -84,6 +84,7 @@ SYNONYMS = {
     "test-driven-development": ["TDD"], "using-git-worktrees": ["git worktree"],
     "web-artifacts-builder": ["artifacts", "shadcn"],
     "opensrc": ["source code", "package source", "dependency source", "read library source"],
+    "greploop": ["Greptile", "PR review loop"], "check-pr": ["PR review", "merge request", "Greptile"],
 }
 
 # ---------------------------------------------------------------------------
@@ -221,7 +222,8 @@ CATEGORIES = [
       "requesting-code-review", "receiving-code-review", "brainstorming", "writing-plans",
       "executing-plans", "subagent-driven-development", "dispatching-parallel-agents",
       "finishing-a-development-branch", "using-git-worktrees", "using-superpowers",
-      "writing-skills", "pytest", "docker", "fastapi", "github-actions-ci", "opensrc"]),
+      "writing-skills", "pytest", "docker", "fastapi", "github-actions-ci", "opensrc",
+      "check-pr", "greploop"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",

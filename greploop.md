@@ -1,0 +1,32 @@
+---
+title: greploop
+aliases:
+  - Greptile
+  - PR review loop
+  - GitHub
+  - GitLab
+  - Perforce
+tags:
+  - skill
+  - domain/software-dev
+domain: software-dev
+status: untried
+source: greploop/SKILL.md
+created: 2026-06-10
+---
+
+# greploop
+
+> [!info] What it does
+> Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments. Triggers Greptile review, fixes all actionable comments, pushes/re-shelves, re-triggers review, and repeats. Use when the user wants to fully optimize a PR/MR/CL against Greptile's code review standards.
+
+**Source:** [greploop/SKILL.md](greploop/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+
+## Related skills
+
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+
+%% ---8<--- personal notes below are preserved on re-run ---8<--- %%
+
+## Notes
+
