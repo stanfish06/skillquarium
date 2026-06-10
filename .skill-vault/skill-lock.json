@@ -1363,36 +1363,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "4b51b6f2dfc1a8f90a709d50e3347705047a7623",
+      "skillFolderHash": "6dcecc236d8ac90250f29565f8ea28c2b5f3a5c7",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-06-09T12:46:19.065Z"
+      "updatedAt": "2026-06-10T07:48:52.023Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "a76ec84ae361526789f035c13f0386dda7d390e6",
+      "skillFolderHash": "2aeaa9a013431c69d6f69c246fe08d9c0e051c2d",
       "installedAt": "2026-06-09T11:25:31.106Z",
-      "updatedAt": "2026-06-09T12:46:19.067Z"
+      "updatedAt": "2026-06-10T07:48:54.041Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "539de0a2149052cef049fe2f088152664d75cc1f",
+      "skillFolderHash": "ba035d4817ac409c2c922b9ddc482c16fcf001ce",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-09T12:46:19.070Z"
+      "updatedAt": "2026-06-10T07:48:56.080Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "7d89f95bedfef2a09156d09d2646a4e46581676a",
+      "skillFolderHash": "e0b5956b64783f2cc6ce093462eb26c79b5402b1",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-06-09T12:46:19.071Z"
+      "updatedAt": "2026-06-10T07:48:58.365Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
