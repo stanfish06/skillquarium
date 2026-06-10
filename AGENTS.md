@@ -16,10 +16,11 @@ than improvising.** This file tells you how to find and use them.
   them up. The skill folders here are the single source of truth.
 - **This vault is the query layer.** `~/.agents/skills/` adds an Obsidian navigation layer on
   top of the raw skills — wrapper notes, per-domain maps, an index, a filterable table,
-  aliases, and tags. Reach for it when you want **comprehensive discovery** beyond your
-  agent's built-in matching: searching by concept/synonym, browsing a whole domain, or
-  ripping through everything with `obsidian-cli` / `rg`. For a quick single-skill match, your
-  native mechanism is enough; for "what do we have across X?", query the vault.
+  aliases, tags, and an optional `graphify-out/` knowledge graph. Reach for it when you
+  want **comprehensive discovery** beyond your agent's built-in matching: searching by
+  concept/synonym, browsing a whole domain, or querying relationships with `graphify`,
+  `obsidian-cli`, or `rg`. For a quick single-skill match, your native mechanism is enough;
+  for "what do we have across X?", query the vault.
 
 ---
 
@@ -50,6 +51,8 @@ Try these in order; stop when you have a match.
 2. **Query the vault for comprehensive discovery** (headless, ranked) — when native matching
    isn't enough, or you want everything related to a concept:
    ```bash
+   cd ~/.agents/skills
+   graphify query "Which skills cover single-cell batch correction?" --graph graphify-out/graph.json --budget 1500
    obsidian-cli search query="single cell batch correction" limit=8
    # zero-dependency fallback (works anywhere ripgrep is installed):
    rg -li "batch correction|integration|harmony" ~/.agents/skills/*.md
@@ -82,6 +85,14 @@ capturing as a new skill (`skill-builder` / `writing-skills`).
   [`opensrc/SKILL.md`](opensrc/SKILL.md).
 - **Understand an unfamiliar codebase or doc set** by turning it into a knowledge graph with
   `graphify`, then query it.
+- **For this skills vault itself, query the local graph when present**:
+  ```bash
+  cd ~/.agents/skills
+  graphify query "How is the skill library organized?" --graph graphify-out/graph.json
+  ```
+  If the graph is missing or stale, rebuild it manually with
+  `python3 .skill-vault/build-graphify.py`. This is separate from `build.py` because graph
+  extraction can be LLM-backed and heavier than CI should run.
 - **Always read the chosen skill's full `SKILL.md`** before acting — the wrapper note is only
   a summary.
 
@@ -146,5 +157,8 @@ Know these by name so you reach for them automatically.
   skills folder so their native loaders pick them up.
 - After adding/removing a skill, regenerate wrappers/maps/index:
   `python3 .skill-vault/build.py` (see [`README.md`](README.md)).
+- To refresh the optional local graphify graph for vault queries, run
+  `python3 .skill-vault/build-graphify.py`. Use `--dry-run` to inspect the command and
+  `--full` only when you intentionally want every skill folder included.
 - This `AGENTS.md` is the canonical guide; symlink or copy it to wherever each tool looks
   (e.g. a project root, or alongside your tool's global instructions).
