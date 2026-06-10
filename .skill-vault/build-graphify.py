@@ -23,6 +23,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 GRAPH_DIR = ROOT / "graphify-out"
 DEFAULT_INCLUDE_DIRS = {"maps", ".github", ".skill-vault"}
+SUPPORTED_BACKENDS = (
+    "azure",
+    "bedrock",
+    "claude",
+    "claude-cli",
+    "deepseek",
+    "gemini",
+    "kimi",
+    "ollama",
+    "openai",
+)
+BACKEND_REASON_EXPLICIT = "explicit"
+BACKEND_REASON_API_KEY = "auto from exported API key"
+BACKEND_REASON_CLAUDE_CLI = "auto fallback through local Claude Code CLI"
+BACKEND_REASON_MISSING = "missing"
 DEFAULT_EXTRA_EXCLUDES = [
     "graphify-out/",
     ".git/",
@@ -41,6 +56,15 @@ LLM_ENV_KEYS = (
     "DEEPSEEK_API_KEY",
     "AZURE_OPENAI_API_KEY",
 )
+MODEL_ENV_BY_BACKEND = {
+    "azure": "GRAPHIFY_AZURE_MODEL",
+    "bedrock": "GRAPHIFY_BEDROCK_MODEL",
+    "claude-cli": "GRAPHIFY_CLAUDE_CLI_MODEL",
+    "deepseek": "GRAPHIFY_DEEPSEEK_MODEL",
+    "gemini": "GRAPHIFY_GEMINI_MODEL",
+    "ollama": "OLLAMA_MODEL",
+    "openai": "GRAPHIFY_OPENAI_MODEL",
+}
 
 
 def has_llm_api_key() -> bool:
@@ -67,23 +91,60 @@ def overview_excludes(root: Path) -> list[str]:
 
 def choose_backend(requested: str | None) -> tuple[str | None, str]:
     if requested:
-        return requested, "explicit"
+        return requested, BACKEND_REASON_EXPLICIT
     if has_llm_api_key():
-        return None, "auto from exported API key"
+        return None, BACKEND_REASON_API_KEY
     if shutil.which("claude"):
-        return "claude-cli", "auto fallback through local Claude Code CLI"
-    return None, "missing"
+        return "claude-cli", BACKEND_REASON_CLAUDE_CLI
+    return None, BACKEND_REASON_MISSING
+
+
+def configure_model_env(
+    backend: str | None,
+    model: str | None,
+    env: dict[str, str],
+) -> str | None:
+    """Propagate model overrides to graphify commands that lack --model support."""
+    if not model:
+        return None
+    if backend is None:
+        print(
+            "warning: --model cannot be propagated to cluster-only without an "
+            "explicit --backend; extraction will receive --model, but labeling "
+            "may use graphify's backend default.",
+            file=sys.stderr,
+        )
+        return None
+    model_env_key = MODEL_ENV_BY_BACKEND.get(backend)
+    if model_env_key is None:
+        print(
+            f"warning: graphify exposes no cluster-only model env override for "
+            f"backend {backend!r}; extraction will receive --model, but labeling "
+            "may use graphify's backend default.",
+            file=sys.stderr,
+        )
+        return None
+    env[model_env_key] = model
+    return model_env_key
 
 
 def quote(cmd: list[str]) -> str:
     return shlex.join(str(part) for part in cmd)
 
 
-def run(cmd: list[str], *, env: dict[str, str], dry_run: bool) -> None:
+def run(cmd: list[str], *, env: dict[str, str], dry_run: bool) -> int:
     print(quote(cmd))
     if dry_run:
-        return
-    subprocess.run(cmd, cwd=ROOT, env=env, check=True)
+        return 0
+    try:
+        subprocess.run(cmd, cwd=ROOT, env=env, check=True)
+    except subprocess.CalledProcessError as exc:
+        print(
+            f"error: command failed with exit code {exc.returncode}: {quote(cmd)}",
+            file=sys.stderr,
+        )
+        return exc.returncode or 1
+    return 0
 
 
 def parse_args() -> argparse.Namespace:
@@ -97,15 +158,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--backend",
-        choices=[
-            "gemini",
-            "kimi",
-            "claude",
-            "openai",
-            "deepseek",
-            "ollama",
-            "claude-cli",
-        ],
+        choices=SUPPORTED_BACKENDS,
         help="Graphify LLM backend; defaults to API-key autodetect or claude-cli",
     )
     parser.add_argument(
@@ -146,7 +199,7 @@ def main() -> int:
         return 127
 
     backend, backend_reason = choose_backend(args.backend)
-    if backend is None and backend_reason == "missing" and not args.dry_run:
+    if backend is None and backend_reason == BACKEND_REASON_MISSING and not args.dry_run:
         print(
             "error: no Graphify LLM backend is configured. Export an API key, "
             "install/authenticate the Claude Code CLI, or pass --backend ollama.",
@@ -159,6 +212,7 @@ def main() -> int:
     if backend == "claude-cli":
         env["GRAPHIFY_CLAUDE_CLI_MODEL"] = model or args.claude_cli_model
         model = None
+    model_env_key = configure_model_env(backend, model, env)
 
     excludes = DEFAULT_EXTRA_EXCLUDES if args.full else overview_excludes(ROOT)
 
@@ -197,12 +251,20 @@ def main() -> int:
     print(f"Backend: {backend or 'graphify auto'} ({backend_reason})")
     if backend == "claude-cli":
         print(f"Claude CLI model: {env['GRAPHIFY_CLAUDE_CLI_MODEL']}")
+    elif model_env_key:
+        print(f"Cluster label model env: {model_env_key}={env[model_env_key]}")
     print()
 
-    run(extract_cmd, env=env, dry_run=args.dry_run)
-    run(cluster_cmd, env=env, dry_run=args.dry_run)
+    status = run(extract_cmd, env=env, dry_run=args.dry_run)
+    if status:
+        return status
+    status = run(cluster_cmd, env=env, dry_run=args.dry_run)
+    if status:
+        return status
     if not args.no_tree:
-        run(tree_cmd, env=env, dry_run=args.dry_run)
+        status = run(tree_cmd, env=env, dry_run=args.dry_run)
+        if status:
+            return status
 
     if args.dry_run:
         print("\nDry run only; graphify-out/ was not changed.")
