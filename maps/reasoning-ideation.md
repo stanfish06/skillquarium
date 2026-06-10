@@ -2,7 +2,7 @@
 title: Reasoning, Ideation & Decision
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Reasoning, Ideation & Decision

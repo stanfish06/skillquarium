@@ -2,7 +2,7 @@
 title: Vault, Skills & Workflow Meta
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Vault, Skills & Workflow Meta
@@ -12,7 +12,7 @@ created: 2026-06-09
 
 [Back to Skill Index](../index.md)
 
-**Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md)
+**Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
 ## Skills (13)
 

@@ -18,6 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [docker](docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
 - [figma-generate-design](figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

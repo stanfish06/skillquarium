@@ -23,6 +23,7 @@ created: 2026-06-09
 - [scirpy-immune-repertoire](scirpy-immune-repertoire.md) — Single-cell immune receptor analysis with Scirpy for scanpy, anndata, and scvi-tools projects
 - [scrna-embedding](scrna-embedding.md) — Local scVI/scANVI-based single-cell latent embedding and batch-aware integration from raw-count .h5ad or 10x Matrix Market input, with stable integrated AnnData export for downstream...
 - [scvi-tools](scvi-tools.md) — Deep generative models for single-cell omics
+- [seurat](seurat.md) — Single-cell RNA-seq analysis in R with Seurat v5 — QC, normalization (LogNormalize or SCTransform), dimensionality reduction, clustering, marker detection, integration of multiple...
 - [spatialdata-squidpy](spatialdata-squidpy.md) — Spatial omics workflows with SpatialData and Squidpy alongside scanpy, anndata, and napari-viz
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

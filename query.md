@@ -23,12 +23,14 @@ created: 2026-06-09
 - [clinpgx](clinpgx.md) — Query the ClinPGx API for pharmacogenomic gene-drug data, clinical annotations, CPIC guidelines, and FDA drug labels
 - [database-lookup](database-lookup.md) — Search 78 public scientific, biomedical, materials science, and economic databases via REST APIs
 - [depmap](depmap.md) — Query the Cancer Dependency Map (DepMap) for cancer cell line gene dependency scores (CRISPR Chronos), drug sensitivity data, and gene effect profiles
+- [fastapi](fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [fragpipe-pyteomics-proteomics](fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
 - [imaging-data-commons](imaging-data-commons.md) — Query and download public cancer imaging data from NCI Imaging Data Commons using idc-index
 - [labstep](labstep.md) — Query and display Labstep electronic lab notebook data — experiments, protocols, resources, and inventory — via labstepPy
 - [lamindb](lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models
 - [langfuse](langfuse.md) — Interact with Langfuse and access its documentation
 - [medchem](medchem.md) — Medicinal chemistry filters for compound triage
+- [ngs-cli-toolkit](ngs-cli-toolkit.md) — The core command-line NGS workhorses for going from raw reads to variants — bwa-mem2/minimap2/bowtie2 (alignment), samtools (BAM sort/index/stats/view), bcftools (VCF...
 - [paper-lookup](paper-lookup.md) — Search 10 academic paper databases via REST APIs for research papers, preprints, and scholarly articles
 - [phoenix-cli](phoenix-cli.md) — Debug LLM applications using the Phoenix CLI
 - [polars](polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration

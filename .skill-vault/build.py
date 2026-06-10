@@ -42,7 +42,7 @@ PALETTE = {
     "literature-discovery": 16775880, "documents-office": 8388608,
     "cloud-devops": 11206595, "vault-meta": 8421376, "reasoning-ideation": 117,
     "web-automation-frontend": 5832703, "analytics-engineering": 16753920,
-    "security-auditing": 13382451,
+    "security-auditing": 13382451, "software-dev": 1752220,
 }
 GRAPH_SEARCH = "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc"
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
@@ -77,6 +77,12 @@ SYNONYMS = {
     "monai-medical-imaging-ai": ["MONAI"], "llm-observability-evals": ["Langfuse", "Phoenix"],
     "llm-agent-security-redteam": ["OWASP LLM Top 10", "prompt injection"],
     "xarray-pandera-duckdb": ["xarray", "Pandera", "DuckDB"],
+    "ngs-cli-toolkit": ["samtools", "bcftools", "bwa", "GATK", "minimap2", "plink2"],
+    "seurat": ["Seurat", "single cell", "scRNA-seq"],
+    "conda-bioconda": ["conda", "mamba", "micromamba", "Bioconda"],
+    "github-actions-ci": ["GitHub Actions", "CI/CD", "workflows"],
+    "test-driven-development": ["TDD"], "using-git-worktrees": ["git worktree"],
+    "web-artifacts-builder": ["artifacts", "shadcn"],
 }
 
 # ---------------------------------------------------------------------------
@@ -102,7 +108,7 @@ CATEGORIES = [
       "scrna-orchestrator", "nfcore-scrnaseq-wrapper", "bulk-rnaseq", "rnaseq-de", "pydeseq2",
       "nfcore-rnaseq-wrapper", "rare-disease-rnaseq", "de-summary", "diff-visualizer", "arboreto",
       "deeptools", "pathway-enricher", "pathway-enrichment", "spatialdata-squidpy",
-      "harmonypy", "scirpy-immune-repertoire"]),
+      "harmonypy", "scirpy-immune-repertoire", "seurat"]),
 
     ("proteomics-metabolomics", "Proteomics & Metabolomics",
      "Mass-spec and affinity proteomics, metabolomics spectral analysis, and glycoengineering.",
@@ -124,7 +130,8 @@ CATEGORIES = [
      ["biopython", "bioservices", "gget", "scikit-bio", "phylogenetics", "phylogenetics-builder",
       "etetoolkit", "busco-assessor", "analyze-fasta", "seq-wrangler", "multiqc-reporter",
       "bioqc-mcp", "claw-metagenomics", "ncbi-datasets", "bioconductor-bridge",
-      "gi-annotation", "gi-chromatin", "gi-enhancer", "gi-expression", "gi-promoter", "gi-splice"]),
+      "gi-annotation", "gi-chromatin", "gi-enhancer", "gi-expression", "gi-promoter", "gi-splice",
+      "ngs-cli-toolkit"]),
 
     ("bio-databases-platforms", "Bio Databases, Lab & Cloud Platforms",
      "Biomedical databases, knowledge graphs, ELNs, lab automation, and bioinformatics cloud platforms.",
@@ -197,18 +204,27 @@ CATEGORIES = [
      "Office document toolkits (docx/pptx/pdf/xlsx), file-to-markdown conversion, and image/report generation.",
      ["research-writing", "literature-discovery"],
      ["docx", "pptx", "pdf", "xlsx", "markitdown", "liteparse", "infographics", "generate-image",
-      "market-research-reports"]),
+      "market-research-reports", "doc-coauthoring", "internal-comms"]),
 
     ("cloud-devops", "Cloud, Infra & MLOps",
      "AWS architecture and operations, serverless GPU compute, developer infrastructure, the Hugging Face CLI, and workflow pipelines.",
-     ["ml-ai", "bio-databases-platforms", "vault-meta", "analytics-engineering", "security-auditing"],
+     ["ml-ai", "bio-databases-platforms", "vault-meta", "analytics-engineering", "security-auditing", "software-dev"],
      ["aws-agentic-ai", "aws-cdk-development", "aws-cost-operations", "aws-mcp-setup",
       "aws-serverless-eda", "modal", "hf-cli", "nextflow", "snakemake-workflow-engine",
-      "e2b-sandbox", "devcontainer-setup", "modern-python"]),
+      "e2b-sandbox", "devcontainer-setup", "modern-python", "conda-bioconda"]),
+
+    ("software-dev", "Software Development & Engineering",
+     "General software-engineering methodology and tooling: TDD, debugging, code review, planning, git worktrees, plus core app primitives (pytest, Docker, FastAPI, CI).",
+     ["vault-meta", "security-auditing", "cloud-devops", "reasoning-ideation"],
+     ["test-driven-development", "systematic-debugging", "verification-before-completion",
+      "requesting-code-review", "receiving-code-review", "brainstorming", "writing-plans",
+      "executing-plans", "subagent-driven-development", "dispatching-parallel-agents",
+      "finishing-a-development-branch", "using-git-worktrees", "using-superpowers",
+      "writing-skills", "pytest", "docker", "fastapi", "github-actions-ci"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",
-     ["cloud-devops", "reasoning-ideation", "security-auditing"],
+     ["cloud-devops", "reasoning-ideation", "security-auditing", "software-dev"],
      ["obsidian-markdown", "obsidian-bases", "obsidian-cli", "json-canvas", "skill-builder",
       "find-skills", "autoskill", "clawpathy-autoresearch", "repro-enforcer", "bio-orchestrator",
       "get-available-resources", "mcp-builder", "auditing-skills"]),
@@ -226,7 +242,8 @@ CATEGORIES = [
       "playwright-cli", "playwright-best-practices", "webapp-testing", "frontend-design",
       "web-design-guidelines", "vercel-composition-patterns", "vercel-react-best-practices",
       "vercel-react-view-transitions", "figma-use", "figma-generate-design",
-      "figma-generate-library", "figma-implement-design"]),
+      "figma-generate-library", "figma-implement-design", "web-artifacts-builder",
+      "brand-guidelines", "theme-factory", "algorithmic-art"]),
 
     ("analytics-engineering", "Analytics Engineering & LLM Operations",
      "dbt analytics engineering, semantic layers, warehouse querying, lineage diagrams, LLM observability, prompt tracing, and evaluation workflows.",

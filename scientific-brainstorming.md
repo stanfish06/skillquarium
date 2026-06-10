@@ -20,6 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [brainstorming](brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
 - [hypogenic](hypogenic.md) — Automated LLM-driven hypothesis generation and testing on tabular datasets
 - [hypothesis-generation](hypothesis-generation.md) — Generate testable hypotheses. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across...
 

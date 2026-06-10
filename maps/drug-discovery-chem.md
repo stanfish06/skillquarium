@@ -2,7 +2,7 @@
 title: Drug Discovery, Cheminformatics & Structural Biology
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Drug Discovery, Cheminformatics & Structural Biology

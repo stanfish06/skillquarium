@@ -20,6 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [github-actions-ci](github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
 - [llm-agent-security-redteam](llm-agent-security-redteam.md) — LLM and agent security red teaming with agentic-actions-auditor, supply-chain-risk-auditor, semgrep, codeql, and sarif-parsing
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

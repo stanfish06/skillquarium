@@ -2,7 +2,7 @@
 title: Sequence Analysis, NGS & Phylogenetics
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Sequence Analysis, NGS & Phylogenetics
@@ -14,7 +14,7 @@ created: 2026-06-09
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (21)
+## Skills (22)
 
 - [analyze-fasta](../analyze-fasta.md) — Analyze a single FASTA file (nucleotide or protein), compute sequence-level metrics (GC, ORFs, MW, pI, GRAVY, secondary-structure fractions) with Biopython, and write a Markdown report...
 - [bioconductor-bridge](../bioconductor-bridge.md) — Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager
@@ -33,6 +33,7 @@ created: 2026-06-09
 - [gi-splice](../gi-splice.md) — Detect splice donor and acceptor sites in DNA sequences using the Genomic Intelligence G0 BigBird transformer, via the hosted /v1/tasks/splice/predict API
 - [multiqc-reporter](../multiqc-reporter.md) — Aggregates QC reports from any bioinformatics tool outputs (FastQC, fastp, STAR, Picard, samtools, etc.) into a single MultiQC HTML report plus a ClawBio markdown summary with...
 - [ncbi-datasets](../ncbi-datasets.md) — Download genomes, genes, virus sequences, and taxonomy data from NCBI using the datasets and dataformat CLI tools
+- [ngs-cli-toolkit](../ngs-cli-toolkit.md) — The core command-line NGS workhorses for going from raw reads to variants — bwa-mem2/minimap2/bowtie2 (alignment), samtools (BAM sort/index/stats/view), bcftools (VCF...
 - [phylogenetics](../phylogenetics.md) — Build and analyze phylogenetic trees using MAFFT (multiple alignment), IQ-TREE 2 (maximum likelihood), and FastTree (fast NJ/ML)
 - [phylogenetics-builder](../phylogenetics-builder.md) — Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2
 - [scikit-bio](../scikit-bio.md) — Biological data toolkit. Sequence analysis, alignments, phylogenetic trees, diversity metrics (alpha/beta, UniFrac), ordination (PCoA), PERMANOVA, FASTA/Newick I/O, for microbiome...

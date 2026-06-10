@@ -2,7 +2,7 @@
 title: Cloud, Infra & MLOps
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Cloud, Infra & MLOps
@@ -12,15 +12,16 @@ created: 2026-06-09
 
 [Back to Skill Index](../index.md)
 
-**Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md)
+**Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (12)
+## Skills (13)
 
 - [aws-agentic-ai](../aws-agentic-ai.md) — AWS Bedrock AgentCore comprehensive expert for deploying and managing AI agents at scale
 - [aws-cdk-development](../aws-cdk-development.md) — AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python
 - [aws-cost-operations](../aws-cost-operations.md) — AWS cost optimization, monitoring, and operational excellence expert
 - [aws-mcp-setup](../aws-mcp-setup.md) — Configure AWS MCP servers for documentation search and API access
 - [aws-serverless-eda](../aws-serverless-eda.md) — AWS serverless and event-driven architecture expert based on Well-Architected Framework
+- [conda-bioconda](../conda-bioconda.md) — Reproducible Conda/Mamba/micromamba environment management for bioinformatics, with correct Bioconda channel setup, environment files, version pinning, and lockfiles
 - [devcontainer-setup](../devcontainer-setup.md) — Creates devcontainers with Claude Code, language-specific tooling (Python/Node/Rust/Go), and persistent volumes
 - [e2b-sandbox](../e2b-sandbox.md) — Guide for creating and managing E2B sandboxes using ComputeSDK
 - [hf-cli](../hf-cli.md) — Hugging Face Hub CLI (`hf`) for downloading, uploading, and managing models, datasets, spaces, buckets, repos, papers, jobs, and more on the Hugging Face Hub

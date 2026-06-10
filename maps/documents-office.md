@@ -2,7 +2,7 @@
 title: Documents, Office & Media
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Documents, Office & Media
@@ -14,11 +14,13 @@ created: 2026-06-09
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Literature Search & Knowledge Discovery](literature-discovery.md)
 
-## Skills (9)
+## Skills (11)
 
+- [doc-coauthoring](../doc-coauthoring.md) — Guide users through a structured workflow for co-authoring documentation
 - [docx](../docx.md) — Document toolkit (.docx). Create/edit documents, tracked changes, comments, formatting preservation, text extraction, for professional document processing
 - [generate-image](../generate-image.md) — Generate or edit images using AI models (FLUX, Gemini)
 - [infographics](../infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
+- [internal-comms](../internal-comms.md) — A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use
 - [liteparse](../liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
 - [market-research-reports](../market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
 - [markitdown](../markitdown.md) — Convert files and office documents to Markdown

@@ -2,7 +2,7 @@
 title: Imaging, Microscopy & Biosignals
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Imaging, Microscopy & Biosignals

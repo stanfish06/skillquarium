@@ -2,7 +2,7 @@
 title: Single-Cell, RNA-seq & Functional Genomics
 tags:
   - skill-map
-created: 2026-06-09
+created: 2026-06-10
 ---
 
 # Single-Cell, RNA-seq & Functional Genomics
@@ -14,7 +14,7 @@ created: 2026-06-09
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (22)
+## Skills (23)
 
 - [anndata](../anndata.md) — Data structure for annotated matrices in single-cell analysis
 - [arboreto](../arboreto.md) — Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3)
@@ -37,4 +37,5 @@ created: 2026-06-09
 - [scrna-orchestrator](../scrna-orchestrator.md) — Local Scanpy pipeline for single-cell RNA-seq QC, optional doublet detection, clustering, marker discovery, optional CellTypist annotation, optional latent downstream mode from...
 - [scvelo](../scvelo.md) — RNA velocity analysis with scVelo. Estimate cell state transitions from unspliced/spliced mRNA dynamics, infer trajectory directions, compute latent time, and identify driver genes in...
 - [scvi-tools](../scvi-tools.md) — Deep generative models for single-cell omics
+- [seurat](../seurat.md) — Single-cell RNA-seq analysis in R with Seurat v5 — QC, normalization (LogNormalize or SCTransform), dimensionality reduction, clustering, marker detection, integration of multiple...
 - [spatialdata-squidpy](../spatialdata-squidpy.md) — Spatial omics workflows with SpatialData and Squidpy alongside scanpy, anndata, and napari-viz
