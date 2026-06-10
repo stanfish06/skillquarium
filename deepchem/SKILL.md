@@ -3,7 +3,7 @@ name: deepchem
 description: Molecular ML with diverse featurizers and pre-built datasets. Use for property prediction (ADMET, toxicity) with traditional ML or GNNs when you want extensive featurization options and MoleculeNet benchmarks. Best for quick experiments with pre-trained models, diverse molecular representations. For graph-first PyTorch workflows use torchdrug; for benchmark datasets use pytdc.
 license: MIT license
 allowed-tools: Read Write Edit Bash
-compatibility: "Requires Python 3.8–3.10 (confirmed working). PyPI is frozen at 2.8.0 (April 2024; no release in 2+ years). Dev branch docs state Python 3.11 no longer works; Python 3.12+ blocked at install. Pin Python 3.10 for reliability."
+compatibility: "Requires Python 3.8–3.10 for the stable 2.8.0 release. Latest stable PyPI release is 2.8.0 (April 2024); 2.8.1.dev pre-releases exist but docs still confirm only Python 3.8–3.10. Dev branch docs state Python 3.11 no longer works; Python 3.12+ blocked at install. Pin Python 3.10 for reliability."
 metadata:
   version: "1.1"
   skill-author: K-Dense Inc.
@@ -16,7 +16,7 @@ metadata:
 DeepChem is a comprehensive Python library for applying machine learning to chemistry, materials science, and biology. Enable molecular property prediction, drug discovery, materials design, and biomolecule analysis through specialized neural networks, molecular featurization methods, and pretrained models.
 
 > [!WARNING]
-> **Maintenance freeze (June 2026):** DeepChem has had no new PyPI release since **v2.8.0 (April 2024)** — over two years. The development-branch docs (2.8.1.dev, February 2026) now list **Python 3.8–3.10 only** as confirmed working; Python 3.11 reportedly fails. Python 3.12+ is blocked at install time (`requires-python < 3.12`). **Use Python 3.10** for the most reliable environment. Consider [DeepChem alternatives](#alternatives) if you need Python 3.11+.
+> **Maintenance freeze (June 2026):** DeepChem has had no new stable PyPI release since **v2.8.0 (April 2024)** — over two years. The 2.8.1.dev pre-releases exist for upstream testing, but the development-branch docs (February 2026) still list **Python 3.8–3.10 only** as confirmed working; Python 3.11 reportedly fails. Python 3.12+ is blocked at install time (`requires-python < 3.12`). **Use Python 3.10** for the most reliable environment. Consider [DeepChem alternatives](#alternatives) if you need Python 3.11+.
 
 **Version note:** Examples target **deepchem 2.8.0** (PyPI stable, Apr 2024). Requires **Python 3.8–3.10** (development docs indicate 3.11 is no longer confirmed working; PyPI hard-caps at `<3.12`). Core utilities (loaders, featurizers, MoleculeNet) work without a DL backend; GNN and transformer models need the matching extra (`torch`, `tensorflow`, or `jax`). Install the backend framework first when using GPU builds.
 
@@ -550,11 +550,14 @@ Install PyTorch or TensorFlow with the correct CUDA build **before** the extra w
 
 ## Alternatives
 
-If Python 3.11+ or 3.12+ is required and you cannot pin Python 3.10:
+If you cannot pin Python 3.10, choose by the Python version you must support:
 
-- **[DeepChem nightly](https://deepchem.readthedocs.io/en/latest/get_started/installation.html)** (`pip install --pre deepchem`): Uses the 2.8.1.dev branch; Python 3.10 is still the recommended target.
-- **[datamol / molfeat](https://molfeat-docs.datamol.io/)**: Focuses on featurization only; Python 3.9–3.10.
-- **[RDKit](https://www.rdkit.org/)**: Full Python 3.12 support; lower-level but widely supported.
+- **Python 3.12+**: **[RDKit](https://www.rdkit.org/)** has full Python 3.12 support; lower-level but widely supported.
+- **Python 3.11**: **[datamol / molfeat](https://molfeat-docs.datamol.io/)** is a featurization-focused alternative; Python 3.9–3.11, but check the release notes for the version you pin.
+
+For tracking upstream DeepChem only:
+
+- **[DeepChem nightly / pre-release](https://deepchem.readthedocs.io/en/latest/get_started/installation.html)** (`pip install --pre deepchem`): Uses the 2.8.1.dev branch; do not treat it as a Python 3.11+ escape hatch unless the specific pre-release you pin documents that support.
 
 ## Reference Documentation
 
