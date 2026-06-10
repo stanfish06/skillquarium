@@ -6,11 +6,15 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
 ## Screenshot
 <table width="100%">
   <tr>
-    <th>Graph</th>
+    <th>Obsidian graph</th>
+    <th>Graphifyy graph</th>
   </tr>
   <tr>
-     <td width="100%">
-       <img src="./screenshot.png" width="600" />
+     <td width="50%">
+       <img src="./screenshot.png" width="300" />
+     </td>
+     <td width="50%">
+       <img src="./graphifyy.png" width="300" />
      </td>
   </tr>
 </table>
