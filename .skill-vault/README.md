@@ -18,6 +18,7 @@ This directory holds the machinery that keeps the human layer in sync.
 | File | Purpose |
 |------|---------|
 | `build.py` | Regenerates the human layer from the `SKILL.md` files. Idempotent; preserves hand edits. Run: `python3 .skill-vault/build.py` |
+| `build-graphify.py` | Rebuilds the optional local Graphify graph in `graphify-out/`. Manual only; can run LLM-backed extraction, so it is deliberately separate from CI's lightweight `build.py`. Run: `python3 .skill-vault/build-graphify.py` |
 | `skill-lock.json` | Committed snapshot of the CLI's global provenance lock (`~/.agents/.skill-lock.json`). Records where each skill came from so CI can update them. |
 
 ## GitHub Actions
@@ -74,3 +75,16 @@ python3 .skill-vault/build.py        # regenerate nav for the new/removed skills
 ```
 
 (The daily `update-skills.yml` run also refreshes the snapshot automatically.)
+
+## Optional Graphify graph
+
+For graph-backed local queries over the vault, rebuild `graphify-out/` manually:
+
+```sh
+python3 .skill-vault/build-graphify.py
+```
+
+By default this builds a lightweight graph over the navigation layer (root wrapper
+notes, `maps/`, repo docs, and vault tooling). Use `--full` only when you really
+want every skill folder included; that can be much slower and may consume LLM
+tokens. Use `--dry-run` to see the exact `graphify` commands without rebuilding.
