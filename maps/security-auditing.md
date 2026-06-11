@@ -2,7 +2,7 @@
 title: Security & Auditing
 tags:
   - skill-map
-created: 2026-06-10
+created: 2026-06-11
 ---
 
 # Security & Auditing

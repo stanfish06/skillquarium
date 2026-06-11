@@ -24,7 +24,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [networkx](networkx.md) — Comprehensive toolkit for creating, analyzing, and visualizing complex networks and graphs in Python
+- [networkx](networkx.md) — Create, analyze, and visualize complex networks and graphs in Python with NetworkX
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

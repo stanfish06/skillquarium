@@ -2,7 +2,7 @@
 title: Data Science, Stats & Scientific Computing
 tags:
   - skill-map
-created: 2026-06-10
+created: 2026-06-11
 ---
 
 # Data Science, Stats & Scientific Computing
@@ -25,7 +25,7 @@ created: 2026-06-10
 - [install-duckdb](../install-duckdb.md) — Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g
 - [matlab](../matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
 - [matplotlib](../matplotlib.md) — Low-level plotting library for full customization
-- [networkx](../networkx.md) — Comprehensive toolkit for creating, analyzing, and visualizing complex networks and graphs in Python
+- [networkx](../networkx.md) — Create, analyze, and visualize complex networks and graphs in Python with NetworkX
 - [optimize-for-gpu](../optimize-for-gpu.md) — GPU-accelerate Python code using CuPy, Numba CUDA, Warp, cuDF, cuML, cuGraph, KvikIO, cuCIM, cuxfilter, cuVS, cuSpatial, and RAFT
 - [pandera-validation](../pandera-validation.md) — DataFrame schema validation using pandera
 - [paraview](../paraview.md) — ParaView scientific visualization for volume data and meshes

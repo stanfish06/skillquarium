@@ -51,9 +51,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/astropy/SKILL.md",
-      "skillFolderHash": "ca175ba06ca08b8a2dc046469c68489c39853fad",
+      "skillFolderHash": "ed076f001916b90b9389a505d662323cfb35f35f",
       "installedAt": "2026-06-09T11:23:24.778Z",
-      "updatedAt": "2026-06-09T11:23:24.778Z"
+      "updatedAt": "2026-06-11T08:01:18.651Z"
     },
     "autoskill": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -141,10 +141,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/citation-management/SKILL.md",
-      "skillFolderHash": "583e7b30c7b200df74e45a2ce16415e070d0e69b",
-      "pluginName": "claude-scientific-writer",
+      "skillFolderHash": "a1031ff2e13e6febde8edeb84d20f447d756c0f4",
       "installedAt": "2026-06-09T11:23:24.781Z",
-      "updatedAt": "2026-06-09T12:47:58.341Z"
+      "updatedAt": "2026-06-11T08:01:24.717Z"
     },
     "clinical-decision-support": {
       "source": "K-Dense-AI/claude-scientific-writer",
@@ -625,9 +624,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/networkx/SKILL.md",
-      "skillFolderHash": "4eb307ca8c1fc7361b1092be5b8c0be60c475462",
+      "skillFolderHash": "a6d3a486cbebdc27e9dae0f043023b097f5c883c",
       "installedAt": "2026-06-09T11:23:24.800Z",
-      "updatedAt": "2026-06-09T11:23:24.800Z"
+      "updatedAt": "2026-06-11T08:01:22.189Z"
     },
     "neurokit2": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1363,9 +1362,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "6dcecc236d8ac90250f29565f8ea28c2b5f3a5c7",
+      "skillFolderHash": "d677c4f1cfa2e201a2b9ef83e38c8ceb35b5e22f",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-06-10T07:48:52.023Z"
+      "updatedAt": "2026-06-11T08:01:27.907Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -1381,9 +1380,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "ba035d4817ac409c2c922b9ddc482c16fcf001ce",
+      "skillFolderHash": "0fcc1a9e1f0fb84e250dd09054a596fb297d0a51",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-10T07:48:56.080Z"
+      "updatedAt": "2026-06-11T08:01:30.581Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",

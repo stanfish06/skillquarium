@@ -2,7 +2,7 @@
 title: Genomics, Variants & Population Genetics
 tags:
   - skill-map
-created: 2026-06-10
+created: 2026-06-11
 ---
 
 # Genomics, Variants & Population Genetics
