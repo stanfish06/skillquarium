@@ -12,7 +12,7 @@ metadata:
 ## Overview
 
 > [!WARNING]
-> **Scanpy API compatibility (June 2026):** scvelo 0.3.x throws `TypeError: Neighbors.compute_neighbors() got an unexpected keyword argument 'write_knn_indices'` when used with **Scanpy ≥ 1.10.0** (GitHub issues [#1212](https://github.com/theislab/scvelo/issues/1212) and [#1235](https://github.com/theislab/scvelo/issues/1235)). This affects `scv.pp.moments()` and all downstream functions. **Workaround:** pin `pip install "scanpy<1.10"` until a confirmed compatible scvelo release is available. Tracked in vault issue [#25](https://github.com/stanfish06/my-skills/issues/25).
+> **Scanpy API compatibility (June 2026):** scvelo releases through 0.3.2 throw `TypeError: Neighbors.compute_neighbors() got an unexpected keyword argument 'write_knn_indices'` when used with **Scanpy ≥ 1.10.0** (GitHub issues [#1212](https://github.com/theislab/scvelo/issues/1212) and [#1235](https://github.com/theislab/scvelo/issues/1235)). This affects `scv.pp.moments()` and all downstream functions. **Preferred fix:** upgrade to `scvelo>=0.3.3`; if that is not possible, pin `pip install "scanpy<1.10"`. Tracked in vault issue [#25](https://github.com/stanfish06/my-skills/issues/25).
 
 scVelo is the leading Python package for RNA velocity analysis in single-cell RNA-seq data. It infers cell state transitions by modeling the kinetics of mRNA splicing — using the ratio of unspliced (pre-mRNA) to spliced (mature mRNA) abundances to determine whether a gene is being upregulated or downregulated in each cell. This allows reconstruction of developmental trajectories and identification of cell fate decisions without requiring time-course data.
 
