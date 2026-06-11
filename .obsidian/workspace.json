@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clawpathy-autoresearch/SKILL.md",
+                "file": "AGENTS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SKILL"
+              "title": "AGENTS"
             }
           }
         ]
@@ -182,6 +182,13 @@
   },
   "active": "0d51df94648d8e18",
   "lastOpenFiles": [
+    "brainstorming/SKILL.md",
+    "brainstorming.md",
+    "maps/software-dev.md",
+    "deeptools/SKILL.md",
+    "deeptools.md",
+    "maps/single-cell-rnaseq.md",
+    "clawpathy-autoresearch/SKILL.md",
     "opensrc.md",
     "opensrc/SKILL.md",
     "opensrc",
@@ -195,7 +202,6 @@
     "skills.base",
     "index.md",
     "seurat.md",
-    "maps/software-dev.md",
     "writing-skills.md",
     "writing-plans.md",
     "web-artifacts-builder.md",
@@ -204,12 +210,6 @@
     "using-git-worktrees.md",
     "theme-factory.md",
     "test-driven-development.md",
-    "systematic-debugging.md",
-    "subagent-driven-development.md",
-    "requesting-code-review.md",
-    "receiving-code-review.md",
-    "pytest.md",
-    "ngs-cli-toolkit.md",
     "github-actions-ci/SKILL.md.tmp.713928.b5e994e4daed",
     "github-actions-ci",
     "fastapi/SKILL.md.tmp.713928.86363684aa61",
