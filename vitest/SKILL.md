@@ -206,11 +206,16 @@ Run: `vitest bench`
 
 ```ts
 // vitest.config.ts
+import { defineConfig } from 'vitest/config';
+// v4: provider is an imported factory, not a string — install the matching
+// package, e.g. `npm i -D @vitest/browser-playwright` (or @vitest/browser-webdriverio)
+import { playwright } from '@vitest/browser-playwright';
+
 export default defineConfig({
   test: {
     browser: {
       enabled: true,
-      provider: 'playwright',   // or 'webdriverio'
+      provider: playwright(),
       // `browser.name` was deprecated in v3 and removed in v4 — use `instances`
       instances: [
         { browser: 'chromium' },
