@@ -169,7 +169,9 @@ print(f"Created: {issue['url']}")
 # Get / update / delete
 client.get_issue("ISSUE-ID")
 client.update_issue("ISSUE-ID", {"title": "Updated title"})
-client.delete_issue("ISSUE-ID", permanently_delete=False)  # archive instead of hard-delete
+# delete_issue accepts a permanently_delete kwarg, but linear-python 0.2.2 does
+# not actually forward it to the API (no-op), so it's omitted here
+client.delete_issue("ISSUE-ID")
 ```
 
 ---
