@@ -79,6 +79,7 @@ SYNONYMS = {
     "xarray-pandera-duckdb": ["xarray", "Pandera", "DuckDB"],
     "ngs-cli-toolkit": ["samtools", "bcftools", "bwa", "GATK", "minimap2", "plink2"],
     "seurat": ["Seurat", "single cell", "scRNA-seq"],
+    "optuna": ["hyperparameter optimization", "HPO", "hyperparameter tuning", "Bayesian optimization"],
     "adjusttext": ["adjustText", "ggrepel", "label placement", "text labels"],
     "conda-bioconda": ["conda", "mamba", "micromamba", "Bioconda"],
     "github-actions-ci": ["GitHub Actions", "CI/CD", "workflows"],
@@ -163,7 +164,8 @@ CATEGORIES = [
      "General ML/DL frameworks, model interpretability, RL, graph learning, and scientific model hubs.",
      ["data-science-compute", "drug-discovery-chem", "cloud-devops"],
      ["scikit-learn", "pytorch-lightning", "transformers", "shap", "stable-baselines3", "pufferlib",
-      "pufferlib-v2", "pufferlib-v3", "torch-geometric", "umap-learn", "aeon", "timesfm-forecasting", "hugging-science"]),
+      "pufferlib-v2", "pufferlib-v3", "torch-geometric", "umap-learn", "aeon", "timesfm-forecasting", "hugging-science",
+      "optuna"]),
 
     ("data-science-compute", "Data Science, Stats & Scientific Computing",
      "DataFrames, big-data tooling, statistics, optimization, simulation, geospatial, and plotting.",

@@ -8,7 +8,7 @@ created: 2026-06-12
 
 # Skills Index
 
-A navigable map of the **420 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
+A navigable map of the **421 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
 
 > [!tip] How to navigate
 > - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).
@@ -72,11 +72,11 @@ Microscopy and pathology images, medical imaging, electrophysiology, flow cytome
 
 [bids](bids.md), [cell-detection](cell-detection.md), [cellpose-cell-segmentation](cellpose-cell-segmentation.md), [cellpose-stardist-bioimage](cellpose-stardist-bioimage.md), [flowio](flowio.md), [histolab](histolab.md) … [see all 13 →](maps/imaging-signals.md)
 
-### [Machine Learning & AI](maps/ml-ai.md)  ·  13 skills
+### [Machine Learning & AI](maps/ml-ai.md)  ·  14 skills
 
 General ML/DL frameworks, model interpretability, RL, graph learning, and scientific model hubs.
 
-[aeon](aeon.md), [hugging-science](hugging-science.md), [pufferlib](pufferlib.md), [pufferlib-v2](pufferlib-v2.md), [pufferlib-v3](pufferlib-v3.md), [pytorch-lightning](pytorch-lightning.md) … [see all 13 →](maps/ml-ai.md)
+[aeon](aeon.md), [hugging-science](hugging-science.md), [optuna](optuna.md), [pufferlib](pufferlib.md), [pufferlib-v2](pufferlib-v2.md), [pufferlib-v3](pufferlib-v3.md) … [see all 14 →](maps/ml-ai.md)
 
 ### [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  31 skills
 
@@ -198,7 +198,7 @@ Secure development, code auditing, static analysis, SARIF, fuzzing, agent securi
 [napari-viz](napari-viz.md) · [nature-academic-search](nature-academic-search.md) · [nature-citation](nature-citation.md) · [nature-data](nature-data.md) · [nature-figure](nature-figure.md) · [nature-paper2ppt](nature-paper2ppt.md) · [nature-polishing](nature-polishing.md) · [nature-reader](nature-reader.md) · [nature-response](nature-response.md) · [nature-reviewer](nature-reviewer.md) · [nature-writing](nature-writing.md) · [ncbi-datasets](ncbi-datasets.md) · [networkx](networkx.md) · [neurokit2](neurokit2.md) · [neuropixels-analysis](neuropixels-analysis.md) · [nextflow](nextflow.md) · [nfcore-rnaseq-wrapper](nfcore-rnaseq-wrapper.md) · [nfcore-sarek-wrapper](nfcore-sarek-wrapper.md) · [nfcore-scrnaseq-wrapper](nfcore-scrnaseq-wrapper.md) · [ngs-cli-toolkit](ngs-cli-toolkit.md) · [nutrigx-advisor](nutrigx-advisor.md)
 
 **O**
-[observability-and-instrumentation](observability-and-instrumentation.md) · [obsidian-bases](obsidian-bases.md) · [obsidian-cli](obsidian-cli.md) · [obsidian-markdown](obsidian-markdown.md) · [omero-integration](omero-integration.md) · [omics-target-evidence-mapper](omics-target-evidence-mapper.md) · [open-notebook](open-notebook.md) · [opensrc](opensrc.md) · [opentrons-integration](opentrons-integration.md) · [optimize-for-gpu](optimize-for-gpu.md) · [ossfuzz](ossfuzz.md)
+[observability-and-instrumentation](observability-and-instrumentation.md) · [obsidian-bases](obsidian-bases.md) · [obsidian-cli](obsidian-cli.md) · [obsidian-markdown](obsidian-markdown.md) · [omero-integration](omero-integration.md) · [omics-target-evidence-mapper](omics-target-evidence-mapper.md) · [open-notebook](open-notebook.md) · [opensrc](opensrc.md) · [opentrons-integration](opentrons-integration.md) · [optimize-for-gpu](optimize-for-gpu.md) · [optuna](optuna.md) · [ossfuzz](ossfuzz.md)
 
 **P**
 [pacsomatic](pacsomatic.md) · [pandera-validation](pandera-validation.md) · [paper-2-web](paper-2-web.md) · [paper-lookup](paper-lookup.md) · [paperzilla](paperzilla.md) · [parallel-web](parallel-web.md) · [paraview](paraview.md) · [pathml](pathml.md) · [pathway-enricher](pathway-enricher.md) · [pathway-enrichment](pathway-enrichment.md) · [pdf](pdf.md) · [peer-review](peer-review.md) · [pennylane](pennylane.md) · [performance-optimization](performance-optimization.md) · [pharmgx-reporter](pharmgx-reporter.md) · [phoenix-cli](phoenix-cli.md) · [phoenix-evals](phoenix-evals.md) · [phylogenetics](phylogenetics.md) · [phylogenetics-builder](phylogenetics-builder.md) · [planning-and-task-breakdown](planning-and-task-breakdown.md) · [playwright-best-practices](playwright-best-practices.md) · [playwright-cli](playwright-cli.md) · [polars](polars.md) · [polars-bio](polars-bio.md) · [pptx](pptx.md) · [pptx-posters](pptx-posters.md) · [pre-submission-reviewer](pre-submission-reviewer.md) · [primekg](primekg.md) · [profile-report](profile-report.md) · [property-based-testing](property-based-testing.md) · [proteomics-clock](proteomics-clock.md) · [proteomics-de](proteomics-de.md) · [protocols-io](protocols-io.md) · [protocolsio-integration](protocolsio-integration.md) · [pubmed-summariser](pubmed-summariser.md) · [pufferlib](pufferlib.md) · [pufferlib-v2](pufferlib-v2.md) · [pufferlib-v3](pufferlib-v3.md) · [pybedtools](pybedtools.md) · [pydeseq2](pydeseq2.md) · [pydicom](pydicom.md) · [pyhealth](pyhealth.md) · [pylabrobot](pylabrobot.md) · [pymatgen](pymatgen.md) · [pymc](pymc.md) · [pymoo](pymoo.md) · [pyopenms](pyopenms.md) · [pysam](pysam.md) · [pytdc](pytdc.md) · [pytest](pytest.md) · [pytorch-lightning](pytorch-lightning.md) · [pyzotero](pyzotero.md)
