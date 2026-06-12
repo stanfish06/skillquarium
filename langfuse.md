@@ -19,7 +19,6 @@ created: 2026-06-09
 ## Related skills
 
 - [llm-observability-evals](llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
-- [query](query.md) — Run SQL queries against the attached DuckDB database or ad-hoc against files
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

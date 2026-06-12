@@ -24,9 +24,7 @@ created: 2026-06-10
 
 ## Related skills
 
-- [core](core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
 - [pysam](pysam.md) — Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines
-- [query](query.md) — Run SQL queries against the attached DuckDB database or ad-hoc against files
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [core](core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

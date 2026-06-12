@@ -19,7 +19,6 @@ created: 2026-06-10
 ## Related skills
 
 - [docker](docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
-- [query](query.md) — Run SQL queries against the attached DuckDB database or ad-hoc against files
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

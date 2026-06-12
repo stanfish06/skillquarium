@@ -18,7 +18,6 @@ created: 2026-06-10
 
 ## Related skills
 
-- [core](core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
 - [devcontainer-setup](devcontainer-setup.md) — Creates devcontainers with Claude Code, language-specific tooling (Python/Node/Rust/Go), and persistent volumes
 - [fastapi](fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [modal](modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs

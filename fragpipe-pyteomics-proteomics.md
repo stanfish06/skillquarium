@@ -26,7 +26,6 @@ created: 2026-06-09
 - [matchms](matchms.md) — Spectral similarity and compound identification for metabolomics
 - [polars](polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
 - [pyopenms](pyopenms.md) — Complete mass spectrometry analysis platform
-- [query](query.md) — Run SQL queries against the attached DuckDB database or ad-hoc against files
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

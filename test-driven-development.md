@@ -21,7 +21,9 @@ created: 2026-06-10
 
 ## Related skills
 
+- [jest](jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [pytest](pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
+- [vitest](vitest.md) — JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
