@@ -1,0 +1,4 @@
+interface:
+  display_name: "adjustText"
+  short_description: "Matplotlib label placement with adjustText."
+  default_prompt: "Use adjustText to make matplotlib text labels readable without overlaps."

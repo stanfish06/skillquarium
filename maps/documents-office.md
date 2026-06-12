@@ -2,7 +2,7 @@
 title: Documents, Office & Media
 tags:
   - skill-map
-created: 2026-06-11
+created: 2026-06-12
 ---
 
 # Documents, Office & Media

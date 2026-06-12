@@ -79,6 +79,7 @@ SYNONYMS = {
     "xarray-pandera-duckdb": ["xarray", "Pandera", "DuckDB"],
     "ngs-cli-toolkit": ["samtools", "bcftools", "bwa", "GATK", "minimap2", "plink2"],
     "seurat": ["Seurat", "single cell", "scRNA-seq"],
+    "adjusttext": ["adjustText", "ggrepel", "label placement", "text labels"],
     "conda-bioconda": ["conda", "mamba", "micromamba", "Bioconda"],
     "github-actions-ci": ["GitHub Actions", "CI/CD", "workflows"],
     "test-driven-development": ["TDD"], "using-git-worktrees": ["git worktree"],
@@ -170,6 +171,7 @@ CATEGORIES = [
      ["polars", "dask", "vaex", "zarr-python", "networkx", "sympy", "matlab", "statsmodels",
       "statistical-analysis", "scikit-survival", "pymc", "pymoo", "simpy", "geomaster", "geopandas",
       "exploratory-data-analysis", "optimize-for-gpu", "usfiscaldata", "matplotlib", "seaborn",
+      "adjusttext",
       "xarray", "pandera-validation", "xarray-pandera-duckdb", "attach-db", "duckdb-docs",
       "install-duckdb", "query", "read-file", "paraview", "ttk-viz"]),
 

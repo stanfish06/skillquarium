@@ -18,6 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [adjusttext](adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [matplotlib](matplotlib.md) — Low-level plotting library for full customization
 - [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R
 - [scientific-visualization](scientific-visualization.md) — Meta-skill for publication-ready figures
