@@ -14,7 +14,7 @@ created: 2026-06-12
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Web Automation, Frontend & Design](web-automation-frontend.md)
 
-## Skills (35)
+## Skills (36)
 
 - [aflpp](../aflpp.md) — AFL++ is a fork of AFL with better fuzzing performance and advanced features
 - [agentic-actions-auditor](../agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
@@ -43,6 +43,7 @@ created: 2026-06-12
 - [property-based-testing](../property-based-testing.md) — Provides guidance for property-based testing across multiple languages and smart contracts
 - [sarif-parsing](../sarif-parsing.md) — Parses and processes SARIF files from static analysis tools like CodeQL, Semgrep, or other scanners
 - [secure-workflow-guide](../secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
+- [security-and-hardening](../security-and-hardening.md) — Hardens code against vulnerabilities. Use when handling user input, authentication, data storage, or external integrations
 - [semgrep](../semgrep.md) — Run Semgrep static analysis scan on a codebase using parallel subagents
 - [semgrep-rule-creator](../semgrep-rule-creator.md) — Creates custom Semgrep rules for detecting security vulnerabilities, bug patterns, and code patterns
 - [sharp-edges](../sharp-edges.md) — Identifies error-prone APIs, dangerous configurations, and footgun designs that enable security mistakes

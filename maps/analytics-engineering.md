@@ -14,7 +14,7 @@ created: 2026-06-12
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Machine Learning & AI](ml-ai.md) | [Security & Auditing](security-auditing.md)
 
-## Skills (16)
+## Skills (17)
 
 - [adding-dbt-unit-test](../adding-dbt-unit-test.md) — Creates unit test YAML definitions that mock upstream model inputs and validate expected outputs
 - [answering-natural-language-questions-with-dbt](../answering-natural-language-questions-with-dbt.md) — Writes and executes SQL queries against the data warehouse using dbt's Semantic Layer or ad-hoc SQL to answer business questions
@@ -26,6 +26,7 @@ created: 2026-06-12
 - [llm-observability-evals](../llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
 - [migrating-dbt-core-to-fusion](../migrating-dbt-core-to-fusion.md) — Use when a user needs help triaging dbt-core to Fusion migration errors
 - [migrating-dbt-project-across-platforms](../migrating-dbt-project-across-platforms.md) — Use when migrating a dbt project from one data platform or data warehouse to another (e.g., Snowflake to Databricks, Databricks to Snowflake) using dbt Fusion's real-time compilation...
+- [observability-and-instrumentation](../observability-and-instrumentation.md) — Instruments code so production behavior is visible and diagnosable
 - [phoenix-cli](../phoenix-cli.md) — Debug LLM applications using the Phoenix CLI
 - [phoenix-evals](../phoenix-evals.md) — Build and run evaluators for AI/LLM applications using Phoenix
 - [running-dbt-commands](../running-dbt-commands.md) — Formats and executes dbt CLI commands, selects the correct dbt executable, and structures command parameters

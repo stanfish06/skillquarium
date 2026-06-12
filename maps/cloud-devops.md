@@ -14,13 +14,14 @@ created: 2026-06-12
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (13)
+## Skills (15)
 
 - [aws-agentic-ai](../aws-agentic-ai.md) — AWS Bedrock AgentCore comprehensive expert for deploying and managing AI agents at scale
 - [aws-cdk-development](../aws-cdk-development.md) — AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python
 - [aws-cost-operations](../aws-cost-operations.md) — AWS cost optimization, monitoring, and operational excellence expert
 - [aws-mcp-setup](../aws-mcp-setup.md) — Configure AWS MCP servers for documentation search and API access
 - [aws-serverless-eda](../aws-serverless-eda.md) — AWS serverless and event-driven architecture expert based on Well-Architected Framework
+- [ci-cd-and-automation](../ci-cd-and-automation.md) — Automates CI/CD pipeline setup. Use when setting up or modifying build and deployment pipelines
 - [conda-bioconda](../conda-bioconda.md) — Reproducible Conda/Mamba/micromamba environment management for bioinformatics, with correct Bioconda channel setup, environment files, version pinning, and lockfiles
 - [devcontainer-setup](../devcontainer-setup.md) — Creates devcontainers with Claude Code, language-specific tooling (Python/Node/Rust/Go), and persistent volumes
 - [e2b-sandbox](../e2b-sandbox.md) — Guide for creating and managing E2B sandboxes using ComputeSDK
@@ -28,4 +29,5 @@ created: 2026-06-12
 - [modal](../modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
 - [modern-python](../modern-python.md) — Configures Python projects with modern tooling (uv, ruff, ty)
 - [nextflow](../nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
+- [shipping-and-launch](../shipping-and-launch.md) — Prepares production launches. Use when preparing to deploy to production
 - [snakemake-workflow-engine](../snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines

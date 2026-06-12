@@ -1,3 +1,5 @@
 Untitled.*
 __pycache__/
 graphify-out/
+.agents/
+skills-lock.json

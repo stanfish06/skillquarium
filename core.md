@@ -26,6 +26,7 @@ created: 2026-06-09
 - [install-duckdb](install-duckdb.md) — Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g
 - [ngs-cli-toolkit](ngs-cli-toolkit.md) — The core command-line NGS workhorses for going from raw reads to variants — bwa-mem2/minimap2/bowtie2 (alignment), samtools (BAM sort/index/stats/view), bcftools (VCF...
 - [paper-lookup](paper-lookup.md) — Search 10 academic paper databases via REST APIs for research papers, preprints, and scholarly articles
+- [performance-optimization](performance-optimization.md) — Optimizes application performance. Use when performance requirements exist, when you suspect performance regressions, or when Core Web Vitals or load times need improvement
 - [scientific-writing](scientific-writing.md) — Core skill for the deep research and writing tool
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
