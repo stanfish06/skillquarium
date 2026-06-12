@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import csv
-import importlib
 from pathlib import Path
 import sys
-import types
 
 import pytest
 
@@ -36,7 +34,7 @@ def _remove_skill_dir_from_sys_path() -> None:
 _purge_foreign_modules("errors", "schemas", "samplesheet_builder")
 
 from errors import ErrorCode, SkillError
-from samplesheet_builder import _looks_like_fastq_path, validate_and_normalize_samplesheet
+from samplesheet_builder import validate_and_normalize_samplesheet
 
 _purge_local_modules("errors", "schemas", "samplesheet_builder")
 _remove_skill_dir_from_sys_path()
@@ -142,6 +140,21 @@ def test_rejects_missing_fastq_path(tmp_path):
     assert exc.value.error_code == ErrorCode.MISSING_FASTQ
 
 
+def test_preserves_remote_fastq_uri_without_local_existence_check(tmp_path):
+    uri = "s3://bucket.example.org/reads/sample_R1.fastq.gz"
+    src = _write_sheet(
+        tmp_path / "samplesheet.csv",
+        [{"sample": "sampleA", "fastq_1": uri, "strandedness": "auto"}],
+    )
+    out = tmp_path / "normalized.csv"
+
+    result = validate_and_normalize_samplesheet(src, out)
+
+    row = next(csv.DictReader(out.open(encoding="utf-8")))
+    assert row["fastq_1"] == uri
+    assert result["fastq_paths"] == [uri]
+
+
 @pytest.mark.parametrize("strandedness", ["", "AUTO"])
 def test_rejects_invalid_strandedness_values(tmp_path, strandedness):
     src = _write_sheet(tmp_path / "samplesheet.csv", [_valid_row(tmp_path, strandedness=strandedness)])
@@ -210,19 +223,19 @@ def test_rejects_duplicate_fastq_rows(tmp_path):
     assert exc.value.error_code == ErrorCode.INVALID_SAMPLESHEET
 
 
-def test_supports_genome_and_transcriptome_bam_columns(tmp_path):
+def test_bam_reprocessing_rows_must_preserve_fastq_1(tmp_path):
     gbam = _touch(tmp_path / "sample.genome.bam")
     tbam = _touch(tmp_path / "sample.transcriptome.bam")
-    # BAM-only row: fastq_1 must be empty (mixing FASTQ + BAM is rejected).
     src = _write_sheet(
         tmp_path / "samplesheet.csv",
         [_valid_row(tmp_path, fastq_1="", genome_bam=str(gbam), transcriptome_bam=str(tbam))],
     )
 
-    result = validate_and_normalize_samplesheet(src, tmp_path / "normalized.csv")
+    with pytest.raises(SkillError) as exc:
+        validate_and_normalize_samplesheet(src, tmp_path / "normalized.csv")
 
-    assert result["bam_paths"] == [gbam.resolve(), tbam.resolve()]
-    assert result["fastq_paths"] == []
+    assert exc.value.error_code == ErrorCode.INVALID_SAMPLESHEET
+    assert "fastq_1" in exc.value.message
 
 
 def test_rejects_row_mixing_fastq_and_bam_columns(tmp_path):
@@ -242,11 +255,11 @@ def test_rejects_row_mixing_fastq_and_bam_columns(tmp_path):
 def test_rejects_missing_bam_path(tmp_path):
     src = _write_sheet(
         tmp_path / "samplesheet.csv",
-        [_valid_row(tmp_path, fastq_1="", genome_bam="missing.bam")],
+        [_valid_row(tmp_path, genome_bam="missing.bam")],
     )
 
     with pytest.raises(SkillError) as exc:
-        validate_and_normalize_samplesheet(src, tmp_path / "normalized.csv")
+        validate_and_normalize_samplesheet(src, tmp_path / "normalized.csv", skip_alignment=True)
 
     assert exc.value.error_code == ErrorCode.MISSING_INPUT
 
@@ -330,18 +343,36 @@ def test_rejects_whitespace_only_fastq_1(tmp_path):
     assert exc.value.error_code == ErrorCode.INVALID_SAMPLESHEET
 
 
-def test_bam_normalized_fastq1_is_empty_string_not_dot(tmp_path):
-    """Normalized BAM samplesheet must write fastq_1='' not '.' (nf-core schema forbids '.')."""
+def test_bam_reprocessing_preserves_official_samplesheet_fastq_columns(tmp_path):
     gbam = _touch(tmp_path / "sample.genome.bam")
+    r1 = _touch(tmp_path / "reads" / "sample_R1.fastq.gz")
     src = _write_sheet(
         tmp_path / "samplesheet.csv",
-        [{"sample": "sampleA", "fastq_1": "", "strandedness": "auto", "genome_bam": str(gbam)}],
+        [{"sample": "sampleA", "fastq_1": str(r1), "strandedness": "auto", "genome_bam": str(gbam)}],
     )
     out = tmp_path / "normalized.csv"
-    validate_and_normalize_samplesheet(src, out)
+    result = validate_and_normalize_samplesheet(src, out, skip_alignment=True)
     import csv as _csv
     row = next(_csv.DictReader(out.open(encoding="utf-8")))
-    assert row["fastq_1"] == "", f"Expected empty string, got {row['fastq_1']!r}"
+    assert row["fastq_1"] == str(r1.resolve())
+    assert result["fastq_paths"] == [r1.resolve()]
+    assert result["bam_paths"] == [gbam.resolve()]
+
+
+def test_preserves_remote_bam_uri_without_local_existence_check(tmp_path):
+    bam_uri = "s3://bucket.example.org/bams/sample.genome.bam"
+    r1 = _touch(tmp_path / "reads" / "sample_R1.fastq.gz")
+    src = _write_sheet(
+        tmp_path / "samplesheet.csv",
+        [{"sample": "sampleA", "fastq_1": str(r1), "strandedness": "auto", "genome_bam": bam_uri}],
+    )
+    out = tmp_path / "normalized.csv"
+
+    result = validate_and_normalize_samplesheet(src, out, skip_alignment=True)
+
+    row = next(csv.DictReader(out.open(encoding="utf-8")))
+    assert row["genome_bam"] == bam_uri
+    assert result["bam_paths"] == [bam_uri]
 
 
 def test_non_csv_extension_rejected(tmp_path):

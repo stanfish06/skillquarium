@@ -43,6 +43,7 @@ from schemas import (
     SKILL_ALIAS,
     SKILL_NAME,
     SUPPORTED_ALIGNERS,
+    SUPPORTED_CONTAMINANT_SCREENING,
     SUPPORTED_PROFILES,
     SUPPORTED_PSEUDO_ALIGNERS,
     SUPPORTED_RIBO_TOOLS,
@@ -116,6 +117,11 @@ def test_pinned_versions_match_runtime_constants():
     assert set(pinned["supported_trimmers"]) == SUPPORTED_TRIMMERS
     assert set(pinned["supported_ribo_tools"]) == SUPPORTED_RIBO_TOOLS
     assert set(pinned["supported_umi_tools"]) == SUPPORTED_UMI_TOOLS
+    assert set(pinned["supported_contaminant_screening"]) == SUPPORTED_CONTAMINANT_SCREENING
+
+
+def test_contaminant_screening_enum_value_is_canonical():
+    assert SUPPORTED_CONTAMINANT_SCREENING == {"kraken2", "kraken2_bracken", "sylph"}
 
 
 def test_rnaseq_runtime_constants_match_phase_1_contract():

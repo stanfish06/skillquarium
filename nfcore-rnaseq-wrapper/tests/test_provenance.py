@@ -4,7 +4,6 @@ from argparse import Namespace
 import json
 from pathlib import Path
 import sys
-from unittest.mock import patch
 
 _SKILL_DIR = Path(__file__).resolve().parent.parent
 if str(_SKILL_DIR) in sys.path:
@@ -35,14 +34,9 @@ import provenance as provenance_module
 from provenance import (
     _reference_checksums,
     build_inputs_payload,
-    build_invocation_payload,
-    build_outputs_payload,
     build_runtime_payload,
-    build_skill_payload,
     build_upstream_payload,
     write_provenance_bundle,
-    write_reproducibility_checksums,
-    write_reproducibility_environment,
 )
 
 _purge_local_modules("preflight", "provenance", "schemas")
@@ -96,6 +90,25 @@ def test_build_inputs_payload_includes_params_and_samplesheet_checksums(tmp_path
     assert payload["samplesheet_checksum"]
     assert payload["params_checksum"]
     assert payload["samples_count"] == 1
+
+
+def test_build_inputs_payload_preserves_remote_input_uris(tmp_path):
+    samplesheet = tmp_path / "samplesheet.valid.csv"
+    params = tmp_path / "params.yaml"
+    samplesheet.write_text("sample,fastq_1,strandedness\nS1,s3://bucket/S1_R1.fastq.gz,auto\n", encoding="utf-8")
+    params.write_text("aligner: star_salmon\n", encoding="utf-8")
+    fastq_uri = "s3://bucket/S1_R1.fastq.gz"
+    bam_uri = "s3://bucket/S1.genome.bam"
+    payload = build_inputs_payload(
+        normalized_samplesheet=samplesheet,
+        samplesheet_summary={"sample_count": 1, "fastq_paths": [fastq_uri], "bam_paths": [bam_uri]},
+        preflight_result=_preflight(),
+        params_path=params,
+    )
+    assert payload["fastq_paths"] == [fastq_uri]
+    assert payload["fastq_checksums"][fastq_uri] == "<remote-uri>"
+    assert payload["bam_paths"] == [bam_uri]
+    assert payload["bam_checksums"][bam_uri] == "<remote-uri>"
 
 
 def test_build_inputs_payload_includes_reference_checksums(tmp_path):
@@ -221,7 +234,7 @@ def test_manifest_written_by_provenance_validates_for_resume(tmp_path):
 
 def test_runtime_payload_finished_at_reflects_duration():
     """finished_at must be started_at + duration_seconds, not a copy of the same timestamp."""
-    from datetime import datetime, timezone, timedelta
+    from datetime import datetime
 
     duration = 3600.0
     timestamp = "2026-05-16T10:00:00+00:00"

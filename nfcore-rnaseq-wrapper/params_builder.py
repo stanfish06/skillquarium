@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 
@@ -10,23 +9,14 @@ _SKILL_DIR = Path(__file__).resolve().parent
 if str(_SKILL_DIR) in sys.path:
     sys.path.remove(str(_SKILL_DIR))
 sys.path.insert(0, str(_SKILL_DIR))
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
-
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
-
-
-_purge_foreign_bare_modules("errors", "schemas")
+purge_foreign_bare_modules("errors", "schemas")
 
 from errors import ErrorCode, SkillError
-
-
-_WHITESPACE_RE = re.compile(r"\s")
-_DEFAULT_TRIMMER = "trimgalore"
+from schemas import DEFAULT_TRIMMER as _DEFAULT_TRIMMER
+from schemas import WHITESPACE_RE as _WHITESPACE_RE
 
 _REFERENCE_PATH_FIELDS = (
     "fasta",
@@ -51,7 +41,7 @@ _CONTAMINANT_PATH_FIELDS = (
     "bbsplit_index",
 )
 # sylph_db and sylph_taxonomy accept comma-separated path lists; each item
-# must be expanded independently — _posix() cannot handle a comma-joined string.
+# must be expanded independently without mangling URI schemes.
 _CONTAMINANT_MULTI_PATH_FIELDS = (
     "sylph_db",
     "sylph_taxonomy",
@@ -176,6 +166,18 @@ def build_effective_params(
     args, *, normalized_samplesheet: Path, output_dir: Path, gencode_autodetected: bool = False
 ) -> dict[str, object]:
     params = _build_base_params(args, normalized_samplesheet=normalized_samplesheet, output_dir=output_dir)
+    # Fully-hermetic profiles: --demo AND any self-contained nf-core test profile
+    # (--profile test/test_full/test_prokaryotic/…, flagged as _noinput) own EVERY
+    # pipeline parameter (input, references, and all QC/skip/tuning/contaminant/ribo/
+    # umi/reporting knobs). Because a -params-file value overrides profile config in
+    # Nextflow, writing any of them would silently alter the profile's hermetic run.
+    # Only the wrapper-forced essentials remain — outdir, and aligner when explicit —
+    # already set by _build_base_params, so we return here without emitting anything
+    # else (audit OBS-3/F1; mirrors the scrnaseq wrapper). _apply_noinput_overrides
+    # also clears the user's reference args upstream; this is defence-in-depth so a
+    # tuning flag can never leak into a test-profile params.yaml.
+    if getattr(args, "demo", False) or getattr(args, "_noinput", False):
+        return params
     _add_aligner_params(params, args)
     _add_reference_params(params, args)
     _add_contaminant_params(params, args)
@@ -191,8 +193,13 @@ def _build_base_params(args, *, normalized_samplesheet: Path, output_dir: Path) 
         # Relative so nf-core's ^\S+$ schema validator accepts paths with spaces.
         # Nextflow runs with cwd=output_dir, so "upstream/results" resolves correctly.
         "outdir": "upstream/results",
-        "aligner": args.aligner,
     }
+    # Self-contained nf-core test profiles (_noinput) ship their own aligner in the
+    # profile config. A -params-file value overrides profile config, so only write
+    # aligner for a real run, or when the user explicitly chose --aligner. Defaults
+    # to writing it (back-compat) when _aligner_explicit was never recorded.
+    if not getattr(args, "_noinput", False) or getattr(args, "_aligner_explicit", True):
+        params["aligner"] = args.aligner
     if getattr(args, "demo", False):
         params["igenomes_ignore"] = True
     elif not getattr(args, "_noinput", False):
@@ -243,7 +250,11 @@ def _add_reference_params(params: dict[str, object], args) -> None:
         if value:
             params[field] = _posix_or_uri(value)
             explicit_ref_names.append(field)
-    if "fasta" in explicit_ref_names or getattr(args, "demo", False):
+    # Ignore the iGenomes bundle whenever the user supplies their own reference
+    # (any explicit ref) without a named --genome — including the fully-prebuilt
+    # index route (no --fasta) — so a dated bundled annotation/index is never
+    # silently mixed in. --genome keeps iGenomes active; demo forces ignore.
+    if getattr(args, "demo", False) or (not getattr(args, "genome", None) and explicit_ref_names):
         params.setdefault("igenomes_ignore", True)
 
 
@@ -256,7 +267,7 @@ def _add_contaminant_params(params: dict[str, object], args) -> None:
     for field in _CONTAMINANT_PATH_FIELDS:
         value = getattr(args, field, None)
         if value:
-            params[field] = _posix(value)
+            params[field] = _posix_or_uri(value)
             if field in {"bbsplit_fasta_list", "bbsplit_index"}:
                 bbsplit_enabled = True
     for field in _CONTAMINANT_MULTI_PATH_FIELDS:
@@ -267,10 +278,6 @@ def _add_contaminant_params(params: dict[str, object], args) -> None:
         params["skip_bbsplit"] = True
     elif bbsplit_enabled:
         params["skip_bbsplit"] = False
-
-
-def _posix(value: str) -> str:
-    return Path(value).expanduser().resolve().as_posix()
 
 
 def _posix_or_uri(value: str) -> str:
@@ -292,7 +299,7 @@ def _add_ribo_params(params: dict[str, object], args) -> None:
     if getattr(args, "ribo_removal_tool", None):
         params["ribo_removal_tool"] = args.ribo_removal_tool
     if getattr(args, "ribo_database_manifest", None):
-        params["ribo_database_manifest"] = _posix(args.ribo_database_manifest)
+        params["ribo_database_manifest"] = _posix_or_uri(args.ribo_database_manifest)
 
 
 def _add_umi_params(params: dict[str, object], args) -> None:
@@ -336,7 +343,7 @@ def _add_tuning_params(params: dict[str, object], args, *, gencode_autodetected:
     for field in _MULTIQC_PATH_FIELDS:
         value = getattr(args, field, None)
         if value:
-            params[field] = _posix(value)
+            params[field] = _posix_or_uri(value)
     # featurecounts_group_type is only written when --gencode is NOT set.
     # When --gencode is set, upstream auto-flips it to "gene_type" — writing
     # it explicitly would override the auto-flip and break biotype QC.

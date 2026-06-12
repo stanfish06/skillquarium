@@ -24,7 +24,10 @@
     "requires_same_aligner": true,
     "requires_same_pseudo_aligner": true,
     "requires_same_profile": true,
-    "requires_same_params_checksum": true
+    "requires_same_prokaryotic": true,
+    "requires_same_arm": true,
+    "requires_same_params_checksum": true,
+    "requires_same_samplesheet_checksum": true
   },
   "execution_policy": {
     "work_dir": "output/upstream/work"

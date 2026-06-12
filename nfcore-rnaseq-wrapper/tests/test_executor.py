@@ -135,6 +135,19 @@ def test_execute_nextflow_timeout_error_reports_timeout_seconds(tmp_path, monkey
     assert exc.value.details["timeout_seconds"] == 7
 
 
+def test_timeout_error_fix_mentions_leftover_containers(tmp_path, monkeypatch):
+    """Killing Nextflow does not stop containers spawned by the Docker daemon (they
+    are not in Nextflow's process group). The timeout error must tell the user to
+    check for and clean up any leftover containers (audit F7)."""
+    proc = _MockProc(returncode=0, timeout_on_first_wait=True)
+    monkeypatch.setattr(sys, "platform", "win32")
+    monkeypatch.setattr(subprocess, "Popen", lambda *a, **kw: proc)
+    monkeypatch.setattr(subprocess, "run", lambda *a, **kw: subprocess.CompletedProcess(a[0], 0))
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(["nextflow", "run", "test"], cwd=tmp_path, output_dir=tmp_path, timeout_seconds=1)
+    assert "container" in exc.value.fix.lower()
+
+
 def test_terminate_process_tree_falls_back_to_sigkill_when_sigterm_times_out(monkeypatch):
     """_terminate_process_tree must send SIGKILL when SIGTERM's wait() times out."""
     import signal as signal_module

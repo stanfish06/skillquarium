@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 
@@ -13,7 +14,10 @@ DEFAULT_LOCAL_PIPELINE_DIR = REPO_PARENT / "rnaseq"
 DEFAULT_REMOTE_PIPELINE = "nf-core/rnaseq"
 DEFAULT_PIPELINE_VERSION = "3.26.0"
 DEFAULT_PROFILE = "docker"
-DEFAULT_TIMEOUT_SECONDS = 60 * 60 * 12
+# Default wall-clock ceiling for a local Nextflow run. Overridable per-run via
+# --timeout-hours so large cohorts are not killed mid-flight (audit F-02).
+DEFAULT_TIMEOUT_HOURS = 12
+DEFAULT_TIMEOUT_SECONDS = DEFAULT_TIMEOUT_HOURS * 60 * 60
 SUPPORTED_PROFILES = {
     # Execution backends
     "docker",
@@ -49,7 +53,25 @@ PIPELINE_REQUIRED_FILES = ("main.nf", "nextflow.config", "assets/schema_input.js
 SUPPORTED_ALIGNERS = {"star_salmon", "star_rsem", "hisat2", "bowtie2_salmon"}
 SUPPORTED_PSEUDO_ALIGNERS = {"salmon", "kallisto"}
 SUPPORTED_TRIMMERS = {"trimgalore", "fastp"}
+# Single source of truth for the default trimmer (nf-core/rnaseq 3.26.0 default).
+# Consumed by params_builder and the wrapper's argument parser so the default
+# lives in exactly one place.
+DEFAULT_TRIMMER = "trimgalore"
 SUPPORTED_RIBO_TOOLS = {"sortmerna", "ribodetector", "bowtie2"}
+# nf-core/rnaseq 3.26.0 nextflow_schema.json contaminant_screening enum. Single
+# source shared by the argument parser and mirrored by both reproducibility JSONs.
+SUPPORTED_CONTAMINANT_SCREENING = {"kraken2", "kraken2_bracken", "sylph"}
+# RSeQC modules accepted by nf-core/rnaseq 3.26.0 (nextflow_schema.json rseqc_modules).
+SUPPORTED_RSEQC_MODULES = {
+    "bam_stat",
+    "inner_distance",
+    "infer_experiment",
+    "junction_annotation",
+    "junction_saturation",
+    "read_distribution",
+    "read_duplication",
+    "tin",
+}
 SUPPORTED_UMI_TOOLS = {"umitools", "umicollapse"}
 SUPPORTED_STRANDEDNESS = {"forward", "reverse", "unstranded", "auto"}
 # nf-core/rnaseq 3.26.0 nextflow_schema.json enum values
@@ -60,6 +82,17 @@ SUPPORTED_SALMON_LIB_TYPES = {
     "MU", "OS", "OSF", "OSR", "OU", "SF", "SR", "U",
 }
 SUPPORTED_PUBLISH_DIR_MODES = {"symlink", "rellink", "link", "copy", "copyNoFollow", "move"}
+# Bracken taxonomic precision levels, ordered domain→species as upstream lists them
+# (nf-core/rnaseq 3.26.0 nextflow_schema.json bracken_precision enum). Tuple, not set,
+# so --help preserves the meaningful taxonomic order.
+SUPPORTED_BRACKEN_PRECISION = ("D", "P", "C", "O", "F", "G", "S")
+
+# Shared regexes — defined once here so every module enforces the identical rule.
+# FASTQ_BASENAME_RE: basename ends in .fq/.fastq(.gz) and contains no whitespace or
+# path separator (nf-core schema fastq pattern). WHITESPACE_RE: any whitespace char,
+# used to reject paths the nf-core ^\S+ schema would later refuse.
+FASTQ_BASENAME_RE = re.compile(r"^[^\s/]+\.f(?:ast)?q(?:\.gz)?$")
+WHITESPACE_RE = re.compile(r"\s")
 SUPPORTED_SAMPLE_COLUMNS = {
     "sample",
     "fastq_1",

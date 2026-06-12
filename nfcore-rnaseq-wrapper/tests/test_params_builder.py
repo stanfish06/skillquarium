@@ -34,8 +34,7 @@ def _remove_skill_dir_from_sys_path() -> None:
 
 _purge_foreign_modules("errors", "schemas", "params_builder")
 
-from errors import ErrorCode, SkillError
-from params_builder import _schema_safe_input_path, build_effective_params, build_params_file
+from params_builder import build_effective_params, build_params_file
 
 _purge_local_modules("errors", "schemas", "params_builder")
 _remove_skill_dir_from_sys_path()
@@ -479,8 +478,8 @@ def test_umi_params_are_written_with_mixed_types(tmp_path):
 def test_remote_ref_uri_passed_through_unchanged(tmp_path, scheme, field):
     """params_builder must not mangle remote URIs through Path().resolve().
 
-    _posix() would turn 'https://example.org/genome.fa' into an absolute POSIX
-    path like '/https:/example.org/genome.fa', breaking the Nextflow run.
+    Path(...).resolve() would turn 'https://example.org/genome.fa' into an
+    absolute POSIX path like '/https:/example.org/genome.fa', breaking the Nextflow run.
     Reference fields must use _posix_or_uri() which passes URIs unchanged.
     """
     uri = f"{scheme}://bucket.example.org/refs/file.fa"
@@ -488,3 +487,77 @@ def test_remote_ref_uri_passed_through_unchanged(tmp_path, scheme, field):
     assert params.get(field) == uri, (
         f"params['{field}'] = {params.get(field)!r}; expected URI {uri!r} to be passed through unchanged"
     )
+
+
+def test_remote_ribo_manifest_uri_passed_through_unchanged(tmp_path):
+    uri = "s3://bucket.example.org/ribo/ribodetector_manifest.txt"
+    params = _load_params(tmp_path, _args(ribo_database_manifest=uri))
+    assert params["ribo_database_manifest"] == uri
+
+
+@pytest.mark.parametrize("field", ["kraken_db", "bbsplit_fasta_list", "bbsplit_index"])
+def test_remote_contaminant_path_uri_passed_through_unchanged(tmp_path, field):
+    uri = f"s3://bucket.example.org/contaminants/{field}"
+    params = _load_params(tmp_path, _args(**{field: uri}))
+    assert params[field] == uri
+
+
+@pytest.mark.parametrize("field", ["multiqc_config", "multiqc_logo", "multiqc_methods_description"])
+def test_remote_multiqc_path_uri_passed_through_unchanged(tmp_path, field):
+    uri = f"https://example.org/multiqc/{field}.yaml"
+    params = _load_params(tmp_path, _args(**{field: uri}))
+    assert params[field] == uri
+
+
+# ── Audit L3: the default trimmer is centralised in schemas (single source) ───
+
+
+def test_default_trimmer_centralised_in_schemas():
+    _SKILL_DIR_LOCAL = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(_SKILL_DIR_LOCAL))
+    try:
+        import schemas as _schemas
+        import params_builder as _pb
+    finally:
+        while str(_SKILL_DIR_LOCAL) in sys.path:
+            sys.path.remove(str(_SKILL_DIR_LOCAL))
+    assert _schemas.DEFAULT_TRIMMER == "trimgalore"
+    assert _schemas.DEFAULT_TRIMMER in _schemas.SUPPORTED_TRIMMERS
+    # params_builder must consume the shared constant, not a private literal.
+    assert _pb._DEFAULT_TRIMMER == _schemas.DEFAULT_TRIMMER
+
+
+# ── F2: igenomes_ignore on a fully-prebuilt reference route ───────────────────
+
+
+def test_igenomes_ignore_set_for_prebuilt_index_route_without_fasta(tmp_path):
+    """Prebuilt indices + annotation with neither --genome nor --fasta must still
+    set igenomes_ignore=True so no iGenomes bundle is silently consulted."""
+    params = _load_params(
+        tmp_path,
+        _args(
+            aligner="star_salmon",
+            star_index="/refs/star",
+            salmon_index="/refs/salmon",
+            gtf="/refs/genes.gtf",
+            genome=None,
+            fasta=None,
+        ),
+    )
+    assert params.get("igenomes_ignore") is True
+
+
+# ── F7: self-contained test profiles own the aligner ──────────────────────────
+
+
+def test_noinput_profile_omits_aligner_when_not_user_chosen(tmp_path):
+    """A self-contained nf-core test profile owns the aligner; the wrapper must not
+    override it via -params-file unless the user explicitly chose one."""
+    params = _load_params(tmp_path, _args(aligner="star_salmon", _noinput=True, _aligner_explicit=False))
+    assert "aligner" not in params
+
+
+def test_noinput_profile_writes_aligner_when_user_chose_it(tmp_path):
+    """When the user explicitly passes --aligner, honour it even for test profiles."""
+    params = _load_params(tmp_path, _args(aligner="star_rsem", _noinput=True, _aligner_explicit=True))
+    assert params["aligner"] == "star_rsem"

@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 from argparse import Namespace
-import gzip
 import json
 from pathlib import Path
-import platform
 import sys
 
 import pytest
@@ -128,6 +126,10 @@ def _samplesheet(tmp_path: Path, **overrides) -> dict[str, object]:
 
 
 def _mock_env(monkeypatch):
+    # Pin the platform so host-OS-specific warnings (e.g. the macOS/VirtioFS /tmp
+    # warning) do not make these preflight assertions non-deterministic across
+    # runners. Tests that exercise darwin behaviour override this afterwards.
+    monkeypatch.setattr(preflight.sys, "platform", "linux")
     monkeypatch.setattr(preflight, "_check_java", lambda: {"path": "/usr/bin/java", "version": "17.0.8"})
     monkeypatch.setattr(preflight, "_check_nextflow", lambda: {"path": "/usr/bin/nextflow", "version": "25.04.3"})
     monkeypatch.setattr(preflight, "_check_profile", lambda profile: {"profile": profile, "backend_path": "/usr/bin/docker", "backend_ready": True})
@@ -144,6 +146,23 @@ def test_preflight_happy_path(tmp_path, monkeypatch):
     assert result["references"]["fasta"].endswith("genome.fa")
     assert result["samplesheet"]["sample_count"] == 1
     assert result["warnings"] == []
+
+
+def test_bam_reprocessing_emits_aligner_match_reminder(tmp_path, monkeypatch):
+    """nf-core cannot mix quantifier types between BAM generation and reprocessing;
+    the wrapper can't infer a BAM's origin, so preflight must warn whenever BAM
+    columns are present (the default --aligner star_salmon silently mismatches RSEM BAMs)."""
+    _mock_env(monkeypatch)
+    bam = _touch(tmp_path / "bams" / "sampleA.markdup.sorted.bam")
+    summary = _samplesheet(tmp_path, bam_paths=[bam])
+    result = _run(_args(tmp_path, skip_alignment=True), summary)
+    assert any("BAM reprocessing" in w and "aligner" in w.lower() for w in result["warnings"])
+
+
+def test_no_bam_reprocessing_reminder_for_fastq_runs(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    result = _run(_args(tmp_path), _samplesheet(tmp_path))
+    assert not any("BAM reprocessing" in w for w in result["warnings"])
 
 
 def test_rejects_invalid_aligner_before_environment_checks(tmp_path, monkeypatch):
@@ -203,6 +222,21 @@ def test_output_dir_not_empty_rejected_without_resume(tmp_path, monkeypatch):
     with pytest.raises(SkillError) as exc:
         _run(_args(tmp_path, output=str(out)), _samplesheet(tmp_path))
     assert exc.value.error_code == ErrorCode.OUTPUT_DIR_NOT_EMPTY
+
+
+def test_output_dir_incomplete_prior_run_gives_actionable_error(tmp_path, monkeypatch):
+    """A dir from a prior FAILED run (result.json present, no manifest) cannot be
+    resumed (no manifest) yet blocks a fresh run (not empty). Preflight must detect
+    this and tell the user precisely what to do, instead of the generic message (F8)."""
+    _mock_env(monkeypatch)
+    out = tmp_path / "out"
+    out.mkdir()
+    (out / "result.json").write_text('{"ok": false}', encoding="utf-8")
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, output=str(out)), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.OUTPUT_DIR_NOT_EMPTY
+    assert exc.value.details.get("prior_run_incomplete") is True
+    assert "delete" in exc.value.fix.lower()
 
 
 def test_output_dir_inside_repo_is_rejected(tmp_path, monkeypatch):
@@ -370,6 +404,14 @@ def test_with_umi_requires_pattern_unless_extract_is_skipped(tmp_path, monkeypat
     assert _run(_args(tmp_path / "ok", with_umi=True, skip_umi_extract=True), _samplesheet(tmp_path / "ok"))["ok"] is True
 
 
+def test_ribo_database_manifest_must_exist_when_set(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, ribo_database_manifest=str(tmp_path / "missing_manifest.txt")), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.REFERENCE_PATH_NOT_FOUND
+    assert exc.value.details["field"] == "ribo_database_manifest"
+
+
 def test_rsem_extra_args_emits_no_effect_warning(tmp_path, monkeypatch):
     _mock_env(monkeypatch)
     result = _run(_args(tmp_path, rsem_extra_args="--estimate-rspd"), _samplesheet(tmp_path))
@@ -389,6 +431,15 @@ def test_samplesheet_fastq_paths_are_revalidated(tmp_path, monkeypatch):
     with pytest.raises(SkillError) as exc:
         _run(_args(tmp_path), _samplesheet(tmp_path, fastq_paths=[bad]))
     assert exc.value.error_code == ErrorCode.INVALID_FASTQ
+
+
+def test_samplesheet_remote_fastq_uri_not_existence_checked(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    result = _run(
+        _args(tmp_path),
+        _samplesheet(tmp_path, fastq_paths=["s3://bucket.example.org/reads/sample_R1.fastq.gz"]),
+    )
+    assert result["ok"] is True
 
 
 def test_bam_reprocessing_requires_skip_alignment(tmp_path, monkeypatch):
@@ -412,6 +463,15 @@ def test_bam_reprocessing_skip_alignment_no_reference_is_allowed(tmp_path, monke
     result = _run(
         _args(tmp_path, skip_alignment=True, fasta=None, gtf=None, genome=None),
         _samplesheet(tmp_path, bam_paths=[bam]),
+    )
+    assert result["samplesheet"]["bam_count"] == 1
+
+
+def test_remote_bam_uri_skip_alignment_not_existence_checked(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    result = _run(
+        _args(tmp_path, skip_alignment=True, fasta=None, gtf=None, genome=None),
+        _samplesheet(tmp_path, bam_paths=["s3://bucket.example.org/bams/sample.genome.bam"]),
     )
     assert result["samplesheet"]["bam_count"] == 1
 
@@ -604,6 +664,45 @@ def test_min_mapped_reads_above_maximum_rejected(tmp_path, monkeypatch):
     with pytest.raises(SkillError) as exc:
         _run(_args(tmp_path, min_mapped_reads=150), _samplesheet(tmp_path))
     assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+
+
+# ── Audit F9: pseudo_aligner_kmer_size must be an odd integer in [1, 31] ───────
+# Both Salmon and Kallisto represent the index k-mer in a 64-bit machine word, so
+# the k-mer must be odd and ≤ 31 (kallisto/salmon hard cap). An out-of-range or
+# even value is a guaranteed indexing crash; the wrapper must catch it early like
+# every other numeric tuning field rather than let the pipeline abort late.
+
+
+def test_pseudo_aligner_kmer_size_below_minimum_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, pseudo_aligner_kmer_size=0), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details.get("field") == "pseudo_aligner_kmer_size"
+
+
+def test_pseudo_aligner_kmer_size_above_maximum_rejected(tmp_path, monkeypatch):
+    """k > 31 cannot be represented in Salmon/Kallisto's 64-bit k-mer word."""
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, pseudo_aligner_kmer_size=32), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details.get("maximum") == 31
+
+
+def test_pseudo_aligner_kmer_size_even_rejected(tmp_path, monkeypatch):
+    """Both pseudo-aligners require an odd k-mer; an even value always fails indexing."""
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, pseudo_aligner_kmer_size=30), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+
+
+def test_pseudo_aligner_kmer_size_valid_odd_accepted(tmp_path, monkeypatch):
+    """A valid odd k-mer in [1, 31] must pass preflight unchanged."""
+    _mock_env(monkeypatch)
+    result = _run(_args(tmp_path, pseudo_aligner_kmer_size=25), _samplesheet(tmp_path))
+    assert result["ok"] is True
 
 
 def test_composite_profile_passes_preflight(tmp_path, monkeypatch):
@@ -875,3 +974,658 @@ def test_extra_star_align_args_rejected_for_hisat2(tmp_path, monkeypatch):
         _run(args, _samplesheet(tmp_path))
     err = exc_info.value
     assert err.error_code == ErrorCode.INCOMPATIBLE_ALIGNER_ARGS
+
+
+# ── Audit follow-up: F-02 timeout bounds ──────────────────────────────────────
+
+
+def test_timeout_hours_zero_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, timeout_hours=0), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "timeout_hours"
+
+
+def test_timeout_hours_negative_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, timeout_hours=-3), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+
+
+def test_timeout_hours_positive_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    result = _run(_args(tmp_path, timeout_hours=48), _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+# ── Audit follow-up: F-03 transcriptome-only pseudo route ─────────────────────
+
+
+def test_transcriptome_only_pseudo_route_is_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    tx = _touch(tmp_path / "refs" / "transcriptome.fa", ">t1\nACGT\n")
+    args = _args(
+        tmp_path,
+        fasta=None,
+        transcript_fasta=str(tx),
+        pseudo_aligner="salmon",
+        skip_alignment=True,
+    )
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_transcriptome_only_without_annotation_still_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    tx = _touch(tmp_path / "refs" / "transcriptome.fa", ">t1\nACGT\n")
+    args = _args(
+        tmp_path,
+        fasta=None,
+        gtf=None,
+        transcript_fasta=str(tx),
+        pseudo_aligner="salmon",
+        skip_alignment=True,
+    )
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.MISSING_REFERENCE
+
+
+def test_transcript_source_without_skip_alignment_is_rejected(tmp_path, monkeypatch):
+    # A genome aligner (default star_salmon) still runs, so a genome FASTA is required.
+    _mock_env(monkeypatch)
+    tx = _touch(tmp_path / "refs" / "transcriptome.fa", ">t1\nACGT\n")
+    args = _args(tmp_path, fasta=None, transcript_fasta=str(tx), pseudo_aligner="salmon")
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.MISSING_REFERENCE
+
+
+# ── Audit follow-up: F-04 rseqc-modules validation ────────────────────────────
+
+
+def test_invalid_rseqc_module_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, rseqc_modules="bam_stat,infer_experimnt")
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert "infer_experimnt" in exc.value.details["unknown"]
+
+
+def test_valid_rseqc_modules_including_tin_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, rseqc_modules="bam_stat,tin")
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+# ── Audit follow-up: F-10 contaminant-screening tool↔database cross-check ──────
+
+
+def test_kraken2_screening_without_db_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, contaminant_screening="kraken2", kraken_db=None)
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "kraken_db"
+
+
+def test_kraken2_bracken_screening_without_db_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, contaminant_screening="kraken2_bracken", kraken_db=None)
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+
+
+def test_sylph_screening_without_db_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, contaminant_screening="sylph", sylph_db=None)
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "sylph_db"
+
+
+def test_sylph_screening_remote_db_uri_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, contaminant_screening="sylph", sylph_db="s3://bucket.example.org/sylph/db.syldb")
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_kraken2_screening_with_db_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    db = tmp_path / "kraken_db"
+    db.mkdir()
+    args = _args(tmp_path, contaminant_screening="kraken2", kraken_db=str(db))
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_bracken_precision_without_bracken_tool_warns(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    db = tmp_path / "kraken_db"
+    db.mkdir()
+    # bracken_precision only applies to kraken2_bracken; with plain kraken2 it is inert.
+    args = _args(tmp_path, contaminant_screening="kraken2", kraken_db=str(db), bracken_precision="G")
+    result = _run(args, _samplesheet(tmp_path))
+    assert any("bracken" in str(w).lower() for w in result["warnings"])
+
+
+def test_nextflow_config_with_params_override_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    cfg = tmp_path / "override.config"
+    cfg.write_text("params.aligner = 'hisat2'\n", encoding="utf-8")
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, nextflow_config=[str(cfg)]), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "nextflow_config"
+
+
+def test_nextflow_config_with_params_block_override_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    cfg = tmp_path / "override-block.config"
+    cfg.write_text("params {\n  aligner = 'hisat2'\n}\n", encoding="utf-8")
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, nextflow_config=[str(cfg)]), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "nextflow_config"
+
+
+def test_nextflow_config_custom_genome_catalogue_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    cfg = tmp_path / "my_genomes.config"
+    cfg.write_text(
+        "params.genomes {\n"
+        "  'MY_GENOME' {\n"
+        "    fasta = '/refs/my.fa'\n"
+        "    gtf = '/refs/my.gtf'\n"
+        "  }\n"
+        "}\n",
+        encoding="utf-8",
+    )
+    result = _run(
+        _args(tmp_path, genome="MY_GENOME", fasta=None, gtf=None, nextflow_config=[str(cfg)]),
+        _samplesheet(tmp_path),
+        pipeline_source=_DEFAULT_REMOTE_PIPELINE_SOURCE,
+    )
+    assert result["ok"] is True
+
+
+def test_nextflow_config_without_params_override_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    cfg = tmp_path / "hpc.config"
+    cfg.write_text("process.executor = 'slurm'\n", encoding="utf-8")
+    result = _run(_args(tmp_path, nextflow_config=[str(cfg)]), _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_parabricks_star_requires_star_salmon_aligner(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, aligner="hisat2", use_parabricks_star=True), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "use_parabricks_star"
+
+
+def test_sentieon_star_requires_star_aligner(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, aligner="bowtie2_salmon", use_sentieon_star=True), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "use_sentieon_star"
+
+
+def test_gpu_ribodetector_requires_matching_ribo_tool(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, use_gpu_ribodetector=True, ribo_removal_tool="sortmerna"), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "use_gpu_ribodetector"
+
+
+# ── Audit follow-up: F-11 UMI options set without --with-umi warn (silent no-op)
+
+
+def test_umi_options_without_with_umi_warn(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, with_umi=False, umitools_bc_pattern="NNNNNN")
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+    assert any("with-umi" in str(w).lower() for w in result["warnings"])
+
+
+def test_umi_options_with_with_umi_do_not_warn(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, with_umi=True, umitools_bc_pattern="NNNNNN")
+    result = _run(args, _samplesheet(tmp_path))
+    assert not any("with-umi" in str(w).lower() for w in result["warnings"])
+
+
+def test_no_umi_options_no_umi_warning(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    result = _run(_args(tmp_path), _samplesheet(tmp_path))
+    assert not any("with-umi" in str(w).lower() for w in result["warnings"])
+
+
+# ── Audit follow-up: F-12 prebuilt-index reference completeness (no --fasta) ───
+
+
+def _index_dir(tmp_path: Path, name: str) -> str:
+    d = tmp_path / "refs" / name
+    d.mkdir(parents=True, exist_ok=True)
+    return str(d)
+
+
+def test_star_salmon_prebuilt_index_plus_transcript_fasta_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    tx = _touch(tmp_path / "refs" / "transcriptome.fa", ">t1\nACGT\n")
+    args = _args(
+        tmp_path,
+        fasta=None,
+        star_index=_index_dir(tmp_path, "star"),
+        transcript_fasta=str(tx),
+    )
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_star_salmon_prebuilt_index_plus_salmon_index_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(
+        tmp_path,
+        fasta=None,
+        star_index=_index_dir(tmp_path, "star"),
+        salmon_index=_index_dir(tmp_path, "salmon"),
+    )
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_star_salmon_index_without_transcript_source_rejected(tmp_path, monkeypatch):
+    # star_salmon still needs a transcript source (fasta/transcript_fasta/salmon_index)
+    # for Salmon quantification; a STAR index + GTF alone is incomplete.
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, fasta=None, star_index=_index_dir(tmp_path, "star"))
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.MISSING_REFERENCE
+
+
+def test_hisat2_prebuilt_index_plus_gtf_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, aligner="hisat2", fasta=None, hisat2_index=_index_dir(tmp_path, "hisat2"))
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_bowtie2_salmon_prebuilt_index_plus_salmon_index_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(
+        tmp_path,
+        aligner="bowtie2_salmon",
+        fasta=None,
+        bowtie2_index=_index_dir(tmp_path, "bt2"),
+        salmon_index=_index_dir(tmp_path, "salmon"),
+    )
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_star_rsem_rsem_index_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, aligner="star_rsem", fasta=None, rsem_index=_index_dir(tmp_path, "rsem"))
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_star_rsem_star_index_without_rsem_source_rejected(tmp_path, monkeypatch):
+    # RSEM quantification needs --rsem-index or --fasta; a bare STAR index is not enough.
+    _mock_env(monkeypatch)
+    args = _args(tmp_path, aligner="star_rsem", fasta=None, star_index=_index_dir(tmp_path, "star"))
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.MISSING_REFERENCE
+
+
+def test_prebuilt_index_without_annotation_rejected(tmp_path, monkeypatch):
+    # Annotation (GTF/GFF) is always required for quantification.
+    _mock_env(monkeypatch)
+    tx = _touch(tmp_path / "refs" / "transcriptome.fa", ">t1\nACGT\n")
+    args = _args(
+        tmp_path,
+        fasta=None,
+        gtf=None,
+        star_index=_index_dir(tmp_path, "star"),
+        transcript_fasta=str(tx),
+    )
+    with pytest.raises(SkillError) as exc:
+        _run(args, _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.MISSING_REFERENCE
+
+
+# ── Audit follow-up F-06: FASTA extension regex matches real extensions only ──
+
+
+def test_fasta_regex_accepts_canonical_extensions():
+    for name in ("genome.fa", "genome.fasta", "genome.fna", "g.fa.gz", "g.fasta.gz", "g.fna.gz"):
+        assert preflight._FASTA_EXT_RE.match(name), name
+
+
+def test_fasta_regex_rejects_bogus_extensions():
+    for name in ("genome.fnasta", "genome.fnasta.gz", "genome.txt", "genome.faa"):
+        assert not preflight._FASTA_EXT_RE.match(name), name
+
+
+# ── Audit follow-up F-1: reference paths that resolve into a directory with ──
+# whitespace fail the nf-core ^\S+ schema pattern at runtime. Catch them at
+# preflight with a precise, dedicated error (mirrors the samplesheet input guard)
+# instead of letting Nextflow abort late with a misleading message.
+
+
+def test_reference_path_with_whitespace_in_directory_rejected(tmp_path):
+    spaced_dir = tmp_path / "my refs"
+    fasta = _touch(spaced_dir / "genome.fa", ">chr1\nACGT\n")
+    gtf = _touch(spaced_dir / "genes.gtf", "chr1\tsrc\tgene\t1\t4\t.\t+\t.\tg\n")
+    with pytest.raises(SkillError) as exc:
+        preflight._check_reference_paths_exist({"fasta": str(fasta), "gtf": str(gtf)})
+    assert exc.value.error_code == ErrorCode.REFERENCE_PATH_HAS_WHITESPACE
+    assert exc.value.details["field"] == "fasta"
+
+
+def test_reference_path_whitespace_check_precedes_extension_check(tmp_path):
+    # An absolute path containing whitespace must report the whitespace problem,
+    # not a misleading "FASTA extension" error (the ^\S+ extension regex also fails
+    # on whitespace, so ordering matters).
+    spaced = _touch(tmp_path / "ref dir" / "genome.fa", ">c\nA\n")
+    with pytest.raises(SkillError) as exc:
+        preflight._check_reference_paths_exist({"fasta": str(spaced)})
+    assert exc.value.error_code == ErrorCode.REFERENCE_PATH_HAS_WHITESPACE
+
+
+def test_whitespace_free_reference_path_still_accepted(tmp_path):
+    fasta = _touch(tmp_path / "refs" / "genome.fa", ">c\nA\n")
+    gtf = _touch(tmp_path / "refs" / "genes.gtf", "chr1\tsrc\tgene\t1\t4\t.\t+\t.\tg\n")
+    # Must not raise.
+    preflight._check_reference_paths_exist({"fasta": str(fasta), "gtf": str(gtf)})
+
+
+# ── Audit follow-up F-5: --check mode intentionally skips the Nextflow version ──
+# gate (presence only). That leniency must be surfaced as a warning so the run is
+# not silently assumed to have a compatible Nextflow.
+
+
+def test_check_mode_warns_that_nextflow_version_unverified(tmp_path, monkeypatch):
+    monkeypatch.setattr(preflight, "_check_java", lambda: {"path": "/usr/bin/java", "version": "17"})
+    monkeypatch.setattr(preflight, "_check_profile", lambda profile: {"profile": profile, "backend_path": "", "backend_ready": True})
+    monkeypatch.setattr(preflight.shutil, "which", lambda name: f"/usr/bin/{name}")
+    monkeypatch.setattr(preflight, "_command_output", lambda cmd: "")
+    result = preflight.run_preflight(
+        _args(tmp_path, check=True, demo=True, profile="test"),
+        pipeline_source={"source_kind": "remote", "source_ref": "3.26.0"},
+        samplesheet_summary={"sample_count": 0, "fastq_paths": []},
+    )
+    assert result["nextflow"]["version_checked"] is False
+    assert any("version" in w.lower() and "check" in w.lower() for w in result["warnings"])
+
+
+def test_real_run_does_not_emit_version_unverified_warning(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    result = _run(_args(tmp_path), _samplesheet(tmp_path))
+    assert not any("not verified" in w.lower() for w in result["warnings"])
+
+
+# ── Audit M1: --genome allows additive annotation/transcriptome overrides ─────
+# nf-core/rnaseq supports iGenomes + an annotation/transcriptome override
+# (e.g. --genome GRCh38 --gtf custom.gtf, or --additional-fasta spike_ins.fa).
+# Only a second *genome sequence* source (--fasta) or a genome *index*
+# (--star-index/--rsem-index/--hisat2-index/--bowtie2-index) genuinely conflicts.
+
+
+def test_genome_with_additional_fasta_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    af = _touch(tmp_path / "refs" / "spikein.fa", ">ercc\nACGT\n")
+    result = _run(
+        _args(tmp_path, genome="GRCh38", fasta=None, gtf=None, additional_fasta=str(af)),
+        _samplesheet(tmp_path),
+    )
+    assert result["references"]["genome"] == "GRCh38"
+    assert result["references"]["additional_fasta"].endswith("spikein.fa")
+
+
+def test_genome_with_gtf_override_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    gtf = _touch(tmp_path / "refs" / "custom.gtf", "chr1\tsrc\tgene\t1\t4\t.\t+\t.\tgene_id \"g1\";\n")
+    result = _run(
+        _args(tmp_path, genome="GRCh38", fasta=None, gtf=str(gtf)),
+        _samplesheet(tmp_path),
+    )
+    assert result["references"]["genome"] == "GRCh38"
+    assert result["references"]["gtf"].endswith("custom.gtf")
+
+
+def test_genome_with_transcript_fasta_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    tf = _touch(tmp_path / "refs" / "tx.fa", ">tx1\nACGT\n")
+    result = _run(
+        _args(tmp_path, genome="GRCh38", fasta=None, gtf=None, transcript_fasta=str(tf)),
+        _samplesheet(tmp_path),
+    )
+    assert result["references"]["genome"] == "GRCh38"
+
+
+def test_genome_with_explicit_fasta_still_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, genome="GRCh38", gtf=None), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.CONFLICTING_REFERENCES
+    assert "fasta" in exc.value.details.get("explicit_set", [])
+
+
+def test_genome_with_star_index_still_rejected(tmp_path, monkeypatch):
+    field = "star_index"
+    index_path = _touch(tmp_path / "refs" / field / "SAindex")
+    _mock_env(monkeypatch)
+    with pytest.raises(SkillError) as exc:
+        _run(
+            _args(tmp_path, genome="GRCh38", fasta=None, gtf=None, **{field: str(index_path.parent)}),
+            _samplesheet(tmp_path),
+        )
+    assert exc.value.error_code == ErrorCode.CONFLICTING_REFERENCES
+    assert field in exc.value.details.get("explicit_set", [])
+
+
+# ── Audit M2: --nextflow-config params-override filter is no longer evadable ───
+
+
+def test_nextflow_config_params_subscript_override_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    cfg = tmp_path / "subscript.config"
+    cfg.write_text("params['aligner'] = 'hisat2'\n", encoding="utf-8")
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, nextflow_config=[str(cfg)]), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+    assert exc.value.details["field"] == "nextflow_config"
+
+
+def test_nextflow_config_params_put_override_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    cfg = tmp_path / "put.config"
+    cfg.write_text("params.put('aligner', 'hisat2')\n", encoding="utf-8")
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, nextflow_config=[str(cfg)]), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+
+
+def test_nextflow_config_include_local_params_override_rejected(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    inner = tmp_path / "inner.config"
+    inner.write_text("params.aligner = 'hisat2'\n", encoding="utf-8")
+    outer = tmp_path / "outer.config"
+    outer.write_text("includeConfig 'inner.config'\n", encoding="utf-8")
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, nextflow_config=[str(outer)]), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
+
+
+def test_nextflow_config_include_clean_local_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    inner = tmp_path / "inner_clean.config"
+    inner.write_text("process.cpus = 8\n", encoding="utf-8")
+    outer = tmp_path / "outer_clean.config"
+    outer.write_text("includeConfig 'inner_clean.config'\n", encoding="utf-8")
+    result = _run(_args(tmp_path, nextflow_config=[str(outer)]), _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+def test_nextflow_config_include_remote_warns_not_blocks(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    cfg = tmp_path / "remote_include.config"
+    cfg.write_text("includeConfig 'https://example.org/foo.config'\n", encoding="utf-8")
+    result = _run(_args(tmp_path, nextflow_config=[str(cfg)]), _samplesheet(tmp_path))
+    assert result["ok"] is True
+    assert any("includeConfig" in w and "audit" in w.lower() for w in result["warnings"])
+
+
+def test_nextflow_config_include_cycle_is_safe(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    a = tmp_path / "a.config"
+    b = tmp_path / "b.config"
+    a.write_text("includeConfig 'b.config'\n", encoding="utf-8")
+    b.write_text("includeConfig 'a.config'\n", encoding="utf-8")
+    result = _run(_args(tmp_path, nextflow_config=[str(a)]), _samplesheet(tmp_path))
+    assert result["ok"] is True
+
+
+# ── Audit L1: preflight shares the single-source FASTQ regex (no local shadow) ─
+
+
+def test_preflight_does_not_shadow_shared_fastq_regex():
+    src = (_SKILL_DIR / "preflight.py").read_text(encoding="utf-8")
+    assert "_FASTQ_BASENAME_RE = re.compile" not in src, (
+        "preflight must use the shared schemas.FASTQ_BASENAME_RE, not a local redefinition"
+    )
+    assert "FASTQ_BASENAME_RE as _FASTQ_BASENAME_RE" in src
+
+
+# ── Audit L2: macOS Docker + STAR index build warns about the memory ceiling ──
+
+
+def test_macos_docker_star_build_without_index_warns(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    monkeypatch.setattr(preflight.sys, "platform", "darwin")
+    result = _run(
+        _args(tmp_path, profile="docker", aligner="star_salmon"),  # fasta set, no star_index
+        _samplesheet(tmp_path),
+    )
+    assert any("memory" in w.lower() and "index" in w.lower() for w in result["warnings"])
+
+
+def test_macos_docker_star_with_prebuilt_index_no_memory_warning(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    monkeypatch.setattr(preflight.sys, "platform", "darwin")
+    star_dir = tmp_path / "refs" / "star"
+    star_dir.mkdir(parents=True)
+    result = _run(
+        _args(tmp_path, profile="docker", aligner="star_salmon", fasta=None, gtf=None,
+              genome="GRCh38", star_index=None),  # genome route, no local fasta build
+        _samplesheet(tmp_path),
+    )
+    assert not any("memory" in w.lower() and "STAR" in w for w in result["warnings"])
+
+
+def test_macos_docker_non_star_aligner_no_memory_warning(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    monkeypatch.setattr(preflight.sys, "platform", "darwin")
+    result = _run(
+        _args(tmp_path, profile="docker", aligner="hisat2"),
+        _samplesheet(tmp_path),
+    )
+    assert not any("STAR index" in w for w in result["warnings"])
+
+
+# ── Audit follow-up F2: --gtf + --gff together must match upstream behaviour ───
+# nf-core/rnaseq docs: "If --gff is provided … the latter [GTF] will be used if
+# both are provided." The wrapper therefore keeps --gtf, drops --gff, and warns —
+# it must NOT reject a configuration the pipeline accepts.
+
+
+def test_gtf_and_gff_together_prefers_gtf_with_warning(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    gff = _touch(tmp_path / "refs" / "genes.gff3", "##gff-version 3\n")
+    args = _args(tmp_path, gff=str(gff))  # default _args sets fasta+gtf
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["references"]["gtf"].endswith("genes.gtf")
+    assert "gff" not in result["references"]
+    assert args.gff is None, "--gff must be dropped so it is not written to params.yaml"
+    assert any("gff" in w.lower() and "gtf" in w.lower() for w in result["warnings"])
+
+
+def test_gtf_and_gff_together_with_genome_prefers_gtf_with_warning(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    gtf = _touch(tmp_path / "refs" / "a.gtf", "x\n")
+    gff = _touch(tmp_path / "refs" / "a.gff3", "##gff-version 3\n")
+    args = _args(tmp_path, genome="GRCh38", fasta=None, gtf=str(gtf), gff=str(gff))
+    result = _run(args, _samplesheet(tmp_path))
+    assert result["references"]["genome"] == "GRCh38"
+    assert result["references"]["gtf"].endswith("a.gtf")
+    assert "gff" not in result["references"]
+    assert args.gff is None
+    assert any("gff" in w.lower() for w in result["warnings"])
+
+
+def test_genome_with_only_gff_accepted(tmp_path, monkeypatch):
+    _mock_env(monkeypatch)
+    gff = _touch(tmp_path / "refs" / "only.gff3", "##gff-version 3\n")
+    result = _run(_args(tmp_path, genome="GRCh38", fasta=None, gtf=None, gff=str(gff)), _samplesheet(tmp_path))
+    assert result["references"]["genome"] == "GRCh38"
+
+
+# ── Audit F3: warn when an index flag the chosen aligner cannot consume is given ─
+
+
+def test_warns_when_salmon_index_supplied_for_star_rsem(tmp_path, monkeypatch):
+    """star_rsem quantifies with RSEM, not Salmon — a --salmon-index is silently
+    unused, so the wrapper must warn rather than let the user believe it took effect."""
+    _mock_env(monkeypatch)
+    salmon_index = _touch(tmp_path / "refs" / "salmon_idx" / "info.json")
+    args = _args(tmp_path, aligner="star_rsem", salmon_index=str(salmon_index))
+    result = _run(args, _samplesheet(tmp_path))
+    assert any("salmon-index" in w and "star_rsem" in w for w in result["warnings"])
+
+
+def test_no_index_mismatch_warning_when_index_matches_aligner(tmp_path, monkeypatch):
+    """star_salmon DOES consume a --salmon-index — no mismatch warning should fire."""
+    _mock_env(monkeypatch)
+    salmon_index = _touch(tmp_path / "refs" / "salmon_idx" / "info.json")
+    args = _args(tmp_path, aligner="star_salmon", salmon_index=str(salmon_index))
+    result = _run(args, _samplesheet(tmp_path))
+    assert not any("does not use" in w.lower() for w in result["warnings"])
+
+
+def test_kallisto_index_relevant_for_kallisto_pseudo_aligner(tmp_path, monkeypatch):
+    """A --kallisto-index is consumed when --pseudo-aligner kallisto runs, so no warning."""
+    _mock_env(monkeypatch)
+    kallisto_index = _touch(tmp_path / "refs" / "kallisto_idx" / "index")
+    args = _args(tmp_path, aligner="star_salmon", pseudo_aligner="kallisto", kallisto_index=str(kallisto_index))
+    result = _run(args, _samplesheet(tmp_path))
+    assert not any("does not use" in w.lower() for w in result["warnings"])
+
+
+# ── F4: GENCODE autodetect handles an uppercase .GZ gzip suffix ───────────────
+
+
+def test_gtf_has_gencode_markers_detects_uppercase_gz_suffix(tmp_path):
+    """A gzipped GTF whose name ends in uppercase .GZ must still be opened as gzip
+    (case-insensitive suffix), so GENCODE markers are detected, not silently missed."""
+    import gzip
+
+    gtf = tmp_path / "genes.gtf.GZ"
+    with gzip.open(gtf, "wt", encoding="utf-8") as handle:
+        handle.write('chr1\tHAVANA\tgene\t1\t10\t.\t+\t.\tgene_id "ENSG1"; gene_type "protein_coding";\n')
+    assert preflight._gtf_has_gencode_markers(gtf) is True

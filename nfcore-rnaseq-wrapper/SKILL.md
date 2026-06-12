@@ -20,11 +20,11 @@ metadata:
       format:
         - csv
       description: >
-        nf-core/rnaseq samplesheet. Required columns: sample, strandedness. FASTQ mode
-        adds fastq_1 (and optional fastq_2). BAM reprocessing mode adds genome_bam and/or
-        transcriptome_bam plus percent_mapped. Optional metadata columns: seq_platform,
-        seq_center. A row may not mix FASTQ and BAM inputs.
-      required: true
+        nf-core/rnaseq samplesheet. Required columns: sample, fastq_1, strandedness.
+        FASTQ mode may add fastq_2. BAM reprocessing mode preserves the original FASTQ
+        columns and adds genome_bam and/or transcriptome_bam plus percent_mapped; use
+        it only with --skip-alignment. Optional metadata columns: seq_platform, seq_center.
+      required: false  # required for real runs; not for --demo or self-contained nf-core test profiles (the only universally required CLI arg is --output)
   outputs:
     - name: report
       type: file
@@ -37,7 +37,7 @@ metadata:
         - json
       description: Structured result payload with detected count matrices and provenance
   dependencies:
-    python: ">=3.11"
+    python: ">=3.10"
     packages: []
   demo_data:
     - path: demo/README.md
@@ -121,14 +121,22 @@ This skill does not perform differential expression. It emits a prefilled `rnase
 
 A pseudo-aligner (`--pseudo-aligner salmon` or `--pseudo-aligner kallisto`) runs *alongside*
 `--aligner` unless paired with `--skip-alignment`. Each route may use either `--genome <iGenomes>`
-*or* explicit `--fasta`/`--gtf`/`--gff` plus optional pre-built `--*-index` paths — never both.
+(optionally with additive annotation/transcriptome overrides such as `--gtf` *or* `--gff`,
+`--additional-fasta`, `--transcript-fasta`, `--gene-bed`, `--splicesites`, `--salmon-index`, or
+`--kallisto-index`) *or* a fully explicit `--fasta`/`--gtf`(/`--gff`) reference plus optional
+pre-built `--*-index` paths. You may not provide both `--genome` and your own genome `--fasta`
+or a genome-level index (`--star-index`/`--rsem-index`/`--hisat2-index`/`--bowtie2-index`).
+If both `--gtf` and `--gff` are supplied, the wrapper keeps `--gtf` and drops `--gff` with a
+warning — matching nf-core/rnaseq, which uses the GTF and ignores the GFF when both are given.
+For new analyses nf-core/rnaseq recommends supplying explicit `--fasta`/`--gtf` directly; the
+iGenomes `--genome` catalogue is supported here for legacy compatibility and convenience.
 
 ## Input Formats
 
 | Format | Extension | Required Fields | Example |
 |--------|-----------|-----------------|---------|
 | Samplesheet | `.csv` | `sample`, `fastq_1`, `strandedness`; optional `fastq_2` | `samplesheet.csv` |
-| BAM reprocessing samplesheet | `.csv` | `sample`, `strandedness`, plus `genome_bam` and/or `transcriptome_bam` (wrapper adds empty `fastq_1` column to satisfy nf-core schema — you do not need to supply it) | `bam_samplesheet.csv` |
+| BAM reprocessing samplesheet | `.csv` | `sample`, `fastq_1`, `strandedness`, plus `genome_bam` and/or `transcriptome_bam`; use with `--skip-alignment` | `samplesheet_with_bams.csv` |
 | Demo mode | n/a | none | `python clawbio.py run rnaseq-pipeline --demo` |
 
 ## Workflow
@@ -215,7 +223,8 @@ Key methods:
 - Samplesheet paths are resolved against the samplesheet directory and written as absolute POSIX paths.
 - `params.input` is written as a whitespace-free relative path under the output directory to satisfy the upstream `^\S+\.csv$` schema.
 - References must use either `--genome`, `--fasta --gtf`, or `--fasta --gff`.
-- `--genome` is mutually exclusive with explicit reference paths.
+- `--genome` accepts additive annotation/transcriptome overrides (`--gtf` *or* `--gff`, `--gene-bed`, `--transcript-fasta`, `--additional-fasta`, `--splicesites`, `--salmon-index`, `--kallisto-index`) — matching nf-core/rnaseq — but is mutually exclusive with a genome `--fasta` or a genome-level index (`--star-index`/`--rsem-index`/`--hisat2-index`/`--bowtie2-index`).
+- `--gtf` and `--gff` together are not rejected: nf-core/rnaseq uses the GTF and ignores the GFF when both are given, so the wrapper drops `--gff` (with a warning) and proceeds with `--gtf`, matching upstream in every reference mode (`--genome`, explicit `--fasta`, prebuilt indices).
 - HISAT2 alignment-only mode sets `handoff_available=false`.
 - Per-sample quantification mode does not auto-chain to `rnaseq-de`.
 
@@ -253,7 +262,7 @@ output/
 ├── upstream/
 │   ├── results/
 │   │   ├── samplesheets/
-│   │   │   └── samplesheet_with_bams.csv   # generated when alignment runs; use with --skip-alignment for BAM reprocessing
+│   │   │   └── samplesheet_with_bams.csv   # only when --save-align-intermeds; use with --skip-alignment for BAM reprocessing
 │   │   ├── star_salmon/                    # star_salmon aligner outputs
 │   │   │   ├── *.markdup.sorted.bam        # sorted, deduplicated BAMs (one per sample)
 │   │   │   ├── log/                        # STAR alignment logs (*.Log.final.out, *.SJ.out.tab)
@@ -275,7 +284,7 @@ output/
 ## Dependencies
 
 **Required**
-- Python >=3.11
+- Python >=3.10
 - Java >=17
 - Nextflow >=25.04.3
 - One execution backend: Docker, Singularity, Apptainer, Podman, Conda/Mamba, Shifter, or Charliecloud
@@ -285,15 +294,30 @@ output/
 - `strandedness` is required per row and must be `auto`, `forward`, `reverse`, or `unstranded`.
 - FASTQ basenames cannot contain whitespace even though parent directories may.
 - FASTQ basenames must end in `.fq`, `.fastq`, `.fq.gz`, or `.fastq.gz` (all four are accepted by the nf-core/rnaseq schema). Only the basename must be whitespace-free; parent directory paths may contain spaces.
-- `--genome` cannot be mixed with `--fasta`, `--gtf`, `--gff`, or index paths. Names not in the built-in iGenomes catalogue emit a preflight warning but do not block execution — this is expected when using a user-defined genome catalogue (pass it via `--nextflow-config my_genomes.config`). If you intended an iGenomes entry, check the exact spelling and case (e.g. `GRCh38`, `GRCm38`).
+- FASTQ and BAM samplesheet entries may be local paths or remote URIs such as `s3://...`/`https://...`. Local paths are normalized and existence-checked; remote URIs are preserved unchanged and left for Nextflow to stage.
+- `--genome` may be combined with additive annotation/transcriptome overrides (`--gtf` *or* `--gff`, `--gene-bed`, `--transcript-fasta`, `--additional-fasta`, `--splicesites`, `--salmon-index`, `--kallisto-index`) — this matches nf-core/rnaseq and supports common cases such as ERCC spike-ins (`--genome GRCh38 --additional-fasta ercc.fa`) or overriding the dated iGenomes annotation (`--genome GRCh38 --gtf custom.gtf`). It is rejected only with a second genome **sequence** source (`--fasta`) or a genome-level index (`--star-index`/`--rsem-index`/`--hisat2-index`/`--bowtie2-index`), which would be ambiguous. If both `--gtf` and `--gff` are supplied, `--gff` is dropped with a warning and `--gtf` is used (matching nf-core/rnaseq). Names not in the built-in iGenomes catalogue emit a preflight warning but do not block execution — this is expected when using a user-defined genome catalogue (pass it via `--nextflow-config my_genomes.config`). If you intended an iGenomes entry, check the exact spelling and case (e.g. `GRCh38`, `GRCm38`).
+- GENCODE autodetection (setting `gencode: true` from `gene_type`/`havana_gene` markers in the GTF) only inspects **local** `--gtf` files; for remote (`s3://`/`https://`) GTFs it is skipped silently — pass `--gencode` explicitly in that case. Autodetection scans only the **first 10 feature records** of the GTF (gzip is detected case-insensitively, e.g. `.gtf.gz` and `.gtf.GZ`); if your GENCODE markers appear later in the file, pass `--gencode` explicitly.
 - `--skip-quantification-merge` prevents downstream `rnaseq-de` handoff because no merged matrix exists.
 - `--aligner hisat2` is alignment-only for this handoff contract.
-- `--with-umi` requires a barcode pattern unless `--skip-umi-extract` is set.
-- On macOS Docker, use an output directory under the home directory rather than `/tmp`.
+- `--with-umi` requires a barcode pattern unless `--skip-umi-extract` is set. Conversely, UMI options (`--umitools-bc-pattern`, `--umi-dedup-tool`, etc.) set *without* `--with-umi` are inert — preflight warns so a run is not mistaken for UMI-deduplicated when it is not.
+- On macOS Docker, use an output directory under the home directory rather than `/tmp`. The wrapper writes a macOS Docker compatibility config whose per-process memory ceiling is derived from host RAM (75% share, floored at 8 GB, capped at 15 GB) and then capped to 90% of the actual Docker VM memory (`docker info`, when available) so a container process is never OOM-killed by requesting more than the VM has. Its per-process `time` ceiling tracks `--timeout-hours` (default 12, floored at 1 h) so raising the wrapper timeout does not leave processes capped at 12 h.
+- The local Nextflow run is killed after `--timeout-hours` (default 12). Raise it for large cohorts (e.g. `--timeout-hours 48`) so a long but healthy run is not terminated. The value must be > 0; HPC/cloud submitters that detach are unaffected. On a timeout the wrapper terminates Nextflow's process group, but containers started by the Docker/Singularity daemon are not in that group and may keep running — the timeout error reminds you to check for and remove leftover containers (e.g. `docker ps`).
+- Reference paths (`--fasta`/`--gtf`/`--gff`/`--transcript-fasta`/`--additional-fasta`/`--gene-bed`) must resolve to a path **without whitespace** — the nf-core schema pattern `^\S+` rejects spaces. Preflight catches a whitespace-containing resolved path early with a precise `REFERENCE_PATH_HAS_WHITESPACE` error (mirroring the samplesheet input guard) instead of letting Nextflow abort late. Move or symlink the reference into a space-free directory.
+- `--check` validates that Nextflow is present but defers the `>=25.04.3` version gate to the real run; it emits a warning so a passing check is not mistaken for confirmation of a compatible Nextflow version.
+- Results are written under a **relative** `upstream/results` because the wrapper launches Nextflow with `cwd=<output>`; the relative path keeps the nf-core `^\S+$` `outdir` schema valid even when `--output` contains spaces (common on macOS). This is a deliberate **local-first** design. Running against cloud executors that require an absolute publish path (e.g. `outdir` on `s3://`/`gs://`) is outside the wrapper's audited surface.
+- The wrapper exposes the **audited scientific parameter surface** of nf-core/rnaseq 3.26.0. A few cosmetic/notification options (`--plaintext_email`, `--max_multiqc_email_size`, `--monochrome_logs`, `--trace_report_suffix`, `--custom_config_*`) are intentionally not exposed. Non-parametric runtime settings (executor, resource limits, institutional config) are supplied through `--nextflow-config`.
+- A sibling `../rnaseq` checkout is auto-detected and used, but its `manifest.version` must be `3.26.0` (the version this wrapper's validations are pinned to). A different version is rejected unless `--allow-pipeline-version-override` is passed; an unparseable manifest version is warned, not blocked.
+- `--rseqc-modules` is validated against the eight nf-core/rnaseq 3.26.0 module names; a typo is rejected at preflight instead of failing later inside Nextflow.
+- `--contaminant-screening kraken2`/`kraken2_bracken` requires `--kraken-db`, and `--contaminant-screening sylph` requires `--sylph-db`; local database paths are existence-checked before Nextflow starts, while URI schemes such as `s3://` and `https://` are passed through for Nextflow to stage. `--bracken-precision` only applies to `kraken2_bracken` and is warned (no effect) otherwise.
+- Transcriptome-only pseudo-quantification (`--skip-alignment` + `--pseudo-aligner salmon`/`kallisto` + `--transcript-fasta` or a prebuilt `--salmon-index`/`--kallisto-index` + `--gtf`/`--gff`) is accepted without a genome `--fasta`. A pseudo-aligner running *alongside* a genome aligner still requires the genome reference.
+- Fully prebuilt references need no `--fasta`: a genome index matching the aligner (`--star-index`/`--hisat2-index`/`--bowtie2-index`, or `--rsem-index` for `star_rsem`) plus `--gtf`/`--gff` and, for the Salmon routes, a transcript source (`--transcript-fasta` or `--salmon-index`) is accepted. A bare genome index without a transcript source (Salmon routes) or without `--rsem-index`/`--fasta` (RSEM) is rejected because quantification cannot run.
+- `--pseudo-aligner-kmer-size` must be an **odd integer in 1..31** (Salmon and Kallisto both encode the index k-mer in a 64-bit word, so 31 is their shared hard cap; pipeline default 31). Preflight rejects an even or out-of-range value with `INVALID_PRESET_CONFIGURATION` instead of letting the pseudo-aligner indexing step crash. Lower it for short reads (<50 bp).
 - Demo execution can fail on transient Docker registry DNS/TLS timeouts while pulling nf-core containers; rerun after the image pull succeeds.
 - `--prokaryotic`, `--rapid-quant`, and `--arm` are profile-modifier flags. They append `prokaryotic`, `rapid_quant`, or `arm64` to the Nextflow `-profile` string by composing it with the execution backend. Use `--profile docker --prokaryotic` (composes `-profile docker,prokaryotic`). `--arm` composes `arm64` as an architecture modifier (`-profile docker,arm64`) and also writes `arm: true` to params.yaml — `arm` is a real hidden boolean parameter in the nf-core/rnaseq 3.26.0 schema (`"Use ARM architecture containers."`).
-- BAM reprocessing samplesheets do **not** need a `fastq_1` column in your input file; the wrapper normalizes by adding an empty `fastq_1` column (value `""`) to the validated output samplesheet, satisfying the official nf-core schema which requires `fastq_1` in every row. The nf-core `samplesheet_with_bams.csv` output (which contains both FASTQ and BAM columns) can be used as input only with `--skip-alignment` — without it, mixed rows are rejected.
-- Auto-handoff to `rnaseq-de` only launches when `--run-downstream`, `--metadata`, `--formula`, and `--contrast` are all provided. Without all four, only a template `reproducibility/rnaseq_de_handoff.sh` is written.
+- BAM reprocessing samplesheets must preserve the official FASTQ columns: `sample`, `fastq_1`, `strandedness`, plus at least one of `genome_bam` or `transcriptome_bam`. Use the nf-core-generated `samplesheet_with_bams.csv` with `--skip-alignment`. Rows with BAMs and an empty `fastq_1` are rejected because they no longer match the audited nf-core/rnaseq 3.26.0 samplesheet contract. **Reprocess with the same `--aligner` used to generate the BAMs**: nf-core/rnaseq cannot mix quantifier types between BAM generation and reprocessing (BAMs from `star_salmon` must be reprocessed with `star_salmon`, `star_rsem` with `star_rsem`). The wrapper defaults to `star_salmon`, so pass `--aligner star_rsem` explicitly when reprocessing RSEM BAMs; preflight emits a reminder warning whenever BAM reprocessing is detected. The `samplesheet_with_bams.csv` you reprocess from is **only produced when the original alignment run used `--save-align-intermeds`** — nf-core/rnaseq creates it solely in that case, so add `--save-align-intermeds` to the run whose BAMs you intend to reprocess later.
+- `--ribo-database-manifest` is preflight-checked when it is a local path; missing files or directories are rejected before Nextflow starts. URI schemes are preserved unchanged in `params.yaml`.
+- `--use-parabricks-star` requires `--aligner star_salmon`; `--use-sentieon-star` requires a STAR-based aligner (`star_salmon` or `star_rsem`); `--use-gpu-ribodetector` requires `--remove-ribo-rna --ribo-removal-tool ribodetector`.
+- Downstream `rnaseq-de` handoff is opt-in via `--run-downstream`. It **launches** `rnaseq-de` only when `--run-downstream` is set *and* `--metadata`, `--formula`, and `--contrast` are all provided. With `--run-downstream` but any of those three missing, only a copy-paste template `reproducibility/rnaseq_de_handoff.sh` is written. **Without `--run-downstream` (the default, including `--demo`), no handoff is launched and no template file is written** — the `report.md` "Next Steps" section still shows the suggested `rnaseq-de` command. `--skip-downstream` suppresses the template even when `--run-downstream` is set.
 - `--rseqc-modules` runs a default set of 7 modules. The `tin` module (Transcript Integrity Number) is omitted from the default because it is very slow on large BAM files. Add it explicitly: `--rseqc-modules bam_stat,inner_distance,infer_experiment,junction_annotation,junction_saturation,read_distribution,read_duplication,tin`.
 - `--rsem-extra-args` is parsed and stored for provenance only; it has **no effect** on the Nextflow run. nf-core/rnaseq ≥3.14 removed `extra_rsem_quant_args` from the schema. Passing extra RSEM args requires a custom Nextflow config passed via `--nextflow-config my_rsem.config`.
 - `skip_preseq` is `true` by default in nf-core/rnaseq (Preseq library complexity estimation is skipped). Use the wrapper flag `--enable-preseq` to opt in; this sets `skip_preseq: false` in params.yaml. Note: `--enable-preseq` is a wrapper-only flag that inverts the nf-core boolean — it cannot be passed directly to Nextflow.
@@ -301,15 +325,15 @@ output/
 - `--kallisto-quant-fraglen` and `--kallisto-quant-fraglen-sd` only apply to single-end Kallisto runs. Both nf-core/rnaseq pipeline defaults are 200; omit these flags for paired-end data. Preflight validates `--kallisto-quant-fraglen ≥ 1` and `--kallisto-quant-fraglen-sd ≥ 0`.
 - `--min-trimmed-reads` must be ≥ 0 (pipeline default: 10000). Preflight rejects negative values. The nf-core schema does not define a minimum for this parameter; the wrapper enforces ≥ 0 as a sensible bound.
 - **Omit = trust upstream default.** Several string parameters are intentionally absent from `params.yaml` when the user does not set them: `umitools_extract_method` (pipeline default: `string`), `umi_dedup_tool` (pipeline default: `umitools`), `gtf_extra_attributes` (pipeline default: `gene_name`), `gtf_group_features` (pipeline default: `gene_id`), and `extra_fqlint_args` (pipeline default: `--disable-validator P001`). Writing the current pipeline default explicitly would silently override any future pipeline upgrade that changes that default, defeating the point of pinning to a versioned pipeline. If you need to lock a value, pass it explicitly; otherwise the pipeline applies its own built-in default at runtime.
-- Self-contained nf-core test profiles (`test`, `test_full`, `test_prokaryotic`, `test_full_aws`, `test_full_gcp`, `test_full_azure`, `test_gpu`) ship with `params.input` in their profile config and do not require `--input`. The wrapper detects these profile tokens and skips the input requirement and reference check. `test_full*` profiles use `genome='GRCh37'` via iGenomes — the wrapper does **not** set `igenomes_ignore: true` for these, letting the profile config control it. `--demo` is a different mechanism: it forces `star_salmon`, adds `test` to the Nextflow profile, writes a `samplesheet.demo.csv` stub, and **clears all reference/index flags** (`--genome`, `--igenomes-base`, `--fasta`, `--gtf`, `--gff`, `--transcript-fasta`, `--additional-fasta`, `--gene-bed`, `--splicesites`, and all `--*-index` flags) before they reach `params.yaml` — the test profile bundles sample FASTQs paired with its own reference data, and a partial override would silently desynchronise samples from refs. Self-contained test profile runs produce `samplesheet.noinput.csv` instead so provenance audits can distinguish them. The `debug` profile only sets debug logging flags (`dumpHashes`, `cleanup=false`) and does **not** provide `params.input` — it still requires `--input`.
+- Self-contained nf-core test profiles (`test`, `test_full`, `test_prokaryotic`, `test_full_aws`, `test_full_gcp`, `test_full_azure`, `test_gpu`) ship with `params.input` in their profile config and do not require `--input`. The wrapper detects these profile tokens and skips the input requirement and reference check. `test_full*` profiles use `genome='GRCh37'` via iGenomes — the wrapper does **not** set `igenomes_ignore: true` (nor `aligner`, unless you pass `--aligner` explicitly) for these, letting the profile config own them. `--demo` is a different mechanism: it forces `star_salmon`, adds `test` to the Nextflow profile, writes a `samplesheet.demo.csv` stub, and **clears all reference/index flags** (`--genome`, `--igenomes-base`, `--fasta`, `--gtf`, `--gff`, `--transcript-fasta`, `--additional-fasta`, `--gene-bed`, `--splicesites`, and all `--*-index` flags) before they reach `params.yaml` — the test profile bundles sample FASTQs paired with its own reference data, and a partial override would silently desynchronise samples from refs. Self-contained test profile runs produce `samplesheet.noinput.csv` instead so provenance audits can distinguish them. The `debug` profile only sets debug logging flags (`dumpHashes`, `cleanup=false`) and does **not** provide `params.input` — it still requires `--input`.
 
 ## Safety
 
 - No patient data is bundled.
 - Demo mode uses upstream test profile data.
 - The wrapper does not upload data.
-- The wrapper does not pass arbitrary unvalidated Nextflow parameters.
-- `--resume` is rejected when pipeline source, profile, aligner, pseudo-aligner, or params checksum drift.
+- The wrapper does not pass arbitrary unvalidated Nextflow *parameters* via `--params-file`: only the audited CLI surface is translated to `params.yaml`. `--nextflow-config` forwards user-supplied `-c` config file(s) for trusted runtime settings such as process, executor, profiles, labels, institutional module tuning, and `params.genomes` custom genome catalogues. Configs that define `params` in any form — block (`params { … }`), property (`params.x`), assignment (`params = …`), subscript (`params['x']`), or map-merge (`params << …`) — are rejected so they cannot bypass the audited parameter surface (the documented `params.genomes` catalogue is the sole exception). Every locally-resolvable `includeConfig` target is audited recursively under the same rule; includes the wrapper cannot read (remote URIs, `${…}`-interpolated paths, or missing files) are surfaced as preflight **warnings** rather than silently trusted, so unaudited surface is always visible.
+- `--resume` is rejected when the pipeline source/version, profile, aligner, pseudo-aligner, `--prokaryotic`/`--arm` modifiers, params checksum, or samplesheet checksum drift.
 
 > ClawBio is a research and educational tool. It is not a medical device and does not provide
 > clinical diagnoses. Consult a healthcare professional before making any medical decisions.
@@ -323,6 +347,7 @@ Use this skill to produce upstream bulk RNA-seq preprocessing outputs. Route dow
 - `rnaseq-de`: bulk/pseudo-bulk differential expression from `preferred_counts_tsv`
 - `diff-visualizer`: plots from downstream DE results
 - `multiqc-reporter`: optional QC aggregation/reporting follow-up
+- `bio-orchestrator`: routes inbound bulk RNA-seq preprocessing requests to this wrapper
 
 ## Maintenance
 

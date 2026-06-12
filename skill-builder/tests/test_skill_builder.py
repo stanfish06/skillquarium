@@ -457,10 +457,13 @@ class TestPatchClawbioPy:
         import py_compile
         from shutil import copyfile
 
-        real = Path(__file__).resolve().parents[3] / "clawbio.py"
+        repo_root = Path(__file__).resolve().parents[3]
+        real = repo_root / "clawbio" / "cli.py"
         if not real.exists():
-            pytest.skip("real clawbio.py not found — running outside the repo")
-        target = tmp_path / "clawbio.py"
+            real = repo_root / "clawbio.py"
+        if not real.exists():
+            pytest.skip("real ClawBio engine module not found, running outside the repo")
+        target = tmp_path / "cli.py"
         copyfile(real, target)
         # Pick an alias we know isn't already used.
         spec["cli_alias"] = "__skillbuilder_probe__"

@@ -2,17 +2,12 @@
 name: scvelo
 description: RNA velocity analysis with scVelo. Estimate cell state transitions from unspliced/spliced mRNA dynamics, infer trajectory directions, compute latent time, and identify driver genes in single-cell RNA-seq data. Complements Scanpy/scVI-tools for trajectory inference.
 license: BSD-3-Clause
-metadata:
-  version: "1.0"
-  skill-author: Kuan-lin Huang
+metadata: {"version": "1.0", "skill-author": "Kuan-lin Huang"}
 ---
 
 # scVelo — RNA Velocity Analysis
 
 ## Overview
-
-> [!WARNING]
-> **Scanpy API compatibility (June 2026):** scvelo releases through 0.3.2 throw `TypeError: Neighbors.compute_neighbors() got an unexpected keyword argument 'write_knn_indices'` when used with **Scanpy ≥ 1.10.0** (reported in GitHub issues [#1212](https://github.com/theislab/scvelo/issues/1212) and [#1235](https://github.com/theislab/scvelo/issues/1235), fixed by [#1233](https://github.com/theislab/scvelo/pull/1233) and released in scvelo 0.3.3). This affects `scv.pp.moments()` and all downstream functions. **Preferred fix:** upgrade to `scvelo>=0.3.3`; if that is not possible, pin `pip install "scanpy<1.10"`. Tracked in vault issue [#25](https://github.com/stanfish06/my-skills/issues/25).
 
 scVelo is the leading Python package for RNA velocity analysis in single-cell RNA-seq data. It infers cell state transitions by modeling the kinetics of mRNA splicing — using the ratio of unspliced (pre-mRNA) to spliced (mature mRNA) abundances to determine whether a gene is being upregulated or downregulated in each cell. This allows reconstruction of developmental trajectories and identification of cell fate decisions without requiring time-course data.
 
@@ -272,7 +267,7 @@ def run_rna_velocity(adata, n_top_genes=2000, mode='dynamical', n_jobs=4):
 After running the workflow, the following fields are added:
 
 | Location | Key | Description |
-|----------|-----|--------------|
+|----------|-----|-------------|
 | `adata.layers` | `velocity` | RNA velocity per gene per cell |
 | `adata.layers` | `fit_t` | Fitted latent time per gene per cell |
 | `adata.obsm` | `velocity_umap` | 2D velocity vectors on UMAP |
@@ -307,7 +302,7 @@ After running the workflow, the following fields are added:
 ## Troubleshooting
 
 | Problem | Solution |
-|---------|----------|
+|---------|---------|
 | Missing unspliced layer | Re-run velocyto or use STARsolo with `--soloFeatures Gene Velocyto` |
 | Very few velocity genes | Lower `min_shared_counts`; check sequencing depth |
 | Random-looking arrows | Try different `n_neighbors` or velocity model |

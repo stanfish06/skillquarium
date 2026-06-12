@@ -18,15 +18,10 @@ if str(_SKILL_DIR) in sys.path:
 sys.path.insert(0, str(_SKILL_DIR))
 
 
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
-
-_purge_foreign_bare_modules("preflight", "schemas")
+purge_foreign_bare_modules("preflight", "schemas")
 
 from preflight import params_payload_checksum
 from schemas import DEFAULT_REMOTE_PIPELINE, JAVA_MIN_VERSION, NEXTFLOW_MIN_VERSION, PROJECT_ROOT, SKILL_ALIAS, SKILL_NAME, SKILL_VERSION
@@ -215,8 +210,8 @@ def build_inputs_payload(
     params_path: Path,
 ) -> dict[str, Any]:
     reference_paths = preflight_result.get("references", {})
-    fastq_paths = [Path(p).as_posix() for p in samplesheet_summary.get("fastq_paths", [])]
-    bam_paths = [Path(p).as_posix() for p in samplesheet_summary.get("bam_paths", [])]
+    fastq_paths = [_path_or_uri_as_posix(p) for p in samplesheet_summary.get("fastq_paths", [])]
+    bam_paths = [_path_or_uri_as_posix(p) for p in samplesheet_summary.get("bam_paths", [])]
     return {
         "samplesheet_path": str(normalized_samplesheet),
         "samplesheet_checksum": sha256_file(normalized_samplesheet),
@@ -230,6 +225,13 @@ def build_inputs_payload(
         "params_path": str(params_path),
         "params_checksum": sha256_file(params_path),
     }
+
+
+def _path_or_uri_as_posix(value: object) -> str:
+    text = str(value)
+    if "://" in text:
+        return text
+    return Path(text).as_posix()
 
 
 def build_outputs_payload(parsed_outputs: dict[str, Any]) -> dict[str, Any]:

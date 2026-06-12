@@ -30,7 +30,13 @@ class ErrorCode:
     MISSING_INPUT = "MISSING_INPUT"
     MISSING_FASTQ = "MISSING_FASTQ"
     INVALID_FASTQ = "INVALID_FASTQ"
-    FASTQ_NOT_READABLE = "FASTQ_NOT_READABLE"
+    # NOTE: input readability is intentionally NOT pre-checked. The wrapper does not
+    # read the FASTQ/BAM data — Nextflow does, and under the default Docker profile the
+    # container often runs as root and can read files the launching user cannot, so an
+    # os.access(R_OK) pre-check by the launcher would false-block valid runs. Output
+    # *writability* IS checked (OUTPUT_DIR_NOT_WRITABLE) because the wrapper itself writes
+    # there. Existence of inputs is validated (MISSING_FASTQ); readability is deferred to
+    # Nextflow's staging, which reads in the true execution context.
     INVALID_SAMPLESHEET = "INVALID_SAMPLESHEET"
     OUTPUT_DIR_NOT_EMPTY = "OUTPUT_DIR_NOT_EMPTY"
     OUTPUT_DIR_NOT_WRITABLE = "OUTPUT_DIR_NOT_WRITABLE"
@@ -67,4 +73,5 @@ class ErrorCode:
     BAM_REPROCESSING_INCOMPLETE = "BAM_REPROCESSING_INCOMPLETE"
     HISAT2_NO_QUANTIFICATION = "HISAT2_NO_QUANTIFICATION"
     REFERENCE_PATH_NOT_FOUND = "REFERENCE_PATH_NOT_FOUND"
+    REFERENCE_PATH_HAS_WHITESPACE = "REFERENCE_PATH_HAS_WHITESPACE"
     INVALID_BAM = "INVALID_BAM"

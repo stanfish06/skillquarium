@@ -327,6 +327,12 @@ First determine whether the passport's CURRENT `terminal_policies` is all-adviso
 
 When refusing under rule 11, the formatter echoes the `reason` token (e.g. `reason=k3_all_indexes_unmatched` for contamination, `reason=lookup_verified_false` for citation_existence) plus any co-emitted advisory suffix when one is present (contamination co-emits a `CONTAMINATED-*` suffix; `citation_existence` co-emits none — its "why" is the `reason` token + the `citation_verification_summary[]` aggregate; note this is the `strict` refusal path — a default-`advisory` `false` does not refuse, it lists in the `provenance_summary.md` `Citation Existence Advisories` section per the subsection above) so the user gets remediation context (R1 P1). Remediation for a HIGH-BLOCK: resolve the underlying signal (verify the source against the original, replace the citation with a matched reference, or — if the user accepts the risk — switch the firing policy (`policy=<...>`) back to `advisory` and re-finalize). `/ars-mark-read` does NOT clear it.
 
+## ARS Marker Stripping (#390)
+
+When emitting converted **final outputs** (LaTeX / DOCX / PDF / clean-markdown deliverables), strip every ARS HTML-comment marker — `<!--ref:...-->`, `<!--anchor:...-->`, `<!--block:...-->` — from the converted artifact. One rule for all marker kinds: markers are audit metadata, not manuscript content, and must not leak into a submission (do not rely on Pandoc happening to drop raw HTML comments — strip explicitly so the rule holds across all five output formats).
+
+Ordering is load-bearing: stripping happens ONLY AFTER every marker-dependent gate above has run against the working draft — the Cite-Time Provenance Hard Gate, the v3.10 stamp gates, and (in patch-mode revision rounds, `references/revision_patch_protocol.md`) the apply script's own self-checks. The **working draft and the `phase6_*/` provenance artifacts keep their markers untouched** — `<!--block:-->` markers are the anchor layer the next revision round's manifest is generated from; stripping them there would destroy patch mode. Word counts already exclude markers regardless (`shared/references/word_count_conventions.md` § HTML-comment markers), so stripping does not change any reported count.
+
 ## Citation Version-Family Advisory (Kong #258)
 
 If `phase2_investigation/version_records.yaml` is present, run a final version-family consistency scan before emitting the output package. This is advisory, not a refusal rule.

@@ -16,17 +16,12 @@ if str(_SKILL_DIR) in sys.path:
 sys.path.insert(0, str(_SKILL_DIR))
 
 
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
+purge_foreign_bare_modules("schemas")
 
-_purge_foreign_bare_modules("schemas")
-
-from schemas import SKILL_ALIAS, SKILL_DIR, SKILL_NAME, SKILL_VERSION
+from schemas import DEFAULT_TIMEOUT_HOURS, DEFAULT_TRIMMER, SKILL_ALIAS, SKILL_DIR, SKILL_NAME, SKILL_VERSION
 
 _REPRO_PATH_FLAGS = (
     "fasta",
@@ -54,6 +49,7 @@ _REPRO_PATH_FLAGS = (
     "bbsplit_index",
     "igenomes_base",
 )
+_REPRO_MULTI_PATH_FLAGS = frozenset({"sylph_db", "sylph_taxonomy"})
 _OPTIONAL_VALUE_FLAGS = (
     "pseudo_aligner",
     "trimmer",
@@ -153,6 +149,7 @@ _BOOLEAN_FLAGS = (
     "run_downstream",
     "skip_downstream",
     "skip_bbsplit",
+    "allow_pipeline_version_override",
 )
 
 _PORTABILITY_NOTICE = """\
@@ -162,13 +159,16 @@ _PORTABILITY_NOTICE = """\
 # This covers FASTQ paths for fresh runs and BAM paths for reprocessing runs.
 # Before replaying on a different machine:
 #
-#   1. Remap FASTQ paths:
+#   1. Remap FASTQ/BAM paths in samplesheet.valid.csv:
 #        python reproducibility/remap_paths.py --old /original/prefix --new /new/prefix
 #
-#   2. Update the --output path above if the output directory changed:
+#   2. Remap reference/index paths in commands.sh (if references moved):
+#        python reproducibility/remap_paths.py --refs-old /original/refs --refs-new /new/refs
+#
+#   3. Update the --output path above if the output directory changed:
 #        python reproducibility/remap_paths.py --output-dir /new/output/dir
 #
-#   3. Verify everything:
+#   4. Verify everything:
 #        python reproducibility/remap_paths.py --verify
 #
 # If ClawBio is installed at a non-standard path on this machine:
@@ -232,6 +232,7 @@ def build_report_lines(
     header = generate_report_header(
         "nf-core/rnaseq Wrapper Report",
         SKILL_NAME,
+        SKILL_VERSION,
         extra_metadata={
             "Aligner": str(getattr(args, "aligner", "")),
             "Profile": str(getattr(args, "profile", "")),
@@ -338,6 +339,7 @@ def write_repro_commands(output_dir: Path, *, args) -> None:
     )
     commands_sh = repro_dir / "commands.sh"
     _patch_commands_sh_repo_fallback(commands_sh)
+    _patch_commands_sh_python_interpreter(commands_sh)
     if not getattr(args, "demo", False):
         with commands_sh.open("a", encoding="utf-8") as fh:
             fh.write(_PORTABILITY_NOTICE)
@@ -345,12 +347,15 @@ def write_repro_commands(output_dir: Path, *, args) -> None:
 
 
 def build_repro_command_args(output_dir: Path, *, args) -> dict[str, str | None]:
-    command_args: dict[str, str | None] = {
-        "--output": output_dir.as_posix(),
-        "--aligner": getattr(args, "aligner", ""),
-        "--profile": getattr(args, "profile", ""),
-        "--pipeline-version": getattr(args, "pipeline_version", ""),
-    }
+    command_args: dict[str, str | None] = {"--output": output_dir.as_posix()}
+    # Mirror F7 (params_builder): a self-contained test profile owns the aligner, so
+    # only record --aligner for a real run or when the user explicitly chose it.
+    # Otherwise replaying commands.sh would pass --aligner and diverge from the
+    # aligner-less params.yaml the original run wrote.
+    if not getattr(args, "_noinput", False) or getattr(args, "_aligner_explicit", True):
+        command_args["--aligner"] = getattr(args, "aligner", "")
+    command_args["--profile"] = getattr(args, "profile", "")
+    command_args["--pipeline-version"] = getattr(args, "pipeline_version", "")
     if getattr(args, "pipeline_local", None):
         command_args["--pipeline-local"] = Path(getattr(args, "pipeline_local")).expanduser().resolve().as_posix()
     if getattr(args, "demo", False):
@@ -362,8 +367,20 @@ def build_repro_command_args(output_dir: Path, *, args) -> dict[str, str | None]
         command_args["--input"] = "${SCRIPT_DIR}/samplesheet.valid.csv"
     for field in _OPTIONAL_VALUE_FLAGS:
         value = getattr(args, field, None)
-        if value is not None and value != "":
-            command_args[f"--{field.replace('_', '-')}"] = str(value)
+        if value is None or value == "":
+            continue
+        # Omit the default --trimmer so commands.sh stays consistent with params.yaml
+        # ("omit = trust upstream default", mirroring params_builder._add_aligner_params)
+        # and never records a flag the user did not choose.
+        if field == "trimmer" and value == DEFAULT_TRIMMER:
+            continue
+        command_args[f"--{field.replace('_', '-')}"] = str(value)
+    # --timeout-hours has a non-None default, so it cannot ride the optional-value
+    # loop above: only record it when the run overrode the pinned default, keeping
+    # the replay command minimal yet faithful.
+    timeout_hours = getattr(args, "timeout_hours", None)
+    if timeout_hours is not None and float(timeout_hours) != float(DEFAULT_TIMEOUT_HOURS):
+        command_args["--timeout-hours"] = str(timeout_hours)
     for field in _BOOLEAN_FLAGS:
         if getattr(args, field, False):
             command_args[f"--{field.replace('_', '-')}"] = None
@@ -377,14 +394,23 @@ def build_repro_command_args(output_dir: Path, *, args) -> dict[str, str | None]
     for field in _REPRO_PATH_FLAGS:
         value = getattr(args, field, None)
         if value:
-            if "://" in str(value):
-                command_args[f"--{field.replace('_', '-')}"] = str(value)
-            else:
-                command_args[f"--{field.replace('_', '-')}"] = Path(value).expanduser().resolve().as_posix()
+            command_args[f"--{field.replace('_', '-')}"] = _serialize_repro_path(field, str(value))
     user_configs = getattr(args, "nextflow_config", None) or []
     if user_configs:
         command_args["--nextflow-config"] = [Path(c).expanduser().resolve().as_posix() for c in user_configs]
     return command_args
+
+
+def _serialize_repro_path(field: str, value: str) -> str:
+    if field in _REPRO_MULTI_PATH_FLAGS:
+        return ",".join(_serialize_one_repro_path(item.strip()) for item in value.split(",") if item.strip())
+    return _serialize_one_repro_path(value)
+
+
+def _serialize_one_repro_path(value: str) -> str:
+    if "://" in value:
+        return value
+    return Path(value).expanduser().resolve().as_posix()
 
 
 def write_result(
@@ -472,6 +498,27 @@ def _patch_commands_sh_repo_fallback(commands_sh: Path) -> None:
     if _CLAWBIO_REPO_FALLBACK not in content:
         return
     commands_sh.write_text(content.replace(_CLAWBIO_REPO_FALLBACK, _CLAWBIO_REPO_FALLBACK_PATCHED), encoding="utf-8")
+
+
+# The shared portable_commands template emits a bare `python "$SKILL_SCRIPT"`, but
+# modern macOS and many Linux distros ship only `python3` (PEP 394) — a bare `python`
+# replay fails with "python: command not found". Rewrite it to a portable form that
+# defaults to python3 and honours a PYTHON override, so the bundle replays on any
+# compatible OS and from any folder. (Root cause is in clawbio/common/portable_commands.py;
+# patched here to keep the fix within this skill's surface.)
+_PYTHON_INVOCATION = 'python "$SKILL_SCRIPT"'
+_PYTHON_INVOCATION_PATCHED = '"${PYTHON:-python3}" "$SKILL_SCRIPT"'
+
+
+def _patch_commands_sh_python_interpreter(commands_sh: Path) -> None:
+    if not commands_sh.exists():
+        return
+    content = commands_sh.read_text(encoding="utf-8")
+    if _PYTHON_INVOCATION not in content:
+        return
+    commands_sh.write_text(
+        content.replace(_PYTHON_INVOCATION, _PYTHON_INVOCATION_PATCHED), encoding="utf-8"
+    )
 
 
 def _write_remap_script(repro_dir: Path) -> None:

@@ -26,15 +26,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 _DOWNSTREAM_HANDOFF_TIMEOUT_SECONDS = 60 * 60 * 2
 
 
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
 
-_purge_foreign_bare_modules(
+purge_foreign_bare_modules(
     "command_builder",
     "errors",
     "executor",
@@ -54,20 +50,26 @@ from executor import execute_nextflow
 from outputs_parser import parse_outputs
 from params_builder import build_effective_params, write_params_yaml
 from pipeline_source import resolve_pipeline_source
-from preflight import check_output_dir_available, check_resume_params_checksum, check_resume_samplesheet_checksum, run_preflight
+from preflight import check_resume_params_checksum, check_resume_samplesheet_checksum, run_preflight
 from provenance import write_provenance_bundle
 from reporting import write_check_result, write_report, write_repro_commands, write_result
 from samplesheet_builder import validate_and_normalize_samplesheet
 from schemas import (
     DEFAULT_PIPELINE_VERSION,
     DEFAULT_PROFILE,
-    DEFAULT_TIMEOUT_SECONDS,
+    DEFAULT_TIMEOUT_HOURS,
+    DEFAULT_TRIMMER,
     SKILL_NAME,
     SUPPORTED_ALIGNERS,
-    SUPPORTED_PROFILES,
+    SUPPORTED_BRACKEN_PRECISION,
+    SUPPORTED_CONTAMINANT_SCREENING,
     SUPPORTED_PSEUDO_ALIGNERS,
+    SUPPORTED_PUBLISH_DIR_MODES,
     SUPPORTED_RIBO_TOOLS,
+    SUPPORTED_SALMON_LIB_TYPES,
     SUPPORTED_TRIMMERS,
+    SUPPORTED_UMI_EXTRACT_METHODS,
+    SUPPORTED_UMI_GROUPING_METHODS,
     SUPPORTED_UMI_TOOLS,
 )
 
@@ -134,12 +136,40 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--pipeline-version", default=DEFAULT_PIPELINE_VERSION, help="Pinned remote nf-core/rnaseq tag or commit")
+    parser.add_argument(
+        "--allow-pipeline-version-override",
+        action="store_true",
+        help=(
+            f"Allow a --pipeline-version other than the pinned nf-core/rnaseq {DEFAULT_PIPELINE_VERSION} "
+            "contract. The wrapper's parameter/enum/output validations remain "
+            f"{DEFAULT_PIPELINE_VERSION}-specific, so this is at your own risk (warned, recorded)."
+        ),
+    )
     parser.add_argument("--pipeline-local", default=None, help="Optional local nf-core/rnaseq checkout override")
     parser.add_argument("--resume", action="store_true", help="Attempt checksum-validated Nextflow resume")
+    parser.add_argument(
+        "--timeout-hours",
+        type=float,
+        default=DEFAULT_TIMEOUT_HOURS,
+        help=(
+            f"Wall-clock ceiling for the local Nextflow run before it is terminated "
+            f"(default: {DEFAULT_TIMEOUT_HOURS}). Raise this for large cohorts so a long "
+            "but healthy run is not killed. Ignored for HPC/cloud submitters that detach."
+        ),
+    )
 
     parser.add_argument("--aligner", default=None, choices=sorted(SUPPORTED_ALIGNERS))
     parser.add_argument("--pseudo-aligner", default=None, choices=sorted(SUPPORTED_PSEUDO_ALIGNERS))
-    parser.add_argument("--pseudo-aligner-kmer-size", type=int, default=None)
+    parser.add_argument(
+        "--pseudo-aligner-kmer-size",
+        type=int,
+        default=None,
+        help=(
+            "Index k-mer length for the Salmon/Kallisto pseudo-aligner. Must be an odd "
+            "integer in 1..31 (their 64-bit k-mer hard cap; pipeline default: 31). "
+            "Lower it for short reads (<50 bp)."
+        ),
+    )
     parser.add_argument("--prokaryotic", action="store_true", help="Compose the prokaryotic nf-core profile")
 
     parser.add_argument("--genome", default=None)
@@ -159,7 +189,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--bowtie2-index", default=None)
     parser.add_argument("--gencode", action="store_true")
 
-    parser.add_argument("--trimmer", default="trimgalore", choices=sorted(SUPPORTED_TRIMMERS))
+    parser.add_argument("--trimmer", default=DEFAULT_TRIMMER, choices=sorted(SUPPORTED_TRIMMERS))
     parser.add_argument("--extra-trimgalore-args", default=None)
     parser.add_argument("--extra-fastp-args", default=None)
     parser.add_argument("--min-trimmed-reads", type=int, default=None, help="Minimum number of reads a sample must retain after trimming to continue (pipeline default: 10000; must be ≥ 0).")
@@ -169,7 +199,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--ribo-removal-tool", default=None, choices=sorted(SUPPORTED_RIBO_TOOLS))
     parser.add_argument("--with-umi", action="store_true")
     parser.add_argument("--umi-dedup-tool", default=None, choices=sorted(SUPPORTED_UMI_TOOLS))
-    parser.add_argument("--umitools-extract-method", default=None, choices=["string", "regex"])
+    parser.add_argument("--umitools-extract-method", default=None, choices=sorted(SUPPORTED_UMI_EXTRACT_METHODS))
     parser.add_argument("--umitools-bc-pattern", default=None)
     parser.add_argument("--umitools-bc-pattern2", default=None)
     parser.add_argument("--umitools-umi-separator", default=None)
@@ -177,7 +207,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--umitools-grouping-method",
         default=None,
-        choices=["unique", "percentile", "cluster", "adjacency", "directional"],
+        choices=sorted(SUPPORTED_UMI_GROUPING_METHODS),
     )
     parser.add_argument("--skip-umi-extract", action="store_true")
     parser.add_argument("--umitools-dedup-stats", action="store_true")
@@ -190,8 +220,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--salmon-quant-libtype",
         default=None,
-        # Enum values from nf-core/rnaseq 3.26.0 nextflow_schema.json.
-        choices=["A", "IS", "ISF", "ISR", "IU", "MS", "MSF", "MSR", "MU", "OS", "OSF", "OSR", "OU", "SF", "SR", "U"],
+        # Enum values from nf-core/rnaseq 3.26.0 nextflow_schema.json (single source: schemas.py).
+        choices=sorted(SUPPORTED_SALMON_LIB_TYPES),
     )
     parser.add_argument("--extra-star-align-args", default=None)
     parser.add_argument("--extra-bowtie2-align-args", default=None)
@@ -214,13 +244,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--stranded-threshold", type=float, default=None)
     parser.add_argument("--unstranded-threshold", type=float, default=None)
 
-    parser.add_argument("--contaminant-screening", default=None, choices=["kraken2", "kraken2_bracken", "sylph"])
+    parser.add_argument("--contaminant-screening", default=None, choices=sorted(SUPPORTED_CONTAMINANT_SCREENING))
     parser.add_argument("--contaminant-screening-input", default=None, choices=["trimmed", "unmapped"])
     parser.add_argument("--kraken-db", default=None)
     parser.add_argument(
         "--bracken-precision",
         default=None,
-        choices=["D", "P", "C", "O", "F", "G", "S"],
+        choices=list(SUPPORTED_BRACKEN_PRECISION),
         help="Bracken taxonomic level for classification (D=domain P=phylum C=class O=order F=family G=genus S=species). Pipeline default: S.",
     )
     parser.add_argument("--sylph-db", default=None)
@@ -290,7 +320,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--publish-dir-mode",
         default=None,
-        choices=["symlink", "rellink", "link", "copy", "copyNoFollow", "move"],
+        choices=sorted(SUPPORTED_PUBLISH_DIR_MODES),
         help="Nextflow publishDir mode. Use 'symlink' or 'link' to save disk space on HPC (pipeline default: copy).",
     )
     parser.add_argument("--email", default=None)
@@ -329,11 +359,157 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _check_pipeline_version_supported(args: argparse.Namespace) -> None:
+    """Keep execution on the pinned nf-core/rnaseq contract unless overridden.
+
+    The wrapper's parameter set, enum validations and output checks are written
+    for nf-core/rnaseq ``DEFAULT_PIPELINE_VERSION`` (3.26.0). Running a different
+    remote tag/commit would apply 3.26.0 rules to a pipeline that may differ, so
+    any non-pinned ``--pipeline-version`` is blocked by default;
+    ``--allow-pipeline-version-override`` is a recorded, warned opt-in for advanced
+    use (mirrors the scrnaseq wrapper's gate; audit OBS-2).
+    """
+    requested = str(getattr(args, "pipeline_version", "") or "").strip()
+    if requested == DEFAULT_PIPELINE_VERSION:
+        return
+    if getattr(args, "allow_pipeline_version_override", False):
+        print(
+            f"WARNING: --pipeline-version {requested!r} differs from the wrapper's pinned "
+            f"nf-core/rnaseq {DEFAULT_PIPELINE_VERSION} contract. Parameter, enum and output "
+            f"validations remain {DEFAULT_PIPELINE_VERSION}-specific and may not match.",
+            file=sys.stderr,
+        )
+        return
+    raise SkillError(
+        stage="validation",
+        error_code=ErrorCode.PIPELINE_SOURCE_INVALID,
+        message=(
+            f"--pipeline-version must be {DEFAULT_PIPELINE_VERSION} "
+            "(the version this wrapper's validations are pinned to)."
+        ),
+        fix=(
+            f"Use --pipeline-version {DEFAULT_PIPELINE_VERSION}, or pass "
+            "--allow-pipeline-version-override to run a different version at your own risk "
+            f"(validations stay {DEFAULT_PIPELINE_VERSION})."
+        ),
+        details={"requested": requested, "contract_version": DEFAULT_PIPELINE_VERSION},
+    )
+
+
+def _check_pipeline_source_version(args: argparse.Namespace, pipeline_source: dict[str, object]) -> None:
+    """Enforce the pinned-version contract on a *resolved* pipeline source.
+
+    ``_check_pipeline_version_supported`` only inspects ``--pipeline-version`` (the
+    remote tag). A sibling ``../rnaseq`` checkout is auto-detected and run regardless
+    of which branch/commit it sits on, so its ``manifest.version`` must be checked
+    too — otherwise 3.26.0-specific parameter/enum/output validations would silently
+    apply to a different pipeline version (audit F-01). An unparseable/absent manifest
+    version (``""``) is treated as unknown and warned, never as a hard mismatch.
+    """
+    if pipeline_source.get("source_kind") != "local_checkout":
+        return
+    manifest_version = str(pipeline_source.get("manifest_version", "") or "").strip()
+    if manifest_version == DEFAULT_PIPELINE_VERSION:
+        return
+    allow_override = getattr(args, "allow_pipeline_version_override", False)
+    if not manifest_version:
+        print(
+            "WARNING: could not determine the local nf-core/rnaseq checkout version "
+            f"(expected {DEFAULT_PIPELINE_VERSION}). The wrapper's parameter, enum and "
+            f"output validations remain {DEFAULT_PIPELINE_VERSION}-specific.",
+            file=sys.stderr,
+        )
+        return
+    if allow_override:
+        print(
+            f"WARNING: local nf-core/rnaseq checkout reports version {manifest_version!r}, "
+            f"which differs from the wrapper's pinned {DEFAULT_PIPELINE_VERSION} contract. "
+            f"Validations remain {DEFAULT_PIPELINE_VERSION}-specific and may not match.",
+            file=sys.stderr,
+        )
+        return
+    raise SkillError(
+        stage="validation",
+        error_code=ErrorCode.PIPELINE_SOURCE_INVALID,
+        message=(
+            f"Local nf-core/rnaseq checkout is version {manifest_version!r}, but this wrapper's "
+            f"validations are pinned to {DEFAULT_PIPELINE_VERSION}."
+        ),
+        fix=(
+            f"Check out nf-core/rnaseq {DEFAULT_PIPELINE_VERSION} in the sibling 'rnaseq' "
+            "directory, point --pipeline-local at a 3.26.0 checkout, remove the local "
+            "checkout to use the pinned remote pipeline, or pass "
+            "--allow-pipeline-version-override to run it at your own risk "
+            f"(validations stay {DEFAULT_PIPELINE_VERSION})."
+        ),
+        details={
+            "manifest_version": manifest_version,
+            "contract_version": DEFAULT_PIPELINE_VERSION,
+            "source_ref": pipeline_source.get("source_ref", ""),
+        },
+    )
+
+
+def _raise_if_expected_outputs_missing(
+    parsed_outputs: dict[str, object], *, args: argparse.Namespace, output_dir: Path
+) -> None:
+    """Fail a completed run that produced none of its required outputs.
+
+    nf-core/rnaseq always writes ``pipeline_info/``, and a standard quantifying run
+    produces a merged gene-count matrix. Treating their absence as success would
+    hide a broken run, so raise EXPECTED_OUTPUTS_NOT_FOUND instead (audit OBS-1;
+    mirrors the scrnaseq wrapper's h5ad gate). The count-matrix check is
+    conditional — it is NOT applied when the merge was skipped
+    (``--skip-quantification-merge`` / rapid_quant) or when no quantifier ran
+    (hisat2 without a pseudo-aligner), which legitimately produce no merged matrix.
+    """
+    missing: list[str] = []
+    if not parsed_outputs.get("pipeline_info_dir"):
+        missing.append("pipeline_info")
+
+    aligner = str(parsed_outputs.get("aligner_effective", ""))
+    pseudo = str(parsed_outputs.get("pseudo_aligner_effective", ""))
+    skip_merge = bool(parsed_outputs.get("skip_quantification_merge"))
+    skip_alignment = bool(getattr(args, "skip_alignment", False))
+    skip_pseudo = bool(getattr(args, "skip_pseudo_alignment", False))
+    aligner_quantifies = (
+        aligner in {"star_salmon", "star_rsem", "bowtie2_salmon"} and not skip_alignment
+    )
+    pseudo_quantifies = bool(pseudo) and not skip_pseudo
+    counts_expected = (not skip_merge) and (aligner_quantifies or pseudo_quantifies)
+    has_counts = bool(
+        parsed_outputs.get("preferred_counts_tsv")
+        or parsed_outputs.get("raw_counts_tsv")
+    )
+    if counts_expected and not has_counts:
+        missing.append("merged gene-count matrix (<quant>.merged.gene_counts.tsv)")
+
+    if not missing:
+        return
+    raise SkillError(
+        stage="parsing",
+        error_code=ErrorCode.EXPECTED_OUTPUTS_NOT_FOUND,
+        message="nf-core/rnaseq completed but required output files were not found.",
+        fix=(
+            "Inspect logs/stdout.txt, logs/stderr.txt and upstream/work for the "
+            "failing step. If quantification was intentionally skipped, use "
+            "--skip-quantification-merge or a hisat2/--skip-alignment configuration."
+        ),
+        details={
+            "output_dir": str(output_dir),
+            "aligner_effective": aligner,
+            "pseudo_aligner_effective": pseudo,
+            "missing_required": missing,
+        },
+    )
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     output_dir = Path(args.output).expanduser().resolve()
     try:
+        _check_pipeline_version_supported(args)
         return _run_wrapper(args, output_dir)
     except SkillError as exc:
         return _handle_skill_error(output_dir, exc)
@@ -341,9 +517,25 @@ def main(argv: list[str] | None = None) -> int:
         return _handle_unexpected_error(output_dir, exc)
 
 
+def _record_aligner_explicit(args: argparse.Namespace) -> bool:
+    """Record (once) whether the user explicitly passed --aligner.
+
+    Must run before any default/override mutates ``args.aligner`` (demo coercion,
+    prokaryotic/rapid_quant overrides, the star_salmon default). Self-contained
+    nf-core test profiles ship their own aligner, so ``params_builder`` omits
+    ``aligner`` from ``params.yaml`` for those runs unless the user chose one
+    explicitly (audit F7).
+    """
+    if not hasattr(args, "_aligner_explicit"):
+        args._aligner_explicit = getattr(args, "aligner", None) is not None
+    return args._aligner_explicit
+
+
 def _run_wrapper(args: argparse.Namespace, output_dir: Path) -> int:
+    _record_aligner_explicit(args)
     _apply_demo_overrides(args)
     _sync_profile_flags(args)
+    _apply_noinput_overrides(args)
     _apply_prokaryotic_overrides(args)
     _apply_rapid_quant_overrides(args)
     _apply_aligner_default(args)
@@ -376,6 +568,50 @@ _DEMO_CLEARED_REFERENCE_FIELDS = (
     "bowtie2_index",
     "sortmerna_index",
 )
+
+
+# High-signal tuning flags a user is most likely to *believe* took effect under
+# --demo but that the hermetic upstream `test` profile silently owns and ignores
+# (a -params-file value would override the profile, so build_effective_params
+# deliberately writes none of them in demo mode). Warned — never errored — so a
+# demo run is not mistaken for e.g. a UMI-deduplicated or contaminant-screened one
+# (audit F-02). Reference/index flags are handled separately above.
+_DEMO_IGNORED_TUNING_FIELDS = (
+    "pseudo_aligner",
+    "contaminant_screening",
+    "remove_ribo_rna",
+    "ribo_removal_tool",
+    "with_umi",
+    "skip_umi_extract",
+    "gencode",
+    "bbsplit_fasta_list",
+    "bbsplit_index",
+)
+
+
+def _warn_about_ignored_hermetic_tuning_flags(args: argparse.Namespace, *, mechanism: str = "--demo") -> None:
+    """Warn that tuning flags are ignored under a hermetic test profile.
+
+    Both ``--demo`` and a self-contained nf-core test profile (``--profile test``/
+    ``test_full``/…) run a profile that owns every pipeline parameter, so any tuning
+    flag the user set has no effect. ``mechanism`` names which one fired so the
+    message is accurate for either path (audit F1).
+    """
+    set_flags = [
+        "--" + field.replace("_", "-")
+        for field in _DEMO_IGNORED_TUNING_FIELDS
+        if getattr(args, field, None)
+    ]
+    # --trimmer defaults to a non-None sentinel (DEFAULT_TRIMMER); only a non-default
+    # choice is a meaningful, silently-ignored override.
+    if getattr(args, "trimmer", DEFAULT_TRIMMER) not in (None, DEFAULT_TRIMMER):
+        set_flags.append("--trimmer")
+    if set_flags:
+        print(
+            f"WARNING: {mechanism} ignores tuning flags ({', '.join(set_flags)}); the upstream "
+            "test profile is hermetic and owns every pipeline parameter, so they have no effect.",
+            file=sys.stderr,
+        )
 
 
 def _apply_demo_overrides(args: argparse.Namespace) -> None:
@@ -425,6 +661,37 @@ def _apply_demo_overrides(args: argparse.Namespace) -> None:
         )
         for field in cleared:
             setattr(args, field, None)
+    _warn_about_ignored_hermetic_tuning_flags(args, mechanism="--demo")
+
+
+def _apply_noinput_overrides(args: argparse.Namespace) -> None:
+    """Clear reference/tuning overrides for self-contained nf-core test profiles.
+
+    Self-contained test profiles (``test``, ``test_full``, ``test_prokaryotic``, …)
+    ship BOTH their own ``params.input`` and bundled reference data. Because a
+    ``-params-file`` value overrides profile config in Nextflow, writing a user
+    ``--genome``/``--fasta``/index would silently desynchronise the profile's test
+    samples from their matched reference and produce garbage with no error (audit F1).
+
+    ``--demo`` already clears these via ``_apply_demo_overrides``; this mirrors that
+    for the ``--profile test*`` path. It must run AFTER ``_sync_profile_flags`` has set
+    ``args._noinput`` and is a no-op for ``--demo`` (handled separately) and real runs.
+    Reuses ``_DEMO_CLEARED_REFERENCE_FIELDS`` so the cleared set has a single source.
+    """
+    if not getattr(args, "_noinput", False) or getattr(args, "demo", False):
+        return
+    cleared = [field for field in _DEMO_CLEARED_REFERENCE_FIELDS if getattr(args, field, None)]
+    if cleared:
+        flags = ", ".join("--" + field.replace("_", "-") for field in cleared)
+        print(
+            f"WARNING: a self-contained nf-core test profile owns its own references; "
+            f"ignoring reference flags ({flags}). The profile bundles samples paired with "
+            "their reference, so overriding would desynchronise them.",
+            file=sys.stderr,
+        )
+        for field in cleared:
+            setattr(args, field, None)
+    _warn_about_ignored_hermetic_tuning_flags(args, mechanism="a self-contained nf-core test profile")
 
 
 def _apply_prokaryotic_overrides(args: argparse.Namespace) -> None:
@@ -537,6 +804,7 @@ def _run_wrapper_with_staging(args: argparse.Namespace, output_dir: Path, *, sta
         requested_version=args.pipeline_version,
         local_pipeline_dir=Path(args.pipeline_local).expanduser().resolve() if args.pipeline_local else None,
     )
+    _check_pipeline_source_version(args, pipeline_source)
     normalized_samplesheet, staged_samplesheet, samplesheet_summary = _prepare_samplesheet(
         args,
         output_dir,
@@ -736,10 +1004,11 @@ def _run_execution_mode(
         command,
         cwd=nextflow_cwd,
         output_dir=output_dir,
-        timeout_seconds=DEFAULT_TIMEOUT_SECONDS,
+        timeout_seconds=_resolve_timeout_seconds(args),
     )
     duration_seconds = round(time.monotonic() - started, 3)
     parsed_outputs = _parse_outputs_with_effective_aligner(output_dir, args)
+    _raise_if_expected_outputs_missing(parsed_outputs, args=args, output_dir=output_dir)
     if preflight_result.get("handoff_available") is False:
         parsed_outputs["handoff_available"] = False
     handoff_result = _run_downstream_handoff(args, parsed_outputs=parsed_outputs, output_dir=output_dir)
@@ -816,7 +1085,7 @@ def _build_extra_nextflow_configs(args: argparse.Namespace, output_dir: Path) ->
     profile_parts = {p.strip() for p in getattr(args, "profile", "").split(",") if p.strip()}
     arm = bool(getattr(args, "arm", False))
     if platform.system() == "Darwin" and "docker" in profile_parts:
-        configs.append(_write_macos_docker_config(output_dir, arm=arm))
+        configs.append(_write_macos_docker_config(output_dir, arm=arm, timeout_hours=_resolve_timeout_hours(args)))
     for user_cfg in getattr(args, "nextflow_config", None) or []:
         # --nextflow-config accepts local paths only; Path.resolve() is intentional.
         # Nextflow's own -c flag also expects local file paths in typical use.
@@ -824,7 +1093,77 @@ def _build_extra_nextflow_configs(args: argparse.Namespace, output_dir: Path) ->
     return configs
 
 
-def _write_macos_docker_config(output_dir: Path, *, arm: bool = False) -> Path:
+_MACOS_DOCKER_MEMORY_CEILING_GB = 15
+_MACOS_DOCKER_MEMORY_FLOOR_GB = 8
+
+
+def _detect_host_memory_gb() -> int | None:
+    """Return total physical RAM in whole GB, or None when it cannot be determined."""
+    try:
+        page_size = os.sysconf("SC_PAGE_SIZE")
+        phys_pages = os.sysconf("SC_PHYS_PAGES")
+    except (ValueError, OSError, AttributeError):
+        return None
+    if page_size <= 0 or phys_pages <= 0:
+        return None
+    return int((page_size * phys_pages) / (1024 ** 3))
+
+
+def _docker_vm_memory_gb() -> int | None:
+    """Return the Docker VM's total memory in whole GB, or None when unknown.
+
+    On macOS, Docker Desktop runs containers in a Linux VM whose RAM is usually
+    smaller than the host's. `docker info` reports that VM's MemTotal (bytes), which
+    is the true ceiling a container process can use before being OOM-killed
+    (audit F-8). Best-effort: any failure (docker absent, daemon down, unparseable
+    output) returns None so the caller falls back to the host-derived heuristic.
+    """
+    if not shutil.which("docker"):
+        return None
+    try:
+        proc = subprocess.run(
+            ["docker", "info", "--format", "{{.MemTotal}}"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if proc.returncode != 0:
+        return None
+    raw = proc.stdout.strip()
+    if not raw.isdigit():
+        return None
+    gb = int(int(raw) / (1024 ** 3))
+    return gb or None
+
+
+def _macos_docker_memory_gb() -> int:
+    """Pick a per-process memory ceiling for the macOS Docker resourceLimits block.
+
+    The ceiling never exceeds the historical 15 GB default (Docker Desktop VMs are
+    typically smaller than the host), but it is lowered toward a 75% share on hosts
+    with less RAM so the limit cannot exceed what the machine physically has
+    (audit F-07). A floor keeps it above the pipeline's per-process minimums.
+
+    When the Docker VM's actual memory is known it overrides everything (including
+    the floor): the limit is capped to 90% of the VM so a container process is not
+    OOM-killed by requesting more than the VM physically has (audit F-8).
+    """
+    host_gb = _detect_host_memory_gb()
+    if not host_gb:
+        budget = _MACOS_DOCKER_MEMORY_CEILING_GB
+    else:
+        budget = max(_MACOS_DOCKER_MEMORY_FLOOR_GB, min(_MACOS_DOCKER_MEMORY_CEILING_GB, int(host_gb * 0.75)))
+    vm_gb = _docker_vm_memory_gb()
+    if vm_gb:
+        # The VM ceiling overrides the floor — requesting more than the VM has would
+        # OOM-kill the process, which is worse than a smaller-but-valid limit.
+        budget = min(budget, max(1, int(vm_gb * 0.9)))
+    return budget
+
+
+def _write_macos_docker_config(output_dir: Path, *, arm: bool = False, timeout_hours: float = DEFAULT_TIMEOUT_HOURS) -> Path:
     config_path = output_dir / ".nextflow_macos_docker.config"
     config_path.parent.mkdir(parents=True, exist_ok=True)
     # --platform linux/amd64 forces qemu emulation on Apple Silicon; omit when using
@@ -836,14 +1175,19 @@ def _write_macos_docker_config(output_dir: Path, *, arm: bool = False) -> Path:
     # over-allocating memory can trigger OOM-kills (worse than throttling); users on
     # high-RAM hosts can override via --nextflow-config.
     cpus = max(4, os.cpu_count() or 4)
+    memory_gb = _macos_docker_memory_gb()
+    # The per-process time ceiling tracks --timeout-hours (audit F-4) so a large-cohort
+    # run raised above the 12h default is not capped back to 12h by this config. Floored
+    # at 1h so a sub-hour --timeout-hours never emits an invalid '0.h' duration.
+    time_hours = max(1, int(timeout_hours))
     config_path.write_text(
         "// macOS Docker compatibility for nf-core/rnaseq.\n"
         "process {\n"
         "    stageInMode = 'copy'\n"
         "    resourceLimits = [\n"
         f"        cpus: {cpus},\n"
-        "        memory: '15.GB',\n"
-        "        time: '12.h'\n"
+        f"        memory: '{memory_gb}.GB',\n"
+        f"        time: '{time_hours}.h'\n"
         "    ]\n"
         + platform_opts
         + "}\n"
@@ -851,6 +1195,17 @@ def _write_macos_docker_config(output_dir: Path, *, arm: bool = False) -> Path:
         encoding="utf-8",
     )
     return config_path
+
+
+def _resolve_timeout_hours(args: argparse.Namespace) -> float:
+    """Return the effective --timeout-hours, falling back to the pinned default."""
+    hours = getattr(args, "timeout_hours", DEFAULT_TIMEOUT_HOURS)
+    return DEFAULT_TIMEOUT_HOURS if hours is None else float(hours)
+
+
+def _resolve_timeout_seconds(args: argparse.Namespace) -> int:
+    """Translate --timeout-hours into seconds, falling back to the pinned default."""
+    return int(_resolve_timeout_hours(args) * 60 * 60)
 
 
 def _nextflow_execution_cwd(output_dir: Path) -> Path:
@@ -871,12 +1226,13 @@ def _parse_outputs_with_effective_aligner(output_dir: Path, args: argparse.Names
         skip_quantification_merge=bool(getattr(args, "skip_quantification_merge", False)),
     )
     parsed["aligner_effective"] = aligner
+    # parse_outputs already sets handoff_available (counts present AND not a skipped
+    # merge); the only adjustment here is forcing it off for the HISAT2 alignment-only
+    # route, which produces BAMs but no merged quantification.
     hisat2_no_quant = aligner == "hisat2" and not parsed.get("preferred_counts_tsv")
     parsed["hisat2_no_quant"] = hisat2_no_quant
     if hisat2_no_quant:
         parsed["handoff_available"] = False
-    else:
-        parsed.setdefault("handoff_available", bool(parsed.get("preferred_counts_tsv")))
     return parsed
 
 

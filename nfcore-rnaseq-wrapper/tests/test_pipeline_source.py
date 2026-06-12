@@ -43,13 +43,50 @@ _remove_skill_dir_from_sys_path()
 _requires_git = pytest.mark.skipif(shutil.which("git") is None, reason="git not on PATH")
 
 
-def _make_valid_local_checkout(path: Path) -> None:
+def _make_valid_local_checkout(path: Path, *, manifest_version: str | None = None) -> None:
     path.mkdir(parents=True, exist_ok=True)
     (path / "main.nf").write_text("// main", encoding="utf-8")
-    (path / "nextflow.config").write_text("// config", encoding="utf-8")
+    if manifest_version is None:
+        config_text = "// config"
+    else:
+        config_text = (
+            "manifest {\n"
+            "    name = 'nf-core/rnaseq'\n"
+            f"    version = '{manifest_version}'\n"
+            "    nextflowVersion = '!>=25.04.3'\n"
+            "}\n"
+        )
+    (path / "nextflow.config").write_text(config_text, encoding="utf-8")
     assets = path / "assets"
     assets.mkdir()
     (assets / "schema_input.json").write_text("{}", encoding="utf-8")
+
+
+def test_local_checkout_parses_manifest_version(tmp_path):
+    local = tmp_path / "rnaseq"
+    _make_valid_local_checkout(local, manifest_version="3.26.0")
+    result = resolve_pipeline_source(requested_version="3.26.0", local_pipeline_dir=local)
+    assert result["manifest_version"] == "3.26.0"
+
+
+def test_local_checkout_manifest_version_ignores_nextflow_version(tmp_path):
+    local = tmp_path / "rnaseq"
+    _make_valid_local_checkout(local, manifest_version="3.20.0")
+    result = resolve_pipeline_source(requested_version="3.26.0", local_pipeline_dir=local)
+    # Must read manifest.version, not manifest.nextflowVersion.
+    assert result["manifest_version"] == "3.20.0"
+
+
+def test_local_checkout_manifest_version_empty_when_absent(tmp_path):
+    local = tmp_path / "rnaseq"
+    _make_valid_local_checkout(local)  # config has no manifest block
+    result = resolve_pipeline_source(requested_version="3.26.0", local_pipeline_dir=local)
+    assert result["manifest_version"] == ""
+
+
+def test_remote_manifest_version_mirrors_requested(tmp_path):
+    result = resolve_pipeline_source(requested_version="3.26.0", local_pipeline_dir=tmp_path / "missing")
+    assert result["manifest_version"] == "3.26.0"
 
 
 def test_resolves_to_remote_when_no_local_dir(tmp_path):
@@ -63,6 +100,28 @@ def test_resolves_to_remote_when_no_local_dir(tmp_path):
     assert result["resolved_version"] == "3.26.0"
     assert result["dirty"] is False
     assert result["branch"] == ""
+
+
+def test_local_checkout_with_whitespace_path_records_rejection_diagnostic(tmp_path):
+    # A sibling checkout whose path contains whitespace is rejected (Docker on macOS
+    # cannot reliably run scripts from spaced paths) and the wrapper falls back to the
+    # remote pipeline. The rejection must be recorded so provenance/upstream.json can
+    # explain why the local checkout was not used (provenance.build_upstream_payload
+    # reads these keys).
+    local = tmp_path / "has space" / "rnaseq"
+    local.mkdir(parents=True)
+    result = resolve_pipeline_source(requested_version="3.26.0", local_pipeline_dir=local)
+    assert result["source_kind"] == "remote_repo"
+    assert result["local_attempted"] == str(local.resolve())
+    assert "whitespace" in str(result["local_rejected_reason"]).lower()
+
+
+def test_remote_without_local_rejection_has_no_diagnostic(tmp_path):
+    result = resolve_pipeline_source(
+        requested_version="3.26.0",
+        local_pipeline_dir=tmp_path / "absent_rnaseq",
+    )
+    assert "local_attempted" not in result
 
 
 def test_resolves_to_local_when_valid_checkout(tmp_path):
@@ -100,7 +159,7 @@ def test_local_checkout_result_contains_expected_keys(tmp_path):
         requested_version="3.26.0",
         local_pipeline_dir=local,
     )
-    assert set(result) == {"source_kind", "source_ref", "resolved_version", "branch", "dirty"}
+    assert set(result) == {"source_kind", "source_ref", "resolved_version", "manifest_version", "branch", "dirty"}
 
 
 def test_remote_result_contains_expected_keys(tmp_path):
@@ -108,7 +167,7 @@ def test_remote_result_contains_expected_keys(tmp_path):
         requested_version="3.26.0",
         local_pipeline_dir=tmp_path / "missing",
     )
-    assert set(result) == {"source_kind", "source_ref", "resolved_version", "branch", "dirty"}
+    assert set(result) == {"source_kind", "source_ref", "resolved_version", "manifest_version", "branch", "dirty"}
 
 
 @_requires_git

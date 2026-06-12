@@ -13,31 +13,32 @@ if str(_SKILL_DIR) in sys.path:
 sys.path.insert(0, str(_SKILL_DIR))
 
 
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
-
-_purge_foreign_bare_modules("errors", "schemas")
+purge_foreign_bare_modules("errors", "schemas")
 
 from errors import ErrorCode, SkillError
-from schemas import REQUIRED_SAMPLE_COLUMNS, SUPPORTED_SAMPLE_COLUMNS, SUPPORTED_STRANDEDNESS
+from schemas import (
+    FASTQ_BASENAME_RE as _FASTQ_BASENAME_RE,
+    REQUIRED_SAMPLE_COLUMNS,
+    SUPPORTED_SAMPLE_COLUMNS,
+    SUPPORTED_STRANDEDNESS,
+)
 
 
 _SAMPLE_NAME_RE = re.compile(r"^\S+$")
 _SAMPLE_WHITESPACE_RE = re.compile(r"\s+")
 _NO_WHITESPACE_RE = re.compile(r"^\S+$")
 _NO_WHITESPACE_COLUMNS = ("seq_platform", "seq_center")
-_FASTQ_BASENAME_RE = re.compile(r"^[^\s/]+\.f(?:ast)?q(?:\.gz)?$")
+# _FASTQ_BASENAME_RE is imported from schemas (single source shared with preflight).
 _BAM_BASENAME_RE = re.compile(r"^[^\s/]+\.bam$", re.IGNORECASE)
 _BASE_OUTPUT_COLUMNS = ("sample", "fastq_1", "fastq_2", "strandedness", "genome_bam", "transcriptome_bam")
 _UPSTREAM_OPTIONAL_SAMPLE_COLUMNS = {"seq_platform", "seq_center", "percent_mapped"}
 _SUPPORTED_SAMPLE_COLUMNS = set(SUPPORTED_SAMPLE_COLUMNS) | _UPSTREAM_OPTIONAL_SAMPLE_COLUMNS
 _FASTQ_COLUMNS = ("fastq_1", "fastq_2")
 _BAM_COLUMNS = ("genome_bam", "transcriptome_bam")
+_ResolvedPath = Path | str
 
 
 def validate_and_normalize_samplesheet(
@@ -103,15 +104,9 @@ def _read_samplesheet(input_path: Path) -> tuple[list[str], list[dict[str, str]]
 
 
 def _validate_required_columns(fieldnames: list[str]) -> None:
-    # BAM-reprocessing samplesheets have genome_bam/transcriptome_bam instead of fastq_1.
-    # In that mode, fastq_1 is optional at the header level; row-level validation guards
-    # the actual values. Only sample and strandedness are universally required.
-    bam_mode = any(col in fieldnames for col in _BAM_COLUMNS)
-    if bam_mode:
-        always_required = ("sample", "strandedness")
-    else:
-        always_required = REQUIRED_SAMPLE_COLUMNS
-    missing_columns = [name for name in always_required if name not in fieldnames]
+    # nf-core/rnaseq 3.26.0 requires sample, fastq_1 and strandedness even for
+    # generated BAM-reprocessing samplesheets; BAM columns are additive metadata.
+    missing_columns = [name for name in REQUIRED_SAMPLE_COLUMNS if name not in fieldnames]
     if missing_columns:
         raise SkillError(
             stage="validation",
@@ -119,7 +114,7 @@ def _validate_required_columns(fieldnames: list[str]) -> None:
             message="Samplesheet is missing required columns.",
             fix=(
                 "FASTQ samplesheets must contain sample, fastq_1, and strandedness. "
-                "BAM reprocessing samplesheets must contain sample, strandedness, and "
+                "BAM reprocessing samplesheets must also preserve fastq_1 and include "
                 "at least one of genome_bam or transcriptome_bam."
             ),
             details={"missing_columns": missing_columns},
@@ -141,11 +136,11 @@ def _normalize_rows(
     input_path: Path,
     output_columns: list[str],
     skip_alignment: bool = False,
-) -> tuple[list[dict[str, str]], list[str], list[Path], list[Path], Counter[str]]:
+) -> tuple[list[dict[str, str]], list[str], list[_ResolvedPath], list[_ResolvedPath], Counter[str]]:
     normalized_rows: list[dict[str, str]] = []
     sample_names: list[str] = []
-    fastq_paths: list[Path] = []
-    bam_paths: list[Path] = []
+    fastq_paths: list[_ResolvedPath] = []
+    bam_paths: list[_ResolvedPath] = []
     strandedness_counts: Counter[str] = Counter()
     raw_samples_by_normalized: dict[str, str] = {}
     strandedness_by_sample: dict[str, str] = {}
@@ -179,7 +174,7 @@ def _normalize_row(
     output_columns: list[str],
     line_number: int,
     skip_alignment: bool = False,
-) -> tuple[dict[str, str], str, list[Path], list[Path]]:
+) -> tuple[dict[str, str], str, list[_ResolvedPath], list[_ResolvedPath]]:
     sample = _validate_sample_name(row, line_number)
     strandedness = _validate_strandedness(row, line_number)
     _validate_no_whitespace_fields(row, line_number)
@@ -201,8 +196,23 @@ def _normalize_row(
                 "bam_columns": [c for c in _BAM_COLUMNS if str(row.get(c, "")).strip()],
             },
         )
+    if bam_provided and not fastq_provided:
+        raise SkillError(
+            stage="validation",
+            error_code=ErrorCode.INVALID_SAMPLESHEET,
+            message="BAM reprocessing rows must preserve the original fastq_1 value.",
+            fix=(
+                "Use the nf-core-generated samplesheet_with_bams.csv, or include the original "
+                "fastq_1 path alongside genome_bam/transcriptome_bam and run with --skip-alignment."
+            ),
+            details={
+                "line": line_number,
+                "sample": sample,
+                "bam_columns": [c for c in _BAM_COLUMNS if str(row.get(c, "")).strip()],
+            },
+        )
     if bam_provided:
-        resolved_fastqs: dict[str, Path] = {}
+        resolved_fastqs = _resolve_fastq_columns(row, input_path=input_path, line_number=line_number)
         resolved_bams = _resolve_bam_columns(row, input_path=input_path, line_number=line_number)
     else:
         resolved_fastqs = _resolve_fastq_columns(row, input_path=input_path, line_number=line_number)
@@ -211,12 +221,12 @@ def _normalize_row(
     normalized.update(
         {
             "sample": sample,
-            "fastq_1": resolved_fastqs["fastq_1"].as_posix() if "fastq_1" in resolved_fastqs else "",
-            "fastq_2": resolved_fastqs["fastq_2"].as_posix() if "fastq_2" in resolved_fastqs else "",
+            "fastq_1": _serialize_resolved_path(resolved_fastqs["fastq_1"]) if "fastq_1" in resolved_fastqs else "",
+            "fastq_2": _serialize_resolved_path(resolved_fastqs["fastq_2"]) if "fastq_2" in resolved_fastqs else "",
             "strandedness": strandedness,
-            "genome_bam": resolved_bams.get("genome_bam", Path("")).as_posix() if "genome_bam" in resolved_bams else "",
+            "genome_bam": _serialize_resolved_path(resolved_bams["genome_bam"]) if "genome_bam" in resolved_bams else "",
             "transcriptome_bam": (
-                resolved_bams.get("transcriptome_bam", Path("")).as_posix()
+                _serialize_resolved_path(resolved_bams["transcriptome_bam"])
                 if "transcriptome_bam" in resolved_bams
                 else ""
             ),
@@ -277,8 +287,8 @@ def _validate_strandedness(row: dict[str, str], line_number: int) -> str:
     return strandedness
 
 
-def _resolve_fastq_columns(row: dict[str, str], *, input_path: Path, line_number: int) -> dict[str, Path]:
-    resolved: dict[str, Path] = {}
+def _resolve_fastq_columns(row: dict[str, str], *, input_path: Path, line_number: int) -> dict[str, _ResolvedPath]:
+    resolved: dict[str, _ResolvedPath] = {}
     for column in _FASTQ_COLUMNS:
         raw_value = str(row.get(column, "")).strip()
         if column == "fastq_2" and not raw_value:
@@ -297,8 +307,8 @@ def _resolve_fastq_columns(row: dict[str, str], *, input_path: Path, line_number
     return resolved
 
 
-def _resolve_bam_columns(row: dict[str, str], *, input_path: Path, line_number: int) -> dict[str, Path]:
-    resolved: dict[str, Path] = {}
+def _resolve_bam_columns(row: dict[str, str], *, input_path: Path, line_number: int) -> dict[str, _ResolvedPath]:
+    resolved: dict[str, _ResolvedPath] = {}
     for column in _BAM_COLUMNS:
         raw_value = str(row.get(column, "")).strip()
         if not raw_value:
@@ -310,16 +320,17 @@ def _resolve_bam_columns(row: dict[str, str], *, input_path: Path, line_number: 
     return resolved
 
 
-def _validate_bam_path(path: Path, *, column: str, line_number: int) -> None:
-    if not _BAM_BASENAME_RE.match(path.name):
+def _validate_bam_path(path: _ResolvedPath, *, column: str, line_number: int) -> None:
+    name = _resolved_path_name(path)
+    if not _BAM_BASENAME_RE.match(name):
         raise SkillError(
             stage="validation",
             error_code=ErrorCode.INVALID_BAM,
             message="BAM path does not have a .bam extension.",
             fix="Ensure the genome_bam or transcriptome_bam column points to a file ending in .bam or .BAM.",
-            details={"line": line_number, "column": column, "filename": path.name},
+            details={"line": line_number, "column": column, "filename": name},
         )
-    if not path.exists():
+    if not _is_remote_uri(path) and not Path(path).exists():
         raise SkillError(
             stage="validation",
             error_code=ErrorCode.MISSING_INPUT,
@@ -353,23 +364,25 @@ def _validate_percent_mapped(row: dict[str, str], *, line_number: int) -> None:
         )
 
 
-def _resolve_path(value: str, *, base_dir: Path) -> Path:
+def _resolve_path(value: str, *, base_dir: Path) -> _ResolvedPath:
+    if _is_remote_uri(value):
+        return value
     path = Path(os.path.expanduser(value))
     if not path.is_absolute():
         path = base_dir / path
     return path.resolve()
 
 
-def _validate_fastq_path(path: Path, *, column: str, line_number: int) -> None:
+def _validate_fastq_path(path: _ResolvedPath, *, column: str, line_number: int) -> None:
     if not _looks_like_fastq_path(path):
         raise SkillError(
             stage="validation",
             error_code=ErrorCode.INVALID_FASTQ,
             message="FASTQ basename is not compatible with nf-core/rnaseq.",
             fix="Use .fq, .fastq, .fq.gz, or .fastq.gz and remove whitespace from the basename.",
-            details={"line": line_number, "column": column, "filename": path.name},
+            details={"line": line_number, "column": column, "filename": _resolved_path_name(path)},
         )
-    if not path.exists():
+    if not _is_remote_uri(path) and not Path(path).exists():
         raise SkillError(
             stage="validation",
             error_code=ErrorCode.MISSING_FASTQ,
@@ -379,8 +392,22 @@ def _validate_fastq_path(path: Path, *, column: str, line_number: int) -> None:
         )
 
 
-def _looks_like_fastq_path(path: Path) -> bool:
-    return bool(_FASTQ_BASENAME_RE.match(path.name))
+def _looks_like_fastq_path(path: _ResolvedPath) -> bool:
+    return bool(_FASTQ_BASENAME_RE.match(_resolved_path_name(path)))
+
+
+def _is_remote_uri(value: _ResolvedPath) -> bool:
+    return "://" in str(value)
+
+
+def _resolved_path_name(value: _ResolvedPath) -> str:
+    return Path(str(value)).name
+
+
+def _serialize_resolved_path(value: _ResolvedPath) -> str:
+    if _is_remote_uri(value):
+        return str(value)
+    return Path(value).as_posix()
 
 
 def _reject_sample_name_collision(
@@ -426,10 +453,14 @@ def _reject_inconsistent_strandedness(
 def _reject_duplicate_fastq_row(
     seen_fastq_rows: set[tuple[str, str, str]],
     sample: str,
-    fastqs: list[Path],
+    fastqs: list[_ResolvedPath],
     line_number: int,
 ) -> None:
-    key = (sample, fastqs[0].as_posix() if fastqs else "", fastqs[1].as_posix() if len(fastqs) > 1 else "")
+    key = (
+        sample,
+        _serialize_resolved_path(fastqs[0]) if fastqs else "",
+        _serialize_resolved_path(fastqs[1]) if len(fastqs) > 1 else "",
+    )
     if key in seen_fastq_rows:
         raise SkillError(
             stage="validation",

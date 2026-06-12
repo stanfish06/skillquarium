@@ -2,9 +2,7 @@
 name: torchdrug
 description: PyTorch-native graph neural networks for molecules and proteins. Use when building custom GNN architectures for drug discovery, protein modeling, or knowledge graph reasoning. Best for custom model development, protein property prediction, retrosynthesis. For pre-trained models and diverse featurizers use deepchem; for benchmark datasets use pytdc.
 license: Apache-2.0 license
-metadata:
-  version: "1.0"
-  skill-author: K-Dense Inc.
+metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 ---
 
 # TorchDrug
@@ -44,8 +42,6 @@ This skill should be used when working with:
 ### Installation
 
 TorchDrug **0.2.1** (latest on PyPI, July 2023) requires **Python 3.7–3.10** and **PyTorch 1.8–2.0**. Install PyTorch and `torch-scatter` / `torch-cluster` first (wheel URL depends on your PyTorch and CUDA versions — see [installation docs](https://torchdrug.ai/docs/installation.html)).
-
-> **⚠ Compatibility warning (as of June 2026):** TorchDrug has had no new release since July 2023. The package declares `python_requires=">=3.7,<3.11"`, so **it cannot be installed on Python 3.11 or newer** (which are today's standard defaults). PyTorch 2.1+ is also untested. If your environment uses Python 3.11+ you will need to pin to Python 3.10 (e.g. `uv venv --python 3.10`) or consider an actively-maintained alternative such as [DeepChem](https://github.com/deepchem/deepchem).
 
 ```bash
 uv pip install torch
@@ -460,3 +456,4 @@ Navigate to the appropriate reference file based on your task:
 8. **Technical details** → `core_concepts.md`
 
 Each reference provides comprehensive coverage of its domain with examples, best practices, and common use cases.
+

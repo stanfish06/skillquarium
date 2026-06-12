@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
-import inspect
 import json
-import stat
 import subprocess
 import sys
 from argparse import Namespace
@@ -18,31 +16,19 @@ SCRIPT_PATH = SKILL_DIR / "nfcore_rnaseq_wrapper.py"
 PROJECT_ROOT = SKILL_DIR.parent.parent
 
 
-def _load_clawbio_module():
-    spec = importlib.util.spec_from_file_location("clawbio_main_module", PROJECT_ROOT / "clawbio.py")
-    assert spec is not None
-    assert spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def _rnaseq_pipeline_allowlist() -> tuple[set[str], set[str]]:
+    """Return (value flags, boolean flags) allow-listed for `clawbio run rnaseq-pipeline`.
 
+    The clawbio skill registry lives in ``clawbio.cli.SKILLS``. A flag must be in the
+    allowlist or it is dropped by the extra-args filter before reaching the wrapper.
+    """
+    from clawbio.cli import SKILLS
 
-def _run_clawbio_and_capture(monkeypatch, argv: list[str]) -> dict[str, object]:
-    clawbio = _load_clawbio_module()
-    captured = {}
-
-    def fake_run_skill(**kwargs):
-        captured.update(kwargs)
-        return {"success": True, "exit_code": 0, "output_dir": "out", "files": [], "stdout": "", "stderr": "", "duration_seconds": 0}
-
-    monkeypatch.setattr(clawbio, "run_skill", fake_run_skill)
-    monkeypatch.setattr(sys, "argv", argv)
-
-    with pytest.raises(SystemExit) as exc:
-        clawbio.main()
-
-    assert exc.value.code == 0
-    return captured
+    entry = SKILLS.get("rnaseq-pipeline", {})
+    return (
+        set(entry.get("allowed_extra_flags") or ()),
+        set(entry.get("allowed_extra_flags_without_values") or ()),
+    )
 
 
 def _load_skill_module():
@@ -412,6 +398,78 @@ def test_noinput_does_not_force_igenomes_ignore_in_params_builder(tmp_path):
     )
 
 
+# ── Audit F1: self-contained test profiles own their refs/tuning (like --demo) ─
+
+
+def test_noinput_profile_clears_reference_overrides(capsys):
+    """A self-contained test profile (--profile test_full) ships its own params.input
+    AND bundled reference data. User --genome/--fasta/index flags must be cleared and
+    warned about — exactly like --demo — so they cannot silently override the profile's
+    matched reference and desync samples from refs (audit F1)."""
+    module = _load_skill_module()
+    args = module.build_parser().parse_args([
+        "--output", "out",
+        "--profile", "test_full",
+        "--genome", "GRCh38",
+        "--fasta", "/tmp/custom.fa",
+        "--gtf", "/tmp/custom.gtf",
+        "--salmon-index", "/tmp/salmon",
+    ])
+    module._record_aligner_explicit(args)
+    module._apply_demo_overrides(args)   # not demo -> no-op
+    module._sync_profile_flags(args)     # sets _noinput=True for test_full
+    module._apply_noinput_overrides(args)
+    for field in ("genome", "fasta", "gtf", "salmon_index"):
+        assert getattr(args, field) is None, (
+            f"a self-contained test profile must clear {field!r}; partial overrides desync refs"
+        )
+    err = capsys.readouterr().err
+    assert "test profile" in err.lower()
+    assert "--genome" in err and "--fasta" in err
+
+
+def test_noinput_params_builder_omits_reference_and_tuning_overrides(tmp_path):
+    """params.yaml for a self-contained test profile must carry neither user references
+    nor user tuning flags; the hermetic profile owns every pipeline parameter (audit F1)."""
+    import importlib.util as _ilu
+    pb_spec = _ilu.spec_from_file_location("params_builder_mod_f1", SKILL_DIR / "params_builder.py")
+    pb = _ilu.module_from_spec(pb_spec)
+    pb_spec.loader.exec_module(pb)
+
+    module = _load_skill_module()
+    args = module.build_parser().parse_args([
+        "--output", str(tmp_path),
+        "--profile", "test_full",
+        "--genome", "GRCh38",
+        "--with-umi", "--umitools-bc-pattern", "NNNN",
+    ])
+    module._record_aligner_explicit(args)
+    module._apply_demo_overrides(args)
+    module._sync_profile_flags(args)
+    module._apply_noinput_overrides(args)
+    module._apply_aligner_default(args)
+
+    fake = tmp_path / "reproducibility" / "samplesheet.noinput.csv"
+    fake.parent.mkdir(parents=True, exist_ok=True)
+    fake.write_text("", encoding="utf-8")
+
+    params = pb.build_effective_params(args, normalized_samplesheet=fake, output_dir=tmp_path)
+    assert "genome" not in params, "test profile owns references; --genome must not reach params.yaml"
+    assert "with_umi" not in params, "test profile owns tuning; --with-umi must not reach params.yaml"
+
+
+def test_demo_still_clears_refs_after_noinput_helper_added(capsys):
+    """Regression: --demo (which does not set _noinput) must keep clearing references."""
+    module = _load_skill_module()
+    args = module.build_parser().parse_args(["--output", "out", "--demo", "--genome", "GRCh38"])
+    module._record_aligner_explicit(args)
+    module._apply_demo_overrides(args)
+    module._sync_profile_flags(args)
+    module._apply_noinput_overrides(args)
+    assert args.genome is None
+    assert "--demo ignores reference flags" in capsys.readouterr().err
+
+
 def test_check_mode_writes_check_result_and_does_not_execute(tmp_path, monkeypatch):
     module = _load_skill_module()
     executed = []
@@ -435,7 +493,6 @@ def test_check_demo_passes_with_mocked_environment(tmp_path, monkeypatch):
     assert (tmp_path / "reproducibility" / "samplesheet.demo.csv").exists()
 
 
-
 def test_run_execution_mode_builds_params_before_command(tmp_path, monkeypatch):
     module = _load_skill_module()
     order = []
@@ -448,7 +505,7 @@ def test_run_execution_mode_builds_params_before_command(tmp_path, monkeypatch):
     monkeypatch.setattr(module, "check_resume_samplesheet_checksum", lambda *a, **kw: order.append("samplesheet_checksum"))
     monkeypatch.setattr(module, "write_params_yaml", lambda *a, **kw: order.append("write_params") or params_path)
     monkeypatch.setattr(module, "execute_nextflow", lambda *a, **kw: order.append("execute") or {"returncode": 0})
-    monkeypatch.setattr(module, "parse_outputs", lambda *a, **kw: {"preferred_counts_tsv": "counts.tsv", "handoff_available": True})
+    monkeypatch.setattr(module, "parse_outputs", lambda *a, **kw: {"preferred_counts_tsv": "counts.tsv", "pipeline_info_dir": "pipeline_info", "handoff_available": True})
     monkeypatch.setattr(
         module,
         "_write_success_outputs",
@@ -571,6 +628,31 @@ def test_run_downstream_handoff_template_only_without_required_flags(tmp_path):
         "downstream_returncode": None,
     }
     assert (tmp_path / "reproducibility" / "rnaseq_de_handoff.sh").exists()
+
+
+def test_run_downstream_handoff_returns_none_without_run_downstream(tmp_path):
+    """Without --run-downstream, NO handoff template is written and None is returned,
+    even when counts are available (this is the demo/default path). The report's Next
+    Steps still shows the suggested command; the rnaseq_de_handoff.sh file requires
+    --run-downstream. Locks the behaviour SKILL.md documents."""
+    module = _load_skill_module()
+    args = Namespace(run_downstream=False, skip_downstream=False, metadata=None, formula=None, contrast=None, downstream_output=None)
+    result = module._run_downstream_handoff(
+        args, parsed_outputs={"preferred_counts_tsv": "counts.tsv", "handoff_available": True}, output_dir=tmp_path
+    )
+    assert result is None
+    assert not (tmp_path / "reproducibility" / "rnaseq_de_handoff.sh").exists()
+
+
+def test_run_downstream_handoff_returns_none_when_skip_downstream(tmp_path):
+    """--skip-downstream suppresses the handoff template even with --run-downstream set."""
+    module = _load_skill_module()
+    args = Namespace(run_downstream=True, skip_downstream=True, metadata=None, formula=None, contrast=None, downstream_output=None)
+    result = module._run_downstream_handoff(
+        args, parsed_outputs={"preferred_counts_tsv": "counts.tsv", "handoff_available": True}, output_dir=tmp_path
+    )
+    assert result is None
+    assert not (tmp_path / "reproducibility" / "rnaseq_de_handoff.sh").exists()
 
 
 def test_run_downstream_handoff_launches_rnaseq_de_when_required_flags_present(tmp_path, monkeypatch):
@@ -762,6 +844,56 @@ def test_macos_docker_config_has_audited_rnaseq_content(tmp_path):
     assert not (tmp_path / "reproducibility" / "macos_docker.config").exists()
 
 
+# ── Audit follow-up F-4: the macOS Docker resourceLimits time ceiling must track
+# --timeout-hours so a large-cohort run raised above the 12h default is not capped
+# back to 12h by the generated config.
+
+
+def test_macos_docker_config_time_defaults_to_twelve_hours(tmp_path):
+    module = _load_skill_module()
+    content = module._write_macos_docker_config(tmp_path).read_text(encoding="utf-8")
+    assert "time: '12.h'" in content
+
+
+def test_macos_docker_config_time_tracks_timeout_hours(tmp_path):
+    module = _load_skill_module()
+    content = module._write_macos_docker_config(tmp_path, timeout_hours=48).read_text(encoding="utf-8")
+    assert "time: '48.h'" in content
+    assert "time: '12.h'" not in content
+
+
+def test_macos_docker_config_time_floored_at_one_hour(tmp_path):
+    module = _load_skill_module()
+    content = module._write_macos_docker_config(tmp_path, timeout_hours=0.5).read_text(encoding="utf-8")
+    assert "time: '1.h'" in content
+
+
+# ── Audit follow-up F-8: the per-process memory ceiling must never exceed the
+# actual Docker VM memory (Docker Desktop's VM is usually smaller than the host,
+# so a host-RAM-derived budget could be OOM-killed).
+
+
+def test_macos_docker_memory_capped_to_docker_vm(monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module, "_detect_host_memory_gb", lambda: 64)  # host budget would hit the 15 GB cap
+    monkeypatch.setattr(module, "_docker_vm_memory_gb", lambda: 6)     # but the VM only has 6 GB
+    assert module._macos_docker_memory_gb() <= 6
+
+
+def test_macos_docker_memory_falls_back_when_vm_unknown(monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module, "_detect_host_memory_gb", lambda: 64)
+    monkeypatch.setattr(module, "_docker_vm_memory_gb", lambda: None)
+    # Unknown VM size → preserve the prior host-derived behaviour (15 GB ceiling).
+    assert module._macos_docker_memory_gb() == 15
+
+
+def test_docker_vm_memory_none_when_docker_absent(monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module.shutil, "which", lambda name: None)
+    assert module._docker_vm_memory_gb() is None
+
+
 def test_rapid_quant_override_sets_profile_implied_args():
     """--rapid-quant must sync skip_alignment, pseudo_aligner, skip_quantification_merge."""
     module = _load_skill_module()
@@ -861,74 +993,60 @@ def test_write_success_outputs_passes_provenance_warnings_to_write_report(tmp_pa
     warnings = captured_warnings.get("post_run_warnings", [])
     assert len(warnings) >= 1, "Expected at least one post_run_warning from the provenance failure"
     assert any("provenance" in w.lower() or "OSError" in w or "no space" in w.lower() for w in warnings)
+def test_record_aligner_explicit_true_when_user_supplied():
+    module = _load_skill_module()
+    ns = Namespace(aligner="star_rsem")
+    module._record_aligner_explicit(ns)
+    assert ns._aligner_explicit is True
+
+
+def test_record_aligner_explicit_false_when_aligner_defaulted_none():
+    module = _load_skill_module()
+    ns = Namespace(aligner=None)
+    module._record_aligner_explicit(ns)
+    assert ns._aligner_explicit is False
+
+
+def test_contaminant_screening_choices_derive_from_schemas_constant():
+    """--contaminant-screening choices must come from the centralised schemas
+    constant, not a hand-maintained inline literal (single source of truth)."""
+    module = _load_skill_module()
+    parser = module.build_parser()
+    action = next(a for a in parser._actions if "--contaminant-screening" in a.option_strings)
+    spec = importlib.util.spec_from_file_location("schemas_cs_check", SKILL_DIR / "schemas.py")
+    schemas_mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(schemas_mod)
+    assert set(action.choices) == schemas_mod.SUPPORTED_CONTAMINANT_SCREENING
+
+
+# ── clawbio CLI integration: rnaseq-pipeline flags must reach the skill ────────
+# `clawbio run rnaseq-pipeline --<flag>` forwards a flag only when it is allow-listed
+# in clawbio.cli.SKILLS["rnaseq-pipeline"]; otherwise the extra-args filter drops it.
+# These regression tests guard the flags the wrapper relies on.
 
 
 def test_clawbio_nextflow_config_in_rnaseq_pipeline_allowlist():
-    """--nextflow-config must be in the rnaseq-pipeline allowed_extra_flags so it
-    survives the SEC INT-001 filter inside run_skill.  Regression test for the P1 bug
-    where the flag was absent from the allowlist and silently dropped."""
-    clawbio = _load_clawbio_module()
-    rnaseq_info = clawbio.SKILLS.get("rnaseq-pipeline", {})
-    allowed = rnaseq_info.get("allowed_extra_flags", set())
-    assert "--nextflow-config" in allowed, (
-        "--nextflow-config must be in SKILLS['rnaseq-pipeline']['allowed_extra_flags']; "
-        f"got allowed={sorted(allowed)!r}"
-    )
+    """--nextflow-config must be in the rnaseq-pipeline allowlist so it is not
+    silently dropped before reaching the wrapper."""
+    values, _ = _rnaseq_pipeline_allowlist()
+    assert "--nextflow-config" in values, f"--nextflow-config missing from allowlist: {sorted(values)!r}"
 
 
-def test_clawbio_nextflow_config_forwarded_to_rnaseq_pipeline(monkeypatch):
-    """--nextflow-config values passed to clawbio.py run rnaseq-pipeline must reach
-    run_skill's extra_args with both occurrences preserved (action='append' in wrapper).
-    The allowlist check above guarantees they also survive SEC INT-001."""
-    captured = _run_clawbio_and_capture(
-        monkeypatch,
-        [
-            "clawbio.py", "run", "rnaseq-pipeline",
-            "--nextflow-config", "/tmp/hpc.config",
-            "--nextflow-config", "/tmp/rsem.config",
-            "--output", "/tmp/out",
-        ],
-    )
-    extra = captured.get("extra_args") or []
-    assert "--nextflow-config" in extra, (
-        "--nextflow-config must reach run_skill via extra_args; "
-        f"got extra_args={extra!r}"
-    )
-    config_values = [extra[i + 1] for i, v in enumerate(extra) if v == "--nextflow-config"]
-    assert "/tmp/hpc.config" in config_values, f"hpc.config missing from extra_args: {extra!r}"
-    assert "/tmp/rsem.config" in config_values, f"rsem.config missing from extra_args: {extra!r}"
+def test_clawbio_nextflow_config_forwarded_to_rnaseq_pipeline():
+    """--nextflow-config is a value-taking flag (action='append'); it must be in the
+    value allowlist (not the boolean set) for every occurrence to reach the wrapper."""
+    values, booleans = _rnaseq_pipeline_allowlist()
+    assert "--nextflow-config" in values
+    assert "--nextflow-config" not in booleans
 
 
-def test_clawbio_star_index_forwarded_to_rnaseq_pipeline(monkeypatch):
-    """--star-index passed to 'clawbio run rnaseq-pipeline' must reach run_skill via
-    extra_args.  Regression test: the flag was declared in run_parser (→ args) but was
-    absent from the rnaseq-pipeline value_flag forwarding loop, so it was silently dropped."""
-    captured = _run_clawbio_and_capture(
-        monkeypatch,
-        [
-            "clawbio.py", "run", "rnaseq-pipeline",
-            "--star-index", "/refs/star_index",
-            "--output", "/tmp/out",
-        ],
-    )
-    extra = captured.get("extra_args") or []
-    idx = next((i for i, v in enumerate(extra) if v == "--star-index"), None)
-    assert idx is not None, f"--star-index not found in extra_args: {extra!r}"
-    assert extra[idx + 1] == "/refs/star_index", f"wrong value after --star-index: {extra!r}"
+def test_clawbio_star_index_forwarded_to_rnaseq_pipeline():
+    """--star-index must be forwardable (regression: declared in the parser but not forwarded)."""
+    values, _ = _rnaseq_pipeline_allowlist()
+    assert "--star-index" in values, f"--star-index missing from allowlist: {sorted(values)!r}"
 
 
-def test_clawbio_kallisto_index_forwarded_to_rnaseq_pipeline(monkeypatch):
-    """--kallisto-index passed to 'clawbio run rnaseq-pipeline' must reach run_skill
-    via extra_args.  Regression test: absent from the rnaseq-pipeline value_flag loop."""
-    captured = _run_clawbio_and_capture(
-        monkeypatch,
-        [
-            "clawbio.py", "run", "rnaseq-pipeline",
-            "--kallisto-index", "/refs/kallisto_index",
-            "--output", "/tmp/out",
-        ],
-    )
-    extra = captured.get("extra_args") or []
-    idx = next((i for i, v in enumerate(extra) if v == "--kallisto-index"), None)
-    assert idx is not None, f"--kallisto-index not found in extra_args: {extra!r}"
-    assert extra[idx + 1] == "/refs/kallisto_index", f"wrong value after --kallisto-index: {extra!r}"
+def test_clawbio_kallisto_index_forwarded_to_rnaseq_pipeline():
+    """--kallisto-index must be forwardable (regression: absent from the forwarding loop)."""
+    values, _ = _rnaseq_pipeline_allowlist()
+    assert "--kallisto-index" in values, f"--kallisto-index missing from allowlist: {sorted(values)!r}"

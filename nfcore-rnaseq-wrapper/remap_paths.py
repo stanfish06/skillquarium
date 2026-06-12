@@ -18,6 +18,9 @@ absolute paths (required by Nextflow). Before replaying on a different machine:
   4. Verify everything is ready:
        python remap_paths.py --verify
 
+  5. Regenerate missing bundle files (manifest.json, checksums.sha256, environment.yml):
+       python remap_paths.py --repair-bundle
+
   Preview any change without modifying files by adding --dry-run.
 
   Remote URIs (s3://, https://, etc.) are recognized and skipped automatically
@@ -140,7 +143,10 @@ def remap_csv(
         backup = samplesheet.with_name(samplesheet.name + ".bak")
         shutil.copy2(samplesheet, backup)
         with samplesheet.open("w", newline="", encoding="utf-8") as fh:
-            writer = csv.DictWriter(fh, fieldnames=fieldnames)
+            # lineterminator="\n" matches how the wrapper first wrote the samplesheet
+            # (samplesheet_builder._write_normalized_samplesheet); the csv default of
+            # "\r\n" would otherwise flip every line ending on this remap step.
+            writer = csv.DictWriter(fh, fieldnames=fieldnames, lineterminator="\n")
             writer.writeheader()
             writer.writerows(rows)
 
@@ -249,7 +255,12 @@ def cmd_remap(
 
     if not changes:
         print(f"No FASTQ/BAM paths start with {old_prefix!r} — nothing to change.")
-        return 0
+        # In a real run the exit code reflects replay-readiness, not whether THIS
+        # invocation rewrote anything — otherwise an idempotent re-run (nothing left
+        # to change) would exit 0 while the bundle is still not replay-ready, an
+        # inconsistency that breaks scripted relocation. --dry-run is a preview and
+        # never gates on readiness.
+        return 0 if dry_run else _report_samplesheet_readiness(samplesheet)
 
     verb = "Would change" if dry_run else "Changed"
     print(f"\n{verb} {len(changes)} path(s):")
@@ -263,13 +274,25 @@ def cmd_remap(
         return 0
 
     print(f"\nBackup saved: {samplesheet.name + '.bak'}")
+    return _report_samplesheet_readiness(samplesheet)
 
+
+def _report_samplesheet_readiness(samplesheet: Path) -> int:
+    """Verify every local FASTQ/BAM path resolves; return 0 only when replay-ready.
+
+    Consistent across invocations (idempotent): the exit code depends solely on the
+    samplesheet's current readiness, never on whether the calling command changed
+    anything. Remote URIs and ``$VAR`` references are skipped by verify_paths.
+    """
     missing = verify_paths(samplesheet)
     if missing:
         print(f"\nWARNING: {len(missing)} path(s) do not exist on this machine:")
         for m in missing:
             print(f"  {m}")
-        print("\nCorrect the paths and run again, or verify the FASTQ files are accessible.")
+        print(
+            "\nStage the data at these paths (or re-run with the correct --new prefix), "
+            "then run `python remap_paths.py --verify` to confirm the bundle is replay-ready."
+        )
         return 1
 
     print("\nAll FASTQ/BAM paths verified.")
@@ -324,7 +347,7 @@ def cmd_update_output(new_output_dir: str, *, dry_run: bool, bundle_dir: Path | 
         if not m:
             print("No --output flag found in commands.sh — nothing to change.")
             return 0
-        print(f"[DRY RUN] Would change --output in commands.sh:")
+        print("[DRY RUN] Would change --output in commands.sh:")
         print(f"    - {_unquote_output_value(m.group('value'))}")
         print(f"    + {new_output_dir}")
         return 0
@@ -378,9 +401,9 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
                 if has_content and not has_resume:
                     warned = True
                     print(
-                        f"  WARNING: output dir is non-empty and commands.sh has no --resume.\n"
-                        f"  A fresh replay may fail because output already exists.\n"
-                        f"  Add --resume to replay into the existing run, or use a new --output path."
+                        "  WARNING: output dir is non-empty and commands.sh has no --resume.\n"
+                        "  A fresh replay may fail because output already exists.\n"
+                        "  Add --resume to replay into the existing run, or use a new --output path."
                     )
             else:
                 # Not an error — the wrapper creates the output dir on a fresh replay.
@@ -402,7 +425,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
     if missing_bundle:
         ok = False  # incomplete bundle is a verification failure, not just a warning
         print(
-            f"\nBundle is incomplete — the following files are missing:\n"
+            "\nBundle is incomplete — the following files are missing:\n"
             + "".join(f"  {bd / f}\n" for f in missing_bundle)
             + "  This usually means the wrapper crashed during post-processing.\n"
             + "  Run --repair-bundle to regenerate them:\n"
@@ -412,9 +435,9 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
     if ok:
         replay_cmd = f"  CLAWBIO_REPO=/path/to/ClawBio bash {shlex.quote(str(bd / 'commands.sh'))}"
         if warned:
-            print(f"\nAll checks passed (with warnings — review above before replaying):")
+            print("\nAll checks passed (with warnings — review above before replaying):")
         else:
-            print(f"\nAll checks passed — ready to replay:")
+            print("\nAll checks passed — ready to replay:")
         print(replay_cmd)
     return 0 if ok else 1
 
@@ -596,6 +619,9 @@ examples:
 
   Verify everything is ready to replay:
     python remap_paths.py --verify
+
+  Regenerate missing bundle files (manifest.json, checksums.sha256, environment.yml):
+    python remap_paths.py --repair-bundle
 
   Replay (CLAWBIO_REPO is always required):
     CLAWBIO_REPO=/path/to/ClawBio bash commands.sh

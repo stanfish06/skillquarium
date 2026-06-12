@@ -1251,8 +1251,19 @@ def patch_clawbio_py(clawbio_path: Path, spec: dict) -> bool:
     # Insert the indented entry immediately before the closing }.
     patched = source[:insert_at] + indented + source[insert_at:]
     clawbio_path.write_text(patched, encoding="utf-8")
-    print(f"  {GREEN}Patched clawbio.py (+1 SKILLS entry for '{cli_alias}'){RESET}")
+    print(f"  {GREEN}Patched {clawbio_path.name} (+1 SKILLS entry for '{cli_alias}'){RESET}")
     return True
+
+
+def _engine_path(repo_root: Path) -> Path:
+    """Return the module holding the SKILLS registry.
+
+    The engine moved from the repo-root ``clawbio.py`` (now a thin shim) into the
+    installable package at ``clawbio/cli.py``. Prefer the package module; fall
+    back to the legacy root module for older checkouts.
+    """
+    pkg_engine = repo_root / "clawbio" / "cli.py"
+    return pkg_engine if pkg_engine.exists() else repo_root / "clawbio.py"
 
 
 # ---------------------------------------------------------------------------
@@ -1488,12 +1499,12 @@ def scaffold_skill(
     )
     if writes_into_repo:
         catalog_path  = repo_root / "skills" / "catalog.json"
-        clawbio_path  = repo_root / "clawbio.py"
+        clawbio_path  = _engine_path(repo_root)
 
         if clawbio_path.exists():
             clawbio_updated = patch_clawbio_py(clawbio_path, spec)
         else:
-            print(f"  {DIM}clawbio.py not found at {clawbio_path} — skipping.{RESET}")
+            print(f"  {DIM}ClawBio engine module not found at {clawbio_path} — skipping.{RESET}")
 
         # Prefer the canonical generator over hand-appending: catalog.json's
         # own header says "generated_by: scripts/generate_catalog.py", and the

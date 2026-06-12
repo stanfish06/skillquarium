@@ -31,7 +31,8 @@ def _purge_local_modules(*names: str) -> None:
 
 _purge_foreign_bare_modules("reporting", "schemas")
 
-from reporting import build_repro_command_args, write_check_result, write_report, write_repro_commands, write_result
+from reporting import _REPRO_PATH_FLAGS, build_repro_command_args, write_report, write_repro_commands, write_result
+from schemas import DEFAULT_TIMEOUT_HOURS
 
 _purge_local_modules("reporting", "schemas")
 if str(_SKILL_DIR) in sys.path:
@@ -196,6 +197,16 @@ def test_write_report_creates_rnaseq_report(tmp_path):
     assert "# nf-core/rnaseq Wrapper Report" in path.read_text(encoding="utf-8")
 
 
+def test_report_header_includes_skill_version(tmp_path):
+    """report.md must show the skill version, consistent with result.json/manifest.json/
+    catalog.json (all 0.1.0). An empty Version field is an inconsistency."""
+    from schemas import SKILL_VERSION
+    write_report(tmp_path, args=_args(tmp_path), pipeline_source=_source(), preflight_result=_preflight(), parsed_outputs=_parsed(), command_str="cmd")
+    content = (tmp_path / "report.md").read_text(encoding="utf-8")
+    assert f"**Version**: {SKILL_VERSION}" in content
+    assert "**Version**: \n" not in content, "report Version field must not be empty"
+
+
 def test_report_summary_contains_bulk_rnaseq_fields(tmp_path):
     write_report(tmp_path, args=_args(tmp_path, pseudo_aligner="salmon", trimmer="fastp"), pipeline_source=_source(), preflight_result=_preflight(), parsed_outputs=_parsed(samples_detected=3), command_str="cmd")
     content = (tmp_path / "report.md").read_text(encoding="utf-8")
@@ -295,6 +306,31 @@ def test_build_repro_command_args_includes_rnaseq_core_flags(tmp_path):
     assert command_args["--pipeline-version"] == "3.26.0"
 
 
+def test_repro_commands_sh_uses_portable_python_interpreter(tmp_path):
+    """commands.sh must not hardcode a bare `python` — modern macOS and many Linux
+    distros ship only `python3`, so a bare `python` replay fails with
+    'python: command not found'. The bundle must use a portable interpreter
+    (`${PYTHON:-python3}`) so replay works on any compatible OS / another folder."""
+    write_repro_commands(tmp_path, args=_args(tmp_path))
+    content = (tmp_path / "reproducibility" / "commands.sh").read_text(encoding="utf-8")
+    assert '"${PYTHON:-python3}" "$SKILL_SCRIPT"' in content
+    assert "\npython \"$SKILL_SCRIPT\"" not in content, "bare `python` is not portable"
+
+
+def test_build_repro_command_args_omits_default_trimmer(tmp_path):
+    """commands.sh must not record the default --trimmer (trimgalore) — it would
+    diverge from params.yaml, which omits defaults ('omit = trust upstream default'),
+    and record a flag the user never chose. Mirrors params_builder._add_aligner_params."""
+    command_args = build_repro_command_args(tmp_path, args=_args(tmp_path))  # default trimmer
+    assert "--trimmer" not in command_args
+
+
+def test_build_repro_command_args_records_non_default_trimmer(tmp_path):
+    """A user-chosen non-default trimmer must be recorded for a faithful replay."""
+    command_args = build_repro_command_args(tmp_path, args=_args(tmp_path, trimmer="fastp"))
+    assert command_args["--trimmer"] == "fastp"
+
+
 def test_build_repro_command_args_includes_reference_paths(tmp_path):
     fasta = tmp_path / "ref.fa"
     gtf = tmp_path / "genes.gtf"
@@ -325,6 +361,26 @@ def test_build_repro_command_args_noinput_includes_profile(tmp_path):
     assert result.get("--profile") == "docker,test_full"
 
 
+def test_build_repro_command_args_noinput_omits_aligner_when_not_explicit(tmp_path):
+    """Mirror F7: a self-contained profile owns the aligner, so commands.sh must NOT
+    bake in --aligner — replaying it would flip the run to an explicit aligner and
+    diverge from the original (aligner-less) params.yaml."""
+    args = _args(tmp_path, input=None, demo=False, profile="docker,test_full", aligner="star_salmon")
+    args._noinput = True
+    args._aligner_explicit = False
+    result = build_repro_command_args(tmp_path, args=args)
+    assert "--aligner" not in result
+
+
+def test_build_repro_command_args_noinput_keeps_aligner_when_explicit(tmp_path):
+    """If the user explicitly chose --aligner with a test profile, the replay keeps it."""
+    args = _args(tmp_path, input=None, demo=False, profile="docker,test_full", aligner="star_rsem")
+    args._noinput = True
+    args._aligner_explicit = True
+    result = build_repro_command_args(tmp_path, args=args)
+    assert result["--aligner"] == "star_rsem"
+
+
 @pytest.mark.parametrize("scheme,field", [
     ("https", "fasta"),
 ])
@@ -342,6 +398,17 @@ def test_build_repro_command_args_remote_refs_not_mangled(tmp_path, scheme, fiel
     assert result.get(flag) == uri, (
         f"commands.sh must write remote URI {uri!r} unchanged; got {result.get(flag)!r}"
     )
+
+
+def test_build_repro_command_args_sylph_multi_paths_resolved_individually(tmp_path, monkeypatch):
+    db1 = tmp_path / "sylph" / "db1"
+    db2 = tmp_path / "sylph" / "db2"
+    db1.mkdir(parents=True)
+    db2.mkdir(parents=True)
+    monkeypatch.chdir(tmp_path)
+    args = _args(tmp_path, sylph_db="sylph/db1,sylph/db2")
+    result = build_repro_command_args(tmp_path, args=args)
+    assert result["--sylph-db"] == f"{db1.resolve().as_posix()},{db2.resolve().as_posix()}"
 
 
 def test_build_repro_command_args_nextflow_config_included(tmp_path):
@@ -362,6 +429,73 @@ def test_build_repro_command_args_nextflow_config_included(tmp_path):
     assert str(cfg2.resolve()) in configs or str(cfg2) in configs
 
 
+def test_commands_sh_replays_every_run_affecting_wrapper_flag(tmp_path):
+    """Replay fidelity: every wrapper flag that affects the run must be emitted by
+    build_repro_command_args, so a newly added flag cannot be silently dropped from
+    commands.sh and make the reproducibility bundle an unfaithful replay."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "rnaseq_wrapper_repro_parity", _SKILL_DIR / "nfcore_rnaseq_wrapper.py"
+    )
+    wrapper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(wrapper)
+    parser = wrapper.build_parser()
+
+    ns = argparse.Namespace()
+    wrapper_flags: set[str] = set()
+    for action in parser._actions:
+        if not action.option_strings or "-h" in action.option_strings:
+            continue
+        wrapper_flags.update(action.option_strings)
+        dest = action.dest
+        if action.nargs == 0:
+            setattr(ns, dest, True)
+        elif action.choices:
+            setattr(ns, dest, sorted(str(c) for c in action.choices)[0])
+        elif action.type is int:
+            setattr(ns, dest, 7)
+        elif action.type is float:
+            setattr(ns, dest, 0.7)
+        else:
+            setattr(ns, dest, f"VAL_{dest}")
+    ns.demo = False
+    ns._noinput = False
+    ns._aligner_explicit = True
+    ns.timeout_hours = 99.0  # != pinned default so it is recorded
+    ns.deseq2_vst = True
+    ns.nextflow_config = ["c.config"]
+    ns.resume = True
+
+    emitted = set(build_repro_command_args(tmp_path, args=ns).keys())
+    # Handled specially / intentionally not replayed verbatim:
+    #  --input/--output → emitted in bundle-relative form by dedicated logic;
+    #  --demo → off in this real-run scenario; --check → means "do not run";
+    #  --no-deseq2-vst → alternate store_false form of --deseq2-vst (mutually exclusive).
+    special = {"--input", "--output", "--demo", "--check", "--no-deseq2-vst"}
+    missing = wrapper_flags - emitted - special
+    assert missing == set(), f"wrapper flags not replayed in commands.sh: {sorted(missing)}"
+
+
+def test_repro_path_flags_are_all_remappable():
+    """Every reference/path flag reporting writes into commands.sh must be one that
+    remap_paths.py can rewrite (_REFERENCE_FLAGS). Otherwise moving the bundle to a
+    new machine silently leaves that path pointing at the old location."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "rnaseq_remap_paths_parity", _SKILL_DIR / "remap_paths.py"
+    )
+    remap = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(remap)
+    # reporting stores fields with underscores; commands.sh / remap use dashes.
+    reporting_dash = {field.replace("_", "-") for field in _REPRO_PATH_FLAGS}
+    unremappable = reporting_dash - set(remap._REFERENCE_FLAGS)
+    assert unremappable == set(), (
+        f"reporting writes path flags remap_paths.py cannot rewrite: {sorted(unremappable)}"
+    )
+
+
 # ── P1: four flags missing from build_repro_command_args ──────────────────────
 
 
@@ -370,6 +504,30 @@ def test_build_repro_command_args_includes_igenomes_base(tmp_path):
     result = build_repro_command_args(tmp_path, args=_args(tmp_path, igenomes_base=str(base)))
     assert "--igenomes-base" in result
     assert str(base.resolve()) in result["--igenomes-base"]
+
+
+# ── Audit F-12: --timeout-hours / --allow-pipeline-version-override in replay ──
+
+
+def test_repro_command_includes_non_default_timeout_hours(tmp_path):
+    result = build_repro_command_args(tmp_path, args=_args(tmp_path, timeout_hours=48.0))
+    assert result.get("--timeout-hours") == "48.0"
+
+
+def test_repro_command_omits_default_timeout_hours(tmp_path):
+    result = build_repro_command_args(tmp_path, args=_args(tmp_path, timeout_hours=float(DEFAULT_TIMEOUT_HOURS)))
+    assert "--timeout-hours" not in result
+
+
+def test_repro_command_records_pipeline_version_override(tmp_path):
+    result = build_repro_command_args(tmp_path, args=_args(tmp_path, allow_pipeline_version_override=True))
+    assert "--allow-pipeline-version-override" in result
+
+
+def test_repro_command_omits_version_override_when_unset(tmp_path):
+    result = build_repro_command_args(tmp_path, args=_args(tmp_path))
+    assert "--allow-pipeline-version-override" not in result
+    assert "--timeout-hours" not in result
 
 
 def test_strandedness_summary_reads_from_strandedness_counts(tmp_path):

@@ -21,47 +21,49 @@ if str(_SKILL_DIR) in sys.path:
 sys.path.insert(0, str(_SKILL_DIR))
 
 
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
-
-_purge_foreign_bare_modules("errors", "schemas")
+purge_foreign_bare_modules("errors", "schemas")
 
 from errors import ErrorCode, SkillError
 from schemas import (
     DEFAULT_PIPELINE_VERSION,
     DEFAULT_REMOTE_PIPELINE,
+    DEFAULT_TRIMMER,
+    FASTQ_BASENAME_RE as _FASTQ_BASENAME_RE,
     JAVA_MIN_VERSION,
     NEXTFLOW_MIN_VERSION,
     PROJECT_ROOT,
     SUPPORTED_ALIGNERS,
     SUPPORTED_IGENOMES_NAMES,
-    SUPPORTED_PROFILES,
     SUPPORTED_PSEUDO_ALIGNERS,
     SUPPORTED_PUBLISH_DIR_MODES,
     SUPPORTED_RIBO_TOOLS,
+    SUPPORTED_RSEQC_MODULES,
     SUPPORTED_SALMON_LIB_TYPES,
     SUPPORTED_STRANDEDNESS,
     SUPPORTED_TRIMMERS,
     SUPPORTED_UMI_EXTRACT_METHODS,
     SUPPORTED_UMI_GROUPING_METHODS,
     SUPPORTED_UMI_TOOLS,
+    WHITESPACE_RE as _WHITESPACE_RE,
 )
 
 
 _SUBPROCESS_TIMEOUT = 30
+# _WHITESPACE_RE is imported from schemas (single source shared with params_builder).
 _EMAIL_RE = re.compile(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
 _GENOME_ID_RE = re.compile(r"^[a-zA-Z0-9_\-\.]+$")
-_FASTA_EXT_RE = re.compile(r"^\S+\.fn?a(sta)?(\.gz)?$")
+# nf-core/rnaseq accepts .fa, .fasta, .fna (optionally .gz). The earlier pattern
+# also matched non-extensions like ".fnasta"; tightened to the canonical set (audit F-06).
+_FASTA_EXT_RE = re.compile(r"^\S+\.(fa|fasta|fna)(\.gz)?$")
 _GTF_EXT_RE = re.compile(r"^\S+\.gtf(\.gz)?$")
 _GFF_EXT_RE = re.compile(r"^\S+\.gff3?(\.gz)?$")
 _BED_EXT_RE = re.compile(r"^\S+\.bed(\.gz)?$")
 _HISAT2_MEM_RE = re.compile(r"^\d+(\.\d+)?\.?\s*(K|M|G|T)?B$")
-_FASTQ_BASENAME_RE = re.compile(r"^[^\s/]+\.f(?:ast)?q(?:\.gz)?$")
+# _FASTQ_BASENAME_RE is the shared regex imported from schemas (single source of
+# truth, also used by samplesheet_builder); it must NOT be redefined locally.
 _REFERENCE_GROUPS = (("genome",), ("fasta", "gtf"), ("fasta", "gff"))
 _ANNOTATION_REFERENCE_FIELDS = (
     "fasta",
@@ -81,10 +83,36 @@ _INDEX_REFERENCE_FIELDS = (
     "kallisto_index",
 )
 _EXPLICIT_REFERENCE_FIELDS = (*_ANNOTATION_REFERENCE_FIELDS, *_INDEX_REFERENCE_FIELDS)
+# Reference fields that genuinely conflict with --genome because they provide an
+# alternative *genome sequence* source. nf-core/rnaseq supports iGenomes together
+# with additive annotation/transcriptome overrides (e.g. --genome GRCh38 --gtf
+# custom.gtf, or --additional-fasta spike_ins.fa, --transcript-fasta, --gene-bed,
+# --splicesites, --salmon-index/--kallisto-index), but providing a second genome
+# FASTA (--fasta) or a genome-level index (STAR/RSEM/HISAT2/Bowtie2) alongside a
+# named iGenomes genome is ambiguous and is rejected (audit M1).
+_GENOME_CONFLICTING_REFERENCE_FIELDS = (
+    "fasta",
+    "star_index",
+    "rsem_index",
+    "hisat2_index",
+    "bowtie2_index",
+)
 # sortmerna_index is an rRNA filter database, not a genome index — it is compatible with
 # --genome and must not participate in the genome-vs-explicit-reference conflict check.
 _CONTAMINANT_PATH_FIELDS = ("kraken_db", "sylph_db", "sylph_taxonomy", "bbsplit_fasta_list", "bbsplit_index", "sortmerna_index")
 _COMMA_SEPARATED_CONTAMINANT_FIELDS = frozenset({"sylph_db", "sylph_taxonomy"})
+# Catch every Groovy form that assigns into `params`: block (`params {`),
+# property (`params.x` / `params.put(...)`), assignment (`params = ...`),
+# subscript (`params['x']` / `params ['x']`), and map-merge (`params << [...]`).
+# The earlier pattern missed subscript/merge forms, leaving a bypass (audit M2).
+_NEXTFLOW_PARAMS_OVERRIDE_RE = re.compile(r"^\s*params\s*(?:\{|\.|=|\[|<<)")
+# The documented escape hatch: a custom genome catalogue under `params.genomes`.
+# Any `params.genomes...` line (block, property, or subscript) is allowed.
+_NEXTFLOW_ALLOWED_PARAMS_RE = re.compile(r"^\s*params\.genomes\b")
+# includeConfig directive — its target is audited recursively so a params
+# override cannot hide in an included file (audit M2).
+_NEXTFLOW_INCLUDE_RE = re.compile(r"""^\s*includeConfig\s+['"]([^'"]+)['"]""")
+_MAX_CONFIG_INCLUDE_DEPTH = 16
 _IGNORED_ROOT_NAMES = frozenset({".DS_Store", ".gitkeep", ".gitignore", "Thumbs.db", "check_result.json"})
 _ALLOWED_REPRO_FILES = frozenset({"samplesheet.valid.csv", "samplesheet.demo.csv", "samplesheet.noinput.csv", "params.yaml", "manifest.json"})
 _GENCODE_GTF_MARKER_RE = re.compile(r'(^|[;\s])(gene_type|havana_gene)\s+"')
@@ -104,7 +132,6 @@ def check_resume_params_checksum(params_payload: dict[str, object], output_dir: 
     output_dir = output_dir.expanduser().resolve()
     repro_dir = output_dir / "reproducibility"
     manifest_path = repro_dir / "manifest.json"
-    params_path = repro_dir / "params.yaml"
     current_checksum = params_payload_checksum(params_payload)
 
     manifest: dict[str, object] = {}
@@ -429,12 +456,28 @@ def _check_output_dir(output_dir: Path, *, resume: bool) -> None:
             continue
         materialized.append(entry)
     if materialized and not resume:
+        # A prior FAILED run leaves result.json but no reproducibility/manifest.json,
+        # so --resume is impossible (it needs a manifest) yet the dir is non-empty — a
+        # dead end unless the user knows to delete it. Detect that and guide precisely
+        # instead of the generic "use --resume" hint that cannot work here (audit F8).
+        prior_run_incomplete = (
+            (output_dir / "result.json").exists()
+            and not (output_dir / "reproducibility" / "manifest.json").exists()
+        )
+        if prior_run_incomplete:
+            fix = (
+                "This directory holds an incomplete previous run (result.json present but no "
+                "reproducibility/manifest.json), so --resume cannot work here. Delete the "
+                "directory and re-run, or choose a new empty --output."
+            )
+        else:
+            fix = "Choose a new empty output directory, or re-run with --resume when a compatible manifest exists."
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.OUTPUT_DIR_NOT_EMPTY,
             message="Output directory already contains files.",
-            fix="Choose a new empty output directory, or re-run with --resume when a compatible manifest exists.",
-            details={"output_dir": str(output_dir)},
+            fix=fix,
+            details={"output_dir": str(output_dir), "prior_run_incomplete": prior_run_incomplete},
         )
 
 
@@ -455,17 +498,32 @@ def run_preflight(args, *, pipeline_source: dict[str, object], samplesheet_summa
     _check_threshold_bounds(args)
     java_info = _check_java()
     nextflow_info = _check_nextflow_presence() if getattr(args, "check", False) else _check_nextflow()
+    if nextflow_info.get("version_checked") is False:
+        # --check verifies Nextflow is present but intentionally defers the
+        # >=25.04.3 version gate to the real run (audit F-5). Surface that so a
+        # check is not silently assumed to confirm a compatible Nextflow.
+        warnings.append(
+            "Nextflow version was not verified in --check mode; the >=25.04.3 "
+            "requirement is enforced on the actual run."
+        )
     profile_info = _check_profile(args.profile)
     output_dir = Path(args.output).expanduser().resolve()
     check_output_dir_available(output_dir, resume=getattr(args, "resume", False))
     _check_contaminant_paths(args)
+    _check_ribo_paths(args)
+    _check_nextflow_configs(args, warnings)
+    _check_acceleration_compatibility(args)
+    _check_contaminant_screening(args, warnings)
     _check_mutual_exclusions(args)
     _check_samplesheet_summary(args, samplesheet_summary=samplesheet_summary)
     bam_paths = samplesheet_summary.get("bam_paths", [])
-    refs = {} if (getattr(args, "demo", False) or getattr(args, "_noinput", False)) else _check_references(args, bam_reprocessing=bool(bam_paths))
+    refs = {} if (getattr(args, "demo", False) or getattr(args, "_noinput", False)) else _check_references(args, bam_reprocessing=bool(bam_paths), warnings=warnings)
     _check_skip_alignment_requirements(args, bam_paths=bam_paths)
+    _collect_bam_reprocessing_warning(bam_paths, aligner_effective, warnings)
+    _collect_index_aligner_warnings(args, warnings)
     gencode_autodetected = _collect_gencode_autodetect_warning(args, warnings)
     _check_resume_compatibility(args, output_dir=output_dir, pipeline_source=pipeline_source)
+    _collect_umi_warnings(args, warnings)
     _collect_demo_warnings(args, warnings)
     _collect_platform_warnings(args, output_dir, warnings)
     handoff_available = _collect_alignment_warnings(args, warnings)
@@ -498,7 +556,7 @@ def _check_supported_options(args) -> str:
     pseudo_aligner = getattr(args, "pseudo_aligner", None)
     if pseudo_aligner and pseudo_aligner not in SUPPORTED_PSEUDO_ALIGNERS:
         _raise_invalid_enum(ErrorCode.INVALID_PSEUDO_ALIGNER, "pseudo_aligner", pseudo_aligner, SUPPORTED_PSEUDO_ALIGNERS)
-    trimmer = getattr(args, "trimmer", "trimgalore")
+    trimmer = getattr(args, "trimmer", DEFAULT_TRIMMER)
     if trimmer not in SUPPORTED_TRIMMERS:
         _raise_invalid_enum(ErrorCode.INVALID_TRIMMER, "trimmer", trimmer, SUPPORTED_TRIMMERS)
     ribo_tool = getattr(args, "ribo_removal_tool", None)
@@ -519,10 +577,32 @@ def _check_supported_options(args) -> str:
     publish_dir_mode = getattr(args, "publish_dir_mode", None)
     if publish_dir_mode and publish_dir_mode not in SUPPORTED_PUBLISH_DIR_MODES:
         _raise_invalid_enum(ErrorCode.INVALID_PRESET_CONFIGURATION, "publish_dir_mode", publish_dir_mode, SUPPORTED_PUBLISH_DIR_MODES)
+    _check_rseqc_modules(getattr(args, "rseqc_modules", None))
     # Profile validation is handled by _check_profile (called later in run_preflight).
     # Composite profiles (e.g. "docker,prokaryotic") and undocumented profiles
     # (test_full, institutional HPC) must not be rejected here.
     return "star_salmon" if getattr(args, "demo", False) else aligner
+
+
+def _check_rseqc_modules(rseqc_modules: str | None) -> None:
+    """Reject unknown RSeQC module names locally instead of failing late in Nextflow.
+
+    ``--rseqc-modules`` is a comma-separated list; nf-core/rnaseq 3.26.0 only accepts
+    the eight names in SUPPORTED_RSEQC_MODULES. Catching a typo here gives a clear
+    error before any container is pulled (audit F-04).
+    """
+    if not rseqc_modules:
+        return
+    requested = [m.strip() for m in str(rseqc_modules).split(",") if m.strip()]
+    unknown = [m for m in requested if m not in SUPPORTED_RSEQC_MODULES]
+    if unknown:
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message=f"Unsupported rseqc-modules value(s): {', '.join(unknown)}.",
+            fix=f"Choose from: {', '.join(sorted(SUPPORTED_RSEQC_MODULES))}.",
+            details={"field": "rseqc_modules", "unknown": unknown, "requested": requested},
+        )
 
 
 def _raise_invalid_enum(code: str, field: str, value: str, supported: set[str]) -> None:
@@ -600,7 +680,7 @@ def _check_threshold_bounds(args) -> None:
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
-            message="unstranded_threshold is out of range (nf-core schema: minimum 0; wrapper enforces maximum 1.0 — thresholds cannot exceed 1).",
+            message="unstranded_threshold is out of range (nf-core schema: minimum 0, maximum 1).",
             fix="Set --unstranded-threshold to a value between 0.0 and 1.0 inclusive.",
             details={"field": "unstranded_threshold", "value": ut, "minimum": 0.0, "maximum": 1.0},
         )
@@ -632,6 +712,11 @@ def _check_threshold_bounds(args) -> None:
             details={"field": "kallisto_quant_fraglen_sd", "value": fraglen_sd, "minimum": 0},
         )
     mmr = getattr(args, "min_mapped_reads", None)
+    # min_mapped_reads is a percentage of uniquely-mapped reads (pipeline default 5).
+    # The nf-core schema declares no explicit maximum, but a percentage > 100 is
+    # meaningless (it would discard every sample), so the wrapper intentionally bounds
+    # it to 0..100 — a guard stricter than the schema, never blocking a usable value
+    # (audit F4).
     if mmr is not None and not (0 <= mmr <= 100):
         raise SkillError(
             stage="preflight",
@@ -639,6 +724,32 @@ def _check_threshold_bounds(args) -> None:
             message="min_mapped_reads must be between 0 and 100 (it is a percentage, pipeline default: 5).",
             fix="Set --min-mapped-reads to a value between 0 and 100 inclusive.",
             details={"field": "min_mapped_reads", "value": mmr, "minimum": 0, "maximum": 100},
+        )
+    kmer = getattr(args, "pseudo_aligner_kmer_size", None)
+    # Salmon and Kallisto both encode the index k-mer in a 64-bit machine word, so
+    # the k-mer must be ODD and ≤ 31 (their shared hard cap; pipeline default 31).
+    # The nf-core schema declares no bound, but an even or out-of-range value is a
+    # guaranteed indexing crash — catch it early like every other numeric field
+    # rather than let the pipeline abort late (audit F9).
+    if kmer is not None and (kmer < 1 or kmer > 31 or kmer % 2 == 0):
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message=(
+                "pseudo_aligner_kmer_size must be an odd integer between 1 and 31 "
+                "(Salmon/Kallisto index constraint; pipeline default: 31)."
+            ),
+            fix="Set --pseudo-aligner-kmer-size to an odd value in 1..31 (e.g. 31 for reads ≥75 bp, lower for short reads).",
+            details={"field": "pseudo_aligner_kmer_size", "value": kmer, "minimum": 1, "maximum": 31},
+        )
+    timeout_hours = getattr(args, "timeout_hours", None)
+    if timeout_hours is not None and timeout_hours <= 0:
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message="timeout_hours must be greater than 0.",
+            fix="Set --timeout-hours to a positive number of hours (default: 12).",
+            details={"field": "timeout_hours", "value": timeout_hours, "minimum": 0},
         )
     hbm = getattr(args, "hisat2_build_memory", None)
     if hbm is not None and not _HISAT2_MEM_RE.match(str(hbm)):
@@ -673,24 +784,43 @@ def _check_threshold_bounds(args) -> None:
             )
 
 
-def _check_references(args, *, bam_reprocessing: bool = False) -> dict[str, str]:
+def _check_references(args, *, bam_reprocessing: bool = False, warnings: list[str] | None = None) -> dict[str, str]:
+    if warnings is None:
+        warnings = []
     values = _collect_reference_values(args)
+    # --gtf + --gff together: nf-core/rnaseq accepts both and uses --gtf, ignoring
+    # --gff (docs: "the latter [GTF] will be used if both are provided"). Match that
+    # exactly — keep --gtf, drop --gff (so it is never written to params.yaml or the
+    # replay command), and warn. Rejecting here would block a valid upstream config
+    # (audit F2).
+    if values.get("gtf") and values.get("gff"):
+        warnings.append(
+            "Both --gtf and --gff were provided; nf-core/rnaseq uses --gtf and ignores "
+            "--gff. Dropping --gff to match upstream behaviour."
+        )
+        values.pop("gff", None)
+        args.gff = None
     if values.get("genome"):
-        explicit_set = [field for field in _EXPLICIT_REFERENCE_FIELDS if values.get(field)]
-        if explicit_set:
-            # ClawBio enforces a stricter rule than upstream: when --genome is
-            # given, no explicit --fasta/--gtf/--gff or --*-index may also be
-            # set. Upstream silently lets explicit flags override iGenomes;
-            # we surface the ambiguity instead. See plan §5.2 row 1.
+        conflicting = [field for field in _GENOME_CONFLICTING_REFERENCE_FIELDS if values.get(field)]
+        if conflicting:
+            # --genome provides a complete iGenomes reference. A second genome
+            # sequence source (--fasta) or a genome-level index (STAR/RSEM/HISAT2/
+            # Bowtie2) is genuinely ambiguous, so it is rejected. Additive
+            # annotation/transcriptome overrides (--gtf/--gff/--gene-bed/
+            # --transcript-fasta/--additional-fasta/--splicesites/--salmon-index/
+            # --kallisto-index) ARE allowed alongside --genome — nf-core/rnaseq
+            # supports them and they are common (e.g. ERCC spike-ins, custom GTF).
             raise SkillError(
                 stage="preflight",
                 error_code=ErrorCode.CONFLICTING_REFERENCES,
-                message="--genome and explicit reference or index paths are mutually exclusive.",
+                message="--genome cannot be combined with an explicit genome FASTA or a genome-level index.",
                 fix=(
-                    "Use either --genome <iGenomes_name> alone, OR explicit --fasta/--gtf "
-                    "(plus optional --*-index flags). Do not mix the two."
+                    "Use --genome <iGenomes_name> (optionally with additive overrides such as "
+                    "--gtf, --gff, --additional-fasta, --transcript-fasta, --gene-bed, --splicesites, "
+                    "--salmon-index, or --kallisto-index), OR a fully explicit --fasta/--gtf reference. "
+                    "Do not provide both a named genome and your own genome FASTA/index."
                 ),
-                details={"genome": values["genome"], "explicit_set": explicit_set},
+                details={"genome": values["genome"], "explicit_set": conflicting},
             )
     # Enforce standard-group uniqueness first (fasta+gtf vs fasta+gff is a real
     # conflict regardless of BAM mode; genome vs explicit is already handled above).
@@ -712,16 +842,87 @@ def _check_references(args, *, bam_reprocessing: bool = False) -> dict[str, str]
         # they do not conflict with each other in this mode.
         if bam_reprocessing and getattr(args, "skip_alignment", False):
             pass
+        elif _is_transcriptome_only_pseudo_route(args, values):
+            # Transcriptome-only pseudo-alignment: Salmon/Kallisto can quantify
+            # against a transcript FASTA or a prebuilt salmon/kallisto index without
+            # a genome FASTA. A GTF/GFF is still required for tximport's tx2gene
+            # gene-level summarisation, so this is accepted only with annotation
+            # present (audit F-03).
+            pass
+        elif not getattr(args, "skip_alignment", False) and _alignment_reference_complete(args, values):
+            # Fully prebuilt references: a genome index matching the aligner plus a
+            # transcript source and annotation needs no --fasta (audit F-12).
+            pass
         else:
             raise SkillError(
                 stage="preflight",
                 error_code=ErrorCode.MISSING_REFERENCE,
                 message="A reference group is required.",
-                fix="Provide --genome, --fasta plus --gtf, or --fasta plus --gff.",
+                fix=(
+                    "Provide --genome, --fasta plus --gtf, or --fasta plus --gff. "
+                    "For pseudo-alignment only, --transcript-fasta or a --salmon-index/"
+                    "--kallisto-index plus --gtf/--gff is also accepted."
+                ),
                 details={"accepted_combinations": [list(group) for group in _REFERENCE_GROUPS]},
             )
     _check_reference_paths_exist(values)
     return values
+
+
+# Prebuilt genome index that lets each aligner run without --fasta.
+_ALIGNER_GENOME_INDEX_FIELDS = {
+    "star_salmon": ("star_index",),
+    "star_rsem": ("star_index", "rsem_index"),
+    "hisat2": ("hisat2_index",),
+    "bowtie2_salmon": ("bowtie2_index",),
+}
+
+
+def _alignment_reference_complete(args, values: dict[str, str]) -> bool:
+    """True when prebuilt references fully specify an alignment route without --fasta.
+
+    nf-core/rnaseq does not need a genome FASTA when every artifact it would build
+    from it is already supplied (audit F-12). A route is complete when:
+
+    * an annotation (``--gtf``/``--gff``) is present — always required for quantification;
+    * a genome source for the aligner is present — ``--fasta`` or the aligner's prebuilt
+      index (STAR/HISAT2/Bowtie2; RSEM also accepts ``--rsem-index``); and
+    * a transcript source is present for quantifying routes — ``--fasta`` (to derive it),
+      ``--transcript-fasta`` or ``--salmon-index`` for the Salmon routes, and
+      ``--fasta`` or ``--rsem-index`` for RSEM. HISAT2-only alignment needs none.
+    """
+    aligner = getattr(args, "aligner", "star_salmon")
+    has_annotation = bool(values.get("gtf") or values.get("gff"))
+    if not has_annotation:
+        return False
+    has_fasta = bool(values.get("fasta"))
+    index_fields = _ALIGNER_GENOME_INDEX_FIELDS.get(aligner, ())
+    has_genome_source = has_fasta or any(values.get(f) for f in index_fields)
+    if not has_genome_source:
+        return False
+    if aligner in {"star_salmon", "bowtie2_salmon"}:
+        return has_fasta or bool(values.get("transcript_fasta") or values.get("salmon_index"))
+    if aligner == "star_rsem":
+        return has_fasta or bool(values.get("rsem_index"))
+    return True  # hisat2: alignment only, no transcript source required
+
+
+def _is_transcriptome_only_pseudo_route(args, values: dict[str, str]) -> bool:
+    """True when a Salmon/Kallisto pseudo route can run off a transcriptome alone.
+
+    Requires (a) the genome aligner to be skipped (``--skip-alignment``) so no STAR/
+    HISAT2/Bowtie2 step demands a genome FASTA — a pseudo-aligner running *alongside*
+    a genome aligner still needs the genome and is intentionally NOT covered here;
+    (b) a transcript source (``--transcript-fasta`` or a prebuilt ``--salmon-index``/
+    ``--kallisto-index``); and (c) an annotation (``--gtf``/``--gff``) for tximport's
+    tx2gene gene-level summarisation. Missing any of these falls through to
+    MISSING_REFERENCE (audit F-03).
+    """
+    if not getattr(args, "skip_alignment", False):
+        return False
+    has_transcript_source = any(values.get(f) for f in ("transcript_fasta", "salmon_index", "kallisto_index"))
+    has_annotation = bool(values.get("gtf") or values.get("gff"))
+    return has_transcript_source and has_annotation
 
 
 def _collect_reference_values(args) -> dict[str, str]:
@@ -780,6 +981,28 @@ def _check_reference_paths_exist(values: dict[str, str]) -> None:
             # Nextflow resolves remote refs directly at runtime.
             continue
         if field in _EXTENSION_CHECKS:
+            # The wrapper resolves reference paths to absolute POSIX before writing
+            # params.yaml, so a path that resolves into a directory containing
+            # whitespace would fail the nf-core ^\S+ schema pattern at runtime
+            # (audit F-1). Catch it here — on the *resolved* path — with a precise,
+            # dedicated error, mirroring the samplesheet input guard. This check
+            # precedes the extension check because the ^\S+ extension regex also
+            # fails on whitespace and would otherwise report a misleading message.
+            resolved = Path(value).expanduser().resolve()
+            if _WHITESPACE_RE.search(resolved.as_posix()):
+                raise SkillError(
+                    stage="preflight",
+                    error_code=ErrorCode.REFERENCE_PATH_HAS_WHITESPACE,
+                    message=(
+                        f"--{field.replace('_', '-')} resolves to a path containing whitespace, "
+                        "which the nf-core/rnaseq schema rejects (pattern ^\\S+)."
+                    ),
+                    fix=(
+                        "Move the reference into a directory whose full path has no spaces, "
+                        "or symlink it to a whitespace-free location, then point the flag there."
+                    ),
+                    details={"field": field, "value": value, "resolved": resolved.as_posix()},
+                )
             pat, msg, fix = _EXTENSION_CHECKS[field]
             if not pat.match(value):
                 raise SkillError(
@@ -812,7 +1035,7 @@ def _collect_gencode_autodetect_warning(args, warnings: list[str]) -> bool:
 def _gtf_has_gencode_markers(path: Path) -> bool:
     feature_records_seen = 0
     try:
-        opener = gzip.open if path.suffix == ".gz" else Path.open
+        opener = gzip.open if path.suffix.lower() == ".gz" else Path.open
         with opener(path, mode="rt", encoding="utf-8") as handle:
             for line in handle:
                 text = line.strip()
@@ -844,6 +1067,10 @@ def _split_contaminant_paths(field: str, value: str) -> list[str]:
 
 
 def _check_existing_contaminant_path(field: str, value: str) -> None:
+    if "://" in value:
+        # Remote databases are staged by Nextflow; local existence checks only
+        # apply to filesystem paths.
+        return
     path = Path(value).expanduser()
     if not path.exists():
         raise SkillError(
@@ -863,6 +1090,228 @@ def _check_existing_contaminant_path(field: str, value: str) -> None:
                 "(one genome per line: <name>\t<path>). See the nf-core/rnaseq docs for format."
             ),
             details={"field": field, "path": value, "expected": "file", "got": "directory"},
+        )
+
+
+def _check_ribo_paths(args) -> None:
+    manifest = getattr(args, "ribo_database_manifest", None)
+    if not manifest:
+        return
+    _check_existing_ribo_manifest(manifest)
+
+
+def _check_existing_ribo_manifest(value: str) -> None:
+    if "://" in value:
+        # Remote URIs are resolved by Nextflow at runtime; local existence checks
+        # are only meaningful for filesystem paths.
+        return
+    path = Path(value).expanduser()
+    if not path.exists():
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.REFERENCE_PATH_NOT_FOUND,
+            message="The rRNA database manifest path was not found.",
+            fix="Correct --ribo-database-manifest or remove it.",
+            details={"field": "ribo_database_manifest", "path": value},
+        )
+    if not path.is_file():
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message="--ribo-database-manifest must point to a manifest file, not a directory.",
+            fix="Provide the manifest file path expected by the selected rRNA removal tool.",
+            details={"field": "ribo_database_manifest", "path": value, "expected": "file", "got": "directory"},
+        )
+
+
+def _check_nextflow_configs(args, warnings: list[str]) -> None:
+    for raw_path in getattr(args, "nextflow_config", None) or []:
+        path = Path(raw_path).expanduser()
+        if not path.exists():
+            raise SkillError(
+                stage="preflight",
+                error_code=ErrorCode.REFERENCE_PATH_NOT_FOUND,
+                message="A Nextflow config path was not found.",
+                fix="Correct --nextflow-config or remove it.",
+                details={"field": "nextflow_config", "path": raw_path},
+            )
+        if not path.is_file():
+            raise SkillError(
+                stage="preflight",
+                error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+                message="--nextflow-config must point to a config file, not a directory.",
+                fix="Provide a .config file path.",
+                details={"field": "nextflow_config", "path": raw_path, "expected": "file", "got": "directory"},
+            )
+        _reject_nextflow_params_overrides(path, warnings=warnings)
+
+
+def _reject_nextflow_params_overrides(
+    path: Path, *, warnings: list[str], _seen: set[Path] | None = None, _depth: int = 0
+) -> None:
+    """Reject params.* overrides in a --nextflow-config file and its includeConfig chain.
+
+    The audited-parameter-surface guarantee is only meaningful if it cannot be
+    bypassed. Besides the direct params forms (block/property/assignment/subscript/
+    merge — see _NEXTFLOW_PARAMS_OVERRIDE_RE), a params override could be hidden in
+    an `includeConfig` target, so every locally-resolvable include is audited
+    recursively (with cycle/depth guards). Includes the wrapper cannot read locally
+    (remote URIs, interpolated `${...}` paths, or missing files) are surfaced as
+    warnings rather than silently trusted — the wrapper is honest about what it
+    could not audit (audit M2).
+    """
+    if _seen is None:
+        _seen = set()
+    resolved = path.resolve()
+    if resolved in _seen:
+        return
+    _seen.add(resolved)
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError) as exc:
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message="--nextflow-config could not be read as UTF-8 text.",
+            fix="Provide a readable Nextflow config file.",
+            details={"field": "nextflow_config", "path": str(path), "error": str(exc)},
+        ) from exc
+    for line_number, line in enumerate(lines, start=1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith(("#", "//", "/*", "*")):
+            continue
+        if _NEXTFLOW_PARAMS_OVERRIDE_RE.match(line) and not _NEXTFLOW_ALLOWED_PARAMS_RE.match(line):
+            raise SkillError(
+                stage="preflight",
+                error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+                message="--nextflow-config must not override nf-core params.* values.",
+                fix=(
+                    "Pass pipeline parameters through audited wrapper flags/params.yaml. "
+                    "Keep --nextflow-config for runtime settings such as process, executor, profiles, labels, "
+                    "and the documented params.genomes custom genome catalogue."
+                ),
+                details={
+                    "field": "nextflow_config",
+                    "path": str(path),
+                    "line": line_number,
+                    "text": stripped[:160],
+                },
+            )
+        include_match = _NEXTFLOW_INCLUDE_RE.match(line)
+        if include_match:
+            _audit_included_config(
+                include_match.group(1),
+                parent=path.parent,
+                source=path,
+                line_number=line_number,
+                warnings=warnings,
+                _seen=_seen,
+                _depth=_depth,
+            )
+
+
+def _audit_included_config(
+    target: str,
+    *,
+    parent: Path,
+    source: Path,
+    line_number: int,
+    warnings: list[str],
+    _seen: set[Path],
+    _depth: int,
+) -> None:
+    if "://" in target or "${" in target:
+        warnings.append(
+            f"--nextflow-config '{source}' line {line_number}: includeConfig '{target}' is a "
+            "remote or dynamically-interpolated path the wrapper cannot audit for params overrides. "
+            "Ensure it does not set nf-core params.* values."
+        )
+        return
+    if _depth + 1 > _MAX_CONFIG_INCLUDE_DEPTH:
+        warnings.append(
+            f"--nextflow-config '{source}' line {line_number}: includeConfig nesting exceeded "
+            f"{_MAX_CONFIG_INCLUDE_DEPTH} levels and was not fully audited for params overrides."
+        )
+        return
+    included = Path(target).expanduser()
+    if not included.is_absolute():
+        included = parent / included
+    if not included.exists() or not included.is_file():
+        warnings.append(
+            f"--nextflow-config '{source}' line {line_number}: includeConfig '{target}' could not be "
+            "resolved to a local file, so it was not audited for params overrides. "
+            "Ensure it does not set nf-core params.* values."
+        )
+        return
+    _reject_nextflow_params_overrides(included, warnings=warnings, _seen=_seen, _depth=_depth + 1)
+
+
+def _check_acceleration_compatibility(args) -> None:
+    aligner = getattr(args, "aligner", "star_salmon")
+    if getattr(args, "use_parabricks_star", False) and aligner != "star_salmon":
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message="--use-parabricks-star requires --aligner star_salmon.",
+            fix="Switch to --aligner star_salmon, or remove --use-parabricks-star.",
+            details={"field": "use_parabricks_star", "aligner": aligner},
+        )
+    if getattr(args, "use_sentieon_star", False) and aligner not in {"star_salmon", "star_rsem"}:
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message="--use-sentieon-star requires a STAR-based aligner.",
+            fix="Switch to --aligner star_salmon or --aligner star_rsem, or remove --use-sentieon-star.",
+            details={"field": "use_sentieon_star", "aligner": aligner},
+        )
+    if getattr(args, "use_gpu_ribodetector", False):
+        remove_ribo = bool(getattr(args, "remove_ribo_rna", False))
+        ribo_tool = getattr(args, "ribo_removal_tool", None)
+        if not remove_ribo or ribo_tool != "ribodetector":
+            raise SkillError(
+                stage="preflight",
+                error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+                message="--use-gpu-ribodetector requires --remove-ribo-rna with --ribo-removal-tool ribodetector.",
+                fix=(
+                    "Add --remove-ribo-rna --ribo-removal-tool ribodetector, "
+                    "or remove --use-gpu-ribodetector."
+                ),
+                details={
+                    "field": "use_gpu_ribodetector",
+                    "remove_ribo_rna": remove_ribo,
+                    "ribo_removal_tool": ribo_tool,
+                },
+            )
+
+
+def _check_contaminant_screening(args, warnings: list[str]) -> None:
+    """Ensure the selected contaminant-screening tool has its required database.
+
+    nf-core/rnaseq 3.26.0 needs a Kraken2 database for ``kraken2``/``kraken2_bracken``
+    and a Sylph database for ``sylph``. Without it the run fails inside Nextflow after
+    container pulls, so catch it at preflight (audit F-10). ``--bracken-precision`` only
+    applies to ``kraken2_bracken``; with any other tool it is inert and merely warned.
+    """
+    screening = getattr(args, "contaminant_screening", None)
+    if screening in {"kraken2", "kraken2_bracken"} and not getattr(args, "kraken_db", None):
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message=f"--contaminant-screening {screening} requires a Kraken2 database.",
+            fix="Provide --kraken-db <path>, or remove --contaminant-screening.",
+            details={"field": "kraken_db", "contaminant_screening": screening},
+        )
+    if screening == "sylph" and not getattr(args, "sylph_db", None):
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
+            message="--contaminant-screening sylph requires a Sylph database.",
+            fix="Provide --sylph-db <path[,path...]>, or remove --contaminant-screening.",
+            details={"field": "sylph_db", "contaminant_screening": screening},
+        )
+    if getattr(args, "bracken_precision", None) and screening != "kraken2_bracken":
+        warnings.append(
+            "--bracken-precision has no effect without --contaminant-screening kraken2_bracken."
         )
 
 
@@ -951,7 +1400,8 @@ def _check_samplesheet_summary(args, *, samplesheet_summary: dict[str, object]) 
                 details={"strandedness": strandedness},
             )
     for fastq_path in samplesheet_summary.get("fastq_paths", []):
-        path = Path(fastq_path)
+        raw_path = str(fastq_path)
+        path = Path(raw_path)
         if not _FASTQ_BASENAME_RE.match(path.name):
             raise SkillError(
                 stage="preflight",
@@ -960,7 +1410,7 @@ def _check_samplesheet_summary(args, *, samplesheet_summary: dict[str, object]) 
                 fix="Use .fq, .fastq, .fq.gz, or .fastq.gz and remove whitespace from the basename.",
                 details={"filename": path.name},
             )
-        if not path.exists():
+        if "://" not in raw_path and not path.exists():
             raise SkillError(
                 stage="preflight",
                 error_code=ErrorCode.MISSING_FASTQ,
@@ -968,16 +1418,19 @@ def _check_samplesheet_summary(args, *, samplesheet_summary: dict[str, object]) 
                 fix="Correct the FASTQ path and rerun samplesheet validation.",
                 details={"path": str(path)},
             )
-    bam_paths = [Path(path) for path in samplesheet_summary.get("bam_paths", [])]
-    if bam_paths and not getattr(args, "skip_alignment", False):
+    raw_bam_paths = [str(path) for path in samplesheet_summary.get("bam_paths", [])]
+    if raw_bam_paths and not getattr(args, "skip_alignment", False):
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.BAM_REPROCESSING_INCOMPLETE,
             message="BAM reprocessing rows require --skip-alignment.",
             fix="Add --skip-alignment, or remove BAM columns from the samplesheet.",
-            details={"bam_count": len(bam_paths)},
+            details={"bam_count": len(raw_bam_paths)},
         )
-    for bam_path in bam_paths:
+    for raw_bam_path in raw_bam_paths:
+        if "://" in raw_bam_path:
+            continue
+        bam_path = Path(raw_bam_path)
         if not bam_path.exists():
             raise SkillError(
                 stage="preflight",
@@ -1041,6 +1494,38 @@ def _raise_resume_mismatch(field: str, expected: object, observed: object) -> No
     )
 
 
+_UMI_DEPENDENT_FIELDS = (
+    "umi_dedup_tool",
+    "umitools_extract_method",
+    "umitools_bc_pattern",
+    "umitools_bc_pattern2",
+    "umitools_umi_separator",
+    "umi_discard_read",
+    "umitools_grouping_method",
+    "skip_umi_extract",
+    "umitools_dedup_stats",
+    "umitools_dedup_primary_only",
+)
+
+
+def _collect_umi_warnings(args, warnings: list[str]) -> None:
+    """Warn when UMI-specific options are set but --with-umi is off.
+
+    Without --with-umi the pipeline performs no UMI extraction/deduplication, so these
+    options are silently inert. Surfacing it prevents a run that the user believes is
+    UMI-deduplicated but is not (audit F-11).
+    """
+    if getattr(args, "with_umi", False):
+        return
+    set_fields = [f for f in _UMI_DEPENDENT_FIELDS if getattr(args, f, None)]
+    if set_fields:
+        flags = ", ".join("--" + f.replace("_", "-") for f in set_fields)
+        warnings.append(
+            f"UMI options ({flags}) have no effect without --with-umi; no UMI "
+            "deduplication will be performed."
+        )
+
+
 def _collect_demo_warnings(args, warnings: list[str]) -> None:
     """Emit a structured demo warning when reference/aligner overrides are still present.
 
@@ -1065,6 +1550,78 @@ def _collect_platform_warnings(args, output_dir: Path, warnings: list[str]) -> N
         output_text = output_dir.as_posix()
         if output_text.startswith("/tmp/") or output_text.startswith("/private/tmp/"):
             warnings.append("On macOS Docker, output under /tmp may be slow or unreliable due to VirtioFS behavior.")
+        _warn_macos_star_index_memory(args, warnings)
+
+
+def _warn_macos_star_index_memory(args, warnings: list[str]) -> None:
+    """Warn when a STAR index will be built from --fasta under the macOS memory cap.
+
+    STAR_GENOMEGENERATE for a large genome needs ~30+ GB, but the macOS Docker
+    compatibility config caps per-process memory (~15 GB), so the build can be
+    OOM-killed. Only relevant when a genome FASTA is provided and the aligner's
+    prebuilt genome index is absent (audit L2). Using --genome (iGenomes) or a
+    prebuilt index needs no local build, so no warning fires.
+    """
+    aligner = getattr(args, "aligner", "")
+    if aligner not in {"star_salmon", "star_rsem"} or not getattr(args, "fasta", None):
+        return
+    prebuilt = getattr(args, "star_index", None)
+    if aligner == "star_rsem":
+        prebuilt = prebuilt or getattr(args, "rsem_index", None)
+    if prebuilt:
+        return
+    warnings.append(
+        "On macOS Docker, building the STAR index from --fasta for a large genome can exceed the "
+        "wrapper's per-process memory ceiling (~15 GB) and be OOM-killed. Provide a prebuilt "
+        "--star-index, use --genome with a local iGenomes mirror, or raise the Docker VM memory."
+    )
+
+
+def _collect_index_aligner_warnings(args, warnings: list[str]) -> None:
+    """Warn when an index flag the chosen aligner/pseudo-aligner cannot consume is set.
+
+    The wrapper validates index presence/completeness but not index *type vs aligner*.
+    e.g. ``--aligner star_rsem --salmon-index`` is accepted, yet RSEM never uses Salmon,
+    so the index is silently ignored by nf-core. Surface it so the user does not believe a
+    prebuilt index took effect when it did not (audit F3). A warning, not an error — the
+    pipeline simply ignores the unused index.
+    """
+    aligner = getattr(args, "aligner", "star_salmon")
+    pseudo = getattr(args, "pseudo_aligner", None)
+    relevant: set[str] = set(_ALIGNER_GENOME_INDEX_FIELDS.get(aligner, ()))
+    if aligner in {"star_salmon", "bowtie2_salmon"}:
+        relevant.add("salmon_index")
+    if pseudo == "salmon":
+        relevant.add("salmon_index")
+    if pseudo == "kallisto":
+        relevant.add("kallisto_index")
+    unused = [f for f in _INDEX_REFERENCE_FIELDS if f not in relevant and getattr(args, f, None)]
+    if unused:
+        flags = ", ".join("--" + f.replace("_", "-") for f in unused)
+        pseudo_suffix = f" --pseudo-aligner {pseudo}" if pseudo else ""
+        warnings.append(
+            f"--aligner {aligner}{pseudo_suffix} does not use the supplied index flag(s) "
+            f"({flags}); they will be ignored. Provide an index matching the chosen aligner, "
+            "or remove the unused flag(s)."
+        )
+
+
+def _collect_bam_reprocessing_warning(bam_paths: list, aligner_effective: str, warnings: list[str]) -> None:
+    """Remind the user that BAM reprocessing must reuse the original aligner.
+
+    nf-core/rnaseq cannot mix quantifier types between BAM generation and reprocessing:
+    star_salmon BAMs must be reprocessed with star_salmon, star_rsem with star_rsem.
+    The wrapper cannot infer how a BAM was produced, and the default aligner is
+    star_salmon, so it warns whenever BAM columns are present to prevent a silent
+    quantifier mismatch.
+    """
+    if not bam_paths:
+        return
+    warnings.append(
+        f"BAM reprocessing detected: ensure --aligner ({aligner_effective}) matches the aligner used to "
+        "generate the BAMs. nf-core/rnaseq cannot mix quantifier types — star_salmon BAMs must be "
+        "reprocessed with star_salmon, star_rsem BAMs with star_rsem."
+    )
 
 
 def _collect_alignment_warnings(args, warnings: list[str]) -> bool:

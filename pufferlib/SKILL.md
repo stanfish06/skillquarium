@@ -2,18 +2,10 @@
 name: pufferlib
 description: High-performance reinforcement learning framework optimized for speed and scale. Use when you need fast parallel training, vectorized environments, multi-agent systems, or integration with game environments (Atari, Procgen, NetHack). Achieves 2-10x speedups over standard implementations. For quick prototyping or standard algorithm implementations with extensive documentation, use stable-baselines3 instead.
 license: MIT license
-metadata:
-  version: "1.0"
-  skill-author: K-Dense Inc.
+metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 ---
 
 # PufferLib - High-Performance Reinforcement Learning
-
-> [!WARNING]
-> **This skill describes the PufferLib v1.x API, which was broken by the v2.0.0 (Dec 2024) and v3.0.0 (Jun 2025) releases.**
-> The top-level `from pufferlib import PuffeRL` import and the v1 constructor pattern shown below are incompatible with `pufferlib>=2.0.0`. Installing a newer PyPI package and following this skill as written can cause `ImportError: cannot import name 'PuffeRL'` or trainer signature/configuration errors.
->
-> Pin to `pufferlib==1.0.0` to use this skill as written. For newer code, use the dedicated `pufferlib-v2` skill for `pufferlib>=2.0,<3.0` or the `pufferlib-v3` skill for `pufferlib>=3.0,<4.0`.
 
 ## Overview
 
@@ -438,3 +430,4 @@ uv pip install pufferlib
 - Official docs: https://puffer.ai/docs.html
 - GitHub: https://github.com/PufferAI/PufferLib
 - Discord: Community support available
+

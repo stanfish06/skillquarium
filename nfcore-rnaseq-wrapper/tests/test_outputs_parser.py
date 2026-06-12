@@ -250,7 +250,7 @@ def test_find_multiqc_reports_returns_list(tmp_path):
     upstream = _upstream(tmp_path)
     r1 = _write(upstream / "multiqc" / "star_salmon" / "multiqc_report.html")
     r2 = _write(upstream / "multiqc" / "sampleA" / "multiqc_report.html")
-    r3 = _write(upstream / "multiqc" / "sampleB" / "multiqc_report.html")
+    _write(upstream / "multiqc" / "sampleB" / "multiqc_report.html")
     reports = find_multiqc_reports(upstream, aligner="star_salmon")
     assert isinstance(reports, list), "find_multiqc_reports must return a list"
     assert len(reports) >= 1

@@ -7,19 +7,13 @@ import subprocess
 import sys
 
 _SKILL_DIR = Path(__file__).resolve().parent
-if str(_SKILL_DIR) not in sys.path:
-    sys.path.insert(0, str(_SKILL_DIR))
+if str(_SKILL_DIR) in sys.path:
+    sys.path.remove(str(_SKILL_DIR))
+sys.path.insert(0, str(_SKILL_DIR))
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
-
-def _purge_foreign_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
-
-
-_purge_foreign_modules("errors")
+purge_foreign_bare_modules("errors")
 
 from errors import ErrorCode, SkillError
 
@@ -71,7 +65,12 @@ def execute_nextflow(
                 stage="execution",
                 error_code=ErrorCode.EXECUTION_FAILED,
                 message="Nextflow execution timed out.",
-                fix="Increase resources, inspect the pipeline, or retry with a smaller dataset.",
+                fix=(
+                    "Raise --timeout-hours for large cohorts, inspect the pipeline, or retry "
+                    "with a smaller dataset. Nextflow was terminated, but containers started by "
+                    "the Docker/Singularity daemon are not in its process group and may still be "
+                    "running — check for and remove any leftover containers (e.g. `docker ps`)."
+                ),
                 details={"timeout_seconds": timeout_seconds},
             )
 

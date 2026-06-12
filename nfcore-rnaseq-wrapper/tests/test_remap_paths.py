@@ -35,11 +35,9 @@ from remap_paths import (
     cmd_repair_bundle,
     cmd_update_output,
     cmd_verify,
-    find_commands_sh,
     find_samplesheet,
     remap_commands_references,
     remap_csv,
-    update_commands_output,
     verify_paths,
     verify_reference_paths,
 )
@@ -114,6 +112,35 @@ def test_verify_paths_returns_missing_paths(tmp_path):
 
 def test_cmd_remap_returns_nonzero_when_no_samplesheet(tmp_path):
     assert cmd_remap("/old", "/new", dry_run=False, bundle_dir=tmp_path) != 0
+
+
+def test_cmd_remap_exit_code_consistent_across_reruns_when_target_missing(tmp_path):
+    """Re-running the same remap must give the SAME exit code for the SAME readiness
+    state. A first run that remaps onto missing targets is not replay-ready (non-zero);
+    a second, idempotent run (nothing left to change) must NOT silently return 0 while
+    the bundle is still not replay-ready — that inconsistency breaks scripted relocation
+    and re-execution."""
+    _write_samplesheet(tmp_path / "samplesheet.valid.csv", "/old/data/R1.fastq.gz")
+    first = cmd_remap("/old/data", "/missing/data", dry_run=False, bundle_dir=tmp_path)
+    second = cmd_remap("/old/data", "/missing/data", dry_run=False, bundle_dir=tmp_path)
+    assert first != 0
+    assert second != 0, "idempotent re-run must report the same not-ready state, not exit 0"
+
+
+def test_cmd_remap_returns_zero_when_remapped_paths_exist(tmp_path):
+    """When the remapped FASTQ paths exist on disk, the bundle is replay-ready → exit 0."""
+    real = tmp_path / "newdata"
+    real.mkdir()
+    (real / "R1.fastq.gz").write_bytes(b"")
+    _write_samplesheet(tmp_path / "samplesheet.valid.csv", "/old/data/R1.fastq.gz")
+    rc = cmd_remap("/old/data", real.as_posix(), dry_run=False, bundle_dir=tmp_path)
+    assert rc == 0
+
+
+def test_cmd_remap_dry_run_does_not_gate_on_missing_paths(tmp_path):
+    """--dry-run is a preview: it must never fail on missing targets (files unchanged)."""
+    _write_samplesheet(tmp_path / "samplesheet.valid.csv", "/old/data/R1.fastq.gz")
+    assert cmd_remap("/old/data", "/missing/data", dry_run=True, bundle_dir=tmp_path) == 0
 
 
 # ── cmd_verify ──────────────────────────────────────────────────────────────
@@ -530,3 +557,23 @@ def test_format_output_value_plain_path_unchanged():
     """Clean paths with no special characters are returned as-is."""
     result = _format_output_value("/data/clean/out", old_value="/old/out")
     assert result == "/data/clean/out"
+
+
+# ── Audit follow-up: remap_csv must preserve the wrapper's '\n' line terminator ──
+# (samplesheet_builder writes LF; the default csv.writer would silently rewrite the
+# file with CRLF on the documented remap step, changing every line's bytes).
+
+
+def test_remap_csv_preserves_unix_line_endings(tmp_path):
+    ss = tmp_path / "samplesheet.valid.csv"
+    ss.write_text(
+        "sample,fastq_1,fastq_2,strandedness\n"
+        "s1,/old/data/s1_R1.fastq.gz,,auto\n",
+        encoding="utf-8",
+    )
+    changes = remap_csv(ss, "/old/data", "/new/data", dry_run=False)
+    assert changes  # the row was remapped
+    raw = ss.read_bytes()
+    assert b"\r\n" not in raw
+    assert raw.endswith(b"\n")
+    assert b"/new/data/s1_R1.fastq.gz" in raw
