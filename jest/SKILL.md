@@ -142,8 +142,10 @@ it('renders correctly', () => {
   const component = render(<Button label="Click me" />);
   expect(component).toMatchSnapshot();
 });
+```
 
-// Update snapshots
+```bash
+# Update snapshots
 jest --updateSnapshot   # or: jest -u
 ```
 

@@ -20,6 +20,9 @@ npm install --save-dev @vitest/ui
 
 # Browser mode
 npm install --save-dev @vitest/browser
+
+# Coverage (required for `vitest run --coverage`)
+npm install --save-dev @vitest/coverage-v8
 ```
 
 Add to `package.json`:

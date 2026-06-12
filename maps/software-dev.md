@@ -14,7 +14,7 @@ created: 2026-06-12
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md)
 
-## Skills (37)
+## Skills (38)
 
 - [api-and-interface-design](../api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
 - [brainstorming](../brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
@@ -51,5 +51,6 @@ created: 2026-06-12
 - [using-git-worktrees](../using-git-worktrees.md) — Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git...
 - [using-superpowers](../using-superpowers.md) — Use when starting any conversation - establishes how to find and use skills, requiring Skill tool invocation before ANY response including clarifying questions
 - [verification-before-completion](../verification-before-completion.md) — Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success...
+- [vitest](../vitest.md) — JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API
 - [writing-plans](../writing-plans.md) — Use when you have a spec or requirements for a multi-step task, before touching code
 - [writing-skills](../writing-skills.md) — Use when creating new skills, editing existing skills, or verifying skills work before deployment

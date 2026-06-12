@@ -5,8 +5,8 @@ aliases:
   - Vitest
 tags:
   - skill
-  - domain/web-automation-frontend
-domain: web-automation-frontend
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: vitest/SKILL.md
 created: 2026-06-12
@@ -17,7 +17,7 @@ created: 2026-06-12
 > [!info] What it does
 > JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API. Use when writing or running tests in a Vite-based project (React, Vue, Svelte, vanilla TS/JS), migrating from Jest, benchmarking code, testing browser APIs with jsdom/happy-dom, or needing in-source testing. Native ES modules, TypeScript, and JSX support with zero config. Pairs with test-driven-development for the methodology.
 
-**Source:** [vitest/SKILL.md](vitest/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](maps/web-automation-frontend.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [vitest/SKILL.md](vitest/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

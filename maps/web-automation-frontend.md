@@ -14,7 +14,7 @@ created: 2026-06-12
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md)
 
-## Skills (27)
+## Skills (26)
 
 - [agent-browser](../agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting...
 - [agentcore](../agentcore.md) — Run agent-browser on AWS Bedrock AgentCore cloud browsers
@@ -39,7 +39,6 @@ created: 2026-06-12
 - [vercel-react-best-practices](../vercel-react-best-practices.md) — React and Next.js performance optimization guidelines from Vercel Engineering
 - [vercel-react-view-transitions](../vercel-react-view-transitions.md) — Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements)
 - [vercel-sandbox](../vercel-sandbox.md) — Run agent-browser + Chrome inside Vercel Sandbox microVMs for browser automation from any Vercel-deployed app
-- [vitest](../vitest.md) — JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API
 - [web-artifacts-builder](../web-artifacts-builder.md) — Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui)
 - [web-design-guidelines](../web-design-guidelines.md) — Review UI code for Web Interface Guidelines compliance
 - [webapp-testing](../webapp-testing.md) — Toolkit for interacting with and testing local web applications using Playwright

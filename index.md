@@ -120,11 +120,11 @@ AWS architecture and operations, serverless GPU compute, developer infrastructur
 
 [aws-agentic-ai](aws-agentic-ai.md), [aws-cdk-development](aws-cdk-development.md), [aws-cost-operations](aws-cost-operations.md), [aws-mcp-setup](aws-mcp-setup.md), [aws-serverless-eda](aws-serverless-eda.md), [ci-cd-and-automation](ci-cd-and-automation.md) … [see all 15 →](maps/cloud-devops.md)
 
-### [Software Development & Engineering](maps/software-dev.md)  ·  37 skills
+### [Software Development & Engineering](maps/software-dev.md)  ·  38 skills
 
 General software-engineering methodology and tooling: TDD, debugging, code review, planning, git worktrees, source-grounded implementation, plus core app primitives (pytest, Docker, FastAPI, CI).
 
-[api-and-interface-design](api-and-interface-design.md), [brainstorming](brainstorming.md), [check-pr](check-pr.md), [code-review-and-quality](code-review-and-quality.md), [code-simplification](code-simplification.md), [context-engineering](context-engineering.md) … [see all 35 →](maps/software-dev.md)
+[api-and-interface-design](api-and-interface-design.md), [brainstorming](brainstorming.md), [check-pr](check-pr.md), [code-review-and-quality](code-review-and-quality.md), [code-simplification](code-simplification.md), [context-engineering](context-engineering.md) … [see all 38 →](maps/software-dev.md)
 
 ### [Vault, Skills & Workflow Meta](maps/vault-meta.md)  ·  13 skills
 
@@ -138,7 +138,7 @@ Multi-perspective deliberation, brainstorming, hypothesis generation, idea evalu
 
 [consciousness-council](consciousness-council.md), [dhdna-profiler](dhdna-profiler.md), [hypogenic](hypogenic.md), [hypothesis-generation](hypothesis-generation.md), [idea-evaluator](idea-evaluator.md), [idea-refine](idea-refine.md) … [see all 10 →](maps/reasoning-ideation.md)
 
-### [Web Automation, Frontend & Design](maps/web-automation-frontend.md)  ·  27 skills
+### [Web Automation, Frontend & Design](maps/web-automation-frontend.md)  ·  26 skills
 
 Browser automation, Playwright testing, frontend design guidance, React/Next.js patterns, Figma workflows, and design-to-code loops.
 
