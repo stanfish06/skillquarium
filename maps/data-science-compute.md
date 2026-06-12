@@ -2,7 +2,7 @@
 title: Data Science, Stats & Scientific Computing
 tags:
   - skill-map
-created: 2026-06-11
+created: 2026-06-12
 ---
 
 # Data Science, Stats & Scientific Computing
@@ -14,8 +14,9 @@ created: 2026-06-11
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Quantum, Physics & Materials](quantum-physics.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md)
 
-## Skills (30)
+## Skills (31)
 
+- [adjusttext](../adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [attach-db](../attach-db.md) — Attach a DuckDB database file for use with /duckdb-skills:query
 - [dask](../dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
 - [duckdb-docs](../duckdb-docs.md) — Search DuckDB and DuckLake documentation and blog posts

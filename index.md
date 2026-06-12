@@ -3,12 +3,12 @@ title: Skills Index
 tags:
   - moc
   - skill-index
-created: 2026-06-11
+created: 2026-06-12
 ---
 
 # Skills Index
 
-A navigable map of the **393 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
+A navigable map of the **394 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
 
 > [!tip] How to navigate
 > - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).
@@ -78,11 +78,11 @@ General ML/DL frameworks, model interpretability, RL, graph learning, and scient
 
 [aeon](aeon.md), [hugging-science](hugging-science.md), [pufferlib](pufferlib.md), [pufferlib-v2](pufferlib-v2.md), [pufferlib-v3](pufferlib-v3.md), [pytorch-lightning](pytorch-lightning.md) … [see all 13 →](maps/ml-ai.md)
 
-### [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  30 skills
+### [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  31 skills
 
 DataFrames, big-data tooling, statistics, optimization, simulation, geospatial, and plotting.
 
-[attach-db](attach-db.md), [dask](dask.md), [duckdb-docs](duckdb-docs.md), [exploratory-data-analysis](exploratory-data-analysis.md), [geomaster](geomaster.md), [geopandas](geopandas.md) … [see all 30 →](maps/data-science-compute.md)
+[adjusttext](adjusttext.md), [attach-db](attach-db.md), [dask](dask.md), [duckdb-docs](duckdb-docs.md), [exploratory-data-analysis](exploratory-data-analysis.md), [geomaster](geomaster.md) … [see all 31 →](maps/data-science-compute.md)
 
 ### [Quantum, Physics & Materials](maps/quantum-physics.md)  ·  7 skills
 
@@ -159,7 +159,7 @@ Secure development, code auditing, static analysis, SARIF, fuzzing, agent securi
 ## All skills (A–Z)
 
 **A**
-[academic-paper](academic-paper.md) · [academic-paper-reviewer](academic-paper-reviewer.md) · [academic-pipeline](academic-pipeline.md) · [adaptyv](adaptyv.md) · [adding-dbt-unit-test](adding-dbt-unit-test.md) · [aeon](aeon.md) · [affinity-proteomics](affinity-proteomics.md) · [aflpp](aflpp.md) · [agent-browser](agent-browser.md) · [agentcore](agentcore.md) · [agentic-actions-auditor](agentic-actions-auditor.md) · [algorithmic-art](algorithmic-art.md) · [analyze-fasta](analyze-fasta.md) · [anndata](anndata.md) · [answering-natural-language-questions-with-dbt](answering-natural-language-questions-with-dbt.md) · [arboreto](arboreto.md) · [archaic-introgression](archaic-introgression.md) · [article-data-fetcher](article-data-fetcher.md) · [astropy](astropy.md) · [atheris](atheris.md) · [attach-db](attach-db.md) · [audit-context-building](audit-context-building.md) · [audit-prep-assistant](audit-prep-assistant.md) · [auditing-skills](auditing-skills.md) · [autoskill](autoskill.md) · [aws-agentic-ai](aws-agentic-ai.md) · [aws-cdk-development](aws-cdk-development.md) · [aws-cost-operations](aws-cost-operations.md) · [aws-mcp-setup](aws-mcp-setup.md) · [aws-serverless-eda](aws-serverless-eda.md)
+[academic-paper](academic-paper.md) · [academic-paper-reviewer](academic-paper-reviewer.md) · [academic-pipeline](academic-pipeline.md) · [adaptyv](adaptyv.md) · [adding-dbt-unit-test](adding-dbt-unit-test.md) · [adjusttext](adjusttext.md) · [aeon](aeon.md) · [affinity-proteomics](affinity-proteomics.md) · [aflpp](aflpp.md) · [agent-browser](agent-browser.md) · [agentcore](agentcore.md) · [agentic-actions-auditor](agentic-actions-auditor.md) · [algorithmic-art](algorithmic-art.md) · [analyze-fasta](analyze-fasta.md) · [anndata](anndata.md) · [answering-natural-language-questions-with-dbt](answering-natural-language-questions-with-dbt.md) · [arboreto](arboreto.md) · [archaic-introgression](archaic-introgression.md) · [article-data-fetcher](article-data-fetcher.md) · [astropy](astropy.md) · [atheris](atheris.md) · [attach-db](attach-db.md) · [audit-context-building](audit-context-building.md) · [audit-prep-assistant](audit-prep-assistant.md) · [auditing-skills](auditing-skills.md) · [autoskill](autoskill.md) · [aws-agentic-ai](aws-agentic-ai.md) · [aws-cdk-development](aws-cdk-development.md) · [aws-cost-operations](aws-cost-operations.md) · [aws-mcp-setup](aws-mcp-setup.md) · [aws-serverless-eda](aws-serverless-eda.md)
 
 **B**
 [benchling-integration](benchling-integration.md) · [benchmark-paper-template](benchmark-paper-template.md) · [bgpt-mcp](bgpt-mcp.md) · [bgpt-paper-search](bgpt-paper-search.md) · [bids](bids.md) · [bigquery-public](bigquery-public.md) · [bio-orchestrator](bio-orchestrator.md) · [bioconductor-bridge](bioconductor-bridge.md) · [biopython](biopython.md) · [bioqc-mcp](bioqc-mcp.md) · [bioservices](bioservices.md) · [brainstorming](brainstorming.md) · [brand-guidelines](brand-guidelines.md) · [building-dbt-semantic-layer](building-dbt-semantic-layer.md) · [bulk-rnaseq](bulk-rnaseq.md) · [busco-assessor](busco-assessor.md)
