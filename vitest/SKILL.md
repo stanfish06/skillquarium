@@ -18,8 +18,8 @@ npm install --save-dev vitest
 # With UI dashboard
 npm install --save-dev @vitest/ui
 
-# Browser mode
-npm install --save-dev @vitest/browser
+# Browser mode (v4: also install the provider package — see Browser Mode section)
+npm install --save-dev @vitest/browser @vitest/browser-playwright
 
 # Coverage (required for `vitest run --coverage`)
 npm install --save-dev @vitest/coverage-v8
