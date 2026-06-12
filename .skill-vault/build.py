@@ -230,7 +230,8 @@ CATEGORIES = [
       "debugging-and-error-recovery", "deprecation-and-migration", "documentation-and-adrs",
       "doubt-driven-development", "git-workflow-and-versioning", "incremental-implementation",
       "planning-and-task-breakdown", "source-driven-development", "spec-driven-development",
-      "pytest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop"]),
+      "pytest", "jest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop",
+      "linear"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",
@@ -255,7 +256,7 @@ CATEGORIES = [
       "web-design-guidelines", "vercel-composition-patterns", "vercel-react-best-practices",
       "vercel-react-view-transitions", "figma-use", "figma-generate-design",
       "figma-generate-library", "figma-implement-design", "web-artifacts-builder",
-      "brand-guidelines", "theme-factory", "algorithmic-art"]),
+      "brand-guidelines", "theme-factory", "algorithmic-art", "vitest"]),
 
     ("analytics-engineering", "Analytics Engineering & LLM Operations",
      "dbt analytics engineering, semantic layers, warehouse querying, lineage diagrams, LLM observability, prompt tracing, and evaluation workflows.",
