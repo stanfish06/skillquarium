@@ -1,0 +1,33 @@
+---
+title: ecologist
+tags:
+  - skill
+  - domain/scientific-expert-profiles
+domain: scientific-expert-profiles
+status: untried
+source: ecologist/SKILL.md
+created: 2026-06-12
+---
+
+# ecologist
+
+> [!info] What it does
+> Expert-thinking profile for Ecologist (field / observational / community & spatial ecology): Reasons from Preston/Fisher SADs and Hutchinson fundamental vs realized niches; designs quadrat/transect and distance/occupancy surveys; filters GBIF issue flags and iNaturalist DQA; fits vegan/iNEXT/unmarked GLMMs with Moran's I and nlme/glmmTMB spatial correlation while treating pseudoreplication, effort bias, and...
+
+**Source:** [ecologist/SKILL.md](ecologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+
+## Related skills
+
+- [behavioral-ecologist](behavioral-ecologist.md) — Expert-thinking profile for Behavioral Ecologist (field / observational / experimental behavioral ecology): Reasons from versioned ethograms, Altmann focal/scan sampling, and activity...
+- [community-ecologist](community-ecologist.md) — Expert-thinking profile for Community Ecologist (field / experimental / multivariate community assembly): Reasons from Vellend's four processes and Chesson stabilizing/equalizing...
+- [ecosystem-ecologist](ecosystem-ecologist.md) — Expert-thinking profile for Ecosystem Ecologist (field / flux towers / biogeochemistry / process modeling): Reasons from NEE/NEP mass balance, ecological stoichiometry, and u*-filtered...
+- [industrial-ecologist](industrial-ecologist.md) — Expert-thinking profile for Industrial Ecologist (MFA/SFA accounting / dynamic stock modeling / industrial symbiosis (EIP) / EEIO-LCA linkage / circular economy metrics): Reasons from...
+- [landscape-ecologist](landscape-ecologist.md) — Expert-thinking profile for Landscape Ecologist (spatial pattern analysis / connectivity modeling / landscape genetics / remote sensing / disturbance ecology): Reasons from...
+- [microbial-ecologist](microbial-ecologist.md) — Expert-thinking profile for Microbial Ecologist (field / mesocosm / amplicon & metagenomic community ecology): Reasons from Vellend assembly (selection, dispersal, drift...
+- [molecular-ecologist](molecular-ecologist.md) — Expert-thinking profile for Molecular Ecologist (field / lab / computational population & environmental genetics): Reasons from population genetics, eDNA/metabarcoding, and marker...
+- [restoration-ecologist](restoration-ecologist.md) — Expert-thinking profile for Restoration Ecologist (field / reference-ecosystem planning / native planting & monitoring): Reasons from SER International Standards (reference models, six...
+- [soil-ecologist](soil-ecologist.md) — Expert-thinking profile for Soil Ecologist (field / lab biogeochemistry / molecular soil ecology): Reasons from soil food webs (nematode EI/SI/CI), PLFA phenotypes, amoA/nirK/nifH...
+
+%% ---8<--- personal notes below are preserved on re-run ---8<--- %%
+
+## Notes

@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [cancer-biologist](cancer-biologist.md) — Expert-thinking profile for Cancer Biologist (wet-lab / cancer genomics / preclinical oncology): Reasons from hallmark capabilities, clonal evolution, and TME context
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

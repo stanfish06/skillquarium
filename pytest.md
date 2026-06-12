@@ -18,6 +18,8 @@ created: 2026-06-10
 
 ## Related skills
 
+- [bioinformatics-engineer](bioinformatics-engineer.md) — Expert-thinking profile for Bioinformatics Engineer (dry-lab / pipeline engineering / production genomics): Builds production genomics DAGs in Nextflow/nf-core, Snakemake, and...
+- [research-software-engineer](research-software-engineer.md) — Expert-thinking profile for Research Software Engineer (computational / research software engineering / HPC): Reasons from Software Carpentry and FAIR4RS through SemVer releases...
 - [test-driven-development](test-driven-development.md) — Use when implementing any feature or bugfix, before writing implementation code
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

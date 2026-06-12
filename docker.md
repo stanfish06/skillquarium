@@ -22,6 +22,7 @@ created: 2026-06-10
 - [fastapi](fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [modal](modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
 - [nextflow](nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
+- [research-software-engineer](research-software-engineer.md) — Expert-thinking profile for Research Software Engineer (computational / research software engineering / HPC): Reasons from Software Carpentry and FAIR4RS through SemVer releases...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

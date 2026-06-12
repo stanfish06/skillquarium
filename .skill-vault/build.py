@@ -43,6 +43,7 @@ PALETTE = {
     "cloud-devops": 11206595, "vault-meta": 8421376, "reasoning-ideation": 117,
     "web-automation-frontend": 5832703, "analytics-engineering": 16753920,
     "security-auditing": 13382451, "software-dev": 1752220,
+    "scientific-expert-profiles": 10040012,
 }
 GRAPH_SEARCH = "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc"
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
@@ -198,6 +199,11 @@ CATEGORIES = [
      ["academic-paper", "academic-paper-reviewer", "academic-pipeline", "deep-research",
       "nature-academic-search", "nature-citation", "nature-data", "nature-figure", "nature-paper2ppt",
       "nature-polishing", "nature-reader", "nature-response", "nature-reviewer", "nature-writing"]),
+
+    ("scientific-expert-profiles", "Scientific Expert Profiles",
+     "Discipline-specific scientific and engineering operating profiles adapted from K-Dense scientific-agents.",
+     ["research-writing", "academic-pipelines", "reasoning-ideation", "data-science-compute"],
+     []),
 
     ("literature-discovery", "Literature Search & Knowledge Discovery",
      "Paper search across databases, web research, content extraction, and knowledge bases.",
@@ -361,6 +367,25 @@ def discover_skills():
     return found
 
 
+def is_scientific_agents_profile(skill):
+    path = os.path.join(ROOT, skill, "SKILL.md")
+    if not os.path.isfile(path):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            text = f.read(4096)
+    except OSError:
+        return False
+    m = re.match(r"^---\s*\n(.*?)\n---\s*\n", text, re.DOTALL)
+    if not m:
+        return False
+    fm = m.group(1)
+    return bool(
+        re.search(r"(?m)^\s*scientific-agents-profile:\s*true\b", fm)
+        or re.search(r"(?m)^\s*source-repo:\s*K-Dense-AI/scientific-agents\b", fm)
+    )
+
+
 # Skill ids that are common English words — their whole-word match against other
 # skills' descriptions produces spurious edges (e.g. "linear" matching "linear algebra"
 # in matlab/shap/sympy). They are never used as a search pattern against *other*
@@ -463,11 +488,19 @@ def main():
             key_by_skill[s] = key
 
     on_disk = discover_skills()
+    for s in sorted(on_disk - set(assigned)):
+        if is_scientific_agents_profile(s):
+            assigned[s] = "scientific-expert-profiles"
+            key_by_skill[s] = "scientific-expert-profiles"
     unsorted = sorted(on_disk - set(assigned))
     if unsorted:
         print(f"WARNING: not categorized: {unsorted}", file=sys.stderr)
     for s in unsorted:
         key_by_skill[s] = "uncategorized"
+
+    skills_by_key = {key: [] for key, *_ in CATEGORIES}
+    for s in on_disk:
+        skills_by_key.setdefault(key_by_skill.get(s, "uncategorized"), []).append(s)
 
     skills_sorted = sorted(on_disk)
     full_desc = {s: read_description(s) for s in skills_sorted}
@@ -526,7 +559,7 @@ def main():
 
     # ---- map notes ---------------------------------------------------------
     for key, title, scope, related_keys, skills in CATEGORIES:
-        live = sorted(s for s in skills if s in on_disk)
+        live = sorted(skills_by_key.get(key, []))
         L = ["---", f"title: {title}", "tags:", "  - skill-map", f"created: {TODAY}", "---", "",
              f"# {title}", "", "> [!abstract] Scope", f"> {scope}", "",
              "[Back to Skill Index](../index.md)", ""]
@@ -557,7 +590,7 @@ def main():
          "- [Workflows & recipes](recipes/index.md)  ·  goal-oriented chains of skills",
          "", "## Browse by domain", ""]
     for key, title, scope, related_keys, skills in CATEGORIES:
-        live = sorted(s for s in skills if s in on_disk)
+        live = sorted(skills_by_key.get(key, []))
         I += [f"### [{title}](maps/{key}.md)  ·  {len(live)} skills", "", scope, ""]
         preview = live[:6]
         chips = ", ".join(f"[{s}]({s}.md)" for s in preview)

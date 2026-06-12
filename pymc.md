@@ -18,7 +18,9 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [bayesian-statistician](bayesian-statistician.md) — Expert-thinking profile for Bayesian Statistician (probabilistic modeling / hierarchical inference / MCMC diagnostics / model criticism / decision theory): Reasons from Bayes' rule...
+- [probabilist](probabilist.md) — Expert-thinking profile for Probabilist (theoretical / computational probability): Reasons from Kolmogorov measure spaces through LLN/CLT, martingales, coupling, concentration/LDP, and...
+- [quantitative-biologist](quantitative-biologist.md) — Expert-thinking profile for Quantitative Biologist (computational / live-imaging / dynamical systems biology): Reasons from SBML/PEtab ODE models, structural and profile-likelihood...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

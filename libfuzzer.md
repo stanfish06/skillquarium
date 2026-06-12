@@ -20,6 +20,7 @@ created: 2026-06-09
 
 - [atheris](atheris.md) — Atheris is a coverage-guided Python fuzzer based on libFuzzer
 - [cargo-fuzz](cargo-fuzz.md) — cargo-fuzz is the de facto fuzzing tool for Rust projects using Cargo
+- [computer-security-researcher](computer-security-researcher.md) — Expert-thinking profile for Computer Security Researcher (dry-computational / vulnerability, protocol, and empirical security research): Reasons from explicit threat models and...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

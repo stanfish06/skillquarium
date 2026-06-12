@@ -21,7 +21,9 @@ created: 2026-06-09
 
 ## Related skills
 
+- [biogeographer](biogeographer.md) — Expert-thinking profile for Biogeographer (field / GIS / phylogenetics / spatial modeling): Reasons from Wallace's ecological vs historical split through GBIF occurrence curation...
 - [biopython](biopython.md) — Comprehensive molecular biology toolkit
+- [zoologist](zoologist.md) — Expert-thinking profile for Zoologist (field / museum / lab / integrative animal biology): Reasons from Bauplan, homoplasy, and voucher-backed ICZN taxonomy through COL/WoRMS/GBIF IPT...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

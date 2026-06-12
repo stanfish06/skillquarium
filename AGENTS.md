@@ -1,6 +1,6 @@
 # AGENTS.md — operating guide for agents
 
-You have access to a curated library of **393 agent skills** at `~/.agents/skills/`
+You have access to a curated library of **925 agent skills** at `~/.agents/skills/`
 (this repo). A *skill* is a folder with a `SKILL.md` holding battle-tested instructions for
 a specific tool, library, or workflow. **Using a relevant skill is faster and more reliable
 than improvising.** This file tells you how to find and use them.
@@ -60,7 +60,7 @@ Try these in order; stop when you have a match.
    The `*.md` files at the repo root are one-line "wrapper" notes (description + domain +
    aliases) — the fast index. Read the underlying `<name>/SKILL.md` once you've picked one.
 
-3. **Browse by domain.** [`index.md`](index.md) groups all skills into 22 domains;
+3. **Browse by domain.** [`index.md`](index.md) groups all skills into 23 domains;
    [`maps/`](maps) has one note per domain; [`skills.base`](skills.base) is a filterable
    table. Coding work lives mostly in [`maps/software-dev.md`](maps/software-dev.md),
    [`maps/cloud-devops.md`](maps/cloud-devops.md), and
