@@ -8,7 +8,7 @@ created: 2026-06-12
 
 # Skills Index
 
-A navigable map of the **417 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
+A navigable map of the **420 agent skills** in this vault, grouped into 22 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
 
 > [!tip] How to navigate
 > - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).
@@ -120,11 +120,11 @@ AWS architecture and operations, serverless GPU compute, developer infrastructur
 
 [aws-agentic-ai](aws-agentic-ai.md), [aws-cdk-development](aws-cdk-development.md), [aws-cost-operations](aws-cost-operations.md), [aws-mcp-setup](aws-mcp-setup.md), [aws-serverless-eda](aws-serverless-eda.md), [ci-cd-and-automation](ci-cd-and-automation.md) … [see all 15 →](maps/cloud-devops.md)
 
-### [Software Development & Engineering](maps/software-dev.md)  ·  35 skills
+### [Software Development & Engineering](maps/software-dev.md)  ·  38 skills
 
 General software-engineering methodology and tooling: TDD, debugging, code review, planning, git worktrees, source-grounded implementation, plus core app primitives (pytest, Docker, FastAPI, CI).
 
-[api-and-interface-design](api-and-interface-design.md), [brainstorming](brainstorming.md), [check-pr](check-pr.md), [code-review-and-quality](code-review-and-quality.md), [code-simplification](code-simplification.md), [context-engineering](context-engineering.md) … [see all 35 →](maps/software-dev.md)
+[api-and-interface-design](api-and-interface-design.md), [brainstorming](brainstorming.md), [check-pr](check-pr.md), [code-review-and-quality](code-review-and-quality.md), [code-simplification](code-simplification.md), [context-engineering](context-engineering.md) … [see all 38 →](maps/software-dev.md)
 
 ### [Vault, Skills & Workflow Meta](maps/vault-meta.md)  ·  13 skills
 
@@ -186,10 +186,10 @@ Secure development, code auditing, static analysis, SARIF, fuzzing, agent securi
 [idea-evaluator](idea-evaluator.md) · [idea-refine](idea-refine.md) · [illumina-bridge](illumina-bridge.md) · [imaging-data-commons](imaging-data-commons.md) · [incremental-implementation](incremental-implementation.md) · [infographics](infographics.md) · [insecure-defaults](insecure-defaults.md) · [install-duckdb](install-duckdb.md) · [internal-comms](internal-comms.md) · [interview-me](interview-me.md) · [intro-drafter](intro-drafter.md) · [iso-13485-certification](iso-13485-certification.md)
 
 **J**
-[json-canvas](json-canvas.md)
+[jest](jest.md) · [json-canvas](json-canvas.md)
 
 **L**
-[labarchive-integration](labarchive-integration.md) · [labstep](labstep.md) · [lamindb](lamindb.md) · [langfuse](langfuse.md) · [latchbio-integration](latchbio-integration.md) · [latex-posters](latex-posters.md) · [ld-1000g-region-compute](ld-1000g-region-compute.md) · [libfuzzer](libfuzzer.md) · [lit-synthesizer](lit-synthesizer.md) · [liteparse](liteparse.md) · [literature-review](literature-review.md) · [llm-agent-security-redteam](llm-agent-security-redteam.md) · [llm-observability-evals](llm-observability-evals.md) · [locuscompare-region-render](locuscompare-region-render.md)
+[labarchive-integration](labarchive-integration.md) · [labstep](labstep.md) · [lamindb](lamindb.md) · [langfuse](langfuse.md) · [latchbio-integration](latchbio-integration.md) · [latex-posters](latex-posters.md) · [ld-1000g-region-compute](ld-1000g-region-compute.md) · [libfuzzer](libfuzzer.md) · [linear](linear.md) · [lit-synthesizer](lit-synthesizer.md) · [liteparse](liteparse.md) · [literature-review](literature-review.md) · [llm-agent-security-redteam](llm-agent-security-redteam.md) · [llm-observability-evals](llm-observability-evals.md) · [locuscompare-region-render](locuscompare-region-render.md)
 
 **M**
 [markdown-mermaid-writing](markdown-mermaid-writing.md) · [marker-dominance-mapper](marker-dominance-mapper.md) · [market-research-reports](market-research-reports.md) · [markitdown](markitdown.md) · [matchms](matchms.md) · [matlab](matlab.md) · [matplotlib](matplotlib.md) · [mcp-builder](mcp-builder.md) · [medchem](medchem.md) · [mendelian-randomisation](mendelian-randomisation.md) · [methylation-clock](methylation-clock.md) · [migrating-dbt-core-to-fusion](migrating-dbt-core-to-fusion.md) · [migrating-dbt-project-across-platforms](migrating-dbt-project-across-platforms.md) · [modal](modal.md) · [modern-python](modern-python.md) · [molecular-dynamics](molecular-dynamics.md) · [molfeat](molfeat.md) · [monai-medical-imaging-ai](monai-medical-imaging-ai.md) · [multiqc-reporter](multiqc-reporter.md)
@@ -219,7 +219,7 @@ Secure development, code auditing, static analysis, SARIF, fuzzing, agent securi
 [ukb-navigator](ukb-navigator.md) · [ukb-ppp-region-fetch](ukb-ppp-region-fetch.md) · [umap-learn](umap-learn.md) · [usfiscaldata](usfiscaldata.md) · [using-agent-skills](using-agent-skills.md) · [using-dbt-for-analytics-engineering](using-dbt-for-analytics-engineering.md) · [using-git-worktrees](using-git-worktrees.md) · [using-superpowers](using-superpowers.md)
 
 **V**
-[vaex](vaex.md) · [variant-analysis](variant-analysis.md) · [variant-annotation](variant-annotation.md) · [vcf-annotator](vcf-annotator.md) · [venue-templates](venue-templates.md) · [vercel-composition-patterns](vercel-composition-patterns.md) · [vercel-react-best-practices](vercel-react-best-practices.md) · [vercel-react-view-transitions](vercel-react-view-transitions.md) · [vercel-sandbox](vercel-sandbox.md) · [verification-before-completion](verification-before-completion.md) · [vibe-research-workflow](vibe-research-workflow.md) · [vmd-mdanalysis-viz](vmd-mdanalysis-viz.md)
+[vaex](vaex.md) · [variant-analysis](variant-analysis.md) · [variant-annotation](variant-annotation.md) · [vcf-annotator](vcf-annotator.md) · [venue-templates](venue-templates.md) · [vercel-composition-patterns](vercel-composition-patterns.md) · [vercel-react-best-practices](vercel-react-best-practices.md) · [vercel-react-view-transitions](vercel-react-view-transitions.md) · [vercel-sandbox](vercel-sandbox.md) · [verification-before-completion](verification-before-completion.md) · [vibe-research-workflow](vibe-research-workflow.md) · [vitest](vitest.md) · [vmd-mdanalysis-viz](vmd-mdanalysis-viz.md)
 
 **W**
 [web-artifacts-builder](web-artifacts-builder.md) · [web-design-guidelines](web-design-guidelines.md) · [webapp-testing](webapp-testing.md) · [wes-clinical-report-en](wes-clinical-report-en.md) · [wes-clinical-report-es](wes-clinical-report-es.md) · [wgs-prs](wgs-prs.md) · [what-if-oracle](what-if-oracle.md) · [working-with-dbt-mesh](working-with-dbt-mesh.md) · [writing-plans](writing-plans.md) · [writing-skills](writing-skills.md)

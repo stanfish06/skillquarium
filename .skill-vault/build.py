@@ -230,7 +230,8 @@ CATEGORIES = [
       "debugging-and-error-recovery", "deprecation-and-migration", "documentation-and-adrs",
       "doubt-driven-development", "git-workflow-and-versioning", "incremental-implementation",
       "planning-and-task-breakdown", "source-driven-development", "spec-driven-development",
-      "pytest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop"]),
+      "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop",
+      "linear"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",
@@ -358,6 +359,13 @@ def discover_skills():
     return found
 
 
+# Skill ids that are common English words — their whole-word match against other
+# skills' descriptions produces spurious edges (e.g. "linear" matching "linear algebra"
+# in matlab/shap/sympy). They are never used as a search pattern against *other*
+# descriptions; they still gain edges when a specific skill name appears in their own.
+GENERIC_NAMES = {"linear", "core", "query", "find-skills"}
+
+
 def build_related(skills, full_desc):
     patterns = {s: re.compile(r"(?<![\w-])" + re.escape(s) + r"(?![\w-])", re.IGNORECASE)
                 for s in skills}
@@ -367,7 +375,7 @@ def build_related(skills, full_desc):
         if not d:
             continue
         for t in skills:
-            if t != s and patterns[t].search(d):
+            if t != s and t not in GENERIC_NAMES and patterns[t].search(d):
                 edges[s].add(t); edges[t].add(s)
     return edges
 
