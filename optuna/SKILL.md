@@ -527,7 +527,11 @@ study = optuna.create_study(
     sampler=optuna.samplers.TPESampler(seed=42),
     pruner=optuna.pruners.HyperbandPruner(),
 )
-study.optimize(objective, n_trials=200, timeout=3600, n_jobs=4)
+# Single process here: this objective trains a PyTorch model (GPU/CPU-bound),
+# so thread parallelism (n_jobs>1) is unsafe under CUDA and gives no speedup
+# under the GIL. For parallelism, run multiple processes against a shared
+# RDBStorage instead (see "Distributed Search with RDBStorage").
+study.optimize(objective, n_trials=200, timeout=3600)
 
 # 4. Extract best hyperparameters
 best = study.best_trial
