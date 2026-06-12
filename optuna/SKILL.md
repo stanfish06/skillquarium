@@ -3,7 +3,7 @@ name: optuna
 description: Hyperparameter optimization (HPO) for ML models using Optuna. Use when tuning learning rate, regularization, architecture choices, or any numeric/categorical hyperparameter. Covers create_study/optimize quickstart, sampler selection (TPE, CMA-ES, grid, random, NSGA-II), pruners for early stopping (MedianPruner, HyperbandPruner), distributed search with RDBStorage, integrations with PyTorch Lightning and scikit-learn, and built-in visualization.
 license: MIT
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.9+ and optuna 3.0+. Optional extras — optuna-integration for framework callbacks (PyTorch Lightning, XGBoost, LightGBM, scikit-learn). Plotly or matplotlib for visualization.
+compatibility: Requires Python 3.9+ and optuna 4.0+. Optional extras — optuna-integration for framework callbacks (PyTorch Lightning, XGBoost, LightGBM, scikit-learn). Plotly or matplotlib for visualization.
 metadata: {"version": "1.0", "skill-author": "community"}
 ---
 
@@ -17,7 +17,7 @@ Use this skill when you need to tune any ML model's hyperparameters — it is fr
 
 ## Installation
 
-Tested against **optuna 4.x** (latest 4.9.0, June 2026). Requires **Python 3.9+**.
+Tested against **optuna 4.x** (latest 4.9.0, June 2026). Requires **optuna 4.0+** and **Python 3.9+** (the skill uses 4.x APIs such as `PatientPruner` and `JournalStorage`).
 
 ```bash
 # Core install
@@ -26,13 +26,17 @@ uv pip install optuna
 # Framework integrations (PyTorch Lightning, sklearn, XGBoost, LightGBM, HF)
 uv pip install optuna-integration
 
+# CMA-ES sampler backend (CmaEsSampler needs the separate `cmaes` package)
+uv pip install cmaes
+
 # Visualization backend (choose one)
 uv pip install plotly          # recommended — interactive HTML plots
 uv pip install matplotlib      # fallback static plots
 
-# Distributed search storage
-uv pip install optuna[postgres]    # psycopg2 for PostgreSQL
-uv pip install optuna[mysql]       # PyMySQL for MySQL/MariaDB
+# Distributed search storage — Optuna has no postgres/mysql extras;
+# install the DB driver directly alongside optuna
+uv pip install psycopg2-binary     # PostgreSQL driver for RDBStorage
+uv pip install pymysql             # MySQL/MariaDB driver for RDBStorage
 ```
 
 Check version:
@@ -87,9 +91,11 @@ print(f"Value: {trial.value}, Params: {trial.params}")
 # All completed trials as a DataFrame
 df = study.trials_dataframe()
 
-# Top-5 trials
+# Top-5 trials — filter to COMPLETE trials first; pruned/failed/running
+# trials have value=None and would raise TypeError when sorted against floats
 import optuna
-trials = sorted(study.trials, key=lambda t: t.value)[:5]
+completed = [t for t in study.trials if t.state == optuna.trial.TrialState.COMPLETE]
+trials = sorted(completed, key=lambda t: t.value)[:5]
 for t in trials:
     print(t.number, t.value, t.params)
 ```
@@ -136,7 +142,7 @@ study = optuna.create_study(
 
 ### CMA-ES — Covariance Matrix Adaptation Evolution Strategy
 
-Better for continuous search spaces where parameters are correlated. Use for ≥5 numeric parameters.
+Better for continuous search spaces where parameters are correlated. Use for ≥5 numeric parameters. Requires the separate `cmaes` package (`uv pip install cmaes`) — a plain `optuna` install raises a missing-backend error.
 
 ```python
 from optuna.samplers import CmaEsSampler
@@ -202,7 +208,7 @@ Pruners stop unpromising trials early. The objective calls `trial.report()` and 
 
 ### MedianPruner
 
-Prunes if the intermediate value is below the median of completed trials at the same step.
+Prunes a trial when its best intermediate result is **worse** than the median of previous completed trials at the same step. Optuna accounts for the study direction, so "worse" means below the median when maximizing and above it when minimizing (e.g. a `val_loss` study prunes trials whose loss is higher than the median).
 
 ```python
 from optuna.pruners import MedianPruner
@@ -308,7 +314,7 @@ All integrations require `optuna-integration` package.
 
 ```python
 import pytorch_lightning as pl
-from optuna.integration import PyTorchLightningPruningCallback
+from optuna_integration import PyTorchLightningPruningCallback
 
 def objective(trial):
     lr = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
@@ -335,7 +341,7 @@ study.optimize(objective, n_trials=50)
 Drop-in replacement for `GridSearchCV` / `RandomizedSearchCV` that uses TPE under the hood.
 
 ```python
-from optuna.integration import OptunaSearchCV
+from optuna_integration import OptunaSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from optuna.distributions import IntDistribution, FloatDistribution
 
@@ -364,7 +370,7 @@ print("Best score:", clf.best_score_)
 
 ```python
 # XGBoost with pruning via XGBoostPruningCallback
-from optuna.integration import XGBoostPruningCallback
+from optuna_integration import XGBoostPruningCallback
 import xgboost as xgb
 
 def objective(trial):
@@ -393,11 +399,15 @@ study.optimize(objective, n_trials=100)
 
 ```python
 # LightGBM with pruning
-from optuna.integration import LightGBMPruningCallback
+from optuna_integration import LightGBMPruningCallback
 import lightgbm as lgb
 
 def objective(trial):
     params = {
+        # objective/metric must be set so LightGBM emits the validation metric
+        # the pruning callback and best_score lookup below request
+        "objective": "binary",
+        "metric": "binary_logloss",
         "num_leaves": trial.suggest_int("num_leaves", 20, 300),
         "learning_rate": trial.suggest_float("learning_rate", 1e-4, 0.3, log=True),
         "min_child_samples": trial.suggest_int("min_child_samples", 5, 100),
@@ -416,7 +426,7 @@ def objective(trial):
 
 ## Visualization
 
-Optuna ships built-in interactive plots (Plotly). For static plots, pass `backend_name="matplotlib"`.
+Optuna ships built-in interactive plots (Plotly). For static plots, import the parallel `optuna.visualization.matplotlib` module instead (the plot functions take no `backend_name` argument) — e.g. `from optuna.visualization.matplotlib import plot_optimization_history`.
 
 ```python
 import optuna.visualization as vis
@@ -466,11 +476,14 @@ optuna best-trial \
   --study-name my_experiment \
   --storage "postgresql://user:pass@localhost/optuna_db"
 
-# Export all trials as CSV
+# Dump all trials — the `trials` command has no --output/CSV; use --format
+# {value,json,table,yaml} and redirect to a file
 optuna trials \
   --study-name my_experiment \
   --storage "postgresql://user:pass@localhost/optuna_db" \
-  --output trials.csv
+  --format json > trials.json
+# For CSV, load the study in Python and use the DataFrame:
+#   optuna.load_study(study_name=..., storage=...).trials_dataframe().to_csv("trials.csv")
 
 # Launch the web dashboard (requires optuna-dashboard package)
 pip install optuna-dashboard
@@ -566,10 +579,11 @@ study = optuna.create_study(sampler=sampler)
 
 ### Use Callbacks for Live Monitoring
 ```python
-from optuna.callbacks import RetryFailedTrialCallback
-
 def log_callback(study, trial):
-    print(f"Trial {trial.number}: {trial.value:.4f} | Best: {study.best_value:.4f}")
+    # trial.value is None for pruned/failed trials; skip them so that
+    # study.best_value (which raises ValueError until a trial COMPLETEs) is safe
+    if trial.value is not None:
+        print(f"Trial {trial.number}: {trial.value:.4f} | Best: {study.best_value:.4f}")
 
 study.optimize(objective, n_trials=100, callbacks=[log_callback])
 ```
@@ -618,6 +632,8 @@ optuna.visualization.matplotlib.plot_optimization_history(study)
 ### Storage Connection Errors in Distributed Mode
 Use `heartbeat_interval` to detect crashed workers:
 ```python
+from optuna.storages import RetryFailedTrialCallback
+
 storage = optuna.storages.RDBStorage(
     url="postgresql://...",
     heartbeat_interval=60,   # mark stale trials as failed after 60s silence

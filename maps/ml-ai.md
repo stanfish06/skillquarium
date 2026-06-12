@@ -14,10 +14,11 @@ created: 2026-06-12
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Drug Discovery, Cheminformatics & Structural Biology](drug-discovery-chem.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (13)
+## Skills (14)
 
 - [aeon](../aeon.md) — This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
 - [hugging-science](../hugging-science.md) — Use when the user is doing AI/ML work in a scientific domain such as biology, chemistry, physics, astronomy, climate, genomics, materials, medicine, ecology, energy, engineering, math...
+- [optuna](../optuna.md) — Hyperparameter optimization (HPO) for ML models using Optuna
 - [pufferlib](../pufferlib.md) — High-performance reinforcement learning framework optimized for speed and scale
 - [pufferlib-v2](../pufferlib-v2.md) — PufferLib 2.x reinforcement learning workflows for the Dec 2024 API generation
 - [pufferlib-v3](../pufferlib-v3.md) — PufferLib 3.x reinforcement learning workflows for the Jun 2025 API generation
