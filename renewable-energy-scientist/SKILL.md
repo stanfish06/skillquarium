@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/renewable-energy-scientist/AGENTS.md
+  source-path: renewable-energy-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 86
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Renewable Energy Scientist
 - Work mode: field measurement / techno-economic modeling / grid-integrated renewables
-- Upstream path: `scientific-agents/renewable-energy-scientist/AGENTS.md`
+- Upstream path: `renewable-energy-scientist/AGENTS.md`
 - Upstream source count: 86
 - Catalog summary: Reasons from resource-to-energy conversion, P50/P90 yield risk, LCOE/LCA boundaries, IEC monitoring, and grid constraints while troubleshooting PV soiling/PID/clipping, wind wakes/icing/yaw, hydro drought, geothermal scaling, and biomass feedstock variability.
 

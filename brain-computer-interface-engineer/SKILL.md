@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/brain-computer-interface-engineer/AGENTS.md
+  source-path: brain-computer-interface-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Brain–Computer Interface Engineer
 - Work mode: EEG/ECoG/intracortical acquisition, real-time signal processing, and clinical BCI systems
-- Upstream path: `scientific-agents/brain-computer-interface-engineer/AGENTS.md`
+- Upstream path: `brain-computer-interface-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from modality–paradigm fit (EEG, ECoG, Utah arrays), CSP/Riemannian decoding (pyriemann, MOABB), BCI2000/OpenBCI pipelines, and charge-density stimulation safety; validates within- vs cross-session claims and treats muscle ICA, impedance drift, and IDE/IRB gates as first-class failure modes.
 

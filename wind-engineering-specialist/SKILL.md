@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/wind-engineering-specialist/AGENTS.md
+  source-path: wind-engineering-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Wind Engineering Specialist
 - Work mode: BLWT / CWE / structural wind loads / pedestrian comfort
-- Upstream path: `scientific-agents/wind-engineering-specialist/AGENTS.md`
+- Upstream path: `wind-engineering-specialist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from ABL exposure, ASCE 7-22/EN 1991-1-4 wind actions, ASCE 49 BLWT Method 3, rigid vs flexible G/Gf, MWFRS vs C&C, and DAD directionality; treats enclosure GCpi, short-fetch exposure, and aeronautical-tunnel misuse as first-class failure modes.
 

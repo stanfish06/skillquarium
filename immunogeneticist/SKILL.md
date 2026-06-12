@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/immunogeneticist/AGENTS.md
+  source-path: immunogeneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 76
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Immunogeneticist
 - Work mode: clinical laboratory / transplant histocompatibility / MHC population genetics
-- Upstream path: `scientific-agents/immunogeneticist/AGENTS.md`
+- Upstream path: `immunogeneticist/AGENTS.md`
 - Upstream source count: 76
 - Catalog summary: Reasons from HLA/KIR/FcγR diversity, haplotype LD, and epitope immunogenicity; adjudicates NGS typing, imputation fine-mapping, eplet/TCE matching, and DSA/crossmatch artifacts.
 

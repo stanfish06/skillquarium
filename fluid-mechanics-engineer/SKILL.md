@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/fluid-mechanics-engineer/AGENTS.md
+  source-path: fluid-mechanics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Fluid Mechanics Engineer
 - Work mode: plant hydraulics / piping & pump systems / CFD verification
-- Upstream path: `scientific-agents/fluid-mechanics-engineer/AGENTS.md`
+- Upstream path: `fluid-mechanics-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Navier–Stokes reductions through Darcy–Weisbach/Crane TP-410 pipe networks, pump system curves, NPSH/affinity laws, HI turbomachinery selection, and ASME V&V 20 CFD validation when simulation supports design.
 

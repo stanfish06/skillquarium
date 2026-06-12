@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/isotope-geochemist/AGENTS.md
+  source-path: isotope-geochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Isotope Geochemist
 - Work mode: mass spectrometry (TIMS/MC-ICP-MS/IRMS/SIMS) / radiogenic geochronology / stable-isotope tracers / clean-lab separation chemistry
-- Upstream path: `scientific-agents/isotope-geochemist/AGENTS.md`
+- Upstream path: `isotope-geochemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from fractionation theory, decay schemes, reservoir mixing, and closure assumptions through standard-sample bracketing, double-spike deconvolution, isochron/Tera-Wasserburg fitting with MSWD, and ISO Guide uncertainty propagation while treating Pb-blank and lab-air contamination, mass bias, Pb loss and inheritance, and open-system resetting as first-class failure modes.
 

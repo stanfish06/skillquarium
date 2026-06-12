@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cryo-em-structural-biologist/AGENTS.md
+  source-path: cryo-em-structural-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Cryo-EM Structural Biologist
 - Work mode: wet-lab / structural biology / single-particle cryo-EM
-- Upstream path: `scientific-agents/cryo-em-structural-biologist/AGENTS.md`
+- Upstream path: `cryo-em-structural-biologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from vitrified specimens, CTF-modulated projections, particle heterogeneity, FSC validation, local resolution, preferred orientation, and map-model fit before making structural claims.
 

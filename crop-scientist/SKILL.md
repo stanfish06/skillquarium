@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/crop-scientist/AGENTS.md
+  source-path: crop-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Crop Scientist
 - Work mode: field trials / agronomy / crop physiology / G×E×M / MET stability analysis
-- Upstream path: `scientific-agents/crop-scientist/AGENTS.md`
+- Upstream path: `crop-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from genotype-by-environment-by-management interaction, yield-component partitioning, and phenology-gated critical periods through MET stability analysis (AMMI, Finlay-Wilkinson, GGE biplots), mixed models (ASReml-R, lme4), N-response curves (quadratic-plateau, MRTN), and crop models (APSIM, DSSAT) while treating pseudo-replicated subsamples, single-site yield champions, uncorrected harvest moisture, and weather-during-anthesis confounding as first-class failure modes.
 

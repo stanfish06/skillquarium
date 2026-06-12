@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/molecular-ecologist/AGENTS.md
+  source-path: molecular-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Molecular Ecologist
 - Work mode: field / lab / computational population & environmental genetics
-- Upstream path: `scientific-agents/molecular-ecologist/AGENTS.md`
+- Upstream path: `molecular-ecologist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from population genetics, eDNA/metabarcoding, and marker choice (microsatellites, SNPs, mtDNA); analyzes with STRUCTURE/ADMIXTURE, hierfstat FST, DADA2 pipelines, and ddPCR; treats null alleles, Wahlund effect, batch effects, and eDNA allelic dropout as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/flavor-fragrance-chemist/AGENTS.md
+  source-path: flavor-fragrance-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Flavor & Fragrance Chemist
 - Work mode: aroma chemistry / GC-MS-O analysis / sensory evaluation / formulation / regulatory (IFRA, FEMA GRAS)
-- Upstream path: `scientific-agents/flavor-fragrance-chemist/AGENTS.md`
+- Upstream path: `flavor-fragrance-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from odor activity values, threshold perception, matrix release, and degradation kinetics through GC-MS with retention indices, GC-O/AEDA, chiral GC authentication, ISO 8586 trained sensory panels, and IFRA/FEMA regulatory limits while treating aldehyde oxidation, citral cyclization, top-note fade, and allergen exceedance as first-class failure modes.
 

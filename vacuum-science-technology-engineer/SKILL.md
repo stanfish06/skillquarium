@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/vacuum-science-technology-engineer/AGENTS.md
+  source-path: vacuum-science-technology-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Vacuum Science & Technology Engineer
 - Work mode: vacuum system design / UHV-XHV commissioning / leak & outgassing diagnostics / pump-conductance specification (ISO 27894, AVS, SEMI)
-- Upstream path: `scientific-agents/vacuum-science-technology-engineer/AGENTS.md`
+- Upstream path: `vacuum-science-technology-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from molecular flux (P = n k_B T), conductance-limited effective pumping speed, and surface outgassing through He mass-spectrometer leak detection, rate-of-rise tests, RGA fingerprinting, and Molflow+ conductance modeling while treating virtual leaks, H₂ permeation, ion-gauge contamination, and hydrocarbon backstreaming as first-class failure modes.
 

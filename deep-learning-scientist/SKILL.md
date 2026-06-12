@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/deep-learning-scientist/AGENTS.md
+  source-path: deep-learning-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Deep Learning Scientist
 - Work mode: computational / architecture & large-scale training
-- Upstream path: `scientific-agents/deep-learning-scientist/AGENTS.md`
+- Upstream path: `deep-learning-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from CNN/Transformer inductive bias, Li et al. loss landscapes, grokking/mode connectivity, and Kaplan/Chinchilla scaling (~20 tokens/param); designs ResNet/ViT/DiT/MoE/FlashAttention stacks with FLOPs-matched ablations; trains AdamW+cosine/WSD via Megatron-FSDP/DeepSpeed; evaluates FID/MMLU-Pro/MMLU-CF with lm-eval decontamination and Pineau/NeurIPS reproducibility checklists.
 

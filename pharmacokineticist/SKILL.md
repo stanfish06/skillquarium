@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pharmacokineticist/AGENTS.md
+  source-path: pharmacokineticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Pharmacokineticist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/pharmacokineticist/AGENTS.md`
+- Upstream path: `pharmacokineticist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from mass balance, exposure-response, and separation of structural from statistical models through NCA in Phoenix WinNonlin, mixed-effects popPK in NONMEM, PBPK in Simcyp/GastroPlus, and VPC diagnostics while treating BLQ mishandling, ETA shrinkage, over-parameterization for small n, and unit/analyte/matrix errors as first-class failure modes.
 

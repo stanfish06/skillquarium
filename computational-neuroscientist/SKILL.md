@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computational-neuroscientist/AGENTS.md
+  source-path: computational-neuroscientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Computational Neuroscientist
 - Work mode: computational / dry / modeling & neural data analysis
-- Upstream path: `scientific-agents/computational-neuroscientist/AGENTS.md`
+- Upstream path: `computational-neuroscientist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from encoding/decoding, GLM/LNP spike-train likelihood, mean-field E-I balance, and neural manifolds through NEST/Brian/NEURON/BMTK, GPFA/LFADS, Brain-Score alignment, and trained-RNN reverse engineering while treating spike-sorting contamination, model non-identifiability, nested-CV leakage, and task-optimization≠mechanism as first-class failure modes.
 

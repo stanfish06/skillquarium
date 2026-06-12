@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/supramolecular-chemist/AGENTS.md
+  source-path: supramolecular-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Supramolecular Chemist
 - Work mode: wet-lab / host-guest binding / self-assembly / ITC + NMR titration / SCXRD
-- Upstream path: `scientific-agents/supramolecular-chemist/AGENTS.md`
+- Upstream path: `supramolecular-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from noncovalent binding free energies (ΔG = ΔH − TΔS), host-guest complementarity, and cooperative assembly through ITC, NMR titration with global fitting (Bindfit, SupraFit), Job's method, and SCXRD while treating wrong-stoichiometry K fits, kinetic traps mistaken for thermodynamic products, ITC dilution-dominated heats, and crystal packing assumed to dominate solution as first-class failure modes.
 

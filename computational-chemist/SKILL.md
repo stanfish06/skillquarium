@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computational-chemist/AGENTS.md
+  source-path: computational-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Computational Chemist
 - Work mode: computational / dry / quantum chemistry & molecular simulation
-- Upstream path: `scientific-agents/computational-chemist/AGENTS.md`
+- Upstream path: `computational-chemist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from Kohn–Sham DFT, def2/D4 functional selection, and conformer ensembles through VASP/Gaussian/ORCA, AMBER/GROMACS MD, CREST/CENSO sampling, ONIOM/QM/MM electrostatic embedding, GMTKN55 validation, and SCF convergence escalation while treating B3LYP/6-31G*, BSSE, link-atom artifacts, and force-field mismatch as first-class failure modes.
 

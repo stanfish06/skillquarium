@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/optical-physicist/AGENTS.md
+  source-path: optical-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Optical Physicist
 - Work mode: ultracold AMO / laser cooling & trapping / optical lattices & tweezers / precision clocks / quantum simulation
-- Upstream path: `scientific-agents/optical-physicist/AGENTS.md`
+- Upstream path: `optical-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from quantized atom-field coupling, recoil and trap energy scales (Γ, E_rec, U/J, κ), and coupled instability-versus-systematic budgets through optical Bloch equations, in-situ lattice-depth and Rabi calibration, QuTiP and ARC modeling, and Allan-deviation and clock systematic tables, while treating uncalibrated lattice depth, intensity-noise heating, double-occupancy mimicking unity filling, and missing BBR or AC-Stark shifts as first-class failure modes.
 

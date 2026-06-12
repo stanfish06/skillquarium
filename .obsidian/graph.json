@@ -99,6 +99,13 @@
       }
     },
     {
+      "query": "tag:#domain/scientific-expert-profiles",
+      "color": {
+        "a": 1,
+        "rgb": 10040012
+      }
+    },
+    {
       "query": "tag:#domain/literature-discovery",
       "color": {
         "a": 1,
@@ -120,6 +127,13 @@
       }
     },
     {
+      "query": "tag:#domain/software-dev",
+      "color": {
+        "a": 1,
+        "rgb": 1752220
+      }
+    },
+    {
       "query": "tag:#domain/vault-meta",
       "color": {
         "a": 1,
@@ -131,6 +145,27 @@
       "color": {
         "a": 1,
         "rgb": 117
+      }
+    },
+    {
+      "query": "tag:#domain/web-automation-frontend",
+      "color": {
+        "a": 1,
+        "rgb": 5832703
+      }
+    },
+    {
+      "query": "tag:#domain/analytics-engineering",
+      "color": {
+        "a": 1,
+        "rgb": 16753920
+      }
+    },
+    {
+      "query": "tag:#domain/security-auditing",
+      "color": {
+        "a": 1,
+        "rgb": 13382451
       }
     }
   ],

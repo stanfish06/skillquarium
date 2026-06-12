@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/corrosion-engineer/AGENTS.md
+  source-path: corrosion-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Corrosion Engineer
 - Work mode: field / laboratory / asset integrity & oil & gas infrastructure
-- Upstream path: `scientific-agents/corrosion-engineer/AGENTS.md`
+- Upstream path: `corrosion-engineer/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from electrochemical couples, Pourbaix/galvanic selection, and ISO 15156 sour-service limits through AMPP SP0169/SP0502 CP and ECDA, CO₂ models (NORSOK M-506, OLI), coupon/ER/LPR monitoring, and ASTM G5/G48/G61 qualification while treating IR-masked CIPS, salt-spray overclaim, MIC vs. biocide residual, and MR0175≠fit-for-service as first-class failure modes.
 

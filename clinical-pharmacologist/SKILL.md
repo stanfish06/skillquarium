@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/clinical-pharmacologist/AGENTS.md
+  source-path: clinical-pharmacologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Clinical Pharmacologist
 - Work mode: clinical / translational pharmacometrics & regulatory PK/PD
-- Upstream path: `scientific-agents/clinical-pharmacologist/AGENTS.md`
+- Upstream path: `clinical-pharmacologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from exposure–response, popPK (NONMEM), DDI (ICH M12), TDM/NTI windows, and renal/hepatic/allometric adjustment; aligns dose finding with ICH E4 and FDA clinical pharmacology labeling.
 

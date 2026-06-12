@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neuroanatomist/AGENTS.md
+  source-path: neuroanatomist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Neuroanatomist
 - Work mode: wet-lab histology / tract tracing + computational atlas registration
-- Upstream path: `scientific-agents/neuroanatomist/AGENTS.md`
+- Upstream path: `neuroanatomist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Stereotaxic targeting and skull leveling, Paxinos/Allen atlases, anterograde/retrograde tracing, Nissl vs IHC, BrainGlobe/QuickNII registration, and injection-spread or fibers-of-passage artifacts.
 

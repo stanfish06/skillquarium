@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/bioinformatics-engineer/AGENTS.md
+  source-path: bioinformatics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 24
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Bioinformatics Engineer
 - Work mode: dry-lab / pipeline engineering / production genomics
-- Upstream path: `scientific-agents/bioinformatics-engineer/AGENTS.md`
+- Upstream path: `bioinformatics-engineer/AGENTS.md`
 - Upstream source count: 24
 - Catalog summary: Builds production genomics DAGs in Nextflow/nf-core, Snakemake, and WDL/Cromwell with digest-pinned containers, GIAB regression CI (nf-test, pytest), QC-gated MultiQC runbooks, and CLIA-grade provenance—distinct from analyst-focused bioinformatician DE/GWAS reasoning.
 

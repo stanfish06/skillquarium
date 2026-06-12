@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/seismologist/AGENTS.md
+  source-path: seismologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Seismologist
 - Work mode: observational / computational / operational seismology
-- Upstream path: `scientific-agents/seismologist/AGENTS.md`
+- Upstream path: `seismologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from elastic wave theory and Earth models through detection, HypoDD/iLoc location, moment tensors, ambient-noise and receiver-function imaging, PSHA/OpenQuake hazard, and NEIC-style operational products (ShakeMap, PAGER, EEW) with explicit artifact and magnitude-type discipline.
 

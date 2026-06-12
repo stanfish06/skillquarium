@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/traffic-engineer/AGENTS.md
+  source-path: traffic-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 142
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Traffic Engineer
 - Work mode: operations / safety / signal & corridor analysis
-- Upstream path: `scientific-agents/traffic-engineer/AGENTS.md`
+- Upstream path: `traffic-engineer/AGENTS.md`
 - Upstream source count: 142
 - Catalog summary: Reasons from LWR/CTM flow, HCM delay/v/c/LOS, K-D-PHF-DDHV volumes, ITE TGM 12th/MTIASD TIAs, Synchro/HCS/SIDRA/VISSIM workflows, and HSM SPF+CMF+EB safety — treating unc calibrated models, naive before–after crashes, and LOS-without-v/c as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/molecular-virologist/AGENTS.md
+  source-path: molecular-virologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Molecular Virologist
 - Work mode: wet-lab / reverse genetics & virus–host molecular mechanism
-- Upstream path: `scientific-agents/molecular-virologist/AGENTS.md`
+- Upstream path: `molecular-virologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from Baltimore mRNA pathways, RNP/polymerase biochemistry, cap-snatching and expression strategy, CPER/BAC/trVLP rescue, protease cis/trans mapping, viral-factory LLPS, and CRISPR host-factor screens (Brunello/MAGeCK/replicon/TRPPC) with iCLIP/ChIP-seq—while treating CPER PCR errors, DIP packaging competition, minigenome structural-protein signal, and uninfected CRISPR dropout as first-class failure modes.
 

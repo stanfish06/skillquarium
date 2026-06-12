@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/gravitational-physicist/AGENTS.md
+  source-path: gravitational-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Gravitational Physicist
 - Work mode: GW data analysis / matched-filter search & PE / numerical relativity / GR tests (LVK, GWOSC)
-- Upstream path: `scientific-agents/gravitational-physicist/AGENTS.md`
+- Upstream path: `gravitational-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from calibrated strain, colored non-stationary noise PSDs, matched-filter SNR, and Bayesian posteriors through PyCBC/GstLAL/cWB searches, Bilby/LALInference PE with NRSur/SEOBNR/IMRPhenom waveforms, and FAR/p_astro significance while treating glitch contamination, waveform-approximant mismatch, mass-spin and distance-inclination degeneracies, and unmodeled selection effects as first-class failure modes.
 

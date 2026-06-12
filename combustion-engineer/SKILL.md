@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/combustion-engineer/AGENTS.md
+  source-path: combustion-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Combustion Engineer
 - Work mode: experimental / combustion & propulsion
-- Upstream path: `scientific-agents/combustion-engineer/AGENTS.md`
+- Upstream path: `combustion-engineer/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from stoichiometry, flame stability, emissions, and CFD-reacted flows while treating blow-off, flashback, and soot formation as first-class failure modes.
 

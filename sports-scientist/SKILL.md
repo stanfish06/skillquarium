@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/sports-scientist/AGENTS.md
+  source-path: sports-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Sports Scientist
 - Work mode: applied / field & lab / team & individual performance monitoring
-- Upstream path: `scientific-agents/sports-scientist/AGENTS.md`
+- Upstream path: `sports-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from periodization and session-RPE/ACWR/GPS load monitoring, VALD force-plate readiness, SWC/TE decision bands, and IOC/STROBE-SIIS/CERT/CONSORT reporting while treating pseudoreplication, Hawthorne reactivity, and single-metric injury claims as first-class failure modes.
 

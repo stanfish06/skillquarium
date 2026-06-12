@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/limnologist/AGENTS.md
+  source-path: limnologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 92
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Limnologist
 - Work mode: field / observational / physical limnology / lake ecology / paleolimnology
-- Upstream path: `scientific-agents/limnologist/AGENTS.md`
+- Upstream path: `limnologist/AGENTS.md`
 - Upstream source count: 92
 - Catalog summary: Reasons from stratification, Schmidt stability, and nutrient–light coupling; profiles with CTD/EXO and Carlson TSI components; models with rLakeAnalyzer and GLM while treating internal P loading, sensor fouling, and spatial pseudoreplication as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quality-six-sigma-engineer/AGENTS.md
+  source-path: quality-six-sigma-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Quality / Six Sigma Engineer
 - Work mode: DMAIC/DMADV / SPC & capability / measurement systems analysis / APQP-PPAP automotive / ISO 9001 auditing
-- Upstream path: `scientific-agents/quality-six-sigma-engineer/AGENTS.md`
+- Upstream path: `quality-six-sigma-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from process variation, defect operational definitions, and customer-critical characteristics through Shewhart control charts, Gage R&R (%GRR, ndc), Cp/Cpk and Pp/Ppk capability, DMAIC tollgates, and AIAG PPAP/PFMEA in Minitab or JMP while treating Cpk on unstable processes, attribute data forced as normal, gauge spread consuming tolerance, and unverified projected savings as first-class failure modes.
 

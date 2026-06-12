@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/extremophile-biologist/AGENTS.md
+  source-path: extremophile-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Extremophile Biologist
 - Work mode: wet-lab / field sampling / high-pressure and anaerobic cultivation / metagenomics / astrobiology analogs
-- Upstream path: `scientific-agents/extremophile-biologist/AGENTS.md`
+- Upstream path: `extremophile-biologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reason from physicochemical limits—T, pH, salinity, pressure, and redox—as filters on membrane chemistry, osmoadaptation, chaperones, and cultivation fidelity before astrobiology or extremozyme claims.
 

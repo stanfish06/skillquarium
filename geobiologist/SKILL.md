@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geobiologist/AGENTS.md
+  source-path: geobiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geobiologist
 - Work mode: biosignature assessment / isotope geochemistry / microbe-mineral petrography / deep-biosphere -omics / astrobiology
-- Upstream path: `scientific-agents/geobiologist/AGENTS.md`
+- Upstream path: `geobiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from metabolism, redox geochemistry, microbe-mineral interactions, and diagenetic filters through stromatolite microfabric petrography, CSIA and clumped-isotopologue analysis, nanoSIMS-FISH mapping, and NASA's Ladder of Life Detection while treating Fischer-Tropsch-type synthesis, serpentinization, Rayleigh distillation, drilling-fluid contamination, and epigenetic overprint as first-class failure modes.
 

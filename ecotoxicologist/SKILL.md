@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ecotoxicologist/AGENTS.md
+  source-path: ecotoxicologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Ecotoxicologist
 - Work mode: regulatory / laboratory & field ERA (aquatic–terrestrial)
-- Upstream path: `scientific-agents/ecotoxicologist/AGENTS.md`
+- Upstream path: `ecotoxicologist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from bioavailability (BLM/WHAM), OECD 201–222 tiered tests, and ECx/SSD HC5–PNEC derivation; compares PEC/PNEC under REACH/PPP frames while treating third-phase BCF artifacts, mixture CA departures, and mesocosm exposure mismatch as first-class failure modes.
 

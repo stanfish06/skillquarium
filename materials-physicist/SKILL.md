@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/materials-physicist/AGENTS.md
+  source-path: materials-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Materials Physicist
 - Work mode: experimental / thin-film & bulk / spectroscopy–transport
-- Upstream path: `scientific-agents/materials-physicist/AGENTS.md`
+- Upstream path: `materials-physicist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from band structure, defects, strain, and Landau order parameters; integrates HRXRD/RSM, ARPES, TEM/4D-STEM, van der Pauw transport, and SQUID/MOKE with Materials Project/VASP while treating matrix-element ARPES artifacts, substrate-dominated GIXRD, contact-resistance Hall errors, and DFT gap overclaim as first-class failure modes.
 

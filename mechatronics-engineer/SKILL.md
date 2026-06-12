@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mechatronics-engineer/AGENTS.md
+  source-path: mechatronics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Mechatronics Engineer
 - Work mode: electromechanical co-design / motion control / FOC drives / fieldbus (EtherCAT, CiA 402) / drive safety (IEC 61800-5-2, ISO 13849)
-- Upstream path: `scientific-agents/mechatronics-engineer/AGENTS.md`
+- Upstream path: `mechatronics-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from reflected inertia, control bandwidth, sensor physics, and thermal duty cycle through Bode loop-shaping with phase/gain margins, FOC current-velocity-position loops, plant identification, HIL, and IEC 61800-5-2 STO architecture while treating backlash and structural-mode resonance, transport-delay phase loss, encoder aliasing, and EMC ground loops as first-class failure modes.
 

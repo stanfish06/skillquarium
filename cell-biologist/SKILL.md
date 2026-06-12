@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cell-biologist/AGENTS.md
+  source-path: cell-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Cell Biologist
 - Work mode: wet-lab / mammalian cell culture / fluorescence microscopy / genetic perturbation / rigor (STR, MIQE, REMBI)
-- Upstream path: `scientific-agents/cell-biologist/AGENTS.md`
+- Upstream path: `cell-biologist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from compartment thermodynamics, membrane electrophysics, and necessity-plus-sufficiency logic through STR authentication, confocal/TIRF imaging, CRISPR and siRNA perturbation with rescue, and Western blot, treating mycoplasma, passage and serum-lot drift, edge effects, antibody cross-reactivity, siRNA seed off-targets, and well-as-n pseudoreplication as first-class failure modes.
 

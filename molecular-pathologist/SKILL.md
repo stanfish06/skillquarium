@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/molecular-pathologist/AGENTS.md
+  source-path: molecular-pathologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Molecular Pathologist
 - Work mode: clinical / anatomic & molecular diagnostic pathology
-- Upstream path: `scientific-agents/molecular-pathologist/AGENTS.md`
+- Upstream path: `molecular-pathologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from tumor cellularity, assay-specific LOD, and AMP/ASCO/CAP Tier I–IV classification; validates IHC (CAP ≥90% concordance), FISH (HER2/ALK break-apart), and NGS oncology panels under CAP/CLIA MM09 while treating FFPE deamination, HER2-low/ultralow scoring, PD-L1 TPS vs CPS, and ctDNA CHIP as first-class failure modes.
 

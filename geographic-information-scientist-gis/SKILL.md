@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geographic-information-scientist-gis/AGENTS.md
+  source-path: geographic-information-scientist-gis/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Geographic Information Scientist (GIS)
 - Work mode: geospatial data engineering / CRS & topology / spatial statistics & geostatistics / network & hydrologic analysis / web GIS (OGC, STAC)
-- Upstream path: `scientific-agents/geographic-information-scientist-gis/AGENTS.md`
+- Upstream path: `geographic-information-scientist-gis/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from location, topology, scale, and positional uncertainty through PostGIS/GDAL pipelines, explicit EPSG/datum choices, kriging with cross-validated variograms, and ISO 19115/FGDC metadata while treating MAUP and ecological fallacy, Web Mercator area statistics, floating-point slivers and broken topology, and spatial-autocorrelation-inflated significance as first-class failure modes.
 

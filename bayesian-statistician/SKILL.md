@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/bayesian-statistician/AGENTS.md
+  source-path: bayesian-statistician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Bayesian Statistician
 - Work mode: probabilistic modeling / hierarchical inference / MCMC diagnostics / model criticism / decision theory
-- Upstream path: `scientific-agents/bayesian-statistician/AGENTS.md`
+- Upstream path: `bayesian-statistician/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Bayes' rule, coherent uncertainty, exchangeability, and partial-pooling hierarchy through Stan/PyMC HMC-NUTS fits, prior and posterior predictive checks, PSIS-LOO, and SBC calibration while treating divergent transitions and funnels, weak identifiability and label switching, improper posteriors, and post-hoc prior tuning as first-class failure modes.
 

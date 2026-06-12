@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computer-architecture-researcher/AGENTS.md
+  source-path: computer-architecture-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Computer Architecture Researcher
 - Work mode: computational / simulation / architecture evaluation
-- Upstream path: `scientific-agents/computer-architecture-researcher/AGENTS.md`
+- Upstream path: `computer-architecture-researcher/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from ISA semantics, AMAT/CPI, MESI coherence, and branch prediction through gem5/SPEC/MLPerf evaluation, Amdahl and roofline discipline, TPU/GPU dataflow accelerators, DVFS/EDP, and Spectre/Meltdown mitigation overhead at ISCA/MICRO/HPCA rigor.
 

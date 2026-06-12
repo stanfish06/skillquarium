@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/propulsion-engineer/AGENTS.md
+  source-path: propulsion-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Propulsion Engineer
 - Work mode: engine design / hot-fire test / combustion stability / rockets-airbreathing-EP / cycle analysis
-- Upstream path: `scientific-agents/propulsion-engineer/AGENTS.md`
+- Upstream path: `propulsion-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from thrust, specific impulse, characteristic velocity c*, thrust coefficient Cf, and NPSH through NASA CEA, RPA and NPSS cycle models, hot-fire thrust stands, and ROCCID/bomb-test stability screening while treating nozzle separation, inducer cavitation, chugging/screech combustion instability, and scramjet unstart as first-class failure modes.
 

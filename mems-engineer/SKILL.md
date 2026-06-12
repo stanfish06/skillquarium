@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mems-engineer/AGENTS.md
+  source-path: mems-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 51
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: MEMS Engineer
 - Work mode: silicon micromachining / transducer design / simulation & WLT
-- Upstream path: `scientific-agents/mems-engineer/AGENTS.md`
+- Upstream path: `mems-engineer/AGENTS.md`
 - Upstream source count: 51
 - Catalog summary: Reasons from scale-dependent mechanics, squeeze-film damping, and electrostatic pull-in through DRIE Bosch/surface micromachining, CoventorMP/COMSOL, foundry PDKs, LDV/WLI metrology, and AEC-Q103 qual while treating release stiction, DRIE scallop bias, package-stress offset drift, and functional-WLT-vs-reliability gaps as first-class failure modes.
 

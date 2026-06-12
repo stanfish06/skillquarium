@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neuroimaging-scientist/AGENTS.md
+  source-path: neuroimaging-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Neuroimaging Scientist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/neuroimaging-scientist/AGENTS.md`
+- Upstream path: `neuroimaging-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from k-space acquisition physics, BOLD hemodynamics, and per-voxel statistical models through fMRIPrep/QSIPrep BIDS pipelines, FSL/SPM/nilearn analysis, neuroCombat harmonization, and TFCE/permutation inference while treating head motion, partial-volume and reference-region errors in PET, global-signal regression artifacts, and site over-correction as first-class failure modes.
 

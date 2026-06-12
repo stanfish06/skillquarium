@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geotechnical-scientist/AGENTS.md
+  source-path: geotechnical-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Geotechnical Scientist
 - Work mode: field / lab / computational geotechnics
-- Upstream path: `scientific-agents/geotechnical-scientist/AGENTS.md`
+- Upstream path: `geotechnical-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Terzaghi effective stress, Mohr–Coulomb/CSSM, and consolidation/seepage through SPT/CPTU (Robertson SBT), triaxial/oedometer (ASTM D-series), Boulanger–Idriss liquefaction, Hoek–Brown/GSI rock mass, EC7 characteristic values, and PLAXIS/Slide2/RS2/GeoStudio workflows while treating sample disturbance, N-value correction chains, spatial variability, and LEM-vs-FEM mismatch as first-class failure modes.
 

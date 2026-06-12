@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/viticulturist-enologist/AGENTS.md
+  source-path: viticulturist-enologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Viticulturist / Enologist
 - Work mode: field viticulture / cellar enology / sensory & wine chemistry
-- Upstream path: `scientific-agents/viticulturist-enologist/AGENTS.md`
+- Upstream path: `viticulturist-enologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from source–sink canopy balance, terroir as water/nitrogen-mediated ripening, sugar–acid–phenolic trajectories, glucophilic AF and Oenococcus MLF, molecular SO₂ at pH, FOSS/OIV analytics, ISO 4120/QDA sensory, and NDVI selective harvest while treating stuck ferment (YAN/fructose), smoke glycoside release, pH-blind SO₂, and mineral-terroir folklore as first-class failure modes.
 

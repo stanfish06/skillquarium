@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/industrial-engineer/AGENTS.md
+  source-path: industrial-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Industrial Engineer
 - Work mode: manufacturing / logistics / service operations / ergonomics & simulation
-- Upstream path: `scientific-agents/industrial-engineer/AGENTS.md`
+- Upstream path: `industrial-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from takt, Little's Law, and ρ-stable queueing (M/M/c, Erlang C) through DMAIC/DMADV, VSM, line balancing, SLP/ALDEP/CRAFT layout, MTM/MOST, work sampling, RNLE/RULA/REBA, ISO 22400 OEE, and Arena/AnyLogic DES V&V; treats simulation warm-up/replication gaps, CRAFT non-contiguity, and OEE-without-takt red herrings as first-class failure modes.
 

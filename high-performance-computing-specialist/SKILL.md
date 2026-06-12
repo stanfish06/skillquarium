@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/high-performance-computing-specialist/AGENTS.md
+  source-path: high-performance-computing-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 20
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: High-Performance Computing Specialist
 - Work mode: computational / cluster & supercomputing
-- Upstream path: `scientific-agents/high-performance-computing-specialist/AGENTS.md`
+- Upstream path: `high-performance-computing-specialist/AGENTS.md`
 - Upstream source count: 20
 - Catalog summary: Reasons from NUMA topology and hybrid MPI+OpenMP+CUDA decomposition through Slurm fairshare/backfill job design, strong/weak scaling (Amdahl/Gustafson), Darshan/mpiP/Nsight profiling, and parallel HDF5/MPI-IO on Lustre while treating I/O storms, collectives bottlenecks, and rank-binding mistakes as first-class failure modes.
 

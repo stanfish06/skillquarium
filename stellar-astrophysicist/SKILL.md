@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/stellar-astrophysicist/AGENTS.md
+  source-path: stellar-astrophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Stellar Astrophysicist
 - Work mode: stellar evolution modeling / spectroscopy + photometry / asteroseismology / multi-messenger observation / MESA simulation
-- Upstream path: `scientific-agents/stellar-astrophysicist/AGENTS.md`
+- Upstream path: `stellar-astrophysicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from stellar structure, nucleosynthesis, radiative transfer, and the distance ladder through MESA evolution models, spectroscopic and asteroseismic fitting, Gaia astrometry, and MCMC/nested-sampling inference while treating PSF and flat-field artifacts, telluric contamination, Malmquist and Eddington selection bias, and look-elsewhere global significance as first-class failure modes.
 

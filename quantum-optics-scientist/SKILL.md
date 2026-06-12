@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quantum-optics-scientist/AGENTS.md
+  source-path: quantum-optics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Quantum Optics Scientist
 - Work mode: optical bench / single-photon & squeezed-light / cavity QED / correlation & homodyne metrology
-- Upstream path: `scientific-agents/quantum-optics-scientist/AGENTS.md`
+- Upstream path: `quantum-optics-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from field quadratures, atom-photon coupling (g, κ, γ), and heralding efficiency budgets through g⁽²⁾ Hanbury Brown-Twiss measurement, balanced homodyne tomography, HOM interference, and SNSPD/APD detector calibration while treating afterpulsing-faked antibunching, LO phase drift erasing squeezing, accidentals and dark counts, and unaddressed Bell-test loopholes as first-class failure modes.
 

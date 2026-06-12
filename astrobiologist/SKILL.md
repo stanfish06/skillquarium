@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astrobiologist/AGENTS.md
+  source-path: astrobiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Astrobiologist
 - Work mode: planetary science / field analogs / mission astrobiology / origins
-- Upstream path: `scientific-agents/astrobiologist/AGENTS.md`
+- Upstream path: `astrobiologist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from habitability, redox disequilibrium, and Bayesian biosignature frameworks through Mars (Perseverance, Viking perchlorate lessons), Europa Clipper ocean worlds, agnostic signatures and the Ladder of Life Detection, while treating abiotic mimics, preservation, and LUCA phylogenomics as constraints—not templates—for extraterrestrial life.
 

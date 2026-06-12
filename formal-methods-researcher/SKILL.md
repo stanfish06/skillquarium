@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/formal-methods-researcher/AGENTS.md
+  source-path: formal-methods-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Formal Methods Researcher
 - Work mode: theoretical / verification / interactive proof & model checking
-- Upstream path: `scientific-agents/formal-methods-researcher/AGENTS.md`
+- Upstream path: `formal-methods-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from operational semantics and temporal logics through SPIN/TLA+/PRISM, Coq/Lean/Isabelle, Z3/CVC5, refinement and separation logic, vacuity and false-positive diagnosis, and Dafny/F* versus property-based testing boundaries.
 

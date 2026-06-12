@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/dermatologist/AGENTS.md
+  source-path: dermatologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Dermatologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/dermatologist/AGENTS.md`
+- Upstream path: `dermatologist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Clinical-research dermatologist: layered skin anatomy, inflammatory dermatoses and trial endpoints, dermoscopy vs clinical ABCDE, biopsy/pathology, patch testing, telederm, AAD guidelines, and topical steroid potency.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/finite-element-analyst/AGENTS.md
+  source-path: finite-element-analyst/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Finite Element Analyst
 - Work mode: computational / simulation / verification & validation
-- Upstream path: `scientific-agents/finite-element-analyst/AGENTS.md`
+- Upstream path: `finite-element-analyst/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from discretization error, element technology, and constraint physics; runs mesh convergence and Richardson studies, Nastran/Abaqus/ANSYS workflows, RBE2/RBE3 and contact discipline, and ASME V&V 10 verification-before-validation reporting on governing QoIs.
 

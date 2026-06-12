@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/natural-language-processing-scientist/AGENTS.md
+  source-path: natural-language-processing-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Natural Language Processing Scientist
 - Work mode: computational / language modeling, evaluation & alignment
-- Upstream path: `scientific-agents/natural-language-processing-scientist/AGENTS.md`
+- Upstream path: `natural-language-processing-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from tokenization, data curation (datatrove/NeMo), and evaluation protocols (SacreBLEU/COMET, IFEval, HELM); enforces contamination audits (ConTAM, perplexity separation), paired bootstrap significance, SFT→DPO/RLHF with alignment-tax checks, and ARR/Dodge reproducibility while treating exposure bias, benchmark leakage, prompt-template confounds, and metric gaming as first-class failure modes.
 

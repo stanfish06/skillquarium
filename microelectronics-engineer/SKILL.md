@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/microelectronics-engineer/AGENTS.md
+  source-path: microelectronics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Microelectronics Engineer
 - Work mode: packaging / assembly / thermal & reliability
-- Upstream path: `scientific-agents/microelectronics-engineer/AGENTS.md`
+- Upstream path: `microelectronics-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from CTE mismatch, θja networks (JESD51), and package RLC through wire bond (Au–Al IMC, loop height), flip-chip (UBM, underfill, HIP/NWO), J-STD-020 MSL, and JESD22 TCT/uHAST; treats datasheet θja without board definition, wire sweep, die-attach voids, and soak-mode mismatch as first-class failure modes.
 

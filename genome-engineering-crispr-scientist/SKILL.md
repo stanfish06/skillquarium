@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/genome-engineering-crispr-scientist/AGENTS.md
+  source-path: genome-engineering-crispr-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Genome Engineering (CRISPR) Scientist
 - Work mode: wet-lab / therapeutic / cell-line engineering
-- Upstream path: `scientific-agents/genome-engineering-crispr-scientist/AGENTS.md`
+- Upstream path: `genome-engineering-crispr-scientist/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from NHEJ/HDR/MMEJ competition and editor modality choice through CRISPick/CRISPResso2 guide design, LOCK/lssDNA and RNP HDR, base and prime editing (PE4/PE5, epegRNA), CAST-Seq/UDiTaS on-target SV assessment, clonal genotyping, and FDA/IBC-bound off-target and genome-integrity analytics.
 

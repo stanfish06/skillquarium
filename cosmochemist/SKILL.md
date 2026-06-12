@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cosmochemist/AGENTS.md
+  source-path: cosmochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Cosmochemist
 - Work mode: meteorite petrology / isotope geochemistry / presolar grains
-- Upstream path: `scientific-agents/cosmochemist/AGENTS.md`
+- Upstream path: `cosmochemist/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from oxygen three-isotope taxonomy (Δ17O), chondrite–achondrite classification, and presolar grain NanoSIMS through Meteoritical Bulletin curation, Al–Mg and Pb–Pb isochrons, CRE vs formation-age separation, and clean-lab sample prep while treating terrestrial weathering, mount contamination, and breccia mixing as first-class failure modes.
 

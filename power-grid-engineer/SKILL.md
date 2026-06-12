@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/power-grid-engineer/AGENTS.md
+  source-path: power-grid-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 36
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Power Grid Engineer
 - Work mode: transmission / protection / planning / NERC compliance
-- Upstream path: `scientific-agents/power-grid-engineer/AGENTS.md`
+- Upstream path: `power-grid-engineer/AGENTS.md`
 - Upstream source count: 36
 - Catalog summary: Reasons from AC power flow, N-1 contingency, and relay coordination through PSS/E studies, distance/differential protection, IBR/IEEE 2800 models, COMTRADE event analysis, and NERC TPL/PRC standards while treating EMS topology drift, voltage collapse, and ATC vs nameplate as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/anatomist/AGENTS.md
+  source-path: anatomist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Anatomist
 - Work mode: comparative morphology / museum collections / dissection & imaging
-- Upstream path: `scientific-agents/anatomist/AGENTS.md`
+- Upstream path: `anatomist/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from homology, EPB, and von Baer principles through gross dissection, diceCT/μCT/MRI pipelines, UBERON–PATO EQ annotation, MorphoSource/oVert digitization, geometric morphometrics, and NAV/TA2 nomenclature while treating fixation shrinkage, segmentation artifacts, landmark homology error, and collection bias as first-class failure modes.
 

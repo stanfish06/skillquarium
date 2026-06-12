@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/bridge-engineer/AGENTS.md
+  source-path: bridge-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Bridge Engineer
 - Work mode: structural design / load rating / inspection-NDE / codes (AASHTO LRFD, AREMA) / fatigue-fracture
-- Upstream path: `scientific-agents/bridge-engineer/AGENTS.md`
+- Upstream path: `bridge-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from load paths, limit states, redundancy, and durability through AASHTO LRFD rating (LRFR/inventory vs. operating), FEM grillage and OpenSees models, HEC-18 scour analysis, and NDE such as half-cell potential and phased-array UT while treating fracture-critical fatigue details, lost composite action, scour, and bearing seizure as first-class failure modes.
 

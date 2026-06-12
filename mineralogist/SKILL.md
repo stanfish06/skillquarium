@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mineralogist/AGENTS.md
+  source-path: mineralogist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Mineralogist
 - Work mode: laboratory / field mineral identification / crystallography / economic mineralogy
-- Upstream path: `scientific-agents/mineralogist/AGENTS.md`
+- Upstream path: `mineralogist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from crystal chemistry, Pauling coordination, and converging optics–XRD/Raman–EPMA evidence; uses RRUFF/Mindat/AMCSD and CNMNC Checklist 2025 while treating preferred orientation, clay EG/heat triads, metamict amorphization, and QEMSCAN library bias as first-class failure modes.
 

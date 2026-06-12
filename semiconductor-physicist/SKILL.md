@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/semiconductor-physicist/AGENTS.md
+  source-path: semiconductor-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 44
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Semiconductor Physicist
 - Work mode: theory / transport & defect spectroscopy / heterostructures
-- Upstream path: `scientific-agents/semiconductor-physicist/AGENTS.md`
+- Upstream path: `semiconductor-physicist/AGENTS.md`
 - Upstream source count: 44
 - Catalog summary: Reasons from ε_n(k), effective-mass tensor, and 2D subband DOS through Hall/multiband fits, mobility scattering analysis, Lang DLTS (E_T, σ, N_T), and quantum-well intersubband spectroscopy while treating compensation, rate-window artifacts, and DFT gap error as first-class failure modes.
 

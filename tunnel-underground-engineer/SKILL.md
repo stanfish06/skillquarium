@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/tunnel-underground-engineer/AGENTS.md
+  source-path: tunnel-underground-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Tunnel & Underground Engineer
 - Work mode: geotechnical / NATM-SEM & TBM tunneling / rock-mass classification (Q/RMR/GSI) / ground-support convergence / fire-life safety (NFPA 502/130)
-- Upstream path: `scientific-agents/tunnel-underground-engineer/AGENTS.md`
+- Upstream path: `tunnel-underground-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from ground-structure-water-air interaction, convergence-support interaction, and face-stability limit states through Q/RMR/GSI classification, Hoek-Brown numerical models (PLAXIS, FLAC), Peck settlement troughs, and DAUB-ITA/NFPA 502 standards while treating face blowout, squeezing, invert heave, and TBM jam in mixed face as first-class failure modes.
 

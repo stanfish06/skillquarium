@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geologist/AGENTS.md
+  source-path: geologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geologist
 - Work mode: field / mapping / stratigraphy / petrography / structural geology
-- Upstream path: `scientific-agents/geologist/AGENTS.md`
+- Upstream path: `geologist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from Steno's principles and Walther's Law through Brunton strike/dip, measured sections, hand-lens rock ID (QAPF/Folk/Dunham), thin-section petrography (PPL/XPL, Michel-Lévy, point counting), FGDC/GeMS geologic maps, NGMDB/Geolex/Macrostrat, and stereonet structural analysis while treating weathering, float, and map-as-hypothesis as first-class failure modes.
 

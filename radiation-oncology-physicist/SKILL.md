@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/radiation-oncology-physicist/AGENTS.md
+  source-path: radiation-oncology-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Radiation Oncology Physicist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/radiation-oncology-physicist/AGENTS.md`
+- Upstream path: `radiation-oncology-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from absorbed dose, fluence, beam geometry, and constraint-driven plan quality through TG-51/TRS-398 reference dosimetry, TPS engines (AAA, Acuros XB, Monte Carlo), DVH metrics, and gamma-based patient-specific QA while treating stale CT-to-density tables, couch-shift sign errors, MLC leaf-bank swaps, and small-field output mishandling as first-class failure modes.
 

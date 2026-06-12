@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ecologist/AGENTS.md
+  source-path: ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Ecologist
 - Work mode: field / observational / community & spatial ecology
-- Upstream path: `scientific-agents/ecologist/AGENTS.md`
+- Upstream path: `ecologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Preston/Fisher SADs and Hutchinson fundamental vs realized niches; designs quadrat/transect and distance/occupancy surveys; filters GBIF issue flags and iNaturalist DQA; fits vegan/iNEXT/unmarked GLMMs with Moran's I and nlme/glmmTMB spatial correlation while treating pseudoreplication, effort bias, and citizen-science artifacts as first-class failure modes.
 

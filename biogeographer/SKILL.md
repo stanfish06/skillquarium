@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biogeographer/AGENTS.md
+  source-path: biogeographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Biogeographer
 - Work mode: field / GIS / phylogenetics / spatial modeling
-- Upstream path: `scientific-agents/biogeographer/AGENTS.md`
+- Upstream path: `biogeographer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Wallace's ecological vs historical split through GBIF occurrence curation, blockCV spatial cross-validation, MaxEnt/biomod2 SDMs with MESS extrapolation flags, BioGeoBEARS vicariance/dispersal tests, and phylogeographic coalescence while treating random-CV AUC inflation, background bias, and area-cladogram overfitting as first-class failure modes.
 

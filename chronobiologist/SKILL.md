@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/chronobiologist/AGENTS.md
+  source-path: chronobiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Chronobiologist
 - Work mode: wet-lab / computational / human circadian physiology
-- Upstream path: `scientific-agents/chronobiologist/AGENTS.md`
+- Upstream path: `chronobiologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from TTFL molecular clocks, SCN–peripheral coupling, and zeitgeber entrainment (PRC); analyzes actigraphy, DLMO, and PER2::LUC with ClockLab/LumiCycle, MetaCycle/eJTK/LimoRhyde, and CircaDB/CGDB/ChronobioticsDB while separating masking from endogenous τ under constant routine/FD.
 

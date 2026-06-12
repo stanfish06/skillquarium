@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ai-researcher/AGENTS.md
+  source-path: ai-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: AI Researcher
 - Work mode: empirical ML / experiment design / evaluation methodology / reproducibility / LLM & RL / trustworthiness (robustness, fairness, safety)
-- Upstream path: `scientific-agents/ai-researcher/AGENTS.md`
+- Upstream path: `ai-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from data generating processes, inductive biases, and compute-data-algorithm trade-offs through train/val/test discipline, seed sweeps, ablation ladders, and standards like NeurIPS reproducibility checklists, model cards, and lm-eval-harness, while treating data leakage (Kapoor & Narayanan taxonomy), benchmark contamination, spurious correlations, and reward-model overoptimization as first-class failure modes.
 

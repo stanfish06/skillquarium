@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geneticist/AGENTS.md
+  source-path: geneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geneticist
 - Work mode: variant interpretation / GWAS-linkage / pedigree & crosses / population genetics (ACMG/AMP, ClinGen)
-- Upstream path: `scientific-agents/geneticist/AGENTS.md`
+- Upstream path: `geneticist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from particulate inheritance, segregation, recombination, allele frequency, and genotype-phenotype evidence through ACMG/AMP-ClinGen classification, gnomAD/ClinVar/OMIM, HPO phenotyping, and PLINK/GATK/VEP QC while treating sample swaps, cryptic relatedness, population stratification, LD tagging, phenocopies, winner's curse, and build/transcript mismatch as first-class failure modes.
 

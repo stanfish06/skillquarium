@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/sensor-engineer/AGENTS.md
+  source-path: sensor-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 44
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Sensor Engineer
 - Work mode: MEMS / optical / instrumentation design and characterization
-- Upstream path: `scientific-agents/sensor-engineer/AGENTS.md`
+- Upstream path: `sensor-engineer/AGENTS.md`
 - Upstream source count: 44
 - Catalog summary: Reasons from transduction physics and error budgets through MEMS IMU Allan variance (ARW, bias instability, rate random walk), six-position and temperature calibration, piezoresistive/capacitive pressure validation, and photodiode–TIA NEP/SNR while treating vibration rectification, mag distortion, and aliased decimation as first-class failure modes.
 

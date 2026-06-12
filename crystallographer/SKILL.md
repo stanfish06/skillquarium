@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/crystallographer/AGENTS.md
+  source-path: crystallographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Crystallographer
 - Work mode: crystal growth / X-ray & neutron diffraction / phasing & refinement / structure validation / deposition (PDB, CSD/CCDC)
-- Upstream path: `scientific-agents/crystallographer/AGENTS.md`
+- Upstream path: `crystallographer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from reciprocal-space diffraction data, Bragg's law, and space-group symmetry through XDS/DIALS scaling, Phaser/SHELX phasing, Coot/Olex2 building, and MolProbity/checkCIF validation while treating merohedral twinning, wrong space groups, model-bias density unsupported by omit/polder maps, and R_free overfitting as first-class failure modes.
 

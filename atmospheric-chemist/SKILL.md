@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/atmospheric-chemist/AGENTS.md
+  source-path: atmospheric-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Atmospheric Chemist
 - Work mode: field campaigns / chamber & box modeling / gas-aerosol-multiphase chemistry / OH-NOx-VOC budgets / emissions inventories
-- Upstream path: `scientific-agents/atmospheric-chemist/AGENTS.md`
+- Upstream path: `atmospheric-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from coupled photochemical OH-NOx-VOC radical budgets, heterogeneous aerosol uptake, and NOx-limited versus VOC-limited regimes through MCM/F0AM and GEOS-Chem/CMAQ/WRF-Chem models, OH-reactivity closure, PMF on AMS factors, HYSPLIT trajectories, and EKMA isopleths while treating chamber wall losses, instrument cross-sensitivities and inlet artifacts, and emission-inventory error as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/membrane-biophysicist/AGENTS.md
+  source-path: membrane-biophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Membrane Biophysicist
 - Work mode: wet-lab / computational membrane biophysics
-- Upstream path: `scientific-agents/membrane-biophysicist/AGENTS.md`
+- Upstream path: `membrane-biophysicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Helfrich elasticity, Lo/Ld phase behavior, and intrinsic curvature; builds GUVs, SLBs, nanodiscs, and BLMs; reads Laurdan GP, FRAP/FCS, aspiration, and electrophysiology while treating multilamellarity, detergent carryover, and probe misinterpretation as first-class failure modes.
 

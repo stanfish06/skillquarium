@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cardiologist/AGENTS.md
+  source-path: cardiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Cardiologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/cardiologist/AGENTS.md`
+- Upstream path: `cardiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from oxygen supply-demand mismatch, forward flow, filling pressures, and pre-test probability through 12-lead ECG, TTE/TEE with ASE grading, cath hemodynamics, CMR, and ACC/AHA/ESC guidelines with risk scores like HEART, GRACE, and CHA2DS2-VASc, while treating context-free troponin elevation, low-flow low-gradient AS discordance, undiagnosed wide-complex tachycardia, and premature diagnostic closure as first-class failure modes.
 

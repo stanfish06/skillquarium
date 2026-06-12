@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/thermodynamics-engineer/AGENTS.md
+  source-path: thermodynamics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Thermodynamics Engineer
 - Work mode: energy-system analysis / cycle modeling / exergy & pinch / heat exchangers / acceptance testing (ASME PTC, AHRI)
-- Upstream path: `scientific-agents/thermodynamics-engineer/AGENTS.md`
+- Upstream path: `thermodynamics-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from energy conservation, entropy generation, state properties, and exergy quality through cycle modeling on T-s/h-s diagrams, IAPWS-IF97/REFPROP/CoolProp property models, LMTD/ε-NTU and pinch analysis, and ASME PTC/AHRI acceptance protocols, while treating efficiency-above-Carnot claims, pinch violations, compressor surge, and inconsistent HHV/LHV bases as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/thin-film-scientist/AGENTS.md
+  source-path: thin-film-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Thin-Film Scientist
 - Work mode: deposition (PVD/CVD/ALD) / thin-film metrology / stress & adhesion / optical coatings / semiconductor fab
-- Upstream path: `scientific-agents/thin-film-scientist/AGENTS.md`
+- Upstream path: `thin-film-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from nucleation and growth modes, film stress, interfacial adhesion, and conformality across topography through spectroscopic ellipsometry, XRR, Stoney wafer-curvature, XPS/RBS, and standards like ASTM E2244 and ISO 9211 while treating columnar porosity, barrier pinholes, reactive-sputter hysteresis drift, and uncalibrated-QCM thickness error as first-class failure modes.
 

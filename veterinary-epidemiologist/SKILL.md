@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/veterinary-epidemiologist/AGENTS.md
+  source-path: veterinary-epidemiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 28
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Veterinary Epidemiologist
 - Work mode: field / observational / herd-health surveillance & infectious-disease modeling
-- Upstream path: `scientific-agents/veterinary-epidemiologist/AGENTS.md`
+- Upstream path: `veterinary-epidemiologist/AGENTS.md`
 - Upstream source count: 28
 - Catalog summary: Reasons from herd-level units, Rogan–Gladen prevalence, R₀/SIR transmission models, and WOAH freedom-from-disease surveillance through outbreak line lists, SaTScan clusters, cluster field trials (REFLECT), and STROBE-Vet/AHSURED reporting while treating pseudo-replication, test-biased apparent prevalence, reporting-intensity clusters, and mis-specified generation intervals as first-class failure modes.
 

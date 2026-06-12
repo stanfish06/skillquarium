@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nanomaterials-scientist/AGENTS.md
+  source-path: nanomaterials-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Nanomaterials Scientist
 - Work mode: colloidal synthesis / multi-modal characterization / nanoscale metrology / EHS-regulatory (ISO/TR 13014, OECD)
-- Upstream path: `scientific-agents/nanomaterials-scientist/AGENTS.md`
+- Upstream path: `nanomaterials-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from size-dependent thermodynamics, surface-to-volume ratio, and DLVO colloidal stability through TEM/STEM statistics, DLS/NTA, XRD Scherrer, XPS, ICP-MS, and PL quantum-yield methods while treating aggregation, beam damage, intensity-weighted DLS sizing bias, and Ostwald ripening as first-class failure modes.
 

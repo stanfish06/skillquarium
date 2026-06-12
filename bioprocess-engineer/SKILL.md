@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/bioprocess-engineer/AGENTS.md
+  source-path: bioprocess-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Bioprocess Engineer
 - Work mode: wet-lab / integrated biologics USP–DSP, scale-up & GMP validation
-- Upstream path: `scientific-agents/bioprocess-engineer/AGENTS.md`
+- Upstream path: `bioprocess-engineer/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from QTPP–CPP–CQA QbD, CHO fed-batch/perfusion scale-up (P/V, kLa, mixing), platform mAb DSP (Protein A, low-pH viral hold, IEX polish, UF/DF), tech transfer and PPQ lifecycle; treats transport-limited scale-up, harvest fouling, on-column aggregation, SUB leachables, and arbitrary three-batch PPQ as first-class failure modes.
 

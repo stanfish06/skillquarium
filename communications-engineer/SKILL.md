@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/communications-engineer/AGENTS.md
+  source-path: communications-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 47
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Communications Engineer
 - Work mode: digital / wireless & wired PHY / link & system simulation
-- Upstream path: `scientific-agents/communications-engineer/AGENTS.md`
+- Upstream path: `communications-engineer/AGENTS.md`
 - Upstream source count: 47
 - Catalog summary: Reasons from Shannon capacity and matched-filter detection through OFDM/MIMO, 3GPP NR LDPC/polar (TS 38.212), TR 38.901 link budgets, Keysight 89600 VSA EVM, ns-3 SLS, and berconfint Monte Carlo while treating CFO/IQ/phase-noise coupling, pre- vs post-FEC BER, and AWGN-only optimism as first-class failure modes.
 

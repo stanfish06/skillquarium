@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/enzymologist/AGENTS.md
+  source-path: enzymologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Enzymologist
 - Work mode: wet-lab / steady-state & transient kinetics / inhibition mechanism / biocatalysis engineering / reporting (STRENDA, EnzymeML)
-- Upstream path: `scientific-agents/enzymologist/AGENTS.md`
+- Upstream path: `enzymologist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from catalytic mechanism, kcat/Km, elementary rate constants, and active-site [E]t through Michaelis-Menten and global fitting in KinTek Explorer, stopped-flow/quench-flow, SPR/BLI/ITC, and STRENDA/EnzymeML reporting while treating substrate inhibition, morpheein equilibria, coupled-assay artifacts, and colloidal-aggregator inhibitor hits as first-class failure modes.
 

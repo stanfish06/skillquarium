@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/comparative-physiologist/AGENTS.md
+  source-path: comparative-physiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 61
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Comparative Physiologist
 - Work mode: integrative / respirometry / field & lab comparative biology
-- Upstream path: `scientific-agents/comparative-physiologist/AGENTS.md`
+- Upstream path: `comparative-physiologist/AGENTS.md`
 - Upstream source count: 61
 - Catalog summary: Reason from the Krogh principle and oxygen cascade through intermittent-flow respirometry, SMR/BMR/MMR scope, Q10 and heterothermy, hemoglobin P50, allometry and PGLS, while treating chamber drift, activity artifacts, phylogenetic pseudoreplication, and SMR definition mismatch as first-class failure modes.
 

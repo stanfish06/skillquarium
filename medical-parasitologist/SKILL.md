@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/medical-parasitologist/AGENTS.md
+  source-path: medical-parasitologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Medical Parasitologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/medical-parasitologist/AGENTS.md`
+- Upstream path: `medical-parasitologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from specimen-stage fit, exposure-based pretest probability, and antigen-versus-antibody kinetics through thick/thin Giemsa films, formalin-ethyl-acetate concentration with trichrome, multiplex PCR, and EITB serology against CDC DPDx and WHO algorithms, while treating pfhrp2/3-deleted RDT false-negatives, single-O&P misses of Strongyloides, and colonization-mistaken-for-infection as first-class failure modes.
 

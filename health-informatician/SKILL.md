@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/health-informatician/AGENTS.md
+  source-path: health-informatician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Health Informatician
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/health-informatician/AGENTS.md`
+- Upstream path: `health-informatician/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from semantic interoperability, provenance, and patient safety through FHIR/US Core, SNOMED-LOINC-RxNorm terminology mapping, OMOP/OHDSI ETL with DQD/Achilles, and chart-review PPV validation while treating immortal-time and confounding-by-indication bias, patient-matching/MPI failures, billing-code phenotypes, and vocabulary version drift as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/theoretical-physicist/AGENTS.md
+  source-path: theoretical-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Theoretical Physicist
 - Work mode: analytic theory / QFT & EFT / lattice & many-body numerics / RG & critical phenomena / GR & gravitation
-- Upstream path: `scientific-agents/theoretical-physicist/AGENTS.md`
+- Upstream path: `theoretical-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from symmetries, conservation laws, effective field theory, and limiting cases through Feynman-diagram and on-shell amplitude tools, renormalization-group flow, lattice and tensor-network numerics, and the conformal bootstrap, while treating gauge-dependent artifacts, unitarity and Ward-identity violations, scheme dependence, and lattice discretization errors as first-class failure modes.
 

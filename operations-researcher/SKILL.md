@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/operations-researcher/AGENTS.md
+  source-path: operations-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Operations Researcher
 - Work mode: optimization modeling / stochastic & robust programming / discrete-event simulation / VRP & scheduling / production solve ops (ERP/WMS/TMS)
-- Upstream path: `scientific-agents/operations-researcher/AGENTS.md`
+- Upstream path: `operations-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from decision structure, integrality and convexity, and explicit uncertainty through LP/MIP solvers (Gurobi, CPLEX, OR-Tools CP-SAT), stochastic and Wasserstein-distributionally-robust formulations, and DES (SimPy, AnyLogic) benchmarked on Solomon/MIPLIB instances, while treating unit inconsistencies, optimality-gap-versus-stale-data trade-offs, infeasibility (IIS) from forgotten labor and fairness constraints, and day-to-day solution oscillation as first-class failure modes.
 

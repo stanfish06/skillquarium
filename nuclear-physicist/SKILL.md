@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nuclear-physicist/AGENTS.md
+  source-path: nuclear-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Nuclear Physicist
 - Work mode: experimental / theoretical / nuclear data & applications
-- Upstream path: `scientific-agents/nuclear-physicist/AGENTS.md`
+- Upstream path: `nuclear-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from shell and collective structure, reaction mechanisms, and ENDF/EXFOR data; matches FRIB–CEBAF–RHIC science to R-matrix, Hauser-Feshbach, chiral ab initio, and GEANT4 tools; treats dead time, normalization, and evaluation covariances as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quantum-computing-scientist/AGENTS.md
+  source-path: quantum-computing-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Quantum Computing Scientist
 - Work mode: experimental / computational / NISQ hardware & fault tolerance
-- Upstream path: `scientific-agents/quantum-computing-scientist/AGENTS.md`
+- Upstream path: `quantum-computing-scientist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from qubits as noisy open systems through T1/T2, gate fidelity, RB/GST/XEB, and quantum volume to surface-code QEC; compiles with Qiskit/Cirq, applies ZNE/PEC/readout mitigation, and treats crosstalk, transpilation depth, and calibration drift as first-class failure modes.
 

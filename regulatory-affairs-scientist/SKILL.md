@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/regulatory-affairs-scientist/AGENTS.md
+  source-path: regulatory-affairs-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Regulatory Affairs Scientist
 - Work mode: regulatory / drug & biologic development (IND–MAA)
-- Upstream path: `scientific-agents/regulatory-affairs-scientist/AGENTS.md`
+- Upstream path: `regulatory-affairs-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from CTD/eCTD Modules 1–5 traceability, FDA Type B/EOP and EMA PRIME/scientific-advice strategy, ICH Q8–Q12 lifecycle CMC, and expedited pathways (BTD/RMAT/accelerated approval); treats RTF, clinical-hold CMC gaps, ignored meeting minutes, and eCTD validation failures as first-class failure modes.
 

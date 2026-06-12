@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/knowledge-representation-researcher/AGENTS.md
+  source-path: knowledge-representation-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Knowledge Representation Researcher
 - Work mode: ontology engineering / description logics / semantic web (OWL 2, SPARQL, SHACL) / OBDA / neuro-symbolic integration
-- Upstream path: `scientific-agents/knowledge-representation-researcher/AGENTS.md`
+- Upstream path: `knowledge-representation-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from model-theoretic semantics, the expressivity-vs-decidability-vs-scalability tradeoff, and competency questions through OWL 2 profiles, reasoners (HermiT, Pellet, ELK), ROBOT/Protégé pipelines, and SHACL validation while treating unsatisfiable classes, silent OWA-vs-CWA semantic mixing, hallucinated LLM-suggested axioms, and IRI-reuse on bad merges as first-class failure modes.
 

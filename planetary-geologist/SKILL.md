@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/planetary-geologist/AGENTS.md
+  source-path: planetary-geologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 46
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Planetary Geologist
 - Work mode: remote sensing / GIS / planetary surfaces (Mars, Moon)
-- Upstream path: `scientific-agents/planetary-geologist/AGENTS.md`
+- Upstream path: `planetary-geologist/AGENTS.md`
 - Upstream source count: 46
 - Catalog summary: Reasons from stratigraphy and landform genesis through ISIS/GDAL/JMARS/ArcGIS, CraterTools/CSFD Tools/CraterStats2 chronology, CRISM/M3/THEMIS spectroscopy with SPLib/RELAB, and PDS archives while treating secondaries, projection/datums, and production-function choice as first-class failure modes.
 

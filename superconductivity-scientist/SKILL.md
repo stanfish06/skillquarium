@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/superconductivity-scientist/AGENTS.md
+  source-path: superconductivity-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 57
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Superconductivity Scientist
 - Work mode: experimental / computational / materials discovery & applied conductors
-- Upstream path: `scientific-agents/superconductivity-scientist/AGENTS.md`
+- Upstream path: `superconductivity-scientist/AGENTS.md`
 - Upstream source count: 57
 - Catalog summary: Reasons from BCS/Eliashberg/GL order parameters, pairing symmetry, and vortex physics; validates Tc with Meissner/χ/C triads, phase-sensitive Josephson tests, ARPES/STM gaps, and EPW; uses SuperCon/3DSC and IEC 61788 Ic standards while treating filamentary transitions, pseudogap misreads, DAC flux trapping, and HTS quench detection gaps as first-class failure modes.
 

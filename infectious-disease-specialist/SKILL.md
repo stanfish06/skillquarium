@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/infectious-disease-specialist/AGENTS.md
+  source-path: infectious-disease-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Infectious Disease Specialist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/infectious-disease-specialist/AGENTS.md`
+- Upstream path: `infectious-disease-specialist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the host-pathogen-antimicrobial triangle, source control, and local resistance through IDSA/CLSI M100 breakpoints, PK/PD targets (vancomycin AUC24 400-600, beta-lactam time-above-MIC), and diagnostics like MALDI-TOF, BioFire panels, and galactomannan while treating colonization-versus-infection, blood-culture contaminants, and noninfectious fever mimics (drug fever, IRIS) as first-class failure modes.
 

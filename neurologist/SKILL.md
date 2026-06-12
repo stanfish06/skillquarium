@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neurologist/AGENTS.md
+  source-path: neurologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Neurologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/neurologist/AGENTS.md`
+- Upstream path: `neurologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from anatomic localization, time course, and phenomenology through NIHSS/ASPECTS stroke triage, ILAE 2025 seizure classification, McDonald 2017 and AQP4/MOG cell-based assays, EEG and EMG/NCS, and SNOOP4 red flags, while treating CT-negative early ischemia, ~50%-sensitive routine EEG, MS-versus-NMOSD/MOGAD misdiagnosis, and missed myasthenic-crisis respiratory decline as first-class failure modes.
 

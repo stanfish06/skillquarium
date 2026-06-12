@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/radiochemist/AGENTS.md
+  source-path: radiochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Radiochemist
 - Work mode: tracer synthesis / radiopharmaceutical QC / cyclotron-generator production / dosimetry / GMP release (USP <823>, FDA 21 CFR 212)
-- Upstream path: `scientific-agents/radiochemist/AGENTS.md`
+- Upstream path: `radiochemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from radionuclide half-life, specific activity, radiochemical purity, and dosimetry through analytical/prep HPLC with radiodetector, iTLC, HPGe γ-spectroscopy, OLINDA/MIRD, and USP <823>/EANM release specs while treating defluorination, transchelation of ⁶⁸Ga/⁸⁹Zr, ⁹⁹ᵐTc colloid and ⁶⁸Ge breakthrough as first-class failure modes.
 

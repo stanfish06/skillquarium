@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pathologist/AGENTS.md
+  source-path: pathologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Pathologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/pathologist/AGENTS.md`
+- Upstream path: `pathologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from H&E morphology, pretest-probability differentials, and pre-analytic integrity through CAP synoptic protocols, staged IHC and FISH panels, WHO/AJCC grading and staging, and Bethesda/Paris/Milan cytology systems while treating crush artifact, fixation/decalcification failure, single-frozen-section overcall, and IHC-without-morphology as first-class failure modes.
 

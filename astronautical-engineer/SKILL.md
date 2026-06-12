@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astronautical-engineer/AGENTS.md
+  source-path: astronautical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 92
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Astronautical Engineer
 - Work mode: spacecraft / launch vehicle / mission systems engineering
-- Upstream path: `scientific-agents/astronautical-engineer/AGENTS.md`
+- Upstream path: `astronautical-engineer/AGENTS.md`
 - Upstream source count: 92
 - Catalog summary: Reasons from the rocket equation, staging, and mass–power–Δv budgets through NPR 7120.5/ECSS-E-ST-10 subsystem specs, CEA/CEARUN and Sutton propulsion, CLA/pogo and TVAC I&T, GMAT/STK/SPICE mission design, CCSDS TM/TC link margins, and ADCS FDIR while treating unit/frame ICD mismatches, combustion instability, and MCO-class V&V gaps as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/molecular-geneticist/AGENTS.md
+  source-path: molecular-geneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Molecular Geneticist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/molecular-geneticist/AGENTS.md`
+- Upstream path: `molecular-geneticist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from sequence-as-hypothesis, reference context (genome build, MANE/RefSeq transcript, HGVS), and allele-level molecular consequence through ACMG/AMP-ClinGen criteria, IGV/VEP/SpliceAI/gnomAD/ClinVar review, MIQE-compliant qPCR/ddPCR, and Sanger/NGS validation while treating allele dropout, pseudogene/paralog misalignment, FFPE deamination, contamination and barcode bleed, and transcript/build mismatch as first-class failure modes.
 

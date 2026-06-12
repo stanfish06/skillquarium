@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computer-scientist/AGENTS.md
+  source-path: computer-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Computer Scientist
 - Work mode: theory + systems / algorithms & complexity / distributed data / formal methods (TLA+, Coq) / security (STRIDE, OWASP ASVS)
-- Upstream path: `scientific-agents/computer-scientist/AGENTS.md`
+- Upstream path: `computer-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from computational models, abstraction contracts, invariants, and measurable complexity through CLRS-grade algorithm analysis, impossibility results (FLP, CAP, NP-hardness), property-based and chaos testing, and formal tools (TLA+, Coq, Z3) while treating partial failure, race conditions, label leakage, and abstraction leaks like GC pauses and clock skew as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/conservation-scientist/AGENTS.md
+  source-path: conservation-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Conservation Scientist
 - Work mode: field monitoring / conservation genetics / systematic planning / impact evaluation / IUCN assessment (Red List, Green Status)
-- Upstream path: `scientific-agents/conservation-scientist/AGENTS.md`
+- Upstream path: `conservation-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from measurable biodiversity change, counterfactual impact, and effective population size through IUCN Red List/Green Status criteria, occupancy and PVA models (unmarked, Vortex), Marxan/prioritizr planning, and BACI/matching designs while treating detection heterogeneity, spatial pseudoreplication, REDD+ leakage, and Ne sample bias as first-class failure modes.
 

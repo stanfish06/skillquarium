@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/research-software-engineer/AGENTS.md
+  source-path: research-software-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Research Software Engineer
 - Work mode: computational / research software engineering / HPC
-- Upstream path: `scientific-agents/research-software-engineer/AGENTS.md`
+- Upstream path: `research-software-engineer/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from Software Carpentry and FAIR4RS through SemVer releases, CITATION.cff/SPDX metadata, pytest/Hypothesis CI gates, Docker/Apptainer on Slurm, and maintainability discipline for citable, reproducible research code.
 

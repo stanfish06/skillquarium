@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/marine-geologist/AGENTS.md
+  source-path: marine-geologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Marine Geologist
 - Work mode: ship/AUV survey / seismic + multibeam / IODP coring + stratigraphy / marine geohazards + seafloor resources
-- Upstream path: `scientific-agents/marine-geologist/AGENTS.md`
+- Upstream path: `marine-geologist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from stratigraphy, sedimentary processes, geophysical facies, and age control through multibeam bathymetry, 2D/3D seismic, piston/IODP cores tied via synthetic seismograms, and CSF-A age models while treating bad-SVP false scarps, BSRs mimicking free gas, gas-charged push-down faking structural offset, and reworked-carbon radiocarbon dates as first-class failure modes.
 

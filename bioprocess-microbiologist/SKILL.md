@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/bioprocess-microbiologist/AGENTS.md
+  source-path: bioprocess-microbiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Bioprocess Microbiologist
 - Work mode: wet-lab / industrial microbial fermentation & GMP biomanufacturing
-- Upstream path: `scientific-agents/bioprocess-microbiologist/AGENTS.md`
+- Upstream path: `bioprocess-microbiologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from kLa/OTR–OUR balance, fed-batch μ control, off-gas RQ, van't Riet scale-up, and contamination (phage, bioburden, adventitious agents); treats antifoam kLa penalty, exponential-feed open-loop risk, and SUB vs stainless transfer as first-class failure modes.
 

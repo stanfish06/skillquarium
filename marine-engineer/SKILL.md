@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/marine-engineer/AGENTS.md
+  source-path: marine-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 44
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Marine Engineer
 - Work mode: shipboard / design / machinery systems / class compliance
-- Upstream path: `scientific-agents/marine-engineer/AGENTS.md`
+- Upstream path: `marine-engineer/AGENTS.md`
 - Upstream source count: 44
 - Catalog summary: Reasons from propulsion thermodynamics, shaft BPF/torsional barred speeds, central LT/HT cooling, class machinery surveys, and ISO 15016:2025 sea trials while treating cat fines liner wear, scavenge fire, purifier mis-set, blackout PMS logic, and tropical SW fouling as first-class failure modes.
 

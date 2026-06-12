@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/food-microbiologist/AGENTS.md
+  source-path: food-microbiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Food Microbiologist
 - Work mode: QC lab / food safety / spoilage ecology / HACCP / method validation (ISO 16140, BAM)
-- Upstream path: `scientific-agents/food-microbiologist/AGENTS.md`
+- Upstream path: `food-microbiologist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from food as a hurdle-governed matrix of water activity, pH, and redox through BAM/ISO reference methods, c/n/m/M sampling plans, PMA-v-qPCR, and ComBase kinetics while treating VBNC and injured cells, post-process contamination, matrix inhibition, and unconfirmed PCR hits as first-class failure modes.
 

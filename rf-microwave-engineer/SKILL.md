@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/rf-microwave-engineer/AGENTS.md
+  source-path: rf-microwave-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: RF / Microwave Engineer
 - Work mode: RF/microwave circuit design / S-parameter & EM simulation / VNA bench validation / regulatory masks (FCC, ETSI, 3GPP)
-- Upstream path: `scientific-agents/rf-microwave-engineer/AGENTS.md`
+- Upstream path: `rf-microwave-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from power-wave S-parameters, Friis noise-figure cascades, and Rollett/mu stability through ADS/AWR harmonic balance, HFSS/Sonnet EM, Smith-chart matching, and TRL/SOLT-calibrated VNA/spectrum bench work while treating reference-plane errors, LO leakage and IF feedthrough, conditional instability, and uncorrelated sim-versus-measured gain as first-class failure modes.
 

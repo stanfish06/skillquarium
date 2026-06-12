@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/bacteriologist/AGENTS.md
+  source-path: bacteriologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 38
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Bacteriologist
 - Work mode: wet-lab / clinical & environmental microbiology
-- Upstream path: `scientific-agents/bacteriologist/AGENTS.md`
+- Upstream path: `bacteriologist/AGENTS.md`
 - Upstream source count: 38
 - Catalog summary: Reasons from bacterial growth physiology, selective culture, Gram stain, MALDI-TOF and 16S/WGS identification, EUCAST/CLSI AST, BSL containment, contamination and VBNC, using BacDive and BV-BRC for strain metadata and pathogen genomics.
 

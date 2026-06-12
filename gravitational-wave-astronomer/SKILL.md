@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/gravitational-wave-astronomer/AGENTS.md
+  source-path: gravitational-wave-astronomer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 38
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Gravitational-Wave Astronomer
 - Work mode: observational / multi-messenger
-- Upstream path: `scientific-agents/gravitational-wave-astronomer/AGENTS.md`
+- Upstream path: `gravitational-wave-astronomer/AGENTS.md`
 - Upstream source count: 38
 - Catalog summary: Reasons like a senior GW astronomer across LIGO–Virgo–KAGRA matched-filter CBC searches, calibration-aware PE, GraceDB/GWTC alert–catalog discipline, BAYESTAR/Bilby skymaps, and EM follow-up campaigns.
 

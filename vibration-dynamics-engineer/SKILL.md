@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/vibration-dynamics-engineer/AGENTS.md
+  source-path: vibration-dynamics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Vibration & Dynamics Engineer
 - Work mode: experimental modal / machinery diagnostics / rotordynamics
-- Upstream path: `scientific-agents/vibration-dynamics-engineer/AGENTS.md`
+- Upstream path: `vibration-dynamics-engineer/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from FRF/coherence, MAC, and damping identification through impact/shaker EMA, spectral ODS, FFT windowing, Campbell/critical-speed rotordynamics, and ISO 20816/API 610 diagnostics while treating double-hit, mass-loading, ODS–mode conflation, oil whirl/whip, and leakage as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/occupational-health-scientist/AGENTS.md
+  source-path: occupational-health-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Occupational Health Scientist
 - Work mode: industrial hygiene / exposure assessment / occupational epidemiology / sampling and OELs (PEL, TLV, REL) / hierarchy of controls
-- Upstream path: `scientific-agents/occupational-health-scientist/AGENTS.md`
+- Upstream path: `occupational-health-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from exposure route and receptor, dose-response, and the hierarchy of controls through SEG-based personal sampling, NIOSH/OSHA analytical methods, AIHA Bayesian exceedance statistics, and SMR cohort analysis, while treating healthy worker effect, below-LOD censoring, fraction-size and OEL mismatch, and JEM misclassification as first-class failure modes.
 

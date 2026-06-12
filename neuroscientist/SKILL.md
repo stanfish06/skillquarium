@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neuroscientist/AGENTS.md
+  source-path: neuroscientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Neuroscientist
 - Work mode: integrative / multiscale circuits / in vivo electrophysiology + optogenetics / translational (ARRIVE, BIDS/NWB)
-- Upstream path: `scientific-agents/neuroscientist/AGENTS.md`
+- Upstream path: `neuroscientist/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Expert profile for neuroscientist — see AGENTS.md for field-specific methods and failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cryptography-engineer/AGENTS.md
+  source-path: cryptography-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Cryptography Engineer
 - Work mode: applied crypto / protocol design & review / key management (HSM/KMS) / standards (NIST, IETF, FIPS 140-3) / PQC migration
-- Upstream path: `scientific-agents/cryptography-engineer/AGENTS.md`
+- Upstream path: `cryptography-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from explicit threat models, vetted primitives, key hierarchy, and constant-time secret handling through STRIDE threat modeling, standards (RFC 8446 TLS 1.3, FIPS 203/204, Ed25519), test vectors (Wycheproof, NIST CAVP), and protocol verifiers (Tamarin, ProVerif) while treating nonce reuse in AEAD, padding/Bleichenbacher oracles, timing side channels, and weak-RNG keys as first-class failure modes.
 

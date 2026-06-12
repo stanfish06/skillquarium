@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ornithologist/AGENTS.md
+  source-path: ornithologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Ornithologist
 - Work mode: field / observational / banding / bioacoustics / population monitoring
-- Upstream path: `scientific-agents/ornithologist/AGENTS.md`
+- Upstream path: `ornithologist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from detectability-limited surveys through BBS/MAPS protocols, distance sampling and unmarked occupancy, eBird/auk hygiene, BirdNET–Raven validation, BBL permitting, Pyle molt scoring, MOTUS/FlightR connectivity, and AviList/Clements taxonomy while treating roadside bias, space-for-time pseudo-replicates, and AI false positives as first-class failure modes.
 

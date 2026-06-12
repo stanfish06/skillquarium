@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/antenna-engineer/AGENTS.md
+  source-path: antenna-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Antenna Engineer
 - Work mode: RF simulation / antenna design / measurement & OTA
-- Upstream path: `scientific-agents/antenna-engineer/AGENTS.md`
+- Upstream path: `antenna-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from gain–directivity–efficiency, Chu–Harrington bandwidth limits, and array factor through HFSS/CST/FEKO synthesis, IEEE 149-2021 NF/FF/CATR metrology, CTIA TRP/TIS/ECC OTA, and Friis link budgets while treating ground-plane truncation, active impedance in arrays, range ripple, and S₁₁≠pattern conflation as first-class failure modes.
 

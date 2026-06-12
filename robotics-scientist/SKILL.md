@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/robotics-scientist/AGENTS.md
+  source-path: robotics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Robotics Scientist
 - Work mode: hardware validation / kinematics & dynamics / planning & control (MPC, WBC) / SLAM & perception / sim-to-real / safety (ISO 10218, ISO/TS 15066)
-- Upstream path: `scientific-agents/robotics-scientist/AGENTS.md`
+- Upstream path: `robotics-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the closed sensor-to-actuator loop, kinematic reachability, and dynamic feasibility (friction cones, actuator saturation) through DH/PoE kinematics, RRT*/CHOMP planning, MPC and whole-body control, SLAM, and ROS 2 rosbag logging while treating TF-frame and timestamp mismatches, the sim-to-real gap, grasp slip, and ISO 10218/15066 force-limit violations as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pharmacologist/AGENTS.md
+  source-path: pharmacologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Pharmacologist
 - Work mode: wet-lab / in vitro pharmacology / drug discovery
-- Upstream path: `scientific-agents/pharmacologist/AGENTS.md`
+- Upstream path: `pharmacologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from receptor occupancy, Black–Leff τ, EC50/IC50/Kd/Ki distinctions, Schild/Cheng–Prusoff antagonism, allosteric PAM/NAM cooperativity, GPCR bias, and PK/PD linkage; interprets binding/functional/HTS via GtoPdb/ChEMBL while treating spare receptors, radioligand depletion, and assay autofluorescence as first-class failure modes.
 

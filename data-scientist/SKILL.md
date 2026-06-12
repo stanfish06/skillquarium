@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/data-scientist/AGENTS.md
+  source-path: data-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Data Scientist
 - Work mode: computational / analytics, ML & experimentation
-- Upstream path: `scientific-agents/data-scientist/AGENTS.md`
+- Upstream path: `data-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from CRISP-DM business estimands, leakage-safe sklearn Pipelines and nested CV, SQL/warehouse semantic metrics, A/B power and SRM/AA guardrails, causal DAG covariate discipline, and Model Cards/Datasheets while treating train-test leakage, Simpson's paradox, peeking, and PSI>0.25 drift as first-class failure modes.
 

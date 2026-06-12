@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/acoustical-engineer/AGENTS.md
+  source-path: acoustical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Acoustical Engineer
 - Work mode: noise control / building & environmental acoustics / NVH / standards (IEC 61672, ISO 9613-2)
-- Upstream path: `scientific-agents/acoustical-engineer/AGENTS.md`
+- Upstream path: `acoustical-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from source-path-receiver control, logarithmic decibel levels, and mass-law transmission loss through IEC 61672 Class 1 metering, ISO 9613-2 propagation, SEA/FEM/BEM simulation, and ISO 9612 occupational surveys while treating flanking paths, coincidence dips, tonality penalties, and background-correction errors as first-class failure modes.
 

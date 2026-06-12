@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/remote-sensing-scientist/AGENTS.md
+  source-path: remote-sensing-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Remote Sensing Scientist
 - Work mode: Earth observation / optical-SAR-LiDAR / atmospheric & geometric correction / change detection / Olofsson validation
-- Upstream path: `scientific-agents/remote-sensing-scientist/AGENTS.md`
+- Upstream path: `remote-sensing-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from sensor physics, atmospheric state, surface BRDF, and sampling geometry through Sen2Cor/LaSRC/6S atmospheric correction, sub-pixel coregistration, SAR radiometric terrain correction, and Olofsson area-adjusted accuracy while treating misregistration, NDVI saturation, BRDF anisotropy, mixed pixels, and spatial label leakage as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/metallurgist/AGENTS.md
+  source-path: metallurgist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Metallurgist
 - Work mode: physical / extractive / process metallurgy
-- Upstream path: `scientific-agents/metallurgist/AGENTS.md`
+- Upstream path: `metallurgist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from phase diagrams, TTT/CCT paths, and Scheil solidification through Jominy hardenability (ASTM A255), ASM heat-treat cycles, metallography (ASTM E3/E112/E407), and staged failure analysis while treating decarburization, quench cracking, HAZ liquation, hot tearing, and microsegregation as first-class failure modes.
 

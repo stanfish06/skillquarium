@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/orthopedic-biomechanist/AGENTS.md
+  source-path: orthopedic-biomechanist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Orthopedic Biomechanist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/orthopedic-biomechanist/AGENTS.md`
+- Upstream path: `orthopedic-biomechanist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from joint kinematics, forces, moments, and tissue stress through optical motion capture with force plates, inverse dynamics with de Leva segment parameters, OpenSim/AnyBody and FEBio/Abaqus models, and ISO 14243 wear testing while treating skin motion artifact, cardan gimbal lock, unnormalized moments, and over-read FEA stress hotspots as first-class failure modes.
 

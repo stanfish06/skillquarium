@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/landscape-ecologist/AGENTS.md
+  source-path: landscape-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Landscape Ecologist
 - Work mode: spatial pattern analysis / connectivity modeling / landscape genetics / remote sensing / disturbance ecology
-- Upstream path: `scientific-agents/landscape-ecologist/AGENTS.md`
+- Upstream path: `landscape-ecologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from scale-explicit pattern-process feedbacks, configuration over composition, and functional rather than graphical connectivity through FRAGSTATS, landscapemetrics, Circuitscape resistance surfaces, NLMR neutral models, and block cross-validation, while treating MAUP grain artifacts, classification error propagation, isolation-by-distance confounding isolation-by-resistance, and resistance surfaces unvalidated by movement as first-class failure modes.
 

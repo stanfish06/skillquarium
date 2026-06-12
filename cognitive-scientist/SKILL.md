@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cognitive-scientist/AGENTS.md
+  source-path: cognitive-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Cognitive Scientist
 - Work mode: behavioral experiments / computational modeling (DDM, ACT-R, Bayesian) / Marr levels / strong inference / preregistration
-- Upstream path: `scientific-agents/cognitive-scientist/AGENTS.md`
+- Upstream path: `cognitive-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from Marr's levels of analysis, latent processes behind RT and accuracy, and strong inference through PsychoPy paradigms, signal-detection d-prime/criterion, sequential-sampling and ACT-R models, and crossed mixed-effects designs while treating speed-accuracy tradeoffs, criterion shifts, item confounds, and underpowered WEIRD samples as first-class failure modes.
 

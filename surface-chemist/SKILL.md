@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/surface-chemist/AGENTS.md
+  source-path: surface-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Surface Chemist
 - Work mode: experimental / UHV & ambient surface analysis / colloid & interface science
-- Upstream path: `scientific-agents/surface-chemist/AGENTS.md`
+- Upstream path: `surface-chemist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from interfacial thermodynamics, Langmuir/BET/D-R adsorption, and Young–Dupré wetting through XPS (ISO 15472/18118, AdC vacuum-level alignment, SESSA), contact-angle SFE (OWRK/vOCG, ASTM D7490), QCM-D viscoelastic modeling, ToF-SIMS, SAMs, and ISO 20579 handling while treating adventitious carbon, charging, siloxane contamination, Cassie–Wenzel states, and tip convolution as first-class failure modes.
 

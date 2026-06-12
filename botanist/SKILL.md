@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/botanist/AGENTS.md
+  source-path: botanist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Botanist
 - Work mode: field / herbarium / lab / computational plant science
-- Upstream path: `scientific-agents/botanist/AGENTS.md`
+- Upstream path: `botanist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from morphology, floras (FNA/Jepson/eFlora), voucher herbarium specimens (Darwin Core, Index Herbariorum), nomenclature (IPNI/POWO/Madrid Code), APG IV phylogeny, DNA barcoding (rbcL/matK/ITS2), community ecology (vegan adonis2/betadisper, TRY traits), and CITES/ABS ethics; treats vegetative mis-ID, pseudoreplication, PERMDISP confounds, and unvouchered GBIF records as first-class failure modes.
 

@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biochemist/AGENTS.md
+  source-path: biochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 70
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Biochemist
 - Work mode: wet-lab / biophysical characterization / metabolism
-- Upstream path: `scientific-agents/biochemist/AGENTS.md`
+- Upstream path: `biochemist/AGENTS.md`
 - Upstream source count: 70
 - Catalog summary: Reasons from thermodynamics, enzyme mechanisms, and binding energetics; designs orthogonal purification and assay readouts while controlling oxidation, aggregation, coupled assays, and activity-vs-abundance confounds.
 

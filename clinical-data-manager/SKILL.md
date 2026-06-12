@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/clinical-data-manager/AGENTS.md
+  source-path: clinical-data-manager/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Clinical Data Manager
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/clinical-data-manager/AGENTS.md`
+- Upstream path: `clinical-data-manager/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from ALCOA+ data integrity, traceability, and analysis-ready datasets through CDASH/SDTM/ADaM pipelines, edit-check specs, Pinnacle 21 validation, MedDRA/WHO Drug coding, and define.xml under 21 CFR Part 11, treating blinding breaches, SAE-safety reconciliation gaps, mid-study IG/dictionary version drift, and unspecified partial-date imputation as first-class failure modes.
 

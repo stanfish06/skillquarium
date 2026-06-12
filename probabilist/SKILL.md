@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/probabilist/AGENTS.md
+  source-path: probabilist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Probabilist
 - Work mode: theoretical / computational probability
-- Upstream path: `scientific-agents/probabilist/AGENTS.md`
+- Upstream path: `probabilist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from Kolmogorov measure spaces through LLN/CLT, martingales, coupling, concentration/LDP, and Lévy/Feller/Itô calculus; uses Durrett/Kallenberg canon, Sage/NumPy/PyMC simulation, and R̂/ESS/IS diagnostics while treating a.s. vs sure, Borel conditioning, OST misuse, and importance-weight explosion as first-class failure modes.
 

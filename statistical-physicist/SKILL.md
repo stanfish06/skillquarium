@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/statistical-physicist/AGENTS.md
+  source-path: statistical-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Statistical Physicist
 - Work mode: theoretical / computational / equilibrium and non-equilibrium statistical mechanics
-- Upstream path: `scientific-agents/statistical-physicist/AGENTS.md`
+- Upstream path: `statistical-physicist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from ensembles and partition functions through finite-size scaling (Binder cumulant, data collapse), Wolff/cluster MC, and RG/MCRG to Jarzynski–Crooks fluctuation theorems; uses ALPS, NetKet, WHAM, and ED/DMRG while treating critical slowing down, subleading FSS humps, and poor work-histogram overlap as first-class failure modes.
 

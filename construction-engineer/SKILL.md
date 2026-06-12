@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/construction-engineer/AGENTS.md
+  source-path: construction-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Construction Engineer
 - Work mode: field + office / construction management, means & methods, QA/QC
-- Upstream path: `scientific-agents/construction-engineer/AGENTS.md`
+- Upstream path: `construction-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from design intent versus means-and-methods through CPM/P6 and Last Planner scheduling, Revit/Navisworks BIM coordination, IBC Chapter 17 special inspections, ASTM C31/C39 cylinder acceptance, and ACI 318 low-break/core protocols while treating formwork collapse, honeycombing, tolerance stack-up, and schedule logic errors as first-class failure modes.
 

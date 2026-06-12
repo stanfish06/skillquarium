@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/public-health-scientist/AGENTS.md
+  source-path: public-health-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Public Health Scientist
 - Work mode: population health / surveillance / program evaluation / policy
-- Upstream path: `scientific-agents/public-health-scientist/AGENTS.md`
+- Upstream path: `public-health-scientist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from the 10 Essential Public Health Services, epidemiologic triad, and SDOH; runs outbreak field investigations, NSSP syndromic and NNDSS surveillance, BRFSS/WONDER complex-survey analysis, CDC Framework and RE-AIM program evaluation, PAF/PIF policy quantification, and Kass ethics review.
 

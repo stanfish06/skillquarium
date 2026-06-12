@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astronomical-instrumentation-scientist/AGENTS.md
+  source-path: astronomical-instrumentation-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Astronomical Instrumentation Scientist
 - Work mode: opto-mechanical design / error-budget / adaptive optics / detector characterization / commissioning
-- Upstream path: `scientific-agents/astronomical-instrumentation-scientist/AGENTS.md`
+- Upstream path: `astronomical-instrumentation-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from system-level error budgets, the diffraction limit and Strehl ratio, detector figures of merit, and resolving power through Zemax/Code V tolerancing, ETC radiometry, AO modeling, and on-sky standard-star commissioning while treating flexure drift, IR persistence, ghosts, and quasi-static speckles as first-class failure modes.
 

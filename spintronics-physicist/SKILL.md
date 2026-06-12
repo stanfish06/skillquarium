@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/spintronics-physicist/AGENTS.md
+  source-path: spintronics-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Spintronics Physicist
 - Work mode: thin-film fab / magneto-transport / spin dynamics (ST-FMR, MTJ/SOT) / micromagnetics
-- Upstream path: `scientific-agents/spintronics-physicist/AGENTS.md`
+- Upstream path: `spintronics-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from spin-orbit coupling, spin diffusion length, exchange and DMI, and spin-dependent transport through MTJ/TMR characterization, ST-FMR and harmonic-Hall torque measurement, nonlocal spin valves, and Valet-Fert and MuMax3/OOMMF modeling, while treating barrier pinholes and shunt paths, ordinary-versus-anomalous Hall and ISHE confusion, Oersted-field and Joule-heating artifacts, and incomplete magnetization switching as first-class failure modes.
 

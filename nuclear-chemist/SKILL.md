@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nuclear-chemist/AGENTS.md
+  source-path: nuclear-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Nuclear Chemist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/nuclear-chemist/AGENTS.md`
+- Upstream path: `nuclear-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from decay-corrected activity ledgers, decay modes and cross sections, and ALARA dose control through Bateman/ORIGEN modeling, extraction-chromatography separations (TRU/Sr/TEVA resins), and HPGe/alpha/LSC spectroscopy while treating daughter ingrowth, generator breakthrough, spectral pile-up and sum peaks, and swipe-test cross-contamination as first-class failure modes.
 

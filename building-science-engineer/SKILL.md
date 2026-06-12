@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/building-science-engineer/AGENTS.md
+  source-path: building-science-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Building Science Engineer
 - Work mode: hygrothermal simulation / field diagnostics / envelope-HVAC integration
-- Upstream path: `scientific-agents/building-science-engineer/AGENTS.md`
+- Upstream path: `building-science-engineer/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from coupled heat-air-moisture transport through ASHRAE 160 moisture-design analysis, WUFI transient simulation, ACH50 leakage mapping, and ISO 10211 psi-values while treating exfiltration condensation, reservoir claddings, and mold-index sensitivity as first-class failure modes.
 

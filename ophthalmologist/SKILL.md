@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ophthalmologist/AGENTS.md
+  source-path: ophthalmologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Ophthalmologist
 - Work mode: clinical / retina, glaucoma & vision trials
-- Upstream path: `scientific-agents/ophthalmologist/AGENTS.md`
+- Upstream path: `ophthalmologist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from structure–function pairing (OCT RNFL/CST, HVF MD/VFI, ETDRS BCVA); manages glaucoma IOP targets and anti-VEGF treat-and-extend while treating field learning effect, OCT floor effect, and 15-letter regulatory margins as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/critical-care-researcher/AGENTS.md
+  source-path: critical-care-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Critical Care Researcher
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/critical-care-researcher/AGENTS.md`
+- Upstream path: `critical-care-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from acute physiology trajectories, modular organ dysfunction, and cluster-aware trial design through APACHE/SAPS/SOFA scoring, Berlin/Sepsis-3/KDIGO definitions, MIMIC-IV phenotyping, and target-trial emulation with clone-censor-weighting while treating immortal-time bias, cluster contamination, competing risks from early death, and sepsis-phenotype cohort inflation as first-class failure modes.
 

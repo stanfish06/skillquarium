@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/chromatin-biologist/AGENTS.md
+  source-path: chromatin-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 75
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Chromatin Biologist
 - Work mode: wet-lab / chromatin biochemistry / epigenomics
-- Upstream path: `scientific-agents/chromatin-biologist/AGENTS.md`
+- Upstream path: `chromatin-biologist/AGENTS.md`
 - Upstream source count: 75
 - Catalog summary: Reasons from nucleosome arrays, histone PTM crosstalk, remodelers, and 3D genome organization; validates ChIP/CUT&Tag/ATAC with spike-ins and IgG controls while separating composition from mechanism.
 

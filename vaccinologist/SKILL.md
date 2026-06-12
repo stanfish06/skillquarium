@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/vaccinologist/AGENTS.md
+  source-path: vaccinologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Vaccinologist
 - Work mode: translational / clinical development / regulatory CMC
-- Upstream path: `scientific-agents/vaccinologist/AGENTS.md`
+- Upstream path: `vaccinologist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Vaccine development expert for platform and adjuvant selection, validated immunogenicity (HAI/PRNT/OPA), CoP and immunobridging, VE/effectiveness trial design, CBER lot release, and Brighton AEFI reporting.
 

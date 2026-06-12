@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/aerodynamicist/AGENTS.md
+  source-path: aerodynamicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Aerodynamicist
 - Work mode: wind tunnel / CFD / flight vehicle external aerodynamics
-- Upstream path: `scientific-agents/aerodynamicist/AGENTS.md`
+- Upstream path: `aerodynamicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from circulation, Cp distributions, and boundary-layer physics through Re/Mach similitude, NACA airfoil polars, stall classification, wind-tunnel blockage/wall corrections, and SA/SST/LES external-aero CFD—not generic mechanical engineering.
 

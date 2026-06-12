@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/stem-cell-biologist/AGENTS.md
+  source-path: stem-cell-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 45
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Stem Cell Biologist
 - Work mode: wet-lab / hPSC culture and directed differentiation
-- Upstream path: `scientific-agents/stem-cell-biologist/AGENTS.md`
+- Upstream path: `stem-cell-biologist/AGENTS.md`
 - Upstream source count: 45
 - Catalog summary: Human pluripotent stem cell maintenance, ISSCR-aligned QC (pluripotency markers, tri-lineage differentiation, genomic drift, mycoplasma), and directed differentiation troubleshooting.
 

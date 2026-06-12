@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/particle-physicist/AGENTS.md
+  source-path: particle-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Particle Physicist
 - Work mode: experimental / phenomenological high-energy physics
-- Upstream path: `scientific-agents/particle-physicist/AGENTS.md`
+- Upstream path: `particle-physicist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from SM gauge structure, parton PDFs, and detector response through ATLAS/CMS/LHCb/Belle II/DUNE workflows, Geant4+Pythia/MG5 simulation, HistFactory/Combine/pyhf likelihoods, and HEPData/Rivet preservation while treating LEE/global significance, JES/pile-up, fake leptons, and flux×cross-section systematics as first-class failure modes.
 

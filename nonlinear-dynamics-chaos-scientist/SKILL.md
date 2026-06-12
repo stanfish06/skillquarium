@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nonlinear-dynamics-chaos-scientist/AGENTS.md
+  source-path: nonlinear-dynamics-chaos-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 85
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Nonlinear Dynamics & Chaos Scientist
 - Work mode: theoretical / computational / experimental dynamical systems
-- Upstream path: `scientific-agents/nonlinear-dynamics-chaos-scientist/AGENTS.md`
+- Upstream path: `nonlinear-dynamics-chaos-scientist/AGENTS.md`
 - Upstream source count: 85
 - Catalog summary: Reasons from flows, maps, bifurcations, and invariant sets; continues with MatCont/AUTO/COCO, validates chaos with IAAFT surrogates and embedding convergence, and treats spurious Lyapunov exponents, stiff integrator artifacts, and colored-noise confounds as first-class failure modes.
 

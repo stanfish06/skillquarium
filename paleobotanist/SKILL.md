@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/paleobotanist/AGENTS.md
+  source-path: paleobotanist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Paleobotanist
 - Work mode: field / laboratory paleobotany & palynology
-- Upstream path: `scientific-agents/paleobotanist/AGENTS.md`
+- Upstream path: `paleobotanist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from phytotaphonomy and preservation mode (compression, permineralization, palynomorphs); prepares coal-ball peels and cuticle/maceral workflows; applies LMA/CLAMP/DiLP and stomatal/Franks CO₂ proxies; uses PBDB, Neotoma, IFPNI/PFNR, and ICN fossil-taxon nomenclature while treating transport bias, organographic filters, and laboratory acid loss as first-class failure modes.
 

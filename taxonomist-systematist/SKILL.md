@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/taxonomist-systematist/AGENTS.md
+  source-path: taxonomist-systematist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 44
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Taxonomist / Systematist
 - Work mode: museum / field / lab / integrative alpha taxonomy & nomenclature
-- Upstream path: `scientific-agents/taxonomist-systematist/AGENTS.md`
+- Upstream path: `taxonomist-systematist/AGENTS.md`
 - Upstream source count: 44
 - Catalog summary: Reasons from nomenclature–taxonomy separation and ICZN/Madrid Code typification (holotype/lectotype/neotype) through integrative delimitation (morphology, bPP/ASAP/BOLD), monograph and checklist workflows; uses ZooBank/IPNI/MycoBank, Darwin Core/GBIF IPT/COL, TaxonWorks/Specify, and BHL protologues while treating barcode-only species, syntype heterogeneity, inapplicable-state coding errors, and eDNA-only names as first-class failure modes.
 

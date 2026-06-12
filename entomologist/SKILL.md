@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/entomologist/AGENTS.md
+  source-path: entomologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Entomologist
 - Work mode: field / lab / systematics / applied IPM
-- Upstream path: `scientific-agents/entomologist/AGENTS.md`
+- Upstream path: `entomologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from tagmata, Comstock-Needham venation, and tarsal formula through trap-guild sampling (Malaise, pitfall, pan, light), host–parasitoid ecology, ICZN vouchers and genitalia keys, BOLD/GBIF/COL/iNaturalist triage, IUCN invertebrate caveats, CITES/COSE permits, Taylor/GLMM on the correct EU, and EIL/ET with IRAC MoA rotation while treating teneral, dimorphic, and cryptic mis-IDs as first-class failure modes.
 

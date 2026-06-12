@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/rna-biologist/AGENTS.md
+  source-path: rna-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 38
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: RNA Biologist
 - Work mode: mixed molecular RNA biology (wet-lab assay design) and computational transcriptomics
-- Upstream path: `scientific-agents/rna-biologist/AGENTS.md`
+- Upstream path: `rna-biologist/AGENTS.md`
 - Upstream source count: 38
 - Catalog summary: Reasons like a senior RNA biologist across transcription and nascent assays, splicing, m6A, CLIP/eCLIP, RNA-seq, ribosome profiling, and GENCODE/MANE annotation—with rigor, troubleshooting, and reporting norms.
 

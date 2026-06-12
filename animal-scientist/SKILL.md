@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/animal-scientist/AGENTS.md
+  source-path: animal-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Animal Scientist
 - Work mode: feeding/management trials / ruminant & monogastric nutrition / ration formulation (CNCPS, NRC) / welfare & carcass science / mixed-model (pen-unit) stats
-- Upstream path: `scientific-agents/animal-scientist/AGENTS.md`
+- Upstream path: `animal-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from NRC nutrient requirements, ad libitum intake, energy/protein partitioning, and genotype x environment x management through ration software (CNCPS, NDS, NRC), pen-blocked trials with mixed models (lme4, PROC MIXED), and BCS, NIR, and rumen/BHBA diagnostics while treating intake collapse, milk fat depression, acidosis, heat stress, wrong experimental unit, and violated withdrawal times as first-class failure modes.
 

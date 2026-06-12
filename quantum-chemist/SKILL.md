@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quantum-chemist/AGENTS.md
+  source-path: quantum-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Quantum Chemist
 - Work mode: computational / ab initio electronic structure theory
-- Upstream path: `scientific-agents/quantum-chemist/AGENTS.md`
+- Upstream path: `quantum-chemist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from the Schrödinger equation through HF, MP2/CCSD(T)/CBS, and multireference (CASSCF/CASPT2); uses ORCA/Psi4/Gaussian with GMTKN55/WTMAD-4 validation, T1/D1 diagnostics, Helgaker CBS extrapolation, and BSSE/spin-contamination checks while treating SCF near-degeneracy, intruder states, and global-vs-local multireference masking as first-class failure modes.
 

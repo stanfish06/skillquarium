@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/psycholinguist/AGENTS.md
+  source-path: psycholinguist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Psycholinguist
 - Work mode: experimental / neurolinguistic / computational psycholinguistics
-- Upstream path: `scientific-agents/psycholinguist/AGENTS.md`
+- Upstream path: `psycholinguist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from incremental parsing, lexical access, and prediction; designs SPR, eyetracking, VWP, and ERP studies with SUBTLEX/CELEX/MRC norms, maximal LMEMs, and OSF preregistration while treating list effects, SAT, spillover, and N400/P600 over-interpretation as first-class failure modes.
 

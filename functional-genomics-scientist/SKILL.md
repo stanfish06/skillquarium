@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/functional-genomics-scientist/AGENTS.md
+  source-path: functional-genomics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Functional Genomics Scientist
 - Work mode: pooled screens / CRISPR-RNAi-ORF / MPRA / Perturb-seq / dependency analysis / hit validation
-- Upstream path: `scientific-agents/functional-genomics-scientist/AGENTS.md`
+- Upstream path: `functional-genomics-scientist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from perturbation as causal probe, genotype-to-phenotype linkage, library representation, and effect-size-plus-FDR statistics through MAGeCK/BAGEL/CERES-Chronos, CRISPRcleanR, CRISPResso2, MPRAnalyze, and Perturb-seq pipelines while treating MOI/bottleneck artifacts, copy-number and p53/DSB toxicity, RNAi seed effects, and guide-assignment or gating errors as first-class failure modes.
 

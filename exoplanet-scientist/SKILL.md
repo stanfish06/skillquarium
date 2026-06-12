@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/exoplanet-scientist/AGENTS.md
+  source-path: exoplanet-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Exoplanet Scientist
 - Work mode: detection / RV & transits / atmospheric retrieval / occurrence demographics
-- Upstream path: `scientific-agents/exoplanet-scientist/AGENTS.md`
+- Upstream path: `exoplanet-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Keplerian motion, transit and RV geometry, and degenerate retrieval spaces through TLS/BLS searches, centroid and odd-even vetting, RadVel and GP activity models, and petitRADTRANS retrievals while treating eclipsing-binary blends, stellar-rotation-mimicking RV signals, and look-elsewhere completeness cliffs as first-class failure modes.
 

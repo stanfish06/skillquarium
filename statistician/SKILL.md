@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/statistician/AGENTS.md
+  source-path: statistician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Statistician
 - Work mode: applied inference / experimental design / Bayesian-frequentist / causal & survey methods / SAP-driven consulting
-- Upstream path: `scientific-agents/statistician/AGENTS.md`
+- Upstream path: `statistician/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from estimands, generative-model assumptions, and a budgeted Type I/II error tradeoff through analysis plans (SAP, ICH E9(R1) estimands), mixed models, multiple imputation under MCAR/MAR/MNAR, and Benjamini-Hochberg FDR while treating naive post-selection SEs, unadjusted multiplicity, ignored clustering in survey PSUs, and sequential peeking as first-class failure modes.
 

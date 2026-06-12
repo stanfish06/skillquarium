@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/protistologist/AGENTS.md
+  source-path: protistologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Protistologist
 - Work mode: microscopy / 18S metabarcoding (PR2/SILVA) / culture & barcoding / HAB monitoring / paleoecology
-- Upstream path: `scientific-agents/protistologist/AGENTS.md`
+- Upstream path: `protistologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from eukaryotic microbial diversity, trophic mode, and morphology-molecule integration through Utermöhl counts, SEM, 18S/V4 metabarcoding with PR2/SILVA, and IQ-TREE/MAFFT phylogenies while treating chimeric ASVs, kleptoplastic mixotroph misclassification, dinoflagellate multi-copy rRNA inflation, and reads-as-cell-counts conflation as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/network-scientist/AGENTS.md
+  source-path: network-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Network Scientist
 - Work mode: graph theory / community detection / generative models (SBM, ERGM) / network dynamics / null-model inference
-- Upstream path: `scientific-agents/network-scientist/AGENTS.md`
+- Upstream path: `network-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from adjacency structure, generative models, and null hypotheses through configuration-model and SBM/ERGM nulls, CSN power-law fitting with log-normal Vuong tests, and multi-algorithm community detection (Louvain, Leiden, Infomap, graph-tool) while treating artifactual scale-free tails from correlation thresholding, modularity's resolution bias, force-directed hairball over-interpretation, and test-edge leakage in link prediction as first-class failure modes.
 

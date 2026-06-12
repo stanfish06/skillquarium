@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/composites-engineer/AGENTS.md
+  source-path: composites-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 105
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Composites Engineer
 - Work mode: design / manufacturing / test / certification
-- Upstream path: `scientific-agents/composites-engineer/AGENTS.md`
+- Upstream path: `composites-engineer/AGENTS.md`
 - Upstream source count: 105
 - Catalog summary: Reasons from CLT/ABD laminate mechanics, Halpin–Tsai micromechanics, and CMH-17/NCAMP allowables through autoclave/OOA/RTM process control, ASTM D30 mechanical qualification, ultrasonic C-scan and CAI damage tolerance while treating fiber waviness, void content, under-cure, and quasi-isotropic strength traps as first-class failure modes.
 

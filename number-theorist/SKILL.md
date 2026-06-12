@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/number-theorist/AGENTS.md
+  source-path: number-theorist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Number Theorist
 - Work mode: theoretical / computational pure and arithmetic number theory
-- Upstream path: `scientific-agents/number-theorist/AGENTS.md`
+- Upstream path: `number-theorist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from primes, congruences, L-functions, and the Langlands web; chooses algebraic, analytic, and sieve methods; validates with SageMath/PARI/LMFDB while treating PARI stack overflows, conditional-proof leaks, and CRT moduli errors as first-class failure modes.
 

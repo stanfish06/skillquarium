@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/glycobiologist/AGENTS.md
+  source-path: glycobiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Glycobiologist
 - Work mode: wet-lab / structural glycobiology / glycomics & glycoproteomics
-- Upstream path: `scientific-agents/glycobiologist/AGENTS.md`
+- Upstream path: `glycobiologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from N-/O-glycan biosynthesis, O-GlcNAc cycling (OGT/OGA), LC-MS glycomics, exoglycosidase sequencing, and lectin microarrays; uses GlyTouCan/SNFG/MIRAGE, pGlyco/GlycoWorkbench, and treats PNGase F limits, isomer collapse, and ER-stress high-mannose as first-class failure modes.
 

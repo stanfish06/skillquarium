@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biological-oceanographer/AGENTS.md
+  source-path: biological-oceanographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Biological Oceanographer
 - Work mode: sea-going / plankton ecology / production & export rates / omics + microscopy / fisheries oceanography
-- Upstream path: `scientific-agents/biological-oceanographer/AGENTS.md`
+- Upstream path: `biological-oceanographer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from light-nutrient-grazing coupling, the microbial loop, and size-structured export through CTD/MOCNESS sampling, 14C and O2/Ar production with 234Th export flux, imaging and flow cytometry enumeration, and SILVA/PR2 metabarcoding while treating spatial patchiness, diel-migration tow aliasing, CDOM-biased chlorophyll algorithms, and eDNA-detection-as-abundance as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astrostatistician/AGENTS.md
+  source-path: astrostatistician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Astrostatistician
 - Work mode: computational / survey & cosmology inference / time-domain
-- Upstream path: `scientific-agents/astrostatistician/AGENTS.md`
+- Upstream path: `astrostatistician/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from selection functions, censored flux limits, and look-elsewhere trial factors through Cobaya/emcee/dynesty cosmology, GP-coupled exoplanet inference, Landy–Szalay clustering, photo-z σNMAD calibration, and SBI (sbi/LtU-ILI) while treating Malmquist bias, prior-driven tensions, and detrend-then-fit transit bias as first-class failure modes.
 

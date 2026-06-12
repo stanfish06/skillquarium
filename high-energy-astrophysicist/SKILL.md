@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/high-energy-astrophysicist/AGENTS.md
+  source-path: high-energy-astrophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 66
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: High-Energy Astrophysicist
 - Work mode: observational / computational X-ray & gamma-ray
-- Upstream path: `scientific-agents/high-energy-astrophysicist/AGENTS.md`
+- Upstream path: `high-energy-astrophysicist/AGENTS.md`
 - Upstream source count: 66
 - Catalog summary: Reasons from Compton/synchrotron radiative processes and compact-object energetics through HEASARC/Fermi/Swift/XMM/Chandra/NuSTAR/XRISM pipelines, XSPEC/Sherpa spectral fitting, pile-up and background systematics, blazar/GRB/TDE campaigns, and GCN multi-messenger coordination while treating RMF versioning, soft-proton flares, and look-elsewhere significance as first-class failure modes.
 

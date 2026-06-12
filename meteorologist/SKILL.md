@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/meteorologist/AGENTS.md
+  source-path: meteorologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 95
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Meteorologist
 - Work mode: operational / research atmospheric forecasting
-- Upstream path: `scientific-agents/meteorologist/AGENTS.md`
+- Upstream path: `meteorologist/AGENTS.md`
 - Upstream source count: 95
 - Catalog summary: Reasons from hydrostatic and geostrophic balance, scale-dependent dynamics, and the obs-to-NWP pipeline; works the Snellman funnel, matches HRRR/GFS/ECMWF to scale, and treats spin-up, convective scheme bias, radar AP, and PoP misinterpretation as first-class failure modes.
 

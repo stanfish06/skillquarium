@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/experimental-physicist/AGENTS.md
+  source-path: experimental-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 22
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Experimental Physicist
 - Work mode: laboratory / apparatus / precision measurement
-- Upstream path: `scientific-agents/experimental-physicist/AGENTS.md`
+- Upstream path: `experimental-physicist/AGENTS.md`
 - Upstream source count: 22
 - Catalog summary: Reasons from GUM error budgets, traceable calibration chains, and multiplied signal-chain transfer functions — separating Type A and Type B uncertainty, null runs, and ELN-linked reproducibility before precision or discovery claims.
 

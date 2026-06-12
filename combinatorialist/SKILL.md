@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/combinatorialist/AGENTS.md
+  source-path: combinatorialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Combinatorialist
 - Work mode: theoretical / computational discrete mathematics
-- Upstream path: `scientific-agents/combinatorialist/AGENTS.md`
+- Upstream path: `combinatorialist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from labelled vs unlabelled enumeration, EGF/OGF and species, bijective and probabilistic proofs, Turán/Ramsey/extremal bounds, and BIBD/OA design parameters through SageMath/GAP/nauty, OEIS, House of Graphs, and Colbourn–Dinitz tables while treating isomorphism double-counting, parity barriers, and OEIS false matches as first-class failure modes.
 

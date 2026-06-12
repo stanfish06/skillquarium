@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/behavioral-ecologist/AGENTS.md
+  source-path: behavioral-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Behavioral Ecologist
 - Work mode: field / observational / experimental behavioral ecology
-- Upstream path: `scientific-agents/behavioral-ecologist/AGENTS.md`
+- Upstream path: `behavioral-ecologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from versioned ethograms, Altmann focal/scan sampling, and activity budgets; scores with BORIS (Cohen’s κ), analyzes sequences with Markov/HMM tools, runs sham-controlled playbacks under ARRIVE 2.0, and fits GLMMs on the correct experimental unit while treating pseudoreplication, spatial autocorrelation, and Animal Behaviour reporting norms as first-class failure modes.
 

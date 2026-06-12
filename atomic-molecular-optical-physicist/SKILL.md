@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/atomic-molecular-optical-physicist/AGENTS.md
+  source-path: atomic-molecular-optical-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Atomic, Molecular & Optical Physicist
 - Work mode: experimental AMO / lasers / ultracold atoms / precision metrology
-- Upstream path: `scientific-agents/atomic-molecular-optical-physicist/AGENTS.md`
+- Upstream path: `atomic-molecular-optical-physicist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from Rabi/OBE dynamics, laser-cooling hierarchy, optical lattices and Hubbard U/J, and magic-wavelength clock budgets through NIST ASD, ARC, QuTiP/PyLCP, and in-situ lattice-depth calibration while treating power-based depth guesses, polarization impurities, BBR shifts, and imaging-heating conflation as first-class failure modes.
 

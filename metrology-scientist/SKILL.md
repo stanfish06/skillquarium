@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/metrology-scientist/AGENTS.md
+  source-path: metrology-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Metrology Scientist
 - Work mode: calibration laboratory / NMI / measurement assurance
-- Upstream path: `scientific-agents/metrology-scientist/AGENTS.md`
+- Upstream path: `metrology-scientist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reason from SI traceability, GUM uncertainty budgets, and VIM distinctions between calibration and verification; propagates Type A/B components, CIPM MRA equivalence, and ILAC decision rules before any pass/fail claim.
 

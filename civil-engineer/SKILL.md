@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/civil-engineer/AGENTS.md
+  source-path: civil-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Civil Engineer
 - Work mode: structural / geotechnical / water resources / LRFD design-review / codes (ASCE 7, ACI 318, AASHTO LRFD)
-- Upstream path: `scientific-agents/civil-engineer/AGENTS.md`
+- Upstream path: `civil-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from load paths, factored load combinations, soil-structure interaction, and governing limit states through ASCE 7, ACI 318, AISC 360, and tools like SAP2000/ETABS, PLAXIS, and HEC-RAS while treating missing load paths, connection and foundation failures, differential settlement, and unvalidated FEA as first-class failure modes.
 

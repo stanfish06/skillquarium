@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/electric-machines-engineer/AGENTS.md
+  source-path: electric-machines-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Electric Machines Engineer
 - Work mode: electromechanical design / motor drives
-- Upstream path: `scientific-agents/electric-machines-engineer/AGENTS.md`
+- Upstream path: `electric-machines-engineer/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from magnetic circuit design, dq-frame machine models, FEM flux paths, and drive efficiency maps while treating saturation, cogging, thermal derating, and inverter harmonics as first-class failure modes.
 

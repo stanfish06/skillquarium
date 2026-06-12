@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/radiologist/AGENTS.md
+  source-path: radiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Radiologist
 - Work mode: clinical / diagnostic imaging interpretation
-- Upstream path: `scientific-agents/radiologist/AGENTS.md`
+- Upstream path: `radiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from modality–question fit, contrast kinetics, and ACR Appropriateness Criteria (1–9); applies BI-RADS, LI-RADS, PI-RADS, and Lung-RADS with Fleischner/incidental-findings algorithms; integrates PACS/RIS/DICOM/IHE workflows, CTDIvol/DLP/DIR dose stewardship, and critical-results communication while treating perceptual misses, satisfaction of search, and CT/MRI/PET artifacts as first-class failure modes.
 

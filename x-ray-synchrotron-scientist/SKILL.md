@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/x-ray-synchrotron-scientist/AGENTS.md
+  source-path: x-ray-synchrotron-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: X-ray / Synchrotron Scientist
 - Work mode: beamline / scattering & spectroscopy (SAXS/WAXS, XAS, RIXS) / synchrotron & XFEL imaging / operando & time-resolved
-- Upstream path: `scientific-agents/x-ray-synchrotron-scientist/AGENTS.md`
+- Upstream path: `x-ray-synchrotron-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from photon-matter cross sections, reciprocal-space Q, absorption edges, and absorbed dose through pyFAI, GSAS-II, Athena/Artemis, BornAgain, and foil/silver-behenate calibration while treating fluorescence self-absorption, substrate Bragg misindexing, beam damage and radiation-induced reduction, and Fourier-termination ripples as first-class failure modes.
 

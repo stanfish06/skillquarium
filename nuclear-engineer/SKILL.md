@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nuclear-engineer/AGENTS.md
+  source-path: nuclear-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Nuclear Engineer
 - Work mode: reactor physics / thermal hydraulics / safety & licensing
-- Upstream path: `scientific-agents/nuclear-engineer/AGENTS.md`
+- Upstream path: `nuclear-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from k_eff, DNBR/CHF margins, xenon transients, and defense-in-depth; couples SCALE/MCNP, PARCS, TRACE/RELAP, and MELCOR to 10 CFR and PRA; treats nodalization, nuclear-data, and CHF-correlation uncertainties as first-class failure modes.
 

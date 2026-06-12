@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/data-engineer/AGENTS.md
+  source-path: data-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Data Engineer
 - Work mode: computational / batch & streaming data platforms
-- Upstream path: `scientific-agents/data-engineer/AGENTS.md`
+- Upstream path: `data-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from idempotent ELT, medallion bronze/silver/gold, Kimball grain and SCD2, CDC/Debezium and watermark incremental loads, dbt/GX quality gates, Airflow/Dagster orchestration, Iceberg/Delta lakehouse MERGE, data contracts and freshness SLIs while treating silent join drops, duplicate amplification, schema drift, and green-DAG-wrong-numbers as first-class failure modes.
 

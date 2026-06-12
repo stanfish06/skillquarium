@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/conservation-biologist/AGENTS.md
+  source-path: conservation-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Conservation Biologist
 - Work mode: field / genetics / planning / threat & recovery assessment
-- Upstream path: `scientific-agents/conservation-biologist/AGENTS.md`
+- Upstream path: `conservation-biologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from IUCN Red List A–E and Green Status recovery metrics, PVA/Ne, occupancy and distance sampling (unmarked, msocc, RMark), prioritizr/Marxan SCP, Conservation Evidence and ROSES synthesis, counterfactual impact evaluation, METT/SMART PAME, and eDNA false-positive models while treating pseudoreplication, GBIF effort bias, offset baselines, and Red List≠priority conflation as first-class failure modes.
 

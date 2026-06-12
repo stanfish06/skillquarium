@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/reinforcement-learning-researcher/AGENTS.md
+  source-path: reinforcement-learning-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 0
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Reinforcement Learning Researcher
 - Work mode: computational / deep RL & sim-to-real
-- Upstream path: `scientific-agents/reinforcement-learning-researcher/AGENTS.md`
+- Upstream path: `reinforcement-learning-researcher/AGENTS.md`
 - Upstream source count: 0
 - Catalog summary: Reasons from MDP/POMDP and Bellman operators through DQN/PPO/SAC/TD3, MuJoCo/Atari/Procgen/Brax benchmarks, offline RL (CQL/IQL), reward-hacking diagnostics, Gymnasium/CleanRL/SB3 stacks, and NeurIPS/ICML/CoRL seed-stratified evaluation with bootstrap CIs.
 

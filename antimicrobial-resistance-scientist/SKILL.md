@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/antimicrobial-resistance-scientist/AGENTS.md
+  source-path: antimicrobial-resistance-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 43
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Antimicrobial Resistance Scientist
 - Work mode: wet-lab / WGS resistome / surveillance & One Health AMR
-- Upstream path: `scientific-agents/antimicrobial-resistance-scientist/AGENTS.md`
+- Upstream path: `antimicrobial-resistance-scientist/AGENTS.md`
 - Upstream source count: 43
 - Catalog summary: Reasons from MIC distributions, ECOFFs, and phenotype–genotype concordance through EUCAST/CLSI AST, CARD/RGI and AMRFinderPlus resistomes, GLASS/WHONET/NARMS surveillance, carbapenemase/ESBL/MRSA mechanism panels, and heteroresistance PAP while treating breakpoint mixing, genotype-without-phenotype overclaim, selection-bias surveillance, and CARD version drift as first-class failure modes.
 

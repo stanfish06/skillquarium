@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/edge-embedded-ai-engineer/AGENTS.md
+  source-path: edge-embedded-ai-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 22
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Edge / Embedded AI Engineer
 - Work mode: embedded firmware / on-device inference
-- Upstream path: `scientific-agents/edge-embedded-ai-engineer/AGENTS.md`
+- Upstream path: `edge-embedded-ai-engineer/AGENTS.md`
 - Upstream source count: 22
 - Catalog summary: Reasons from tensor-arena budgets, full-int8 PTQ with representative calibration, and TFLM/CMSIS-NN or Vela/Ethos-U compile paths through ONNX Runtime QNN HTP and mobile delegates—treating train–serve preprocessing skew, float thresholds on quantized outputs, and NPU operator fallback as first-class failure modes.
 

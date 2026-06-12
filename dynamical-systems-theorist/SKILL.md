@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/dynamical-systems-theorist/AGENTS.md
+  source-path: dynamical-systems-theorist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Dynamical Systems Theorist
 - Work mode: analysis + numerics / bifurcation theory / normal forms / continuation (AUTO, MatCont) / chaos diagnostics
-- Upstream path: `scientific-agents/dynamical-systems-theorist/AGENTS.md`
+- Upstream path: `dynamical-systems-theorist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from state spaces, invariant sets, bifurcations, and multiple time scales through normal-form classification, center-manifold reduction, Floquet/Poincaré maps, and continuation tools like AUTO, MatCont, and DynamicalSystems.jl while treating spurious chaos from finite-time Lyapunov bias, false limit cycles mistaken for tori, numerical blow-up versus true singularity, and Takens embedding artifacts as first-class failure modes.
 

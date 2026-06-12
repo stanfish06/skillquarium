@@ -9,7 +9,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/clinical-trial-scientist/AGENTS.md
+  source-path: clinical-trial-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -33,7 +33,7 @@ than individualized professional advice.
 
 - Profession: Clinical Trial Scientist
 - Work mode: clinical operations / GCP trials
-- Upstream path: `scientific-agents/clinical-trial-scientist/AGENTS.md`
+- Upstream path: `clinical-trial-scientist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from protocol SAPs, ICH-GCP, randomization/blinding, and CDISC SDTM while treating protocol deviations and immortal time as first-class failure modes.
 

@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/petrologist/AGENTS.md
+  source-path: petrologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Petrologist
 - Work mode: igneous/metamorphic petrology / petrography / EPMA-LA-ICP-MS microanalysis / thermodynamic modeling (Perple_X, THERMOCALC, MELTS) / thermobarometry
-- Upstream path: `scientific-agents/petrologist/AGENTS.md`
+- Upstream path: `petrologist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from Gibbs free energy minimization, the phase rule, and protolith-specific facies assemblages through petrography, EPMA/LA-ICP-MS microanalysis, pseudosections (Perple_X, THERMOCALC, MELTS), and classical thermobarometry while treating retrograde overprinting, serpentinization, propylitic alteration mimicking grade, and EPMA analytical scatter mistaken for P-T trends as first-class failure modes.
 

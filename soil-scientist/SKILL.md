@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/soil-scientist/AGENTS.md
+  source-path: soil-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Soil Scientist
 - Work mode: pedology / soil physics & chemistry / classification (USDA Taxonomy, WRB) / land evaluation
-- Upstream path: `scientific-agents/soil-scientist/AGENTS.md`
+- Upstream path: `soil-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from CLORPT genetic horizonation, matric-potential water flow, and colloid exchange chemistry through Munsell pedon description, USDA Soil Taxonomy and WRB keys, buffer-pH lime calculation, and HYDRUS/RUSLE2/PHREEQC modeling while treating wrong-extractant nutrient values (Mehlich-3 vs Olsen), map-unit-as-pedon substitution, and PTF-output-as-measured-K_sat as first-class failure modes.
 

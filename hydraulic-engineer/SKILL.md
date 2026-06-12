@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/hydraulic-engineer/AGENTS.md
+  source-path: hydraulic-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Hydraulic Engineer
 - Work mode: open-channel / pipe flow / water systems
-- Upstream path: `scientific-agents/hydraulic-engineer/AGENTS.md`
+- Upstream path: `hydraulic-engineer/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from Bernoulli–Darcy–Weisbach, Moody diagrams, HEC-RAS/EPANET modeling, and pump/system curves while treating transient water hammer, air entrainment, and roughness aging as first-class failure modes.
 

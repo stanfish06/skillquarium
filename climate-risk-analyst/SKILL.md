@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/climate-risk-analyst/AGENTS.md
+  source-path: climate-risk-analyst/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Climate Risk Analyst
 - Work mode: financial / insurance / disclosure & portfolio climate risk
-- Upstream path: `scientific-agents/climate-risk-analyst/AGENTS.md`
+- Upstream path: `climate-risk-analyst/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from TCFD/IFRS S2 four-pillar disclosure, NGFS Phase V orderly/disorderly/hot-house scenarios, hazard–exposure–vulnerability and RMS/AIR/CLIMADA cat economics, transition carbon-price and stranded-asset pathways, and PCAF financed emissions while treating exposure geocoding quality, Kotz damage-function retraction, and scenario-not-forecast misuse as first-class failure modes.
 

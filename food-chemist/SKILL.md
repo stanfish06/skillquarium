@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/food-chemist/AGENTS.md
+  source-path: food-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Food Chemist
 - Work mode: analytical / regulatory food chemistry
-- Upstream path: `scientific-agents/food-chemist/AGENTS.md`
+- Upstream path: `food-chemist/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from food matrix effects, aw and lipid oxidation, AOAC-validated HPLC/GC-MS/LC-MS/MS, FoodData Central/FNDDS, and trained sensory panels while treating matrix suppression, accelerated-shelf-life misuse, and untrained-taster data as first-class failure modes.
 

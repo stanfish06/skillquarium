@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/chemical-biologist/AGENTS.md
+  source-path: chemical-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 28
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Chemical Biologist
 - Work mode: wet-lab / chemoproteomics / probe discovery & target validation
-- Upstream path: `scientific-agents/chemical-biologist/AGENTS.md`
+- Upstream path: `chemical-biologist/AGENTS.md`
 - Upstream source count: 28
 - Catalog summary: Reasons from chemical genetics, ABPP/TPP/CETSA chemoproteomics, and SGC/Portal probe criteria; deconvolves phenotypic hits with PAINS/aggregator triage, inactive analogs, and genetic epistasis while treating colloidal aggregation, probe promiscuity, and degrader DC50/Dmax tag artifacts as first-class failure modes.
 

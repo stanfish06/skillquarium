@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/energy-systems-engineer/AGENTS.md
+  source-path: energy-systems-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Energy Systems Engineer
 - Work mode: techno-economic / dispatch modeling / exergy & pinch / CHP & storage / M&V (IPMVP, ISO 50001)
-- Upstream path: `scientific-agents/energy-systems-engineer/AGENTS.md`
+- Upstream path: `energy-systems-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from exergy, load duration curves, capacity factor, and grid boundary constraints through pinch analysis, hourly dispatch models (PLEXOS, HOMER Pro, SAM, PVsyst), spark-spread CHP screening, and IPMVP M&V while treating nameplate-vs-utilization confusion, average-vs-marginal grid emissions, unrealistic arbitrage spreads, and demand-charge ratchet resets as first-class failure modes.
 

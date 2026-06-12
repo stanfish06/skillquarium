@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/carbon-cycle-scientist/AGENTS.md
+  source-path: carbon-cycle-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Carbon Cycle Scientist
 - Work mode: flux towers / atmospheric inversions / GHG inventories / isotopic constraints / Earth-system model evaluation
-- Upstream path: `scientific-agents/carbon-cycle-scientist/AGENTS.md`
+- Upstream path: `carbon-cycle-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from carbon mass balance across reservoirs and timescales, sign conventions, and budget closure through the Global Carbon Budget protocol, ONEFlux/REddyProc eddy-covariance processing, atmospheric inversions (CarbonTracker, CAMS, GEOS-Chem), Δ¹⁴C/δ¹³C isotopic partitioning, and ILAMB model evaluation while treating NEE sign mismatches, gap-filled GPP read as measured, fixed-depth SOC comparisons, and uncounted lateral aquatic carbon export as first-class failure modes.
 

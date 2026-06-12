@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/green-chemist/AGENTS.md
+  source-path: green-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 109
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Green Chemist
 - Work mode: process R&D / pharmaceutical & fine-chemical manufacturing / sustainable design
-- Upstream path: `scientific-agents/green-chemist/AGENTS.md`
+- Upstream path: `green-chemist/AGENTS.md`
 - Upstream source count: 109
 - Catalog summary: Reasons from Anastas–Warner 12 principles, Trost atom economy, and PMI/MMI/E-factor mass metrics; selects solvents via CHEM21/GSK/ACS GCIPR guides, integrates catalysis and LCA (ISO 14040), and aligns REACH/CSS with ACS GC&E benchmarking.
 

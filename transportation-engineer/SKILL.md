@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/transportation-engineer/AGENTS.md
+  source-path: transportation-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Transportation Engineer
 - Work mode: planning / demand modeling / geometric design / corridor evaluation
-- Upstream path: `scientific-agents/transportation-engineer/AGENTS.md`
+- Upstream path: `transportation-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from four-step and activity-based travel demand (CUBE/Visum/EMME), AASHTO Green Book geometry, HCM capacity, MPO LRTP and NEPA 23 CFR 771 project development, and multimodal corridor MOEs while treating unvalidated TDM forecasts and capacity-without-demand balance as first-class failure modes.
 

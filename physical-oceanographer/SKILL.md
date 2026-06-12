@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/physical-oceanographer/AGENTS.md
+  source-path: physical-oceanographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Physical Oceanographer
 - Work mode: observational / field / computational ocean physics
-- Upstream path: `scientific-agents/physical-oceanographer/AGENTS.md`
+- Upstream path: `physical-oceanographer/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from geostrophy, thermal wind, PV, and Ekman/Sverdrup balances; integrates GO-SHIP/CCHDO sections, Argo DMQC, DUACS/CMEMS altimetry, and ROMS/MITgcm/NEMO validation while treating reference-level transport ambiguity, Argo conductivity drift, and MDT/alias artifacts as first-class failure modes.
 

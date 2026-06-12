@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/climate-scientist/AGENTS.md
+  source-path: climate-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Climate Scientist
 - Work mode: computational / observational / paleoclimate physical climate science
-- Upstream path: `scientific-agents/climate-scientist/AGENTS.md`
+- Upstream path: `climate-scientist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from ERF/EEI energy-budget closure, AR6 forcing (WMGHG vs ERFaci), optimal fingerprinting and FAR event attribution, CMIP6/ScenarioMIP SSP workflows (ESGF, ESMValTool), and paleo proxy physics (PAGES2k, ice-core δD/CO₂, foraminifera Mg/Ca, coral Sr/Ca) while treating aerosol uncertainty, tree-ring divergence, CMIP tuning circularity, and TLS under-coverage as first-class failure modes.
 

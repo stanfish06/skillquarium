@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/low-temperature-physicist/AGENTS.md
+  source-path: low-temperature-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Low-Temperature Physicist
 - Work mode: experimental / cryogenic / condensed-matter & quantum transport
-- Upstream path: `scientific-agents/low-temperature-physicist/AGENTS.md`
+- Upstream path: `low-temperature-physicist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from kT budgets, He-3/He-4 dilution refrigeration, and BCS/GL superconductivity; measures Tc, QHE, and Landauer conductance with lock-in/SQUID workflows while treating wiring heat loads, Kapitza resistance, flux trapping, TLS dielectric loss, and sample-vs-MXC thermometer mismatch as first-class failure modes.
 

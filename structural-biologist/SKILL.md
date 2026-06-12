@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/structural-biologist/AGENTS.md
+  source-path: structural-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Structural Biologist
 - Work mode: wet-lab / X-ray crystallography / cryo-EM / NMR
-- Upstream path: `scientific-agents/structural-biologist/AGENTS.md`
+- Upstream path: `structural-biologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from the phase problem, CTF, and gold-standard FSC; refines with CCP4/PHENIX/RELION/cryoSPARC; validates with MolProbity and OneDep while treating preferred orientation, twinning, and radiation damage as first-class failure modes.
 

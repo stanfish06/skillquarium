@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/palliative-care-researcher/AGENTS.md
+  source-path: palliative-care-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Palliative Care Researcher
 - Work mode: clinical trials / symptom science / patient-reported outcomes / health services / reporting (CONSORT-PRO, SPIRIT, PCORI)
-- Upstream path: `scientific-agents/palliative-care-researcher/AGENTS.md`
+- Upstream path: `palliative-care-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from serious-illness trajectories, multidimensional symptom burden, goals-of-care concordance, and caregiver dyad outcomes through validated PROMs (ESAS-r, IPOS, FACIT-Pal), prespecified MCID responder analysis, mixed-effects and joint survival-QoL models, and CONSORT-PRO/SPIRIT/PCORI reporting while treating death-related attrition, unjustified proxy substitution, inconsistent palliative-care exposure definitions, and hospice-versus-consult conflation as first-class failure modes.
 

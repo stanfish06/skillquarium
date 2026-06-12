@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/applied-mathematician/AGENTS.md
+  source-path: applied-mathematician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Applied Mathematician
 - Work mode: theoretical / computational / interdisciplinary modeling
-- Upstream path: `scientific-agents/applied-mathematician/AGENTS.md`
+- Upstream path: `applied-mathematician/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from formulation-first modeling, Buckingham scaling, and asymptotics (matched expansions, boundary layers) through FEM/FVM numerics (FEniCS, PETSc, LAPACK), Tikhonov inverse problems, and ASME/Sandia V&V while treating ill-posed inversion, stiffness, and numerical diffusion as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/precision-agriculture-specialist/AGENTS.md
+  source-path: precision-agriculture-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Precision Agriculture Specialist
 - Work mode: site-specific crop management / VRT prescriptions / remote & proximal sensing / RTK-GNSS & ISOBUS / yield-map QA
-- Upstream path: `scientific-agents/precision-agriculture-specialist/AGENTS.md`
+- Upstream path: `precision-agriculture-specialist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from management-zone heterogeneity, the spatial 4R (right input, rate, place, time), and per-zone margin maps through SSURGO/ECa zone delineation, NDVI/NDRE indices, RTK-GNSS georeferencing, and ISOBUS Task Controller as-applied logs while treating planned-versus-applied divergence, NDVI saturation, miscalibrated yield-monitor mass-flow and lag, and RTK float passes as first-class failure modes.
 

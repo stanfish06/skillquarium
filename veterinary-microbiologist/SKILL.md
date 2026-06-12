@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/veterinary-microbiologist/AGENTS.md
+  source-path: veterinary-microbiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Veterinary Microbiologist
 - Work mode: diagnostic bacteriology-mycology-virology / reference lab & herd surveillance
-- Upstream path: `scientific-agents/veterinary-microbiologist/AGENTS.md`
+- Upstream path: `veterinary-microbiologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from pre-analytic specimen quality, CLSI VET01 AST, MALDI-TOF/PCR/WGS, and ISCAID significance thresholds through ACVM/AAVLD/WOAH workflows, NARMS/Vet-LIRN AMR surveillance, and One Health zoonoses while treating wound-swab contaminants, PCR-without-viability, human breakpoints on veterinary isolates, DTM false positives, MRSP biofilm, and Brucella BSL-3 exposure as first-class failure modes.
 

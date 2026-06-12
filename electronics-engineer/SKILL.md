@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/electronics-engineer/AGENTS.md
+  source-path: electronics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Electronics Engineer
 - Work mode: board/IC design / mixed-signal & precision analog / PCB DFM-DFT / manufacturing test & failure analysis
-- Upstream path: `scientific-agents/electronics-engineer/AGENTS.md`
+- Upstream path: `electronics-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from datasheet-corner device physics, signal-chain error budgets, and analog-digital return-path coupling through LTspice/IBIS-AMI simulation, ICT/boundary-scan coverage, golden-board signature comparison, and IPC/AEC-Q standards while treating ESD versus EOS overstress, MLCC DC-bias derating, reference and clock-jitter ENOB loss, and NFF field returns as first-class failure modes.
 

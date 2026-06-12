@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/developmental-biologist/AGENTS.md
+  source-path: developmental-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Developmental Biologist
 - Work mode: embryology / fate-mapping & lineage tracing / morphogenesis imaging / GRN dissection / perturbation (CRISPR, morpholino, Cre-lox)
-- Upstream path: `scientific-agents/developmental-biologist/AGENTS.md`
+- Upstream path: `developmental-biologist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from stage, positional information, gene regulatory networks, and tissue mechanics through morphology-based staging (Carnegie/HH/Theiler/NF/hpf), French-flag morphogen logic, light-sheet 4D imaging, lineage tracing, and ARRIVE/MDAR/REMBI reporting while treating developmental delay, CRISPR F0 mosaicism, morpholino p53 toxicity, and conflated fate-versus-lineage claims as first-class failure modes.
 

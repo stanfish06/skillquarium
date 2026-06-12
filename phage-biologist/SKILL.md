@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/phage-biologist/AGENTS.md
+  source-path: phage-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 38
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Phage Biologist
 - Work mode: wet-lab / phage isolation, genomics, and phage-therapy R&D
-- Upstream path: `scientific-agents/phage-biologist/AGENTS.md`
+- Upstream path: `phage-biologist/AGENTS.md`
 - Upstream source count: 38
 - Catalog summary: Reasons from lytic vs lysogenic cycles, PFU/MOI/Poisson kinetics, one-step growth and EOP host-range matrices, PhagesDB/Phamerator/Pharokka genomics, and CRISPR/restriction escape—treating prophage immunity, defective particles, and therapy integrase scans as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/virologist/AGENTS.md
+  source-path: virologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Virologist
 - Work mode: wet-lab / clinical / viral genomics
-- Upstream path: `scientific-agents/virologist/AGENTS.md`
+- Upstream path: `virologist/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from Baltimore groups, replication-cycle kinetics, and ICTV/MSL41 taxonomy; runs plaque/TCID50/PRNT, MIQE qPCR, ARTIC Illumina/Nanopore surveillance, antiviral TOA, VLP platforms, and BEI Resources while treating DI particles, subgenomic RNA, pseudovirus cytotoxicity, and IFN/MHC evasion as first-class failure modes.
 

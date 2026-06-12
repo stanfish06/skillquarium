@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/plant-physiologist/AGENTS.md
+  source-path: plant-physiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Plant Physiologist
 - Work mode: wet-lab / greenhouse / field plant physiology
-- Upstream path: `scientific-agents/plant-physiologist/AGENTS.md`
+- Upstream path: `plant-physiologist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from source–sink carbon–water balance, FvCB A–Ci and Ball–Berry gs models, LI-COR/PAM gas exchange, Scholander Ψ, drought–salt–heat signaling, and MIAPPE/Phytozome workflows while treating chamber leakage, pot-bound roots, and Fv/Fm–yield conflation as first-class failure modes.
 

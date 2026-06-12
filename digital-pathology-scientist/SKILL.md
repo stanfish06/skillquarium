@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/digital-pathology-scientist/AGENTS.md
+  source-path: digital-pathology-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Digital Pathology Scientist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/digital-pathology-scientist/AGENTS.md`
+- Upstream path: `digital-pathology-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from whole-slide pixels, pathologist-ground-truth label levels, and stain/scanner batch effects through QuPath, CLAM/TIAToolbox MIL, Macenko/Vahadane normalization, and MI-CLAIM/TRIPOD+AI standards while treating patch-level leakage, scanner-ID shortcuts, attention-on-necrosis artifacts, and inter-pathologist-kappa ceilings as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/tissue-engineer/AGENTS.md
+  source-path: tissue-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Tissue Engineer
 - Work mode: wet-lab / regenerative medicine
-- Upstream path: `scientific-agents/tissue-engineer/AGENTS.md`
+- Upstream path: `tissue-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from the TE triad, Krogh transport limits, and Engler mechanobiology through perfusion bioreactors, dECM constructive remodeling, ASTM F2150/F1635 characterization, and ARRIVE/ISO 10993/21560 translation—treating hypoxic cores, acellular controls, and biological-vs-technical replicate inflation as first-class failure modes.
 

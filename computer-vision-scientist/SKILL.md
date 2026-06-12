@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computer-vision-scientist/AGENTS.md
+  source-path: computer-vision-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 0
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Computer Vision Scientist
 - Work mode: computational / detection, segmentation, pose & 3D vision
-- Upstream path: `scientific-agents/computer-vision-scientist/AGENTS.md`
+- Upstream path: `computer-vision-scientist/AGENTS.md`
 - Upstream source count: 0
 - Catalog summary: Reasons from calibration, augmentations, and domain shift through COCO/LVIS/KITTI metrics (mAP, IoU, mask AP), convnets vs ViTs, OpenCV/PyTorch/MMDetection stacks, COLMAP/NeRF 3D, and CVPR/ICCV/ECCV eval discipline while treating label noise, train-test leakage, and resolution mismatch as first-class failure modes.
 

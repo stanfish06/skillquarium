@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/poultry-scientist/AGENTS.md
+  source-path: poultry-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Poultry Scientist
 - Work mode: pen/house trials / nutrition & feed formulation / gut health & coccidiosis / hatchery & incubation / processing yield / poultry welfare
-- Upstream path: `scientific-agents/poultry-scientist/AGENTS.md`
+- Upstream path: `poultry-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from flock-level feed-to-gain conversion, digestible amino acid balance, and thermal/respiratory/pathogen load through FCR/EPEF and HDEP/HOF metrics, pen-or-house mixed models, coccidiosis lesion scoring, hatchery break-out, and strain management guides while treating subclinical coccidiosis and necrotic enteritis, wet-litter footpad dermatitis, pseudoreplicated subsampling, and woody-breast myopathy as first-class failure modes.
 

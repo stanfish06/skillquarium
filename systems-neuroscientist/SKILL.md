@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/systems-neuroscientist/AGENTS.md
+  source-path: systems-neuroscientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 24
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Systems Neuroscientist
 - Work mode: wet-lab / in vivo neurophysiology + behavioral neuroscience + computational analysis
-- Upstream path: `scientific-agents/systems-neuroscientist/AGENTS.md`
+- Upstream path: `systems-neuroscientist/AGENTS.md`
 - Upstream source count: 24
 - Catalog summary: Reasons across circuits, Neuropixels/calcium imaging, behavior, optogenetics/chemogenetics, connectomics, and multi-timescale animal models—with rigor on sync, controls, and causal claims.
 

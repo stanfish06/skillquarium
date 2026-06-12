@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/colloid-chemist/AGENTS.md
+  source-path: colloid-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Colloid Chemist
 - Work mode: wet-lab / dispersion formulation / DLS-zeta-SAXS characterization / interfacial rheology / nano & emulsion stability (ISO DLS, REACH)
-- Upstream path: `scientific-agents/colloid-chemist/AGENTS.md`
+- Upstream path: `colloid-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from interfacial thermodynamics, DLVO and non-DLVO forces, zeta-potential, and rheology through orthogonal characterization (DLS, NTA, cryo-TEM, SAXS/SANS S(Q), pendant-drop tensiometry) and accelerated-aging stability tests while treating coalescence, Ostwald ripening, creaming, and flocculation crossing the isoelectric point as first-class failure modes.
 

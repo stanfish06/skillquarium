@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/paleontologist/AGENTS.md
+  source-path: paleontologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Paleontologist
 - Work mode: field / museum / computational
-- Upstream path: `scientific-agents/paleontologist/AGENTS.md`
+- Upstream path: `paleontologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reason from **taphonomic filters** first: biostratinomy, diagenesis, time-averaging, and Signor–Lipps before biostratigraphic correlation, morphometrics, or phylogenetic claims.
 

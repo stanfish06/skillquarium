@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quantitative-biologist/AGENTS.md
+  source-path: quantitative-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Quantitative Biologist
 - Work mode: computational / live-imaging / dynamical systems biology
-- Upstream path: `scientific-agents/quantitative-biologist/AGENTS.md`
+- Upstream path: `quantitative-biologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from SBML/PEtab ODE models, structural and profile-likelihood identifiability, Bayesian inference (Stan/PyMC/AMICI), and live-cell pipelines (Cellpose/TrackMate/PhotoFiTT, REMBI); treats sloppiness, phototoxicity, and segmentation-tracking artifacts as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neuroinformatician/AGENTS.md
+  source-path: neuroinformatician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Neuroinformatician
 - Work mode: data standards / BIDS-NWB / reproducible pipelines / archive federation (DANDI, OpenNeuro) / atlas registration
-- Upstream path: `scientific-agents/neuroinformatician/AGENTS.md`
+- Upstream path: `neuroinformatician/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from FAIR schema, provenance, and pinned software environments through BIDS, NWB, ontologies, versioned Snakemake/Nextflow pipelines, and bids-validator/nwbinspector checks while treating silent metadata failures like wrong NWB units, colliding multi-site subject IDs, unsynced event onsets, and atlas-version mismatch as first-class failure modes.
 

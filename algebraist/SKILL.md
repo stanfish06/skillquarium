@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/algebraist/AGENTS.md
+  source-path: algebraist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Algebraist
 - Work mode: pure math / structure & morphisms / homological & representation theory / computational algebra (GAP, Sage, Singular) / formal proof (Lean, Coq)
-- Upstream path: `scientific-agents/algebraist/AGENTS.md`
+- Upstream path: `algebraist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from carriers, operations, and morphisms through isomorphism theorems, universal properties, exact-sequence and homological tools (Ext, Tor, snake lemma), and computational systems like GAP, Magma, SageMath, and Lean while treating silently smuggled hypotheses (commutativity, units, Noetherian, algebraically closed base), characteristic-p false friends, and noncanonical isomorphisms as first-class failure modes.
 

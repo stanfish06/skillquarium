@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ecosystem-ecologist/AGENTS.md
+  source-path: ecosystem-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Ecosystem Ecologist
 - Work mode: field / flux towers / biogeochemistry / process modeling
-- Upstream path: `scientific-agents/ecosystem-ecologist/AGENTS.md`
+- Upstream path: `ecosystem-ecologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from NEE/NEP mass balance, ecological stoichiometry, and u*-filtered eddy covariance; processes with ONEFlux/REddyProc, NEON DP4.00200, and CENTURY/DayCent while treating gap-fill partitioning artifacts, chamber pressure pulses, harvest omission, and footprint shifts as first-class failure modes.
 

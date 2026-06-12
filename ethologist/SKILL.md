@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ethologist/AGENTS.md
+  source-path: ethologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Ethologist
 - Work mode: field / lab / comparative observational ethology
-- Upstream path: `scientific-agents/ethologist/AGENTS.md`
+- Upstream path: `ethologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Tinbergen's four questions and versioned species vs experimental ethograms; scores with BORIS (Cohen's κ per behavior), Altmann focal/scan budgets, and ARRIVE 2.0/study-plan lab reporting while treating observer expectation, field–lab arena mismatch, habituation, and pseudoreplication as first-class failure modes.
 

@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/immunologist/AGENTS.md
+  source-path: immunologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Immunologist
 - Work mode: wet-lab / translational immunology
-- Upstream path: `scientific-agents/immunologist/AGENTS.md`
+- Upstream path: `immunologist/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from innate/adaptive immunity and MHC presentation; designs flow cytometry (FMO, gating, exhaustion panels), ICS, ELISpot (DFR), tetramer, and multiplex cytokine assays; validates epitopes via IEDB/NetMHCpan; reports per MIATA and MIFlowCyt.
 

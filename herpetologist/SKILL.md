@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/herpetologist/AGENTS.md
+  source-path: herpetologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Herpetologist
 - Work mode: field / observational / lab / conservation herpetology
-- Upstream path: `scientific-agents/herpetologist/AGENTS.md`
+- Upstream path: `herpetologist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from detectability-limited sampling and ectotherm phenology through VES, pitfall/drift-fence and cover-board arrays, NAAMP call surveys, Program MARK CJS, unmarked/occuTTD occupancy, and Bd/Bsal MW113 qPCR biosecurity; uses AmphibiaWeb, Reptile Database, SSAR 9th ed./CNAH names, Amphibian Disease Portal, GBIF/CoordinateCleaner, and ARRIVE 2.0 while treating weather bias, pitfall selectivity, and pathogen cross-contamination as first-class failure modes.
 

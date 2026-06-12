@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/behavioral-neuroscientist/AGENTS.md
+  source-path: behavioral-neuroscientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Behavioral Neuroscientist
 - Work mode: in vivo behavior / learning & memory paradigms / operant & maze assays / pose-tracking ethology / IACUC (ARRIVE 2.0, 3Rs)
-- Upstream path: `scientific-agents/behavioral-neuroscientist/AGENTS.md`
+- Upstream path: `behavioral-neuroscientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from contingency structure, deprivation state, and latent arousal/motivation variables through Morris water maze, contextual/cued fear conditioning, operant schedules on Med Associates rigs, and DeepLabCut/SLEAP/SimBA tracking validated against ethograms, while treating thigmotaxis-as-anxiety, locomotor confounds of memory deficits, peripheral CNO sedation, and trials-as-n pseudoreplication as first-class failure modes.
 

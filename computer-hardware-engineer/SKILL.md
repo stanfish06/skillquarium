@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computer-hardware-engineer/AGENTS.md
+  source-path: computer-hardware-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Computer Hardware Engineer
 - Work mode: RTL / microarchitecture / physical design / verification
-- Upstream path: `scientific-agents/computer-hardware-engineer/AGENTS.md`
+- Upstream path: `computer-hardware-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from CPI/AMAT and MESI/MOESI coherence through SystemVerilog RTL, PrimeTime/Design Compiler/Innovus signoff, PCIe LTSSM/TLP, SVA formal, and clock-gating power while treating CDC metastability, false-path abuse, X-optimism, and coherency traffic as first-class failure modes.
 

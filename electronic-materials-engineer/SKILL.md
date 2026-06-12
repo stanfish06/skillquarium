@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/electronic-materials-engineer/AGENTS.md
+  source-path: electronic-materials-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Electronic Materials Engineer
 - Work mode: thin-film / semiconductor materials / process-metrology
-- Upstream path: `scientific-agents/electronic-materials-engineer/AGENTS.md`
+- Upstream path: `electronic-materials-engineer/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from band alignment, defect chemistry, and process–structure–property links; correlates Hall, C–V (Dit), XRD/RSM, SIMS, and ALD/MOCVD/sputtering recipes while treating dopant activation vs. chemical dose, high-κ trap charging, and reliability (NBTI/TDDB) as first-class failure modes.
 

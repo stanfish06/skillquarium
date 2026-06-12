@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/medical-mycologist/AGENTS.md
+  source-path: medical-mycologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Medical Mycologist
 - Work mode: clinical / laboratory medical mycology
-- Upstream path: `scientific-agents/medical-mycologist/AGENTS.md`
+- Upstream path: `medical-mycologist/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from EUCAST/CLSI antifungal susceptibility, culture and MALDI-TOF ID, galactomannan/β-D-glucan assays, and CLSI breakpoints while treating contamination, cryptic species mis-ID, and azole MIC trailing as first-class failure modes.
 

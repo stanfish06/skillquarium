@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/glaciologist/AGENTS.md
+  source-path: glaciologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Glaciologist
 - Work mode: field / remote sensing / ice-core paleoclimate / ice-sheet modeling
-- Upstream path: `scientific-agents/glaciologist/AGENTS.md`
+- Upstream path: `glaciologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from mass-budget closure (SMB, dynamic discharge, calving), Glen flow law, and subglacial effective pressure through WGMS/GlaMBIE stake networks, ICESat-2/CryoSat altimetry with firn and radar-penetration corrections, ITS_LIVE velocities, ApRES basal melt, RES/MCoRDS bed picks, RGI/BedMachine inventories, OGGM mountain-glacier projections, and PISM/ISSM ISMIP6/7 protocols while treating firn-compaction aliasing, DEM penetration bias, GRACE leakage/GIA, and tidal InSAR artifacts as first-class failure modes.
 

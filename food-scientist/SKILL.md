@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/food-scientist/AGENTS.md
+  source-path: food-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Food Scientist
 - Work mode: product development / process engineering / sensory / food-safety systems
-- Upstream path: `scientific-agents/food-scientist/AGENTS.md`
+- Upstream path: `food-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from a_w and GAB isotherms, Maillard/acrylamide kinetics, HLB emulsions, TPA/rheology, ISO sensory methods, and HACCP/FSMA preventive controls while treating aw–moisture conflation, HLB-only emulsion fixes, and Arrhenius misuse as first-class failure modes.
 

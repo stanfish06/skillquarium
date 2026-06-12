@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/process-chemist/AGENTS.md
+  source-path: process-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Process Chemist
 - Work mode: API/route development / scale-up & reaction engineering / crystallization & PAT / regulatory (ICH Q8-Q11, M7, QbD)
-- Upstream path: `scientific-agents/process-chemist/AGENTS.md`
+- Upstream path: `process-chemist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from mass and energy balances, impurity fate maps, and supersaturation trajectories through RC1 calorimetry, DoE in JMP/MODDE, FBRM/XRPD crystallization tracking, and ICH Q8/Q9/Q11 control strategy while treating exotherm runaway at plant jacket capacity, ICH M7 genotoxic carry-over, polymorph shifts on scale, and unvalidated PAT release as first-class failure modes.
 

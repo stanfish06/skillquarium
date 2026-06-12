@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/distributed-systems-researcher/AGENTS.md
+  source-path: distributed-systems-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Distributed Systems Researcher
 - Work mode: protocol R&D / consensus & replication / consistency semantics / chaos & formal verification (TLA+, Jepsen)
-- Upstream path: `scientific-agents/distributed-systems-researcher/AGENTS.md`
+- Upstream path: `distributed-systems-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from failure models, consistency contracts, and tail-latency-and-recovery performance through TLA+ model checking, Jepsen and Porcupine linearizability checking, and YCSB/DeathStarBench benchmarking with iptables and kill -9 fault injection, while treating unbounded leases and split-brain, clock skew under NTP, and GC-induced p99 spikes as first-class failure modes.
 

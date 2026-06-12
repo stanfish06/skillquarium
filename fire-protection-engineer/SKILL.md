@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/fire-protection-engineer/AGENTS.md
+  source-path: fire-protection-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Fire Protection Engineer
 - Work mode: design / engineering / performance-based fire modeling
-- Upstream path: `scientific-agents/fire-protection-engineer/AGENTS.md`
+- Upstream path: `fire-protection-engineer/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from NFPA 13 Hazen-Williams hydraulics (K-factor, remote area, hose stream) and NFPA 101 egress (occupant load, travel distance, capacity factors) through NFPA 92 smoke containment/management, ASET/RSET PBD, and FDS/CFAST/CONTAM/PyroSim modeling while treating breached compartmentation, C-factor/fitting errors, and supply-curve shortfall as first-class failure modes.
 

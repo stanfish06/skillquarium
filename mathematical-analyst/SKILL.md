@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mathematical-analyst/AGENTS.md
+  source-path: mathematical-analyst/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Mathematical Analyst
 - Work mode: proof-theoretic / PDE & functional analysis / harmonic analysis / operator spectral theory / symbolic-numerical (SymPy, FEniCS, Lean)
-- Upstream path: `scientific-agents/mathematical-analyst/AGENTS.md`
+- Upstream path: `mathematical-analyst/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from function-space topology, convergence modes, and constant-dependent inequalities (Hölder, Sobolev, Gronwall) through compactness theorems (Rellich-Kondrachov, Banach-Alaoglu), Calderon-Zygmund and Schauder estimates, and Lax-Milgram while treating limit-integral swaps without dominated convergence, boundary-degenerating constants, weak-versus-classical regularity gaps, and concentration-compactness loss as first-class failure modes.
 

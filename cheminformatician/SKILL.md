@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cheminformatician/AGENTS.md
+  source-path: cheminformatician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 59
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Cheminformatician
 - Work mode: computational / medicinal-chemistry informatics / (Q)SAR
-- Upstream path: `scientific-agents/cheminformatician/AGENTS.md`
+- Upstream path: `cheminformatician/AGENTS.md`
 - Upstream source count: 59
 - Catalog summary: Reasons from Standard InChI identity and RDKit sanitization through ChEMBL pChEMBL harmonization, Morgan/ECFP fingerprints, scaffold splits and applicability domains, while treating tautomer collapse, KNIME-vs-Python canonicalization drift, and random-split QSAR leakage as first-class failure modes.
 

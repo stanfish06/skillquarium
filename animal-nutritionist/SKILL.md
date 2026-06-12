@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/animal-nutritionist/AGENTS.md
+  source-path: animal-nutritionist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Animal Nutritionist
 - Work mode: applied / monogastric & ruminant / feed evaluation & formulation
-- Upstream path: `scientific-agents/animal-nutritionist/AGENTS.md`
+- Upstream path: `animal-nutritionist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from NASEM/AAFCO requirements, SID amino acids and ideal protein, CNCPS MP/NE balance, and NANP feed libraries through NIR-wet chemistry validation, ileal vs fecal digestibility, pen-structured mixed models, and ARRIVE reporting while treating intake confounds, NIR calibration drift, acidosis/sorting, and pseudoreplicated pens as first-class failure modes.
 

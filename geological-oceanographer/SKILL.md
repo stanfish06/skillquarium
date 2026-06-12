@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geological-oceanographer/AGENTS.md
+  source-path: geological-oceanographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geological Oceanographer
 - Work mode: seafloor mapping / sedimentology / marine geophysics / coring & seismic / geohazards
-- Upstream path: `scientific-agents/geological-oceanographer/AGENTS.md`
+- Upstream path: `geological-oceanographer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from sediment transport mechanics, stratigraphic context, and accommodation through multibeam (EM122/EM712) and sub-bottom/seismic imaging, gravity and piston cores with XRF/X-ray CT, CTD tow-yo ORP/Mn/CH4 plume surveys, and Bouma/Lowe facies analysis, while treating bathymetry-mimicking multipath artifacts, bioturbation homogenizing event beds, glacial isostasy mistaken for eustasy, and single-core turbidite extrapolation as first-class failure modes.
 

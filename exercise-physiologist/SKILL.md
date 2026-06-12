@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/exercise-physiologist/AGENTS.md
+  source-path: exercise-physiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Exercise Physiologist
 - Work mode: human performance laboratory / clinical CPET / applied sport science
-- Upstream path: `scientific-agents/exercise-physiologist/AGENTS.md`
+- Upstream path: `exercise-physiologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reason from the Fick principle and verified gas exchange: separate VO2max, VT1/RCP, MLSS, and lactate kinetics before metabolic carts, biopsy, MRS, or periodization prescriptions.
 

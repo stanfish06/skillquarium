@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/molecular-biologist/AGENTS.md
+  source-path: molecular-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Molecular Biologist
 - Work mode: wet-lab / molecular genetics / functional genomics / assay validation (MIQE, ARRIVE 2.0)
-- Upstream path: `scientific-agents/molecular-biologist/AGENTS.md`
+- Upstream path: `molecular-biologist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from central-dogma sequence flow, binding affinity (Kd/Km/kcat), gene regulation, and biological-versus-technical replicate structure through MIQE-compliant RT-qPCR, ddPCR, Western/flow/microscopy, CRISPR editing with rescue, and IWGAV antibody validation while treating off-target reagent effects, batch effects, mycoplasma and cell-line misidentification, and toxicity-driven artifacts as first-class failure modes.
 

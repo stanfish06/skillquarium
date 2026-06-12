@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/organoid-biologist/AGENTS.md
+  source-path: organoid-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Organoid Biologist
 - Work mode: wet-lab / stem-cell and 3D epithelial culture
-- Upstream path: `scientific-agents/organoid-biologist/AGENTS.md`
+- Upstream path: `organoid-biologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from niche signaling, Matrigel scaffolds, and culture geometry; engineers Wnt/R-spondin expansion, ALI differentiation, and PDO biobanks while treating matrix lot effects and donor-level pseudoreplication as first-class failure modes.
 

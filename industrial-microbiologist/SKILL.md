@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/industrial-microbiologist/AGENTS.md
+  source-path: industrial-microbiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 64
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Industrial Microbiologist
 - Work mode: wet-lab / bulk & GMP-adjacent fermentation, environmental & mining biotech, biocontrol
-- Upstream path: `scientific-agents/industrial-microbiologist/AGENTS.md`
+- Upstream path: `industrial-microbiologist/AGENTS.md`
 - Upstream source count: 64
 - Catalog summary: Reasons from SmF/SSF physiology, fed-batch μ/OTR–OUR/RQ, DoE media optimization, PAT (Raman soft sensors), ICH Q8/Q7 characterization, bioleaching, SVI/F/M filament ID, and phage (10⁴–10⁶ PFU/mL) plant hygiene; treats antifoam kLa penalty, F₀ CIP/SIP cold spots, DSP mass balance, and golden-batch vs biofilm red herrings as first-class failure modes.
 

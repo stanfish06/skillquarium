@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/hepatologist/AGENTS.md
+  source-path: hepatologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Hepatologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/hepatologist/AGENTS.md`
+- Upstream path: `hepatologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from hepatic injury pattern (R-value), synthetic function, and portal hypertension through Child-Pugh/MELD 3.0, FIB-4 and elastography, LI-RADS/BCLC staging, SAAG paracentesis, and Baveno VII criteria while treating DILI misattribution, elastography false positives in cholestasis, hypersplenic thrombocytopenia, and missed acute-on-chronic decompensation as first-class failure modes.
 

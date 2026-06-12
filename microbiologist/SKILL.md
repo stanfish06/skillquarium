@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/microbiologist/AGENTS.md
+  source-path: microbiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Microbiologist
 - Work mode: wet-lab / culture, amplicon & shotgun microbiomics
-- Upstream path: `scientific-agents/microbiologist/AGENTS.md`
+- Upstream path: `microbiologist/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from culturability limits, CFU/MPN enumeration, selective media, DADA2/QIIME2 16S ASVs (SILVA/GTDB), and shotgun metagenomics (Kraken2, MetaPhlAn, HUMAnN); treats plate-count anomaly, compositional stats pitfalls, kit contamination, and index hopping as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mechanical-design-engineer/AGENTS.md
+  source-path: mechanical-design-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Mechanical Design Engineer
 - Work mode: CAD / GD&T / tolerance / DFM
-- Upstream path: `scientific-agents/mechanical-design-engineer/AGENTS.md`
+- Upstream path: `mechanical-design-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from function, datum reference frames, and tolerance budgets; releases inspectable drawings and MBD through ASME Y14.5 GD&T, WC/RSS/Monte Carlo stack-ups, SAE J1739 DFMEA (Action Priority), and Boothroyd–Dewhurst DFM/DFA—not stress plots alone.
 

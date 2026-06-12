@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/fermentation-scientist/AGENTS.md
+  source-path: fermentation-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Fermentation Scientist
 - Work mode: wet-lab / SmF & SSF R&D / starter cultures / kinetic & metabolic modeling
-- Upstream path: `scientific-agents/fermentation-scientist/AGENTS.md`
+- Upstream path: `fermentation-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from Monod–Luedeking–Piret kinetics, overflow μcrit, OTR/RQ/RAMOS analytics, DoE media optimization, and 13C-MFA/COBRApy flux bounds while treating stuck-ferment ethanol×T synergy, SSF heat/moisture gradients, and OD-as-biomass red herrings as first-class failure modes.
 

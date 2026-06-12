@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/control-systems-engineer/AGENTS.md
+  source-path: control-systems-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Control Systems Engineer
 - Work mode: feedback design / state-space & robust control / digital implementation / industrial (PLC/DCS, IEC 61508/61511)
-- Upstream path: `scientific-agents/control-systems-engineer/AGENTS.md`
+- Upstream path: `control-systems-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from plant dynamics, stability margins, and disturbance-rejection specs through Bode/Nyquist and Routh-Hurwitz analysis, LQR/H-infinity and pole placement, Kalman/EKF observers, RGA pairing, and HIL validation while treating integrator windup, actuator saturation and backlash limit cycles, sensor delay masking phase margin, and estimator divergence as first-class failure modes.
 

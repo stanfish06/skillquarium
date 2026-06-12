@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/histologist/AGENTS.md
+  source-path: histologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Histologist
 - Work mode: wet-lab / clinical & research histology
-- Upstream path: `scientific-agents/histologist/AGENTS.md`
+- Upstream path: `histologist/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from fixation-through-stain pre-analytical chain (NBF, grossing, processing, embedding orientation, microtomy); validates H&E pH/QC, CAP IHC (90% concordance, predictive scoring systems), RNAscope controls, WSI (60-case validation), and treats floaters, autolysis, crush, ice-crystal, and decalcification artifacts as first-class failure modes.
 

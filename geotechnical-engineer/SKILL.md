@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geotechnical-engineer/AGENTS.md
+  source-path: geotechnical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geotechnical Engineer
 - Work mode: design / field investigation / construction engineering
-- Upstream path: `scientific-agents/geotechnical-engineer/AGENTS.md`
+- Upstream path: `geotechnical-engineer/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from effective stress and LRFD/EC7 limit states through GDR/GBR/FDR deliverables, shallow and deep foundations (GEC 6/10/12), excavation support (DeepEX, LPILE), ground improvement, ASCE 7 liquefaction, observational-method triggers, and FHWA pile acceptance while treating DSC claims, setup vs. blow count, and GBR-vs-design conflation as first-class failure modes.
 

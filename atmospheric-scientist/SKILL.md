@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/atmospheric-scientist/AGENTS.md
+  source-path: atmospheric-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Atmospheric Scientist
 - Work mode: dynamics-physics / obs-model synthesis / reanalysis-NWP / multiscale (synoptic-mesoscale-tropical-stratosphere)
-- Upstream path: `scientific-agents/atmospheric-scientist/AGENTS.md`
+- Upstream path: `atmospheric-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from scale-dependent balances, Ertel PV on isentropic surfaces, and closed moisture/energy budgets through PV/omega/Q-vector diagnostics, reanalyses (ERA5, MERRA-2) and WRF/MPAS/CMIP runs, and obs validation (GRUAN sondes, IMERG, CERES), while treating reanalysis assimilation increments, retrieval biases, parameterized-vs-resolved convection, and internal-variability masking of forced trends as first-class failure modes.
 

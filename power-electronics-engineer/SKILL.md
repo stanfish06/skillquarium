@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/power-electronics-engineer/AGENTS.md
+  source-path: power-electronics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Power Electronics Engineer
 - Work mode: converter design / magnetics / WBG semiconductors / loop-gain control / EMI-EMC / regulatory (CISPR, IEC 61000-3-2, IEEE 1547.1)
-- Upstream path: `scientific-agents/power-electronics-engineer/AGENTS.md`
+- Upstream path: `power-electronics-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from volt-second and charge balance, switched-mode energy transfer, and small-signal loop gain through PLECS/LTspice/SIMPLIS simulation, Steinmetz and Dowell magnetics loss accounting, Bode injection on hardware, and LISN-based EMI scans while treating shoot-through, RHP-zero subharmonic oscillation, Qrr and ZVS-window loss, and CM-choke saturation as first-class failure modes.
 

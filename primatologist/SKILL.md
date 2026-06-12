@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/primatologist/AGENTS.md
+  source-path: primatologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Primatologist
 - Work mode: field / observational ethology / conservation / comparative & captive research
-- Upstream path: `scientific-agents/primatologist/AGENTS.md`
+- Upstream path: `primatologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from Tinbergen questions, habituation trade-offs, and phylogenetic comparative trees (TimeTree, Craig 2024) through focal/scan ethograms (BORIS, κ), Raven/Praat vocal repertoires, IUCN SSC great-ape surveys (A.P.E.S.), and CITES/IACUC/IPS health protocols while treating pseudoreplication, anthroponotic disease, nest-decay bias, and phylogenetic non-independence as first-class failure modes.
 

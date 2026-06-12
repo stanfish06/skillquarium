@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/coastal-engineer/AGENTS.md
+  source-path: coastal-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Coastal Engineer
 - Work mode: field / computational / coastal structures & flood risk
-- Upstream path: `scientific-agents/coastal-engineer/AGENTS.md`
+- Upstream path: `coastal-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from joint-probability surge and waves through CEM/EurOtop runup-overtopping, Van der Meer/Rock Manual armor, CERC–Van Rijn sediment budgets, and CMS/XBeach/ADCIRC–SWAN model selection while treating toe scour, armor breakage, datum mismatch (BFE vs MHHW), and downdrift impacts as first-class failure modes.
 

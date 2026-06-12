@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/signal-processing-engineer/AGENTS.md
+  source-path: signal-processing-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Signal Processing Engineer
 - Work mode: DSP algorithm design / detection & estimation / spectral analysis / multirate & adaptive filtering / fixed-point bit-true sign-off
-- Upstream path: `scientific-agents/signal-processing-engineer/AGENTS.md`
+- Upstream path: `signal-processing-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the sampling theorem, LTI system functions H(z), and sufficient statistics for detection through Parks-McClellan filter design, Welch and multitaper spectral estimation, matched filters and CFAR detection, and bit-true fixed-point verification while treating aliasing, leakage and scalloping, IIR limit cycles, and detector leakage as first-class failure modes.
 

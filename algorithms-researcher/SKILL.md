@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/algorithms-researcher/AGENTS.md
+  source-path: algorithms-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Algorithms Researcher
 - Work mode: algorithm design & analysis / proofs & cost models / approximation & online / empirical algorithmics (DIMACS, MIPLIB)
-- Upstream path: `scientific-agents/algorithms-researcher/AGENTS.md`
+- Upstream path: `algorithms-researcher/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Expert profile for algorithms researcher — see AGENTS.md for field-specific methods and failure modes.
 

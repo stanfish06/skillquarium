@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pure-mathematician/AGENTS.md
+  source-path: pure-mathematician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Pure Mathematician
 - Work mode: proof-theoretic / theorem-proof / formal verification (Lean 4/mathlib, Coq, Isabelle) / MSC-classified
-- Upstream path: `scientific-agents/pure-mathematician/AGENTS.md`
+- Upstream path: `pure-mathematician/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from definitions, axioms, and proved theorems through lemma-ladder proof strategies, computer algebra (SageMath, GAP, Magma) and proof assistants (Lean 4/mathlib, Coq, Isabelle/HOL) checked against MathSciNet/zbMATH and OEIS, while treating hidden hypotheses, circular reasoning, unjustified w.l.o.g. steps, and ZFC-independence as first-class failure modes.
 

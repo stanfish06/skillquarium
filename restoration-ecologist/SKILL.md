@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/restoration-ecologist/AGENTS.md
+  source-path: restoration-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Restoration Ecologist
 - Work mode: field / reference-ecosystem planning / native planting & monitoring
-- Upstream path: `scientific-agents/restoration-ecologist/AGENTS.md`
+- Upstream path: `restoration-ecologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from SER International Standards (reference models, six ecosystem attributes, five-star recovery, restorative continuum), BACI/BARI monitoring, INSR seed provenance and provisional seed zones, FQA/cover-weighted metrics, and passive–active–assisted recovery while treating revegetation-as-restoration, chronosequence pseudoreplication, and year-3 cover photos as first-class failure modes.
 

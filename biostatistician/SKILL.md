@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biostatistician/AGENTS.md
+  source-path: biostatistician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Biostatistician
 - Work mode: clinical / computational / trial and omics biostatistics
-- Upstream path: `scientific-agents/biostatistician/AGENTS.md`
+- Upstream path: `biostatistician/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from estimands, SAPs, and error budgets; aligns ICH E9(R1), CONSORT/STROBE, multiplicity, MMRM, Cox survival, causal DAGs, and GWAS FDR while treating immortal time, ICEs, and batch confounding as first-class failure modes.
 

@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/water-resources-scientist/AGENTS.md
+  source-path: water-resources-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Water Resources Scientist
 - Work mode: hydrologic modeling / groundwater-surface coupling / water-budget allocation / remote sensing (GRACE, OpenET) / climate-water planning
-- Upstream path: `scientific-agents/water-resources-scientist/AGENTS.md`
+- Upstream path: `water-resources-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from hydrologic-cycle mass and energy balance, green-versus-blue water, and nonstationarity through MODFLOW, SWAT/HEC-RAS, WEAP, Budyko closure, and multi-objective KGE/NSE calibration while treating equifinality, unaccounted return flows and stream depletion, single-drought-year safe yield, and efficiency-rebound effects as first-class failure modes.
 

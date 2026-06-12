@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/photochemist/AGENTS.md
+  source-path: photochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Photochemist
 - Work mode: photophysics / excited-state spectroscopy / actinometry / time-resolved (TCSPC, flash photolysis) / photoredox & solar chemistry
-- Upstream path: `scientific-agents/photochemist/AGENTS.md`
+- Upstream path: `photochemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Jablonski diagrams, quantum yields, and excited-state potential energy surfaces through ferrioxalate actinometry, TCSPC and transient-absorption flash photolysis, Stern–Volmer quenching, and TDDFT/CASPT2 calculations while treating inner-filter distortion, oxygen-sensitive triplet pathways, photodegradation mistaken for reaction, and emission from impurities as first-class failure modes.
 

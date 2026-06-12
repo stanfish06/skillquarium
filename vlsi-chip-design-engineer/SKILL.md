@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/vlsi-chip-design-engineer/AGENTS.md
+  source-path: vlsi-chip-design-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: VLSI / Chip Design Engineer
 - Work mode: RTL-to-GDSII / MCMM STA signoff / DFT-ATPG / physical verification (DRC/LVS) / tapeout
-- Upstream path: `scientific-agents/vlsi-chip-design-engineer/AGENTS.md`
+- Upstream path: `vlsi-chip-design-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from PPA tradeoffs, timing slack, on-chip variation, and foundry rule decks through MCMM STA with OCV/POCV in PrimeTime/Tempus, UPF power intent, SpyGlass/JasperGold CDC, and Calibre DRC/LVS while treating clock-domain crossings, post-CTS hold violations, IR drop, and TT-only signoff as first-class failure modes.
 

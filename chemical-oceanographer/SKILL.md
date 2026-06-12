@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/chemical-oceanographer/AGENTS.md
+  source-path: chemical-oceanographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Chemical Oceanographer
 - Work mode: seawater carbonate chemistry / nutrient & trace-metal biogeochemistry / isotope tracers / shipboard & autonomous sampling / GEOTRACES-GLODAP synthesis
-- Upstream path: `scientific-agents/chemical-oceanographer/AGENTS.md`
+- Upstream path: `chemical-oceanographer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from seawater thermodynamics, carbonate-system coupling (DIC, TA, pH, pCO2), redox hierarchies, and tracer conservation on density surfaces through CO2SYS/seacarb with Dickson CRMs, Winkler oxygen, IRMS isotopes, GO-FLO clean trace-metal sampling, and GLODAP/SOCAT/GEOTRACES synthesis while treating organic alkalinity, headspace equilibration, pCO2-mooring biofouling, and trace-metal contamination as first-class failure modes.
 

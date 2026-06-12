@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/fusion-scientist/AGENTS.md
+  source-path: fusion-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Fusion Scientist
 - Work mode: experimental plasma physics / integrated modeling / fusion systems
-- Upstream path: `scientific-agents/fusion-scientist/AGENTS.md`
+- Upstream path: `fusion-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Lawson triple product and Q through tokamak/stellarator confinement (H-mode, ELMs, RMP), NBI/ICRH/ECRH heating, EFIT/TRANSP/SOLPS-ITER workflows, ITER/JET/DIII-D/W7-X benchmarks, PMI (W/Be PFCs), and tritium breeding blankets.
 

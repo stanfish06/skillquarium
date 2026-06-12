@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neurophysiologist/AGENTS.md
+  source-path: neurophysiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 86
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Neurophysiologist
 - Work mode: wet-lab / intracellular & extracellular electrophysiology + spike sorting
-- Upstream path: `scientific-agents/neurophysiologist/AGENTS.md`
+- Upstream path: `neurophysiologist/AGENTS.md`
 - Upstream source count: 86
 - Catalog summary: Reasons from membrane biophysics, patch clamp Rs/seal quality, Neuropixels AP/LF streams, LFP referencing and spike contamination, Kilosort4/Phy curation, and stimulation-artifact suppression.
 

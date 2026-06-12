@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/spectroscopist/AGENTS.md
+  source-path: spectroscopist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Spectroscopist
 - Work mode: wet-lab / optical & magnetic spectroscopy (UV-Vis/fluorescence/IR-Raman/NMR/EPR/XAS) / peak assignment & quantitation / instrument QC & calibration
-- Upstream path: `scientific-agents/spectroscopist/AGENTS.md`
+- Upstream path: `spectroscopist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from selection rules, line shapes as convolutions of intrinsic and instrument broadening, and Beer-Lambert linearity through UV-Vis, fluorescence, IR/Raman, NMR, CD, EPR, and XAS/XPS with calibration standards (polystyrene 1601 cm⁻¹, TMS/DSS, C 1s 284.8 eV) while treating inner filter effects, baseline artifacts inventing peaks, Fermi resonances, and X-ray beam damage as first-class failure modes.
 

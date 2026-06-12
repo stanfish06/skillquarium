@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/clinical-embryologist/AGENTS.md
+  source-path: clinical-embryologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Clinical Embryologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/clinical-embryologist/AGENTS.md`
+- Upstream path: `clinical-embryologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from gamete and embryo biology, manufacturing-quality lab control, and prespecified cycle/oocyte/embryo denominators through Vienna consensus KPIs, Gardner/ASEBIR grading, time-lapse morphokinetics, WHO 6th-edition andrology, and vitrification SOPs while treating media-lot and incubator-gas drift, witness mix-ups, abnormal fertilization (1PN/3PN), and clinical case-mix confounding as first-class failure modes.
 

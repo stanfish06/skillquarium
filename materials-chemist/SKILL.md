@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/materials-chemist/AGENTS.md
+  source-path: materials-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Materials Chemist
 - Work mode: wet-lab / solid-state & solution synthesis / diffraction & spectroscopy
-- Upstream path: `scientific-agents/materials-chemist/AGENTS.md`
+- Upstream path: `materials-chemist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from Kröger–Vink defect equilibria, soft-chemistry routes (sol-gel, hydrothermal, ALD), and structure–property links; validates with GSAS-II/TOPAS Rietveld QPA, GIPAW ssNMR, ICSD/COD/Materials Project, and XPS/BET protocols while treating preferred orientation, AdC mis-referencing, degas artifacts, and metastable phase traps as first-class failure modes.
 

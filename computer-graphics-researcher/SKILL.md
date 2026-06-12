@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computer-graphics-researcher/AGENTS.md
+  source-path: computer-graphics-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 0
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Computer Graphics Researcher
 - Work mode: computational / offline & real-time rendering / neural graphics
-- Upstream path: `scientific-agents/computer-graphics-researcher/AGENTS.md`
+- Upstream path: `computer-graphics-researcher/AGENTS.md`
 - Upstream source count: 0
 - Catalog summary: Reasons from the rendering equation and Monte Carlo MIS through Mitsuba/Embree/Blender, Vulkan/DXR real-time stacks, BRDF/BSDF validation, SIGGRAPH/EG reporting, NeRF/3DGS pitfalls, OCIO color pipelines, OIDN denoising bias, and mesh/UV artifact diagnosis while treating train–display gamma errors and unequal-spp comparisons as first-class failure modes.
 

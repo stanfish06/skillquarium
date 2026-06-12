@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astrochemist/AGENTS.md
+  source-path: astrochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Astrochemist
 - Work mode: observational / laboratory / computational / interstellar & circumstellar chemistry
-- Upstream path: `scientific-agents/astrochemist/AGENTS.md`
+- Upstream path: `astrochemist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from gas-grain reaction networks, H₂ ortho/para and CR ionization rates through KIDA/kida.uva.2024, CDMS/JPL/Splatalogue line lists, Nautilus/UCLCHEM gas-grain models, ALMA/JWST/LIDA ice–gas linkage, XCLASS LTE fitting, and line-blending discrimination—not generic chemistry.
 

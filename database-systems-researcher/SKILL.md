@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/database-systems-researcher/AGENTS.md
+  source-path: database-systems-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Database Systems Researcher
 - Work mode: systems prototyping / storage engines & concurrency control / query optimization / workload benchmarking (TPC, YCSB, JOB)
-- Upstream path: `scientific-agents/database-systems-researcher/AGENTS.md`
+- Upstream path: `database-systems-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from storage hierarchy, concurrency semantics, query-optimization theory, and declared workload models through TPC-C/H, YCSB, and JOB benchmarks, Jepsen/Elle correctness checkers, and perf/blktrace/fio profiling while treating cardinality-estimation plan regressions, tail-latency spikes under skew, unfair fsync-disabled speedups, and benchmark-trick wins as first-class failure modes.
 

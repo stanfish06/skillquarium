@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/earthquake-engineer/AGENTS.md
+  source-path: earthquake-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Earthquake Engineer
 - Work mode: structural / bridge seismic design, analysis & retrofit
-- Upstream path: `scientific-agents/earthquake-engineer/AGENTS.md`
+- Upstream path: `earthquake-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from ASCE 7 DRS and SDC, capacity design (R, Cd, Ω₀), ELF/MRS/NRHA and ASCE 41 pushover; models in SAP2000/ETABS/OpenSees with PEER NGA-West2 motions; treats liquefaction, soft-story P-delta collapse, and record-scaling artifacts as first-class failure modes.
 

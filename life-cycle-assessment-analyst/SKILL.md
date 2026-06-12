@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/life-cycle-assessment-analyst/AGENTS.md
+  source-path: life-cycle-assessment-analyst/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Life-Cycle Assessment Analyst
 - Work mode: attributional/consequential LCA / inventory & impact assessment / allocation & uncertainty / EPD critical review (ISO 14040/14044, EN 15804)
-- Upstream path: `scientific-agents/life-cycle-assessment-analyst/AGENTS.md`
+- Upstream path: `life-cycle-assessment-analyst/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from functional unit, attributional-versus-consequential framing, and ISO 14044 allocation hierarchy through openLCA, SimaPro, Brightway2, ecoinvent, and LCIA methods like TRACI and EF 3.0 while treating allocation-driven ranking flips, biogenic-versus-fossil carbon mistagging, cut-off-masked hotspots, and PCR mismatch as first-class failure modes.
 

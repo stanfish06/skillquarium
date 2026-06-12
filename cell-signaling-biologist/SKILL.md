@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cell-signaling-biologist/AGENTS.md
+  source-path: cell-signaling-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Cell Signaling Biologist
 - Work mode: wet-lab / phospho-signaling / pathway biology
-- Upstream path: `scientific-agents/cell-signaling-biologist/AGENTS.md`
+- Upstream path: `cell-signaling-biologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from RTK–RAS–MAPK and PI3K–Akt–mTOR phosphorylation networks, pathway crosstalk and feedback; validates with phospho-Western, phospho-flow, and PhosphoSitePlus while treating serum-starvation artifacts, inhibitor off-targets, and RNA footprint vs PTM mismatch as first-class failure modes.
 

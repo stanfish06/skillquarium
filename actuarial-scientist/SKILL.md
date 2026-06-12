@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/actuarial-scientist/AGENTS.md
+  source-path: actuarial-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Actuarial Scientist
 - Work mode: life / health / P&C / valuation / capital & accounting
-- Upstream path: `scientific-agents/actuarial-scientist/AGENTS.md`
+- Upstream path: `actuarial-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from mortality tables (qx, period/cohort, select/ultimate) and Chain-Ladder/Mack reserving through GLM/GAM frequency–severity and Tweedie pricing, limited-fluctuation and Bühlhmann-Straub credibility, Solvency II SCR standard formula, and IFRS 17 CSM/RA while treating triangle truncation, overfitting, and tail risk as first-class failure modes.
 

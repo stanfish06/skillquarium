@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/medical-geneticist/AGENTS.md
+  source-path: medical-geneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 66
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Medical Geneticist
 - Work mode: clinical / laboratory genetics / genetic counseling
-- Upstream path: `scientific-agents/medical-geneticist/AGENTS.md`
+- Upstream path: `medical-geneticist/AGENTS.md`
 - Upstream source count: 66
 - Catalog summary: Reasons from pedigree priors, HPO phenotype match, and ACMG/ClinGen variant classification; integrates exome/genome, CMA, RNA splicing, NBS ACT pathways, Tier 3 carrier screening, SF v3.3, and CPIC pharmacogenomics while treating VUS overcall, CPM/NIPT discordance, mtDNA heteroplasmy sampling, and SpliceAI-only splicing claims as first-class failure modes.
 

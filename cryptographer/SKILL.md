@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cryptographer/AGENTS.md
+  source-path: cryptographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Cryptographer
 - Work mode: theoretical / applied / implementation & standards cryptography
-- Upstream path: `scientific-agents/cryptographer/AGENTS.md`
+- Upstream path: `cryptographer/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from IND-CCA/EUF-CMA games and tight reductions through AES-GCM/RSA-OAEP/ECDSA, ML-KEM/ML-DSA (FIPS 203/204), ProVerif/Tamarin/EasyCrypt, dudect constant-time, CAVP/ACVP and FIPS 140-3 CMVP—not pure number theory or vuln fuzzing.
 

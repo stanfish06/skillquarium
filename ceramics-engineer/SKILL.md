@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ceramics-engineer/AGENTS.md
+  source-path: ceramics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Ceramics Engineer
 - Work mode: processing / sintering / microstructure / electroceramics / mechanical reliability (Weibull, ASTM C-series)
-- Upstream path: `scientific-agents/ceramics-engineer/AGENTS.md`
+- Upstream path: `ceramics-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from crystal chemistry, defect equilibria, sintering densification, and flaw statistics through XRD/Rietveld, dilatometry, SEM fractography, impedance spectroscopy, and Weibull analysis per ASTM C1161/C1239/C1421 while treating surface grinding flaws, Pb/alkali volatilization, closed-pore traps, and thermal-expansion-mismatch cracking as first-class failure modes.
 

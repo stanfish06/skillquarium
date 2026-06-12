@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/gene-therapy-scientist/AGENTS.md
+  source-path: gene-therapy-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Gene Therapy Scientist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/gene-therapy-scientist/AGENTS.md`
+- Upstream path: `gene-therapy-scientist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from vector biology, biodistribution, linked potency, and integration risk through ddPCR titer, empty/full analytics, ISA and off-target NGS (GUIDE-seq, CIRCLE-seq), and ICH S12 nonclinical design while treating pre-existing capsid neutralizing antibodies, RCV/RCA/RCR positivity, gonadal vector genome, and oligoclonal VCN expansion as first-class failure modes.
 

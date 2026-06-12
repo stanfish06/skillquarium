@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/economic-geologist/AGENTS.md
+  source-path: economic-geologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 22
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Economic Geologist
 - Work mode: field / exploration / ore deposit modelling / geochemistry / resource estimation
-- Upstream path: `scientific-agents/economic-geologist/AGENTS.md`
+- Upstream path: `economic-geologist/AGENTS.md`
 - Upstream source count: 22
 - Catalog summary: Reasons from mineral systems and deposit-type models (porphyry, VMS, orogenic Au, SEDEX, IOCG) through regolith and lithogeochemistry, LA-ICP-MS sulfide fingerprinting, and geophysical vectors to JORC/CIM/NI 43-101 MRE domaining, variography, OK/MIK estimation, and classification while treating transported regolith, dispersion shadows, pXRF false highs, and Inferred-overclaim as first-class failure modes.
 

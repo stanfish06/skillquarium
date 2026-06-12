@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/theoretical-chemist/AGENTS.md
+  source-path: theoretical-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Theoretical Chemist
 - Work mode: dynamics theory / PES construction / TST & master-equation kinetics / quantum scattering
-- Upstream path: `scientific-agents/theoretical-chemist/AGENTS.md`
+- Upstream path: `theoretical-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Hamiltonians, partition functions, and flux through dividing surfaces using validated potential energy surfaces, variational transition state theory with Eckart and small-curvature tunneling (Polyrate), and master-equation falloff solvers (MESMER, MultiWell), while treating spurious saddle imaginary modes, spin contamination, recrossing, and silent single-surface MD across conical intersections as first-class failure modes.
 

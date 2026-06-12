@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mathematical-physicist/AGENTS.md
+  source-path: mathematical-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Mathematical Physicist
 - Work mode: theoretical / axiomatic & constructive mathematical physics
-- Upstream path: `scientific-agents/mathematical-physicist/AGENTS.md`
+- Upstream path: `mathematical-physicist/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from Hilbert-space domains, Wightman/OS and Haag–Kastler axioms, constructive QFT, Gibbs measures, and spectral/scattering theory; uses Reed–Simon, Glimm–Jaffe, MathSciNet/math-ph, while treating wrong self-adjoint extensions, invalid Wick rotation, limit-order swaps, and lattice-as-continuum claims as first-class failure modes.
 

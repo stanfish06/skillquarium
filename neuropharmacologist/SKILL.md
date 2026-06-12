@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neuropharmacologist/AGENTS.md
+  source-path: neuropharmacologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Neuropharmacologist
 - Work mode: wet-lab / in vitro pharmacology + in vivo behavioral PK/PD + translational imaging
-- Upstream path: `scientific-agents/neuropharmacologist/AGENTS.md`
+- Upstream path: `neuropharmacologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from Kp,uu,brain and receptor occupancy, radioligand binding with depletion-aware Ki, biased GPCR/allosteric signaling, PDSP/GtoPdb panels, microdialysis and PET RO, and operant self-administration while treating Cheng-Prusoff error, P-gp efflux, FST validity limits, and patch-clamp Rs artifacts as first-class failure modes.
 

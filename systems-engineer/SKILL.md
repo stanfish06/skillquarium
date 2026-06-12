@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/systems-engineer/AGENTS.md
+  source-path: systems-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Systems Engineer
 - Work mode: requirements / architecture / integration / V&V / MBSE
-- Upstream path: `scientific-agents/systems-engineer/AGENTS.md`
+- Upstream path: `systems-engineer/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from stakeholder needs, ISO/IEC/IEEE 15288 life-cycle processes, and V-model verification/validation through bidirectional requirements trace (DOORS/Polarion), MBSE SysML digital threads, ICD interface control, DSM integration sequencing, MCDA trade studies, and FMEA/FTA/STPA risk—while treating scope creep, gold plating, traceability gaps, and ICD mismatches as first-class failure modes.
 

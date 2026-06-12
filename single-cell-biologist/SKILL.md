@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/single-cell-biologist/AGENTS.md
+  source-path: single-cell-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Single-Cell Biologist
 - Work mode: wet-lab / computational single-cell genomics
-- Upstream path: `scientific-agents/single-cell-biologist/AGENTS.md`
+- Upstream path: `single-cell-biologist/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from assay chemistry, sample-level replication, cell-state manifolds, and metadata provenance; treats ambient RNA, doublets, dissociation stress, batch, and pseudoreplication as core failure modes.
 

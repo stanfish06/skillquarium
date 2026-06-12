@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/oral-biologist/AGENTS.md
+  source-path: oral-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Oral Biologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/oral-biologist/AGENTS.md`
+- Upstream path: `oral-biologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from biofilm dysbiosis, demineralization-remineralization balance, and host-mineral-microbe partitioning through pH-cycling and ligature models, 16S/shotgun metagenomics (DADA2/QIIME2, HOMD), micro-CT, and ICDAS/AAP-EFP staging, while treating saliva-ignored caries models, low-biomass contamination, probe-force inconsistency, and unconfounded oral-systemic claims as first-class failure modes.
 

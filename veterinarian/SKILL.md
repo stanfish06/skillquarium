@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/veterinarian/AGENTS.md
+  source-path: veterinarian/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Veterinarian
 - Work mode: clinical / companion & production animal medicine / One Health
-- Upstream path: `scientific-agents/veterinarian/AGENTS.md`
+- Upstream path: `veterinarian/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from species-specific physiology and pharmacology (Plumb's, AMDUCA, MDR1/PRiME), WSAVA 2024/AAHA/ISCAID 2025/CAPC guidelines, IDEXX/Cornell/eClinpath diagnostics, CMPS-SF/FGS pain and RECOVER 2024 CPR, and One Health zoonosis reporting while treating cat NSAID/acetaminophen toxicity, subclinical bacteriuria, greyhound lab artifacts, and human-dose extrapolation as first-class failure modes.
 

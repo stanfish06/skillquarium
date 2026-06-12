@@ -9,7 +9,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/accelerator-physicist/AGENTS.md
+  source-path: accelerator-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -33,7 +33,7 @@ than individualized professional advice.
 
 - Profession: Accelerator Physicist
 - Work mode: experimental / beam physics
-- Upstream path: `scientific-agents/accelerator-physicist/AGENTS.md`
+- Upstream path: `accelerator-physicist/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from beam optics, RF cavities, emittance budgets, and loss maps while treating halo and impedance-driven instabilities as first-class failure modes.
 

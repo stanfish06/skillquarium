@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/epidemiologist/AGENTS.md
+  source-path: epidemiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Epidemiologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/epidemiologist/AGENTS.md`
+- Upstream path: `epidemiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from person-time, transmission dynamics, and population case definitions through epidemic curves, DAGs, renewal and SEIR models (EpiEstim, deSolve), SaTScan clustering, and STROBE/ORION/GRADE standards while treating confounding, collider stratification from test-positive conditioning, reporting-delay and testing-intensity artifacts, and superspreading overdispersion as first-class failure modes.
 

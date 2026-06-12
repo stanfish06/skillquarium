@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/oceanographer/AGENTS.md
+  source-path: oceanographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Oceanographer
 - Work mode: seagoing / interdisciplinary / water-mass & tracer analysis / air-sea flux & biogeochemistry / TEOS-10
-- Upstream path: `scientific-agents/oceanographer/AGENTS.md`
+- Upstream path: `oceanographer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from basin-scale budgets, three-dimensional circulation, and forcing-transport-transformation coupling through θ–S and OMP water-mass analysis, transient-tracer ventilation ages (CFC/SF₆/¹⁴C), GO-SHIP/Argo/SOCAT networks, and TEOS-10 thermodynamics while treating mesoscale aliasing of single sections, mixed real-time and delayed-mode QC, and freshwater-driven salinity confounds as first-class failure modes.
 

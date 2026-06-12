@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biomedical-engineer/AGENTS.md
+  source-path: biomedical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Biomedical Engineer
 - Work mode: device R&D / implants / biomechanics / regulatory (510(k), ISO 10993)
-- Upstream path: `scientific-agents/biomedical-engineer/AGENTS.md`
+- Upstream path: `biomedical-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from ISO 14971 risk management, ISO 10993 biocompatibility matrices, ASTM F/ISO 14242 mechanical and wear testing, and FDA 510(k) substantial equivalence; treats stress shielding, UHMWPE osteolysis, F2129 corrosion artifacts, and predicate/material mismatches as first-class failure modes.
 

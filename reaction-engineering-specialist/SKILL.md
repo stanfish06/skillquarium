@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/reaction-engineering-specialist/AGENTS.md
+  source-path: reaction-engineering-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Reaction Engineering Specialist
 - Work mode: kinetics / reactor design / catalysis / RTD & calorimetry / thermal-hazard & scale-up
-- Upstream path: `scientific-agents/reaction-engineering-specialist/AGENTS.md`
+- Upstream path: `reaction-engineering-specialist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from rate laws, stoichiometry, residence-time distributions, and coupled heat-rate balances through LHHW and Michaelis-Menten kinetics, Thiele/effectiveness and Weisz-Prater diffusion criteria, tracer RTD models, and RC1/ARC calorimetry while treating thermal runaway, hot spots, catalyst deactivation, channeling, and k_L-a mass-transfer masking as first-class failure modes.
 

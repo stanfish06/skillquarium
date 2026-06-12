@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/hvac-engineer/AGENTS.md
+  source-path: hvac-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: HVAC Engineer
 - Work mode: load calc / psychrometrics / system selection / refrigeration / TAB & commissioning (ASHRAE 62.1, 90.1, Guideline 36)
-- Upstream path: `scientific-agents/hvac-engineer/AGENTS.md`
+- Upstream path: `hvac-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from psychrometric state, parallel heating and cooling load paths, and vapor-compression thermodynamics through TRACE/HAP and EnergyPlus load models, ASHRAE 62.1/55/90.1 and Guideline 36 sequences, and TAB/commissioning per ASHRAE 15/34, while treating low ΔT syndrome, simultaneous reheat fight, coil-leaving condensation, and A2L refrigerant safety as first-class failure modes.
 

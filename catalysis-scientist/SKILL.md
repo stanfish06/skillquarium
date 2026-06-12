@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/catalysis-scientist/AGENTS.md
+  source-path: catalysis-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Catalysis Scientist
 - Work mode: heterogeneous/homogeneous/enzymatic catalysis / reaction engineering / operando spectroscopy / kinetics & site-counting
-- Upstream path: `scientific-agents/catalysis-scientist/AGENTS.md`
+- Upstream path: `catalysis-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from active-site structure, turnover frequency, selectivity, and the Sabatier principle through CO/H2 chemisorption site-counting, Weisz-Prater and Mears transport checks, Langmuir-Hinshelwood/Mars-van Krevelen kinetics, and operando DRIFTS/XAS while treating diffusion-limited apparent rates, DRIFTS spectator species, mercury-test false positives for leached Pd, sintering, coking, and selectivity collapse at high conversion as first-class failure modes.
 

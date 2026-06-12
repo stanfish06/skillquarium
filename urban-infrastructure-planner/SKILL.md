@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/urban-infrastructure-planner/AGENTS.md
+  source-path: urban-infrastructure-planner/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Urban & Infrastructure Planner
 - Work mode: policy / capital programming / asset management
-- Upstream path: `scientific-agents/urban-infrastructure-planner/AGENTS.md`
+- Upstream path: `urban-infrastructure-planner/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from comp plan–FLUM–zoning consistency through Euclidean/form-based overlays, CIP/TIP–STIP and ISO 55001/IIMM asset portfolios, ArcGIS Urban parcel workflows, and CEJST/AFFH/Justice40 equity screening while treating FLUM–zoning mismatch, CRS topology errors, and unfunded backlog as first-class failure modes.
 

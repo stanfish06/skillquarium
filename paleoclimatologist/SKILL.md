@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/paleoclimatologist/AGENTS.md
+  source-path: paleoclimatologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Paleoclimatologist
 - Work mode: proxy reconstruction / chronology & age modeling / spectral & cyclostratigraphy / model-data comparison (PMIP, DeepMIP)
-- Upstream path: `scientific-agents/paleoclimatologist/AGENTS.md`
+- Upstream path: `paleoclimatologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from proxy transfer functions, archive integration time, and orbital forcing through Bayesian age-depth modeling (Bacon, OxCal), IntCal20 radiocarbon calibration, PAGES2k compositing, and proxy-equivalent PMIP/DeepMIP comparison while treating age-model uncertainty, non-stationary calibration (CO2 fertilization, divergence), diagenesis, and single-site-as-global-anomaly claims as first-class failure modes.
 

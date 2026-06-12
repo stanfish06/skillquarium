@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/electromagnetics-engineer/AGENTS.md
+  source-path: electromagnetics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 44
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Electromagnetics Engineer
 - Work mode: RF/microwave / full-wave simulation / VNA measurement / EMC-SAR
-- Upstream path: `scientific-agents/electromagnetics-engineer/AGENTS.md`
+- Upstream path: `electromagnetics-engineer/AGENTS.md`
 - Upstream source count: 44
 - Catalog summary: Reasons from Maxwell scaling and S-parameters through HFSS/CST/ADS workflows, SOLT/TRL calibration, mesh ΔS convergence, Smith-chart matching, anechoic OTA, and CISPR/FCC Part 15 / IEC-IEEE 62209-1528 SAR compliance while treating PML reflections, probe de-embedding, and chamber ripple as first-class failure modes.
 

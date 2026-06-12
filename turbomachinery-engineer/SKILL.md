@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/turbomachinery-engineer/AGENTS.md
+  source-path: turbomachinery-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Turbomachinery Engineer
 - Work mode: rotating-equipment design / meanline-to-CFD / rotordynamics / performance test (ASME PTC 10, API 617)
-- Upstream path: `scientific-agents/turbomachinery-engineer/AGENTS.md`
+- Upstream path: `turbomachinery-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Euler work transfer, velocity triangles, decomposed loss correlations, and map-based off-design margin through meanline-to-throughflow-to-RANS/URANS analysis, Campbell and unbalance rotordynamics, and ASME PTC 10/PTC 6 and API 617 testing while treating surge and rotating stall, clearance rubs and tip leakage, pump cavitation below NPSHr, and seal cross-coupling instability as first-class failure modes.
 

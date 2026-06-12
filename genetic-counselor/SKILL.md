@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/genetic-counselor/AGENTS.md
+  source-path: genetic-counselor/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Genetic Counselor
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/genetic-counselor/AGENTS.md`
+- Upstream path: `genetic-counselor/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from probabilistic penetrance, Bayesian pretest probability, and patient autonomy through three-generation pedigrees, ACMG/AMP variant criteria, ClinVar/ClinGen/gnomAD, NCCN and CPIC guidelines, and cascade-testing protocols while treating VUS over-upgraded to pathogenic, screening-versus-diagnostic confusion (NIPT vs amnio/CVS), and unaddressed psychosocial and GINA discrimination risk as first-class failure modes.
 

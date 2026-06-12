@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astroparticle-physicist/AGENTS.md
+  source-path: astroparticle-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Astroparticle Physicist
 - Work mode: low-rate counting / neutrino astronomy / dark-matter direct detection / cosmic-ray composition / multimessenger / Geant4-CORSIKA simulation
-- Upstream path: `scientific-agents/astroparticle-physicist/AGENTS.md`
+- Upstream path: `astroparticle-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from flux times cross section times acceptance, Poisson counting over structured backgrounds, and Cherenkov photoelectron budgets through SkyLLH unbinned likelihoods, Geant4/CORSIKA chains validated on through-going-muon and calibration samples, and Feldman-Cousins/CLs limits, while treating atmospheric-neutrino and downgoing-muon contamination, ER/NR leakage and the neutrino fog, and look-elsewhere trials as first-class failure modes.
 

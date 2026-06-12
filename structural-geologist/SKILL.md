@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/structural-geologist/AGENTS.md
+  source-path: structural-geologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Structural Geologist
 - Work mode: field mapping / balanced cross sections / microstructural petrofabrics / active tectonics & paleoseismology / fault-slip inversion
-- Upstream path: `scientific-agents/structural-geologist/AGENTS.md`
+- Upstream path: `structural-geologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from stress, strain, kinematics, and Mohr-Coulomb failure through stereonet fault-slip analysis, area-balanced cross sections in Move, quartz/calcite paleopiezometry on EBSD-indexed CPO, and geodetic-plus-trench slip-rate estimates while treating heterogeneous-fault paleostress inversion, map-pattern vergence errors, seismic processing artifacts as false faults, and outcrop-face shear-sense bias as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/plasma-physicist/AGENTS.md
+  source-path: plasma-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Plasma Physicist
 - Work mode: fusion + space plasma / MHD & gyrokinetic / PIC simulation / tokamak-stellarator diagnostics / reconnection
-- Upstream path: `scientific-agents/plasma-physicist/AGENTS.md`
+- Upstream path: `plasma-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from collective scales (Debye length, plasma frequency), dimensionless regime parameters (beta, collisionality, Lundquist number), and instability drive-versus-dissipation through Grad-Shafranov equilibria (EFIT, VMEC), gyrokinetic and MHD codes (GENE, NIMROD, XGC), PIC simulation (VPIC, OSIRIS), and confinement scalings (IPB98, Greenwald, Troyon) while treating probe sheath distortion, equilibrium-reconstruction error, resolution-limited reconnection rates, and unmatched wall conditioning as first-class failure modes.
 

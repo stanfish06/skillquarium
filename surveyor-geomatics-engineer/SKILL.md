@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/surveyor-geomatics-engineer/AGENTS.md
+  source-path: surveyor-geomatics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Surveyor / Geomatics Engineer
 - Work mode: field / office geodetic, cadastral, construction, hydro, and remote sensing
-- Upstream path: `scientific-agents/surveyor-geomatics-engineer/AGENTS.md`
+- Upstream path: `surveyor-geomatics-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from datum/epoch/geoid and NSRS 2022 migration, CSF grid–ground, Baarda/3D least squares, NGS 92/ALTA RPP/ASPRS RMSE and IHO S-44 TPU; treats prism constants, BIM Helmert, and mixed CRS as first-class failure modes.
 

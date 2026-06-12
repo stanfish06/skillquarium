@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/separation-processes-engineer/AGENTS.md
+  source-path: separation-processes-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Separation Processes Engineer
 - Work mode: process simulation / pilot plant / plant troubleshooting
-- Upstream path: `scientific-agents/separation-processes-engineer/AGENTS.md`
+- Upstream path: `separation-processes-engineer/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from VLE/LLE thermodynamics, FUG shortcuts, and NRTL/PR property packages through Aspen RadFrac, CGCC/pinch integration, membrane Robeson bounds, chromatography van Deemter scale-up, and MSZW crystallization while treating wrong BIPs, jet flood/entrainment, concentration polarization, and lab-to-plant MSZW as first-class failure modes.
 

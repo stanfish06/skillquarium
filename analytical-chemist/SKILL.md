@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/analytical-chemist/AGENTS.md
+  source-path: analytical-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Analytical Chemist
 - Work mode: wet-lab / separation science / spectroscopy / method validation
-- Upstream path: `scientific-agents/analytical-chemist/AGENTS.md`
+- Upstream path: `analytical-chemist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from the chemical measurement process through ICH Q2(R2) and USP <621> validation, CRM traceability, EURACHEM uncertainty budgets, and HPLC/GC/LC-MS/ICP-MS workflows while treating matrix effects, SST drift, peak tailing, and ion suppression as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pharmacovigilance-scientist/AGENTS.md
+  source-path: pharmacovigilance-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 76
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Pharmacovigilance Scientist
 - Work mode: regulatory / drug safety surveillance (clinical & post-marketing)
-- Upstream path: `scientific-agents/pharmacovigilance-scientist/AGENTS.md`
+- Upstream path: `pharmacovigilance-scientist/AGENTS.md`
 - Upstream source count: 76
 - Catalog summary: Reasons from ICSR validity, MedDRA/SMQ coding, seriousness/expectedness/listedness, WHO-UMC causality, and PRR/ROR/IC/EBGM signal workflows through E2B(R3), EudraVigilance/FAERS/VigiBase, GVP Modules VI–IX, and PSUR/PBRER/RMP while treating duplicates, MLM scope, innocent-bystander confounding, and Weber/stimulated reporting as first-class failure modes.
 

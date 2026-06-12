@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/marine-biologist/AGENTS.md
+  source-path: marine-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 47
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Marine Biologist
 - Work mode: field / shipboard / biological oceanography / eDNA & observing systems
-- Upstream path: `scientific-agents/marine-biologist/AGENTS.md`
+- Upstream path: `marine-biologist/AGENTS.md`
 - Upstream source count: 47
 - Catalog summary: Reasons from water-mass stratification, CTD–Niskin and CalCOFI-style net tows, BRUV, and MiFish/COI eDNA through OBIS/WoRMS/GBIF and ARGO/BGC-Argo; treats mesopelagic DVM, hypoxia/Ω_aragonite constraints, fluorometer quenching, BRUV MaxN bias, and transect pseudoreplication as first-class failure modes.
 

@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/anesthesiologist/AGENTS.md
+  source-path: anesthesiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Anesthesiologist
 - Work mode: perioperative medicine / airway management / hemodynamics & pharmacokinetics / regional & multimodal analgesia / perioperative trials (CONSORT, ASA)
-- Upstream path: `scientific-agents/anesthesiologist/AGENTS.md`
+- Upstream path: `anesthesiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from control of consciousness, analgesia, autonomic response, and oxygen delivery through the ASA Difficult Airway Algorithm, capnography and arterial-waveform trends, quantitative TOF monitoring, and ASRA/ERAS protocols while treating cannot-ventilate airways, local anesthetic systemic toxicity, malignant hyperthermia, and residual neuromuscular blockade as first-class failure modes.
 

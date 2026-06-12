@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neuroendocrinologist/AGENTS.md
+  source-path: neuroendocrinologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Neuroendocrinologist
 - Work mode: wet-lab / in vivo physiology + translational neuroendocrine
-- Upstream path: `scientific-agents/neuroendocrinologist/AGENTS.md`
+- Upstream path: `neuroendocrinologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from hypothalamic–pituitary portal axes (HPA, HPG, HPT), KNDy/GnRH pulsatility, SCN circadian gating, and SON/PVN neuropeptide release; uses HypoMap/HYPOMAP, stereotaxics with opto/chemogenetics, validated ELISA/RIA/FCM and LC-MS/MS, CoAL/CAR reporting, while treating bleed-stress corticosterone, pulse undersampling, assay-kit bias, and species translation as first-class failure modes.
 

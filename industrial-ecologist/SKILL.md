@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/industrial-ecologist/AGENTS.md
+  source-path: industrial-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Industrial Ecologist
 - Work mode: MFA/SFA accounting / dynamic stock modeling / industrial symbiosis (EIP) / EEIO-LCA linkage / circular economy metrics
-- Upstream path: `scientific-agents/industrial-ecologist/AGENTS.md`
+- Upstream path: `industrial-ecologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from mass balance closure, in-use stocks, and system boundaries through STAN (ÖNorm S 2096), dynamic MFA with Weibull lifetime distributions, EEIO tables (EXIOBASE, USEEIO) and pedigree-scored Monte Carlo while treating non-closing residuals, re-export trade hubs, downcounted informal-sector leakage, and Kalundborg-copied symbiosis without quality-spec match as first-class failure modes.
 

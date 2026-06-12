@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/polymer-chemist/AGENTS.md
+  source-path: polymer-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 92
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Polymer Chemist
 - Work mode: wet-lab / synthetic polymer chemistry
-- Upstream path: `scientific-agents/polymer-chemist/AGENTS.md`
+- Upstream path: `polymer-chemist/AGENTS.md`
 - Upstream source count: 92
 - Catalog summary: Designs and interprets polymer synthesis, characterization, and structure–property relationships from mechanism (chain-growth, step-growth, RDRP, ROMP) through absolute MW verification to application-relevant thermal and rheological data.
 

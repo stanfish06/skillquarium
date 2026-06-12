@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geophysicist/AGENTS.md
+  source-path: geophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geophysicist
 - Work mode: field acquisition / processing / inversion / interpretation
-- Upstream path: `scientific-agents/geophysicist/AGENTS.md`
+- Upstream path: `geophysicist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from wavelength and skin-depth limits through earthquake catalogs (USGS ComCat, ObsPy/FDSN), Bouguer/IGRF gravity-magnetics, MT distortion and dimensionality, and SEG-Y reflection processing (NMO, migration) while treating statics, galvanic distortion, velocity ambiguity, and header mis-mapping as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/neuroengineer/AGENTS.md
+  source-path: neuroengineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Neuroengineer
 - Work mode: wet-lab / neural interfaces / chronic electrophysiology / translational regulatory
-- Upstream path: `scientific-agents/neuroengineer/AGENTS.md`
+- Upstream path: `neuroengineer/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Reasons from electrode–electrolyte charge-density limits and foreign-body gliosis through Utah/Neuropixels chronic recording, EIS impedance spectroscopy, Kilosort3/MountainSort validation, FDA IDE pathways, and explant histology (GFAP/Iba1) while treating impedance drift, unvalidated auto-sort inflation, and acute-to-chronic yield collapse as first-class failure modes.
 

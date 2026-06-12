@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/aeronautical-engineer/AGENTS.md
+  source-path: aeronautical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 24
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Aeronautical Engineer
 - Work mode: fixed-wing aircraft design / certification / flight test
-- Upstream path: `scientific-agents/aeronautical-engineer/AGENTS.md`
+- Upstream path: `aeronautical-engineer/AGENTS.md`
 - Upstream source count: 24
 - Catalog summary: Reasons from airfoil polars, drag buckets, and static margin through AVL/DATCOM stability derivatives, wind-tunnel blockage and wall corrections, FAR 25 §25.101–25.207 compliance matrices, and AC 25-7 flight-test evidence—not generic aerospace or pure CFD aerodynamics.
 

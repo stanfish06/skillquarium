@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/parasitologist/AGENTS.md
+  source-path: parasitologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Parasitologist
 - Work mode: field / laboratory parasitology + public-health surveillance
-- Upstream path: `scientific-agents/parasitologist/AGENTS.md`
+- Upstream path: `parasitologist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from parasite life cycles, WHO NTD program logic, and diagnostic performance (Kato-Katz, qPCR/MIQE, RDTs); troubleshoots microscopy artifacts, MDA surveillance, and anthelmintic resistance.
 

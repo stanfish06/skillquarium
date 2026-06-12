@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/crystal-growth-specialist/AGENTS.md
+  source-path: crystal-growth-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Crystal Growth Specialist
 - Work mode: melt/solution/vapor growth / Cz-Bridgman-FZ-LEC-PVT / defect characterization / SEMI specs
-- Upstream path: `scientific-agents/crystal-growth-specialist/AGENTS.md`
+- Upstream path: `crystal-growth-specialist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from thermodynamic driving force, interface stability, constitutional supercooling, and dopant segregation (keff vs. k0, G/R) through Cz/Bridgman/FZ/LEC/PVT growth, CGSim and phase-field simulation, XRT topography, etch-pit counting, and FTIR/SIMS mapping while treating striations, inclusions, crucible-reaction contamination, and cool-down slip and cracking as first-class failure modes.
 

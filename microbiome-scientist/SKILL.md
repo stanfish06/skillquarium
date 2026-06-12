@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/microbiome-scientist/AGENTS.md
+  source-path: microbiome-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 46
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Microbiome Scientist
 - Work mode: cohort / intervention / multi-omics host–microbiome
-- Upstream path: `scientific-agents/microbiome-scientist/AGENTS.md`
+- Upstream path: `microbiome-scientist/AGENTS.md`
 - Upstream source count: 46
 - Catalog summary: Reasons from compositional and longitudinal stats (MaAsLin2, ANCOM-BC2), STORMS pre-analytics, FMT/LBP and diet trials, and multi-omics integration; treats PPI/antibiotic confounders, kitome contamination, host-DNA swamping, and HMA causality overclaim as first-class failure modes.
 

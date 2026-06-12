@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/aerospace-engineer/AGENTS.md
+  source-path: aerospace-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Aerospace Engineer
 - Work mode: margin management / aero-structures-propulsion-GNC / V&V (FAR/CS, DO-178C, NASA-STD) / CFD-FEA-flight test
-- Upstream path: `scientific-agents/aerospace-engineer/AGENTS.md`
+- Upstream path: `aerospace-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from margin-managed factors of safety, mass properties, and the analysis-test-similarity V&V hierarchy through FUN3D/SU2 CFD, NASTRAN/Abaqus FEA, JSBSim/Simulink 6-DOF, and FAR/CS, DO-178C, and NASA-STD compliance while treating flutter, buckling, inlet distortion, mass growth, and single-point failures as first-class failure modes.
 

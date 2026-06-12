@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/connectomics-scientist/AGENTS.md
+  source-path: connectomics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Connectomics Scientist
 - Work mode: computational / volume EM connectomics + collaborative proofreading
-- Upstream path: `scientific-agents/connectomics-scientist/AGENTS.md`
+- Upstream path: `connectomics-scientist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from vEM acquisition and petascale alignment through FFN/RoboEM segmentation, FlyWire/neuPrint/MICrONS/H01 graphs, and synapse-level QC while treating split/merge errors, alignment tears, false synapses, and release-version drift as first-class failure modes.
 

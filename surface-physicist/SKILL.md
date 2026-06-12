@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/surface-physicist/AGENTS.md
+  source-path: surface-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Surface Physicist
 - Work mode: UHV surface science / electron spectroscopy / scanning-probe microscopy / surface diffraction / catalysis & 2D epitaxy
-- Upstream path: `scientific-agents/surface-physicist/AGENTS.md`
+- Upstream path: `surface-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from surface thermodynamics, adsorption coverage, work function, and probe escape depth through XPS/ARPES, LEED I(V) and CTR analysis, STM/AFM, TPD with Redhead analysis, and DFT slabs while treating adventitious-carbon contamination, differential charging, electron-beam and tip-induced damage, and UHV-to-operando extrapolation as first-class failure modes.
 

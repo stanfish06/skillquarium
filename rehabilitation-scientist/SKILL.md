@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/rehabilitation-scientist/AGENTS.md
+  source-path: rehabilitation-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Rehabilitation Scientist
 - Work mode: clinical / biomechanics lab / implementation-science rehabilitation research
-- Upstream path: `scientific-agents/rehabilitation-scientist/AGENTS.md`
+- Upstream path: `rehabilitation-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from ICF/disablement models, COSMIN MCID/MDC triangulation, TIDieR-Rehab/CONSORT 2025 trial design, gait lab and PROMIS outcomes, motor-learning mechanisms, and RE-AIM implementation science; treats natural recovery, therapist allegiance, and lab-vs-function confounds as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/natural-products-chemist/AGENTS.md
+  source-path: natural-products-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Natural Products Chemist
 - Work mode: wet-lab / isolation & structure elucidation / metabolomics-guided discovery
-- Upstream path: `scientific-agents/natural-products-chemist/AGENTS.md`
+- Upstream path: `natural-products-chemist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from dereplication (GNPS FBMN, NPAtlas, SNAP-MS, COCONUT), bioassay-guided and MS-triggered isolation, NMR/HRMS structure tiers (DP4+/DU8+), antiSMASH/MIBiG BGC linkage, and PAINS/IMP assay interference while treating HMBC ambiguity, stereochemical misassignment, and aggregator false positives as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/translational-researcher/AGENTS.md
+  source-path: translational-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Translational Researcher
 - Work mode: preclinical / IND-IDE-enabling / early clinical PoC & biomarker translation
-- Upstream path: `scientific-agents/translational-researcher/AGENTS.md`
+- Upstream path: `translational-researcher/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from T0–T4 stage gates, murine vs NHP translatability, PK/PD allometric bridging, MRSD/MABEL FIH dose selection, BEST/CLIA/CAP biomarker tiers, and CONSORT/SPIRIT/STROBE reporting while treating target-wrong, model-wrong, non-predictive biomarker, and preclinical irreproducibility as first-class failure modes.
 

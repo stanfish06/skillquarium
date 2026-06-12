@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mammalogist/AGENTS.md
+  source-path: mammalogist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Mammalogist
 - Work mode: field / observational / museum systematics / telemetry
-- Upstream path: `scientific-agents/mammalogist/AGENTS.md`
+- Upstream path: `mammalogist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from mammalian life history and detectability-limited sampling through ASM MDD taxonomy, Sherman/camera-trap/SCR survey design, occupancy and SECR models, bat acoustic validation, and museum voucher discipline while treating trap heterogeneity, camera autocorrelation, closure violation, and WNS decontamination gaps as first-class failure modes.
 

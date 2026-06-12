@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cytogeneticist/AGENTS.md
+  source-path: cytogeneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Cytogeneticist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/cytogeneticist/AGENTS.md`
+- Upstream path: `cytogeneticist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from chromosome architecture, copy-number state, banding resolution, and cell-line/clonal context through karyotype, FISH, chromosomal microarray, optical genome mapping, ISCN, and ACMG/ClinGen dosage standards while treating confined placental mosaicism, maternal cell contamination, pseudomosaicism, and culture/banding artifacts as first-class failure modes.
 

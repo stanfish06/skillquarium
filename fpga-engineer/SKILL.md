@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/fpga-engineer/AGENTS.md
+  source-path: fpga-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: FPGA Engineer
 - Work mode: RTL design / timing closure / CDC / SoC integration / lab bring-up (Vivado, Quartus)
-- Upstream path: `scientific-agents/fpga-engineer/AGENTS.md`
+- Upstream path: `fpga-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from metastability budgets, setup/hold margins, and tool-reported WNS/TNS through Vivado/Quartus timing and CDC reports, XDC/SDC constraints, Spyglass/Verilator lint, and ILA/IBERT lab bring-up while treating unsafe clock-domain crossings, reset domain crossings, sim-versus-silicon X mismatches, and unconstrained timing paths as first-class failure modes.
 

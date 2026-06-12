@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/telecommunications-engineer/AGENTS.md
+  source-path: telecommunications-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Telecommunications Engineer
 - Work mode: RAN/backhaul/core / link budgets / propagation modeling / spectrum compliance (3GPP, ITU-R, FCC Part 47)
-- Upstream path: `scientific-agents/telecommunications-engineer/AGENTS.md`
+- Upstream path: `telecommunications-engineer/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Expert profile for telecommunications engineer — see AGENTS.md for field-specific methods and failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/human-computer-interaction-researcher/AGENTS.md
+  source-path: human-computer-interaction-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Human–Computer Interaction Researcher
 - Work mode: empirical / design / field & lab HCI research
-- Upstream path: `scientific-agents/human-computer-interaction-researcher/AGENTS.md`
+- Upstream path: `human-computer-interaction-researcher/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from situated context, Fitts/GOMS/KLM, and CHI contribution types; runs contextual inquiry through LMM/CLMM analysis with SUS/NASA-TLX triangulation; uses Prolific/OSF and treats demand characteristics, novelty effects, ordinal misuse, and WEIRD samples as first-class failure modes.
 

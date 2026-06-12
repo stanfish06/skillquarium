@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computational-social-scientist/AGENTS.md
+  source-path: computational-social-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Computational Social Scientist
 - Work mode: digital-trace / network science / text-as-data / causal inference (DiD, IV, RDD) / field & survey experiments
-- Upstream path: `scientific-agents/computational-social-scientist/AGENTS.md`
+- Upstream path: `computational-social-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from social mechanisms, measurement validity, and sampling frames through DAGs, fixed-effects and IV/DiD/RDD designs, ERGM/SAOM network models, and human-audited text classifiers while treating unobserved homophily, network interference and SUTVA violations, platform-driven selection, bot contamination, and digital-skew unrepresentativeness as first-class failure modes.
 

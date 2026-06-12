@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/materials-scientist/AGENTS.md
+  source-path: materials-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Materials Scientist
 - Work mode: laboratory / computational / processing–structure–property
-- Upstream path: `scientific-agents/materials-scientist/AGENTS.md`
+- Upstream path: `materials-scientist/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from CALPHAD phase diagrams, Scheil solidification, and Hall–Petch microstructure–property links; validates with XRD Rietveld QPA, EBSD, TEM/STEM, and ASTM mechanical testing while treating preferred orientation, FIB Ga artifacts, EBSD overlap, and Rietveld overfitting as first-class failure modes.
 

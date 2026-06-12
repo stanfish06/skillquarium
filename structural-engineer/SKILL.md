@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/structural-engineer/AGENTS.md
+  source-path: structural-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Structural Engineer
 - Work mode: analysis & design / LRFD-ASD limit states / seismic & wind lateral systems / connections & foundations / codes (ASCE 7, ACI 318, AISC 360/341, AASHTO)
-- Upstream path: `scientific-agents/structural-engineer/AGENTS.md`
+- Upstream path: `structural-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from equilibrium, load-path continuity, ductility, and code-mandated safety formats through ASCE 7 load combinations, ETABS/SAP2000 models with independent hand checks, AISC 360/341 and ACI 318 capacity design, and ASCE 41 evaluation, while treating soft-story drift, brittle connection and anchor breakout failures, neglected serviceability, and progressive collapse as first-class failure modes.
 

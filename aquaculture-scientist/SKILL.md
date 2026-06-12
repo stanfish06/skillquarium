@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/aquaculture-scientist/AGENTS.md
+  source-path: aquaculture-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Aquaculture Scientist
 - Work mode: wet-lab / production aquaculture
-- Upstream path: `scientific-agents/aquaculture-scientist/AGENTS.md`
+- Upstream path: `aquaculture-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from FCR, dissolved oxygen and ammonia thresholds, hatchery biosecurity, and stock genetics while treating off-flavor, disease outbreak, and escape risk as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mass-spectrometrist/AGENTS.md
+  source-path: mass-spectrometrist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Mass Spectrometrist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/mass-spectrometrist/AGENTS.md`
+- Upstream path: `mass-spectrometrist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from ion formation, m/z resolution and mass accuracy, fragmentation, and calibrated ion statistics through ESI/APCI/MALDI tuning, CID/HCD/ETD MS/MS, isotope-pattern formula assignment, and spectral libraries (NIST, mzCloud, GNPS) under FDA/ICH M10/MSI tiers, while treating matrix suppression, PEG/siloxane/keratin contamination, decoy-driven FDR inflation, and unassigned adducts as first-class failure modes.
 

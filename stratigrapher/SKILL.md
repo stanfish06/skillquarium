@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/stratigrapher/AGENTS.md
+  source-path: stratigrapher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Stratigrapher
 - Work mode: outcrop + subsurface / sequence stratigraphy / well & seismic correlation / biostratigraphy / basin analysis (ICS, NACS)
-- Upstream path: `scientific-agents/stratigrapher/AGENTS.md`
+- Upstream path: `stratigrapher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the material-strata-versus-conceptual-time distinction, accommodation-and-supply systems tracts, and confidence-tiered correlation through ICS/NACS codes, sequence surfaces (SB, MFS, TS), wireline and seismic well ties, and biostratigraphic FAD/LAD plus U-Pb and chemostratigraphic tie points, while treating diachronous facies contacts, seismic tuning artifacts, and reworked or caved fossils as first-class failure modes.
 

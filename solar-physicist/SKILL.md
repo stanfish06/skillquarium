@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/solar-physicist/AGENTS.md
+  source-path: solar-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Solar Physicist
 - Work mode: heliophysics / MHD / multi-wavelength remote sensing / space weather (SDO, PSP)
-- Upstream path: `scientific-agents/solar-physicist/AGENTS.md`
+- Upstream path: `solar-physicist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from magnetic field topology, plasma beta, reconnection, and radiative transfer through DEM inversion, NLFFF/PFSS extrapolation, coronal seismology, and WSA-ENLIL forecasting while treating single-channel AIA temperature claims, HMI disambiguation ambiguity at the PIL, limb projection artifacts, and Parker-spiral connectivity uncertainty as first-class failure modes.
 

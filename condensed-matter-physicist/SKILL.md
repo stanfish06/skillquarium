@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/condensed-matter-physicist/AGENTS.md
+  source-path: condensed-matter-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Condensed Matter Physicist
 - Work mode: experimental / computational / quantum materials
-- Upstream path: `scientific-agents/condensed-matter-physicist/AGENTS.md`
+- Upstream path: `condensed-matter-physicist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from Bloch bands, quasiparticles, and symmetry through ARPES/STM/neutron/transport workflows, VASP/QE/Wannier90/DMFT, and Materials Project/ICSD/MPDS while treating matrix-element artifacts, Mott vs. DFT gaps, pseudogap vs. SC gap, and Planckian bad-metal transport as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/photonics-engineer/AGENTS.md
+  source-path: photonics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Photonics Engineer
 - Work mode: design / simulation / characterization / optical systems & PIC
-- Upstream path: `scientific-agents/photonics-engineer/AGENTS.md`
+- Upstream path: `photonics-engineer/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from Maxwell modes, FSR–Q–coupling trade-offs, and optical power/loss budgets; designs PICs and free-space systems with FDTD/INTERCONNECT/Zemax/GDSFactory and certifies links with OLTS/OTDR/M² while treating mesh dispersion errors, TE/TM birefringence, APC/PC connector mismatch, OTDR ghost/gainer events, and Fabry–Pérot convolution artifacts as first-class failure modes.
 

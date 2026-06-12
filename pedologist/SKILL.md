@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pedologist/AGENTS.md
+  source-path: pedologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Pedologist
 - Work mode: soil survey / pedon morphology / classification (USDA Taxonomy, WRB) / micromorphology / digital soil mapping
-- Upstream path: `scientific-agents/pedologist/AGENTS.md`
+- Upstream path: `pedologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from CLORPT factors, genetic horizons, and catenary position through the USDA Field Book, Soil Taxonomy and WRB 2022 keys, XRD clay mineralogy, micromorphology, and NASIS/SSURGO correlation while treating colluvial-versus-illuvial Bt confusion, lithologic discontinuities, surface-color-alone drainage calls, and digital-map covariate leakage as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/petrochemist/AGENTS.md
+  source-path: petrochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Petrochemist
 - Work mode: refinery process chemistry / crude assay / fuels & lubricants spec testing / catalyst performance / standards (ASTM D02, EN 228/590)
-- Upstream path: `scientific-agents/petrochemist/AGENTS.md`
+- Upstream path: `petrochemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from boiling range, hydrocarbon class, sulfur/nitrogen speciation, and octane/cetane drivers through SimDist and PIONA/SARA group-type analysis, CFR-engine RON/MON and cetane testing, refinery LP models, and ASTM/EN spec methods, while treating light-ends loss, assay mismatch versus plant yields, catalyst end-of-run deactivation, and asphaltene instability as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/optoelectronics-engineer/AGENTS.md
+  source-path: optoelectronics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Optoelectronics Engineer
 - Work mode: device R&D / characterization / PIC & semiconductor photonics
-- Upstream path: `scientific-agents/optoelectronics-engineer/AGENTS.md`
+- Upstream path: `optoelectronics-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from photon–electron conversion, ABC recombination, and IQE/EQE/WPE budgets; runs LIV/pulsed laser, EMVA 1288, and responsivity metrology; designs with Lumerical/Sentaurus/COMSOL TCAD and foundry PDKs while treating efficiency droop, thermal rollover, LIV kinks, and calibration geometry as first-class failure modes.
 

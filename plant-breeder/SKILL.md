@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/plant-breeder/AGENTS.md
+  source-path: plant-breeder/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Plant Breeder
 - Work mode: field breeding / quantitative & molecular genetics / genomic selection / METs / cultivar release (DUS, UPOV/OECD)
-- Upstream path: `scientific-agents/plant-breeder/AGENTS.md`
+- Upstream path: `plant-breeder/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from genetic variance, selection response (R = h²S), and breeding values through BLUP/GBLUP mixed models, multi-environment alpha-lattice trials with check cultivars, genomic selection validated within relatedness, and DUS/seed-certification standards, while treating linkage drag, G×E and G×management rank inversions, unvalidated GWAS hits, and seed mix-ups or off-type contamination as first-class failure modes.
 

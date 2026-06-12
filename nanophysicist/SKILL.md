@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nanophysicist/AGENTS.md
+  source-path: nanophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 24
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Nanophysicist
 - Work mode: experimental / low-T transport / SPM / electron spectroscopy
-- Upstream path: `scientific-agents/nanophysicist/AGENTS.md`
+- Upstream path: `nanophysicist/AGENTS.md`
 - Upstream source count: 24
 - Catalog summary: Reasons from quantum confinement dimensionality, Coulomb diamonds and SET conditions, Kondo vs Luttinger-liquid power laws, and lock-in cryostat transport through STM/STS, AFM/KPFM, and STEM/EELS while treating charging artifacts, tip convolution, contact resistance, and beam-damage plasmon shifts as first-class failure modes.
 

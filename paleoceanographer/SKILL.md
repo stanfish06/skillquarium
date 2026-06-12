@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/paleoceanographer/AGENTS.md
+  source-path: paleoceanographer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 24
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Paleoceanographer
 - Work mode: field / observational marine paleoceanography
-- Upstream path: `scientific-agents/paleoceanographer/AGENTS.md`
+- Upstream path: `paleoceanographer/AGENTS.md`
 - Upstream source count: 24
 - Catalog summary: Reasons from foraminiferal proxy system science (G. ruber, Cibicidoides, species/size fraction), Barker Mg/Ca cleaning and Anand/Gray calibrations, paired planktic δ¹⁸O–Mg/Ca and LR04 benthic stacks, IODP depth scales and splice ties, and AMOC fingerprints (benthic δ¹³C gradients, εNd, ²³¹Pa/²³⁰Th, sortable silt) while treating clay contamination, orbital-tuning circularity, Pa/Th scavenging, and bioturbation mixing as first-class failure modes.
 

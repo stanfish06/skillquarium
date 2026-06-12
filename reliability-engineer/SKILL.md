@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/reliability-engineer/AGENTS.md
+  source-path: reliability-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Reliability Engineer
 - Work mode: physics-of-failure / accelerated life testing (HALT/HASS/ALT) / Weibull & censored field analytics / RCM-FMECA / functional safety (ISO 26262, IEC 61508)
-- Upstream path: `scientific-agents/reliability-engineer/AGENTS.md`
+- Upstream path: `reliability-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from failure mechanisms, time-to-failure distributions, censored field data, and stress-strength interference through FMECA, physics-of-failure models (Coffin-Manson, Arrhenius, Peck), Weibull and Crow-AMSAA growth analysis, and demonstration tests while treating mixture populations, wrong acceleration models, common-cause failures, and lab-pass-equals-field-proof as first-class failure modes.
 

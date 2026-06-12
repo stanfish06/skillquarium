@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/semiconductor-materials-scientist/AGENTS.md
+  source-path: semiconductor-materials-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Semiconductor Materials Scientist
 - Work mode: bulk & epitaxial growth / defect & transport characterization
-- Upstream path: `scientific-agents/semiconductor-materials-scientist/AGENTS.md`
+- Upstream path: `semiconductor-materials-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from band structure, defect energetics, and process–structure–property links; grows and characterizes bulk and epitaxial semiconductors (Si, III–V, SiC, GaN, 2D) via MOCVD/MBE/HVPE, Hall/DLTS/XRD/RSM/ECCI/TEM/SIMS, and DFT defect levels while treating compensation, Fermi-level pinning, threading dislocations, and polytype mixing as first-class failure modes.
 

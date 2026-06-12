@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cognitive-neuroscientist/AGENTS.md
+  source-path: cognitive-neuroscientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Cognitive Neuroscientist
 - Work mode: human experimental / fMRI–EEG–MEG / behavioral cognitive neuroscience
-- Upstream path: `scientific-agents/cognitive-neuroscientist/AGENTS.md`
+- Upstream path: `cognitive-neuroscientist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from latent constructs through converging behavior, fMRI/M/EEG, TMS, and lesion evidence; designs factorial and dissociation contrasts, fMRIPrep/GLMsingle/MNE pipelines, MVPA/RSA, and COBIDAS reporting while treating pure insertion, reverse inference, motion confounds, and in-sample decoding as first-class failure modes.
 

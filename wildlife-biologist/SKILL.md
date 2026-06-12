@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/wildlife-biologist/AGENTS.md
+  source-path: wildlife-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Wildlife Biologist
 - Work mode: field / population monitoring / telemetry / management science
-- Upstream path: `scientific-agents/wildlife-biologist/AGENTS.md`
+- Upstream path: `wildlife-biologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from detectability-aware abundance (Distance/mrds, MARK/RMark CJS, secr/oSCR, unmarked occupancy), Camtrap DP and Movebank/amt telemetry, ASM/MBTA/ESA permitting, and MIEM/FAIRe eDNA while treating index-effort bias, closure violation, bait aggregation, apparent-survival emigration, and collar/fix pseudoreplication as first-class failure modes.
 

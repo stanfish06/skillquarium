@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/agricultural-engineer/AGENTS.md
+  source-path: agricultural-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Agricultural Engineer
 - Work mode: field machinery / irrigation & drainage / postharvest storage / precision ag / ASABE standards (D497, ISO 11783)
-- Upstream path: `scientific-agents/agricultural-engineer/AGENTS.md`
+- Upstream path: `agricultural-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from mass, energy, and momentum balances on variable biological media through ET-based scheduling, psychrometric grain-drying balances, ASABE D497 draft estimates, EPANET pipe networks, and RTK-GNSS/ISOBUS precision-ag validation while treating soil compaction, clogged drip emitters, grain-bin hotspots, GPS drift, and uncalibrated yield monitors as first-class failure modes.
 

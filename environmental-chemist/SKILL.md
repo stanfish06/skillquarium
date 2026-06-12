@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/environmental-chemist/AGENTS.md
+  source-path: environmental-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Environmental Chemist
 - Work mode: field sampling / trace analysis (GC-MS, LC-MS/MS, ICP-MS) / fate & partitioning / remediation / regulatory (EPA SW-846, REACH)
-- Upstream path: `scientific-agents/environmental-chemist/AGENTS.md`
+- Upstream path: `environmental-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from thermodynamic partitioning (K_oc/K_ow, Henry's law), pathway-specific half-lives, and mass balance through GC-MS/LC-MS/MS/ICP-MS analysis, EPI Suite and fugacity fate models, and EPA SW-846 QA/QC while treating blank contamination, matrix suppression, censored sub-LOD data, and unscoped transformation products as first-class failure modes.
 

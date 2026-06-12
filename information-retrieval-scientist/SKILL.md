@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/information-retrieval-scientist/AGENTS.md
+  source-path: information-retrieval-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 0
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Information Retrieval Scientist
 - Work mode: ranking / evaluation (TREC, trec_eval) / BM25 + neural retrieval / search-log privacy
-- Upstream path: `scientific-agents/information-retrieval-scientist/AGENTS.md`
+- Upstream path: `information-retrieval-scientist/AGENTS.md`
 - Upstream source count: 0
 - Catalog summary: Reasons from the Probability Ranking Principle, ranked-list utility, and candidate-generation-versus-re-ranking separation through BM25 baselines, dense and cross-encoder retrieval, and TREC-style qrels evaluated with trec_eval and nDCG, while treating position-biased clicks, unjudged-as-nonrelevant pools, analyzer mismatches, and AOL-style search-log re-identification as first-class failure modes.
 

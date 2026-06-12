@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/organometallic-chemist/AGENTS.md
+  source-path: organometallic-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Organometallic Chemist
 - Work mode: air-sensitive synthesis / homogeneous catalysis / multinuclear NMR & SCXRD / mechanistic kinetics
-- Upstream path: `scientific-agents/organometallic-chemist/AGENTS.md`
+- Upstream path: `organometallic-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from electron counting, oxidation states, and elementary catalytic steps through Schlenk/glovebox technique, multinuclear NMR and νCO IR, SCXRD with checkCIF, and TON/TOF kinetics while treating air oxidation to oxo/hydroxo species, paramagnetic line-broadening, and trace or colloidal-metal leaching as first-class failure modes.
 

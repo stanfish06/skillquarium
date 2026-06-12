@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/health-economist/AGENTS.md
+  source-path: health-economist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Health Economist
 - Work mode: computational / HEOR / health technology assessment
-- Upstream path: `scientific-agents/health-economist/AGENTS.md`
+- Upstream path: `health-economist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from QALY/ICER and NMB opportunity-cost framing, NICE reference case and WTP bands, cohort Markov/PSM models with PSA (CEAC/CEAF), ISPOR transferability and DCE conjoint checklists, CHEERS 2022 and trial-based RCT-CEA reporting.
 

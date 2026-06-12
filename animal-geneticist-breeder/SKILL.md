@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/animal-geneticist-breeder/AGENTS.md
+  source-path: animal-geneticist-breeder/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Animal Geneticist & Breeder
 - Work mode: quantitative genetics / BLUP-REML / genomic selection / crossbreeding systems / mate allocation
-- Upstream path: `scientific-agents/animal-geneticist-breeder/AGENTS.md`
+- Upstream path: `animal-geneticist-breeder/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from additive genetic variance, response to selection (R = i h sigma_A), accuracy, and inbreeding depression through REML/BLUP and ssGBLUP pipelines (BLUPF90, ASReml, WOMBAT), economic selection indices, optimum-contribution mate allocation, and Interbull MACE while treating confounded contemporary groups, prediction bias/dispersion, popular-sire inbreeding and rising deleterious haplotypes, GxE reranking, and pedigree or genotype-calling errors as first-class failure modes.
 

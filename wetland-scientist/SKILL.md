@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/wetland-scientist/AGENTS.md
+  source-path: wetland-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Wetland Scientist
 - Work mode: field / regulatory delineation / mapping / restoration & assessment
-- Upstream path: `scientific-agents/wetland-scientist/AGENTS.md`
+- Upstream path: `wetland-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the three-parameter delineation test (1987 Manual + Regional Supplements, NWPL, FISM), Cowardin/NWI/LLWW mapping, HGM function and Level 1–2–3 RAM, compensatory mitigation/RIBITS, and wetland carbon–GHG flux while treating legacy hydrology, 50/20 cover errors, relict redox nodules, NWI≠jurisdiction, and short well records as first-class failure modes.
 

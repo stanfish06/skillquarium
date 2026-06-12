@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/physical-chemist/AGENTS.md
+  source-path: physical-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Physical Chemist
 - Work mode: wet-lab / calorimetry (DSC, ITC) / spectroscopy (FTIR, Raman, UV-vis) / kinetics / statistical thermodynamics
-- Upstream path: `scientific-agents/physical-chemist/AGENTS.md`
+- Upstream path: `physical-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from state functions, partition functions, rate laws, and selection rules through Eyring and van't Hoff fits, DSC/ITC calorimetry, and stopped-flow spectroscopy anchored to NIST thermochemical data, while treating inner-filter and aggregation artifacts, curved Arrhenius plots from mechanism change, and concentration-for-activity substitution as first-class failure modes.
 

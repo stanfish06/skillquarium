@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/microbial-physiologist/AGENTS.md
+  source-path: microbial-physiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Microbial Physiologist
 - Work mode: wet-lab / chemostat & metabolic-flux physiology
-- Upstream path: `scientific-agents/microbial-physiologist/AGENTS.md`
+- Upstream path: `microbial-physiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Monod/chemostat (μ = D), YX/S and Pirt maintenance, Crabtree/overflow, 13C-MFA and FBA, and BMSAB taxonomy; treats OD-as-biomass yield error, FBA-as-measured-flux, washout misread, and portable ms across media as first-class failure modes.
 

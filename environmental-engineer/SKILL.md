@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/environmental-engineer/AGENTS.md
+  source-path: environmental-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Environmental Engineer
 - Work mode: treatment design / water-air-waste / remediation / compliance (NPDES, NAAQS, RCRA/CERCLA)
-- Upstream path: `scientific-agents/environmental-engineer/AGENTS.md`
+- Upstream path: `environmental-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from mass balances, reaction kinetics, source-pathway-receptor transport, and permit limits through BioWin/GPS-X, SWMM, AERMOD/CALPUFF, GAC/IX and activated-sludge design, and 40 CFR Part 136 QA/QC, while treating nitrifier washout, clarifier upset, PFAS breakthrough, and remediation rebound as first-class failure modes.
 

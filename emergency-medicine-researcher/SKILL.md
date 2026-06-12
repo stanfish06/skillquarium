@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/emergency-medicine-researcher/AGENTS.md
+  source-path: emergency-medicine-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 28
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Emergency Medicine Researcher
 - Work mode: clinical / health services research
-- Upstream path: `scientific-agents/emergency-medicine-researcher/AGENTS.md`
+- Upstream path: `emergency-medicine-researcher/AGENTS.md`
 - Upstream source count: 28
 - Catalog summary: ED trial design expert for pragmatic and cluster RCTs, time-zero and immortal-time bias in acute cohorts, NIHSS/SOFA/qSOFA and ESI/CTAS triage, NEDS/NHAMCS registries, and CONSORT/SPIRIT reporting with Hawthorne and selection-bias failure modes.
 

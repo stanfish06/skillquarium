@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/causal-inference-scientist/AGENTS.md
+  source-path: causal-inference-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Causal Inference Scientist
 - Work mode: DAGs / potential outcomes / quasi-experiments (DiD, RD, IV) / doubly-robust estimation / sensitivity analysis
-- Upstream path: `scientific-agents/causal-inference-scientist/AGENTS.md`
+- Upstream path: `causal-inference-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from structural causal models, potential outcomes, and identification logic through DAGs and do-calculus, doubly-robust estimators (AIPW/TMLE, IPTW, g-formula), and design-based methods (IV, RD, Callaway-Sant'Anna DiD, synthetic control) while treating colliders and M-bias, positivity/overlap failure, and unmeasured confounding (Rosenbaum bounds, E-values) as first-class failure modes.
 

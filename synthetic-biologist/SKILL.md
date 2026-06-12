@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/synthetic-biologist/AGENTS.md
+  source-path: synthetic-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Synthetic Biologist
 - Work mode: engineering biology / DBTL / genetic circuits + metabolic pathways / Golden Gate + Gibson assembly / SBOL-SBML standards / biosafety (NIH Guidelines, DURC)
-- Upstream path: `scientific-agents/synthetic-biologist/AGENTS.md`
+- Upstream path: `synthetic-biologist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from biological parts, the DBTL cycle, chassis context, and the central dogma as a wiring diagram through Golden Gate and Gibson assembly, SBOL/SBML encoding, RPU/MEFL-calibrated characterization, and FBA models while treating metabolic burden, genetic instability, plasmid loss, and resource competition as first-class failure modes.
 

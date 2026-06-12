@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/environmental-scientist/AGENTS.md
+  source-path: environmental-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Environmental Scientist
 - Work mode: fate & transport / exposure-risk assessment / groundwater & remediation / environmental chemistry / regulatory (CERCLA, SW-846)
-- Upstream path: `scientific-agents/environmental-scientist/AGENTS.md`
+- Upstream path: `environmental-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from source-pathway-receptor linkages, multimedia partitioning, and dose-as-exposure through conceptual site models, fate models (MODFLOW/MT3DMS, AERMOD), SW-846 QA/QC chains, and ProUCL/Mann-Kendall statistics while treating censoring bias, conceptual-model error, well-construction artifacts, and seasonal confounding as first-class failure modes.
 

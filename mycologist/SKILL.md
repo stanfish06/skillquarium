@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mycologist/AGENTS.md
+  source-path: mycologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Mycologist
 - Work mode: field / herbarium / culture & molecular systematics
-- Upstream path: `scientific-agents/mycologist/AGENTS.md`
+- Upstream path: `mycologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from fungal life cycles, voucher-first taxonomy, and integrated sporocarp–culture–ITS/multilocus workflows; uses MycoBank/UNITE/MaarjAM, FUSARIUM-ID, EPPO Q-bank, and MycoCosm while treating rich-media non-sporulation, ITS saturation in Fusarium/Penicillium, AMF SSU vs ITS misuse, environmental-DNA-only names, and BSL-3 dimorphic mould handling as first-class failure modes.
 

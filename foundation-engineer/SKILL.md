@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/foundation-engineer/AGENTS.md
+  source-path: foundation-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Foundation Engineer
 - Work mode: geotechnical design / deep & shallow foundations / soil-structure interaction / LRFD (AASHTO, Eurocode 7) / site investigation
-- Upstream path: `scientific-agents/foundation-engineer/AGENTS.md`
+- Upstream path: `foundation-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from effective stress, ULS versus SLS limit states, and construction-altered soil behavior through CPT/SPT logging, triaxial and oedometer testing, LRFD φ-factor checks, and LPILE/PLAXIS analysis while treating liquefaction-driven lateral spread, negative skin friction downdrag, differential settlement, and scour as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/robotics-engineer/AGENTS.md
+  source-path: robotics-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Robotics Engineer
 - Work mode: hardware-software integration / manipulation, navigation & perception
-- Upstream path: `scientific-agents/robotics-engineer/AGENTS.md`
+- Upstream path: `robotics-engineer/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from DH/PoE kinematics, Jacobian singularities, and computed-torque/impedance control through ROS 2, MoveIt/OMPL, Nav2/SLAM/AMCL, hand-eye AX=XB, Isaac/Gazebo sim-to-real, and ISO 10218/ISO TS 15066 safety while treating tf/frame errors, encoder drift, backlash, and reality-gap overclaim as first-class failure modes.
 

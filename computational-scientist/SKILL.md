@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computational-scientist/AGENTS.md
+  source-path: computational-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Computational Scientist
 - Work mode: computational / dry / simulation, UQ, and reproducible workflows
-- Upstream path: `scientific-agents/computational-scientist/AGENTS.md`
+- Upstream path: `computational-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from Roache code/solution verification and ASME V&V 10/20/40 credibility through MMS/GCI, UQ ensembles, and Snakemake/Nextflow/CWL pipelines with conda-lock/Apptainer provenance while treating environment drift, workflow cache staleness, and validation-vs-calibration conflation as first-class failure modes.
 

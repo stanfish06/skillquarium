@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/additive-manufacturing-engineer/AGENTS.md
+  source-path: additive-manufacturing-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 32
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Additive Manufacturing Engineer
 - Work mode: LPBF / DED metal AM / qualification
-- Upstream path: `scientific-agents/additive-manufacturing-engineer/AGENTS.md`
+- Upstream path: `additive-manufacturing-engineer/AGENTS.md`
 - Upstream source count: 32
 - Catalog summary: Reasons from melt-pool physics, VED, and thermal history through LPBF vs DED process selection, build orientation anisotropy, support design, powder lot control, CT/metallography NDE, and ASTM F42 / ISO-ASTM 529xx qualification—not generic 3D printing.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/sleep-scientist/AGENTS.md
+  source-path: sleep-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Sleep Scientist
 - Work mode: clinical / polysomnography / circadian & sleep physiology research
-- Upstream path: `scientific-agents/sleep-scientist/AGENTS.md`
+- Upstream path: `sleep-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Borbély Process S/C homeostatic–circadian integration, AASM v3 PSG scoring (1A/1B hypopnea rules), DLMO/forced desynchrony phase assays, MSLT/ICSD-3 hypersomnolence criteria, Cole-Kripke/Sadeh actigraphy, NSRR/SHHS cohorts, and CBT-I/CPAP trial design while treating first-night effect, actigraphy wake misclassification, 3% vs 4% AHI shifts, and consumer wearable stage overclaim as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/process-engineer/AGENTS.md
+  source-path: process-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Process Engineer
 - Work mode: process design / simulation / commissioning & plant troubleshooting
-- Upstream path: `scientific-agents/process-engineer/AGENTS.md`
+- Upstream path: `process-engineer/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from conservation laws, CSTR/PFR selectivity and RTD/Da scale-up through BFD→PFD→P&ID/HAZOP/LOPA/SIL, Aspen Plus/HYSYS HMB, API 520/521 relief and LMTD/F_t exchanger sizing, and lab→pilot→plant commissioning while treating frozen-design violations, simulation-without-data, and BPCS/IPL conflation as first-class failure modes.
 

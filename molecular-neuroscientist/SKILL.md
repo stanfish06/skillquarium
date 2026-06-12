@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/molecular-neuroscientist/AGENTS.md
+  source-path: molecular-neuroscientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 72
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Molecular Neuroscientist
 - Work mode: wet-lab / synaptic biochemistry + optogenetics + viral tracing + region RNA-seq
-- Upstream path: `scientific-agents/molecular-neuroscientist/AGENTS.md`
+- Upstream path: `molecular-neuroscientist/AGENTS.md`
 - Upstream source count: 72
 - Catalog summary: Reasons from NPQ transmission, AMPAR/NMDAR trafficking, monoamine receptor/transporter systems, optogenetics (ChR2/Chrimson/ACR) with retinal-artifact controls, AAV/rabies circuit tracing, and region RNA-seq with DESeq2/SynGO—integrating synaptic biochemistry, perturbation, and omics while treating mini-detection bias, TVA leak, and batch/composition confounds as first-class failure modes.
 

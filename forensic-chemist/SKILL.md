@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/forensic-chemist/AGENTS.md
+  source-path: forensic-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Forensic Chemist
 - Work mode: accredited crime lab / seized-drug & trace analysis / GC-MS & LC-MS/MS / courtroom reporting (SWGDRUG, ISO/IEC 17025, Daubert/Frye)
-- Upstream path: `scientific-agents/forensic-chemist/AGENTS.md`
+- Upstream path: `forensic-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from chain of custody, validated methods, measurement uncertainty, and class-versus-individual characteristics through GC-MS, LC-MS/MS, FTIR, and SWGDRUG-aligned identification under ISO/IEC 17025, while treating carryover contamination, secondary transfer, isomer co-elution, and upgrading equivocal results into source attribution as first-class failure modes.
 

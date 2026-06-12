@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mathematical-modeler/AGENTS.md
+  source-path: mathematical-modeler/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Mathematical Modeler
 - Work mode: mechanistic modeling / ODE-PDE & agent-based / identifiability & UQ / calibration & inverse problems
-- Upstream path: `scientific-agents/mathematical-modeler/AGENTS.md`
+- Upstream path: `mathematical-modeler/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from nondimensionalization, conservation/positivity laws, and minimal-viable model structure through mechanistic ODE/PDE, stochastic, and agent-based formulations, profile-likelihood and Fisher-information identifiability, and Sobol/Morris sensitivity analysis, while treating sloppy unidentifiable parameters, structural model uncertainty, and out-of-regime extrapolation as first-class failure modes.
 

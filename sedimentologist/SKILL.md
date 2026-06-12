@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/sedimentologist/AGENTS.md
+  source-path: sedimentologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Sedimentologist
 - Work mode: field logging / facies analysis / granulometry & petrography / core-log-seismic integration / reservoir quality
-- Upstream path: `scientific-agents/sedimentologist/AGENTS.md`
+- Upstream path: `sedimentologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from grain-scale hydraulics, facies associations, and base-level accommodation through measured sections, Folk & Ward granulometry, Bouma divisions, ichnofacies, and core-log-seismic ties while treating diagenetic overprint, bioturbation-destroyed laminae, fining-upward and shale-equals-deep-water defaults, and single-outcrop overextrapolation as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cosmologist/AGENTS.md
+  source-path: cosmologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 46
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Cosmologist
 - Work mode: theoretical / observational / computational cosmology
-- Upstream path: `scientific-agents/cosmologist/AGENTS.md`
+- Upstream path: `cosmologist/AGENTS.md`
 - Upstream source count: 46
 - Catalog summary: Reasons from Friedmann/ΛCDM, r_s and transfer functions, and multi-probe inference (Planck CMB, DESI BAO, lensing, Pantheon+ SNe) through CAMB/CLASS, Cobaya, and GetDist while treating photo-z–IA coupling, CMB foreground pipelines, H0/S8 tensions, and emulator extrapolation as first-class failure modes.
 

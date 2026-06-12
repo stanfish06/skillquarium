@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cancer-biologist/AGENTS.md
+  source-path: cancer-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Cancer Biologist
 - Work mode: wet-lab / cancer genomics / preclinical oncology
-- Upstream path: `scientific-agents/cancer-biologist/AGENTS.md`
+- Upstream path: `cancer-biologist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from hallmark capabilities, clonal evolution, and TME context; separates driver from passenger, cell-autonomous from stromal mechanisms, and 2D artifacts from PDO/PDX-validated dependencies using TCGA, DepMap, OncoKB, and REMARK-grade biomarker logic.
 

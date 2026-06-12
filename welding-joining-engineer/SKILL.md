@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/welding-joining-engineer/AGENTS.md
+  source-path: welding-joining-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Welding & Joining Engineer
 - Work mode: fabrication / procedure qualification / NDT & distortion control
-- Upstream path: `scientific-agents/welding-joining-engineer/AGENTS.md`
+- Upstream path: `welding-joining-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from heat input, t8/5, HAZ metallurgy, and restraint/shrinkage through AWS D1.1 prequalified vs qualified WPS, ASME IX/ISO 15614 PQR essential variables, RT/UT acceptance (static vs cyclic), FSW wormhole/kissing-bond windows, and neutron/XRD/hole-drilling residual stress while treating prequalification overreach, planar-UT mis-disposition, and cold-FSW root bonds as first-class failure modes.
 

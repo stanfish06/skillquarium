@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geochemist/AGENTS.md
+  source-path: geochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geochemist
 - Work mode: lab / field sampling / isotope & aqueous geochemistry / thermodynamic modeling
-- Upstream path: `scientific-agents/geochemist/AGENTS.md`
+- Upstream path: `geochemist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from Gibbs equilibria, mass and isotope balance, and fluid–rock interaction through stable (δ) and radiogenic (ε, isochron) systems, ICP-MS/LA-ICP-MS/TIMS/MC-ICP-MS/IRMS, PHREEQC/Perple_X phase modeling, and EarthChem/GeoReM workflows while treating alteration, matrix effects, Pb loss, mixing arrays, and Fretwell’s Law violations as first-class failure modes.
 

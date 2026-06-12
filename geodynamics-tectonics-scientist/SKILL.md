@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geodynamics-tectonics-scientist/AGENTS.md
+  source-path: geodynamics-tectonics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geodynamics & Tectonics Scientist
 - Work mode: geodesy (GPS/InSAR) / earthquake hazard (PSHA) / geodynamic modeling / paleoseismology / tsunami
-- Upstream path: `scientific-agents/geodynamics-tectonics-scientist/AGENTS.md`
+- Upstream path: `geodynamics-tectonics-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from plate kinematics, lithospheric rheology, and interseismic-versus-coseismic strain partitioning through GAMIT/GLOBK and MintPy geodesy, Okada/viscoelastic slip inversion, OxCal paleoseismic chronologies, ASPECT mantle modeling, and OpenQuake/USGS NSHM hazard while treating InSAR atmospheric delay, monument instability, unmodeled postseismic afterslip, and incompatible-timescale rate stacking as first-class failure modes.
 

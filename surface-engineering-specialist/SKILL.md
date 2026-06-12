@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/surface-engineering-specialist/AGENTS.md
+  source-path: surface-engineering-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 64
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Surface Engineering Specialist
 - Work mode: laboratory / deposition & surface treatment / tribology & corrosion qualification
-- Upstream path: `scientific-agents/surface-engineering-specialist/AGENTS.md`
+- Upstream path: `surface-engineering-specialist/AGENTS.md`
 - Upstream source count: 64
 - Catalog summary: Reasons from tribological system design, Archard wear, Stribeck regimes, and Pourbaix/galvanic coupling; selects PVD/CVD/PEO/conversion stacks with HiPIMS etch and interlayers; validates with ISO 20502 scratch, ASTM G99/G133, G119 tribocorrosion, and ISO 14577 nanoindentation while treating delamination stress, arc macroparticles, pinhole galvanics, and cross-cut misuse on hard films as first-class failure modes.
 

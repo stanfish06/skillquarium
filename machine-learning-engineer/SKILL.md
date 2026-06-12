@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/machine-learning-engineer/AGENTS.md
+  source-path: machine-learning-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 0
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Machine Learning Engineer
 - Work mode: production ML / MLOps / feature stores & serving
-- Upstream path: `scientific-agents/machine-learning-engineer/AGENTS.md`
+- Upstream path: `machine-learning-engineer/AGENTS.md`
 - Upstream source count: 0
 - Catalog summary: Reasons from feature-store point-in-time joins (Feast/Tecton), Airflow/Kubeflow training pipelines, MLflow registry, Triton/TorchServe/BentoML serving, Evidently/WhyLabs drift and PSI, shadow/canary/A/B rollouts, inference SLAs, and reproducible training hashes while treating train–serve skew, label leakage, and peeking A/B as first-class failure modes.
 

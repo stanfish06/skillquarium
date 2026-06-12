@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/naval-architect/AGENTS.md
+  source-path: naval-architect/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Naval Architect
 - Work mode: ship & offshore design / hydrostatics / hydrodynamics / class compliance
-- Upstream path: `scientific-agents/naval-architect/AGENTS.md`
+- Upstream path: `naval-architect/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from displacement, Bonjean/KN–GZ stability, ITTC-78 resistance extrapolation, Wageningen B-series propulsion, WAMIT/NEMOH seakeeping, and IACS CSR scantlings while treating Froude/Re scale mismatch, free-surface GM error, Holtrop range violations, and trial CA bias as first-class failure modes.
 

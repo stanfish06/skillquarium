@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quantum-physicist/AGENTS.md
+  source-path: quantum-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Quantum Physicist
 - Work mode: theory / quantum information / open-system dynamics / device benchmarking / multi-platform hardware (superconducting, trapped-ion, photonic, neutral-atom)
-- Upstream path: `scientific-agents/quantum-physicist/AGENTS.md`
+- Upstream path: `quantum-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Hilbert-space density operators, commutation relations, and Lindblad open-system dynamics through randomized benchmarking, gate-set and process tomography, Bell-CHSH tests, and Stim/PyMatching surface-code decoding while treating crosstalk, leakage, calibration drift, and measurement backaction as first-class failure modes.
 

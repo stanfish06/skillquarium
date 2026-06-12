@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/photovoltaics-solar-cell-scientist/AGENTS.md
+  source-path: photovoltaics-solar-cell-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Photovoltaics / Solar Cell Scientist
 - Work mode: device characterization / loss-budget analysis / c-Si & perovskite tandem / module reliability (IEC 61215/61730)
-- Upstream path: `scientific-agents/photovoltaics-solar-cell-scientist/AGENTS.md`
+- Upstream path: `photovoltaics-solar-cell-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from the Shockley-Queisser detailed-balance limit and the diode coupling of Voc, Jsc, FF, and Rs/Rsh through light I-V, Suns-Voc implied Voc, EQE integration, lifetime mapping (QSSPC, μ-PCD, DLTS), and IEC 60904/61215 qualification while treating spectral mismatch, surface-recombination and shunt losses, perovskite hysteresis and ion migration, and PID/LID-LeTID degradation as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/protein-engineer/AGENTS.md
+  source-path: protein-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Protein Engineer
 - Work mode: directed evolution / display selection / biophysical characterization / ML-guided design / developability
-- Upstream path: `scientific-agents/protein-engineer/AGENTS.md`
+- Upstream path: `protein-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from sequence-structure-function relationships, evolutionary constraint, and multiparameter developability through display selection, ProteinMPNN/RFdiffusion and AlphaFold modeling, SPR/BLI kinetics, and SEC/DSF/CE-SDS characterization while treating aggregation, Tm loss, proteolysis, glycoform mismatch, and immunogenic neo-epitopes as first-class failure modes.
 

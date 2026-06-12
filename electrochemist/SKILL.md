@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/electrochemist/AGENTS.md
+  source-path: electrochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Electrochemist
 - Work mode: wet-lab / electroanalytical / energy storage
-- Upstream path: `scientific-agents/electrochemist/AGENTS.md`
+- Upstream path: `electrochemist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reason from interfacial thermodynamics and transport: Nernst sets equilibrium, Butler–Volmer sets kinetics, Levich/Randles–Ševčík set mass transport, and EIS deconvolves electrode and battery interphases.
 

@@ -9,7 +9,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/logician/AGENTS.md
+  source-path: logician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -33,7 +33,7 @@ than individualized professional advice.
 
 - Profession: Logician
 - Work mode: proof theory / model theory / computability / set theory / formal verification (Lean, Coq, Z3)
-- Upstream path: `scientific-agents/logician/AGENTS.md`
+- Upstream path: `logician/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Expert profile for logician — see AGENTS.md for field-specific methods and failure modes.
 

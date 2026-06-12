@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/gerontologist/AGENTS.md
+  source-path: gerontologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Gerontologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/gerontologist/AGENTS.md`
+- Upstream path: `gerontologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from senescence hallmarks, frailty, multi-morbidity, and life-course exposures through validated instruments (Fried phenotype, Rockwood CFS, SPPB/gait speed), epigenetic clocks (Horvath, PhenoAge, GrimAge), competing-risk survival (Fine-Gray), and NIA cohorts (HRS, NHATS, ITP) while treating survivor bias, differential attrition, healthy-volunteer bias, and frail-subset toxicity as first-class failure modes.
 

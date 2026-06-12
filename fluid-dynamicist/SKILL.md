@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/fluid-dynamicist/AGENTS.md
+  source-path: fluid-dynamicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 24
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Fluid Dynamicist
 - Work mode: computational CFD / theoretical scaling / experimental validation
-- Upstream path: `scientific-agents/fluid-dynamicist/AGENTS.md`
+- Upstream path: `fluid-dynamicist/AGENTS.md`
 - Upstream source count: 24
 - Catalog summary: Reasons from Navier–Stokes and dimensionless scaling through RANS/LES/DNS selection, mesh/y+ strategy, OpenFOAM/Fluent workflows, and MMS + ASME V&V 20 / PIV validation.
 

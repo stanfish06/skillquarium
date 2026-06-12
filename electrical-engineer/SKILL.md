@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/electrical-engineer/AGENTS.md
+  source-path: electrical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Electrical Engineer
 - Work mode: circuits & boards / analog & power / SI & EMC / instrumentation / standards-based verification (IEC 62368, CISPR)
-- Upstream path: `scientific-agents/electrical-engineer/AGENTS.md`
+- Upstream path: `electrical-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Kirchhoff's laws, Maxwell's quasi-static limit, energy conservation, and LTI superposition through SPICE loop-gain and corner analysis, Bode gain/phase-margin checks, impedance-controlled layout, and IEC 62368/CISPR compliance, while treating unmodeled PCB parasitics, ground-return loops, protection let-through energy versus semiconductor SOA, and probe-artifact confounders as first-class failure modes.
 

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Import K-Dense scientific-agents profiles as native SKILL.md folders.
 
-The upstream repository stores each expert profile as:
-
-    scientific-agents/<slug>/AGENTS.md
+The upstream catalog records each expert profile path. Current checkouts store
+those catalog-relative paths under the scientific-agents/ directory, so the
+importer resolves the catalog path first and then uses the nested layout as a
+compatibility fallback.
 
 This vault and the skills CLI discover folders that contain SKILL.md, so this
 script converts the upstream profiles into first-class skills while preserving
@@ -61,10 +62,30 @@ def compact_description(agent: dict) -> str:
     return desc
 
 
+def catalog_profile_path(agent: dict) -> Path:
+    profile_path = Path(agent.get("path") or f"{agent['slug']}/AGENTS.md")
+    if profile_path.is_absolute() or ".." in profile_path.parts:
+        raise ValueError(f"Unsafe catalog path for {agent['slug']}: {profile_path}")
+    return profile_path
+
+
+def resolve_profile_path(source: Path, agent: dict) -> Path:
+    catalog_path = catalog_profile_path(agent)
+    candidates = [
+        source / catalog_path,
+        source / "scientific-agents" / catalog_path,
+    ]
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    tried = ", ".join(str(candidate) for candidate in candidates)
+    raise FileNotFoundError(f"{catalog_path} for {agent['slug']} (tried: {tried})")
+
+
 def render_skill(agent: dict, profile_body: str, commit: str) -> str:
     slug = agent["slug"]
     profession = agent["profession"]
-    upstream_path = f"scientific-agents/{slug}/AGENTS.md"
+    upstream_path = catalog_profile_path(agent).as_posix()
     desc = compact_description(agent)
     summary = " ".join(agent.get("summary", "").split())
     work_mode = " ".join(agent.get("work_mode", "").split())
@@ -189,10 +210,7 @@ def load_agents(source: Path) -> list[dict]:
         data = json.load(f)
     agents = data["agents"]
     for agent in agents:
-        slug = agent["slug"]
-        profile_path = source / "scientific-agents" / slug / "AGENTS.md"
-        if not profile_path.is_file():
-            raise FileNotFoundError(profile_path)
+        resolve_profile_path(source, agent)
     return agents
 
 
@@ -209,7 +227,7 @@ def main() -> None:
 
     for agent in agents:
         slug = agent["slug"]
-        profile_path = source / "scientific-agents" / slug / "AGENTS.md"
+        profile_path = resolve_profile_path(source, agent)
         skill_dir = dest / slug
         skill_dir.mkdir(parents=True, exist_ok=True)
         skill_text = render_skill(agent, profile_path.read_text(encoding="utf-8"), commit)

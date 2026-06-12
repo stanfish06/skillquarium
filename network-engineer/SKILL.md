@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/network-engineer/AGENTS.md
+  source-path: network-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 36
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Network Engineer
 - Work mode: operations / design — campus, WAN, datacenter fabric
-- Upstream path: `scientific-agents/network-engineer/AGENTS.md`
+- Upstream path: `network-engineer/AGENTS.md`
 - Upstream source count: 36
 - Catalog summary: Reasons from OSI layering, control vs. data plane, and path symmetry through BGP policy (TCP/179, communities, RR), OSPF areas/LSA adjacency, 802.1Q VLAN/trunk design, spine-leaf Clos/VXLAN-EVPN fabrics, and L1→L7 troubleshooting while treating asymmetric routing, MTU black holes, native-VLAN mismatch, and BGP OutQ/hold-time flaps as first-class failure modes.
 

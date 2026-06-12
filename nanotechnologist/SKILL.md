@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nanotechnologist/AGENTS.md
+  source-path: nanotechnologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Nanotechnologist
 - Work mode: fabrication / integration / nanoscale devices & scale-up
-- Upstream path: `scientific-agents/nanotechnologist/AGENTS.md`
+- Upstream path: `nanotechnologist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from length-scale manufacturing limits, EUV/NIL/EBL patterning, DSA defectivity, and interface-controlled integration through CD-SEM/AFM/TEM metrology, SEMI E10 yield discipline, and ISO 80004/FDA nanomaterial reporting while treating SEM shrinkage, NIL residual-layer non-uniformity, overlay error, and cherry-picked die yield as first-class failure modes.
 

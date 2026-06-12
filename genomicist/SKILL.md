@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/genomicist/AGENTS.md
+  source-path: genomicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Genomicist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/genomicist/AGENTS.md`
+- Upstream path: `genomicist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from reference-relative coordinates, haplotypes, variant classes, and sequencing-as-measurement through GATK/DeepVariant, VEP/ClinVar/gnomAD, GIAB/hap.py benchmarking, and ACMG/AMP-ClinGen frameworks while treating build mismatches, paralog/pseudogene and GC dropout artifacts, contamination and index hopping, batch effects, and annotation drift as first-class failure modes.
 

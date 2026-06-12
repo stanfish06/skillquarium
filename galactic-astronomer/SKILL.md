@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/galactic-astronomer/AGENTS.md
+  source-path: galactic-astronomer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Galactic Astronomer
 - Work mode: Galactic archaeology / survey astrometry / stellar populations / chemodynamics / orbit modeling
-- Upstream path: `scientific-agents/galactic-astronomer/AGENTS.md`
+- Upstream path: `galactic-astronomer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from distance ladders, dust extinction, and survey selection functions through Gaia DR3 cross-matches, isochrone and Bayesian SFH fitting (PARSEC/MIST, Starfish), and orbit integration in named potentials (McMillan17, MWPotential2015) via galpy, Agama, and Gala, while treating parallax-S/N and RUWE failures, unresolved binaries and fiber collisions, dust-or-crowding overdensities, and spiral-arm-mimicking-streams as first-class failure modes.
 

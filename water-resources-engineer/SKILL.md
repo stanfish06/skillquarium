@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/water-resources-engineer/AGENTS.md
+  source-path: water-resources-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Water Resources Engineer
 - Work mode: design / engineering / hydrology & floodplain
-- Upstream path: `scientific-agents/water-resources-engineer/AGENTS.md`
+- Upstream path: `water-resources-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Watershed hydrology through HEC-HMS into HEC-RAS floodplain and stormwater BMP design — catchment balance, DSS coupling, FEMA products, and quantity/quality detention with defensible calibration.
 

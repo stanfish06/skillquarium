@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/horticulturist/AGENTS.md
+  source-path: horticulturist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Horticulturist
 - Work mode: orchard/CEA trials / postharvest physiology / rootstock-scion & crop load / IPM (degree-day, MRL/PHI)
-- Upstream path: `scientific-agents/horticulturist/AGENTS.md`
+- Upstream path: `horticulturist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from plant-environment-cultural coupling, source-sink carbon partitioning, and chilling/photoperiod thresholds through rootstock-scion matching, DLI/VPD and substrate EC/pH targets, Dynamic/Utah chill models, and CA/MA postharvest setpoints while treating blossom-end rot, bitter pit, tipburn, storage scald, and MRL/PHI breaches as first-class failure modes.
 

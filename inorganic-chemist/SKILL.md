@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/inorganic-chemist/AGENTS.md
+  source-path: inorganic-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Inorganic Chemist
 - Work mode: wet-lab / coordination & organometallic synthesis / solid-state & catalysis
-- Upstream path: `scientific-agents/inorganic-chemist/AGENTS.md`
+- Upstream path: `inorganic-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from electron counting, ligand field theory, and HSAB matching through Schlenk/glovebox air-sensitive synthesis, SCXRD/checkCIF validation, Evans/EPR/XANES oxidation-state assignment, and hot-filtration leaching tests while treating paramagnetic NMR overinterpretation, mystery-oil misidentification, and DFT-without-multiplicity claims as first-class failure modes.
 

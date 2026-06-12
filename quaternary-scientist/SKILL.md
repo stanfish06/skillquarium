@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quaternary-scientist/AGENTS.md
+  source-path: quaternary-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Quaternary Scientist
 - Work mode: field geochronology / glacial geomorphology / multi-proxy paleoclimate / ice-core & tephra correlation
-- Upstream path: `scientific-agents/quaternary-scientist/AGENTS.md`
+- Upstream path: `quaternary-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from dated landform-sediment-proxy associations, multi-method chronology, and ice-age cyclicity (MIS, orbital forcing) through radiocarbon/OSL/cosmogenic dating, Bayesian age models (OxCal, Bacon, IntCal20), tephrochronology, and GIA models while treating uncalibrated 14C years, incomplete OSL bleaching, cosmogenic inheritance, and no-analog pollen assemblages as first-class failure modes.
 

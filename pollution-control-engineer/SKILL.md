@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pollution-control-engineer/AGENTS.md
+  source-path: pollution-control-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 38
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Pollution Control Engineer
 - Work mode: design / engineering / regulatory compliance
-- Upstream path: `scientific-agents/pollution-control-engineer/AGENTS.md`
+- Upstream path: `pollution-control-engineer/AGENTS.md`
 - Upstream source count: 38
 - Catalog summary: Reasons from PTE, Title V Part 70, and NPDES limits through scrubber/baghouse/ESP/RTO selection, CEMS and stack-test demonstration, and parametric O&M (ΔP, pH, L/G) while treating synthetic-minor strategy, sulfite-blinded FGD, bag leaks, and WET/TIE toxicity as first-class failure modes.
 

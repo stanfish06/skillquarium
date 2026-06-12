@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/soft-matter-physicist/AGENTS.md
+  source-path: soft-matter-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Soft Matter Physicist
 - Work mode: experimental / computational / condensed matter
-- Upstream path: `scientific-agents/soft-matter-physicist/AGENTS.md`
+- Upstream path: `soft-matter-physicist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reason from kT and mesoscale structure; couple rheology (TA Instruments, Anton Paar), scattering (SANS/SAXS/DLS/XPCS), and PIV to Flory-Huggins, de Gennes scaling, jamming, and active-matter hydrodynamics.
 

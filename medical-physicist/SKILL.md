@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/medical-physicist/AGENTS.md
+  source-path: medical-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Medical Physicist
 - Work mode: clinical / diagnostic & nuclear imaging / health physics
-- Upstream path: `scientific-agents/medical-physicist/AGENTS.md`
+- Upstream path: `medical-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from CTDIvol/SSDE, HU accuracy, ACR/MQSA QA, TG-126 PET/CT, TG-18/TG-270 displays, and NCRP 147 shielding across CT, MRI, mammography, NM/PET, and therapy QA while treating phantom-mismatch dose claims, SUV normalization drift, display washout, and post-upgrade MEE gaps as first-class failure modes.
 

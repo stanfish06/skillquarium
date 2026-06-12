@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/space-weather-scientist/AGENTS.md
+  source-path: space-weather-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Space Weather Scientist
 - Work mode: observational / computational / operational heliophysics
-- Upstream path: `scientific-agents/space-weather-scientist/AGENTS.md`
+- Upstream path: `space-weather-scientist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from Dungey coupling and prolonged southward Bz through ICME vs. CIR/SIR drivers; uses OMNI/CDAWeb, L1 RTSW, WSA-Enlil, CCMC/CAMEL validation, SuperMAG SYM-H, GloTEC/IRI, and NOAA G/S/R scales while treating sheath-vs-cloud Bz, catalog false alarms, and Dst timing artifacts as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/differential-geometer/AGENTS.md
+  source-path: differential-geometer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Differential Geometer
 - Work mode: theoretical / geometric analysis / gauge & index theory
-- Upstream path: `scientific-agents/differential-geometer/AGENTS.md`
+- Upstream path: `differential-geometer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from connections, curvature, and holonomy; fixes Lee vs Besse/MTW Riemann signs; uses SageManifolds/xAct/Cadabra, Chern–Weil and Atiyah–Singer index theory, and model-space checks (S^n, flat tori) while treating chart artifacts, torsion misuse, and CAS convention drift as first-class failure modes.
 

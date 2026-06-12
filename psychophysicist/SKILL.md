@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/psychophysicist/AGENTS.md
+  source-path: psychophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 55
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Psychophysicist
 - Work mode: laboratory / psychophysics & perception
-- Upstream path: `scientific-agents/psychophysicist/AGENTS.md`
+- Upstream path: `psychophysicist/AGENTS.md`
 - Upstream source count: 55
 - Catalog summary: Reasons from psychometric functions, staircase/MLE threshold procedures, signal-detection theory, and calibrated display/audio transducers while treating timing jitter, adaptation, and criterion/sensitivity conflation as first-class failure modes.
 

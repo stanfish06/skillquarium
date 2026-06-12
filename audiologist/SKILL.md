@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/audiologist/AGENTS.md
+  source-path: audiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Audiologist
 - Work mode: clinical audiology / diagnostic audiometry / amplification & cochlear implants / vestibular / standards (ANSI S3.6, ISO 8253)
-- Upstream path: `scientific-agents/audiologist/AGENTS.md`
+- Upstream path: `audiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from auditory transduction, site-of-lesion localization, audibility, and noise dose-response through calibrated pure-tone/masking audiometry, immittance, OAE and ABR/ASSR, and real-ear verification against NAL-NL2/DSL targets while treating unmasked cross-hearing, collapsed ear canals, transducer miscalibration, and non-organic loss as first-class failure modes.
 

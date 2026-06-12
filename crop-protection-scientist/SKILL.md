@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/crop-protection-scientist/AGENTS.md
+  source-path: crop-protection-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 76
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Crop Protection Scientist
 - Work mode: field / regulatory / IPM & pesticide stewardship
-- Upstream path: `scientific-agents/crop-protection-scientist/AGENTS.md`
+- Upstream path: `crop-protection-scientist/AGENTS.md`
 - Upstream source count: 76
 - Catalog summary: Reasons from IPM, EIL/ET, and FRAC/HRAC/IRAC MoA rotation through GEP/EPPO efficacy trials, CDMS label law, BBCH timing, DRT application, PPDB/fate modeling, and MRL/GAP alignment while treating resistance, drift, herbicide carryover, and abiotic mimicry as first-class failure modes.
 

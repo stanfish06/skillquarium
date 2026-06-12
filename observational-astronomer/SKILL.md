@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/observational-astronomer/AGENTS.md
+  source-path: observational-astronomer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Observational Astronomer
 - Work mode: multi-wavelength observational / calibration & photometry / time-domain & transients / Bayesian inference / multi-messenger
-- Upstream path: `scientific-agents/observational-astronomer/AGENTS.md`
+- Upstream path: `observational-astronomer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from radiative transfer, the distance ladder, and statistical-versus-systematic error budgets through HST/JWST/ALMA pipelines, Gaia DR3 astrometry, archives (SIMBAD, MAST, HEASARC), and emcee/dynesty inference while treating the look-elsewhere effect, PSF and flat-field artifacts, photo-z catastrophic outliers, and Malmquist/Eddington selection bias as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/hematologist/AGENTS.md
+  source-path: hematologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Hematologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/hematologist/AGENTS.md`
+- Upstream path: `hematologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from hematopoietic hierarchy, clonal evolution, and hemostatic balance through peripheral smear review, reticulocyte production index, flow cytometry, mixing studies, and WHO/ICC-anchored NGS and cytogenetics, while treating pseudothrombocytopenia, preanalytic line-draw and EDTA artifacts, and missed consumptive emergencies like TTP and DIC as first-class failure modes.
 

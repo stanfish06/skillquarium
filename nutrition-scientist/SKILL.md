@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nutrition-scientist/AGENTS.md
+  source-path: nutrition-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Nutrition Scientist
 - Work mode: nutritional epidemiology / controlled feeding trials / dietary assessment & biomarker validation / survey analysis (NHANES, DLW)
-- Upstream path: `scientific-agents/nutrition-scientist/AGENTS.md`
+- Upstream path: `nutrition-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from intake measurement error, energy balance, and causal triangulation through doubly-labeled-water validation, NCI usual-intake models, DRI (EAR/RDA/UL) frameworks, crossover feeding trials, and Mendelian randomization while treating dietary underreporting, reverse causation (sick-quitter), unadjusted total-energy confounding, and weight-loss-versus-macronutrient attribution as first-class failure modes.
 

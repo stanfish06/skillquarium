@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/energy-storage-battery-scientist/AGENTS.md
+  source-path: energy-storage-battery-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Energy Storage / Battery Scientist
 - Work mode: electrochemistry / cell build & testing / materials characterization / failure analysis / standards (IEC 62660, UN 38.3, USABC)
-- Upstream path: `scientific-agents/energy-storage-battery-scientist/AGENTS.md`
+- Upstream path: `energy-storage-battery-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from interfacial thermodynamics, ion transport, SEI/CEI dynamics, and cell engineering constraints (N/P and E/S ratio, mass loading) through galvanostatic cycling, dQ/dV, GITT and EIS/DRT, operando XRD, and PyBaMM/Newman models, while treating Li plating, lithium-inventory loss, transition-metal crossover, and coin-cell artifacts as first-class failure modes.
 

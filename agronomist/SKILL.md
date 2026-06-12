@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/agronomist/AGENTS.md
+  source-path: agronomist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Agronomist
 - Work mode: field / observational / extension & farm decision support
-- Upstream path: `scientific-agents/agronomist/AGENTS.md`
+- Upstream path: `agronomist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from 4R stewardship and G×E×M through MRTN economic N, calibrated soil-test extractants, penetrometer compaction diagnosis, on-farm strip mixed models, partial budgets, and AgroEcoList reporting while treating pseudo-replication, yield-monitor drift, and yield-goal N over-application as first-class failure modes.
 

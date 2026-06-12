@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mining-geologist/AGENTS.md
+  source-path: mining-geologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 74
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Mining Geologist
 - Work mode: field / exploration drilling / ore deposit modelling / geostatistics / resource estimation
-- Upstream path: `scientific-agents/mining-geologist/AGENTS.md`
+- Upstream path: `mining-geologist/AGENTS.md`
 - Upstream source count: 74
 - Catalog summary: Reasons from deposit-type models (porphyry, VMS, SEDEX, orogenic Au, IOCG, skarn) through oriented core logging, domaining, variography, OK/MIK/LUC estimation, and Chain-of-Mining reconciliation to JORC Table 1, NI 43-101 Item 14, and CIM MRMR reporting; uses Leapfrog, GIM Suite/MX Deposit, and Parker F-series factors while treating support/compositing errors, batch QA/QC failures, OK smoothing bias, and Inferred-overclaim as first-class failure modes.
 

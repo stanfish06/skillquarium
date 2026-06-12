@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astrophysicist/AGENTS.md
+  source-path: astrophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 46
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Astrophysicist
 - Work mode: observational / computational / multi-messenger
-- Upstream path: `scientific-agents/astrophysicist/AGENTS.md`
+- Upstream path: `astrophysicist/AGENTS.md`
 - Upstream source count: 46
 - Catalog summary: Reasons like a senior astrophysicist across observational, computational, and multi-messenger work — from radiative transfer and error budgets through JWST/ALMA/Rubin/LIGO pipelines, VO archives, and calibrated detection vs upper-limit reporting.
 

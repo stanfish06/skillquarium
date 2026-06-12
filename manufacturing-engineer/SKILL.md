@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/manufacturing-engineer/AGENTS.md
+  source-path: manufacturing-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Manufacturing Engineer
 - Work mode: process planning / CNC-CAM / GD&T / quality launch (APQP/PPAP, MSA/SPC) / multi-process (machining, welding, casting)
-- Upstream path: `scientific-agents/manufacturing-engineer/AGENTS.md`
+- Upstream path: `manufacturing-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from process physics, capability, and cost through Shercliff-Lovatt process selection, ASME Y14.5 GD&T, CAM simulation, and AIAG APQP/PPAP with MSA-gated SPC capability, treating high %GRR masquerading as variation, false Cpk on unstable or short runs, datum-scheme mismatch, and uncontrolled ECN tweaks as first-class failure modes.
 

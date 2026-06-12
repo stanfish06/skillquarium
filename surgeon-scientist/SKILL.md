@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/surgeon-scientist/AGENTS.md
+  source-path: surgeon-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Surgeon-Scientist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/surgeon-scientist/AGENTS.md`
+- Upstream path: `surgeon-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from anatomy, pathophysiology, and the IDEAL stage of surgical innovation through IDE/IND pathways, NSQIP/STS registry risk-adjustment, CUSUM learning-curve analysis, and ischemia-timed biobank SOPs while treating unrisk-adjusted case series, indication-confounded surgeon-preference comparisons, cold-ischemia biomarker artifact, and conflated learning-curve and surgeon-volume effects as first-class failure modes.
 

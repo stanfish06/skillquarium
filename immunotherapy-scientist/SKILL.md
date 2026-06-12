@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/immunotherapy-scientist/AGENTS.md
+  source-path: immunotherapy-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 59
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Immunotherapy Scientist
 - Work mode: translational / cellular & checkpoint immunotherapy
-- Upstream path: `scientific-agents/immunotherapy-scientist/AGENTS.md`
+- Upstream path: `immunotherapy-scientist/AGENTS.md`
 - Upstream source count: 59
 - Catalog summary: Reasons from antigen recognition and checkpoint circuits through CAR-T/bispecific design, ASTCT CRS/ICANS grading, flow cytometry release CQAs, iRECIST response assessment, COMPASS/TIDE biomarker modeling, and JACIE/FACT IEC accreditation while treating antigen escape, pseudoprogression, tonic signaling, and step-up CRS as first-class failure modes.
 

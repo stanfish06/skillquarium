@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/ichthyologist/AGENTS.md
+  source-path: ichthyologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Ichthyologist
 - Work mode: field / museum / fisheries science / ichthyoplankton / eDNA
-- Upstream path: `scientific-agents/ichthyologist/AGENTS.md`
+- Upstream path: `ichthyologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from meristic fin formulae, sagittal otolith annuli/daily increments, larval flexion staging, and ICZN type discipline through Eschmeyer's Catalog, FishBase/WoRMS, MiFish/12S eDNA with blank controls, FSA/TropFishR/SS3 stock assessment, and Darwin Core museum metadata while treating CPUE catchability, unvalidated otolith ages, larval pigmentation loss, and eDNA false positives as first-class failure modes.
 

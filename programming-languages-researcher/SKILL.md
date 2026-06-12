@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/programming-languages-researcher/AGENTS.md
+  source-path: programming-languages-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Programming Languages Researcher
 - Work mode: formal semantics / type systems / mechanized metatheory (Coq/Ott) / verification / POPL-PLDI
-- Upstream path: `scientific-agents/programming-languages-researcher/AGENTS.md`
+- Upstream path: `programming-languages-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from operational semantics, type-theoretic invariants, and soundness as preservation-plus-progress through Ott/LN-defined calculi, Coq/Isabelle/Agda mechanization, Hindley-Milner inference, and abstract-interpretation Galois connections while treating stuck terms, blame escaping onto well-typed pure terms, broken substitution and canonical-forms lemmas, and unsound widening as first-class failure modes.
 

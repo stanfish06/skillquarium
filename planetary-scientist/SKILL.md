@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/planetary-scientist/AGENTS.md
+  source-path: planetary-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Planetary Scientist
 - Work mode: solar-system / remote-sensing & in situ / exoplanet detection-characterization / mission archives (PDS, SPICE)
-- Upstream path: `scientific-agents/planetary-scientist/AGENTS.md`
+- Upstream path: `planetary-scientist/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Expert profile for planetary scientist — see AGENTS.md for field-specific methods and failure modes.
 

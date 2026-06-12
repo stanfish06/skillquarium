@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/heat-transfer-engineer/AGENTS.md
+  source-path: heat-transfer-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Heat Transfer Engineer
 - Work mode: thermal analysis / conjugate CFD-FEA / heat exchanger design / electronics cooling / standards (ASME, TEMA, JEDEC JESD51)
-- Upstream path: `scientific-agents/heat-transfer-engineer/AGENTS.md`
+- Upstream path: `heat-transfer-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from conduction, convection, radiation, and coupled fluid-solid physics through thermal resistance networks, Biot/NTU/film-temperature scaling, LMTD and epsilon-NTU exchanger methods, fin efficiency, and conjugate-heat-transfer CFD while treating contact resistance and TIM pump-out, fouling, boiling CHF, non-condensables, and non-conservative interface flux mapping as first-class failure modes.
 

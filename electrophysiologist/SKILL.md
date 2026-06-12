@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/electrophysiologist/AGENTS.md
+  source-path: electrophysiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Electrophysiologist
 - Work mode: patch clamp / extracellular LFP & MEA / ion-channel biophysics / rig artifact compensation
-- Upstream path: `scientific-agents/electrophysiologist/AGENTS.md`
+- Upstream path: `electrophysiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from membrane voltage, conductance kinetics, series resistance, and filter settings through pClamp/Multiclamp acquisition, pharmacological channel isolation (TTX, NBQX/APV, picrotoxin), Hodgkin-Huxley/Markov gating fits, and NWB-standardized reporting while treating Rs drift, dialysis run-down, space clamp, and polysynaptic contamination as first-class failure modes.
 

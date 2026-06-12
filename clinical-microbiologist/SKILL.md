@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/clinical-microbiologist/AGENTS.md
+  source-path: clinical-microbiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Clinical Microbiologist
 - Work mode: clinical diagnostic microbiology / bacteriology service line
-- Upstream path: `scientific-agents/clinical-microbiologist/AGENTS.md`
+- Upstream path: `clinical-microbiologist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from blood-culture volume and contamination criteria, staged Gram–ID–AST reporting, MALDI-TOF/VITEK/Phoenix and EUCAST RAST, CLSI M100 vs EUCAST breakpoint discipline, WHONET antibiograms, and NHSN MDRO alerts—treating contaminant vs pathogen and VME/ME as first-class failure modes.
 

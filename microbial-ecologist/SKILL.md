@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/microbial-ecologist/AGENTS.md
+  source-path: microbial-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Microbial Ecologist
 - Work mode: field / mesocosm / amplicon & metagenomic community ecology
-- Upstream path: `scientific-agents/microbial-ecologist/AGENTS.md`
+- Upstream path: `microbial-ecologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from Vellend assembly (selection, dispersal, drift, diversification), compositional stats (ANCOM-BC2, MaAsLin2, Aitchison), and SILVA/GTDB/EMP workflows; treats kitome contamination, GCN bias, pseudoreplication, SparCC-as-interaction, and PICRUSt2-as-measured-function as first-class failure modes.
 

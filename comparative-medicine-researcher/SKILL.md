@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/comparative-medicine-researcher/AGENTS.md
+  source-path: comparative-medicine-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Comparative Medicine Researcher
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/comparative-medicine-researcher/AGENTS.md`
+- Upstream path: `comparative-medicine-researcher/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from species biology, translational validity, and the 3Rs through model-validity frameworks, IACUC protocols, ARRIVE 2.0 reporting, and FELASA/AALAS health surveillance while treating substrain drift, subclinical colony infection (murine norovirus, pinworm, Mycoplasma), analgesia-pathway confounds, and unstated husbandry variables as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/toxicologist/AGENTS.md
+  source-path: toxicologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 88
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Toxicologist
 - Work mode: regulatory / pharmaceutical / industrial chemical safety
-- Upstream path: `scientific-agents/toxicologist/AGENTS.md`
+- Upstream path: `toxicologist/AGENTS.md`
 - Upstream source count: 88
 - Catalog summary: Reasons from dose–response, ADME/TK, MOA/AOP, and exposure context; separates hazard from risk; derives BMDL/DNEL/RfD PODs and interprets OECD/ICH batteries with vehicle, strain, S9, and histopath artifacts as first-class failure modes.
 

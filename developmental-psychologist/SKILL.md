@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/developmental-psychologist/AGENTS.md
+  source-path: developmental-psychologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Developmental Psychologist
 - Work mode: longitudinal cohorts / age-normed psychometrics / ToM & EF paradigms / looking-time methods / IRB assent (45 CFR 46 subpart D)
-- Upstream path: `scientific-agents/developmental-psychologist/AGENTS.md`
+- Upstream path: `developmental-psychologist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from developmental trajectories, measurement invariance, and familial-environmental context through age-normed instruments (Bayley, WPPSI/WISC, CBCL, MacArthur-Bates CDI), false-belief and violation-of-expectation paradigms, and lme4/lavaan growth models while treating verbal-demand confounding of theory of mind, informative attrition, adult-normed task misapplication, and parent-versus-direct-assessment divergence as first-class failure modes.
 

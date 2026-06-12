@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/machine-learning-researcher/AGENTS.md
+  source-path: machine-learning-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Machine Learning Researcher
 - Work mode: computational / empirical & theoretical machine learning research
-- Upstream path: `scientific-agents/machine-learning-researcher/AGENTS.md`
+- Upstream path: `machine-learning-researcher/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from population risk, double descent, and inductive bias; enforces sacred test sets, hierarchical ablations, nested CV, and HELM/Dynabench-aware benchmarking; reports with NeurIPS and Pineau reproducibility checklists while treating leakage, meta-overfitting, benchmark contamination, Goodhart gaming, and seed variance as first-class failure modes.
 

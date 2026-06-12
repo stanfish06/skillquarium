@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pharmaceutical-formulation-scientist/AGENTS.md
+  source-path: pharmaceutical-formulation-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Pharmaceutical Formulation Scientist
 - Work mode: formulation development / QbD-CMC / solid-state & dissolution / regulatory (ICH Q8, USP, Module 3.2.P)
-- Upstream path: `scientific-agents/pharmaceutical-formulation-scientist/AGENTS.md`
+- Upstream path: `pharmaceutical-formulation-scientist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Anchor every decision in the QTPP and critical quality attributes (CQAs): assay, Classify the API before choosing a technology path. Use BCS (solubility vs.
 

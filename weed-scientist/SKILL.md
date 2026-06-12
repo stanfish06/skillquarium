@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/weed-scientist/AGENTS.md
+  source-path: weed-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Weed Scientist
 - Work mode: field efficacy trials / herbicide resistance / dose-response (drc/GR50) / IWM / MOA stewardship (HRAC/WSSA)
-- Upstream path: `scientific-agents/weed-scientist/AGENTS.md`
+- Upstream path: `weed-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the weed seed bank, population dynamics, and herbicide mode-of-action biology through log-logistic dose-response (GR50/GR90 in R drc), replicated RCB field trials with susceptible checks, molecular resistance assays (ALS sequencing, EPSPS copy number), and HRAC/WSSA-based MOA rotation while treating drift and carryover, tank-mix antagonism and water-quality failures, and late-escape seed rain as first-class failure modes.
 

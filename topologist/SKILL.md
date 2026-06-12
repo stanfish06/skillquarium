@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/topologist/AGENTS.md
+  source-path: topologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Topologist
 - Work mode: proof-based / algebraic topology / low-dimensional & knot theory / TDA (persistent homology)
-- Upstream path: `scientific-agents/topologist/AGENTS.md`
+- Upstream path: `topologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from continuity, compactness, connectedness, homotopy, and manifold structure through invariants and tools like π₁ via Seifert-van Kampen, cellular/simplicial homology with ∂²=0 and Smith-normal-form torsion, Mayer-Vietoris, and SnapPy/GUDHI computation, while treating lost-Hausdorffness in quotients, torsion missed by rational coefficients, visual deformation without a homotopy or Reidemeister proof, and barcodes interpreted without filtration stability as first-class failure modes.
 

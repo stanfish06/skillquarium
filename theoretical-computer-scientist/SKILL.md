@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/theoretical-computer-scientist/AGENTS.md
+  source-path: theoretical-computer-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Theoretical Computer Scientist
 - Work mode: theoretical / complexity, algorithms, and formal proof
-- Upstream path: `scientific-agents/theoretical-computer-scientist/AGENTS.md`
+- Upstream path: `theoretical-computer-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from explicit models (TM, circuit, communication, query) and resource measures; audits Karp/parsimonious/gap/fine-grained reductions against ETH/SETH/#ETH and PCP/UGC/APX barriers; uses Complexity Zoo, ECCC/arXiv cs.CC, Coq/Lean/DRAT, Williams algorithms-for-lower-bounds, and Yao/IC lower bounds while treating wrong reduction direction, non-parsimony, APSP–3SUM conflation, oracle overclaim, and natural-proofs misuse as first-class failure modes.
 

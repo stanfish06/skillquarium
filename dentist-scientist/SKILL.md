@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/dentist-scientist/AGENTS.md
+  source-path: dentist-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Dentist-Scientist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/dentist-scientist/AGENTS.md`
+- Upstream path: `dentist-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from oral biofilm-host ecology, tissue healing capacity, and patient-level clinical endpoints (DMFS, PD/CAL, implant survival) through PICO/PROSPERO protocols, CAMBRA and 2017 AAP/EFP staging, ISO 4049/14801 bench tests with thermocycling, and GRADE-rated reviews while treating in-vitro-to-chairside leaps, plaque-index surrogates without caries reduction, and examiner calibration drift as first-class failure modes.
 

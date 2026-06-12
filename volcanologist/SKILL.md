@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/volcanologist/AGENTS.md
+  source-path: volcanologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Volcanologist
 - Work mode: field / observational / computational volcanology & hazard assessment
-- Upstream path: `scientific-agents/volcanologist/AGENTS.md`
+- Upstream path: `volcanologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from mush reservoirs, volatile exsolution, and conduit fragmentation through WOVOdat/GVP unrest synthesis, MultiGAS–DOAS CO₂/SO₂, melt-inclusion thermobarometry, GACOS/ERA5 InSAR, LP/VLP/VOISS-Net seismology, BET_EF probabilistic forecasting, and LaMEVE recurrence while treating atmospheric InSAR artefacts, MI H₂O diffusion loss, open-vent gas misread, and deterministic eruption countdowns as first-class failure modes.
 

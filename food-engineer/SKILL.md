@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/food-engineer/AGENTS.md
+  source-path: food-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Food Engineer
 - Work mode: process engineering / thermal & nonthermal processing / HACCP validation / pilot-to-plant scale-up
-- Upstream path: `scientific-agents/food-engineer/AGENTS.md`
+- Upstream path: `food-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from water activity, thermal microbiology, transport-coupled reaction, and rheology through heat-penetration studies, F0/D/z lethality integration, HACCP with prerequisite programs, and CFR Title 21 LACF/acidified-food rules while treating cold-point under-processing, aw and pH drift, post-process contamination, and unvalidated scale-up as first-class failure modes.
 

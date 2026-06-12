@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biophysicist/AGENTS.md
+  source-path: biophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Biophysicist
 - Work mode: single-molecule biophysics / force spectroscopy / electrophysiology / structural (cryo-EM, NMR) / MD simulation
-- Upstream path: `scientific-agents/biophysicist/AGENTS.md`
+- Upstream path: `biophysicist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from energy landscapes, kT-scale thermodynamics, conformational ensembles, and the equilibrium-versus-kinetics distinction through smFRET, optical/magnetic tweezers, patch clamp, cryo-EM, and MD with force-field validation while treating photobleaching and blinking, FRET crosstalk, tether and series-resistance artifacts, and sampling or force-field bias as first-class failure modes.
 

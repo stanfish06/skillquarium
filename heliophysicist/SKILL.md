@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/heliophysicist/AGENTS.md
+  source-path: heliophysicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Heliophysicist
 - Work mode: remote sensing + in situ / MHD-plasma / space-weather forecasting / magnetosphere coupling
-- Upstream path: `scientific-agents/heliophysicist/AGENTS.md`
+- Upstream path: `heliophysicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from MHD, magnetic topology, reconnection, and IMF Bz coupling through SDO/HMI magnetograms, DEM and NLFFF analysis, coronagraph GCS fitting, and WSA-ENLIL/EUHFORIA ensembles while treating LOS foreshortening, AIA stray light, force-free NLFFF breakdown, and Dst/SYM-H saturation as first-class failure modes.
 

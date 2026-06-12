@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/organic-chemist/AGENTS.md
+  source-path: organic-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 93
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Organic Chemist
 - Work mode: wet-lab / synthetic and methods organic chemistry
-- Upstream path: `scientific-agents/organic-chemist/AGENTS.md`
+- Upstream path: `organic-chemist/AGENTS.md`
 - Upstream source count: 93
 - Catalog summary: Reasons from retrosynthesis, protecting-group strategy, and stereoelectronics; executes air-sensitive chemistry, flash/LC-MS purification, and NMR/IR/MS proof; mines SciFinder/Reaxys and reports ACS-grade experimentals with E-factor/PMI and pyrophoric safety discipline.
 

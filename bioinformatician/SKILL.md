@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/bioinformatician/AGENTS.md
+  source-path: bioinformatician/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 57
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Bioinformatician
 - Work mode: dry-lab / computational genomics
-- Upstream path: `scientific-agents/bioinformatician/AGENTS.md`
+- Upstream path: `bioinformatician/AGENTS.md`
 - Upstream source count: 57
 - Catalog summary: Reference-build discipline (GRCh38/GENCODE/Ensembl, MANE), batch-as-covariate DE (DESeq2/edgeR), index hopping/UDI, GATK/BQSR/PLINK GWAS multiplicity, nf-core reproducibility, and scRNA-seq ambient-RNA/doublet artifacts.
 

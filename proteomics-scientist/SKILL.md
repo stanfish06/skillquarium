@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/proteomics-scientist/AGENTS.md
+  source-path: proteomics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Proteomics Scientist
 - Work mode: bottom-up LC-MS/MS / DDA-DIA-TMT-SILAC / differential abundance / FDR & batch control
-- Upstream path: `scientific-agents/proteomics-scientist/AGENTS.md`
+- Upstream path: `proteomics-scientist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from peptide-to-protein inference, acquisition mode, quantification modality, and missing-value mechanism through MaxQuant, FragPipe/MSFragger, DIA-NN/Spectronaut, Skyline, and MSstats/proDA while treating MNAR missingness, batch confounding, TMT co-isolation ratio compression, and keratin/contaminant signal as first-class failure modes.
 

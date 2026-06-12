@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/agroecologist/AGENTS.md
+  source-path: agroecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Agroecologist
 - Work mode: field ecology / soil health / participatory on-farm trials / landscape GIS / agroecology transitions (FAO 10 Elements)
-- Upstream path: `scientific-agents/agroecologist/AGENTS.md`
+- Upstream path: `agroecologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from socio-ecological farm systems, functional diversity, soil-biology-mediated fertility, and yield-service trade-offs through mother-baby and mixed-model trials, N/P/C mass balances, PLFA/amplicon and pollinator surveys, and NDVI/FRAGSTATS landscape analysis, while treating edge-effect and plot-size artifacts, weather-year confounding, surface-only soil carbon, and ignored labor/tenure adoption constraints as first-class failure modes.
 

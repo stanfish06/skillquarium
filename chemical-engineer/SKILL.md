@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/chemical-engineer/AGENTS.md
+  source-path: chemical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Chemical Engineer
 - Work mode: process design / unit operations / separations & reaction engineering / HAZOP safety (API 520, IEC 61511) / Aspen flowsheeting
-- Upstream path: `scientific-agents/chemical-engineer/AGENTS.md`
+- Upstream path: `chemical-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from closing mass, energy, and momentum balances and competing equilibrium/kinetics/transport regimes through Aspen Plus/HYSYS flowsheeting, McCabe-Thiele and Damkohler-based sizing, pinch analysis, and HAZOP/LOPA with API 520/521 relief, while treating azeotrope-pinched columns, reactor runaway, recycle impurity accumulation, and pump cavitation (NPSHa<NPSHr) as first-class failure modes.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biogeochemist/AGENTS.md
+  source-path: biogeochemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Biogeochemist
 - Work mode: field / lab / soil-sediment biogeochemistry / process modeling
-- Upstream path: `scientific-agents/biogeochemist/AGENTS.md`
+- Upstream path: `biogeochemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from coupled C/N/P/S redox cycles through TEAP zonation, porewater Rhizon-peeper sampling, δ13C/δ15N/δ34S tracers, chamber and eddy-covariance fluxes, and Century/DayCent SOM modeling while treating porewater O2 contamination and nitrification-denitrification coupling errors as first-class failure modes.
 

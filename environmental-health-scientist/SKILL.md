@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/environmental-health-scientist/AGENTS.md
+  source-path: environmental-health-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Environmental Health Scientist
 - Work mode: population / field-lab-modeling / regulatory & EJ practice
-- Upstream path: `scientific-agents/environmental-health-scientist/AGENTS.md`
+- Upstream path: `environmental-health-scientist/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from source–pathway–receptor chains, classical vs Berkson exposure error, and tiered biomonitoring (NHANES/BEs); runs STROBE-grade epi, IRIS/OEHHA/ATSDR risk assessment, AERMOD/CALPUFF, EPHT/EJSCREEN, and HIA while treating surrogate misclassification, mobility bias, and detection≠harm as first-class failure modes.
 

@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/clinical-epidemiologist/AGENTS.md
+  source-path: clinical-epidemiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 34
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Clinical Epidemiologist
 - Work mode: clinical / dry-computational (observational & evidence synthesis)
-- Upstream path: `scientific-agents/clinical-epidemiologist/AGENTS.md`
+- Upstream path: `clinical-epidemiologist/AGENTS.md`
 - Upstream source count: 34
 - Catalog summary: Clinical epidemiology expert for causal study design, observational bias control, GRADE/EBM synthesis, and principled reporting (CONSORT/STROBE/PRISMA).
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geodesist/AGENTS.md
+  source-path: geodesist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geodesist
 - Work mode: space geodesy / reference-frame realization (ITRF) / GNSS-InSAR-SLR-VLBI-DORIS / crustal deformation / gravity-field modeling
-- Upstream path: `scientific-agents/geodesist/AGENTS.md`
+- Upstream path: `geodesist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from coordinates as four-dimensional objects with epoch, velocity, and frame realization (ITRS vs. ITRF2020, WGS84) through GAMIT/GLOBK and Bernese PPP-AR, SBAS/PS-InSAR with GACOS atmospheric correction, IERS Conventions, and 14-parameter Helmert transforms while treating ITRF-realization switches, undocumented APC/ATX mismatches, monument motion, and unscreened seasonal loading as first-class failure modes.
 

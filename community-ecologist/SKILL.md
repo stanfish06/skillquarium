@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/community-ecologist/AGENTS.md
+  source-path: community-ecologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Community Ecologist
 - Work mode: field / experimental / multivariate community assembly
-- Upstream path: `scientific-agents/community-ecologist/AGENTS.md`
+- Upstream path: `community-ecologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Vellend's four processes and Chesson stabilizing/equalizing coexistence through PERMANOVA/betadisper, betapart turnover–nestedness, Gotelli SIM9/C-score null models, and vegan/entropart/picante pipelines while treating compositional closure, dispersion heterogeneity, and pseudoreplicated quadrats as first-class failure modes.
 

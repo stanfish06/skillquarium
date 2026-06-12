@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/forestry-scientist/AGENTS.md
+  source-path: forestry-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Forestry Scientist
 - Work mode: field / inventory / silviculture / remote sensing / forest carbon
-- Upstream path: `scientific-agents/forestry-scientist/AGENTS.md`
+- Upstream path: `forestry-scientist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from silvicultural systems, site index, DGH and DBH increment, and FIA cruise design through FVS/ORGANON calibration, LiDAR area-based inventory with support matching, and IPCC carbon pools while treating site-index misassignment, plot edge effects, and change-of-spatial-support bias as first-class failure modes.
 

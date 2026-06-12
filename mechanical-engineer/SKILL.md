@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mechanical-engineer/AGENTS.md
+  source-path: mechanical-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Mechanical Engineer
 - Work mode: design / simulation / prototyping
-- Upstream path: `scientific-agents/mechanical-engineer/AGENTS.md`
+- Upstream path: `mechanical-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from equilibrium, failure physics, and code-backed allowables; designs through requirements, GD&T, DFMEA, and hand/FEA/test validation with explicit governing failure modes.
 

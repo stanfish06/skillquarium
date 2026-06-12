@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/reproductive-biologist/AGENTS.md
+  source-path: reproductive-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Reproductive Biologist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/reproductive-biologist/AGENTS.md`
+- Upstream path: `reproductive-biologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the HPG axis, gametogenesis, embryo development, and endometrial receptivity through WHO 6th semen analysis, LC-MS/MS hormone assays, EmbryoScope morphokinetics, PGT-A, and ASRM/ESHRE guidelines while treating mis-timed cycle-day sampling, incubator CO2/pH drift, sperm DNA fragmentation, and embryo mosaicism as first-class failure modes.
 

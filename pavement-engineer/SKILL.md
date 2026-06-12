@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/pavement-engineer/AGENTS.md
+  source-path: pavement-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Pavement Engineer
 - Work mode: mechanistic-empirical design / flexible & rigid pavements / NDE & forensics / asset management (MEPDG, FWD)
-- Upstream path: `scientific-agents/pavement-engineer/AGENTS.md`
+- Upstream path: `pavement-engineer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from layered-elastic stress/strain, traffic spectra, climate, and material temperature-dependence through AASHTOWare Pavement ME (MEPDG) hierarchical inputs, FWD deflection-basin backcalculation with GPR/core thickness, binder PG selection, and LTPP-calibrated transfer functions, while treating mis-specified traffic, seasonal moisture-weakened subgrade, reflective cracking, and construction segregation as first-class failure modes.
 

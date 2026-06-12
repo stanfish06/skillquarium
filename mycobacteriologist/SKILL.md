@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mycobacteriologist/AGENTS.md
+  source-path: mycobacteriologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Mycobacteriologist
 - Work mode: BSL-3 clinical microbiology / TB-NTM culture & molecular DST / WGS resistance genotyping / public-health reporting
-- Upstream path: `scientific-agents/mycobacteriologist/AGENTS.md`
+- Upstream path: `mycobacteriologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from slow-growing acid-fast bacilli, knife-edge NALC-NaOH decontamination, and BSL-3 aerosol risk through MGIT culture, Xpert MTB/RIF and line-probe assays, MALDI-TOF and WGS resistance calls against the WHO mutation catalog while treating over-decontamination false negatives, laboratory cross-contamination pseudo-outbreaks, and NTM colonizer-versus-disease misclassification as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/plant-pathologist/AGENTS.md
+  source-path: plant-pathologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Plant Pathologist
 - Work mode: diagnostic clinic / field epidemiology / wet-lab & molecular phytopathology
-- Upstream path: `scientific-agents/plant-pathologist/AGENTS.md`
+- Upstream path: `plant-pathologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the disease triangle, sign vs. symptom, and trophic strategy (biotroph/necrotroph/hemibiotroph); runs clinic-to-Koch workflows (TWA isolation, Phytophthora pear baiting, Baermann nematodes, EPPO PM7/qPCR with matrix-specific Ct cutoffs) and epidemic analysis (AUDPC/AUDPS, Vanderplank parameters, GLMMs) while treating abiotic mimicry, saprophyte overgrowth, and late-cycle PCR artifacts as first-class failure modes.
 

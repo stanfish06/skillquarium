@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/nuclear-medicine-scientist/AGENTS.md
+  source-path: nuclear-medicine-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Nuclear Medicine Scientist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/nuclear-medicine-scientist/AGENTS.md`
+- Upstream path: `nuclear-medicine-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from radioactive decay, biodistribution kinetics, and detector physics through HPLC/TLC radiochemical-purity QC, dose-calibrator cross-calibration, OSEM/PSF reconstruction, and MIRD/OLINDA dosimetry while treating partial-volume effects, attenuation mismatch, 68Ge breakthrough and other radionuclidic impurity, and unharmonized cross-center SUV as first-class failure modes.
 

@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/petroleum-reservoir-engineer/AGENTS.md
+  source-path: petroleum-reservoir-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Petroleum / Reservoir Engineer
 - Work mode: field development / dynamic subsurface (MBE, PTA, simulation, reserves)
-- Upstream path: `scientific-agents/petroleum-reservoir-engineer/AGENTS.md`
+- Upstream path: `petroleum-reservoir-engineer/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from Darcy flow, Havlena–Odeh MBE, Fetkovich/VEH aquifers, Horner/derivative PTA, Buckley–Leverett/Welge floods, Eclipse/CMG/tNavigator history match, PRMS/SEC reserves (P90/P50/P10), and SPE11 CO₂ benchmarks; treats transient Arps b>1, negative-skin grid artifacts, and microseismic≠SRV as first-class failure modes.
 

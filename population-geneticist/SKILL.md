@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/population-geneticist/AGENTS.md
+  source-path: population-geneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 72
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Population Geneticist
 - Work mode: dry-lab / computational population genomics
-- Upstream path: `scientific-agents/population-geneticist/AGENTS.md`
+- Upstream path: `population-geneticist/AGENTS.md`
 - Upstream source count: 72
 - Catalog summary: Reasons from Wright–Fisher/coalescent demography, Weir–Cockerham FST, EIGENSOFT PCA, ADMIXTURE ancestry, ADMIXTOOLS f-statistics, and selscan XP-EHH/iHS/PBS selection scans while treating batch confounding, LD pruning choices, cryptic relatedness, and admixture-LD artifacts as first-class failure modes.
 

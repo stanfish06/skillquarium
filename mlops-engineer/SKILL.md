@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/mlops-engineer/AGENTS.md
+  source-path: mlops-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: MLOps Engineer
 - Work mode: ML lifecycle ops / feature stores & serving / drift monitoring / CI-CD-CT / registry promotion
-- Upstream path: `scientific-agents/mlops-engineer/AGENTS.md`
+- Upstream path: `mlops-engineer/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from data contracts, feature parity, evaluation gates, and rollback-readiness through MLflow/W&B registries, Feast feature stores, KServe/Triton serving, Great Expectations/TFDV validation, and Evidently PSI/KS drift monitors while treating train-serve skew, data leakage, silent degradation, and schema/concept drift as first-class failure modes.
 

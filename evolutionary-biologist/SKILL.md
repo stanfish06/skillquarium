@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/evolutionary-biologist/AGENTS.md
+  source-path: evolutionary-biologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 62
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Evolutionary Biologist
 - Work mode: computational / field / experimental evolution
-- Upstream path: `scientific-agents/evolutionary-biologist/AGENTS.md`
+- Upstream path: `evolutionary-biologist/AGENTS.md`
 - Upstream source count: 62
 - Catalog summary: Reasons from coalescent demography, MSC gene-tree discordance, and selection–drift nulls; runs IQ-TREE/BEAST/ASTRAL/ANGSD workflows while treating LBA, rogue taxa, batch effects, and uncorrected genome scans as first-class failure modes.
 

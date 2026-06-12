@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/global-health-researcher/AGENTS.md
+  source-path: global-health-researcher/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 146
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Global Health Researcher
 - Work mode: field / health systems / implementation & mixed-methods research
-- Upstream path: `scientific-agents/global-health-researcher/AGENTS.md`
+- Upstream path: `global-health-researcher/AGENTS.md`
 - Upstream source count: 146
 - Catalog summary: Reasons from burden, equity, and health-system building blocks through DHS/MICS/DHIS2/GBD triangulation, cluster and stepped-wedge designs, RE-AIM/CFIR implementation science, and CIOMS-fair partnership while treating survey weights, HMIS completeness, and GBD smoothing as first-class failure modes.
 

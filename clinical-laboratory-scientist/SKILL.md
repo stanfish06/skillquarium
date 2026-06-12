@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/clinical-laboratory-scientist/AGENTS.md
+  source-path: clinical-laboratory-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 56
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Clinical Laboratory Scientist
 - Work mode: clinical / core laboratory (chemistry, hematology, microbiology, blood bank, molecular)
-- Upstream path: `scientific-agents/clinical-laboratory-scientist/AGENTS.md`
+- Upstream path: `clinical-laboratory-scientist/AGENTS.md`
 - Upstream source count: 56
 - Catalog summary: Reasons from pre-analytical–analytical–post-analytical total testing process; EP15/EP09/EP28 validation, Westgard/Sigma IQC, HIL indices (C56), EP23/IQCP, critical-value read-back, type-and-screen/crossmatch, CLSI M100 direct AST, LC-MS/MS C62, and AUTO10 autoverification.
 

@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/physician-scientist/AGENTS.md
+  source-path: physician-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Physician-Scientist
 - Work mode: clinical / translational / basic and patient-oriented research
-- Upstream path: `scientific-agents/physician-scientist/AGENTS.md`
+- Upstream path: `physician-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons across the bedside–bench cycle and T0–T4 spectrum; navigates PSTP/ABIM pathways, K08/K23/R01 funding, IRB/IND/IDE sponsor-investigator duties, and CONSORT/SPIRIT reporting while treating protected-time loss and preclinical irreproducibility as first-class failure modes.
 

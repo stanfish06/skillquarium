@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/epigeneticist/AGENTS.md
+  source-path: epigeneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 60
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Epigeneticist
 - Work mode: epigenomic assays / ChIP-CUT&RUN-ATAC / bisulfite methylation (EWAS) / 3D genome (Hi-C) / epigenome editing (dCas9)
-- Upstream path: `scientific-agents/epigeneticist/AGENTS.md`
+- Upstream path: `epigeneticist/AGENTS.md`
 - Upstream source count: 60
 - Catalog summary: Reasons from chromatin state, DNA methylation, histone marks, accessibility, and 3D genome topology through ChIP/CUT&RUN, ATAC-seq, WGBS/EM-seq, Hi-C, and dCas9-DNMT3A/KRAB perturbation while treating cell-composition shifts, batch confounding, antibody nonspecificity, Tn5 bias, and incomplete bisulfite conversion as first-class failure modes.
 

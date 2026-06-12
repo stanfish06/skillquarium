@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/cellular-neuroscientist/AGENTS.md
+  source-path: cellular-neuroscientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Cellular Neuroscientist
 - Work mode: wet-lab / patch-clamp electrophysiology / live-cell imaging / culture-slice-iPSC preparations / synaptic physiology
-- Upstream path: `scientific-agents/cellular-neuroscientist/AGENTS.md`
+- Upstream path: `cellular-neuroscientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Treat the neuron as a cable with active channels, not a point integrator unless you have shown it is one for your question. Separate voltage, calcium, and fluorescence observables. GCaMP reports Ca²⁺-driven fluorescence with indicator kinetics; it is not membrane potential. FRET sensors (ArcLight, ASAP) trade speed and dynamic range differently.
 

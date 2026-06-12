@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/laser-physicist/AGENTS.md
+  source-path: laser-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Laser Physicist
 - Work mode: laser source R&D / ultrafast & CPA / nonlinear frequency conversion / beam metrology / laser safety (ISO 11146, IEC 60825)
-- Upstream path: `scientific-agents/laser-physicist/AGENTS.md`
+- Upstream path: `laser-physicist/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Expert profile for laser physicist — see AGENTS.md for field-specific methods and failure modes.
 

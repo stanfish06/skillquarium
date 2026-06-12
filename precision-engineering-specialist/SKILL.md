@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/precision-engineering-specialist/AGENTS.md
+  source-path: precision-engineering-specialist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 40
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Precision Engineering Specialist
 - Work mode: GD&T / CMM metrology / ultra-precision manufacturing
-- Upstream path: `scientific-agents/precision-engineering-specialist/AGENTS.md`
+- Upstream path: `precision-engineering-specialist/AGENTS.md`
 - Upstream source count: 40
 - Catalog summary: Reasons from ASME Y14.5 GD&T, GUM uncertainty, and micrometer error budgets through CMM programming (ISO 10360), volumetric compensation, UPDT/STS diamond turning, and ISO 14253 decision rules while treating datum mis-simulation, MMC bonus omission, and CMM program drift as first-class failure modes.
 

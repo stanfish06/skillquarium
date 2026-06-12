@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/power-systems-engineer/AGENTS.md
+  source-path: power-systems-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Power Systems Engineer
 - Work mode: power flow / protection coordination / DER hosting / stability & EMT / standards (NERC TPL, IEEE 1547, IEC 60909)
-- Upstream path: `scientific-agents/power-systems-engineer/AGENTS.md`
+- Upstream path: `power-systems-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from per-unit impedances, symmetrical components, swing equations, and relay reach through PSS/E, OpenDSS, Aspen OneLiner, PSCAD, and NERC TPL/IEEE 1547/IEC 60909 criteria while treating loss of protection selectivity, DER-driven reverse power flow and voltage rise, CT saturation, and voltage collapse as first-class failure modes.
 

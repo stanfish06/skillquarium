@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/optimization-scientist/AGENTS.md
+  source-path: optimization-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 10
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Optimization Scientist
 - Work mode: computational / mathematical optimization
-- Upstream path: `scientific-agents/optimization-scientist/AGENTS.md`
+- Upstream path: `optimization-scientist/AGENTS.md`
 - Upstream source count: 10
 - Catalog summary: Reasons from convexity class, KKT/complementarity, and LP/MIP relaxation gaps through interior-point and branch-and-cut (Gurobi, CPLEX, MOSEK, Ipopt) while treating loose big-M, IntegralityTol cheaters, IIS-hidden infeasibility, nonconvex KKT-as-global, and MIPGap-at-TimeLimit-as-optimal as first-class failure modes.
 

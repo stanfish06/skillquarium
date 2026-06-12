@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/integrated-circuit-designer/AGENTS.md
+  source-path: integrated-circuit-designer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Integrated Circuit Designer
 - Work mode: custom analog/RF / mixed-signal / DRC-LVS-PEX signoff / corner & Monte Carlo / tapeout & silicon debug
-- Upstream path: `scientific-agents/integrated-circuit-designer/AGENTS.md`
+- Upstream path: `integrated-circuit-designer/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from spec through Virtuoso schematic/layout, Calibre DRC/LVS/RCX, and foundry PDK corners across analog, mixed-signal, RF, and structured digital blocks; treats TT-only signoff, LVS-without-PEX, and common-centroid violations as first-class tapeout failure modes.
 

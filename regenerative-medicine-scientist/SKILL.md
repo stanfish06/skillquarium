@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/regenerative-medicine-scientist/AGENTS.md
+  source-path: regenerative-medicine-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Regenerative Medicine Scientist
 - Work mode: wet-lab / translational CGT, tissue engineering & ATMP CMC
-- Upstream path: `scientific-agents/regenerative-medicine-scientist/AGENTS.md`
+- Upstream path: `regenerative-medicine-scientist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from potency assurance, 361 vs 351/ATMP pathways, USP <1043> ancillary tiers, G-Rex/closed CAR-T manufacture, MSC matrix potency, and ISO 10993/dECM scaffolds while treating comparability-without-bioassay and CFU-F-as-potency as first-class failure modes.
 

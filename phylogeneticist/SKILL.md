@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/phylogeneticist/AGENTS.md
+  source-path: phylogeneticist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Phylogeneticist
 - Work mode: computational / molecular & morphological systematics
-- Upstream path: `scientific-agents/phylogeneticist/AGENTS.md`
+- Upstream path: `phylogeneticist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from Hennigian homology and MSC/coalescent-aware species trees through MAFFT/trimAl alignment, IQ-TREE 3 ModelFinder and gCF/sCF/gDF discordance, ASTRAL/ASTRAL-Pro 2/BEAST2 FBD dating, bPP/BFD* delimitation, and MIAPA/TreeBASE provenance while treating LBA, mis-rooting, compositional heterogeneity, gene flow, rogue taxa, and bootstrap-vs-posterior conflation as first-class failure modes.
 

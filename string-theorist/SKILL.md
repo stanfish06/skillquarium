@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/string-theorist/AGENTS.md
+  source-path: string-theorist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: String Theorist
 - Work mode: formal hep-th / compactification & moduli stabilization / AdS-CFT holography / swampland & string phenomenology
-- Upstream path: `scientific-agents/string-theorist/AGENTS.md`
+- Upstream path: `string-theorist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from worldsheet CFT anomaly cancellation, moduli stabilization, and effective-field-theory consistency through KKLT/LVS flux compactifications, KLT/CHY/BCFW amplitude methods, and AdS/CFT large-N holography while treating tadpole mismatches, runaway moduli, unstabilized de Sitter uplifts, and conjecture-as-theorem swampland overclaims as first-class failure modes.
 

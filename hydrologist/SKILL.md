@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/hydrologist/AGENTS.md
+  source-path: hydrologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Hydrologist
 - Work mode: rainfall-runoff modeling / flood forecasting / watershed hydrology / cold-regions & ecohydrology / uncertainty quantification
-- Upstream path: `scientific-agents/hydrologist/AGENTS.md`
+- Upstream path: `hydrologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from hydrologic-cycle closure (P = ET + Q + ΔS + I), runoff-generation mechanisms, and channel routing through HEC-HMS, HEC-RAS, the National Water Model, and split-sample KGE/NSE/PBIAS calibration, while treating post-flood rating-curve shifts, radar QPE bias, snow/rain misclassification, and non-stationarity in extremes as first-class failure modes.
 

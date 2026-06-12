@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/automotive-engineer/AGENTS.md
+  source-path: automotive-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Automotive Engineer
 - Work mode: vehicle integration / powertrain & xEV calibration / chassis dynamics & NVH / durability & fatigue / homologation & functional safety (FMVSS, ISO 26262)
-- Upstream path: `scientific-agents/automotive-engineer/AGENTS.md`
+- Upstream path: `automotive-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from vehicle-level requirements, regulatory limits, energy/exergy budgets, and distribution-based durability through DFMEA/DVP&R, DoE calibration (INCA, CANape, HIL), Pacejka tire and multibody models, rainflow fatigue, and source-path NVH analysis while treating undocumented build-level and cal-ID deltas, unmet emissions preconditioning and OBD readiness, ADAS sensor misalignment, and cross-domain torque-arbitration conflicts as first-class failure modes.
 

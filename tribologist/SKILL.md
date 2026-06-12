@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/tribologist/AGENTS.md
+  source-path: tribologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Tribologist
 - Work mode: tribometry / contact mechanics & EHL / lubricant & coating selection / wear failure analysis / condition monitoring (ASTM G99, ISO 281/4406)
-- Upstream path: `scientific-agents/tribologist/AGENTS.md`
+- Upstream path: `tribologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from contact mechanics, lubricant rheology, Stribeck-regime and λ ratio through Hamrock-Dowson EHL film estimates, pin-on-disk/four-ball/SRV/FZG bench tests and SEM-EDS/ferrography scar analysis while treating scuffing, rolling-contact pitting, three-body abrasion and DLC adhesive transfer as first-class failure modes.
 

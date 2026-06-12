@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/astronomer/AGENTS.md
+  source-path: astronomer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 51
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Astronomer
 - Work mode: observational / survey / time-domain / solar-system
-- Upstream path: `scientific-agents/astronomer/AGENTS.md`
+- Upstream path: `astronomer/AGENTS.md`
 - Upstream source count: 51
 - Catalog summary: Reasons like a senior observational astronomer from the telescope and catalog outward — Landolt/Stetson photometry, Gaia/MPC astrometry, Horizons ephemerides, SDSS–ZTF–Rubin survey discipline, TOPCAT cross-matches, and calibrated detection vs upper-limit reporting.
 

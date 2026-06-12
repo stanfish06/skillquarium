@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/instrumentation-engineer/AGENTS.md
+  source-path: instrumentation-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Instrumentation Engineer
 - Work mode: I&C loops / 4-20 mA & HART / calibration & metrology / safety systems (ISA-84/IEC 61511)
-- Upstream path: `scientific-agents/instrumentation-engineer/AGENTS.md`
+- Upstream path: `instrumentation-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the process variable, its transduction chain, 4-20 mA loop integrity, and traceable calibration through ISA-5.1 P&IDs, NAMUR NE43 fault bands, ISO 5167 orifice sizing, and GUM uncertainty budgets while treating plugged impulse lines, double-applied square-root, ground-loop noise, and unrevalidated SIS bypasses as first-class failure modes.
 

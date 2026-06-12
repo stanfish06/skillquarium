@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/fisheries-scientist/AGENTS.md
+  source-path: fisheries-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Fisheries Scientist
 - Work mode: stock assessment / population dynamics / harvest control rules / MSE / reference points (F_MSY, B_lim)
-- Upstream path: `scientific-agents/fisheries-scientist/AGENTS.md`
+- Upstream path: `fisheries-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from recruitment, growth, and natural and fishing mortality through state-space assessment models (SS3, SAM, JABBA), CPUE/GLM standardization, and reference points like F_MSY and B_lim under ICES and Magnuson-Stevens frameworks, while treating hyperstability, retrospective bias (Mohn's rho), unaccounted discard mortality, and misspecified M or selectivity as first-class failure modes.
 

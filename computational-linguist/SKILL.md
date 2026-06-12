@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/computational-linguist/AGENTS.md
+  source-path: computational-linguist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 72
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Computational Linguist
 - Work mode: computational / corpus & annotation / parsing & semantics
-- Upstream path: `scientific-agents/computational-linguist/AGENTS.md`
+- Upstream path: `computational-linguist/AGENTS.md`
 - Upstream source count: 72
 - Catalog summary: Reasons from UD/PTB formalisms, validate.py/eval.py (LAS/MLAS/ELAS), and evalb .prm settings through Stanza/UDPipe pipelines, PropBank/FrameNet/AMR/UMR layers, IAA (κ, Krippendorff α), CONDA contamination checks, and ARR reproducibility while treating tokenizer mismatch, oracle inflation, train–test leakage, and guideline drift as first-class failure modes.
 

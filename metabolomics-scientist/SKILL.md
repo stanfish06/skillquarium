@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/metabolomics-scientist/AGENTS.md
+  source-path: metabolomics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 68
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Metabolomics Scientist
 - Work mode: wet-lab / LC-MS & GC-MS / computational metabolomics
-- Upstream path: `scientific-agents/metabolomics-scientist/AGENTS.md`
+- Upstream path: `metabolomics-scientist/AGENTS.md`
 - Upstream source count: 68
 - Catalog summary: Reasons from MSI annotation levels, pooled-QC RSD and D-ratio gates, MZmine/MS-DIAL/XCMS pipelines, HMDB/GNPS identification, and MetaboAnalyst batch correction (ComBat, QC-RLSC); treats injection-order drift, ComBat over-correction, and Level-5 pathway stories as first-class failure modes.
 

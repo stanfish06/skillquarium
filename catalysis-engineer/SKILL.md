@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/catalysis-engineer/AGENTS.md
+  source-path: catalysis-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Catalysis Engineer
 - Work mode: process catalysis / hydroprocessing & FCC / deactivation economics / regeneration / vendor qualification
-- Upstream path: `scientific-agents/catalysis-engineer/AGENTS.md`
+- Upstream path: `catalysis-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from catalyst lifecycle margin, space velocity (WHSV/GHSV/LHSV), and deactivation economics through plant historian trends, MAT/pilot trickle-bed activity tests, Aspen HYSYS activity factors, and ASTM crush/attrition plus TPO/ICP spent-catalyst profiling while treating coke, poisoning, sintering, attrition, and channeling/maldistribution as first-class failure modes.
 

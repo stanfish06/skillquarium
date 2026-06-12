@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/dairy-scientist/AGENTS.md
+  source-path: dairy-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Dairy Scientist
 - Work mode: clinical / research
-- Upstream path: `scientific-agents/dairy-scientist/AGENTS.md`
+- Upstream path: `dairy-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from the lactation curve, dry matter intake, and rumen health through NASEM Dairy 2021/CNCPS ration formulation, Penn State particle separation, DHIA records, and pen-level mixed models while treating subacute ruminal acidosis, milk fat depression, transition-cow hypocalcemia, and unadjusted DIM/parity confounding as first-class failure modes.
 

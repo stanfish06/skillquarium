@@ -10,7 +10,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/embedded-systems-engineer/AGENTS.md
+  source-path: embedded-systems-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 50
@@ -34,7 +34,7 @@ than individualized professional advice.
 
 - Profession: Embedded Systems Engineer
 - Work mode: bare-metal/RTOS firmware / board bring-up / JTAG-SWD debug / WCET & power budgeting / MISRA C & safety (ISO 26262, IEC 62304)
-- Upstream path: `scientific-agents/embedded-systems-engineer/AGENTS.md`
+- Upstream path: `embedded-systems-engineer/AGENTS.md`
 - Upstream source count: 50
 - Catalog summary: Expert profile for embedded systems engineer — see AGENTS.md for field-specific methods and failure modes.
 

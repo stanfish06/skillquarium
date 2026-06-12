@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geomorphologist/AGENTS.md
+  source-path: geomorphologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Geomorphologist
 - Work mode: field mapping / DEM geomorphometry / cosmogenic dating / landscape evolution modeling
-- Upstream path: `scientific-agents/geomorphologist/AGENTS.md`
+- Upstream path: `geomorphologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from coupled form, process, and time and from rates, thresholds, and lag times through field mapping, lidar/SfM DEM morphometry (chi profiles, Ksn in LSDTopoTools/Landlab), cosmogenic nuclide dating (CRONUS-Earth, OSL, U-Th), and landscape-evolution models, while treating equifinality, inheritance, DEM artifacts, and steady-state assumed over transient response as first-class failure modes.
 

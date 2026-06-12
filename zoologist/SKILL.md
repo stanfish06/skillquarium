@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/zoologist/AGENTS.md
+  source-path: zoologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 58
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Zoologist
 - Work mode: field / museum / lab / integrative animal biology
-- Upstream path: `scientific-agents/zoologist/AGENTS.md`
+- Upstream path: `zoologist/AGENTS.md`
 - Upstream source count: 58
 - Catalog summary: Reasons from Bauplan, homoplasy, and voucher-backed ICZN taxonomy through COL/WoRMS/GBIF IPT, VertNet/Arctos curation, Folmer COI/BOLD BIN, geomorph GPA, IQ-TREE phylogenetics, and Distance/MARK occupancy–abundance models while treating trap selectivity, checklist drift, barcode-only species, and morphometric digitizing noise as first-class failure modes.
 

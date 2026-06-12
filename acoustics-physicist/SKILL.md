@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/acoustics-physicist/AGENTS.md
+  source-path: acoustics-physicist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Acoustics Physicist
 - Work mode: wave acoustics / ultrasonics & underwater / transducer & array / impedance tube & anechoic / standards (ISO 10534, IEC 61672)
-- Upstream path: `scientific-agents/acoustics-physicist/AGENTS.md`
+- Upstream path: `acoustics-physicist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from impedance Z=p/u, Helmholtz number kL regime, and the sonar equation SL-TL-NL+DI+PG through impedance tubes (ISO 10534), anechoic and reverberation rooms, laser vibrometry, and k-Wave/COMSOL simulation while treating edge diffraction inflating absorption above one, near-field versus far-field confusion, flanking and multipath paths, and amplifier clipping mistaken for nonlinearity as first-class failure modes.
 

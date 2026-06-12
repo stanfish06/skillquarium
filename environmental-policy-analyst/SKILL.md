@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/environmental-policy-analyst/AGENTS.md
+  source-path: environmental-policy-analyst/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Environmental Policy Analyst
 - Work mode: regulatory / benefit-cost / NEPA-ESA / climate policy economics
-- Upstream path: `scientific-agents/environmental-policy-analyst/AGENTS.md`
+- Upstream path: `environmental-policy-analyst/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from statutory authority, baseline definition, and monetization boundaries through NEPA/ESA compliance, Circular A-4 RIAs, EPA SC-GHG and benefit transfer, IAM/IPCC scenario use, and APA regulatory comment while treating discount-rate dominance, weak transfer extrapolation, IAM structural uncertainty, and baseline inflation as first-class failure modes.
 

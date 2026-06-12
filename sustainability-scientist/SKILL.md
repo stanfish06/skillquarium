@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/sustainability-scientist/AGENTS.md
+  source-path: sustainability-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Sustainability Scientist
 - Work mode: sustainability reporting / GHG accounting (GHG Protocol, GRI/ISSB/ESRS) / planetary boundaries / circularity & nexus / scenario analysis
-- Upstream path: `scientific-agents/sustainability-scientist/AGENTS.md`
+- Upstream path: `sustainability-scientist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from measurable capitals, planetary-boundary safe operating space, and absolute-versus-intensity impact through GHG Protocol Scope 1/2/3 accounting, GRI/ISSB/ESRS disclosure, MCI circularity and MFA, and IPCC SSP/IEA/NGFS scenario analysis, while treating greenwashing offsets without additionality or permanence, Scope 3 EEIO collapse, masked SDG trade-offs and leakage, and intensity gains hiding absolute growth as first-class failure modes.
 

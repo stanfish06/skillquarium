@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biosystems-agricultural-process-engineer/AGENTS.md
+  source-path: biosystems-agricultural-process-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Biosystems & Agricultural Process Engineer
 - Work mode: postharvest / grain drying & storage / heat-mass transfer / ag bioprocessing / ASABE standards (D245.7, S448)
-- Upstream path: `scientific-agents/biosystems-agricultural-process-engineer/AGENTS.md`
+- Upstream path: `biosystems-agricultural-process-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from coupled heat and mass transfer, moisture sorption (EMC/ERH on D245.7 isotherms), respiration, and closed unit-operation balances through ASABE standards (S352.2 oven moisture, S448 Page thin-layer kinetics, D272.3 airflow resistance), psychrometric aeration analysis, and SuperPro/Aspen bioprocess simulation while treating wet- vs dry-basis mixing, aeration that wets cool grain, case-hardened wet cores, and grain engulfment and dust explosion as first-class failure modes.
 

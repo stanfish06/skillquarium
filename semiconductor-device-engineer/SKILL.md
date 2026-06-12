@@ -13,7 +13,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/semiconductor-device-engineer/AGENTS.md
+  source-path: semiconductor-device-engineer/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -37,7 +37,7 @@ than individualized professional advice.
 
 - Profession: Semiconductor Device Engineer
 - Work mode: device characterization / TCAD-to-silicon calibration / compact modeling (BSIM-CMG) / wafer-level reliability (NBTI/HCI/TDDB) / FinFET-GAA
-- Upstream path: `scientific-agents/semiconductor-device-engineer/AGENTS.md`
+- Upstream path: `semiconductor-device-engineer/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from electrostatics, capacitance-current MOSFET physics, interface-trap behavior, and self-heating through I-V/C-V extraction ladders, Sentaurus TCAD calibrated to silicon splits, BSIM-CMG compact modeling, and JEDEC reliability stress while treating uncalibrated TCAD, unstated constant-current Vt references, ignored BTI partial recovery, and self-heating-distorted DC Ron as first-class failure modes.
 

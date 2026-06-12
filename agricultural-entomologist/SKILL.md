@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/agricultural-entomologist/AGENTS.md
+  source-path: agricultural-entomologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Agricultural Entomologist
 - Work mode: field scouting / IPM / resistance management (IRAC MoA) / biocontrol / pollinator protection
-- Upstream path: `scientific-agents/agricultural-entomologist/AGENTS.md`
+- Upstream path: `agricultural-entomologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from pest population dynamics, economic injury levels and thresholds, and degree-day phenology through systematic scouting, IRAC mode-of-action rotation, RCBD efficacy trials, and conservation biocontrol while treating misidentification, secondary pest flares from enemy removal, resistance under repeated MoA, and trap-catch-without-field-verification as first-class failure modes.
 

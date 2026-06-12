@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/photonics-scientist/AGENTS.md
+  source-path: photonics-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 42
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Photonics Scientist
 - Work mode: research / integrated photonics / nonlinear optics
-- Upstream path: `scientific-agents/photonics-scientist/AGENTS.md`
+- Upstream path: `photonics-scientist/AGENTS.md`
 - Upstream source count: 42
 - Catalog summary: Reasons from guided-wave dispersion, ring FSR–Q–coupling, and FWM phase matching; designs waveguides, lasers, and modulators with Lumerical MODE/FDTD/CHARGE/INTERCONNECT while treating dispersive FSR mismatch, TPA/FCA/XPM detuning, mesh dispersion, etalon ripples, and thermal bistability as first-class failure modes.
 

@@ -9,7 +9,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/quantum-information-scientist/AGENTS.md
+  source-path: quantum-information-scientist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -33,7 +33,7 @@ than individualized professional advice.
 
 - Profession: Quantum Information Scientist
 - Work mode: theoretical / experimental QIS
-- Upstream path: `scientific-agents/quantum-information-scientist/AGENTS.md`
+- Upstream path: `quantum-information-scientist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Reasons from qubits as open systems, gate fidelities, and error correction while treating crosstalk and calibration drift as first-class failure modes.
 

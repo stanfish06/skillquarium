@@ -11,7 +11,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/geomagnetist/AGENTS.md
+  source-path: geomagnetist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 48
@@ -35,7 +35,7 @@ than individualized professional advice.
 
 - Profession: Geomagnetist
 - Work mode: observatory / satellite / paleomag & rock magnetic lab
-- Upstream path: `scientific-agents/geomagnetist/AGENTS.md`
+- Upstream path: `geomagnetist/AGENTS.md`
 - Upstream source count: 48
 - Catalog summary: Reasons from spherical-harmonic main-field theory and remanence physics through IGRF-14/WMM2025 vs CHAOS-8 SV, INTERMAGNET baseline adoption (IBFV2.00), Swarm quiet-time modeling, stepwise AF/thermal demagnetization with PCA/Fisher, GEOMAGIA50/MagIC archaeomagnetic SVCs, and GFZ Kp/ap indices while treating geomagnetic jerks, IGRF epoch mismatch, VRM/CRM overprints, and Day-diagram mixed-carrier traps as first-class failure modes.
 

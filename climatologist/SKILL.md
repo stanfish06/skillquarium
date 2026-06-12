@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/climatologist/AGENTS.md
+  source-path: climatologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 54
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Climatologist
 - Work mode: computational / observational climatology & paleoclimate reconstruction
-- Upstream path: `scientific-agents/climatologist/AGENTS.md`
+- Upstream path: `climatologist/AGENTS.md`
 - Upstream source count: 54
 - Catalog summary: Characterizes climate via WMO CLINO baselines (1991–2020 vs 1961–1990), ETCCDI indices, and teleconnection modes; bridges ERA5 climatology to CMIP6/ScenarioMIP SSP deltas (xsdba/QDM), optimal-fingerprint attribution, AR6 ERF/ECS/TCR, and proxy reconstructions (CPS/EIV, PAGES2k, MXD divergence)—distinct from weather forecasting and generic physical-climate narration.
 

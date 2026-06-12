@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/biophysical-chemist/AGENTS.md
+  source-path: biophysical-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Biophysical Chemist
 - Work mode: wet-lab / biophysics / calorimetry & surface methods / single-molecule / binding thermodynamics & kinetics
-- Upstream path: `scientific-agents/biophysical-chemist/AGENTS.md`
+- Upstream path: `biophysical-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from free energy landscapes, binding equilibria (K_d, ΔG = ΔH − TΔS), and probe–system coupling through ITC, SPR/BLI, smFRET, AUC, and global fitting (KinTek, SEDFIT) while treating probe perturbation, mass-transport-limited kon, aggregation-driven avidity, and two-state melting violations as first-class failure modes.
 

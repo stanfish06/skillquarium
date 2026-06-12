@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/environmental-microbiologist/AGENTS.md
+  source-path: environmental-microbiologist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Environmental Microbiologist
 - Work mode: field sampling / amplicon + shotgun metagenomics / biogeochemistry coupling / microbial ecology stats
-- Upstream path: `scientific-agents/environmental-microbiologist/AGENTS.md`
+- Upstream path: `environmental-microbiologist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from spatial patchiness, redox thermodynamic ceilings, and process-over-taxonomy guild function through DADA2/QIIME2 amplicons keyed to SILVA/GTDB/PR2/UNITE, metaSPAdes/MetaBAT2 MAGs vetted by CheckM/GUNC, and SIP/qSIP rate assays paired with IC/GC/ICP-MS chemistry, while treating extraction-batch effects, relic and extracellular DNA, primer-window bias, and core pseudoreplication as first-class failure modes.
 

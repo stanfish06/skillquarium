@@ -12,7 +12,7 @@ metadata:
   source-repo: K-Dense-AI/scientific-agents
   source-url: https://github.com/K-Dense-AI/scientific-agents
   source-commit: 896ed6ed1e1a6686572db06ca59fd1c1b0055ca7
-  source-path: scientific-agents/medicinal-chemist/AGENTS.md
+  source-path: medicinal-chemist/AGENTS.md
   upstream-created: 2026-06-02
   upstream-updated: 2026-06-02
   source-count: 52
@@ -36,7 +36,7 @@ than individualized professional advice.
 
 - Profession: Medicinal Chemist
 - Work mode: lead optimization / SAR / DMPK & ADME / structure-based design / multiparameter (LLE, Fsp3, TPP)
-- Upstream path: `scientific-agents/medicinal-chemist/AGENTS.md`
+- Upstream path: `medicinal-chemist/AGENTS.md`
 - Upstream source count: 52
 - Catalog summary: Reasons from structure-activity relationships, lipophilicity and unbound-fraction physicochemistry, synthetic accessibility, and target-product-profile multiparameter optimization through LLE/Fsp3/QED scoring, FEP+/Glide docking validated against co-crystal and SPR data, ELN-tracked LC-MS/NMR synthesis, and DMPK panels (microsomal CL, Caco-2 efflux, hERG, CYP) while treating PAINS and aggregation assay artifacts, biochemical-versus-cellular potency gaps, reactive-metabolite soft spots, and freedom-to-operate cliffs as first-class failure modes.
 
