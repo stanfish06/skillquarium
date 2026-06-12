@@ -21,10 +21,8 @@ created: 2026-06-12
 
 ## Related skills
 
-- [test-driven-development](test-driven-development.md) — Use when implementing any feature or bugfix, before writing implementation code
 - [jest](jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
-- [playwright-best-practices](playwright-best-practices.md) — Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model...
-- [playwright-cli](playwright-cli.md) — Automate browser interactions, test web pages and work with Playwright tests
+- [test-driven-development](test-driven-development.md) — Use when implementing any feature or bugfix, before writing implementation code
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

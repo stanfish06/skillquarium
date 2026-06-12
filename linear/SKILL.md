@@ -32,20 +32,25 @@ linear_list_projects     - List projects and their status
 linear_list_teams        - List workspace teams
 ```
 
-Configure in Claude's MCP settings:
+Linear hosts the MCP server remotely at `https://mcp.linear.app/mcp` (Streamable HTTP, OAuth 2.1 — no API key needed). Connect directly where HTTP transport is supported:
+
+```bash
+# Claude Code
+claude mcp add --transport http linear-server https://mcp.linear.app/mcp
+# then run /mcp in a session to complete the OAuth flow
+```
+
+For clients that only support stdio MCP servers, bridge with `mcp-remote`:
 ```json
 {
   "mcpServers": {
     "linear": {
       "command": "npx",
-      "args": ["-y", "linear-mcp"],
-      "env": { "LINEAR_API_KEY": "<your-api-key>" }
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/mcp"]
     }
   }
 }
 ```
-
-Get an API key: Linear → Settings → API → Personal API Keys.
 
 ---
 
@@ -136,28 +141,35 @@ mutation UpdateIssue($id: String!, $input: IssueUpdateInput!) {
 pip install linear-python
 ```
 
+The package is imported from `linear_python` and the API key is passed positionally.
+Methods take/return plain dicts (it's a thin wrapper over the GraphQL API), and `create_issue`
+only accepts `teamId`, `title`, and `description` — for richer fields (priority, labels,
+assignee) call the GraphQL API directly (see above).
+
 ```python
-from linear import LinearClient
+from linear_python import LinearClient
 
-client = LinearClient(api_key="lin_api_...")
+client = LinearClient("lin_api_...")
 
-# Get teams
-teams = client.teams()
-for team in teams:
-    print(f"{team.key}: {team.name}")
+# Current user
+viewer = client.get_viewer()        # -> {"id", "name", "email"}
 
-# Create issue
-issue = client.create_issue(
-    team_id="TEAM-ID",
-    title="Fix authentication bug",
-    description="Users can't log in with OAuth. See error logs.",
-    priority=2,  # High
-    label_ids=["LABEL-ID"],
-)
-print(f"Created: {issue.identifier} — {issue.url}")
+# Teams
+teams = client.get_teams()          # -> {"nodes": [{"id", "name"}, ...]}
 
-# Query issues
-issues = client.issues(filter={"state": {"type": {"in": ["started"]}}})
+# Create issue — data is a dict; teamId + title are required
+result = client.create_issue({
+    "teamId": "TEAM-ID",
+    "title": "Fix authentication bug",
+    "description": "Users can't log in with OAuth. See error logs.",
+})
+issue = result["issue"]             # {"id", "title", "url"}
+print(f"Created: {issue['url']}")
+
+# Get / update / delete
+client.get_issue("ISSUE-ID")
+client.update_issue("ISSUE-ID", {"title": "Updated title"})
+client.delete_issue("ISSUE-ID", permanently_delete=False)  # archive instead of hard-delete
 ```
 
 ---

@@ -174,7 +174,15 @@ if (import.meta.vitest) {
 }
 ```
 
-Enable in config: `test: { includeSource: ['src/**/*.ts'] }`
+Enable in config: `test: { includeSource: ['src/**/*.ts'] }`. For production builds you must
+also strip the test block so it never ships — define `import.meta.vitest` as `undefined` so
+the bundler can dead-code-eliminate it:
+```ts
+// vite.config.ts
+export default defineConfig({
+  define: { 'import.meta.vitest': 'undefined' },
+});
+```
 
 ## Benchmarks
 
@@ -203,7 +211,10 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: 'playwright',   // or 'webdriverio'
-      name: 'chromium',
+      // `browser.name` was deprecated in v3 and removed in v4 — use `instances`
+      instances: [
+        { browser: 'chromium' },
+      ],
     },
   },
 });
