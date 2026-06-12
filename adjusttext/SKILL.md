@@ -11,6 +11,8 @@ description: Use the Python adjustText package to automatically move matplotlib 
 
 The source-grounded API here targets `adjustText` 1.4.0. Prefer current names such as `objects`, `force_static`, `expand`, `target_x`, `target_y`, `time_lim`, and `iter_lim`; older examples may mention legacy names such as `add_objects`, `force_points`, `force_objects`, `expand_text`, or `lim`.
 
+`ggrepel` is included as a search/discovery alias because adjustText is the Python/matplotlib analogue. For R or ggplot2 code, use `ggrepel::geom_text_repel()`/`geom_label_repel()` instead; this skill covers only Python workflows.
+
 ## Core Workflow
 
 1. Build the complete plot first: data, axis limits, scales, legends, colorbars, aspect ratio, and layout.
@@ -40,7 +42,7 @@ adjust_text(
     time_lim=1,
 )
 
-fig.savefig("volcano_labeled.pdf", bbox_inches="tight")
+fig.savefig("volcano_labeled.pdf")
 ```
 
 ## Common Patterns
@@ -103,6 +105,7 @@ Start with better figure geometry before force tuning: slightly larger figure, s
 - `expand`: Multiplier for label bounding boxes during collision checks. Increase the y component for tall fonts or dense vertical labels.
 - `max_move`: Per-iteration movement limit in display units. Use `None` for unconstrained movement only when needed.
 - `explode_radius`: Radius for initial nearby-object search; `"auto"` uses mean text size.
+- `min_arrow_len`: Minimum display-space distance between adjusted text and target before drawing an arrow. Lower it to draw short arrows; raise it to suppress arrows for nearby labels.
 - `only_move`: Restrict movement globally with a string (`"x"`, `"y"`, `"x+"`, `"y-"`) or per phase with keys `"text"`, `"static"`, `"explode"`, and `"pull"`.
 - `prevent_crossings`: Keep enabled for arrowed plots unless it causes unstable placements; it is marked experimental upstream.
 - `ensure_inside_axes` / `expand_axes`: Keep labels inside axes by default, or set `expand_axes=True` when labels should be allowed to enlarge the axes limits before adjustment.
