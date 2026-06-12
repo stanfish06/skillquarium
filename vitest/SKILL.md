@@ -149,6 +149,8 @@ await expect(fetchUser(-1)).rejects.toThrow('Not found');
 ## Snapshot Testing
 
 ```ts
+import { renderToString } from 'react-dom/server';
+
 it('matches snapshot', () => {
   const result = renderToString(<Component />);
   expect(result).toMatchSnapshot();
