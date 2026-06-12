@@ -300,9 +300,11 @@ print(f"Resuming with {len(study.trials)} trials already completed.")
 ### In-memory JournalStorage (lightweight multi-process)
 
 ```python
-# optuna 4.x: JournalFileBackend lives in optuna.storages.journal
-# (optuna.storages only exposes the deprecated JournalFileStorage)
-from optuna.storages.journal import JournalStorage, JournalFileBackend
+# optuna 4.x: JournalStorage is a top-level storages export, but the file
+# backend lives in optuna.storages.journal (optuna.storages only keeps the
+# deprecated JournalFileStorage)
+from optuna.storages import JournalStorage
+from optuna.storages.journal import JournalFileBackend
 
 storage = JournalStorage(JournalFileBackend("optuna_journal.log"))
 study = optuna.create_study(storage=storage, study_name="local_run")
@@ -507,10 +509,16 @@ def objective(trial):
     weight_decay = trial.suggest_float("weight_decay", 1e-6, 1e-2, log=True)
     hidden_size = trial.suggest_categorical("hidden_size", [128, 256, 512])
 
-    # 2. Build and train model
+    # 2. Build and train model — report after each epoch so the pruner can act.
+    #    HyperbandPruner (like all pruners) is inert without trial.report()/
+    #    trial.should_prune(); training as one opaque call would never prune.
     model = build_model(hidden_size=hidden_size)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
-    val_loss = train(model, optimizer, epochs=20)
+    for epoch in range(20):
+        val_loss = train_one_epoch(model, optimizer)   # one epoch of train + validate
+        trial.report(val_loss, step=epoch)
+        if trial.should_prune():
+            raise optuna.TrialPruned()
     return val_loss
 
 # 3. Run study
