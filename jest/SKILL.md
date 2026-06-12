@@ -139,8 +139,10 @@ afterEach(async () => {
 ```ts
 // Creates/updates a snapshot file on first run
 it('renders correctly', () => {
-  const component = render(<Button label="Click me" />);
-  expect(component).toMatchSnapshot();
+  // snapshot the DOM (asFragment), not the whole RenderResult object —
+  // the latter serializes helper functions and makes noisy, brittle snapshots
+  const { asFragment } = render(<Button label="Click me" />);
+  expect(asFragment()).toMatchSnapshot();
 });
 ```
 
