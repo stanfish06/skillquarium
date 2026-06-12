@@ -22,6 +22,7 @@ created: 2026-06-09
 
 - [aeon](aeon.md) — This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
 - [optimize-for-gpu](optimize-for-gpu.md) — GPU-accelerate Python code using CuPy, Numba CUDA, Warp, cuDF, cuML, cuGraph, KvikIO, cuCIM, cuxfilter, cuVS, cuSpatial, and RAFT
+- [optuna](optuna.md) — Hyperparameter optimization (HPO) for ML models using Optuna
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

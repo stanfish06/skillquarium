@@ -24,10 +24,7 @@ created: 2026-06-12
 ## Related skills
 
 - [scikit-learn](scikit-learn.md) — Machine learning in Python with scikit-learn
-- [pytorch-lightning](pytorch-lightning.md) — Deep learning framework (PyTorch Lightning / lightning package)
-- [shap](shap.md) — Model interpretability and explainability using SHAP (SHapley Additive exPlanations)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
-
