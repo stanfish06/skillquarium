@@ -26,7 +26,6 @@ created: 2026-06-09
 - [duckdb-docs](duckdb-docs.md) — Search DuckDB and DuckLake documentation and blog posts
 - [pandera-validation](pandera-validation.md) — DataFrame schema validation using pandera
 - [polars](polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
-- [query](query.md) — Run SQL queries against the attached DuckDB database or ad-hoc against files
 - [read-file](read-file.md) — Read any data file (CSV, JSON, Parquet, Avro, Excel, spatial, SQLite) or remote URL (S3, HTTPS)
 - [xarray](xarray.md) — N-dimensional labeled arrays and datasets in Python
 

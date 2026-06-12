@@ -23,6 +23,7 @@ created: 2026-06-09
 - [agentcore](agentcore.md) — Run agent-browser on AWS Bedrock AgentCore cloud browsers
 - [core](core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
 - [electron](electron.md) — Automate Electron desktop apps (VS Code, Slack, Discord, Figma, Notion, Spotify, etc.) using agent-browser via Chrome DevTools Protocol
+- [linear](linear.md) — Linear project management — create and manage issues, projects, cycles, and roadmaps via the Linear API, MCP server, or web browser
 - [slack](slack.md) — Interact with Slack workspaces using browser automation
 - [vercel-sandbox](vercel-sandbox.md) — Run agent-browser + Chrome inside Vercel Sandbox microVMs for browser automation from any Vercel-deployed app
 

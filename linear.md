@@ -22,9 +22,7 @@ created: 2026-06-12
 
 ## Related skills
 
-- [gh-cli](gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl/WebFetch patterns
-- [agent-browser](agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites...
-- [github-actions-ci](github-actions-ci.md) — Use when setting up, updating, or debugging GitHub Actions workflows
+- [agent-browser](agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

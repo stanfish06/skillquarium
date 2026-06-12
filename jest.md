@@ -23,8 +23,6 @@ created: 2026-06-12
 
 - [test-driven-development](test-driven-development.md) — Use when implementing any feature or bugfix, before writing implementation code
 - [vitest](vitest.md) — JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API
-- [playwright-best-practices](playwright-best-practices.md) — Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model...
-- [property-based-testing](property-based-testing.md) — Provides guidance for property-based testing across multiple languages and smart contracts
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
