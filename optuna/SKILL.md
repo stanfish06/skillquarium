@@ -300,7 +300,9 @@ print(f"Resuming with {len(study.trials)} trials already completed.")
 ### In-memory JournalStorage (lightweight multi-process)
 
 ```python
-from optuna.storages import JournalStorage, JournalFileBackend
+# optuna 4.x: JournalFileBackend lives in optuna.storages.journal
+# (optuna.storages only exposes the deprecated JournalFileStorage)
+from optuna.storages.journal import JournalStorage, JournalFileBackend
 
 storage = JournalStorage(JournalFileBackend("optuna_journal.log"))
 study = optuna.create_study(storage=storage, study_name="local_run")
