@@ -14,9 +14,15 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Vault, Skills & Workflow Meta](vault-meta.md)
 
-## Skills (11)
+## Skills (17)
 
-- [caveman](../caveman.md) — Use when the user asks for caveman mode, caveperson style, brutally simple explanation, ELI5, dumb it down, no-jargon translation, or a blunt plain-language version of a concept, plan...
+- [cavecrew](../cavecrew.md) — Decision guide for delegating to caveman-style subagents
+- [caveman](../caveman.md) — Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy
+- [caveman-commit](../caveman-commit.md) — Ultra-compressed commit message generator
+- [caveman-compress](../caveman-compress.md) — Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens
+- [caveman-help](../caveman-help.md) — Quick-reference card for all caveman modes, skills, and commands
+- [caveman-review](../caveman-review.md) — Ultra-compressed code review comments. Cuts noise from PR feedback while preserving the actionable signal
+- [caveman-stats](../caveman-stats.md) — Show real token usage and estimated savings for the current session
 - [consciousness-council](../consciousness-council.md) — Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge
 - [dhdna-profiler](../dhdna-profiler.md) — Extract cognitive patterns and thinking fingerprints from any text
 - [hypogenic](../hypogenic.md) — Automated LLM-driven hypothesis generation and testing on tabular datasets

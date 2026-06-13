@@ -17,13 +17,14 @@ created: 2026-06-13
 # caveman
 
 > [!info] What it does
-> Use when the user asks for caveman mode, caveperson style, brutally simple explanation, ELI5, dumb it down, no-jargon translation, or a blunt plain-language version of a concept, plan, review, bug, decision, or technical artifact.
+> Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says "caveman mode", "talk like caveman", "use caveman", "less tokens", "be brief", or invokes /caveman. Also auto-triggers when token efficiency is requested.
 
 **Source:** [caveman/SKILL.md](caveman/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](maps/reasoning-ideation.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [caveman-compress](caveman-compress.md) — Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens
+- [caveman-help](caveman-help.md) — Quick-reference card for all caveman modes, skills, and commands
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

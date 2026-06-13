@@ -14,10 +14,14 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md)
 
-## Skills (38)
+## Skills (42)
 
 - [api-and-interface-design](../api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
 - [brainstorming](../brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
+- [cavekit-design-system](../cavekit-design-system.md) — How to write and maintain DESIGN.md as the visual specification layer for Cavekit projects
+- [cavekit-methodology](../cavekit-methodology.md) — Cavekit specification-driven development methodology — the Hunt lifecycle (Draft → Architect → Build → Inspect → Monitor) and how to apply it
+- [cavekit-revision](../cavekit-revision.md) — Trace bugs and manual fixes back to kits and prompts
+- [cavekit-validation-first](../cavekit-validation-first.md) — Validation-first design for Cavekit — every kit requirement must be automatically verifiable
 - [check-pr](../check-pr.md) — Checks a GitHub, GitLab, or Perforce (p4) pull request (or merge request, or shelved changelist) for unresolved review comments, failing status checks, and incomplete PR descriptions
 - [code-review-and-quality](../code-review-and-quality.md) — Conducts multi-axis code review. Use before merging any change
 - [code-simplification](../code-simplification.md) — Simplifies code for clarity. Use when refactoring code for clarity without changing behavior
