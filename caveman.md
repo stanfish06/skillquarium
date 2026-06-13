@@ -23,7 +23,8 @@ created: 2026-06-13
 
 ## Related skills
 
-- [caveman-compress](caveman-compress.md) — Ultra-compressed communication mode (lite / full / ultra) that cuts token usage ~75% by speaking like caveman while keeping full technical accuracy
+- [caveman-compress](caveman-compress.md) — Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens
+- [caveman-help](caveman-help.md) — Quick-reference card for all caveman modes, skills, and commands
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

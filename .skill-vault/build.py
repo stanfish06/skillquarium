@@ -256,7 +256,7 @@ CATEGORIES = [
      ["research-writing", "academic-pipelines", "vault-meta"],
      ["consciousness-council", "what-if-oracle", "dhdna-profiler", "scientific-brainstorming",
       "hypothesis-generation", "idea-evaluator", "idea-refine", "interview-me",
-      "vibe-research-workflow", "hypogenic", "caveman", "caveman-compress"]),
+      "vibe-research-workflow", "hypogenic", "caveman", "caveman-compress", "cavecrew", "caveman-help", "caveman-review", "caveman-stats", "caveman-commit"]),
 
     ("web-automation-frontend", "Web Automation, Frontend & Design",
      "Browser automation, Playwright testing, frontend design guidance, React/Next.js patterns, Figma workflows, and design-to-code loops.",

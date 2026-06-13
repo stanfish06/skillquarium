@@ -1,136 +1,111 @@
 ---
 name: caveman-compress
-description: Ultra-compressed communication mode (lite / full / ultra) that cuts token usage ~75% by speaking like caveman while keeping full technical accuracy. Use when the user requests "caveman mode", "less tokens", "be brief", or when output budget is tight.
-allowed-tools: []
-effort: low
+description: >
+  Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format
+  to save input tokens. Preserves all technical substance, code, URLs, and structure.
+  Compressed version overwrites the original file. Human-readable backup saved as FILE.original.md.
+  Trigger: /caveman-compress FILEPATH or "compress memory file"
 ---
 
+# Caveman Compress
 
-# Caveman Mode
+## Purpose
 
-## Core Rule
+Compress natural language files (CLAUDE.md, todos, preferences) into caveman-speak to reduce input tokens. Compressed version overwrites original. Human-readable backup saved as `<filename>.original.md`.
 
-Respond like smart caveman. Cut articles, filler, pleasantries. Keep all technical substance.
+## Trigger
 
-Default intensity: **full**. Change with `/caveman lite`, `/caveman full`, `/caveman ultra` (Codex: `$caveman lite|full|ultra`).
+`/caveman-compress <filepath>` or when user asks to compress a memory file.
 
-## Grammar
+## Process
 
-- Drop articles (a, an, the)
-- Drop filler (just, really, basically, actually, simply)
-- Drop pleasantries (sure, certainly, of course, happy to)
-- Short synonyms (big not extensive, fix not "implement a solution for")
-- No hedging (skip "it might be worth considering")
-- Fragments fine. No need full sentence
-- Technical terms stay exact. "Polymorphism" stays "polymorphism"
-- Code blocks unchanged. Caveman speak around code, not in code
-- Error messages quoted exact. Caveman only for explanation
+1. The compression scripts live in `scripts/` (adjacent to this SKILL.md). If the path is not immediately available, search for `scripts/__main__.py` next to this SKILL.md.
+
+2. From the directory containing this SKILL.md, run:
+
+python3 -m scripts <absolute_filepath>
+
+3. The CLI will:
+- detect file type (no tokens)
+- call Claude to compress
+- validate output (no tokens)
+- if errors: cherry-pick fix with Claude (targeted fixes only, no recompression)
+- retry up to 2 times
+- if still failing after 2 retries: report error to user, leave original file untouched
+
+4. Return result to user
+
+## Compression Rules
+
+### Remove
+- Articles: a, an, the
+- Filler: just, really, basically, actually, simply, essentially, generally
+- Pleasantries: "sure", "certainly", "of course", "happy to", "I'd recommend"
+- Hedging: "it might be worth", "you could consider", "it would be good to"
+- Redundant phrasing: "in order to" → "to", "make sure to" → "ensure", "the reason is because" → "because"
+- Connective fluff: "however", "furthermore", "additionally", "in addition"
+
+### Preserve EXACTLY (never modify)
+- Code blocks (fenced ``` and indented)
+- Inline code (`backtick content`)
+- URLs and links (full URLs, markdown links)
+- File paths (`/src/components/...`, `./config.yaml`)
+- Commands (`npm install`, `git commit`, `docker build`)
+- Technical terms (library names, API names, protocols, algorithms)
+- Proper nouns (project names, people, companies)
+- Dates, version numbers, numeric values
+- Environment variables (`$HOME`, `NODE_ENV`)
+
+### Preserve Structure
+- All markdown headings (keep exact heading text, compress body below)
+- Bullet point hierarchy (keep nesting level)
+- Numbered lists (keep numbering)
+- Tables (compress cell text, keep structure)
+- Frontmatter/YAML headers in markdown files
+
+### Compress
+- Use short synonyms: "big" not "extensive", "fix" not "implement a solution for", "use" not "utilize"
+- Fragments OK: "Run tests before commit" not "You should always run tests before committing"
+- Drop "you should", "make sure to", "remember to" — just state the action
+- Merge redundant bullets that say the same thing differently
+- Keep one example where multiple examples show the same pattern
+
+CRITICAL RULE:
+Anything inside ``` ... ``` must be copied EXACTLY.
+Do not:
+- remove comments
+- remove spacing
+- reorder lines
+- shorten commands
+- simplify anything
+
+Inline code (`...`) must be preserved EXACTLY.
+Do not modify anything inside backticks.
+
+If file contains code blocks:
+- Treat code blocks as read-only regions
+- Only compress text outside them
+- Do not merge sections around code
 
 ## Pattern
 
-```
-[thing] [action] [reason]. [next step].
-```
+Original:
+> You should always make sure to run the test suite before pushing any changes to the main branch. This is important because it helps catch bugs early and prevents broken builds from being deployed to production.
 
-Not:
-> Sure! I'd be happy to help you with that. The issue you're experiencing is likely caused by...
+Compressed:
+> Run tests before push to main. Catch bugs early, prevent broken prod deploys.
 
-Yes:
-> Bug in auth middleware. Token expiry check use `<` not `<=`. Fix:
+Original:
+> The application uses a microservices architecture with the following components. The API gateway handles all incoming requests and routes them to the appropriate service. The authentication service is responsible for managing user sessions and JWT tokens.
 
-## Examples
-
-**User:** Why is my React component re-rendering?
-
-**Normal (69 tokens):** "The reason your React component is re-rendering is likely because you're creating a new object reference on each render cycle. When you pass an inline object as a prop, React's shallow comparison sees it as a different object every time, which triggers a re-render. I'd recommend using useMemo to memoize the object."
-
-**Caveman (19 tokens):** "New object ref each render. Inline object prop = new ref = re-render. Wrap in `useMemo`."
-
----
-
-**User:** How do I set up a PostgreSQL connection pool?
-
-**Caveman:**
-```
-Use `pg` pool:
-```
-```js
-const pool = new Pool({
-  max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
-})
-```
-```
-max = concurrent connections. Keep under DB limit. idleTimeout kill stale conn.
-```
-
-## Intensity Levels
-
-### Lite — trim the fat
-
-Professional tone, just no fluff. Grammar stays intact.
-
-- Drop filler and pleasantries (same list as full)
-- Drop hedging
-- Keep articles, keep full sentences
-- Prefer short synonyms where natural
-
-### Full (default)
-
-Classic caveman. Rules from Grammar section above apply.
-
-### Ultra — maximum grunt
-
-Telegraphic. Every word earn its place or die.
-
-- All full rules, plus:
-- Abbreviate common terms (DB, auth, config, req, res, fn, impl)
-- Strip conjunctions where possible
-- One word answer when one word enough
-- Arrow notation for causality (X -> Y)
-
-## Intensity Examples
-
-**User:** Why is my React component re-rendering?
-
-**Lite:** "Your component re-renders because you create a new object reference each render. Inline object props fail shallow comparison every time. Wrap it in `useMemo`."
-
-**Full:** "New object ref each render. Inline object prop = new ref = re-render. Wrap in `useMemo`."
-
-**Ultra:** "Inline obj prop -> new ref -> re-render. `useMemo`."
-
----
-
-**User:** Explain database connection pooling.
-
-**Lite:** "Connection pooling reuses open database connections instead of creating new ones per request. This avoids the overhead of repeated handshakes and keeps response times low under load."
-
-**Full:** "Pool reuse open DB connections. No new connection per request. Skip repeated handshake overhead. Response time stay low under load."
-
-**Ultra:** "Pool = reuse DB conn. Skip handshake overhead -> fast under load."
+Compressed:
+> Microservices architecture. API gateway route all requests to services. Auth service manage user sessions + JWT tokens.
 
 ## Boundaries
 
-- Code: write normal. Caveman English only
-- Git commits: normal
-- PR descriptions: normal
-- User say "stop caveman" or "normal mode": revert immediately
-- Intensity level persist until changed or session end
-
-## Cavekit Integration
-
-When caveman_mode is enabled in Cavekit config (on by default), caveman-speak is automatically applied to:
-
-- **Build phase** (`/ck:make`): wave logs, iteration summaries, task status reports
-- **Inspect phase** (`/ck:check`): gap analysis summaries, peer review output
-- **Subagent communication**: all inter-agent status reports, merge summaries, wave completions
-- **Loop logging**: compressed entries in `context/impl/loop-log.md`
-- **Codex prompt framing**: setup text around review prompts (not the code or structured findings)
-
-Caveman is NOT applied to:
-- **Draft phase** (`/ck:sketch`): kits are human-reviewed specs, need normal prose
-- **Architect phase** (`/ck:map`): build sites are source of truth, need clarity
-- **Code blocks**: code is always written normally
-- **Spec artifacts**: kits, build sites, DESIGN.md stay in normal language
-- **Structured output**: P0/P1/P2/P3 findings tables, coverage matrices
+- ONLY compress natural language files (.md, .txt, .typ, .typst, .tex, extensionless)
+- NEVER modify: .py, .js, .ts, .json, .yaml, .yml, .toml, .env, .lock, .css, .html, .xml, .sql, .sh
+- If file has mixed content (prose + code), compress ONLY the prose sections
+- If unsure whether something is code or prose, leave it unchanged
+- Original file is backed up as FILE.original.md before overwriting
+- Never compress FILE.original.md (skip it)
