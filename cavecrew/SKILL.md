@@ -40,21 +40,21 @@ What main thread can rely on per agent:
 <Header>:
 - path:line — `symbol` — short note
 totals: <counts>.
-```text
+```
 Or `No match.` Always file-path-first, line-number-attached, backticked symbols. Safe to grep with `path:\d+`.
 
 **`cavecrew-builder`**
 ```text
 <path:line-range> — <change ≤10 words>.
 verified: <re-read OK | mismatch @ path:line>.
-```text
+```
 Or one of: `too-big.` / `needs-confirm.` / `ambiguous.` / `regressed.` (terminal first token).
 
 **`cavecrew-reviewer`**
 ```text
 path:line: <emoji> <severity>: <problem>. <fix>.
 totals: N🔴 N🟡 N🔵 N❓
-```text
+```
 Or `No issues.` Findings sorted file → line ascending.
 
 ## Chaining patterns

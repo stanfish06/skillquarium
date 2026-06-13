@@ -47,12 +47,12 @@ Default mode = `full`. Change it:
 **Environment variable** (highest priority):
 ```bash
 export CAVEMAN_DEFAULT_MODE=ultra
-```text
+```
 
 **Config file** (`~/.config/caveman/config.json`):
 ```json
 { "defaultMode": "lite" }
-```text
+```
 
 Set `"off"` to disable auto-activation on session start. User can still activate manually with `/caveman`.
 
