@@ -85,6 +85,7 @@ SYNONYMS = {
     "conda-bioconda": ["conda", "mamba", "micromamba", "Bioconda"],
     "github-actions-ci": ["GitHub Actions", "CI/CD", "workflows"],
     "test-driven-development": ["TDD"], "using-git-worktrees": ["git worktree"],
+    "caveman": ["plain language", "ELI5", "dumb it down", "no jargon"],
     "web-artifacts-builder": ["artifacts", "shadcn"],
     "opensrc": ["source code", "package source", "dependency source", "read library source"],
     "greploop": ["Greptile", "PR review loop"], "check-pr": ["PR review", "merge request", "Greptile"],
@@ -253,7 +254,7 @@ CATEGORIES = [
      ["research-writing", "academic-pipelines", "vault-meta"],
      ["consciousness-council", "what-if-oracle", "dhdna-profiler", "scientific-brainstorming",
       "hypothesis-generation", "idea-evaluator", "idea-refine", "interview-me",
-      "vibe-research-workflow", "hypogenic"]),
+      "vibe-research-workflow", "hypogenic", "caveman"]),
 
     ("web-automation-frontend", "Web Automation, Frontend & Design",
      "Browser automation, Playwright testing, frontend design guidance, React/Next.js patterns, Figma workflows, and design-to-code loops.",
@@ -441,6 +442,18 @@ def parse_existing(skill):
     return data
 
 
+def existing_created(path):
+    """Preserve generated note creation dates across rebuilds."""
+    if not os.path.isfile(path):
+        return TODAY
+    try:
+        txt = open(path, encoding="utf-8").read(1024)
+    except OSError:
+        return TODAY
+    m = re.search(r"^created:\s*(.+)$", txt, re.MULTILINE)
+    return m.group(1).strip() if m else TODAY
+
+
 def emit_alias_block(aliases):
     if not aliases:
         return []
@@ -560,22 +573,27 @@ def main():
     # ---- map notes ---------------------------------------------------------
     for key, title, scope, related_keys, skills in CATEGORIES:
         live = sorted(skills_by_key.get(key, []))
+        path = os.path.join(MAPS_DIR, f"{key}.md")
+        created = existing_created(path)
         L = ["---", f"title: {title}", "tags:", "  - skill-map", f"created: {TODAY}", "---", "",
              f"# {title}", "", "> [!abstract] Scope", f"> {scope}", "",
              "[Back to Skill Index](../index.md)", ""]
+        L[4] = f"created: {created}"
         rel = [f"[{title_by_key[r]}]({r}.md)" for r in related_keys if r in title_by_key]
         if rel:
             L += ["**Related maps:** " + " | ".join(rel), ""]
         L += [f"## Skills ({len(live)})", ""]
         L += [f"- [{s}](../{s}.md) — {short[s]}" for s in live]
         L.append("")
-        with open(os.path.join(MAPS_DIR, f"{key}.md"), "w", encoding="utf-8") as f:
+        with open(path, "w", encoding="utf-8") as f:
             f.write("\n".join(L))
 
     # ---- index -------------------------------------------------------------
     total = len(on_disk)
+    index_path = os.path.join(ROOT, "index.md")
+    index_created = existing_created(index_path)
     I = ["---", "title: Skills Index", "tags:", "  - moc", "  - skill-index",
-         f"created: {TODAY}", "---", "", "# Skills Index", "",
+         f"created: {index_created}", "---", "", "# Skills Index", "",
          f"A navigable map of the **{total} agent skills** in this vault, grouped into "
          f"{len(CATEGORIES)} domains. Each entry links to a per-skill note that wraps the "
          f"original `SKILL.md` and holds your personal notes, status, and aliases.", "",
@@ -611,7 +629,7 @@ def main():
         I += ["## Uncategorized", ""]
         I += [f"- [{s}]({s}.md) — {short[s]}" for s in unsorted]
         I.append("")
-    with open(os.path.join(ROOT, "index.md"), "w", encoding="utf-8") as f:
+    with open(index_path, "w", encoding="utf-8") as f:
         f.write("\n".join(I))
 
     # ---- prune orphaned wrappers ------------------------------------------
