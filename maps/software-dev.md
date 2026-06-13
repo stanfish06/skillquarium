@@ -2,7 +2,7 @@
 title: Software Development & Engineering
 tags:
   - skill-map
-created: 2026-06-12
+created: 2026-06-13
 ---
 
 # Software Development & Engineering

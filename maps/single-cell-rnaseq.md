@@ -2,7 +2,7 @@
 title: Single-Cell, RNA-seq & Functional Genomics
 tags:
   - skill-map
-created: 2026-06-12
+created: 2026-06-13
 ---
 
 # Single-Cell, RNA-seq & Functional Genomics

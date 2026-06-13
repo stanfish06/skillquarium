@@ -2,7 +2,7 @@
 title: Analytics Engineering & LLM Operations
 tags:
   - skill-map
-created: 2026-06-12
+created: 2026-06-13
 ---
 
 # Analytics Engineering & LLM Operations
