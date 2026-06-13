@@ -8,7 +8,7 @@
 
 1. **subprocess usage**: The skill calls the `claude` CLI via `subprocess.run()` as a fallback when `ANTHROPIC_API_KEY` is not set. The subprocess call uses a fixed argument list — no shell interpolation occurs. User file content is passed via stdin, not as a shell argument.
 
-2. **File read/write**: The skill reads the file the user explicitly points it at, compresses it, and writes the result back to the same path. A `.original.md` backup is saved alongside it. No files outside the user-specified path are read or written.
+2. **File read/write**: The skill reads the file the user explicitly points it at, compresses it, and writes the result back to the same path. A `.original.md` backup of the original file is saved to the location returned by `backup_dir_for(filepath)` (a platform-specific out-of-tree backups directory, namespaced per repository + relative path). Apart from that backup behavior the skill does not read or write files outside the user-specified path. The subprocess invocation (when used) passes file content via stdin and does not perform shell interpolation.
 
 ### What the skill does NOT do
 

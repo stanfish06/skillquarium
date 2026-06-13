@@ -67,6 +67,10 @@ def detect_file_type(filepath: Path) -> str:
     """
     ext = filepath.suffix.lower()
 
+    # Special-cased extensionless files that are conventionally code/config
+    if filepath.name in {"Dockerfile", "Makefile"} or filepath.name.startswith(("Dockerfile.", "Makefile.")):
+        return "code"
+
     # Extension-based classification
     if ext in COMPRESSIBLE_EXTENSIONS:
         return "natural_language"

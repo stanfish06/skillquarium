@@ -66,6 +66,25 @@ SENSITIVE_NAME_TOKENS = (
 )
 
 
+def _get_repo_backup_namespace(filepath: Path):
+    """Return (repo_name, safe_rel_path) for collision-resistant backup names.
+
+    safe_rel_path replaces path separators and dots with _ so it can be used
+    in both dir names and file stems.
+    Falls back to (None, None) if not in a git repo.
+    """
+    try:
+        repo_root = Path(subprocess.check_output(
+            ["git", "-C", str(filepath.parent), "rev-parse", "--show-toplevel"],
+            stderr=subprocess.DEVNULL, text=True
+        ).strip())
+        repo_name = repo_root.name
+        rel = filepath.relative_to(repo_root)
+        safe = re.sub(r'[\\/.]+', '_', str(rel))
+        return repo_name, safe
+    except Exception:
+        return None, None
+
 def backup_dir_for(filepath: Path) -> Path:
     """Resolve the out-of-tree backup directory for a given source file.
 
@@ -76,8 +95,8 @@ def backup_dir_for(filepath: Path) -> Path:
       - else:    $XDG_DATA_HOME/caveman-compress/backups if set,
                  else ~/.local/share/caveman-compress/backups
 
-    The source file's parent-dir name is mirrored under the base to reduce
-    cross-project collisions (e.g. two `task.md` files in different repos).
+    Namespaces by repository + sanitized relative path (from repo root) to
+    avoid cross-project and same-name collisions.
     """
     if os.name == "nt" or sys.platform == "win32":
         local_appdata = os.environ.get("LOCALAPPDATA")
@@ -87,6 +106,13 @@ def backup_dir_for(filepath: Path) -> Path:
         xdg = os.environ.get("XDG_DATA_HOME")
         base = Path(xdg) if xdg else Path.home() / ".local" / "share"
         base = base / "caveman-compress" / "backups"
+
+    repo_name, safe_rel = _get_repo_backup_namespace(filepath)
+    if repo_name and safe_rel:
+        # Use repo_name as the project namespace dir; the safe_rel will be
+        # used for the actual backup filename (includes dir + name + ext sanitized).
+        return base / repo_name
+    # Fallback for non-git or detection failure (old behavior)
     return base / filepath.parent.name
 
 
@@ -248,11 +274,18 @@ def compress_file(filepath: Path) -> bool:
 
     original_text = filepath.read_text(errors="ignore")
     # Store backup outside the source directory so skill auto-loaders don't
-    # re-ingest the `.original.md` copy as a live file. Mirror the source's
-    # parent-dir name + stem under a platform-aware base to reduce collisions.
+    # re-ingest the `.original.md` copy as a live file. Namespace by repo +
+    # full relative path (sanitized) under a platform-aware base to reduce
+    # cross-project and intra-project name collisions.
     backup_dir = backup_dir_for(filepath)
     backup_dir.mkdir(parents=True, exist_ok=True)
-    backup_path = backup_dir / (filepath.stem + ".original.md")
+
+    repo_name, safe_rel = _get_repo_backup_namespace(filepath)
+    if repo_name and safe_rel:
+        backup_name = safe_rel + ".original.md"
+    else:
+        backup_name = filepath.stem + ".original.md"
+    backup_path = backup_dir / backup_name
 
     if not original_text.strip():
         print("❌ Refusing to compress: file is empty or whitespace-only.")

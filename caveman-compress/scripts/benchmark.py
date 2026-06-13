@@ -12,7 +12,7 @@ except ImportError:
 try:
     import tiktoken
     _enc = tiktoken.get_encoding("o200k_base")
-except ImportError:
+except (ImportError, ValueError, KeyError):
     _enc = None
 
 
