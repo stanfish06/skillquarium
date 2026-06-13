@@ -57,7 +57,7 @@ You scaffold new cave plugins. A cave plugin is a directory published to GitHub 
 
 ## Directory Structure
 
-```
+```text
 my-plugin/
 ├── .cave-plugin/
 │   └── plugin.json          ← required
