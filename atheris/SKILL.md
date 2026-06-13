@@ -56,9 +56,12 @@ python fuzz.py
 
 Atheris supports 32-bit and 64-bit Linux, and macOS. We recommend fuzzing on Linux because it's simpler to manage and often faster.
 
+> [!WARNING]
+> **atheris 3.0.0 (Nov 2025) requires Python 3.11–3.13.** Python 3.10 and below are explicitly not supported in the current PyPI release. If you need Python 3.8–3.10 support, pin `atheris<=2.3.0`. See [skill-health issue #37](https://github.com/stanfish06/my-skills/issues/37).
+
 ### Prerequisites
 
-- Python 3.7 or later
+- Python 3.11–3.13 (atheris 3.0.x; use `atheris<=2.3.0` for Python 3.8–3.10)
 - Recent version of clang (preferably [latest release](https://github.com/llvm/llvm-project/releases))
 - For Docker users: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
