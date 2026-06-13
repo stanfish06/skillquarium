@@ -913,9 +913,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/pyopenms/SKILL.md",
-      "skillFolderHash": "e48d83da4955777f5bb1a0464cf4bddd9c527428",
+      "skillFolderHash": "1731f15ae407f5688279f28424f80b187e3dc3c7",
       "installedAt": "2026-06-09T11:23:24.815Z",
-      "updatedAt": "2026-06-12T08:00:59.583Z"
+      "updatedAt": "2026-06-13T07:35:00.222Z"
     },
     "pysam": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1014,9 +1014,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/scanpy/SKILL.md",
-      "skillFolderHash": "b078835a7e853c3db9563248b6f4ab802ee63a41",
+      "skillFolderHash": "375d3348b4fa21643a7c839d27c873ed27a08327",
       "installedAt": "2026-06-09T11:23:24.820Z",
-      "updatedAt": "2026-06-12T08:01:30.838Z"
+      "updatedAt": "2026-06-13T07:35:03.418Z"
     },
     "scholar-evaluation": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1362,9 +1362,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "83a60c10184c73ea24c2d6475275dc1096ee1630",
+      "skillFolderHash": "1928532b080a194e1c94b2e2de91a60480e3fc1d",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-06-12T08:02:55.672Z"
+      "updatedAt": "2026-06-13T07:35:06.315Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -1380,18 +1380,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "1a166953a275bdb91822b0509ec49a3c3236f685",
+      "skillFolderHash": "ccf2644a70797d18b2ff7e758b096c34f54581eb",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-12T08:02:58.354Z"
+      "updatedAt": "2026-06-13T07:35:08.858Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "e0b5956b64783f2cc6ce093462eb26c79b5402b1",
+      "skillFolderHash": "e72534a8657e32c12669a6bbfd916275ed6f03e2",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-06-10T07:48:58.365Z"
+      "updatedAt": "2026-06-13T07:35:11.694Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
