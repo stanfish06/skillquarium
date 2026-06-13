@@ -14,9 +14,10 @@ created: 2026-06-12
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Vault, Skills & Workflow Meta](vault-meta.md)
 
-## Skills (11)
+## Skills (12)
 
-- [caveman](../caveman.md) — Use when the user asks for caveman mode, caveperson style, brutally simple explanation, ELI5, dumb it down, no-jargon translation, or a blunt plain-language version of a concept, plan...
+- [caveman](../caveman.md) — Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy
+- [caveman-compress](../caveman-compress.md) — Ultra-compressed communication mode (lite / full / ultra) that cuts token usage ~75% by speaking like caveman while keeping full technical accuracy
 - [consciousness-council](../consciousness-council.md) — Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge
 - [dhdna-profiler](../dhdna-profiler.md) — Extract cognitive patterns and thinking fingerprints from any text
 - [hypogenic](../hypogenic.md) — Automated LLM-driven hypothesis generation and testing on tabular datasets
