@@ -225,7 +225,7 @@ CATEGORIES = [
      ["aws-agentic-ai", "aws-cdk-development", "aws-cost-operations", "aws-mcp-setup",
       "aws-serverless-eda", "modal", "hf-cli", "nextflow", "snakemake-workflow-engine",
       "e2b-sandbox", "devcontainer-setup", "modern-python", "conda-bioconda",
-      "ci-cd-and-automation", "shipping-and-launch"]),
+      "docker-expert", "kubernetes-specialist", "ci-cd-and-automation", "shipping-and-launch"]),
 
     ("software-dev", "Software Development & Engineering",
      "General software-engineering methodology and tooling: TDD, debugging, code review, planning, git worktrees, source-grounded implementation, plus core app primitives (pytest, Docker, FastAPI, CI).",

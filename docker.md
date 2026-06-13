@@ -19,6 +19,7 @@ created: 2026-06-10
 ## Related skills
 
 - [devcontainer-setup](devcontainer-setup.md) — Creates devcontainers with Claude Code, language-specific tooling (Python/Node/Rust/Go), and persistent volumes
+- [docker-expert](docker-expert.md) — You are an advanced Docker containerization expert with comprehensive, practical knowledge of container optimization, security hardening, multi-stage builds, orchestration patterns...
 - [fastapi](fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [modal](modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
 - [nextflow](nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
