@@ -447,7 +447,8 @@ def existing_created(path):
     if not os.path.isfile(path):
         return TODAY
     try:
-        txt = open(path, encoding="utf-8").read(1024)
+        with open(path, encoding="utf-8") as f:
+            txt = f.read(1024)
     except OSError:
         return TODAY
     m = re.search(r"^created:\s*(.+)$", txt, re.MULTILINE)
@@ -575,10 +576,9 @@ def main():
         live = sorted(skills_by_key.get(key, []))
         path = os.path.join(MAPS_DIR, f"{key}.md")
         created = existing_created(path)
-        L = ["---", f"title: {title}", "tags:", "  - skill-map", f"created: {TODAY}", "---", "",
+        L = ["---", f"title: {title}", "tags:", "  - skill-map", f"created: {created}", "---", "",
              f"# {title}", "", "> [!abstract] Scope", f"> {scope}", "",
              "[Back to Skill Index](../index.md)", ""]
-        L[4] = f"created: {created}"
         rel = [f"[{title_by_key[r]}]({r}.md)" for r in related_keys if r in title_by_key]
         if rel:
             L += ["**Related maps:** " + " | ".join(rel), ""]
