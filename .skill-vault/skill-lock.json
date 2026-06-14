@@ -1234,9 +1234,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/transformers/SKILL.md",
-      "skillFolderHash": "9500f9425168ea444b783db76e3313c1e9d73d64",
+      "skillFolderHash": "0b3c4a10eb6d08ee93aaa32fc04404defe24635c",
       "installedAt": "2026-06-09T11:23:24.836Z",
-      "updatedAt": "2026-06-12T08:02:36.397Z"
+      "updatedAt": "2026-06-14T07:53:25.123Z"
     },
     "treatment-plans": {
       "source": "K-Dense-AI/claude-scientific-writer",
