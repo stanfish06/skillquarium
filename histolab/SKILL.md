@@ -10,6 +10,10 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 ## Overview
 
+> [!WARNING]
+> **Python 3.12+ not supported.** histolab 0.7.0 specifies `requires-python >=3.8,<3.12`; `uv pip install histolab` fails on Python 3.12 or 3.13. Pin to Python 3.11: `conda create -n histolab python=3.11`.
+> **Maintenance freeze:** No new releases since **February 25, 2024** (v0.7.0, 2+ years). Snyk Advisor rates the project as [Inactive](https://snyk.io/advisor/python/histolab). For Python 3.12+ environments consider [pathml](https://github.com/Dana-Farber-AI/pathml) (Dana-Farber/Harvard, active) or [TIAToolbox](https://github.com/TIA-Lab/tiatoolbox). Tracked: issue [#45](https://github.com/stanfish06/my-skills/issues/45).
+
 Histolab is a Python library for processing whole slide images (WSI) in digital pathology. It automates tissue detection, extracts informative tiles from gigapixel images, and prepares datasets for deep learning pipelines. The library handles multiple WSI formats, implements sophisticated tissue segmentation, and provides flexible tile extraction strategies.
 
 ## Installation
@@ -710,4 +714,3 @@ Comprehensive visualization guide:
 - Interactive visualization in Jupyter notebooks
 
 **Usage pattern:** Reference files contain in-depth information to support workflows described in this main skill document. Load specific reference files as needed for detailed implementation guidance, troubleshooting, or advanced features.
-
