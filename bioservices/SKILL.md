@@ -3,7 +3,7 @@ name: bioservices
 description: Unified Python interface to 40+ bioinformatics services. Use when querying multiple databases (UniProt, KEGG, ChEMBL, Reactome) in a single workflow with consistent API. Best for cross-database analysis, ID mapping across services. For quick single-database lookups use gget; for sequence/file manipulation use biopython.
 license: GPLv3 license
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.9–3.12 and internet access to 40+ bioinformatics web APIs. NCBI BLAST requires a contact email (`NCBI_EMAIL` env var or explicit parameter).
+compatibility: Requires Python ≥3.9 (3.9–3.14 as of 1.16.0) and internet access to 40+ bioinformatics web APIs. NCBI BLAST requires a contact email (`NCBI_EMAIL` env var or explicit parameter).
 required_environment_variables: [{"name": "NCBI_EMAIL", "prompt": "Email for NCBI service identification.", "required_for": "optional features"}]
 metadata: {"version": "1.2", "skill-author": "K-Dense Inc.", "openclaw": {"envVars": [{"name": "NCBI_EMAIL", "required": false, "description": "Email for NCBI service identification."}]}}
 ---
@@ -14,7 +14,7 @@ metadata: {"version": "1.2", "skill-author": "K-Dense Inc.", "openclaw": {"envVa
 
 BioServices is a Python package providing programmatic access to approximately 40 bioinformatics web services and databases. Retrieve biological data, perform cross-database queries, map identifiers, analyze sequences, and integrate multiple biological resources in Python workflows. The package handles both REST and SOAP/WSDL protocols transparently.
 
-**Version note:** Examples target **bioservices 1.16.0** (PyPI, Mar 2026). Requires **Python 3.9–3.12**. UniProt REST changes in mid-2022 (bioservices ≥1.10) mainly affect tabular `columns` names — see upstream `_legacy_names` if parsing breaks. ChEMBL wrappers changed at 1.6.0 (2018 API); use `get_similarity`, `get_substructure`, `get_molecule` instead of pre-1.6 method names.
+**Version note:** Examples target **bioservices 1.16.0** (PyPI, Mar 2026). Requires **Python ≥3.9** (classifiers include 3.9–3.14 as of 1.16.0). UniProt REST changes in mid-2022 (bioservices ≥1.10) mainly affect tabular `columns` names — see upstream `_legacy_names` if parsing breaks. ChEMBL wrappers changed at 1.6.0 (2018 API); use `get_similarity`, `get_substructure`, `get_molecule` instead of pre-1.6 method names.
 
 ## When to Use This Skill
 
@@ -357,7 +357,7 @@ Load references when working with specific services or complex integration tasks
 uv pip install "bioservices==1.16.0"
 ```
 
-Dependencies are installed automatically. Upstream CI tests Python 3.9–3.12 ([PyPI](https://pypi.org/project/bioservices/), [docs](https://bioservices.readthedocs.io/)).
+Dependencies are installed automatically. Upstream CI tests Python 3.9–3.14 ([PyPI](https://pypi.org/project/bioservices/), [docs](https://bioservices.readthedocs.io/)).
 
 ## Credentials
 
@@ -382,4 +382,3 @@ For detailed API documentation and advanced features, refer to:
 - Official documentation: https://bioservices.readthedocs.io/
 - Source code: https://github.com/cokelaer/bioservices
 - Service-specific references in `references/services_reference.md`
-
