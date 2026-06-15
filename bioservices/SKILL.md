@@ -357,7 +357,7 @@ Load references when working with specific services or complex integration tasks
 uv pip install "bioservices==1.16.0"
 ```
 
-Dependencies are installed automatically. Upstream CI tests Python 3.9–3.14 ([PyPI](https://pypi.org/project/bioservices/), [docs](https://bioservices.readthedocs.io/)).
+Dependencies are installed automatically. PyPI 1.16.0 declares `requires-python >=3.9,<4.0` and classifiers through Python 3.14, while upstream's core CI currently tests Python 3.9–3.13 and the README still advertises tested support through 3.12. Treat Python 3.14 as package metadata compatibility, not advertised CI coverage ([PyPI](https://pypi.org/project/bioservices/), [docs](https://bioservices.readthedocs.io/)).
 
 ## Credentials
 
