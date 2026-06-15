@@ -57,6 +57,7 @@ def _purge_foreign_bare_modules(*names: str) -> None:
 
 _purge_foreign_bare_modules("errors", "schemas", "preflight")
 
+from clawbio.common.textio import write_text_lf  # noqa: E402
 from schemas import DEFAULT_ALIGNER, DEFAULT_STEP, SKILL_NAME, SKILL_VERSION  # noqa: E402
 
 
@@ -277,9 +278,8 @@ def _json_safe(value: Any, *, anchor: Path | None = None, warnings: list[str] | 
 
 def _dump_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n",
-        encoding="utf-8",
+    write_text_lf(
+        path, json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n"
     )
 
 
@@ -518,9 +518,9 @@ def _write_checksums_file(
 ) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
     if not outputs_report_present:
-        target.write_text(
+        write_text_lf(
+            target,
             "# checksums.sha256 — outputs not parsed (pre-run / --check); file intentionally empty.\n",
-            encoding="utf-8",
         )
         return
 
@@ -532,7 +532,7 @@ def _write_checksums_file(
         hex_digest = digest_with_prefix.split(":", 1)[1]
         rel = path.resolve().relative_to(output_dir.resolve()).as_posix()
         lines.append(f"{hex_digest}  {rel}")
-    target.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+    write_text_lf(target, "\n".join(lines) + ("\n" if lines else ""))
 
 
 # ---------------------------------------------------------------------------
@@ -622,9 +622,9 @@ def write_provenance_bundle(
 
     # ---- 4. environment.yml ----------------------------------------------
     env_path = bundle_dir / "environment.yml"
-    env_path.write_text(
+    write_text_lf(
+        env_path,
         _build_environment_yml(nextflow_version=nextflow_version, warnings=warnings),
-        encoding="utf-8",
     )
     written.append(env_path)
 

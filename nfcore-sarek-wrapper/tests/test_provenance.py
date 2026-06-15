@@ -1,7 +1,10 @@
 """Tests for nfcore-sarek-wrapper / provenance.py."""
 from __future__ import annotations
 
+import hashlib
 import json
+import shutil
+import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -201,6 +204,88 @@ def test_bundle_writes_all_expected_files(tmp_path: Path):
     }
     assert expected.issubset(names), f"Missing from bundle: {expected - names}"
 
+
+def test_provenance_bundle_files_use_lf_line_endings(tmp_path: Path):
+    """Cross-OS portability invariant: every provenance-bundle text file
+    (checksums.sha256, manifest.json, environment.yml, the copied params.yaml /
+    commands.sh / samplesheet, and all JSON) is LF-only. CRLF would break the
+    bash commands.sh on Windows and make checksums.sha256 OS-dependent."""
+    bundle = _run_bundle(tmp_path)
+    text_suffixes = {".sh", ".yaml", ".yml", ".json", ".md", ".csv", ".sha256"}
+    checked = 0
+    for path in bundle.files_written:
+        p = Path(path)
+        if p.is_file() and (p.suffix in text_suffixes):
+            data = p.read_bytes()
+            assert b"\r" not in data, f"{p.name} contains a CR byte (not LF-only)"
+            checked += 1
+    assert checked >= 6  # csv + yaml + sh + sha256 + json + yml
+
+
+def _run_bundle_with_fake_output(tmp_path: Path) -> ProvenanceBundle:
+    """Build a full bundle whose output dir holds a real pipeline output, so the
+    output-scoped checksums.sha256 is populated (sarek checksums the results, not
+    the bundle; input integrity lives in the manifest's params/samplesheet hashes)."""
+    samplesheet_csv, params_yaml, commands_sh = _write_caller_artifacts(tmp_path)
+    output_dir = tmp_path / "out"
+    results = output_dir / "upstream" / "results" / "variant_calling"
+    results.mkdir(parents=True)
+    (results / "sample.vcf.gz").write_bytes(b"fake compressed vcf\n")
+    return write_provenance_bundle(
+        output_dir=output_dir,
+        skill_dir=_SKILL_DIR,
+        samplesheet_csv_src=samplesheet_csv,
+        params_yaml_src=params_yaml,
+        commands_sh_src=commands_sh,
+        params=_base_params(),
+        samplesheet_report=_FakeSamplesheetReport(),
+        pipeline_source=_FakePipelineSource(),
+        outputs_report=_FakeOutputsReport(),
+        nextflow_version="25.10.2",
+        java_version="17.0.10",
+        profile="docker",
+    )
+
+
+def test_checksums_self_verifiable_in_place(tmp_path: Path):
+    """Every label in checksums.sha256 resolves relative to the output dir and
+    matches — the manifest is self-verifiable in place on any OS. After the LF
+    fixes the digests are byte-stable across operating systems."""
+    bundle = _run_bundle_with_fake_output(tmp_path)
+    repro = Path(bundle.manifest_path).parent
+    output_dir = repro.parent
+    raw = (repro / "checksums.sha256").read_bytes()
+    assert b"\r" not in raw, "checksums.sha256 must be LF-only"
+    lines = [
+        ln for ln in raw.decode("utf-8").splitlines()
+        if ln.strip() and not ln.startswith("#")
+    ]
+    assert lines, "checksums.sha256 is empty"
+    failures = []
+    for ln in lines:
+        digest, label = ln.split("  ", 1)
+        target = output_dir / label
+        if not target.exists():
+            failures.append((label, "MISSING"))
+        elif hashlib.sha256(target.read_bytes()).hexdigest() != digest:
+            failures.append((label, "MISMATCH"))
+    assert failures == [], f"checksums.sha256 not verifiable in place: {failures}"
+
+
+def test_sha256sum_c_passes_from_output_dir(tmp_path: Path):
+    """If a sha256 CLI is available, `-c` returns 0 from the output dir."""
+    tool = shutil.which("sha256sum")
+    if not tool:
+        pytest.skip("sha256sum not available")
+    bundle = _run_bundle_with_fake_output(tmp_path)
+    repro = Path(bundle.manifest_path).parent
+    r = subprocess.run(
+        [tool, "-c", "reproducibility/checksums.sha256"],
+        cwd=str(repro.parent),
+        capture_output=True,
+        text=True,
+    )
+    assert r.returncode == 0, f"sha256sum -c failed:\n{r.stdout}\n{r.stderr}"
 
 
 def test_manifest_has_required_fields(tmp_path: Path):
@@ -465,7 +550,11 @@ def test_compatibility_policy_loads_with_expected_fields():
         "pipeline_source.source_kind", "pipeline_source.resolved_version",
         "params_checksum", "reference_checksums", "samplesheet_checksum",
     }
-    assert expected_drift_fields.issubset(set(policy["resume_drift_fields"]))
+    # Exact equality (not issubset): the policy JSON and the code's tracked-field
+    # set are the single source of truth for resume drift and must not diverge in
+    # either direction — a policy field the code ignored would silently fail to
+    # gate resume.
+    assert expected_drift_fields == set(policy["resume_drift_fields"])
     # arm/gpu/spark are profile modifiers, not separate drift fields.
     assert {"arm", "gpu", "spark"}.issubset(set(policy["ignored_during_drift"]))
     assert policy["schema_version"] == 1

@@ -173,6 +173,6 @@ This skill is invoked by the Bio Orchestrator when:
 
 It can be chained with:
 - **pharmgx-reporter**: PRS provides disease risk context; PharmGx provides drug metabolism context. Together they give a comprehensive genomic health report.
-- **nutrigx_advisor**: Combine PRS for metabolic traits (T2D, BMI) with nutrigenomic recommendations.
+- **nutrigx**: Combine PRS for metabolic traits (T2D, BMI) with nutrigenomic recommendations.
 - **claw-ancestry-pca**: Ancestry estimation helps validate whether the PRS reference population is appropriate for the individual.
 - **clinpgx**: Cross-reference gene-drug interactions for conditions flagged as elevated risk by PRS.

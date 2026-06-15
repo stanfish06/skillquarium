@@ -8,13 +8,13 @@ FASTQ paths in the samplesheet and reference/index paths in params.yaml — need
 remapping before replaying on a different machine:
 
   1. Update FASTQ paths in the samplesheet:
-       python remap_paths.py --old /original/data/dir --new /new/data/dir
+       python3 remap_paths.py --old /original/data/dir --new /new/data/dir
 
   2. Update reference/index paths in params.yaml (fasta, gtf, *_index, ...):
-       python remap_paths.py --refs-old /old/refs --refs-new /new/refs
+       python3 remap_paths.py --refs-old /old/refs --refs-new /new/refs
 
   3. Verify everything is ready:
-       python remap_paths.py --verify
+       python3 remap_paths.py --verify
 
   Preview any change without modifying files by adding --dry-run.
   Remote URIs (s3://, https://, ...) and $VAR references are always skipped.
@@ -326,7 +326,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
         print(f"FASTQ paths: {len(missing)} missing in {samplesheet.name}:")
         for m in missing:
             print(f"  {m}")
-        print("  → fix: python remap_paths.py --old <old_prefix> --new <new_prefix>")
+        print("  → fix: python3 remap_paths.py --old <old_prefix> --new <new_prefix>")
 
     params_yaml = find_params(bundle_dir=bundle_dir)
     if params_yaml is not None:
@@ -339,7 +339,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             for m in missing_refs:
                 print(f"  {m}")
             print(
-                "  → fix: python remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>"
+                "  → fix: python3 remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>"
             )
 
     if ok:
@@ -355,16 +355,16 @@ def main() -> int:
         epilog="""
 examples:
   Remap FASTQ paths (required when FASTQs live at a different prefix):
-    python remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs
+    python3 remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs
 
   Remap reference/index paths in params.yaml:
-    python remap_paths.py --refs-old /Users/alice/refs --refs-new /home/bob/refs
+    python3 remap_paths.py --refs-old /Users/alice/refs --refs-new /home/bob/refs
 
   Preview any change without modifying files:
-    python remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs --dry-run
+    python3 remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs --dry-run
 
   Verify everything is ready to replay:
-    python remap_paths.py --verify
+    python3 remap_paths.py --verify
 """,
     )
     parser.add_argument(

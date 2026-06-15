@@ -8,26 +8,26 @@ Nextflow). Reference/index paths are stored in params.yaml, not in
 commands.sh. Before replaying on a different machine:
 
   1. Remap input data paths in the samplesheet (if data moved):
-       python remap_paths.py --old /original/data/dir --new /new/data/dir
+       python3 remap_paths.py --old /original/data/dir --new /new/data/dir
 
   2. Remap reference/index paths (--fasta, --dbsnp, …). For sarek these live in
      reproducibility/params.yaml; this remaps params.yaml (and commands.sh, if
      references were added there manually):
-       python remap_paths.py --refs-old /original/refs --refs-new /new/refs
+       python3 remap_paths.py --refs-old /original/refs --refs-new /new/refs
 
   3. Update the --output path in commands.sh (if output dir changed):
-       python remap_paths.py --output-dir /new/output/dir
+       python3 remap_paths.py --output-dir /new/output/dir
 
   4. Verify everything is ready:
-       python remap_paths.py --verify
+       python3 remap_paths.py --verify
 
   Preview any change without modifying files by adding --dry-run.
 
   Remote URIs (s3://, https://, etc.) are recognized and skipped automatically
   during path verification and checksumming — they are never resolved locally.
 
-  CLAWBIO_REPO must always be set to replay:
-       CLAWBIO_REPO=/path/to/ClawBio bash commands.sh
+  Replay is self-contained — no environment variable is required:
+       bash commands.sh
 """
 from __future__ import annotations
 
@@ -43,6 +43,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 _BUNDLE_DIR = Path(__file__).resolve().parent
+
+
+def _write_text_lf(path: Path, text: str) -> None:
+    """Write ``text`` with LF line endings on every OS (self-contained).
+
+    This script is shipped inside the reproducibility bundle and runs standalone
+    at replay (no ClawBio package available), so it cannot import the shared
+    ``clawbio.common.textio`` helper. CRLF/CR are normalised to LF and the result
+    is written as bytes (bypassing text-mode newline translation) so a rewrite on
+    Windows never reintroduces CRLF into commands.sh, params.yaml, or checksums.
+    """
+    normalised = text.replace("\r\n", "\n").replace("\r", "\n")
+    Path(path).write_bytes(normalised.encode("utf-8"))
+
+
 _FASTQ_COLUMNS = ("fastq_1", "fastq_2")
 # All samplesheet columns that hold local file paths for nf-core/sarek.
 _SAMPLESHEET_PATH_COLUMNS = (
@@ -205,8 +220,11 @@ def remap_csv(
     if not dry_run and changes:
         backup = samplesheet.with_name(samplesheet.name + ".bak")
         shutil.copy2(samplesheet, backup)
+        # lineterminator="\n": csv defaults to CRLF; force LF so a remap preserves
+        # the LF endings written by samplesheet_builder and keeps the bundle
+        # byte-stable across operating systems.
         with samplesheet.open("w", newline="", encoding="utf-8") as fh:
-            writer = csv.DictWriter(fh, fieldnames=fieldnames)
+            writer = csv.DictWriter(fh, fieldnames=fieldnames, lineterminator="\n")
             writer.writeheader()
             writer.writerows(rows)
 
@@ -239,7 +257,7 @@ def remap_commands_references(
     if not dry_run and changes:
         backup = commands_sh.with_suffix(".sh.bak")
         shutil.copy2(commands_sh, backup)
-        commands_sh.write_text(updated, encoding="utf-8")
+        _write_text_lf(commands_sh, updated)
 
     return changes
 
@@ -275,7 +293,7 @@ def remap_params_references(
     if not dry_run and changes:
         backup = params_yaml.with_suffix(".yaml.bak")
         shutil.copy2(params_yaml, backup)
-        params_yaml.write_text(updated, encoding="utf-8")
+        _write_text_lf(params_yaml, updated)
 
     return changes
 
@@ -352,7 +370,7 @@ def update_commands_output(commands_sh: Path, new_output_dir: str) -> bool:
         return False
     backup = commands_sh.with_suffix(".sh.bak")
     shutil.copy2(commands_sh, backup)
-    commands_sh.write_text(updated, encoding="utf-8")
+    _write_text_lf(commands_sh, updated)
     return True
 
 
@@ -506,7 +524,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
         print(f"FASTQ/BAM paths: {len(missing_reads)} missing in {samplesheet.name}:")
         for m in missing_reads:
             print(f"  {m}")
-        print("  → fix: python remap_paths.py --old <old_prefix> --new <new_prefix>")
+        print("  → fix: python3 remap_paths.py --old <old_prefix> --new <new_prefix>")
 
     commands_sh = find_commands_sh(bundle_dir=bundle_dir)
     if commands_sh is not None:
@@ -535,7 +553,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             else:
                 # Not an error — the wrapper creates the output dir on a fresh replay.
                 print(f"Output dir:  will be created on replay ({output_path})")
-                print("  → to change it: python remap_paths.py --output-dir <new_output_dir>")
+                print("  → to change it: python3 remap_paths.py --output-dir <new_output_dir>")
 
         missing_refs = verify_reference_paths(commands_sh)
         if missing_refs:
@@ -543,7 +561,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             print(f"Reference paths (commands.sh): {len(missing_refs)} missing:")
             for r in missing_refs:
                 print(f"  {r}")
-            print("  → fix: python remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>")
+            print("  → fix: python3 remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>")
 
     # nf-core/sarek reference paths live in params.yaml (passed via -params-file).
     params_yaml = find_params(bundle_dir=bundle_dir)
@@ -556,7 +574,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             print(f"Reference paths: {len(missing_params_refs)} missing in params.yaml:")
             for r in missing_params_refs:
                 print(f"  {r}")
-            print("  → fix: python remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>")
+            print("  → fix: python3 remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>")
 
     bd = bundle_dir or _BUNDLE_DIR
     missing_bundle = [f for f in _REQUIRED_BUNDLE_FILES if not (bd / f).exists()]
@@ -567,11 +585,11 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             + "".join(f"  {bd / f}\n" for f in missing_bundle)
             + "  This usually means the wrapper crashed during post-processing.\n"
             + "  Run --repair-bundle to regenerate them:\n"
-            + "    python remap_paths.py --repair-bundle"
+            + "    python3 remap_paths.py --repair-bundle"
         )
 
     if ok:
-        replay_cmd = f"  CLAWBIO_REPO=/path/to/ClawBio bash {shlex.quote(str(bd / 'commands.sh'))}"
+        replay_cmd = f"  bash {shlex.quote(str(bd / 'commands.sh'))}"
         if warned:
             print("\nAll checks passed (with warnings — review above before replaying):")
         else:
@@ -620,10 +638,7 @@ def _regenerate_checksums(bundle_dir: Path) -> None:
         if f.suffix == ".log":
             continue
         lines.append(f"{_sha256_file(f)}  {rel.as_posix()}")
-    checksum_path.write_text(
-        "\n".join(lines) + ("\n" if lines else ""),
-        encoding="utf-8",
-    )
+    _write_text_lf(checksum_path, "\n".join(lines) + ("\n" if lines else ""))
 
 
 def _regenerate_manifest_stub(bundle_dir: Path, commands_sh: Path) -> None:
@@ -644,10 +659,7 @@ def _regenerate_manifest_stub(bundle_dir: Path, commands_sh: Path) -> None:
         "commands_sh": str(commands_sh),
         "regenerated_at": datetime.now(timezone.utc).isoformat(),
     }
-    (bundle_dir / "manifest.json").write_text(
-        json.dumps(manifest, indent=2),
-        encoding="utf-8",
-    )
+    _write_text_lf(bundle_dir / "manifest.json", json.dumps(manifest, indent=2))
 
 
 def _regenerate_environment_stub(bundle_dir: Path) -> None:
@@ -657,13 +669,13 @@ def _regenerate_environment_stub(bundle_dir: Path) -> None:
     at run time.  Without the wrapper context those cannot be reconstructed, so
     this stub records only a named placeholder that auditors can recognise.
     """
-    (bundle_dir / "environment.yml").write_text(
+    _write_text_lf(
+        bundle_dir / "environment.yml",
         "# regenerated post-hoc by remap_paths.py --repair-bundle\n"
         "# Original environment snapshot was lost because the wrapper crashed during\n"
         "# post-processing. For the original snapshot, re-run the wrapper.\n"
         "name: claw-sarek\n"
         "regenerated_post_hoc: true\n",
-        encoding="utf-8",
     )
 
 
@@ -743,22 +755,22 @@ def main() -> int:
         epilog="""
 examples:
   Remap FASTQ/BAM paths in the samplesheet:
-    python remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs
+    python3 remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs
 
   Remap reference/index paths in params.yaml (and commands.sh if present):
-    python remap_paths.py --refs-old /Users/alice/refs --refs-new /home/bob/refs
+    python3 remap_paths.py --refs-old /Users/alice/refs --refs-new /home/bob/refs
 
   Update the --output directory in commands.sh:
-    python remap_paths.py --output-dir /home/bob/my_run
+    python3 remap_paths.py --output-dir /home/bob/my_run
 
   Preview any change without modifying files:
-    python remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs --dry-run
+    python3 remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs --dry-run
 
   Verify everything is ready to replay:
-    python remap_paths.py --verify
+    python3 remap_paths.py --verify
 
-  Replay (CLAWBIO_REPO is always required):
-    CLAWBIO_REPO=/path/to/ClawBio bash commands.sh
+  Replay the run (self-contained — no environment variable required):
+    bash commands.sh
 """,
     )
     parser.add_argument("--old", metavar="PREFIX", help="Original FASTQ/BAM path prefix to replace in samplesheet")

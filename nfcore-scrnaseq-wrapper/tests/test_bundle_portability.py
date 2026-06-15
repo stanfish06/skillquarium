@@ -267,3 +267,25 @@ def test_bundle_remap_roundtrip_then_verifies(tmp_path):
     assert changes, "remap should have rewritten the FASTQ paths"
     # after remap, every FASTQ path must resolve on the 'new machine'
     assert remap_paths.verify_paths(ss) == [], "all paths must resolve after remap"
+
+
+def test_bundle_remap_roundtrip_with_space_and_unicode_prefix(tmp_path):
+    """Relocate the FASTQs to a NEW prefix containing a space AND a non-ASCII char
+    (a realistic replay machine), then remap + re-verify. The samplesheet must stay
+    LF-only afterwards. Parity with nfcore-sarek-wrapper's roundtrip guard, and the
+    explicit spaces/unicode-in-paths portability case."""
+    import remap_paths
+
+    repro = _build_full_bundle(tmp_path)
+    ss = repro / "samplesheet.valid.csv"
+
+    old_prefix = str((tmp_path / "data").resolve())
+    moved = tmp_path / "relocated café data"  # space + non-ASCII
+    shutil.move(str(tmp_path / "data"), str(moved))
+    new_prefix = str(moved.resolve())
+
+    assert remap_paths.verify_paths(ss), "expected missing paths before remap"
+    changes = remap_paths.remap_csv(ss, old_prefix, new_prefix, dry_run=False)
+    assert changes, "remap should have rewritten the FASTQ paths"
+    assert remap_paths.verify_paths(ss) == [], "all paths must resolve after remap"
+    assert b"\r" not in ss.read_bytes(), "remap must preserve LF endings"

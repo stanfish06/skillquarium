@@ -2,7 +2,7 @@
 name: nfcore-scrnaseq-wrapper
 version: "0.1.0"
 author: ClawBio
-description: Wrapper skill for running nf-core/scrnaseq upstream single-cell RNA-seq preprocessing from FASTQ with strict preflight, reproducibility outputs, and downstream handoff to ClawBio scRNA skills.
+description: Wrapper skill for running nf-core/scrnaseq 4.1.0 upstream single-cell RNA-seq preprocessing from FASTQ with strict preflight, reproducibility outputs, and downstream handoff to ClawBio scRNA skills.
 inputs:
   - name: samplesheet
     type: file

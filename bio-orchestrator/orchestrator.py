@@ -508,7 +508,7 @@ def append_audit_log(output_dir: Path, action: str, details: str = "") -> None:
 SKILL_REGISTRY_MAP: dict[str, str] = {
     "pharmgx-reporter": "pharmgx",
     "equity-scorer": "equity",
-    "nutrigx_advisor": "nutrigx",
+    "nutrigx": "nutrigx",
     "scrna-orchestrator": "scrna",
     "scrna-embedding": "scrna-embedding",
     "genome-compare": "compare",

@@ -148,13 +148,13 @@ _PORTABILITY_NOTICE = """\
 # but your data and reference paths are machine-specific. Before replaying:
 #
 #   1. Remap FASTQ paths in the samplesheet:
-#        python reproducibility/remap_paths.py --old /original/prefix --new /new/prefix
+#        python3 reproducibility/remap_paths.py --old /original/prefix --new /new/prefix
 #
 #   2. Remap reference/index paths in params.yaml (--fasta, --gtf, indexes, ...):
-#        python reproducibility/remap_paths.py --refs-old /original/refs --refs-new /new/refs
+#        python3 reproducibility/remap_paths.py --refs-old /original/refs --refs-new /new/refs
 #
 #   3. Verify everything resolves on this machine:
-#        python reproducibility/remap_paths.py --verify
+#        python3 reproducibility/remap_paths.py --verify
 #
 # The output directory is auto-detected from this script's location — no
 # --output edit is needed when you move the whole bundle.

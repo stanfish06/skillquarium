@@ -1362,9 +1362,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "1928532b080a194e1c94b2e2de91a60480e3fc1d",
+      "skillFolderHash": "64ba0b482cd49c81376236f955810adbb6e9fa4b",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-06-13T07:35:06.315Z"
+      "updatedAt": "2026-06-15T08:29:09.799Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -1380,18 +1380,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "ccf2644a70797d18b2ff7e758b096c34f54581eb",
+      "skillFolderHash": "a48a0c1670d04cde73015a5d4234760117404f6a",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-13T07:35:08.858Z"
+      "updatedAt": "2026-06-15T08:29:11.600Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "e72534a8657e32c12669a6bbfd916275ed6f03e2",
+      "skillFolderHash": "9bbf126fc5cff01922b4988bbda5466e6883c105",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-06-13T07:35:11.694Z"
+      "updatedAt": "2026-06-15T08:29:13.710Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
@@ -1615,9 +1615,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/bio-orchestrator/SKILL.md",
-      "skillFolderHash": "cd1da529ea4aecb62fd6d91820c25b97ee3e2f6f",
+      "skillFolderHash": "f9d801ae02c6bf3fdf5563167be6a7ae7eeb2afc",
       "installedAt": "2026-06-09T11:30:14.155Z",
-      "updatedAt": "2026-06-09T12:47:15.913Z"
+      "updatedAt": "2026-06-15T08:29:17.241Z"
     },
     "bioconductor-bridge": {
       "source": "ClawBio/ClawBio",
@@ -1939,9 +1939,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gwas-prs/SKILL.md",
-      "skillFolderHash": "74932e9860287c3121677e2522ded1f3cacd150b",
+      "skillFolderHash": "f414ee741829df240d91353c8ebc4a81832871f1",
       "installedAt": "2026-06-09T11:30:14.230Z",
-      "updatedAt": "2026-06-09T12:47:15.940Z"
+      "updatedAt": "2026-06-15T08:29:20.624Z"
     },
     "hla-typing": {
       "source": "ClawBio/ClawBio",
@@ -2056,18 +2056,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-sarek-wrapper/SKILL.md",
-      "skillFolderHash": "9954d084c2308d6971956ea39537541f24fd7251",
+      "skillFolderHash": "fc835f807b4aafdffc94e05706dc27721810fa83",
       "installedAt": "2026-06-09T11:30:14.250Z",
-      "updatedAt": "2026-06-09T12:47:15.949Z"
+      "updatedAt": "2026-06-15T08:29:24.208Z"
     },
     "nfcore-scrnaseq-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "6193114323ce4d19864503e3ac715e8dd9d6eb0d",
+      "skillFolderHash": "de4fb444a529cefb75fb997d7f1fd058c6e518ac",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-06-09T12:47:15.950Z"
+      "updatedAt": "2026-06-15T08:29:27.990Z"
     },
     "nutrigx-advisor": {
       "source": "ClawBio/ClawBio",
@@ -2101,9 +2101,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/pharmgx-reporter/SKILL.md",
-      "skillFolderHash": "7e4ebd01922dc95468cff6d0d46218bc789f91e7",
+      "skillFolderHash": "4a6a4f50e5faed311148879f17f04cd36873127b",
       "installedAt": "2026-06-09T11:30:14.260Z",
-      "updatedAt": "2026-06-09T12:47:15.952Z"
+      "updatedAt": "2026-06-15T08:29:31.138Z"
     },
     "phylogenetics-builder": {
       "source": "ClawBio/ClawBio",

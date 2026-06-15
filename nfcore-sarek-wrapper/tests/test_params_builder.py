@@ -3,7 +3,19 @@ from __future__ import annotations
 
 import argparse
 
-from params_builder import build_effective_params
+from params_builder import build_effective_params, write_params_yaml
+
+
+def test_params_yaml_written_with_lf_line_endings(tmp_path):
+    """Cross-OS: params.yaml is written LF-only (never CRLF) so the repro bundle
+    is byte-stable and checksums match across operating systems."""
+    path = write_params_yaml(
+        {"step": "mapping", "genome": "GATK.GRCh38", "tools": "haplotypecaller"},
+        output_dir=tmp_path,
+    )
+    data = path.read_bytes()
+    assert b"\r" not in data
+    assert data.endswith(b"\n")
 
 
 def _args(**overrides):

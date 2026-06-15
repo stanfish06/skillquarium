@@ -8,6 +8,43 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Added
 
+- **Cross-OS reproducibility-bundle hardening.** The entire bundle is now
+  byte-stable and portable across Linux, macOS, and Windows/WSL:
+  - Every bundle text file (`commands.sh`, `report.md`, `result.json`,
+    `params.yaml`, `checksums.sha256`, `manifest.json`, `environment.yml`, the
+    JSON handoffs, the `.sh` handoff, the normalized samplesheet, and the macOS
+    config) is now written with forced **LF** line endings via the shared
+    `clawbio.common.textio.write_text_lf` (and a self-contained `_write_text_lf`
+    in the standalone `remap_paths.py`). Previously they used platform-default
+    newlines, so on Windows the bash `commands.sh` got a CRLF shebang
+    (`/usr/bin/env bash\r` → bad interpreter) and `checksums.sha256` differed by
+    OS. Matches `nfcore-scrnaseq-wrapper`.
+  - `commands.sh` is now **self-contained and directly runnable** (`bash
+    commands.sh`): it self-anchors from `BASH_SOURCE`, runs the pinned pipeline
+    against the bundled `params.yaml`, requires no `CLAWBIO_REPO` and has no
+    `<EDIT_ME>` in the runnable path, and **pins the Nextflow engine** via
+    `export NXF_VER`. Re-running through ClawBio is now an optional, commented
+    alternative. Previously a bare `bash commands.sh` aborted (`${CLAWBIO_REPO:?}`
+    under `set -u`) and required editing an `<EDIT_ME>` output path.
+  - `_portable_argv` now rewrites paths with resolved `Path.relative_to` instead
+    of string prefixes, so a symlinked/unresolved output dir (e.g. macOS
+    `/var`→`/private/var`) or `/` vs `\` separators no longer degrade valid paths
+    to `<EDIT_ME>`.
+  - The macOS-only `macos_docker.config` (Apple-Silicon `--platform`, VirtioFS
+    `stageInMode`, host-scaled `resourceLimits`) is applied through a
+    `uname`-gated `EXTRA_CONFIG` variable, so a macOS-generated bundle replays
+    cleanly on Linux. The remap tool's samplesheet rewrite now forces
+    `lineterminator="\n"` (csv defaults to CRLF).
+- Preflight now validates an explicitly-provided `--genome` against the pinned
+  42-key iGenomes catalogue (`SUPPORTED_IGENOMES_NAMES`, an exact mirror of
+  `conf/igenomes.config`). The schema declares `genome` as a free string, so a
+  typo'd/invalid key — e.g. bare `GRCh38` instead of `GATK.GRCh38` — was never
+  caught and only failed late inside Nextflow with an opaque reference-resolution
+  error. With the default iGenomes mirror an unknown key is now an `INVALID_GENOME`
+  preflight error; with a custom `--igenomes-base` it softens to a warning (the
+  mirror may define other keys). The absent-key (upstream default) and
+  `null`/`igenomes_ignore` custom-FASTA paths are unaffected. This activates the
+  previously-unused `SUPPORTED_IGENOMES_NAMES` constant and `INVALID_GENOME` code.
 - `result.json` now carries a `samples_detected` field (the samples parsed from
   the actual upstream outputs) alongside the existing input-derived `samples`.
   In `--demo` the `test` profile supplies the samplesheet remotely, so `samples`
@@ -24,6 +61,57 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Fixed
 
+- **Direct invocation no longer fails with `ModuleNotFoundError: clawbio`.**
+  CLAUDE.md documents `python skills/nfcore-sarek-wrapper/nfcore_sarek_wrapper.py
+  --help` for the full flag surface, but Python only adds the *script's* directory
+  to `sys.path`, not the repo root, so the top-level `from clawbio.common...` import
+  failed unless the caller pre-set `PYTHONPATH`. The wrapper now bootstraps the repo
+  root (`_SKILL_DIR.parent.parent`) onto `sys.path` before importing `clawbio`
+  (a no-op under `clawbio.py run`, which already has it). Mirrors
+  nfcore-scrnaseq-wrapper, which already did this. Guarded by
+  `test_cli_direct_invocation.py` (subprocess `--help` from a clean env/cwd).
+- **Replay instructions now match the self-contained `commands.sh`.**
+  `remap_paths.py` (its docstring, the `--verify` success message, and the help
+  epilog), the `report.md` reproducibility section, and `SKILL.md` still told
+  users to replay with `CLAWBIO_REPO=… bash commands.sh` and claimed
+  `commands.sh` "regenerates" the macOS Docker config. Since `commands.sh` is now
+  self-contained (a bare `bash commands.sh`, no environment variable; the macOS
+  config is a pre-written, `uname`-gated `-c reproducibility/macos_docker.config`),
+  those hints were stale and contradicted the bundle itself and the
+  `nfcore-scrnaseq-wrapper` replay hint. Corrected all five sites and added
+  regression guards (`test_replay_hint_is_self_contained_no_required_clawbio_repo`,
+  `test_report_md_describes_commands_sh_as_self_contained`). Also added an
+  end-to-end remap roundtrip test that relocates FASTQs to a path containing a
+  space and a non-ASCII character, then remaps and re-verifies — proving
+  cross-machine portability (parity with `nfcore-scrnaseq-wrapper`).
+- A missing `java` binary now raises `MISSING_JAVA` (previously the code
+  contradicted its own "was not found" message by reporting the old
+  `JAVA_TOO_OLD`), and a missing `nextflow` raises `MISSING_NEXTFLOW`. An
+  unparseable Nextflow version now raises `NEXTFLOW_VERSION_TOO_OLD` rather than
+  `NEXTFLOW_NOT_FOUND` (the binary is present; only the version gate fails).
+  Matches the `nfcore-scrnaseq-wrapper` taxonomy and activates the
+  previously-dead `MISSING_JAVA`/`MISSING_NEXTFLOW` codes.
+- Renamed the `JAVA_TOO_OLD` error code to `JAVA_VERSION_TOO_OLD` so it is
+  internally consistent with `NEXTFLOW_VERSION_TOO_OLD` and matches the sibling
+  `nfcore-scrnaseq-wrapper` enum. No external consumers depended on the old code.
+- Backend preflight now emits runtime-specific error codes (`MISSING_DOCKER`,
+  `DOCKER_NOT_RUNNING`, `MISSING_PODMAN`, `PODMAN_NOT_RUNNING`, `MISSING_CONDA`,
+  `MISSING_SINGULARITY`, `MISSING_HPC_RUNTIME`) instead of the single generic
+  `BACKEND_UNAVAILABLE`, matching the sibling `nfcore-scrnaseq-wrapper` so both
+  skills classify the same backend failure identically. `BACKEND_UNAVAILABLE`
+  remains only as a fallback for any unmapped runtime. This activates the
+  previously-dead specific codes; user-facing messages are unchanged.
+- `--wes` help text no longer claims "(requires --intervals)". The preflight does
+  not require an intervals file to be present with `--wes` (per the upstream docs a
+  target BED is recommended, not mandatory); it only enforces BED format *when*
+  `--intervals` is supplied. The help now reads "Whole-exome/panel mode (provide a
+  target --intervals BED; enforced as BED when given)" to match actual behaviour.
+- Consolidated the Sentieon emit-mode and `sentieon_dnascope_pcr_indel_model`
+  enum checks onto their `schemas.py` constants (`SUPPORTED_SENTIEON_EMIT_MODE`,
+  now the complete 10-value set including the `gvcf` pairings, and
+  `SUPPORTED_GATK_PCR_INDEL_MODEL`) instead of inline regex/set literals. Removes
+  duplicated allowed-value definitions and the previously-dead constants; behaviour
+  is unchanged and now covered by explicit regression tests.
 - Preflight now validates cheap, environment-independent input (step, aligner,
   enumerated params, required-tools-for-step, and unknown `--tools` tokens) BEFORE
   probing the container backend. Previously a typo'd `--step`/`--tools`/enum with the

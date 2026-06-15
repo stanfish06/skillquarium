@@ -30,7 +30,7 @@ from clawbio.common.report import write_result_json, DISCLAIMER
 from clawbio.common.html_report import HtmlReportBuilder, write_html_report
 
 # ---------------------------------------------------------------------------
-# Strand utilities (mirrors nutrigx_advisor/extract_genotypes.py)
+# Strand utilities (mirrors nutrigx/extract_genotypes.py)
 # ---------------------------------------------------------------------------
 
 COMPLEMENT = {"A": "T", "T": "A", "C": "G", "G": "C"}

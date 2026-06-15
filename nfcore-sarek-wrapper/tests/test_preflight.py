@@ -13,6 +13,7 @@ from preflight import (
     _check_email,
     _check_enums,
     _check_flag_compatibility,
+    _check_genome_known,
     _check_output_dir,
     _check_pipeline_source,
     _check_profile_string,
@@ -167,7 +168,9 @@ def test_java_missing(stub_no_java):
 
     with pytest.raises(SkillError) as exc:
         _check_java()
-    assert exc.value.error_code == ErrorCode.JAVA_TOO_OLD
+    # A *missing* binary must be MISSING_JAVA, not JAVA_VERSION_TOO_OLD (the code must not
+    # contradict the message). Aligned with nfcore-scrnaseq-wrapper.
+    assert exc.value.error_code == ErrorCode.MISSING_JAVA
 
 
 def test_java_too_old(stub_old_java):
@@ -175,8 +178,18 @@ def test_java_too_old(stub_old_java):
 
     with pytest.raises(SkillError) as exc:
         _check_java()
-    assert exc.value.error_code == ErrorCode.JAVA_TOO_OLD
+    assert exc.value.error_code == ErrorCode.JAVA_VERSION_TOO_OLD
 
+
+def test_java_version_unparseable_is_version_failure(monkeypatch):
+    import preflight as p
+
+    monkeypatch.setattr(p.shutil, "which", lambda n: "/usr/bin/java")
+    monkeypatch.setattr(p, "_command_output", lambda args: "no version here")
+    with pytest.raises(SkillError) as exc:
+        p._check_java()
+    # java IS present but its version can't be confirmed → version failure, not MISSING.
+    assert exc.value.error_code == ErrorCode.JAVA_VERSION_TOO_OLD
 
 
 def test_nextflow_missing(monkeypatch):
@@ -185,7 +198,7 @@ def test_nextflow_missing(monkeypatch):
     monkeypatch.setattr(p.shutil, "which", lambda n: None if n == "nextflow" else "/usr/bin/x")
     with pytest.raises(SkillError) as exc:
         p._check_nextflow()
-    assert exc.value.error_code == ErrorCode.NEXTFLOW_NOT_FOUND
+    assert exc.value.error_code == ErrorCode.MISSING_NEXTFLOW
 
 
 def test_nextflow_too_old(stub_old_nextflow):
@@ -193,6 +206,18 @@ def test_nextflow_too_old(stub_old_nextflow):
 
     with pytest.raises(SkillError) as exc:
         _check_nextflow()
+    assert exc.value.error_code == ErrorCode.NEXTFLOW_VERSION_TOO_OLD
+
+
+def test_nextflow_version_unparseable_is_version_failure(monkeypatch):
+    import preflight as p
+
+    monkeypatch.setattr(p.shutil, "which", lambda n: "/usr/bin/nextflow")
+    monkeypatch.setattr(p, "_command_output", lambda args: "no version here")
+    with pytest.raises(SkillError) as exc:
+        p._check_nextflow()
+    # nextflow IS present but its version can't be confirmed → version failure,
+    # not NEXTFLOW_NOT_FOUND (which would wrongly imply the binary is absent).
     assert exc.value.error_code == ErrorCode.NEXTFLOW_VERSION_TOO_OLD
 
 
@@ -213,7 +238,28 @@ def test_backend_docker_missing(stub_no_docker, monkeypatch):
 
     with pytest.raises(SkillError) as exc:
         p._check_backends_for_profile("docker")
-    assert exc.value.error_code == ErrorCode.BACKEND_UNAVAILABLE
+    # Specific backend codes (aligned with nfcore-scrnaseq-wrapper).
+    assert exc.value.error_code == ErrorCode.MISSING_DOCKER
+
+
+def test_backend_specific_codes_per_runtime(monkeypatch):
+    import preflight as p
+
+    # Binary absent → MISSING_<runtime>; daemon present but down → <runtime>_NOT_RUNNING.
+    monkeypatch.setattr(p.shutil, "which", lambda name: None)
+    cases = {
+        "podman": ErrorCode.MISSING_PODMAN,
+        "singularity": ErrorCode.MISSING_SINGULARITY,
+        "apptainer": ErrorCode.MISSING_SINGULARITY,
+        "conda": ErrorCode.MISSING_CONDA,
+        "mamba": ErrorCode.MISSING_CONDA,
+        "shifter": ErrorCode.MISSING_HPC_RUNTIME,
+        "charliecloud": ErrorCode.MISSING_HPC_RUNTIME,
+    }
+    for token, code in cases.items():
+        with pytest.raises(SkillError) as exc:
+            p._check_backends_for_profile(token)
+        assert exc.value.error_code == code, token
 
 
 def test_sentieon_tool_requires_license_secret(monkeypatch):
@@ -252,7 +298,7 @@ def test_backend_docker_not_running(stub_docker_not_running):
 
     with pytest.raises(SkillError) as exc:
         p._check_backends_for_profile("docker")
-    assert exc.value.error_code == ErrorCode.BACKEND_UNAVAILABLE
+    assert exc.value.error_code == ErrorCode.DOCKER_NOT_RUNNING
 
 
 
@@ -361,7 +407,7 @@ def test_unknown_tool_surfaces_before_backend_probe(tmp_path, stub_no_docker):
 
 def test_backend_still_checked_when_input_valid(tmp_path, stub_no_docker):
     # The reorder must NOT skip the backend probe: valid input + no backend still
-    # raises BACKEND_UNAVAILABLE.
+    # raises the (now runtime-specific) docker-missing code.
     with pytest.raises(SkillError) as exc:
         run_preflight(
             params=make_params(step="variant_calling", tools=["strelka"]),
@@ -370,7 +416,7 @@ def test_backend_still_checked_when_input_valid(tmp_path, stub_no_docker):
             output_dir=tmp_path / "out",
             repo_root=tmp_path / "repo",
         )
-    assert exc.value.error_code == ErrorCode.BACKEND_UNAVAILABLE
+    assert exc.value.error_code == ErrorCode.MISSING_DOCKER
 
 
 # ---------------------------------------------------------------------------
@@ -949,6 +995,111 @@ def test_invalid_enum_values_rejected():
         with pytest.raises(SkillError) as exc:
             _check_enums(params)
         assert exc.value.error_code == ErrorCode.INVALID_FLAG_COMBINATION
+
+
+def test_invalid_sentieon_emit_mode_rejected():
+    # Guards the dead-constant consolidation: SUPPORTED_SENTIEON_EMIT_MODE is the
+    # single source of truth used by _check_enums for both emit-mode params.
+    for name in ("sentieon_haplotyper_emit_mode", "sentieon_dnascope_emit_mode"):
+        with pytest.raises(SkillError) as exc:
+            _check_enums({name: "banana"})
+        assert exc.value.error_code == ErrorCode.INVALID_FLAG_COMBINATION
+        # All documented combinations remain accepted.
+        for good in ("variant", "gvcf", "gvcf,variant", "variant,gvcf", "all"):
+            _check_enums({name: good})
+
+
+def test_invalid_sentieon_dnascope_pcr_indel_model_rejected():
+    with pytest.raises(SkillError) as exc:
+        _check_enums({"sentieon_dnascope_pcr_indel_model": "banana"})
+    assert exc.value.error_code == ErrorCode.INVALID_FLAG_COMBINATION
+    for good in ("NONE", "HOSTILE", "AGGRESSIVE", "CONSERVATIVE"):
+        _check_enums({"sentieon_dnascope_pcr_indel_model": good})
+
+
+# ---------------------------------------------------------------------------
+# --genome iGenomes key validation
+# Audit fix: SUPPORTED_IGENOMES_NAMES (the pinned conf/igenomes.config catalogue)
+# and the INVALID_GENOME error code were both unused; the wrapper never caught a
+# typo'd/invalid --genome key (e.g. bare "GRCh38" instead of "GATK.GRCh38") before
+# launching Nextflow. These tests lock the new preflight gate.
+# ---------------------------------------------------------------------------
+
+
+def test_unknown_genome_rejected_with_default_igenomes_base():
+    # Bare "GRCh38" is NOT a Sarek iGenomes key (the catalogue uses GATK.GRCh38,
+    # Ensembl.GRCh37, NCBI.GRCh38, …) — it must fail fast with the default mirror.
+    with pytest.raises(SkillError) as exc:
+        _check_genome_known({"genome": "GRCh38"})
+    assert exc.value.error_code == ErrorCode.INVALID_GENOME
+    assert "GRCh38" in exc.value.message
+
+
+def test_known_genome_keys_accepted():
+    for key in ("GATK.GRCh38", "GATK.GRCh37", "Ensembl.GRCh37", "NCBI.GRCh38", "hg38", "mm10"):
+        assert _check_genome_known({"genome": key}) == []
+
+
+def test_absent_genome_uses_upstream_default_and_is_accepted():
+    # No genome key → upstream default GATK.GRCh38; nothing to validate.
+    assert _check_genome_known({}) == []
+    assert _check_genome_known({"genome": ""}) == []
+
+
+def test_genome_disable_sentinel_not_validated():
+    # Custom-FASTA runs disable iGenomes — the genome label is then informational.
+    assert _check_genome_known({"genome": "null"}) == []
+    assert _check_genome_known({"genome": "GRCh38", "igenomes_ignore": True}) == []
+
+
+def test_unknown_genome_with_custom_igenomes_base_warns_not_errors():
+    # A custom iGenomes mirror may define other keys, so don't hard-fail — warn.
+    warnings = _check_genome_known(
+        {"genome": "MyCustomKey", "igenomes_base": "/data/custom_igenomes/"}
+    )
+    assert warnings and any("MyCustomKey" in w for w in warnings)
+
+
+def test_macos_docker_tmp_warns(monkeypatch):
+    """On macOS + Docker, an output dir under /tmp warns (Colima does not share
+    /tmp into its VM). Mirrors nfcore-scrnaseq-wrapper's guard."""
+    import preflight as p
+    from pathlib import Path as _P
+    monkeypatch.setattr(p.sys, "platform", "darwin")
+    warns = p._check_macos_docker_tmp("docker", _P("/tmp/run_out"))
+    assert warns and any("/tmp" in w for w in warns)
+    # Non-docker backend, or output not under /tmp, does not warn.
+    assert p._check_macos_docker_tmp("singularity", _P("/tmp/run_out")) == []
+
+
+def test_macos_docker_tmp_skipped_off_darwin(monkeypatch):
+    import preflight as p
+    from pathlib import Path as _P
+    monkeypatch.setattr(p.sys, "platform", "linux")
+    assert p._check_macos_docker_tmp("docker", _P("/tmp/run_out")) == []
+
+
+def test_unknown_genome_exempt_under_upstream_test_profile():
+    # An upstream test/test_* profile supplies its own reference, mirroring the
+    # GENOME_REQUIRED exemption, so it must not raise INVALID_GENOME.
+    assert _check_genome_known({"genome": "GRCh38", "profile": "docker,test_full"}) == []
+    assert _check_genome_known({"genome": "GRCh38", "profile": "test"}) == []
+
+
+def test_unknown_genome_surfaces_in_run_preflight(tmp_path, stub_binaries):
+    out = tmp_path / "out"
+    out.mkdir()
+    params = make_params(genome="GRCh38")
+    params["profile"] = "docker"
+    with pytest.raises(SkillError) as exc:
+        run_preflight(
+            params=params,
+            samplesheet=make_samplesheet(),
+            pipeline_source=make_pipeline_source(),
+            output_dir=out,
+            repo_root=tmp_path / "repo",
+        )
+    assert exc.value.error_code == ErrorCode.INVALID_GENOME
 
 
 # ---------------------------------------------------------------------------

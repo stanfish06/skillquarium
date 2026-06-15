@@ -45,13 +45,17 @@ from schemas import (
     DEFAULT_ALIGNER,
     DEFAULT_GENOME,
     DEFAULT_STEP,
+    DEFAULT_IGENOMES_BASE,
     JAVA_MIN_VERSION,
     NEXTFLOW_MIN_VERSION,
     SUPPORTED_ALIGNERS,
     SUPPORTED_ASCAT_GENOME,
+    SUPPORTED_GATK_PCR_INDEL_MODEL,
     SUPPORTED_GROUP_BY_UMI,
+    SUPPORTED_IGENOMES_NAMES,
     SUPPORTED_PROFILES,
     SUPPORTED_PUBLISH_DIR_MODES,
+    SUPPORTED_SENTIEON_EMIT_MODE,
     SUPPORTED_SKIP_TOOLS,
     SUPPORTED_STEPS,
     SUPPORTED_TOOLS,
@@ -228,12 +232,14 @@ def run_preflight(
     _check_step(params)
     _check_aligner(params)
     _check_enums(params)
+    warnings_acc.extend(_check_genome_known(params))
     _check_tools_required_for_step(params)
     _check_tools_known(_normalize_tools(params.get("tools")))
 
     # --- environment / IO probes (after input is known good) -------------
     _check_backends_for_profile(profile)
     _check_output_dir(output_dir, repo_root=repo_root, resume=resume)
+    warnings_acc.extend(_check_macos_docker_tmp(profile, output_dir))
     _check_email(params.get("email"))
     _check_email(params.get("email_on_fail"), field_name="email_on_fail")
     _check_pipeline_source(pipeline_source)
@@ -324,7 +330,7 @@ def _check_java() -> None:
     if not java_path:
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.JAVA_TOO_OLD,
+            error_code=ErrorCode.MISSING_JAVA,
             message="Required executable `java` was not found.",
             fix="Install Java 17 or newer and ensure it is on PATH.",
             details={"executable": "java"},
@@ -334,7 +340,7 @@ def _check_java() -> None:
     if not version:
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.JAVA_TOO_OLD,
+            error_code=ErrorCode.JAVA_VERSION_TOO_OLD,
             message="Java is installed but its version could not be parsed.",
             fix="Install Java 17 or newer and ensure `java -version` works.",
             details={"java_path": java_path, "output": version_text},
@@ -342,7 +348,7 @@ def _check_java() -> None:
     if version[0] < JAVA_MIN_VERSION:
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.JAVA_TOO_OLD,
+            error_code=ErrorCode.JAVA_VERSION_TOO_OLD,
             message=f"Java {'.'.join(map(str, version))} is older than the required {JAVA_MIN_VERSION}.",
             fix=f"Install Java {JAVA_MIN_VERSION} or newer.",
             details={"detected_version": ".".join(map(str, version)), "min": JAVA_MIN_VERSION},
@@ -357,7 +363,7 @@ def _check_nextflow() -> None:
     if not nextflow_path:
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.NEXTFLOW_NOT_FOUND,
+            error_code=ErrorCode.MISSING_NEXTFLOW,
             message="Required executable `nextflow` was not found.",
             fix=f"Install Nextflow >={minimum} and ensure it is on PATH.",
             details={"executable": "nextflow"},
@@ -365,9 +371,11 @@ def _check_nextflow() -> None:
     version_text = _command_output(["nextflow", "-version"])
     version = _parse_version_tuple(version_text)
     if not version:
+        # nextflow IS present but its version cannot be confirmed — this is a
+        # version-gate failure, not an absent binary (NEXTFLOW_NOT_FOUND).
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.NEXTFLOW_NOT_FOUND,
+            error_code=ErrorCode.NEXTFLOW_VERSION_TOO_OLD,
             message="Nextflow is installed but its version could not be parsed.",
             fix=f"Install Nextflow >={minimum} and ensure `nextflow -version` works.",
             details={"nextflow_path": nextflow_path, "output": version_text},
@@ -438,12 +446,31 @@ def _check_backends_for_profile(profile: str) -> None:
             _probe_binary_present(token, binary="ch-run")
 
 
+# Runtime-specific backend error codes, mirroring nfcore-scrnaseq-wrapper so the
+# two sibling skills classify the same backend failure identically (cross-skill
+# consistency; activates the previously-dead specific codes).
+_MISSING_BACKEND_CODE = {
+    "docker": ErrorCode.MISSING_DOCKER,
+    "podman": ErrorCode.MISSING_PODMAN,
+    "singularity": ErrorCode.MISSING_SINGULARITY,
+    "apptainer": ErrorCode.MISSING_SINGULARITY,
+    "conda": ErrorCode.MISSING_CONDA,
+    "mamba": ErrorCode.MISSING_CONDA,
+    "shifter": ErrorCode.MISSING_HPC_RUNTIME,
+    "charliecloud": ErrorCode.MISSING_HPC_RUNTIME,
+}
+_DAEMON_DOWN_CODE = {
+    "docker": ErrorCode.DOCKER_NOT_RUNNING,
+    "podman": ErrorCode.PODMAN_NOT_RUNNING,
+}
+
+
 def _probe_daemon(profile: str, *, binary: str) -> None:
     path = shutil.which(binary)
     if not path:
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.BACKEND_UNAVAILABLE,
+            error_code=_MISSING_BACKEND_CODE.get(profile, ErrorCode.BACKEND_UNAVAILABLE),
             message=f"Profile '{profile}' selected but `{binary}` is not installed.",
             fix=f"Install {binary} or remove the '{profile}' profile token.",
             details={"profile": profile, "binary": binary},
@@ -461,7 +488,7 @@ def _probe_daemon(profile: str, *, binary: str) -> None:
     if not ok:
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.BACKEND_UNAVAILABLE,
+            error_code=_DAEMON_DOWN_CODE.get(profile, ErrorCode.BACKEND_UNAVAILABLE),
             message=f"{binary} is installed but its service is not available.",
             fix=f"Start {binary} (run `{binary} info` to diagnose).",
             details={"profile": profile, "binary": binary},
@@ -472,7 +499,7 @@ def _probe_binary_present(profile: str, *, binary: str) -> None:
     if not shutil.which(binary):
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.BACKEND_UNAVAILABLE,
+            error_code=_MISSING_BACKEND_CODE.get(profile, ErrorCode.BACKEND_UNAVAILABLE),
             message=f"Profile '{profile}' selected but `{binary}` was not found on PATH.",
             fix=f"Install {binary} or remove the '{profile}' profile token.",
             details={"profile": profile, "binary": binary},
@@ -487,6 +514,43 @@ def _is_relative_to(path: Path, parent: Path) -> bool:
     except ValueError:
         return False
     return True
+
+
+def _is_under_tmp(path: Path) -> bool:
+    """True when ``path`` resolves to (or inside) /tmp or /private/tmp."""
+    try:
+        resolved = path.expanduser().resolve()
+    except OSError:
+        return False
+    for base in (Path("/tmp"), Path("/private/tmp")):
+        try:
+            base_resolved = base.resolve()
+        except OSError:
+            continue
+        if resolved == base_resolved or base_resolved in resolved.parents:
+            return True
+    return False
+
+
+def _check_macos_docker_tmp(profile: str, output_dir: Path) -> list[str]:
+    """Warn when a macOS + Docker run writes under /tmp.
+
+    Colima (a common macOS Docker runtime) only shares the user HOME into its VM;
+    /tmp and /private/tmp live on the VM's own filesystem and are NOT shared with
+    the host, so Nextflow work-dir files are invisible to containers and the run
+    fails with a confusing 'No such file or directory'. Mirrors the
+    nfcore-scrnaseq-wrapper guard so both skills behave the same on macOS.
+    """
+    if sys.platform != "darwin" or "docker" not in _profile_tokens(profile):
+        return []
+    if _is_under_tmp(output_dir):
+        return [
+            "Output directory is under /tmp. On macOS with Colima, Docker "
+            "containers cannot see files written to /tmp (the VM uses its own "
+            "separate /tmp). Move --output under your home directory to avoid "
+            "'No such file or directory' errors."
+        ]
+    return []
 
 
 def _check_output_dir(output_dir: Path, *, repo_root: Path, resume: bool) -> None:
@@ -670,25 +734,24 @@ def _check_enums(params: dict[str, Any]) -> None:
             details={"unknown": bad_skip_tools, "supported": sorted(SUPPORTED_SKIP_TOOLS)},
         )
 
-    emit_re = re.compile(r"^(all|confident|gvcf|variant|gvcf,all|gvcf,confident|gvcf,variant|all,gvcf|confident,gvcf|variant,gvcf)$")
     for name in ("sentieon_haplotyper_emit_mode", "sentieon_dnascope_emit_mode"):
         value = params.get(name)
-        if value not in (None, "") and not emit_re.fullmatch(str(value)):
+        if value not in (None, "") and str(value) not in SUPPORTED_SENTIEON_EMIT_MODE:
             raise SkillError(
                 stage="preflight",
                 error_code=ErrorCode.INVALID_FLAG_COMBINATION,
                 message=f"Unsupported --{name.replace('_', '-')} value '{value}'.",
-                fix="Use one of: all, confident, gvcf, variant, or one gvcf combination supported by the Sarek schema.",
-                details={name: value},
+                fix=f"Use one of: {', '.join(sorted(SUPPORTED_SENTIEON_EMIT_MODE))}.",
+                details={name: value, "supported": sorted(SUPPORTED_SENTIEON_EMIT_MODE)},
             )
 
     pcr = params.get("sentieon_dnascope_pcr_indel_model")
-    if pcr not in (None, "") and str(pcr) not in {"NONE", "HOSTILE", "AGGRESSIVE", "CONSERVATIVE"}:
+    if pcr not in (None, "") and str(pcr) not in SUPPORTED_GATK_PCR_INDEL_MODEL:
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.INVALID_FLAG_COMBINATION,
             message=f"Unsupported --sentieon-dnascope-pcr-indel-model value '{pcr}'.",
-            fix="Use one of: NONE, HOSTILE, AGGRESSIVE, CONSERVATIVE.",
+            fix=f"Use one of: {', '.join(sorted(SUPPORTED_GATK_PCR_INDEL_MODEL))}.",
             details={"sentieon_dnascope_pcr_indel_model": pcr},
         )
 
@@ -713,6 +776,70 @@ def _check_enums(params: dict[str, Any]) -> None:
             fix="Use '&'-separated feature types from the official schema, e.g. Gene&Variation.",
             details={"phenotypes_include_types": phenotypes_types},
         )
+
+
+def _is_default_igenomes_base(params: dict[str, Any]) -> bool:
+    """True when no custom iGenomes mirror is configured.
+
+    The wrapper writes ``igenomes_base`` only when the user passes
+    ``--igenomes-base``; an absent key means the upstream default
+    (``s3://ngi-igenomes/igenomes/``) is in effect. With the default mirror the
+    set of valid ``--genome`` keys is exactly conf/igenomes.config; a custom
+    mirror may define others, so genome validation softens to a warning there.
+    """
+    base = str(params.get("igenomes_base") or "").strip()
+    if not base:
+        return True
+    return base.rstrip("/") == DEFAULT_IGENOMES_BASE.rstrip("/")
+
+
+def _check_genome_known(params: dict[str, Any]) -> list[str]:
+    """Validate an explicitly-provided ``--genome`` against the iGenomes catalogue.
+
+    nf-core/sarek 3.8.1 resolves ``--genome`` against conf/igenomes.config
+    (SUPPORTED_IGENOMES_NAMES). The schema declares ``genome`` as a free string
+    (default ``GATK.GRCh38``), so an invalid key — e.g. bare ``GRCh38`` instead of
+    ``GATK.GRCh38`` — is not caught by nf-schema and only fails late inside
+    Nextflow with an opaque reference-resolution error. This gate surfaces the
+    mistake at preflight.
+
+    Only an *explicitly set* key is validated: an absent key keeps the upstream
+    default (always valid), and the ``null``/``false`` disable sentinel (or
+    ``--igenomes_ignore``) marks a custom-FASTA run where the label is
+    informational. With the default mirror an unknown key is a hard error; with a
+    custom ``--igenomes-base`` it softens to a warning (the mirror may define it).
+    """
+    raw = params.get("genome")
+    if raw in (None, "", False):
+        return []
+    genome = str(raw).strip()
+    if not genome or genome.lower() in ("null", "none", "false"):
+        return []
+    if _truthy(params.get("igenomes_ignore")):
+        return []
+    if genome in SUPPORTED_IGENOMES_NAMES:
+        return []
+    # An upstream test/test_* profile supplies its own reference (and may set a
+    # non-iGenomes genome label), exactly as the GENOME_REQUIRED check exempts it.
+    if _uses_upstream_test_profile(params):
+        return []
+    if not _is_default_igenomes_base(params):
+        return [
+            f"--genome '{genome}' is not a standard nf-core/sarek iGenomes key. "
+            "A custom --igenomes-base is set, so the wrapper assumes your mirror "
+            "defines it; verify the key resolves before a long run."
+        ]
+    raise SkillError(
+        stage="preflight",
+        error_code=ErrorCode.INVALID_GENOME,
+        message=f"--genome '{genome}' is not a known nf-core/sarek iGenomes key.",
+        fix=(
+            "Use a valid iGenomes key (e.g. GATK.GRCh38, GATK.GRCh37, "
+            "Ensembl.GRCh37, NCBI.GRCh38, hg38, mm10), or set --igenomes-ignore "
+            "with --fasta for a custom reference."
+        ),
+        details={"genome": genome, "supported_count": len(SUPPORTED_IGENOMES_NAMES)},
+    )
 
 
 def _check_tools_required_for_step(params: dict[str, Any]) -> None:

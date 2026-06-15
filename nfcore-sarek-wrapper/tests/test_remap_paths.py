@@ -121,3 +121,72 @@ def test_cmd_remap_references_rewrites_params_yaml(tmp_path: Path):
     rc = remap_paths.cmd_remap_references("/orig", str(newrefs), dry_run=False, bundle_dir=bundle)
     assert rc == 0
     assert f"fasta: {newrefs.as_posix()}/genome.fa" in (bundle / "params.yaml").read_text()
+
+
+def test_replay_hint_is_self_contained_no_required_clawbio_repo():
+    """commands.sh replays with a bare ``bash commands.sh`` — no required env var
+    (enforced by test_reporting.test_commands_sh_is_directly_runnable_and_pins_engine).
+
+    remap_paths.py's own replay hints must match, or the two halves of the same
+    bundle contradict each other: telling the user ``CLAWBIO_REPO=... bash
+    commands.sh`` is required is stale and wrong. ``CLAWBIO_REPO`` belongs only to
+    the optional ``clawbio.py run`` re-validation path, which commands.sh documents
+    itself — remap_paths.py must not couple it to ``bash commands.sh``.
+    """
+    src = (Path(__file__).resolve().parent.parent / "remap_paths.py").read_text(
+        encoding="utf-8"
+    )
+    offenders = [
+        f"{i}: {ln.strip()}"
+        for i, ln in enumerate(src.splitlines(), 1)
+        if "CLAWBIO_REPO" in ln and "commands.sh" in ln and "bash" in ln
+    ]
+    assert not offenders, (
+        "remap_paths.py couples CLAWBIO_REPO to `bash commands.sh`, but commands.sh is "
+        "self-contained. Drop the CLAWBIO_REPO prefix from the replay hint:\n"
+        + "\n".join(offenders)
+    )
+    assert "CLAWBIO_REPO is always required" not in src
+    assert "CLAWBIO_REPO must always be set" not in src
+    # A self-contained replay hint must still be present.
+    assert "bash commands.sh" in src
+
+
+def test_bundle_remap_roundtrip_simulates_another_machine(tmp_path: Path):
+    """End-to-end cross-machine portability: move the FASTQs to a NEW prefix that
+    contains a space and a non-ASCII char (as a real replay machine well might),
+    remap the bundle samplesheet, and confirm every path resolves and the file
+    stays LF-only. Mirrors nfcore-scrnaseq-wrapper's bundle roundtrip so both skills
+    prove the same guarantee, and exercises spaces/unicode in relocated paths."""
+    data = tmp_path / "data"
+    data.mkdir()
+    r1 = data / "s1_R1.fastq.gz"
+    r1.write_bytes(b"\x1f\x8b")
+    r2 = data / "s1_R2.fastq.gz"
+    r2.write_bytes(b"\x1f\x8b")
+
+    repro = tmp_path / "reproducibility"
+    repro.mkdir()
+    ss = repro / "samplesheet.valid.csv"
+    ss.write_text(
+        "patient,sample,fastq_1,fastq_2\n"
+        f"P1,S1,{r1.as_posix()},{r2.as_posix()}\n",
+        encoding="utf-8",
+    )
+
+    old_prefix = data.resolve().as_posix()
+    # Destination prefix with a space AND a non-ASCII character.
+    moved = tmp_path / "relocated café data"
+    data.rename(moved)
+    new_prefix = moved.resolve().as_posix()
+
+    # Before remap: the moved paths must be reported missing.
+    assert remap_paths.verify_paths(ss), "paths should be missing after the move"
+
+    changes = remap_paths.remap_csv(ss, old_prefix, new_prefix, dry_run=False)
+    assert changes, "remap should have rewritten the FASTQ paths"
+
+    # After remap: every path resolves on the 'new machine', incl. space+unicode.
+    assert remap_paths.verify_paths(ss) == [], "all paths must resolve after remap"
+    # The rewrite preserved LF endings (cross-OS byte stability — no CRLF).
+    assert b"\r" not in ss.read_bytes()

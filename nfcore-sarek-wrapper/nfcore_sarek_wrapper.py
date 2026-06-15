@@ -27,6 +27,15 @@ _SKILL_DIR = Path(__file__).resolve().parent
 if str(_SKILL_DIR) in sys.path:
     sys.path.remove(str(_SKILL_DIR))
 sys.path.insert(0, str(_SKILL_DIR))
+# Bootstrap the repo root (which holds the `clawbio` package) onto sys.path so the
+# documented direct invocation — `python skills/nfcore-sarek-wrapper/
+# nfcore_sarek_wrapper.py --help` — resolves `from clawbio.common...` without the
+# caller setting PYTHONPATH. Running via `clawbio.py run sarek-pipeline` already has
+# the root on the path, so the guard makes this a no-op there. Mirrors
+# nfcore-scrnaseq-wrapper.
+_PROJECT_ROOT = _SKILL_DIR.parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 
 
 def _purge_foreign_bare_modules(*names: str) -> None:
@@ -51,6 +60,7 @@ _purge_foreign_bare_modules(
     "schemas",
 )
 
+from clawbio.common.textio import write_text_lf
 from command_builder import build_nextflow_command, compose_profile
 from errors import ErrorCode, SkillError
 from executor import execute_nextflow
@@ -105,7 +115,7 @@ _SAREK_PASSTHROUGH_PARAMS: tuple[tuple[str, str, type, Any, str, str], ...] = (
     ("--skip-tools", "skip_tools", str, None, "Comma-separated skip-tools list", "main"),
     ("--aligner", "aligner", str, None, "Aligner: " + ",".join(sorted(SUPPORTED_ALIGNERS)), "main"),
     ("--no-intervals", "no_intervals", bool, False, "Disable intervals processing", "main"),
-    ("--wes", "wes", bool, False, "Whole-exome mode (requires --intervals)", "main"),
+    ("--wes", "wes", bool, False, "Whole-exome/panel mode (provide a target --intervals BED; enforced as BED when given)", "main"),
     ("--joint-germline", "joint_germline", bool, False, "Joint germline variant calling", "main"),
     ("--joint-mutect2", "joint_mutect2", bool, False, "Joint Mutect2 variant calling", "main"),
     ("--only-paired-variant-calling", "only_paired_variant_calling", bool, False, "Only paired variant calling", "main"),
@@ -938,7 +948,7 @@ def _prepare_samplesheet(
     repro_dir.mkdir(parents=True, exist_ok=True)
     if args.demo:
         normalized_csv = repro_dir / "samplesheet.demo.csv"
-        normalized_csv.write_text("patient,sample,lane,fastq_1,fastq_2\n", encoding="utf-8")
+        write_text_lf(normalized_csv, "patient,sample,lane,fastq_1,fastq_2\n")
         return {
             "normalized_path": normalized_csv,
             "step": getattr(args, "step", None) or "mapping",
@@ -965,7 +975,7 @@ def _prepare_samplesheet(
     if not args.input and getattr(args, "build_only_index", False):
         # Build-only run: no samplesheet is consumed; it may also download caches.
         normalized_csv = repro_dir / "samplesheet.noinput.csv"
-        normalized_csv.write_text("patient,sample,lane,fastq_1,fastq_2\n", encoding="utf-8")
+        write_text_lf(normalized_csv, "patient,sample,lane,fastq_1,fastq_2\n")
         return {
             "normalized_path": normalized_csv,
             "step": getattr(args, "step", None) or "mapping",
@@ -1105,7 +1115,8 @@ def _write_macos_docker_config(output_dir: Path, *, args: argparse.Namespace) ->
         else:
             run_options = "-u $(id -u):$(id -g) --platform=linux/amd64"
         docker_block = f"docker {{\n    runOptions = '{run_options}'\n}}\n"
-    config_path.write_text(
+    write_text_lf(
+        config_path,
         "// macOS Docker compatibility for nf-core/sarek.\n"
         "process {\n"
         "    stageInMode = 'copy'\n"
@@ -1116,7 +1127,6 @@ def _write_macos_docker_config(output_dir: Path, *, args: argparse.Namespace) ->
         "    ]\n"
         + "}\n"
         + docker_block,
-        encoding="utf-8",
     )
     return config_path
 
@@ -1205,8 +1215,8 @@ def _write_check_report(
     }
     repro_dir = output_dir / "reproducibility"
     repro_dir.mkdir(parents=True, exist_ok=True)
-    (repro_dir / "check_result.json").write_text(
-        json.dumps(payload, indent=2, default=str), encoding="utf-8"
+    write_text_lf(
+        repro_dir / "check_result.json", json.dumps(payload, indent=2, default=str)
     )
     _print("[check] Preflight passed.")
     _print(f"  Samples: {payload['samplesheet']['sample_count']}")
@@ -1283,8 +1293,8 @@ def _emit_downstream_handoff(
         "routes": routes,
         "annotation_dir_hint": str(annotation_dir),
     }
-    (repro_dir / "sarek_downstream_handoff.json").write_text(
-        json.dumps(json_payload, indent=2), encoding="utf-8"
+    write_text_lf(
+        repro_dir / "sarek_downstream_handoff.json", json.dumps(json_payload, indent=2)
     )
 
     lines = [
@@ -1300,7 +1310,7 @@ def _emit_downstream_handoff(
         lines.append(f"{prefix}{info['example']}")
         lines.append("")
     sh_path = repro_dir / "sarek_downstream_handoff.sh"
-    sh_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text_lf(sh_path, "\n".join(lines) + "\n")
     try:
         sh_path.chmod(sh_path.stat().st_mode | 0o111)
     except OSError:
@@ -1362,13 +1372,13 @@ def _write_error_result_if_safe(output_dir: Path, payload: dict[str, Any]) -> No
     try:
         repro_dir = output_dir / "reproducibility"
         repro_dir.mkdir(parents=True, exist_ok=True)
-        (repro_dir / "result.json").write_text(text, encoding="utf-8")
+        write_text_lf(repro_dir / "result.json", text)
         return
     except OSError:
         pass
     try:
         output_dir.mkdir(parents=True, exist_ok=True)
-        (output_dir / "result.json").write_text(text, encoding="utf-8")
+        write_text_lf(output_dir / "result.json", text)
     except OSError:
         return
 

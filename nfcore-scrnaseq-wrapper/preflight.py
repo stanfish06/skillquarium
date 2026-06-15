@@ -114,9 +114,11 @@ def _check_java() -> dict[str, str]:
     version_text = _command_output(["java", "-version"])
     version_tuple = _parse_version_tuple(version_text)
     if not version_tuple:
+        # java IS present but its version can't be confirmed — this is a
+        # version-gate failure, not an absent binary (MISSING_JAVA).
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.MISSING_JAVA,
+            error_code=ErrorCode.JAVA_VERSION_TOO_OLD,
             message="Java is installed but its version could not be determined.",
             fix="Install Java 17 or newer and ensure `java -version` works.",
             details={"java_path": java_path},
@@ -137,9 +139,11 @@ def _check_nextflow() -> dict[str, str]:
     version_text = _command_output(["nextflow", "-version"])
     version_tuple = _parse_version_tuple(version_text)
     if not version_tuple:
+        # nextflow IS present but its version can't be confirmed — version-gate
+        # failure, not an absent binary (MISSING_NEXTFLOW).
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.MISSING_NEXTFLOW,
+            error_code=ErrorCode.NEXTFLOW_VERSION_TOO_OLD,
             message="Nextflow is installed but its version could not be determined.",
             fix=f"Install Nextflow {NEXTFLOW_MIN_VERSION_DISPLAY} or newer and ensure `nextflow -version` works.",
             details={"nextflow_path": nextflow_path},

@@ -17,6 +17,10 @@ DEFAULT_TIMEOUT_SECONDS = 60 * 60 * 24   # 24h — sarek WGS+variant calling can
 DEFAULT_STEP = "mapping"
 DEFAULT_ALIGNER = "bwa-mem"
 DEFAULT_GENOME = "GATK.GRCh38"
+# nf-core/sarek 3.8.1 nextflow.config: igenomes_base = 's3://ngi-igenomes/igenomes/'.
+# When this default base is in effect, --genome must be one of the keys defined in
+# conf/igenomes.config (SUPPORTED_IGENOMES_NAMES); a custom base may define others.
+DEFAULT_IGENOMES_BASE = "s3://ngi-igenomes/igenomes/"
 
 JAVA_MIN_VERSION = 17
 # From nf-core/sarek 3.8.1 nextflow.config: manifest.nextflowVersion = '!>=25.10.2'.
@@ -95,11 +99,20 @@ SUPPORTED_STATUS = {0, 1}
 SUPPORTED_GROUP_BY_UMI = {"Identity", "Edit", "Adjacency", "Paired"}
 SUPPORTED_UMI_LOCATIONS = {"read1", "read2", "per_read", "index1", "index2", "per_index"}
 
-# gatk_pcr_indel_model has no schema enum (free string); these are the GATK-valid
-# values, kept for documentation/help only — not used to reject input.
+# GATK PCR indel model values. `gatk_pcr_indel_model` has no schema enum (free
+# string) and is left unvalidated; `sentieon_dnascope_pcr_indel_model` is gated
+# against this set in preflight (single source of truth — no inline duplication).
 SUPPORTED_GATK_PCR_INDEL_MODEL = {"NONE", "HOSTILE", "AGGRESSIVE", "CONSERVATIVE"}
-# Sentieon emit-mode base values; the schema also accepts `gvcf,<mode>` combinations.
-SUPPORTED_SENTIEON_EMIT_MODE = {"variant", "confident", "all", "gvcf"}
+# Sentieon Haplotyper/DNAscope emit modes. The 3.8.1 schema declares these as
+# free strings (no enum), but only the Sentieon-documented base modes and their
+# `gvcf` pairings are valid; preflight rejects anything else. Single source of
+# truth for both emit-mode params (no inline regex/list duplication).
+_SENTIEON_EMIT_BASE_MODES = ("variant", "confident", "all", "gvcf")
+SUPPORTED_SENTIEON_EMIT_MODE = frozenset(
+    _SENTIEON_EMIT_BASE_MODES
+    + tuple(f"gvcf,{m}" for m in ("all", "confident", "variant"))
+    + tuple(f"{m},gvcf" for m in ("all", "confident", "variant"))
+)
 SUPPORTED_USE_GATK_SPARK = {"baserecalibrator", "markduplicates"}
 
 SUPPORTED_VEP_OUT_FORMAT = {"json", "tab", "vcf"}

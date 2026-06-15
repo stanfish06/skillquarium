@@ -23,6 +23,7 @@ def _purge_foreign_bare_modules(*names: str) -> None:
 
 _purge_foreign_bare_modules("errors", "schemas")
 
+from clawbio.common.textio import write_text_lf
 from errors import ErrorCode, SkillError
 
 
@@ -423,7 +424,7 @@ def write_params_yaml(params: dict[str, object], *, output_dir: Path) -> Path:
     repro_dir = output_dir / "reproducibility"
     repro_dir.mkdir(parents=True, exist_ok=True)
     params_path = repro_dir / "params.yaml"
-    params_path.write_text(serialize_params_yaml(params), encoding="utf-8")
+    write_text_lf(params_path, serialize_params_yaml(params))
     return params_path
 
 

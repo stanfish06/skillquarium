@@ -489,6 +489,25 @@ def test_preflight_messages_use_canonical_nextflow_version(monkeypatch):
         assert "25.4.0" not in exc.fix
 
 
+def test_unparseable_version_is_version_failure_not_missing(monkeypatch):
+    """A present binary whose version can't be parsed is a version-gate failure,
+    not a MISSING_* binary (the code must not contradict the 'is installed'
+    message). Aligned with nfcore-sarek-wrapper."""
+    import preflight
+    from errors import ErrorCode, SkillError
+
+    monkeypatch.setattr(preflight.shutil, "which", lambda name: f"/usr/bin/{name}")
+    monkeypatch.setattr(preflight, "_command_output", lambda args: "no version here")
+
+    with pytest.raises(SkillError) as exc:
+        preflight._check_java()
+    assert exc.value.error_code == ErrorCode.JAVA_VERSION_TOO_OLD
+
+    with pytest.raises(SkillError) as exc:
+        preflight._check_nextflow()
+    assert exc.value.error_code == ErrorCode.NEXTFLOW_VERSION_TOO_OLD
+
+
 # ── H-7: --skip-downstream documents its precedence ────────────────────────────
 
 
