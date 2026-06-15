@@ -36,11 +36,13 @@ sc.tl.leiden(adata)
 
 ## Direct harmonypy Pattern
 
+Current version: **harmonypy 2.0.0** (April 2026, C++ backend rewrite matching R harmony2). Pre-built wheels for Linux and macOS (Python 3.9–3.13); Windows is not supported.
+
 ```python
 import harmonypy as hm
 
 ho = hm.run_harmony(pca_matrix, metadata, vars_use=["batch"])
-corrected = ho.Z_corr.T
+corrected = ho.Z_corr  # already cells × PCs since harmonypy 0.1.0 — do not transpose
 ```
 
 ## Checks
