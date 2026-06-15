@@ -18,7 +18,7 @@ Prefer `scvi-tools` when the project needs a probabilistic model, covariates, tr
 ## Scanpy Pattern
 
 > [!WARNING]
-> Scanpy 1.12.1's `scanpy.external.pp.harmony_integrate` still writes `harmony_out.Z_corr.T`. That is the right orientation for harmonypy 0.0.x, but harmonypy **>=0.1.0** already returns `Z_corr` as cells × PCs. With current harmonypy, use the direct pattern below and assign `adata.obsm["X_pca_harmony"] = ho.Z_corr`; otherwise pin harmonypy 0.0.10 before using the Scanpy wrapper.
+> Scanpy 1.12.1's `scanpy.external.pp.harmony_integrate` still writes `harmony_out.Z_corr.T`. That is the right orientation for harmonypy 0.0.x, but harmonypy **>=0.1.0** already returns `Z_corr` as cells × PCs. With current harmonypy, use the direct pattern below and store `ho.Z_corr` in `adata.obsm["X_pca_harmony"]`; otherwise pin harmonypy 0.0.10 before using the Scanpy wrapper.
 
 ```python
 import scanpy as sc
