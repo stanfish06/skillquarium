@@ -15,6 +15,9 @@ Arboreto is a Python library from [Aerts Lab](https://github.com/aertslab/arbore
 
 **Upstream**: PyPI **0.1.6** (2021-02-09, latest). Docs: [arboreto.readthedocs.io](https://arboreto.readthedocs.io/en/latest/). Primary downstream consumer: [pySCENIC](https://github.com/aertslab/pySCENIC).
 
+> [!WARNING]
+> **Maintenance freeze & Dask compatibility break:** arboreto has had no PyPI release since **0.1.6 (February 2021)**. The `grnboost2()` function raises `TypeError: Must supply at least one delayed object` with modern Dask (open bugs since Aug 2024, no maintainer response — see [arboreto#42](https://github.com/aertslab/arboreto/issues/42), [#40](https://github.com/aertslab/arboreto/issues/40)). pySCENIC (primary consumer) has had no release since Nov 2022. **Workaround:** pin `dask==1.0.0 "distributed>=1.21.6,<2.0.0"` alongside arboreto, or use `arboreto_with_multiprocessing.py` (available in the pySCENIC repo) to bypass Dask entirely.
+
 ## Quick Start
 
 Install arboreto:
@@ -262,4 +265,3 @@ if __name__ == '__main__':
 **Empty results**: Check data format (genes as columns), verify TF names match column names in the expression matrix
 
 **Sparse data**: Use `scipy.sparse.csc_matrix` and pass matching `gene_names`; supported since arboreto 0.1.6 / pySCENIC 0.11
-
