@@ -197,9 +197,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/database-lookup/SKILL.md",
-      "skillFolderHash": "2aeb266543c437b1dff86dee6a59f560f600cd30",
+      "skillFolderHash": "4cf8a343c0750495aa0fa11d190f21e82dac03a4",
       "installedAt": "2026-06-09T11:23:24.783Z",
-      "updatedAt": "2026-06-12T07:57:35.727Z"
+      "updatedAt": "2026-06-16T08:20:41.885Z"
     },
     "datamol": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -269,9 +269,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/document-skills/docx/SKILL.md",
-      "skillFolderHash": "d402386a781e386f8ecd9a264568581a2af82b9b",
+      "skillFolderHash": "d91f84e0f01ccb1264ceb768c74438d84232f47b",
       "installedAt": "2026-06-09T11:23:24.785Z",
-      "updatedAt": "2026-06-09T12:47:58.348Z"
+      "updatedAt": "2026-06-16T08:20:44.405Z"
     },
     "esm": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -805,9 +805,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/claude-scientific-writer.git",
       "skillPath": "skills/document-skills/pptx/SKILL.md",
-      "skillFolderHash": "c73661acb72a7af139143848cd8c212afdd3ea21",
+      "skillFolderHash": "89eb93813f8b33437e23ef529a3c8b8a2e965fea",
       "installedAt": "2026-06-09T11:23:24.810Z",
-      "updatedAt": "2026-06-09T12:47:58.350Z"
+      "updatedAt": "2026-06-16T08:20:46.666Z"
     },
     "pptx-posters": {
       "source": "K-Dense-AI/claude-scientific-writer",
