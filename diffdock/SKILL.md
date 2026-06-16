@@ -8,7 +8,7 @@ allowed-tools:
   - Bash
   - Glob
   - Grep
-compatibility: Requires the DiffDock repository, Python 3.9 environment from upstream environment.yml or the official Docker image, RDKit, PyTorch/PyG, and optional CUDA GPU acceleration. Current guidance targets DiffDock v1.1.3 / DiffDock-L.
+compatibility: Requires the DiffDock repository, Python 3.9 environment from upstream environment.yml or the official Docker image, RDKit, PyTorch/PyG, and optional CUDA GPU acceleration. Current guidance targets DiffDock v1.1.3 / DiffDock-L. WARNING — Python 3.9 reached EOL October 2025 and no longer receives security patches; prefer the Docker image (rbgcsail/diffdock) to avoid managing an EOL Python environment directly.
 license: MIT license
 metadata:
   version: "1.1"
@@ -43,6 +43,8 @@ This skill should be used when:
 - Batch docking of multiple protein-ligand pairs
 
 ## Installation and Environment Setup
+
+> **⚠️ Maintenance Warning:** The upstream repository (`gcorso/DiffDock`) has not released an update since **v1.1.3 (September 4, 2024)**. The `environment.yml` pins **Python 3.9.18**, which reached **end-of-life in October 2025** and no longer receives security patches. Use the **Docker image** (`rbgcsail/diffdock`) as the safest installation path, or monitor https://github.com/gcorso/DiffDock for a Python 3.10+ compatible release. Tracked in issue #62.
 
 ### Check Environment Status
 
