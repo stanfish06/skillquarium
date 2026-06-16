@@ -7,6 +7,8 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 
 # ETE Toolkit Skill
 
+> **⚠️ Maintenance Warning:** This skill targets the **`ete3`** PyPI package, whose last release was **May 2, 2023** (v3.1.3). The ETE project now actively maintains **`ete4`** (current: v4.4.0, `pip install ete4`), which has an **incompatible API** (imports use `from ete4 import Tree`). New projects should use `ete4`. Existing `ete3` code continues to work but receives no further updates or security patches. See the [ETE GitHub](https://github.com/etetoolkit/ete) for migration guidance. Tracked in issue #63.
+
 ## Overview
 
 ETE (Environment for Tree Exploration) is a toolkit for phylogenetic and hierarchical tree analysis. Manipulate trees, analyze evolutionary events, visualize results, and integrate with biological databases for phylogenomic research and clustering analysis.
