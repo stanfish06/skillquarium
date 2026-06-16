@@ -8,7 +8,7 @@ allowed-tools:
   - Bash
   - Glob
   - Grep
-compatibility: Requires the DiffDock repository, Python 3.9 environment from upstream environment.yml or the official Docker image, RDKit, PyTorch/PyG, and optional CUDA GPU acceleration. Current guidance targets DiffDock v1.1.3 / DiffDock-L.
+compatibility: Requires the DiffDock repository, Python 3.9 environment from upstream environment.yml or the official Docker image, RDKit, PyTorch/PyG, and optional CUDA GPU acceleration. Current guidance targets DiffDock v1.1.3 / DiffDock-L. WARNING — upstream Conda and Docker paths both use Python 3.9.18; Python 3.9 reached EOL October 2025 and no longer receives security patches.
 license: MIT license
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
@@ -42,6 +42,8 @@ This skill should be used when:
 
 ## Installation and Environment Setup
 
+> **⚠️ Maintenance Warning:** The upstream repository (`gcorso/DiffDock`) has not released an update since **v1.1.3 (September 4, 2024)**. The `environment.yml` pins **Python 3.9.18**, which reached **end-of-life in October 2025** and no longer receives security patches, and the official Docker image builds from that same environment. Docker can make setup more reproducible and isolate host dependencies, but it does **not** remove the EOL interpreter risk. Avoid processing untrusted molecular files or exposing the bundled UIs unless you run DiffDock in a hardened, isolated environment. Monitor https://github.com/gcorso/DiffDock for a Python 3.10+ compatible release. Tracked in issue #62.
+
 ### Check Environment Status
 
 Before proceeding with DiffDock tasks, verify the environment setup:
@@ -55,7 +57,7 @@ This script validates Python version, PyTorch with CUDA, PyTorch Geometric, RDKi
 
 ### Installation Options
 
-**Option 1: Conda (Recommended)**
+**Option 1: Conda (Upstream Environment)**
 ```bash
 git clone https://github.com/gcorso/DiffDock.git
 cd DiffDock
@@ -63,7 +65,7 @@ conda env create --file environment.yml
 conda activate diffdock
 ```
 
-**Option 2: Docker**
+**Option 2: Docker (Reproducible Container)**
 ```bash
 docker pull rbgcsail/diffdock
 docker run -it --gpus all --entrypoint /bin/bash rbgcsail/diffdock
@@ -489,4 +491,3 @@ ICLR 2023, arXiv:2210.01776
 - **Online Demo**: https://huggingface.co/spaces/reginabarzilaygroup/DiffDock-Web
 - **DiffDock-L Paper**: https://arxiv.org/abs/2402.18396
 - **Original Paper**: https://arxiv.org/abs/2210.01776
-
