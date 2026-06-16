@@ -2,7 +2,7 @@
 title: Academic Paper & Nature Pipelines
 tags:
   - skill-map
-created: 2026-06-16
+created: 2026-06-09
 ---
 
 # Academic Paper & Nature Pipelines

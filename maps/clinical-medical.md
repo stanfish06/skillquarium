@@ -2,7 +2,7 @@
 title: Clinical, Medical & Pharmacogenomics
 tags:
   - skill-map
-created: 2026-06-16
+created: 2026-06-09
 ---
 
 # Clinical, Medical & Pharmacogenomics
