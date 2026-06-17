@@ -1,0 +1,29 @@
+---
+title: atac-seq
+aliases:
+  - atac seq
+tags:
+  - skill
+  - domain/single-cell-rnaseq
+domain: single-cell-rnaseq
+status: untried
+source: atac-seq/SKILL.md
+created: 2026-06-17
+---
+
+# atac-seq
+
+> [!info] What it does
+> ATAC-seq processing with assay QC, MACS3 peak calling, consensus peak matrices, differential accessibility, and motif or footprint follow-up.
+
+**Source:** [atac-seq/SKILL.md](atac-seq/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+
+## Related skills
+
+- [deeptools](deeptools.md) — NGS analysis toolkit. BAM to bigWig conversion, QC (correlation, PCA, fingerprints), heatmaps/profiles (TSS, peaks), for ChIP-seq, RNA-seq, ATAC-seq visualization
+- [epigeneticist](epigeneticist.md) — Expert-thinking profile for Epigeneticist (epigenomic assays / ChIP-CUT&RUN-ATAC / bisulfite methylation (EWAS) / 3D genome (Hi-C) / epigenome editing (dCas9)): Reasons from chromatin...
+- [geniml](geniml.md) — This skill should be used when working with genomic interval data (BED files) for machine learning tasks
+
+%% ---8<--- personal notes below are preserved on re-run ---8<--- %%
+
+## Notes

@@ -20,6 +20,7 @@ created: 2026-06-09
 
 - [monai-medical-imaging-ai](monai-medical-imaging-ai.md) — Medical imaging deep learning with MONAI, PyTorch, pydicom, pathml, histolab, and napari-viz
 - [pathml](pathml.md) — Full-featured computational pathology toolkit
+- [proteomics](proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

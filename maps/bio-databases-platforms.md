@@ -14,11 +14,12 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Clinical, Medical & Pharmacogenomics](clinical-medical.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (22)
+## Skills (34)
 
 - [article-data-fetcher](../article-data-fetcher.md) — Given an article DOI or PubMed ID, discover and download the genomics data files deposited by the authors (VCF, FASTA, H5AD, CSV, JSON, BAM, etc.) from public repositories such as GEO...
 - [benchling-integration](../benchling-integration.md) — Benchling Python SDK and REST API integration for registry entities, inventory, ELN entries, workflows, Benchling Apps, and Data Warehouse queries
 - [bigquery-public](../bigquery-public.md) — Run read-only SQL against BigQuery public datasets with local result capture, cost safeguards, and reproducibility outputs
+- [bio-tools](../bio-tools.md) — Biology research tools reference. Always available inside agent containers
 - [clinpgx](../clinpgx.md) — Query the ClinPGx API for pharmacogenomic gene-drug data, clinical annotations, CPIC guidelines, and FDA drug labels
 - [database-lookup](../database-lookup.md) — Deterministically query 78 public scientific, biomedical, materials science, regulatory, finance, and demographics databases through documented REST APIs
 - [dnanexus-integration](../dnanexus-integration.md) — DNAnexus cloud genomics platform. Build apps/applets, manage data (upload/download), dxpy Python SDK, run workflows, FASTQ/BAM/VCF, for genomics pipeline development and execution
@@ -36,5 +37,16 @@ created: 2026-06-13
 - [protocols-io](../protocols-io.md) — Search, browse, and retrieve scientific protocols from protocols.io via REST API
 - [protocolsio-integration](../protocolsio-integration.md) — Integration with protocols.io API for managing scientific protocols
 - [pylabrobot](../pylabrobot.md) — Vendor-agnostic lab automation framework
+- [query-alphafold](../query-alphafold.md) — Query AlphaFold protein structure predictions
+- [query-clinvar](../query-clinvar.md) — Query ClinVar for clinical variant significance
+- [query-ensembl](../query-ensembl.md) — Query Ensembl for genomic data. Use when user asks about gene coordinates, genomic sequences, variants, gene structure, exons, transcripts, or species comparison
+- [query-geo](../query-geo.md) — Query NCBI GEO for gene expression datasets
+- [query-interpro](../query-interpro.md) — Query InterPro for protein domains and families
+- [query-kegg](../query-kegg.md) — Query KEGG for biological pathways and gene info
+- [query-opentarget](../query-opentarget.md) — Query OpenTargets for drug targets, disease associations, and therapeutic evidence
+- [query-pdb](../query-pdb.md) — Query RCSB PDB for experimental protein structures
+- [query-reactome](../query-reactome.md) — Query Reactome for biological pathways and reactions
+- [query-stringdb](../query-stringdb.md) — Query STRING for protein-protein interactions
+- [query-uniprot](../query-uniprot.md) — Query UniProt protein database. Use when user asks about protein sequences, functions, annotations, domains, or protein identifiers
 - [turingdb-graph](../turingdb-graph.md) — Build, query, and analyse biomedical knowledge graphs in TuringDB, a columnar graph database with git-like versioning
 - [ukb-navigator](../ukb-navigator.md) — Semantic search across UK Biobank's 12,000+ data fields and publications — find the right variables for your research question

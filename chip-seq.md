@@ -1,0 +1,28 @@
+---
+title: chip-seq
+aliases:
+  - chip seq
+tags:
+  - skill
+  - domain/single-cell-rnaseq
+domain: single-cell-rnaseq
+status: untried
+source: chip-seq/SKILL.md
+created: 2026-06-17
+---
+
+# chip-seq
+
+> [!info] What it does
+> ChIP-seq peak calling and downstream interpretation with MACS3, signal track export, annotation, motif analysis, and differential binding review.
+
+**Source:** [chip-seq/SKILL.md](chip-seq/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+
+## Related skills
+
+- [deeptools](deeptools.md) — NGS analysis toolkit. BAM to bigWig conversion, QC (correlation, PCA, fingerprints), heatmaps/profiles (TSS, peaks), for ChIP-seq, RNA-seq, ATAC-seq visualization
+- [molecular-virologist](molecular-virologist.md) — Expert-thinking profile for Molecular Virologist (wet-lab / reverse genetics & virus–host molecular mechanism): Reasons from Baltimore mRNA pathways, RNP/polymerase biochemistry...
+
+%% ---8<--- personal notes below are preserved on re-run ---8<--- %%
+
+## Notes

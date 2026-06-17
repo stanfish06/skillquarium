@@ -24,6 +24,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [differential-expression](differential-expression.md) — Bulk transcriptomics differential expression with count-aware modeling, design validation, contrast handling, thresholded exports, and publication-ready DE figures
 - [nextflow](nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
 - [pathway-enrichment](pathway-enrichment.md) — Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results
 - [pydeseq2](pydeseq2.md) — Differential gene expression analysis for bulk RNA-seq with PyDESeq2, including formulaic designs, Wald tests, FDR correction, LFC shrinkage, and result visualization

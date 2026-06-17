@@ -23,6 +23,7 @@ created: 2026-06-12
 ## Related skills
 
 - [ecologist](ecologist.md) — Expert-thinking profile for Ecologist (field / observational / community & spatial ecology): Reasons from Preston/Fisher SADs and Hutchinson fundamental vs realized niches
+- [metagenomics](metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

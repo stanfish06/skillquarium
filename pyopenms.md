@@ -22,6 +22,7 @@ created: 2026-06-09
 
 - [fragpipe-pyteomics-proteomics](fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
 - [matchms](matchms.md) — Spectral similarity and compound identification for metabolomics
+- [proteomics](proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

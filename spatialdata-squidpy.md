@@ -26,6 +26,7 @@ created: 2026-06-09
 
 - [anndata](anndata.md) — Data structure for annotated matrices in single-cell analysis
 - [napari-viz](napari-viz.md) — Headless bioimage and microscopy visualization with napari
+- [proteomics](proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
 - [scanpy](scanpy.md) — Standard single-cell RNA-seq analysis pipeline
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

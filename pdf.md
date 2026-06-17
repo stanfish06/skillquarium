@@ -30,6 +30,8 @@ created: 2026-06-09
 - [paper-2-web](paper-2-web.md) — This skill should be used when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), and...
 - [pptx-posters](pptx-posters.md) — Create research posters using HTML/CSS that can be exported to PDF or PPTX
 - [pyzotero](pyzotero.md) — Interact with Zotero reference management libraries using the pyzotero Python client
+- [report-template](report-template.md) — Publication-quality PDF report generation using Typst templates
+- [sec-report](sec-report.md) — SEC (size-exclusion chromatography) analysis with peak detection, oligomer classification, and publication-quality PDF report generation via Typst templates
 - [treatment-plans](treatment-plans.md) — Generate concise (3-4 page), focused medical treatment plans in LaTeX/PDF format for all clinical specialties
 - [wes-clinical-report-en](wes-clinical-report-en.md) — Generates professional clinical PDF reports in English from WES (Whole Exome Sequencing) data with clinical interpretation summary, pharmacogenomic alerts, and follow-up recommendations
 - [wes-clinical-report-es](wes-clinical-report-es.md) — Generates professional clinical PDF reports in Spanish from WES (Whole Exome Sequencing) data with clinical interpretation, pharmacogenomic alerts, and follow-up recommendations

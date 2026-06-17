@@ -25,6 +25,7 @@ created: 2026-06-09
 
 - [matchms](matchms.md) — Spectral similarity and compound identification for metabolomics
 - [polars](polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
+- [proteomics](proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
 - [pyopenms](pyopenms.md) — Complete mass spectrometry analysis platform
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

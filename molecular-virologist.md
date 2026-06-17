@@ -23,6 +23,7 @@ created: 2026-06-12
 
 ## Related skills
 
+- [chip-seq](chip-seq.md) — ChIP-seq peak calling and downstream interpretation with MACS3, signal track export, annotation, motif analysis, and differential binding review
 - [virologist](virologist.md) — Expert-thinking profile for Virologist (wet-lab / clinical / viral genomics): Reasons from Baltimore groups, replication-cycle kinetics, and ICTV/MSL41 taxonomy
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
