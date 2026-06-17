@@ -14,13 +14,14 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (22)
+## Skills (25)
 
 - [analyze-fasta](../analyze-fasta.md) — Analyze a single FASTA file (nucleotide or protein), compute sequence-level metrics (GC, ORFs, MW, pI, GRAVY, secondary-structure fractions) with Biopython, and write a Markdown report...
 - [bioconductor-bridge](../bioconductor-bridge.md) — Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager
 - [biopython](../biopython.md) — Comprehensive molecular biology toolkit
 - [bioqc-mcp](../bioqc-mcp.md) — Automated sequencing quality control and advanced visualization wrapping FastQC, MultiQC, and custom chart generation
 - [bioservices](../bioservices.md) — Unified Python interface to 40+ bioinformatics services
+- [blast-search](../blast-search.md) — Run BLAST sequence similarity searches. Use when the user asks to BLAST a sequence, find similar sequences, identify a gene/protein, or do homology search
 - [busco-assessor](../busco-assessor.md) — Genome, transcriptome, and protein completeness assessment via BUSCO v6
 - [claw-metagenomics](../claw-metagenomics.md) — Shotgun metagenomics profiling — taxonomy, resistome, and functional pathways
 - [etetoolkit](../etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
@@ -31,6 +32,7 @@ created: 2026-06-13
 - [gi-expression](../gi-expression.md) — Predict tissue / cell-type expression (log TPM + TPM) from a 9,198 bp TSS-centered DNA sequence using the Genomic Intelligence G0 Expression model, via the hosted...
 - [gi-promoter](../gi-promoter.md) — Detect promoter regions in DNA sequences using the Genomic Intelligence G0 transformer (GENA-LM BERT Large), via the hosted /v1/tasks/promoter/predict API
 - [gi-splice](../gi-splice.md) — Detect splice donor and acceptor sites in DNA sequences using the Genomic Intelligence G0 BigBird transformer, via the hosted /v1/tasks/splice/predict API
+- [metagenomics](../metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
 - [multiqc-reporter](../multiqc-reporter.md) — Aggregates QC reports from any bioinformatics tool outputs (FastQC, fastp, STAR, Picard, samtools, etc.) into a single MultiQC HTML report plus a ClawBio markdown summary with...
 - [ncbi-datasets](../ncbi-datasets.md) — Download genomes, genes, virus sequences, and taxonomy data from NCBI using the datasets and dataformat CLI tools
 - [ngs-cli-toolkit](../ngs-cli-toolkit.md) — The core command-line NGS workhorses for going from raw reads to variants — bwa-mem2/minimap2/bowtie2 (alignment), samtools (BAM sort/index/stats/view), bcftools (VCF...
@@ -38,3 +40,4 @@ created: 2026-06-13
 - [phylogenetics-builder](../phylogenetics-builder.md) — Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2
 - [scikit-bio](../scikit-bio.md) — Biological data toolkit. Sequence analysis, alignments, phylogenetic trees, diversity metrics (alpha/beta, UniFrac), ordination (PCoA), PERMANOVA, FASTA/Newick I/O, for microbiome...
 - [seq-wrangler](../seq-wrangler.md) — NGS read QC, alignment, and BAM processing pipeline
+- [sequence-analysis](../sequence-analysis.md) — Analyze DNA/RNA/protein sequences. Use when the user provides a sequence and asks for analysis, translation, GC content, ORFs, motifs, restriction sites, or primer design

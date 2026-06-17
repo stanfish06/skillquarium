@@ -20,6 +20,7 @@ created: 2026-06-12
 
 ## Related skills
 
+- [metagenomics](metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
 - [microbiologist](microbiologist.md) — Expert-thinking profile for Microbiologist (wet-lab / culture, amplicon & shotgun microbiomics): Reasons from culturability limits, CFU/MPN enumeration, selective media, DADA2/QIIME2...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

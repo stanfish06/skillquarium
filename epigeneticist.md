@@ -22,7 +22,7 @@ created: 2026-06-12
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [atac-seq](atac-seq.md) — ATAC-seq processing with assay QC, MACS3 peak calling, consensus peak matrices, differential accessibility, and motif or footprint follow-up
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Machine Learning & AI](ml-ai.md)
 
-## Skills (21)
+## Skills (22)
 
 - [adaptyv](../adaptyv.md) — How to use the Adaptyv Bio Foundry API and Python SDK for protein experiment design, submission, and results retrieval
 - [cobrapy](../cobrapy.md) — Constraint-based metabolic modeling (COBRA)
@@ -34,6 +34,7 @@ created: 2026-06-13
 - [rdkit](../rdkit.md) — Cheminformatics toolkit for fine-grained molecular control
 - [rowan](../rowan.md) — Rowan is a cloud-native molecular modeling and medicinal-chemistry workflow platform with a Python API
 - [struct-predictor](../struct-predictor.md) — Protein structure prediction with Boltz-2
+- [structural-biology](../structural-biology.md) — Structure retrieval, confidence-aware AlphaFold DB usage, coordinate download, PAE and pLDDT interpretation, and structure-guided biological annotation
 - [target-validation-scorer](../target-validation-scorer.md) — Evidence-grounded target validation scoring with GO/NO-GO decisions for drug discovery campaigns
 - [torchdrug](../torchdrug.md) — PyTorch-native graph neural networks for molecules and proteins
 - [vmd-mdanalysis-viz](../vmd-mdanalysis-viz.md) — Headless molecular visualization and trajectory analysis with VMD, MDAnalysis, and GROMACS

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (15)
+## Skills (16)
 
 - [auditing-skills](../auditing-skills.md) — Use when checking skills for security or quality issues, reviewing audit results from skills.sh or Tessl, or remediating findings across published skills
 - [autoskill](../autoskill.md) — Observe the user's screen via screenpipe, detect repeated research workflows, match them against existing scientific-agent-skills, and draft new skills (or composition recipes that...
@@ -31,3 +31,4 @@ created: 2026-06-13
 - [plugin-creator](../plugin-creator.md) — Scaffold a complete cave plugin bundle — generates .cave-plugin/plugin.json manifest and the standard directory structure (commands/, skills/, agents/, themes/, hooks/)
 - [repro-enforcer](../repro-enforcer.md) — Export any bioinformatics analysis as a reproducible bundle with Conda environment, Singularity container definition, and Nextflow pipeline
 - [skill-builder](../skill-builder.md) — Scaffold a new ClawBio skill from a spec file (JSON/YAML) or interactively — generates SKILL.md, Python skeleton, tests, and updates catalog.json
+- [skills-hub](../skills-hub.md) — Browse and install community skills from the BioClaw Skills Hub

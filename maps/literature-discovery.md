@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Documents, Office & Media](documents-office.md)
 
-## Skills (14)
+## Skills (15)
 
 - [bgpt-mcp](../bgpt-mcp.md) — Search scientific papers via the BGPT MCP server and retrieve structured experimental data — methods, results, conclusions, quality scores, and 25+ metadata fields per paper
 - [bgpt-paper-search](../bgpt-paper-search.md) — Search scientific papers and retrieve structured experimental data extracted from full-text studies via the BGPT MCP server
@@ -28,5 +28,6 @@ created: 2026-06-13
 - [paper-lookup](../paper-lookup.md) — Search 10 academic paper databases via REST APIs for research papers, preprints, and scholarly articles
 - [paperzilla](../paperzilla.md) — Chat with your agent about projects, recommendations, and canonical papers in Paperzilla
 - [parallel-web](../parallel-web.md) — All-in-one web toolkit powered by parallel-cli, with a strong emphasis on academic and scientific sources
+- [pubmed-search](../pubmed-search.md) — Search PubMed for scientific literature
 - [pubmed-summariser](../pubmed-summariser.md) — Search PubMed for a gene name or disease term and generate a structured research briefing of the top recent English-language papers
 - [research-lookup](../research-lookup.md) — Look up current research information using parallel-cli search (primary, fast web search) or the Parallel Chat API (deep research)

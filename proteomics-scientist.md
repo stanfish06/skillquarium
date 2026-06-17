@@ -20,7 +20,7 @@ created: 2026-06-12
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [proteomics](proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

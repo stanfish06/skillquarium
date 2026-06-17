@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [bulk-rnaseq](bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
+- [proteomics](proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
 - [pydeseq2](pydeseq2.md) — Differential gene expression analysis for bulk RNA-seq with PyDESeq2, including formulaic designs, Wald tests, FDR correction, LFC shrinkage, and result visualization
 - [scanpy](scanpy.md) — Standard single-cell RNA-seq analysis pipeline
 

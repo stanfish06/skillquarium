@@ -23,7 +23,7 @@ created: 2026-06-12
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [metagenomics](metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
