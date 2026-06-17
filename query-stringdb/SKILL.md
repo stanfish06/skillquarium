@@ -26,7 +26,7 @@ BASE_URL = "https://version-12-0.string-db.org/api"
 def get_interactions(genes, species=9606, score_threshold=400):
     url = f"{BASE_URL}/json/network"
     params = {
-        "identifiers": "%0d".join(genes),
+        "identifiers": "\r".join(genes),  # requests encodes \r -> %0D, STRING's identifier delimiter
         "species": species,
         "required_score": score_threshold,
         "caller_identity": "bioclaw"
@@ -39,7 +39,7 @@ def get_interactions(genes, species=9606, score_threshold=400):
 def get_enrichment(genes, species=9606):
     url = f"{BASE_URL}/json/enrichment"
     params = {
-        "identifiers": "%0d".join(genes),
+        "identifiers": "\r".join(genes),  # requests encodes \r -> %0D, STRING's identifier delimiter
         "species": species,
         "caller_identity": "bioclaw"
     }
@@ -61,10 +61,10 @@ def get_partners(gene, species=9606, limit=10):
     return r.json()
 
 # 4. Download network image
-def download_network_image(genes, species=9606, output_path="/workspace/group/network.png"):
+def download_network_image(genes, species=9606, output_path="network.png"):
     url = f"{BASE_URL}/highres_image/network"
     params = {
-        "identifiers": "%0d".join(genes),
+        "identifiers": "\r".join(genes),  # requests encodes \r -> %0D, STRING's identifier delimiter
         "species": species,
         "caller_identity": "bioclaw"
     }

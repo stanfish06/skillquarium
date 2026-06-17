@@ -91,6 +91,7 @@ for enzyme, sites in results.items():
 ```python
 from Bio.Seq import Seq
 from Bio.SeqUtils import MeltingTemp as mt
+from Bio.SeqUtils import gc_fraction
 
 def design_primers(seq_str, product_size_range=(200, 800)):
     seq = Seq(seq_str)

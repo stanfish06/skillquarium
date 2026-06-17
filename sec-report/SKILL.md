@@ -57,14 +57,16 @@ pip install fpdf2 2>/dev/null || pip install --user fpdf2
 ```
 
 **Step 2 — Locate the uploaded data**:
-Find the user's uploaded file (ZIP, CSV, or directory) under `/workspace/group/`.
+Find the user's uploaded file (ZIP, CSV, or directory) at the path the user provided.
 
 **Step 3 — Run the pipeline script**:
 ```bash
-cd /home/node/.claude/skills/sec-report
+# Run from this skill's own directory (the folder that contains sec_pipeline.py).
+# In this vault that is the sec-report skill folder, e.g. ~/.agents/skills/sec-report
+cd ~/.agents/skills/sec-report
 python3 sec_pipeline.py \
   --input <path-to-uploaded-data-or-zip> \
-  --output /workspace/group/sec_analysis/output
+  --output <output-dir>/sec_analysis/output
 ```
 
 The script accepts either a ZIP file or a directory as `--input`. It handles extraction, parsing, peak detection, figure generation, and PDF report building automatically. The pipeline will use the Typst template engine for publication-quality output; if Typst is unavailable, it falls back to fpdf2.
@@ -77,13 +79,13 @@ By default, the pipeline now produces a **compact user-facing report**. If you e
 
 **Step 4 — Send the PDF report to the user** via `send_image` MCP tool:
 ```
-file_path: /workspace/group/sec_analysis/output/SEC_Analysis_Report.pdf
+file_path: <output-dir>/sec_analysis/output/SEC_Analysis_Report.pdf
 caption: "SEC Analysis Report"
 ```
 
 **Step 5 — Also send the ranking figure**:
 ```
-file_path: /workspace/group/sec_analysis/output/figures/ranking_summary.png
+file_path: <output-dir>/sec_analysis/output/figures/ranking_summary.png
 caption: "Construct Quality Ranking"
 ```
 

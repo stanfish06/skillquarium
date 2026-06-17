@@ -101,11 +101,15 @@ Panel 类型：{panel_descriptions.get(panel_type, panel_type)}
             # response = model.generate_content(prompt)
             # ... 保存图片
             
+            # NOTE: the actual Gemini call and image-saving code above are not
+            # implemented yet, so no image file is written. Report failure rather
+            # than claiming success, otherwise callers assume a panel exists.
             return {
-                "success": True,
+                "success": False,
                 "prompt": prompt,
                 "output_path": output_path,
-                "message": "Image generated successfully (placeholder)"
+                "message": "Gemini image generation is not implemented; no image was written.",
+                "note": "Implement the google.generativeai call above and save the image before marking success."
             }
         except Exception as e:
             return {
