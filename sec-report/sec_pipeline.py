@@ -715,7 +715,13 @@ class SECPlotter:
 # ─── Helpers ────────────────────────────────────────────────────────────────────
 
 def extract_zip(zip_path: str, dest: str) -> str:
+    dest_root = os.path.abspath(dest)
     with zipfile.ZipFile(zip_path, 'r') as zf:
+        # Guard against Zip Slip: reject members that resolve outside dest.
+        for member in zf.namelist():
+            target = os.path.abspath(os.path.join(dest_root, member))
+            if target != dest_root and not target.startswith(dest_root + os.sep):
+                raise ValueError(f"Unsafe path in archive (Zip Slip): {member!r}")
         zf.extractall(dest)
     return dest
 

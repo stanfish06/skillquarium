@@ -24,7 +24,8 @@ BASE_URL = "https://rest.kegg.jp"
 # 1. Find pathways by keyword
 def find_pathways(keyword, organism="hsa"):
     url = f"{BASE_URL}/find/pathway/{keyword}"
-    r = requests.get(url)
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
     lines = r.text.strip().split('\n')
     results = []
     for line in lines:
@@ -37,13 +38,15 @@ def find_pathways(keyword, organism="hsa"):
 # 2. Get pathway details
 def get_pathway(pathway_id):
     url = f"{BASE_URL}/get/{pathway_id}"
-    r = requests.get(url)
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
     return r.text
 
 # 3. Get genes in a pathway
 def get_pathway_genes(pathway_id):
     url = f"{BASE_URL}/link/genes/{pathway_id}"
-    r = requests.get(url)
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
     genes = []
     for line in r.text.strip().split('\n'):
         if line:
@@ -55,19 +58,22 @@ def get_pathway_genes(pathway_id):
 # 4. Get gene info
 def get_gene(kegg_gene_id):
     url = f"{BASE_URL}/get/{kegg_gene_id}"
-    r = requests.get(url)
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
     return r.text
 
 # 5. Find genes by name
 def find_gene(gene_name, organism="hsa"):
     url = f"{BASE_URL}/find/{organism}/{gene_name}"
-    r = requests.get(url)
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
     return r.text
 
 # 6. List all human pathways
 def list_pathways(organism="hsa"):
     url = f"{BASE_URL}/list/pathway/{organism}"
-    r = requests.get(url)
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
     return r.text
 
 # Example

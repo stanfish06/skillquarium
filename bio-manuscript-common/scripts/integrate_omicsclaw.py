@@ -7,12 +7,19 @@ OmicsClaw 联动脚本
 
 import subprocess
 import os
+import tempfile
 from typing import Optional, Dict, List
 
 
 class OmicsClawRunner:
     """OmicsClaw 运行器"""
     
+    # Only these skill names may be passed to the OmicsClaw CLI (guards run_skill).
+    ALLOWED_SKILLS = {
+        "spatial-preprocess", "spatial-domains", "spatial-annotate",
+        "sc-markers", "spatial-statistics", "spatial-enrichment",
+    }
+
     def __init__(self, omicsclaw_path: str = "omicsclaw"):
         """
         初始化
@@ -39,6 +46,10 @@ class OmicsClawRunner:
         Returns:
             运行结果
         """
+        if skill_name not in self.ALLOWED_SKILLS:
+            raise ValueError(
+                f"Unknown skill {skill_name!r}; allowed: {sorted(self.ALLOWED_SKILLS)}"
+            )
         cmd = [self.omicsclaw_path, "run", skill_name, "--input", input_file]
         
         if output_dir:
@@ -160,16 +171,18 @@ class OmicsClawRunner:
         Returns:
             运行结果
         """
-        # 创建临时文件
-        temp_file = "/tmp/gene_list.txt"
-        with open(temp_file, "w") as f:
-            f.write("\n".join(gene_list))
-        
-        return self.run_skill(
-            skill_name="spatial-enrichment",
-            input_file=temp_file,
-            params={"database": database}
-        )
+        # 创建临时文件 (secure temp file avoids symlink/TOCTOU races on a shared /tmp)
+        fd, temp_file = tempfile.mkstemp(prefix="gene_list_", suffix=".txt", text=True)
+        try:
+            with os.fdopen(fd, "w") as f:
+                f.write("\n".join(gene_list))
+            return self.run_skill(
+                skill_name="spatial-enrichment",
+                input_file=temp_file,
+                params={"database": database}
+            )
+        finally:
+            os.unlink(temp_file)
 
 
 def main():

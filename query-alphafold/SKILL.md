@@ -47,8 +47,9 @@ def get_plddt(uniprot_id):
     data = r.json()
     if isinstance(data, list) and data:
         cif_url = data[0].get("cifUrl", "")
-        plddt_url = data[0].get("paeImageUrl", "")
-        return {"cifUrl": cif_url, "paeImageUrl": plddt_url, "data": data[0]}
+        # paeImageUrl is being retired; paeDocUrl returns the PAE matrix as JSON.
+        pae_url = data[0].get("paeDocUrl", "")
+        return {"cifUrl": cif_url, "paeDocUrl": pae_url, "data": data[0]}
     return data
 
 # Example

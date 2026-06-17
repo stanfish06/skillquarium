@@ -27,28 +27,28 @@ HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
 # 1. Gene lookup by symbol
 def lookup_gene(symbol, species="homo_sapiens"):
     url = f"{BASE_URL}/lookup/symbol/{species}/{symbol}"
-    r = requests.get(url, headers=HEADERS, params={"expand": 1})
+    r = requests.get(url, headers=HEADERS, params={"expand": 1}, timeout=30)
     r.raise_for_status()
     return r.json()
 
 # 2. Get sequence
 def get_sequence(ensembl_id, seq_type="genomic"):
     url = f"{BASE_URL}/sequence/id/{ensembl_id}"
-    r = requests.get(url, headers=HEADERS, params={"type": seq_type})
+    r = requests.get(url, headers=HEADERS, params={"type": seq_type}, timeout=30)
     r.raise_for_status()
     return r.json()
 
 # 3. Variant lookup by rsID
 def lookup_variant(rsid, species="homo_sapiens"):
     url = f"{BASE_URL}/variation/{species}/{rsid}"
-    r = requests.get(url, headers=HEADERS)
+    r = requests.get(url, headers=HEADERS, timeout=30)
     r.raise_for_status()
     return r.json()
 
 # 4. Get overlapping features in a region
 def overlap_region(species, chrom, start, end, feature="gene"):
     url = f"{BASE_URL}/overlap/region/{species}/{chrom}:{start}-{end}"
-    r = requests.get(url, headers=HEADERS, params={"feature": feature})
+    r = requests.get(url, headers=HEADERS, params={"feature": feature}, timeout=30)
     r.raise_for_status()
     return r.json()
 
@@ -58,7 +58,7 @@ def get_homologs(ensembl_id, target_species=None):
     params = {}
     if target_species:
         params["target_species"] = target_species
-    r = requests.get(url, headers=HEADERS, params=params)
+    r = requests.get(url, headers=HEADERS, params=params, timeout=30)
     r.raise_for_status()
     return r.json()
 

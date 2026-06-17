@@ -38,7 +38,9 @@ def search_uniprot(gene_name, organism_id=9606, max_results=5):
 # 2. Get by accession ID
 def get_uniprot_entry(accession):
     url = f"{BASE_URL}/uniprotkb/{accession}.json"
-    r = requests.get(url)
+    # Request an explicit field set so the response shape is deterministic.
+    params = {"fields": "accession,id,gene_names,protein_name,organism_name,length,cc_function,ft_domain,sequence"}
+    r = requests.get(url, params=params, timeout=30)
     r.raise_for_status()
     return r.json()
 
