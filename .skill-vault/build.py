@@ -183,7 +183,7 @@ CATEGORIES = [
      ["polars", "dask", "vaex", "zarr-python", "networkx", "sympy", "matlab", "statsmodels",
       "statistical-analysis", "scikit-survival", "pymc", "pymoo", "simpy", "geomaster", "geopandas",
       "exploratory-data-analysis", "optimize-for-gpu", "usfiscaldata", "matplotlib", "seaborn",
-      "adjusttext",
+      "adjusttext", "build-complexheatmaps",
       "xarray", "pandera-validation", "xarray-pandera-duckdb", "attach-db", "duckdb-docs",
       "install-duckdb", "query", "read-file", "paraview", "ttk-viz"]),
 
