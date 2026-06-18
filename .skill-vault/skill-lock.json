@@ -1380,108 +1380,108 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "a48a0c1670d04cde73015a5d4234760117404f6a",
+      "skillFolderHash": "862ecf3b3e552223059267d18b157b4dd6e8f320",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-15T08:29:11.600Z"
+      "updatedAt": "2026-06-18T08:01:40.006Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "9bbf126fc5cff01922b4988bbda5466e6883c105",
+      "skillFolderHash": "40d2ce13b0e921d8a909b88f63fc6a37270163c5",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-06-15T08:29:13.710Z"
+      "updatedAt": "2026-06-18T08:01:42.500Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-academic-search/SKILL.md",
-      "skillFolderHash": "aab5790c825b3371cc912d7e83fcb84b0129e5f2",
+      "skillFolderHash": "7178fd7de664693ae3d2ec52b33a59757f4d5410",
       "installedAt": "2026-06-09T11:26:33.282Z",
-      "updatedAt": "2026-06-17T08:12:56.368Z"
+      "updatedAt": "2026-06-18T08:01:44.887Z"
     },
     "nature-citation": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-citation/SKILL.md",
-      "skillFolderHash": "cfcf2860afa5945348d130672d78e9fade3e9943",
+      "skillFolderHash": "9e35f87e568d7e43be13d170e045713121295a3f",
       "installedAt": "2026-06-09T11:26:33.285Z",
-      "updatedAt": "2026-06-09T12:46:34.990Z"
+      "updatedAt": "2026-06-18T08:01:46.743Z"
     },
     "nature-data": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-data/SKILL.md",
-      "skillFolderHash": "c42a6f112f0b3940faf7c0ee7ce254b88439393a",
+      "skillFolderHash": "3c51eb8adba66c717b206c5ad9c8dde4349e90cb",
       "installedAt": "2026-06-09T11:26:33.288Z",
-      "updatedAt": "2026-06-09T12:46:34.992Z"
+      "updatedAt": "2026-06-18T08:01:48.607Z"
     },
     "nature-figure": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-figure/SKILL.md",
-      "skillFolderHash": "210a163e565e735ddbc0139a6268f74974ea37f0",
+      "skillFolderHash": "6cc25b0f19bd6e35badc25f95e69ea054339160f",
       "installedAt": "2026-06-09T11:26:33.311Z",
-      "updatedAt": "2026-06-09T12:46:34.993Z"
+      "updatedAt": "2026-06-18T08:01:55.327Z"
     },
     "nature-paper2ppt": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-paper2ppt/SKILL.md",
-      "skillFolderHash": "6de8e69eefb55825f974c970623dc428cecb67bf",
+      "skillFolderHash": "c44e86f09203ecc4d0804fd3d1a4e7d049f8fcb7",
       "installedAt": "2026-06-09T11:26:33.312Z",
-      "updatedAt": "2026-06-09T12:46:34.994Z"
+      "updatedAt": "2026-06-18T08:01:57.301Z"
     },
     "nature-polishing": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-polishing/SKILL.md",
-      "skillFolderHash": "901a57a9f1544ad1a167d74cdce3ef0d252b7435",
+      "skillFolderHash": "edee26c9774664f1c40aa003bc90cf2e4ce2b6d3",
       "installedAt": "2026-06-09T11:26:33.313Z",
-      "updatedAt": "2026-06-09T12:46:34.996Z"
+      "updatedAt": "2026-06-18T08:01:59.376Z"
     },
     "nature-reader": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reader/SKILL.md",
-      "skillFolderHash": "1129273065e5555d4a31a9c88c604a586f1e3868",
+      "skillFolderHash": "e3c4900c8b529d63c1f881a262f9dd679b4fb6c1",
       "installedAt": "2026-06-09T11:26:33.314Z",
-      "updatedAt": "2026-06-09T12:46:34.997Z"
+      "updatedAt": "2026-06-18T08:02:01.428Z"
     },
     "nature-response": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-response/SKILL.md",
-      "skillFolderHash": "499801e95472d906b945655dd3163fc6b8f3f628",
+      "skillFolderHash": "1876e0ad82aef2024521e43bbc3657dcac01090d",
       "installedAt": "2026-06-09T11:26:33.315Z",
-      "updatedAt": "2026-06-09T12:46:34.998Z"
+      "updatedAt": "2026-06-18T08:02:03.829Z"
     },
     "nature-reviewer": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reviewer/SKILL.md",
-      "skillFolderHash": "da8ba9c70ab04cfbecb41b6d8522ec93c555f2ae",
+      "skillFolderHash": "1c40e9fe7843ceee6c9cff8b02f2a131526934a5",
       "installedAt": "2026-06-09T11:26:33.316Z",
-      "updatedAt": "2026-06-09T12:46:34.999Z"
+      "updatedAt": "2026-06-18T08:02:06.010Z"
     },
     "nature-writing": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-writing/SKILL.md",
-      "skillFolderHash": "70006b822163938173eb72c6e6328af3901f110b",
+      "skillFolderHash": "0520c46e6097fa05ce02a9ba386e7532c9a468a5",
       "installedAt": "2026-06-09T11:26:33.318Z",
-      "updatedAt": "2026-06-09T12:46:35.000Z"
+      "updatedAt": "2026-06-18T08:02:09.038Z"
     },
     "paper-2-web": {
       "source": "K-Dense-AI/claude-scientific-writer",
