@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build ComplexHeatmaps"
+  short_description: "Build and debug polished ComplexHeatmap figures"
+  default_prompt: "Use $build-complexheatmaps to build or debug this ComplexHeatmap figure."

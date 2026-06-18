@@ -14,10 +14,11 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Quantum, Physics & Materials](quantum-physics.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md)
 
-## Skills (31)
+## Skills (32)
 
 - [adjusttext](../adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [attach-db](../attach-db.md) — Attach a DuckDB database file for use with /duckdb-skills:query
+- [build-complexheatmaps](../build-complexheatmaps.md) — Build, debug, and polish ComplexHeatmap figures in R, including HeatmapList sizing, unequal-row multi-panel layouts, row and column annotations, anno_mark labels, shared legends, title...
 - [dask](../dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
 - [duckdb-docs](../duckdb-docs.md) — Search DuckDB and DuckLake documentation and blog posts
 - [exploratory-data-analysis](../exploratory-data-analysis.md) — Perform comprehensive exploratory data analysis on scientific data files across 200+ file formats
