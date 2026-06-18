@@ -244,13 +244,22 @@ For the batch pipeline, follow the repository's `README.md` tutorial and run its
 - **Use**: Draw glycan structures, calculate masses, annotate MS spectra
 - **Format**: GlycoCT, IUPAC condensed glycan notation
 
-Build and launch the current source distribution with Java 8+ and Maven 3.6+:
+> **Legacy software:** GlycoWorkbench is no longer actively maintained or
+> distributed as a current release. Its public GitLab source remains available
+> for users who need the older tool.
+
+Build the legacy source snapshot with Java 8+ and Maven 3.6+:
 
 ```bash
 git clone https://gitlab.com/glycoinfo/glycoworkbench.git
 cd glycoworkbench
 mvn clean package
-java -XstartOnFirstThread -jar target/glycoworkbench2-*-jar-with-dependencies.jar
+
+# macOS
+java -XstartOnFirstThread -jar target/glycoworkbench2-0.0.3-SNAPSHOT-jar-with-dependencies.jar
+
+# Linux or Windows
+java -jar target/glycoworkbench2-0.0.3-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ### 4. GlyConnect (Glycan-Protein Database)
