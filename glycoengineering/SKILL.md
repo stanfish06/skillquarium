@@ -228,22 +228,39 @@ GlycoShield-MD analyzes how glycans shield protein surfaces during MD simulation
 - **Output**: Per-residue shielding fraction, visualization
 
 ```bash
-# Installation
-pip install glycoshield
-
-# Basic usage: analyze glycan shielding from glycosylated protein MD trajectory
-glycoshield \
-    --topology glycoprotein.pdb \
-    --trajectory glycoprotein.xtc \
-    --glycan_resnames BGLCNA FUC \
-    --output shielding_analysis/
+# Install the source package and launch the upstream Streamlit app
+git clone https://gitlab.mpcdf.mpg.de/dioscuri-biophysics/glycoshield-md.git
+cd glycoshield-md
+uv pip install -e . streamlit
+bash run_streamlit.sh
 ```
+
+For the batch pipeline, follow the repository's `README.md` tutorial and run its
+`GlycoSHIELD.py`, `GlycoTRAJ.py`, and `GlycoSASA.py` scripts directly.
 
 ### 3. GlycoWorkbench (Glycan Structure Drawing/Analysis)
 
-- **URL**: https://www.eurocarbdb.org/project/glycoworkbench
+- **URL**: https://gitlab.com/glycoinfo/glycoworkbench
 - **Use**: Draw glycan structures, calculate masses, annotate MS spectra
 - **Format**: GlycoCT, IUPAC condensed glycan notation
+
+> **Legacy software:** GlycoWorkbench is no longer actively maintained or
+> distributed as a current release. Its public GitLab source remains available
+> for users who need the older tool.
+
+Build the legacy source snapshot with Java 8+ and Maven 3.6+:
+
+```bash
+git clone https://gitlab.com/glycoinfo/glycoworkbench.git
+cd glycoworkbench
+mvn clean package
+
+# macOS
+java -XstartOnFirstThread -jar target/glycoworkbench2-0.0.3-SNAPSHOT-jar-with-dependencies.jar
+
+# Linux or Windows
+java -jar target/glycoworkbench2-0.0.3-SNAPSHOT-jar-with-dependencies.jar
+```
 
 ### 4. GlyConnect (Glycan-Protein Database)
 
@@ -332,6 +349,6 @@ Neu5Ac-Gal-GlcNAc-Man/
 - **GlyConnect**: https://glyconnect.expasy.org/
 - **CFG Functional Glycomics**: http://www.functionalglycomics.org/
 - **DTU Health Tech servers** (NetNGlyc, NetOGlyc): https://services.healthtech.dtu.dk/
-- **GlycoWorkbench**: https://glycoworkbench.software.informer.com/
+- **GlycoWorkbench**: https://gitlab.com/glycoinfo/glycoworkbench
 - **Review**: Apweiler R et al. (1999) Biochim Biophys Acta. PMID: 10564035
 - **Therapeutic glycoengineering review**: Jefferis R (2009) Nature Reviews Drug Discovery. PMID: 19448661
