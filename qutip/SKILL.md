@@ -161,8 +161,8 @@ f_modes, f_energies = floquet_modes(H, T, args)
 result = fmmesolve(H, psi0, tlist, c_ops, T=T, args=args)
 
 # HEOM (non-Markovian, strong coupling)
-from qutip.nonmarkov.heom import HEOMSolver, BosonicBath
-bath = BosonicBath(Q, ck_real, vk_real)
+from qutip.solver.heom import HEOMSolver, BosonicBath
+bath = BosonicBath(Q, ck_real, vk_real, ck_imag, vk_imag)
 hsolver = HEOMSolver(H_sys, [bath], max_depth=5)
 result = hsolver.run(rho0, tlist)
 
@@ -312,4 +312,3 @@ This skill includes detailed reference documentation:
 - Tutorials: https://qutip.org/qutip-tutorials/
 - API Reference: https://qutip.readthedocs.io/en/stable/apidoc/apidoc.html
 - GitHub: https://github.com/qutip/qutip
-
