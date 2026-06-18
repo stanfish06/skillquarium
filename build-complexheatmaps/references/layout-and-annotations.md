@@ -113,8 +113,17 @@ For variable heights, derive `panel_heights` from row counts, with a documented 
 
 ```r
 row_counts <- vapply(panel_data, nrow, integer(1))
+keep <- row_counts > 0L
+if (!any(keep)) {
+  stop("No non-empty panels remain after filtering")
+}
+panel_data <- panel_data[keep]
+row_counts <- row_counts[keep]
 panel_heights <- pmax(0.18, row_counts / max(row_counts))
 ```
+
+Build `panels` from the filtered `panel_data`. This skips empty panels and prevents
+an all-empty input from producing `NaN` viewport heights.
 
 If height should not encode row count, set every height to 1. Do not introduce visual encoding accidentally.
 
@@ -125,6 +134,12 @@ Construct mark indices after final filtering, sorting, and splitting so indices 
 ```r
 make_mark_annotation <- function(genes, mark, highlight, font_size, width = NULL) {
   at <- which(mark)
+  if (!length(at)) {
+    return(rowAnnotation(
+      mark = anno_empty(which = "row", border = FALSE),
+      width = width
+    ))
+  }
   labels <- genes[at]
   label_col <- ifelse(labels %in% highlight, "#B2182B", "grey15")
 
@@ -138,7 +153,7 @@ make_mark_annotation <- function(genes, mark, highlight, font_size, width = NULL
       padding = unit(0.6, "mm"),
       link_gp = gpar(col = "grey60", lwd = 0.45),
       labels_gp = gpar(
-        col = if (length(label_col)) label_col else "grey15",
+        col = label_col,
         fontsize = font_size
       )
     ),
@@ -147,7 +162,8 @@ make_mark_annotation <- function(genes, mark, highlight, font_size, width = NULL
 }
 ```
 
-The scalar fallback for `label_col` avoids passing a zero-length color vector to `gpar()` when no rows qualify. `anno_mark()` itself handles an empty `at` by producing an empty annotation.
+Current `anno_mark()` releases handle an empty `at`, but the explicit guard also
+supports older releases and preserves a row-annotation object for unmarked panels.
 
 For regular-expression marker sets, anchor patterns when exact symbols are intended:
 
@@ -211,13 +227,14 @@ upViewport(2)
 When maintaining an existing ComplexHeatmap title workflow, reserve the title viewport first, then decorate it:
 
 ```r
-Heatmap(
+ht <- Heatmap(
   mat,
   name = unique_name,
   column_title = " \n ",
   column_title_gp = gpar(col = "transparent")
 )
 
+draw(ht)
 decorate_column_title(unique_name, {
   grid.text(panel_title, gp = gpar(fontface = "bold"))
 })
