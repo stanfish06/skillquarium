@@ -221,8 +221,8 @@ uv pip install bids-validator-deno
 # Validate a dataset
 bids-validator-deno /path/to/bids_dataset
 
-# Ignore specific warnings/errors
-bids-validator-deno /path/to/bids_dataset --ignoreNiftiHeaders --ignoreSubjectConsistency
+# Skip warnings and checks that require NIfTI header data
+bids-validator-deno /path/to/bids_dataset --ignoreWarnings --ignoreNiftiHeaders
 ```
 
 #### Using bids-validator via Deno directly
