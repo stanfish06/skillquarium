@@ -36,6 +36,10 @@ uv pip install "amazon-braket-pennylane-plugin==1.34.1"
 uv pip install "pennylane-cirq==0.44.0"
 
 # Rigetti Forest
+# WARNING: pennylane-rigetti only supports PennyLane <=0.40 and has had no release
+# since; it is incompatible with the pennylane==0.45.0 core pinned above. Install it
+# in a separate environment pinned to pennylane==0.40.0, or use pennylane-braket for
+# Rigetti-via-Braket access instead.
 uv pip install "pennylane-rigetti==0.40.0"
 
 # IonQ
