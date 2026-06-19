@@ -4,7 +4,7 @@
 
 - Do not invent results, mechanisms, references, methods, novelty, sample sizes, statistics, or limitations.
 - Write the argument before writing the sentences.
-- If essential evidence is missing, write a placeholder or ask for the missing input instead of filling the gap.
+- Prefer confirming over guessing. If essential input is missing or the framing is ambiguous, do not silently draft a full section on an assumed premise — confirm first (see Intake below) instead of filling the gap.
 
 ## Reader workflow
 
@@ -28,4 +28,4 @@ Identify before writing:
 - **target journal or word limit** if provided
 - **terminology**: on first contact with the material, extract the recurring methods, models, datasets, metrics, abbreviations, and notation into a Terminology Ledger and reuse the canonical forms across every section (see `../../../_shared/core/terminology-ledger.md`)
 
-If any of `core claim`, `evidence`, or `boundary` is absent, expose the gap before drafting. You may still produce a scaffold with explicit placeholders.
+If any of `core claim`, `evidence`, or `boundary` is absent, or the framing is ambiguous, run the **confirmation gate** in `workflow.md` (step 3b) before drafting the full section: echo back your one-sentence argument and key assumptions, ask at most 2–3 targeted questions, and wait for the user. A wrong assumed premise surfaced only in the final notes wastes the entire draft. If the user prefers to proceed without answering, you may still produce a scaffold with explicit placeholders.

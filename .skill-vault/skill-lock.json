@@ -1380,18 +1380,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "862ecf3b3e552223059267d18b157b4dd6e8f320",
+      "skillFolderHash": "1bc6415fe52debb1a74fadd0edb6ccc3f97e54df",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-18T08:01:40.006Z"
+      "updatedAt": "2026-06-19T08:13:51.583Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "40d2ce13b0e921d8a909b88f63fc6a37270163c5",
+      "skillFolderHash": "b5cf0a545244f0c099d5cc02f394c828cee9afce",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-06-18T08:01:42.500Z"
+      "updatedAt": "2026-06-19T08:13:54.256Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
@@ -1425,9 +1425,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-figure/SKILL.md",
-      "skillFolderHash": "6cc25b0f19bd6e35badc25f95e69ea054339160f",
+      "skillFolderHash": "80aad830e8696f16a088c58697486caebd3d04f4",
       "installedAt": "2026-06-09T11:26:33.311Z",
-      "updatedAt": "2026-06-18T08:01:55.327Z"
+      "updatedAt": "2026-06-19T08:14:01.534Z"
     },
     "nature-paper2ppt": {
       "source": "Yuan1z0825/nature-skills",
@@ -1443,18 +1443,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-polishing/SKILL.md",
-      "skillFolderHash": "edee26c9774664f1c40aa003bc90cf2e4ce2b6d3",
+      "skillFolderHash": "76ad8debb843470e08e744dd84992225e536c959",
       "installedAt": "2026-06-09T11:26:33.313Z",
-      "updatedAt": "2026-06-18T08:01:59.376Z"
+      "updatedAt": "2026-06-19T08:14:04.167Z"
     },
     "nature-reader": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reader/SKILL.md",
-      "skillFolderHash": "e3c4900c8b529d63c1f881a262f9dd679b4fb6c1",
+      "skillFolderHash": "a2c0077835bb7143ddf94376baa267eb9a7ca5a5",
       "installedAt": "2026-06-09T11:26:33.314Z",
-      "updatedAt": "2026-06-18T08:02:01.428Z"
+      "updatedAt": "2026-06-19T08:14:06.452Z"
     },
     "nature-response": {
       "source": "Yuan1z0825/nature-skills",
@@ -1479,9 +1479,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-writing/SKILL.md",
-      "skillFolderHash": "0520c46e6097fa05ce02a9ba386e7532c9a468a5",
+      "skillFolderHash": "7f895866eaa7fa2621c3a9bc3dc370b636ef4912",
       "installedAt": "2026-06-09T11:26:33.318Z",
-      "updatedAt": "2026-06-18T08:02:09.038Z"
+      "updatedAt": "2026-06-19T08:14:10.426Z"
     },
     "paper-2-web": {
       "source": "K-Dense-AI/claude-scientific-writer",
@@ -2403,9 +2403,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/browser-testing-with-devtools/SKILL.md",
-      "skillFolderHash": "fa80af3450335a24ca6f83cc955939980cae5801",
+      "skillFolderHash": "42be59520831f02c46bce7bed1aac6ab0592947c",
       "installedAt": "2026-06-12T08:07:57.841Z",
-      "updatedAt": "2026-06-12T08:07:57.841Z"
+      "updatedAt": "2026-06-19T08:14:11.728Z"
     },
     "ci-cd-and-automation": {
       "source": "addyosmani/agent-skills",
@@ -2448,9 +2448,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/debugging-and-error-recovery/SKILL.md",
-      "skillFolderHash": "d7f832d654e1a16755dcece28bf53a112dbcf0ce",
+      "skillFolderHash": "8845857bad758f5313263b7d79f7d82067b764bb",
       "installedAt": "2026-06-12T08:07:57.845Z",
-      "updatedAt": "2026-06-12T08:07:57.845Z"
+      "updatedAt": "2026-06-19T08:14:12.981Z"
     },
     "deprecation-and-migration": {
       "source": "addyosmani/agent-skills",
@@ -2502,9 +2502,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/idea-refine/SKILL.md",
-      "skillFolderHash": "b03c3dd70f49a564888b33a363d04e07edda8f4c",
+      "skillFolderHash": "9c0c69efce37dc33f460c29f91d35cafad5973a7",
       "installedAt": "2026-06-12T08:07:57.850Z",
-      "updatedAt": "2026-06-12T08:07:57.850Z"
+      "updatedAt": "2026-06-19T08:14:14.351Z"
     },
     "incremental-implementation": {
       "source": "addyosmani/agent-skills",
@@ -2529,9 +2529,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/observability-and-instrumentation/SKILL.md",
-      "skillFolderHash": "d8045c8cc4a5b30e5a4670100ade6da9bb0760fc",
+      "skillFolderHash": "e970a55caf9ef4128bdb04af83b4a4dd08045b37",
       "installedAt": "2026-06-12T08:07:57.852Z",
-      "updatedAt": "2026-06-12T08:07:57.852Z"
+      "updatedAt": "2026-06-19T08:14:15.479Z"
     },
     "performance-optimization": {
       "source": "addyosmani/agent-skills",
