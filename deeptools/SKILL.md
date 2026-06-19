@@ -15,6 +15,9 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 ## Overview
 
+> [!WARNING]
+> **Maintenance has slowed:** deepTools has had no new release since **3.5.6 (2025-01-20)** — the longest gap between releases in the project's history (prior gaps were under a year). The repo is not archived and there's no formal deprecation notice, but it currently has 162 open issues and 20 open PRs with no recent release to absorb fixes. The pinned version below is still current and there is no broken install or removed API, so this skill remains usable — just sanity-check compatibility with newer NumPy/pysam versions before depending on it for new long-lived pipelines. Tracked: issue [#84](https://github.com/stanfish06/my-skills/issues/84).
+
 deepTools is a comprehensive suite of Python command-line tools designed for processing and analyzing high-throughput sequencing data. Use deepTools to perform quality control, normalize data, compare samples, and generate publication-quality visualizations for ChIP-seq, RNA-seq, ATAC-seq, MNase-seq, and other NGS experiments.
 
 **Core capabilities:**
