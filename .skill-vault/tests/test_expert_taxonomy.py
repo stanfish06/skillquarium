@@ -268,6 +268,20 @@ class ExpertTaxonomyTests(unittest.TestCase):
                 for profile in taxonomy.profiles.values()
             )
         )
+        self.assertEqual(
+            taxonomy.profiles["materials-scientist"].bridge_domains,
+            ("data-science-compute", "quantum-physics"),
+        )
+        self.assertEqual(
+            taxonomy.profiles[
+                "photovoltaics-solar-cell-scientist"
+            ].bridge_domains,
+            ("data-science-compute", "quantum-physics"),
+        )
+        self.assertEqual(
+            taxonomy.profiles["urban-infrastructure-planner"].bridge_domains,
+            ("data-science-compute",),
+        )
 
 
 if __name__ == "__main__":

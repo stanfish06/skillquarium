@@ -2210,9 +2210,8 @@
       "primary": "chemistry-materials",
       "secondary": [],
       "bridge_domains": [
-        "drug-discovery-chem",
-        "imaging-signals",
-        "data-science-compute"
+        "data-science-compute",
+        "quantum-physics"
       ]
     },
     "mathematical-analyst": {
@@ -2971,7 +2970,8 @@
         "engineering-technology"
       ],
       "bridge_domains": [
-        "drug-discovery-chem"
+        "data-science-compute",
+        "quantum-physics"
       ]
     },
     "phylogeneticist": {
@@ -3903,7 +3903,7 @@
         "engineering-technology"
       ],
       "bridge_domains": [
-        "software-dev"
+        "data-science-compute"
       ]
     },
     "vaccinologist": {
