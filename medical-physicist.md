@@ -20,7 +20,7 @@ created: 2026-06-12
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [qa](qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

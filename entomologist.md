@@ -21,6 +21,7 @@ created: 2026-06-12
 ## Related skills
 
 - [agricultural-entomologist](agricultural-entomologist.md) — Expert-thinking profile for Agricultural Entomologist (field scouting / IPM / resistance management (IRAC MoA) / biocontrol / pollinator protection): Reasons from pest population...
+- [triage](triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

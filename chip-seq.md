@@ -22,6 +22,7 @@ created: 2026-06-17
 
 - [deeptools](deeptools.md) — NGS analysis toolkit. BAM to bigWig conversion, QC (correlation, PCA, fingerprints), heatmaps/profiles (TSS, peaks), for ChIP-seq, RNA-seq, ATAC-seq visualization
 - [molecular-virologist](molecular-virologist.md) — Expert-thinking profile for Molecular Virologist (wet-lab / reverse genetics & virus–host molecular mechanism): Reasons from Baltimore mRNA pathways, RNP/polymerase biochemistry...
+- [review](review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

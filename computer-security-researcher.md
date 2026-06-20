@@ -21,6 +21,7 @@ created: 2026-06-12
 ## Related skills
 
 - [libfuzzer](libfuzzer.md) — Coverage-guided fuzzer built into LLVM for C/C++ projects
+- [triage](triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

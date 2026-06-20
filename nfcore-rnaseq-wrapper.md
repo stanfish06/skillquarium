@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [handoff](handoff.md) — Compact the current conversation into a handoff document for another agent to pick up
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
