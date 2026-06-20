@@ -212,7 +212,8 @@
         "biology-life-sciences"
       ],
       "bridge_domains": [
-        "genomics-variants"
+        "genomics-variants",
+        "data-science-compute"
       ]
     },
     "animal-nutritionist": {
@@ -226,8 +227,7 @@
       "primary": "agriculture-food-animal-sciences",
       "secondary": [],
       "bridge_domains": [
-        "data-science-compute",
-        "software-dev"
+        "data-science-compute"
       ]
     },
     "antenna-engineer": {
@@ -954,7 +954,6 @@
       "secondary": [],
       "bridge_domains": [
         "data-science-compute",
-        "cloud-devops",
         "software-dev"
       ]
     },
@@ -979,8 +978,8 @@
       "bridge_domains": [
         "data-science-compute",
         "cloud-devops",
-        "security-auditing",
-        "software-dev"
+        "software-dev",
+        "security-auditing"
       ]
     },
     "computer-security-researcher": {
@@ -988,8 +987,8 @@
       "secondary": [],
       "bridge_domains": [
         "data-science-compute",
-        "security-auditing",
-        "software-dev"
+        "software-dev",
+        "security-auditing"
       ]
     },
     "computer-vision-scientist": {
@@ -1230,7 +1229,8 @@
       ],
       "bridge_domains": [
         "clinical-medical",
-        "imaging-signals"
+        "imaging-signals",
+        "ml-ai"
       ]
     },
     "distributed-systems-researcher": {
@@ -1239,8 +1239,8 @@
       "bridge_domains": [
         "data-science-compute",
         "cloud-devops",
-        "security-auditing",
-        "software-dev"
+        "software-dev",
+        "security-auditing"
       ]
     },
     "dynamical-systems-theorist": {
@@ -1411,7 +1411,8 @@
         "earth-environmental-sciences"
       ],
       "bridge_domains": [
-        "clinical-medical"
+        "clinical-medical",
+        "data-science-compute"
       ]
     },
     "environmental-microbiologist": {
@@ -1812,8 +1813,7 @@
       "primary": "biology-life-sciences",
       "secondary": [],
       "bridge_domains": [
-        "proteomics-metabolomics",
-        "sequence-phylogenetics"
+        "proteomics-metabolomics"
       ]
     },
     "gravitational-physicist": {
@@ -2035,8 +2035,8 @@
       "primary": "computing-data-science",
       "secondary": [],
       "bridge_domains": [
-        "security-auditing",
-        "software-dev"
+        "software-dev",
+        "security-auditing"
       ]
     },
     "inorganic-chemist": {
@@ -2112,8 +2112,7 @@
       "primary": "mathematics-statistics",
       "secondary": [],
       "bridge_domains": [
-        "data-science-compute",
-        "security-auditing"
+        "data-science-compute"
       ]
     },
     "low-temperature-physicist": {
@@ -3193,7 +3192,7 @@
         "proteomics-metabolomics",
         "drug-discovery-chem",
         "sequence-phylogenetics",
-        "data-science-compute"
+        "ml-ai"
       ]
     },
     "proteomics-scientist": {
@@ -3221,9 +3220,7 @@
     },
     "psychophysicist": {
       "primary": "social-behavioral-sciences",
-      "secondary": [
-        "physics-astronomy"
-      ],
+      "secondary": [],
       "bridge_domains": [
         "data-science-compute"
       ]
@@ -3239,7 +3236,7 @@
       "primary": "mathematics-statistics",
       "secondary": [],
       "bridge_domains": [
-        "security-auditing"
+        "data-science-compute"
       ]
     },
     "quality-six-sigma-engineer": {
@@ -3266,7 +3263,8 @@
       ],
       "bridge_domains": [
         "drug-discovery-chem",
-        "data-science-compute"
+        "data-science-compute",
+        "quantum-physics"
       ]
     },
     "quantum-computing-scientist": {
@@ -3463,7 +3461,8 @@
       "primary": "engineering-technology",
       "secondary": [],
       "bridge_domains": [
-        "imaging-signals"
+        "imaging-signals",
+        "data-science-compute"
       ]
     },
     "sedimentologist": {
@@ -3933,7 +3932,7 @@
       ]
     },
     "veterinary-epidemiologist": {
-      "primary": "medicine-health",
+      "primary": "agriculture-food-animal-sciences",
       "secondary": [
         "mathematics-statistics"
       ],

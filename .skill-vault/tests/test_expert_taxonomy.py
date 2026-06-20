@@ -39,6 +39,10 @@ class ExpertTaxonomyTests(unittest.TestCase):
                 },
             ],
             "profiles": {
+                "astrobiologist": {
+                    "primary": "biology-life-sciences",
+                    "bridge_domains": ["data-science-compute"],
+                },
                 "biophysicist": {
                     "primary": "biology-life-sciences",
                     "secondary": ["physics-astronomy"],
@@ -46,10 +50,6 @@ class ExpertTaxonomyTests(unittest.TestCase):
                         "imaging-signals",
                         "data-science-compute",
                     ],
-                },
-                "astrobiologist": {
-                    "primary": "biology-life-sciences",
-                    "bridge_domains": ["data-science-compute"],
                 },
             },
         }
@@ -157,6 +157,115 @@ class ExpertTaxonomyTests(unittest.TestCase):
 
         self.assertIn("cannot read taxonomy", str(caught.exception))
 
+    def test_rejects_unsorted_profile_keys(self):
+        data = self.valid_data()
+        data["profiles"] = {
+            "biophysicist": data["profiles"]["biophysicist"],
+            "astrobiologist": data["profiles"]["astrobiologist"],
+        }
+
+        with self.assertRaises(
+            expert_taxonomy.TaxonomyValidationError
+        ) as caught:
+            expert_taxonomy.load_taxonomy(
+                self.write_json("taxonomy.json", data),
+                catalog_profiles={"astrobiologist", "biophysicist"},
+                discovered_profiles={"astrobiologist", "biophysicist"},
+                valid_bridge_domains=(
+                    "imaging-signals",
+                    "data-science-compute",
+                ),
+            )
+
+        self.assertIn(
+            "profiles: keys must be lexicographically ordered",
+            str(caught.exception),
+        )
+
+    def test_rejects_more_than_three_secondary_disciplines(self):
+        data = self.valid_data()
+        for discipline_id in ("chemistry", "medicine", "engineering"):
+            data["disciplines"].append(
+                {
+                    "id": discipline_id,
+                    "title": discipline_id.title(),
+                    "description": "Additional discipline.",
+                }
+            )
+        data["profiles"]["biophysicist"]["secondary"] = [
+            "physics-astronomy",
+            "chemistry",
+            "medicine",
+            "engineering",
+        ]
+
+        with self.assertRaises(
+            expert_taxonomy.TaxonomyValidationError
+        ) as caught:
+            expert_taxonomy.load_taxonomy(
+                self.write_json("taxonomy.json", data),
+                catalog_profiles={"astrobiologist", "biophysicist"},
+                discovered_profiles={"astrobiologist", "biophysicist"},
+                valid_bridge_domains=(
+                    "imaging-signals",
+                    "data-science-compute",
+                ),
+            )
+
+        self.assertIn(
+            "biophysicist.secondary: at most 3 disciplines are allowed",
+            str(caught.exception),
+        )
+
+    def test_rejects_more_than_four_bridge_domains(self):
+        data = self.valid_data()
+        domains = tuple(f"domain-{index}" for index in range(5))
+        data["profiles"]["astrobiologist"]["bridge_domains"] = list(domains)
+
+        with self.assertRaises(
+            expert_taxonomy.TaxonomyValidationError
+        ) as caught:
+            expert_taxonomy.load_taxonomy(
+                self.write_json("taxonomy.json", data),
+                catalog_profiles={"astrobiologist", "biophysicist"},
+                discovered_profiles={"astrobiologist", "biophysicist"},
+                valid_bridge_domains=(
+                    *domains,
+                    "imaging-signals",
+                    "data-science-compute",
+                ),
+            )
+
+        self.assertIn(
+            "astrobiologist.bridge_domains: at most 4 domains are allowed",
+            str(caught.exception),
+        )
+
+    def test_rejects_bridge_domains_outside_canonical_order(self):
+        data = self.valid_data()
+        data["profiles"]["biophysicist"]["bridge_domains"] = [
+            "data-science-compute",
+            "imaging-signals",
+        ]
+
+        with self.assertRaises(
+            expert_taxonomy.TaxonomyValidationError
+        ) as caught:
+            expert_taxonomy.load_taxonomy(
+                self.write_json("taxonomy.json", data),
+                catalog_profiles={"astrobiologist", "biophysicist"},
+                discovered_profiles={"astrobiologist", "biophysicist"},
+                valid_bridge_domains=(
+                    "imaging-signals",
+                    "data-science-compute",
+                ),
+            )
+
+        self.assertIn(
+            "biophysicist.bridge_domains: must follow canonical domain order",
+            str(caught.exception),
+        )
+
     def test_reports_all_validation_errors_together(self):
         data = self.valid_data()
         data["schema_version"] = 2
@@ -213,6 +322,13 @@ class ExpertTaxonomyTests(unittest.TestCase):
 
     def test_repository_manifest_covers_every_imported_profile(self):
         root = Path(__file__).resolve().parents[2]
+        build_path = root / ".skill-vault/build.py"
+        build_spec = importlib.util.spec_from_file_location(
+            "skill_vault_build", build_path
+        )
+        vault_build = importlib.util.module_from_spec(build_spec)
+        assert build_spec.loader is not None
+        build_spec.loader.exec_module(vault_build)
         catalog = expert_taxonomy.load_catalog_profiles(
             root / "scientific-agents/references/catalog.json"
         )
@@ -225,29 +341,10 @@ class ExpertTaxonomyTests(unittest.TestCase):
             and "scientific-agents-profile: true"
             in (skill_dir / "SKILL.md").read_text(encoding="utf-8")[:4096]
         }
-        valid_domains = (
-            "genomics-variants",
-            "single-cell-rnaseq",
-            "proteomics-metabolomics",
-            "drug-discovery-chem",
-            "sequence-phylogenetics",
-            "bio-databases-platforms",
-            "clinical-medical",
-            "imaging-signals",
-            "ml-ai",
-            "data-science-compute",
-            "quantum-physics",
-            "research-writing",
-            "academic-pipelines",
-            "literature-discovery",
-            "documents-office",
-            "cloud-devops",
-            "vault-meta",
-            "reasoning-ideation",
-            "web-automation-frontend",
-            "analytics-engineering",
-            "security-auditing",
-            "software-dev",
+        valid_domains = tuple(
+            category[0]
+            for category in vault_build.CATEGORIES
+            if category[0] != expert_taxonomy.EXPERT_DOMAIN
         )
         taxonomy = expert_taxonomy.load_taxonomy(
             root / ".skill-vault/scientific-expert-taxonomy.json",
@@ -282,6 +379,59 @@ class ExpertTaxonomyTests(unittest.TestCase):
             taxonomy.profiles["urban-infrastructure-planner"].bridge_domains,
             ("data-science-compute",),
         )
+        self.assertEqual(taxonomy.profiles["psychophysicist"].secondary, ())
+        self.assertEqual(
+            taxonomy.profiles["veterinary-epidemiologist"].primary,
+            "agriculture-food-animal-sciences",
+        )
+        self.assertEqual(
+            taxonomy.profiles["veterinary-epidemiologist"].secondary,
+            ("mathematics-statistics",),
+        )
+        expected_bridges = {
+            "animal-scientist": ("data-science-compute",),
+            "glycobiologist": ("proteomics-metabolomics",),
+            "logician": ("data-science-compute",),
+            "pure-mathematician": ("data-science-compute",),
+            "computer-architecture-researcher": (
+                "data-science-compute",
+                "software-dev",
+            ),
+            "animal-geneticist-breeder": (
+                "genomics-variants",
+                "data-science-compute",
+            ),
+            "digital-pathology-scientist": (
+                "clinical-medical",
+                "imaging-signals",
+                "ml-ai",
+            ),
+            "environmental-health-scientist": (
+                "clinical-medical",
+                "data-science-compute",
+            ),
+            "protein-engineer": (
+                "proteomics-metabolomics",
+                "drug-discovery-chem",
+                "sequence-phylogenetics",
+                "ml-ai",
+            ),
+            "quantum-chemist": (
+                "drug-discovery-chem",
+                "data-science-compute",
+                "quantum-physics",
+            ),
+            "robotics-scientist": (
+                "imaging-signals",
+                "data-science-compute",
+            ),
+        }
+        for slug, bridge_domains in expected_bridges.items():
+            with self.subTest(slug=slug):
+                self.assertEqual(
+                    taxonomy.profiles[slug].bridge_domains,
+                    bridge_domains,
+                )
 
 
 if __name__ == "__main__":

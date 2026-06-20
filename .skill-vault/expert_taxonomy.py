@@ -185,6 +185,10 @@ def load_taxonomy(
         raw_profiles = {}
         errors.append("profiles: expected an object")
 
+    profile_keys = list(raw_profiles)
+    if profile_keys != sorted(profile_keys):
+        errors.append("profiles: keys must be lexicographically ordered")
+
     taxonomy_slugs = set(raw_profiles)
     if catalog_profiles != discovered_profiles:
         catalog_only = ", ".join(
@@ -211,6 +215,9 @@ def load_taxonomy(
         )
 
     valid_domains = set(valid_bridge_domains)
+    valid_order = {
+        domain: index for index, domain in enumerate(valid_bridge_domains)
+    }
     profiles: dict[str, ProfileAssignment] = {}
     for slug, item in raw_profiles.items():
         if not isinstance(slug, str) or not isinstance(item, dict):
@@ -227,6 +234,10 @@ def load_taxonomy(
         secondary = _string_list(
             item.get("secondary", []), f"{slug}.secondary", errors
         )
+        if len(secondary) > 3:
+            errors.append(
+                f"{slug}.secondary: at most 3 disciplines are allowed"
+            )
         for value in _duplicates(secondary):
             errors.append(f"{slug}.secondary: duplicate discipline {value}")
         if primary and primary in secondary:
@@ -242,6 +253,10 @@ def load_taxonomy(
         )
         if not bridges:
             errors.append(f"{slug}.bridge_domains: at least one domain is required")
+        if len(bridges) > 4:
+            errors.append(
+                f"{slug}.bridge_domains: at most 4 domains are allowed"
+            )
         for value in _duplicates(bridges):
             errors.append(f"{slug}.bridge_domains: duplicate domain {value}")
         for value in dict.fromkeys(bridges):
@@ -249,6 +264,12 @@ def load_taxonomy(
                 errors.append(f"{slug}.bridge_domains: forbidden expert domain")
             elif value not in valid_domains:
                 errors.append(f"{slug}.bridge_domains: unknown domain {value}")
+        if all(value in valid_order for value in bridges) and bridges != tuple(
+            sorted(bridges, key=valid_order.__getitem__)
+        ):
+            errors.append(
+                f"{slug}.bridge_domains: must follow canonical domain order"
+            )
 
         profiles[slug] = ProfileAssignment(primary, secondary, bridges)
 
