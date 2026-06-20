@@ -22,6 +22,7 @@ created: 2026-06-09
 
 - [generate-image](generate-image.md) — Generate or edit images using AI models (FLUX, Gemini)
 - [market-research-reports](market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
+- [review](review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

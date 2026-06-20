@@ -21,6 +21,7 @@ created: 2026-06-12
 ## Related skills
 
 - [geneticist](geneticist.md) — Expert-thinking profile for Geneticist (variant interpretation / GWAS-linkage / pedigree & crosses / population genetics (ACMG/AMP, ClinGen)): Reasons from particulate inheritance...
+- [review](review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

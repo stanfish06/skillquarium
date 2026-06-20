@@ -1,0 +1,24 @@
+---
+title: handoff
+tags:
+  - skill
+status: untried
+source: handoff/SKILL.md
+created: 2026-06-20
+---
+
+# handoff
+
+> [!info] What it does
+> Compact the current conversation into a handoff document for another agent to pick up.
+
+**Source:** [handoff/SKILL.md](handoff/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+
+## Related skills
+
+- [nfcore-rnaseq-wrapper](nfcore-rnaseq-wrapper.md) — Wrapper skill for running nf-core/rnaseq bulk RNA-seq preprocessing from FASTQ or BAM inputs with strict preflight, reproducibility outputs, and downstream handoff to ClawBio bulk...
+- [nfcore-scrnaseq-wrapper](nfcore-scrnaseq-wrapper.md) — Wrapper skill for running nf-core/scrnaseq 4.1.0 upstream single-cell RNA-seq preprocessing from FASTQ with strict preflight, reproducibility outputs, and downstream handoff to ClawBio...
+
+%% ---8<--- personal notes below are preserved on re-run ---8<--- %%
+
+## Notes

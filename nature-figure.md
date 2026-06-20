@@ -23,6 +23,8 @@ created: 2026-06-09
 - [infographics](infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
 - [matplotlib](matplotlib.md) — Low-level plotting library for full customization
 - [pdf](pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
+- [qa](qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
+- [review](review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 - [seaborn](seaborn.md) — Statistical visualization with pandas integration
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
