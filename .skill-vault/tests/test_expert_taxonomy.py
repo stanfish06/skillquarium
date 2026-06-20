@@ -106,6 +106,57 @@ class ExpertTaxonomyTests(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             taxonomy.disciplines[0].title = "Changed"
 
+    def test_profiles_mapping_is_a_read_only_snapshot(self):
+        assignment = expert_taxonomy.ProfileAssignment(
+            "biology-life-sciences", (), ("data-science-compute",)
+        )
+        source_profiles = {"biophysicist": assignment}
+        taxonomy = expert_taxonomy.ExpertTaxonomy((), source_profiles)
+
+        source_profiles.clear()
+
+        self.assertEqual(tuple(taxonomy.profiles), ("biophysicist",))
+        with self.assertRaises(TypeError):
+            taxonomy.profiles["astrobiologist"] = assignment
+        with self.assertRaises(TypeError):
+            del taxonomy.profiles["biophysicist"]
+
+    def test_rejects_non_integer_schema_versions(self):
+        for schema_version in (True, 1.0):
+            with self.subTest(schema_version=schema_version):
+                data = self.valid_data()
+                data["schema_version"] = schema_version
+                with self.assertRaises(
+                    expert_taxonomy.TaxonomyValidationError
+                ) as caught:
+                    expert_taxonomy.load_taxonomy(
+                        self.write_json("taxonomy.json", data),
+                        catalog_profiles={"astrobiologist", "biophysicist"},
+                        discovered_profiles={"astrobiologist", "biophysicist"},
+                        valid_bridge_domains=(
+                            "imaging-signals",
+                            "data-science-compute",
+                        ),
+                    )
+
+                self.assertIn("unsupported schema_version", str(caught.exception))
+
+    def test_wraps_malformed_utf8_as_validation_error(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        path = Path(directory.name) / "taxonomy.json"
+        path.write_bytes(b"\xff")
+
+        with self.assertRaises(expert_taxonomy.TaxonomyValidationError) as caught:
+            expert_taxonomy.load_taxonomy(
+                path,
+                catalog_profiles=set(),
+                discovered_profiles=set(),
+                valid_bridge_domains=(),
+            )
+
+        self.assertIn("cannot read taxonomy", str(caught.exception))
+
     def test_reports_all_validation_errors_together(self):
         data = self.valid_data()
         data["schema_version"] = 2

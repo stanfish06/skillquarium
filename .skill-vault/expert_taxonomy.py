@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from types import MappingProxyType
 from typing import Iterable, Mapping, Sequence
 
 
@@ -41,6 +42,11 @@ class ProfileAssignment:
 class ExpertTaxonomy:
     disciplines: tuple[Discipline, ...]
     profiles: Mapping[str, ProfileAssignment]
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self, "profiles", MappingProxyType(dict(self.profiles))
+        )
 
     @property
     def discipline_by_id(self) -> Mapping[str, Discipline]:
@@ -80,7 +86,7 @@ class ExpertTaxonomy:
 def _read_json(path: Path, source: str) -> object:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
         raise TaxonomyValidationError((f"cannot read {source} {path}: {exc}",)) from exc
 
 
@@ -144,8 +150,9 @@ def load_taxonomy(
         raise TaxonomyValidationError(("manifest root: expected an object",))
 
     errors: list[str] = []
-    if raw.get("schema_version") != SCHEMA_VERSION:
-        errors.append(f"unsupported schema_version: {raw.get('schema_version')!r}")
+    schema_version = raw.get("schema_version")
+    if type(schema_version) is not int or schema_version != SCHEMA_VERSION:
+        errors.append(f"unsupported schema_version: {schema_version!r}")
 
     raw_disciplines = raw.get("disciplines")
     if not isinstance(raw_disciplines, list):
