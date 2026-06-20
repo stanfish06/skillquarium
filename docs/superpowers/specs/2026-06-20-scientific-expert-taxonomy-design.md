@@ -1,6 +1,6 @@
 # Scientific Expert Taxonomy Design
 
-**Status:** Draft for written review
+**Status:** Approved
 **Date:** 2026-06-20
 
 ## Context
