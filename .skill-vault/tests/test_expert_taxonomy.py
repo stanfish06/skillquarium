@@ -211,6 +211,64 @@ class ExpertTaxonomyTests(unittest.TestCase):
         ):
             self.assertIn(fragment, message)
 
+    def test_repository_manifest_covers_every_imported_profile(self):
+        root = Path(__file__).resolve().parents[2]
+        catalog = expert_taxonomy.load_catalog_profiles(
+            root / "scientific-agents/references/catalog.json"
+        )
+        discovered = {
+            skill_dir.name
+            for skill_dir in root.iterdir()
+            if skill_dir.is_dir()
+            and skill_dir.name != expert_taxonomy.DISPATCHER
+            and (skill_dir / "SKILL.md").is_file()
+            and "scientific-agents-profile: true"
+            in (skill_dir / "SKILL.md").read_text(encoding="utf-8")[:4096]
+        }
+        valid_domains = (
+            "genomics-variants",
+            "single-cell-rnaseq",
+            "proteomics-metabolomics",
+            "drug-discovery-chem",
+            "sequence-phylogenetics",
+            "bio-databases-platforms",
+            "clinical-medical",
+            "imaging-signals",
+            "ml-ai",
+            "data-science-compute",
+            "quantum-physics",
+            "research-writing",
+            "academic-pipelines",
+            "literature-discovery",
+            "documents-office",
+            "cloud-devops",
+            "vault-meta",
+            "reasoning-ideation",
+            "web-automation-frontend",
+            "analytics-engineering",
+            "security-auditing",
+            "software-dev",
+        )
+        taxonomy = expert_taxonomy.load_taxonomy(
+            root / ".skill-vault/scientific-expert-taxonomy.json",
+            catalog_profiles=catalog,
+            discovered_profiles=discovered,
+            valid_bridge_domains=valid_domains,
+        )
+
+        self.assertEqual(len(taxonomy.profiles), 503)
+        self.assertEqual(len(taxonomy.disciplines), 10)
+        for discipline in taxonomy.disciplines:
+            self.assertTrue(
+                taxonomy.primary_profiles(discipline.id), discipline.id
+            )
+        self.assertTrue(
+            all(
+                profile.bridge_domains
+                for profile in taxonomy.profiles.values()
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
