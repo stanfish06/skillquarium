@@ -2047,9 +2047,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-rnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "43010836888d20af8b8a501ffe0406de0d3d31a2",
+      "skillFolderHash": "e038dd82c90f32ea604de8d297279e9d0a855dad",
       "installedAt": "2026-06-09T11:30:14.248Z",
-      "updatedAt": "2026-06-12T08:03:03.525Z"
+      "updatedAt": "2026-06-20T07:36:45.070Z"
     },
     "nfcore-sarek-wrapper": {
       "source": "ClawBio/ClawBio",
@@ -2065,9 +2065,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "de4fb444a529cefb75fb997d7f1fd058c6e518ac",
+      "skillFolderHash": "4f7a0648137d7c8b140e33b0d2a17e7501b13e46",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-06-15T08:29:27.990Z"
+      "updatedAt": "2026-06-20T07:36:48.482Z"
     },
     "nutrigx-advisor": {
       "source": "ClawBio/ClawBio",

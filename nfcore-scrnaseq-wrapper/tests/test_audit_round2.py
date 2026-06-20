@@ -301,13 +301,17 @@ def test_protocol_matrix_matches_sibling_protocols_json_if_present():
 
 
 def _load_clawbio():
-    import importlib.util
+    """Return the ClawBio runner engine.
 
-    clawbio_path = _SKILL_DIR.parent.parent / "clawbio.py"
-    spec = importlib.util.spec_from_file_location("clawbio_script", clawbio_path)
-    clawbio = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(clawbio)
-    return clawbio
+    The runner registry (``SKILLS``) and the ``run_skill`` / ``main`` callables
+    live in :mod:`clawbio.cli`; the top-level ``clawbio.py`` is a thin shim that
+    only re-exports and delegates to them. Tests inspect and monkeypatch the
+    engine, so they must target ``clawbio.cli`` directly — patching a name on the
+    shim would not change the binding ``main`` resolves inside ``clawbio.cli``.
+    """
+    import clawbio.cli as clawbio_cli
+
+    return clawbio_cli
 
 
 def test_runner_allowlist_includes_no_save_align_intermeds():

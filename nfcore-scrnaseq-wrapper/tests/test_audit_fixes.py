@@ -676,12 +676,10 @@ def test_handoff_provenance_records_path_and_checksum(tmp_path):
 
 
 def test_clawbio_allowlist_is_subset_of_wrapper_flags():
-    import importlib.util
+    # The runner registry lives in clawbio.cli; clawbio.py is a thin shim that
+    # delegates to it.
+    import clawbio.cli as clawbio
 
-    clawbio_path = _SKILL_DIR.parent.parent / "clawbio.py"
-    spec = importlib.util.spec_from_file_location("clawbio_script", clawbio_path)
-    clawbio = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(clawbio)
     entry = clawbio.SKILLS["scrnaseq-pipeline"]
     allow = set(entry.get("allowed_extra_flags", set())) | set(
         entry.get("allowed_extra_flags_without_values", set())
