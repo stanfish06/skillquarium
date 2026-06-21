@@ -3,6 +3,7 @@ import importlib.util
 import io
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -456,6 +457,155 @@ class ExpertNavigationRenderTests(unittest.TestCase):
             "[Back to Skill Index](../index.md)\n\n"
             "## Skills (0)\n\n",
         )
+
+
+class RepositoryGeneratedNavigationAuditTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = VAULT_HELPERS.parent
+        cls.bridge_domain_order = tuple(
+            key
+            for key, *_ in vault_build.CATEGORIES
+            if key != expert_taxonomy.EXPERT_DOMAIN
+        )
+        catalog_profiles = expert_taxonomy.load_catalog_profiles(
+            cls.root / "scientific-agents/references/catalog.json"
+        )
+        discovered_profiles = {
+            skill_dir.name
+            for skill_dir in cls.root.iterdir()
+            if skill_dir.is_dir()
+            and skill_dir.name != expert_taxonomy.DISPATCHER
+            and (skill_dir / "SKILL.md").is_file()
+            and "scientific-agents-profile: true"
+            in (skill_dir / "SKILL.md").read_text(encoding="utf-8")[:4096]
+        }
+        cls.taxonomy = expert_taxonomy.load_taxonomy(
+            cls.root / ".skill-vault/scientific-expert-taxonomy.json",
+            catalog_profiles=catalog_profiles,
+            discovered_profiles=discovered_profiles,
+            valid_bridge_domains=cls.bridge_domain_order,
+        )
+        cls.master_map = cls.root / "maps/scientific-expert-profiles.md"
+        cls.discipline_maps = {
+            discipline.id: cls.root
+            / "maps/scientific-expert-profiles"
+            / f"{discipline.id}.md"
+            for discipline in cls.taxonomy.disciplines
+        }
+
+    def frontmatter(self, text):
+        match = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
+        self.assertIsNotNone(match, "wrapper is missing frontmatter")
+        return match.group(1)
+
+    def scalar_field(self, frontmatter, key):
+        match = re.search(
+            rf"^{re.escape(key)}: (.+)$", frontmatter, re.MULTILINE
+        )
+        return None if match is None else match.group(1)
+
+    def list_field(self, frontmatter, key):
+        lines = frontmatter.splitlines()
+        try:
+            start = lines.index(f"{key}:") + 1
+        except ValueError:
+            return None
+        values = []
+        for line in lines[start:]:
+            if not line.startswith("  - "):
+                break
+            values.append(line.removeprefix("  - "))
+        return tuple(values)
+
+    def test_all_503_wrappers_match_manifest_metadata_and_navigation(self):
+        self.assertEqual(len(self.taxonomy.profiles), 503)
+
+        for slug, assignment in self.taxonomy.profiles.items():
+            with self.subTest(slug=slug):
+                text = (self.root / f"{slug}.md").read_text(encoding="utf-8")
+                frontmatter = self.frontmatter(text)
+                self.assertEqual(
+                    self.scalar_field(frontmatter, "expert_primary"),
+                    assignment.primary,
+                )
+                expected_secondary = assignment.secondary or None
+                self.assertEqual(
+                    self.list_field(frontmatter, "expert_secondary"),
+                    expected_secondary,
+                )
+                self.assertEqual(
+                    self.list_field(frontmatter, "bridge_domains"),
+                    assignment.bridge_domains,
+                )
+                self.assertTrue(assignment.bridge_domains)
+                self.assertIn(
+                    "maps/scientific-expert-profiles/"
+                    f"{assignment.primary}.md",
+                    text,
+                )
+                for domain in assignment.bridge_domains:
+                    self.assertIn(f"(maps/{domain}.md)", text)
+
+    def test_discipline_maps_place_profiles_in_declared_sections(self):
+        for discipline in self.taxonomy.disciplines:
+            path = self.discipline_maps[discipline.id]
+            text = path.read_text(encoding="utf-8")
+            primary_heading = text.index("## Primary experts")
+            cross_heading = text.index("## Cross-disciplinary experts")
+            self.assertLess(primary_heading, cross_heading)
+            primary_section = text[primary_heading:cross_heading]
+            cross_section = text[cross_heading:]
+
+            for slug in self.taxonomy.primary_profiles(discipline.id):
+                with self.subTest(discipline=discipline.id, primary=slug):
+                    link = f"](../../{slug}.md)"
+                    self.assertEqual(text.count(link), 1)
+                    self.assertIn(link, primary_section)
+
+            for slug in self.taxonomy.secondary_profiles(discipline.id):
+                with self.subTest(discipline=discipline.id, secondary=slug):
+                    link = f"](../../{slug}.md)"
+                    self.assertEqual(text.count(link), 1)
+                    self.assertNotIn(link, text[:cross_heading])
+                    self.assertIn(link, cross_section)
+
+    def test_dispatcher_appears_only_in_master_map(self):
+        master = self.master_map.read_text(encoding="utf-8")
+        self.assertEqual(
+            master.count("[scientific-agents](../scientific-agents.md)"), 1
+        )
+        for discipline_id, path in self.discipline_maps.items():
+            with self.subTest(discipline=discipline_id):
+                self.assertNotIn(
+                    "scientific-agents", path.read_text(encoding="utf-8")
+                )
+
+    def test_every_generated_map_markdown_link_resolves(self):
+        paths = (self.master_map, *self.discipline_maps.values())
+        for path in paths:
+            text = path.read_text(encoding="utf-8")
+            for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
+                with self.subTest(map=path.name, target=target):
+                    local_target = target.split("#", 1)[0]
+                    self.assertTrue(
+                        (path.parent / local_target).is_file(),
+                        f"{path.relative_to(self.root)} links missing {target}",
+                    )
+
+    def test_representative_wrappers_omit_incidental_related_skill_links(self):
+        former_targets = ("electron.md", "qa.md", "review.md")
+        for slug in (
+            "inorganic-chemist",
+            "environmental-engineer",
+            "health-informatician",
+        ):
+            with self.subTest(slug=slug):
+                text = (self.root / f"{slug}.md").read_text(encoding="utf-8")
+                self.assertIn("## Relevant capability domains", text)
+                self.assertNotIn("## Related skills", text)
+                for target in former_targets:
+                    self.assertNotIn(f"]({target})", text)
 
 
 class RepositoryFixedPointTests(unittest.TestCase):
