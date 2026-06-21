@@ -20,8 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [fermentation-scientist](fermentation-scientist.md) — Expert-thinking profile for Fermentation Scientist (wet-lab / SmF & SSF R&D / starter cultures / kinetic & metabolic modeling): Reasons from Monod–Luedeking–Piret kinetics, overflow...
-- [systems-biologist](systems-biologist.md) — Expert-thinking profile for Systems Biologist (computational / research): Reasons from network motifs, separation of structure from dynamics, mass-balance constraints, and multi-layer...
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

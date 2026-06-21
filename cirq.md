@@ -20,7 +20,6 @@ created: 2026-06-09
 
 - [pennylane](pennylane.md) — Hardware-agnostic quantum ML framework with automatic differentiation
 - [qiskit](qiskit.md) — IBM quantum computing framework. Use when targeting IBM Quantum hardware, working with Qiskit Runtime for production workloads, or needing IBM optimization tools
-- [quantum-computing-scientist](quantum-computing-scientist.md) — Expert-thinking profile for Quantum Computing Scientist (experimental / computational / NISQ hardware & fault tolerance): Reasons from qubits as noisy open systems through T1/T2, gate...
 - [qutip](qutip.md) — Quantum physics simulation library for open quantum systems
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

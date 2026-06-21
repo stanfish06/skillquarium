@@ -2,8 +2,9 @@ name: Rebuild vault index
 
 # Regenerates the human/Obsidian navigation layer (per-skill wrapper notes,
 # domain maps, and index.md) from the SKILL.md files whenever you push.
-# Fast and deterministic — it only runs .skill-vault/build.py and commits the
-# result back. It never touches the upstream-managed <skill>/SKILL.md files.
+# Fast and deterministic — it rebuilds the navigation layer, runs the vault
+# tests, then commits the result back. It never touches the upstream-managed
+# <skill>/SKILL.md files.
 
 on:
   push:
@@ -33,6 +34,9 @@ jobs:
 
       - name: Rebuild navigation layer
         run: python3 .skill-vault/build.py
+
+      - name: Test vault navigation
+        run: python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py' -v
 
       - name: Commit regenerated files
         run: |

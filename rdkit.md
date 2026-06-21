@@ -18,7 +18,6 @@ created: 2026-06-09
 
 ## Related skills
 
-- [cheminformatician](cheminformatician.md) — Expert-thinking profile for Cheminformatician (computational / medicinal-chemistry informatics / (Q)SAR): Reasons from Standard InChI identity and RDKit sanitization through ChEMBL...
 - [datamol](datamol.md) — Pythonic wrapper around RDKit with simplified interface and sensible defaults
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

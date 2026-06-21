@@ -10,6 +10,10 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: biology-life-sciences
+bridge_domains:
+  - genomics-variants
+  - imaging-signals
 status: untried
 source: developmental-biologist/SKILL.md
 created: 2026-06-12
@@ -20,11 +24,12 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Developmental Biologist (embryology / fate-mapping & lineage tracing / morphogenesis imaging / GRN dissection / perturbation (CRISPR, morpholino, Cre-lox)): Reasons from stage, positional information, gene regulatory networks, and tissue mechanics through morphology-based staging (Carnegie/HH/Theiler/NF/hpf), French-flag morphogen logic, light-sheet 4D imaging, lineage tracing, and ARRIVE/MDAR/REMBI reporting while treating developmental delay, CRISPR F0 mosaicism...
 
-**Source:** [developmental-biologist/SKILL.md](developmental-biologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [developmental-biologist/SKILL.md](developmental-biologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Biology & Life Sciences](maps/scientific-expert-profiles/biology-life-sciences.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [Genomics, Variants & Population Genetics](maps/genomics-variants.md)
+- [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -8,6 +8,76 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
+      "query": "[expert_primary:biology-life-sciences]",
+      "color": {
+        "a": 1,
+        "rgb": 2924588
+      }
+    },
+    {
+      "query": "[expert_primary:medicine-health]",
+      "color": {
+        "a": 1,
+        "rgb": 14034728
+      }
+    },
+    {
+      "query": "[expert_primary:chemistry-materials]",
+      "color": {
+        "a": 1,
+        "rgb": 16744206
+      }
+    },
+    {
+      "query": "[expert_primary:physics-astronomy]",
+      "color": {
+        "a": 1,
+        "rgb": 2062260
+      }
+    },
+    {
+      "query": "[expert_primary:earth-environmental-sciences]",
+      "color": {
+        "a": 1,
+        "rgb": 1556175
+      }
+    },
+    {
+      "query": "[expert_primary:agriculture-food-animal-sciences]",
+      "color": {
+        "a": 1,
+        "rgb": 12369186
+      }
+    },
+    {
+      "query": "[expert_primary:mathematics-statistics]",
+      "color": {
+        "a": 1,
+        "rgb": 9725885
+      }
+    },
+    {
+      "query": "[expert_primary:computing-data-science]",
+      "color": {
+        "a": 1,
+        "rgb": 8355711
+      }
+    },
+    {
+      "query": "[expert_primary:engineering-technology]",
+      "color": {
+        "a": 1,
+        "rgb": 9197131
+      }
+    },
+    {
+      "query": "[expert_primary:social-behavioral-sciences]",
+      "color": {
+        "a": 1,
+        "rgb": 14907330
+      }
+    },
+    {
       "query": "tag:#domain/genomics-variants",
       "color": {
         "a": 1,

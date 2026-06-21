@@ -10,6 +10,10 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: medicine-health
+bridge_domains:
+  - clinical-medical
+  - data-science-compute
 status: untried
 source: palliative-care-researcher/SKILL.md
 created: 2026-06-12
@@ -20,11 +24,12 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Palliative Care Researcher (clinical trials / symptom science / patient-reported outcomes / health services / reporting (CONSORT-PRO, SPIRIT, PCORI)): Reasons from serious-illness trajectories, multidimensional symptom burden, goals-of-care concordance, and caregiver dyad outcomes through validated PROMs (ESAS-r, IPOS, FACIT-Pal), prespecified MCID responder analysis, mixed-effects and joint survival-QoL models, and CONSORT-PRO/SPIRIT/PCORI reporting while treating...
 
-**Source:** [palliative-care-researcher/SKILL.md](palliative-care-researcher/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [palliative-care-researcher/SKILL.md](palliative-care-researcher/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Medicine & Health](maps/scientific-expert-profiles/medicine-health.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [Clinical, Medical & Pharmacogenomics](maps/clinical-medical.md)
+- [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -31,6 +31,9 @@ cd ~/.agent/skills && ./install-skills.sh
 - **[skills.base](skills.base)** — filterable / sortable table (by domain, status, rating).
 - **[recipes/](recipes/index.md)** — goal-oriented workflows that chain skills together.
 - **[maps/](maps)** — one map note per domain, with cross-links between domains.
+- **[Scientific Expert Profiles](maps/scientific-expert-profiles.md)** — browse the
+  discipline index and its per-discipline maps; each lists primary experts first,
+  then cross-disciplinary experts, with bridges to broader capability maps.
 
 Each skill has a wrapper note (e.g. `scanpy.md`) at the vault root that links to its
 source `SKILL.md`, lists related skills, and holds your personal notes / status / aliases.

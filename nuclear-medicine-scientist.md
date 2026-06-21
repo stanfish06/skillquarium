@@ -6,6 +6,9 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: medicine-health
+bridge_domains:
+  - clinical-medical
 status: untried
 source: nuclear-medicine-scientist/SKILL.md
 created: 2026-06-12
@@ -16,11 +19,11 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Nuclear Medicine Scientist (clinical / research): Reasons from radioactive decay, biodistribution kinetics, and detector physics through HPLC/TLC radiochemical-purity QC, dose-calibrator cross-calibration, OSEM/PSF reconstruction, and MIRD/OLINDA dosimetry while treating partial-volume effects, attenuation mismatch, 68Ge breakthrough and other radionuclidic impurity...
 
-**Source:** [nuclear-medicine-scientist/SKILL.md](nuclear-medicine-scientist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [nuclear-medicine-scientist/SKILL.md](nuclear-medicine-scientist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Medicine & Health](maps/scientific-expert-profiles/medicine-health.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [Clinical, Medical & Pharmacogenomics](maps/clinical-medical.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

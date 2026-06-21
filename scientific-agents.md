@@ -20,9 +20,7 @@ created: 2026-06-12
 
 ## Related skills
 
-- [astrophysicist](astrophysicist.md) — Expert-thinking profile for Astrophysicist (observational / computational / multi- messenger): Reasons like a senior astrophysicist across observational, computational, and...
-- [bioinformatician](bioinformatician.md) — Expert-thinking profile for Bioinformatician (dry-lab / computational genomics): Reference-build discipline (GRCh38/GENCODE/Ensembl, MANE), batch-as-covariate DE (DESeq2/edgeR), index...
-- [epidemiologist](epidemiologist.md) — Expert-thinking profile for Epidemiologist (clinical / research): Reasons from person- time, transmission dynamics, and population case definitions through epidemic curves, DAGs...
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

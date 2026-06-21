@@ -24,7 +24,6 @@ created: 2026-06-17
 - [histolab](histolab.md) — Lightweight WSI tile extraction and preprocessing
 - [matchms](matchms.md) — Spectral similarity and compound identification for metabolomics
 - [pathway-enrichment](pathway-enrichment.md) — Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results
-- [proteomics-scientist](proteomics-scientist.md) — Expert-thinking profile for Proteomics Scientist (bottom-up LC-MS/MS / DDA-DIA-TMT- SILAC / differential abundance / FDR & batch control): Reasons from peptide-to-protein inference...
 - [pyopenms](pyopenms.md) — Complete mass spectrometry analysis platform
 - [spatialdata-squidpy](spatialdata-squidpy.md) — Spatial omics workflows with SpatialData and Squidpy alongside scanpy, anndata, and napari-viz
 - [ukb-ppp-region-fetch](ukb-ppp-region-fetch.md) — Fetch a regional slice of plasma pQTL summary statistics from the UK Biobank Pharma Proteomics Project (UKB-PPP

@@ -8,6 +8,12 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: medicine-health
+expert_secondary:
+  - earth-environmental-sciences
+bridge_domains:
+  - clinical-medical
+  - data-science-compute
 status: untried
 source: environmental-health-scientist/SKILL.md
 created: 2026-06-12
@@ -18,11 +24,12 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Environmental Health Scientist (population / field-lab- modeling / regulatory & EJ practice): Reasons from source–pathway–receptor chains, classical vs Berkson exposure error, and tiered biomonitoring (NHANES/BEs); runs STROBE-grade epi, IRIS/OEHHA/ATSDR risk assessment, AERMOD/CALPUFF, EPHT/EJSCREEN, and HIA while treating surrogate misclassification, mobility bias, and detection≠harm as first-class failure...
 
-**Source:** [environmental-health-scientist/SKILL.md](environmental-health-scientist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [environmental-health-scientist/SKILL.md](environmental-health-scientist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Medicine & Health](maps/scientific-expert-profiles/medicine-health.md)  ·  **Secondary:** [Earth & Environmental Sciences](maps/scientific-expert-profiles/earth-environmental-sciences.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [Clinical, Medical & Pharmacogenomics](maps/clinical-medical.md)
+- [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

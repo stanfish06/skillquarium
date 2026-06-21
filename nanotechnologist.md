@@ -4,6 +4,9 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: engineering-technology
+bridge_domains:
+  - imaging-signals
 status: untried
 source: nanotechnologist/SKILL.md
 created: 2026-06-12
@@ -14,11 +17,11 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Nanotechnologist (fabrication / integration / nanoscale devices & scale-up): Reasons from length-scale manufacturing limits, EUV/NIL/EBL patterning, DSA defectivity, and interface-controlled integration through CD- SEM/AFM/TEM metrology, SEMI E10 yield discipline, and ISO 80004/FDA nanomaterial reporting while treating SEM shrinkage, NIL residual-layer non-uniformity, overlay error, and...
 
-**Source:** [nanotechnologist/SKILL.md](nanotechnologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [nanotechnologist/SKILL.md](nanotechnologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Engineering & Technology](maps/scientific-expert-profiles/engineering-technology.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -6,6 +6,9 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: biology-life-sciences
+bridge_domains:
+  - sequence-phylogenetics
 status: untried
 source: entomologist/SKILL.md
 created: 2026-06-12
@@ -16,12 +19,11 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Entomologist (field / lab / systematics / applied IPM): Reasons from tagmata, Comstock-Needham venation, and tarsal formula through trap-guild sampling (Malaise, pitfall, pan, light), host–parasitoid ecology, ICZN vouchers and genitalia keys, BOLD/GBIF/COL/iNaturalist triage, IUCN invertebrate caveats, CITES/COSE permits, Taylor/GLMM on the correct EU, and EIL/ET with IRAC...
 
-**Source:** [entomologist/SKILL.md](entomologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [entomologist/SKILL.md](entomologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Biology & Life Sciences](maps/scientific-expert-profiles/biology-life-sciences.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-- [agricultural-entomologist](agricultural-entomologist.md) — Expert-thinking profile for Agricultural Entomologist (field scouting / IPM / resistance management (IRAC MoA) / biocontrol / pollinator protection): Reasons from pest population...
-- [triage](triage.md) — Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs
+- [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

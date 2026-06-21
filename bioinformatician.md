@@ -10,6 +10,14 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: computing-data-science
+expert_secondary:
+  - biology-life-sciences
+bridge_domains:
+  - genomics-variants
+  - single-cell-rnaseq
+  - bio-databases-platforms
+  - data-science-compute
 status: untried
 source: bioinformatician/SKILL.md
 created: 2026-06-12
@@ -20,12 +28,14 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Bioinformatician (dry-lab / computational genomics): Reference-build discipline (GRCh38/GENCODE/Ensembl, MANE), batch-as-covariate DE (DESeq2/edgeR), index hopping/UDI, GATK/BQSR/PLINK GWAS multiplicity, nf-core reproducibility, and scRNA-seq ambient-RNA/doublet artifacts.
 
-**Source:** [bioinformatician/SKILL.md](bioinformatician/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [bioinformatician/SKILL.md](bioinformatician/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Computing & Data Science](maps/scientific-expert-profiles/computing-data-science.md)  ·  **Secondary:** [Biology & Life Sciences](maps/scientific-expert-profiles/biology-life-sciences.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-- [bioinformatics-engineer](bioinformatics-engineer.md) — Expert-thinking profile for Bioinformatics Engineer (dry-lab / pipeline engineering / production genomics): Builds production genomics DAGs in Nextflow/nf-core, Snakemake, and...
-- [scientific-agents](scientific-agents.md) — Dispatcher for the K-Dense scientific-agents collection
+- [Genomics, Variants & Population Genetics](maps/genomics-variants.md)
+- [Single-Cell, RNA-seq & Functional Genomics](maps/single-cell-rnaseq.md)
+- [Bio Databases, Lab & Cloud Platforms](maps/bio-databases-platforms.md)
+- [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

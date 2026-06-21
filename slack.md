@@ -20,7 +20,6 @@ created: 2026-06-09
 
 - [agent-browser](agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting...
 - [electron](electron.md) — Automate Electron desktop apps (VS Code, Slack, Discord, Figma, Notion, Spotify, etc.) using agent-browser via Chrome DevTools Protocol
-- [vlsi-chip-design-engineer](vlsi-chip-design-engineer.md) — Expert-thinking profile for VLSI / Chip Design Engineer (RTL-to-GDSII / MCMM STA signoff / DFT-ATPG / physical verification (DRC/LVS) / tapeout): Reasons from PPA tradeoffs, timing...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -1,0 +1,4063 @@
+{
+  "schema_version": 1,
+  "disciplines": [
+    {
+      "id": "biology-life-sciences",
+      "title": "Biology & Life Sciences",
+      "description": "Biological systems from molecules and cells to organisms and ecosystems."
+    },
+    {
+      "id": "medicine-health",
+      "title": "Medicine & Health",
+      "description": "Human health, clinical care, diagnostics, therapeutics, epidemiology, and public health."
+    },
+    {
+      "id": "chemistry-materials",
+      "title": "Chemistry & Materials",
+      "description": "Chemical composition and reactions, molecular design, and the structure, properties, and processing of materials."
+    },
+    {
+      "id": "physics-astronomy",
+      "title": "Physics & Astronomy",
+      "description": "Fundamental physical phenomena, matter and energy, and astronomical and space systems."
+    },
+    {
+      "id": "earth-environmental-sciences",
+      "title": "Earth & Environmental Sciences",
+      "description": "The solid Earth, atmosphere, oceans, climate, water, and coupled environmental systems."
+    },
+    {
+      "id": "agriculture-food-animal-sciences",
+      "title": "Agriculture, Food & Animal Sciences",
+      "description": "Crop and soil production, food systems, forestry, fisheries, and animal and veterinary sciences."
+    },
+    {
+      "id": "mathematics-statistics",
+      "title": "Mathematics & Statistics",
+      "description": "Pure and applied mathematics, probability, statistics, optimization, and quantitative inference."
+    },
+    {
+      "id": "computing-data-science",
+      "title": "Computing & Data Science",
+      "description": "Computer science, artificial intelligence, data systems, scientific computing, and software research."
+    },
+    {
+      "id": "engineering-technology",
+      "title": "Engineering & Technology",
+      "description": "Design, analysis, manufacture, operation, and reliability of engineered systems and technologies."
+    },
+    {
+      "id": "social-behavioral-sciences",
+      "title": "Social & Behavioral Sciences",
+      "description": "Human behavior, cognition, language, economics, policy, and social systems."
+    }
+  ],
+  "profiles": {
+    "accelerator-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "acoustical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "acoustics-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "actuarial-scientist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "additive-manufacturing-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "aerodynamicist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "aeronautical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "aeronomy-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "aerospace-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "agricultural-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "agriculture-food-animal-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "agricultural-entomologist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "agroecologist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "agronomist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "ai-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "air-quality-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "algebraist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "algorithms-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "analytical-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "anatomist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "anesthesiologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "animal-geneticist-breeder": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "data-science-compute"
+      ]
+    },
+    "animal-nutritionist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "animal-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "antenna-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "antimicrobial-resistance-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "applied-mathematician": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "aquaculture-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "astrobiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "astrochemist": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "astrodynamicist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "engineering-technology"
+      ],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "astronautical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "astronomer": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "astronomical-instrumentation-scientist": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "astroparticle-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "astrophysicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "astrostatistician": {
+      "primary": "mathematics-statistics",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "atmospheric-chemist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "atmospheric-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "atomic-molecular-optical-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "audiologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "automotive-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "bacteriologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "bayesian-statistician": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "behavioral-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics"
+      ]
+    },
+    "behavioral-neuroscientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "social-behavioral-sciences"
+      ],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "biochemist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "biogeochemist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "biogeographer": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "bioinformatician": {
+      "primary": "computing-data-science",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "single-cell-rnaseq",
+        "bio-databases-platforms",
+        "data-science-compute"
+      ]
+    },
+    "bioinformatics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "bio-databases-platforms",
+        "data-science-compute",
+        "cloud-devops"
+      ]
+    },
+    "biological-oceanographer": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "biomaterials-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "biology-life-sciences",
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "biomedical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "biomedical-imaging-scientist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals"
+      ]
+    },
+    "biophysical-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "biology-life-sciences",
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "biophysicist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "bioprocess-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "bioprocess-microbiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "biostatistician": {
+      "primary": "mathematics-statistics",
+      "secondary": [
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "biosystems-agricultural-process-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "agriculture-food-animal-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "botanist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "brain-computer-interface-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "medicine-health",
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals"
+      ]
+    },
+    "bridge-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "building-science-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "cancer-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "carbon-cycle-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "cardiologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals"
+      ]
+    },
+    "catalysis-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "catalysis-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "causal-inference-scientist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "cell-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "imaging-signals"
+      ]
+    },
+    "cell-signaling-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "proteomics-metabolomics"
+      ]
+    },
+    "cellular-neuroscientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "ceramics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "chemical-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "proteomics-metabolomics"
+      ]
+    },
+    "chemical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "chemical-oceanographer": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "cheminformatician": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "chromatin-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "chronobiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "civil-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "climate-risk-analyst": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "social-behavioral-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "climate-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "climatologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "clinical-data-manager": {
+      "primary": "medicine-health",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "bio-databases-platforms",
+        "clinical-medical"
+      ]
+    },
+    "clinical-embryologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "clinical-epidemiologist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "mathematics-statistics"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "clinical-laboratory-scientist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "clinical-microbiologist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "clinical-pharmacologist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "clinical-trial-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "coastal-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "cognitive-neuroscientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "social-behavioral-sciences"
+      ],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "cognitive-scientist": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "colloid-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "combinatorialist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "combustion-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "communications-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "community-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "comparative-medicine-researcher": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "comparative-physiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "composites-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "computational-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "computational-linguist": {
+      "primary": "computing-data-science",
+      "secondary": [
+        "social-behavioral-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "computational-neuroscientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "computational-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "computational-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "computational-social-scientist": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "computer-architecture-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "computer-graphics-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "computer-hardware-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "computer-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "cloud-devops",
+        "software-dev",
+        "security-auditing"
+      ]
+    },
+    "computer-security-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev",
+        "security-auditing"
+      ]
+    },
+    "computer-vision-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "condensed-matter-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "connectomics-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "conservation-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "conservation-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "data-science-compute"
+      ]
+    },
+    "construction-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "control-systems-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "corrosion-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "cosmochemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "cosmologist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "critical-care-researcher": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "crop-protection-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "crop-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "cryo-em-structural-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "cryptographer": {
+      "primary": "mathematics-statistics",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "security-auditing"
+      ]
+    },
+    "cryptography-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "crystal-growth-specialist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "crystallographer": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "cytogeneticist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "dairy-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "data-engineer": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "data-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "database-systems-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "deep-learning-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "dentist-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "dermatologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "developmental-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "imaging-signals"
+      ]
+    },
+    "developmental-psychologist": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "differential-geometer": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "digital-pathology-scientist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "ml-ai"
+      ]
+    },
+    "distributed-systems-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "cloud-devops",
+        "software-dev",
+        "security-auditing"
+      ]
+    },
+    "dynamical-systems-theorist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "earthquake-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "economic-geologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "ecosystem-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "ecotoxicologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "edge-embedded-ai-engineer": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "electric-machines-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "electrical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "electrochemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "electromagnetics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "electronic-materials-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "electronics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "electrophysiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "embedded-systems-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "emergency-medicine-researcher": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "endocrinologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "energy-storage-battery-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "energy-systems-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "entomologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics"
+      ]
+    },
+    "environmental-chemist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "environmental-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "environmental-health-scientist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "environmental-microbiologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "environmental-policy-analyst": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "environmental-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "enzymologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "epidemiologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "epigeneticist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "ethologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "evolutionary-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "data-science-compute"
+      ]
+    },
+    "exercise-physiologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "exoplanet-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "experimental-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "extremophile-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "fermentation-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "finite-element-analyst": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "fire-protection-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "fisheries-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "flavor-fragrance-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "fluid-dynamicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "fluid-mechanics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "food-chemist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "food-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "agriculture-food-animal-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "food-microbiologist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "food-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "forensic-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "forestry-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "formal-methods-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "foundation-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "fpga-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "functional-genomics-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "single-cell-rnaseq",
+        "data-science-compute"
+      ]
+    },
+    "fusion-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "galactic-astronomer": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "gene-therapy-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "genetic-counselor": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "geneticist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "genome-engineering-crispr-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "engineering-technology"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "genomicist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "clinical-medical"
+      ]
+    },
+    "geobiologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "geochemist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "geodesist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "geodynamics-tectonics-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "geographic-information-scientist-gis": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "geological-oceanographer": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "geologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "geomagnetist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "geomorphologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "geophysicist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "geotechnical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "geotechnical-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "engineering-technology"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "gerontologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "glaciologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "global-health-researcher": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "glycobiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "proteomics-metabolomics"
+      ]
+    },
+    "gravitational-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "gravitational-wave-astronomer": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "green-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "health-economist": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "health-informatician": {
+      "primary": "computing-data-science",
+      "secondary": [
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "bio-databases-platforms",
+        "clinical-medical",
+        "software-dev"
+      ]
+    },
+    "heat-transfer-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "heliophysicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "hematologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical",
+        "imaging-signals"
+      ]
+    },
+    "hepatologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "herpetologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "bio-databases-platforms"
+      ]
+    },
+    "high-energy-astrophysicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "high-performance-computing-specialist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "cloud-devops",
+        "software-dev"
+      ]
+    },
+    "histologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals"
+      ]
+    },
+    "horticulturist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "human-computer-interaction-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [
+        "social-behavioral-sciences"
+      ],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "hvac-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "hydraulic-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "hydrogeologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "hydrologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "ichthyologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "immunogeneticist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "immunologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "immunotherapy-scientist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "industrial-ecologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "industrial-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "industrial-microbiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "infectious-disease-specialist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "information-retrieval-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev",
+        "security-auditing"
+      ]
+    },
+    "inorganic-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "instrumentation-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "integrated-circuit-designer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "isotope-geochemist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "knowledge-representation-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "landscape-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "laser-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "life-cycle-assessment-analyst": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "limnologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "logician": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "low-temperature-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "machine-learning-engineer": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "cloud-devops",
+        "software-dev"
+      ]
+    },
+    "machine-learning-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "mammalogist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "manufacturing-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "marine-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "marine-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "marine-geologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "mass-spectrometrist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "materials-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "materials-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "materials-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "mathematical-analyst": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "mathematical-modeler": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "mathematical-physicist": {
+      "primary": "mathematics-statistics",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "mathematical-statistician": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "mechanical-design-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "mechanical-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "mechatronics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "medical-geneticist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "medical-mycologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "medical-parasitologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "medical-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "medicinal-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "membrane-biophysicist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "mems-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "metabolomics-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "proteomics-metabolomics",
+        "data-science-compute"
+      ]
+    },
+    "metallurgist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "meteorologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "metrology-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "microbial-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "microbial-physiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "microbiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "microbiome-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "data-science-compute"
+      ]
+    },
+    "microelectronics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "mineralogist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "mining-geologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "mlops-engineer": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "cloud-devops",
+        "software-dev"
+      ]
+    },
+    "molecular-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "single-cell-rnaseq",
+        "sequence-phylogenetics",
+        "imaging-signals"
+      ]
+    },
+    "molecular-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "molecular-geneticist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "clinical-medical"
+      ]
+    },
+    "molecular-neuroscientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "single-cell-rnaseq"
+      ]
+    },
+    "molecular-pathologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical",
+        "imaging-signals"
+      ]
+    },
+    "molecular-virologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "mycobacteriologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "mycologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "nanomaterials-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "nanophysicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "nanotechnologist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "natural-language-processing-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "natural-products-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "proteomics-metabolomics",
+        "drug-discovery-chem"
+      ]
+    },
+    "naval-architect": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "network-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "cloud-devops",
+        "software-dev"
+      ]
+    },
+    "network-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "neuroanatomist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "neuroendocrinologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "neuroengineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "biology-life-sciences",
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "neuroimaging-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "neuroinformatician": {
+      "primary": "computing-data-science",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "bio-databases-platforms",
+        "software-dev"
+      ]
+    },
+    "neurologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "neuropharmacologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals"
+      ]
+    },
+    "neurophysiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "neuroscientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "imaging-signals"
+      ]
+    },
+    "nonlinear-dynamics-chaos-scientist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "nuclear-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "clinical-medical",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "nuclear-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "nuclear-medicine-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "nuclear-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "number-theorist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "numerical-analyst": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "nutrition-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "observational-astronomer": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "occupational-health-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "oceanographer": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "oncologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "operations-researcher": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "ophthalmologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "optical-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "optimization-scientist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "optoelectronics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "oral-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "organic-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "organoid-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "single-cell-rnaseq",
+        "bio-databases-platforms"
+      ]
+    },
+    "organometallic-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "ornithologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai"
+      ]
+    },
+    "orthopedic-biomechanist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "engineering-technology"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "paleobotanist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "paleoceanographer": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "paleoclimatologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "paleontologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "palliative-care-researcher": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "parasitologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "particle-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "pathologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "pavement-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "pedologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "petrochemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "petroleum-geologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "petroleum-reservoir-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "petrologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "phage-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "pharmaceutical-formulation-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "pharmacokineticist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "pharmacologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "clinical-medical"
+      ]
+    },
+    "pharmacovigilance-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "photochemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "photonics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "photonics-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "photovoltaics-solar-cell-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "engineering-technology"
+      ],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "phylogeneticist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "physical-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "physical-oceanographer": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "physician-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "planetary-geologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "planetary-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "plant-breeder": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "genomics-variants",
+        "data-science-compute"
+      ]
+    },
+    "plant-pathologist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "plant-physiologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "plasma-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "pollution-control-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "polymer-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "polymer-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "population-geneticist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "data-science-compute"
+      ]
+    },
+    "poultry-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "power-electronics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "power-grid-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "power-systems-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "precision-agriculture-specialist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "precision-engineering-specialist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "precision-medicine-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "primatologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "probabilist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "process-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "process-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "programming-languages-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "propulsion-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "protein-engineer": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "engineering-technology"
+      ],
+      "bridge_domains": [
+        "proteomics-metabolomics",
+        "drug-discovery-chem",
+        "sequence-phylogenetics",
+        "ml-ai"
+      ]
+    },
+    "proteomics-scientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "proteomics-metabolomics",
+        "data-science-compute"
+      ]
+    },
+    "protistologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics",
+        "imaging-signals"
+      ]
+    },
+    "psycholinguist": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "psychophysicist": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "public-health-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "pure-mathematician": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "quality-six-sigma-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "quantitative-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [
+        "mathematics-statistics"
+      ],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "quantum-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "quantum-computing-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "quantum-information-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "quantum-optics-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "quantum-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "quaternary-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "radiation-oncology-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "quantum-physics"
+      ]
+    },
+    "radio-astronomer": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "radiochemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "radiologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "reaction-engineering-specialist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "regenerative-medicine-scientist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "regulatory-affairs-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "rehabilitation-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "reinforcement-learning-researcher": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "ml-ai",
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "reliability-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "remote-sensing-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [
+        "computing-data-science"
+      ],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "renewable-energy-scientist": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "reproductive-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "research-software-engineer": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "cloud-devops",
+        "software-dev"
+      ]
+    },
+    "restoration-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "rf-microwave-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "rna-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "single-cell-rnaseq",
+        "data-science-compute"
+      ]
+    },
+    "robotics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "robotics-scientist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "sedimentologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "seismologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "semiconductor-device-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "semiconductor-materials-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "semiconductor-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [
+        "chemistry-materials"
+      ],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "sensor-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "separation-processes-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "signal-processing-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "single-cell-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "single-cell-rnaseq",
+        "data-science-compute"
+      ]
+    },
+    "sleep-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "soft-matter-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "soil-ecologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "soil-fertility-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "soil-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "solar-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "space-weather-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "spectroscopist": {
+      "primary": "chemistry-materials",
+      "secondary": [
+        "physics-astronomy"
+      ],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "spintronics-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "sports-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "statistical-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "statistician": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "stellar-astrophysicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "stem-cell-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants"
+      ]
+    },
+    "stratigrapher": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "string-theorist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "structural-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "structural-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "structural-geologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "superconductivity-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "quantum-physics"
+      ]
+    },
+    "supramolecular-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "surface-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "data-science-compute"
+      ]
+    },
+    "surface-engineering-specialist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "surface-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "surgeon-scientist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "bio-databases-platforms",
+        "clinical-medical"
+      ]
+    },
+    "surveyor-geomatics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "sustainability-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "synthetic-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "data-science-compute"
+      ]
+    },
+    "systems-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "systems-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "systems-neuroscientist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "taxonomist-systematist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "telecommunications-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "theoretical-chemist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem"
+      ]
+    },
+    "theoretical-computer-scientist": {
+      "primary": "computing-data-science",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute",
+        "software-dev"
+      ]
+    },
+    "theoretical-physicist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "quantum-physics"
+      ]
+    },
+    "thermodynamics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "thin-film-scientist": {
+      "primary": "chemistry-materials",
+      "secondary": [],
+      "bridge_domains": [
+        "drug-discovery-chem",
+        "imaging-signals"
+      ]
+    },
+    "tissue-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "biology-life-sciences",
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "topologist": {
+      "primary": "mathematics-statistics",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "toxicologist": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "traffic-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "translational-researcher": {
+      "primary": "medicine-health",
+      "secondary": [],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "transportation-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "tribologist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "tunnel-underground-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "turbomachinery-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "urban-infrastructure-planner": {
+      "primary": "social-behavioral-sciences",
+      "secondary": [
+        "engineering-technology"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "vaccinologist": {
+      "primary": "medicine-health",
+      "secondary": [
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "vacuum-science-technology-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "veterinarian": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [
+        "medicine-health"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "veterinary-epidemiologist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [
+        "mathematics-statistics"
+      ],
+      "bridge_domains": [
+        "clinical-medical",
+        "data-science-compute"
+      ]
+    },
+    "veterinary-microbiologist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [
+        "medicine-health",
+        "biology-life-sciences"
+      ],
+      "bridge_domains": [
+        "clinical-medical"
+      ]
+    },
+    "vibration-dynamics-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "virologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "clinical-medical"
+      ]
+    },
+    "viticulturist-enologist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "proteomics-metabolomics",
+        "imaging-signals"
+      ]
+    },
+    "vlsi-chip-design-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "software-dev"
+      ]
+    },
+    "volcanologist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "water-resources-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [
+        "earth-environmental-sciences"
+      ],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "water-resources-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "data-science-compute"
+      ]
+    },
+    "weed-scientist": {
+      "primary": "agriculture-food-animal-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    },
+    "welding-joining-engineer": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "wetland-scientist": {
+      "primary": "earth-environmental-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals"
+      ]
+    },
+    "wildlife-biologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics"
+      ]
+    },
+    "wind-engineering-specialist": {
+      "primary": "engineering-technology",
+      "secondary": [],
+      "bridge_domains": [
+        "data-science-compute"
+      ]
+    },
+    "x-ray-synchrotron-scientist": {
+      "primary": "physics-astronomy",
+      "secondary": [],
+      "bridge_domains": [
+        "imaging-signals",
+        "quantum-physics"
+      ]
+    },
+    "zoologist": {
+      "primary": "biology-life-sciences",
+      "secondary": [],
+      "bridge_domains": [
+        "genomics-variants",
+        "sequence-phylogenetics",
+        "data-science-compute"
+      ]
+    }
+  }
+}

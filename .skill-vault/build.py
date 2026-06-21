@@ -16,11 +16,31 @@ Usage:  python3 .skill-vault/build.py
 """
 import os
 import re
+import stat
 import sys
+import tempfile
 from datetime import date
+from pathlib import Path
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAPS_DIR = os.path.join(ROOT, "maps")
+from expert_taxonomy import (
+    DISPATCHER,
+    EXPERT_DOMAIN,
+    ExpertTaxonomy,
+    ProfileAssignment,
+    TaxonomyValidationError,
+    load_catalog_profiles,
+    load_taxonomy,
+)
+
+DEFAULT_VAULT_DIR = Path(__file__).resolve().parents[1]
+VAULT_DIR = Path(
+    os.environ.get("SKILL_VAULT_ROOT") or DEFAULT_VAULT_DIR
+).resolve()
+ROOT = str(VAULT_DIR)
+MAPS_DIR = VAULT_DIR / "maps"
+TAXONOMY_PATH = VAULT_DIR / ".skill-vault/scientific-expert-taxonomy.json"
+CATALOG_PATH = VAULT_DIR / "scientific-agents/references/catalog.json"
+EXPERT_MAPS_DIR = VAULT_DIR / "maps/scientific-expert-profiles"
 TODAY = date.today().isoformat()
 # one-time: regenerate aliases even if a wrapper already has an aliases key.
 # Do NOT use after you have hand-curated aliases.
@@ -45,8 +65,21 @@ PALETTE = {
     "security-auditing": 13382451, "software-dev": 1752220,
     "scientific-expert-profiles": 10040012,
 }
+EXPERT_PALETTE = {
+    "biology-life-sciences": 0x2CA02C,
+    "medicine-health": 0xD62728,
+    "chemistry-materials": 0xFF7F0E,
+    "physics-astronomy": 0x1F77B4,
+    "earth-environmental-sciences": 0x17BECF,
+    "agriculture-food-animal-sciences": 0xBCBD22,
+    "mathematics-statistics": 0x9467BD,
+    "computing-data-science": 0x7F7F7F,
+    "engineering-technology": 0x8C564B,
+    "social-behavioral-sciences": 0xE377C2,
+}
 GRAPH_SEARCH = "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc"
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
+GENERATED_EXPERT_MARKER = "generated: scientific-expert-taxonomy"
 
 # acronyms too generic to be useful aliases
 STOP = {"API", "CLI", "ML", "AI", "QC", "DNA", "RNA", "GPU", "CPU", "PDF", "CSV",
@@ -421,12 +454,23 @@ def build_related(skills, full_desc):
     return edges
 
 
+def build_related_excluding(skills, full_desc, excluded):
+    """Build exact-name edges without allowing excluded skills to participate."""
+    excluded = set(excluded)
+    candidates = [skill for skill in skills if skill not in excluded]
+    related = build_related(candidates, full_desc)
+    for skill in skills:
+        related.setdefault(skill, set())
+    return related
+
+
 def parse_existing(skill):
     """Read user-editable bits from an existing wrapper so re-runs preserve them."""
     path = os.path.join(ROOT, skill + ".md")
     if not os.path.isfile(path):
         return None
-    txt = open(path, encoding="utf-8").read()
+    with open(path, encoding="utf-8") as wrapper_file:
+        txt = wrapper_file.read()
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n", txt, re.DOTALL)
     fm = m.group(1) if m else ""
     data = {}
@@ -468,6 +512,165 @@ def existing_created(path):
     return m.group(1).strip() if m else TODAY
 
 
+def expert_map_path(directory, discipline_id):
+    """Resolve one nested map path and reject paths outside its directory."""
+    root = Path(directory).resolve()
+    candidate = (root / f"{discipline_id}.md").resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError as exc:
+        raise TaxonomyValidationError(
+            (f"discipline path escapes expert map directory: {discipline_id}",)
+        ) from exc
+    return candidate
+
+
+def atomic_write_text(path, content):
+    """Atomically replace a generated text file via a temporary sibling."""
+    path = Path(path)
+    mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o644
+    temporary_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as temporary:
+            temporary_path = Path(temporary.name)
+            temporary.write(content)
+            temporary.flush()
+            os.fsync(temporary.fileno())
+        temporary_path.chmod(mode)
+        os.replace(temporary_path, path)
+    except BaseException:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
+        raise
+
+
+def render_expert_master_map(*, taxonomy, title, scope, created):
+    """Render the scientific expert profile master map."""
+    lines = [
+        "---",
+        f"title: {title}",
+        "tags:",
+        "  - skill-map",
+        GENERATED_EXPERT_MARKER,
+        f"created: {created}",
+        "---",
+        "",
+        f"# {title}",
+        "",
+        "> [!abstract] Scope",
+        f"> {scope}",
+        "",
+        "[Back to Skill Index](../index.md)",
+        "",
+        "## Profile Dispatcher",
+        "",
+        "- [scientific-agents](../scientific-agents.md) - Route a question "
+        "to the most relevant scientific expert profile.",
+        "",
+        "## Browse By Discipline",
+        "",
+    ]
+    for discipline in taxonomy.disciplines:
+        primary_count = len(taxonomy.primary_profiles(discipline.id))
+        cross_count = len(taxonomy.secondary_profiles(discipline.id))
+        lines.append(
+            f"- [{discipline.title}]"
+            f"({EXPERT_DOMAIN}/{discipline.id}.md) - "
+            f"{primary_count} primary, {cross_count} cross-disciplinary"
+        )
+    lines.append("")
+    return "\n".join(lines)
+
+
+def render_expert_discipline_map(
+    *,
+    discipline,
+    taxonomy,
+    short_descriptions,
+    category_titles,
+    bridge_domain_order,
+    created,
+):
+    """Render one scientific expert discipline map."""
+    primary = taxonomy.primary_profiles(discipline.id)
+    secondary = taxonomy.secondary_profiles(discipline.id)
+    bridges = taxonomy.bridge_domains_for_discipline(
+        discipline.id, bridge_domain_order
+    )
+    lines = [
+        "---",
+        f"title: {discipline.title}",
+        "tags:",
+        "  - skill-map",
+        GENERATED_EXPERT_MARKER,
+        f"created: {created}",
+        "---",
+        "",
+        f"# {discipline.title}",
+        "",
+        "> [!abstract] Scope",
+        f"> {discipline.description}",
+        "",
+        "[Back to Scientific Expert Profiles](../scientific-expert-profiles.md)",
+        "",
+        "## Relevant capability maps",
+        "",
+    ]
+    if bridges:
+        lines += [
+            f"- [{category_titles[domain]}](../{domain}.md)"
+            for domain in bridges
+        ]
+    else:
+        lines.append("_No capability maps assigned._")
+    lines += ["", "## Primary experts", ""]
+    if primary:
+        lines += [
+            f"- [{slug}](../../{slug}.md) - {short_descriptions[slug]}"
+            for slug in primary
+        ]
+    else:
+        lines.append("_No primary experts._")
+    lines += ["", "## Cross-disciplinary experts", ""]
+    if secondary:
+        lines += [
+            f"- [{slug}](../../{slug}.md) - {short_descriptions[slug]}"
+            for slug in secondary
+        ]
+    else:
+        lines.append("_No cross-disciplinary experts._")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def prune_stale_expert_maps(directory, discipline_ids):
+    """Remove obsolete generated direct-child maps without touching other files."""
+    current = set(discipline_ids)
+    pruned = []
+    for path in Path(directory).glob("*.md"):
+        if not path.is_file() or path.stem in current:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        frontmatter = re.match(r"^---\s*\n(.*?)\n---(?:\s*\n|$)", text, re.DOTALL)
+        if (
+            frontmatter is not None
+            and GENERATED_EXPERT_MARKER in frontmatter.group(1).splitlines()
+        ):
+            path.unlink()
+            pruned.append(path.name)
+    return tuple(sorted(pruned))
+
+
 def emit_alias_block(aliases):
     if not aliases:
         return []
@@ -477,14 +680,152 @@ def emit_alias_block(aliases):
     return out
 
 
-def update_graph():
+def render_wrapper(
+    skill,
+    *,
+    key,
+    domain_title,
+    description,
+    short_descriptions,
+    related,
+    existing,
+    today,
+    force_aliases,
+    expert_assignment: ProfileAssignment | None = None,
+    discipline_titles=None,
+    category_titles=None,
+    bridge_domain_order=(),
+):
+    """Render one wrapper without reading from or writing to the vault."""
+    discipline_titles = discipline_titles or {}
+    category_titles = category_titles or {}
+    if existing:
+        created = existing.get("created", today)
+        status = existing.get("status", "untried")
+        rating = existing.get("rating")
+        aliases = existing.get("aliases")
+        if aliases is None or force_aliases:
+            aliases = gen_aliases(skill, description)
+        personal = existing.get("personal")
+    else:
+        created, status, rating = today, "untried", None
+        aliases = gen_aliases(skill, description)
+        personal = None
+
+    lines = ["---", f"title: {skill}"]
+    lines += emit_alias_block(aliases)
+    lines += ["tags:", "  - skill"]
+    if key != "uncategorized":
+        lines.append(f"  - domain/{key}")
+        lines.append(f"domain: {key}")
+    if expert_assignment is not None:
+        lines.append(f"expert_primary: {expert_assignment.primary}")
+        if expert_assignment.secondary:
+            lines.append("expert_secondary:")
+            lines += [f"  - {value}" for value in expert_assignment.secondary]
+        lines.append("bridge_domains:")
+        lines += [f"  - {value}" for value in expert_assignment.bridge_domains]
+    lines.append(f"status: {status}")
+    if rating is not None:
+        lines.append(f"rating: {rating}")
+    lines.append(f"source: {skill}/SKILL.md")
+    lines.append(f"created: {created}")
+    lines += [
+        "---",
+        "",
+        f"# {skill}",
+        "",
+        "> [!info] What it does",
+        f"> {description or '(no description)'}",
+        "",
+    ]
+
+    nav = [f"**Source:** [{skill}/SKILL.md]({skill}/SKILL.md)"]
+    if key != "uncategorized":
+        nav.append(f"**Domain:** [{domain_title}](maps/{key}.md)")
+    if expert_assignment is not None:
+        primary = expert_assignment.primary
+        nav.append(
+            "**Primary:** "
+            f"[{discipline_titles[primary]}]"
+            f"(maps/{EXPERT_DOMAIN}/{primary}.md)"
+        )
+        if expert_assignment.secondary:
+            secondary_links = ", ".join(
+                f"[{discipline_titles[value]}]"
+                f"(maps/{EXPERT_DOMAIN}/{value}.md)"
+                for value in expert_assignment.secondary
+            )
+            nav.append(f"**Secondary:** {secondary_links}")
+    nav += [
+        "**Table:** [skills.base](skills.base)",
+        "**Index:** [Skills Index](index.md)",
+    ]
+    lines += ["  ·  ".join(nav), ""]
+
+    if expert_assignment is not None:
+        lines += ["## Relevant capability domains", ""]
+        bridges = set(expert_assignment.bridge_domains)
+        lines += [
+            f"- [{category_titles[domain]}](maps/{domain}.md)"
+            for domain in bridge_domain_order
+            if domain in bridges
+        ]
+    else:
+        lines += ["## Related skills", ""]
+        rel = sorted(related)
+        if rel:
+            lines += [
+                f"- [{other}]({other}.md) — {short_descriptions[other]}"
+                for other in rel
+            ]
+        else:
+            lines.append(
+                "_None auto-detected. Add your own links here, e.g. "
+                "`[scanpy](scanpy.md)`._"
+            )
+    lines.append("")
+    if personal:
+        lines.append(personal)
+    else:
+        lines += [PERSONAL_MARKER, "", "## Notes", "", ""]
+    return "\n".join(lines)
+
+
+def expert_graph_groups(taxonomy):
+    """Build expert color groups after checking taxonomy/palette coverage."""
+    discipline_ids = tuple(
+        discipline.id for discipline in taxonomy.disciplines
+    )
+    taxonomy_domains = set(discipline_ids)
+    palette_domains = set(EXPERT_PALETTE)
+    missing = sorted(taxonomy_domains - palette_domains)
+    unexpected = sorted(palette_domains - taxonomy_domains)
+    if missing or unexpected:
+        raise TaxonomyValidationError((
+            "expert graph palette domains mismatch: "
+            f"missing={', '.join(missing) or 'none'}; "
+            f"unexpected={', '.join(unexpected) or 'none'}",
+        ))
+    return [
+        {
+            "query": f"[expert_primary:{discipline_id}]",
+            "color": {"a": 1, "rgb": EXPERT_PALETTE[discipline_id]},
+        }
+        for discipline_id in discipline_ids
+    ]
+
+
+def update_graph(taxonomy):
     """Rewrite graph.json color groups + filter, preserving all other settings."""
     import json
+    expert_groups = expert_graph_groups(taxonomy)
     path = os.path.join(ROOT, ".obsidian", "graph.json")
     cfg = {}
     if os.path.isfile(path):
         try:
-            cfg = json.load(open(path, encoding="utf-8"))
+            with open(path, encoding="utf-8") as graph_file:
+                cfg = json.load(graph_file)
         except (OSError, ValueError):
             cfg = {}
     if cfg.get("close") is False:
@@ -492,19 +833,17 @@ def update_graph():
               "Obsidian may overwrite these colors.", file=sys.stderr)
     cfg["search"] = GRAPH_SEARCH
     cfg["showOrphans"] = False
-    cfg["colorGroups"] = [
+    domain_groups = [
         {"query": f"tag:#domain/{key}", "color": {"a": 1, "rgb": PALETTE[key]}}
         for key, *_ in CATEGORIES if key in PALETTE
     ]
+    cfg["colorGroups"] = expert_groups + domain_groups
     with open(path, "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2)
     print(f"graph.json: wrote {len(cfg['colorGroups'])} color groups + filter")
 
 
 def main():
-    os.makedirs(MAPS_DIR, exist_ok=True)
-    if GRAPH:
-        update_graph()
     title_by_key = {k: t for k, t, _, _, _ in CATEGORIES}
     key_by_skill, assigned = {}, {}
     for key, title, scope, related, skills in CATEGORIES:
@@ -514,11 +853,59 @@ def main():
             assigned[s] = key
             key_by_skill[s] = key
 
-    on_disk = discover_skills()
-    for s in sorted(on_disk - set(assigned)):
-        if is_scientific_agents_profile(s):
-            assigned[s] = "scientific-expert-profiles"
-            key_by_skill[s] = "scientific-expert-profiles"
+    try:
+        on_disk = discover_skills()
+    except OSError as exc:
+        print(f"ERROR: cannot discover skills in {VAULT_DIR}: {exc}", file=sys.stderr)
+        return 1
+    imported_profiles = {
+        skill
+        for skill in on_disk
+        if skill != DISPATCHER and is_scientific_agents_profile(skill)
+    }
+    valid_bridge_domains = tuple(
+        key for key, *_ in CATEGORIES if key != EXPERT_DOMAIN
+    )
+    try:
+        catalog_profiles = load_catalog_profiles(CATALOG_PATH)
+        taxonomy: ExpertTaxonomy = load_taxonomy(
+            TAXONOMY_PATH,
+            catalog_profiles=catalog_profiles,
+            discovered_profiles=imported_profiles,
+            valid_bridge_domains=valid_bridge_domains,
+        )
+    except TaxonomyValidationError as exc:
+        print(exc, file=sys.stderr)
+        return 1
+
+    try:
+        discipline_paths = {
+            discipline.id: expert_map_path(EXPERT_MAPS_DIR, discipline.id)
+            for discipline in taxonomy.disciplines
+        }
+    except TaxonomyValidationError as exc:
+        print(exc, file=sys.stderr)
+        return 1
+
+    discipline_ids = tuple(
+        discipline.id for discipline in taxonomy.disciplines
+    )
+    if GRAPH:
+        try:
+            update_graph(taxonomy)
+        except TaxonomyValidationError as exc:
+            print(exc, file=sys.stderr)
+            return 1
+
+    os.makedirs(MAPS_DIR, exist_ok=True)
+    os.makedirs(EXPERT_MAPS_DIR, exist_ok=True)
+
+    expert_skills = set(imported_profiles)
+    if DISPATCHER in on_disk:
+        expert_skills.add(DISPATCHER)
+    for skill in expert_skills:
+        assigned[skill] = EXPERT_DOMAIN
+        key_by_skill[skill] = EXPERT_DOMAIN
     unsorted = sorted(on_disk - set(assigned))
     if unsorted:
         print(f"WARNING: not categorized: {unsorted}", file=sys.stderr)
@@ -532,63 +919,72 @@ def main():
     skills_sorted = sorted(on_disk)
     full_desc = {s: read_description(s) for s in skills_sorted}
     short = {s: one_liner(full_desc[s]) for s in skills_sorted}
-    related = build_related(skills_sorted, full_desc)
+    related = build_related_excluding(skills_sorted, full_desc, expert_skills)
+    discipline_titles = {
+        discipline.id: discipline.title for discipline in taxonomy.disciplines
+    }
 
     # ---- wrapper notes -----------------------------------------------------
     for s in skills_sorted:
         key = key_by_skill.get(s, "uncategorized")
         dtitle = title_by_key.get(key, "Uncategorized")
         ex = parse_existing(s)
-        if ex:
-            created = ex.get("created", TODAY)
-            status = ex.get("status", "untried")
-            rating = ex.get("rating")
-            aliases = ex.get("aliases")
-            if aliases is None or FORCE_ALIASES:  # key absent => first-time auto-generate
-                aliases = gen_aliases(s, full_desc[s])
-            personal = ex.get("personal")
-        else:
-            created, status, rating = TODAY, "untried", None
-            aliases = gen_aliases(s, full_desc[s])
-            personal = None
-
-        L = ["---", f"title: {s}"]
-        L += emit_alias_block(aliases)
-        L += ["tags:", "  - skill"]
-        if key != "uncategorized":
-            L.append(f"  - domain/{key}")
-        if key != "uncategorized":
-            L.append(f"domain: {key}")
-        L.append(f"status: {status}")
-        if rating is not None:
-            L.append(f"rating: {rating}")
-        L.append(f"source: {s}/SKILL.md")
-        L.append(f"created: {created}")
-        L += ["---", "", f"# {s}", "", "> [!info] What it does",
-              f"> {full_desc[s] or '(no description)'}", ""]
-        nav = [f"**Source:** [{s}/SKILL.md]({s}/SKILL.md)"]
-        if key != "uncategorized":
-            nav.append(f"**Domain:** [{dtitle}](maps/{key}.md)")
-        nav += ["**Table:** [skills.base](skills.base)", "**Index:** [Skills Index](index.md)"]
-        L += ["  ·  ".join(nav), "", "## Related skills", ""]
-        rel = sorted(related.get(s, []))
-        if rel:
-            L += [f"- [{r}]({r}.md) — {short[r]}" for r in rel]
-        else:
-            L.append("_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._")
-        L.append("")
-        if personal:
-            L.append(personal.rstrip() + "\n")
-        else:
-            L += [PERSONAL_MARKER, "", "## Notes", "", ""]
+        rendered = render_wrapper(
+            s,
+            key=key,
+            domain_title=dtitle,
+            description=full_desc[s],
+            short_descriptions=short,
+            related=related.get(s, set()),
+            existing=ex,
+            today=TODAY,
+            force_aliases=FORCE_ALIASES,
+            expert_assignment=taxonomy.profiles.get(s),
+            discipline_titles=discipline_titles,
+            category_titles=title_by_key,
+            bridge_domain_order=valid_bridge_domains,
+        )
         with open(os.path.join(ROOT, s + ".md"), "w", encoding="utf-8") as f:
-            f.write("\n".join(L))
+            f.write(rendered)
 
     # ---- map notes ---------------------------------------------------------
     for key, title, scope, related_keys, skills in CATEGORIES:
-        live = sorted(skills_by_key.get(key, []))
         path = os.path.join(MAPS_DIR, f"{key}.md")
         created = existing_created(path)
+        if key == EXPERT_DOMAIN:
+            expert_outputs = [
+                (
+                    Path(path),
+                    render_expert_master_map(
+                        taxonomy=taxonomy,
+                        title=title,
+                        scope=scope,
+                        created=created,
+                    ),
+                )
+            ]
+            for discipline in taxonomy.disciplines:
+                discipline_path = discipline_paths[discipline.id]
+                discipline_created = existing_created(discipline_path)
+                expert_outputs.append(
+                    (
+                        discipline_path,
+                        render_expert_discipline_map(
+                            discipline=discipline,
+                            taxonomy=taxonomy,
+                            short_descriptions=short,
+                            category_titles=title_by_key,
+                            bridge_domain_order=valid_bridge_domains,
+                            created=discipline_created,
+                        ),
+                    )
+                )
+            for output_path, rendered in expert_outputs:
+                atomic_write_text(output_path, rendered)
+            if discipline_ids:
+                prune_stale_expert_maps(EXPERT_MAPS_DIR, discipline_ids)
+            continue
+        live = sorted(skills_by_key.get(key, []))
         L = ["---", f"title: {title}", "tags:", "  - skill-map", f"created: {created}", "---", "",
              f"# {title}", "", "> [!abstract] Scope", f"> {scope}", "",
              "[Back to Skill Index](../index.md)", ""]
@@ -671,7 +1067,8 @@ def main():
     edge_count = sum(len(v) for v in related.values()) // 2
     print(f"OK: {total} wrappers, {len(CATEGORIES)} maps, {edge_count} related-links, "
           f"unsorted={len(unsorted)}, pruned={len(pruned)}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

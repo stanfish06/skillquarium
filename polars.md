@@ -18,8 +18,6 @@ created: 2026-06-09
 
 ## Related skills
 
-- [aerodynamicist](aerodynamicist.md) — Expert-thinking profile for Aerodynamicist (wind tunnel / CFD / flight vehicle external aerodynamics): Reasons from circulation, Cp distributions, and boundary-layer physics through...
-- [aeronautical-engineer](aeronautical-engineer.md) — Expert-thinking profile for Aeronautical Engineer (fixed-wing aircraft design / certification / flight test): Reasons from airfoil polars, drag buckets, and static margin through...
 - [dask](dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
 - [fragpipe-pyteomics-proteomics](fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
 - [polars-bio](polars-bio.md) — High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames
