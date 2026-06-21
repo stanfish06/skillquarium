@@ -31,6 +31,57 @@ assert BUILD_SPEC.loader is not None
 BUILD_SPEC.loader.exec_module(vault_build)
 
 
+def _reject_fenced_code(text):
+    if re.search(r"(?m)^[ \t]*(?:```|~~~)", text):
+        raise ValueError("generated navigation contains fenced code")
+
+
+def _parse_first_frontmatter(text):
+    match = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
+    if match is None:
+        raise ValueError("wrapper is missing exact first frontmatter delimiters")
+
+    list_keys = {"aliases", "tags", "expert_secondary", "bridge_domains"}
+    fields = []
+    current_key = None
+    current_values = None
+    for line in match.group(1).splitlines():
+        if line.startswith((" ", "\t")):
+            if (
+                current_key not in list_keys
+                or current_values is None
+                or re.fullmatch(r"  - .+", line) is None
+            ):
+                raise ValueError(f"invalid frontmatter list indentation: {line}")
+            current_values.append(line.removeprefix("  - "))
+            continue
+
+        if current_key in list_keys and not current_values:
+            raise ValueError(f"frontmatter list {current_key} is empty")
+        key_match = re.fullmatch(r"([a-z][a-z0-9_-]*):(.*)", line)
+        if key_match is None:
+            raise ValueError(f"invalid top-level frontmatter line: {line}")
+        key, remainder = key_match.groups()
+        if key in list_keys:
+            if remainder:
+                raise ValueError(f"frontmatter list {key} must be block style")
+            value = []
+        else:
+            if not remainder.startswith(" ") or not remainder.strip():
+                raise ValueError(f"frontmatter scalar {key} is empty")
+            value = remainder.removeprefix(" ")
+        fields.append((key, value))
+        current_key = key
+        current_values = value if isinstance(value, list) else None
+
+    if current_key in list_keys and not current_values:
+        raise ValueError(f"frontmatter list {current_key} is empty")
+    return tuple(
+        (key, tuple(value) if isinstance(value, list) else value)
+        for key, value in fields
+    )
+
+
 def validate_expert_taxonomy_metadata(text, assignment):
     match = re.match(r"^---\n(.*?)\n---(?:\n|$)", text, re.DOTALL)
     if match is None:
@@ -81,6 +132,68 @@ def validate_expert_taxonomy_metadata(text, assignment):
         )
 
 
+def validate_expert_wrapper_frontmatter(text, slug, assignment):
+    fields = _parse_first_frontmatter(text)
+    keys = tuple(key for key, _ in fields)
+    expected_keys = ["title"]
+    if "aliases" in keys:
+        expected_keys.append("aliases")
+    expected_keys.extend(("tags", "domain", "expert_primary"))
+    if assignment.secondary:
+        expected_keys.append("expert_secondary")
+    expected_keys.extend(("bridge_domains", "status"))
+    if "rating" in keys:
+        expected_keys.append("rating")
+    expected_keys.extend(("source", "created"))
+    if keys != tuple(expected_keys):
+        raise ValueError(
+            "expert wrapper frontmatter keys mismatch: "
+            f"expected {expected_keys!r}, found {keys!r}"
+        )
+
+    values = dict(fields)
+    if values["title"] != slug:
+        raise ValueError(
+            f"expert wrapper title mismatch: expected {slug}, "
+            f"found {values['title']}"
+        )
+    if values["tags"] != (
+        "skill",
+        f"domain/{expert_taxonomy.EXPERT_DOMAIN}",
+    ):
+        raise ValueError(f"expert wrapper tags mismatch: {values['tags']!r}")
+    if values["domain"] != expert_taxonomy.EXPERT_DOMAIN:
+        raise ValueError(f"expert wrapper domain mismatch: {values['domain']}")
+    if values["source"] != f"{slug}/SKILL.md":
+        raise ValueError(f"expert wrapper source mismatch: {values['source']}")
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", values["created"]) is None:
+        raise ValueError(f"expert wrapper created date is invalid: {values['created']}")
+    validate_expert_taxonomy_metadata(text, assignment)
+
+
+def discover_repository_profiles(build_module):
+    return {
+        skill
+        for skill in build_module.discover_skills()
+        if skill != expert_taxonomy.DISPATCHER
+        and build_module.is_scientific_agents_profile(skill)
+    }
+
+
+def validate_generated_map_links(text, expected_links):
+    _reject_fenced_code(text)
+    actual_links = tuple(
+        re.findall(r"\[([^]\n]+)\]\(([^)\n]+)\)", text)
+    )
+    expected_links = tuple(expected_links)
+    if actual_links != expected_links:
+        raise ValueError(
+            "ordered links mismatch: "
+            f"expected {expected_links!r}, found {actual_links!r}"
+        )
+    return actual_links
+
+
 def _profile_bullet_slugs(section):
     slugs = []
     pattern = re.compile(
@@ -100,6 +213,7 @@ def _profile_bullet_slugs(section):
 def validate_discipline_profile_sections(
     text, *, expected_primary, expected_cross
 ):
+    _reject_fenced_code(text)
     primary_heading = "## Primary experts"
     cross_heading = "## Cross-disciplinary experts"
     if text.count(primary_heading) != 1 or text.count(cross_heading) != 1:
@@ -175,6 +289,91 @@ class ExpertNavigationAuditParserTests(unittest.TestCase):
                 expected_primary=("alpha",),
                 expected_cross=("omega",),
             )
+
+    def test_discipline_section_validator_rejects_fenced_navigation(self):
+        text = (
+            "```markdown\n"
+            "## Primary experts\n\n"
+            "- [alpha](../../alpha.md) - Alpha.\n\n"
+            "## Cross-disciplinary experts\n\n"
+            "- [omega](../../omega.md) - Omega.\n"
+            "```\n"
+        )
+
+        with self.assertRaisesRegex(ValueError, "fenced code"):
+            validate_discipline_profile_sections(
+                text,
+                expected_primary=("alpha",),
+                expected_cross=("omega",),
+            )
+
+    def test_profile_discovery_uses_frontmatter_markers_and_excludes_dispatcher(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        fixtures = {
+            "explicit-profile": (
+                "---\nscientific-agents-profile: true\n---\n"
+            ),
+            "source-fallback": (
+                "---\nmetadata:\n"
+                "  source-repo: K-Dense-AI/scientific-agents\n---\n"
+            ),
+            "body-false-positive": (
+                "---\nname: ordinary\n---\n"
+                "scientific-agents-profile: true\n"
+            ),
+            expert_taxonomy.DISPATCHER: (
+                "---\nscientific-agents-profile: true\n---\n"
+            ),
+        }
+        for slug, content in fixtures.items():
+            skill_dir = root / slug
+            skill_dir.mkdir()
+            (skill_dir / "SKILL.md").write_text(content, encoding="utf-8")
+
+        with mock.patch.object(vault_build, "ROOT", str(root)):
+            discovered = discover_repository_profiles(vault_build)
+
+        self.assertEqual(
+            discovered, {"explicit-profile", "source-fallback"}
+        )
+
+    def test_wrapper_frontmatter_validator_rejects_malformed_title(self):
+        text = (
+            "---\n"
+            "title: [unterminated\n"
+            "tags:\n"
+            "  - skill\n"
+            "  - domain/scientific-expert-profiles\n"
+            "domain: scientific-expert-profiles\n"
+            "expert_primary: physics-astronomy\n"
+            "bridge_domains:\n"
+            "  - data-science-compute\n"
+            "status: untried\n"
+            "source: alpha/SKILL.md\n"
+            "created: 2025-01-02\n"
+            "---\n"
+        )
+        assignment = expert_taxonomy.ProfileAssignment(
+            "physics-astronomy", (), ("data-science-compute",)
+        )
+
+        with self.assertRaisesRegex(ValueError, "title"):
+            validate_expert_wrapper_frontmatter(text, "alpha", assignment)
+
+    def test_generated_map_link_validator_rejects_malformed_expected_link(self):
+        expected = (
+            ("Back", "../index.md"),
+            ("Physics", "scientific-expert-profiles/physics.md"),
+        )
+        mutated = (
+            "[Back](../index.md)\n\n"
+            "[Physics](scientific-expert-profiles/physics.md\n"
+        )
+
+        with self.assertRaisesRegex(ValueError, "ordered links mismatch"):
+            validate_generated_map_links(mutated, expected)
 
 
 class ExpertNavigationRenderTests(unittest.TestCase):
@@ -609,15 +808,8 @@ class RepositoryGeneratedNavigationAuditTests(unittest.TestCase):
         catalog_profiles = expert_taxonomy.load_catalog_profiles(
             cls.root / "scientific-agents/references/catalog.json"
         )
-        discovered_profiles = {
-            skill_dir.name
-            for skill_dir in cls.root.iterdir()
-            if skill_dir.is_dir()
-            and skill_dir.name != expert_taxonomy.DISPATCHER
-            and (skill_dir / "SKILL.md").is_file()
-            and "scientific-agents-profile: true"
-            in (skill_dir / "SKILL.md").read_text(encoding="utf-8")[:4096]
-        }
+        with mock.patch.object(vault_build, "ROOT", str(cls.root)):
+            discovered_profiles = discover_repository_profiles(vault_build)
         cls.taxonomy = expert_taxonomy.load_taxonomy(
             cls.root / ".skill-vault/scientific-expert-taxonomy.json",
             catalog_profiles=catalog_profiles,
@@ -631,6 +823,9 @@ class RepositoryGeneratedNavigationAuditTests(unittest.TestCase):
             / f"{discipline.id}.md"
             for discipline in cls.taxonomy.disciplines
         }
+        cls.category_titles = {
+            key: title for key, title, *_ in vault_build.CATEGORIES
+        }
 
     def test_all_503_wrappers_match_manifest_metadata_and_navigation(self):
         self.assertEqual(len(self.taxonomy.profiles), 503)
@@ -638,7 +833,7 @@ class RepositoryGeneratedNavigationAuditTests(unittest.TestCase):
         for slug, assignment in self.taxonomy.profiles.items():
             with self.subTest(slug=slug):
                 text = (self.root / f"{slug}.md").read_text(encoding="utf-8")
-                validate_expert_taxonomy_metadata(text, assignment)
+                validate_expert_wrapper_frontmatter(text, slug, assignment)
                 self.assertTrue(assignment.bridge_domains)
                 primary = self.taxonomy.discipline_by_id[assignment.primary]
                 primary_link = (
@@ -684,11 +879,56 @@ class RepositoryGeneratedNavigationAuditTests(unittest.TestCase):
                     "scientific-agents", path.read_text(encoding="utf-8")
                 )
 
-    def test_every_generated_map_markdown_link_resolves(self):
-        paths = (self.master_map, *self.discipline_maps.values())
-        for path in paths:
+    def test_generated_map_links_match_taxonomy_and_resolve(self):
+        expected_master = [
+            ("Back to Skill Index", "../index.md"),
+            ("scientific-agents", "../scientific-agents.md"),
+        ]
+        expected_master.extend(
+            (
+                discipline.title,
+                "scientific-expert-profiles/"
+                f"{discipline.id}.md",
+            )
+            for discipline in self.taxonomy.disciplines
+        )
+        map_contracts = [
+            (self.master_map, tuple(expected_master)),
+        ]
+
+        for discipline in self.taxonomy.disciplines:
+            expected_nested = [
+                (
+                    "Back to Scientific Expert Profiles",
+                    "../scientific-expert-profiles.md",
+                )
+            ]
+            bridges = self.taxonomy.bridge_domains_for_discipline(
+                discipline.id, self.bridge_domain_order
+            )
+            expected_nested.extend(
+                (self.category_titles[domain], f"../{domain}.md")
+                for domain in bridges
+            )
+            expected_nested.extend(
+                (slug, f"../../{slug}.md")
+                for slug in self.taxonomy.primary_profiles(discipline.id)
+            )
+            expected_nested.extend(
+                (slug, f"../../{slug}.md")
+                for slug in self.taxonomy.secondary_profiles(discipline.id)
+            )
+            map_contracts.append(
+                (self.discipline_maps[discipline.id], tuple(expected_nested))
+            )
+
+        for path, expected_links in map_contracts:
             text = path.read_text(encoding="utf-8")
-            for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
+            with self.subTest(map=path.name):
+                actual_links = validate_generated_map_links(
+                    text, expected_links
+                )
+            for _, target in actual_links:
                 with self.subTest(map=path.name, target=target):
                     local_target = target.split("#", 1)[0]
                     self.assertTrue(
