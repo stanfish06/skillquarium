@@ -497,6 +497,114 @@ def existing_created(path):
     return m.group(1).strip() if m else TODAY
 
 
+def render_expert_master_map(*, taxonomy, title, scope, created):
+    """Render the scientific expert profile master map."""
+    lines = [
+        "---",
+        f"title: {title}",
+        "tags:",
+        "  - skill-map",
+        f"created: {created}",
+        "---",
+        "",
+        f"# {title}",
+        "",
+        "> [!abstract] Scope",
+        f"> {scope}",
+        "",
+        "[Back to Skill Index](../index.md)",
+        "",
+        "## Profile Dispatcher",
+        "",
+        "- [scientific-agents](../scientific-agents.md) - Route a question "
+        "to the most relevant scientific expert profile.",
+        "",
+        "## Browse By Discipline",
+        "",
+    ]
+    for discipline in taxonomy.disciplines:
+        primary_count = len(taxonomy.primary_profiles(discipline.id))
+        cross_count = len(taxonomy.secondary_profiles(discipline.id))
+        lines.append(
+            f"- [{discipline.title}]"
+            f"({EXPERT_DOMAIN}/{discipline.id}.md) - "
+            f"{primary_count} primary, {cross_count} cross-disciplinary"
+        )
+    lines.append("")
+    return "\n".join(lines)
+
+
+def render_expert_discipline_map(
+    *,
+    discipline,
+    taxonomy,
+    short_descriptions,
+    category_titles,
+    bridge_domain_order,
+    created,
+):
+    """Render one scientific expert discipline map."""
+    primary = taxonomy.primary_profiles(discipline.id)
+    secondary = taxonomy.secondary_profiles(discipline.id)
+    bridges = taxonomy.bridge_domains_for_discipline(
+        discipline.id, bridge_domain_order
+    )
+    lines = [
+        "---",
+        f"title: {discipline.title}",
+        "tags:",
+        "  - skill-map",
+        f"created: {created}",
+        "---",
+        "",
+        f"# {discipline.title}",
+        "",
+        "> [!abstract] Scope",
+        f"> {discipline.description}",
+        "",
+        "[Back to Scientific Expert Profiles](../scientific-expert-profiles.md)",
+        "",
+        "## Relevant capability maps",
+        "",
+    ]
+    if bridges:
+        lines += [
+            f"- [{category_titles[domain]}](../{domain}.md)"
+            for domain in bridges
+        ]
+    else:
+        lines.append("_No capability maps assigned._")
+    lines += ["", "## Primary experts", ""]
+    if primary:
+        lines += [
+            f"- [{slug}](../../{slug}.md) - {short_descriptions[slug]}"
+            for slug in primary
+        ]
+    else:
+        lines.append("_No primary experts._")
+    lines += ["", "## Cross-disciplinary experts", ""]
+    if secondary:
+        lines += [
+            f"- [{slug}](../../{slug}.md) - {short_descriptions[slug]}"
+            for slug in secondary
+        ]
+    else:
+        lines.append("_No cross-disciplinary experts._")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def prune_stale_expert_maps(directory, discipline_ids):
+    """Remove obsolete direct-child expert maps without touching other files."""
+    current = set(discipline_ids)
+    pruned = []
+    for path in Path(directory).glob("*.md"):
+        if path.is_file() and path.stem not in current:
+            path.unlink()
+            pruned.append(path.name)
+    return tuple(sorted(pruned))
+
+
 def emit_alias_block(aliases):
     if not aliases:
         return []
@@ -678,6 +786,12 @@ def main():
         return 1
 
     os.makedirs(MAPS_DIR, exist_ok=True)
+    os.makedirs(EXPERT_MAPS_DIR, exist_ok=True)
+    discipline_ids = tuple(
+        discipline.id for discipline in taxonomy.disciplines
+    )
+    if discipline_ids:
+        prune_stale_expert_maps(EXPERT_MAPS_DIR, discipline_ids)
     if GRAPH:
         update_graph()
 
@@ -730,9 +844,32 @@ def main():
 
     # ---- map notes ---------------------------------------------------------
     for key, title, scope, related_keys, skills in CATEGORIES:
-        live = sorted(skills_by_key.get(key, []))
         path = os.path.join(MAPS_DIR, f"{key}.md")
         created = existing_created(path)
+        if key == EXPERT_DOMAIN:
+            rendered = render_expert_master_map(
+                taxonomy=taxonomy,
+                title=title,
+                scope=scope,
+                created=created,
+            )
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(rendered)
+            for discipline in taxonomy.disciplines:
+                discipline_path = EXPERT_MAPS_DIR / f"{discipline.id}.md"
+                discipline_created = existing_created(discipline_path)
+                rendered = render_expert_discipline_map(
+                    discipline=discipline,
+                    taxonomy=taxonomy,
+                    short_descriptions=short,
+                    category_titles=title_by_key,
+                    bridge_domain_order=valid_bridge_domains,
+                    created=discipline_created,
+                )
+                with open(discipline_path, "w", encoding="utf-8") as f:
+                    f.write(rendered)
+            continue
+        live = sorted(skills_by_key.get(key, []))
         L = ["---", f"title: {title}", "tags:", "  - skill-map", f"created: {created}", "---", "",
              f"# {title}", "", "> [!abstract] Scope", f"> {scope}", "",
              "[Back to Skill Index](../index.md)", ""]
