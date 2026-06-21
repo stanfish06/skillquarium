@@ -73,11 +73,13 @@ metadata:
         - python3
       env:
         - SYNAPSE_AUTH_TOKEN
-      config: []
+      config:
     always: false
     emoji: "🧪"
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
+    os:
+      - darwin
+      - linux
     install: |
       pip install synapseclient requests
     trigger_keywords:

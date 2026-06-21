@@ -1,24 +1,58 @@
 ---
 name: gi-splice
-description: >-
-  Detect splice donor and acceptor sites in DNA sequences using the
-  Genomic Intelligence G0 BigBird transformer, via the hosted
-  /v1/tasks/splice/predict API. Returns per-position site probabilities
+description: Detect splice donor and acceptor sites in DNA sequences using the Genomic Intelligence G0 BigBird transformer, via the hosted /v1/tasks/splice/predict API. Returns per-position site probabilities
   and called sites.
-version: 0.1.0
-author: ClawBio + Genomic Intelligence
-domain: genomics
 license: MIT
-tags: [genomics, splice, splice-site, splicing, intron-exon, dna-lm, transformer, gi-api]
-
-inputs:
+metadata:
+  openclaw:
+    requires:
+      bins:
+      - python3
+      env: null
+      config: null
+    always: false
+    emoji: ✂️
+    homepage: https://docs.genomicintelligence.ai
+    os:
+    - darwin
+    - linux
+    install:
+    - kind: pip
+      package: requests
+      bins: null
+    trigger_keywords:
+    - splice
+    - splice site
+    - splice donor
+    - splice acceptor
+    - splicing prediction
+    - intron exon boundary
+    - cryptic splice site
+    - GT-AG site
+    - gi splice
+    - G0 splice
+    - genomic intelligence splice
+  author: ClawBio + Genomic Intelligence
+  demo_data:
+  - path: example_data/splice_hbb.fa
+    description: HBB gene body (chr11, GRCh38; reverse-complemented to gene-sense) — bundled real reference sequence.
+  dependencies:
+    python: '>=3.10'
+    packages:
+    - requests>=2.31
+  domain: genomics
+  endpoints:
+    cli: python skills/gi-splice/gi_splice.py --input {input_file} --output {output_dir}
+  inputs:
   - name: input_file
     type: file
-    format: [fa, fasta, fna]
+    format:
+    - fa
+    - fasta
+    - fna
     description: Single-record FASTA, typically a gene body (5'UTR → 3'UTR including introns).
     required: false
-
-outputs:
+  outputs:
   - name: report
     type: file
     format: md
@@ -29,46 +63,17 @@ outputs:
     description: Full `{data, meta}` response from the GI API plus a flattened summary.
   - name: reproducibility
     type: directory
-    description: 'command.sh + environment.json for exact-rerun reproducibility.'
-
-dependencies:
-  python: ">=3.10"
-  packages:
-    - requests>=2.31
-
-demo_data:
-  - path: example_data/splice_hbb.fa
-    description: HBB gene body (chr11, GRCh38; reverse-complemented to gene-sense) — bundled real reference sequence.
-
-endpoints:
-  cli: python skills/gi-splice/gi_splice.py --input {input_file} --output {output_dir}
-
-metadata:
-  openclaw:
-    requires:
-      bins: [python3]
-      env: []
-      config: []
-    always: false
-    emoji: "✂️"
-    homepage: https://docs.genomicintelligence.ai
-    os: [darwin, linux]
-    install:
-      - kind: pip
-        package: requests
-        bins: []
-    trigger_keywords:
-      - splice
-      - splice site
-      - splice donor
-      - splice acceptor
-      - splicing prediction
-      - intron exon boundary
-      - cryptic splice site
-      - GT-AG site
-      - gi splice
-      - G0 splice
-      - genomic intelligence splice
+    description: command.sh + environment.json for exact-rerun reproducibility.
+  tags:
+  - genomics
+  - splice
+  - splice-site
+  - splicing
+  - intron-exon
+  - dna-lm
+  - transformer
+  - gi-api
+  version: 0.1.0
 ---
 
 # ✂️ gi-splice

@@ -22,7 +22,11 @@ metadata:
   inputs:
     - name: input
       type: file
-      format: [fasta, fna, fa, faa]
+      format:
+        - fasta
+        - fna
+        - fa
+        - faa
       description: Assembly, transcriptome, or protein FASTA (required unless --demo)
       required: true
   outputs:
@@ -42,7 +46,7 @@ metadata:
       description: commands.sh, environment.yml, checksums.sha256
   dependencies:
     python: ">=3.10"
-    packages: []
+    packages:
     external:
       - busco>=6.0 (runtime; not required for --demo)
       - hmmer>=3.1 (installed with BUSCO via conda)
@@ -56,8 +60,8 @@ metadata:
     requires:
       bins:
         - python3
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: "🧬"
     homepage: https://busco.ezlab.org/
@@ -67,10 +71,14 @@ metadata:
     install:
       - kind: conda
         package: busco=6.0.0
-        channels: [bioconda, conda-forge]
+        channels:
+          - bioconda
+          - conda-forge
       - kind: conda
         package: sepp=4.5.5
-        channels: [bioconda, conda-forge]
+        channels:
+          - bioconda
+          - conda-forge
     trigger_keywords:
       - "genome completeness"
       - "BUSCO score"

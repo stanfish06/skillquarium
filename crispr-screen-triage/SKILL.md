@@ -13,21 +13,24 @@ metadata:
   inputs:
     - name: input_file
       type: file
-      format: [csv]
+      format:
+        - csv
       description: Guide-level CRISPR count and annotation table
       required: true
   outputs:
     - name: report
       type: file
-      format: [md]
+      format:
+        - md
       description: Ranked hit report
     - name: result
       type: file
-      format: [json]
+      format:
+        - json
       description: Machine-readable triage results
   dependencies:
     python: ">=3.10"
-    packages: []
+    packages:
   demo_data:
     - path: demo_screen_counts.csv
       description: Synthetic twelve-guide, six-gene CRISPR screen table
@@ -35,12 +38,15 @@ metadata:
     cli: python skills/crispr-screen-triage/crispr_screen_triage.py --input {input_file} --output {output_dir}
   openclaw:
     requires:
-      bins: [python3]
+      bins:
+        - python3
     always: false
     emoji: "🧬"
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
-    install: []
+    os:
+      - darwin
+      - linux
+    install:
     trigger_keywords:
       - CRISPR screen triage
       - guide count ranking

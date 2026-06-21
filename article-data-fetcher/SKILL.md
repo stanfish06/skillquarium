@@ -77,8 +77,8 @@ metadata:
     requires:
       bins:
         - python3
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: "🧬"
     homepage: https://github.com/ClawBio/ClawBio
@@ -88,16 +88,16 @@ metadata:
     install:
       - kind: pip
         package: requests
-        bins: []
+        bins:
       - kind: pip
         package: biopython
-        bins: []
+        bins:
       - kind: pip
         package: tqdm
-        bins: []
+        bins:
       - kind: pip
         package: pydantic
-        bins: []
+        bins:
     trigger_keywords:
       - download data from paper
       - download genomics data from article

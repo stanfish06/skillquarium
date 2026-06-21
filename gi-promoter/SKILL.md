@@ -1,23 +1,58 @@
 ---
 name: gi-promoter
-description: >-
-  Detect promoter regions in DNA sequences using the Genomic Intelligence
-  G0 transformer (GENA-LM BERT Large), via the hosted /v1/tasks/promoter/predict
-  API. Returns per-window promoter probabilities and called regions.
-version: 0.1.0
-author: ClawBio + Genomic Intelligence
-domain: genomics
+description: Detect promoter regions in DNA sequences using the Genomic Intelligence G0 transformer (GENA-LM BERT Large), via the hosted /v1/tasks/promoter/predict API. Returns per-window promoter probabilities
+  and called regions.
 license: MIT
-tags: [genomics, promoter, transcription, regulatory, dna-lm, transformer, gi-api]
-
-inputs:
+metadata:
+  openclaw:
+    requires:
+      bins:
+      - python3
+      env: null
+      config: null
+    always: false
+    emoji: 🧬
+    homepage: https://docs.genomicintelligence.ai
+    os:
+    - darwin
+    - linux
+    install:
+    - kind: pip
+      package: requests
+      bins: null
+    trigger_keywords:
+    - promoter
+    - promoter prediction
+    - predict promoter
+    - find promoter
+    - promoter region
+    - TSS prediction
+    - transcription start site
+    - gi promoter
+    - genomic intelligence promoter
+    - G0 promoter
+    - GENA-LM promoter
+  author: ClawBio + Genomic Intelligence
+  demo_data:
+  - path: example_data/promoter_tp53.fa
+    description: TP53 locus, gene-sense (chr17:7661779-7687546, GRCh38, 25.8 kbp; TP53 is minus-strand, so this is the reverse complement) — bundled real reference sequence.
+  dependencies:
+    python: '>=3.10'
+    packages:
+    - requests>=2.31
+  domain: genomics
+  endpoints:
+    cli: python skills/gi-promoter/gi_promoter.py --input {input_file} --output {output_dir}
+  inputs:
   - name: input_file
     type: file
-    format: [fa, fasta, fna]
+    format:
+    - fa
+    - fasta
+    - fna
     description: Single-record FASTA. Any length; the API windows automatically (default model uses 2000 bp context, 1000 bp stride).
     required: false
-
-outputs:
+  outputs:
   - name: report
     type: file
     format: md
@@ -28,46 +63,16 @@ outputs:
     description: Full `{data, meta}` response from the GI API plus a flattened summary.
   - name: reproducibility
     type: directory
-    description: 'command.sh + environment.json for exact-rerun reproducibility.'
-
-dependencies:
-  python: ">=3.10"
-  packages:
-    - requests>=2.31
-
-demo_data:
-  - path: example_data/promoter_tp53.fa
-    description: TP53 locus, gene-sense (chr17:7661779-7687546, GRCh38, 25.8 kbp; TP53 is minus-strand, so this is the reverse complement) — bundled real reference sequence.
-
-endpoints:
-  cli: python skills/gi-promoter/gi_promoter.py --input {input_file} --output {output_dir}
-
-metadata:
-  openclaw:
-    requires:
-      bins: [python3]
-      env: []
-      config: []
-    always: false
-    emoji: "🧬"
-    homepage: https://docs.genomicintelligence.ai
-    os: [darwin, linux]
-    install:
-      - kind: pip
-        package: requests
-        bins: []
-    trigger_keywords:
-      - promoter
-      - promoter prediction
-      - predict promoter
-      - find promoter
-      - promoter region
-      - TSS prediction
-      - transcription start site
-      - gi promoter
-      - genomic intelligence promoter
-      - G0 promoter
-      - GENA-LM promoter
+    description: command.sh + environment.json for exact-rerun reproducibility.
+  tags:
+  - genomics
+  - promoter
+  - transcription
+  - regulatory
+  - dna-lm
+  - transformer
+  - gi-api
+  version: 0.1.0
 ---
 
 # 🧬 gi-promoter

@@ -66,12 +66,14 @@ metadata:
         - python3
         - tabix
         - plink
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: "🎯"
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
+    os:
+      - darwin
+      - linux
     install: |
       pip install 'numpy>=1.24' 'scipy>=1.10' 'pandas>=2.0' 'matplotlib>=3.7' \
                   'pysam>=0.22' 'pyyaml>=6.0' 'pydantic>=2.0' 'requests>=2.28'

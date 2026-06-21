@@ -279,8 +279,10 @@ def estimate_ancestry(
 
     # EM admixture
     Q = np.ones(K) / K  # initial mixing proportions
+    MAX_ITER = 200
+    _em_converged = False
 
-    for _ in range(200):
+    for _em_iter in range(MAX_ITER):
         # E-step: compute P(genotype | pop) for each AIM and pop
         # P(g=0|p) = (1-p)^2, P(g=1|p) = 2p(1-p), P(g=2|p) = p^2
         log_lik = np.zeros((n_aims, K))
@@ -308,8 +310,16 @@ def estimate_ancestry(
         Q_new /= Q_new.sum()
 
         if np.allclose(Q, Q_new, atol=1e-7):
+            _em_converged = True
             break
         Q = Q_new
+
+    if not _em_converged:
+        print(
+            f"WARNING: EM admixture did not converge in {MAX_ITER} iterations; "
+            "ancestry proportions may be unreliable.",
+            file=sys.stderr,
+        )
 
     continental = {pop_labels[k]: round(float(Q[k]), 4) for k in range(K)}
 

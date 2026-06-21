@@ -70,33 +70,53 @@ def analyze_nucleotide(record):
     top_dinuc = dinuc.most_common(5)
     result["top_dinucleotides"] = {d: c for d, c in top_dinuc}
 
-    # Buscar ORFs simples (ATG ... stop)
+    # Buscar ORFs en los 6 marcos de lectura (3 sentido + 3 antisentido)
     stops = {"TAA", "TAG", "TGA"}
-    orfs = []
-    for frame in range(3):
-        i = frame
-        while i < length - 2:
-            codon = seq_str[i:i+3]
-            if codon == "ATG":
-                start = i
-                j = i + 3
-                while j < length - 2:
-                    c = seq_str[j:j+3]
-                    if c in stops:
-                        orf_len = j - start + 3
-                        if orf_len >= 300:
-                            orfs.append({
-                                "frame": f"+{frame+1}",
-                                "start": start + 1,
-                                "end": j + 3,
-                                "length_bp": orf_len,
-                                "length_aa": orf_len // 3,
-                            })
-                        break
-                    j += 3
-                i = j + 3
-            else:
-                i += 3
+    _COMPLEMENT = str.maketrans("ATCGN", "TAGCN")
+
+    def _revcomp(s: str) -> str:
+        return s.translate(_COMPLEMENT)[::-1]
+
+    def _scan_orfs(template: str, strand: str, offset: int = 0) -> list:
+        """Scan 3 reading frames of `template` for ORFs ≥300 bp."""
+        found = []
+        tlen = len(template)
+        for frame in range(3):
+            i = frame
+            while i < tlen - 2:
+                codon = template[i:i+3]
+                if codon == "ATG":
+                    start = i
+                    j = i + 3
+                    while j < tlen - 2:
+                        c = template[j:j+3]
+                        if c in stops:
+                            orf_len = j - start + 3
+                            if orf_len >= 300:
+                                if strand == "+":
+                                    s_coord = start + offset + 1
+                                    e_coord = j + 3 + offset
+                                else:
+                                    # Convert back to forward-strand coordinates
+                                    s_coord = length - (j + 3 + offset) + 1
+                                    e_coord = length - (start + offset)
+                                found.append({
+                                    "frame": f"{strand}{frame+1}",
+                                    "start": s_coord,
+                                    "end": e_coord,
+                                    "length_bp": orf_len,
+                                    "length_aa": orf_len // 3,
+                                })
+                            break
+                        j += 3
+                    i = j + 3
+                else:
+                    i += 3
+        return found
+
+    rc_seq = _revcomp(seq_str)
+    orfs = _scan_orfs(seq_str, "+") + _scan_orfs(rc_seq, "-")
+    orfs.sort(key=lambda o: o["length_bp"], reverse=True)
 
     result["orfs_found"] = len(orfs)
     result["orfs"] = orfs[:10]

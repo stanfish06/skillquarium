@@ -18,7 +18,16 @@ metadata:
   inputs:
     - name: input_file
       type: file
-      format: [vcf, vcf.gz, fasta, fasta.gz, fa, fa.gz, fas, fas.gz, dist]
+      format:
+        - vcf
+        - vcf.gz
+        - fasta
+        - fasta.gz
+        - fa
+        - fa.gz
+        - fas
+        - fas.gz
+        - dist
       description: >-
         VCF file (biallelic/multiallelic SNPs, compressed or plain),
         FASTA file (aligned or unaligned sequences, compressed or plain), or
@@ -27,19 +36,23 @@ metadata:
   outputs:
     - name: tree
       type: file
-      format: [nwk]
+      format:
+        - nwk
       description: Newick phylogenetic tree (VCF2TREE / DIST2TREE)
     - name: distances
       type: file
-      format: [dist]
+      format:
+        - dist
       description: PHYLIP distance matrix (VCF2DIST / FASTA2DIST)
     - name: report
       type: file
-      format: [md]
+      format:
+        - md
       description: Analysis summary with sample list and interpretation
     - name: result
       type: file
-      format: [json]
+      format:
+        - json
       description: Machine-readable metadata (samples, command, paths)
   dependencies:
     python: ">=3.10"
@@ -57,11 +70,15 @@ metadata:
       python skills/fastreer/fastreer.py --command {command} --input {input_file} --output {output_dir}
   openclaw:
     requires:
-      bins: [python3, java]
+      bins:
+        - python3
+        - java
     always: false
     emoji: "🌳"
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
+    os:
+      - darwin
+      - linux
     install:
       - kind: pip
         package: fastreer

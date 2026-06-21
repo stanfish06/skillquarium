@@ -1,24 +1,58 @@
 ---
 name: gi-annotation
-description: >-
-  Predict gene and transcript structure (intervals, exons, strand) from a
-  DNA sequence using the Genomic Intelligence DNA Annotation model, via
-  the hosted /v1/tasks/annotation/predict API. Async-only — the pipeline
-  takes ~20 s for ~20 kbp.
-version: 0.1.0
-author: ClawBio + Genomic Intelligence
-domain: genomics
+description: Predict gene and transcript structure (intervals, exons, strand) from a DNA sequence using the Genomic Intelligence DNA Annotation model, via the hosted /v1/tasks/annotation/predict API. Async-only
+  — the pipeline takes ~20 s for ~20 kbp.
 license: MIT
-tags: [genomics, annotation, gene-prediction, transcript-prediction, gene-structure, dna-lm, gi-api]
-
-inputs:
+metadata:
+  openclaw:
+    requires:
+      bins:
+      - python3
+      env: null
+      config: null
+    always: false
+    emoji: 📜
+    homepage: https://docs.genomicintelligence.ai
+    os:
+    - darwin
+    - linux
+    install:
+    - kind: pip
+      package: requests
+      bins: null
+    trigger_keywords:
+    - gene annotation
+    - transcript annotation
+    - annotate sequence
+    - gene structure prediction
+    - predict transcripts
+    - de novo gene prediction
+    - DNA annotation
+    - gene boundaries
+    - exon prediction
+    - gi annotation
+    - genomic intelligence annotation
+  author: ClawBio + Genomic Intelligence
+  demo_data:
+  - path: example_data/annotation_tp53.fa
+    description: TP53 locus (chr17:7668402-7687550, GRCh38, 19 kbp) — bundled real reference sequence.
+  dependencies:
+    python: '>=3.10'
+    packages:
+    - requests>=2.31
+  domain: genomics
+  endpoints:
+    cli: python skills/gi-annotation/gi_annotation.py --input {input_file} --output {output_dir}
+  inputs:
   - name: input_file
     type: file
-    format: [fa, fasta, fna]
+    format:
+    - fa
+    - fasta
+    - fna
     description: Single-record FASTA (genomic region; can be tens to hundreds of kbp).
     required: false
-
-outputs:
+  outputs:
   - name: report
     type: file
     format: md
@@ -29,46 +63,16 @@ outputs:
     description: Full `{data, meta}` response with per-transcript structure.
   - name: reproducibility
     type: directory
-    description: 'command.sh + environment.json.'
-
-dependencies:
-  python: ">=3.10"
-  packages:
-    - requests>=2.31
-
-demo_data:
-  - path: example_data/annotation_tp53.fa
-    description: TP53 locus (chr17:7668402-7687550, GRCh38, 19 kbp) — bundled real reference sequence.
-
-endpoints:
-  cli: python skills/gi-annotation/gi_annotation.py --input {input_file} --output {output_dir}
-
-metadata:
-  openclaw:
-    requires:
-      bins: [python3]
-      env: []
-      config: []
-    always: false
-    emoji: "📜"
-    homepage: https://docs.genomicintelligence.ai
-    os: [darwin, linux]
-    install:
-      - kind: pip
-        package: requests
-        bins: []
-    trigger_keywords:
-      - gene annotation
-      - transcript annotation
-      - annotate sequence
-      - gene structure prediction
-      - predict transcripts
-      - de novo gene prediction
-      - DNA annotation
-      - gene boundaries
-      - exon prediction
-      - gi annotation
-      - genomic intelligence annotation
+    description: command.sh + environment.json.
+  tags:
+  - genomics
+  - annotation
+  - gene-prediction
+  - transcript-prediction
+  - gene-structure
+  - dna-lm
+  - gi-api
+  version: 0.1.0
 ---
 
 # 📜 gi-annotation

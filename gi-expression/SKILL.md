@@ -1,24 +1,57 @@
 ---
 name: gi-expression
-description: >-
-  Predict tissue / cell-type expression (log TPM + TPM) from a 9,198 bp
-  TSS-centered DNA sequence using the Genomic Intelligence G0 Expression
-  model, via the hosted /v1/tasks/expression/predict API. The model is
-  conditioned on a free-text cell-type / assay description.
-version: 0.1.0
-author: ClawBio + Genomic Intelligence
-domain: genomics
+description: Predict tissue / cell-type expression (log TPM + TPM) from a 9,198 bp TSS-centered DNA sequence using the Genomic Intelligence G0 Expression model, via the hosted /v1/tasks/expression/predict
+  API. The model is conditioned on a free-text cell-type / assay description.
 license: MIT
-tags: [genomics, expression, RNA-seq, TPM, sequence-to-expression, dna-lm, gi-api]
-
-inputs:
+metadata:
+  openclaw:
+    requires:
+      bins:
+      - python3
+      env: null
+      config: null
+    always: false
+    emoji: 🧪
+    homepage: https://docs.genomicintelligence.ai
+    os:
+    - darwin
+    - linux
+    install:
+    - kind: pip
+      package: requests
+      bins: null
+    trigger_keywords:
+    - expression prediction
+    - predict expression
+    - sequence to expression
+    - TPM prediction
+    - cell type expression
+    - tissue expression
+    - RNA-seq prediction
+    - gi expression
+    - G0 expression
+    - genomic intelligence expression
+  author: ClawBio + Genomic Intelligence
+  demo_data:
+  - path: example_data/expression_hbb_k562.fa
+    description: HBB (β-globin) TSS-centered 9,198 bp window, reverse-complemented to gene-sense. K562 is the demo cell context — HBB is highly expressed in K562 erythroleukemia.
+  dependencies:
+    python: '>=3.10'
+    packages:
+    - requests>=2.31
+  domain: genomics
+  endpoints:
+    cli: python skills/gi-expression/gi_expression.py --input {input_file} --output {output_dir}
+  inputs:
   - name: input_file
     type: file
-    format: [fa, fasta, fna]
+    format:
+    - fa
+    - fasta
+    - fna
     description: Single-record FASTA. The expression model expects exactly 9,198 bp centered on the TSS, gene-sense (RC minus-strand genes).
     required: false
-
-outputs:
+  outputs:
   - name: report
     type: file
     format: md
@@ -29,45 +62,16 @@ outputs:
     description: Full `{data, meta}` response.
   - name: reproducibility
     type: directory
-    description: 'command.sh + environment.json.'
-
-dependencies:
-  python: ">=3.10"
-  packages:
-    - requests>=2.31
-
-demo_data:
-  - path: example_data/expression_hbb_k562.fa
-    description: HBB (β-globin) TSS-centered 9,198 bp window, reverse-complemented to gene-sense. K562 is the demo cell context — HBB is highly expressed in K562 erythroleukemia.
-
-endpoints:
-  cli: python skills/gi-expression/gi_expression.py --input {input_file} --output {output_dir}
-
-metadata:
-  openclaw:
-    requires:
-      bins: [python3]
-      env: []
-      config: []
-    always: false
-    emoji: "🧪"
-    homepage: https://docs.genomicintelligence.ai
-    os: [darwin, linux]
-    install:
-      - kind: pip
-        package: requests
-        bins: []
-    trigger_keywords:
-      - expression prediction
-      - predict expression
-      - sequence to expression
-      - TPM prediction
-      - cell type expression
-      - tissue expression
-      - RNA-seq prediction
-      - gi expression
-      - G0 expression
-      - genomic intelligence expression
+    description: command.sh + environment.json.
+  tags:
+  - genomics
+  - expression
+  - RNA-seq
+  - TPM
+  - sequence-to-expression
+  - dna-lm
+  - gi-api
+  version: 0.1.0
 ---
 
 # 🧪 gi-expression

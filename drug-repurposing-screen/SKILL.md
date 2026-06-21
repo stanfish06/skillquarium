@@ -79,8 +79,8 @@ metadata:
     requires:
       bins:
         - python3
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: "💊"
     homepage: https://github.com/ClawBio/ClawBio
@@ -90,19 +90,19 @@ metadata:
     install:
       - kind: pip
         package: numpy
-        bins: []
+        bins:
       - kind: pip
         package: pandas
-        bins: []
+        bins:
       - kind: pip
         package: scipy
-        bins: []
+        bins:
       - kind: pip
         package: pyyaml
-        bins: []
+        bins:
       - kind: pip
         package: pyarrow
-        bins: []
+        bins:
     trigger_keywords:
       - drug repurposing
       - repurposing screen

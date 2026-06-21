@@ -13,21 +13,24 @@ metadata:
   inputs:
     - name: input_file
       type: file
-      format: [csv]
+      format:
+        - csv
       description: Sample-level QC metrics table with optional identity checks
       required: true
   outputs:
     - name: report
       type: file
-      format: [md]
+      format:
+        - md
       description: QC triage report
     - name: result
       type: file
-      format: [json]
+      format:
+        - json
       description: Machine-readable sample flags
   dependencies:
     python: ">=3.10"
-    packages: []
+    packages:
   demo_data:
     - path: demo_qc_metrics.csv
       description: Synthetic five-sample QC metrics table
@@ -35,12 +38,15 @@ metadata:
     cli: python skills/sample-qc-triage/sample_qc_triage.py --input {input_file} --output {output_dir}
   openclaw:
     requires:
-      bins: [python3]
+      bins:
+        - python3
     always: false
     emoji: "🔬"
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
-    install: []
+    os:
+      - darwin
+      - linux
+    install:
     trigger_keywords:
       - sample QC triage
       - sequencing QC outliers

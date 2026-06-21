@@ -38,7 +38,7 @@ metadata:
       description: Structured result payload with detected count matrices and provenance
   dependencies:
     python: ">=3.10"
-    packages: []
+    packages:
   demo_data:
     - path: demo/README.md
       description: Demo mode uses the upstream nf-core/rnaseq test profile rather than bundled FASTQs
@@ -50,15 +50,15 @@ metadata:
         - python3
         - nextflow
         - java
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: "🧬"
     homepage: https://github.com/ClawBio/ClawBio
     os:
       - darwin
       - linux
-    install: []
+    install:
     trigger_keywords:
       - bulk RNA-seq preprocessing
       - nf-core rnaseq

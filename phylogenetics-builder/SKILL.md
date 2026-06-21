@@ -1,75 +1,68 @@
 ---
 name: phylogenetics-builder
-description: >-
-  Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2.
-version: 0.1.0
-author: Dr. Babajan Banaganapalli
-domain: genomics
+description: Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2.
 license: MIT
-
-inputs:
-  - name: input_file
-    type: file
-    format:
-      - fasta
-      - fa
-      - aln
-      - phy
-    description: Aligned DNA or protein sequences
-    required: true
-
-outputs:
-  - name: report
-    type: file
-    format:
-      - md
-    description: Analysis report
-  - name: result
-    type: file
-    format:
-      - json
-    description: Machine-readable results
-  - name: phylo_tree
-    type: file
-    format:
-      - nwk
-    description: Newick format phylogenetic tree
-
-dependencies:
-  python: ">=3.10"
-  packages:
-    - pandas>=2.0
-    - biopython>=1.80
-    - matplotlib>=3.5
-
-demo_data:
-  - path: demo_alignment.fasta
-    description: Synthetic 5-taxon DNA sequence alignment
-
-endpoints:
-  cli: python skills/phylogenetics-builder/phylogenetics_builder.py --input {input_file} --output {output_dir}
-
 metadata:
   openclaw:
     requires:
       bins:
-        - python3
+      - python3
     always: false
-    emoji: "🌳"
+    emoji: 🌳
     homepage: https://github.com/ClawBio/ClawBio
     os:
-      - darwin
-      - linux
+    - darwin
+    - linux
     install:
-      - kind: conda
-        package: bioconda::iqtree
+    - kind: conda
+      package: bioconda::iqtree
     trigger_keywords:
-      - phylogeny
-      - phylogenetic tree
-      - iqtree
-      - maximum likelihood tree
-      - fasta alignment
-      - build tree
+    - phylogeny
+    - phylogenetic tree
+    - iqtree
+    - maximum likelihood tree
+    - fasta alignment
+    - build tree
+  author: Dr. Babajan Banaganapalli
+  demo_data:
+  - path: demo_alignment.fasta
+    description: Synthetic 5-taxon DNA sequence alignment
+  dependencies:
+    python: '>=3.10'
+    packages:
+    - pandas>=2.0
+    - biopython>=1.80
+    - matplotlib>=3.5
+  domain: genomics
+  endpoints:
+    cli: python skills/phylogenetics-builder/phylogenetics_builder.py --input {input_file} --output {output_dir}
+  inputs:
+  - name: input_file
+    type: file
+    format:
+    - fasta
+    - fa
+    - aln
+    - phy
+    description: Aligned DNA or protein sequences
+    required: true
+  outputs:
+  - name: report
+    type: file
+    format:
+    - md
+    description: Analysis report
+  - name: result
+    type: file
+    format:
+    - json
+    description: Machine-readable results
+  - name: phylo_tree
+    type: file
+    format:
+    - nwk
+    description: Newick format phylogenetic tree
+  version: 0.1.0
 ---
 
 # 🦖 Phylogenetics Builder

@@ -49,7 +49,7 @@ metadata:
       description: Structured result payload with detected CRAMs, per-tool VCFs, MultiQC HTML, and provenance
   dependencies:
     python: ">=3.11"
-    packages: []
+    packages:
   demo_data:
     - path: demo/README.md
       description: Demo mode uses the upstream nf-core/sarek -profile test dataset rather than bundled FASTQs
@@ -61,15 +61,15 @@ metadata:
         - python3
         - nextflow
         - java
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: 🧬
     homepage: https://github.com/ClawBio/ClawBio
     os:
       - darwin
       - linux
-    install: []
+    install:
     trigger_keywords:
       - sarek
       - germline variant calling

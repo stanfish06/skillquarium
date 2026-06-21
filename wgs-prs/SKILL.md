@@ -1,15 +1,90 @@
 ---
 name: wgs-prs
-description: >-
-  End-to-end WGS to polygenic risk score pipeline. Takes paired-end FASTQ files
-  (or a pre-existing VCF) through nf-core/sarek for variant calling, applies VCF
-  QC (normalisation, hard filtering, Ti/Tv and Het/Hom checks), then computes
-  polygenic risk scores via the PGS Catalog. Fills the FASTQ to VCF gap upstream
-  of the gwas-prs skill.
-version: 0.1.0
-author: David de Lorenzo
+description: End-to-end WGS to polygenic risk score pipeline. Takes paired-end FASTQ files (or a pre-existing VCF) through nf-core/sarek for variant calling, applies VCF QC (normalisation, hard filtering,
+  Ti/Tv and Het/Hom checks), then computes polygenic risk scores via the PGS Catalog. Fills the FASTQ to VCF gap upstream of the gwas-prs skill.
 license: MIT
-tags:
+metadata:
+  openclaw:
+    requires:
+      bins:
+      - python3
+      - nextflow
+      anyBins:
+      - docker
+      - singularity
+      env: null
+      config: null
+    always: false
+    emoji: 🧬
+    homepage: https://github.com/ClawBio/ClawBio
+    os:
+    - darwin
+    - linux
+    install:
+    - kind: url
+      url: https://get.nextflow.io
+      bins:
+      - nextflow
+      note: curl -s https://get.nextflow.io | bash
+    - kind: conda
+      package: bcftools
+      bins:
+      - bcftools
+      note: conda install -c bioconda bcftools  (optional, enables full VCF QC)
+    trigger_keywords:
+    - WGS
+    - whole genome sequencing
+    - FASTQ to PRS
+    - variant calling
+    - nf-core sarek
+    - sarek
+    - FASTQ VCF
+    - WGS polygenic risk
+    - germline variant calling
+    - GATK HaplotypeCaller
+    - WGS pipeline
+    - raw sequencing to risk scores
+  author: David de Lorenzo
+  inputs:
+  - name: fastq_r1
+    type: file
+    format: fastq.gz
+    description: Forward reads FASTQ.gz (paired-end WGS)
+    required: false
+  - name: fastq_r2
+    type: file
+    format: fastq.gz
+    description: Reverse reads FASTQ.gz
+    required: false
+  - name: input_vcf
+    type: file
+    format: vcf.gz
+    description: Pre-existing VCF, skips sarek, starts at QC stage
+    required: false
+  - name: sample_id
+    type: string
+    description: Sample identifier used throughout the pipeline
+    required: false
+    default: SAMPLE
+  - name: sex
+    type: string
+    description: 'Biological sex: XX or XY (affects sex-chromosome calling)'
+    required: false
+    default: XX
+  outputs:
+  - name: bridge_report.md
+    description: Human-readable summary of all pipeline stages
+  - name: bridge_report.json
+    description: Machine-readable stage status and QC metrics
+  - name: vcf_qc/qc_metrics.json
+    description: Ti/Tv ratio, Het/Hom ratio, variant counts, pass/fail
+  - name: vcf_qc/canonical_pass.vcf.gz
+    description: Normalised, filtered canonical VCF ready for PRS scoring
+  - name: prs_output/report.md
+    description: PRS narrative report from gwas-prs
+  - name: prs_output/tables/scores.csv
+    description: Per-trait PRS scores, percentiles, and risk categories
+  tags:
   - wgs
   - whole-genome-sequencing
   - polygenic-risk-scores
@@ -20,82 +95,7 @@ tags:
   - variant-calling
   - vcf-qc
   - gatk
-metadata:
-  openclaw:
-    requires:
-      bins:
-        - python3
-        - nextflow
-      anyBins:
-        - docker
-        - singularity
-      env: []
-      config: []
-    always: false
-    emoji: "🧬"
-    homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
-    install:
-      - kind: url
-        url: https://get.nextflow.io
-        bins: [nextflow]
-        note: "curl -s https://get.nextflow.io | bash"
-      - kind: conda
-        package: bcftools
-        bins: [bcftools]
-        note: "conda install -c bioconda bcftools  (optional, enables full VCF QC)"
-    trigger_keywords:
-      - WGS
-      - whole genome sequencing
-      - FASTQ to PRS
-      - variant calling
-      - nf-core sarek
-      - sarek
-      - FASTQ VCF
-      - WGS polygenic risk
-      - germline variant calling
-      - GATK HaplotypeCaller
-      - WGS pipeline
-      - raw sequencing to risk scores
-inputs:
-  - name: fastq_r1
-    type: file
-    format: fastq.gz
-    description: "Forward reads FASTQ.gz (paired-end WGS)"
-    required: false
-  - name: fastq_r2
-    type: file
-    format: fastq.gz
-    description: "Reverse reads FASTQ.gz"
-    required: false
-  - name: input_vcf
-    type: file
-    format: vcf.gz
-    description: "Pre-existing VCF, skips sarek, starts at QC stage"
-    required: false
-  - name: sample_id
-    type: string
-    description: "Sample identifier used throughout the pipeline"
-    required: false
-    default: "SAMPLE"
-  - name: sex
-    type: string
-    description: "Biological sex: XX or XY (affects sex-chromosome calling)"
-    required: false
-    default: "XX"
-outputs:
-  - name: bridge_report.md
-    description: "Human-readable summary of all pipeline stages"
-  - name: bridge_report.json
-    description: "Machine-readable stage status and QC metrics"
-  - name: vcf_qc/qc_metrics.json
-    description: "Ti/Tv ratio, Het/Hom ratio, variant counts, pass/fail"
-  - name: vcf_qc/canonical_pass.vcf.gz
-    description: "Normalised, filtered canonical VCF ready for PRS scoring"
-  - name: prs_output/report.md
-    description: "PRS narrative report from gwas-prs"
-  - name: prs_output/tables/scores.csv
-    description: "Per-trait PRS scores, percentiles, and risk categories"
+  version: 0.1.0
 ---
 
 # 🧬 WGS-PRS Pipeline

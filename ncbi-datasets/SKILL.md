@@ -1,62 +1,62 @@
 ---
 name: ncbi-datasets
-description: >-
-  Download genomes, genes, virus sequences, and taxonomy data from NCBI using
-  the datasets and dataformat CLI tools.
-version: 0.1.0
-author: nullvoid42
-domain: datasets
+description: Download genomes, genes, virus sequences, and taxonomy data from NCBI using the datasets and dataformat CLI tools.
 license: MIT
-
-tags: [
-  ncbi,
-  genomics,
-  bioinformatics,
-  genome-download,
-  gene,
-  virus,
-  taxonomy,
-  datasets,
-  dataformat,
-  refseq,
-  genbank
-]
-
 metadata:
   openclaw:
     requires:
       bins:
-        - datasets
-        - dataformat
-      env: []        
-      config: []
-    always: false
-    emoji: "🧬"
-    homepage: https://www.ncbi.nlm.nih.gov/datasets/
-    os: [darwin, linux, win32]
-    install:
-      - kind: conda
-        package: ncbi-datasets-cli
-        channel: conda-forge
-        bins: [datasets, dataformat]
-    trigger_keywords:
-      - ncbi
-      - datasets download
-      - datasets summary
+      - datasets
       - dataformat
-      - download genome
-      - download gene
-      - reference genome
-      - genome accession
-      - gene symbol
-      - ortholog
-      - download virus
-      - sars-cov-2 sequence
-      - taxonomy data
-      - dehydrated download
-      - rehydrate
-      - GCF
-      - GCA
+      env: null
+      config: null
+    always: false
+    emoji: 🧬
+    homepage: https://www.ncbi.nlm.nih.gov/datasets/
+    os:
+    - darwin
+    - linux
+    - win32
+    install:
+    - kind: conda
+      package: ncbi-datasets-cli
+      channel: conda-forge
+      bins:
+      - datasets
+      - dataformat
+    trigger_keywords:
+    - ncbi
+    - datasets download
+    - datasets summary
+    - dataformat
+    - download genome
+    - download gene
+    - reference genome
+    - genome accession
+    - gene symbol
+    - ortholog
+    - download virus
+    - sars-cov-2 sequence
+    - taxonomy data
+    - dehydrated download
+    - rehydrate
+    - GCF
+    - GCA
+  author: nullvoid42
+  domain: datasets
+  tags:
+  - ncbi
+  - genomics
+  - bioinformatics
+  - genome-download
+  - gene
+  - virus
+  - taxonomy
+  - datasets
+  - dataformat
+  - refseq
+  - genbank
+  version: 0.1.0
 ---
 
 # 🦖 Skill Name

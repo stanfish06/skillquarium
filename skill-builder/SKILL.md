@@ -1,31 +1,37 @@
 ---
 name: skill-builder
 description: Scaffold a new ClawBio skill from a spec file (JSON/YAML) or interactively — generates SKILL.md, Python skeleton, tests, and updates catalog.json
-version: 0.1.0
-author: Mj
 license: MIT
-tags: [meta, scaffolding, developer-tools, skill-creation]
 metadata:
   openclaw:
     requires:
       bins:
-        - python3
-      env: []
-      config: []
+      - python3
+      env: null
+      config: null
     always: false
-    emoji: "🦖"
+    emoji: 🦖
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
-    install: []
+    os:
+    - darwin
+    - linux
+    install: null
     trigger_keywords:
-      - create skill
-      - new skill
-      - scaffold skill
-      - skill template
-      - skill builder
-      - add a skill
-      - build a skill
-      - make a skill
+    - create skill
+    - new skill
+    - scaffold skill
+    - skill template
+    - skill builder
+    - add a skill
+    - build a skill
+    - make a skill
+  author: Mj
+  tags:
+  - meta
+  - scaffolding
+  - developer-tools
+  - skill-creation
+  version: 0.1.0
 ---
 
 # 🦖 Skill Builder

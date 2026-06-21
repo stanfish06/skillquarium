@@ -1,24 +1,57 @@
 ---
 name: nfcore-scrnaseq-wrapper
-version: "0.1.0"
-author: ClawBio
-description: Wrapper skill for running nf-core/scrnaseq 4.1.0 upstream single-cell RNA-seq preprocessing from FASTQ with strict preflight, reproducibility outputs, and downstream handoff to ClawBio scRNA skills.
-inputs:
+description: Wrapper skill for running nf-core/scrnaseq 4.1.0 upstream single-cell RNA-seq preprocessing from FASTQ with strict preflight, reproducibility outputs, and downstream handoff to ClawBio scRNA
+  skills.
+license: MIT
+metadata:
+  domain: transcriptomics
+  tags:
+  - scrna
+  - single-cell
+  - nextflow
+  - nf-core
+  - fastq
+  - 10x
+  - h5ad
+  - preprocessing
+  dependencies:
+    python: '>=3.11'
+    packages:
+    - pyyaml
+  endpoints:
+    cli: python skills/nfcore-scrnaseq-wrapper/nfcore_scrnaseq_wrapper.py --input {samplesheet} --output {output_dir}
+  openclaw:
+    requires:
+      bins:
+      - python3
+      - nextflow
+      - java
+    always: false
+    emoji: 🧫
+    homepage: https://github.com/ClawBio/ClawBio
+    os:
+    - darwin
+    - linux
+  author: ClawBio
+  inputs:
   - name: samplesheet
     type: file
-    format: [csv]
-    description: "nf-core/scrnaseq samplesheet CSV with required columns: sample, fastq_1, fastq_2"
+    format:
+    - csv
+    description: 'nf-core/scrnaseq samplesheet CSV with required columns: sample, fastq_1, fastq_2'
     required: true
-outputs:
+  outputs:
   - name: report
     type: file
-    format: [md]
+    format:
+    - md
     description: Wrapper run summary and downstream handoff recommendations
   - name: result
     type: file
-    format: [json]
+    format:
+    - json
     description: Structured result payload with detected outputs and provenance
-trigger_keywords:
+  trigger_keywords:
   - scrnaseq
   - nf-core scrnaseq
   - run scrnaseq from fastq
@@ -33,22 +66,7 @@ trigger_keywords:
   - upstream single-cell pipeline
   - fastq to h5ad single cell
   - 10x genomics fastq pipeline
-license: MIT
-metadata:
-  domain: transcriptomics
-  tags: [scrna, single-cell, nextflow, nf-core, fastq, 10x, h5ad, preprocessing]
-  dependencies:
-    python: ">=3.11"
-    packages: [pyyaml]
-  endpoints:
-    cli: python skills/nfcore-scrnaseq-wrapper/nfcore_scrnaseq_wrapper.py --input {samplesheet} --output {output_dir}
-  openclaw:
-    requires:
-      bins: [python3, nextflow, java]
-    always: false
-    emoji: "🧫"
-    homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
+  version: 0.1.0
 ---
 
 # nfcore-scrnaseq-wrapper

@@ -13,21 +13,24 @@ metadata:
   inputs:
     - name: input_file
       type: file
-      format: [csv]
+      format:
+        - csv
       description: Spot-level marker count table
       required: true
   outputs:
     - name: report
       type: file
-      format: [md]
+      format:
+        - md
       description: Marker-dominance map report
     - name: result
       type: file
-      format: [json]
+      format:
+        - json
       description: Machine-readable mapped spots
   dependencies:
     python: ">=3.10"
-    packages: []
+    packages:
   demo_data:
     - path: demo_marker_counts.csv
       description: Synthetic six-spot marker expression table
@@ -35,12 +38,15 @@ metadata:
     cli: python skills/marker-dominance-mapper/marker_dominance_mapper.py --input {input_file} --output {output_dir}
   openclaw:
     requires:
-      bins: [python3]
+      bins:
+        - python3
     always: false
     emoji: "🗺️"
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
-    install: []
+    os:
+      - darwin
+      - linux
+    install:
     trigger_keywords:
       - marker dominance mapping
       - map marker spots

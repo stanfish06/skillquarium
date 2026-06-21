@@ -1,23 +1,58 @@
 ---
 name: gi-enhancer
-description: >-
-  Predict enhancer activity in DNA sequences using the Genomic Intelligence
-  G0 DeepSTARR model, via the hosted /v1/tasks/enhancer/predict API.
-  Returns per-window activity scores.
-version: 0.1.0
-author: ClawBio + Genomic Intelligence
-domain: genomics
+description: Predict enhancer activity in DNA sequences using the Genomic Intelligence G0 DeepSTARR model, via the hosted /v1/tasks/enhancer/predict API. Returns per-window activity scores.
 license: MIT
-tags: [genomics, enhancer, regulatory, cis-regulatory, deepstarr, dna-lm, gi-api]
-
-inputs:
+metadata:
+  openclaw:
+    requires:
+      bins:
+      - python3
+      env: null
+      config: null
+    always: false
+    emoji: 🎚️
+    homepage: https://docs.genomicintelligence.ai
+    os:
+    - darwin
+    - linux
+    install:
+    - kind: pip
+      package: requests
+      bins: null
+    trigger_keywords:
+    - enhancer
+    - enhancer activity
+    - predict enhancer
+    - regulatory element
+    - cis-regulatory
+    - CRE
+    - DeepSTARR
+    - STARR-seq
+    - massively parallel reporter assay
+    - MPRA
+    - gi enhancer
+    - genomic intelligence enhancer
+  author: ClawBio + Genomic Intelligence
+  demo_data:
+  - path: example_data/enhancer_eve.fa
+    description: Drosophila eve (even-skipped) developmental-enhancer region (chr2R:9972000-9982000, BDGP6, gene-sense, incl. upstream stripe enhancers) — canonical DeepSTARR benchmark.
+  dependencies:
+    python: '>=3.10'
+    packages:
+    - requests>=2.31
+  domain: genomics
+  endpoints:
+    cli: python skills/gi-enhancer/gi_enhancer.py --input {input_file} --output {output_dir}
+  inputs:
   - name: input_file
     type: file
-    format: [fa, fasta, fna]
+    format:
+    - fa
+    - fasta
+    - fna
     description: Single-record FASTA (any length; API windows automatically).
     required: false
-
-outputs:
+  outputs:
   - name: report
     type: file
     format: md
@@ -28,47 +63,16 @@ outputs:
     description: Full `{data, meta}` response.
   - name: reproducibility
     type: directory
-    description: 'command.sh + environment.json.'
-
-dependencies:
-  python: ">=3.10"
-  packages:
-    - requests>=2.31
-
-demo_data:
-  - path: example_data/enhancer_eve.fa
-    description: Drosophila eve (even-skipped) developmental-enhancer region (chr2R:9972000-9982000, BDGP6, gene-sense, incl. upstream stripe enhancers) — canonical DeepSTARR benchmark.
-
-endpoints:
-  cli: python skills/gi-enhancer/gi_enhancer.py --input {input_file} --output {output_dir}
-
-metadata:
-  openclaw:
-    requires:
-      bins: [python3]
-      env: []
-      config: []
-    always: false
-    emoji: "🎚️"
-    homepage: https://docs.genomicintelligence.ai
-    os: [darwin, linux]
-    install:
-      - kind: pip
-        package: requests
-        bins: []
-    trigger_keywords:
-      - enhancer
-      - enhancer activity
-      - predict enhancer
-      - regulatory element
-      - cis-regulatory
-      - CRE
-      - DeepSTARR
-      - STARR-seq
-      - massively parallel reporter assay
-      - MPRA
-      - gi enhancer
-      - genomic intelligence enhancer
+    description: command.sh + environment.json.
+  tags:
+  - genomics
+  - enhancer
+  - regulatory
+  - cis-regulatory
+  - deepstarr
+  - dna-lm
+  - gi-api
+  version: 0.1.0
 ---
 
 # 🎚️ gi-enhancer

@@ -30,21 +30,31 @@ metadata:
   inputs:
     - name: alignment
       type: file
-      format: [fasta, fas, nexus, nex]
+      format:
+        - fasta
+        - fas
+        - nexus
+        - nex
       description: >-
         Aligned DNA sequences (pre-aligned, equal-length). FASTA (including
         DnaSP-style >'name' [comment] headers) or NEXUS (MATCHCHAR, INTERLEAVE).
       required: true
     - name: alignment2
       type: file
-      format: [fasta, fas, nexus, nex]
+      format:
+        - fasta
+        - fas
+        - nexus
+        - nex
       description: >-
         Second-population alignment for divergence analysis (--input2).
         Alternative to --pop-file. Sequences must have same length as --input.
       required: false
     - name: pop_file
       type: file
-      format: [tsv, txt]
+      format:
+        - tsv
+        - txt
       description: >-
         Population assignment file: one row per sequence, tab-separated
         (sequence_name<TAB>population_name). Alternative to --input2.
@@ -57,7 +67,9 @@ metadata:
       required: false
     - name: hka_file
       type: file
-      format: [tsv, txt]
+      format:
+        - tsv
+        - txt
       description: >-
         HKA locus file: tab-separated (locus<TAB>S<TAB>D<TAB>n) where S = segregating
         sites in ingroup, D = fixed differences to outgroup, n = ingroup sample size.
@@ -81,15 +93,18 @@ metadata:
   outputs:
     - name: report
       type: file
-      format: [md]
+      format:
+        - md
       description: Markdown analysis report with statistics and interpretation
     - name: results_table
       type: file
-      format: [tsv]
+      format:
+        - tsv
       description: DnaSP-compatible tab-delimited results
     - name: ld_pairs
       type: file
-      format: [tsv]
+      format:
+        - tsv
       description: Pairwise LD table (only when --analysis ld is active)
     - name: figures
       type: directory
@@ -111,11 +126,14 @@ metadata:
       python skills/dnasp/dnasp.py --input {alignment} --analysis {analyses} --output {output_dir}
   openclaw:
     requires:
-      bins: [python3]
+      bins:
+        - python3
     always: false
     emoji: ""
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
+    os:
+      - darwin
+      - linux
     install:
       - kind: pip
         package: matplotlib

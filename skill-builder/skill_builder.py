@@ -1300,39 +1300,35 @@ def _is_inside(child: Path, parent: Path) -> bool:
 
 def _run_skill_lint(repo_root: Path, skill_name: str) -> None:
     """
-    Run the repo's own ``scripts/lint_skills.py`` and echo any row that
-    mentions the freshly scaffolded skill.
+    Run ``agentskills validate`` on the freshly scaffolded skill directory.
 
     This is advisory — it never fails the scaffold, it just surfaces issues
-    the same CI job will flag later (wrong ``os:`` value, missing emoji etc.).
+    the same CI job will flag later.
     """
+    import shutil
     import subprocess
 
-    lint = repo_root / "scripts" / "lint_skills.py"
-    if not lint.exists():
+    if not shutil.which("agentskills"):
+        return
+    skill_dir = repo_root / "skills" / skill_name
+    if not skill_dir.is_dir():
         return
     try:
         result = subprocess.run(
-            [sys.executable, str(lint)],
-            cwd=repo_root,
+            ["agentskills", "validate", str(skill_dir)],
             capture_output=True,
             text=True,
         )
     except OSError:
         return
 
-    rows = [
-        line for line in result.stdout.splitlines()
-        if line.startswith("|") and skill_name in line
-    ]
-    if not rows:
-        return
-    # Each row looks like: | name | Status | OS | Emoji | Issues |
-    for row in rows:
-        if " FAIL " in row:
-            print(f"  {RED}lint: {row.strip()}{RESET}")
-        elif " Warn " in row:
-            print(f"  {DIM}lint: {row.strip()}{RESET}")
+    if result.returncode != 0:
+        for line in result.stderr.splitlines():
+            line = line.strip()
+            if line.startswith("-"):
+                print(f"  {RED}lint: {line}{RESET}")
+    elif result.stdout.strip():
+        print(f"  {DIM}lint: {result.stdout.strip()}{RESET}")
 
 
 # ---------------------------------------------------------------------------
@@ -1576,8 +1572,8 @@ def write_skill_builder_report(
     )
     steps.append(f"Run tests: `python -m pytest skills/{name}/tests/ -v`")
     steps.append(
-        f"Lint the skill: `python scripts/lint_skills.py` "
-        "(CI will reject any new skill whose frontmatter fails this)"
+        f"Validate the skill: `agentskills validate skills/{name}` "
+        "(CI will reject any new skill that fails validation)"
     )
     steps.append(
         f"Submit PR: `git checkout -b add-{name} && git add skills/{name}/ "
@@ -1950,7 +1946,7 @@ def main() -> None:
         _clear_draft()  # remove any lingering interactive draft
 
         # Write skill-builder's own output report into a *hidden* subdirectory
-        # so it's skipped by scripts/lint_skills.py and scripts/generate_catalog.py
+        # so it's skipped by agentskills validate and scripts/generate_catalog.py
         # (both of which skip directories starting with a dot). Older leading-
         # underscore names were treated as real skills and failed lint for
         # missing a SKILL.md.

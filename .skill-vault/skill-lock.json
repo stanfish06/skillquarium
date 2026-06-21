@@ -1570,9 +1570,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/analyze-fasta/SKILL.md",
-      "skillFolderHash": "73fb26ff81fe2f765dad31b557457075b85978dd",
+      "skillFolderHash": "376ec24807113e6b875be446ca049d23bf22c388",
       "installedAt": "2026-06-09T11:30:14.151Z",
-      "updatedAt": "2026-06-09T12:47:15.907Z"
+      "updatedAt": "2026-06-21T07:55:54.813Z"
     },
     "archaic-introgression": {
       "source": "ClawBio/ClawBio",
@@ -1588,9 +1588,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/article-data-fetcher/SKILL.md",
-      "skillFolderHash": "9bb8fa1a32e667c0c3a0996b71278b980f253bc1",
+      "skillFolderHash": "10261310aa5c465792a045ddf9066174f21ae02e",
       "installedAt": "2026-06-09T11:30:14.153Z",
-      "updatedAt": "2026-06-09T12:47:15.911Z"
+      "updatedAt": "2026-06-21T07:55:57.705Z"
     },
     "bgpt-mcp": {
       "source": "ClawBio/ClawBio",
@@ -1642,9 +1642,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/busco-assessor/SKILL.md",
-      "skillFolderHash": "c9269ca943c58f945d9b535ff7562d99b44ec8c2",
+      "skillFolderHash": "9d4bdb5804918269efe8aa18295e97cdddb4f07f",
       "installedAt": "2026-06-09T11:30:14.157Z",
-      "updatedAt": "2026-06-09T12:47:15.916Z"
+      "updatedAt": "2026-06-21T07:56:00.475Z"
     },
     "cell-detection": {
       "source": "ClawBio/ClawBio",
@@ -1723,9 +1723,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/crispr-screen-triage/SKILL.md",
-      "skillFolderHash": "9be4bb63644662c84e2029ce25f5d338b9df1ffe",
+      "skillFolderHash": "330cf09afdd4276b673448fdfee72ab12aa4c25a",
       "installedAt": "2026-06-09T11:30:14.166Z",
-      "updatedAt": "2026-06-09T12:47:15.924Z"
+      "updatedAt": "2026-06-21T07:56:04.230Z"
     },
     "data-extractor": {
       "source": "ClawBio/ClawBio",
@@ -1759,9 +1759,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/dnasp/SKILL.md",
-      "skillFolderHash": "e7dc031ca5d9a322df2f481683f2a2e2808f651c",
+      "skillFolderHash": "e6474baf463e640f59bb2f174cb4d8d9da130ad6",
       "installedAt": "2026-06-09T11:30:14.169Z",
-      "updatedAt": "2026-06-09T12:47:15.927Z"
+      "updatedAt": "2026-06-21T07:56:07.217Z"
     },
     "drug-photo": {
       "source": "ClawBio/ClawBio",
@@ -1777,18 +1777,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/drug-repurposing-screen/SKILL.md",
-      "skillFolderHash": "e12256c66f5048f4d6d15bbb0b2d4fd7bf40bb88",
+      "skillFolderHash": "f70d6e9ec18588f0fd51428ecdcdb32cbc779a99",
       "installedAt": "2026-06-09T11:30:14.172Z",
-      "updatedAt": "2026-06-09T12:47:15.928Z"
+      "updatedAt": "2026-06-21T07:56:10.313Z"
     },
     "eqtl-catalogue-region-fetch": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/eqtl-catalogue-region-fetch/SKILL.md",
-      "skillFolderHash": "d86f4e65dd590c5a1694832cd31e12c38334081f",
+      "skillFolderHash": "cff654a6a6660982dba05ec8ae60bf26150ac063",
       "installedAt": "2026-06-09T11:30:14.173Z",
-      "updatedAt": "2026-06-09T12:47:15.929Z"
+      "updatedAt": "2026-06-21T07:56:13.621Z"
     },
     "equity-scorer": {
       "source": "ClawBio/ClawBio",
@@ -1804,9 +1804,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/fastreer/SKILL.md",
-      "skillFolderHash": "61c32d43301cad0680f2a4095fe1aae88b821623",
+      "skillFolderHash": "2db6ef396d2254b014b12798726c2ec628b09520",
       "installedAt": "2026-06-09T11:30:14.174Z",
-      "updatedAt": "2026-06-09T12:47:15.930Z"
+      "updatedAt": "2026-06-21T07:56:16.555Z"
     },
     "fine-mapping": {
       "source": "ClawBio/ClawBio",
@@ -1840,9 +1840,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/genome-compare/SKILL.md",
-      "skillFolderHash": "c398b2e3d800e1e8c2caa0e33ec0d3e76e4160cb",
+      "skillFolderHash": "9f16f9a8637a3da078cd6e757a8a7845c3a59780",
       "installedAt": "2026-06-09T11:30:14.219Z",
-      "updatedAt": "2026-06-09T12:47:15.933Z"
+      "updatedAt": "2026-06-21T07:56:20.954Z"
     },
     "genome-match": {
       "source": "ClawBio/ClawBio",
@@ -1858,63 +1858,63 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-annotation/SKILL.md",
-      "skillFolderHash": "3a75dd6b540b635db2f4f8a02316614a02470a70",
+      "skillFolderHash": "5d84d031eddc5c6af63a8400a086b995e54f70b9",
       "installedAt": "2026-06-09T11:30:14.222Z",
-      "updatedAt": "2026-06-09T12:47:15.935Z"
+      "updatedAt": "2026-06-21T07:56:24.077Z"
     },
     "gi-chromatin": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-chromatin/SKILL.md",
-      "skillFolderHash": "bc8ec50d76e94565b1961b22357d5a60a4826a9b",
+      "skillFolderHash": "2e14ebc6b55f97341a3c462eca8a80bc6c882f94",
       "installedAt": "2026-06-09T11:30:14.223Z",
-      "updatedAt": "2026-06-09T12:47:15.935Z"
+      "updatedAt": "2026-06-21T07:56:27.107Z"
     },
     "gi-enhancer": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-enhancer/SKILL.md",
-      "skillFolderHash": "049922d4aa9dcef84189609f675be09633a1ffa8",
+      "skillFolderHash": "5830deca777217ed65657d9c394e0af3363b852e",
       "installedAt": "2026-06-09T11:30:14.223Z",
-      "updatedAt": "2026-06-09T12:47:15.936Z"
+      "updatedAt": "2026-06-21T07:56:30.476Z"
     },
     "gi-expression": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-expression/SKILL.md",
-      "skillFolderHash": "f47c472953be443b8959d50d578fa3608e1d02e9",
+      "skillFolderHash": "fa0ee39346f549c48c1a0b43fd7cb1772b2c9b75",
       "installedAt": "2026-06-09T11:30:14.224Z",
-      "updatedAt": "2026-06-09T12:47:15.937Z"
+      "updatedAt": "2026-06-21T07:56:33.576Z"
     },
     "gi-promoter": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-promoter/SKILL.md",
-      "skillFolderHash": "f51ae64786719a033ab3221ec36a9f7fbe30f168",
+      "skillFolderHash": "14a92e9f1312213cd88526238978087c3dd88566",
       "installedAt": "2026-06-09T11:30:14.225Z",
-      "updatedAt": "2026-06-09T12:47:15.937Z"
+      "updatedAt": "2026-06-21T07:56:36.470Z"
     },
     "gi-splice": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gi-splice/SKILL.md",
-      "skillFolderHash": "a585c7d33f382f5655b71deed277cc378b8fe687",
+      "skillFolderHash": "8173ef4dc56685d08e36866d8d19e72541cc1856",
       "installedAt": "2026-06-09T11:30:14.226Z",
-      "updatedAt": "2026-06-09T12:47:15.938Z"
+      "updatedAt": "2026-06-21T07:56:39.336Z"
     },
     "gwas-catalog-region-fetch": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/gwas-catalog-region-fetch/SKILL.md",
-      "skillFolderHash": "6e4280f19193b988d441ecf947357392938d5ed5",
+      "skillFolderHash": "9f8ecc40bfed56507104b3df4cfe072a38197dad",
       "installedAt": "2026-06-09T11:30:14.226Z",
-      "updatedAt": "2026-06-09T12:47:15.939Z"
+      "updatedAt": "2026-06-21T07:56:42.281Z"
     },
     "gwas-lookup": {
       "source": "ClawBio/ClawBio",
@@ -1975,9 +1975,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/ld-1000g-region-compute/SKILL.md",
-      "skillFolderHash": "1f48b5a8f448af64f9155868bfe5583da4e92158",
+      "skillFolderHash": "be25bfffccd677d101d835d5c77c67efc48db472",
       "installedAt": "2026-06-09T11:30:14.233Z",
-      "updatedAt": "2026-06-09T12:47:15.943Z"
+      "updatedAt": "2026-06-21T07:56:45.614Z"
     },
     "lit-synthesizer": {
       "source": "ClawBio/ClawBio",
@@ -1993,18 +1993,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/locuscompare-region-render/SKILL.md",
-      "skillFolderHash": "f79bf545d027f05e6e0886b4ec8ae04a879b25d3",
+      "skillFolderHash": "a6353c0f85744af64c524ea18b2af3ff1e7c9f28",
       "installedAt": "2026-06-09T11:30:14.236Z",
-      "updatedAt": "2026-06-09T12:47:15.945Z"
+      "updatedAt": "2026-06-21T07:56:50.130Z"
     },
     "marker-dominance-mapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/marker-dominance-mapper/SKILL.md",
-      "skillFolderHash": "5fd26537d89ee2477c84bc646d142e72ecc86c2f",
+      "skillFolderHash": "f84c97e2789c32193a8837ba87e88b446909be94",
       "installedAt": "2026-06-09T11:30:14.237Z",
-      "updatedAt": "2026-06-09T12:47:15.945Z"
+      "updatedAt": "2026-06-21T07:56:52.907Z"
     },
     "mendelian-randomisation": {
       "source": "ClawBio/ClawBio",
@@ -2038,36 +2038,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/ncbi-datasets/SKILL.md",
-      "skillFolderHash": "cb81f7ae02990c444cf0f56a1e7f0c97c0ae645d",
+      "skillFolderHash": "df12ea0cd86096bf9288c7cc2d9680ade27238df",
       "installedAt": "2026-06-09T11:30:14.247Z",
-      "updatedAt": "2026-06-09T12:47:15.948Z"
+      "updatedAt": "2026-06-21T07:56:55.950Z"
     },
     "nfcore-rnaseq-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-rnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "e038dd82c90f32ea604de8d297279e9d0a855dad",
+      "skillFolderHash": "066671a5fb47926b663dbbcd535937c336ad60d3",
       "installedAt": "2026-06-09T11:30:14.248Z",
-      "updatedAt": "2026-06-20T07:36:45.070Z"
+      "updatedAt": "2026-06-21T07:56:59.138Z"
     },
     "nfcore-sarek-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-sarek-wrapper/SKILL.md",
-      "skillFolderHash": "fc835f807b4aafdffc94e05706dc27721810fa83",
+      "skillFolderHash": "b34eed56578a7dd79e9585c5c25a562e41c5ff71",
       "installedAt": "2026-06-09T11:30:14.250Z",
-      "updatedAt": "2026-06-15T08:29:24.208Z"
+      "updatedAt": "2026-06-21T07:57:03.225Z"
     },
     "nfcore-scrnaseq-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "4f7a0648137d7c8b140e33b0d2a17e7501b13e46",
+      "skillFolderHash": "7d4027bbc4bef9f53d0b21eb850c9655686c47d4",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-06-20T07:36:48.482Z"
+      "updatedAt": "2026-06-21T07:57:06.753Z"
     },
     "nutrigx-advisor": {
       "source": "ClawBio/ClawBio",
@@ -2110,9 +2110,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/phylogenetics-builder/SKILL.md",
-      "skillFolderHash": "1bd4392134ef5872187f79a7bb6cf6f632506194",
+      "skillFolderHash": "c7f491f00153219db08acca4a41fd2a1c11fb6f3",
       "installedAt": "2026-06-09T11:30:14.261Z",
-      "updatedAt": "2026-06-09T12:47:15.953Z"
+      "updatedAt": "2026-06-21T07:57:09.639Z"
     },
     "profile-report": {
       "source": "ClawBio/ClawBio",
@@ -2128,9 +2128,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/proteomics-clock/SKILL.md",
-      "skillFolderHash": "d96ccc528b82fc86313c57974db8f8484441e85f",
+      "skillFolderHash": "bb7980e4ebfe2e0659f5c57f66e19dd5ef19d4c7",
       "installedAt": "2026-06-09T11:30:14.262Z",
-      "updatedAt": "2026-06-09T12:47:15.954Z"
+      "updatedAt": "2026-06-21T07:57:12.633Z"
     },
     "proteomics-de": {
       "source": "ClawBio/ClawBio",
@@ -2164,9 +2164,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/rare-disease-rnaseq/SKILL.md",
-      "skillFolderHash": "1daba16244c89231104af1ee16652e5d24552ba2",
+      "skillFolderHash": "ab4f230c3f656425631d59a6637feb6d5cb56f51",
       "installedAt": "2026-06-09T11:30:14.266Z",
-      "updatedAt": "2026-06-09T12:47:15.956Z"
+      "updatedAt": "2026-06-21T07:57:15.704Z"
     },
     "recombinator": {
       "source": "ClawBio/ClawBio",
@@ -2191,18 +2191,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/rnaseq-de/SKILL.md",
-      "skillFolderHash": "135be4cd147bbc9de714c783146cb91838bfb48f",
+      "skillFolderHash": "dcd32d5a6595701527d4668d8c6ff5a87c8ca88a",
       "installedAt": "2026-06-09T11:30:14.268Z",
-      "updatedAt": "2026-06-09T12:47:15.958Z"
+      "updatedAt": "2026-06-21T07:57:18.622Z"
     },
     "sample-qc-triage": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/sample-qc-triage/SKILL.md",
-      "skillFolderHash": "01b778c763965d6176ecbbb6b9599bb648018d4b",
+      "skillFolderHash": "d49df04c926b7ad0ab3695a54d8afb95121d6dee",
       "installedAt": "2026-06-09T11:30:14.269Z",
-      "updatedAt": "2026-06-09T12:47:15.959Z"
+      "updatedAt": "2026-06-21T07:57:21.517Z"
     },
     "scrna-embedding": {
       "source": "ClawBio/ClawBio",
@@ -2227,18 +2227,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/seq-wrangler/SKILL.md",
-      "skillFolderHash": "82a08586bea2492c50a61ce10f366d7efe52e2c4",
+      "skillFolderHash": "445f7ad0f6966c4e4a1b87ff510d4eb378a177c1",
       "installedAt": "2026-06-09T11:30:14.271Z",
-      "updatedAt": "2026-06-09T12:47:15.960Z"
+      "updatedAt": "2026-06-21T07:57:24.411Z"
     },
     "skill-builder": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/skill-builder/SKILL.md",
-      "skillFolderHash": "ff4f3949eb54a17abdb72862c64e653cc87d1b4f",
+      "skillFolderHash": "b3dd6cc423891d9908021f9f6e25e6a90f6cad6e",
       "installedAt": "2026-06-09T11:30:14.272Z",
-      "updatedAt": "2026-06-12T08:03:08.512Z"
+      "updatedAt": "2026-06-21T07:57:27.267Z"
     },
     "soul2dna": {
       "source": "ClawBio/ClawBio",
@@ -2290,9 +2290,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/ukb-ppp-region-fetch/SKILL.md",
-      "skillFolderHash": "69a4fc1c0582e5f9073b1fd7657be8a15eee7e7f",
+      "skillFolderHash": "1952bbb943ea27719e0ef760fea0f84a6139a50d",
       "installedAt": "2026-06-09T11:30:14.277Z",
-      "updatedAt": "2026-06-09T12:47:15.965Z"
+      "updatedAt": "2026-06-21T07:57:30.369Z"
     },
     "variant-annotation": {
       "source": "ClawBio/ClawBio",
@@ -2308,9 +2308,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/vcf-annotator/SKILL.md",
-      "skillFolderHash": "4f88691e2739ec0e7be0e683c0d1b60ecaa7239e",
+      "skillFolderHash": "49e478d043854ae5695df21314344acea4e8e798",
       "installedAt": "2026-06-09T11:30:14.279Z",
-      "updatedAt": "2026-06-09T12:47:15.966Z"
+      "updatedAt": "2026-06-21T07:57:33.335Z"
     },
     "wes-clinical-report-en": {
       "source": "ClawBio/ClawBio",
@@ -2335,9 +2335,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/wgs-prs/SKILL.md",
-      "skillFolderHash": "90cec36f4ab992d31dfeb7f613ad742d93e6c419",
+      "skillFolderHash": "f46748bcadf6c8bf4aefac742f6dc59a669b884c",
       "installedAt": "2026-06-09T11:30:14.281Z",
-      "updatedAt": "2026-06-09T12:47:15.968Z"
+      "updatedAt": "2026-06-21T07:57:36.499Z"
     },
     "aws-agentic-ai": {
       "source": "zxkane/aws-skills",
@@ -2421,9 +2421,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/code-review-and-quality/SKILL.md",
-      "skillFolderHash": "e1edec4a273dbc65b6f3d2d6e56858783047b705",
+      "skillFolderHash": "7a7b6783c30bb40f01b472325c85d0789b38e67e",
       "installedAt": "2026-06-12T08:07:57.843Z",
-      "updatedAt": "2026-06-12T08:07:57.843Z"
+      "updatedAt": "2026-06-21T07:57:37.435Z"
     },
     "code-simplification": {
       "source": "addyosmani/agent-skills",

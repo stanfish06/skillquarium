@@ -9,6 +9,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from scipy.stats import t as _t_dist
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -197,9 +199,16 @@ def de_simple(
 
     n_num = float(len(num_samples))
     n_den = float(len(den_samples))
-    se = np.sqrt((var_num / n_num) + (var_den / n_den) + 1e-12)
+    v_num = var_num / n_num
+    v_den = var_den / n_den
+    se = np.sqrt(v_num + v_den + 1e-12)
     t_stat = (mean_num - mean_den) / se
-    pvals = np.array([math.erfc(abs(float(t)) / math.sqrt(2.0)) for t in t_stat])
+
+    # Welch-Satterthwaite degrees of freedom; clipped to ≥1 to stay on t-distribution
+    dof_num = (v_num + v_den) ** 2
+    dof_den = (v_num ** 2) / max(n_num - 1, 1) + (v_den ** 2) / max(n_den - 1, 1)
+    dof = np.where(dof_den > 0, dof_num / dof_den, 1.0).clip(1.0)
+    pvals = 2 * _t_dist.sf(np.abs(t_stat), df=dof)
     padj = _bh_fdr(pvals)
 
     base_mean = cpm.mean(axis=1)

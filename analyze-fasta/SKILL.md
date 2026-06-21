@@ -59,8 +59,8 @@ metadata:
     requires:
       bins:
         - python3
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: "🧬"
     homepage: https://github.com/ClawBio/ClawBio
@@ -70,7 +70,7 @@ metadata:
     install:
       - kind: pip
         package: biopython
-        bins: []
+        bins:
     trigger_keywords:
       - fasta
       - analyze fasta

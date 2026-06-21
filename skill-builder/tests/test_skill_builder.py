@@ -170,9 +170,9 @@ class TestGenerateSkillMd:
 
     def test_os_values_use_process_platform_names(self, spec: dict) -> None:
         """
-        ``scripts/lint_skills.py`` (run in CI) rejects ``macos``/``windows`` and
+        ``agentskills validate`` (run in CI) rejects ``macos``/``windows`` and
         requires Node's ``process.platform`` names. Ensure the generator emits
-        values that pass that lint so no scaffolded skill is DOA.
+        values that pass validation so no scaffolded skill is DOA.
         """
         md = generate_skill_md(spec)
         assert "os: [darwin" in md, "os field must use 'darwin' (not 'macos')"

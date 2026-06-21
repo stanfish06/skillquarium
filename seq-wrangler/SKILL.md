@@ -1,45 +1,76 @@
 ---
 name: seq-wrangler
-description: "NGS read QC, alignment, and BAM processing pipeline. Wraps FastQC, BWA/Bowtie2/Minimap2, SAMtools, and MultiQC for automated read-to-BAM workflows."
-version: 0.1.0
-author: Daniel Garbozo
-domain: genomics
+description: NGS read QC, alignment, and BAM processing pipeline. Wraps FastQC, BWA/Bowtie2/Minimap2, SAMtools, and MultiQC for automated read-to-BAM workflows.
 license: MIT
-emoji: "🦖"
-os: [darwin, linux]
-inputs:
+metadata:
+  openclaw:
+    requires:
+      always: false
+    homepage: https://github.com/ClawBio/ClawBio
+    os:
+    - darwin
+    - linux
+    emoji: 🦖
+    install: null
+    trigger_keywords:
+    - align reads
+    - align fastq
+    - map reads
+    - paired-end alignment
+    - bwa mem
+    - bowtie2
+    - minimap2
+    - fastq to bam
+    - read qc
+    - trim adapters
+    - coverage of bam
+    - flagstat
+    - sort and index bam
+    - process fastq
+  author: Daniel Garbozo
+  demo_data:
+  - path: examples/demo-results/report.md
+    description: Pre-generated demo report for two synthetic samples
+  dependencies:
+    python: '>=3.10'
+    packages: null
+  domain: genomics
+  emoji: 🦖
+  endpoints:
+    cli: python skills/seq-wrangler/seq_wrangler.py --r1 {r1} --r2 {r2} --index {index} --output {output_dir}
+  inputs:
   - name: r1
     type: file
     format: fastq.gz
-    description: "FASTQ R1 or single-end reads"
+    description: FASTQ R1 or single-end reads
     required: true
   - name: r2
     type: file
     format: fastq.gz
-    description: "FASTQ R2 for paired-end mode"
+    description: FASTQ R2 for paired-end mode
     required: false
   - name: samplesheet
     type: file
     format: csv
-    description: "CSV with columns sample, fastq1, fastq2"
+    description: CSV with columns sample, fastq1, fastq2
     required: false
   - name: index
     type: string
-    description: "Aligner index prefix (bowtie2-build / bwa index output)"
+    description: Aligner index prefix (bowtie2-build / bwa index output)
     required: true
-outputs:
+  os:
+  - darwin
+  - linux
+  outputs:
   - name: report
     type: file
     format: md
-    description: "Alignment QC report with flagstat, coverage, and insert size"
+    description: Alignment QC report with flagstat, coverage, and insert size
   - name: bam
     type: file
     format: bam
-    description: "Sorted, duplicate-marked BAM with .bai index"
-dependencies:
-  python: ">=3.10"
-  packages: []
-tags:
+    description: Sorted, duplicate-marked BAM with .bai index
+  tags:
   - fastq
   - alignment
   - bam
@@ -50,34 +81,7 @@ tags:
   - samtools
   - ngs
   - genomics
-demo_data:
-  - path: examples/demo-results/report.md
-    description: Pre-generated demo report for two synthetic samples
-endpoints:
-  cli: python skills/seq-wrangler/seq_wrangler.py --r1 {r1} --r2 {r2} --index {index} --output {output_dir}
-metadata:
-  openclaw:
-    requires:
-      always: false
-    homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
-    emoji: "🦖"
-    install: []
-    trigger_keywords:
-      - "align reads"
-      - "align fastq"
-      - "map reads"
-      - "paired-end alignment"
-      - "bwa mem"
-      - "bowtie2"
-      - "minimap2"
-      - "fastq to bam"
-      - "read qc"
-      - "trim adapters"
-      - "coverage of bam"
-      - "flagstat"
-      - "sort and index bam"
-      - "process fastq"
+  version: 0.1.0
 ---
 
 # 🦖 Seq Wrangler

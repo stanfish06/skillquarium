@@ -1,27 +1,54 @@
 ---
 name: vcf-annotator
-description: "Annotate VCF variants with Ensembl VEP, ClinVar, and gnomAD. Ranks variants by impact (HIGH/MODERATE/LOW/MODIFIER) and generates a reproducible report."
-version: 0.1.0
-author: Sooraj (github.com/sooraj-codes)
-domain: genomics
+description: Annotate VCF variants with Ensembl VEP, ClinVar, and gnomAD. Ranks variants by impact (HIGH/MODERATE/LOW/MODIFIER) and generates a reproducible report.
 license: MIT
-emoji: "🧬"
-os: [darwin, linux]
-inputs:
+metadata:
+  openclaw:
+    requires:
+      always: false
+    homepage: https://github.com/ClawBio/ClawBio
+    os:
+    - darwin
+    - linux
+    emoji: 🧬
+    install: null
+    trigger_keywords:
+    - annotate vcf
+    - annotate variants
+    - variant annotation
+    - clinvar lookup
+    - gnomad frequency
+    - vep annotation
+    - pathogenic variants
+    - variant effect
+    - annotate my vcf
+    - what variants are pathogenic
+  author: Sooraj (github.com/sooraj-codes)
+  demo_data:
+  - path: examples/demo_output/report.md
+    description: Pre-generated demo report for 5 clinically relevant variants
+  dependencies:
+    python: '>=3.11'
+    packages: null
+  domain: genomics
+  emoji: 🧬
+  endpoints:
+    cli: python skills/vcf-annotator/vcf_annotator.py --input {input} --output {output_dir}
+  inputs:
   - name: input
     type: file
     format: vcf
-    description: "VCF file (VCFv4.x, GRCh38)"
+    description: VCF file (VCFv4.x, GRCh38)
     required: true
-outputs:
+  os:
+  - darwin
+  - linux
+  outputs:
   - name: report
     type: file
     format: md
     description: Annotated variant report with ClinVar, gnomAD, and VEP results
-dependencies:
-  python: ">=3.11"
-  packages: []
-tags:
+  tags:
   - vcf
   - variants
   - annotation
@@ -29,30 +56,7 @@ tags:
   - gnomad
   - vep
   - genomics
-demo_data:
-  - path: examples/demo_output/report.md
-    description: Pre-generated demo report for 5 clinically relevant variants
-endpoints:
-  cli: python skills/vcf-annotator/vcf_annotator.py --input {input} --output {output_dir}
-metadata:
-  openclaw:
-    requires:
-      always: false
-    homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
-    emoji: "🧬"
-    install: []
-    trigger_keywords:
-      - "annotate vcf"
-      - "annotate variants"
-      - "variant annotation"
-      - "clinvar lookup"
-      - "gnomad frequency"
-      - "vep annotation"
-      - "pathogenic variants"
-      - "variant effect"
-      - "annotate my vcf"
-      - "what variants are pathogenic"
+  version: 0.1.0
 ---
 
 # 🧬 VCF Annotator

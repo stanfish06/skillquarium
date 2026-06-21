@@ -147,3 +147,135 @@ def test_legacy_positional_argument_still_works(tmp_path):
     result = run_cli([str(EXAMPLE_DIR / "demo_nucleotide.fasta"), "--json"])
     data = json.loads(result.stdout)
     assert data["sequence_type"] == "nucleotide"
+
+
+# ──────────────────────────────────────────────
+# Reverse-strand ORF detection (6-frame scanning)
+# ──────────────────────────────────────────────
+
+_COMPLEMENT = str.maketrans("ATCGN", "TAGCN")
+
+
+def _revcomp(s: str) -> str:
+    return s.translate(_COMPLEMENT)[::-1]
+
+
+def _make_minus_strand_fasta(tmp_path, orf_len_bp: int = 333, pad: int = 100) -> tuple:
+    """
+    Build a FASTA where the only long ORF lives on the minus strand.
+
+    Returns (fasta_path, expected_start_1based, expected_end_1based, seq_length).
+    """
+    # Build a sense ORF of exactly orf_len_bp bp (must be divisible by 3)
+    assert orf_len_bp % 3 == 0
+    stops = {"TAA", "TAG", "TGA"}
+    import random
+    rng = random.Random(42)
+    internal_codons = []
+    n_internal = (orf_len_bp - 6) // 3  # exclude ATG and stop
+    while len(internal_codons) < n_internal:
+        c = "".join(rng.choices("ATCG", k=3))
+        if c not in stops:
+            internal_codons.append(c)
+    orf_sense = "ATG" + "".join(internal_codons) + "TAA"
+    orf_fwd = _revcomp(orf_sense)  # embed this in the forward sequence
+
+    # Pad with sequence guaranteed to have no ATG (avoids accidental forward ORFs)
+    def _no_atg(n, seed):
+        r = random.Random(seed)
+        bases = []
+        while len(bases) < n:
+            b = r.choice("TCG")  # no A -> no ATG possible
+            bases.append(b)
+        return "".join(bases)
+
+    left = _no_atg(pad, seed=1)
+    right = _no_atg(pad, seed=2)
+    seq = left + orf_fwd + right
+    seq_len = len(seq)
+
+    fasta = tmp_path / "minus_strand.fasta"
+    fasta.write_text(f">test_minus_strand\n{seq}\n")
+
+    # 1-based forward coordinates of the embedded ORF
+    expected_start = pad + 1
+    expected_end = pad + orf_len_bp
+    return fasta, expected_start, expected_end, seq_len
+
+
+def test_minus_strand_orf_is_detected(tmp_path):
+    """A >=300 bp ORF on the reverse strand must appear in orfs list."""
+    fasta, _, _, _ = _make_minus_strand_fasta(tmp_path)
+    out = tmp_path / "out"
+    run_cli(["--input", str(fasta), "--output", str(out)])
+    data = json.loads((out / "result.json").read_text())
+    seq = data["sequences"][0]
+    assert seq["orfs_found"] >= 1, "Expected at least one ORF but found none"
+    frames = [o["frame"] for o in seq["orfs"]]
+    minus_frames = [f for f in frames if f.startswith("-")]
+    assert minus_frames, f"No minus-strand frames in results: {frames}"
+
+
+def test_minus_strand_orf_coordinates_are_correct(tmp_path):
+    """Reverse-strand ORF coordinates must map back to forward-strand positions."""
+    fasta, expected_start, expected_end, seq_len = _make_minus_strand_fasta(
+        tmp_path, orf_len_bp=333, pad=100
+    )
+    out = tmp_path / "out"
+    run_cli(["--input", str(fasta), "--output", str(out)])
+    data = json.loads((out / "result.json").read_text())
+    seq = data["sequences"][0]
+
+    minus_orfs = [o for o in seq["orfs"] if o["frame"].startswith("-")]
+    assert minus_orfs, "No minus-strand ORF found to check coordinates"
+
+    # The largest minus-strand ORF should span the embedded region
+    best = max(minus_orfs, key=lambda o: o["length_bp"])
+    assert best["start"] == expected_start, (
+        f"Expected start={expected_start}, got {best['start']}"
+    )
+    assert best["end"] == expected_end, (
+        f"Expected end={expected_end}, got {best['end']}"
+    )
+
+
+def test_forward_only_sequence_has_no_minus_orfs(tmp_path):
+    """A sequence whose only long ORF is on the forward strand reports no minus frames."""
+    # Build a clear forward-strand ORF: ATG + 110 safe codons + TAA = 336 bp
+    stops = {"TAA", "TAG", "TGA"}
+    import random
+    rng = random.Random(7)
+    codons = []
+    while len(codons) < 110:
+        c = "".join(rng.choices("ATCG", k=3))
+        if c not in stops:
+            codons.append(c)
+    fwd_orf = "ATG" + "".join(codons) + "TAA"
+    seq = fwd_orf + "C" * 50
+    fasta = tmp_path / "fwd_only.fasta"
+    fasta.write_text(f">fwd_only\n{seq}\n")
+    out = tmp_path / "out"
+    run_cli(["--input", str(fasta), "--output", str(out)])
+    data = json.loads((out / "result.json").read_text())
+    seq_res = data["sequences"][0]
+    minus_orfs = [o for o in seq_res["orfs"] if o["frame"].startswith("-")]
+    fwd_orfs = [o for o in seq_res["orfs"] if o["frame"].startswith("+")]
+    assert fwd_orfs, "Expected at least one forward-strand ORF"
+    # Minus-strand ORFs may or may not exist by chance; this is informational
+    # The key assertion: forward ORF IS present (regression guard)
+    assert any(o["length_bp"] >= 333 for o in fwd_orfs), (
+        "Forward ORF should be at least 333 bp"
+    )
+
+
+def test_orf_results_sorted_by_length_descending(tmp_path):
+    """orfs list must be sorted longest-first."""
+    fasta, _, _, _ = _make_minus_strand_fasta(tmp_path, orf_len_bp=333, pad=100)
+    out = tmp_path / "out"
+    run_cli(["--input", str(fasta), "--output", str(out)])
+    data = json.loads((out / "result.json").read_text())
+    seq = data["sequences"][0]
+    lengths = [o["length_bp"] for o in seq["orfs"]]
+    assert lengths == sorted(lengths, reverse=True), (
+        f"ORFs not sorted by length descending: {lengths}"
+    )

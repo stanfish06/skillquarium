@@ -61,12 +61,14 @@ metadata:
         - python3
         - plink
         - tabix
-      env: []
-      config: []
+      env:
+      config:
     always: false
     emoji: "🧬"
     homepage: https://github.com/ClawBio/ClawBio
-    os: [darwin, linux]
+    os:
+      - darwin
+      - linux
     install: |
       pip install pysam pandas requests
       # plus the plink 1.9 binary (cog-genomics.org/plink/1.9):
