@@ -78,6 +78,9 @@ jobs:
         # personal notes). Safe here because this job is the upstream-sync path.
         run: python3 .skill-vault/build.py --prune
 
+      - name: Test vault navigation
+        run: python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py' -v
+
       - name: Commit updated skills + index
         run: |
           set -euo pipefail

@@ -21,6 +21,35 @@ This directory holds the machinery that keeps the human layer in sync.
 | `build-graphify.py` | Rebuilds the optional local Graphify graph in `graphify-out/`. Manual only; can run LLM-backed extraction, so it is deliberately separate from CI's lightweight `build.py`. Run: `python3 .skill-vault/build-graphify.py` |
 | `skill-lock.json` | Committed snapshot of the CLI's global provenance lock (`~/.agents/.skill-lock.json`). Records where each skill came from so CI can update them. |
 
+## Scientific expert taxonomy
+
+`.skill-vault/scientific-expert-taxonomy.json` is the authority for assigning
+503 catalog profiles to 10 disciplines. The `scientific-agents` dispatcher is
+separate and is not one of those 503 profiles. Generated maps, wrapper notes,
+and Graphify output are views of the manifest, not classification sources.
+Normal builds are deterministic and never classify profiles with heuristics or
+an LLM.
+
+When the upstream catalog adds or removes a profile, update the manifest in the
+same change. Each profile has one `primary` discipline, may appear under
+`secondary` disciplines as cross-disciplinary, and declares `bridge_domains`
+that link discipline pages to broader capability maps.
+
+The generated hierarchy starts at
+`maps/scientific-expert-profiles.md`, with one page per discipline at
+`maps/scientific-expert-profiles/<discipline-id>.md`. Discipline pages list
+primary experts first, then cross-disciplinary experts, and expose relevant
+capability-map bridges. Validate and rebuild in that order:
+
+```sh
+python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py' -v
+python3 .skill-vault/build.py
+```
+
+The builder validates the manifest against both the catalog and discovered
+profile folders before writing any navigation files, so invalid or incomplete
+assignments fail without a partial rebuild.
+
 ## GitHub Actions
 
 Two workflows in `.github/workflows/` (both share a `vault-write` concurrency
