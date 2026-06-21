@@ -514,17 +514,29 @@ class RepositoryFixedPointTests(unittest.TestCase):
 
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        fixture = Path(temporary.name)
+        workspace = Path(temporary.name)
+        fixture = workspace / "fixture"
+        fixture.mkdir()
+        adversarial = workspace / "adversarial-vault"
+        adversarial.mkdir()
+        adversarial_sentinel = adversarial / "do-not-touch.txt"
+        adversarial_sentinel.write_text("untouched", encoding="utf-8")
         copied_skills = self.copy_navigation_fixture(source, fixture)
         before = self.snapshot_generated_tree(fixture, copied_skills)
 
-        result = subprocess.run(
-            [sys.executable, str(fixture / ".skill-vault/build.py")],
-            cwd=fixture,
-            check=False,
-            capture_output=True,
-            text=True,
-        )
+        with mock.patch.dict(
+            os.environ, {"SKILL_VAULT_ROOT": str(adversarial)}
+        ):
+            environment = os.environ.copy()
+            environment["SKILL_VAULT_ROOT"] = str(fixture)
+            result = subprocess.run(
+                [sys.executable, str(fixture / ".skill-vault/build.py")],
+                cwd=fixture,
+                env=environment,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
 
         self.assertEqual(result.returncode, 0, result.stderr)
         after = self.snapshot_generated_tree(fixture, copied_skills)
@@ -539,6 +551,9 @@ class RepositoryFixedPointTests(unittest.TestCase):
         )
         self.assertEqual(
             hashlib.sha256(sentinel.read_bytes()).hexdigest(), sentinel_before
+        )
+        self.assertEqual(
+            adversarial_sentinel.read_text(encoding="utf-8"), "untouched"
         )
 
 
