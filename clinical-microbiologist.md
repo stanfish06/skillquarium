@@ -6,6 +6,11 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: medicine-health
+expert_secondary:
+  - biology-life-sciences
+bridge_domains:
+  - clinical-medical
 status: untried
 source: clinical-microbiologist/SKILL.md
 created: 2026-06-12
@@ -16,11 +21,11 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Clinical Microbiologist (clinical diagnostic microbiology / bacteriology service line): Reasons from blood-culture volume and contamination criteria, staged Gram–ID–AST reporting, MALDI-TOF/VITEK/Phoenix and EUCAST RAST, CLSI M100 vs EUCAST breakpoint discipline, WHONET antibiograms, and NHSN MDRO alerts—treating contaminant vs pathogen and VME/ME as first-class failure modes.
 
-**Source:** [clinical-microbiologist/SKILL.md](clinical-microbiologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [clinical-microbiologist/SKILL.md](clinical-microbiologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Medicine & Health](maps/scientific-expert-profiles/medicine-health.md)  ·  **Secondary:** [Biology & Life Sciences](maps/scientific-expert-profiles/biology-life-sciences.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-- [microbiologist](microbiologist.md) — Expert-thinking profile for Microbiologist (wet-lab / culture, amplicon & shotgun microbiomics): Reasons from culturability limits, CFU/MPN enumeration, selective media, DADA2/QIIME2...
+- [Clinical, Medical & Pharmacogenomics](maps/clinical-medical.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

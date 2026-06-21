@@ -16,7 +16,9 @@ Usage:  python3 .skill-vault/build.py
 """
 import os
 import re
+import stat
 import sys
+import tempfile
 from datetime import date
 from pathlib import Path
 
@@ -65,6 +67,7 @@ PALETTE = {
 }
 GRAPH_SEARCH = "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc"
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
+GENERATED_EXPERT_MARKER = "generated: scientific-expert-taxonomy"
 
 # acronyms too generic to be useful aliases
 STOP = {"API", "CLI", "ML", "AI", "QC", "DNA", "RNA", "GPU", "CPU", "PDF", "CSV",
@@ -497,6 +500,45 @@ def existing_created(path):
     return m.group(1).strip() if m else TODAY
 
 
+def expert_map_path(directory, discipline_id):
+    """Resolve one nested map path and reject paths outside its directory."""
+    root = Path(directory).resolve()
+    candidate = (root / f"{discipline_id}.md").resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError as exc:
+        raise TaxonomyValidationError(
+            (f"discipline path escapes expert map directory: {discipline_id}",)
+        ) from exc
+    return candidate
+
+
+def atomic_write_text(path, content):
+    """Atomically replace a generated text file via a temporary sibling."""
+    path = Path(path)
+    mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o644
+    temporary_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as temporary:
+            temporary_path = Path(temporary.name)
+            temporary.write(content)
+            temporary.flush()
+            os.fsync(temporary.fileno())
+        temporary_path.chmod(mode)
+        os.replace(temporary_path, path)
+    except BaseException:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
+        raise
+
+
 def render_expert_master_map(*, taxonomy, title, scope, created):
     """Render the scientific expert profile master map."""
     lines = [
@@ -504,6 +546,7 @@ def render_expert_master_map(*, taxonomy, title, scope, created):
         f"title: {title}",
         "tags:",
         "  - skill-map",
+        GENERATED_EXPERT_MARKER,
         f"created: {created}",
         "---",
         "",
@@ -554,6 +597,7 @@ def render_expert_discipline_map(
         f"title: {discipline.title}",
         "tags:",
         "  - skill-map",
+        GENERATED_EXPERT_MARKER,
         f"created: {created}",
         "---",
         "",
@@ -595,11 +639,21 @@ def render_expert_discipline_map(
 
 
 def prune_stale_expert_maps(directory, discipline_ids):
-    """Remove obsolete direct-child expert maps without touching other files."""
+    """Remove obsolete generated direct-child maps without touching other files."""
     current = set(discipline_ids)
     pruned = []
     for path in Path(directory).glob("*.md"):
-        if path.is_file() and path.stem not in current:
+        if not path.is_file() or path.stem in current:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        frontmatter = re.match(r"^---\s*\n(.*?)\n---(?:\s*\n|$)", text, re.DOTALL)
+        if (
+            frontmatter is not None
+            and GENERATED_EXPERT_MARKER in frontmatter.group(1).splitlines()
+        ):
             path.unlink()
             pruned.append(path.name)
     return tuple(sorted(pruned))
@@ -785,13 +839,20 @@ def main():
         print(exc, file=sys.stderr)
         return 1
 
+    try:
+        discipline_paths = {
+            discipline.id: expert_map_path(EXPERT_MAPS_DIR, discipline.id)
+            for discipline in taxonomy.disciplines
+        }
+    except TaxonomyValidationError as exc:
+        print(exc, file=sys.stderr)
+        return 1
+
     os.makedirs(MAPS_DIR, exist_ok=True)
     os.makedirs(EXPERT_MAPS_DIR, exist_ok=True)
     discipline_ids = tuple(
         discipline.id for discipline in taxonomy.disciplines
     )
-    if discipline_ids:
-        prune_stale_expert_maps(EXPERT_MAPS_DIR, discipline_ids)
     if GRAPH:
         update_graph()
 
@@ -847,27 +908,37 @@ def main():
         path = os.path.join(MAPS_DIR, f"{key}.md")
         created = existing_created(path)
         if key == EXPERT_DOMAIN:
-            rendered = render_expert_master_map(
-                taxonomy=taxonomy,
-                title=title,
-                scope=scope,
-                created=created,
-            )
-            with open(path, "w", encoding="utf-8") as f:
-                f.write(rendered)
-            for discipline in taxonomy.disciplines:
-                discipline_path = EXPERT_MAPS_DIR / f"{discipline.id}.md"
-                discipline_created = existing_created(discipline_path)
-                rendered = render_expert_discipline_map(
-                    discipline=discipline,
-                    taxonomy=taxonomy,
-                    short_descriptions=short,
-                    category_titles=title_by_key,
-                    bridge_domain_order=valid_bridge_domains,
-                    created=discipline_created,
+            expert_outputs = [
+                (
+                    Path(path),
+                    render_expert_master_map(
+                        taxonomy=taxonomy,
+                        title=title,
+                        scope=scope,
+                        created=created,
+                    ),
                 )
-                with open(discipline_path, "w", encoding="utf-8") as f:
-                    f.write(rendered)
+            ]
+            for discipline in taxonomy.disciplines:
+                discipline_path = discipline_paths[discipline.id]
+                discipline_created = existing_created(discipline_path)
+                expert_outputs.append(
+                    (
+                        discipline_path,
+                        render_expert_discipline_map(
+                            discipline=discipline,
+                            taxonomy=taxonomy,
+                            short_descriptions=short,
+                            category_titles=title_by_key,
+                            bridge_domain_order=valid_bridge_domains,
+                            created=discipline_created,
+                        ),
+                    )
+                )
+            for output_path, rendered in expert_outputs:
+                atomic_write_text(output_path, rendered)
+            if discipline_ids:
+                prune_stale_expert_maps(EXPERT_MAPS_DIR, discipline_ids)
             continue
         live = sorted(skills_by_key.get(key, []))
         L = ["---", f"title: {title}", "tags:", "  - skill-map", f"created: {created}", "---", "",

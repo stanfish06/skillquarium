@@ -6,6 +6,9 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: agriculture-food-animal-sciences
+bridge_domains:
+  - imaging-signals
 status: untried
 source: plant-pathologist/SKILL.md
 created: 2026-06-12
@@ -16,11 +19,11 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Plant Pathologist (diagnostic clinic / field epidemiology / wet-lab & molecular phytopathology): Reasons from the disease triangle, sign vs. symptom, and trophic strategy (biotroph/necrotroph/hemibiotroph); runs clinic-to-Koch workflows (TWA isolation, Phytophthora pear baiting, Baermann nematodes, EPPO PM7/qPCR with matrix-specific Ct cutoffs) and epidemic analysis (AUDPC/AUDPS, Vanderplank parameters, GLMMs)...
 
-**Source:** [plant-pathologist/SKILL.md](plant-pathologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [plant-pathologist/SKILL.md](plant-pathologist/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Agriculture, Food & Animal Sciences](maps/scientific-expert-profiles/agriculture-food-animal-sciences.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-- [pathologist](pathologist.md) — Expert-thinking profile for Pathologist (clinical / research): Reasons from H&E morphology, pretest-probability differentials, and pre-analytic integrity through CAP synoptic...
+- [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

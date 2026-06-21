@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
@@ -12,6 +13,7 @@ from typing import Iterable, Mapping, Sequence
 SCHEMA_VERSION = 1
 DISPATCHER = "scientific-agents"
 EXPERT_DOMAIN = "scientific-expert-profiles"
+DISCIPLINE_ID_PATTERN = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 
 
 class TaxonomyValidationError(ValueError):
@@ -174,6 +176,9 @@ def load_taxonomy(
             )
             continue
         discipline_id, title, description = values
+        if DISCIPLINE_ID_PATTERN.fullmatch(discipline_id) is None:
+            errors.append(f"invalid discipline id: {discipline_id}")
+            continue
         if discipline_id in seen_discipline_ids:
             errors.append(f"duplicate discipline id: {discipline_id}")
             continue

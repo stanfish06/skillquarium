@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [mathematical-analyst](mathematical-analyst.md) — Expert-thinking profile for Mathematical Analyst (proof-theoretic / PDE & functional analysis / harmonic analysis / operator spectral theory / symbolic-numerical (SymPy, FEniCS...
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

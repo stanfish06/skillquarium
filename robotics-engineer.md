@@ -6,6 +6,9 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: engineering-technology
+bridge_domains:
+  - software-dev
 status: untried
 source: robotics-engineer/SKILL.md
 created: 2026-06-12
@@ -16,11 +19,11 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Robotics Engineer (hardware-software integration / manipulation, navigation & perception): Reasons from DH/PoE kinematics, Jacobian singularities, and computed-torque/impedance control through ROS 2, MoveIt/OMPL, Nav2/SLAM/AMCL, hand-eye AX=XB, Isaac/Gazebo sim-to-real, and ISO 10218/ISO TS 15066 safety while treating tf/frame errors, encoder drift, backlash, and reality-gap overclaim as first-class failure...
 
-**Source:** [robotics-engineer/SKILL.md](robotics-engineer/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [robotics-engineer/SKILL.md](robotics-engineer/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Engineering & Technology](maps/scientific-expert-profiles/engineering-technology.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [Software Development & Engineering](maps/software-dev.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

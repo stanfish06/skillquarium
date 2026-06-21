@@ -6,6 +6,9 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: mathematics-statistics
+bridge_domains:
+  - data-science-compute
 status: untried
 source: bayesian-statistician/SKILL.md
 created: 2026-06-12
@@ -16,12 +19,11 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Bayesian Statistician (probabilistic modeling / hierarchical inference / MCMC diagnostics / model criticism / decision theory): Reasons from Bayes' rule, coherent uncertainty, exchangeability, and partial-pooling hierarchy through Stan/PyMC HMC-NUTS fits, prior and posterior predictive checks, PSIS-LOO, and SBC calibration while treating divergent transitions and funnels, weak identifiability and label switching, improper posteriors, and...
 
-**Source:** [bayesian-statistician/SKILL.md](bayesian-statistician/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [bayesian-statistician/SKILL.md](bayesian-statistician/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Mathematics & Statistics](maps/scientific-expert-profiles/mathematics-statistics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-- [pymc](pymc.md) — Bayesian modeling with PyMC. Build hierarchical models, MCMC (NUTS), variational inference, LOO/WAIC comparison, posterior checks, for probabilistic programming and inference
-- [statistician](statistician.md) — Expert-thinking profile for Statistician (applied inference / experimental design / Bayesian-frequentist / causal & survey methods / SAP-driven consulting): Reasons from estimands...
+- [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -21,7 +21,6 @@ created: 2026-06-17
 ## Related skills
 
 - [deeptools](deeptools.md) — NGS analysis toolkit. BAM to bigWig conversion, QC (correlation, PCA, fingerprints), heatmaps/profiles (TSS, peaks), for ChIP-seq, RNA-seq, ATAC-seq visualization
-- [epigeneticist](epigeneticist.md) — Expert-thinking profile for Epigeneticist (epigenomic assays / ChIP-CUT&RUN-ATAC / bisulfite methylation (EWAS) / 3D genome (Hi-C) / epigenome editing (dCas9)): Reasons from chromatin...
 - [geniml](geniml.md) — This skill should be used when working with genomic interval data (BED files) for machine learning tasks
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

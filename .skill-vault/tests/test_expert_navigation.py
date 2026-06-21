@@ -1,4 +1,9 @@
+import hashlib
 import importlib.util
+import io
+import json
+import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -29,6 +34,7 @@ class ExpertNavigationApiTests(unittest.TestCase):
         self.assertTrue(hasattr(vault_build, "render_expert_master_map"))
         self.assertTrue(hasattr(vault_build, "render_expert_discipline_map"))
         self.assertTrue(hasattr(vault_build, "prune_stale_expert_maps"))
+        self.assertTrue(hasattr(vault_build, "atomic_write_text"))
 
 
 class ExpertNavigationRenderTests(unittest.TestCase):
@@ -63,6 +69,24 @@ class ExpertNavigationRenderTests(unittest.TestCase):
         }
         return expert_taxonomy.ExpertTaxonomy(disciplines, profiles)
 
+    def test_atomic_write_replaces_with_temporary_sibling(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        target = Path(temporary.name) / "map.md"
+        target.write_text("old", encoding="utf-8")
+
+        with mock.patch.object(
+            vault_build.os, "replace", wraps=os.replace
+        ) as replace:
+            vault_build.atomic_write_text(target, "new")
+
+        replace.assert_called_once()
+        source, destination = map(Path, replace.call_args.args)
+        self.assertEqual(destination, target)
+        self.assertEqual(source.parent, target.parent)
+        self.assertFalse(source.exists())
+        self.assertEqual(target.read_text(encoding="utf-8"), "new")
+
     def test_master_uses_manifest_order_counts_and_dispatcher_without_flat_list(self):
         rendered = vault_build.render_expert_master_map(
             taxonomy=self.taxonomy(),
@@ -71,7 +95,13 @@ class ExpertNavigationRenderTests(unittest.TestCase):
             created="2025-01-02",
         )
 
-        self.assertIn("tags:\n  - skill-map\ncreated: 2025-01-02", rendered)
+        self.assertIn(
+            "tags:\n"
+            "  - skill-map\n"
+            "generated: scientific-expert-taxonomy\n"
+            "created: 2025-01-02",
+            rendered,
+        )
         self.assertIn("[Back to Skill Index](../index.md)", rendered)
         self.assertIn("## Profile Dispatcher", rendered)
         self.assertIn("[scientific-agents](../scientific-agents.md)", rendered)
@@ -117,6 +147,7 @@ class ExpertNavigationRenderTests(unittest.TestCase):
         )
 
         self.assertIn("# Physics & Astronomy", rendered)
+        self.assertIn("generated: scientific-expert-taxonomy", rendered)
         self.assertIn("Physical systems from particles to the cosmos.", rendered)
         self.assertIn(
             "[Back to Scientific Expert Profiles]"
@@ -175,23 +206,78 @@ class ExpertNavigationRenderTests(unittest.TestCase):
 
         self.assertIn("## Cross-disciplinary experts\n\n_No cross-disciplinary experts._", rendered)
 
-    def test_pruning_removes_only_stale_direct_child_markdown(self):
+    def test_pruning_removes_only_owned_stale_direct_child_markdown(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         directory = Path(temporary.name)
         (directory / "current.md").write_text("current", encoding="utf-8")
-        (directory / "stale.md").write_text("stale", encoding="utf-8")
+        owned = "---\ngenerated: scientific-expert-taxonomy\n---\n"
+        (directory / "stale-owned.md").write_text(owned, encoding="utf-8")
+        (directory / "manual.md").write_text("manual", encoding="utf-8")
         (directory / "keep.txt").write_text("keep", encoding="utf-8")
         nested = directory / "nested"
         nested.mkdir()
-        (nested / "stale.md").write_text("nested", encoding="utf-8")
+        (nested / "stale-owned.md").write_text(owned, encoding="utf-8")
 
-        vault_build.prune_stale_expert_maps(directory, ("current",))
+        pruned = vault_build.prune_stale_expert_maps(directory, ("current",))
 
+        self.assertEqual(pruned, ("stale-owned.md",))
         self.assertTrue((directory / "current.md").exists())
-        self.assertFalse((directory / "stale.md").exists())
+        self.assertFalse((directory / "stale-owned.md").exists())
+        self.assertTrue((directory / "manual.md").exists())
         self.assertTrue((directory / "keep.txt").exists())
-        self.assertTrue((nested / "stale.md").exists())
+        self.assertTrue((nested / "stale-owned.md").exists())
+
+    def test_renderer_failure_happens_before_expert_writes_or_pruning(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        maps = root / "maps"
+        expert_maps = maps / "scientific-expert-profiles"
+        expert_maps.mkdir(parents=True)
+        master = maps / "scientific-expert-profiles.md"
+        master.write_text("manual master", encoding="utf-8")
+        stale = expert_maps / "stale-owned.md"
+        stale.write_text(
+            "---\ngenerated: scientific-expert-taxonomy\n---\n",
+            encoding="utf-8",
+        )
+        discipline = expert_taxonomy.Discipline(
+            "biology-life-sciences",
+            "Biology & Life Sciences",
+            "Living systems across scales.",
+        )
+        taxonomy = expert_taxonomy.ExpertTaxonomy((discipline,), {})
+        categories = (
+            (
+                expert_taxonomy.EXPERT_DOMAIN,
+                "Scientific Expert Profiles",
+                "Discipline-specific profiles.",
+                (),
+                (),
+            ),
+        )
+
+        with (
+            mock.patch.object(vault_build, "VAULT_DIR", root),
+            mock.patch.object(vault_build, "ROOT", str(root)),
+            mock.patch.object(vault_build, "MAPS_DIR", maps),
+            mock.patch.object(vault_build, "EXPERT_MAPS_DIR", expert_maps),
+            mock.patch.object(vault_build, "CATEGORIES", categories),
+            mock.patch.object(vault_build, "discover_skills", return_value=set()),
+            mock.patch.object(vault_build, "load_catalog_profiles", return_value=set()),
+            mock.patch.object(vault_build, "load_taxonomy", return_value=taxonomy),
+            mock.patch.object(
+                vault_build,
+                "render_expert_discipline_map",
+                side_effect=RuntimeError("render failed"),
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "render failed"):
+                vault_build.main()
+
+        self.assertEqual(master.read_text(encoding="utf-8"), "manual master")
+        self.assertTrue(stale.exists())
 
     def test_main_does_not_prune_without_validated_discipline_ids(self):
         temporary = tempfile.TemporaryDirectory()
@@ -220,6 +306,81 @@ class ExpertNavigationRenderTests(unittest.TestCase):
             self.assertEqual(vault_build.main(), 0)
 
         self.assertTrue(existing.exists())
+
+    def test_taxonomy_rejects_non_slug_discipline_ids(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        path = Path(temporary.name) / "taxonomy.json"
+        path.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "disciplines": [
+                        {
+                            "id": "../software-dev",
+                            "title": "Escaped",
+                            "description": "Must not escape the map directory.",
+                        }
+                    ],
+                    "profiles": {},
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        with self.assertRaises(expert_taxonomy.TaxonomyValidationError) as raised:
+            expert_taxonomy.load_taxonomy(
+                path,
+                catalog_profiles=set(),
+                discovered_profiles=set(),
+                valid_bridge_domains=(),
+            )
+
+        self.assertIn("invalid discipline id: ../software-dev", str(raised.exception))
+
+    def test_main_rejects_escaped_discipline_path_without_overwrite(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        maps = root / "maps"
+        expert_maps = maps / "scientific-expert-profiles"
+        expert_maps.mkdir(parents=True)
+        outside = maps / "software-dev.md"
+        outside.write_text("manual map", encoding="utf-8")
+        taxonomy = expert_taxonomy.ExpertTaxonomy(
+            (
+                expert_taxonomy.Discipline(
+                    "../software-dev",
+                    "Escaped",
+                    "Must not escape the map directory.",
+                ),
+            ),
+            {},
+        )
+        categories = (
+            (
+                expert_taxonomy.EXPERT_DOMAIN,
+                "Scientific Expert Profiles",
+                "Discipline-specific profiles.",
+                (),
+                (),
+            ),
+        )
+        with (
+            mock.patch.object(vault_build, "VAULT_DIR", root),
+            mock.patch.object(vault_build, "ROOT", str(root)),
+            mock.patch.object(vault_build, "MAPS_DIR", maps),
+            mock.patch.object(vault_build, "EXPERT_MAPS_DIR", expert_maps),
+            mock.patch.object(vault_build, "CATEGORIES", categories),
+            mock.patch.object(vault_build, "discover_skills", return_value=set()),
+            mock.patch.object(vault_build, "load_catalog_profiles", return_value=set()),
+            mock.patch.object(vault_build, "load_taxonomy", return_value=taxonomy),
+            mock.patch("sys.stderr", new_callable=io.StringIO),
+        ):
+            result = vault_build.main()
+
+        self.assertNotEqual(result, 0)
+        self.assertEqual(outside.read_text(encoding="utf-8"), "manual map")
 
     def test_main_preserves_expert_dates_and_keeps_nonexpert_map_bytes(self):
         temporary = tempfile.TemporaryDirectory()
@@ -294,6 +455,39 @@ class ExpertNavigationRenderTests(unittest.TestCase):
             "[Back to Skill Index](../index.md)\n\n"
             "## Skills (0)\n\n",
         )
+
+
+class RepositoryFixedPointTests(unittest.TestCase):
+    def snapshot_generated_tree(self):
+        root = VAULT_HELPERS.parent
+        paths = set(root.glob("*.md"))
+        paths.update((root / "maps").rglob("*.md"))
+        return {
+            path.relative_to(root).as_posix(): hashlib.sha256(
+                path.read_bytes()
+            ).hexdigest()
+            for path in paths
+        }
+
+    def test_repository_build_is_a_byte_identical_fixed_point(self):
+        before = self.snapshot_generated_tree()
+
+        result = subprocess.run(
+            [sys.executable, str(VAULT_HELPERS / "build.py")],
+            cwd=VAULT_HELPERS.parent,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        after = self.snapshot_generated_tree()
+        changed = sorted(
+            path
+            for path in before.keys() | after.keys()
+            if before.get(path) != after.get(path)
+        )
+        self.assertEqual(changed, [], "generated files changed on rebuild")
 
 
 if __name__ == "__main__":

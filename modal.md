@@ -20,7 +20,6 @@ created: 2026-06-09
 
 - [docker](docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
 - [figma-generate-design](figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
-- [vibration-dynamics-engineer](vibration-dynamics-engineer.md) — Expert-thinking profile for Vibration & Dynamics Engineer (experimental modal / machinery diagnostics / rotordynamics): Reasons from FRF/coherence, MAC, and damping identification...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

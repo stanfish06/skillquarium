@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [operations-researcher](operations-researcher.md) — Expert-thinking profile for Operations Researcher (optimization modeling / stochastic & robust programming / discrete-event simulation / VRP & scheduling / production solve ops...
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

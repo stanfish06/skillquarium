@@ -6,6 +6,10 @@ tags:
   - skill
   - domain/scientific-expert-profiles
 domain: scientific-expert-profiles
+expert_primary: engineering-technology
+bridge_domains:
+  - cloud-devops
+  - software-dev
 status: untried
 source: network-engineer/SKILL.md
 created: 2026-06-12
@@ -16,11 +20,12 @@ created: 2026-06-12
 > [!info] What it does
 > Expert-thinking profile for Network Engineer (operations / design — campus, WAN, datacenter fabric): Reasons from OSI layering, control vs. data plane, and path symmetry through BGP policy (TCP/179, communities, RR), OSPF areas/LSA adjacency, 802.1Q VLAN/trunk design, spine-leaf Clos/VXLAN-EVPN fabrics, and L1→L7 troubleshooting while treating asymmetric routing, MTU black holes, native-VLAN mismatch, and BGP...
 
-**Source:** [network-engineer/SKILL.md](network-engineer/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [network-engineer/SKILL.md](network-engineer/SKILL.md)  ·  **Domain:** [Scientific Expert Profiles](maps/scientific-expert-profiles.md)  ·  **Primary:** [Engineering & Technology](maps/scientific-expert-profiles/engineering-technology.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
-## Related skills
+## Relevant capability domains
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [Cloud, Infra & MLOps](maps/cloud-devops.md)
+- [Software Development & Engineering](maps/software-dev.md)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

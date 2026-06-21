@@ -2,6 +2,7 @@
 title: Social & Behavioral Sciences
 tags:
   - skill-map
+generated: scientific-expert-taxonomy
 created: 2026-06-20
 ---
 

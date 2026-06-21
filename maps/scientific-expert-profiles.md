@@ -2,7 +2,8 @@
 title: Scientific Expert Profiles
 tags:
   - skill-map
-created: 2026-06-13
+generated: scientific-expert-taxonomy
+created: 2026-06-20
 ---
 
 # Scientific Expert Profiles
