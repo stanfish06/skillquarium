@@ -31,9 +31,11 @@ assert BUILD_SPEC.loader is not None
 BUILD_SPEC.loader.exec_module(vault_build)
 
 
-def _reject_fenced_code(text):
+def _reject_hidden_navigation_markup(text):
     if re.search(r"(?m)^[ \t]*(?:```|~~~)", text):
         raise ValueError("generated navigation contains fenced code")
+    if "<!--" in text or "-->" in text:
+        raise ValueError("generated navigation contains HTML comment markup")
 
 
 def _parse_first_frontmatter(text):
@@ -200,7 +202,7 @@ def discover_repository_profiles(build_module):
 
 
 def validate_generated_map_links(text, expected_links):
-    _reject_fenced_code(text)
+    _reject_hidden_navigation_markup(text)
     actual_links = tuple(
         re.findall(r"(?<!!)\[([^]\n]+)\]\(([^)\n]+)\)", text)
     )
@@ -232,7 +234,7 @@ def _profile_bullet_slugs(section):
 def validate_discipline_profile_sections(
     text, *, expected_primary, expected_cross
 ):
-    _reject_fenced_code(text)
+    _reject_hidden_navigation_markup(text)
     primary_headings = tuple(
         re.finditer(r"(?m)^## Primary experts$", text)
     )
@@ -339,6 +341,31 @@ class ExpertNavigationAuditParserTests(unittest.TestCase):
         )
 
         with self.assertRaisesRegex(ValueError, "headings"):
+            validate_discipline_profile_sections(
+                text,
+                expected_primary=("alpha",),
+                expected_cross=("omega",),
+            )
+
+    def test_navigation_validators_reject_commented_links_and_sections(self):
+        text = (
+            "<!--\n"
+            "[Back](../index.md)\n\n"
+            "## Primary experts\n\n"
+            "- [alpha](../../alpha.md) - Alpha.\n\n"
+            "## Cross-disciplinary experts\n\n"
+            "- [omega](../../omega.md) - Omega.\n"
+            "-->\n"
+        )
+        expected_links = (
+            ("Back", "../index.md"),
+            ("alpha", "../../alpha.md"),
+            ("omega", "../../omega.md"),
+        )
+
+        with self.assertRaisesRegex(ValueError, "HTML comment"):
+            validate_generated_map_links(text, expected_links)
+        with self.assertRaisesRegex(ValueError, "HTML comment"):
             validate_discipline_profile_sections(
                 text,
                 expected_primary=("alpha",),
