@@ -7,6 +7,16 @@ VAULT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 npx skills add . -s '*' -g
 git restore .
 
+# Clean up stray gstack artifacts that `npx skills add . -s '*'` and gstack's
+# own ./setup leak to the vault root. gstack sub-skills are navigated via the
+# gstack/ bundle (build.py recurses into it), not as individual root-level skills.
+# 1. Remove symlinks whose SKILL.md points into gstack/
+find . -maxdepth 2 -name SKILL.md -type l -lname '*gstack*' -exec sh -c '
+  dir=$(dirname "$1"); rm -rf "$dir"
+' _ {} \; 2>/dev/null || true
+# 2. Remove gstack-prefixed directories created by gstack ./setup --prefix
+find . -maxdepth 1 -name 'gstack-*' -not -name 'gstack-*.md' -exec rm -rf {} \; 2>/dev/null || true
+
 # ─── gstack (Garry Tan's AI engineering workflow) ───────────────
 # gstack is a bundled skill collection — 23 specialist slash commands
 # + 8 power tools that turn Claude Code into a virtual engineering team
@@ -24,9 +34,6 @@ git restore .
 #   GSTACK_SKIP=1         — skip gstack entirely
 #   GSTACK_SKIP_BUN=1     — skip bun install (browser skills disabled;
 #                           methodology skills still work via manual symlink)
-#   GSTACK_REF=<ref>      — pin to a git ref (commit hash or tag). Defaults
-#                           to a pinned commit below for reproducibility.
-#                           Override to track main: GSTACK_REF=main
 #   GSTACK_REF=<ref>      — pin to a git ref (commit hash or tag). Defaults
 #                           to a pinned commit below for reproducibility.
 #                           Override to track main: GSTACK_REF=main
