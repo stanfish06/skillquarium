@@ -285,7 +285,7 @@ CATEGORIES = [
       "planning-and-task-breakdown", "source-driven-development", "spec-driven-development",
       "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop",
       "linear", "cavekit-methodology", "cavekit-validation-first", "cavekit-revision",
-      "cavekit-design-system"]),
+      "cavekit-design-system", "gstack"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",
@@ -411,7 +411,32 @@ def discover_skills():
         p = os.path.join(ROOT, name)
         if os.path.isdir(p) and os.path.isfile(os.path.join(p, "SKILL.md")):
             found.add(name)
+    # Recurse into bundled skill collections (e.g. gstack/) that ship their
+    # own sub-skills as gstack/<subskill>/SKILL.md. These are registered as
+    # "gstack/<subskill>" IDs so source: links resolve correctly, while the
+    # wrapper filename uses "gstack-<subskill>.md" (see wrapper_filename()).
+    for bundle in ("gstack",):
+        bundle_dir = os.path.join(ROOT, bundle)
+        if not os.path.isdir(bundle_dir):
+            continue
+        for sub in os.listdir(bundle_dir):
+            if sub.startswith("."):
+                continue
+            sub_p = os.path.join(bundle_dir, sub)
+            if os.path.isdir(sub_p) and os.path.isfile(
+                os.path.join(sub_p, "SKILL.md")
+            ):
+                found.add(f"{bundle}/{sub}")
     return found
+
+
+def wrapper_filename(skill):
+    """Map a skill ID to its wrapper note filename.
+
+    Top-level skills: "scanpy" -> "scanpy.md"
+    Bundled sub-skills: "gstack/office-hours" -> "gstack-office-hours.md"
+    """
+    return skill.replace("/", "-") + ".md"
 
 
 def is_scientific_agents_profile(skill):
@@ -466,7 +491,7 @@ def build_related_excluding(skills, full_desc, excluded):
 
 def parse_existing(skill):
     """Read user-editable bits from an existing wrapper so re-runs preserve them."""
-    path = os.path.join(ROOT, skill + ".md")
+    path = os.path.join(ROOT, wrapper_filename(skill))
     if not os.path.isfile(path):
         return None
     with open(path, encoding="utf-8") as wrapper_file:
@@ -776,7 +801,7 @@ def render_wrapper(
         rel = sorted(related)
         if rel:
             lines += [
-                f"- [{other}]({other}.md) — {short_descriptions[other]}"
+                f"- [{other}]({wrapper_filename(other)}) — {short_descriptions[other]}"
                 for other in rel
             ]
         else:
@@ -906,6 +931,15 @@ def main():
     for skill in expert_skills:
         assigned[skill] = EXPERT_DOMAIN
         key_by_skill[skill] = EXPERT_DOMAIN
+    # Auto-categorize bundled sub-skills (e.g. gstack/office-hours) into
+    # the same domain as their parent bundle.
+    for skill in on_disk:
+        if "/" in skill and skill not in assigned:
+            parent = skill.split("/")[0]
+            parent_key = key_by_skill.get(parent)
+            if parent_key and parent_key != "uncategorized":
+                assigned[skill] = parent_key
+                key_by_skill[skill] = parent_key
     unsorted = sorted(on_disk - set(assigned))
     if unsorted:
         print(f"WARNING: not categorized: {unsorted}", file=sys.stderr)
@@ -944,7 +978,7 @@ def main():
             category_titles=title_by_key,
             bridge_domain_order=valid_bridge_domains,
         )
-        with open(os.path.join(ROOT, s + ".md"), "w", encoding="utf-8") as f:
+        with open(os.path.join(ROOT, wrapper_filename(s)), "w", encoding="utf-8") as f:
             f.write(rendered)
 
     # ---- map notes ---------------------------------------------------------
@@ -992,7 +1026,7 @@ def main():
         if rel:
             L += ["**Related maps:** " + " | ".join(rel), ""]
         L += [f"## Skills ({len(live)})", ""]
-        L += [f"- [{s}](../{s}.md) — {short[s]}" for s in live]
+        L += [f"- [{s}](../{wrapper_filename(s)}) — {short[s]}" for s in live]
         L.append("")
         with open(path, "w", encoding="utf-8") as f:
             f.write("\n".join(L))
@@ -1020,7 +1054,7 @@ def main():
         live = sorted(skills_by_key.get(key, []))
         I += [f"### [{title}](maps/{key}.md)  ·  {len(live)} skills", "", scope, ""]
         preview = live[:6]
-        chips = ", ".join(f"[{s}]({s}.md)" for s in preview)
+        chips = ", ".join(f"[{s}]({wrapper_filename(s)})" for s in preview)
         more = f" … [see all {len(live)} →](maps/{key}.md)" if len(live) > len(preview) else ""
         I += [chips + more, ""]
     I += ["## All skills (A–Z)", ""]
@@ -1032,11 +1066,11 @@ def main():
         letter = s[0].upper()
         if letter != cur:
             flush(); bucket = []; cur = letter; I.append(f"**{letter}**")
-        bucket.append(f"[{s}]({s}.md)")
+        bucket.append(f"[{s}]({wrapper_filename(s)})")
     flush()
     if unsorted:
         I += ["## Uncategorized", ""]
-        I += [f"- [{s}]({s}.md) — {short[s]}" for s in unsorted]
+        I += [f"- [{s}]({wrapper_filename(s)}) — {short[s]}" for s in unsorted]
         I.append("")
     with open(index_path, "w", encoding="utf-8") as f:
         f.write("\n".join(I))
@@ -1044,7 +1078,12 @@ def main():
     # ---- prune orphaned wrappers ------------------------------------------
     pruned = []
     if PRUNE:
-        keep = set(on_disk) | {"index", "README"}
+        # Always keep gstack.md — it's a committed entry point for the
+        # bundled gstack/ collection, not a generated wrapper. Sub-skill
+        # wrappers (gstack-*.md) are gitignored and come/go with install.
+        keep = {wrapper_filename(s)[:-3] for s in on_disk} | {
+            "index", "README", "gstack",
+        }
         for f in os.listdir(ROOT):
             if not f.endswith(".md") or f.startswith("."):
                 continue
