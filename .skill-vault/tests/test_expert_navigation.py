@@ -152,6 +152,25 @@ def validate_expert_wrapper_frontmatter(text, slug, assignment):
         )
 
     values = dict(fields)
+    simple_scalar = re.compile(
+        r"[A-Za-z0-9]+(?:[._/-][A-Za-z0-9]+)*"
+    )
+    scalar_keys = (
+        "title",
+        "domain",
+        "expert_primary",
+        "status",
+        "source",
+        "created",
+    )
+    if "rating" in values:
+        scalar_keys += ("rating",)
+    for key in scalar_keys:
+        if simple_scalar.fullmatch(values[key]) is None:
+            raise ValueError(
+                f"expert wrapper {key} scalar has invalid syntax: "
+                f"{values[key]}"
+            )
     if values["title"] != slug:
         raise ValueError(
             f"expert wrapper title mismatch: expected {slug}, "
@@ -183,7 +202,7 @@ def discover_repository_profiles(build_module):
 def validate_generated_map_links(text, expected_links):
     _reject_fenced_code(text)
     actual_links = tuple(
-        re.findall(r"\[([^]\n]+)\]\(([^)\n]+)\)", text)
+        re.findall(r"(?<!!)\[([^]\n]+)\]\(([^)\n]+)\)", text)
     )
     expected_links = tuple(expected_links)
     if actual_links != expected_links:
@@ -214,17 +233,21 @@ def validate_discipline_profile_sections(
     text, *, expected_primary, expected_cross
 ):
     _reject_fenced_code(text)
-    primary_heading = "## Primary experts"
-    cross_heading = "## Cross-disciplinary experts"
-    if text.count(primary_heading) != 1 or text.count(cross_heading) != 1:
+    primary_headings = tuple(
+        re.finditer(r"(?m)^## Primary experts$", text)
+    )
+    cross_headings = tuple(
+        re.finditer(r"(?m)^## Cross-disciplinary experts$", text)
+    )
+    if len(primary_headings) != 1 or len(cross_headings) != 1:
         raise ValueError("profile section headings must each appear exactly once")
-    primary_start = text.index(primary_heading)
-    cross_start = text.index(cross_heading)
-    if primary_start >= cross_start:
+    primary_heading = primary_headings[0]
+    cross_heading = cross_headings[0]
+    if primary_heading.start() >= cross_heading.start():
         raise ValueError("profile section headings are out of order")
 
-    primary_section = text[primary_start + len(primary_heading) : cross_start]
-    cross_section = text[cross_start + len(cross_heading) :]
+    primary_section = text[primary_heading.end() : cross_heading.start()]
+    cross_section = text[cross_heading.end() :]
     actual_primary = _profile_bullet_slugs(primary_section)
     actual_cross = _profile_bullet_slugs(cross_section)
     expected_primary = tuple(expected_primary)
@@ -307,6 +330,21 @@ class ExpertNavigationAuditParserTests(unittest.TestCase):
                 expected_cross=("omega",),
             )
 
+    def test_discipline_section_validator_rejects_inline_heading_substrings(self):
+        text = (
+            "paragraph ## Primary experts\n\n"
+            "- [alpha](../../alpha.md) - Alpha.\n\n"
+            "paragraph ## Cross-disciplinary experts\n\n"
+            "- [omega](../../omega.md) - Omega.\n"
+        )
+
+        with self.assertRaisesRegex(ValueError, "headings"):
+            validate_discipline_profile_sections(
+                text,
+                expected_primary=("alpha",),
+                expected_cross=("omega",),
+            )
+
     def test_profile_discovery_uses_frontmatter_markers_and_excludes_dispatcher(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
@@ -362,6 +400,40 @@ class ExpertNavigationAuditParserTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "title"):
             validate_expert_wrapper_frontmatter(text, "alpha", assignment)
 
+    def test_wrapper_frontmatter_validator_rejects_flow_like_scalars(self):
+        valid = (
+            "---\n"
+            "title: alpha\n"
+            "tags:\n"
+            "  - skill\n"
+            "  - domain/scientific-expert-profiles\n"
+            "domain: scientific-expert-profiles\n"
+            "expert_primary: physics-astronomy\n"
+            "bridge_domains:\n"
+            "  - data-science-compute\n"
+            "status: in-progress\n"
+            "rating: 4.5\n"
+            "source: alpha/SKILL.md\n"
+            "created: 2025-01-02\n"
+            "---\n"
+        )
+        assignment = expert_taxonomy.ProfileAssignment(
+            "physics-astronomy", (), ("data-science-compute",)
+        )
+        mutations = {
+            "status": valid.replace(
+                "status: in-progress", "status: [unterminated"
+            ),
+            "rating": valid.replace("rating: 4.5", "rating: {unterminated"),
+        }
+
+        for field, text in mutations.items():
+            with self.subTest(field=field):
+                with self.assertRaisesRegex(ValueError, field):
+                    validate_expert_wrapper_frontmatter(
+                        text, "alpha", assignment
+                    )
+
     def test_generated_map_link_validator_rejects_malformed_expected_link(self):
         expected = (
             ("Back", "../index.md"),
@@ -374,6 +446,12 @@ class ExpertNavigationAuditParserTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "ordered links mismatch"):
             validate_generated_map_links(mutated, expected)
+
+    def test_generated_map_link_validator_rejects_image_navigation(self):
+        expected = (("Back", "../index.md"),)
+
+        with self.assertRaisesRegex(ValueError, "ordered links mismatch"):
+            validate_generated_map_links("![Back](../index.md)\n", expected)
 
 
 class ExpertNavigationRenderTests(unittest.TestCase):
