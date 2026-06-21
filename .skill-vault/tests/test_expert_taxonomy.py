@@ -2,6 +2,7 @@ import importlib.util
 import io
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -444,6 +445,61 @@ class ExpertTaxonomyTests(unittest.TestCase):
 
 
 class ExpertWrapperBuildTests(unittest.TestCase):
+    def test_render_wrapper_ignores_mutated_build_globals(self):
+        with (
+            mock.patch.object(vault_build, "TODAY", "2099-12-31"),
+            mock.patch.object(vault_build, "FORCE_ALIASES", True),
+        ):
+            rendered = vault_build.render_wrapper(
+                "alpha",
+                key="software-dev",
+                domain_title="Software Development & Engineering",
+                description="Alpha description (CustomTool).",
+                short_descriptions={},
+                related=set(),
+                existing={
+                    "status": "untried",
+                    "rating": None,
+                    "aliases": ["Hand Curated"],
+                    "personal": None,
+                },
+                category_titles={},
+                bridge_domain_order=(),
+                today="2025-01-02",
+                force_aliases=False,
+            )
+
+        self.assertIn("created: 2025-01-02", rendered)
+        self.assertIn("aliases:\n  - Hand Curated", rendered)
+        self.assertNotIn("2099-12-31", rendered)
+        self.assertNotIn("CustomTool", rendered.split("tags:", 1)[0])
+
+    def test_new_wrapper_is_byte_identical_after_parse_and_rerender(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        root = Path(directory.name)
+        arguments = {
+            "key": "software-dev",
+            "domain_title": "Software Development & Engineering",
+            "description": "Alpha description.",
+            "short_descriptions": {},
+            "related": set(),
+            "category_titles": {},
+            "bridge_domain_order": (),
+            "today": "2025-01-02",
+            "force_aliases": False,
+        }
+        first = vault_build.render_wrapper("alpha", existing=None, **arguments)
+        (root / "alpha.md").write_text(first, encoding="utf-8")
+
+        with mock.patch.object(vault_build, "ROOT", str(root)):
+            existing = vault_build.parse_existing("alpha")
+        second = vault_build.render_wrapper(
+            "alpha", existing=existing, **arguments
+        )
+
+        self.assertEqual(second, first)
+
     def test_renders_expert_metadata_navigation_and_preserved_fields(self):
         assignment = expert_taxonomy.ProfileAssignment(
             "biology-life-sciences",
@@ -469,6 +525,8 @@ class ExpertWrapperBuildTests(unittest.TestCase):
             short_descriptions={"electron": "Electron tooling."},
             related={"electron"},
             existing=existing,
+            today="2025-01-02",
+            force_aliases=False,
             expert_assignment=assignment,
             discipline_titles={
                 "biology-life-sciences": "Biology & Life Sciences",
@@ -517,6 +575,8 @@ class ExpertWrapperBuildTests(unittest.TestCase):
                 "aliases": [],
                 "personal": None,
             },
+            today="2025-01-02",
+            force_aliases=False,
             category_titles={},
             bridge_domain_order=(),
         )
@@ -585,6 +645,27 @@ class ExpertWrapperBuildTests(unittest.TestCase):
         update_graph.assert_not_called()
         opened.assert_not_called()
 
+    def test_main_reports_discovery_errors_before_any_write(self):
+        with (
+            mock.patch.object(
+                vault_build,
+                "discover_skills",
+                side_effect=PermissionError("permission denied"),
+            ),
+            mock.patch.object(vault_build.os, "makedirs") as makedirs,
+            mock.patch.object(vault_build, "update_graph") as update_graph,
+            mock.patch("builtins.open", mock.mock_open()) as opened,
+            mock.patch("sys.stderr", new_callable=io.StringIO) as stderr,
+        ):
+            result = vault_build.main()
+
+        self.assertEqual(result, 1)
+        self.assertIn("cannot discover skills", stderr.getvalue())
+        self.assertIn("permission denied", stderr.getvalue())
+        makedirs.assert_not_called()
+        update_graph.assert_not_called()
+        opened.assert_not_called()
+
     def test_main_returns_zero_after_successful_validation(self):
         taxonomy = expert_taxonomy.ExpertTaxonomy((), {})
         with (
@@ -633,6 +714,62 @@ class ExpertWrapperBuildTests(unittest.TestCase):
             overridden.EXPERT_MAPS_DIR,
             root / "maps/scientific-expert-profiles",
         )
+
+    def test_empty_root_override_falls_back_to_repository_root(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        code = (
+            "import importlib.util, sys; "
+            "from pathlib import Path; "
+            "path = Path(sys.argv[1]); "
+            "sys.path.insert(0, str(path.parent)); "
+            "spec = importlib.util.spec_from_file_location('empty_override', path); "
+            "module = importlib.util.module_from_spec(spec); "
+            "spec.loader.exec_module(module); "
+            "print(module.VAULT_DIR)"
+        )
+        environment = os.environ.copy()
+        environment["SKILL_VAULT_ROOT"] = ""
+
+        result = subprocess.run(
+            [sys.executable, "-c", code, str(BUILD_PATH)],
+            cwd=directory.name,
+            env=environment,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            result.stdout.strip(), str(BUILD_PATH.resolve().parents[1])
+        )
+
+    def test_nonexistent_root_override_exits_cleanly_without_writes(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        root = Path(directory.name)
+        missing = root / "missing-vault"
+        sentinel = root / "sentinel.txt"
+        sentinel.write_text("untouched", encoding="utf-8")
+        environment = os.environ.copy()
+        environment["SKILL_VAULT_ROOT"] = str(missing)
+
+        result = subprocess.run(
+            [sys.executable, str(BUILD_PATH)],
+            cwd=root,
+            env=environment,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("cannot discover skills", result.stderr)
+        self.assertIn(str(missing), result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+        self.assertEqual(sentinel.read_text(encoding="utf-8"), "untouched")
+        self.assertEqual(tuple(root.iterdir()), (sentinel,))
 
 
 if __name__ == "__main__":

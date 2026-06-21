@@ -30,8 +30,9 @@ from expert_taxonomy import (
     load_taxonomy,
 )
 
+DEFAULT_VAULT_DIR = Path(__file__).resolve().parents[1]
 VAULT_DIR = Path(
-    os.environ.get("SKILL_VAULT_ROOT", Path(__file__).resolve().parents[1])
+    os.environ.get("SKILL_VAULT_ROOT") or DEFAULT_VAULT_DIR
 ).resolve()
 ROOT = str(VAULT_DIR)
 MAPS_DIR = VAULT_DIR / "maps"
@@ -453,7 +454,8 @@ def parse_existing(skill):
     path = os.path.join(ROOT, skill + ".md")
     if not os.path.isfile(path):
         return None
-    txt = open(path, encoding="utf-8").read()
+    with open(path, encoding="utf-8") as wrapper_file:
+        txt = wrapper_file.read()
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n", txt, re.DOTALL)
     fm = m.group(1) if m else ""
     data = {}
@@ -513,6 +515,8 @@ def render_wrapper(
     short_descriptions,
     related,
     existing,
+    today,
+    force_aliases,
     expert_assignment: ProfileAssignment | None = None,
     discipline_titles=None,
     category_titles=None,
@@ -522,15 +526,15 @@ def render_wrapper(
     discipline_titles = discipline_titles or {}
     category_titles = category_titles or {}
     if existing:
-        created = existing.get("created", TODAY)
+        created = existing.get("created", today)
         status = existing.get("status", "untried")
         rating = existing.get("rating")
         aliases = existing.get("aliases")
-        if aliases is None or FORCE_ALIASES:
+        if aliases is None or force_aliases:
             aliases = gen_aliases(skill, description)
         personal = existing.get("personal")
     else:
-        created, status, rating = TODAY, "untried", None
+        created, status, rating = today, "untried", None
         aliases = gen_aliases(skill, description)
         personal = None
 
@@ -608,7 +612,7 @@ def render_wrapper(
             )
     lines.append("")
     if personal:
-        lines.append(personal.rstrip() + "\n")
+        lines.append(personal)
     else:
         lines += [PERSONAL_MARKER, "", "## Notes", "", ""]
     return "\n".join(lines)
@@ -648,7 +652,11 @@ def main():
             assigned[s] = key
             key_by_skill[s] = key
 
-    on_disk = discover_skills()
+    try:
+        on_disk = discover_skills()
+    except OSError as exc:
+        print(f"ERROR: cannot discover skills in {VAULT_DIR}: {exc}", file=sys.stderr)
+        return 1
     imported_profiles = {
         skill
         for skill in on_disk
@@ -710,6 +718,8 @@ def main():
             short_descriptions=short,
             related=related.get(s, set()),
             existing=ex,
+            today=TODAY,
+            force_aliases=FORCE_ALIASES,
             expert_assignment=taxonomy.profiles.get(s),
             discipline_titles=discipline_titles,
             category_titles=title_by_key,
