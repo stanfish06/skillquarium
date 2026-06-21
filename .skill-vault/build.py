@@ -285,7 +285,7 @@ CATEGORIES = [
       "planning-and-task-breakdown", "source-driven-development", "spec-driven-development",
       "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop",
       "linear", "cavekit-methodology", "cavekit-validation-first", "cavekit-revision",
-      "cavekit-design-system"]),
+      "cavekit-design-system", "gstack"]),
 
     ("vault-meta", "Vault, Skills & Workflow Meta",
      "Obsidian authoring, skill building/discovery, reproducibility, orchestration, and resource detection.",

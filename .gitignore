@@ -3,3 +3,8 @@ __pycache__/
 graphify-out/
 .agents/
 skills-lock.json
+
+# gstack is a bundled skill collection cloned by install-skills.sh.
+# 250MB+ with its own .git — not commitable. install-skills.sh clones it
+# fresh and runs its ./setup to symlink the bundle into each agent.
+gstack/
