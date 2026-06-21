@@ -39,11 +39,12 @@ The generated hierarchy starts at
 `maps/scientific-expert-profiles.md`, with one page per discipline at
 `maps/scientific-expert-profiles/<discipline-id>.md`. Discipline pages list
 primary experts first, then cross-disciplinary experts, and expose relevant
-capability-map bridges. Validate and rebuild in that order:
+capability-map bridges. Build and audit in that order: generated-output audits
+expect the maps to be current, so rebuild before running the tests.
 
 ```sh
-python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py' -v
 python3 .skill-vault/build.py
+python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py' -v
 ```
 
 The builder validates the manifest against both the catalog and discovered
