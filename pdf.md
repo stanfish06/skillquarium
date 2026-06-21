@@ -21,7 +21,6 @@ created: 2026-06-09
 - [academic-paper](academic-paper.md) — 12-agent academic paper writing pipeline
 - [clinical-decision-support](clinical-decision-support.md) — Generate professional clinical decision support (CDS) documents for pharmaceutical and clinical research settings, including patient cohort analyses (biomarker-stratified with...
 - [etetoolkit](etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
-- [gstack/make-pdf](gstack-make-pdf.md) — Turn any markdown file into a publication-quality PDF
 - [liteparse](liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
 - [markitdown](markitdown.md) — Convert files and office documents to Markdown
 - [matplotlib](matplotlib.md) — Low-level plotting library for full customization
