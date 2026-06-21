@@ -11,6 +11,9 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 
 ## Overview
 
+> [!WARNING]
+> **Maintenance freeze:** No new releases since **0.12.5 (June 10, 2024), 2+ years**. The project still installs and works as documented, but it predates two years of RDKit/NumPy/Python releases with no upstream compatibility follow-up — pin versions deliberately rather than assuming active maintenance. `medchem` (also in this vault) depends on datamol and inherits the same risk. Tracked: issue [#92](https://github.com/stanfish06/my-skills/issues/92).
+
 Datamol is a Python library that provides a lightweight, Pythonic abstraction layer over RDKit for molecular cheminformatics. Simplify complex molecular operations with sensible defaults, efficient parallelization, and modern I/O capabilities. All molecular objects are native `rdkit.Chem.Mol` instances, ensuring full compatibility with the RDKit ecosystem.
 
 **Version note:** Examples target **datamol 0.12.x** (PyPI stable: **0.12.5**, June 2024). Since 0.10.0, modules are lazy-loaded by default (set `DATAMOL_DISABLE_LAZY_LOADING=1` to disable). Since 0.12.2, RDKit is a direct PyPI dependency of datamol. Fingerprints use RDKit's `rdFingerprintGenerator` API (0.12.5+).
