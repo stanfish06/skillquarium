@@ -491,7 +491,7 @@ def build_related_excluding(skills, full_desc, excluded):
 
 def parse_existing(skill):
     """Read user-editable bits from an existing wrapper so re-runs preserve them."""
-    path = os.path.join(ROOT, skill + ".md")
+    path = os.path.join(ROOT, wrapper_filename(skill))
     if not os.path.isfile(path):
         return None
     with open(path, encoding="utf-8") as wrapper_file:
@@ -1078,7 +1078,12 @@ def main():
     # ---- prune orphaned wrappers ------------------------------------------
     pruned = []
     if PRUNE:
-        keep = {wrapper_filename(s)[:-3] for s in on_disk} | {"index", "README"}
+        # Always keep gstack.md — it's a committed entry point for the
+        # bundled gstack/ collection, not a generated wrapper. Sub-skill
+        # wrappers (gstack-*.md) are gitignored and come/go with install.
+        keep = {wrapper_filename(s)[:-3] for s in on_disk} | {
+            "index", "README", "gstack",
+        }
         for f in os.listdir(ROOT):
             if not f.endswith(".md") or f.startswith("."):
                 continue
