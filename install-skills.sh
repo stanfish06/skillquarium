@@ -24,8 +24,18 @@ git restore .
 #   GSTACK_SKIP=1         — skip gstack entirely
 #   GSTACK_SKIP_BUN=1     — skip bun install (browser skills disabled;
 #                           methodology skills still work via manual symlink)
+#   GSTACK_REF=<ref>      — pin to a git ref (commit hash or tag). Defaults
+#                           to a pinned commit below for reproducibility.
+#                           Override to track main: GSTACK_REF=main
+#   GSTACK_REF=<ref>      — pin to a git ref (commit hash or tag). Defaults
+#                           to a pinned commit below for reproducibility.
+#                           Override to track main: GSTACK_REF=main
 GSTACK_DIR="$VAULT_DIR/gstack"
 GSTACK_REPO="https://github.com/garrytan/gstack.git"
+# Pinned to a known-good commit (VERSION 1.58.4.0). Bump deliberately.
+# Verify with: git -C gstack log -1 --format='%H %s' 9fd03fa
+GSTACK_DEFAULT_REF="9fd03fae9e74f5daa7a138366aca8f86c7367c5c"
+GSTACK_REF="${GSTACK_REF:-$GSTACK_DEFAULT_REF}"
 
 install_gstack() {
   if [ -n "${GSTACK_SKIP:-}" ]; then
@@ -33,14 +43,20 @@ install_gstack() {
     return 0
   fi
 
-  # Clone or update
+  # Clone or update — pinned to GSTACK_REF for reproducibility and
+  # supply-chain safety. Override with GSTACK_REF=<ref> (e.g. main) to
+  # track upstream.
   if [ -d "$GSTACK_DIR/.git" ]; then
-    echo "gstack: updating existing clone..."
-    git -C "$GSTACK_DIR" pull --ff-only --depth 1 2>/dev/null || true
+    echo "gstack: updating to ref $GSTACK_REF..."
+    git -C "$GSTACK_DIR" fetch --depth 1 origin "$GSTACK_REF" 2>/dev/null || true
+    git -C "$GSTACK_DIR" checkout --detach "$GSTACK_REF" 2>/dev/null || \
+      git -C "$GSTACK_DIR" checkout --detach FETCH_HEAD 2>/dev/null || true
   else
-    echo "gstack: cloning..."
+    echo "gstack: cloning (ref $GSTACK_REF)..."
     rm -rf "$GSTACK_DIR"
-    git clone --single-branch --depth 1 "$GSTACK_REPO" "$GSTACK_DIR"
+    git clone --no-checkout --depth 1 "$GSTACK_REPO" "$GSTACK_DIR" 2>/dev/null
+    git -C "$GSTACK_DIR" fetch --depth 1 origin "$GSTACK_REF"
+    git -C "$GSTACK_DIR" checkout --detach FETCH_HEAD
   fi
 
   if [ ! -x "$GSTACK_DIR/setup" ]; then
@@ -54,12 +70,27 @@ install_gstack() {
   if [ -z "${GSTACK_SKIP_BUN:-}" ] && ! command -v bun >/dev/null 2>&1; then
     echo "gstack: installing bun (required for browser skills)..."
     if command -v curl >/dev/null 2>&1; then
-      curl -fsSL https://bun.sh/install | bash 2>/dev/null || {
-        echo "WARNING: bun install failed." >&2
-        echo "  Install bun manually from https://bun.sh, or set GSTACK_SKIP_BUN=1" >&2
-        echo "  to skip (only methodology skills will work)." >&2
+      # Download with TLS + retries, then execute (not piped directly) so
+      # a network hiccup can't truncate the script mid-stream.
+      bun_installer="$(mktemp)"
+      trap 'rm -f "$bun_installer"' EXIT
+      if curl --proto '=https' --tlsv1.2 --fail --location --retry 3 \
+              --connect-timeout 10 -o "$bun_installer" \
+              https://bun.sh/install 2>/dev/null; then
+        bash "$bun_installer" 2>/dev/null || {
+          echo "WARNING: bun install failed." >&2
+          echo "  Install bun manually from https://bun.sh, or set GSTACK_SKIP_BUN=1" >&2
+          echo "  to skip (only methodology skills will work)." >&2
+          rm -f "$bun_installer"
+          return 1
+        }
+      else
+        echo "WARNING: failed to download bun installer." >&2
+        rm -f "$bun_installer"
         return 1
-      }
+      fi
+      rm -f "$bun_installer"
+      trap - EXIT
       export BUN_INSTALL="$HOME/.bun"
       export PATH="$BUN_INSTALL/bin:$PATH"
     else
