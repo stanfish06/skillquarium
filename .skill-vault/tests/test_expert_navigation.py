@@ -3,6 +3,7 @@ import importlib.util
 import io
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -458,9 +459,42 @@ class ExpertNavigationRenderTests(unittest.TestCase):
 
 
 class RepositoryFixedPointTests(unittest.TestCase):
-    def snapshot_generated_tree(self):
-        root = VAULT_HELPERS.parent
-        paths = set(root.glob("*.md"))
+    def copy_navigation_fixture(self, source, destination):
+        helper_dir = destination / ".skill-vault"
+        helper_dir.mkdir(parents=True)
+        for name in (
+            "build.py",
+            "expert_taxonomy.py",
+            "scientific-expert-taxonomy.json",
+        ):
+            shutil.copy2(source / ".skill-vault" / name, helper_dir / name)
+
+        catalog = Path("scientific-agents/references/catalog.json")
+        (destination / catalog).parent.mkdir(parents=True)
+        shutil.copy2(source / catalog, destination / catalog)
+
+        skill_names = []
+        for skill_path in sorted(source.glob("*/SKILL.md")):
+            skill = skill_path.parent.name
+            skill_names.append(skill)
+            copied_skill = destination / skill / "SKILL.md"
+            copied_skill.parent.mkdir(exist_ok=True)
+            shutil.copy2(skill_path, copied_skill)
+            wrapper = source / f"{skill}.md"
+            if wrapper.is_file():
+                shutil.copy2(wrapper, destination / wrapper.name)
+
+        shutil.copy2(source / "index.md", destination / "index.md")
+        for map_path in (source / "maps").rglob("*.md"):
+            relative = map_path.relative_to(source)
+            copied_map = destination / relative
+            copied_map.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(map_path, copied_map)
+        return tuple(skill_names)
+
+    def snapshot_generated_tree(self, root, skill_names):
+        paths = {root / f"{skill}.md" for skill in skill_names}
+        paths.add(root / "index.md")
         paths.update((root / "maps").rglob("*.md"))
         return {
             path.relative_to(root).as_posix(): hashlib.sha256(
@@ -470,24 +504,42 @@ class RepositoryFixedPointTests(unittest.TestCase):
         }
 
     def test_repository_build_is_a_byte_identical_fixed_point(self):
-        before = self.snapshot_generated_tree()
+        source = VAULT_HELPERS.parent
+        source_skills = tuple(
+            path.parent.name for path in sorted(source.glob("*/SKILL.md"))
+        )
+        source_before = self.snapshot_generated_tree(source, source_skills)
+        sentinel = source / "maps/scientific-expert-profiles.md"
+        sentinel_before = hashlib.sha256(sentinel.read_bytes()).hexdigest()
+
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        fixture = Path(temporary.name)
+        copied_skills = self.copy_navigation_fixture(source, fixture)
+        before = self.snapshot_generated_tree(fixture, copied_skills)
 
         result = subprocess.run(
-            [sys.executable, str(VAULT_HELPERS / "build.py")],
-            cwd=VAULT_HELPERS.parent,
+            [sys.executable, str(fixture / ".skill-vault/build.py")],
+            cwd=fixture,
             check=False,
             capture_output=True,
             text=True,
         )
 
         self.assertEqual(result.returncode, 0, result.stderr)
-        after = self.snapshot_generated_tree()
+        after = self.snapshot_generated_tree(fixture, copied_skills)
         changed = sorted(
             path
             for path in before.keys() | after.keys()
             if before.get(path) != after.get(path)
         )
         self.assertEqual(changed, [], "generated files changed on rebuild")
+        self.assertEqual(
+            self.snapshot_generated_tree(source, source_skills), source_before
+        )
+        self.assertEqual(
+            hashlib.sha256(sentinel.read_bytes()).hexdigest(), sentinel_before
+        )
 
 
 if __name__ == "__main__":

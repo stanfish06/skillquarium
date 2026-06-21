@@ -668,10 +668,13 @@ class ExpertWrapperBuildTests(unittest.TestCase):
 
     def test_main_returns_zero_after_successful_validation(self):
         taxonomy = expert_taxonomy.ExpertTaxonomy((), {})
+        master = vault_build.MAPS_DIR / "scientific-expert-profiles.md"
+        master_before = master.read_bytes()
         with (
             mock.patch.object(vault_build, "discover_skills", return_value=set()),
             mock.patch.object(vault_build, "load_catalog_profiles", return_value=set()),
             mock.patch.object(vault_build, "load_taxonomy", return_value=taxonomy),
+            mock.patch.object(vault_build, "atomic_write_text") as atomic_write,
             mock.patch.object(vault_build.os, "makedirs"),
             mock.patch("builtins.open", mock.mock_open()),
             mock.patch.object(vault_build.os.path, "isfile", return_value=False),
@@ -680,6 +683,8 @@ class ExpertWrapperBuildTests(unittest.TestCase):
             result = vault_build.main()
 
         self.assertEqual(result, 0)
+        atomic_write.assert_called_once()
+        self.assertEqual(master.read_bytes(), master_before)
 
     def test_root_override_defines_all_vault_paths(self):
         temporary = tempfile.TemporaryDirectory()
