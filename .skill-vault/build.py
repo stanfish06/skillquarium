@@ -65,6 +65,18 @@ PALETTE = {
     "security-auditing": 13382451, "software-dev": 1752220,
     "scientific-expert-profiles": 10040012,
 }
+EXPERT_PALETTE = {
+    "biology-life-sciences": 0x2CA02C,
+    "medicine-health": 0xD62728,
+    "chemistry-materials": 0xFF7F0E,
+    "physics-astronomy": 0x1F77B4,
+    "earth-environmental-sciences": 0x17BECF,
+    "agriculture-food-animal-sciences": 0xBCBD22,
+    "mathematics-statistics": 0x9467BD,
+    "computing-data-science": 0x7F7F7F,
+    "engineering-technology": 0x8C564B,
+    "social-behavioral-sciences": 0xE377C2,
+}
 GRAPH_SEARCH = "tag:#skill OR tag:#skill-map OR tag:#recipe OR tag:#moc"
 PERSONAL_MARKER = "%% ---8<--- personal notes below are preserved on re-run ---8<--- %%"
 GENERATED_EXPERT_MARKER = "generated: scientific-expert-taxonomy"
@@ -780,14 +792,40 @@ def render_wrapper(
     return "\n".join(lines)
 
 
-def update_graph():
+def expert_graph_groups(taxonomy):
+    """Build expert color groups after checking taxonomy/palette coverage."""
+    discipline_ids = tuple(
+        discipline.id for discipline in taxonomy.disciplines
+    )
+    taxonomy_domains = set(discipline_ids)
+    palette_domains = set(EXPERT_PALETTE)
+    missing = sorted(taxonomy_domains - palette_domains)
+    unexpected = sorted(palette_domains - taxonomy_domains)
+    if missing or unexpected:
+        raise TaxonomyValidationError((
+            "expert graph palette domains mismatch: "
+            f"missing={', '.join(missing) or 'none'}; "
+            f"unexpected={', '.join(unexpected) or 'none'}",
+        ))
+    return [
+        {
+            "query": f"[expert_primary:{discipline_id}]",
+            "color": {"a": 1, "rgb": EXPERT_PALETTE[discipline_id]},
+        }
+        for discipline_id in discipline_ids
+    ]
+
+
+def update_graph(taxonomy):
     """Rewrite graph.json color groups + filter, preserving all other settings."""
     import json
+    expert_groups = expert_graph_groups(taxonomy)
     path = os.path.join(ROOT, ".obsidian", "graph.json")
     cfg = {}
     if os.path.isfile(path):
         try:
-            cfg = json.load(open(path, encoding="utf-8"))
+            with open(path, encoding="utf-8") as graph_file:
+                cfg = json.load(graph_file)
         except (OSError, ValueError):
             cfg = {}
     if cfg.get("close") is False:
@@ -795,10 +833,11 @@ def update_graph():
               "Obsidian may overwrite these colors.", file=sys.stderr)
     cfg["search"] = GRAPH_SEARCH
     cfg["showOrphans"] = False
-    cfg["colorGroups"] = [
+    domain_groups = [
         {"query": f"tag:#domain/{key}", "color": {"a": 1, "rgb": PALETTE[key]}}
         for key, *_ in CATEGORIES if key in PALETTE
     ]
+    cfg["colorGroups"] = expert_groups + domain_groups
     with open(path, "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2)
     print(f"graph.json: wrote {len(cfg['colorGroups'])} color groups + filter")
@@ -848,13 +887,18 @@ def main():
         print(exc, file=sys.stderr)
         return 1
 
-    os.makedirs(MAPS_DIR, exist_ok=True)
-    os.makedirs(EXPERT_MAPS_DIR, exist_ok=True)
     discipline_ids = tuple(
         discipline.id for discipline in taxonomy.disciplines
     )
     if GRAPH:
-        update_graph()
+        try:
+            update_graph(taxonomy)
+        except TaxonomyValidationError as exc:
+            print(exc, file=sys.stderr)
+            return 1
+
+    os.makedirs(MAPS_DIR, exist_ok=True)
+    os.makedirs(EXPERT_MAPS_DIR, exist_ok=True)
 
     expert_skills = set(imported_profiles)
     if DISPATCHER in on_disk:

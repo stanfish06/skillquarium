@@ -445,6 +445,36 @@ class ExpertTaxonomyTests(unittest.TestCase):
 
 
 class ExpertWrapperBuildTests(unittest.TestCase):
+    def expert_graph_taxonomy(self):
+        discipline_ids = (
+            "biology-life-sciences",
+            "medicine-health",
+            "chemistry-materials",
+            "physics-astronomy",
+            "earth-environmental-sciences",
+            "agriculture-food-animal-sciences",
+            "mathematics-statistics",
+            "computing-data-science",
+            "engineering-technology",
+            "social-behavioral-sciences",
+        )
+        return expert_taxonomy.ExpertTaxonomy(
+            tuple(
+                expert_taxonomy.Discipline(discipline_id, discipline_id, "Test")
+                for discipline_id in discipline_ids
+            ),
+            {},
+        )
+
+    def temporary_graph(self, data):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        root = Path(directory.name)
+        graph_path = root / ".obsidian/graph.json"
+        graph_path.parent.mkdir()
+        graph_path.write_text(json.dumps(data), encoding="utf-8")
+        return root, graph_path
+
     def test_render_wrapper_ignores_mutated_build_globals(self):
         with (
             mock.patch.object(vault_build, "TODAY", "2099-12-31"),
@@ -625,6 +655,93 @@ class ExpertWrapperBuildTests(unittest.TestCase):
         self.assertEqual(related["biophysicist"], set())
         self.assertEqual(related["scientific-agents"], set())
 
+    def test_update_graph_prepends_expert_groups_and_preserves_settings(self):
+        taxonomy = self.expert_graph_taxonomy()
+        expected_expert_colors = (
+            0x2CA02C,
+            0xD62728,
+            0xFF7F0E,
+            0x1F77B4,
+            0x17BECF,
+            0xBCBD22,
+            0x9467BD,
+            0x7F7F7F,
+            0x8C564B,
+            0xE377C2,
+        )
+        root, graph_path = self.temporary_graph(
+            {
+                "close": True,
+                "unrelated": {"nested": "preserved"},
+                "colorGroups": [{"query": "old", "color": {"rgb": 1}}],
+            }
+        )
+
+        with (
+            mock.patch.object(vault_build, "ROOT", str(root)),
+            mock.patch("sys.stdout", new_callable=io.StringIO),
+        ):
+            vault_build.update_graph(taxonomy)
+
+        graph = json.loads(graph_path.read_text(encoding="utf-8"))
+        expert_queries = [
+            f"[expert_primary:{discipline.id}]"
+            for discipline in taxonomy.disciplines
+        ]
+        generic_queries = [
+            f"tag:#domain/{key}"
+            for key, *_ in vault_build.CATEGORIES
+            if key in vault_build.PALETTE
+        ]
+        queries = [group["query"] for group in graph["colorGroups"]]
+        self.assertEqual(queries, expert_queries + generic_queries)
+        self.assertEqual(
+            [group["color"] for group in graph["colorGroups"][:10]],
+            [{"a": 1, "rgb": color} for color in expected_expert_colors],
+        )
+        self.assertLess(
+            queries.index("[expert_primary:biology-life-sciences]"),
+            queries.index("tag:#domain/scientific-expert-profiles"),
+        )
+        self.assertEqual(graph["unrelated"], {"nested": "preserved"})
+        self.assertTrue(graph["close"])
+
+    def test_update_graph_rejects_expert_palette_domain_mismatches(self):
+        taxonomy = self.expert_graph_taxonomy()
+        cases = (
+            (
+                "missing",
+                {
+                    key: color
+                    for key, color in vault_build.EXPERT_PALETTE.items()
+                    if key != "biology-life-sciences"
+                },
+                "missing=biology-life-sciences; unexpected=none",
+            ),
+            (
+                "unexpected",
+                {**vault_build.EXPERT_PALETTE, "unexpected-domain": 0},
+                "missing=none; unexpected=unexpected-domain",
+            ),
+        )
+        for name, palette, expected_error in cases:
+            with self.subTest(name=name):
+                root, graph_path = self.temporary_graph(
+                    {"unrelated": "preserved"}
+                )
+                before = graph_path.read_bytes()
+                with (
+                    mock.patch.object(vault_build, "ROOT", str(root)),
+                    mock.patch.object(vault_build, "EXPERT_PALETTE", palette),
+                    self.assertRaises(
+                        expert_taxonomy.TaxonomyValidationError
+                    ) as raised,
+                ):
+                    vault_build.update_graph(taxonomy)
+
+                self.assertIn(expected_error, str(raised.exception))
+                self.assertEqual(graph_path.read_bytes(), before)
+
     def test_main_validates_taxonomy_before_any_write(self):
         validation_error = expert_taxonomy.TaxonomyValidationError(("broken",))
         with (
@@ -675,14 +792,17 @@ class ExpertWrapperBuildTests(unittest.TestCase):
             mock.patch.object(vault_build, "load_catalog_profiles", return_value=set()),
             mock.patch.object(vault_build, "load_taxonomy", return_value=taxonomy),
             mock.patch.object(vault_build, "atomic_write_text") as atomic_write,
+            mock.patch.object(vault_build, "update_graph") as update_graph,
             mock.patch.object(vault_build.os, "makedirs"),
             mock.patch("builtins.open", mock.mock_open()),
             mock.patch.object(vault_build.os.path, "isfile", return_value=False),
+            mock.patch.object(vault_build, "GRAPH", True),
             mock.patch("sys.stdout", new_callable=io.StringIO),
         ):
             result = vault_build.main()
 
         self.assertEqual(result, 0)
+        update_graph.assert_called_once_with(taxonomy)
         atomic_write.assert_called_once()
         self.assertEqual(master.read_bytes(), master_before)
 
