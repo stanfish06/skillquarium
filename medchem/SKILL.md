@@ -11,6 +11,9 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 ## Overview
 
+> [!WARNING]
+> **Maintenance freeze:** No stable release since **2.0.5 (November 18, 2024), 19+ months** (only a `v2.0.5-alpha` pre-release in Jan 2025 since). medchem also hard-depends on `datamol`, which has had no release at all in ~2 years (see [datamol#92](https://github.com/stanfish06/my-skills/issues/92)), so staleness risk is compounded. The filters documented here are unchanged and still work — pin versions deliberately rather than assuming active upstream maintenance. Tracked: issue [#93](https://github.com/stanfish06/my-skills/issues/93).
+
 Medchem is a Python library from [datamol-io](https://github.com/datamol-io/medchem) for molecular filtering and prioritization in drug discovery. Apply literature-derived drug-likeness rules, named alert catalogs, complexity thresholds, chemical-group detection, and a custom query language to triage compound libraries at scale. Filters are context-specific guidelines — combine with domain expertise and target knowledge.
 
 **Version note:** Examples target **medchem 2.0.5** (PyPI stable, Nov 2024). Requires **Python ≥3.9**. Depends on **datamol** and **RDKit** (installed automatically). `RuleFilters` and structural filter classes return **pandas DataFrames**. Lilly demerits require optional native binaries (`mamba install lilly-medchem-rules`).
