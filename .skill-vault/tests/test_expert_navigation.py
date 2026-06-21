@@ -31,12 +31,150 @@ assert BUILD_SPEC.loader is not None
 BUILD_SPEC.loader.exec_module(vault_build)
 
 
+def validate_expert_taxonomy_metadata(text, assignment):
+    match = re.match(r"^---\n(.*?)\n---(?:\n|$)", text, re.DOTALL)
+    if match is None:
+        raise ValueError("wrapper is missing first frontmatter block")
+    lines = match.group(1).splitlines()
+    keys = ("expert_primary", "expert_secondary", "bridge_domains")
+    positions = {
+        key: [
+            index
+            for index, line in enumerate(lines)
+            if line.startswith(f"{key}:")
+        ]
+        for key in keys
+    }
+    expected_counts = {
+        "expert_primary": 1,
+        "expert_secondary": int(bool(assignment.secondary)),
+        "bridge_domains": 1,
+    }
+    for key, expected_count in expected_counts.items():
+        actual_count = len(positions[key])
+        if actual_count != expected_count:
+            if expected_count == 1:
+                expectation = f"exactly one {key}"
+            else:
+                expectation = f"no {key}"
+            raise ValueError(
+                f"expected {expectation}, found {actual_count}"
+            )
+
+    expected = [f"expert_primary: {assignment.primary}"]
+    if assignment.secondary:
+        expected.append("expert_secondary:")
+        expected.extend(f"  - {value}" for value in assignment.secondary)
+    expected.append("bridge_domains:")
+    expected.extend(f"  - {value}" for value in assignment.bridge_domains)
+
+    start = positions["expert_primary"][0]
+    bridge_start = positions["bridge_domains"][0]
+    end = bridge_start + 1
+    while end < len(lines) and lines[end].startswith("  - "):
+        end += 1
+    actual = lines[start:end]
+    if actual != expected:
+        raise ValueError(
+            "expert taxonomy metadata mismatch: "
+            f"expected {expected!r}, found {actual!r}"
+        )
+
+
+def _profile_bullet_slugs(section):
+    slugs = []
+    pattern = re.compile(
+        r"^- \[([a-z0-9]+(?:-[a-z0-9]+)*)\]"
+        r"\(\.\./\.\./([a-z0-9]+(?:-[a-z0-9]+)*)\.md\) - .+$"
+    )
+    for line in section.splitlines():
+        if not line.startswith("- "):
+            continue
+        match = pattern.fullmatch(line)
+        if match is None or match.group(1) != match.group(2):
+            raise ValueError(f"invalid profile bullet: {line}")
+        slugs.append(match.group(1))
+    return tuple(slugs)
+
+
+def validate_discipline_profile_sections(
+    text, *, expected_primary, expected_cross
+):
+    primary_heading = "## Primary experts"
+    cross_heading = "## Cross-disciplinary experts"
+    if text.count(primary_heading) != 1 or text.count(cross_heading) != 1:
+        raise ValueError("profile section headings must each appear exactly once")
+    primary_start = text.index(primary_heading)
+    cross_start = text.index(cross_heading)
+    if primary_start >= cross_start:
+        raise ValueError("profile section headings are out of order")
+
+    primary_section = text[primary_start + len(primary_heading) : cross_start]
+    cross_section = text[cross_start + len(cross_heading) :]
+    actual_primary = _profile_bullet_slugs(primary_section)
+    actual_cross = _profile_bullet_slugs(cross_section)
+    expected_primary = tuple(expected_primary)
+    expected_cross = tuple(expected_cross)
+    all_linked_slugs = tuple(
+        re.findall(
+            r"\]\(\.\./\.\./([a-z0-9]+(?:-[a-z0-9]+)*)\.md\)",
+            text,
+        )
+    )
+    if (
+        actual_primary != expected_primary
+        or actual_cross != expected_cross
+        or all_linked_slugs != expected_primary + expected_cross
+    ):
+        raise ValueError(
+            "profile section mismatch: "
+            f"expected {(expected_primary, expected_cross)!r}, "
+            f"found {(actual_primary, actual_cross)!r}"
+        )
+
+
 class ExpertNavigationApiTests(unittest.TestCase):
     def test_exposes_testable_expert_navigation_helpers(self):
         self.assertTrue(hasattr(vault_build, "render_expert_master_map"))
         self.assertTrue(hasattr(vault_build, "render_expert_discipline_map"))
         self.assertTrue(hasattr(vault_build, "prune_stale_expert_maps"))
         self.assertTrue(hasattr(vault_build, "atomic_write_text"))
+
+
+class ExpertNavigationAuditParserTests(unittest.TestCase):
+    def test_taxonomy_metadata_parser_rejects_duplicate_keys(self):
+        text = (
+            "---\n"
+            "title: alpha\n"
+            "expert_primary: physics-astronomy\n"
+            "expert_primary: chemistry-materials\n"
+            "bridge_domains:\n"
+            "  - data-science-compute\n"
+            "---\n"
+        )
+        assignment = expert_taxonomy.ProfileAssignment(
+            "physics-astronomy", (), ("data-science-compute",)
+        )
+
+        with self.assertRaisesRegex(ValueError, "exactly one expert_primary"):
+            validate_expert_taxonomy_metadata(text, assignment)
+
+    def test_discipline_section_validator_rejects_extra_or_duplicate_members(self):
+        text = (
+            "## Primary experts\n\n"
+            "- [alpha](../../alpha.md) - Alpha.\n"
+            "- [alpha](../../alpha.md) - Duplicate.\n\n"
+            "## Cross-disciplinary experts\n\n"
+            "- [omega](../../omega.md) - Omega.\n"
+            "- [extra](../../extra.md) - Extra.\n"
+        )
+
+        with self.assertRaisesRegex(ValueError, "profile section mismatch"):
+            validate_discipline_profile_sections(
+                text,
+                expected_primary=("alpha",),
+                expected_cross=("omega",),
+            )
 
 
 class ExpertNavigationRenderTests(unittest.TestCase):
@@ -494,56 +632,29 @@ class RepositoryGeneratedNavigationAuditTests(unittest.TestCase):
             for discipline in cls.taxonomy.disciplines
         }
 
-    def frontmatter(self, text):
-        match = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
-        self.assertIsNotNone(match, "wrapper is missing frontmatter")
-        return match.group(1)
-
-    def scalar_field(self, frontmatter, key):
-        match = re.search(
-            rf"^{re.escape(key)}: (.+)$", frontmatter, re.MULTILINE
-        )
-        return None if match is None else match.group(1)
-
-    def list_field(self, frontmatter, key):
-        lines = frontmatter.splitlines()
-        try:
-            start = lines.index(f"{key}:") + 1
-        except ValueError:
-            return None
-        values = []
-        for line in lines[start:]:
-            if not line.startswith("  - "):
-                break
-            values.append(line.removeprefix("  - "))
-        return tuple(values)
-
     def test_all_503_wrappers_match_manifest_metadata_and_navigation(self):
         self.assertEqual(len(self.taxonomy.profiles), 503)
 
         for slug, assignment in self.taxonomy.profiles.items():
             with self.subTest(slug=slug):
                 text = (self.root / f"{slug}.md").read_text(encoding="utf-8")
-                frontmatter = self.frontmatter(text)
-                self.assertEqual(
-                    self.scalar_field(frontmatter, "expert_primary"),
-                    assignment.primary,
-                )
-                expected_secondary = assignment.secondary or None
-                self.assertEqual(
-                    self.list_field(frontmatter, "expert_secondary"),
-                    expected_secondary,
-                )
-                self.assertEqual(
-                    self.list_field(frontmatter, "bridge_domains"),
-                    assignment.bridge_domains,
-                )
+                validate_expert_taxonomy_metadata(text, assignment)
                 self.assertTrue(assignment.bridge_domains)
-                self.assertIn(
-                    "maps/scientific-expert-profiles/"
-                    f"{assignment.primary}.md",
-                    text,
+                primary = self.taxonomy.discipline_by_id[assignment.primary]
+                primary_link = (
+                    f"[{primary.title}]"
+                    "(maps/scientific-expert-profiles/"
+                    f"{primary.id}.md)"
                 )
+                self.assertEqual(text.count(primary_link), 1)
+                for discipline_id in assignment.secondary:
+                    secondary = self.taxonomy.discipline_by_id[discipline_id]
+                    secondary_link = (
+                        f"[{secondary.title}]"
+                        "(maps/scientific-expert-profiles/"
+                        f"{secondary.id}.md)"
+                    )
+                    self.assertEqual(text.count(secondary_link), 1)
                 for domain in assignment.bridge_domains:
                     self.assertIn(f"(maps/{domain}.md)", text)
 
@@ -551,24 +662,16 @@ class RepositoryGeneratedNavigationAuditTests(unittest.TestCase):
         for discipline in self.taxonomy.disciplines:
             path = self.discipline_maps[discipline.id]
             text = path.read_text(encoding="utf-8")
-            primary_heading = text.index("## Primary experts")
-            cross_heading = text.index("## Cross-disciplinary experts")
-            self.assertLess(primary_heading, cross_heading)
-            primary_section = text[primary_heading:cross_heading]
-            cross_section = text[cross_heading:]
-
-            for slug in self.taxonomy.primary_profiles(discipline.id):
-                with self.subTest(discipline=discipline.id, primary=slug):
-                    link = f"](../../{slug}.md)"
-                    self.assertEqual(text.count(link), 1)
-                    self.assertIn(link, primary_section)
-
-            for slug in self.taxonomy.secondary_profiles(discipline.id):
-                with self.subTest(discipline=discipline.id, secondary=slug):
-                    link = f"](../../{slug}.md)"
-                    self.assertEqual(text.count(link), 1)
-                    self.assertNotIn(link, text[:cross_heading])
-                    self.assertIn(link, cross_section)
+            with self.subTest(discipline=discipline.id):
+                validate_discipline_profile_sections(
+                    text,
+                    expected_primary=self.taxonomy.primary_profiles(
+                        discipline.id
+                    ),
+                    expected_cross=self.taxonomy.secondary_profiles(
+                        discipline.id
+                    ),
+                )
 
     def test_dispatcher_appears_only_in_master_map(self):
         master = self.master_map.read_text(encoding="utf-8")
