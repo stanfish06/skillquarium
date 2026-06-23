@@ -1,7 +1,7 @@
 ---
 name: gtars
 description: High-performance toolkit for genomic interval analysis in Rust with Python bindings. Use when working with genomic regions, BED files, coverage tracks, overlap detection, tokenization for ML models, or fragment analysis in computational genomics and machine learning applications.
-license: Unknown
+license: BSD-2-Clause
 metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 ---
 
@@ -47,7 +47,7 @@ Add to Cargo.toml for Rust projects:
 
 ```toml
 [dependencies]
-gtars = { version = "0.1", features = ["tokenizers", "overlaprs"] }
+gtars = { version = "0.9", features = ["tokenizers", "overlaprs"] }
 ```
 
 ## Core Capabilities
