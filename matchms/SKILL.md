@@ -183,10 +183,9 @@ Consult `references/workflows.md` for detailed examples.
 uv pip install matchms
 ```
 
-For molecular structure processing (SMILES, InChI):
-```bash
-uv pip install matchms[chemistry]
-```
+Molecular structure processing (SMILES, InChI) via rdkit and pubchempy is included as a core
+dependency since matchms 0.24.0 — the older `matchms[chemistry]` extra no longer exists and will
+fail to install.
 
 ## Reference Documentation
 
