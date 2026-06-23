@@ -2421,9 +2421,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/code-review-and-quality/SKILL.md",
-      "skillFolderHash": "7a7b6783c30bb40f01b472325c85d0789b38e67e",
+      "skillFolderHash": "49d4d30c3839541abb063446b3b24bc6c0dc5ae6",
       "installedAt": "2026-06-12T08:07:57.843Z",
-      "updatedAt": "2026-06-21T07:57:37.435Z"
+      "updatedAt": "2026-06-23T07:32:38.684Z"
     },
     "code-simplification": {
       "source": "addyosmani/agent-skills",
