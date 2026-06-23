@@ -16,7 +16,8 @@ Comprehensive geospatial science skill covering GIS, remote sensing, spatial ana
 conda install -c conda-forge gdal rasterio fiona shapely pyproj geopandas
 
 # Remote sensing & ML
-uv pip install rsgislib torchgeo earthengine-api
+conda install -c conda-forge rsgislib  # rsgislib is conda-only, not on PyPI
+uv pip install torchgeo earthengine-api
 uv pip install scikit-learn xgboost torch-geometric
 
 # Network & visualization
@@ -27,8 +28,8 @@ uv pip install cartopy contextily mapclassify
 uv pip install xarray rioxarray dask-geopandas
 uv pip install pystac-client planetary-computer
 
-# Point clouds
-uv pip install laspy pylas open3d pdal
+# Point clouds (pylas is deprecated upstream in favor of laspy 2.0+; use laspy only)
+uv pip install laspy open3d pdal
 
 # Databases
 conda install -c conda-forge postgis spatialite
