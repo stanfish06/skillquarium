@@ -38,6 +38,10 @@ class ErrorCode:
     # there. Existence of inputs is validated (MISSING_FASTQ); readability is deferred to
     # Nextflow's staging, which reads in the true execution context.
     INVALID_SAMPLESHEET = "INVALID_SAMPLESHEET"
+    # Remote input/reference URIs (s3://, gs://, https://, ftp://, …) are rejected by
+    # default (local-first); they are only allowed with --allow-remote-inputs, which
+    # also emits a runtime warning that data is being fetched over the network.
+    REMOTE_INPUT_NOT_ALLOWED = "REMOTE_INPUT_NOT_ALLOWED"
     OUTPUT_DIR_NOT_EMPTY = "OUTPUT_DIR_NOT_EMPTY"
     OUTPUT_DIR_NOT_WRITABLE = "OUTPUT_DIR_NOT_WRITABLE"
     MISSING_REFERENCE = "MISSING_REFERENCE"

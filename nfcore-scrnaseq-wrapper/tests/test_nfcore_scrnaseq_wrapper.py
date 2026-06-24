@@ -179,6 +179,32 @@ def test_main_writes_structured_error_for_aligner_preset_conflict(tmp_path, monk
     assert payload["error_code"] == "INVALID_PRESET_CONFIGURATION"
 
 
+def test_main_accepts_explicit_argv(tmp_path, monkeypatch):
+    """main() must accept an explicit argv list (parity with nfcore-sarek/rnaseq)
+    so the entrypoint is unit-testable without mutating sys.argv."""
+    module = _load_skill_module()
+
+    def _boom(*_args, **_kwargs):
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(module, "_run_wrapper", _boom)
+    # Reaching _run_wrapper proves argv was parsed by main(argv=...).
+    assert module.main(["--output", str(tmp_path), "--demo"]) == 130
+
+
+def test_main_keyboard_interrupt_returns_130(tmp_path, monkeypatch):
+    """Ctrl+C during a long-running pipeline must exit 130 (SIGINT convention),
+    not dump a traceback — parity with nfcore-sarek/rnaseq."""
+    module = _load_skill_module()
+
+    def _boom(*_args, **_kwargs):
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(module, "_run_wrapper", _boom)
+    rc = module.main(["--output", str(tmp_path), "--demo"])
+    assert rc == 130
+
+
 def test_parser_save_align_intermeds_is_two_way_switch():
     """--save-align-intermeds must be a two-way switch so the BAM-saving default
     can be explicitly turned OFF (--no-save-align-intermeds → False), turned ON

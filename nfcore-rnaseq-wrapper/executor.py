@@ -26,8 +26,11 @@ def execute_nextflow(
     *,
     cwd: Path,
     output_dir: Path,
-    timeout_seconds: int,
+    timeout_seconds: int | None,
 ) -> dict[str, object]:
+    # timeout_seconds=None disables the wall-clock cap entirely (long HPC/cloud
+    # runs whose walltime is enforced by the scheduler); proc.wait(timeout=None)
+    # blocks until completion.
     logs_dir = output_dir / "logs"
     logs_dir.mkdir(parents=True, exist_ok=True)
     stdout_path = logs_dir / "stdout.txt"

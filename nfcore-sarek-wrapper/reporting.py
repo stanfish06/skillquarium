@@ -32,24 +32,18 @@ if str(_SKILL_DIR) in sys.path:
 sys.path.insert(0, str(_SKILL_DIR))
 
 
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
+purge_foreign_bare_modules("schemas")
 
-_purge_foreign_bare_modules("schemas")
-
+from clawbio.common.report import DISCLAIMER as _DISCLAIMER  # noqa: E402
 from clawbio.common.textio import write_text_lf  # noqa: E402
 from schemas import DEFAULT_ALIGNER, DEFAULT_STEP, SKILL_NAME, SKILL_VERSION  # noqa: E402
 
-_DISCLAIMER = (
-    "ClawBio is a research and educational tool. It is not a medical device "
-    "and does not provide clinical diagnoses. Consult a healthcare "
-    "professional before making any medical decisions."
-)
+# Disclaimer text is sourced from the single canonical constant in
+# clawbio.common.report (shared with nfcore-scrnaseq/rnaseq via
+# generate_report_footer) so the wording can never drift across skills.
 
 _EM_DASH = "-"  # ASCII placeholder for "not available"
 

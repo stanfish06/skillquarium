@@ -1205,3 +1205,46 @@ def test_run_preflight_happy_path(tmp_path, stub_binaries):
         repo_root=repo_root,
     )
     assert isinstance(result, PreflightResult)
+
+
+# --- --allow-remote-inputs gate (local-first by default) ---------------------
+
+def test_remote_samplesheet_input_rejected_by_default():
+    import preflight as _pf
+    with pytest.raises(SkillError) as exc:
+        _pf._check_remote_inputs(
+            {}, {"fastq_paths": ["s3://bucket/n_R1.fastq.gz"], "bam_paths": [], "cram_paths": []},
+            allow_remote_inputs=False,
+        )
+    assert exc.value.error_code == ErrorCode.REMOTE_INPUT_NOT_ALLOWED
+
+
+def test_remote_reference_param_rejected_by_default():
+    import preflight as _pf
+    with pytest.raises(SkillError) as exc:
+        _pf._check_remote_inputs(
+            {"fasta": "https://example.org/genome.fa"}, {}, allow_remote_inputs=False
+        )
+    assert exc.value.error_code == ErrorCode.REMOTE_INPUT_NOT_ALLOWED
+
+
+def test_igenomes_base_remote_default_is_not_gated():
+    """The public iGenomes mirror base (s3://ngi-igenomes/) is remote by design and
+    must NOT trip the local-first gate."""
+    import preflight as _pf
+    _pf._check_remote_inputs(
+        {"igenomes_base": "s3://ngi-igenomes/igenomes/"}, {}, allow_remote_inputs=False
+    )
+
+
+def test_remote_inputs_allowed_with_flag_warns(capsys):
+    import preflight as _pf
+    _pf._check_remote_inputs(
+        {}, {"fastq_paths": ["gs://bucket/n_R1.fastq.gz"]}, allow_remote_inputs=True
+    )
+    assert "--allow-remote-inputs" in capsys.readouterr().err
+
+
+def test_local_inputs_pass_the_remote_gate():
+    import preflight as _pf
+    _pf._check_remote_inputs({"fasta": "/refs/genome.fa"}, {"fastq_paths": ["/d/n_R1.fastq.gz"]}, allow_remote_inputs=False)

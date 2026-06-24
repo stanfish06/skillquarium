@@ -66,6 +66,10 @@ _CONTROL_DESTS = frozenset({
     "deseq2_vst",         # recorded explicitly via --deseq2-vst/--no-deseq2-vst
     "nextflow_config",    # recorded explicitly (list)
     "check",              # preflight-only, never reaches a real run
+    "verbose",            # launcher-only logging concern, not an nf-core param
+    "no_banner",          # launcher-only display concern, not an nf-core param
+    "work_dir",           # execution-environment path, not a scientific param
+    "allow_remote_inputs",  # data-governance gate, not an nf-core param
 })
 
 

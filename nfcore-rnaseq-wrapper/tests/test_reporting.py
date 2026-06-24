@@ -471,8 +471,23 @@ def test_commands_sh_replays_every_run_affecting_wrapper_flag(tmp_path):
     # Handled specially / intentionally not replayed verbatim:
     #  --input/--output → emitted in bundle-relative form by dedicated logic;
     #  --demo → off in this real-run scenario; --check → means "do not run";
-    #  --no-deseq2-vst → alternate store_false form of --deseq2-vst (mutually exclusive).
-    special = {"--input", "--output", "--demo", "--check", "--no-deseq2-vst"}
+    #  --no-deseq2-vst → alternate store_false form of --deseq2-vst (mutually exclusive);
+    #  -v/--verbose/--no-banner → launcher-only logging/display, not run-affecting;
+    #  -c/--config → aliases of --nextflow-config, replayed under that canonical name.
+    special = {
+        "--input",
+        "--output",
+        "--demo",
+        "--check",
+        "--no-deseq2-vst",
+        "-v",
+        "--verbose",
+        "--no-banner",
+        "-c",
+        "--config",
+        "--work-dir",
+        "--allow-remote-inputs",
+    }
     missing = wrapper_flags - emitted - special
     assert missing == set(), f"wrapper flags not replayed in commands.sh: {sorted(missing)}"
 

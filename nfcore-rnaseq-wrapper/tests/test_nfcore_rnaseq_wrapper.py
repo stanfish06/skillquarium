@@ -1050,3 +1050,16 @@ def test_clawbio_kallisto_index_forwarded_to_rnaseq_pipeline():
     """--kallisto-index must be forwardable (regression: absent from the forwarding loop)."""
     values, _ = _rnaseq_pipeline_allowlist()
     assert "--kallisto-index" in values, f"--kallisto-index missing from allowlist: {sorted(values)!r}"
+
+
+def test_main_keyboard_interrupt_returns_130(tmp_path, monkeypatch):
+    """Ctrl+C during a long-running pipeline must exit 130 (SIGINT convention),
+    not dump a traceback — parity with nfcore-sarek/scrnaseq."""
+    module = _load_skill_module()
+
+    def _boom(*_args, **_kwargs):
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(module, "_run_wrapper", _boom)
+    rc = module.main(["--output", str(tmp_path), "--demo"])
+    assert rc == 130

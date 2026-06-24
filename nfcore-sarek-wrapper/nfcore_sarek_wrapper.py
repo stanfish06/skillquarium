@@ -38,15 +38,10 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 
-def _purge_foreign_bare_modules(*names: str) -> None:
-    for name in names:
-        module = sys.modules.get(name)
-        module_file = Path(getattr(module, "__file__", "") or "")
-        if module is not None and _SKILL_DIR not in module_file.parents and module_file != _SKILL_DIR / f"{name}.py":
-            sys.modules.pop(name, None)
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
 
-
-_purge_foreign_bare_modules(
+purge_foreign_bare_modules(
     "command_builder",
     "errors",
     "executor",
@@ -333,8 +328,83 @@ _BANNER = (
 
 
 def _print(msg: str) -> None:
-    """Log to stdout (not stderr) for status messages."""
+    """Log a human-readable status line to stdout (progress/traceability)."""
     print(msg, flush=True)
+
+
+_DEFAULT_TIMEOUT_HOURS = DEFAULT_TIMEOUT_SECONDS / 3600
+
+
+def _timeout_hours(value: str) -> float:
+    try:
+        hours = float(value)
+    except (TypeError, ValueError):
+        raise argparse.ArgumentTypeError(
+            f"--timeout-hours must be a number, got {value!r}"
+        )
+    if hours < 0:
+        raise argparse.ArgumentTypeError(
+            "--timeout-hours must be >= 0 (0 disables the timeout)"
+        )
+    return hours
+
+
+def _resolve_timeout_seconds(args: argparse.Namespace) -> int | None:
+    """Translate --timeout-hours into seconds; 0 disables the cap (returns None)."""
+    hours = getattr(args, "timeout_hours", _DEFAULT_TIMEOUT_HOURS)
+    if hours is None or hours == 0:
+        return None
+    return int(round(hours * 3600))
+
+
+def _check_pipeline_version_supported(args: argparse.Namespace) -> None:
+    """Keep execution on the pinned 3.8.1 contract unless explicitly overridden.
+
+    The wrapper's parameter set, profile matrix and output validations are
+    hardcoded for nf-core/sarek 3.8.1. Running a different remote tag/commit would
+    apply 3.8.1 rules to a pipeline that may differ, so any non-3.8.1
+    ``--pipeline-version`` is blocked by default; ``--allow-pipeline-version-override``
+    is a recorded, warned opt-in for advanced use. Parity with
+    nfcore-scrnaseq/rnaseq.
+    """
+    requested = str(getattr(args, "pipeline_version", "") or "").strip()
+    if requested == DEFAULT_PIPELINE_VERSION:
+        return
+    if getattr(args, "allow_pipeline_version_override", False):
+        print(
+            f"WARNING: --pipeline-version {requested!r} differs from the wrapper's pinned "
+            f"nf-core/sarek {DEFAULT_PIPELINE_VERSION} contract. Parameter, profile and "
+            f"output validations remain {DEFAULT_PIPELINE_VERSION}-specific and may not match.",
+            file=sys.stderr,
+        )
+        return
+    raise SkillError(
+        stage="validation",
+        error_code=ErrorCode.PIPELINE_SOURCE_INVALID,
+        message=(
+            f"--pipeline-version must be {DEFAULT_PIPELINE_VERSION} "
+            "(the version this wrapper's validations are pinned to)."
+        ),
+        fix=(
+            f"Use --pipeline-version {DEFAULT_PIPELINE_VERSION}, or pass "
+            "--allow-pipeline-version-override to run a different version at your own risk "
+            f"(validations stay {DEFAULT_PIPELINE_VERSION})."
+        ),
+        details={"requested": requested, "contract_version": DEFAULT_PIPELINE_VERSION},
+    )
+
+
+def _resolve_nextflow_work_dir(args: argparse.Namespace, output_dir: Path) -> Path | str:
+    """Resolve the Nextflow work directory: default <output>/upstream/work, or the
+    user's --work-dir (a local path, or an object-store URI kept verbatim for cloud
+    executors). Parity with nfcore-scrnaseq/rnaseq."""
+    raw_work_dir = getattr(args, "work_dir", None)
+    if not raw_work_dir:
+        return output_dir / "upstream" / "work"
+    work_dir = str(raw_work_dir).strip()
+    if "://" in work_dir:
+        return work_dir
+    return Path(work_dir).expanduser().resolve()
 
 
 # ---------------------------------------------------------------------------
@@ -371,16 +441,54 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--nextflow-config",
+        "-c",
+        "--config",
+        dest="nextflow_config",
         action="append",
         metavar="CONFIG",
         default=None,
-        help="Extra Nextflow -c config file(s). Can be repeated.",
+        help="Extra Nextflow -c config file(s) (aliases: -c/--config). Can be repeated.",
     )
     parser.add_argument("--pipeline-version", default=DEFAULT_PIPELINE_VERSION, help="Pinned nf-core/sarek tag/ref")
+    parser.add_argument(
+        "--allow-pipeline-version-override",
+        action="store_true",
+        help=(
+            f"Run a --pipeline-version other than the pinned {DEFAULT_PIPELINE_VERSION} "
+            "contract (recorded, warned). Validations stay "
+            f"{DEFAULT_PIPELINE_VERSION}-specific, so this is at your own risk."
+        ),
+    )
     parser.add_argument("--pipeline-local", default=None, help="Local nf-core/sarek checkout")
+    parser.add_argument(
+        "--work-dir",
+        default=None,
+        help="Nextflow work directory. Defaults to <output>/upstream/work; may be an object-store URI for cloud executors.",
+    )
+    parser.add_argument(
+        "--allow-remote-inputs",
+        action="store_true",
+        help=(
+            "Opt in to remote samplesheet inputs and reference paths (s3://, gs://, "
+            "https://, ftp://, …). Default is local-first: remote URIs are rejected so "
+            "genetic data and references stay on the local machine. When enabled, a "
+            "runtime warning lists the paths fetched over the network. (The iGenomes "
+            "mirror base and object-store --work-dir are not gated.)"
+        ),
+    )
     parser.add_argument("--params-file", default=None, help="Sarek-native --params-file (advanced)")
     parser.add_argument("--no-banner", action="store_true", help="Suppress console banner")
     parser.add_argument("-v", "--verbose", action="store_true", help="Verbose logging")
+    parser.add_argument(
+        "--timeout-hours",
+        type=_timeout_hours,
+        default=_DEFAULT_TIMEOUT_HOURS,
+        help=(
+            f"Wall-clock cap for the Nextflow run in hours (default {_DEFAULT_TIMEOUT_HOURS:g}). "
+            "Use 0 to disable the cap for long HPC/cloud runs whose walltime is enforced "
+            "by the scheduler."
+        ),
+    )
     parser.add_argument(
         "--extra-param",
         action="append",
@@ -431,7 +539,8 @@ def main(argv: list[str] | None = None) -> int:
         _print(_BANNER)
     output_dir = Path(args.output).expanduser().resolve()
     try:
-        return _run(args, output_dir)
+        _check_pipeline_version_supported(args)
+        return _run_wrapper(args, output_dir)
     except SkillError as exc:
         return _handle_skill_error(output_dir, exc, verbose=args.verbose)
     except KeyboardInterrupt:
@@ -441,7 +550,7 @@ def main(argv: list[str] | None = None) -> int:
         return _handle_unexpected_error(output_dir, exc, verbose=args.verbose)
 
 
-def _run(args: argparse.Namespace, output_dir: Path) -> int:
+def _run_wrapper(args: argparse.Namespace, output_dir: Path) -> int:
     # Materialise config-provided step/tools before input validation. In
     # particular, downstream Sarek steps may omit input and retrieve their CSV
     # handoff, whereas mapping may not.
@@ -507,6 +616,7 @@ def _run(args: argparse.Namespace, output_dir: Path) -> int:
         repo_root=repo_root,
         resume=bool(args.resume),
         resume_manifest=resume_manifest,
+        allow_remote_inputs=bool(getattr(args, "allow_remote_inputs", False)),
     )
     _print(f"[preflight] passed (warnings: {len(preflight_result.warnings)})")
     if args.verbose:
@@ -535,7 +645,7 @@ def _run(args: argparse.Namespace, output_dir: Path) -> int:
 
     macos_cfg = _write_macos_docker_config(output_dir, args=args)
     extra_configs = _resolve_extra_configs(args, macos_cfg=macos_cfg)
-    work_dir = output_dir / "upstream" / "work"
+    work_dir = _resolve_nextflow_work_dir(args, output_dir)
 
     nextflow_command, command_str = build_nextflow_command(
         pipeline_source=pipeline_source,
@@ -558,7 +668,7 @@ def _run(args: argparse.Namespace, output_dir: Path) -> int:
         nextflow_command,
         cwd=output_dir,
         output_dir=output_dir,
-        timeout_seconds=DEFAULT_TIMEOUT_SECONDS,
+        timeout_seconds=_resolve_timeout_seconds(args),
     )
     elapsed = round(time.monotonic() - started, 3)
     _print(f"[execute] completed in {elapsed:.1f}s")
@@ -735,14 +845,27 @@ def _apply_demo_overrides(args: argparse.Namespace) -> None:
         for key in (*_DEMO_CLEARED_REFERENCE_FIELDS, "igenomes_ignore"):
             if extras.pop(key, None) is not None and key not in cleared:
                 cleared.append(key)
+    # Demo coercions override user-supplied flags, so they are advisories the user
+    # should notice → stderr WARNING (parity with nfcore-scrnaseq/rnaseq), not a
+    # stdout progress line.
     if cleared:
         flags = ", ".join("--" + f.replace("_", "-") for f in cleared)
-        _print(f"[demo] cleared reference flags: {flags}")
+        print(
+            f"WARNING: --demo ignores reference flags ({flags}); "
+            "the upstream test profile provides its own bundled references.",
+            file=sys.stderr,
+        )
     if args.input:
-        _print("[demo] ignoring --input; the upstream test profile provides its own samplesheet")
+        print(
+            "WARNING: --demo ignores --input; the upstream test profile provides its own samplesheet.",
+            file=sys.stderr,
+        )
         args.input = None
     if args.resume:
-        _print("[demo] disabling --resume; demo runs do not resume from prior synthetic state")
+        print(
+            "WARNING: --demo disables --resume; demo runs cannot resume from a prior synthetic run.",
+            file=sys.stderr,
+        )
         args.resume = False
 
 
@@ -1336,7 +1459,13 @@ def _handle_skill_error(output_dir: Path, exc: SkillError, *, verbose: bool) -> 
         _print(_indent(json.dumps(exc.details, indent=2, default=str), 4))
     _print("============================================")
     _write_error_result_if_safe(output_dir, payload)
-    return 2
+    # Machine-readable error on stderr: always available even when result.json
+    # cannot be written (e.g. the output dir is a file or inside the repo).
+    print(json.dumps(payload, indent=2), file=sys.stderr)
+    # Exit 1 for a SkillError (parity with nfcore-scrnaseq/rnaseq). Exit 2 is
+    # reserved for argparse CLI-usage errors, so reusing it for validation
+    # failures would make the two indistinguishable to machine consumers.
+    return 1
 
 
 def _handle_unexpected_error(output_dir: Path, exc: Exception, *, verbose: bool) -> int:
@@ -1358,6 +1487,8 @@ def _handle_unexpected_error(output_dir: Path, exc: Exception, *, verbose: bool)
         _print("  Re-run with --verbose for traceback.")
     _print("================================================")
     _write_error_result_if_safe(output_dir, payload)
+    # Machine-readable error on stderr (always available; see _handle_skill_error).
+    print(json.dumps(payload, indent=2), file=sys.stderr)
     return 1
 
 

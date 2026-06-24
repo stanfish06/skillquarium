@@ -27,6 +27,8 @@ from acmg_engine import (
     is_secondary_finding_gene,
 )
 from clinical_variant_reporter import (
+    VEP_REST_URL,
+    annotate_variants_vep,
     build_evidence_from_cache,
     generate_report,
     load_demo_evidence_cache,
@@ -337,9 +339,73 @@ class TestDemoMode:
         assert result["total_variants"] == 20
         assert result["framework"] == "ACMG/AMP 2015 (Richards et al., PMID 25741868)"
 
+    def test_demo_transcripts_are_versioned(self, demo_vcf_path):
+        """HGVS v21.1 requires versioned transcript accessions (e.g. ENST00000357654.9)."""
+        records = parse_vcf(demo_vcf_path)
+        classified = run_classification(records, demo=True)
+        import re
+        versioned_pattern = re.compile(r"^ENST\d+\.\d+$")
+        for cv in classified:
+            transcript = cv.evidence.transcript
+            if transcript:
+                assert versioned_pattern.match(transcript), (
+                    f"Unversioned transcript {transcript} for {cv.evidence.gene} "
+                    f"at {cv.evidence.chrom}:{cv.evidence.pos}"
+                )
+
     def test_gene_filter(self, demo_vcf_path):
         records = parse_vcf(demo_vcf_path)
         classified = run_classification(records, demo=True, gene_filter={"BRCA1", "TP53"})
         genes = {cv.evidence.gene for cv in classified}
         assert genes <= {"BRCA1", "TP53"}
         assert len(classified) >= 2
+
+
+# ---------------------------------------------------------------------------
+# Unit tests — VEP live-path parameters
+# ---------------------------------------------------------------------------
+class TestVepLivePath:
+    """Verify that annotate_variants_vep sends transcript_version=1 to Ensembl."""
+
+    def test_transcript_version_param_sent(self, monkeypatch):
+        from unittest.mock import MagicMock
+        from clinical_variant_reporter import VcfRecord
+
+        captured_kwargs: list[dict] = []
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = [
+            {
+                "input": "1 100 100 A/G 1",
+                "most_severe_consequence": "missense_variant",
+                "transcript_consequences": [
+                    {
+                        "gene_symbol": "FAKEGENE",
+                        "impact": "MODERATE",
+                        "consequence_terms": ["missense_variant"],
+                        "transcript_id": "ENST00000000001.3",
+                    }
+                ],
+            }
+        ]
+
+        def mock_post(*args, **kwargs):
+            captured_kwargs.append(kwargs)
+            return mock_response
+
+        import requests
+        monkeypatch.setattr(requests, "post", mock_post)
+        monkeypatch.setattr(
+            "clinical_variant_reporter.VEP_RATE_LIMIT_SECONDS", 0,
+        )
+
+        records = [VcfRecord(chrom="1", pos=100, id=".", ref="A", alt="G",
+                             qual=".", filt="PASS", info={})]
+        annotate_variants_vep(records)
+
+        assert len(captured_kwargs) == 1
+        params = captured_kwargs[0].get("params", {})
+        assert params.get("transcript_version") == 1, (
+            f"Expected transcript_version=1 in VEP params, got: {params}"
+        )

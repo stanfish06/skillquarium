@@ -16,8 +16,13 @@ from clawbio.common.report import (
 from clawbio.common.textio import write_text_lf
 
 _SKILL_DIR = Path(__file__).resolve().parent
-if str(_SKILL_DIR) not in sys.path:
-    sys.path.insert(0, str(_SKILL_DIR))
+if str(_SKILL_DIR) in sys.path:
+    sys.path.remove(str(_SKILL_DIR))
+sys.path.insert(0, str(_SKILL_DIR))
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
+
+purge_foreign_bare_modules("repro_commands", "schemas")
 
 from repro_commands import build_nextflow_commands_sh, write_macos_docker_config
 from schemas import (

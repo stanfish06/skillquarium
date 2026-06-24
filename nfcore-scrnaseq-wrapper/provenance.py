@@ -11,8 +11,13 @@ from clawbio.common.checksums import sha256_file
 from clawbio.common.reproducibility import write_checksums, write_environment_yml
 
 _SKILL_DIR = Path(__file__).resolve().parent
-if str(_SKILL_DIR) not in sys.path:
-    sys.path.insert(0, str(_SKILL_DIR))
+if str(_SKILL_DIR) in sys.path:
+    sys.path.remove(str(_SKILL_DIR))
+sys.path.insert(0, str(_SKILL_DIR))
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
+
+purge_foreign_bare_modules("schemas")
 
 from clawbio.common.textio import write_text_lf
 from schemas import DEFAULT_REMOTE_PIPELINE, SKILL_ALIAS, SKILL_NAME, SKILL_VERSION
@@ -210,8 +215,13 @@ def build_inputs_payload(
         "sample_count": samplesheet_summary["sample_count"],
         # fastq_paths and reference_paths are deliberately kept absolute: they point
         # to external data outside the bundle and are remapped by remap_paths.py on
-        # replay, not relativised against the output dir.
-        "fastq_paths": [Path(p).as_posix() for p in samplesheet_summary["fastq_paths"]],
+        # replay, not relativised against the output dir. Remote URIs (s3://, https://,
+        # …) are preserved verbatim — Path().as_posix() would collapse the `//` scheme
+        # separator and corrupt them.
+        "fastq_paths": [
+            str(p) if "://" in str(p) else Path(p).as_posix()
+            for p in samplesheet_summary["fastq_paths"]
+        ],
         "reference_paths": preflight_result.get("references", {}),
         # Reference *file* digests are recorded here (provenance) rather than in
         # checksums.sha256, because references live outside the bundle: putting

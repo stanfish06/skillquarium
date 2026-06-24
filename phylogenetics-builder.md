@@ -15,7 +15,7 @@ created: 2026-06-09
 # phylogenetics-builder
 
 > [!info] What it does
-> Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2.
+> End-to-end ML phylogenetic tree inference — MSA, trimming, ModelFinder, IQ-TREE2/RAxML-NG.
 
 **Source:** [phylogenetics-builder/SKILL.md](phylogenetics-builder/SKILL.md)  ·  **Domain:** [Sequence Analysis, NGS & Phylogenetics](maps/sequence-phylogenetics.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 

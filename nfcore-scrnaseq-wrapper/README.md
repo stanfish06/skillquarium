@@ -15,7 +15,7 @@ ClawBio wrapper for running the upstream `scrnaseq` Nextflow pipeline from FASTQ
 
 - Clustering, marker detection, normalization, scVI/scANVI, or other downstream analysis.
 - Downstream chaining is **off by default**; it runs only as an explicit opt-in via `--run-downstream` (and `--skip-downstream` force-skips it). The wrapper never chains automatically without that flag.
-- Free-form Nextflow passthrough flags beyond validated `-c/--config` files.
+- Free-form Nextflow passthrough flags beyond validated `-c`/`--config`/`--nextflow-config` files.
 - Running without preflight.
 
 ## Quick Start
@@ -42,15 +42,15 @@ Use `--check` to run preflight without launching Nextflow.
 This wrapper targets nf-core/scrnaseq `4.1.0`. It is not a free-form passthrough. Parameters are grouped as:
 
 - **Supported upstream parameters:** input/output, aligner/preset, reference/index, skip, CellRanger, CellRanger ARC, CellRanger Multi, selected MultiQC/reporting options.
-- **Wrapper policy parameters:** `--preset`, `--check`, `--run-downstream`, `--skip-downstream`, `--expected-cells`, `--timeout-hours`, `--work-dir`, `--allow-dirty-pipeline`, `--require-local-pipeline`, `--allow-pipeline-version-override`, `--trust-config-params`, `--allow-conda-cellranger`, and `-c/--config`; these are ClawBio conveniences and are not nf-core parameters.
+- **Wrapper policy parameters:** `--preset`, `--check`, `--run-downstream`, `--skip-downstream`, `--expected-cells`, `--timeout-hours`, `--work-dir`, `--allow-remote-inputs`, `--allow-dirty-pipeline`, `--require-local-pipeline`, `--allow-pipeline-version-override`, `--trust-config-params`, `--allow-conda-cellranger`, and `-c`/`--config`/`--nextflow-config`; these are ClawBio conveniences and are not nf-core parameters.
 - **Deprecated compatibility aliases:** `skip_emptydrops` is accepted only as `--skip-emptydrops` and translated to `skip_cellbender: true`; the deprecated upstream parameter is never written.
 - **Intentionally unsupported upstream parameters:** `custom_config_version`, `custom_config_base`, `config_profile_name`, `config_profile_description`, `config_profile_contact`, `config_profile_url`, `version`, `plaintext_email`, `max_multiqc_email_size`, `hook_url`, `validate_params`, `pipelines_testdata_base_path`, `help`, `help_full`, `show_hidden`.
 
 Unsupported parameters are either hidden/institutional metadata, interactive help/version flags, or options that would weaken the wrapper's fixed validation/reproducibility policy.
 
-## Local-first Input Policy
+## Input & Reference Path Policy
 
-The upstream pipeline can consume remote test-data URLs in some examples, but this ClawBio wrapper rejects remote FASTQ URIs by default. Download FASTQs locally first. This prevents accidental cloud access or patient-data movement and keeps all processing local-first.
+**Local-first by default.** Samplesheet FASTQs and reference/index inputs must be local paths; remote URIs (`s3://`, `gs://`, `https://`, `ftp://`, …) are rejected at preflight (`REMOTE_INPUT_NOT_ALLOWED`) so genetic data and references stay on the local machine. Pass `--allow-remote-inputs` to opt in — remote URIs are then passed through verbatim (Nextflow stages them; only the basename is validated) and a runtime warning lists every path fetched over the network. The same flag is shared by all three nf-core wrappers. Local references and FASTQs are always existence-checked at preflight so missing local paths fail fast.
 
 ## Protocol Policy
 

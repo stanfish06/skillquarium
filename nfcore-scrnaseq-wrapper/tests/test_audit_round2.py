@@ -704,15 +704,19 @@ def test_catalog_entry_mirrors_skill_frontmatter():
     import json
 
     fm = _read_yaml_frontmatter()
+    meta = fm.get("metadata", {})
     catalog = json.loads(
         (_SKILL_DIR.parent / "catalog.json").read_text(encoding="utf-8")
     )
     items = catalog if isinstance(catalog, list) else catalog.get("skills", [])
     entry = next(e for e in items if e.get("name") == "nfcore-scrnaseq-wrapper")
+    # Frontmatter follows the canonical SKILL-TEMPLATE schema: description is
+    # top-level; version/tags under metadata:; trigger_keywords under
+    # metadata.openclaw: (mirrors nfcore-sarek/rnaseq test_catalog_consistency).
     assert entry["description"] == fm["description"]
-    assert entry["version"] == fm["version"]
-    assert entry["tags"] == fm["metadata"]["tags"]
-    assert entry["trigger_keywords"] == fm["trigger_keywords"]
+    assert entry["version"] == meta["version"]
+    assert entry["tags"] == meta["tags"]
+    assert entry["trigger_keywords"] == meta["openclaw"]["trigger_keywords"]
 
 
 def test_declared_packages_cover_external_imports():

@@ -45,7 +45,7 @@ def build_nextflow_command(
     profile: str,
     params_path: Path,
     resume: bool,
-    work_dir: Path | None = None,
+    work_dir: Path | str | None = None,
     extra_configs: list[Path] | None = None,
     demo: bool = False,
     arm: bool = False,
@@ -73,7 +73,10 @@ def build_nextflow_command(
 
     command.extend(["-profile", composed_profile, "-params-file", params_path.as_posix()])
     if work_dir is not None:
-        command.extend(["-work-dir", work_dir.as_posix()])
+        # work_dir may be a local Path or a remote object-store URI (str, e.g.
+        # s3://bucket/work); preserve URIs verbatim, posix-normalise local paths.
+        work_dir_arg = work_dir if isinstance(work_dir, str) else work_dir.as_posix()
+        command.extend(["-work-dir", work_dir_arg])
     for cfg in extra_configs or []:
         command.extend(["-c", cfg.as_posix()])
     if resume:

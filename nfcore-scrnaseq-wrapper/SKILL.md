@@ -32,7 +32,25 @@ metadata:
     os:
     - darwin
     - linux
+    trigger_keywords:
+    - scrnaseq
+    - nf-core scrnaseq
+    - run scrnaseq from fastq
+    - preprocess 10x fastqs
+    - generate h5ad from single-cell fastq
+    - single-cell preprocessing
+    - nextflow scrna pipeline
+    - 10x chromium fastq pipeline
+    - starsolo upstream processing
+    - alevin-fry fastq to counts
+    - run nextflow scrnaseq
+    - upstream single-cell pipeline
+    - fastq to h5ad single cell
+    - 10x genomics fastq pipeline
   author: ClawBio
+  demo_data:
+  - path: demo/README.md
+    description: Demo mode uses the upstream nf-core/scrnaseq -profile test dataset rather than bundled FASTQs
   inputs:
   - name: samplesheet
     type: file
@@ -51,21 +69,6 @@ metadata:
     format:
     - json
     description: Structured result payload with detected outputs and provenance
-  trigger_keywords:
-  - scrnaseq
-  - nf-core scrnaseq
-  - run scrnaseq from fastq
-  - preprocess 10x fastqs
-  - generate h5ad from single-cell fastq
-  - single-cell preprocessing
-  - nextflow scrna pipeline
-  - 10x chromium fastq pipeline
-  - starsolo upstream processing
-  - alevin-fry fastq to counts
-  - run nextflow scrnaseq
-  - upstream single-cell pipeline
-  - fastq to h5ad single cell
-  - 10x genomics fastq pipeline
   version: 0.1.0
 ---
 
@@ -164,21 +167,23 @@ Each preset requires at least one reference option: `--genome <iGenomes_shortcut
 This wrapper targets nf-core/scrnaseq `4.1.0`. It is not a free-form passthrough. Parameters are grouped as:
 
 - **Supported upstream parameters:** input/output, aligner/preset, reference/index, skip, CellRanger, CellRanger ARC, CellRanger Multi, selected MultiQC/reporting options.
-- **Wrapper policy parameters:** `--preset`, `--check`, `--run-downstream`, `--skip-downstream`, `--expected-cells`, `--timeout-hours`, `--work-dir`, `--allow-dirty-pipeline`, `--require-local-pipeline`, `--allow-pipeline-version-override`, `--trust-config-params`, `--allow-conda-cellranger`, and `-c/--config`; these are ClawBio conveniences and are not nf-core parameters.
+- **Wrapper policy parameters:** `--preset`, `--check`, `--run-downstream`, `--skip-downstream`, `--expected-cells`, `--timeout-hours`, `--work-dir`, `--allow-remote-inputs`, `--allow-dirty-pipeline`, `--require-local-pipeline`, `--allow-pipeline-version-override`, `--trust-config-params`, `--allow-conda-cellranger`, and `-c`/`--config`/`--nextflow-config`; these are ClawBio conveniences and are not nf-core parameters.
 - **Deprecated compatibility aliases:** `skip_emptydrops` is accepted only as `--skip-emptydrops` and translated to `skip_cellbender: true`; the deprecated upstream parameter is never written.
 - **Intentionally unsupported upstream parameters:** `custom_config_version`, `custom_config_base`, `config_profile_name`, `config_profile_description`, `config_profile_contact`, `config_profile_url`, `version`, `plaintext_email`, `max_multiqc_email_size`, `hook_url`, `validate_params`, `pipelines_testdata_base_path`, `help`, `help_full`, `show_hidden`.
 
 Unsupported parameters are either hidden/institutional metadata, interactive help/version flags, or options that would weaken the wrapper's fixed validation/reproducibility policy.
 
-## Local-first Input Policy (restricted local-first mode)
+## Input & Reference Path Policy
 
-**This wrapper runs nf-core/scrnaseq 4.1.0 in a deliberately restricted, local-first mode — it is not a full-compatibility passthrough of every nf-core input/parameter path.** The upstream pipeline can consume remote test-data URLs in some examples (nf-core's CellRanger Multi usage examples use HTTPS FASTQ URLs), but this ClawBio wrapper rejects remote FASTQ URIs by default. Download FASTQs locally first. This prevents accidental cloud access or patient-data movement and keeps all processing local-first. There is no opt-in for remote FASTQs: if you need Nextflow-resolved remote inputs, run the upstream pipeline directly.
+**Local-first by default.** Samplesheet FASTQs and reference/index inputs must be local paths unless you explicitly opt in. Remote URIs (`s3://`, `gs://`, `https://`, `ftp://`, …) are **rejected** at preflight with `REMOTE_INPUT_NOT_ALLOWED`, so genetic data and references stay on the local machine and no accidental cloud fetch happens. This guarantee is enforced by the code, not just advertised (`preflight._check_remote_inputs`).
 
-**This is a deliberate ClawBio wrapper policy, not a reproduction of nf-core's full input flexibility.** Two checks are intentionally stricter than the upstream schema (which types reference/FASTQ inputs as plain strings that Nextflow may resolve as URIs at runtime):
-- Remote FASTQ URIs in the samplesheet are rejected (`samplesheet_builder.py`).
-- Every supplied reference/index path (`--fasta`, `--gtf`, `--star-index`, …) must exist on the local filesystem at preflight (`preflight.py`), so a missing reference fails fast with a clear error instead of a late Nextflow error.
+**Opt-in for remote inputs.** Pass `--allow-remote-inputs` to permit remote samplesheet inputs and reference paths (parity with `nfcore-sarek-wrapper` / `nfcore-rnaseq-wrapper`, which share the same flag). When enabled, remote URIs are passed through **verbatim** (Nextflow resolves and stages them; only the FASTQ/FASTA basename is validated) and preflight emits a **runtime WARNING** listing every path that will be fetched over the network, so cloud access is always visible. The object-store `--work-dir` is a separate setting and is not gated.
 
-Both are local-first guarantees; environments that rely on Nextflow-resolved remote references should run the upstream pipeline directly.
+**Local** paths are still validated eagerly at preflight so they fail fast with a clear error instead of a late Nextflow error:
+- A supplied local reference/index path (`--fasta`, `--gtf`, `--star-index`, …) that does not exist raises `MISSING_REFERENCE` (`preflight.py`).
+- A local FASTQ that does not exist (or is not a regular file) raises `MISSING_FASTQ` (`samplesheet_builder.py`).
+
+Readability is never pre-checked: Nextflow reads inputs in the true execution context (often a root container under the default Docker profile), so a launcher-side `os.access(R_OK)` probe would false-block valid runs (`errors.py`).
 
 ## CLI Reference
 
@@ -430,7 +435,7 @@ output_directory/
 
 ## Safety
 
-- **Local-first**: User FASTQs and outputs remain on the local filesystem.
+- **Local-first by default**: user FASTQs/references and outputs stay on the local filesystem. Remote input/reference URIs are rejected (`REMOTE_INPUT_NOT_ALLOWED`) unless `--allow-remote-inputs` is explicitly passed, which also logs a runtime warning naming every path fetched over the network.
 - **Strict preflight**: Nextflow is never invoked if validation fails.
 - **No hallucinated outputs**: Only artifacts confirmed on disk are reported.
 - **Disclaimer**: Every report includes the ClawBio medical disclaimer.

@@ -8,6 +8,58 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Added
 
+- **`--allow-remote-inputs` opt-in (local-first by default).** Remote samplesheet
+  inputs and user-supplied reference paths (`s3://`, `gs://`, `https://`, `ftp://`,
+  …) are now rejected at preflight (`REMOTE_INPUT_NOT_ALLOWED`) unless the flag is
+  passed, in which case a runtime warning names every path fetched over the
+  network. The public iGenomes mirror base (`igenomes_base`) and the object-store
+  `--work-dir` are intentionally remote and are not gated. Shared verbatim with
+  `nfcore-scrnaseq/rnaseq`. (Flag surface 176 → 177.)
+- **Control-flag parity with the sibling wrappers.** Added `--work-dir`
+  (Nextflow work directory override, accepts a local path or an object-store URI
+  for cloud executors; was hardcoded to `<output>/upstream/work`),
+  `--allow-pipeline-version-override` plus a `_check_pipeline_version_supported`
+  guard (a non-pinned `--pipeline-version` is now blocked unless explicitly
+  overridden, so the 3.8.1-pinned validations can't silently run against a
+  different version), and `-c`/`--config` as aliases of `--nextflow-config`.
+  These bumped the flag surface to 176 (154 passthrough + 22 wrapper controls).
+- **`--timeout-hours` is now configurable** (was hardcoded to 24h). Accepts a
+  positive number of hours or `0` to disable the wall-clock cap for long
+  HPC/cloud runs whose walltime the scheduler enforces — parity with
+  `nfcore-scrnaseq/rnaseq`. The executor's `timeout_seconds` is now `int | None`.
+  This bumped the flag surface 173 → 174 (154 passthrough + 20 wrapper controls).
+
+### Changed
+
+- **Demo coercions now emit `WARNING:` on stderr** (were `[demo]` on stdout):
+  overriding a user-supplied flag is an advisory the user should notice, so it
+  belongs on stderr — parity with the sibling wrappers.
+- **Logging fully consistent with the siblings**: `_print` docstring unified and
+  a dedicated `[provenance]` stage line added, so all three wrappers emit the
+  identical stage-prefix set (`[preflight]`/`[execute]`/`[outputs]`/`[report]`/
+  `[provenance]`/`[done]`/`[check]`/`[abort]`).
+- **`SkillError` now exits `1`** (was `2`), matching `nfcore-scrnaseq/rnaseq`.
+  Exit `2` is reserved by argparse for CLI-usage errors, so reusing it for
+  validation/preflight failures made the two indistinguishable to machine
+  consumers. Internal/unexpected errors still exit `1`.
+- **Order-independent test suite.** `tests/conftest.py` now claims this skill's
+  bare modules (`errors`, `schemas`, …) via a canonical-object cache — at
+  collection and before each test — so `make test` (which collects all three
+  wrapper suites together) no longer hits cross-skill module shadowing. The same
+  block is shared verbatim across all three wrappers' conftests.
+
+### Added
+
+- **Cross-wrapper homogenization pass.** Centralized the import-isolation guard
+  into `_isolated_imports.py` (replacing per-module copy-pasted
+  `_purge_foreign_modules` and a buggy `if not in sys.path` path block that did
+  not force this skill's dir to the front), renamed the inner runner `_run` →
+  `_run_wrapper`, removed the dead `FASTQ_NOT_READABLE` error code (with the
+  shared readability-policy NOTE), gave the README the common Scope/Out-of-Scope/
+  Quick-Start skeleton, and added a machine-readable JSON error on **stderr**
+  (in addition to the human box and `result.json`) so a structured error is
+  available even when `result.json` cannot be written — matching
+  `nfcore-scrnaseq-wrapper` and `nfcore-rnaseq-wrapper`.
 - **Cross-OS reproducibility-bundle hardening.** The entire bundle is now
   byte-stable and portable across Linux, macOS, and Windows/WSL:
   - Every bundle text file (`commands.sh`, `report.md`, `result.json`,

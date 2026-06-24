@@ -7,8 +7,13 @@ import sys
 from pathlib import Path
 
 _SKILL_DIR = Path(__file__).resolve().parent
-if str(_SKILL_DIR) not in sys.path:
-    sys.path.insert(0, str(_SKILL_DIR))
+if str(_SKILL_DIR) in sys.path:
+    sys.path.remove(str(_SKILL_DIR))
+sys.path.insert(0, str(_SKILL_DIR))
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
+
+purge_foreign_bare_modules("errors", "schemas")
 
 from errors import ErrorCode, SkillError
 from schemas import is_under_tmp

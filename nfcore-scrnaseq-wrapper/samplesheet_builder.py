@@ -1,15 +1,19 @@
 from __future__ import annotations
 
 import csv
-import os
 import re
 import sys
 from pathlib import Path
 from typing import cast
 
 _SKILL_DIR = Path(__file__).resolve().parent
-if str(_SKILL_DIR) not in sys.path:
-    sys.path.insert(0, str(_SKILL_DIR))
+if str(_SKILL_DIR) in sys.path:
+    sys.path.remove(str(_SKILL_DIR))
+sys.path.insert(0, str(_SKILL_DIR))
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
+
+purge_foreign_bare_modules("errors", "nfcore_4_1_0_contract", "schemas")
 
 from errors import ErrorCode, SkillError
 from nfcore_4_1_0_contract import CELLRANGER_FAMILY_PRESETS
@@ -37,6 +41,29 @@ _FASTQ_SUFFIXES = (".fastq.gz", ".fq.gz")
 _BASE_OUTPUT_COLUMNS = ("sample", "fastq_1", "fastq_2", "expected_cells", "seq_center")
 _REQUIRED_FASTQ_COLUMNS = ("fastq_1", "fastq_2")
 _OPTIONAL_FASTQ_COLUMNS = ("fastq_barcode",)
+
+# A resolved FASTQ value is either a normalized local Path or a remote URI kept
+# verbatim as a str (s3://, gs://, https://, …). nf-core/scrnaseq supports remote
+# inputs and Nextflow stages them in the execution context, so — matching
+# nfcore-sarek-wrapper and nfcore-rnaseq-wrapper — the wrapper passes remote URIs
+# through unchanged and validates only their basename, deferring existence to
+# Nextflow. Local-first (no data exfiltration) is preserved: this only *reads*
+# user-specified inputs.
+_ResolvedPath = Path | str
+
+
+def _is_remote_uri(value: str) -> bool:
+    return bool(_REMOTE_URI_RE.match(str(value)))
+
+
+def _resolved_name(value: _ResolvedPath) -> str:
+    """Basename of a resolved FASTQ path or remote URI."""
+    return Path(str(value)).name
+
+
+def _resolved_output(value: _ResolvedPath) -> str:
+    """Output-samplesheet string: remote URIs verbatim, local paths as posix."""
+    return value if isinstance(value, str) else value.as_posix()
 
 
 def validate_and_normalize_samplesheet(
@@ -229,7 +256,7 @@ def _normalize_rows(
 ) -> tuple[list[dict[str, str]], list[str], list[Path]]:
     normalized_rows: list[dict[str, str]] = []
     sample_names: list[str] = []
-    fastq_paths: list[Path] = []
+    fastq_paths: list[_ResolvedPath] = []
     seen_rows: set[tuple[str, str, str]] = set()
     raw_samples_by_normalized_sample: dict[str, str] = {}
     metadata_by_sample: dict[str, dict[str, str]] = {}
@@ -280,8 +307,8 @@ def _normalize_samplesheet_row(
     normalized.update(
         {
             "sample": sample,
-            "fastq_1": resolved_fastqs["fastq_1"].as_posix(),
-            "fastq_2": resolved_fastqs["fastq_2"].as_posix(),
+            "fastq_1": _resolved_output(resolved_fastqs["fastq_1"]),
+            "fastq_2": _resolved_output(resolved_fastqs["fastq_2"]),
             "expected_cells": expected_cells,
             "seq_center": str(row.get("seq_center", "")).strip(),
         }
@@ -292,7 +319,7 @@ def _normalize_samplesheet_row(
         normalized["feature_type"] = feature_type
     for optional_fastq in _optional_fastq_columns_for_preset(preset):
         if optional_fastq in resolved_fastqs:
-            normalized[optional_fastq] = resolved_fastqs[optional_fastq].as_posix()
+            normalized[optional_fastq] = _resolved_output(resolved_fastqs[optional_fastq])
     return normalized, sample, resolved_fastqs
 
 
@@ -384,7 +411,7 @@ def _resolve_fastq_columns(
     line_number: int,
     input_path: Path,
     preset: str | None,
-) -> dict[str, Path]:
+) -> dict[str, _ResolvedPath]:
     resolved = {
         column: _resolve_required_fastq(
             row, column, line_number=line_number, input_path=input_path
@@ -410,7 +437,7 @@ def _resolve_fastq_columns(
 
 def _resolve_required_fastq(
     row: dict[str, str], column: str, *, line_number: int, input_path: Path
-) -> Path:
+) -> _ResolvedPath:
     raw_value = str(row.get(column, "")).strip()
     if not raw_value:
         _raise_missing_fastq_column(column, line_number)
@@ -468,15 +495,13 @@ def _looks_like_fastq_path(value: str) -> bool:
 
 def _resolve_existing_fastq(
     raw_path: str, column: str, *, line_number: int, input_path: Path
-) -> Path:
-    if _REMOTE_URI_RE.match(raw_path):
-        raise SkillError(
-            stage="validation",
-            error_code=ErrorCode.INVALID_SAMPLESHEET,
-            message="Remote FASTQ URIs are not supported by this local-first wrapper.",
-            fix="Download FASTQs locally first, then point the samplesheet to local paths.",
-            details={"line": line_number, "column": column, "path": raw_path},
-        )
+) -> _ResolvedPath:
+    # Remote URIs (s3://, gs://, https://, …) are passed through verbatim: nf-core
+    # supports remote inputs and Nextflow stages them in the execution context, so
+    # the wrapper validates only the basename and defers existence to Nextflow.
+    if _is_remote_uri(raw_path):
+        _validate_fastq_path(raw_path, raw_path, column, line_number)
+        return raw_path
     fastq_path = Path(raw_path).expanduser()
     fastq_path = (
         (input_path.parent / fastq_path).resolve()
@@ -488,8 +513,26 @@ def _resolve_existing_fastq(
 
 
 def _validate_fastq_path(
-    fastq_path: Path, raw_path: str, column: str, line_number: int
+    value: _ResolvedPath, raw_path: str, column: str, line_number: int
 ) -> None:
+    # Remote URI: validate the basename only; existence/readability are deferred to
+    # Nextflow staging (it reads in the true execution context).
+    if _is_remote_uri(raw_path):
+        if not _FASTQ_BASENAME_RE.match(_resolved_name(value)):
+            raise SkillError(
+                stage="validation",
+                error_code=ErrorCode.INVALID_FASTQ,
+                message="FASTQ filenames must match the nf-core/scrnaseq schema.",
+                fix="Use a basename without whitespace and with lowercase .fastq.gz or .fq.gz extension.",
+                details={
+                    "line": line_number,
+                    "column": column,
+                    "path": raw_path,
+                    "filename": _resolved_name(value),
+                },
+            )
+        return
+    fastq_path = value  # local Path
     if not fastq_path.exists():
         raise SkillError(
             stage="validation",
@@ -514,23 +557,20 @@ def _validate_fastq_path(
     if not fastq_path.is_file():
         raise SkillError(
             stage="validation",
-            error_code=ErrorCode.FASTQ_NOT_READABLE,
-            message="A FASTQ path does not point to a readable file.",
-            fix="Ensure the FASTQ path refers to a regular file.",
+            error_code=ErrorCode.MISSING_FASTQ,
+            message="A FASTQ path exists but does not point to a regular file.",
+            fix="Ensure the FASTQ path refers to a regular file, not a directory.",
             details={"line": line_number, "column": column, "path": raw_path},
         )
-    if not os.access(fastq_path, os.R_OK):
-        raise SkillError(
-            stage="validation",
-            error_code=ErrorCode.FASTQ_NOT_READABLE,
-            message="A FASTQ file exists but is not readable by the current user.",
-            fix="Check file permissions and ensure the file is readable.",
-            details={"line": line_number, "column": column, "path": raw_path},
-        )
+    # NOTE: readability is intentionally NOT pre-checked here. Nextflow reads the FASTQ
+    # data in the execution context (often a root container under the default Docker
+    # profile), so an os.access(R_OK) pre-check by the launching user would false-block
+    # valid runs. Existence + regular-file type are validated; readability is deferred to
+    # Nextflow's staging. (Mirrors nfcore-rnaseq-wrapper's documented policy.)
 
 
 def _validate_preset_fastq_naming(
-    resolved_fastqs: dict[str, Path],
+    resolved_fastqs: dict[str, _ResolvedPath],
     *,
     preset: str | None,
     line_number: int,
@@ -552,10 +592,10 @@ def _validate_preset_fastq_naming(
 
 
 def _validate_cellranger_fastq_pair(
-    resolved_fastqs: dict[str, Path], *, line_number: int
+    resolved_fastqs: dict[str, _ResolvedPath], *, line_number: int
 ) -> None:
-    r1_name = resolved_fastqs["fastq_1"].name
-    r2_name = resolved_fastqs["fastq_2"].name
+    r1_name = _resolved_name(resolved_fastqs["fastq_1"])
+    r2_name = _resolved_name(resolved_fastqs["fastq_2"])
     r1_key = _cellranger_pair_key(r1_name, expected_marker="_R1")
     r2_key = _cellranger_pair_key(r2_name, expected_marker="_R2")
     if r1_key and r1_key == r2_key:
@@ -582,10 +622,10 @@ def _cellranger_pair_key(filename: str, *, expected_marker: str) -> str:
 
 
 def _validate_cellrangerarc_fastq_names(
-    resolved_fastqs: dict[str, Path], *, line_number: int
+    resolved_fastqs: dict[str, _ResolvedPath], *, line_number: int
 ) -> None:
     for column, fastq_path in resolved_fastqs.items():
-        if _TENX_FASTQ_RE.match(fastq_path.name):
+        if _TENX_FASTQ_RE.match(_resolved_name(fastq_path)):
             continue
         raise SkillError(
             stage="validation",
@@ -599,7 +639,7 @@ def _validate_cellrangerarc_fastq_names(
                 "line": line_number,
                 "preset": "cellrangerarc",
                 "column": column,
-                "filename": fastq_path.name,
+                "filename": _resolved_name(fastq_path),
             },
         )
 
@@ -685,12 +725,12 @@ def _reject_duplicate_fastq_row(
     seen_rows: set[tuple[str, str, str]],
     line_number: int,
     sample: str,
-    resolved_fastqs: dict[str, Path],
+    resolved_fastqs: dict[str, _ResolvedPath],
 ) -> None:
     row_key = (
         sample,
-        resolved_fastqs["fastq_1"].as_posix(),
-        resolved_fastqs["fastq_2"].as_posix(),
+        _resolved_output(resolved_fastqs["fastq_1"]),
+        _resolved_output(resolved_fastqs["fastq_2"]),
     )
     if row_key in seen_rows:
         raise SkillError(

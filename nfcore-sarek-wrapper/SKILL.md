@@ -146,8 +146,12 @@ This skill does not perform ACMG classification, does not interpret variants cli
 ## Input Formats
 
 The samplesheet may be `.csv`, `.tsv`, `.yaml`, `.yml`, or `.json` (CSV/TSV are
-delimited; YAML/JSON are a top-level list of row records). File-column values may
-be local paths or remote URLs (`https://`, `s3://`, `gs://`, `ftp://`, …).
+delimited; YAML/JSON are a top-level list of row records). File-column values
+must be local paths by default (local-first): remote URLs (`https://`, `s3://`,
+`gs://`, `ftp://`, …) — and remote reference paths — are rejected at preflight
+(`REMOTE_INPUT_NOT_ALLOWED`) unless you pass `--allow-remote-inputs`, which also
+logs a runtime warning naming every path fetched over the network. (The public
+iGenomes mirror base and the object-store `--work-dir` are not gated.)
 
 | Mode | Required Fields | Example |
 |--------|-----------------|---------|
@@ -241,6 +245,17 @@ python clawbio.py run sarek-pipeline \
   --tools haplotypecaller,vep \
   --genome GATK.GRCh38 \
   --run-downstream --downstream-skill clinical-variant-reporter
+
+# Wrapper runtime controls (parity with scrnaseq/rnaseq):
+#   --timeout-hours N   wall-clock cap (default 24h; 0 disables for HPC/cloud)
+#   --work-dir PATH     Nextflow work dir (local path or object-store URI; default <output>/upstream/work)
+#   --nextflow-config / -c / --config   extra Nextflow config file(s), repeatable
+#   --allow-pipeline-version-override    run a non-3.8.1 --pipeline-version at your own risk
+#   --allow-remote-inputs               opt in to remote inputs/refs (default local-first)
+python clawbio.py run sarek-pipeline \
+  --input samplesheet.csv --output ./sarek_run \
+  --genome GATK.GRCh38 --tools haplotypecaller \
+  --timeout-hours 0 --work-dir s3://my-bucket/sarek/work
 ```
 
 ## Demo
@@ -365,6 +380,7 @@ The wrapper writes exactly two child directories under the `output/` root: `upst
 - No patient data is bundled.
 - Demo mode uses upstream `-profile test` data.
 - The wrapper does not upload data.
+- **Local-first by default**: remote samplesheet inputs and reference paths are rejected (`REMOTE_INPUT_NOT_ALLOWED`) unless `--allow-remote-inputs` is explicitly passed, which also logs a runtime warning naming every path fetched over the network. The iGenomes mirror base and the object-store `--work-dir` are not gated.
 - The wrapper does not pass arbitrary unvalidated Nextflow parameters; unknown native keys via `--extra-param` are passed through but tracked in provenance, while `input`, `input_restart`, and `outdir` remain wrapper-managed so normalized input and output provenance cannot be bypassed.
 - `--resume` is rejected on manifest drift (pipeline source, profile, step, aligner, tools, skip_tools, analysis_mode, wes, joint_germline, joint_mutect2, effective params checksum, reference fingerprints, samplesheet checksum).
 

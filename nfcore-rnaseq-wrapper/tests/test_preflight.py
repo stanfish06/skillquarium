@@ -69,6 +69,7 @@ def _args(tmp_path: Path, **overrides) -> Namespace:
         output=str(tmp_path / "out"),
         resume=False,
         demo=False,
+        allow_remote_inputs=False,
         aligner="star_salmon",
         pseudo_aligner=None,
         trimmer="trimgalore",
@@ -434,9 +435,11 @@ def test_samplesheet_fastq_paths_are_revalidated(tmp_path, monkeypatch):
 
 
 def test_samplesheet_remote_fastq_uri_not_existence_checked(tmp_path, monkeypatch):
+    """With --allow-remote-inputs, a remote FASTQ URI passes preflight (existence is
+    deferred to Nextflow). Without the flag it is rejected (see the gate tests)."""
     _mock_env(monkeypatch)
     result = _run(
-        _args(tmp_path),
+        _args(tmp_path, allow_remote_inputs=True),
         _samplesheet(tmp_path, fastq_paths=["s3://bucket.example.org/reads/sample_R1.fastq.gz"]),
     )
     assert result["ok"] is True
@@ -470,7 +473,7 @@ def test_bam_reprocessing_skip_alignment_no_reference_is_allowed(tmp_path, monke
 def test_remote_bam_uri_skip_alignment_not_existence_checked(tmp_path, monkeypatch):
     _mock_env(monkeypatch)
     result = _run(
-        _args(tmp_path, skip_alignment=True, fasta=None, gtf=None, genome=None),
+        _args(tmp_path, skip_alignment=True, fasta=None, gtf=None, genome=None, allow_remote_inputs=True),
         _samplesheet(tmp_path, bam_paths=["s3://bucket.example.org/bams/sample.genome.bam"]),
     )
     assert result["samplesheet"]["bam_count"] == 1
@@ -717,10 +720,10 @@ def test_remote_fasta_url_passes_preflight(tmp_path, monkeypatch):
     _mock_env(monkeypatch)
     monkeypatch.setattr(preflight, "check_output_dir_available", lambda *a, **kw: None)
     result = _run(
-        _args(tmp_path, fasta="s3://example.org/genome.fa", gtf="s3://example.org/genes.gtf"),
+        _args(tmp_path, fasta="s3://example.org/genome.fa", gtf="s3://example.org/genes.gtf", allow_remote_inputs=True),
         _samplesheet(tmp_path),
     )
-    assert result["ok"] is True, f"Remote s3:// refs should pass preflight; got errors: {result}"
+    assert result["ok"] is True, f"Remote s3:// refs should pass preflight with --allow-remote-inputs; got: {result}"
 
 
 def test_local_ref_path_not_found_still_raises(tmp_path, monkeypatch):
@@ -979,12 +982,12 @@ def test_extra_star_align_args_rejected_for_hisat2(tmp_path, monkeypatch):
 # ── Audit follow-up: F-02 timeout bounds ──────────────────────────────────────
 
 
-def test_timeout_hours_zero_rejected(tmp_path, monkeypatch):
+def test_timeout_hours_zero_accepted_disables_cap(tmp_path, monkeypatch):
+    """--timeout-hours 0 is accepted: it disables the wall-clock cap (parity with
+    nfcore-scrnaseq/sarek). Only negative values are rejected at preflight."""
     _mock_env(monkeypatch)
-    with pytest.raises(SkillError) as exc:
-        _run(_args(tmp_path, timeout_hours=0), _samplesheet(tmp_path))
-    assert exc.value.error_code == ErrorCode.INVALID_PRESET_CONFIGURATION
-    assert exc.value.details["field"] == "timeout_hours"
+    result = _run(_args(tmp_path, timeout_hours=0), _samplesheet(tmp_path))
+    assert result["ok"] is True
 
 
 def test_timeout_hours_negative_rejected(tmp_path, monkeypatch):
@@ -1629,3 +1632,32 @@ def test_gtf_has_gencode_markers_detects_uppercase_gz_suffix(tmp_path):
     with gzip.open(gtf, "wt", encoding="utf-8") as handle:
         handle.write('chr1\tHAVANA\tgene\t1\t10\t.\t+\t.\tgene_id "ENSG1"; gene_type "protein_coding";\n')
     assert preflight._gtf_has_gencode_markers(gtf) is True
+
+
+# --- --allow-remote-inputs gate (local-first by default) ---------------------
+
+def test_remote_fastq_rejected_by_default():
+    from argparse import Namespace as _NS
+    with pytest.raises(SkillError) as exc:
+        preflight._check_remote_inputs(
+            _NS(allow_remote_inputs=False), {"fastq_paths": ["s3://bucket/n_R1.fastq.gz"], "bam_paths": []}
+        )
+    assert exc.value.error_code == ErrorCode.REMOTE_INPUT_NOT_ALLOWED
+
+
+def test_remote_reference_rejected_by_default():
+    from argparse import Namespace as _NS
+    with pytest.raises(SkillError) as exc:
+        preflight._check_remote_inputs(_NS(allow_remote_inputs=False, fasta="gs://bucket/genome.fa"), {})
+    assert exc.value.error_code == ErrorCode.REMOTE_INPUT_NOT_ALLOWED
+
+
+def test_remote_inputs_allowed_with_flag_warns(capsys):
+    from argparse import Namespace as _NS
+    preflight._check_remote_inputs(_NS(allow_remote_inputs=True), {"fastq_paths": ["https://x/n_R1.fastq.gz"]})
+    assert "--allow-remote-inputs" in capsys.readouterr().err
+
+
+def test_local_inputs_pass_the_remote_gate():
+    from argparse import Namespace as _NS
+    preflight._check_remote_inputs(_NS(allow_remote_inputs=False), {"fastq_paths": ["/d/n_R1.fastq.gz"]})

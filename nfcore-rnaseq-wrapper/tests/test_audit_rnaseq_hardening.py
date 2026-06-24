@@ -368,6 +368,27 @@ def test_resolve_timeout_seconds_uses_arg():
     assert wrapper._resolve_timeout_seconds(Namespace(timeout_hours=48)) == 48 * 3600
 
 
+def test_resolve_timeout_seconds_zero_disables_cap():
+    """--timeout-hours 0 disables the wall-clock cap (returns None) — parity with
+    nfcore-scrnaseq/sarek."""
+    assert wrapper._resolve_timeout_seconds(Namespace(timeout_hours=0)) is None
+
+
+def test_resolve_work_dir_default(tmp_path):
+    assert wrapper._resolve_nextflow_work_dir(Namespace(work_dir=None), tmp_path) == (
+        tmp_path / "upstream" / "work"
+    )
+
+
+def test_resolve_work_dir_object_store_uri_preserved(tmp_path):
+    """Remote object-store work dirs are preserved verbatim (cloud executors) —
+    parity with nfcore-scrnaseq/sarek."""
+    assert (
+        wrapper._resolve_nextflow_work_dir(Namespace(work_dir="s3://bucket/work"), tmp_path)
+        == "s3://bucket/work"
+    )
+
+
 def test_resolve_timeout_seconds_falls_back_to_default():
     assert (
         wrapper._resolve_timeout_seconds(Namespace(timeout_hours=None))

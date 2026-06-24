@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
+      "skillFolderHash": "eb6a23305aea6e340d14b9de3766e721f9f4861b",
       "installedAt": "2026-05-20T08:43:33.811Z",
-      "updatedAt": "2026-05-20T08:43:33.811Z"
+      "updatedAt": "2026-06-24T07:28:43.281Z"
     },
     "adaptyv": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -386,9 +386,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/ginkgo-cloud-lab/SKILL.md",
-      "skillFolderHash": "59a4dc0d0e32cf3065dfbf208a70105118c727bf",
+      "skillFolderHash": "08e260a87844512b41a3935428536ff247bb9004",
       "installedAt": "2026-06-09T11:23:24.789Z",
-      "updatedAt": "2026-06-12T07:58:29.919Z"
+      "updatedAt": "2026-06-24T07:28:46.394Z"
     },
     "glycoengineering": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1705,9 +1705,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/clinical-variant-reporter/SKILL.md",
-      "skillFolderHash": "d8afb5e5ac4bf36b2a546fe272ffb5bed2849178",
+      "skillFolderHash": "75e970e31c06ec0f187d4fa5501254427995036b",
       "installedAt": "2026-06-09T11:30:14.164Z",
-      "updatedAt": "2026-06-09T12:47:15.923Z"
+      "updatedAt": "2026-06-24T07:28:50.480Z"
     },
     "clinpgx": {
       "source": "ClawBio/ClawBio",
@@ -2047,27 +2047,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-rnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "066671a5fb47926b663dbbcd535937c336ad60d3",
+      "skillFolderHash": "45ca854418c7107898574933a318c3eed765a5d1",
       "installedAt": "2026-06-09T11:30:14.248Z",
-      "updatedAt": "2026-06-21T07:56:59.138Z"
+      "updatedAt": "2026-06-24T07:28:54.882Z"
     },
     "nfcore-sarek-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-sarek-wrapper/SKILL.md",
-      "skillFolderHash": "b34eed56578a7dd79e9585c5c25a562e41c5ff71",
+      "skillFolderHash": "32af6e39e5d05e7cbf17869966939844058c8b2b",
       "installedAt": "2026-06-09T11:30:14.250Z",
-      "updatedAt": "2026-06-21T07:57:03.225Z"
+      "updatedAt": "2026-06-24T07:28:59.300Z"
     },
     "nfcore-scrnaseq-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "7d4027bbc4bef9f53d0b21eb850c9655686c47d4",
+      "skillFolderHash": "702efe8c65d5737158a2d0323f4f7e12bee87fbd",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-06-21T07:57:06.753Z"
+      "updatedAt": "2026-06-24T07:29:04.404Z"
     },
     "nutrigx-advisor": {
       "source": "ClawBio/ClawBio",
@@ -2110,9 +2110,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/phylogenetics-builder/SKILL.md",
-      "skillFolderHash": "c7f491f00153219db08acca4a41fd2a1c11fb6f3",
+      "skillFolderHash": "7b7a4f7a1e89b02b043e3eba6484605a2bf4be82",
       "installedAt": "2026-06-09T11:30:14.261Z",
-      "updatedAt": "2026-06-21T07:57:09.639Z"
+      "updatedAt": "2026-06-24T07:29:08.532Z"
     },
     "profile-report": {
       "source": "ClawBio/ClawBio",
@@ -2511,9 +2511,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/incremental-implementation/SKILL.md",
-      "skillFolderHash": "98e1743a15d0ff04ce8a0a92d005aa165fe06810",
+      "skillFolderHash": "da7154bb2c7b46a921534ed03c9ca15376602dc1",
       "installedAt": "2026-06-12T08:07:57.851Z",
-      "updatedAt": "2026-06-12T08:07:57.851Z"
+      "updatedAt": "2026-06-24T07:29:10.059Z"
     },
     "interview-me": {
       "source": "addyosmani/agent-skills",
@@ -2547,9 +2547,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/planning-and-task-breakdown/SKILL.md",
-      "skillFolderHash": "7122f9fa302c8e879fe7bd4e8ca401ffb7b2aec7",
+      "skillFolderHash": "2122963142e964ea83719664b4da43bae9644f7c",
       "installedAt": "2026-06-12T08:07:57.853Z",
-      "updatedAt": "2026-06-12T08:07:57.853Z"
+      "updatedAt": "2026-06-24T07:29:11.673Z"
     },
     "security-and-hardening": {
       "source": "addyosmani/agent-skills",
@@ -2565,9 +2565,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/shipping-and-launch/SKILL.md",
-      "skillFolderHash": "5fdf87bd28e41a9ed3cf82be0e86e249e6a117e0",
+      "skillFolderHash": "4f404de257f66732e1507cddf060adcd435a1322",
       "installedAt": "2026-06-12T08:07:57.855Z",
-      "updatedAt": "2026-06-12T08:07:57.855Z"
+      "updatedAt": "2026-06-24T07:29:13.068Z"
     },
     "source-driven-development": {
       "source": "addyosmani/agent-skills",
@@ -2583,18 +2583,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/spec-driven-development/SKILL.md",
-      "skillFolderHash": "a73f385d99fb07ec0a8f1d8bbd17ec478d11f46b",
+      "skillFolderHash": "0f66b186630a22dc422cbccf1467f7e5d131a0b6",
       "installedAt": "2026-06-12T08:07:57.857Z",
-      "updatedAt": "2026-06-12T08:07:57.857Z"
+      "updatedAt": "2026-06-24T07:29:14.484Z"
     },
     "using-agent-skills": {
       "source": "addyosmani/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/using-agent-skills/SKILL.md",
-      "skillFolderHash": "c4d585a3a6fe1317c27945a4de8092fbac3259a9",
+      "skillFolderHash": "27e5995a3dc4dd91db86dec8933f476f9275ff8e",
       "installedAt": "2026-06-12T08:07:57.858Z",
-      "updatedAt": "2026-06-12T08:07:57.858Z"
+      "updatedAt": "2026-06-24T07:29:16.022Z"
     },
     "caveman": {
       "source": "juliusbrussee/caveman",

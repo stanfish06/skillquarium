@@ -205,6 +205,17 @@ python clawbio.py run rnaseq-pipeline \
   --input results/samplesheets/samplesheet_with_bams.csv \
   --output ./rnaseq_reprocess \
   --skip-alignment
+
+# Wrapper runtime controls (parity with scrnaseq/sarek):
+#   --timeout-hours N   wall-clock cap (default 12h; 0 disables for HPC/cloud)
+#   --work-dir PATH     Nextflow work dir (local path or object-store URI; default <output>/upstream/work)
+#   --nextflow-config / -c / --config   extra Nextflow config file(s), repeatable
+#   --allow-pipeline-version-override    run a non-3.26.0 --pipeline-version at your own risk
+#   --allow-remote-inputs               opt in to remote inputs/refs (default local-first)
+python clawbio.py run rnaseq-pipeline \
+  --input samplesheet.csv --output ./rnaseq_run \
+  --genome GRCh38 --aligner star_salmon \
+  --timeout-hours 0 --work-dir s3://my-bucket/rnaseq/work
 ```
 
 ## Demo
@@ -301,7 +312,7 @@ output/
 - `--aligner hisat2` is alignment-only for this handoff contract.
 - `--with-umi` requires a barcode pattern unless `--skip-umi-extract` is set. Conversely, UMI options (`--umitools-bc-pattern`, `--umi-dedup-tool`, etc.) set *without* `--with-umi` are inert — preflight warns so a run is not mistaken for UMI-deduplicated when it is not.
 - On macOS Docker, use an output directory under the home directory rather than `/tmp`. The wrapper writes a macOS Docker compatibility config whose per-process memory ceiling is derived from host RAM (75% share, floored at 8 GB, capped at 15 GB) and then capped to 90% of the actual Docker VM memory (`docker info`, when available) so a container process is never OOM-killed by requesting more than the VM has. Its per-process `time` ceiling tracks `--timeout-hours` (default 12, floored at 1 h) so raising the wrapper timeout does not leave processes capped at 12 h.
-- The local Nextflow run is killed after `--timeout-hours` (default 12). Raise it for large cohorts (e.g. `--timeout-hours 48`) so a long but healthy run is not terminated. The value must be > 0; HPC/cloud submitters that detach are unaffected. On a timeout the wrapper terminates Nextflow's process group, but containers started by the Docker/Singularity daemon are not in that group and may keep running — the timeout error reminds you to check for and remove leftover containers (e.g. `docker ps`).
+- The local Nextflow run is killed after `--timeout-hours` (default 12). Raise it for large cohorts (e.g. `--timeout-hours 48`) so a long but healthy run is not terminated, or pass `--timeout-hours 0` to disable the cap entirely for long HPC/cloud runs whose walltime is enforced by the scheduler (negative values are rejected). On a timeout the wrapper terminates Nextflow's process group, but containers started by the Docker/Singularity daemon are not in that group and may keep running — the timeout error reminds you to check for and remove leftover containers (e.g. `docker ps`).
 - Reference paths (`--fasta`/`--gtf`/`--gff`/`--transcript-fasta`/`--additional-fasta`/`--gene-bed`) must resolve to a path **without whitespace** — the nf-core schema pattern `^\S+` rejects spaces. Preflight catches a whitespace-containing resolved path early with a precise `REFERENCE_PATH_HAS_WHITESPACE` error (mirroring the samplesheet input guard) instead of letting Nextflow abort late. Move or symlink the reference into a space-free directory.
 - `--check` validates that Nextflow is present but defers the `>=25.04.3` version gate to the real run; it emits a warning so a passing check is not mistaken for confirmation of a compatible Nextflow version.
 - Results are written under a **relative** `upstream/results` because the wrapper launches Nextflow with `cwd=<output>`; the relative path keeps the nf-core `^\S+$` `outdir` schema valid even when `--output` contains spaces (common on macOS). This is a deliberate **local-first** design. Running against cloud executors that require an absolute publish path (e.g. `outdir` on `s3://`/`gs://`) is outside the wrapper's audited surface.
@@ -332,6 +343,7 @@ output/
 - No patient data is bundled.
 - Demo mode uses upstream test profile data.
 - The wrapper does not upload data.
+- **Local-first by default**: remote samplesheet inputs and reference paths are rejected (`REMOTE_INPUT_NOT_ALLOWED`) unless `--allow-remote-inputs` is explicitly passed, which also logs a runtime warning naming every path fetched over the network. The object-store `--work-dir` is not gated.
 - The wrapper does not pass arbitrary unvalidated Nextflow *parameters* via `--params-file`: only the audited CLI surface is translated to `params.yaml`. `--nextflow-config` forwards user-supplied `-c` config file(s) for trusted runtime settings such as process, executor, profiles, labels, institutional module tuning, and `params.genomes` custom genome catalogues. Configs that define `params` in any form — block (`params { … }`), property (`params.x`), assignment (`params = …`), subscript (`params['x']`), or map-merge (`params << …`) — are rejected so they cannot bypass the audited parameter surface (the documented `params.genomes` catalogue is the sole exception). Every locally-resolvable `includeConfig` target is audited recursively under the same rule; includes the wrapper cannot read (remote URIs, `${…}`-interpolated paths, or missing files) are surfaced as preflight **warnings** rather than silently trusted, so unaudited surface is always visible.
 - `--resume` is rejected when the pipeline source/version, profile, aligner, pseudo-aligner, `--prokaryotic`/`--arm` modifiers, params checksum, or samplesheet checksum drift.
 
@@ -352,3 +364,16 @@ Use this skill to produce upstream bulk RNA-seq preprocessing outputs. Route dow
 ## Maintenance
 
 Pinned upstream: `nf-core/rnaseq` v3.26.0. Before changing the default version, audit `nextflow.config`, `assets/schema_input.json`, `nextflow_schema.json`, `docs/output.md`, and changed module configs, then update tests and `reproducibility/pinned_versions.json`.
+
+## Citations
+
+- [nf-core/rnaseq 3.26.0](https://nf-co.re/rnaseq/3.26.0)
+- [nf-core/rnaseq usage](https://nf-co.re/rnaseq/3.26.0/docs/usage/)
+- [nf-core/rnaseq parameters](https://nf-co.re/rnaseq/3.26.0/parameters/)
+- [nf-core/rnaseq output](https://nf-co.re/rnaseq/3.26.0/docs/output/)
+- [Nextflow](https://www.nextflow.io/)
+- [STAR](https://github.com/alexdobin/STAR)
+- [Salmon](https://salmon.readthedocs.io/)
+- [RSEM](https://github.com/deweylab/RSEM)
+- [HISAT2](https://daehwankimlab.github.io/hisat2/)
+- [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml)

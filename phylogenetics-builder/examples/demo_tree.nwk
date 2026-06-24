@@ -1,1 +1,1 @@
-(Macaca_mulatta_demo:0.15,(Pongo_pygmaeus_demo:0.08,(Gorilla_gorilla_demo:0.05,(Homo_sapiens_demo:0.02,Pan_troglodytes_demo:0.02)100:0.03)100:0.03)100:0.07)100:0.00;
+((Mus_musculus:0.235,Rattus_norvegicus:0.240)99:0.065,(Lemur_catta:0.195,(Callithrix_jacchus:0.140,((Macaca_mulatta:0.090,Papio_anubis:0.095)96:0.042,(Nomascus_leucogenys:0.072,(Pongo_pygmaeus:0.052,((Homo_sapiens:0.010,(Pan_troglodytes:0.008,Pan_paniscus:0.009)98:0.005)99:0.018,Gorilla_gorilla:0.028)95:0.015)97:0.020)92:0.030)100:0.040)88:0.055)85:0.025);

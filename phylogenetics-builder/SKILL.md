@@ -1,6 +1,6 @@
 ---
 name: phylogenetics-builder
-description: Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2.
+description: End-to-end ML phylogenetic tree inference — MSA, trimming, ModelFinder, IQ-TREE2/RAxML-NG.
 license: MIT
 metadata:
   openclaw:
@@ -16,236 +16,356 @@ metadata:
     install:
     - kind: conda
       package: bioconda::iqtree
+    - kind: conda
+      package: bioconda::raxml-ng
+    - kind: conda
+      package: bioconda::mafft
+    - kind: conda
+      package: bioconda::muscle
+    - kind: conda
+      package: bioconda::trimal
     trigger_keywords:
     - phylogeny
     - phylogenetic tree
     - iqtree
+    - raxml
     - maximum likelihood tree
-    - fasta alignment
-    - build tree
-  author: Dr. Babajan Banaganapalli
+    - mafft alignment
+    - build tree from sequences
+    - model selection
+    - ModelFinder
+    - bootstrap support
+    - evolutionary tree
+    - molecular phylogeny
+  author: ClawBio
+  version: 0.2.0
   demo_data:
   - path: demo_alignment.fasta
-    description: Synthetic 5-taxon DNA sequence alignment
+    description: "Synthetic 12-taxon primate alignment (500 bp, pre-aligned)"
   dependencies:
     python: '>=3.10'
     packages:
     - pandas>=2.0
     - biopython>=1.80
     - matplotlib>=3.5
+    optional:
+    - ete3>=3.1  # midpoint rooting
   domain: genomics
   endpoints:
     cli: python skills/phylogenetics-builder/phylogenetics_builder.py --input {input_file} --output {output_dir}
   inputs:
   - name: input_file
     type: file
-    format:
-    - fasta
-    - fa
-    - aln
-    - phy
-    description: Aligned DNA or protein sequences
+    format: [fasta, fa, aln]
+    description: DNA or protein sequences (unaligned for full pipeline, aligned with --aligned flag)
     required: true
   outputs:
   - name: report
     type: file
-    format:
-    - md
-    description: Analysis report
+    format: [md]
+    description: Full analysis report with pipeline summary and branch table
   - name: result
     type: file
-    format:
-    - json
-    description: Machine-readable results
+    format: [json]
+    description: Machine-readable results (ClawBio output contract)
   - name: phylo_tree
     type: file
-    format:
-    - nwk
-    description: Newick format phylogenetic tree
-  version: 0.1.0
+    format: [nwk]
+    description: Newick format tree with bootstrap support values
 ---
 
-# 🦖 Phylogenetics Builder
+# 🌳 Phylogenetics Builder
 
-You are **Phylogenetics Builder**, a specialised ClawBio agent for genomics. Your role is to build maximum-likelihood phylogenetic trees from aligned FASTA sequences.
-
-## Trigger
-
-**Fire this skill when the user says any of:**
-- "build a phylogenetic tree"
-- "run phylogeny analysis on this alignment"
-- "build maximum likelihood tree using iq-tree"
-- "run iqtree on my aligned fasta"
-- "infer evolutionary tree"
-
-**Do NOT fire when:**
-- The input is a raw, unaligned FASTA (use a sequence aligner first)
-- The user asks for fast k-mer / distance-based tree building (use `fastreer` instead)
-- The user is analysing genomic distances without sequence alignments (use `fastreer` instead)
+You are **Phylogenetics Builder**, a ClawBio agent for end-to-end maximum-likelihood phylogenetic tree inference. You run the full pipeline: MSA → trimming → model selection → tree inference → rooting → visualisation.
 
 ## Why This Exists
 
-Phylogenetic tree inference is a cornerstone of evolutionary biology. However, standard maximum-likelihood tools are complex to install, configure, and parse.
+Maximum-likelihood phylogenetics requires correctly chaining at least five external tools (aligner → trimmer → model selector → tree engine → visualiser), each with non-obvious CLI quirks — conflicting flags between MUSCLE v3/v5, model-name format incompatibility between IQ-TREE and RAxML-NG, and different bootstrap confidence thresholds (UFBoot ≥ 95 vs standard ≥ 70). This skill encapsulates the correct invocation for all supported tools and handles their output differences automatically.
 
-- **Without it**: Users must manually install IQ-TREE, run it from command line, locate logs, parse the selected substitution model, parse branch support values, and write custom scripts to render the tree.
-- **With it**: One command automates alignment validation, substitution model selection, maximum-likelihood tree search, UFBoot bootstrap support, parsing, tabulating branch statistics, and rendering a high-quality tree image.
-- **Why ClawBio**: Integrates industry-standard IQ-TREE 2 with automated reports and reproducible environment capture local-first.
+## Trigger
 
-## Core Capabilities
+**Fire when the user says:**
+- "build a phylogenetic tree from these sequences"
+- "run phylogeny analysis" / "infer evolutionary tree"
+- "run IQ-TREE on my FASTA" / "use RAxML"
+- "what substitution model should I use?" (with a FASTA file present)
+- "align and build a tree" / "MSA then tree"
+- "bootstrap support values" / "UFBoot replicates"
+- "midpoint root the tree" / "root with outgroup"
+- "maximum likelihood tree from my sequences"
 
-1. **Alignment Verification**: Parses and validates FASTA alignment format, checking for sequence count, sequence length equality, and character alphabet validity.
-2. **Maximum-Likelihood Search**: Runs IQ-TREE 2 with ModelFinder to auto-select the best-fit substitution model and UltraFast Bootstrap (UFBoot2) to calculate branch support values.
-3. **Phylogram Rendering**: Generates a high-quality proportional phylogram using matplotlib and Bio.Phylo.
-4. **Offline Demo Fallback**: Automatically falls back to a pre-computed Newick tree if IQ-TREE is not installed locally, ensuring demo functionality is always operational.
+**Do NOT fire when:**
+- The user wants k-mer/distance trees only → use `fastreer` instead
+- The user wants variant-based trees from VCF → use `fastreer` instead
+- The user wants protein structure prediction → use `struct-predictor`
+- The user needs alignment only (no tree) → recommend mafft/muscle standalone
 
 ## Scope
 
-**One skill, one task.** This skill infers a maximum-likelihood phylogenetic tree from an aligned sequence file and nothing else. It does not perform sequence alignment itself.
+**One skill, one task.** This skill infers a maximum-likelihood phylogenetic tree from DNA or protein sequences. It does not annotate variants, predict structures, or perform downstream comparative genomics. Each post-tree task chains to another skill.
 
-## Input Formats
+Supported pipeline stages:
 
-| Format | Extension | Required Fields | Example |
-|--------|-----------|-----------------|---------|
-| Aligned FASTA | `.fasta`, `.fa`, `.aln`, `.phy` | Equal length DNA or amino acid sequences | `demo_alignment.fasta` |
+- **6 MSA algorithms**: mafft (default), muscle, clustalw, kalign, tcoffee, prank
+- **Alignment trimming**: trimAl `-automated1` (removes gapped columns)
+- **Automatic model selection**: IQ-TREE2 ModelFinder (`-m MFP`), BIC-selected
+- **Two inference engines**: IQ-TREE2 (default) and RAxML-NG
+- **Three bootstrap modes**: UFBoot (1 000 reps, threshold ≥ 95), standard Felsenstein (100 reps, threshold ≥ 70), triple support (UFBoot + aLRT + aBayes)
+- **Post-inference rooting**: outgroup or midpoint (ETE3 primary, Bio.Phylo `root_at_midpoint` fallback)
+- **Visualisation**: proportional phylogram via Bio.Phylo + matplotlib
+- **Reproducibility bundle**: exact CLI command, Conda environment definition, SHA-256 checksums
+- **Offline demo**: pre-computed 12-taxon primate tree — never refuses when binaries are absent
 
 ## Workflow
 
-When the user asks for tree building:
+1. **Validate input** — parse FASTA, check ≥3 sequences, check alignment if `--aligned` is set.
+2. **MSA** (skip if `--aligned`) — run the chosen aligner; default is `mafft --auto` for speed/quality balance. Alternative aligners: `muscle`, `clustalw`, `kalign`, `tcoffee`, `prank`.
+3. **Trim** (skip with `--no-trim`) — run `trimal -automated1`. This removes gapped columns that add noise without information. Skip for protein alignments where all columns are informative.
+4. **Model selection** (skip if `--model` provided) — run `iqtree2 -m MFP`. Parse `Best-fit model according to BIC:` from the `.iqtree` log. The selected model is passed directly to tree inference.
+5. **Tree inference** — choose engine:
+   - **IQ-TREE2** (default): `iqtree2 -s aln.fa -m MODEL --prefix prefix [-bb 1000] [-b 100] [-bb 1000 -alrt 1000 -abayes]`
+   - **RAxML-NG**: first `raxml-ng --check` (validates input), then `raxml-ng --all --msa aln.fa --model MODEL --bs-trees N`
+6. **Rooting** (optional):
+   - Outgroup: pass `--outgroup TAXON` to tree builder (`-o` in IQ-TREE, `--outgroup` in RAxML-NG)
+   - Midpoint: use ETE3 `t.get_midpoint_outgroup(); t.set_outgroup(midpoint)` post-inference
+7. **Parse & render** — extract branch lengths and support values from Newick; draw proportional phylogram with Bio.Phylo + matplotlib.
+8. **Report** — write `report.md`, `result.json` (ClawBio contract), `phylo_tree.nwk`, `figures/phylogram.png`, `tables/branch_support.csv`, `reproducibility/`.
 
-1. **Validate**: Read the input FASTA file, verify that it contains at least 3 sequences, and check that all sequences are of equal length.
-2. **Detect Environment**: Check if `iqtree` or `iqtree2` is available on the system PATH.
-3. **Execute Core Analysis**:
-    - If `iqtree` is found: Run a child process calling IQ-TREE with automated model selection (`-m TEST`) and 1000 bootstrap replicates (`-B 1000`).
-    - If `iqtree` is not found (or in demo mode without the binary): Fall back to the pre-computed tree topology matching the demo dataset.
-4. **Parse Output**: Extract the best substitution model and parse the generated Newick tree string. Parse branch lengths and bootstrap values.
-5. **Render Graph**: Draw the phylogram using Bio.Phylo and save it to the output figures folder.
-6. **Generate Report**: Write the summary `report.md` (with disclaimer), structured `result.json`, and reproducibility bundle to the output directory.
+**Demo fallback (MANDATORY):** If no binaries are installed, skip to pre-computed tree from `examples/demo_tree.nwk`. Always show a result, never refuse.
 
-**Freedom level guidance:**
-- The invocation of IQ-TREE 2 and parsing of the Newick tree string must be strictly prescriptive.
-- The narrative description of the evolutionary findings can be composed flexibly by the agent.
+**Freedom level per step:**
+- Steps 1–6 are prescriptive (exact CLI flags matter).
+- Report narrative can be written flexibly by the agent.
 
 ## CLI Reference
 
 ```bash
-# Standard usage
+# Full pipeline: unaligned → MSA → trim → ModelFinder → IQ-TREE2
 python skills/phylogenetics-builder/phylogenetics_builder.py \
-  --input <alignment_file> --output <output_dir>
+  --input sequences.fasta --output /tmp/phylo
 
-# Demo mode (synthetic data, no external binary required)
-python skills/phylogenetics-builder/phylogenetics_builder.py --demo --output /tmp/phylo_demo
+# Pre-aligned input (skip MSA)
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned
 
-# Via ClawBio runner
-python clawbio.py run phylo --demo
-python clawbio.py run phylo --input <alignment_file> --output <output_dir>
+# Choose MSA algorithm (mafft default)
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input sequences.fasta --output /tmp/phylo \
+  --aligner muscle
+
+# Standard bootstrap instead of UFBoot
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned \
+  --bootstrap standard
+
+# Triple support: UFBoot + aLRT + aBayes
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned \
+  --bootstrap all
+
+# Root by outgroup
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned \
+  --outgroup Mus_musculus,Rattus_norvegicus
+
+# Midpoint rooting (requires ETE3)
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned \
+  --root midpoint
+
+# Use RAxML-NG engine
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned \
+  --engine raxml-ng
+
+# Skip trimming
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned --no-trim
+
+# Provide model explicitly (skip ModelFinder)
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --input aligned.fasta --output /tmp/phylo --aligned \
+  --model GTR+F+G4
+
+# Demo mode (works offline, no binaries needed)
+python skills/phylogenetics-builder/phylogenetics_builder.py \
+  --demo --output /tmp/phylo_demo
 ```
 
-## Demo
+### All flags
 
-To verify the skill works:
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--input FILE` | — | Input FASTA (unaligned or aligned) |
+| `--output DIR` | — | Output directory |
+| `--demo` | off | Run with built-in 12-taxon primate data |
+| `--aligned` | off | Input is already aligned — skip MSA |
+| `--aligner` | mafft | MSA algorithm: mafft / muscle / clustalw / kalign / tcoffee / prank |
+| `--engine` | iqtree2 | Tree engine: iqtree2 / raxml-ng |
+| `--model MODEL` | auto | Skip ModelFinder; use this substitution model |
+| `--bootstrap` | ufboot | Bootstrap: ufboot / standard / all |
+| `--outgroup TAXA` | — | Comma-separated outgroup taxon name(s) |
+| `--root midpoint` | — | Midpoint rooting via ETE3 (post-inference) |
+| `--no-trim` | off | Skip trimAl trimming |
+| `--threads N` | 2 | CPU threads for tree inference |
+| `--seed N` | 42 | Random seed for reproducibility |
 
-```bash
-python clawbio.py run phylo --demo
-```
+## MSA Algorithm Guide
 
-Expected output: A report containing the selected substitution model (e.g., GTR+G), taxon counts, Newick tree string, parsed branch support table, and a tree diagram at `figures/phylogram.png`.
+| Aligner | Speed (10 seqs) | Speed (250 seqs) | Recommendation |
+|---------|-----------------|------------------|----------------|
+| mafft | 4.4 s | 42 s | **Default** — best speed/quality balance |
+| kalign | 0.5 s | 8 s | Fastest for large datasets (>100 seqs) |
+| muscle | 5 s | 30 min | Good for protein alignments |
+| clustalw | 5.6 s | 49 min | Legacy; avoid for large datasets |
+| tcoffee | slow | very slow | Most accurate; use for ≤20 sequences |
+| prank | slow | very slow | Codon-aware; use with `-codon` for coding DNA |
 
-## Algorithm / Methodology
+_Benchmarks on SUP35 gene dataset from NGS Handbook._
 
-1. **Model Selection**: IQ-TREE's ModelFinder calculates likelihoods under various substitution models (e.g., JC, HKY, GTR for DNA) and chooses the model with the minimum Bayesian Information Criterion (BIC).
-2. **Tree Search**: Performs stochastic hill-climbing to find the tree that maximizes the probability of observing the alignment.
-3. **Branch Support**: Calculates UltraFast Bootstrap (UFBoot2) values. Support values range from 0 to 100, where values >= 95 are considered highly reliable.
+## Bootstrap Guide
 
-## Example Queries
+| Mode | Flag | Speed | Use when |
+|------|------|-------|----------|
+| `ufboot` | `-bb 1000` | ~3 sec | Default; fast and reliable (threshold: ≥95) |
+| `standard` | `-b 100` | ~3 min | Publication standard; slower Felsenstein bootstrap |
+| `all` | `-bb 1000 -alrt 1000 -abayes` | ~5 sec | Need triple validation; parse with `/` delimiter |
 
-- "Build a maximum likelihood tree for these aligned sequences"
-- "Run phylogenetic tree inference on alignment.fasta"
-- "Run iqtree2 on my FASTA file"
+Triple support labels format: `{alrt}/{abayes}/{ufb}` — thresholds: alrt > 70, abayes > 0.7, ufb > 95.
 
 ## Example Output
 
 ```markdown
 # Phylogenetics Builder Report
 
-**Input**: demo_alignment.fasta
-**Taxa Count**: 5
-**Substitution Model**: GTR+F+I+G4 (Selected via ModelFinder)
+### Pipeline Summary
 
-| Node | Ancestor | Descendant | Length | UFBoot Support |
-|------|----------|------------|--------|----------------|
-| Node1| Root     | SpeciesA   | 0.045  | 100            |
-| Node2| Root     | SpeciesB   | 0.052  | 98             |
+| Parameter | Value |
+|-----------|-------|
+| Input | `sequences.fasta` |
+| Taxa | 12 |
+| Aligner | mafft |
+| Trimming | trimAl -automated1 |
+| Substitution model | `TIM3+F+G4` |
+| Tree engine | iqtree2 |
+| Bootstrap | UFBoot (1 000 replicates) |
+| Rooting | unrooted |
 
-## Tree Visualization
+### Pipeline Steps
+- `msa:mafft`
+- `trim:trimal`
+- `modelfinder:TIM3+F+G4`
+- `tree:iqtree2:ufboot`
 
-Proportional phylogram image generated at `figures/phylogram.png`.
-
-## Summary
-The maximum-likelihood tree search has converged. Taxa are clustered according to evolutionary distances.
-
-*ClawBio is a research and educational tool. It is not a medical device and does not provide clinical diagnoses. Consult a healthcare professional before making any medical decisions.*
+### Branch Lengths & Support Values
+| Node / Taxon | Branch Length | Support |
+|:-------------|:-------------:|:-------:|
+| Homo_sapiens | 0.01000 | 100 |
+| Pan_troglodytes | 0.00800 | 98 |
+...
 ```
 
 ## Output Structure
 
 ```
 output_directory/
-├── report.md                  # Primary markdown report
-├── result.json                # Machine-readable results
-├── phylo_tree.nwk             # Newick format tree file
+├── report.md                    # Primary markdown report with pipeline summary
+├── result.json                  # Machine-readable ClawBio output contract
+├── phylo_tree.nwk               # Newick format tree with bootstrap support
 ├── figures/
-│   └── phylogram.png          # Matplotlib tree rendering
+│   └── phylogram.png            # Proportional phylogram (matplotlib)
 ├── tables/
-│   └── branch_support.csv     # Parsed branch lengths and support values
+│   └── branch_support.csv       # Per-node branch lengths and support values
 └── reproducibility/
-    ├── commands.sh            # Reproduction commands
-    └── environment.yml        # Conda environment definition
+    ├── commands.sh              # Exact CLI command used
+    ├── environment.yml          # Conda environment definition
+    └── checksums.sha256         # SHA-256 checksums of all outputs
 ```
-
-## Dependencies
-
-**Required**:
-- `pandas` >= 2.0; tabular data handling
-- `biopython` >= 1.80; FASTA parsing and Bio.Phylo tree parsing
-- `matplotlib` >= 3.5; drawing phylogram figures
-
-**Optional**:
-- `iqtree` or `iqtree2` binary; for running actual tree inferences rather than falling back to demo files.
 
 ## Gotchas
 
-- **Gotcha 1**: The model will want to align sequences before building the tree. Do not do this. This skill assumes input sequences are pre-aligned and of equal length. Reject unaligned inputs with clear warnings.
-- **Gotcha 2**: When sequences have unequal length, IQ-TREE will fail. The script must preemptively validate length equality and raise a clear ValueError before calling subprocesses.
-- **Gotcha 3**: Model names are case-sensitive in IQ-TREE. Ensure you let ModelFinder select the model automatically rather than hardcoding incorrect case-sensitive models.
-- **Gotcha 4**: Bio.Phylo drawing requires a non-interactive matplotlib backend (e.g. Agg) in headless environments. Make sure matplotlib uses the correct backend to prevent GUI errors.
-- **Gotcha 5**: Empty taxon names or duplicate names can cause parsing errors. Always clean and assert uniqueness of sequence headers before passing to IQ-TREE.
+- **Prank writes to `{prefix}.best.fas`, not `{prefix}`**. If using prank as aligner, the skill auto-renames this file. If you call prank manually, remember to look for the `.best.fas` suffix.
+- **ModelFinder adds `+F` to models; RAxML-NG rejects it**. `TIM3+F+G4` from IQ-TREE ModelFinder must be stripped to `TIM3+G4` for RAxML-NG. The skill handles this automatically via `adapt_model_for_engine()`. If you pass `--model` manually with `--engine raxml-ng`, omit the `+F`.
+- **UFBoot threshold is 95, not 70**. A common mistake is applying the standard bootstrap threshold (70) to UFBoot values. UFBoot support of 70 is NOT reliable. Use ≥ 95 as the cutoff for UFBoot.
+- **Triple support labels contain `/`**. With `--bootstrap all`, node labels encode `alrt/abayes/ufb` (e.g. `80.5/0.85/97`). Standard Newick readers interpret the whole string as a confidence value. Use `strsplit(label, "/")` in R or split by `/` in Python.
+- **trimAl on protein alignments may over-trim**. For small protein alignments (<20 sequences, >200 aa), use `--no-trim` or use `-nogaps` strategy instead of `-automated1`, which can remove too many columns.
+- **IQ-TREE `-T AUTO` can block tests**. Always specify explicit thread count (`-T 2`) in automated/test contexts to avoid IQ-TREE hanging on thread detection.
+- **Pre-aligned input still needs equal-length sequences**. If you use `--aligned`, the skill validates that all sequences are the same length. Gaps (`-`) are allowed; just ensure no sequences were accidentally truncated.
 
 ## Safety
 
-- **Local-first**: IQ-TREE runs entirely locally on patient data.
-- **Disclaimer**: Every report includes the ClawBio medical disclaimer.
-- **Audit trail**: Subprocess calls are recorded in the reproducibility bundle.
-- **No hallucinated science**: Models and distances are calculated directly from local data.
+- **All processing is local** — sequences never leave the machine.
+- **Disclaimer**: every report includes the ClawBio medical disclaimer.
+- **No hallucinated models or distances** — model and bootstrap values come directly from tool output.
+- **Warn before overwriting** — script warns if output directory is non-empty.
 
 ## Agent Boundary
 
-The agent (LLM) dispatches and explains. The skill (Python) executes. The agent must NOT invent tree branch support values or override model selections.
+The agent (LLM) dispatches to this skill and explains the results. The skill (Python script) executes all computation. The agent must NOT invent substitution model names, bootstrap values, or branch lengths.
 
 ## Integration with Bio Orchestrator
 
-**Trigger conditions**: the orchestrator routes here when:
-- The input is a FASTA file (`.fasta`, `.fa`, `.aln`) and the user mentions "tree", "phylogeny", or "iqtree".
+Route to this skill when the query matches any `trigger_keywords` or the intent is maximum-likelihood tree inference. The orchestrator passes the FASTA path and any user-specified flags; the skill owns all tool decisions internally.
 
-**Chaining partners**: this skill connects with:
-- `profile-report`: Adds evolutionary tree findings to patient profiles.
+After the run, read `result.json`:
+- `chat_summary_lines` — surface to the user verbatim.
+- `preferred_artifacts` — open the figure and tree file for the user.
+- `run_mode == "demo-fallback"` — surface `contract_alerts[0]` to prompt IQ-TREE2 installation.
+- `workflow_state == "completed"` — no retry needed.
+
+Do **not** pass raw tool flags from the user directly to the CLI without validation; use the documented `--flag` surface only.
+
+## Chaining Partners
+
+| Skill | When to chain |
+|-------|--------------|
+| `fastreer` | User wants a fast k-mer distance tree without full MSA |
+| `variant-annotation` | Annotate variants found in sequences before building tree |
+| `genome-compare` | Compare multiple genomes before phylogenetic inference |
+| `profile-report` | Add evolutionary context to a patient profile |
+| `claw-ancestry-pca` | Population structure analysis complements phylogenetics |
+
+## Dependencies
+
+| Dependency | Version | Required | Purpose |
+|------------|---------|----------|---------|
+| python | ≥ 3.10 | yes | Runtime |
+| biopython | ≥ 1.80 | yes | Newick I/O, `root_at_midpoint`, visualisation |
+| matplotlib | ≥ 3.5 | yes | Phylogram rendering |
+| pandas | ≥ 2.0 | yes | Branch support CSV export |
+| iqtree2 | ≥ 2.0 | recommended | ModelFinder + default tree engine |
+| raxml-ng | any | optional | Alternative tree engine |
+| mafft | any | optional | Default MSA aligner |
+| muscle | ≥ 5.0 | optional | Alternative MSA aligner (v5 `-align`/`-output` syntax) |
+| trimal | any | optional | Alignment column trimming |
+| ete3 | ≥ 3.1 | optional | Midpoint rooting (Bio.Phylo fallback if absent) |
+| clustalw | any | optional | Legacy MSA aligner |
+| kalign | ≥ 3 | optional | Fast MSA for large datasets |
+| t_coffee | any | optional | High-accuracy MSA for ≤ 20 sequences |
+| prank | any | optional | Codon-aware MSA |
+
+Install all bioinformatics binaries:
+```bash
+conda install -c bioconda iqtree raxml-ng mafft muscle trimal clustalw kalign3 t_coffee prank
+```
 
 ## Maintenance
 
-- **Review cadence**: Re-evaluate this skill bi-annually.
-- **Staleness signals**: Deprecation of IQ-TREE 2 commands or Bio.Phylo APIs.
-- **Deprecation**: Archive if superseded by more modern tools.
+- **Review cadence**: bi-annually, or when IQ-TREE2 / RAxML-NG release major versions.
+- **Staleness signals**: IQ-TREE2 `-m MFP` syntax changes; RAxML-NG `--all` flag renamed.
+- **Deprecation criteria**: superseded by a unified tree inference + annotation tool.
 
 ## Citations
 
-- [IQ-TREE 2 Paper](https://doi.org/10.1093/molbev/msaa015); Nguyen et al., 2020.
-- [Bio.Phylo Module](https://doi.org/10.1186/1471-2105-13-209); Talevich et al., 2012.
+- [IQ-TREE 2](https://doi.org/10.1093/molbev/msaa015) — Minh et al., 2020
+- [RAxML-NG](https://doi.org/10.1093/bioinformatics/btz305) — Kozlov et al., 2019
+- [ModelTest-NG](https://doi.org/10.1093/molbev/msz189) — Darriba et al., 2020
+- [trimAl](https://doi.org/10.1093/bioinformatics/btp348) — Capella-Gutiérrez et al., 2009
+- [MAFFT](https://doi.org/10.1093/molbev/mst010) — Katoh & Standley, 2013
+- [MUSCLE v5](https://doi.org/10.1101/2021.06.20.449169) — Edgar, 2021 (bioRxiv); [MUSCLE v3](https://doi.org/10.1093/nar/gkh340) — Edgar, 2004
+- [T-Coffee](https://doi.org/10.1006/jmbi.2000.4042) — Notredame et al., 2000
+- [ClustalW](https://doi.org/10.1093/nar/22.22.4673) — Thompson et al., 1994
+- [KAlign](https://doi.org/10.1186/1471-2105-6-298) — Lassmann & Sonnhammer, 2005
+- [PRANK](https://doi.org/10.1126/science.1158395) — Löytynoja & Goldman, 2008
+- [ETE3](https://doi.org/10.1093/molbev/msw046) — Huerta-Cepas et al., 2016
+- [Bio.Phylo](https://doi.org/10.1186/1471-2105-13-209) — Talevich et al., 2012

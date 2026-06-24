@@ -43,24 +43,41 @@ def test_validate_and_normalize_samplesheet_rejects_missing_fastq(tmp_path):
     assert exc.value.error_code == "MISSING_FASTQ"
 
 
-def test_validate_rejects_remote_fastq_urls_with_local_first_message(tmp_path):
+def test_validate_accepts_remote_fastq_urls_verbatim(tmp_path):
+    """Remote FASTQ URIs are passed through verbatim (parity with nf-core +
+    nfcore-sarek/rnaseq): existence is deferred to Nextflow staging, only the
+    basename is validated, and the URI is written unchanged to the normalized
+    samplesheet (no Path() mangling of the `//` scheme separator)."""
     src = tmp_path / "samplesheet.csv"
     src.write_text(
         "sample,fastq_1,fastq_2\n"
-        "sampleA,https://example.org/S1_R1.fastq.gz,https://example.org/S1_R2.fastq.gz\n",
+        "sampleA,https://example.org/S1_R1.fastq.gz,s3://bucket/S1_R2.fastq.gz\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "normalized.csv"
+
+    summary = validate_and_normalize_samplesheet(src, out)
+
+    assert "https://example.org/S1_R1.fastq.gz" in summary["fastq_paths"]
+    assert "s3://bucket/S1_R2.fastq.gz" in summary["fastq_paths"]
+    written = out.read_text(encoding="utf-8")
+    assert "https://example.org/S1_R1.fastq.gz" in written
+    assert "s3://bucket/S1_R2.fastq.gz" in written
+
+
+def test_validate_rejects_remote_fastq_url_with_bad_basename(tmp_path):
+    """A remote URI that is not a FASTQ basename is still rejected (INVALID_FASTQ)."""
+    src = tmp_path / "samplesheet.csv"
+    src.write_text(
+        "sample,fastq_1,fastq_2\n"
+        "sampleA,https://example.org/S1_R1.fastq.gz,https://example.org/notes.txt\n",
         encoding="utf-8",
     )
 
     with pytest.raises(SkillError) as exc:
         validate_and_normalize_samplesheet(src, tmp_path / "normalized.csv")
 
-    assert exc.value.error_code == ErrorCode.INVALID_SAMPLESHEET
-    assert "local-first" in exc.value.message
-    assert exc.value.details == {
-        "line": 2,
-        "column": "fastq_1",
-        "path": "https://example.org/S1_R1.fastq.gz",
-    }
+    assert exc.value.error_code == ErrorCode.INVALID_FASTQ
 
 
 def test_validate_rejects_fastq_basename_with_space(tmp_path):

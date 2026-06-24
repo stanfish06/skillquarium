@@ -414,17 +414,91 @@ def test_apply_demo_overrides_clears_references(module):
 
 
 
+def test_timeout_hours_resolves_to_seconds(module):
+    args = module.build_parser().parse_args(
+        ["--output", "out", "--demo", "--no-banner", "--timeout-hours", "6"]
+    )
+    assert module._resolve_timeout_seconds(args) == 6 * 3600
+
+
+def test_timeout_hours_zero_disables_cap(module):
+    """--timeout-hours 0 disables the wall-clock cap (parity with scrnaseq/rnaseq)."""
+    args = module.build_parser().parse_args(
+        ["--output", "out", "--demo", "--no-banner", "--timeout-hours", "0"]
+    )
+    assert module._resolve_timeout_seconds(args) is None
+
+
+def test_timeout_hours_default_is_pinned(module):
+    args = module.build_parser().parse_args(["--output", "out", "--demo", "--no-banner"])
+    assert module._resolve_timeout_seconds(args) == module.DEFAULT_TIMEOUT_SECONDS
+
+
+def test_timeout_hours_negative_rejected(module):
+    with pytest.raises(SystemExit):
+        module.build_parser().parse_args(
+            ["--output", "out", "--demo", "--no-banner", "--timeout-hours", "-1"]
+        )
+
+
+def test_pipeline_version_mismatch_blocked(module):
+    """A non-pinned --pipeline-version is blocked by default (parity with siblings)."""
+    args = module.build_parser().parse_args(
+        ["--output", "out", "--demo", "--no-banner", "--pipeline-version", "3.5.0"]
+    )
+    with pytest.raises(module.SkillError) as exc:
+        module._check_pipeline_version_supported(args)
+    assert exc.value.error_code == "PIPELINE_SOURCE_INVALID"
+
+
+def test_pipeline_version_override_allows_mismatch(module):
+    args = module.build_parser().parse_args(
+        [
+            "--output", "out", "--demo", "--no-banner",
+            "--pipeline-version", "3.5.0", "--allow-pipeline-version-override",
+        ]
+    )
+    module._check_pipeline_version_supported(args)  # must not raise
+
+
+def test_pipeline_version_default_passes(module):
+    args = module.build_parser().parse_args(["--output", "out", "--demo", "--no-banner"])
+    module._check_pipeline_version_supported(args)  # default == pinned, no raise
+
+
+def test_work_dir_defaults_under_output(module, tmp_path):
+    args = module.build_parser().parse_args(["--output", str(tmp_path), "--demo", "--no-banner"])
+    assert module._resolve_nextflow_work_dir(args, tmp_path) == tmp_path / "upstream" / "work"
+
+
+def test_work_dir_override_local(module, tmp_path):
+    args = module.build_parser().parse_args(
+        ["--output", str(tmp_path), "--demo", "--no-banner", "--work-dir", str(tmp_path / "scratch")]
+    )
+    assert module._resolve_nextflow_work_dir(args, tmp_path) == (tmp_path / "scratch").resolve()
+
+
+def test_work_dir_override_object_store_uri_preserved(module, tmp_path):
+    args = module.build_parser().parse_args(
+        ["--output", str(tmp_path), "--demo", "--no-banner", "--work-dir", "s3://bucket/work"]
+    )
+    assert module._resolve_nextflow_work_dir(args, tmp_path) == "s3://bucket/work"
+
+
 def test_flag_surface_counts_match_docs(module):
     # Locks the numbers cited in README.md / CLAUDE.md / SKILL.md so they cannot
-    # silently drift: 154 Sarek passthrough params + 19 wrapper-only controls
-    # = 173 user-facing flags (excluding the auto-generated -h/--help).
+    # silently drift: 154 Sarek passthrough params + 23 wrapper-only controls
+    # = 177 user-facing flags (excluding the auto-generated -h/--help).
+    # (Homogenization added --timeout-hours, --allow-pipeline-version-override,
+    # --work-dir, and --allow-remote-inputs for parity with the sibling wrappers,
+    # bumping wrapper-only controls 19 → 23.)
     assert len(module._SAREK_PASSTHROUGH_PARAMS) == 154
     parser = module.build_parser()
     opts = [a for a in parser._actions if a.option_strings and a.dest != "help"]
-    assert len({a.dest for a in opts}) == 173
+    assert len({a.dest for a in opts}) == 177
     passthrough_dests = {dest for _flag, dest, *_rest in module._SAREK_PASSTHROUGH_PARAMS}
     wrapper_only = {a.dest for a in opts} - passthrough_dests
-    assert len(wrapper_only) == 19
+    assert len(wrapper_only) == 23
 
 
 def test_demo_strips_reference_extra_params(module):
@@ -602,7 +676,7 @@ def test_main_returns_2_on_skill_error_during_validation(module, monkeypatch, tm
         # no --input and no --demo → SkillError(MISSING_INPUT)
         "--no-banner",
     ])
-    assert rc == 2
+    assert rc == 1
 
 
 def test_main_keyboard_interrupt_returns_130(module, monkeypatch, tmp_path):
@@ -739,7 +813,7 @@ def test_main_run_downstream_without_skill_returns_2(module, monkeypatch, tmp_pa
         "--no-banner",
         "--run-downstream",
     ])
-    assert rc == 2
+    assert rc == 1
 
 
 
@@ -817,7 +891,7 @@ def test_main_banner_suppression(module, monkeypatch, tmp_path, capsys):
 
 
 def test_main_skill_error_bubbles_up_with_nonzero_exit(module, monkeypatch, tmp_path):
-    """SkillError raised from any module yields exit code 2."""
+    """SkillError raised from any module yields exit code 1 (parity with siblings)."""
     _patch_heavy(monkeypatch, module)
 
     def boom(**kw):
@@ -835,7 +909,7 @@ def test_main_skill_error_bubbles_up_with_nonzero_exit(module, monkeypatch, tmp_
         "--demo",
         "--no-banner",
     ])
-    assert rc == 2
+    assert rc == 1
 
 
 def test_main_error_result_json_written_under_reproducibility(module, monkeypatch, tmp_path):
@@ -855,7 +929,7 @@ def test_main_error_result_json_written_under_reproducibility(module, monkeypatc
     monkeypatch.setattr(module, "run_preflight", boom)
     out = tmp_path / "out"
     rc = module.main(["--output", str(out), "--demo", "--no-banner"])
-    assert rc == 2
+    assert rc == 1
     err = out / "reproducibility" / "result.json"
     assert err.exists()
     payload = json.loads(err.read_text())

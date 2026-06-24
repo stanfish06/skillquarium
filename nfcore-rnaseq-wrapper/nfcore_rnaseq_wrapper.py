@@ -119,6 +119,8 @@ class _RnaseqArgumentParser(argparse.ArgumentParser):
 
 def build_parser() -> argparse.ArgumentParser:
     parser = _RnaseqArgumentParser(description="Run nf-core/rnaseq through the ClawBio wrapper.")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Verbose logging")
+    parser.add_argument("--no-banner", action="store_true", help="Suppress the startup banner")
     parser.add_argument("--input", help="Path to a valid nf-core/rnaseq samplesheet.csv")
     parser.add_argument("--output", required=True, help="Output directory for wrapper results")
     parser.add_argument("--demo", action="store_true", help="Run the upstream test profile without user FASTQs")
@@ -146,15 +148,31 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--pipeline-local", default=None, help="Optional local nf-core/rnaseq checkout override")
+    parser.add_argument(
+        "--work-dir",
+        default=None,
+        help="Nextflow work directory. Defaults to <output>/upstream/work; may be an object-store URI for cloud executors.",
+    )
+    parser.add_argument(
+        "--allow-remote-inputs",
+        action="store_true",
+        help=(
+            "Opt in to remote samplesheet inputs and reference paths (s3://, gs://, "
+            "https://, ftp://, …). Default is local-first: remote URIs are rejected so "
+            "genetic data and references stay on the local machine. When enabled, a "
+            "runtime warning lists the paths fetched over the network."
+        ),
+    )
     parser.add_argument("--resume", action="store_true", help="Attempt checksum-validated Nextflow resume")
     parser.add_argument(
         "--timeout-hours",
-        type=float,
+        type=_timeout_hours,
         default=DEFAULT_TIMEOUT_HOURS,
         help=(
             f"Wall-clock ceiling for the local Nextflow run before it is terminated "
             f"(default: {DEFAULT_TIMEOUT_HOURS}). Raise this for large cohorts so a long "
-            "but healthy run is not killed. Ignored for HPC/cloud submitters that detach."
+            "but healthy run is not killed. Use 0 to disable the cap for long HPC/cloud "
+            "runs whose walltime is enforced by the scheduler."
         ),
     )
 
@@ -340,11 +358,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--nextflow-config",
+        "-c",
+        "--config",
+        dest="nextflow_config",
         action="append",
         metavar="CONFIG",
         default=None,
         help=(
-            "Additional Nextflow config file(s) passed as -c to Nextflow. "
+            "Additional Nextflow config file(s) passed as -c to Nextflow (aliases: -c/--config). "
             "Can be repeated: --nextflow-config hpc.config --nextflow-config rsem.config. "
             "Use this for institution-specific settings, RSEM ext.args, or any non-parametric "
             "configuration not exposed via --params-file."
@@ -504,17 +525,42 @@ def _raise_if_expected_outputs_missing(
     )
 
 
+_BANNER = (
+    "==============================================\n"
+    f"  ClawBio :: {SKILL_NAME}\n"
+    f"  nf-core/rnaseq {DEFAULT_PIPELINE_VERSION} orchestrator\n"
+    "=============================================="
+)
+
+
+def _print(msg: str) -> None:
+    """Log a human-readable status line to stdout (progress/traceability)."""
+    print(msg, flush=True)
+
+
+def _indent(text: str, n: int) -> str:
+    pad = " " * n
+    return "\n".join(pad + line for line in text.splitlines())
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if not getattr(args, "no_banner", False):
+        _print(_BANNER)
     output_dir = Path(args.output).expanduser().resolve()
     try:
         _check_pipeline_version_supported(args)
         return _run_wrapper(args, output_dir)
     except SkillError as exc:
-        return _handle_skill_error(output_dir, exc)
+        return _handle_skill_error(output_dir, exc, verbose=getattr(args, "verbose", False))
+    except KeyboardInterrupt:
+        _print("[abort] Interrupted by user.")
+        return 130
     except Exception as exc:
-        return _handle_unexpected_error(output_dir, exc)
+        return _handle_unexpected_error(
+            output_dir, exc, verbose=getattr(args, "verbose", False)
+        )
 
 
 def _record_aligner_explicit(args: argparse.Namespace) -> bool:
@@ -811,6 +857,10 @@ def _run_wrapper_with_staging(args: argparse.Namespace, output_dir: Path, *, sta
         staging_dir=staging_dir,
     )
     preflight_result = run_preflight(args, pipeline_source=pipeline_source, samplesheet_summary=samplesheet_summary)
+    _print(
+        "[preflight] passed "
+        f"(warnings: {len(preflight_result.get('warnings', []) or [])})"
+    )
     if args.check:
         if staged_samplesheet != normalized_samplesheet:
             _commit_validated_samplesheet(staged_samplesheet, normalized_samplesheet)
@@ -973,6 +1023,7 @@ def _write_check_mode_result(
         "pipeline_source": pipeline_source,
     }
     write_check_result(output_dir, payload)
+    _print("[check] Preflight passed. No pipeline was launched (--check).")
     print(json.dumps(payload, indent=2))
     return 0
 
@@ -1000,6 +1051,10 @@ def _run_execution_mode(
     command, command_str = _build_nextflow_invocation(args, output_dir, pipeline_source, params_path)
     nextflow_cwd = _nextflow_execution_cwd(output_dir)
     started = time.monotonic()
+    _print(
+        f"[execute] launching Nextflow "
+        f"({pipeline_source['source_kind']} → {pipeline_source['resolved_version']})"
+    )
     execution_result = execute_nextflow(
         command,
         cwd=nextflow_cwd,
@@ -1007,8 +1062,12 @@ def _run_execution_mode(
         timeout_seconds=_resolve_timeout_seconds(args),
     )
     duration_seconds = round(time.monotonic() - started, 3)
+    _print(f"[execute] completed in {duration_seconds:.1f}s")
+    _print("[outputs] parsing pipeline outputs")
     parsed_outputs = _parse_outputs_with_effective_aligner(output_dir, args)
     _raise_if_expected_outputs_missing(parsed_outputs, args=args, output_dir=output_dir)
+    _print("[report] writing report.md, result.json, commands.sh")
+    _print("[provenance] writing reproducibility bundle")
     if preflight_result.get("handoff_available") is False:
         parsed_outputs["handoff_available"] = False
     handoff_result = _run_downstream_handoff(args, parsed_outputs=parsed_outputs, output_dir=output_dir)
@@ -1027,7 +1086,7 @@ def _run_execution_mode(
         duration_seconds=duration_seconds,
         command_str=_nextflow_replay_command(command_str, nextflow_cwd),
     )
-    print(f"Wrapper completed successfully. Output: {output_dir}")
+    _print(f"[done] Wrapper completed successfully. Output: {output_dir}")
     return 0
 
 
@@ -1071,7 +1130,7 @@ def _build_nextflow_invocation(
         profile=args.profile,
         params_path=params_path,
         resume=args.resume,
-        work_dir=output_dir / "upstream" / "work",
+        work_dir=_resolve_nextflow_work_dir(args, output_dir),
         extra_configs=_build_extra_nextflow_configs(args, output_dir),
         demo=bool(getattr(args, "demo", False)),
         prokaryotic=bool(getattr(args, "prokaryotic", False)),
@@ -1179,7 +1238,9 @@ def _write_macos_docker_config(output_dir: Path, *, arm: bool = False, timeout_h
     # The per-process time ceiling tracks --timeout-hours (audit F-4) so a large-cohort
     # run raised above the 12h default is not capped back to 12h by this config. Floored
     # at 1h so a sub-hour --timeout-hours never emits an invalid '0.h' duration.
-    time_hours = max(1, int(timeout_hours))
+    # --timeout-hours 0 disables the wall-clock cap, so the per-process ceiling falls back
+    # to the pinned default rather than being floored to a misleading 1h.
+    time_hours = int(DEFAULT_TIMEOUT_HOURS) if timeout_hours == 0 else max(1, int(timeout_hours))
     config_path.write_text(
         "// macOS Docker compatibility for nf-core/rnaseq.\n"
         "process {\n"
@@ -1197,15 +1258,50 @@ def _write_macos_docker_config(output_dir: Path, *, arm: bool = False, timeout_h
     return config_path
 
 
+def _timeout_hours(value: str) -> float:
+    try:
+        hours = float(value)
+    except (TypeError, ValueError):
+        raise argparse.ArgumentTypeError(
+            f"--timeout-hours must be a number, got {value!r}"
+        )
+    if hours < 0:
+        raise argparse.ArgumentTypeError(
+            "--timeout-hours must be >= 0 (0 disables the timeout)"
+        )
+    return hours
+
+
 def _resolve_timeout_hours(args: argparse.Namespace) -> float:
     """Return the effective --timeout-hours, falling back to the pinned default."""
     hours = getattr(args, "timeout_hours", DEFAULT_TIMEOUT_HOURS)
     return DEFAULT_TIMEOUT_HOURS if hours is None else float(hours)
 
 
-def _resolve_timeout_seconds(args: argparse.Namespace) -> int:
-    """Translate --timeout-hours into seconds, falling back to the pinned default."""
-    return int(_resolve_timeout_hours(args) * 60 * 60)
+def _resolve_nextflow_work_dir(args: argparse.Namespace, output_dir: Path) -> Path | str:
+    """Resolve the Nextflow work directory: default <output>/upstream/work, or the
+    user's --work-dir (a local path, or an object-store URI kept verbatim for cloud
+    executors). Parity with nfcore-scrnaseq/sarek."""
+    raw_work_dir = getattr(args, "work_dir", None)
+    if not raw_work_dir:
+        return output_dir / "upstream" / "work"
+    work_dir = str(raw_work_dir).strip()
+    if "://" in work_dir:
+        return work_dir
+    return Path(work_dir).expanduser().resolve()
+
+
+def _resolve_timeout_seconds(args: argparse.Namespace) -> int | None:
+    """Translate --timeout-hours into seconds; 0 disables the cap (returns None).
+
+    Parity with nfcore-scrnaseq/sarek: the default keeps a wall-clock cap, but an
+    explicit ``--timeout-hours 0`` opts out (long HPC/cloud runs governed by the
+    scheduler's walltime).
+    """
+    hours = _resolve_timeout_hours(args)
+    if hours == 0:
+        return None
+    return int(hours * 60 * 60)
 
 
 def _nextflow_execution_cwd(output_dir: Path) -> Path:
@@ -1441,14 +1537,31 @@ def _write_error_result_if_safe(output_dir: Path, payload: dict[str, object]) ->
         return
 
 
-def _handle_skill_error(output_dir: Path, exc: SkillError) -> int:
+def _handle_skill_error(
+    output_dir: Path, exc: SkillError, *, verbose: bool = False
+) -> int:
     payload = exc.to_dict()
     _write_error_result_if_safe(output_dir, payload)
+    # Human-readable box on stdout (sarek-style traceability).
+    _print("")
+    _print("================ SkillError ================")
+    _print(f"  stage:   {exc.stage}")
+    _print(f"  code:    {exc.error_code}")
+    _print(f"  message: {exc.message}")
+    _print(f"  fix:     {exc.fix}")
+    if exc.details and verbose:
+        _print("  details:")
+        _print(_indent(json.dumps(exc.details, indent=2, default=str), 4))
+    _print("============================================")
+    # Machine-readable error on stderr: always available even when result.json
+    # cannot be written (e.g. the output dir is a file or inside the repo).
     print(json.dumps(payload, indent=2), file=sys.stderr)
     return 1
 
 
-def _handle_unexpected_error(output_dir: Path, exc: Exception) -> int:
+def _handle_unexpected_error(
+    output_dir: Path, exc: Exception, *, verbose: bool = False
+) -> int:
     payload = {
         "ok": False,
         "stage": "internal",
@@ -1461,6 +1574,16 @@ def _handle_unexpected_error(output_dir: Path, exc: Exception) -> int:
         },
     }
     _write_error_result_if_safe(output_dir, payload)
+    _print("")
+    _print("================ Internal error ================")
+    _print(f"  type:    {type(exc).__name__}")
+    _print(f"  message: {exc}")
+    if verbose:
+        _print(_indent(traceback.format_exc(), 4))
+    else:
+        _print("  Re-run with --verbose for the full traceback.")
+    _print("================================================")
+    # Machine-readable error on stderr (always available; see _handle_skill_error).
     print(json.dumps(payload, indent=2), file=sys.stderr)
     return 1
 

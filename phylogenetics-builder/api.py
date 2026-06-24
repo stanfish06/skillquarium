@@ -1,8 +1,8 @@
 """API entry point for skill registry and orchestrator integration."""
 
 import sys
+from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
-from importlib.util import spec_from_file_location, module_from_spec
 
 _mod_path = Path(__file__).parent / "phylogenetics_builder.py"
 _spec = spec_from_file_location("phylogenetics_builder", _mod_path)
@@ -18,8 +18,10 @@ def run(input_path: str, output_dir: str = "/tmp/phylogenetics-builder") -> dict
     try:
         sys.argv = [
             "phylogenetics_builder.py",
-            "--input", str(input_path),
-            "--output", str(output_dir)
+            "--input",
+            str(input_path),
+            "--output",
+            str(output_dir),
         ]
         _mod.main()
     finally:

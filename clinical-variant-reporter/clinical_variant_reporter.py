@@ -285,7 +285,7 @@ def annotate_variants_vep(
                 VEP_REST_URL,
                 json={"variants": regions},
                 headers={"Content-Type": "application/json", "Accept": "application/json"},
-                params={"assembly": assembly},
+                params={"assembly": assembly, "transcript_version": 1},
                 timeout=60,
             )
             resp.raise_for_status()

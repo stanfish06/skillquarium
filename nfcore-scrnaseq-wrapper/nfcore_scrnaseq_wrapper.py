@@ -16,11 +16,31 @@ from pathlib import Path
 from typing import Any
 
 _SKILL_DIR = Path(__file__).resolve().parent
-if str(_SKILL_DIR) not in sys.path:
-    sys.path.insert(0, str(_SKILL_DIR))
+if str(_SKILL_DIR) in sys.path:
+    sys.path.remove(str(_SKILL_DIR))
+sys.path.insert(0, str(_SKILL_DIR))
 _PROJECT_ROOT = _SKILL_DIR.parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
+
+sys.modules.pop("_isolated_imports", None)
+from _isolated_imports import purge_foreign_bare_modules
+
+purge_foreign_bare_modules(
+    "command_builder",
+    "errors",
+    "executor",
+    "nfcore_4_1_0_contract",
+    "outputs_parser",
+    "params_builder",
+    "pipeline_source",
+    "preflight",
+    "provenance",
+    "reporting",
+    "repro_commands",
+    "samplesheet_builder",
+    "schemas",
+)
 
 from clawbio.common.textio import write_text_lf
 from command_builder import build_nextflow_command
@@ -155,6 +175,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Run the scrnaseq pipeline through a ClawBio wrapper."
     )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Verbose logging")
+    parser.add_argument(
+        "--no-banner", action="store_true", help="Suppress the startup banner"
+    )
     parser.add_argument("--input", help="Path to a valid samplesheet.csv")
     parser.add_argument(
         "--output", required=True, help="Output directory for the wrapper results"
@@ -206,10 +230,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "-c",
         "--config",
+        "--nextflow-config",
         dest="extra_config",
         action="append",
         default=[],
-        help="Additional Nextflow config file; may be supplied multiple times for HPC/cloud profiles",
+        help="Additional Nextflow config file (alias: --nextflow-config); may be supplied multiple times for HPC/cloud profiles",
     )
     parser.add_argument(
         "--preset",
@@ -282,6 +307,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--work-dir",
         default=None,
         help="Nextflow work directory. Defaults to <output>/upstream/work; may be an object-store URI for cloud executors.",
+    )
+    parser.add_argument(
+        "--allow-remote-inputs",
+        action="store_true",
+        help=(
+            "Opt in to remote samplesheet inputs and reference paths (s3://, gs://, "
+            "https://, ftp://, …). Default is local-first: remote URIs are rejected so "
+            "genetic data and references stay on the local machine. When enabled, a "
+            "runtime warning lists the paths fetched over the network."
+        ),
     )
     parser.add_argument(
         "--allow-conda-cellranger",
@@ -528,9 +563,29 @@ def _write_error_result_if_safe(output_dir: Path, payload: dict[str, object]) ->
         return
 
 
-def main() -> int:
+_BANNER = (
+    "==============================================\n"
+    f"  ClawBio :: {SKILL_NAME}\n"
+    f"  nf-core/scrnaseq {NFCORE_SCRNASEQ_VERSION} orchestrator\n"
+    "=============================================="
+)
+
+
+def _print(msg: str) -> None:
+    """Log a human-readable status line to stdout (progress/traceability)."""
+    print(msg, flush=True)
+
+
+def _indent(text: str, n: int) -> str:
+    pad = " " * n
+    return "\n".join(pad + line for line in text.splitlines())
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+    if not getattr(args, "no_banner", False):
+        _print(_BANNER)
     output_dir = Path(args.output).expanduser().resolve()
 
     try:
@@ -538,9 +593,14 @@ def main() -> int:
         _check_pipeline_version_supported(args)
         return _run_wrapper(args, output_dir)
     except SkillError as exc:
-        return _handle_skill_error(output_dir, exc)
+        return _handle_skill_error(output_dir, exc, verbose=getattr(args, "verbose", False))
+    except KeyboardInterrupt:
+        _print("[abort] Interrupted by user.")
+        return 130
     except Exception as exc:
-        return _handle_unexpected_error(output_dir, exc)
+        return _handle_unexpected_error(
+            output_dir, exc, verbose=getattr(args, "verbose", False)
+        )
 
 
 def _check_pipeline_version_supported(args: argparse.Namespace) -> None:
@@ -643,6 +703,10 @@ def _run_wrapper_with_staging(
     )
     preflight_result = run_preflight(
         args, pipeline_source=pipeline_source, samplesheet_summary=samplesheet_summary
+    )
+    _print(
+        "[preflight] passed "
+        f"(warnings: {len(preflight_result.get('warnings', []) or [])})"
     )
     if args.check:
         return _write_check_mode_result(
@@ -781,6 +845,7 @@ def _write_check_mode_result(
         "parameter_support": _build_parameter_support_summary(),
     }
     write_check_result(output_dir, payload)
+    _print("[check] Preflight passed. No pipeline was launched (--check).")
     print(json.dumps(payload, indent=2))
     return 0
 
@@ -839,14 +904,22 @@ def _run_execution_mode(
         args, output_dir, pipeline_source, params_path
     )
     nextflow_cwd = _nextflow_execution_cwd(output_dir)
+    _print(
+        f"[execute] launching Nextflow "
+        f"({pipeline_source['source_kind']} → {pipeline_source['resolved_version']})"
+    )
     execution_result = execute_nextflow(
         command,
         cwd=nextflow_cwd,
         output_dir=output_dir,
         timeout_seconds=_resolve_timeout_seconds(args),
     )
+    _print("[execute] completed")
+    _print("[outputs] parsing pipeline outputs")
     parsed_outputs = _parse_outputs_with_effective_aligner(output_dir, args)
     _raise_if_expected_outputs_missing(parsed_outputs, output_dir=output_dir)
+    _print("[report] writing report.md, result.json, commands.sh")
+    _print("[provenance] writing reproducibility bundle")
     _write_success_outputs(
         output_dir,
         args=args,
@@ -861,7 +934,7 @@ def _run_execution_mode(
         command_str=_nextflow_replay_command(command_str, nextflow_cwd),
     )
     _run_downstream_handoff(args, parsed_outputs=parsed_outputs, output_dir=output_dir)
-    print(f"Wrapper completed successfully. Output: {output_dir}")
+    _print(f"[done] Wrapper completed successfully. Output: {output_dir}")
     return 0
 
 
@@ -1168,14 +1241,31 @@ def _write_handoff_provenance(output_dir: Path, record: dict[str, object]) -> No
     write_text_lf(provenance_dir / "handoff.json", json.dumps(record, indent=2))
 
 
-def _handle_skill_error(output_dir: Path, exc: SkillError) -> int:
+def _handle_skill_error(
+    output_dir: Path, exc: SkillError, *, verbose: bool = False
+) -> int:
     payload = exc.to_dict()
     _write_error_result_if_safe(output_dir, payload)
+    # Human-readable box on stdout (sarek-style traceability).
+    _print("")
+    _print("================ SkillError ================")
+    _print(f"  stage:   {exc.stage}")
+    _print(f"  code:    {exc.error_code}")
+    _print(f"  message: {exc.message}")
+    _print(f"  fix:     {exc.fix}")
+    if exc.details and verbose:
+        _print("  details:")
+        _print(_indent(json.dumps(exc.details, indent=2, default=str), 4))
+    _print("============================================")
+    # Machine-readable error on stderr: always available even when result.json
+    # cannot be written (e.g. the output dir is a file or inside the repo).
     print(json.dumps(payload, indent=2), file=sys.stderr)
     return 1
 
 
-def _handle_unexpected_error(output_dir: Path, exc: Exception) -> int:
+def _handle_unexpected_error(
+    output_dir: Path, exc: Exception, *, verbose: bool = False
+) -> int:
     payload = {
         "ok": False,
         "stage": "internal",
@@ -1188,6 +1278,16 @@ def _handle_unexpected_error(output_dir: Path, exc: Exception) -> int:
         },
     }
     _write_error_result_if_safe(output_dir, payload)
+    _print("")
+    _print("================ Internal error ================")
+    _print(f"  type:    {type(exc).__name__}")
+    _print(f"  message: {exc}")
+    if verbose:
+        _print(_indent(traceback.format_exc(), 4))
+    else:
+        _print("  Re-run with --verbose for the full traceback.")
+    _print("================================================")
+    # Machine-readable error on stderr (always available; see _handle_skill_error).
     print(json.dumps(payload, indent=2), file=sys.stderr)
     return 1
 

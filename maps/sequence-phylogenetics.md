@@ -37,7 +37,7 @@ created: 2026-06-13
 - [ncbi-datasets](../ncbi-datasets.md) — Download genomes, genes, virus sequences, and taxonomy data from NCBI using the datasets and dataformat CLI tools
 - [ngs-cli-toolkit](../ngs-cli-toolkit.md) — The core command-line NGS workhorses for going from raw reads to variants — bwa-mem2/minimap2/bowtie2 (alignment), samtools (BAM sort/index/stats/view), bcftools (VCF...
 - [phylogenetics](../phylogenetics.md) — Build and analyze phylogenetic trees using MAFFT (multiple alignment), IQ-TREE 2 (maximum likelihood), and FastTree (fast NJ/ML)
-- [phylogenetics-builder](../phylogenetics-builder.md) — Build maximum-likelihood phylogenetic trees from aligned FASTA data using IQ-TREE 2
+- [phylogenetics-builder](../phylogenetics-builder.md) — End-to-end ML phylogenetic tree inference — MSA, trimming, ModelFinder, IQ-TREE2/RAxML-NG
 - [scikit-bio](../scikit-bio.md) — Biological data toolkit. Sequence analysis, alignments, phylogenetic trees, diversity metrics (alpha/beta, UniFrac), ordination (PCoA), PERMANOVA, FASTA/Newick I/O, for microbiome...
 - [seq-wrangler](../seq-wrangler.md) — NGS read QC, alignment, and BAM processing pipeline
 - [sequence-analysis](../sequence-analysis.md) — Analyze DNA/RNA/protein sequences. Use when the user provides a sequence and asks for analysis, translation, GC content, ORFs, motifs, restriction sites, or primer design
