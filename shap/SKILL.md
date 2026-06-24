@@ -555,7 +555,7 @@ uv pip install -U shap
 ## Additional Resources
 
 - **Official Documentation**: https://shap.readthedocs.io/
-- **GitHub Repository**: https://github.com/slundberg/shap
+- **GitHub Repository**: https://github.com/shap/shap
 - **Original Paper**: Lundberg & Lee (2017) - "A Unified Approach to Interpreting Model Predictions"
 - **Nature MI Paper**: Lundberg et al. (2020) - "From local explanations to global understanding with explainable AI for trees"
 
