@@ -387,7 +387,7 @@ The SDK automatically retries failed requests:
 # Automatic retry for 429, 502, 503, 504 status codes
 # Up to 5 retries with exponential backoff
 # Customize retry behavior if needed
-from benchling_sdk.retry import RetryStrategy
+from benchling_sdk.helpers.retry_helpers import RetryStrategy
 
 benchling = Benchling(
     url=tenant_url,
