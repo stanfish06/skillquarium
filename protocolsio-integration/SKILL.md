@@ -150,7 +150,7 @@ Follow the guidance in the relevant reference files:
 
 All API requests use the base URL:
 ```
-https://protocols.io/api/v3
+https://www.protocols.io/api/v3
 ```
 
 All requests require the Authorization header:
@@ -257,7 +257,7 @@ headers = {"Authorization": f"Bearer {token}"}
 
 # Search for CRISPR protocols
 response = requests.get(
-    "https://protocols.io/api/v3/protocols",
+    "https://www.protocols.io/api/v3/protocols",
     headers=headers,
     params={
         "filter": "public",
@@ -291,7 +291,7 @@ data = {
 }
 
 response = requests.post(
-    "https://protocols.io/api/v3/protocols",
+    "https://www.protocols.io/api/v3/protocols",
     headers=headers,
     json=data
 )
@@ -318,7 +318,7 @@ with open("data.csv", "rb") as f:
     }
 
     response = requests.post(
-        "https://protocols.io/api/v3/workspaces/12345/files/upload",
+        "https://www.protocols.io/api/v3/workspaces/12345/files/upload",
         headers=headers,
         files=files,
         data=data
