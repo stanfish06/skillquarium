@@ -7,6 +7,9 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 
 # PyTDC (Therapeutics Data Commons)
 
+> [!WARNING]
+> **Maintenance risk:** Upstream Therapeutics Data Commons (https://github.com/mims-harvard/TDC) has had no commits since 2025-04-18 and PyPI's latest release (1.1.15) dates to 2025-03-31 — 14+ months of inactivity as of mid-2026. The package still installs and the documented API still works, but don't expect dataset/API updates from upstream. Pin your version deliberately. Tracked: issue [#120](https://github.com/stanfish06/my-skills/issues/120).
+
 ## Overview
 
 PyTDC is an open-science platform providing AI-ready datasets and benchmarks for drug discovery and development. Access curated datasets spanning the entire therapeutics pipeline with standardized evaluation metrics and meaningful data splits, organized into three categories: single-instance prediction (molecular/protein properties), multi-instance prediction (drug-target interactions, DDI), and generation (molecule generation, retrosynthesis).
