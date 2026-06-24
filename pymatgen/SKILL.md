@@ -38,7 +38,7 @@ uv pip install pymatgen
 uv pip install pymatgen mp-api
 
 # Optional dependencies for extended functionality
-uv pip install pymatgen[analysis]  # Additional analysis tools
+uv pip install pymatgen[optional]  # Additional analysis tools
 uv pip install pymatgen[vis]       # Visualization tools
 ```
 
@@ -649,7 +649,7 @@ Pymatgen integrates seamlessly with:
 
 **Import errors**: Install missing dependencies
 ```bash
-uv pip install pymatgen[analysis,vis]
+uv pip install pymatgen[optional,vis]
 ```
 
 **API key not found**: Set MP_API_KEY environment variable
