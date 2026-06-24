@@ -3,7 +3,7 @@ name: stable-baselines3
 description: Production-ready reinforcement learning algorithms (PPO, SAC, DQN, TD3, DDPG, A2C) with scikit-learn-like API. Use for standard RL experiments, quick prototyping, and well-documented algorithm implementations. Best for single-agent RL with Gymnasium environments. For high-performance parallel training, multi-agent systems, or custom vectorized environments, use pufferlib instead.
 license: MIT license
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.10+, PyTorch >= 2.3, and stable-baselines3 2.8+. Gymnasium environments; optional extras for TensorBoard and Atari (ale-py).
+compatibility: Requires Python 3.10+, PyTorch >= 2.8, and stable-baselines3 2.9+. Gymnasium environments; optional extras for TensorBoard and Atari (ale-py).
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -13,21 +13,21 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 Stable Baselines3 (SB3) is a PyTorch-based library providing reliable implementations of reinforcement learning algorithms. This skill provides comprehensive guidance for training RL agents, creating custom environments, implementing callbacks, and optimizing training workflows using SB3's unified API.
 
-**Current upstream:** SB3 **2.8.0** (April 2026). Docs: [stable-baselines3.readthedocs.io](https://stable-baselines3.readthedocs.io/en/master/).
+**Current upstream:** SB3 **2.9.0**. Docs: [stable-baselines3.readthedocs.io](https://stable-baselines3.readthedocs.io/en/master/).
 
 ## Installation
 
-Tested against **stable-baselines3 2.8.0**. Requires **Python 3.10+** (3.9 dropped in 2.8.0) and **PyTorch >= 2.3**.
+Tested against **stable-baselines3 2.9.0**. Requires **Python 3.10+** (3.9 dropped in 2.8.0) and **PyTorch >= 2.8** ([GHSA-887c-mr87-cxwp](https://github.com/advisories/GHSA-887c-mr87-cxwp) raised the floor from 2.3 in 2.9.0).
 
 ```bash
 # Basic installation
-uv pip install "stable-baselines3>=2.8"
+uv pip install "stable-baselines3>=2.9"
 
 # With extra dependencies (TensorBoard, ale-py for Atari, etc.)
-uv pip install "stable-baselines3[extra]>=2.8"
+uv pip install "stable-baselines3[extra]>=2.9"
 ```
 
-On zsh, quote brackets: `uv pip install 'stable-baselines3[extra]>=2.8'`.
+On zsh, quote brackets: `uv pip install 'stable-baselines3[extra]>=2.9'`.
 
 For MuJoCo continuous-control benchmarks:
 
