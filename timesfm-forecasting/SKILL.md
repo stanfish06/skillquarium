@@ -130,8 +130,8 @@ uv pip install timesfm[flax]
 ### Step 3: Install PyTorch for Your Hardware
 
 ```bash
-# CUDA 12.1 (NVIDIA GPU)
-pip install torch>=2.0.0 --index-url https://download.pytorch.org/whl/cu121
+# CUDA 12.6 (NVIDIA GPU) — current PyTorch wheels no longer publish a cu121 index
+pip install torch>=2.0.0 --index-url https://download.pytorch.org/whl/cu126
 
 # CPU only
 pip install torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
