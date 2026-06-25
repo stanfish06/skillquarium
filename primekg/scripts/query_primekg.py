@@ -3,13 +3,19 @@ import os
 import json
 from typing import List, Dict, Optional, Union
 
-# Default data path
-DATA_PATH = "/mnt/c/Users/eamon/Documents/Data/PrimeKG/kg.csv"
+# Data path, overridable via the PRIMEKG_DATA_PATH environment variable.
+# Download kg.csv from Harvard Dataverse:
+#   wget -O kg.csv https://dataverse.harvard.edu/api/access/datafile/6180620
+DATA_PATH = os.environ.get("PRIMEKG_DATA_PATH", "./data/primekg/kg.csv")
 
 def _load_kg():
     """Internal helper to load the KG efficiently."""
     if not os.path.exists(DATA_PATH):
-        raise FileNotFoundError(f"PrimeKG data not found at {DATA_PATH}. Please ensure the file is downloaded.")
+        raise FileNotFoundError(
+            f"PrimeKG data not found at {DATA_PATH}. Download it from Harvard Dataverse "
+            "(wget -O kg.csv https://dataverse.harvard.edu/api/access/datafile/6180620) "
+            "and place it there, or set the PRIMEKG_DATA_PATH environment variable."
+        )
     # For very large files, we might want to use a database or specialized graph library.
     # For now, we'll use pandas for simplicity but with low_memory=True.
     return pd.read_csv(DATA_PATH, low_memory=True)
