@@ -17,7 +17,12 @@ PrimeKG is a precision medicine knowledge graph that integrates over 20 primary 
 - Analyze local disease context (related genes, drugs, phenotypes)
 - Identify drug-disease paths (potential repurposing opportunities)
 
-**Data access:** Programmatic access via `query_primekg.py`. Data is stored at `C:\Users\eamon\Documents\Data\PrimeKG\kg.csv`.
+**Data access:** Programmatic access via `query_primekg.py`. Download `kg.csv` from Harvard Dataverse and place it at `./data/primekg/kg.csv` (or point the `PRIMEKG_DATA_PATH` environment variable at it):
+
+```bash
+mkdir -p data/primekg
+wget -O data/primekg/kg.csv https://dataverse.harvard.edu/api/access/datafile/6180620
+```
 
 ## When to Use This Skill
 
@@ -90,7 +95,8 @@ The graph contains several key relationship types including:
 - `scripts/query_primekg.py`: Core functions for searching and querying the knowledge graph.
 
 ### Data Path
-- Data: `/mnt/c/Users/eamon/Documents/Data/PrimeKG/kg.csv`
+- Data: `./data/primekg/kg.csv` by default, or wherever `PRIMEKG_DATA_PATH` points.
+- Source: [Harvard Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IXA7BM)
 - Total nodes: ~129,000
 - Total edges: ~4,000,000
 - Database: CSV-based, optimized for pandas querying.
