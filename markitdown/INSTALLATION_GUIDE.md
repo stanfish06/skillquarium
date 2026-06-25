@@ -268,8 +268,8 @@ After installation:
 To use the skill scripts:
 
 ```bash
-# Navigate to scripts directory
-cd /Users/vinayak/Documents/claude-scientific-writer/.claude/skills/markitdown/scripts
+# Navigate to scripts directory (relative to this skill's root)
+cd scripts
 
 # Scripts are already executable, just run them
 python batch_convert.py --help
