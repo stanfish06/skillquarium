@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [cellpose-stardist-bioimage](cellpose-stardist-bioimage.md) — Bioimage cell and nucleus segmentation routing with cellpose-cell-segmentation, Cellpose, StarDist, napari-viz, and monai-medical-imaging-ai
+- [scikit-image](scikit-image.md) — A collection of algorithms for image processing in Python
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

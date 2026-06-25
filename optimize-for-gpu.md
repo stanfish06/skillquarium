@@ -24,6 +24,8 @@ created: 2026-06-09
 
 - [geopandas](geopandas.md) — Python library for working with geospatial vector data including shapefiles, GeoJSON, and GeoPackage files
 - [networkx](networkx.md) — Create, analyze, and visualize complex networks and graphs in Python with NetworkX
+- [numba](numba.md) — A Just-In-Time (JIT) compiler for Python that translates a subset of Python and NumPy code into fast machine code
+- [scikit-image](scikit-image.md) — A collection of algorithms for image processing in Python
 - [scikit-learn](scikit-learn.md) — Machine learning in Python with scikit-learn
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
