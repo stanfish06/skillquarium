@@ -658,7 +658,9 @@ def select_model(task_complexity, budget):
     candidates = models[task_complexity]
     affordable = [m for m, cost in candidates if cost <= budget]
 
-    return affordable[0] if affordable else candidates[0][0]
+    if not affordable:
+        raise ValueError(f"No {task_complexity} model fits budget={budget}")
+    return affordable[0]
 
 # Use in optimization
 task = "complex"
@@ -811,6 +813,8 @@ class ModelRegistry:
             return {}
 
     def _save_registry(self):
+        from pathlib import Path
+        Path(self.registry_path).parent.mkdir(parents=True, exist_ok=True)
         with open(self.registry_path, 'w') as f:
             json.dump(self.registry, f, indent=2)
 
@@ -896,9 +900,11 @@ class DSPyMonitor:
 
     def _setup_logger(self, log_file):
         """Setup logging."""
+        from pathlib import Path
         logger = logging.getLogger("dspy_monitor")
         logger.setLevel(logging.INFO)
 
+        Path(log_file).parent.mkdir(parents=True, exist_ok=True)
         handler = logging.FileHandler(log_file)
         handler.setFormatter(
             logging.Formatter('%(asctime)s - %(message)s')

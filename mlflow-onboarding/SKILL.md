@@ -1,6 +1,7 @@
 ---
 name: mlflow-onboarding
 description: Onboards users to MLflow by determining their use case (GenAI agents/apps or traditional ML/deep learning) and guiding them through relevant quickstart tutorials and initial integration. If an experiment ID is available, it should be supplied as input to help determine the use case. Use when the user asks to get started with MLflow, set up tracking, add observability, or integrate MLflow into their project. Triggers on "get started with MLflow", "set up MLflow", "onboard to MLflow", "add MLflow to my project", "how do I use MLflow".
+author: mlflow
 ---
 
 # MLflow Onboarding
@@ -33,11 +34,11 @@ Search the user's project for imports and usage patterns that indicate the use c
 - Dataset loading with tabular/image/time-series data
 
 ```bash
-# Search for GenAI indicators
-grep -rl --include='*.py' -E '(import openai|import anthropic|from langchain|from langgraph|import litellm|from mlflow\.genai|from mlflow\.tracing|mlflow\.openai|mlflow\.langchain|ChatCompletion|chat\.completions)' .
+# Search for GenAI indicators (Python, notebooks, JS/TS)
+rg -l -g '*.{py,ipynb,js,ts,tsx}' -e '(from openai|import openai|from anthropic|import anthropic|from langchain|from langgraph|import litellm|from mlflow\.genai|from mlflow\.tracing|mlflow\.openai|mlflow\.langchain|from langchain_openai|import google\.genai|import google\.generativeai|ChatCompletion|chat\.completions|dspy)' .
 
 # Search for ML indicators
-grep -rl --include='*.py' -E '(from sklearn|import torch|import tensorflow|import keras|import xgboost|import lightgbm|mlflow\.sklearn|mlflow\.pytorch|mlflow\.tensorflow|\.fit\()' .
+rg -l -g '*.{py,ipynb}' -e '(from sklearn|import torch|import tensorflow|import keras|import xgboost|import lightgbm|mlflow\.sklearn|mlflow\.pytorch|mlflow\.tensorflow|\.fit\()' .
 ```
 
 ### Signal 2: Check the Experiment Type Tag

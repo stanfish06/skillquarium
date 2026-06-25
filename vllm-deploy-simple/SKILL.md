@@ -1,6 +1,7 @@
 ---
 name: vllm-deploy-simple
 description: Quick install and deploy vLLM, start serving with a simple LLM, and test OpenAI API.
+author: vllm-project
 ---
 
 # vLLM Simple Deployment

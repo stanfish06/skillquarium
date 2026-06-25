@@ -156,8 +156,8 @@ monitors = list_signal_monitors(entity, project)
 print(f"monitor_count_before={len(monitors)}")
 for m in monitors:
     print(f"{m['object_id']} ops={m['op_names']} query={m['query']} active={m['active']} scorers={len(m['scorers'])}")
-print(f"candidate_ops={[selected_op_ref]}")
-print(f"candidate_query=SUCCESSFUL_TRACES_QUERY")
+print(f"candidate_ops={candidate_op_names}")
+print(f"candidate_query={candidate_query}")
 ```
 
 Show this pre-write monitor check to the user before approval. Then stop. Do not create or update
@@ -195,7 +195,12 @@ and use `SUCCESSFUL_ROOT_TRACES_QUERY`. If you pass `op_names` without an explic
 `SUCCESSFUL_ROOT_TRACES_QUERY`. For failed-trace signals, use `FAILED_TRACES_QUERY`. When the write
 finishes, report the monitor ref, scorer ref, and that scoring applies to future traces only.
 
-### Set up a Weave Monitor
+### Raw Weave Monitor (standalone — not using signal_helpers)
+
+> **Note:** This is a standalone raw Weave monitoring example. For signal creation following
+> the signal workflow rules above, use `signal_helpers.py` (`create_signal()`, `add_scorer_to_monitor()`)
+> instead. This example is for cases where you need direct `weave.Monitor` access outside the
+> signal framework.
 
 ```python
 import weave, os

@@ -63,8 +63,8 @@ fi
 if [[ -n "$VENV_PATH" ]] && [[ "$VENV_PATH" != "." ]]; then
     # Check if the virtual environment directory exists
     if [[ ! -d "$VENV_PATH" ]]; then
-        echo "Error: Virtual environment path '$VENV_PATH' does not exist."
-        exit 1
+        echo "Virtual environment '$VENV_PATH' does not exist. Creating it..."
+        python3 -m venv "$VENV_PATH"
     fi
 
     # Determine the activation script based on OS
@@ -84,7 +84,17 @@ if [[ -n "$VENV_PATH" ]] && [[ "$VENV_PATH" != "." ]]; then
     fi
 
     # Activate the virtual environment
+    # shellcheck source=/dev/null
     source "$ACTIVATE_SCRIPT"
+elif [[ -z "$VENV_PATH" ]]; then
+    # No --venv provided: create a default isolated environment
+    VENV_PATH=".venv-vllm"
+    if [[ ! -d "$VENV_PATH" ]]; then
+        echo "Creating default virtual environment at '$VENV_PATH'..."
+        python3 -m venv "$VENV_PATH"
+    fi
+    # shellcheck source=/dev/null
+    source "$VENV_PATH/bin/activate"
 fi
 
 # Colors for output
@@ -128,7 +138,7 @@ detect_backend() {
         echo "NVIDIA CUDA"
     elif [[ -f "/dev/kfd" ]] && [[ -d "/dev/dri" ]]; then
         echo "AMD ROCm"
-    elif [[ -n "$TPU_NAME" ]] || command -v gcloud &> /dev/null; then
+    elif [[ -n "$TPU_NAME" ]] || [[ -n "$TPU_ACCELERATOR" ]] || [[ -f "/sys/devices/pci0000:00/0000:00:04.0/device" && "$(cat /sys/devices/pci0000:00/0000:00:04.0/device 2>/dev/null)" == "0x005e" ]]; then
         echo "Google TPU"
     else
         echo "CPU"

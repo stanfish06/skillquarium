@@ -10,7 +10,7 @@ Python and extract structured data from calls and evals for pandas analysis.
 
 Usage:
     import sys
-    sys.path.insert(0, "skills/wandb-primary/scripts")
+    sys.path.insert(0, "wandb-primary/scripts")
     from weave_helpers import (
         unwrap,                  # Recursively convert Weave types -> plain Python
         get_token_usage,         # Extract token counts from a call's summary

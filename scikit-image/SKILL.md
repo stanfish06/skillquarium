@@ -1,6 +1,7 @@
 ---
 name: scikit-image
 description: A collection of algorithms for image processing in Python. Built on NumPy, SciPy, and Cython. It focuses on scientific image analysis including segmentation, geometric transformations, color space manipulation, analysis, and filtering.
+author: tondevrel
 version: 0.22
 license: BSD-3-Clause
 ---
@@ -263,7 +264,9 @@ def segment_nuclei(dna_image):
     
     # Separate touching nuclei
     distance = ndi.distance_transform_edt(filled)
-    local_maxi = feature.peak_local_max(distance, indices=False, footprint=np.ones((15, 15)), labels=filled)
+    coords = feature.peak_local_max(distance, footprint=np.ones((15, 15)), labels=filled)
+    local_maxi = np.zeros_like(distance, dtype=bool)
+    local_maxi[tuple(coords.T)] = True
     markers = measure.label(local_maxi)
     labels = segmentation.watershed(-distance, markers, mask=filled)
     

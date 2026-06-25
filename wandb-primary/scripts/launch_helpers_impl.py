@@ -7,7 +7,7 @@ Helper functions for W&B Launch — queue management, job submission, and run re
 
 Usage:
     import sys
-    sys.path.insert(0, "skills/wandb-primary/scripts")
+    sys.path.insert(0, "wandb-primary/scripts")
     from launch_helpers import (
         create_queue,
         recreate_queue_with_prioritization,
@@ -256,7 +256,7 @@ def list_queues(entity):
         print(f"  No queues found for entity '{entity}'")
         print("  Suggested Kubernetes queue name: wandb-launch-k8s")
         print(
-            "  Create one with: python skills/wandb-primary/scripts/launch_helpers.py "
+            "  Create one with: python wandb-primary/scripts/launch_helpers.py "
             f"create-queue {entity} --queue wandb-launch-k8s --namespace wandb-launch"
         )
         return queues
@@ -742,6 +742,7 @@ def download_code_artifact(job_artifact_path):
         artifact(id: $id) {
             artifactSequence { name project { name entityName } }
             aliases { alias }
+            version
         }
     }
     """)
@@ -751,8 +752,7 @@ def download_code_artifact(job_artifact_path):
     entity = seq["project"]["entityName"]
     project = seq["project"]["name"]
     art_name = seq["name"]
-    aliases = [a["alias"] for a in art_data["aliases"]]
-    version = aliases[0] if aliases else "latest"
+    version = art_data.get("version") or "latest"
 
     # Download source code
     source_art = api.artifact(f"{entity}/{project}/{art_name}:{version}")
@@ -1019,7 +1019,7 @@ def _job_url_from_run_spec(run_spec):
     )
 
 
-def _fetch_launch_queue_item(entity, queue_name, run_queue_item_id):
+def _fetch_launch_queue_item(entity, queue_name, run_queue_item_id, project_name=None):
     """Fetch the queue item fields used by the Launch queue details drawer."""
     api = wandb.Api()
     query_str = """
@@ -1064,7 +1064,7 @@ def _fetch_launch_queue_item(entity, queue_name, run_queue_item_id):
         query_str,
         {
             "entityName": entity,
-            "projectName": DEFAULT_LAUNCH_PROJECT_NAME,
+            "projectName": project_name or DEFAULT_LAUNCH_PROJECT_NAME,
             "runQueueName": queue_name,
             "runQueueItemID": run_queue_item_id,
         },
@@ -1178,7 +1178,7 @@ def check_launch(entity, project, queue_name, run_queue_item_id):
     """
     api = wandb.Api()
     try:
-        item = _fetch_launch_queue_item(entity, queue_name, run_queue_item_id)
+        item = _fetch_launch_queue_item(entity, queue_name, run_queue_item_id, project_name=project)
     except Exception as e:
         print(f"Could not fetch Launch queue-item details: {e}")
         item = None
@@ -1265,7 +1265,7 @@ def check_launch(entity, project, queue_name, run_queue_item_id):
 
 def _check_command(entity, project, queue_name, run_queue_item_id):
     return (
-        "python skills/wandb-primary/scripts/launch_helpers.py check "
+        "python wandb-primary/scripts/launch_helpers.py check "
         f"{entity} {project} {queue_name} {run_queue_item_id}"
     )
 

@@ -6,7 +6,7 @@
 
 Usage:
     import sys
-    sys.path.insert(0, "skills/wandb-primary/scripts")
+    sys.path.insert(0, "wandb-primary/scripts")
     from signal_helpers import (
         explore_ops,             # List ops and their input/output field schemas
         sample_traces,           # Query and unwrap traces for inspection
