@@ -56,21 +56,27 @@ metadata:
   inputs:
   - name: input_file
     type: file
-    format: [fasta, fa, aln]
+    format:
+    - fasta
+    - fa
+    - aln
     description: DNA or protein sequences (unaligned for full pipeline, aligned with --aligned flag)
     required: true
   outputs:
   - name: report
     type: file
-    format: [md]
+    format:
+    - md
     description: Full analysis report with pipeline summary and branch table
   - name: result
     type: file
-    format: [json]
+    format:
+    - json
     description: Machine-readable results (ClawBio output contract)
   - name: phylo_tree
     type: file
-    format: [nwk]
+    format:
+    - nwk
     description: Newick format tree with bootstrap support values
 ---
 

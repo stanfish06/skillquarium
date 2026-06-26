@@ -2110,9 +2110,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/phylogenetics-builder/SKILL.md",
-      "skillFolderHash": "7b7a4f7a1e89b02b043e3eba6484605a2bf4be82",
+      "skillFolderHash": "20825f5bfec7832381a08ba22354a5cdf5cd540f",
       "installedAt": "2026-06-09T11:30:14.261Z",
-      "updatedAt": "2026-06-24T07:29:08.532Z"
+      "updatedAt": "2026-06-26T07:35:34.765Z"
     },
     "profile-report": {
       "source": "ClawBio/ClawBio",
@@ -2502,9 +2502,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/idea-refine/SKILL.md",
-      "skillFolderHash": "9c0c69efce37dc33f460c29f91d35cafad5973a7",
+      "skillFolderHash": "14f474d8f51370ddd9127ff3d171810a1acf891a",
       "installedAt": "2026-06-12T08:07:57.850Z",
-      "updatedAt": "2026-06-19T08:14:14.351Z"
+      "updatedAt": "2026-06-26T07:35:36.294Z"
     },
     "incremental-implementation": {
       "source": "addyosmani/agent-skills",
