@@ -2,7 +2,7 @@
 name: imaging-data-commons
 description: Query and download public cancer imaging data from NCI Imaging Data Commons using idc-index. Use for accessing large-scale radiology (CT, MR, PET) and pathology datasets for AI training or research. No authentication required. Query by metadata, visualize in browser, check licenses.
 license: This skill is provided under the MIT License. IDC data itself has individual licensing (mostly CC-BY, some CC-NC) that must be respected when using the data.
-metadata: {"version": "1.1", "source-skill-version": "1.4.0", "skill-author": "Andrey Fedorov, @fedorov", "idc-index": "0.11.14", "idc-data-version": "v23", "repository": "https://github.com/ImagingDataCommons/idc-claude-skill"}
+metadata: {"version": "1.1", "source-skill-version": "1.4.0", "skill-author": "Andrey Fedorov, @fedorov", "idc-index": "0.12.3", "idc-data-version": "v24", "repository": "https://github.com/ImagingDataCommons/idc-claude-skill"}
 ---
 
 # Imaging Data Commons
@@ -11,7 +11,7 @@ metadata: {"version": "1.1", "source-skill-version": "1.4.0", "skill-author": "A
 
 Use the `idc-index` Python package to query and download public cancer imaging data from the National Cancer Institute Imaging Data Commons (IDC). No authentication required for data access.
 
-**Current IDC Data Version: v23** (always verify with `IDCClient().get_idc_version()`)
+**Current IDC Data Version: v24** (always verify with `IDCClient().get_idc_version()`)
 
 **Primary tool:** `idc-index` ([GitHub](https://github.com/imagingdatacommons/idc-index))
 
@@ -20,7 +20,7 @@ Use the `idc-index` Python package to query and download public cancer imaging d
 ```python
 import idc_index
 
-REQUIRED_VERSION = "0.11.14"  # Must match metadata.idc-index in this file
+REQUIRED_VERSION = "0.12.3"  # Must match metadata.idc-index in this file
 installed = idc_index.__version__
 
 if installed < REQUIRED_VERSION:
