@@ -6,7 +6,7 @@ allowed-tools:
   - Write
   - Bash
 license: https://github.com/matplotlib/matplotlib/tree/main/LICENSE
-compatibility: Requires Python 3.10+ and Matplotlib 3.10.x. Use `uv add matplotlib` in projects; interactive Jupyter widgets require `ipympl`.
+compatibility: Requires Python 3.11+ and Matplotlib 3.11.x. Use `uv add matplotlib` in projects; interactive Jupyter widgets require `ipympl`.
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -44,7 +44,7 @@ uv add matplotlib ipympl
 
 Then enable the widget backend in Jupyter with `%matplotlib widget` or `%matplotlib ipympl`.
 
-Matplotlib 3.10 requires Python 3.10+ and NumPy 1.23+. Non-interactive file output works through backends such as Agg, PDF, and SVG. For GUI windows, Matplotlib auto-selects an available backend; if `TkAgg` fails in a uv-managed Python, update uv and Python builds with `uv self update` and `uv python upgrade --reinstall`, or install a Qt backend with `uv add pyside6`.
+Matplotlib 3.11 requires Python 3.11+ and NumPy 1.23+. Non-interactive file output works through backends such as Agg, PDF, and SVG. For GUI windows, Matplotlib auto-selects an available backend; if `TkAgg` fails in a uv-managed Python, update uv and Python builds with `uv self update` and `uv python upgrade --reinstall`, or install a Qt backend with `uv add pyside6`.
 
 ## Core Concepts
 
