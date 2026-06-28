@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Clinical, Medical & Pharmacogenomics](clinical-medical.md)
 
-## Skills (34)
+## Skills (36)
 
 - [archaic-introgression](../archaic-introgression.md) — Detect Neanderthal and Denisovan introgression segments from modern human genomes
 - [claw-ancestry-pca](../claw-ancestry-pca.md) — Ancestry decomposition PCA against the Simons Genome Diversity Project
@@ -27,6 +27,7 @@ created: 2026-06-13
 - [geniml](../geniml.md) — This skill should be used when working with genomic interval data (BED files) for machine learning tasks
 - [genome-compare](../genome-compare.md) — Compare your genome to George Church (PGP-1) and estimate ancestry composition via IBS and EM admixture
 - [genome-match](../genome-match.md) — Score genetic compatibility across all male-female pairings in a Genomebook generation
+- [genomics-workflow-acceleration](../genomics-workflow-acceleration.md) — Use when accelerating existing genomics workflows with NVIDIA Parabricks, improving runtime or price/performance, converting pipeline steps to GPUs, or comparing CPU and GPU workflow...
 - [gtars](../gtars.md) — High-performance toolkit for genomic interval analysis in Rust with Python bindings
 - [gwas-catalog-region-fetch](../gwas-catalog-region-fetch.md) — Fetch a region of GWAS summary statistics from the NHGRI-EBI GWAS Catalog harmonised collection via tabix-on-FTP
 - [gwas-lookup](../gwas-lookup.md) — Federated variant lookup across 9 genomic databases — GWAS Catalog, Open Targets, PheWeb (UKB, FinnGen, BBJ), GTEx, eQTL Catalogue, and more
@@ -39,6 +40,7 @@ created: 2026-06-13
 - [mendelian-randomisation](../mendelian-randomisation.md) — Two-sample Mendelian Randomisation from GWAS summary statistics with IVW, MR-Egger, weighted median/mode, and full sensitivity analysis (Cochran Q, Egger intercept, Steiger...
 - [nfcore-sarek-wrapper](../nfcore-sarek-wrapper.md) — ClawBio wrapper around nf-core/sarek 3.8.1 covering mapping through annotation for germline, tumor-only, and somatic paired analyses
 - [pacsomatic](../pacsomatic.md) — Operator toolkit for nf-core/pacsomatic matched tumor-normal workflows from BAM inputs
+- [parabricks](../parabricks.md) — Route NVIDIA Parabricks pbrun tools, assess GPU/runtime readiness, and provide version-aware command guidance for FASTQ/BAM processing, RNA-seq, variant calling, BAM QC, and GVCF...
 - [polars-bio](../polars-bio.md) — High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames
 - [pybedtools](../pybedtools.md) — Python genomic interval arithmetic with BEDTools, complementing pysam, polars, and query for downstream tables
 - [pysam](../pysam.md) — Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines

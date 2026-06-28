@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (25)
+## Skills (28)
 
 - [analyze-fasta](../analyze-fasta.md) — Analyze a single FASTA file (nucleotide or protein), compute sequence-level metrics (GC, ORFs, MW, pI, GRAVY, secondary-structure fractions) with Biopython, and write a Markdown report...
 - [bioconductor-bridge](../bioconductor-bridge.md) — Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager
@@ -25,6 +25,7 @@ created: 2026-06-13
 - [busco-assessor](../busco-assessor.md) — Genome, transcriptome, and protein completeness assessment via BUSCO v6
 - [claw-metagenomics](../claw-metagenomics.md) — Shotgun metagenomics profiling — taxonomy, resistome, and functional pathways
 - [etetoolkit](../etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
+- [evo2-nim](../evo2-nim.md) — Generate and analyze DNA sequences using NVIDIA's Evo 2 BioNeMo NIM microservice
 - [gget](../gget.md) — Fast CLI/Python queries to 20+ bioinformatics databases
 - [gi-annotation](../gi-annotation.md) — Predict gene and transcript structure (intervals, exons, strand) from a DNA sequence using the Genomic Intelligence DNA Annotation model, via the hosted /v1/tasks/annotation/predict API
 - [gi-chromatin](../gi-chromatin.md) — Predict chromatin state — histone marks, DNase, TF binding — across 919 tracks (DeepSEA-style) for DNA sequences, via the hosted Genomic Intelligence /v1/tasks/chromatin/predict API
@@ -33,6 +34,8 @@ created: 2026-06-13
 - [gi-promoter](../gi-promoter.md) — Detect promoter regions in DNA sequences using the Genomic Intelligence G0 transformer (GENA-LM BERT Large), via the hosted /v1/tasks/promoter/predict API
 - [gi-splice](../gi-splice.md) — Detect splice donor and acceptor sites in DNA sequences using the Genomic Intelligence G0 BigBird transformer, via the hosted /v1/tasks/splice/predict API
 - [metagenomics](../metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
+- [msa-search-nim](../msa-search-nim.md) — Generate multiple sequence alignments (MSAs) for protein sequences using the ColabFold MSA-Search NIM
+- [msa-structure-prediction-pipeline](../msa-structure-prediction-pipeline.md) — Run a complete protein structure prediction pipeline using NVIDIA BioNeMo NIMs: search for MSA alignments with MSA-Search (ColabFold), then predict the structure with OpenFold3 using...
 - [multiqc-reporter](../multiqc-reporter.md) — Aggregates QC reports from any bioinformatics tool outputs (FastQC, fastp, STAR, Picard, samtools, etc.) into a single MultiQC HTML report plus a ClawBio markdown summary with...
 - [ncbi-datasets](../ncbi-datasets.md) — Download genomes, genes, virus sequences, and taxonomy data from NCBI using the datasets and dataformat CLI tools
 - [ngs-cli-toolkit](../ngs-cli-toolkit.md) — The core command-line NGS workhorses for going from raw reads to variants — bwa-mem2/minimap2/bowtie2 (alignment), samtools (BAM sort/index/stats/view), bcftools (VCF...

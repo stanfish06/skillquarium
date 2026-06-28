@@ -20,7 +20,8 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [diffdock-nim](diffdock-nim.md) — Run DiffDock molecular docking via NVIDIA NIM to predict small-molecule binding poses against protein targets
+- [drug-discovery-pipeline](drug-discovery-pipeline.md) — Run a complete computational drug discovery pipeline using NVIDIA BioNeMo NIMs: generate drug-like molecules with GenMol, dock them to a protein target with DiffDock, then predict...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
