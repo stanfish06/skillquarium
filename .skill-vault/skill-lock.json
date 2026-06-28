@@ -2658,6 +2658,276 @@
       "skillFolderHash": "de99644a837172940aefcfab4e51f19344ba98df",
       "installedAt": "2026-06-13T13:42:44.373Z",
       "updatedAt": "2026-06-13T13:42:44.373Z"
+    },
+    "boltz2-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/boltz2-nim/SKILL.md",
+      "skillFolderHash": "80191c1b5967331193fe090ebd89287c86a41624",
+      "installedAt": "2026-06-28T21:15:35.304Z",
+      "updatedAt": "2026-06-28T21:15:35.304Z"
+    },
+    "complexa-design": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/complexa-design/SKILL.md",
+      "skillFolderHash": "bef686e94e583c8e9c35fb40480be0bcd3026bb3",
+      "installedAt": "2026-06-28T21:15:35.307Z",
+      "updatedAt": "2026-06-28T21:15:35.307Z"
+    },
+    "complexa-evaluate-pdbs": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/complexa-evaluate-pdbs/SKILL.md",
+      "skillFolderHash": "869d9ee358f6f853b8cea43b147b4e573556b22c",
+      "installedAt": "2026-06-28T21:15:35.307Z",
+      "updatedAt": "2026-06-28T21:15:35.307Z"
+    },
+    "complexa-setup": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/complexa-setup/SKILL.md",
+      "skillFolderHash": "29dd65004aab580c6e234ea844c3a7897df85ce6",
+      "installedAt": "2026-06-28T21:15:35.308Z",
+      "updatedAt": "2026-06-28T21:15:35.308Z"
+    },
+    "complexa-slurm": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/complexa-slurm/SKILL.md",
+      "skillFolderHash": "94e9334c41f7fc3d44a97a8d9b2f0e7748f3f5b2",
+      "installedAt": "2026-06-28T21:15:35.309Z",
+      "updatedAt": "2026-06-28T21:15:35.309Z"
+    },
+    "complexa-sweep": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/complexa-sweep/SKILL.md",
+      "skillFolderHash": "41bfa5a471cadcf132434830cda19599a7bbd3d7",
+      "installedAt": "2026-06-28T21:15:35.310Z",
+      "updatedAt": "2026-06-28T21:15:35.310Z"
+    },
+    "complexa-target": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/complexa-target/SKILL.md",
+      "skillFolderHash": "faea18cb953aaf534df13ac503c4d173df17d95b",
+      "installedAt": "2026-06-28T21:15:35.310Z",
+      "updatedAt": "2026-06-28T21:15:35.310Z"
+    },
+    "cuequivariance": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/cuEquivariance/SKILL.md",
+      "skillFolderHash": "7391b36f0047f77e076f3dea872a9beb5ee7b8f1",
+      "installedAt": "2026-06-28T21:15:35.311Z",
+      "updatedAt": "2026-06-28T21:15:35.311Z"
+    },
+    "diffdock-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/diffdock-nim/SKILL.md",
+      "skillFolderHash": "56a850dc0e73bdc0fa622ce950258cfe3b58cabd",
+      "installedAt": "2026-06-28T21:15:35.312Z",
+      "updatedAt": "2026-06-28T21:15:35.312Z"
+    },
+    "drug-discovery-pipeline": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/drug-discovery-pipeline/SKILL.md",
+      "skillFolderHash": "9e850055ee6c636a2ee58f592ff7aa544ad613ed",
+      "installedAt": "2026-06-28T21:15:35.313Z",
+      "updatedAt": "2026-06-28T21:15:35.313Z"
+    },
+    "evo2-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/evo2-nim/SKILL.md",
+      "skillFolderHash": "a73bdee61d1c45e0a59101470803268b3330729a",
+      "installedAt": "2026-06-28T21:15:35.314Z",
+      "updatedAt": "2026-06-28T21:15:35.314Z"
+    },
+    "genmol-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/genmol-nim/SKILL.md",
+      "skillFolderHash": "8aea0cbe20acabe270114f34bc18982267ad9387",
+      "installedAt": "2026-06-28T21:15:35.315Z",
+      "updatedAt": "2026-06-28T21:15:35.315Z"
+    },
+    "genomics-workflow-acceleration": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/genomics-workflow-acceleration/SKILL.md",
+      "skillFolderHash": "a3defcc94a3b8c59bb5b24771a21e5fa1d1c09a9",
+      "installedAt": "2026-06-28T21:15:35.315Z",
+      "updatedAt": "2026-06-28T21:15:35.315Z"
+    },
+    "kermt-add-cmim-pretrain": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-add-cmim-pretrain/SKILL.md",
+      "skillFolderHash": "3ff9ba0cb3db164e72baa22eb99a8509139f266c",
+      "installedAt": "2026-06-28T21:15:35.316Z",
+      "updatedAt": "2026-06-28T21:15:35.316Z"
+    },
+    "kermt-continue-pretrain": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-continue-pretrain/SKILL.md",
+      "skillFolderHash": "b302d5bf23f0fbb3baabf2b41d34745752f9ec8c",
+      "installedAt": "2026-06-28T21:15:35.317Z",
+      "updatedAt": "2026-06-28T21:15:35.317Z"
+    },
+    "kermt-embed": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-embed/SKILL.md",
+      "skillFolderHash": "626a82280651f836c8c7076f9d09ac38162a064b",
+      "installedAt": "2026-06-28T21:15:35.317Z",
+      "updatedAt": "2026-06-28T21:15:35.317Z"
+    },
+    "kermt-finetune": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-finetune/SKILL.md",
+      "skillFolderHash": "4e249a336823a4cfbff4d076216c18f70747063a",
+      "installedAt": "2026-06-28T21:15:35.318Z",
+      "updatedAt": "2026-06-28T21:15:35.318Z"
+    },
+    "kermt-infer": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-infer/SKILL.md",
+      "skillFolderHash": "561cda6e760091fa2abf59fd9adbf40dbde20917",
+      "installedAt": "2026-06-28T21:15:35.319Z",
+      "updatedAt": "2026-06-28T21:15:35.319Z"
+    },
+    "kermt-monitor": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-monitor/SKILL.md",
+      "skillFolderHash": "935556b391e237dc0dc481e0cec6670e9ef2bfd5",
+      "installedAt": "2026-06-28T21:15:35.320Z",
+      "updatedAt": "2026-06-28T21:15:35.320Z"
+    },
+    "kermt-pretrain-scratch": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-pretrain-scratch/SKILL.md",
+      "skillFolderHash": "534b2d820c1f88b4bab6b33bda641341017fe662",
+      "installedAt": "2026-06-28T21:15:35.321Z",
+      "updatedAt": "2026-06-28T21:15:35.321Z"
+    },
+    "kermt-setup": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-setup/SKILL.md",
+      "skillFolderHash": "1fca98201e5f5d53b66b65c32983af68aa06327e",
+      "installedAt": "2026-06-28T21:15:35.321Z",
+      "updatedAt": "2026-06-28T21:15:35.321Z"
+    },
+    "molmim-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/molmim-nim/SKILL.md",
+      "skillFolderHash": "28ec3a8e45467b8bdff200ad6f2807fc8361de16",
+      "installedAt": "2026-06-28T21:15:35.322Z",
+      "updatedAt": "2026-06-28T21:15:35.322Z"
+    },
+    "msa-search-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/msa-search-nim/SKILL.md",
+      "skillFolderHash": "85e1c4508cc929f72fb0c247735391c8b569a70d",
+      "installedAt": "2026-06-28T21:15:35.323Z",
+      "updatedAt": "2026-06-28T21:15:35.323Z"
+    },
+    "msa-structure-prediction-pipeline": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/msa-structure-prediction-pipeline/SKILL.md",
+      "skillFolderHash": "19f14369fec19beaaa24a5831a213dc1678a32b0",
+      "installedAt": "2026-06-28T21:15:35.323Z",
+      "updatedAt": "2026-06-28T21:15:35.323Z"
+    },
+    "nvmolkit-usage": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/nvMolKit/SKILL.md",
+      "skillFolderHash": "4a7286f5378af75011abe32bc1d28019a5dcede9",
+      "installedAt": "2026-06-28T21:15:35.324Z",
+      "updatedAt": "2026-06-28T21:15:35.324Z"
+    },
+    "openfold2-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/openfold2-nim/SKILL.md",
+      "skillFolderHash": "d3a22961316d3be9d75f83bbe26745e43e3d9720",
+      "installedAt": "2026-06-28T21:15:35.325Z",
+      "updatedAt": "2026-06-28T21:15:35.325Z"
+    },
+    "openfold3-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/openfold3-nim/SKILL.md",
+      "skillFolderHash": "3bcd4239249d64d89dc5aa0c19333ca1428f2fa4",
+      "installedAt": "2026-06-28T21:15:35.326Z",
+      "updatedAt": "2026-06-28T21:15:35.326Z"
+    },
+    "parabricks": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/parabricks/SKILL.md",
+      "skillFolderHash": "06545244c15c28bac7708ffc2ec2f157eb8814bf",
+      "installedAt": "2026-06-28T21:15:35.326Z",
+      "updatedAt": "2026-06-28T21:15:35.326Z"
+    },
+    "proteinmpnn-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/proteinmpnn-nim/SKILL.md",
+      "skillFolderHash": "91352000df5e947e85787681ddf4d99718a96dc8",
+      "installedAt": "2026-06-28T21:15:35.327Z",
+      "updatedAt": "2026-06-28T21:15:35.327Z"
+    },
+    "rfdiffusion-nim": {
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
+      "skillPath": "plugins/bionemo-agent-toolkit/skills/rfdiffusion-nim/SKILL.md",
+      "skillFolderHash": "3a8a9da63a94653e073c49ab479118860672bf1f",
+      "installedAt": "2026-06-28T21:15:35.328Z",
+      "updatedAt": "2026-06-28T21:15:35.328Z"
     }
   },
   "dismissed": {
