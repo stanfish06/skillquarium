@@ -41,7 +41,7 @@ Use this skill when:
 uv pip install modal
 ```
 
-The Modal Python SDK supports Python 3.10–3.14. This skill targets the stable `modal>=1.0` API (current release: 1.4.x).
+The Modal Python SDK supports Python 3.10–3.14. This skill targets the stable `modal>=1.0` API (current release: 1.5.x).
 
 ### Authenticate
 
