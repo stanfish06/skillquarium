@@ -3,7 +3,7 @@ name: cellxgene-census
 description: Query the CZ CELLxGENE Census programmatically for versioned public single-cell and spatial transcriptomics data. Use when you need population-scale cell metadata, gene expression slices, Census summary counts, source H5AD URIs/downloads, embeddings, spatial Census data, or reference atlas comparisons across organisms, tissues, diseases, assays, and cell types. For analyzing your own local single-cell data use scanpy, anndata, or scvi-tools.
 allowed-tools: Read Write Edit Bash
 license: MIT
-compatibility: Requires Python >=3.10,<3.13. Examples target cellxgene-census 1.17.x and the 2025-11-08 stable LTS Census; spatial workflows need the spatial extra and TileDB-SOMA >=1.15.5. No authentication is required for public Census data.
+compatibility: Requires Python >=3.10,<3.13. Examples target cellxgene-census 1.18.x and the 2025-11-08 stable LTS Census; spatial workflows need the spatial extra and TileDB-SOMA >=1.15.3. No authentication is required for public Census data.
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -37,18 +37,18 @@ This skill should be used when:
 
 Install the Census API:
 ```bash
-uv pip install "cellxgene-census==1.17.*"
+uv pip install "cellxgene-census==1.18.*"
 ```
 
 For spatial workflows:
 ```bash
-uv pip install "cellxgene-census[spatial]==1.17.*" "spatialdata[extra]>=0.2.5"
+uv pip install "cellxgene-census[spatial]==1.18.*" "spatialdata[extra]>=0.2.5"
 ```
 
 For PyTorch model training, use TileDB-SOMA-ML. The old `cellxgene_census.experimental.ml` loaders are deprecated:
 
 ```bash
-uv pip install "cellxgene-census==1.17.*" tiledbsoma-ml
+uv pip install "cellxgene-census==1.18.*" tiledbsoma-ml
 ```
 
 ## Core Workflow Patterns
@@ -556,4 +556,3 @@ with cellxgene_census.open_soma() as census:
 - Always specify `census_version` explicitly
 - Use same version across all analyses
 - Check release notes for version-specific changes
-
