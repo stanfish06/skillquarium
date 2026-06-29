@@ -37,13 +37,13 @@ metadata = {
     'protocolName': 'My Protocol',
     'author': 'Name <email@example.com>',
     'description': 'Protocol description',
-    'apiLevel': '2.19'  # Use latest available API version
+    'apiLevel': '2.27'  # Use latest available API version
 }
 
 # Requirements (optional)
 requirements = {
     'robotType': 'Flex',  # or 'OT-2'
-    'apiLevel': '2.19'
+    'apiLevel': '2.27'
 }
 
 # Run function
