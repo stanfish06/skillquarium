@@ -636,7 +636,7 @@ All workflows follow the same submit → wait → retrieve pattern and support w
 | Workflow | Function | When to use |
 |----------|----------|-------------|
 | RBFE/FEP | `submit_relative_binding_free_energy_perturbation_workflow` | Relative ΔΔG for congeneric series |
-| RBFE Graph | `submit_rbfe_graph_workflow` | Build and optimize an RBFE perturbation network |
+| RBFE Graph | `submit_relative_binding_free_energy_graph_workflow` | Build and optimize an RBFE perturbation network |
 
 ### Sequence and structural biology
 
