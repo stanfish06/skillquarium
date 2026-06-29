@@ -1,6 +1,8 @@
 cellpose>=4.0
 tifffile
-Pillow
+czifile>=2019.7.2.2
+nd2>=0.11.1
+Pillow>=10.0.0
 numpy
 matplotlib
 scikit-image

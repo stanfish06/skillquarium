@@ -344,6 +344,415 @@ class TestLoadImage:
         arr, n = cell_detection.load_image(str(path))
         assert n == 1
 
+    def test_load_czi_zcyx_metadata_max_projects_to_hwc(self, tmp_path):
+        import types
+        path = tmp_path / "img.czi"
+        path.write_bytes(b"")
+        source = np.ones((1, 3, 32, 32), dtype=np.uint16)
+
+        class _FakeCziFile:
+            axes = "ZCYX"
+
+            def __init__(self, image):
+                self.image = image
+
+            def asarray(self):
+                return source
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_czi = types.ModuleType("czifile")
+        fake_czi.imread = lambda image: source
+        fake_czi.CziFile = _FakeCziFile
+        with patch.dict("sys.modules", {"czifile": fake_czi}):
+            arr, n = cell_detection.load_image(str(path))
+        assert arr.shape == (32, 32, 3)
+        assert n == 3
+
+    def test_load_nd2_stack_counts_channels(self, tmp_path):
+        import types
+        path = tmp_path / "img.nd2"
+        path.write_bytes(b"")
+        source = np.ones((4, 3, 16, 16), dtype=np.uint16)
+
+        class _FakeND2File:
+            sizes = {"Z": 4, "C": 3, "Y": 16, "X": 16}
+
+            def __init__(self, image):
+                self.image = image
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_nd2 = types.ModuleType("nd2")
+        fake_nd2.imread = lambda image: source
+        fake_nd2.ND2File = _FakeND2File
+        with patch.dict("sys.modules", {"nd2": fake_nd2}):
+            arr, n = cell_detection.load_image(str(path))
+        assert arr.shape == (16, 16, 3)
+        assert n == 3
+
+    def test_load_czi_uses_axes_metadata_for_channel_gt_z(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.czi"
+        path.write_bytes(b"")
+        source = np.zeros((2, 5, 8, 8), dtype=np.uint16)  # Z, C, Y, X
+        for channel in range(5):
+            source[:, channel, :, :] = channel + 1
+
+        class _FakeCziFile:
+            axes = "ZCYX"
+
+            def __init__(self, image):
+                self.image = image
+
+            def asarray(self):
+                return source
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_czi = types.ModuleType("czifile")
+        fake_czi.CziFile = _FakeCziFile
+        fake_czi.imread = lambda image: source
+
+        with patch.dict("sys.modules", {"czifile": fake_czi}):
+            arr, n = cell_detection.load_image(str(path))
+
+        assert arr.shape == (8, 8, 5)
+        assert n == 5
+        for channel in range(5):
+            assert np.all(arr[:, :, channel] == channel + 1)
+
+    def test_load_nd2_uses_metadata_for_channel_gt_z(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.nd2"
+        path.write_bytes(b"")
+        source = np.zeros((2, 5, 8, 8), dtype=np.uint16)  # Z, C, Y, X
+        for channel in range(5):
+            source[:, channel, :, :] = channel + 1
+
+        class _FakeND2File:
+            sizes = {"Z": 2, "C": 5, "Y": 8, "X": 8}
+
+            def __init__(self, image):
+                self.image = image
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_nd2 = types.ModuleType("nd2")
+        fake_nd2.imread = lambda image: source
+        fake_nd2.ND2File = _FakeND2File
+
+        with patch.dict("sys.modules", {"nd2": fake_nd2}):
+            arr, n = cell_detection.load_image(str(path))
+
+        assert arr.shape == (8, 8, 5)
+        assert n == 5
+        for channel in range(5):
+            assert np.all(arr[:, :, channel] == channel + 1)
+
+    def test_load_czi_singleton_channel_preserved(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.czi"
+        path.write_bytes(b"")
+        source = np.zeros((8, 1, 12, 12), dtype=np.uint16)  # Z, C, Y, X
+        source[:, 0, :, :] = 4096
+
+        class _FakeCziFile:
+            axes = "ZCYX"
+
+            def __init__(self, image):
+                self.image = image
+
+            def asarray(self):
+                return source
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_czi = types.ModuleType("czifile")
+        fake_czi.CziFile = _FakeCziFile
+        fake_czi.imread = lambda image: source
+
+        with patch.dict("sys.modules", {"czifile": fake_czi}):
+            arr, n = cell_detection.load_image(str(path))
+
+        assert arr.shape == (12, 12, 1)
+        assert n == 1
+        assert arr.dtype == np.uint16
+        assert int(arr.max()) == 4096
+
+    def test_load_nd2_uint16_dynamic_range_preserved(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.nd2"
+        path.write_bytes(b"")
+        source = np.zeros((2, 3, 10, 10), dtype=np.uint16)  # Z, C, Y, X
+        source[0, 0, :, :] = 10
+        source[0, 1, :, :] = 2000
+        source[1, 2, :, :] = 65535
+
+        class _FakeND2File:
+            sizes = {"Z": 2, "C": 3, "Y": 10, "X": 10}
+
+            def __init__(self, image):
+                self.image = image
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_nd2 = types.ModuleType("nd2")
+        fake_nd2.imread = lambda image: source
+        fake_nd2.ND2File = _FakeND2File
+
+        with patch.dict("sys.modules", {"nd2": fake_nd2}):
+            arr, n = cell_detection.load_image(str(path))
+
+        assert arr.shape == (10, 10, 3)
+        assert n == 3
+        assert arr.dtype == np.uint16
+        assert int(arr[:, :, 0].max()) == 10
+        assert int(arr[:, :, 1].max()) == 2000
+        assert int(arr[:, :, 2].max()) == 65535
+
+    def test_load_nd2_projection_none_returns_zcyx_single_channel(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.nd2"
+        path.write_bytes(b"")
+        source = np.arange(4 * 1 * 6 * 7, dtype=np.uint16).reshape(4, 1, 6, 7)  # Z, C, Y, X
+
+        class _FakeND2File:
+            sizes = {"Z": 4, "C": 1, "Y": 6, "X": 7}
+
+            def __init__(self, image):
+                self.image = image
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_nd2 = types.ModuleType("nd2")
+        fake_nd2.imread = lambda image: source
+        fake_nd2.ND2File = _FakeND2File
+
+        with patch.dict("sys.modules", {"nd2": fake_nd2}):
+            arr, n = cell_detection.load_image(str(path), z_projection="none")
+
+        assert arr.shape == (4, 1, 6, 7)
+        assert n == 1
+        np.testing.assert_array_equal(arr, source)
+
+    def test_load_czi_projection_none_multichannel_returns_zcyx(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.czi"
+        path.write_bytes(b"")
+        source = np.zeros((3, 4, 6, 7), dtype=np.uint16)  # Z, C, Y, X
+        for channel in range(4):
+            source[:, channel, :, :] = channel + 10
+
+        class _FakeCziFile:
+            axes = "ZCYX"
+
+            def __init__(self, image):
+                self.image = image
+
+            def asarray(self):
+                return source
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_czi = types.ModuleType("czifile")
+        fake_czi.CziFile = _FakeCziFile
+        fake_czi.imread = lambda image: source
+
+        with patch.dict("sys.modules", {"czifile": fake_czi}):
+            arr, n = cell_detection.load_image(str(path), z_projection="none")
+
+        assert arr.shape == (3, 4, 6, 7)
+        assert n == 4
+        np.testing.assert_array_equal(arr, source)
+
+    def test_load_nd2_projection_none_multichannel_returns_zcyx(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.nd2"
+        path.write_bytes(b"")
+        source = np.zeros((5, 3, 4, 6), dtype=np.uint16)  # Z, C, Y, X
+        for channel in range(3):
+            source[:, channel, :, :] = channel + 20
+
+        class _FakeND2File:
+            sizes = {"Z": 5, "C": 3, "Y": 4, "X": 6}
+
+            def __init__(self, image):
+                self.image = image
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_nd2 = types.ModuleType("nd2")
+        fake_nd2.imread = lambda image: source
+        fake_nd2.ND2File = _FakeND2File
+
+        with patch.dict("sys.modules", {"nd2": fake_nd2}):
+            arr, n = cell_detection.load_image(str(path), z_projection="none")
+
+        assert arr.shape == (5, 3, 4, 6)
+        assert n == 3
+        np.testing.assert_array_equal(arr, source)
+
+    def test_run_segmentation_3d_multichannel_uses_z_and_channel_axes(self):
+        import types
+
+        calls = {}
+
+        def fake_eval(
+            img,
+            diameter=None,
+            do_3D=False,
+            z_axis=None,
+            channel_axis=None,
+            flow_threshold=0.4,
+            cellprob_threshold=0.0,
+        ):
+            calls["shape"] = img.shape
+            calls["do_3D"] = do_3D
+            calls["z_axis"] = z_axis
+            calls["channel_axis"] = channel_axis
+            return np.zeros((img.shape[2], img.shape[3]), dtype=np.uint16), [[]], None
+
+        class _FakeCellposeModel:
+            def __init__(self, gpu=False):
+                self.gpu = gpu
+
+            def eval(self, *args, **kwargs):
+                return fake_eval(*args, **kwargs)
+
+        fake_models = types.ModuleType("cellpose.models")
+        fake_models.CellposeModel = _FakeCellposeModel
+        fake_utils = types.ModuleType("cellpose.utils")
+        fake_utils.remove_edge_masks = lambda masks: masks
+        fake_cellpose = types.ModuleType("cellpose")
+        fake_cellpose.models = fake_models
+        fake_cellpose.utils = fake_utils
+
+        with patch.dict(
+            "sys.modules",
+            {
+                "cellpose": fake_cellpose,
+                "cellpose.models": fake_models,
+                "cellpose.utils": fake_utils,
+            },
+        ):
+            img = np.zeros((4, 3, 8, 9), dtype=np.uint16)  # Z, C, Y, X
+            cell_detection.run_segmentation(img, diameter=None, use_gpu=False, do_3D=True)
+
+        assert calls["shape"] == (4, 3, 8, 9)
+        assert calls["do_3D"] is True
+        assert calls["z_axis"] == 0
+        assert calls["channel_axis"] == 1
+
+    def test_load_czi_projection_none_heuristic_4d_returns_zcyx(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.czi"
+        path.write_bytes(b"")
+        source = np.zeros((7, 4, 16, 16), dtype=np.uint16)  # Z, C, Y, X
+        for channel in range(4):
+            source[:, channel, :, :] = channel + 1
+
+        class _FakeCziFile:
+            # Non-CZYX metadata so loader falls back to 4D heuristic path.
+            axes = "BTZYX"
+
+            def __init__(self, image):
+                self.image = image
+
+            def asarray(self):
+                return source
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_czi = types.ModuleType("czifile")
+        fake_czi.CziFile = _FakeCziFile
+
+        with patch.dict("sys.modules", {"czifile": fake_czi}):
+            arr, n = cell_detection.load_image(str(path), z_projection="none")
+
+        assert arr.shape == (7, 4, 16, 16)
+        assert n == 4
+        np.testing.assert_array_equal(arr, source)
+
+    def test_load_4d_heuristic_raises_when_z_le_c_and_no_metadata(self, tmp_path):
+        import types
+
+        path = tmp_path / "img.czi"
+        path.write_bytes(b"")
+        source = np.zeros((3, 4, 16, 16), dtype=np.uint16)  # Z, C, Y, X — Z <= C
+
+        class _FakeCziFile:
+            axes = "BTZYX"
+
+            def __init__(self, image):
+                self.image = image
+
+            def asarray(self):
+                return source
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb):
+                return False
+
+        fake_czi = types.ModuleType("czifile")
+        fake_czi.CziFile = _FakeCziFile
+
+        with patch.dict("sys.modules", {"czifile": fake_czi}):
+            with pytest.raises(ValueError, match="Cannot infer channel vs Z axis"):
+                cell_detection.load_image(str(path), z_projection="max")
+            with pytest.raises(ValueError, match="Cannot infer channel vs Z axis"):
+                cell_detection.load_image(str(path), z_projection="none")
+
 
 # ---------------------------------------------------------------------------
 # TestDemoImageEdgeCells
@@ -495,6 +904,100 @@ class TestFlowCellprobThresholds:
         args = parser.parse_args([])
         assert args.flow_threshold == 0.4
         assert args.cellprob_threshold == 0.0
+
+
+# ---------------------------------------------------------------------------
+# TestCliGuardrails
+# ---------------------------------------------------------------------------
+
+
+class TestCliGuardrails:
+    """Tests for --do_3D / --z_projection mode consistency in main()."""
+
+    def test_z_projection_none_without_do_3d_errors(self, tmp_path):
+        with patch(
+            "sys.argv",
+            [
+                "cell_detection.py",
+                "--input",
+                str(tmp_path / "img.tif"),
+                "--z_projection",
+                "none",
+                "--output",
+                str(tmp_path / "out"),
+            ],
+        ):
+            with pytest.raises(SystemExit) as exc:
+                cell_detection.main()
+        assert exc.value.code == 2
+
+    def test_do_3d_with_max_projection_errors_on_volumetric_input(self, tmp_path):
+        path = tmp_path / "stack.nd2"
+        path.write_bytes(b"")
+        volume = np.zeros((3, 2, 8, 8), dtype=np.uint16)
+
+        with patch.object(cell_detection, "load_image", return_value=(volume, 2)):
+            with patch(
+                "sys.argv",
+                [
+                    "cell_detection.py",
+                    "--input",
+                    str(path),
+                    "--do_3D",
+                    "--output",
+                    str(tmp_path / "out"),
+                ],
+            ):
+                with pytest.raises(SystemExit) as exc:
+                    cell_detection.main()
+        assert exc.value.code == 2
+
+    def test_do_3d_errors_on_non_volumetric_ndim2_input(self, tmp_path):
+        """Greyscale H×W (ndim=2) with n_channels>1 cannot be treated as 3D."""
+        path = tmp_path / "img.tif"
+        path.write_bytes(b"")
+        image = np.zeros((8, 8), dtype=np.uint8)
+
+        with patch.object(cell_detection, "load_image", return_value=(image, 4)):
+            with patch(
+                "sys.argv",
+                [
+                    "cell_detection.py",
+                    "--input",
+                    str(path),
+                    "--do_3D",
+                    "--z_projection",
+                    "none",
+                    "--output",
+                    str(tmp_path / "out"),
+                ],
+            ):
+                with pytest.raises(SystemExit) as exc:
+                    cell_detection.main()
+        assert exc.value.code == 2
+
+    def test_do_3d_errors_when_z_stack_has_single_plane(self, tmp_path):
+        path = tmp_path / "stack.nd2"
+        path.write_bytes(b"")
+        volume = np.zeros((1, 3, 8, 8), dtype=np.uint16)
+
+        with patch.object(cell_detection, "load_image", return_value=(volume, 3)):
+            with patch(
+                "sys.argv",
+                [
+                    "cell_detection.py",
+                    "--input",
+                    str(path),
+                    "--do_3D",
+                    "--z_projection",
+                    "none",
+                    "--output",
+                    str(tmp_path / "out"),
+                ],
+            ):
+                with pytest.raises(SystemExit) as exc:
+                    cell_detection.main()
+        assert exc.value.code == 2
 
 
 # ---------------------------------------------------------------------------
