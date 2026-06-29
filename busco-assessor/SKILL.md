@@ -70,7 +70,7 @@ metadata:
       - linux
     install:
       - kind: conda
-        package: busco=6.0.0
+        package: busco=6.1.0
         channels:
           - bioconda
           - conda-forge
@@ -131,7 +131,7 @@ You are the **busco-assessor**, a specialised ClawBio agent for genome, transcri
 3. **Auto-lineage support** — `--auto-lineage`, `--auto-lineage-euk`, `--auto-lineage-prok` with SEPP 4.5.5 compatibility enforcement.
 4. **Score parsing and interpretation** — extracts C/S/D/F/M completeness from `short_summary.txt` and provides plain-language interpretation.
 5. **Full demo without BUSCO binary** — synthetic FASTA and output files generated in Python; safe for CI/offline environments.
-6. **Reproducibility bundle** — `commands.sh`, `environment.yml` (pinning busco=6.0.0 + sepp=4.5.5), `checksums.sha256`.
+6. **Reproducibility bundle** — `commands.sh`, `environment.yml` (pinning busco=6.1.0 + sepp=4.5.5), `checksums.sha256`.
 
 ## Scope
 
@@ -212,7 +212,7 @@ python skills/busco-assessor/busco_assessor.py --demo-live --output /tmp/busco_l
 2. Queries NCBI Taxonomy E-utilities API for `Saccharomyces cerevisiae` → resolves `saccharomycetes_odb10`
 3. Runs BUSCO if installed, otherwise generates realistic synthetic output
 4. Writes `report.md` with completeness table and mitochondrial-genome note
-5. Writes reproducibility bundle (commands.sh pins `busco=6.0.0 sepp=4.5.5`)
+5. Writes reproducibility bundle (commands.sh pins `busco=6.1.0 sepp=4.5.5`)
 
 **Expected output (no BUSCO binary):**
 ```markdown
@@ -325,7 +325,7 @@ output_dir/
 │   └── full_table.tsv               # Per-gene completeness table
 └── reproducibility/
     ├── commands.sh                  # Exact replay command
-    ├── environment.yml              # Pins busco=6.0.0, sepp=4.5.5
+    ├── environment.yml              # Pins busco=6.1.0, sepp=4.5.5
     └── checksums.sha256             # SHA-256 of all output files
 ```
 
@@ -335,7 +335,7 @@ output_dir/
 
 | Tool | Version | Purpose |
 |------|---------|---------|
-| `busco` | ≥6.0.0 | Core completeness analysis engine |
+| `busco` | ≥6.1.0 | Core completeness analysis engine |
 | `hmmer` | ≥3.1 | Profile HMM searches (installed with BUSCO) |
 | `miniprot` | any | Eukaryote genome mode (default gene predictor) |
 | `prodigal` | any | Prokaryote genome mode |
@@ -351,7 +351,7 @@ output_dir/
 
 **Install (conda — recommended):**
 ```bash
-conda create -n busco_env -c conda-forge -c bioconda busco=6.0.0 sepp=4.5.5
+conda create -n busco_env -c conda-forge -c bioconda busco=6.1.0 sepp=4.5.5
 conda activate busco_env
 ```
 
