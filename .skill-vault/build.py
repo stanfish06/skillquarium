@@ -823,7 +823,7 @@ def render_wrapper(
     if personal:
         lines.append(personal)
     else:
-        lines += [PERSONAL_MARKER, "", "## Notes", "", ""]
+        lines += [PERSONAL_MARKER, "", "## Notes", ""]
     return "\n".join(lines)
 
 

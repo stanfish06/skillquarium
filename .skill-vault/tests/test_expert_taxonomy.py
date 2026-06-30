@@ -528,6 +528,7 @@ class ExpertWrapperBuildTests(unittest.TestCase):
             "alpha", existing=existing, **arguments
         )
 
+        self.assertFalse(first.endswith("\n\n"))
         self.assertEqual(second, first)
 
     def test_renders_expert_metadata_navigation_and_preserved_fields(self):
