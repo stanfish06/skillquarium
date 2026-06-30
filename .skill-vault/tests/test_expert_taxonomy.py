@@ -634,7 +634,7 @@ class ExpertWrapperBuildTests(unittest.TestCase):
             "## Related skills\n\n"
             "- [beta](beta.md) — Beta summary\n\n"
             f"{vault_build.PERSONAL_MARKER}\n\n"
-            "## Notes\n\n",
+            "## Notes\n",
         )
 
     def test_expert_skills_are_excluded_from_name_matching(self):
