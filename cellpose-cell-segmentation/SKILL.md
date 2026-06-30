@@ -2,6 +2,8 @@
 name: "cellpose-cell-segmentation"
 description: "DL cell/nucleus segmentation for fluorescence and brightfield microscopy. Pre-trained models (cyto3, nuclei, tissuenet) and a generalist flow-based algorithm segment cells without retraining. Outputs label masks for morphology and tracking. Use scikit-image watershed for rule-based; Cellpose when DL generalization across staining is needed."
 license: "BSD-3-Clause"
+compatibility: "Requires Python 3.9+ and cellpose 4.x (uv pip install cellpose). GPU acceleration needs a CUDA-capable PyTorch (cu124 builds recommended). The `models.Cellpose` wrapper class was removed in cellpose 4.0 — use `models.CellposeModel` for all inference."
+metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
 # Cellpose — Deep Learning Cell Segmentation
@@ -9,6 +11,9 @@ license: "BSD-3-Clause"
 ## Overview
 
 Cellpose uses a flow-based neural network to segment individual cells or nuclei in fluorescence microscopy images without manual parameter tuning. Pre-trained models (`cyto3`, `nuclei`, `tissuenet`) generalize across cell types, magnifications, and staining conditions — eliminating the need for manual threshold selection or watershed parameter optimization. Cellpose outputs integer label masks (each cell = unique integer) compatible with scikit-image `regionprops` for morphology measurement and with TrackPy for tracking. A built-in diameter estimator removes the need to specify cell size, though providing an approximate diameter improves accuracy.
+
+> [!NOTE]
+> **Cellpose 4.x API change**: The `cellpose.models.Cellpose` convenience class was removed in cellpose 4.0 (current: 4.2.1). All code must now use `cellpose.models.CellposeModel` directly. The `model.eval()` return signature `(masks, flows, styles, diams)` is unchanged.
 
 ## When to Use
 
@@ -23,18 +28,18 @@ Cellpose uses a flow-based neural network to segment individual cells or nuclei 
 ## Prerequisites
 
 - **Python packages**: `cellpose`, `numpy`, `matplotlib`
-- **Optional**: GPU with CUDA for 10-50× speedup (`pip install cellpose[gui]` for GUI)
+- **Optional**: GPU with CUDA for 10-50× speedup (`uv pip install "cellpose[gui]"` for GUI)
 - **Input**: grayscale or multichannel TIFF/PNG images (2D or 3D arrays)
 
 ```bash
 # Install Cellpose
-pip install cellpose
+uv pip install cellpose
 
 # Install with GUI support
-pip install cellpose[gui]
+uv pip install "cellpose[gui]"
 
-# Install with GPU (PyTorch CUDA)
-pip install cellpose torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# Install with GPU (PyTorch CUDA 12.4)
+uv pip install cellpose torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # Verify
 python -c "from cellpose import models; print('Cellpose ready')"
@@ -51,7 +56,7 @@ from skimage import io
 img = io.imread("cells.tif")  # shape: (H, W) or (H, W, C)
 
 # Initialize model and segment
-model = models.Cellpose(model_type="cyto3", gpu=False)
+model = models.CellposeModel(model_type="cyto3", gpu=False)
 masks, flows, styles, diams = model.eval(img, diameter=0, channels=[0, 0])
 
 print(f"Cells segmented: {masks.max()}")  # number of cells
@@ -98,7 +103,7 @@ import numpy as np
 from skimage import io
 
 # Available models: 'cyto3' (cells), 'nuclei', 'tissuenet', 'cyto2', 'CP'
-model = models.Cellpose(model_type="cyto3", gpu=False)
+model = models.CellposeModel(model_type="cyto3", gpu=False)
 
 img = io.imread("cells.tif")
 
@@ -126,7 +131,7 @@ from cellpose import models
 from skimage import io
 import numpy as np
 
-model = models.Cellpose(model_type="nuclei", gpu=False)
+model = models.CellposeModel(model_type="nuclei", gpu=False)
 dapi = io.imread("dapi.tif")
 
 # Nucleus-only segmentation: channels=[0, 0] (single channel)
@@ -228,7 +233,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-model = models.Cellpose(model_type="cyto3", gpu=False)
+model = models.CellposeModel(model_type="cyto3", gpu=False)
 image_dir = Path("images/")
 output_dir = Path("results/")
 output_dir.mkdir(exist_ok=True)
@@ -260,7 +265,7 @@ print(f"\nTotal cells: {len(summary)} across {summary['image'].nunique()} images
 ## Key Parameters
 
 | Parameter | Default | Range/Options | Effect |
-|-----------|---------|---------------|--------|
+|-----------|---------|---------------|---------|
 | `model_type` | `"cyto3"` | `"cyto3"`, `"cyto2"`, `"nuclei"`, `"tissuenet"`, `"CP"`, custom path | Pre-trained model; `cyto3` is most general; `nuclei` for DAPI-only |
 | `diameter` | `30` | 0–500 px | Approximate cell diameter in pixels; `0` = auto-estimate from image |
 | `channels` | `[0, 0]` | `[cyto, nucleus]` (0=gray, 1=R, 2=G, 3=B) | Channel indices for cytoplasm and nuclear stain |
@@ -281,7 +286,7 @@ from cellpose import models
 from skimage import io
 import numpy as np
 
-model = models.Cellpose(model_type="cyto3", gpu=False)
+model = models.CellposeModel(model_type="cyto3", gpu=False)
 
 # Multichannel image: channel 1 = GFP (cytoplasm), channel 3 = DAPI (nucleus)
 img_multi = io.imread("cells_gfp_dapi.tif")  # shape: (H, W, 3)
@@ -356,7 +361,7 @@ print(f"Fine-tuned model saved: {model_path}")
 |--------|--------|-------------|
 | `masks` array | numpy int32 | Label mask: 0=background, 1..N=unique cell IDs |
 | `flows` list | numpy arrays | Flow field components: [XY flows, cell prob, gradient] |
-| `styles` array | numpy float | Style vector embedding (used for model similarity) |
+| `styles` array | numpy float | Style vector embedding (zeros in Cellpose-SAM models) |
 | `diams` float | scalar | Estimated average cell diameter in pixels |
 | `*_masks.npy` | NumPy | Saved mask array (from `np.save`) |
 | `*_cp_masks.tif` | TIFF uint16 | Mask TIFF (from CLI `--save_tif`); compatible with FIJI/ImageJ |
@@ -365,6 +370,7 @@ print(f"Fine-tuned model saved: {model_path}")
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
+| `AttributeError: module 'cellpose.models' has no attribute 'Cellpose'` | cellpose 4.x removed `Cellpose` class | Use `models.CellposeModel(...)` instead |
 | All cells merged into one mask | Diameter too large or cells too close | Reduce `diameter`; increase `flow_threshold` to 0.6–0.8 |
 | Very few cells detected | Diameter too small or `cellprob_threshold` too high | Increase `cellprob_threshold` to −2; use `diameter=0` for auto |
 | Many false positives (background labeled) | Low `flow_threshold` | Increase `flow_threshold` to 0.6–0.9; increase `min_size` |
@@ -372,7 +378,7 @@ print(f"Fine-tuned model saved: {model_path}")
 | Poor generalization on new cell type | Model not trained on similar cells | Try all pre-trained models; fine-tune with 10-20 annotated images |
 | 3D segmentation very slow | Large z-stack on CPU | Enable GPU; reduce z-stack depth; use `anisotropy` parameter |
 | Mask values overflow uint8 | More than 255 cells in image | Save with `dtype=np.uint16` or `np.int32` |
-| Import error: `No module named 'cellpose'` | Package not installed | `pip install cellpose` or `conda install -c conda-forge cellpose` |
+| Import error: `No module named 'cellpose'` | Package not installed | `uv pip install cellpose` |
 
 ## References
 
