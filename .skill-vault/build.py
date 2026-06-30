@@ -292,7 +292,8 @@ CATEGORIES = [
       "debugging-and-error-recovery", "deprecation-and-migration", "documentation-and-adrs",
       "doubt-driven-development", "git-workflow-and-versioning", "incremental-implementation",
       "planning-and-task-breakdown", "source-driven-development", "spec-driven-development",
-      "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "opensrc", "check-pr", "greploop",
+      "pytest", "jest", "vitest", "docker", "fastapi", "github-actions-ci", "opensrc",
+      "check-pr", "check-repo-status", "context-check", "review-git-changes", "greploop",
       "linear", "cavekit-methodology", "cavekit-validation-first", "cavekit-revision",
       "cavekit-design-system", "gstack"]),
 

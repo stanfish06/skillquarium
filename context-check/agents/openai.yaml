@@ -1,0 +1,7 @@
+interface:
+  display_name: "Context Check"
+  short_description: "Assess whether this conversation context is still healthy"
+  default_prompt: "Assess the health of this conversation's current context."
+
+policy:
+  allow_implicit_invocation: false

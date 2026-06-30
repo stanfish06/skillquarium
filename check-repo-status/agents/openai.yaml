@@ -1,0 +1,7 @@
+interface:
+  display_name: "Check Repo Status"
+  short_description: "Build a read-only repository startup briefing"
+  default_prompt: "Check this repository's current status and give me the concise startup briefing."
+
+policy:
+  allow_implicit_invocation: false

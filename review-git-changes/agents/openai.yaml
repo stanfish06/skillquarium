@@ -1,0 +1,7 @@
+interface:
+  display_name: "Review Git Changes"
+  short_description: "Review local changes and related GitHub work"
+  default_prompt: "Review the current Git changes and their related GitHub status."
+
+policy:
+  allow_implicit_invocation: false

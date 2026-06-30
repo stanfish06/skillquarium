@@ -46,6 +46,7 @@ created: 2026-06-20
 - [pre-submission-reviewer](pre-submission-reviewer.md) — Runs a pre-submission review of a technical paper across five dimensions: macro logic, writing details, English grammar, LaTeX formatting, and figure quality
 - [receiving-code-review](receiving-code-review.md) — Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification...
 - [research-grants](research-grants.md) — Write competitive research proposals for NSF, NIH, DOE, and DARPA
+- [review-git-changes](review-git-changes.md) — Use when the user explicitly asks to review local Git changes and related GitHub issues or pull requests for bugs, security problems, regressions, and coordination gaps
 - [scientific-schematics](scientific-schematics.md) — Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement
 - [sds-gel-review](sds-gel-review.md) — Review SDS-PAGE or protein purification gel images using DNA sequence, protein sequence, base-pair length, expected protein size, and lane labels
 - [web-design-guidelines](web-design-guidelines.md) — Review UI code for Web Interface Guidelines compliance

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md)
 
-## Skills (42)
+## Skills (45)
 
 - [api-and-interface-design](../api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
 - [brainstorming](../brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
@@ -23,8 +23,10 @@ created: 2026-06-13
 - [cavekit-revision](../cavekit-revision.md) — Trace bugs and manual fixes back to kits and prompts
 - [cavekit-validation-first](../cavekit-validation-first.md) — Validation-first design for Cavekit — every kit requirement must be automatically verifiable
 - [check-pr](../check-pr.md) — Checks a GitHub, GitLab, or Perforce (p4) pull request (or merge request, or shelved changelist) for unresolved review comments, failing status checks, and incomplete PR descriptions
+- [check-repo-status](../check-repo-status.md) — Use when the user explicitly asks for a concise, read-only startup briefing covering repository state, recent activity, and relevant GitHub work
 - [code-review-and-quality](../code-review-and-quality.md) — Conducts multi-axis code review. Use before merging any change
 - [code-simplification](../code-simplification.md) — Simplifies code for clarity. Use when refactoring code for clarity without changing behavior
+- [context-check](../context-check.md) — Use when the user explicitly asks whether the current conversation has mixed tasks, accumulated stale context, or should continue, start fresh, or delegate its next step
 - [context-engineering](../context-engineering.md) — Optimizes agent context setup. Use when starting a new session, when agent output quality degrades, when switching between tasks, or when you need to configure rules files and context...
 - [debugging-and-error-recovery](../debugging-and-error-recovery.md) — Guides systematic root-cause debugging. Use when tests fail, builds break, behavior doesn't match expectations, or you encounter any unexpected error
 - [deprecation-and-migration](../deprecation-and-migration.md) — Manages deprecation and migration. Use when removing old systems, APIs, or features
@@ -46,6 +48,7 @@ created: 2026-06-13
 - [pytest](../pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
 - [receiving-code-review](../receiving-code-review.md) — Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification...
 - [requesting-code-review](../requesting-code-review.md) — Use when completing tasks, implementing major features, or before merging to verify work meets requirements
+- [review-git-changes](../review-git-changes.md) — Use when the user explicitly asks to review local Git changes and related GitHub issues or pull requests for bugs, security problems, regressions, and coordination gaps
 - [source-driven-development](../source-driven-development.md) — Grounds every implementation decision in official documentation
 - [spec-driven-development](../spec-driven-development.md) — Creates specs before coding. Use when starting a new project, feature, or significant change and no specification exists yet
 - [subagent-driven-development](../subagent-driven-development.md) — Use when executing implementation plans with independent tasks in the current session
