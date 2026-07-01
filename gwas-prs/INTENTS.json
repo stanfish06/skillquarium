@@ -1,0 +1,31 @@
+{
+  "schema": "clawbio.skill_intents.v1",
+  "skill": "prs",
+  "description": "Plan explicit GWAS PRS demo runs without silently substituting demo data.",
+  "aliases": [
+    "gwas-prs",
+    "prs",
+    "polygenic risk",
+    "risk score"
+  ],
+  "routes": [
+    {
+      "intent_id": "demo_report",
+      "description": "Run the polygenic risk score demo.",
+      "trigger_terms": [
+        "prs demo",
+        "gwas prs demo",
+        "polygenic risk demo",
+        "risk score demo"
+      ],
+      "demo_policy": "only_when_explicit",
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "prs",
+          "demo": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "clawbio.skill_intents.v1",
+  "skill": "clinpgx",
+  "description": "Plan deterministic ClinPGx gene and drug lookups.",
+  "aliases": [
+    "clinpgx",
+    "cpic",
+    "pharmgkb",
+    "gene drug"
+  ],
+  "routes": [
+    {
+      "intent_id": "gene_lookup",
+      "description": "Look up pharmacogenomic evidence for one gene.",
+      "trigger_terms": [
+        "clinpgx",
+        "gene lookup",
+        "cpic gene",
+        "pharmgkb gene",
+        "look up gene"
+      ],
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "clinpgx",
+          "slots": {
+            "gene_symbol": {
+              "required": true,
+              "pattern": "\\b([A-Z][A-Z0-9]{2,15})\\b",
+              "ignore_case": false
+            }
+          },
+          "args": [
+            "--gene",
+            "{gene_symbol}"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "drug_lookup",
+      "description": "Look up pharmacogenomic evidence for one drug.",
+      "trigger_terms": [
+        "drug lookup",
+        "cpic drug",
+        "pharmgkb drug",
+        "drug label",
+        "gene drug"
+      ],
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "clinpgx",
+          "slots": {
+            "drug_name": {
+              "required": true,
+              "pattern": "\\b(?:drug|for|about)\\s+([A-Za-z][A-Za-z0-9-]{2,40})\\b",
+              "ignore_case": true
+            }
+          },
+          "args": [
+            "--drug",
+            "{drug_name}"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "demo_report",
+      "description": "Run the ClinPGx demo.",
+      "trigger_terms": [
+        "clinpgx demo",
+        "cpic demo",
+        "pharmgkb demo"
+      ],
+      "demo_policy": "only_when_explicit",
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "clinpgx",
+          "demo": true
+        }
+      ]
+    }
+  ]
+}

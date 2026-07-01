@@ -1,0 +1,58 @@
+{
+  "schema": "clawbio.skill_intents.v1",
+  "skill": "gwas",
+  "description": "Plan deterministic GWAS variant lookups from rsID requests.",
+  "aliases": [
+    "gwas-lookup",
+    "variant lookup",
+    "rsid lookup"
+  ],
+  "routes": [
+    {
+      "intent_id": "variant_lookup",
+      "description": "Look up a variant rsID across GWAS and annotation databases.",
+      "trigger_terms": [
+        "gwas lookup",
+        "variant lookup",
+        "rsid",
+        "look up rs",
+        "phewas",
+        "eqtl"
+      ],
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "gwas",
+          "slots": {
+            "rsid": {
+              "required": true,
+              "pattern": "\\b(rs\\d{1,12})\\b",
+              "ignore_case": true
+            }
+          },
+          "args": [
+            "--rsid",
+            "{rsid}"
+          ]
+        }
+      ]
+    },
+    {
+      "intent_id": "demo_report",
+      "description": "Run the GWAS lookup demo.",
+      "trigger_terms": [
+        "gwas demo",
+        "variant lookup demo",
+        "rsid demo"
+      ],
+      "demo_policy": "only_when_explicit",
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "gwas",
+          "demo": true
+        }
+      ]
+    }
+  ]
+}

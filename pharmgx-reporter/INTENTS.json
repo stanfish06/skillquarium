@@ -1,0 +1,31 @@
+{
+  "schema": "clawbio.skill_intents.v1",
+  "skill": "pharmgx",
+  "description": "Plan explicit PharmGx demo runs without silently substituting demo data.",
+  "aliases": [
+    "pharmgx",
+    "pharmacogenomics",
+    "pgx",
+    "drug response"
+  ],
+  "routes": [
+    {
+      "intent_id": "demo_report",
+      "description": "Run the pharmacogenomics demo report.",
+      "trigger_terms": [
+        "pharmgx demo",
+        "pharmacogenomics demo",
+        "pgx demo",
+        "drug response demo"
+      ],
+      "demo_policy": "only_when_explicit",
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "pharmgx",
+          "demo": true
+        }
+      ]
+    }
+  ]
+}

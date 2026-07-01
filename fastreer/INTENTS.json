@@ -1,0 +1,32 @@
+{
+  "schema": "clawbio.skill_intents.v1",
+  "skill": "fastreer",
+  "description": "Plan explicit fastreer demo runs for phylogenetic trees and distance matrices.",
+  "aliases": [
+    "fastreer",
+    "vcf2tree",
+    "vcf2dist",
+    "fasta2dist",
+    "dist2tree"
+  ],
+  "routes": [
+    {
+      "intent_id": "demo_report",
+      "description": "Run the fastreer demo.",
+      "trigger_terms": [
+        "fastreer demo",
+        "vcf2tree demo",
+        "phylogenetic tree demo",
+        "distance matrix demo"
+      ],
+      "demo_policy": "only_when_explicit",
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "fastreer",
+          "demo": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "clawbio.skill_intents.v1",
+  "skill": "bioqc",
+  "description": "Plan explicit BioQC demo runs for sequencing QC and visualization.",
+  "aliases": [
+    "bioqc",
+    "fastqc",
+    "multiqc",
+    "sequencing qc"
+  ],
+  "routes": [
+    {
+      "intent_id": "demo_report",
+      "description": "Run the BioQC demo.",
+      "trigger_terms": [
+        "bioqc demo",
+        "fastqc demo",
+        "multiqc demo",
+        "sequencing qc demo"
+      ],
+      "demo_policy": "only_when_explicit",
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "bioqc",
+          "demo": true
+        }
+      ]
+    }
+  ]
+}

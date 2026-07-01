@@ -1,0 +1,31 @@
+{
+  "schema": "clawbio.skill_intents.v1",
+  "skill": "phylo",
+  "description": "Plan explicit phylogenetics-builder demo runs.",
+  "aliases": [
+    "phylo",
+    "phylogenetics",
+    "iqtree",
+    "maximum likelihood tree"
+  ],
+  "routes": [
+    {
+      "intent_id": "demo_report",
+      "description": "Run the phylogenetics builder demo.",
+      "trigger_terms": [
+        "phylo demo",
+        "phylogenetics demo",
+        "iqtree demo",
+        "maximum likelihood tree demo"
+      ],
+      "demo_policy": "only_when_explicit",
+      "plan": [
+        {
+          "kind": "skill_run",
+          "skill": "phylo",
+          "demo": true
+        }
+      ]
+    }
+  ]
+}
