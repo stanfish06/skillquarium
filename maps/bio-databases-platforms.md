@@ -21,7 +21,7 @@ created: 2026-06-13
 - [bigquery-public](../bigquery-public.md) — Run read-only SQL against BigQuery public datasets with local result capture, cost safeguards, and reproducibility outputs
 - [bio-tools](../bio-tools.md) — Biology research tools reference. Always available inside agent containers
 - [clinpgx](../clinpgx.md) — Query the ClinPGx API for pharmacogenomic gene-drug data, clinical annotations, CPIC guidelines, and FDA drug labels
-- [database-lookup](../database-lookup.md) — Deterministically query 78 public scientific, biomedical, materials science, regulatory, finance, and demographics databases through documented REST APIs
+- [database-lookup](../database-lookup.md) — Query documented public database APIs with explicit endpoints, filters, pagination, and provenance
 - [dnanexus-integration](../dnanexus-integration.md) — DNAnexus cloud genomics platform. Build apps/applets, manage data (upload/download), dxpy Python SDK, run workflows, FASTQ/BAM/VCF, for genomics pipeline development and execution
 - [flow-bio](../flow-bio.md) — Flow.bio API bridge — authenticate, browse pipelines/samples/projects, search, upload data, launch pipeline executions, and check run status on any Flow instance
 - [galaxy-bridge](../galaxy-bridge.md) — Galaxy tool discovery, intelligent recommendation, and execution — 8,000+ bioinformatics tools from usegalaxy.org with multi-signal scoring and workflow suggestions

@@ -197,9 +197,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
       "skillPath": "skills/database-lookup/SKILL.md",
-      "skillFolderHash": "4cf8a343c0750495aa0fa11d190f21e82dac03a4",
+      "skillFolderHash": "9bc69cf51d4902b1c84b5ac5153eef38c6fef7f0",
       "installedAt": "2026-06-09T11:23:24.783Z",
-      "updatedAt": "2026-06-16T08:20:41.885Z"
+      "updatedAt": "2026-07-02T07:25:44.151Z"
     },
     "datamol": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1362,9 +1362,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "64ba0b482cd49c81376236f955810adbb6e9fa4b",
+      "skillFolderHash": "e9c015db4aff0b099dfe87f0f894653566cb8742",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-06-15T08:29:09.799Z"
+      "updatedAt": "2026-07-02T07:25:47.161Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -1380,18 +1380,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "1bc6415fe52debb1a74fadd0edb6ccc3f97e54df",
+      "skillFolderHash": "091469a11706eee55bff2e8a7b4e9dc5fa83e069",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-06-19T08:13:51.583Z"
+      "updatedAt": "2026-07-02T07:25:49.359Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "b5cf0a545244f0c099d5cc02f394c828cee9afce",
+      "skillFolderHash": "d97d36e9c5057fdde8ebb111f4fabe35ccf7dd81",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-06-19T08:13:54.256Z"
+      "updatedAt": "2026-07-02T07:25:52.277Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
