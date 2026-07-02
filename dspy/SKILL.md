@@ -21,7 +21,7 @@ progressive_disclosure:
       - "When implementing RAG, classification, or structured extraction tasks"
       - "When version-controlled, reproducible prompts are needed"
     quick_start:
-      - "pip install dspy-ai"
+      - "pip install dspy"
       - "Define signature: class QA(dspy.Signature): question = dspy.InputField(); answer = dspy.OutputField()"
       - "Create module: qa = dspy.ChainOfThought(QA)"
       - "Optimize: optimizer.compile(qa, trainset=examples)"
@@ -348,14 +348,16 @@ optimized_program = knn_optimizer.compile(qa_module)
 # Geography query → retrieves geography examples
 ```
 
-### SignatureOptimizer
+### COPRO (formerly SignatureOptimizer)
 
 **Best For**: Optimizing signature descriptions and field specifications
 
-```python
-from dspy.teleprompt import SignatureOptimizer
+> **DSPy 3.x note:** `SignatureOptimizer` was renamed to `COPRO` in DSPy 3.x. Use `from dspy.teleprompt import COPRO`.
 
-sig_optimizer = SignatureOptimizer(
+```python
+from dspy.teleprompt import COPRO
+
+sig_optimizer = COPRO(
     metric=accuracy_metric,
     breadth=10,  # Number of variations to generate
     depth=3      # Optimization iterations
@@ -388,7 +390,7 @@ final_program = mipro.compile(
 )
 
 # Step 3: Fine-tune signature descriptions
-sig_optimizer = dspy.SignatureOptimizer(metric=accuracy_metric)
+sig_optimizer = COPRO(metric=accuracy_metric)  # renamed from SignatureOptimizer in DSPy 3.x
 production_program = sig_optimizer.compile(final_program, trainset=train_examples)
 
 # Save production model
