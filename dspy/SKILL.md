@@ -363,13 +363,20 @@ sig_optimizer = COPRO(
     depth=3      # Optimization iterations
 )
 
-optimized_signature = sig_optimizer.compile(
-    initial_signature=QuestionAnswer,
-    trainset=trainset
+# COPRO compiles a program, not a bare Signature.
+student_program = dspy.ChainOfThought(QuestionAnswer)
+optimized_program = sig_optimizer.compile(
+    student_program,
+    trainset=trainset,
+    eval_kwargs={
+        "num_threads": 4,
+        "display_progress": True,
+        "display_table": 0,
+    },
 )
 
-# Use optimized signature
-qa = dspy.ChainOfThought(optimized_signature)
+# The compiled program contains the optimized instructions.
+qa = optimized_program
 ```
 
 ### Sequential Optimization Strategy
@@ -391,7 +398,15 @@ final_program = mipro.compile(
 
 # Step 3: Fine-tune signature descriptions
 sig_optimizer = COPRO(metric=accuracy_metric)  # renamed from SignatureOptimizer in DSPy 3.x
-production_program = sig_optimizer.compile(final_program, trainset=train_examples)
+production_program = sig_optimizer.compile(
+    final_program,
+    trainset=train_examples,
+    eval_kwargs={
+        "num_threads": 4,
+        "display_progress": True,
+        "display_table": 0,
+    },
+)
 
 # Save production model
 production_program.save("production_optimized.json")
