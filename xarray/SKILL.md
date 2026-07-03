@@ -51,6 +51,10 @@ Xarray provides a pandas-like experience for multidimensional data. It is the co
 ### Installation
 
 ```bash
+# Create and activate an isolated environment
+uv venv
+source .venv/bin/activate
+
 # Recommended: io extra includes netCDF4, h5netcdf, zarr (v3), scipy; parallel adds Dask
 uv pip install "xarray[io,parallel]"
 
