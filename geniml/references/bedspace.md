@@ -1,5 +1,8 @@
 # BEDspace: Joint Region and Metadata Embeddings
 
+> [!WARNING]
+> **Archived dependency:** BEDspace requires [facebookresearch/StarSpace](https://github.com/facebookresearch/StarSpace), archived October 31, 2023 (read-only). Build failures on modern compilers are expected. See [#184](https://github.com/stanfish06/my-skills/issues/184).
+
 ## Overview
 
 BEDspace applies the StarSpace model to genomic data, enabling simultaneous training of numerical embeddings for both region sets and their metadata labels in a shared low-dimensional space. This allows for rich queries across regions and metadata.
