@@ -1,13 +1,20 @@
 ---
 name: xarray
 description: N-dimensional labeled arrays and datasets in Python. Built on top of NumPy and Dask. It introduces labels in the form of dimensions, coordinates, and attributes on top of raw NumPy-like arrays, making data analysis in physical sciences more intuitive and less error-prone. Use for working with multi-dimensional scientific data, NetCDF/GRIB/Zarr files, climate/weather/oceanographic datasets, remote sensing, geospatial imaging, large out-of-memory datasets with Dask, and labeled array operations.
-version: 2024.01
+compatibility: Requires Python 3.11+ and xarray 2026.04.0+. Install with `uv pip install "xarray[io,parallel]"` for NetCDF/Zarr I/O and Dask support. Zarr I/O now requires zarr>=3.0 (included with `xarray[io]`). Cloud I/O (S3/GCS) additionally needs s3fs or gcsfs.
 license: Apache-2.0
+metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
 # Xarray - N-Dimensional Labeled Arrays
 
 Xarray provides a pandas-like experience for multidimensional data. It is the core of the Pangeo ecosystem and is essential for working with NetCDF, GRIB, and Zarr formats.
+
+> [!WARNING]
+> **Breaking changes in xarray 2026.04.0** (the current release, up from 2024.01 when this skill was first written):
+> 1. **Zarr v3 required**: `xarray[io]` now installs `zarr>=3.0`; if your environment pins `zarr<3`, Zarr I/O will fail.
+> 2. **Timedelta decode default changed**: `open_dataset()` no longer decodes `np.timedelta64` from units-only attributes by default. Pass `decode_timedelta=True` to restore the previous behavior.
+> 3. **netCDF preferred engine**: The default backend order reverted to `netCDF4 > h5netcdf > scipy` in 2026.04.0 (after a temporary change in 2025.09.1). Explicitly specify `engine=` when reproducibility matters.
 
 ## When to Use
 
@@ -29,7 +36,7 @@ Xarray provides a pandas-like experience for multidimensional data. It is the co
 ### DataArray vs Dataset
 
 | Structure | Description | Analogy |
-|-----------|-------------|---------|
+|-----------|-------------|--------|
 | DataArray | A single labeled N-dimensional array. | Like a pandas.Series but N-D. |
 | Dataset | A dict-like container of multiple DataArrays. | Like a pandas.DataFrame but N-D. |
 
@@ -44,7 +51,18 @@ Xarray provides a pandas-like experience for multidimensional data. It is the co
 ### Installation
 
 ```bash
-pip install xarray netCDF4 dask zarr
+# Create and activate an isolated environment
+uv venv
+source .venv/bin/activate
+
+# Recommended: io extra includes netCDF4, h5netcdf, zarr (v3), scipy; parallel adds Dask
+uv pip install "xarray[io,parallel]"
+
+# Minimal install (no I/O extras)
+uv pip install xarray
+
+# Full install with visualization and acceleration
+uv pip install "xarray[complete]"
 ```
 
 ### Standard Imports
@@ -178,8 +196,8 @@ rolling_mean = ds.rolling(time=7, center=True).mean()
 ### Reading and Writing
 
 ```python
-# Open a single file
-ds = xr.open_dataset("weather_data.nc")
+# Open a single file (explicit engine avoids default-engine ambiguity)
+ds = xr.open_dataset("weather_data.nc", engine="netcdf4")
 
 # Open multiple files (MFDataset)
 ds_all = xr.open_mfdataset("data/*.nc", combine="by_coords", chunks={'time': 100})
@@ -187,7 +205,7 @@ ds_all = xr.open_mfdataset("data/*.nc", combine="by_coords", chunks={'time': 100
 # Write to NetCDF
 ds.to_netcdf("output.nc")
 
-# Write to Zarr (Cloud optimized)
+# Write to Zarr (requires zarr>=3.0 with xarray 2026.04.0+)
 ds.to_zarr("data.zarr")
 ```
 
@@ -246,7 +264,7 @@ final_val = result.compute()
 ```python
 def calculate_temp_anomaly(filepath):
     """Calculate monthly anomalies from NetCDF data."""
-    ds = xr.open_dataset(filepath)
+    ds = xr.open_dataset(filepath, engine="netcdf4")
     
     # 1. Compute climatology (mean for each month of the year)
     climatology = ds.temp.groupby("time.month").mean("time")
