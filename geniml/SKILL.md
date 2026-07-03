@@ -52,6 +52,9 @@ Train unsupervised embeddings of genomic regions using word2vec-style learning.
 
 Train shared embeddings for region sets and metadata labels using StarSpace.
 
+> [!WARNING]
+> **Archived dependency (StarSpace):** BEDspace requires [facebookresearch/StarSpace](https://github.com/facebookresearch/StarSpace), which was **archived on October 31, 2023** (read-only; no bug fixes or compiler-compatibility updates). Build failures on modern GCC/Clang are expected. Region2Vec embeddings plus an external nearest-neighbour index (FAISS, Qdrant) can provide region-to-region similarity, but they do not replace BEDspace's metadata-label embeddings or region↔label queries. Tracked: [#184](https://github.com/stanfish06/my-skills/issues/184).
+
 **Use for:** Metadata-aware searches, cross-modal queries (region→label or label→region), joint analysis of genomic content and experimental conditions.
 
 **Workflow:**
@@ -309,7 +312,7 @@ Geniml is part of the BEDbase ecosystem:
 
 **"StarSpace not found" (BEDspace):**
 - Install StarSpace separately: https://github.com/facebookresearch/StarSpace
+- **Note:** StarSpace is archived (read-only since Oct 2023) — build failures on modern systems are expected. See [#184](https://github.com/stanfish06/my-skills/issues/184).
 - Set `--path-to-starspace` parameter correctly
 
 For detailed troubleshooting and method-specific issues, consult the appropriate reference file.
-
