@@ -2493,9 +2493,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/git-workflow-and-versioning/SKILL.md",
-      "skillFolderHash": "c705111c81c8da2e62d836f9e22d8a7d39a2c9de",
+      "skillFolderHash": "6c54b67dd522883fc69013535c7cf35b8cdb8930",
       "installedAt": "2026-06-12T08:07:57.849Z",
-      "updatedAt": "2026-06-12T08:07:57.849Z"
+      "updatedAt": "2026-07-03T09:34:03.963Z"
     },
     "idea-refine": {
       "source": "addyosmani/agent-skills",
@@ -2547,9 +2547,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/planning-and-task-breakdown/SKILL.md",
-      "skillFolderHash": "2122963142e964ea83719664b4da43bae9644f7c",
+      "skillFolderHash": "bad0e4c4216693e6908e273228b1484fdd6d2246",
       "installedAt": "2026-06-12T08:07:57.853Z",
-      "updatedAt": "2026-06-24T07:29:11.673Z"
+      "updatedAt": "2026-07-03T09:34:05.078Z"
     },
     "security-and-hardening": {
       "source": "addyosmani/agent-skills",
@@ -2583,9 +2583,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/spec-driven-development/SKILL.md",
-      "skillFolderHash": "0f66b186630a22dc422cbccf1467f7e5d131a0b6",
+      "skillFolderHash": "8a6049f381636e580e2db44e6cc65cb5682b8bcc",
       "installedAt": "2026-06-12T08:07:57.857Z",
-      "updatedAt": "2026-06-24T07:29:14.484Z"
+      "updatedAt": "2026-07-03T09:34:06.024Z"
     },
     "using-agent-skills": {
       "source": "addyosmani/agent-skills",
