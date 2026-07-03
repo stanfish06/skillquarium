@@ -18,7 +18,7 @@ created: 2026-06-13
 
 - [bids](../bids.md) — Use this skill when working with Brain Imaging Data Structure (BIDS) datasets: organizing neuroscience and biomedical data (MRI, EEG, MEG, iEEG, PET, microscopy, NIRS, motion capture...
 - [cell-detection](../cell-detection.md) — Cell segmentation in fluorescence microscopy images
-- [cellpose-cell-segmentation](../cellpose-cell-segmentation.md) — DL cell/nucleus segmentation for fluorescence and brightfield microscopy
+- [cellpose-cell-segmentation](../cellpose-cell-segmentation.md) — DL cell/nucleus segmentation for fluorescence and brightfield microscopy with Cellpose 4's Cellpose-SAM and CellposeDINO models
 - [cellpose-stardist-bioimage](../cellpose-stardist-bioimage.md) — Bioimage cell and nucleus segmentation routing with cellpose-cell-segmentation, Cellpose, StarDist, napari-viz, and monai-medical-imaging-ai
 - [flowio](../flowio.md) — Parse FCS (Flow Cytometry Standard) files v2.0-3.1
 - [histolab](../histolab.md) — Lightweight WSI tile extraction and preprocessing
