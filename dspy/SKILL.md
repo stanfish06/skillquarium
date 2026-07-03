@@ -21,7 +21,7 @@ progressive_disclosure:
       - "When implementing RAG, classification, or structured extraction tasks"
       - "When version-controlled, reproducible prompts are needed"
     quick_start:
-      - "pip install dspy-ai"
+      - "pip install dspy"
       - "Define signature: class QA(dspy.Signature): question = dspy.InputField(); answer = dspy.OutputField()"
       - "Create module: qa = dspy.ChainOfThought(QA)"
       - "Optimize: optimizer.compile(qa, trainset=examples)"
@@ -348,26 +348,35 @@ optimized_program = knn_optimizer.compile(qa_module)
 # Geography query → retrieves geography examples
 ```
 
-### SignatureOptimizer
+### COPRO (formerly SignatureOptimizer)
 
 **Best For**: Optimizing signature descriptions and field specifications
 
-```python
-from dspy.teleprompt import SignatureOptimizer
+> **DSPy 3.x note:** `SignatureOptimizer` was renamed to `COPRO` in DSPy 3.x. Use `from dspy.teleprompt import COPRO`.
 
-sig_optimizer = SignatureOptimizer(
+```python
+from dspy.teleprompt import COPRO
+
+sig_optimizer = COPRO(
     metric=accuracy_metric,
     breadth=10,  # Number of variations to generate
     depth=3      # Optimization iterations
 )
 
-optimized_signature = sig_optimizer.compile(
-    initial_signature=QuestionAnswer,
-    trainset=trainset
+# COPRO compiles a program, not a bare Signature.
+student_program = dspy.ChainOfThought(QuestionAnswer)
+optimized_program = sig_optimizer.compile(
+    student_program,
+    trainset=trainset,
+    eval_kwargs={
+        "num_threads": 4,
+        "display_progress": True,
+        "display_table": 0,
+    },
 )
 
-# Use optimized signature
-qa = dspy.ChainOfThought(optimized_signature)
+# The compiled program contains the optimized instructions.
+qa = optimized_program
 ```
 
 ### Sequential Optimization Strategy
@@ -388,8 +397,16 @@ final_program = mipro.compile(
 )
 
 # Step 3: Fine-tune signature descriptions
-sig_optimizer = dspy.SignatureOptimizer(metric=accuracy_metric)
-production_program = sig_optimizer.compile(final_program, trainset=train_examples)
+sig_optimizer = COPRO(metric=accuracy_metric)  # renamed from SignatureOptimizer in DSPy 3.x
+production_program = sig_optimizer.compile(
+    final_program,
+    trainset=train_examples,
+    eval_kwargs={
+        "num_threads": 4,
+        "display_progress": True,
+        "display_table": 0,
+    },
+)
 
 # Save production model
 production_program.save("production_optimized.json")
