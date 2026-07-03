@@ -14,7 +14,7 @@ created: 2026-06-09
 # cellpose-cell-segmentation
 
 > [!info] What it does
-> DL cell/nucleus segmentation for fluorescence and brightfield microscopy. Pre-trained models (cyto3, nuclei, tissuenet) and a generalist flow-based algorithm segment cells without retraining. Outputs label masks for morphology and tracking. Use scikit-image watershed for rule-based; Cellpose when DL generalization across staining is needed.
+> DL cell/nucleus segmentation for fluorescence and brightfield microscopy with Cellpose 4's Cellpose-SAM and CellposeDINO models. Handles grayscale, multichannel, 2D, and 3D images and outputs label masks for morphology and tracking. Use scikit-image watershed for rule-based segmentation; use Cellpose when learned generalization is needed.
 
 **Source:** [cellpose-cell-segmentation/SKILL.md](cellpose-cell-segmentation/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](maps/imaging-signals.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 

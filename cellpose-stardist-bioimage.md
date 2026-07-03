@@ -22,7 +22,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [cellpose-cell-segmentation](cellpose-cell-segmentation.md) — DL cell/nucleus segmentation for fluorescence and brightfield microscopy
+- [cellpose-cell-segmentation](cellpose-cell-segmentation.md) — DL cell/nucleus segmentation for fluorescence and brightfield microscopy with Cellpose 4's Cellpose-SAM and CellposeDINO models
 - [monai-medical-imaging-ai](monai-medical-imaging-ai.md) — Medical imaging deep learning with MONAI, PyTorch, pydicom, pathml, histolab, and napari-viz
 - [napari-viz](napari-viz.md) — Headless bioimage and microscopy visualization with napari
 
