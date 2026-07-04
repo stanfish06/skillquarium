@@ -17,6 +17,16 @@ SKIP_EXTENSIONS = {
     ".dockerfile", ".makefile", ".csv", ".ini", ".cfg",
 }
 
+# Well-known build/config files that carry no (or a misleading) extension —
+# `Dockerfile` has no suffix so `.dockerfile` above never matches it, and
+# `CMakeLists.txt` would ride the compressible `.txt` rule. Checked by
+# basename before any extension rule.
+KNOWN_CODE_FILENAMES = {
+    "dockerfile", "makefile", "gnumakefile", "jenkinsfile", "vagrantfile",
+    "rakefile", "gemfile", "justfile", "procfile", "brewfile",
+    "cmakelists.txt",
+}
+
 # Patterns that indicate a line is code
 CODE_PATTERNS = [
     re.compile(r"^\s*(import |from .+ import |require\(|const |let |var )"),
@@ -67,8 +77,8 @@ def detect_file_type(filepath: Path) -> str:
     """
     ext = filepath.suffix.lower()
 
-    # Special-cased extensionless files that are conventionally code/config
-    if filepath.name in {"Dockerfile", "Makefile"} or filepath.name.startswith(("Dockerfile.", "Makefile.")):
+    # Known code filenames win over any extension rule
+    if filepath.name.lower() in KNOWN_CODE_FILENAMES:
         return "code"
 
     # Extension-based classification
@@ -85,6 +95,10 @@ def detect_file_type(filepath: Path) -> str:
             return "unknown"
 
         lines = text.splitlines()[:50]
+
+        # Shebang means executable script, never prose
+        if text.startswith("#!"):
+            return "code"
 
         if _is_json_content(text[:10000]):
             return "config"

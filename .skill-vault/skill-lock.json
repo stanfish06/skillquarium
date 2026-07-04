@@ -1362,36 +1362,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "e9c015db4aff0b099dfe87f0f894653566cb8742",
+      "skillFolderHash": "b446ca1be971b952c60544f5bce812df882b2f29",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-07-02T07:25:47.161Z"
+      "updatedAt": "2026-07-04T08:49:45.060Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "2aeaa9a013431c69d6f69c246fe08d9c0e051c2d",
+      "skillFolderHash": "6014470de2297a1195cd57dc26612606caeaa324",
       "installedAt": "2026-06-09T11:25:31.106Z",
-      "updatedAt": "2026-06-10T07:48:54.041Z"
+      "updatedAt": "2026-07-04T08:49:47.335Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "091469a11706eee55bff2e8a7b4e9dc5fa83e069",
+      "skillFolderHash": "9458fee144355014fdbb6ca37d38150f9ef0f4c0",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-07-02T07:25:49.359Z"
+      "updatedAt": "2026-07-04T08:49:49.735Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "d97d36e9c5057fdde8ebb111f4fabe35ccf7dd81",
+      "skillFolderHash": "fbc2cd062efd6000f92da207deb3833de7c6dcbd",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-07-02T07:25:52.277Z"
+      "updatedAt": "2026-07-04T08:49:52.716Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
@@ -1470,9 +1470,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reviewer/SKILL.md",
-      "skillFolderHash": "1c40e9fe7843ceee6c9cff8b02f2a131526934a5",
+      "skillFolderHash": "a511845d36d46ed9dcefcfc60410c341086edd51",
       "installedAt": "2026-06-09T11:26:33.316Z",
-      "updatedAt": "2026-06-18T08:02:06.010Z"
+      "updatedAt": "2026-07-04T08:49:54.737Z"
     },
     "nature-writing": {
       "source": "Yuan1z0825/nature-skills",
@@ -2601,18 +2601,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman/SKILL.md",
-      "skillFolderHash": "a22aa2a0a64d7d4b7b59bbddbdb865fedfb40d9c",
+      "skillFolderHash": "166040c027f7764d43df36abc5df0079bfc6394b",
       "installedAt": "2026-06-13T13:23:12.859Z",
-      "updatedAt": "2026-06-13T13:42:44.376Z"
+      "updatedAt": "2026-07-04T08:49:55.753Z"
     },
     "caveman-compress": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "ed28315c564230ce691623a01cd367f222b769e5",
+      "skillFolderHash": "1284ac809fbdaeb9e871f84ee850aebe10c85030",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-06-13T13:42:44.379Z"
+      "updatedAt": "2026-07-04T08:49:57.101Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -2655,9 +2655,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "de99644a837172940aefcfab4e51f19344ba98df",
+      "skillFolderHash": "326ab384eb445cc0a74608d6f0c0abe6558bb44a",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-06-13T13:42:44.373Z"
+      "updatedAt": "2026-07-04T08:49:58.120Z"
     },
     "boltz2-nim": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",

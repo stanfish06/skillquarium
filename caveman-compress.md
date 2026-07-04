@@ -20,7 +20,7 @@ created: 2026-06-13
 
 ## Related skills
 
-- [caveman](caveman.md) — Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy
+- [caveman](caveman.md) — Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

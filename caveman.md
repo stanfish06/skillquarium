@@ -17,7 +17,7 @@ created: 2026-06-13
 # caveman
 
 > [!info] What it does
-> Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says "caveman mode", "talk like caveman", "use caveman", "less tokens", "be brief", or invokes /caveman. Also auto-triggers when token efficiency is requested.
+> Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy. Supports intensity levels: lite, full (default), ultra, wenyan-lite, wenyan-full, wenyan-ultra. Use when user says "caveman mode", "talk like caveman", "use caveman", "less tokens", "be brief", or invokes /caveman. Also auto-triggers when token efficiency is requested.
 
 **Source:** [caveman/SKILL.md](caveman/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](maps/reasoning-ideation.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 

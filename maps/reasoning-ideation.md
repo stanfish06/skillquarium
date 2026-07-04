@@ -17,7 +17,7 @@ created: 2026-06-13
 ## Skills (17)
 
 - [cavecrew](../cavecrew.md) — Decision guide for delegating to caveman-style subagents
-- [caveman](../caveman.md) — Ultra-compressed communication mode. Cuts token usage ~75% by speaking like caveman while keeping full technical accuracy
+- [caveman](../caveman.md) — Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy
 - [caveman-commit](../caveman-commit.md) — Ultra-compressed commit message generator
 - [caveman-compress](../caveman-compress.md) — Compress natural language memory files (CLAUDE.md, todos, preferences) into caveman format to save input tokens
 - [caveman-help](../caveman-help.md) — Quick-reference card for all caveman modes, skills, and commands

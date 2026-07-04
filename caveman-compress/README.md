@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://em-content.zobj.net/source/apple/391/rock_1faa8.png" width="80" alt="" />
+  <img src="https://em-content.zobj.net/source/apple/391/rock_1faa8.png" width="80" />
 </p>
 
 <h1 align="center">caveman-compress</h1>

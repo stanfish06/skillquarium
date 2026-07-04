@@ -36,7 +36,7 @@ Subagent tool results get injected into main context verbatim. A vanilla `Explor
 What main thread can rely on per agent:
 
 **`cavecrew-investigator`**
-```text
+```
 <Header>:
 - path:line — `symbol` — short note
 totals: <counts>.
@@ -44,14 +44,14 @@ totals: <counts>.
 Or `No match.` Always file-path-first, line-number-attached, backticked symbols. Safe to grep with `path:\d+`.
 
 **`cavecrew-builder`**
-```text
+```
 <path:line-range> — <change ≤10 words>.
 verified: <re-read OK | mismatch @ path:line>.
 ```
 Or one of: `too-big.` / `needs-confirm.` / `ambiguous.` / `regressed.` (terminal first token).
 
 **`cavecrew-reviewer`**
-```text
+```
 path:line: <emoji> <severity>: <problem>. <fix>.
 totals: N🔴 N🟡 N🔵 N❓
 ```
