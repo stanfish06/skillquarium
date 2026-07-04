@@ -4,7 +4,7 @@ description: Use this skill for processing and analyzing large tabular datasets 
 allowed-tools: Read Write Edit Bash Grep Glob
 license: MIT license
 metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
-compatibility: Requires Python 3.10+ (3.12+ recommended with vaex 4.19.0). Install with uv pip install vaex. Optional s3fs/gcsfs/adlfs for cloud I/O.
+compatibility: Requires Python 3.9–3.12 (3.12 recommended; Python 3.13+ not yet supported). Install with uv pip install vaex. Optional s3fs/gcsfs/adlfs for cloud I/O.
 ---
 
 # Vaex
@@ -29,7 +29,7 @@ uv pip install vaex-core vaex-viz vaex-hdf5 vaex-ml
 
 The `vaex` package is a meta-package that pulls in `vaex-core`, `vaex-viz`, `vaex-hdf5`, `vaex-ml`, and other sub-packages. Arrow support is built into `vaex-core` (the separate `vaex-arrow` package is deprecated). `vaex-distributed` is deprecated in favor of vaex-enterprise.
 
-**Version notes (vaex 4.19.0+):** Python 3.12 and NumPy v2 require vaex >= 4.19.0. On Windows, you may need Python dev headers to build the `annoy` dependency.
+**Version notes (vaex 4.19.0):** Python 3.12 and NumPy v2 require vaex >= 4.19.0. Python 3.13+ is not yet supported (vaex-core declares `requires_python: >=3.9,<3.13`). On Windows, you may need Python dev headers to build the `annoy` dependency.
 
 ## When to Use This Skill
 
