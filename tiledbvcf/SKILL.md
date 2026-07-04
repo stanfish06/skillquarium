@@ -36,7 +36,7 @@ CONDA_SUBDIR=osx-64
 conda config --env --set subdir osx-64
 
 # Create the conda environment
-conda create -n tiledb-vcf "python<3.10"
+conda create -n tiledb-vcf python=3.12
 conda activate tiledb-vcf
 
 # Mamba is a faster and more reliable alternative to conda
