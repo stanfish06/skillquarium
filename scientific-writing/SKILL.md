@@ -50,7 +50,7 @@ This is not optional. Scientific papers without visual elements are incomplete. 
 
 **Generate the graphical abstract FIRST:**
 ```bash
-python scripts/generate_schematic.py "Graphical abstract for [paper title]: [brief description showing workflow from input → methods → key findings → conclusions]" -o figures/graphical_abstract.png
+python <path-to-scientific-schematics-skill>/scripts/generate_schematic.py "Graphical abstract for [paper title]: [brief description showing workflow from input → methods → key findings → conclusions]" -o figures/graphical_abstract.png
 ```
 
 **Graphical Abstract Requirements:**
@@ -80,7 +80,7 @@ Every document should be richly illustrated. Generate figures liberally - when i
 
 **Use scientific-schematics EXTENSIVELY for technical diagrams:**
 ```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
+python <path-to-scientific-schematics-skill>/scripts/generate_schematic.py "your diagram description" -o figures/output.png
 ```
 
 - Study design and methodology flowcharts (CONSORT, PRISMA, STROBE)

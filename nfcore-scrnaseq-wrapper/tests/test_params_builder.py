@@ -298,3 +298,41 @@ def test_igenomes_ignore_absent_when_genome_shortcut_used(tmp_path):
     )
     loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert "igenomes_ignore" not in loaded
+
+
+def test_remote_reference_uris_are_preserved(tmp_path):
+    """Remote reference URIs (staged by Nextflow when --allow-remote-inputs is set)
+    must be written to params.yaml verbatim. Resolving them as local paths
+    corrupts the scheme (https://host/... -> <cwd>/https:/host/...), which nf-core
+    then rejects during parameter validation."""
+    samplesheet = tmp_path / "reproducibility" / "samplesheet.valid.csv"
+    samplesheet.parent.mkdir(parents=True)
+    samplesheet.write_text("sample,fastq_1,fastq_2\n", encoding="utf-8")
+    fasta_uri = "https://github.com/nf-core/test-datasets/raw/scrnaseq/reference/GRCm38.p6.genome.chr19.fa"
+    gtf_uri = "https://github.com/nf-core/test-datasets/raw/scrnaseq/reference/gencode.vM19.annotation.chr19.gtf"
+    args = _base_args(
+        tmp_path, preset="standard", protocol="10XV3", fasta=fasta_uri, gtf=gtf_uri
+    )
+    path, _payload = build_params_file(
+        args, normalized_samplesheet=samplesheet, output_dir=tmp_path
+    )
+    loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert loaded["fasta"] == fasta_uri
+    assert loaded["gtf"] == gtf_uri
+    # The scheme must not be collapsed / anchored to a local directory.
+    assert "https:/g" not in path.read_text(encoding="utf-8")
+
+
+def test_local_reference_paths_still_resolved(tmp_path):
+    """A local reference path is still resolved to an absolute POSIX path."""
+    samplesheet = tmp_path / "reproducibility" / "samplesheet.valid.csv"
+    samplesheet.parent.mkdir(parents=True)
+    samplesheet.write_text("sample,fastq_1,fastq_2\n", encoding="utf-8")
+    fasta = tmp_path / "g.fa"
+    fasta.write_text(">x\nACGT\n", encoding="utf-8")
+    args = _base_args(tmp_path, preset="standard", protocol="10XV3", fasta=str(fasta))
+    path, _payload = build_params_file(
+        args, normalized_samplesheet=samplesheet, output_dir=tmp_path
+    )
+    loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert loaded["fasta"] == fasta.resolve().as_posix()

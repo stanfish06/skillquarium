@@ -17,6 +17,7 @@ class SkillError(Exception):
 
     def to_dict(self) -> dict[str, Any]:
         return {
+            "status": "error",
             "ok": False,
             "stage": self.stage,
             "error_code": self.error_code,
@@ -42,8 +43,16 @@ class ErrorCode:
     # default (local-first); they are only allowed with --allow-remote-inputs, which
     # also emits a runtime warning that data is being fetched over the network.
     REMOTE_INPUT_NOT_ALLOWED = "REMOTE_INPUT_NOT_ALLOWED"
+    # --demo delegates to nf-core's upstream `-profile test`, whose inputs/references
+    # are remote GitHub URLs by design. Under NXF_OFFLINE the demo cannot fetch them,
+    # so preflight fails fast with this code instead of a cryptic Nextflow abort.
+    DEMO_REQUIRES_NETWORK = "DEMO_REQUIRES_NETWORK"
     OUTPUT_DIR_NOT_EMPTY = "OUTPUT_DIR_NOT_EMPTY"
     OUTPUT_DIR_NOT_WRITABLE = "OUTPUT_DIR_NOT_WRITABLE"
+    # Writing pipeline outputs inside the ClawBio source tree would pollute the
+    # repository, so it is refused with a dedicated, self-describing code (parity
+    # with nfcore-sarek / nfcore-scrnaseq) rather than the generic _NOT_WRITABLE.
+    OUTPUT_DIR_INSIDE_REPO = "OUTPUT_DIR_INSIDE_REPO"
     MISSING_REFERENCE = "MISSING_REFERENCE"
     CONFLICTING_REFERENCES = "CONFLICTING_REFERENCES"
     INVALID_GENOME = "INVALID_GENOME"

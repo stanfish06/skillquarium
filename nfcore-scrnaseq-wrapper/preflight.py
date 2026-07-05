@@ -37,6 +37,7 @@ from schemas import (
     NEXTFLOW_MIN_VERSION,
     NEXTFLOW_MIN_VERSION_DISPLAY,
     PRESET_REQUIREMENTS,
+    PROJECT_ROOT,
     SUPPORTED_PRESETS,
     SUPPORTED_PROFILES,
     SYMBOLIC_REFERENCE_FIELDS,
@@ -407,7 +408,26 @@ _ALLOWED_REPRO_FILES = frozenset(
 )
 
 
+def _is_relative_to(path: Path, parent: Path) -> bool:
+    try:
+        path.relative_to(parent)
+    except ValueError:
+        return False
+    return True
+
+
 def _check_output_dir(output_dir: Path, *, resume: bool) -> None:
+    # Refuse to write pipeline outputs inside the ClawBio source tree — large
+    # upstream artifacts would pollute the repository. Parity with nfcore-rnaseq /
+    # nfcore-sarek. Checked before mkdir so no directory is created on rejection.
+    if _is_relative_to(output_dir.expanduser().resolve(), PROJECT_ROOT.resolve()):
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.OUTPUT_DIR_INSIDE_REPO,
+            message="Output directory cannot be inside the ClawBio source tree.",
+            fix="Choose an output directory outside the repository, for example under your analysis workspace.",
+            details={"output_dir": str(output_dir), "project_root": str(PROJECT_ROOT.resolve())},
+        )
     if output_dir.exists() and not output_dir.is_dir():
         raise SkillError(
             stage="preflight",
@@ -803,12 +823,42 @@ def _normalize_protocol_token(protocol: str) -> str:
     return re.sub(r"[\s_-]+", "", protocol.lower())
 
 
+def _check_demo_network(args) -> None:
+    """--demo runs nf-core's upstream ``-profile test``, whose inputs (test FASTQs and
+    reference FASTA/GTF) are remote GitHub URLs by design. Under ``NXF_OFFLINE`` the
+    nf-schema plugin aborts during parameter validation with a confusing
+    ``does not exist`` before any work starts, so fail early with an actionable message
+    instead. Downloading nf-core's PUBLIC test data does not conflict with the
+    local-first guarantee, which governs USER genetic data (never uploaded)."""
+    if not getattr(args, "demo", False):
+        return
+    offline = str(os.environ.get("NXF_OFFLINE", "")).strip().lower()
+    if offline in {"true", "1", "yes", "on"}:
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.DEMO_REQUIRES_NETWORK,
+            message=(
+                "--demo runs the upstream nf-core `-profile test`, which downloads its test "
+                "datasets and reference files from GitHub, but NXF_OFFLINE is set — Nextflow "
+                "would abort during parameter validation because the remote test inputs cannot "
+                "be reached."
+            ),
+            fix=(
+                "Unset NXF_OFFLINE to run the demo (it fetches only nf-core's public test data — "
+                "no user or genetic data is uploaded), or run a real analysis with your own local "
+                "--input samplesheet and references, which is fully offline."
+            ),
+            details={"NXF_OFFLINE": os.environ.get("NXF_OFFLINE")},
+        )
+
+
 def run_preflight(
     args,
     *,
     pipeline_source: dict[str, object],
     samplesheet_summary: dict[str, Any],
 ) -> dict[str, object]:
+    _check_demo_network(args)
     _warn_if_native_windows()
     _check_remote_inputs(args, samplesheet_summary)
     _check_supported_preset(args.preset)
@@ -1087,7 +1137,7 @@ def _check_protocol_compatibility(args) -> None:
                 stage="preflight",
                 error_code=ErrorCode.INVALID_PRESET_CONFIGURATION,
                 message="The selected preset requires an explicit protocol in nf-core/scrnaseq 4.1.0.",
-                fix="Provide --protocol with a value supported by the selected aligner, such as 10XV2, 10XV3, 10XV4, dropseq, or smartseq where documented.",
+                fix="Provide --protocol with a value supported by the selected aligner, such as 10XV2, 10XV3, 10XV4, dropseq, or smartseq where documented. nf-core/scrnaseq takes the protocol from this flag (a global pipeline parameter); a `protocol` column in the samplesheet is not read for it, so pass the value explicitly here even if your samplesheet has one.",
                 details={
                     "preset": preset,
                     "missing_field": "protocol",

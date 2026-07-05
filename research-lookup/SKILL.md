@@ -39,7 +39,7 @@ If your document does not already contain schematics or diagrams:
 - Simply describe your desired diagram in natural language
 
 ```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
+python <path-to-scientific-schematics-skill>/scripts/generate_schematic.py "your diagram description" -o figures/output.png
 ```
 
 ---

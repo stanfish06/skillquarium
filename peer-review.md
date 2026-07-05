@@ -20,7 +20,6 @@ created: 2026-06-09
 
 ## Related skills
 
-- [nature-response](nature-response.md) — Draft, audit, or revise point-by-point reviewer response letters for Nature-family manuscript revisions
 - [nature-reviewer](nature-reviewer.md) — Simulate a Nature-style reviewer assessment from the referee perspective rather than an author rebuttal
 - [review](review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 

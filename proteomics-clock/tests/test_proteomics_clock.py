@@ -2,7 +2,6 @@ import json
 import subprocess
 import sys
 from pathlib import Path
-from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
@@ -11,7 +10,6 @@ import pytest
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
-REPO_ROOT = SKILL_DIR.parents[1]
 DEMO_FIXTURE = SKILL_DIR / "data" / "demo_olink_npx.csv.gz"
 
 
@@ -115,6 +113,21 @@ def test_missing_proteins_reported():
     assert "ProteinA" not in missing_proteins
 
 
+def test_download_coefficients_selects_fold(monkeypatch):
+    import proteomics_clock as pc
+
+    text = "Intercept,ProteinA,ProteinB\n1,2,3\n4,5,6\n"
+    monkeypatch.setattr(pc, "_download_text", lambda url, cache_name: text)
+
+    coeffs = pc.download_coefficients(["Heart"], "gen1", fold=2)
+    assert coeffs["Heart_gen1"]["Intercept"] == 4.0
+    assert coeffs["Heart_gen1"]["ProteinA"] == 5.0
+    assert coeffs["Heart_gen1"]["ProteinB"] == 6.0
+
+    with pytest.raises(ValueError):
+        pc.download_coefficients(["Heart"], "gen1", fold=3)
+
+
 def test_load_input_csv(tmp_path):
     from proteomics_clock import load_input
 
@@ -160,6 +173,7 @@ def test_run_analysis_with_demo(tmp_path):
     report_text = (out_dir / "report.md").read_text()
     assert "ClawBio is a research and educational tool" in report_text
     assert "Goeminne" in report_text
+    assert "Input Sanity" in report_text
 
 
 def test_cli_smoke_with_demo(tmp_path):

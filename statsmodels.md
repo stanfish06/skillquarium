@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [statistical-analysis](statistical-analysis.md) — Guided statistical analysis with test selection and reporting
+- [statistical-analysis](statistical-analysis.md) — Guided statistical analysis for research data - test selection, assumption checking, effect sizes, power analysis, Bayesian alternatives, and APA-formatted reporting
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

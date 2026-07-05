@@ -1,15 +1,18 @@
 # nfcore-sarek-wrapper / reporting.py
 """Write the human-facing report bundle for an nf-core/sarek run.
 
-This module owns four files written under ``<output_dir>/reproducibility/``:
+This module owns four files, laid out to match nfcore-rnaseq / nfcore-scrnaseq:
 
-* ``report.md``       — human-readable markdown summary.
-* ``result.json``     — machine-readable run summary (schema_version 1).
-* ``commands.sh``     — portable bash replay script.
-* ``remap_paths.py``  — copy of the cross-machine path remapper.
+* ``<output_dir>/report.md``                    — human-readable markdown summary.
+* ``<output_dir>/result.json``                  — machine-readable run summary.
+* ``<output_dir>/reproducibility/commands.sh``  — portable bash replay script.
+* ``<output_dir>/reproducibility/remap_paths.py`` — cross-machine path remapper.
 
-It must NOT write to any other file in the reproducibility bundle (that is
-``provenance.py``'s job).  This module is pure-Python: no subprocesses, no
+``report.md`` and ``result.json`` are the discoverable run summaries and live at
+the output root (where consumers and the sibling wrappers expect them); the
+replay/provenance artifacts stay inside the ``reproducibility/`` bundle. It must
+NOT write to any other file in the reproducibility bundle (that is
+``provenance.py``'s job). This module is pure-Python: no subprocesses, no
 network, no logging beyond the returned ``warnings`` list.
 """
 
@@ -87,12 +90,14 @@ def write_reports(
 ) -> ReportingArtifacts:
     """Write report.md, result.json, commands.sh, and copy remap_paths.py.
 
-    All four files land in ``<output_dir>/reproducibility/``.  The function
-    is idempotent: re-running overwrites the four artifacts but leaves all
-    other files in the bundle untouched.
+    ``report.md`` and ``result.json`` land at the output root; ``commands.sh``
+    and ``remap_paths.py`` land in ``<output_dir>/reproducibility/``. The
+    function is idempotent: re-running overwrites the four artifacts but leaves
+    all other files in the bundle untouched.
     """
     output_dir = Path(output_dir)
     skill_dir = Path(skill_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     repro_dir = output_dir / "reproducibility"
     repro_dir.mkdir(parents=True, exist_ok=True)
 
@@ -117,7 +122,7 @@ def write_reports(
     )
 
     # ---- report.md ---------------------------------------------------------
-    report_md = repro_dir / "report.md"
+    report_md = output_dir / "report.md"
     write_text_lf(
         report_md,
         _build_report_md(
@@ -132,11 +137,12 @@ def write_reports(
             resume_used=resume_used,
             elapsed_seconds=elapsed_seconds,
             extra_warnings=list(warnings),
+            profile=profile,
         ),
     )
 
     # ---- result.json -------------------------------------------------------
-    result_json = repro_dir / "result.json"
+    result_json = output_dir / "result.json"
     result_payload = _build_result_payload(
         output_dir=output_dir,
         generated_at=generated_at,
@@ -147,6 +153,9 @@ def write_reports(
         resume_used=resume_used,
         elapsed_seconds=elapsed_seconds,
         warnings=warnings,
+        profile=profile,
+        java_version=java_version,
+        nextflow_version=nextflow_version,
     )
     write_text_lf(
         result_json, json.dumps(result_payload, indent=2, sort_keys=True)
@@ -325,6 +334,31 @@ def _parse_ascat_purity_ploidy(path: Path | str | None) -> tuple[str | None, str
 # ---------------------------------------------------------------------------
 
 
+def _effective_tools(
+    params: dict[str, Any], outputs: dict[str, Any] | None
+) -> tuple[list[str], bool]:
+    """Return (tools, inferred).
+
+    Prefer the tools the user requested (``params['tools']``). When none were
+    requested — e.g. under ``--demo``, where the hermetic upstream ``-profile
+    test`` owns the tool selection and the wrapper never sets ``params['tools']``
+    — fall back to the tools actually observed in the parsed outputs
+    (``variant_calling``/``annotation`` keys). ``inferred`` flags the fallback so
+    the report can label it. This reads what the run produced rather than
+    assuming a tool list, matching the nf-core test profile's real behaviour.
+    """
+    requested = _tool_tokens(params.get("tools"))
+    if requested:
+        return requested, False
+    if outputs is not None:
+        vc = outputs.get("variant_calling") or {}
+        ann = outputs.get("annotation") or {}
+        detected = sorted({str(t) for t in vc if vc.get(t)} | {str(a) for a in ann if ann.get(a)})
+        if detected:
+            return detected, True
+    return [], False
+
+
 def _build_report_md(
     *,
     output_dir: Path,
@@ -338,6 +372,7 @@ def _build_report_md(
     resume_used: bool,
     elapsed_seconds: float | None,
     extra_warnings: list[str],
+    profile: str | None = None,
 ) -> str:
     lines: list[str] = []
     lines.append("# nf-core/sarek run report")
@@ -347,11 +382,19 @@ def _build_report_md(
 
     # ---- Summary table ----------------------------------------------------
     analysis_mode = str(samplesheet.get("analysis_mode") or _EM_DASH)
-    tools_list = _tool_tokens(params.get("tools"))
+    tools_list, tools_inferred = _effective_tools(params, outputs)
     skip_list = _tool_tokens(params.get("skip_tools"))
     samples = samplesheet.get("sample_names") or []
+    detected_samples = (outputs.get("samples_detected") or []) if outputs else []
+    # Under --demo the local samplesheet is empty (the test profile supplies
+    # samples remotely), so fall back to the samples detected in the outputs.
+    sample_count = len(samples) or len(detected_samples)
     pairings = samplesheet.get("pairings") or []
     elapsed_str = _format_elapsed(elapsed_seconds)
+    effective_profile = str(profile or params.get("profile") or "").strip()
+    tools_cell = _join_or_none(tools_list)
+    if tools_inferred and tools_list:
+        tools_cell += " (detected from outputs)"
 
     lines.append("## Run summary")
     lines.append("")
@@ -361,13 +404,13 @@ def _build_report_md(
     lines.append(f"| Step | {params.get('step') or DEFAULT_STEP} |")
     lines.append(f"| Aligner | {params.get('aligner') or DEFAULT_ALIGNER} |")
     lines.append(f"| Analysis mode | {analysis_mode} |")
-    lines.append(f"| Profile | {params.get('profile') or _EM_DASH} |")
-    lines.append(f"| Tools | {_join_or_none(tools_list)} |")
+    lines.append(f"| Profile | {effective_profile or _EM_DASH} |")
+    lines.append(f"| Tools | {tools_cell} |")
     lines.append(f"| Skip tools | {_join_or_none(skip_list)} |")
     lines.append(f"| WES | {_yes_no(params.get('wes'))} |")
     lines.append(f"| Joint germline | {_yes_no(params.get('joint_germline'))} |")
     lines.append(f"| Joint Mutect2 | {_yes_no(params.get('joint_mutect2'))} |")
-    lines.append(f"| Samples | {len(samples)} |")
+    lines.append(f"| Samples | {sample_count} |")
     if analysis_mode == "somatic_paired":
         lines.append(f"| Tumor/Normal pairs | {len(pairings)} |")
     else:
@@ -671,19 +714,29 @@ def _build_result_payload(
     resume_used: bool,
     elapsed_seconds: float | None,
     warnings: list[str],
+    profile: str | None = None,
+    java_version: str | None = None,
+    nextflow_version: str | None = None,
 ) -> dict[str, Any]:
+    tools_effective, tools_inferred = _effective_tools(params, outputs)
     run = {
         "step": params.get("step") or DEFAULT_STEP,
         "aligner": params.get("aligner") or DEFAULT_ALIGNER,
         "analysis_mode": samplesheet.get("analysis_mode") or "",
-        "profile": params.get("profile") or "",
+        "profile": str(profile or params.get("profile") or ""),
         "tools": _tool_tokens(params.get("tools")),
+        # tools actually observed in the outputs — differs from `tools` under
+        # --demo, where the upstream test profile owns tool selection.
+        "tools_effective": tools_effective,
+        "tools_from_outputs": bool(tools_inferred),
         "skip_tools": _tool_tokens(params.get("skip_tools")),
         "wes": bool(params.get("wes") or False),
         "joint_germline": bool(params.get("joint_germline") or False),
         "joint_mutect2": bool(params.get("joint_mutect2") or False),
         "resume_used": bool(resume_used),
         "elapsed_seconds": elapsed_seconds,
+        "java_version": java_version or "",
+        "nextflow_version": nextflow_version or "",
     }
 
     samples_out = [str(s) for s in (samplesheet.get("sample_names") or [])]
@@ -742,6 +795,10 @@ def _build_result_payload(
         "schema_version": 1,
         "skill": SKILL_NAME,
         "skill_version": SKILL_VERSION,
+        # `ok` is the cross-wrapper success discriminator (shared minimal contract
+        # with nfcore-rnaseq/scrnaseq). A completed run that produced outputs is
+        # "ok"; "partial" (outputs not parsed) is still a non-error completion.
+        "ok": status != "error",
         "status": status,
         "generated_at": generated_at,
         "run": run,

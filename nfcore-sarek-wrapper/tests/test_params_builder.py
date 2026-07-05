@@ -128,3 +128,17 @@ def test_bcftools_header_lines_is_resolved_as_path(tmp_path, monkeypatch):
     )
 
     assert params["bcftools_header_lines"] == header.resolve().as_posix()
+
+
+def test_multiqc_path_remote_uri_preserved(tmp_path):
+    """A remote --multiqc-config / --multiqc-logo URI must be written to
+    params.yaml verbatim, not resolved as a local path (which collapses the
+    scheme, e.g. https://host/x -> <cwd>/https:/host/x). Parity with the genome
+    reference fields, which already pass URIs through."""
+    uri = "https://raw.githubusercontent.com/nf-core/sarek/3.8.1/assets/multiqc_config.yml"
+    params = build_effective_params(
+        _args(multiqc_config=uri),
+        normalized_samplesheet=tmp_path / "samplesheet.valid.csv",
+        output_dir=tmp_path,
+    )
+    assert params["multiqc_config"] == uri

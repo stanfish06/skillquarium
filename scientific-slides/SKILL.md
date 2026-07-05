@@ -310,7 +310,7 @@ In addition to slide generation, use the **scientific-schematics** skill for tec
 
 **How to generate schematics:**
 ```bash
-python scripts/generate_schematic.py "your diagram description" -o figures/output.png
+python <path-to-scientific-schematics-skill>/scripts/generate_schematic.py "your diagram description" -o figures/output.png
 ```
 
 For detailed guidance on creating schematics, refer to the scientific-schematics skill documentation.

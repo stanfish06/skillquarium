@@ -138,10 +138,14 @@ def _reported_sample_count(
     samplesheet = preflight_result.get("samplesheet", {})
     if isinstance(samplesheet, dict):
         sample_count = samplesheet.get("sample_count")
-        if isinstance(sample_count, int):
-            return sample_count
         if isinstance(sample_count, str) and sample_count.isdigit():
-            return int(sample_count)
+            sample_count = int(sample_count)
+        # Only trust a *positive* local samplesheet count. Under --demo the
+        # samplesheet is supplied remotely by the upstream test profile, so the
+        # local count is 0 — fall back to the samples detected in the outputs
+        # rather than reporting 0 for a run that produced real samples.
+        if isinstance(sample_count, int) and sample_count > 0:
+            return sample_count
     samples_detected = parsed_outputs.get("samples_detected", [])
     return len(samples_detected) if isinstance(samples_detected, list) else 0
 
@@ -294,6 +298,9 @@ def write_result(
         output_dir,
         skill=SKILL_ALIAS,
         version=SKILL_VERSION,
+        # Minimal shared cross-wrapper contract: a successful run is ok/"ok".
+        status="ok",
+        ok=True,
         summary=summary,
         data=data,
     )

@@ -81,6 +81,31 @@ def test_execute_nextflow_raises_on_nonzero_exit_and_keeps_logs(tmp_path, monkey
     assert (tmp_path / "logs" / "stderr.txt").exists()
 
 
+def test_execute_nextflow_failure_appends_macos_tmp_hint(tmp_path, monkeypatch):
+    """On macOS, a failed run with --output under /tmp must append the actionable
+    Colima / 'No such file or directory' hint to the fix (parity with
+    nfcore-scrnaseq), so the silent cause of the failure is surfaced."""
+    proc = _MockProc(returncode=1)
+    monkeypatch.setattr(subprocess, "Popen", lambda *a, **kw: proc)
+    monkeypatch.setattr(executor_module.sys, "platform", "darwin")
+    monkeypatch.setattr(executor_module, "is_under_tmp", lambda _p: True, raising=False)
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(["nextflow", "run", "test"], cwd=tmp_path, output_dir=tmp_path, timeout_seconds=60)
+    assert "No such file or directory" in exc.value.fix
+    assert "home" in exc.value.fix.lower()
+
+
+def test_execute_nextflow_failure_no_tmp_hint_when_not_under_tmp(tmp_path, monkeypatch):
+    """The macOS /tmp hint must not appear for a non-/tmp output directory."""
+    proc = _MockProc(returncode=1)
+    monkeypatch.setattr(subprocess, "Popen", lambda *a, **kw: proc)
+    monkeypatch.setattr(executor_module.sys, "platform", "darwin")
+    monkeypatch.setattr(executor_module, "is_under_tmp", lambda _p: False, raising=False)
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(["nextflow", "run", "test"], cwd=tmp_path, output_dir=tmp_path, timeout_seconds=60)
+    assert "No such file or directory" not in exc.value.fix
+
+
 def test_execute_nextflow_starts_new_session_on_posix(tmp_path, monkeypatch):
     proc = _MockProc(returncode=0)
     popen_kwargs = {}
@@ -191,3 +216,71 @@ def test_terminate_process_tree_falls_back_to_sigkill_when_sigterm_times_out(mon
     # proc.kill() (last-resort fallback) must NOT have been called —
     # killpg(SIGKILL) should have succeeded.
     assert proc.killed is False
+
+
+def test_memory_limit_failure_hint(tmp_path):
+    """A run that fails because a process exceeds host memory must append an
+    actionable hint pointing at Nextflow resourceLimits (Issue: nf-core defaults
+    request more memory than a small host provides)."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    sig = "Process requirement exceeds available memory -- req: 72 GB; avail: 62.8 GB"
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", f"echo '{sig}' 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "resourceLimits" in exc.value.fix
+
+
+def test_network_unreachable_failure_hint(tmp_path):
+    """A run that fails with an unreachable network must append the IPv6/NAT64
+    NXF_OPTS hint (Issue: IPv6-only / NAT64 hosts where the JVM prefers IPv4)."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    sig = "Network is unreachable (connect failed)"
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", f"echo '{sig}' 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "preferIPv6Addresses" in exc.value.fix
+
+
+def test_no_environment_hint_without_signature(tmp_path):
+    """A generic failure with no known signature must not append the env hints."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", "echo boom 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "resourceLimits" not in exc.value.fix
+    assert "preferIPv6Addresses" not in exc.value.fix
+
+
+def test_config_parse_failure_hint(tmp_path):
+    """A run that fails because Nextflow could not fetch/parse the remote nf-core
+    config (the `includeConfig … ? <url> : '/dev/null'` line) must point at
+    NXF_OFFLINE for a fully-local run."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    sig = "Unable to parse config file: '/root/.nextflow/assets/nf-core/rnaseq/nextflow.config'"
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", f"echo \"{sig}\" 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "NXF_OFFLINE" in exc.value.fix
+
+
+def test_no_config_parse_hint_without_signal(tmp_path):
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", "echo plain-failure 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "NXF_OFFLINE" not in exc.value.fix

@@ -193,6 +193,20 @@ def test_nextflow_version_too_old(monkeypatch):
     assert exc.value.error_code == ErrorCode.NEXTFLOW_VERSION_TOO_OLD
 
 
+def test_nextflow_version_preserves_zero_padded_month(monkeypatch):
+    """A detected version like '26.04.3' must be reported verbatim, never
+    reconstructed from the comparison tuple as '26.4.3' (not a real release)."""
+    monkeypatch.setattr(preflight.shutil, "which", lambda name: f"/usr/bin/{name}")
+    monkeypatch.setattr(preflight, "_command_output", lambda args: "Nextflow version 26.04.3 build 5928")
+    assert preflight._check_nextflow()["version"] == "26.04.3"
+
+
+def test_java_version_preserves_exact_string(monkeypatch):
+    monkeypatch.setattr(preflight.shutil, "which", lambda name: f"/usr/bin/{name}")
+    monkeypatch.setattr(preflight, "_command_output", lambda args: 'openjdk version "17.0.10" 2024-01-16')
+    assert preflight._check_java()["version"] == "17.0.10"
+
+
 def test_check_mode_does_not_execute_nextflow_version(tmp_path, monkeypatch):
     calls = []
     monkeypatch.setattr(preflight, "_check_java", lambda: {"path": "/usr/bin/java", "version": "17"})
@@ -245,7 +259,9 @@ def test_output_dir_inside_repo_is_rejected(tmp_path, monkeypatch):
     inside = _SKILL_DIR / "tmp-test-output"
     with pytest.raises(SkillError) as exc:
         _run(_args(tmp_path, output=str(inside)), _samplesheet(tmp_path))
-    assert exc.value.error_code == ErrorCode.OUTPUT_DIR_NOT_WRITABLE
+    # A dedicated, self-describing code (matching nfcore-sarek/scrnaseq) rather than
+    # the generic OUTPUT_DIR_NOT_WRITABLE, which wrongly implies a permissions issue.
+    assert exc.value.error_code == ErrorCode.OUTPUT_DIR_INSIDE_REPO
 
 
 def test_reference_accepts_genome_shortcut(tmp_path, monkeypatch):
@@ -638,7 +654,61 @@ def test_macos_docker_tmp_warning(tmp_path, monkeypatch):
     # macOS (sandbox/permissions prevent creating /tmp subdirs in CI/test env).
     monkeypatch.setattr(preflight, "check_output_dir_available", lambda *a, **kw: None)
     result = _run(_args(tmp_path, output="/tmp/clawbio-rnaseq-test"), _samplesheet(tmp_path))
-    assert any("/tmp" in warning for warning in result["warnings"])
+    tmp_warnings = [w for w in result["warnings"] if "/tmp" in w]
+    assert tmp_warnings, result["warnings"]
+    msg = " ".join(tmp_warnings)
+    # Must describe the real failure mode (a hard '.command.run: No such file or
+    # directory' because Colima does not share /tmp into its VM) and give the
+    # actionable fix — parity with nfcore-sarek / nfcore-scrnaseq, not the old
+    # misleading "may be slow / VirtioFS" wording.
+    assert "No such file or directory" in msg
+    assert "home" in msg.lower()
+    assert "slow" not in msg.lower()
+
+
+def test_macos_docker_tmp_warning_resolves_private_tmp(tmp_path, monkeypatch):
+    """Detection is resolve-based (is_under_tmp), so the macOS-canonical
+    /private/tmp is caught just like /tmp."""
+    _mock_env(monkeypatch)
+    monkeypatch.setattr(preflight.sys, "platform", "darwin")
+    monkeypatch.setattr(preflight, "check_output_dir_available", lambda *a, **kw: None)
+    result = _run(_args(tmp_path, output="/private/tmp/clawbio-rnaseq-test"), _samplesheet(tmp_path))
+    assert any("No such file or directory" in w for w in result["warnings"])
+
+
+def test_macos_docker_non_tmp_output_has_no_tmp_warning(tmp_path, monkeypatch):
+    """A normal (non-/tmp) output directory must not trigger the /tmp guard."""
+    _mock_env(monkeypatch)
+    monkeypatch.setattr(preflight.sys, "platform", "darwin")
+    out = tmp_path / "out"
+    result = _run(_args(tmp_path, output=str(out)), _samplesheet(tmp_path))
+    assert not any("No such file or directory" in w for w in result["warnings"])
+
+
+def test_demo_under_nxf_offline_is_rejected(tmp_path, monkeypatch):
+    """--demo runs nf-core's remote `-profile test`; under NXF_OFFLINE it cannot
+    fetch its test data, so preflight must fail fast with a clear, actionable
+    DEMO_REQUIRES_NETWORK error instead of a cryptic Nextflow 'does not exist'."""
+    _mock_env(monkeypatch)
+    monkeypatch.setenv("NXF_OFFLINE", "true")
+    with pytest.raises(SkillError) as exc:
+        _run(_args(tmp_path, demo=True), _samplesheet(tmp_path))
+    assert exc.value.error_code == ErrorCode.DEMO_REQUIRES_NETWORK
+
+
+def test_demo_without_nxf_offline_not_blocked(tmp_path, monkeypatch):
+    """A demo with network available (no NXF_OFFLINE) must not trip the guard."""
+    _mock_env(monkeypatch)
+    monkeypatch.delenv("NXF_OFFLINE", raising=False)
+    _run(_args(tmp_path, demo=True), _samplesheet(tmp_path))
+
+
+def test_nxf_offline_real_run_not_blocked(tmp_path, monkeypatch):
+    """A real (non-demo) run is fully local, so NXF_OFFLINE must not block it —
+    the guard is specific to --demo's remote test profile."""
+    _mock_env(monkeypatch)
+    monkeypatch.setenv("NXF_OFFLINE", "true")
+    _run(_args(tmp_path, demo=False), _samplesheet(tmp_path))
 
 
 def test_email_on_fail_invalid_rejected(tmp_path, monkeypatch):

@@ -409,6 +409,23 @@ def test_real_output_artifacts_still_block_rerun(tmp_path):
     assert exc.value.error_code == "OUTPUT_DIR_NOT_EMPTY"
 
 
+def test_output_dir_inside_repo_is_rejected(tmp_path, monkeypatch):
+    """Pipeline outputs must not be written inside the ClawBio source tree — parity
+    with nfcore-rnaseq / nfcore-sarek, which both refuse this. The dedicated
+    OUTPUT_DIR_INSIDE_REPO code is self-describing (vs the generic
+    OUTPUT_DIR_NOT_WRITABLE). PROJECT_ROOT is monkeypatched to a temp dir so the
+    check is hermetic and never materialises a directory inside the real repo."""
+    import preflight
+    from errors import SkillError
+
+    monkeypatch.setattr(preflight, "PROJECT_ROOT", tmp_path, raising=False)
+    inside = tmp_path / "skills" / "nfcore-scrnaseq-wrapper" / "tmp-test-output"
+    with pytest.raises(SkillError) as exc:
+        preflight.check_output_dir_available(inside, resume=False)
+    assert exc.value.error_code == "OUTPUT_DIR_INSIDE_REPO"
+    assert not inside.exists(), "guard must reject before creating the directory"
+
+
 # ── H-17: detected versions must preserve their exact string (NXF_VER/conda) ───
 
 

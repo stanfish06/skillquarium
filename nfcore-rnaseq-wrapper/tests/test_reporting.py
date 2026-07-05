@@ -268,6 +268,15 @@ def test_write_result_summary_contains_handoff_keys(tmp_path):
     assert summary["skip_quantification_merge"] is False
 
 
+def test_write_result_has_shared_status_ok_contract(tmp_path):
+    """Issue 5: a successful result.json must carry the shared status/ok
+    discriminators (consistent with nfcore-sarek/scrnaseq)."""
+    result_path = write_result(tmp_path, args=_args(tmp_path), pipeline_source=_source(), parsed_outputs=_parsed(), command_str="cmd")
+    payload = json.loads(result_path.read_text(encoding="utf-8"))
+    assert payload["status"] == "ok"
+    assert payload["ok"] is True
+
+
 def test_write_result_data_contains_full_outputs(tmp_path):
     parsed = _parsed(samples_detected=7)
     result_path = write_result(tmp_path, args=_args(tmp_path), pipeline_source=_source(), parsed_outputs=parsed, command_str="cmd")

@@ -232,6 +232,7 @@ This skill fetches model coefficients on first run and caches them locally.
 | Gen2 coefficients (per organ) | `.../instance_0/mortality_based_models/{organ}_mortality_coefs_GTEx_4x_FC.csv` | Yes |
 
 - **Cache location**: `$CLAWBIO_CACHE/proteomics-clock/` if set, otherwise `~/.cache/clawbio/proteomics-clock/`
+- **Local integrity check**: downloaded coefficient files are cached with SHA-256 sidecar files and verified against the cached hash on reuse
 - **Pinned commit**: All URLs are pinned to organAging commit `5147b03` for reproducibility. Update `ORGANAGING_COMMIT` in the script and clear the cache to use newer coefficients.
 - **Offline mode**: After first run, the skill works fully offline from cache. No `--offline` flag needed.
 

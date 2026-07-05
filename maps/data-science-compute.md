@@ -39,7 +39,7 @@ created: 2026-06-13
 - [scikit-survival](../scikit-survival.md) — Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival
 - [seaborn](../seaborn.md) — Statistical visualization with pandas integration
 - [simpy](../simpy.md) — Process-based discrete-event simulation framework in Python
-- [statistical-analysis](../statistical-analysis.md) — Guided statistical analysis with test selection and reporting
+- [statistical-analysis](../statistical-analysis.md) — Guided statistical analysis for research data - test selection, assumption checking, effect sizes, power analysis, Bayesian alternatives, and APA-formatted reporting
 - [statsmodels](../statsmodels.md) — Statistical models library for Python. Use when you need specific model classes (OLS, GLM, mixed models, ARIMA) with detailed diagnostics, residuals, and inference
 - [sympy](../sympy.md) — Use when you need exact symbolic math in Python — algebra, calculus, equation solving, symbolic linear algebra, or code generation via lambdify/LaTeX
 - [ttk-viz](../ttk-viz.md) — Headless topological data analysis and visualization with the Topology ToolKit (TTK) on top of ParaView

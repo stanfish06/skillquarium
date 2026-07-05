@@ -176,3 +176,102 @@ def test_macos_tmp_failure_hint_empty_on_linux(monkeypatch):
 
     monkeypatch.setattr(executor.sys, "platform", "linux")
     assert executor._macos_tmp_failure_hint(Path("/tmp/scrnaseq_run")) == ""
+
+
+def test_memory_limit_failure_hint(tmp_path):
+    """A run that fails because a process exceeds host memory must append an
+    actionable hint pointing at Nextflow resourceLimits (Issue: nf-core defaults
+    request more memory than a small host provides)."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    sig = "Process requirement exceeds available memory -- req: 72 GB; avail: 62.8 GB"
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", f"echo '{sig}' 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "resourceLimits" in exc.value.fix
+
+
+def test_network_unreachable_failure_hint(tmp_path):
+    """A run that fails with an unreachable network must append the IPv6/NAT64
+    NXF_OPTS hint (Issue: IPv6-only / NAT64 hosts where the JVM prefers IPv4)."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    sig = "Network is unreachable (connect failed)"
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", f"echo '{sig}' 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "preferIPv6Addresses" in exc.value.fix
+
+
+def test_no_environment_hint_without_signature(tmp_path):
+    """A generic failure with no known signature must not append the env hints."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", "echo boom 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "resourceLimits" not in exc.value.fix
+    assert "preferIPv6Addresses" not in exc.value.fix
+
+
+def test_cellbender_failure_hint(tmp_path):
+    """When CellBender background removal is the failing process (it errors on
+    very small/test datasets), the fix must point at --skip-cellbender."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    err = (
+        "Error executing process > "
+        "'NFCORE_SCRNASEQ:SCRNASEQ:H5AD_REMOVEBACKGROUND_BARCODES_CELLBENDER_ANNDATA:"
+        "CELLBENDER_REMOVEBACKGROUND (Sample_X)'\n"
+        "IndexError: index -100 is out of bounds for axis 0 with size 88"
+    )
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", f"echo '{err}' 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "--skip-cellbender" in exc.value.fix
+
+
+def test_no_cellbender_hint_without_signal(tmp_path):
+    """A generic failure must not mention CellBender."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", "echo boom 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "--skip-cellbender" not in exc.value.fix
+
+
+def test_config_parse_failure_hint(tmp_path):
+    """A run that fails because Nextflow could not fetch/parse the remote nf-core
+    config (the `includeConfig … ? <url> : '/dev/null'` line) must point at
+    NXF_OFFLINE for a fully-local run."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    sig = "Unable to parse config file: '/root/.nextflow/assets/nf-core/rnaseq/nextflow.config'"
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", f"echo \"{sig}\" 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "NXF_OFFLINE" in exc.value.fix
+
+
+def test_no_config_parse_hint_without_signal(tmp_path):
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", "echo plain-failure 1>&2; exit 1"],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "NXF_OFFLINE" not in exc.value.fix

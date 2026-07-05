@@ -1052,6 +1052,78 @@ def test_clawbio_kallisto_index_forwarded_to_rnaseq_pipeline():
     assert "--kallisto-index" in values, f"--kallisto-index missing from allowlist: {sorted(values)!r}"
 
 
+def test_clawbio_timeout_hours_in_rnaseq_pipeline_allowlist():
+    """--timeout-hours is a real wrapper flag (and is exposed for scrnaseq-pipeline and
+    sarek-pipeline); it must also be forwardable for rnaseq-pipeline rather than being
+    silently dropped by the extra-args filter. It takes a value, so it belongs to the
+    value allowlist, not the boolean set."""
+    values, booleans = _rnaseq_pipeline_allowlist()
+    assert "--timeout-hours" in values, f"--timeout-hours missing from allowlist: {sorted(values)!r}"
+    assert "--timeout-hours" not in booleans
+
+
+def test_clawbio_allow_pipeline_version_override_in_rnaseq_pipeline_allowlist():
+    """--allow-pipeline-version-override is a store_true wrapper flag (exposed for
+    scrnaseq-pipeline and sarek-pipeline); it must be forwardable for rnaseq-pipeline
+    and must live in the boolean (value-free) set so the filter does not consume the
+    following token as its value."""
+    values, booleans = _rnaseq_pipeline_allowlist()
+    assert "--allow-pipeline-version-override" in (values | booleans), (
+        f"--allow-pipeline-version-override missing from allowlist: {sorted(values | booleans)!r}"
+    )
+    assert "--allow-pipeline-version-override" in booleans
+
+
+def _wrapper_option_flags(module) -> tuple[set[str], set[str]]:
+    """Return (all option strings, value-free option strings) for the wrapper parser."""
+    import argparse
+
+    parser = module.build_parser()
+    all_opts: set[str] = set()
+    no_value: set[str] = set()
+    for action in parser._actions:
+        for opt in action.option_strings:
+            all_opts.add(opt)
+            if (
+                isinstance(
+                    action,
+                    (
+                        argparse._StoreTrueAction,
+                        argparse._StoreFalseAction,
+                        argparse._CountAction,
+                        argparse._HelpAction,
+                    ),
+                )
+                or action.nargs == 0
+            ):
+                no_value.add(opt)
+    return all_opts, no_value
+
+
+def test_rnaseq_pipeline_allowlist_consistent_with_wrapper():
+    """The clawbio runner allowlist must stay coherent with the wrapper parser:
+
+    * every allow-listed flag is a real wrapper flag (else it would error as
+      ``unrecognized arguments`` when forwarded), and
+    * the value/boolean classification matches the wrapper so the extra-args
+      filter neither drops a value nor swallows the next token.
+    """
+    values, booleans = _rnaseq_pipeline_allowlist()
+    allowed = values | booleans
+    all_opts, no_value = _wrapper_option_flags(_load_skill_module())
+
+    assert allowed <= all_opts, f"allowlist flags absent from wrapper: {sorted(allowed - all_opts)}"
+    boolean_allowed = no_value & allowed
+    assert boolean_allowed <= booleans, (
+        "value-free wrapper flags missing from the without-values set: "
+        f"{sorted(boolean_allowed - booleans)}"
+    )
+    assert booleans <= no_value, (
+        "flags marked value-free but the wrapper expects a value: "
+        f"{sorted(booleans - no_value)}"
+    )
+
+
 def test_main_keyboard_interrupt_returns_130(tmp_path, monkeypatch):
     """Ctrl+C during a long-running pipeline must exit 130 (SIGINT convention),
     not dump a traceback — parity with nfcore-sarek/scrnaseq."""

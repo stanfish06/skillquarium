@@ -21,6 +21,92 @@ from schemas import is_under_tmp
 _PROCESS_TERMINATION_GRACE_SECONDS = 10
 
 
+_MEMORY_FAILURE_SIGNATURES = (
+    "process requirement exceeds available memory",
+    "process requirement exceeds available cpus",
+)
+_NETWORK_FAILURE_SIGNATURES = (
+    "network is unreachable",
+    "java.net.connectexception",
+    "java.net.unknownhostexception",
+    "no route to host",
+    "connection timed out",
+    "temporary failure in name resolution",
+)
+_CONFIG_PARSE_FAILURE_SIGNATURES = (
+    "unable to parse config file",
+    "configparseexception",
+)
+
+
+def _read_log_tail(path: Path, limit: int = 65536) -> str:
+    """Best-effort tail read of a captured log; never raises."""
+    try:
+        with path.open("r", encoding="utf-8", errors="replace") as fh:
+            return fh.read()[-limit:]
+    except OSError:
+        return ""
+
+
+def _environment_failure_hints(stdout_path: Path, stderr_path: Path) -> str:
+    """Append actionable hints when the captured logs show a known environment
+    failure — the host being smaller than a process request, or an unreachable
+    network. Diagnosed from the actual Nextflow error text (never predicting
+    pipeline resource requirements), so no thresholds are fabricated. Empty string
+    when no known signature is present. Shared verbatim across the three wrappers.
+    """
+    blob = (_read_log_tail(stdout_path) + "\n" + _read_log_tail(stderr_path)).lower()
+    hints: list[str] = []
+    if any(sig in blob for sig in _MEMORY_FAILURE_SIGNATURES):
+        hints.append(
+            " A process requested more memory or CPUs than this machine provides "
+            "('Process requirement exceeds available memory' in the logs). Cap "
+            "requests to your host with a Nextflow config passed via -c, e.g. a file "
+            "with `process { resourceLimits = [ memory: '12.GB', cpus: 4 ] }`, or run "
+            "on a larger machine or an HPC/cloud executor."
+        )
+    if any(sig in blob for sig in _NETWORK_FAILURE_SIGNATURES):
+        hints.append(
+            " Nextflow could not reach the network ('Network is unreachable' or a Java "
+            "connection exception in the logs). Confirm outbound HTTPS and DNS to "
+            "github.com are reachable; on IPv6-only / NAT64 hosts the JVM prefers IPv4 "
+            "by default, so export NXF_OPTS='-Djava.net.preferIPv6Addresses=true' and "
+            "re-run."
+        )
+    if any(sig in blob for sig in _CONFIG_PARSE_FAILURE_SIGNATURES):
+        hints.append(
+            " Nextflow could not parse the pipeline config; on nf-core this usually "
+            "means it could not fetch the remote nf-core/configs 'nfcore_custom.config' "
+            "(the `includeConfig ... ? <url> : '/dev/null'` line). For a fully local run "
+            "(local --input, references and an already-pulled pipeline) set "
+            "NXF_OFFLINE=true so Nextflow skips the remote include; otherwise ensure "
+            "outbound HTTPS/DNS to raw.githubusercontent.com is reachable."
+        )
+    return "".join(hints)
+
+
+def _cellbender_failure_hint(stdout_path: Path, stderr_path: Path) -> str:
+    """Hint when CellBender background removal is the failing process.
+
+    CELLBENDER_REMOVEBACKGROUND estimates ambient RNA from the droplet-count
+    distribution and errors on very small or test datasets (a common symptom is
+    ``IndexError: index -100 is out of bounds``). CellBender is optional, so a
+    re-run with ``--skip-cellbender`` lets the rest of the pipeline produce its
+    count matrices. Best-effort: empty string when CellBender is not the failing
+    process (or the logs are unreadable).
+    """
+    blob = (_read_log_tail(stdout_path) + "\n" + _read_log_tail(stderr_path)).lower()
+    if "cellbender_removebackground" in blob and "error executing process" in blob:
+        return (
+            " The failing process is CellBender background removal, which estimates "
+            "ambient RNA from the droplet distribution and does not work on very small "
+            "or test datasets (a common symptom is 'IndexError: index -100 is out of "
+            "bounds'). CellBender is optional — re-run with --skip-cellbender to let the "
+            "rest of the pipeline produce its count matrices."
+        )
+    return ""
+
+
 def execute_nextflow(
     command: list[str],
     *,
@@ -86,6 +172,8 @@ def execute_nextflow(
             fix=(
                 "Inspect logs/stdout.txt and logs/stderr.txt, then correct the failing input or environment."
                 + _macos_tmp_failure_hint(output_dir)
+                + _environment_failure_hints(stdout_path, stderr_path)
+                + _cellbender_failure_hint(stdout_path, stderr_path)
             ),
             details={
                 "exit_code": exit_code,

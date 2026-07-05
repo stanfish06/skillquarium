@@ -87,6 +87,8 @@ def test_skill_error_to_dict_shape():
         details={"aligner": "bad"},
     )
     assert err.to_dict() == {
+        # Shared cross-wrapper failure contract: status + ok discriminators.
+        "status": "error",
         "ok": False,
         "stage": "validation",
         "error_code": "INVALID_ALIGNER",

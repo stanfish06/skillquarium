@@ -355,7 +355,9 @@ def _add_tuning_params(params: dict[str, object], args) -> None:
     for field in _MULTIQC_PATH_FIELDS:
         value = getattr(args, field, None)
         if value:
-            params[field] = _posix(value)
+            # MultiQC config/logo/methods may be a local file or a remote URL;
+            # preserve URIs verbatim (parity with the genome reference fields).
+            params[field] = _posix_or_uri(value)
     outdir_cache = getattr(args, "outdir_cache", None)
     if outdir_cache:
         # Upstream declares this as directory-path; resolve local values from
@@ -395,10 +397,6 @@ def _schema_safe_string(field: str, value: str) -> str:
     if field in {"sentieon_haplotyper_emit_mode", "sentieon_dnascope_emit_mode"}:
         return ",".join(part.strip() for part in value.split(",") if part.strip())
     return value
-
-
-def _posix(value: str) -> str:
-    return Path(value).expanduser().resolve().as_posix()
 
 
 def _posix_or_uri(value: str) -> str:

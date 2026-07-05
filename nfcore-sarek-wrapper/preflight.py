@@ -43,6 +43,7 @@ from schemas import (
     DEFAULT_IGENOMES_BASE,
     JAVA_MIN_VERSION,
     NEXTFLOW_MIN_VERSION,
+    is_under_tmp,
     SUPPORTED_ALIGNERS,
     SUPPORTED_ASCAT_GENOME,
     SUPPORTED_GATK_PCR_INDEL_MODEL,
@@ -193,6 +194,8 @@ class PreflightResult:
 
     warnings: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+    java_version: str = ""
+    nextflow_version: str = ""
 
 
 def _check_remote_inputs(
@@ -264,12 +267,15 @@ def run_preflight(
     warnings_acc: list[str] = []
     notes_acc: list[str] = []
 
+    # --demo requires network (nf-core's remote -profile test). Fail fast under NXF_OFFLINE.
+    _check_demo_network(params)
+
     # Local-first gate: reject remote inputs/references unless opted in.
     _check_remote_inputs(params, samplesheet, allow_remote_inputs=allow_remote_inputs)
 
     # §5.1 — cross-cutting checks ------------------------------------------
-    _check_java()
-    _check_nextflow()
+    java_version = _check_java()
+    nextflow_version = _check_nextflow()
     profile = str(params.get("profile") or "")
     _check_profile_string(profile)
 
@@ -335,7 +341,12 @@ def run_preflight(
             manifest=resume_manifest,
         )
 
-    return PreflightResult(warnings=warnings_acc, notes=notes_acc)
+    return PreflightResult(
+        warnings=warnings_acc,
+        notes=notes_acc,
+        java_version=java_version,
+        nextflow_version=nextflow_version,
+    )
 
 
 # --- §5.1: Java -----------------------------------------------------------
@@ -372,8 +383,22 @@ def _pad_version(t: tuple[int, ...], length: int = 3) -> tuple[int, ...]:
     return t + (0,) * max(0, length - len(t))
 
 
-def _check_java() -> None:
-    """Java >=17 must be present on PATH."""
+def _detected_version_string(text: str) -> str:
+    """Return the version exactly as reported by the tool (e.g. '26.04.3').
+
+    The parsed tuple is for *comparison* only; reconstructing a string from it
+    drops zero-padding (26.04.3 → 26.4.3), which is not a real Nextflow release
+    and would break NXF_VER / conda pins on replay. Always store the raw token.
+    """
+    for pattern in (r"\b(\d+\.\d+\.\d+)\b", r"\b(\d+\.\d+)\b", r"\b(\d+)\b"):
+        m = re.search(pattern, text)
+        if m:
+            return m.group(1)
+    return ""
+
+
+def _check_java() -> str:
+    """Java >=17 must be present on PATH. Returns the detected version string."""
     java_path = shutil.which("java")
     if not java_path:
         raise SkillError(
@@ -393,19 +418,22 @@ def _check_java() -> None:
             fix="Install Java 17 or newer and ensure `java -version` works.",
             details={"java_path": java_path, "output": version_text},
         )
+    version_str = _detected_version_string(version_text)
     if version[0] < JAVA_MIN_VERSION:
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.JAVA_VERSION_TOO_OLD,
-            message=f"Java {'.'.join(map(str, version))} is older than the required {JAVA_MIN_VERSION}.",
+            message=f"Java {version_str} is older than the required {JAVA_MIN_VERSION}.",
             fix=f"Install Java {JAVA_MIN_VERSION} or newer.",
-            details={"detected_version": ".".join(map(str, version)), "min": JAVA_MIN_VERSION},
+            details={"detected_version": version_str, "min": JAVA_MIN_VERSION},
         )
+    return version_str
 
 
 # --- §5.1: Nextflow -------------------------------------------------------
 
-def _check_nextflow() -> None:
+def _check_nextflow() -> str:
+    """Nextflow >= minimum must be present. Returns the detected version string."""
     minimum = ".".join(map(str, NEXTFLOW_MIN_VERSION))
     nextflow_path = shutil.which("nextflow")
     if not nextflow_path:
@@ -428,21 +456,23 @@ def _check_nextflow() -> None:
             fix=f"Install Nextflow >={minimum} and ensure `nextflow -version` works.",
             details={"nextflow_path": nextflow_path, "output": version_text},
         )
+    version_str = _detected_version_string(version_text)
     if _pad_version(version) < _pad_version(NEXTFLOW_MIN_VERSION):
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.NEXTFLOW_VERSION_TOO_OLD,
             message=(
                 "Nextflow "
-                f"{'.'.join(map(str, version))} is older than the required "
+                f"{version_str} is older than the required "
                 f"{minimum}."
             ),
             fix=f"Upgrade Nextflow to {minimum} or newer.",
             details={
-                "detected_version": ".".join(map(str, version)),
+                "detected_version": version_str,
                 "min_version": minimum,
             },
         )
+    return version_str
 
 
 # --- §5.1: Profile & backends --------------------------------------------
@@ -564,22 +594,6 @@ def _is_relative_to(path: Path, parent: Path) -> bool:
     return True
 
 
-def _is_under_tmp(path: Path) -> bool:
-    """True when ``path`` resolves to (or inside) /tmp or /private/tmp."""
-    try:
-        resolved = path.expanduser().resolve()
-    except OSError:
-        return False
-    for base in (Path("/tmp"), Path("/private/tmp")):
-        try:
-            base_resolved = base.resolve()
-        except OSError:
-            continue
-        if resolved == base_resolved or base_resolved in resolved.parents:
-            return True
-    return False
-
-
 def _check_macos_docker_tmp(profile: str, output_dir: Path) -> list[str]:
     """Warn when a macOS + Docker run writes under /tmp.
 
@@ -591,7 +605,7 @@ def _check_macos_docker_tmp(profile: str, output_dir: Path) -> list[str]:
     """
     if sys.platform != "darwin" or "docker" not in _profile_tokens(profile):
         return []
-    if _is_under_tmp(output_dir):
+    if is_under_tmp(output_dir):
         return [
             "Output directory is under /tmp. On macOS with Colima, Docker "
             "containers cannot see files written to /tmp (the VM uses its own "
@@ -1518,6 +1532,35 @@ def _uses_upstream_test_profile(params: dict[str, Any]) -> bool:
     return any(part == "test" or part.startswith("test_") for part in profiles)
 
 
+def _check_demo_network(params: dict[str, Any]) -> None:
+    """--demo composes nf-core's upstream ``-profile test``, whose inputs (test FASTQs
+    and reference FASTA/GTF) are remote GitHub URLs by design. Under ``NXF_OFFLINE`` the
+    nf-schema plugin aborts during parameter validation with a confusing
+    ``does not exist`` before any work starts, so fail early with an actionable message
+    instead. Downloading nf-core's PUBLIC test data does not conflict with the
+    local-first guarantee, which governs USER genetic data (never uploaded)."""
+    if not _uses_upstream_test_profile(params):
+        return
+    offline = str(os.environ.get("NXF_OFFLINE", "")).strip().lower()
+    if offline in {"true", "1", "yes", "on"}:
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.DEMO_REQUIRES_NETWORK,
+            message=(
+                "--demo runs the upstream nf-core `-profile test`, which downloads its test "
+                "datasets and reference files from GitHub, but NXF_OFFLINE is set — Nextflow "
+                "would abort during parameter validation because the remote test inputs cannot "
+                "be reached."
+            ),
+            fix=(
+                "Unset NXF_OFFLINE to run the demo (it fetches only nf-core's public test data — "
+                "no user or genetic data is uploaded), or run a real analysis with your own local "
+                "--input samplesheet and references, which is fully offline."
+            ),
+            details={"NXF_OFFLINE": os.environ.get("NXF_OFFLINE")},
+        )
+
+
 def _check_flag_compatibility(*, params: dict[str, Any], tools: list[str]) -> list[str]:
     warnings_acc: list[str] = []
     step = str(params.get("step") or "").strip() or "mapping"
@@ -1932,7 +1975,11 @@ def _check_flag_compatibility(*, params: dict[str, Any], tools: list[str]) -> li
             raise SkillError(
                 stage="preflight",
                 error_code=ErrorCode.MISSING_REFERENCE,
-                message="BQSR requires --dbsnp or --known_indels when baserecalibrator is not skipped.",
+                message=(
+                    "BQSR requires --dbsnp or --known_indels when baserecalibrator is not "
+                    "skipped. Note: baserecalibrator runs by default in the Sarek mapping "
+                    "workflow, independently of the requested variant-calling --tools."
+                ),
                 fix="Provide --dbsnp/--known_indels resources, select an iGenomes genome, or add baserecalibrator to --skip_tools.",
                 details={"step": step, "skip_tools": sorted(skip_tools)},
             )

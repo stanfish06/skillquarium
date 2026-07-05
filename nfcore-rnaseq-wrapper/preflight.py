@@ -35,6 +35,7 @@ from schemas import (
     JAVA_MIN_VERSION,
     NEXTFLOW_MIN_VERSION,
     PROJECT_ROOT,
+    is_under_tmp,
     SUPPORTED_ALIGNERS,
     SUPPORTED_IGENOMES_NAMES,
     SUPPORTED_PSEUDO_ALIGNERS,
@@ -215,6 +216,20 @@ def _pad_version(t: tuple[int, ...], length: int = 3) -> tuple[int, ...]:
     return t + (0,) * max(0, length - len(t))
 
 
+def _detected_version_string(text: str) -> str:
+    """Return the version exactly as reported by the tool (e.g. '26.04.3').
+
+    The parsed tuple is for *comparison* only; reconstructing a string from it
+    drops zero-padding (26.04.3 → 26.4.3), which is not a real Nextflow release
+    and would break NXF_VER / conda pins on replay. Always store the raw token.
+    """
+    for pattern in (r"\b(\d+\.\d+\.\d+)\b", r"\b(\d+\.\d+)\b", r"\b(\d+)\b"):
+        m = re.search(pattern, text)
+        if m:
+            return m.group(1)
+    return ""
+
+
 def _parse_version_tuple(text: str) -> tuple[int, ...]:
     m = re.search(r"\b(\d+)\.(\d+)\.(\d+)\b", text)
     if m:
@@ -248,15 +263,16 @@ def _check_java() -> dict[str, str]:
             fix="Install Java 17 or newer and ensure `java -version` works.",
             details={"java_path": java_path},
         )
+    version_str = _detected_version_string(version_text)
     if version_tuple[0] < JAVA_MIN_VERSION:
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.JAVA_VERSION_TOO_OLD,
             message="Java version is too old for nf-core/rnaseq.",
             fix="Install Java 17 or newer.",
-            details={"detected_version": ".".join(map(str, version_tuple))},
+            details={"detected_version": version_str},
         )
-    return {"path": java_path, "version": ".".join(map(str, version_tuple))}
+    return {"path": java_path, "version": version_str}
 
 
 def _check_nextflow() -> dict[str, str]:
@@ -279,15 +295,16 @@ def _check_nextflow() -> dict[str, str]:
             fix="Install Nextflow 25.04.3 or newer and ensure `nextflow -version` works.",
             details={"nextflow_path": nextflow_path},
         )
+    version_str = _detected_version_string(version_text)
     if _pad_version(version_tuple) < _pad_version(NEXTFLOW_MIN_VERSION):
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.NEXTFLOW_VERSION_TOO_OLD,
             message="Nextflow version is too old for nf-core/rnaseq 3.26.0.",
             fix="Upgrade Nextflow to 25.04.3 or newer.",
-            details={"detected_version": ".".join(map(str, version_tuple))},
+            details={"detected_version": version_str},
         )
-    return {"path": nextflow_path, "version": ".".join(map(str, version_tuple))}
+    return {"path": nextflow_path, "version": version_str}
 
 
 def _check_nextflow_presence() -> dict[str, str | bool]:
@@ -420,7 +437,7 @@ def _check_output_dir(output_dir: Path, *, resume: bool) -> None:
     if _is_relative_to(output_dir, PROJECT_ROOT.resolve()):
         raise SkillError(
             stage="preflight",
-            error_code=ErrorCode.OUTPUT_DIR_NOT_WRITABLE,
+            error_code=ErrorCode.OUTPUT_DIR_INSIDE_REPO,
             message="Output directory cannot be inside the ClawBio source tree.",
             fix="Choose an output directory outside the repository, for example under your analysis workspace.",
             details={"output_dir": str(output_dir), "project_root": str(PROJECT_ROOT.resolve())},
@@ -531,8 +548,38 @@ def _check_remote_inputs(args, samplesheet_summary: dict[str, object]) -> None:
     )
 
 
+def _check_demo_network(args) -> None:
+    """--demo runs nf-core's upstream ``-profile test``, whose inputs (test FASTQs and
+    reference FASTA/GTF) are remote GitHub URLs by design. Under ``NXF_OFFLINE`` the
+    nf-schema plugin aborts during parameter validation with a confusing
+    ``does not exist`` before any work starts, so fail early with an actionable message
+    instead. Downloading nf-core's PUBLIC test data does not conflict with the
+    local-first guarantee, which governs USER genetic data (never uploaded)."""
+    if not getattr(args, "demo", False):
+        return
+    offline = str(os.environ.get("NXF_OFFLINE", "")).strip().lower()
+    if offline in {"true", "1", "yes", "on"}:
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.DEMO_REQUIRES_NETWORK,
+            message=(
+                "--demo runs the upstream nf-core `-profile test`, which downloads its test "
+                "datasets and reference files from GitHub, but NXF_OFFLINE is set — Nextflow "
+                "would abort during parameter validation because the remote test inputs cannot "
+                "be reached."
+            ),
+            fix=(
+                "Unset NXF_OFFLINE to run the demo (it fetches only nf-core's public test data — "
+                "no user or genetic data is uploaded), or run a real analysis with your own local "
+                "--input samplesheet and references, which is fully offline."
+            ),
+            details={"NXF_OFFLINE": os.environ.get("NXF_OFFLINE")},
+        )
+
+
 def run_preflight(args, *, pipeline_source: dict[str, object], samplesheet_summary: dict[str, object]) -> dict[str, object]:
     warnings: list[str] = []
+    _check_demo_network(args)
     _check_remote_inputs(args, samplesheet_summary)
     aligner_effective = _check_supported_options(args)
     _check_igenomes_genome(args, pipeline_source=pipeline_source, warnings=warnings)
@@ -1594,9 +1641,21 @@ def _collect_demo_warnings(args, warnings: list[str]) -> None:
 def _collect_platform_warnings(args, output_dir: Path, warnings: list[str]) -> None:
     profile_parts = {p.strip() for p in getattr(args, "profile", "").split(",") if p.strip()}
     if sys.platform == "darwin" and "docker" in profile_parts:
-        output_text = output_dir.as_posix()
-        if output_text.startswith("/tmp/") or output_text.startswith("/private/tmp/"):
-            warnings.append("On macOS Docker, output under /tmp may be slow or unreliable due to VirtioFS behavior.")
+        # Colima (a common macOS Docker runtime) only shares the user HOME into
+        # its VM; /tmp and /private/tmp live on the VM's own filesystem and are
+        # NOT shared with the host, so Nextflow's work-dir files are invisible to
+        # containers and the run fails with '.command.run: No such file or
+        # directory'. Use a resolve-based check and the accurate message so this
+        # matches the nfcore-sarek / nfcore-scrnaseq guards (not the old, wrong
+        # "may be slow / VirtioFS" wording, which describes a non-existent failure
+        # mode and would not steer the user away from /tmp).
+        if is_under_tmp(output_dir):
+            warnings.append(
+                "Output directory is under /tmp. On macOS with Colima, Docker "
+                "containers cannot see files written to /tmp (the VM uses its own "
+                "separate /tmp). Move --output under your home directory to avoid "
+                "'No such file or directory' errors."
+            )
         _warn_macos_star_index_memory(args, warnings)
 
 

@@ -491,3 +491,30 @@ def test_bracken_precision_choices_preserve_schema_order():
     # SUPPORTED_BRACKEN_PRECISION is an ordered tuple (domain→species); --help must
     # preserve that order, so the parser choices must equal it exactly (not a set).
     assert tuple(_parser_choices("bracken_precision")) == wrapper.SUPPORTED_BRACKEN_PRECISION
+
+
+def test_skipped_samples_hint_added_when_log_signals_it(tmp_path):
+    """When nf-core reports it 'completed with skipped sample(s)' and no count
+    matrix was produced, the fix must point at --min-trimmed-reads (nf-core drops
+    samples below its default 10000-trimmed-read threshold)."""
+    logs = tmp_path / "logs"
+    logs.mkdir()
+    (logs / "stdout.txt").write_text(
+        "-[nf-core/rnaseq] Pipeline completed successfully with skipped sample(s)-\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(SkillError) as exc:
+        wrapper._raise_if_expected_outputs_missing(
+            _parsed(), args=_gate_args(), output_dir=tmp_path
+        )
+    assert exc.value.error_code == "EXPECTED_OUTPUTS_NOT_FOUND"
+    assert "min-trimmed-reads" in exc.value.fix
+
+
+def test_no_skipped_samples_hint_without_signal(tmp_path):
+    """No skipped-samples signal in the logs -> no min-trimmed-reads hint."""
+    with pytest.raises(SkillError) as exc:
+        wrapper._raise_if_expected_outputs_missing(
+            _parsed(), args=_gate_args(), output_dir=tmp_path
+        )
+    assert "min-trimmed-reads" not in exc.value.fix

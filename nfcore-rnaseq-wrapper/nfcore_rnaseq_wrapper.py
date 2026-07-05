@@ -515,6 +515,7 @@ def _raise_if_expected_outputs_missing(
             "Inspect logs/stdout.txt, logs/stderr.txt and upstream/work for the "
             "failing step. If quantification was intentionally skipped, use "
             "--skip-quantification-merge or a hisat2/--skip-alignment configuration."
+            + _skipped_samples_hint(output_dir)
         ),
         details={
             "output_dir": str(output_dir),
@@ -523,6 +524,32 @@ def _raise_if_expected_outputs_missing(
             "missing_required": missing,
         },
     )
+
+
+def _skipped_samples_hint(output_dir: Path) -> str:
+    """Hint appended when nf-core reports it completed with skipped sample(s).
+
+    nf-core/rnaseq drops samples with fewer than ``min_trimmed_reads`` trimmed
+    reads (schema default 10000) before quantification, so an all-skipped run
+    completes 'successfully' yet produces no merged count matrix — the exact
+    EXPECTED_OUTPUTS_NOT_FOUND we raise here. Read from the captured run log so we
+    only surface the hint when that specific signal is present. Best-effort:
+    empty string on any read error or when the signal is absent.
+    """
+    for name in ("stdout.txt", "stderr.txt"):
+        try:
+            text = (output_dir / "logs" / name).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if "skipped sample" in text.lower():
+            return (
+                " nf-core reported it completed with skipped sample(s): samples below "
+                "--min-trimmed-reads (nf-core/rnaseq default 10000) are dropped before "
+                "quantification, so no merged count matrix is produced. Lower "
+                "--min-trimmed-reads (e.g. 0 for tiny test data), or check "
+                "upstream/results/multiqc and pipeline_info for which samples were skipped."
+            )
+    return ""
 
 
 _BANNER = (
@@ -1563,6 +1590,7 @@ def _handle_unexpected_error(
     output_dir: Path, exc: Exception, *, verbose: bool = False
 ) -> int:
     payload = {
+        "status": "error",
         "ok": False,
         "stage": "internal",
         "error_code": ErrorCode.UNEXPECTED_ERROR,

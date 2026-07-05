@@ -1267,6 +1267,7 @@ def _handle_unexpected_error(
     output_dir: Path, exc: Exception, *, verbose: bool = False
 ) -> int:
     payload = {
+        "status": "error",
         "ok": False,
         "stage": "internal",
         "error_code": ErrorCode.UNEXPECTED_ERROR,

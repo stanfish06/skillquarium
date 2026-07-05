@@ -25,9 +25,9 @@ created: 2026-06-13
 - [lit-synthesizer](../lit-synthesizer.md) — Search PubMed and bioRxiv for bioinformatics literature, synthesise results into a structured report, and build a citation graph — all locally, with a reproducibility bundle
 - [literature-review](../literature-review.md) — Conduct comprehensive, systematic literature reviews using multiple academic databases (PubMed, arXiv, bioRxiv, Semantic Scholar, etc.)
 - [open-notebook](../open-notebook.md) — Self-hosted, open-source alternative to Google NotebookLM for AI-powered research and document analysis
-- [paper-lookup](../paper-lookup.md) — Search 10 academic paper databases via REST APIs for research papers, preprints, and scholarly articles
+- [paper-lookup](../paper-lookup.md) — Search 10 academic literature APIs for papers, preprints, citations, and open-access full text, and return results with reproducible provenance
 - [paperzilla](../paperzilla.md) — Chat with your agent about projects, recommendations, and canonical papers in Paperzilla
-- [parallel-web](../parallel-web.md) — All-in-one web toolkit powered by parallel-cli, with a strong emphasis on academic and scientific sources
+- [parallel-web](../parallel-web.md) — Search the web, extract URL content, enrich datasets, and run deep research using parallel-cli, prioritizing academic and scientific sources
 - [pubmed-search](../pubmed-search.md) — Search PubMed for scientific literature
 - [pubmed-summariser](../pubmed-summariser.md) — Search PubMed for a gene name or disease term and generate a structured research briefing of the top recent English-language papers
 - [research-lookup](../research-lookup.md) — Look up current research information using parallel-cli search (primary, fast web search) or the Parallel Chat API (deep research)

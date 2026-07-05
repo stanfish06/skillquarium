@@ -86,6 +86,10 @@ def _sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def _checksum_path(path: Path) -> Path:
+    return path.with_suffix(path.suffix + ".sha256")
+
+
 def _get_skill_data_dir() -> Path:
     return Path(__file__).resolve().parent / "data"
 
@@ -124,6 +128,42 @@ def load_input(path: Path) -> pd.DataFrame:
     )
 
 
+def assess_input_npx_scale(df: pd.DataFrame) -> list[str]:
+    """Return warnings when the numeric input does not look like Olink NPX."""
+    protein_cols = [
+        col
+        for col in df.columns
+        if col != "sample_id" and pd.api.types.is_numeric_dtype(df[col])
+    ]
+    if not protein_cols:
+        return ["No numeric protein columns were detected."]
+
+    numeric = df[protein_cols].apply(pd.to_numeric, errors="coerce")
+    values = numeric.to_numpy(dtype=float, copy=False).ravel()
+    values = values[np.isfinite(values)]
+    if values.size == 0:
+        return ["No finite protein values could be parsed."]
+
+    abs_values = np.abs(values)
+    median_abs = float(np.median(abs_values))
+    p95_abs = float(np.quantile(abs_values, 0.95))
+    std = float(np.std(values))
+
+    warnings: list[str] = []
+    if median_abs < 0.75 and std < 2.0:
+        warnings.append(
+            "The protein values look centered/scaled rather than like raw Olink NPX. "
+            "This skill expects Olink NPX input; non-Olink data must be rescaled using "
+            "the Table S3 standard deviations from the paper."
+        )
+    if p95_abs > 100:
+        warnings.append(
+            "The protein values are unusually large for Olink NPX. "
+            "Please confirm the input is not raw intensity data."
+        )
+    return warnings
+
+
 # ---------------------------------------------------------------------------
 # Coefficient downloading and caching
 # ---------------------------------------------------------------------------
@@ -131,11 +171,21 @@ def load_input(path: Path) -> pd.DataFrame:
 
 def _download_text(url: str, cache_name: str) -> str:
     cached = _cache_dir() / cache_name
+    checksum_file = _checksum_path(cached)
     if cached.exists():
+        if checksum_file.exists():
+            expected = checksum_file.read_text().strip()
+            actual = _sha256(cached)
+            if expected and expected != actual:
+                raise RuntimeError(
+                    f"Checksum mismatch for cached download {cached.name}: "
+                    f"expected {expected}, got {actual}"
+                )
         return cached.read_text()
     resp = requests.get(url, timeout=30)
     resp.raise_for_status()
     cached.write_text(resp.text)
+    checksum_file.write_text(_sha256(cached) + "\n")
     return resp.text
 
 
@@ -170,10 +220,15 @@ def download_coefficients(
             header = next(reader)
             rows = list(reader)
 
-            if fold < 1 or fold > len(rows):
-                fold_idx = 0
-            else:
-                fold_idx = fold - 1
+            if fold < 1:
+                raise ValueError("fold must be a positive 1-based index")
+            if fold > len(rows):
+                raise ValueError(
+                    f"Requested fold {fold} for {organ} {gen}, but the coefficient "
+                    f"file only has {len(rows)} fold rows."
+                )
+
+            fold_idx = fold - 1
 
             row = rows[fold_idx]
             coefs = {}
@@ -342,6 +397,7 @@ def write_report(
     organs: list[str],
     generation: str,
     fold: int,
+    input_warnings: list[str],
     gen1_preds: pd.DataFrame | None,
     gen2_preds: pd.DataFrame | None,
     missing_df: pd.DataFrame,
@@ -375,6 +431,11 @@ def write_report(
         "No missing proteins were detected."
         if not missing_counts
         else "\n".join([f"- {k}: {v} missing" for k, v in sorted(missing_counts.items())])
+    )
+    sanity_block = (
+        "- No obvious unit issues detected."
+        if not input_warnings
+        else "\n".join([f"- {warning}" for warning in input_warnings])
     )
 
     report = f"""# ClawBio Proteomics Clock Report
@@ -412,6 +473,10 @@ using elastic net coefficients trained on UK Biobank data.
 ## Missing Proteins
 
 {missing_block}
+
+## Input Sanity
+
+{sanity_block}
 
 ## Reproducibility
 
@@ -463,6 +528,7 @@ def run_analysis(
     df = load_input(input_path)
     if df.empty:
         raise ValueError("Input data is empty")
+    input_warnings = assess_input_npx_scale(df)
 
     if verbose:
         print(f"Downloading coefficients for {len(organs)} organs, generation={generation}, fold={fold}")
@@ -529,6 +595,7 @@ def run_analysis(
         "fold": fold,
         "n_coefficients_loaded": len(coefficients),
         "convert_mortality_to_years": convert_mortality_to_years,
+        "input_sanity_warnings": input_warnings,
     }
     (output_dir / "tables" / "clock_metadata.json").write_text(json.dumps(metadata, indent=2))
 
@@ -548,6 +615,7 @@ def run_analysis(
         organs=organs,
         generation=generation,
         fold=fold,
+        input_warnings=input_warnings,
         gen1_preds=gen1_preds,
         gen2_preds=gen2_preds,
         missing_df=all_missing,

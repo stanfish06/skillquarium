@@ -189,7 +189,7 @@ same Sarek surface; common flags parsed by ClawBio are forwarded unchanged.
 4. **Build params**: assemble the effective `params.yaml` from CLI flags + extras + step-dependent defaults; clear all reference flags when `--demo` is set.
 5. **Execute Nextflow**: launch with composed profile, `-params-file params.yaml`, deterministic `-work-dir`, streamed stdout/stderr.
 6. **Parse outputs**: detect aligned/recalibrated CRAMs, per-tool VCFs (§1–§6 layout), annotated VCFs, MultiQC, and pipeline_info.
-7. **Write provenance + report**: under `reproducibility/`, emit `report.md`, `result.json`, `commands.sh`, `params.yaml`, the normalized samplesheet, `environment.yml`, `checksums.sha256`, and seven JSON files (`manifest.json`, `parameters.json`, `samplesheet.json`, `pipeline_source.json`, `tool_versions.json`, `outputs.json`, `compatibility_policy.json`).
+7. **Write provenance + report**: emit `report.md` and `result.json` at the output root (matching nfcore-rnaseq/scrnaseq), and under `reproducibility/` emit `commands.sh`, `params.yaml`, the normalized samplesheet, `environment.yml`, `checksums.sha256`, and seven JSON files (`manifest.json`, `parameters.json`, `samplesheet.json`, `pipeline_source.json`, `tool_versions.json`, `outputs.json`, `compatibility_policy.json`).
 
 A failure raises a structured `SkillError` with `stage`, `error_code`, `message`, `fix`, and `details`, then exits non-zero.
 
@@ -264,7 +264,7 @@ python clawbio.py run sarek-pipeline \
 python clawbio.py run sarek-pipeline --demo --output /tmp/sarek_demo
 ```
 
-Expected output: upstream `nf-core/sarek -profile test` outputs (synthetic small dataset) under `upstream/results/`, plus the ClawBio `reproducibility/` bundle (`report.md`, `result.json`, params/commands/samplesheet snapshots, provenance JSON, `environment.yml`, `checksums.sha256`).
+Expected output: upstream `nf-core/sarek -profile test` outputs (synthetic small dataset) under `upstream/results/`, `report.md` and `result.json` at the output root, and the ClawBio `reproducibility/` bundle (params/commands/samplesheet snapshots, provenance JSON, `environment.yml`, `checksums.sha256`).
 
 ## Algorithm / Methodology
 
@@ -320,9 +320,10 @@ output/                                       # the --output directory
 │   │   ├── pipeline_info/
 │   │   └── reports/
 │   └── work/                                 # Nextflow work directory
-└── reproducibility/                          # all ClawBio artifacts land here
-    ├── report.md                             # human-readable run summary
-    ├── result.json                           # machine-readable run summary
+├── report.md                                # human-readable run summary (output root)
+├── result.json                              # machine-readable run summary (output root)
+├── logs/                                    # Nextflow stdout.txt / stderr.txt (real runs only; excluded from checksums)
+└── reproducibility/                          # replay + provenance bundle
     ├── samplesheet.valid.csv                 # or samplesheet.demo.csv in --demo mode
     ├── params.yaml
     ├── commands.sh
@@ -336,10 +337,14 @@ output/                                       # the --output directory
     ├── tool_versions.json
     ├── outputs.json                          # omitted if outputs parsing was skipped
     ├── manifest.json
-    ├── logs/                                 # Nextflow stdout.txt / stderr.txt (real runs only)
     ├── macos_docker.config                   # written only on macOS + docker backend
     └── sarek_downstream_handoff.{sh,json}    # written only when --run-downstream is set
 ```
+
+`report.md`, `result.json`, and `logs/` sit at the output root — the same layout
+as the nfcore-rnaseq and nfcore-scrnaseq wrappers — so a consumer finds
+`<output>/result.json` for any of the three pipelines. The `reproducibility/`
+directory holds the portable replay + provenance bundle.
 
 ## Output Structure
 
@@ -361,7 +366,8 @@ The wrapper writes exactly two child directories under the `output/` root: `upst
 - **SnpEff needs a database identifier.** `snpeff` and `merge` require an effective `snpeff_db`: either pass `--snpeff-db` or use an iGenomes genome that supplies it. This is still required when downloading/building annotation caches because Sarek uses the database identifier to select/download the cache.
 - **Mutect2 without PON or germline resource emits unreliable calls.** The model will want to skip the PON/germline resource for "simplicity". Do not. Mutect2 without a panel-of-normals returns the union of true somatic calls and recurrent technical artifacts, and without a germline resource no germline-based filtering is applied. The wrapper warns when neither explicit nor inherited resources are effective, and warns separately when the generic `GATK.GRCh38` PON is used; pass a technically matched `--pon`/`--pon-tbi` and appropriate `--germline-resource` for production runs.
 - **MarkDuplicatesSpark cannot do UMI-based deduplication.** The model will want to set `--use-gatk-spark markduplicates` alongside header/positional UMIs (`--umi-in-read-header` or `--umi-location`) to "speed up dedup". Do not — MarkDuplicatesSpark cannot perform UMI-aware deduplication, so the wrapper rejects that combination (matching sarek). Note: `--use-gatk-spark markduplicates` IS compatible with `--umi-read-structure`, because fgbio collapses UMIs into consensus reads *before* deduplication.
-- **iGenomes defaults to GATK.GRCh38.** For a wholly custom build, pass `--genome null --igenomes-ignore --fasta <reference>`; Sarek documents FASTA as the only required custom-reference file and can build missing indices. For a partial override, keep `--genome <iGenomes>` and pass only the replacement resource files, as described in the official usage guide.
+- **iGenomes defaults to GATK.GRCh38 — a custom `--fasta` disables it automatically.** nf-core/sarek 3.8.1 defaults `genome = 'GATK.GRCh38'` in `nextflow.config`. When you pass `--fasta <reference>` **without** `--genome`, the wrapper sets `igenomes_ignore=true` for you (emitting a WARNING) so Sarek does not load the default GATK.GRCh38 iGenomes bundle and fail while validating its ~20 remote `s3://ngi-igenomes/...` reference paths as local files. You therefore no longer need to add `--igenomes-ignore` by hand for a custom build (passing it explicitly is still honoured, and combining `--fasta` with an explicit `--genome` is treated as a documented partial override and left untouched). Sarek documents FASTA as the only required custom-reference file and can build missing indices: the `.fai` index and `.dict` GATK needs are built automatically from your `--fasta` — you do not have to pre-generate or pass them (do so only if you already have them, and then they must be co-located and consistent with the FASTA). For a partial override, keep `--genome <iGenomes>` and pass only the replacement resource files, as described in the official usage guide.
+- **BQSR requires known sites unless skipped.** Base recalibration (`baserecalibrator`) runs by default on the preprocessing start steps (`mapping`, `markduplicates`, `prepare_recalibration`, `recalibrate`), independently of the variant-calling `--tools` you request, and needs `--dbsnp` or `--known-indels` — supplied explicitly or inherited from an iGenomes `--genome`. The model will want to silently skip BQSR to "make it run" on a small or non-model genome. Do not. The wrapper does not inject any hidden default: a start step without those resources is rejected at preflight (`MISSING_REFERENCE`), and the error now states that baserecalibrator runs by default so the requirement is not surprising when you only asked for, say, `--tools haplotypecaller`. To run without known sites (e.g. a non-model organism or a synthetic test genome), make the choice explicit by adding `baserecalibrator` to `--skip-tools` (the nf-core-native `--skip_tools` spelling is accepted too). This mirrors nf-core/sarek 3.8.1 exactly (the upstream `-profile test` ships its own known-sites resources, so `--demo` is exempt).
 - **Tool×mode pairing is inferred from the `status` column — there is no `--tumor-only` flag.** The model will want to write an all-`status=1` samplesheet and still ask for paired tools. Do not. The wrapper's preflight enforces each tool's supported modes against the samplesheet:
   - **Paired-only** (need both a `status=0` normal and a `status=1` tumor under the same `patient`): `ascat`, `msisensorpro`, `muse`.
   - **Tumor-only** (need a tumor; no normal required): `lofreq`, `msisensor2`.
@@ -371,16 +377,21 @@ The wrapper writes exactly two child directories under the `output/` root: `upst
   - **Needs a normal/germline sample**: `haplotypecaller`, `deepvariant`, `sentieon_haplotyper`, `sentieon_dnascope`. These run on the normal sample of a tumor/normal pair as well as on standalone normals.
   - The check is **per-patient**, like sarek: a tool is accepted when *at least one* patient supplies its required input. Mixed samplesheets and paired cohorts are valid — for a paired patient, `haplotypecaller` runs on the normal while `mutect2` runs on the tumor/normal pair.
 - **`--demo` clears all reference flags.** The model will want to combine `--demo` with `--genome GATK.GRCh38` or `--fasta`. Do not. The `--demo` flag forces the upstream `-profile test` dataset, which ships its own tiny reference; the wrapper clears every reference-path flag (genome, igenomes_base, fasta, intervals, dbsnp, known_indels, known_snps, germline_resource, pon, ...) before they reach `params.yaml` and ignores `--input`.
+- **`--demo` requires network access.** The upstream `-profile test` fetches its sample FASTQs and reference files from remote GitHub URLs (nf-core's design — the wrapper does not bundle local test data). On an offline/sandboxed host set `NXF_OFFLINE`, and the wrapper fails fast at preflight with `DEMO_REQUIRES_NETWORK` and a clear message, instead of a cryptic Nextflow `does not exist` abort during schema validation. This does **not** violate the local-first guarantee, which governs your *genetic data* (never uploaded); `--demo` only *downloads* nf-core's public test data. For a fully offline run, use a real analysis with your own local `--input` and references.
 - **`--resume` is rejected when the manifest drifts.** Changes to pipeline source, profile composition, step, aligner, tools, skip_tools, analysis_mode, wes, joint_germline, joint_mutect2, the complete emitted parameter checksum, reference fingerprints, or samplesheet checksum invalidate the Nextflow work directory. The wrapper refuses to resume in those cases — re-run with a fresh `--output` directory.
+- **`--output` must be outside the ClawBio source tree.** An output directory inside the repository is rejected at preflight with `OUTPUT_DIR_INSIDE_REPO` so multi-gigabyte pipeline artifacts never pollute (or get committed to) the checkout — choose a path under your analysis workspace. This matches the nfcore-rnaseq and nfcore-scrnaseq wrappers.
 - **`arm64` profile implicitly enables Wave.** The model will want to use `--arm` on offline / air-gapped machines. Do not without preparation. Sarek's `arm64` profile sets `wave.enabled=true` + `wave.freeze=true` + `wave.strategy='conda,container'` so containers are rebuilt for arm via the upstream Wave service. If outbound traffic to `wave.seqera.io` is blocked, the run stalls. On offline Apple Silicon, instead build images once via Wave on a connected host, mirror to a local registry, and add a custom `-c` config pointing `process.container` to the mirror.
 - **Sentieon callers and aligner require a license.** The model will want to use `--aligner sentieon-bwamem` or `--tools sentieon_haplotyper,sentieon_dnascope,sentieon_tnscope` without setting `SENTIEON_LICENSE` (or `SENTIEON_LICENSE_BASE64`) first. Do not. Sarek does not vendor a Sentieon license; the upstream task fails late with a cryptic Sentieon binary error. Export `SENTIEON_LICENSE=host:port` (server) or `SENTIEON_LICENSE_BASE64=...` (offline) before invoking `clawbio.py run sarek-pipeline`, and document the license source in your run notes.
+- **nf-core-native (snake_case) flag spellings are accepted.** You can paste an upstream nf-core command's parameters verbatim: `--skip_tools`, `--fasta_fai`, `--known_indels`, … all work as aliases of the hyphenated wrapper flags, both via `clawbio.py run sarek-pipeline` and when invoking the wrapper directly. There is no need to convert underscores to hyphens by hand.
+- **Host-limited memory and IPv6-only networks are environment issues — read the failure hint.** On a non-zero exit the executor scans the run logs and names the likely cause in the `EXECUTION_FAILED` fix. (1) If Nextflow aborts with `Process requirement exceeds available memory` (an nf-core default request larger than your machine), cap resources with a `-c` config, e.g. `process { resourceLimits = [ memory: '12.GB', cpus: 4 ] }` — do **not** delete resource labels to force it through. (2) On an IPv6-only / NAT64 host the JVM prefers IPv4 and downloads fail with `Network is unreachable`; export `NXF_OPTS='-Djava.net.preferIPv6Addresses=true'` and re-run. The wrapper inherits your environment and never overrides `NXF_OPTS`, so your setting takes effect.
+- **The nf-schema "positional argument 'nextflow' has been detected" warning is a benign upstream false positive.** nf-core/sarek 3.8.1's schema plugin inspects `workflow.commandLine`, whose first token is literally `nextflow` (argv[0]), and mislabels it as a positional argument. The wrapper's command is well-formed (`nextflow run nf-core/sarek -r 3.8.1 -profile … -params-file …`, identical in shape to the rnaseq/scrnaseq wrappers, which use newer plugin versions that do not warn). It does not affect the run — do **not** try to "fix" it by altering the command.
 
 ## Safety
 
 - No patient data is bundled.
 - Demo mode uses upstream `-profile test` data.
 - The wrapper does not upload data.
-- **Local-first by default**: remote samplesheet inputs and reference paths are rejected (`REMOTE_INPUT_NOT_ALLOWED`) unless `--allow-remote-inputs` is explicitly passed, which also logs a runtime warning naming every path fetched over the network. The iGenomes mirror base and the object-store `--work-dir` are not gated.
+- **Local-first by default**: remote samplesheet inputs and reference paths are rejected (`REMOTE_INPUT_NOT_ALLOWED`) unless `--allow-remote-inputs` is explicitly passed, which also logs a runtime warning naming every path fetched over the network. The iGenomes mirror base and the object-store `--work-dir` are not gated. `--allow-remote-inputs` relaxes only the wrapper's own preflight check: remote FASTQ/reference URIs are then written into the normalized samplesheet/`params.yaml` **verbatim** and staged natively by Nextflow at run time. The wrapper does not download them itself, so remote inputs require outbound network access and are incompatible with `NXF_OFFLINE` — under offline mode Nextflow's own file-existence validation (nf-schema) still runs and will fail on the remote paths.
 - The wrapper does not pass arbitrary unvalidated Nextflow parameters; unknown native keys via `--extra-param` are passed through but tracked in provenance, while `input`, `input_restart`, and `outdir` remain wrapper-managed so normalized input and output provenance cannot be bypassed.
 - `--resume` is rejected on manifest drift (pipeline source, profile, step, aligner, tools, skip_tools, analysis_mode, wes, joint_germline, joint_mutect2, effective params checksum, reference fingerprints, samplesheet checksum).
 

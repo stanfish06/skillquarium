@@ -427,6 +427,9 @@ def write_result(
         output_dir,
         skill=SKILL_ALIAS,
         version=SKILL_VERSION,
+        # Minimal shared cross-wrapper contract: a successful run is ok/"ok".
+        status="ok",
+        ok=True,
         summary=build_result_summary(
             args=args,
             pipeline_source=pipeline_source,

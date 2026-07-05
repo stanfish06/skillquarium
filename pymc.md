@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [statistical-analysis](statistical-analysis.md) — Guided statistical analysis for research data - test selection, assumption checking, effect sizes, power analysis, Bayesian alternatives, and APA-formatted reporting
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

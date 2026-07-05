@@ -240,6 +240,30 @@ def test_input_false_normalized_to_none(module):
     assert args.input is None
 
 
+def test_nfcore_native_underscore_spelling_accepted(module):
+    # nf-core's own parameter is `--skip_tools` (snake_case). The wrapper exposes
+    # it as `--skip-tools`, but a user copying an upstream nf-core command types
+    # the underscore form. Both spellings must land in the same dest so direct
+    # wrapper invocation is not surprised by the native spelling.
+    hyphen = module.build_parser().parse_args([
+        "--output", "out", "--skip-tools", "baserecalibrator",
+    ])
+    underscore = module.build_parser().parse_args([
+        "--output", "out", "--skip_tools", "baserecalibrator",
+    ])
+    assert hyphen.skip_tools == "baserecalibrator"
+    assert underscore.skip_tools == "baserecalibrator"
+
+
+def test_nfcore_native_underscore_spelling_for_value_reference(module):
+    # Generalises beyond skip_tools: a schema passthrough with a value
+    # (`--fasta_fai`) must also accept the nf-core-native underscore spelling.
+    args = module.build_parser().parse_args([
+        "--output", "out", "--fasta_fai", "ref.fasta.fai",
+    ])
+    assert args.fasta_fai == "ref.fasta.fai"
+
+
 def test_mutect_profile_rejected_outside_demo(module):
     # The `mutect` profile only includeConfig conf/test_mutect2.config, whose sole
     # effect is `--normal-sample normal` on MUTECT2_PAIRED — correct ONLY for the
@@ -412,6 +436,62 @@ def test_apply_demo_overrides_clears_references(module):
     # A user-supplied --igenomes-ignore must be cleared, not passed through.
     assert getattr(args, "igenomes_ignore", False) is not True
 
+
+
+def test_custom_fasta_without_genome_auto_disables_igenomes(module):
+    """A custom --fasta with no --genome must auto-set igenomes_ignore so Sarek
+    does not fall back to its default GATK.GRCh38 iGenomes bundle and try to
+    validate ~20 remote s3://ngi-igenomes paths as local files."""
+    args = module.build_parser().parse_args([
+        "--output", "out",
+        "--input", "input.csv",
+        "--fasta", "/refs/custom.fa",
+    ])
+    args.profile = "docker"  # composed profile (no upstream test profile)
+    notice = module._auto_disable_igenomes_for_custom_fasta(args)
+    assert args.igenomes_ignore is True
+    assert notice and "igenomes" in notice.lower()
+    # The auto-disable must reach both preflight and the emitted params.yaml.
+    params = module._build_params_for_preflight(args, composed_profile="docker")
+    assert params.get("igenomes_ignore") is True
+
+
+def test_custom_fasta_with_explicit_genome_keeps_igenomes(module):
+    """When the user passes BOTH --fasta and --genome (documented override), the
+    wrapper must respect the explicit iGenomes choice and not auto-disable it."""
+    args = module.build_parser().parse_args([
+        "--output", "out",
+        "--input", "input.csv",
+        "--fasta", "/refs/custom.fa",
+        "--genome", "GATK.GRCh38",
+    ])
+    args.profile = "docker"
+    notice = module._auto_disable_igenomes_for_custom_fasta(args)
+    assert getattr(args, "igenomes_ignore", False) is False
+    assert notice is None
+
+
+def test_no_fasta_does_not_auto_disable_igenomes(module):
+    """A plain --genome run (no custom fasta) must not be touched."""
+    args = module.build_parser().parse_args([
+        "--output", "out",
+        "--input", "input.csv",
+        "--genome", "GATK.GRCh38",
+    ])
+    args.profile = "docker"
+    notice = module._auto_disable_igenomes_for_custom_fasta(args)
+    assert getattr(args, "igenomes_ignore", False) is False
+    assert notice is None
+
+
+def test_demo_run_does_not_auto_disable_igenomes(module):
+    """--demo uses the upstream test profile, which owns genome/igenomes_base;
+    auto-disabling would break it."""
+    args = module.build_parser().parse_args(["--output", "out", "--demo"])
+    args.profile = "test,docker"
+    notice = module._auto_disable_igenomes_for_custom_fasta(args)
+    assert notice is None
+    assert getattr(args, "igenomes_ignore", False) is False
 
 
 def test_timeout_hours_resolves_to_seconds(module):
@@ -912,9 +992,10 @@ def test_main_skill_error_bubbles_up_with_nonzero_exit(module, monkeypatch, tmp_
     assert rc == 1
 
 
-def test_main_error_result_json_written_under_reproducibility(module, monkeypatch, tmp_path):
-    # On error the result.json marker must land in reproducibility/, keeping the
-    # output root to two children (no stray top-level result.json).
+def test_main_error_result_json_written_at_output_root(module, monkeypatch, tmp_path):
+    # On error the result.json marker must land at the output root, next to where
+    # a successful run writes result.json (parity with nfcore-rnaseq/scrnaseq), so
+    # consumers read <output>/result.json regardless of outcome.
     _patch_heavy(monkeypatch, module)
 
     def boom(**kw):
@@ -930,12 +1011,13 @@ def test_main_error_result_json_written_under_reproducibility(module, monkeypatc
     out = tmp_path / "out"
     rc = module.main(["--output", str(out), "--demo", "--no-banner"])
     assert rc == 1
-    err = out / "reproducibility" / "result.json"
+    err = out / "result.json"
     assert err.exists()
     payload = json.loads(err.read_text())
     assert payload["ok"] is False
+    assert payload["status"] == "error"
     assert payload["error_code"] == "MISSING_JAVA"
-    assert not (out / "result.json").exists()
+    assert not (out / "reproducibility" / "result.json").exists()
 
 
 def test_main_unexpected_error_returns_1(module, monkeypatch, tmp_path):
@@ -1003,3 +1085,84 @@ def test_detect_repo_root_finds_clawbio_py(module):
     root = module._detect_repo_root()
     # Should be a Path; may or may not contain clawbio.py depending on layout
     assert isinstance(root, Path)
+
+
+# ── clawbio runner allowlist stays in sync with the wrapper CLI ────────────────
+# A flag must be in clawbio.cli.SKILLS["sarek-pipeline"]["allowed_extra_flags"]
+# (and, when value-free, also in allowed_extra_flags_without_values) or the
+# extra-args filter silently drops it / swallows the following token.
+
+
+def _sarek_pipeline_allowlist() -> tuple[set[str], set[str]]:
+    from clawbio.cli import SKILLS
+
+    entry = SKILLS.get("sarek-pipeline", {})
+    return (
+        set(entry.get("allowed_extra_flags") or ()),
+        set(entry.get("allowed_extra_flags_without_values") or ()),
+    )
+
+
+def _wrapper_option_flags(module) -> tuple[set[str], set[str]]:
+    """Return (all option strings, value-free option strings) for the wrapper parser."""
+    import argparse
+
+    parser = module.build_parser()
+    all_opts: set[str] = set()
+    no_value: set[str] = set()
+    for action in parser._actions:
+        for opt in action.option_strings:
+            all_opts.add(opt)
+            if (
+                isinstance(
+                    action,
+                    (
+                        argparse._StoreTrueAction,
+                        argparse._StoreFalseAction,
+                        argparse._CountAction,
+                        argparse._HelpAction,
+                    ),
+                )
+                or action.nargs == 0
+            ):
+                no_value.add(opt)
+    return all_opts, no_value
+
+
+def test_clawbio_allow_remote_inputs_is_value_free_for_sarek_pipeline():
+    """--allow-remote-inputs is a store_true wrapper flag; it must live in the
+    boolean (value-free) set, otherwise the extra-args filter treats it as
+    value-taking and consumes the following argument as its value."""
+    allowed, booleans = _sarek_pipeline_allowlist()
+    assert "--allow-remote-inputs" in allowed
+    assert "--allow-remote-inputs" in booleans
+
+
+def test_clawbio_allow_pipeline_version_override_is_value_free_for_sarek_pipeline():
+    """--allow-pipeline-version-override is store_true and must be value-free too."""
+    allowed, booleans = _sarek_pipeline_allowlist()
+    assert "--allow-pipeline-version-override" in allowed
+    assert "--allow-pipeline-version-override" in booleans
+
+
+def test_sarek_pipeline_allowlist_consistent_with_wrapper(module):
+    """The clawbio runner allowlist must stay coherent with the wrapper parser:
+
+    * every allow-listed flag is a real wrapper flag, and
+    * the value/boolean classification matches the wrapper so the extra-args
+      filter neither drops a value nor swallows the next token.
+    """
+    values, booleans = _sarek_pipeline_allowlist()
+    allowed = values | booleans
+    all_opts, no_value = _wrapper_option_flags(module)
+
+    assert allowed <= all_opts, f"allowlist flags absent from wrapper: {sorted(allowed - all_opts)}"
+    boolean_allowed = no_value & allowed
+    assert boolean_allowed <= booleans, (
+        "value-free wrapper flags missing from the without-values set: "
+        f"{sorted(boolean_allowed - booleans)}"
+    )
+    assert booleans <= no_value, (
+        "flags marked value-free but the wrapper expects a value: "
+        f"{sorted(booleans - no_value)}"
+    )

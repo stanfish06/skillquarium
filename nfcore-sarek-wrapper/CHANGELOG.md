@@ -6,8 +6,130 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ## [Unreleased] — 0.1.0
 
+### Documentation
+
+- **`--allow-remote-inputs` semantics clarified.** SKILL.md now states explicitly
+  that the flag relaxes only the wrapper's own local-first preflight check: remote
+  FASTQ/reference URIs are written into the normalized samplesheet/`params.yaml`
+  verbatim and staged natively by Nextflow at run time. The wrapper does not
+  download them, so remote inputs require outbound network access and are
+  incompatible with `NXF_OFFLINE` (under which Nextflow's own nf-schema file-existence
+  validation still runs and fails on the remote paths). Shared wording across the
+  three wrappers.
+
+### Fixed
+
+- **Custom `--fasta` without `--genome` now disables iGenomes automatically.**
+  nf-core/sarek 3.8.1 defaults `genome = 'GATK.GRCh38'` in `nextflow.config`, so a
+  custom-reference run that supplied `--fasta` but left `--genome` unset would still
+  load the full GATK.GRCh38 iGenomes configuration and abort while validating its
+  ~20 `s3://ngi-igenomes/...` reference paths as local files — a wall of "does not
+  exist" errors that never mentioned `--igenomes-ignore`. The wrapper now sets
+  `igenomes_ignore=true` in that case (emitting a WARNING recorded in the report),
+  matching the nf-core guidance for custom references and the equivalent automatic
+  behaviour already in nfcore-scrnaseq-wrapper. An explicit `--genome` alongside
+  `--fasta` (documented partial override) and `--demo`/`-profile test` runs are left
+  untouched.
+- **The BQSR preflight error now explains that baserecalibrator runs by default.**
+  When a start step requires `--dbsnp`/`--known_indels` and neither is available,
+  the `MISSING_REFERENCE` message now adds: "baserecalibrator runs by default in the
+  Sarek mapping workflow, independently of the requested variant-calling --tools."
+  A user who only requested `--tools haplotypecaller` previously had no way to know
+  why base recalibration — and therefore the known-sites requirement — was active.
+- **Detected Java/Nextflow versions preserve zero-padded components in reports.**
+  The version string shown in `report.md` and `result.json` was reconstructed from
+  the integer comparison tuple, so `int("04") = 4` turned `26.04.3` into `26.4.3` —
+  not a real Nextflow release, and inconsistent with `manifest.json`, which kept the
+  correct string. The check now records the version exactly as reported by the tool
+  (via `_detected_version_string`) for display, using the integer tuple only for the
+  minimum-version comparison. Parity with nfcore-scrnaseq-wrapper, which already did
+  this.
+- **Config-parse failures now point at `NXF_OFFLINE`.** On Nextflow 26.x the
+  nf-core `nextflow.config`'s `includeConfig ... ? <url> : '/dev/null'` line fails
+  to parse when the remote `nfcore_custom.config` cannot be fetched. The executor's
+  `EXECUTION_FAILED` fix now detects `Unable to parse config file` /
+  `ConfigParseException` and suggests `NXF_OFFLINE=true` for a fully local run (or
+  confirming outbound HTTPS/DNS). Shared verbatim across the three wrappers.
+
+- **Remote MultiQC config/logo URIs are preserved in `params.yaml`.** A remote
+  `--multiqc-config`/`--multiqc-logo`/`--multiqc-methods-description` URL was
+  resolved as a local path (collapsing the scheme, e.g. `https://host/x` →
+  `<cwd>/https:/host/x`); those fields now pass URIs through verbatim via
+  `_posix_or_uri`, parity with the genome reference fields (which already did).
+  The now-redundant URI-unaware `_posix` helper was removed.
+- **Output layout now matches nfcore-rnaseq/scrnaseq.** `report.md` and
+  `result.json` are written at the output root (were under `reproducibility/`),
+  and execution logs are written to `<output>/logs/` (were under
+  `reproducibility/logs/`). A consumer now finds `<output>/result.json` and
+  `<output>/report.md` for any of the three pipelines. The `reproducibility/`
+  directory keeps the portable replay + provenance bundle (`commands.sh`,
+  `params.yaml`, `manifest.json`, `checksums.sha256`, `environment.yml`,
+  `remap_paths.py`, provenance JSON). The root `report.md`/`result.json` and the
+  `logs/` tree are excluded from `checksums.sha256`. On failure, the error
+  `result.json` marker is likewise written at the root.
+- **Report `Profile`, `Java`, and `Nextflow` are populated.** They previously
+  rendered as `-` because the runtime metadata was not threaded into the report
+  generator. Preflight now surfaces the detected Java and Nextflow versions, and
+  the composed Nextflow profile string is passed through, so all three appear in
+  `report.md` and in `result.json` (`run.profile`/`run.java_version`/
+  `run.nextflow_version`) as the sibling wrappers already do.
+- **`--demo` reports the effective samples and tools.** The `Samples` count now
+  falls back to the samples detected in the outputs when the local samplesheet is
+  empty (the upstream `-profile test` supplies samples remotely), and `Tools`
+  falls back to the tools observed in the parsed variant-calling/annotation
+  outputs when none were requested — so a demo that runs Strelka no longer reports
+  `Samples: 0` / `Tools: (none)`. `result.json` records both the requested
+  `run.tools` and the effective `run.tools_effective` (+ `run.tools_from_outputs`).
+- **`result.json` carries the shared `ok`/`status` contract.** A successful run is
+  `ok: true` (existing `status` retained); a failed run is `ok: false` with
+  `status: "error"` — a minimal discriminator shared with nfcore-rnaseq/scrnaseq.
+- **`clawbio run sarek-pipeline` now forwards `-c`/`--config` Nextflow config
+  files.** The launcher (`clawbio/cli.py`) accepted `-c`/`--config` but forwarded
+  only `--nextflow-config`, silently dropping configs supplied with the short or
+  `--config` spelling. All three spellings are now normalised and forwarded as
+  `--nextflow-config` (the wrapper accepts them as aliases).
+- **`--allow-remote-inputs` and `--allow-pipeline-version-override` are recorded as
+  value-free in the launcher allowlist.** Both are `store_true` wrapper flags but
+  were listed only among value-taking flags, so the extra-args filter could consume
+  the following token as a spurious value. They are now in the without-values set.
+- **`--demo` under `NXF_OFFLINE` now fails fast with a clear message.** Demo mode
+  composes nf-core's upstream `-profile test`, whose FASTQs and references are remote
+  GitHub URLs; on an offline/sandboxed host the nf-schema plugin previously aborted
+  with a cryptic `does not exist`. Preflight now detects `NXF_OFFLINE` + the test
+  profile and raises `DEMO_REQUIRES_NETWORK` with an actionable fix. Docs (SKILL.md,
+  AGENTS.md) clarify that `--demo` downloads only nf-core public test data — no
+  user/genetic data is uploaded — so it is compatible with the local-first guarantee.
+- **macOS + Docker `/tmp` post-failure hint (demo-mode parity).** When a run fails
+  with `--output` under `/tmp` on macOS, the executor now appends the actionable
+  Colima / `.command.run: No such file or directory` hint to `EXECUTION_FAILED`,
+  matching nfcore-scrnaseq (the preflight WARNING already existed). The
+  `is_under_tmp` check is consolidated into `schemas.py` as the single source of
+  truth shared by preflight and the executor.
+- **nf-core-native snake_case flag spellings are now accepted.** nf-core's own
+  parameters are snake_case (`--skip_tools`, `--fasta_fai`, …) while the wrapper
+  exposes them as hyphenated flags (`--skip-tools`, `--fasta-fai`). A user copying
+  an upstream nf-core command previously had the token silently dropped: the
+  launcher's INT-001 allowlist filter matches exact tokens (all hyphenated), and
+  the wrapper parser only registered the hyphen spelling. Now `clawbio run
+  sarek-pipeline` canonicalises `_`↔`-` when matching the allowlist and forwards
+  the wrapper's canonical hyphen spelling, and the wrapper parser registers the
+  nf-core-native `--<param>` spelling as an alias of every schema passthrough flag
+  — so `--skip_tools baserecalibrator` reaches the pipeline whether invoked via the
+  launcher or the wrapper directly. The canonicalisation is scoped to the three
+  nf-core pipeline skills; other skills keep exact-match filtering.
+
 ### Added
 
+- **Environment post-failure hints on `EXECUTION_FAILED`.** When a run fails, the
+  executor scans the captured Nextflow logs and appends an actionable hint if it
+  finds a known environment signature — diagnosed from the actual error text, so no
+  resource thresholds are invented. `Process requirement exceeds available memory`
+  (nf-core's default request larger than the host) yields a hint to cap resources
+  via a `-c` config using `process.resourceLimits`; `Network is unreachable` / a
+  Java connection exception (common on IPv6-only / NAT64 hosts, where the JVM
+  prefers IPv4) yields a hint to verify outbound DNS/HTTPS and to set
+  `NXF_OPTS='-Djava.net.preferIPv6Addresses=true'`. Shared verbatim across the three
+  wrappers.
 - **`--allow-remote-inputs` opt-in (local-first by default).** Remote samplesheet
   inputs and user-supplied reference paths (`s3://`, `gs://`, `https://`, `ftp://`,
   …) are now rejected at preflight (`REMOTE_INPUT_NOT_ALLOWED`) unless the flag is

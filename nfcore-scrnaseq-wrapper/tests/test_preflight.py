@@ -154,6 +154,54 @@ def test_preflight_happy_path(tmp_path, monkeypatch):
     assert result["ok"] is True
 
 
+def test_demo_under_nxf_offline_is_rejected(tmp_path, monkeypatch):
+    """--demo runs nf-core's remote `-profile test`; under NXF_OFFLINE it cannot
+    fetch its test data, so preflight must fail fast with a clear DEMO_REQUIRES_NETWORK
+    error instead of a cryptic Nextflow 'does not exist'."""
+    args = _args(tmp_path)
+    args.demo = True
+    _mock_env(monkeypatch)
+    monkeypatch.setenv("NXF_OFFLINE", "true")
+    with pytest.raises(SkillError) as exc:
+        preflight.run_preflight(
+            args,
+            pipeline_source=_PIPELINE_SOURCE,
+            samplesheet_summary={"sample_count": 1, "unknown_columns": []},
+        )
+    assert exc.value.error_code == "DEMO_REQUIRES_NETWORK"
+
+
+def test_demo_without_nxf_offline_not_blocked(tmp_path, monkeypatch):
+    """A demo with network available (no NXF_OFFLINE) must not trip the guard."""
+    args = _args(tmp_path)
+    args.demo = True
+    _mock_env(monkeypatch)
+    monkeypatch.delenv("NXF_OFFLINE", raising=False)
+    result = preflight.run_preflight(
+        args,
+        pipeline_source=_PIPELINE_SOURCE,
+        samplesheet_summary={"sample_count": 1, "unknown_columns": []},
+    )
+    assert result["ok"] is True
+
+
+def test_nxf_offline_real_run_not_blocked(tmp_path, monkeypatch):
+    """A real (non-demo) run is fully local, so NXF_OFFLINE must not block it."""
+    args = _args(tmp_path)
+    Path(args.fasta).write_text(">chr1\nACGT\n", encoding="utf-8")
+    Path(args.gtf).write_text(
+        'chr1\tsrc\tgene\t1\t4\t.\t+\t.\tgene_id "g1";\n', encoding="utf-8"
+    )
+    _mock_env(monkeypatch)
+    monkeypatch.setenv("NXF_OFFLINE", "true")
+    result = preflight.run_preflight(
+        args,
+        pipeline_source=_PIPELINE_SOURCE,
+        samplesheet_summary={"sample_count": 1, "unknown_columns": []},
+    )
+    assert result["ok"] is True
+
+
 def test_profile_accepts_safe_institutional_executor_component(monkeypatch):
     monkeypatch.setattr(
         preflight,

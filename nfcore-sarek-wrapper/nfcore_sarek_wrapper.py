@@ -519,10 +519,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     for cli_flag, dest, ptype, default, help_text, group_key in _SAREK_PASSTHROUGH_PARAMS:
         g = _group(group_key, _GROUP_TITLES.get(group_key, group_key))
+        # Accept the nf-core-native snake_case spelling (``--<dest>``) alongside the
+        # hyphenated wrapper flag, so a command copied from the upstream nf-core
+        # docs is not rejected. ``dest`` is exactly the nf-core parameter name.
+        native = f"--{dest}"
+        option_strings = [cli_flag] if native == cli_flag else [cli_flag, native]
         if ptype is bool:
-            g.add_argument(cli_flag, dest=dest, action="store_true", default=default, help=help_text)
+            g.add_argument(*option_strings, dest=dest, action="store_true", default=default, help=help_text)
         else:
-            g.add_argument(cli_flag, dest=dest, type=ptype, default=default, help=help_text)
+            g.add_argument(*option_strings, dest=dest, type=ptype, default=default, help=help_text)
 
     return parser
 
@@ -575,6 +580,13 @@ def _run_wrapper(args: argparse.Namespace, output_dir: Path) -> int:
     )
     args.profile = composed_profile  # propagate to preflight + provenance
 
+    # Custom --fasta without --genome → disable iGenomes so Sarek does not load its
+    # default GATK.GRCh38 bundle and validate ~20 remote paths as local files. Must
+    # run after demo-override cleanup and profile composition (see helper docstring).
+    igenomes_notice = _auto_disable_igenomes_for_custom_fasta(args)
+    if igenomes_notice:
+        print(f"WARNING: {igenomes_notice}", file=sys.stderr)
+
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # --- pipeline source resolution ---
@@ -618,6 +630,10 @@ def _run_wrapper(args: argparse.Namespace, output_dir: Path) -> int:
         resume_manifest=resume_manifest,
         allow_remote_inputs=bool(getattr(args, "allow_remote_inputs", False)),
     )
+    # Record the auto-igenomes-ignore notice in the report's warning list too, so the
+    # behaviour change is provenance-visible (not only on stderr at emit time).
+    if igenomes_notice:
+        preflight_result.warnings.insert(0, igenomes_notice)
     _print(f"[preflight] passed (warnings: {len(preflight_result.warnings)})")
     if args.verbose:
         for w in preflight_result.warnings:
@@ -710,7 +726,9 @@ def _run_wrapper(args: argparse.Namespace, output_dir: Path) -> int:
         pipeline_source_kind=str(pipeline_source["source_kind"]),
         resume_used=bool(args.resume),
         arm=bool(args.arm),
-        profile=args.profile,
+        profile=composed_profile,
+        java_version=getattr(preflight_result, "java_version", "") or None,
+        nextflow_version=getattr(preflight_result, "nextflow_version", "") or None,
         elapsed_seconds=elapsed,
     )
 
@@ -867,6 +885,46 @@ def _apply_demo_overrides(args: argparse.Namespace) -> None:
             file=sys.stderr,
         )
         args.resume = False
+
+
+def _auto_disable_igenomes_for_custom_fasta(args: argparse.Namespace) -> str | None:
+    """Disable iGenomes automatically for a custom-FASTA run with no --genome.
+
+    nf-core/sarek 3.8.1 defaults ``genome = 'GATK.GRCh38'`` in ``nextflow.config``.
+    The wrapper deliberately omits upstream-default parameters from ``params.yaml``,
+    so a custom-reference run that supplies ``--fasta`` but leaves ``--genome`` unset
+    would still let Sarek load the full GATK.GRCh38 iGenomes configuration and try
+    to validate its ~20 ``s3://ngi-igenomes/...`` reference paths as local files —
+    failing with a wall of "does not exist" errors that never mention
+    ``--igenomes-ignore``. Setting ``igenomes_ignore=true`` matches the nf-core
+    guidance for custom references ("``--igenomes_ignore`` must be set ... The
+    ``fasta`` file is the only required input file") and mirrors the equivalent
+    automatic behaviour already in nfcore-scrnaseq-wrapper.
+
+    Returns an explanatory notice when it changed anything, else ``None``. Must run
+    AFTER ``_apply_demo_overrides`` (which clears references for demo) and AFTER the
+    profile is composed, so the upstream ``test`` profile — which owns its own
+    genome/igenomes_base — is never touched.
+    """
+    if getattr(args, "demo", False) or getattr(args, "_noinput", False):
+        return None
+    profile_parts = {p.strip() for p in str(getattr(args, "profile", "") or "").split(",") if p.strip()}
+    if any(p == "test" or p.startswith("test_") for p in profile_parts):
+        return None
+    if not getattr(args, "fasta", None):
+        return None
+    if getattr(args, "genome", None):
+        # Explicit --genome alongside --fasta is a documented override; respect it.
+        return None
+    if getattr(args, "igenomes_ignore", False):
+        return None
+    args.igenomes_ignore = True
+    return (
+        "--fasta was provided without --genome: iGenomes is disabled automatically "
+        "(igenomes_ignore=true) so Sarek does not fall back to its default "
+        "GATK.GRCh38 iGenomes reference bundle. Pass --genome to use iGenomes, or "
+        "--igenomes-ignore explicitly to silence this notice."
+    )
 
 
 def _sync_profile_flags(args: argparse.Namespace) -> None:
@@ -1470,6 +1528,7 @@ def _handle_skill_error(output_dir: Path, exc: SkillError, *, verbose: bool) -> 
 
 def _handle_unexpected_error(output_dir: Path, exc: Exception, *, verbose: bool) -> int:
     payload = {
+        "status": "error",
         "ok": False,
         "stage": "internal",
         "error_code": ErrorCode.UNEXPECTED_ERROR,
@@ -1497,16 +1556,9 @@ def _write_error_result_if_safe(output_dir: Path, payload: dict[str, Any]) -> No
     if code in {ErrorCode.OUTPUT_DIR_NOT_EMPTY, ErrorCode.OUTPUT_DIR_NOT_WRITABLE}:
         return
     text = json.dumps(payload, indent=2, default=str)
-    # Co-locate the error marker with the rest of the bundle so the output root
-    # keeps to two children (upstream/, reproducibility/). Fall back to the
-    # output root only if the bundle directory cannot be created.
-    try:
-        repro_dir = output_dir / "reproducibility"
-        repro_dir.mkdir(parents=True, exist_ok=True)
-        write_text_lf(repro_dir / "result.json", text)
-        return
-    except OSError:
-        pass
+    # The failure marker lives at the output root, next to where a successful
+    # run writes result.json, so consumers read <output>/result.json regardless
+    # of outcome (parity with nfcore-rnaseq/scrnaseq).
     try:
         output_dir.mkdir(parents=True, exist_ok=True)
         write_text_lf(output_dir / "result.json", text)

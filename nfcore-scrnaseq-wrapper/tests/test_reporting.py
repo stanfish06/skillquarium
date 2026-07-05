@@ -231,6 +231,9 @@ def test_write_result_creates_result_json(tmp_path):
     )
     assert result_path.exists()
     payload = json.loads(result_path.read_text(encoding="utf-8"))
+    # Issue 5: shared cross-wrapper status/ok contract on success.
+    assert payload["status"] == "ok"
+    assert payload["ok"] is True
     assert "summary" in payload
     assert payload["summary"]["preset"] == "star"
     assert payload["summary"]["profile"] == "docker"
@@ -283,3 +286,23 @@ def test_write_repro_commands_portability_notice_in_commands_sh(tmp_path):
         or "absolute" in content.lower()
         or "FASTQ" in content
     )
+
+
+def test_reported_sample_count_falls_back_to_detected_when_zero():
+    """Issue 2: under --demo the local samplesheet reports 0 samples (the test
+    profile supplies them remotely), so the count must fall back to the samples
+    detected in the outputs instead of reporting 0."""
+    import reporting as _reporting_mod
+
+    preflight_result = {"samplesheet": {"sample_count": 0}}
+    parsed_outputs = {"samples_detected": ["Sample_X", "Sample_Y"]}
+    assert _reporting_mod._reported_sample_count(preflight_result, parsed_outputs) == 2
+
+
+def test_reported_sample_count_prefers_positive_samplesheet_count():
+    """A positive samplesheet count is authoritative and used as-is."""
+    import reporting as _reporting_mod
+
+    preflight_result = {"samplesheet": {"sample_count": 3}}
+    parsed_outputs = {"samples_detected": ["only_one"]}
+    assert _reporting_mod._reported_sample_count(preflight_result, parsed_outputs) == 3

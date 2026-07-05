@@ -48,6 +48,22 @@ def _posix(value: str) -> str:
     return Path(value).expanduser().resolve().as_posix()
 
 
+def _posix_or_uri(value: str) -> str:
+    """Like :func:`_posix`, but pass remote URIs (``s3://``, ``gs://``, ``https://``,
+    ``ftp://`` …) through unchanged.
+
+    ``Path(...).resolve()`` on a URI corrupts it: the ``//`` collapses and the
+    scheme is anchored to the current directory
+    (``https://host/x`` → ``<cwd>/https:/host/x``), which nf-core then rejects at
+    parameter validation. Remote references are gated behind ``--allow-remote-inputs``
+    at preflight and staged by Nextflow, so they must reach ``params.yaml`` verbatim.
+    Mirrors ``igenomes_base`` handling and the nfcore-rnaseq/sarek wrappers.
+    """
+    if "://" in str(value):
+        return str(value)
+    return _posix(value)
+
+
 def build_params_file(
     args, *, normalized_samplesheet: Path, output_dir: Path
 ) -> tuple[Path, dict[str, object]]:
@@ -228,7 +244,8 @@ def _add_reference_path_params(params: dict[str, object], args) -> None:
     for param_name in _REFERENCE_PATH_FIELDS:
         value = getattr(args, param_name, None)
         if value:
-            params[param_name] = _posix(value)
+            # Preserve remote URIs verbatim; only local paths are resolved.
+            params[param_name] = _posix_or_uri(value)
             if param_name in GENOME_REFERENCE_FIELDS:
                 explicit_genome_refs.append(param_name)
     # Only a real GENOME reference (e.g. a prebuilt star_index, or fasta+gtf)

@@ -150,12 +150,16 @@ def test_bundle_text_files_use_lf_line_endings(tmp_path: Path) -> None:
     repro = output_dir / "reproducibility"
     text_suffixes = {".sh", ".yaml", ".yml", ".json", ".md", ".config", ".csv"}
     checked = 0
-    for path in repro.rglob("*"):
+    # report.md/result.json now live at the output root; commands.sh stays in the
+    # bundle. All generated text files must be LF-only regardless of location.
+    candidates = [output_dir / "report.md", output_dir / "result.json"]
+    candidates += list(repro.rglob("*"))
+    for path in candidates:
         if path.is_file() and path.suffix in text_suffixes and path.name != "remap_paths.py":
             data = path.read_bytes()
             assert b"\r" not in data, f"{path.name} contains a CR byte (not LF-only)"
             checked += 1
-    assert checked >= 2  # at least commands.sh + report.md/result.json
+    assert checked >= 3  # report.md + result.json + commands.sh
 
 
 
@@ -689,3 +693,126 @@ def test_annotation_section_present_with_data(tmp_path: Path) -> None:
 
 
 
+
+
+# ---------------------------------------------------------------------------
+# Runtime metadata + demo fallbacks (Issues 3/4/5/6)
+# ---------------------------------------------------------------------------
+
+
+def test_report_shows_profile_java_nextflow(tmp_path: Path) -> None:
+    """Issue 6: Profile/Java/Nextflow must render from the passed runtime
+    metadata instead of the '-' placeholder."""
+    output_dir = _make_output_dir(tmp_path)
+    artifacts = write_reports(
+        output_dir=output_dir,
+        skill_dir=_skill_dir(),
+        params=_minimal_params(),
+        samplesheet_report=_minimal_samplesheet(),
+        pipeline_source=_minimal_pipeline_source(),
+        outputs_report=_FakeOutputsReport(),
+        nextflow_command=_minimal_command(output_dir),
+        pipeline_source_kind="remote",
+        java_version="17.0.9",
+        nextflow_version="25.04.3",
+        profile="test,docker",
+    )
+    text = artifacts.report_md.read_text(encoding="utf-8")
+    assert "| Profile | test,docker |" in text
+    assert "| Java | 17.0.9 |" in text
+    assert "| Nextflow | 25.04.3 |" in text
+    result = json.loads(artifacts.result_json.read_text(encoding="utf-8"))
+    assert result["run"]["profile"] == "test,docker"
+    assert result["run"]["java_version"] == "17.0.9"
+    assert result["run"]["nextflow_version"] == "25.04.3"
+
+
+def test_demo_tools_inferred_from_outputs(tmp_path: Path) -> None:
+    """Issue 4: with no requested tools (as under --demo) the effective tools
+    must be inferred from detected variant-calling outputs, not shown as none."""
+    output_dir = _make_output_dir(tmp_path)
+    params = _minimal_params()
+    params["tools"] = []  # demo: the upstream test profile owns tool selection
+    ofr = _FakeOutputsReport(variant_calling={"strelka": {"test": {"vcf": [Path("x.vcf.gz")]}}})
+    artifacts = write_reports(
+        output_dir=output_dir,
+        skill_dir=_skill_dir(),
+        params=params,
+        samplesheet_report=_minimal_samplesheet(),
+        pipeline_source=_minimal_pipeline_source(),
+        outputs_report=ofr,
+        nextflow_command=_minimal_command(output_dir),
+        pipeline_source_kind="remote",
+    )
+    text = artifacts.report_md.read_text(encoding="utf-8")
+    assert "strelka" in text
+    assert "| Tools | (none) |" not in text
+    result = json.loads(artifacts.result_json.read_text(encoding="utf-8"))
+    assert result["run"]["tools"] == []
+    assert result["run"]["tools_effective"] == ["strelka"]
+    assert result["run"]["tools_from_outputs"] is True
+
+
+def test_demo_samples_counted_from_detected_outputs(tmp_path: Path) -> None:
+    """Issues 3: with an empty local samplesheet (as under --demo) the Samples
+    count must fall back to the samples detected in the outputs."""
+    output_dir = _make_output_dir(tmp_path)
+    ss = _minimal_samplesheet()
+    ss["sample_names"] = []
+    ss["sample_count"] = 0
+    ofr = _FakeOutputsReport(samples_detected=["test"])
+    artifacts = write_reports(
+        output_dir=output_dir,
+        skill_dir=_skill_dir(),
+        params=_minimal_params(),
+        samplesheet_report=ss,
+        pipeline_source=_minimal_pipeline_source(),
+        outputs_report=ofr,
+        nextflow_command=_minimal_command(output_dir),
+        pipeline_source_kind="remote",
+    )
+    text = artifacts.report_md.read_text(encoding="utf-8")
+    assert "| Samples | 1 |" in text
+
+
+def test_result_json_has_ok_field(tmp_path: Path) -> None:
+    """Issue 5: result.json must carry the shared `ok` success discriminator."""
+    output_dir = _make_output_dir(tmp_path)
+    artifacts = write_reports(
+        output_dir=output_dir,
+        skill_dir=_skill_dir(),
+        params=_minimal_params(),
+        samplesheet_report=_minimal_samplesheet(),
+        pipeline_source=_minimal_pipeline_source(),
+        outputs_report=_FakeOutputsReport(),
+        nextflow_command=_minimal_command(output_dir),
+        pipeline_source_kind="remote",
+    )
+    result = json.loads(artifacts.result_json.read_text(encoding="utf-8"))
+    assert result["ok"] is True
+    assert result["status"] in {"ok", "partial"}
+
+
+def test_report_and_result_written_at_output_root(tmp_path: Path) -> None:
+    """Issue 1: report.md and result.json must live at the output root (matching
+    nfcore-rnaseq/scrnaseq), while commands.sh/remap_paths.py stay in the bundle."""
+    output_dir = _make_output_dir(tmp_path)
+    artifacts = write_reports(
+        output_dir=output_dir,
+        skill_dir=_skill_dir(),
+        params=_minimal_params(),
+        samplesheet_report=_minimal_samplesheet(),
+        pipeline_source=_minimal_pipeline_source(),
+        outputs_report=_FakeOutputsReport(),
+        nextflow_command=_minimal_command(output_dir),
+        pipeline_source_kind="remote",
+    )
+    assert artifacts.report_md == output_dir / "report.md"
+    assert artifacts.result_json == output_dir / "result.json"
+    assert (output_dir / "report.md").exists()
+    assert (output_dir / "result.json").exists()
+    # No longer written inside the reproducibility bundle.
+    assert not (output_dir / "reproducibility" / "report.md").exists()
+    assert not (output_dir / "reproducibility" / "result.json").exists()
+    # Replay/provenance artifacts remain in the bundle.
+    assert artifacts.commands_sh == output_dir / "reproducibility" / "commands.sh"

@@ -360,3 +360,20 @@ def test_non_cellranger_preset_does_not_warn_about_expected_cells(tmp_path, caps
     )
     validate_and_normalize_samplesheet(src, tmp_path / "norm.csv", preset="standard")
     assert "Cell Ranger v7" not in capsys.readouterr().out
+
+
+def test_protocol_column_is_recognised_not_flagged_unknown(tmp_path):
+    """nf-core/scrnaseq 4.1.0 ships an example samplesheet (assets/samplesheet.csv)
+    with a `protocol` column, so the wrapper must not warn that it is an
+    unrecognised column (it is preserved as before, just not flagged)."""
+    r1 = tmp_path / "a_R1.fastq.gz"
+    r2 = tmp_path / "a_R2.fastq.gz"
+    r1.write_text("x", encoding="utf-8")
+    r2.write_text("x", encoding="utf-8")
+    src = tmp_path / "samplesheet.csv"
+    src.write_text(
+        f"sample,fastq_1,fastq_2,protocol,expected_cells\nsampleA,{r1},{r2},10XV2,1000\n",
+        encoding="utf-8",
+    )
+    result = validate_and_normalize_samplesheet(src, tmp_path / "normalized.csv")
+    assert "protocol" not in result["unknown_columns"]

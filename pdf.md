@@ -28,6 +28,7 @@ created: 2026-06-09
 - [nature-paper2ppt](nature-paper2ppt.md) — Build a complete but efficient Nature-style Chinese PPTX presentation from a scientific paper, preprint, PDF, article text, abstract, figure legends, or reading notes
 - [nature-reader](nature-reader.md) — Build full-paper Chinese-English side-by-side, figure/table-aware, source-grounded Markdown readers for journal or conference papers from PDF, DOI, arXiv, publisher HTML, or pasted text
 - [paper-2-web](paper-2-web.md) — This skill should be used when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), and...
+- [paper-lookup](paper-lookup.md) — Search 10 academic literature APIs for papers, preprints, citations, and open-access full text, and return results with reproducible provenance
 - [pptx-posters](pptx-posters.md) — Create research posters using HTML/CSS that can be exported to PDF or PPTX
 - [pyzotero](pyzotero.md) — Interact with Zotero reference management libraries using the pyzotero Python client
 - [report-template](report-template.md) — Publication-quality PDF report generation using Typst templates

@@ -221,6 +221,28 @@ def test_nextflow_version_unparseable_is_version_failure(monkeypatch):
     assert exc.value.error_code == ErrorCode.NEXTFLOW_VERSION_TOO_OLD
 
 
+def test_nextflow_version_preserves_zero_padded_month(monkeypatch):
+    """A detected version like '26.04.3' must be reported verbatim, never
+    reconstructed from the comparison tuple as '26.4.3' (which is not a real
+    Nextflow release and would break NXF_VER / conda pins on replay)."""
+    import preflight as p
+
+    monkeypatch.setattr(p.shutil, "which", lambda n: f"/usr/bin/{n}")
+    monkeypatch.setattr(
+        p, "_command_output", lambda args: "  N E X T F L O W\n  version 26.04.3 build 5928"
+    )
+    assert p._check_nextflow() == "26.04.3"
+
+
+def test_java_version_preserves_exact_string(monkeypatch):
+    import preflight as p
+
+    monkeypatch.setattr(p.shutil, "which", lambda n: f"/usr/bin/{n}")
+    monkeypatch.setattr(
+        p, "_command_output", lambda args: 'openjdk version "17.0.10" 2024-01-16'
+    )
+    assert p._check_java() == "17.0.10"
+
 
 def test_profile_empty():
     with pytest.raises(SkillError) as exc:
@@ -890,6 +912,18 @@ def test_bqsr_requires_dbsnp_or_known_indels_when_not_skipped():
     assert exc.value.error_code == ErrorCode.MISSING_REFERENCE
 
 
+def test_bqsr_error_explains_baserecalibrator_runs_by_default():
+    """A user who only requested --tools haplotypecaller may not know
+    baserecalibrator runs by default in the mapping workflow. The error must
+    say so, so the fix (--skip-tools baserecalibrator or supplying known sites)
+    is understandable rather than surprising."""
+    params = make_params(step="mapping", skip_tools=[], genome="", igenomes_ignore=True, fasta="/ref.fa")
+    with pytest.raises(SkillError) as exc:
+        _check_flag_compatibility(params=params, tools=["haplotypecaller"])
+    assert exc.value.error_code == ErrorCode.MISSING_REFERENCE
+    assert "baserecalibrator runs by default" in exc.value.message.lower()
+
+
 def test_bqsr_allows_upstream_test_profile_refs():
     params = make_params(step="mapping", skip_tools=[], genome="", fasta="", profile="test,docker")
     _check_flag_compatibility(params=params, tools=[])
@@ -1205,6 +1239,52 @@ def test_run_preflight_happy_path(tmp_path, stub_binaries):
         repo_root=repo_root,
     )
     assert isinstance(result, PreflightResult)
+
+
+# --- --demo offline gate (nf-core -profile test is remote by design) ---------
+
+def test_check_demo_network_offline_test_profile_raises(monkeypatch):
+    """--demo composes the upstream `-profile test`, whose inputs/references are
+    remote GitHub URLs; under NXF_OFFLINE it must fail fast with a clear
+    DEMO_REQUIRES_NETWORK error instead of a cryptic Nextflow abort."""
+    import preflight as _pf
+
+    monkeypatch.setenv("NXF_OFFLINE", "true")
+    with pytest.raises(SkillError) as exc:
+        _pf._check_demo_network({"profile": "docker,test"})
+    assert exc.value.error_code == ErrorCode.DEMO_REQUIRES_NETWORK
+
+
+def test_check_demo_network_offline_real_run_not_blocked(monkeypatch):
+    """A real (non-test-profile) run is fully local; NXF_OFFLINE must not block it."""
+    import preflight as _pf
+
+    monkeypatch.setenv("NXF_OFFLINE", "true")
+    _pf._check_demo_network({"profile": "docker"})
+
+
+def test_check_demo_network_test_profile_online_not_blocked(monkeypatch):
+    """A test-profile run with network available must not trip the guard."""
+    import preflight as _pf
+
+    monkeypatch.delenv("NXF_OFFLINE", raising=False)
+    _pf._check_demo_network({"profile": "docker,test"})
+
+
+def test_run_preflight_demo_offline_raises(tmp_path, stub_binaries, monkeypatch):
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    params = make_params(step="mapping", aligner="bwa-mem", profile="docker,test", tools=["haplotypecaller"])
+    monkeypatch.setenv("NXF_OFFLINE", "true")
+    with pytest.raises(SkillError) as exc:
+        run_preflight(
+            params=params,
+            samplesheet=make_samplesheet(analysis_mode="germline"),
+            pipeline_source=make_pipeline_source(),
+            output_dir=tmp_path / "results",
+            repo_root=repo_root,
+        )
+    assert exc.value.error_code == ErrorCode.DEMO_REQUIRES_NETWORK
 
 
 # --- --allow-remote-inputs gate (local-first by default) ---------------------
