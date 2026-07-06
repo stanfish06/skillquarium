@@ -24,7 +24,7 @@ created: 2026-06-09
 - [liteparse](liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
 - [markitdown](markitdown.md) — Convert files and office documents to Markdown
 - [matplotlib](matplotlib.md) — Low-level plotting library for full customization
-- [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R
+- [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R, plus optional OpenRouter GPT Image 2 manuscript schematic generation when the user explicitly asks for...
 - [nature-paper2ppt](nature-paper2ppt.md) — Build a complete but efficient Nature-style Chinese PPTX presentation from a scientific paper, preprint, PDF, article text, abstract, figure legends, or reading notes
 - [nature-reader](nature-reader.md) — Build full-paper Chinese-English side-by-side, figure/table-aware, source-grounded Markdown readers for journal or conference papers from PDF, DOI, arXiv, publisher HTML, or pasted text
 - [paper-2-web](paper-2-web.md) — This skill should be used when converting academic papers into promotional and presentation formats including interactive websites (Paper2Web), presentation videos (Paper2Video), and...

@@ -36,7 +36,7 @@ created: 2026-06-20
 - [greploop](greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
 - [guidelines-advisor](guidelines-advisor.md) — Smart contract development advisor based on Trail of Bits' best practices
 - [infographics](infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
-- [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R
+- [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R, plus optional OpenRouter GPT Image 2 manuscript schematic generation when the user explicitly asks for...
 - [nature-reviewer](nature-reviewer.md) — Simulate a Nature-style reviewer assessment from the referee perspective rather than an author rebuttal
 - [neuropixels-analysis](neuropixels-analysis.md) — Analyze Neuropixels extracellular recordings end-to-end with SpikeInterface
 - [peer-review](peer-review.md) — Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across...

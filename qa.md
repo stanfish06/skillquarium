@@ -18,7 +18,6 @@ created: 2026-06-20
 
 - [agent-browser](agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting...
 - [dogfood](dogfood.md) — Systematically explore and test a web application to find bugs, UX issues, and other problems
-- [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
