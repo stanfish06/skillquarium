@@ -22,29 +22,35 @@ For IBM hardware use **qiskit**; for quantum ML with autodiff use **pennylane**;
 
 ## Installation
 
-Requires Python 3.11+. Current stable release: **1.6.1** (August 2025). Vendor packages share the same version number.
+Requires Python 3.11+. Current stable release: **1.7.0** (June 2026). Vendor packages share the same version number.
 
 ```bash
-uv pip install "cirq==1.6.1"
+uv pip install "cirq==1.7.0"
 ```
 
 For hardware integration (pin matching versions for reproducibility):
 ```bash
 # Google Quantum Engine (requires approved GCP project access)
-uv pip install "cirq-google==1.6.1"
+uv pip install "cirq-google==1.7.0"
 
 # IonQ
-uv pip install "cirq-ionq==1.6.1"
+uv pip install "cirq-ionq==1.7.0"
 
 # AQT (Alpine Quantum Technologies)
-uv pip install "cirq-aqt==1.6.1"
+uv pip install "cirq-aqt==1.7.0"
 
 # Pasqal
-uv pip install "cirq-pasqal==1.6.1"
+uv pip install "cirq-pasqal==1.7.0"
 
 # Azure Quantum (IonQ, Honeywell/Quantinuum backends)
 uv pip install "azure-quantum[cirq]"
 ```
+
+**Cirq 1.7.0 compatibility notes:**
+- Requires **NumPy ≥ 2.1** (raised from 2.0 in 1.6.x) — upgrade NumPy before installing.
+- `cirq-ionq`: IonQ REST API version bumped to **0.4** — code that pinned the API version string (`api_version="0.3"` or earlier) must be updated.
+- Some previously-deprecated symbols were removed; review the [1.7.0 release notes](https://github.com/quantumlib/Cirq/releases/tag/v1.7.0) before upgrading production code.
+- New: CY/CCY gates, `LATEST` circuit insertion strategy, GHZ state helpers, Python 3.14 support.
 
 For latest features during development, omit version pins; for production or hardware runs, pin all packages to the same Cirq release.
 
@@ -365,4 +371,3 @@ results = noise_comparison_study(circuit, noise_levels)
 - Density matrix simulation is O(2^2n) - consider reducing qubits
 - Use noise models selectively on critical operations only
 - See `simulation.md` for performance optimization
-
