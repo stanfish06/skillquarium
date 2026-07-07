@@ -3,8 +3,8 @@ name: aeon
 description: This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search. Use when working with temporal data, sequential patterns, or time-indexed observations requiring specialized algorithms beyond standard ML approaches. Particularly suited for univariate and multivariate time series analysis with scikit-learn compatible APIs.
 license: BSD-3-Clause license
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.10+ and the aeon package (uv pip install). Optional aeon[all_extras] for deep learning and extended dependencies.
-metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
+compatibility: Requires Python 3.11+ and the aeon package (uv pip install). Optional aeon[all_extras] for deep learning and extended dependencies.
+metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
 # Aeon Time Series Machine Learning
@@ -13,7 +13,7 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 
 Aeon is a scikit-learn compatible Python toolkit for time series machine learning ([aeon-toolkit.org](https://www.aeon-toolkit.org/)). It provides algorithms across classification, regression, clustering, forecasting, anomaly detection, segmentation, similarity search, distances, transformations, benchmarking, and visualization — with a consistent estimator API.
 
-**Version note:** Examples target **aeon 1.x** (stable docs: v1.4.0, March 2026). The v1.0 release reworked forecasting and transformations; import paths differ from aeon 0.x/sktime-era code.
+**Version note:** Examples target **aeon 1.x** (stable docs: v1.5.0, June 2026). The v1.0 release reworked forecasting and transformations; import paths differ from aeon 0.x/sktime-era code.
 
 ## When to Use This Skill
 
@@ -28,19 +28,19 @@ Apply this skill when:
 
 ## Installation
 
-Requires **Python 3.10+** (3.11+ recommended). Pin a 1.x release for reproducibility:
+Requires **Python 3.11+**. Pin a 1.x release for reproducibility:
 
 ```bash
-uv pip install "aeon>=1.4,<2"
+uv pip install "aeon>=1.5,<2"
 ```
 
 For deep learning forecasters/classifiers and other optional estimators:
 
 ```bash
-uv pip install "aeon[all_extras]>=1.4,<2"
+uv pip install "aeon[all_extras]>=1.5,<2"
 ```
 
-On zsh, quote the extras: `uv pip install "aeon[all_extras]>=1.4,<2"`.
+On zsh, quote the extras: `uv pip install "aeon[all_extras]>=1.5,<2"`.
 
 ### Experimental modules
 
