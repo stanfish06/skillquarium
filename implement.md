@@ -17,6 +17,7 @@ created: 2026-06-20
 ## Related skills
 
 - [figma-implement-design](figma-implement-design.md) — Translates Figma designs into production-ready application code with 1:1 visual fidelity
+- [image-to-code](image-to-code.md) — Elite website image-to-code skill for Codex
 - [pytorch-lightning](pytorch-lightning.md) — Deep learning framework (PyTorch Lightning / lightning package)
 - [vercel-react-view-transitions](vercel-react-view-transitions.md) — Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements)
 

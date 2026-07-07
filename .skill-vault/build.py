@@ -320,7 +320,11 @@ CATEGORIES = [
       "web-design-guidelines", "vercel-composition-patterns", "vercel-react-best-practices",
       "vercel-react-view-transitions", "figma-use", "figma-generate-design",
       "figma-generate-library", "figma-implement-design", "web-artifacts-builder",
-      "brand-guidelines", "theme-factory", "algorithmic-art"]),
+      "brand-guidelines", "theme-factory", "algorithmic-art", "brandkit",
+      "design-taste-frontend", "design-taste-frontend-v1", "full-output-enforcement",
+      "gpt-taste", "high-end-visual-design", "image-to-code",
+      "imagegen-frontend-mobile", "imagegen-frontend-web", "industrial-brutalist-ui",
+      "minimalist-ui", "redesign-existing-projects", "stitch-design-taste"]),
 
     ("analytics-engineering", "Analytics Engineering & LLM Operations",
      "dbt analytics engineering, semantic layers, warehouse querying, lineage diagrams, LLM observability, prompt tracing, and evaluation workflows.",
