@@ -20,7 +20,7 @@ created: 2026-06-10
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [brandkit](brandkit.md) — Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
