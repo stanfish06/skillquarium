@@ -166,7 +166,7 @@ LaminDB provides six interconnected capability areas, each documented in detail 
 - Current stable baseline: `lamindb==2.7.0` (released 2026-06-29; Python >=3.10, <=3.14)
 - Basic: `uv pip install 'lamindb==2.7.0'`
 - With extras: `uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.7.0'`
-- Minimal namespace only: `uv pip install 'lamindb-core==2.7.0'`
+- Minimal namespace only: `uv pip install 'lamindb-core==2.6.1'` (as of 2026-07-08, latest published `lamindb-core` release; `lamindb` and `lamindb-core` version out-of-sync — pin core to its own latest release, not to the `lamindb` version)
 - Bionty module: included in the LaminDB docs and available as `uv pip install 'bionty==2.4.0'`
 - Optional modules: pin reviewed releases for wetlab or clinical schema modules rather than installing floating latest versions
 
@@ -262,7 +262,7 @@ immune_datasets = ln.Artifact.filter(
     key__startswith="scrna/",
     tissue="PBMC",
     condition="treated"
-).to_dataframe(limit=100)
+).to_dataframe(limit=None)
 
 # Load specific datasets
 for artifact in immune_datasets:
