@@ -188,16 +188,16 @@ Robust statistical functions including sigma clipping and outlier rejection.
 
 ```bash
 # Reproducible install against the current stable release
-uv pip install "astropy==7.2.0"
+uv pip install "astropy==8.0.1"
 
 # Recommended optional dependencies for plotting and common workflows
-uv pip install "astropy[recommended]==7.2.0"
+uv pip install "astropy[recommended]==8.0.1"
 
 # Full optional dependency set for broad astronomy workflows
-uv pip install "astropy[all]==7.2.0"
+uv pip install "astropy[all]==8.0.1"
 ```
 
-Astropy 7.2.0 requires Python 3.11+ and depends on NumPy, PyERFA, PyYAML, and packaging. Use an isolated virtual environment; do not install Astropy with elevated privileges.
+Astropy 8.0.1 requires Python 3.11+ and **NumPy 2.0+**, along with PyERFA, PyYAML, and packaging. Use an isolated virtual environment; do not install Astropy with elevated privileges.
 
 Note that the `[recommended]` and `[all]` extras pull in transitive dependencies (matplotlib, scipy, etc.) at unpinned versions. For reproducible production environments, pin the full dependency tree with a lockfile (`uv lock` in a project, or `uv pip compile` for requirements files) and review the resolved versions before deploying.
 
@@ -317,19 +317,27 @@ print(f"Found {len(cat1_matched)} matches")
 9. **Check WCS validity**: Verify WCS before using transformations
 10. **Cache frequently used values**: Expensive calculations (e.g., cosmological distances) can be cached
 11. **Be explicit about network access**: `SkyCoord.from_name()`, `EarthLocation.of_site(refresh_cache=True)`, `EarthLocation.of_address()`, `download_file()`, remote FITS reads, and some IERS time/coordinate transforms can contact external services or update local caches. Avoid sending sensitive target names, addresses, URLs, or proprietary file locations to third-party services. When working with potentially sensitive targets or data locations, confirm with the user before making these network calls.
-12. **Pin for reproducibility**: Use pinned versions such as `astropy==7.2.0` for shared environments; update pins intentionally after reviewing release notes.
+12. **Pin for reproducibility**: Use pinned versions such as `astropy==8.0.1` for shared environments; update pins intentionally after reviewing release notes.
 
 ## Current-Version Notes
 
-- Current stable release researched: Astropy 7.2.0 (released 2025-11-25; verified current as of 2026-06-10)
-- Python requirement: 3.11+
-- **Astropy 8.0 is at release-candidate stage** (8.0.0rc1, 2026-05-26). Key changes to anticipate:
-  - The deprecated `astropy.cosmology` submodule shims (`astropy.cosmology.flrw`, `.core`, `.funcs`, `.connect`, `.parameter`) are removed — import everything directly from `astropy.cosmology` (e.g., `from astropy.cosmology import FlatLambdaCDM, z_at_value`)
-  - `astropy.constants` defaults change from CODATA 2018 to CODATA 2022; pin a constants version via the `astropyconst` science states if reproducibility matters
-  - NumPy 2.0 becomes the minimum supported version; the 7.2.x LTS branch retains NumPy 1.x support for six months after the 8.0 release
-  - The built-in test runner (`astropy.test()`, `TestRunner`) is formally deprecated — invoke `pytest` directly
-- Recent 7.x deprecations to avoid in new code: passing a table index identifier as the first `.loc` element (`t.loc["b", 2]`) — use `t.loc.with_index("b")[2]` instead (removal planned for 9.0); `astropy.utils.isiterable()` — use `numpy.iterable()`
-- Recent 7.0 removals: older deprecated FITS APIs such as `(Bin)Table.update`, `_ExtensionHDU`, `_NonstandardExtHDU`, and the `tile_size` argument for `CompImageHDU`; `CompImageHeader` is deprecated. Avoid those legacy patterns in new examples.
+- Current stable release: Astropy 8.0.1 (released 2026-07-05)
+- Python requirement: 3.11–3.14
+- **NumPy 2.0+ is now required** — environments using NumPy < 2.0 cannot install astropy 8.x. The 7.2.x LTS branch retains NumPy 1.x support for approximately six months after the 8.0 release.
+- **`astropy.constants` now defaults to CODATA 2022** (was CODATA 2018 in 7.x). Numerical results for physical constants (e.g., `astropy.constants.G`, `astropy.constants.c`) will differ silently from 7.x values. To preserve old values, use the ScienceState API **before importing `astropy.constants` or `astropy.units`**:
+
+  ```python
+  import astropy
+  astropy.physical_constants.set("codata2018")
+  astropy.astronomical_constants.set("iau2015")
+  import astropy.constants as const  # now bound to codata2018 / iau2015
+  ```
+
+  The `astropy.constants.set_enabled_constants(...)` context manager from 7.x was removed in 8.0 — calling it now raises `AttributeError`.
+- **`astropy.cosmology` submodule shims removed** — `astropy.cosmology.flrw`, `.core`, `.funcs`, `.connect`, `.parameter` no longer exist. Import everything directly from `astropy.cosmology` (e.g., `from astropy.cosmology import FlatLambdaCDM, z_at_value`).
+- **Built-in test runner deprecated** — replace `astropy.test()` / `TestRunner` with direct `pytest` invocation.
+- Deprecations to avoid in new code: passing a table index identifier as the first `.loc` element (`t.loc["b", 2]`) — use `t.loc.with_index("b")[2]` instead (removal planned for 9.0); `astropy.utils.isiterable()` — use `numpy.iterable()`.
+- Legacy FITS patterns removed in 7.0 still apply: avoid `(Bin)Table.update`, `_ExtensionHDU`, `_NonstandardExtHDU`, and the `tile_size` argument for `CompImageHDU`.
 - The recommended optional extras are `recommended` for common plotting/scientific dependencies and `all` only when a broad optional feature set is needed.
 
 ## Documentation and Resources
@@ -348,4 +356,3 @@ For detailed information on specific modules:
 - `references/tables.md` - Table creation, I/O, and operations
 - `references/time.md` - Time formats, scales, and calculations
 - `references/wcs_and_other_modules.md` - WCS, NDData, modeling, visualization, constants, and utilities
-
