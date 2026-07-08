@@ -48,7 +48,7 @@ uv pip install "azure-quantum[cirq]"
 
 **Cirq 1.7.0 compatibility notes:**
 - Requires **NumPy ≥ 2.1** (raised from 2.0 in 1.6.x) — upgrade NumPy before installing.
-- `cirq-ionq`: IonQ REST API version bumped to **0.4** — code that pinned the API version string (`api_version="0.3"` or earlier) must be updated.
+- `cirq-ionq`: IonQ REST API version bumped to **`v0.4`** (default in `cirq_ionq.Service`) — code that pinned the API version string (`api_version="v0.3"` or earlier) must be updated. The value is interpolated into `https://api.ionq.co/{api_version}`, so keep the `v` prefix.
 - Some previously-deprecated symbols were removed; review the [1.7.0 release notes](https://github.com/quantumlib/Cirq/releases/tag/v1.7.0) before upgrading production code.
 - New: CY/CCY gates, `LATEST` circuit insertion strategy, GHZ state helpers, Python 3.14 support.
 
