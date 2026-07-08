@@ -58,7 +58,7 @@ export AWS_SECRET_ACCESS_KEY='<redacted>'
 
 ```bash
 # Install GCP extras
-uv pip install 'lamindb[gcp]==2.5.1'
+uv pip install 'lamindb[gcp]==2.7.0'
 
 # Initialize with GCS
 export LAMIN_DB_URL='<set-in-secret-manager>'

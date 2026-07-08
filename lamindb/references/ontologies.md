@@ -30,7 +30,7 @@ LaminDB provides access to multiple curated ontology sources:
 
 ```bash
 # Install the current validated baseline
-uv pip install 'lamindb==2.5.1' 'bionty==2.4.0'
+uv pip install 'lamindb==2.7.0' 'bionty==2.4.0'
 ```
 
 ```python

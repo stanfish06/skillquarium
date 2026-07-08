@@ -8,10 +8,10 @@ This document covers installation, configuration, instance management, storage o
 
 ```bash
 # Install the current validated baseline
-uv pip install 'lamindb==2.5.1'
+uv pip install 'lamindb==2.7.0'
 
 # Minimal namespace-only package for lightweight clients
-uv pip install 'lamindb-core==2.5.1'
+uv pip install 'lamindb-core==2.6.1'
 ```
 
 ### Installation with Extras
@@ -20,19 +20,19 @@ Install optional dependencies for specific functionality:
 
 ```bash
 # Google Cloud Platform support
-uv pip install 'lamindb[gcp]==2.5.1'
+uv pip install 'lamindb[gcp]==2.7.0'
 
 # Flow cytometry formats
-uv pip install 'lamindb[fcs]==2.5.1'
+uv pip install 'lamindb[fcs]==2.7.0'
 
 # Array storage and streaming (Zarr v2 support)
-uv pip install 'lamindb[zarr-v2]==2.5.1'
+uv pip install 'lamindb[zarr-v2]==2.7.0'
 
 # AWS S3 support (usually included by default)
-uv pip install 'lamindb==2.5.1'
+uv pip install 'lamindb==2.7.0'
 
 # Multiple extras
-uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.5.1'
+uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.7.0'
 ```
 
 ### Module Plugins
@@ -716,7 +716,7 @@ lamin cache set /larger/disk/cache
 
 ```bash
 # Upgrade after reviewing changelog and compatibility matrix
-uv pip install --upgrade 'lamindb==2.5.1'
+uv pip install --upgrade 'lamindb==2.7.0'
 
 # Upgrade database schema
 lamin migrate deploy
