@@ -324,7 +324,16 @@ print(f"Found {len(cat1_matched)} matches")
 - Current stable release: Astropy 8.0.1 (released 2026-07-05)
 - Python requirement: 3.11–3.14
 - **NumPy 2.0+ is now required** — environments using NumPy < 2.0 cannot install astropy 8.x. The 7.2.x LTS branch retains NumPy 1.x support for approximately six months after the 8.0 release.
-- **`astropy.constants` now defaults to CODATA 2022** (was CODATA 2018 in 7.x). Numerical results for physical constants (e.g., `astropy.constants.G`, `astropy.constants.c`) will differ silently from 7.x values. To preserve old values in existing scripts, use `astropy.constants.set_enabled_constants("codata2018")` as a context manager.
+- **`astropy.constants` now defaults to CODATA 2022** (was CODATA 2018 in 7.x). Numerical results for physical constants (e.g., `astropy.constants.G`, `astropy.constants.c`) will differ silently from 7.x values. To preserve old values, use the ScienceState API **before importing `astropy.constants` or `astropy.units`**:
+
+  ```python
+  import astropy
+  astropy.physical_constants.set("codata2018")
+  astropy.astronomical_constants.set("iau2015")
+  import astropy.constants as const  # now bound to codata2018 / iau2015
+  ```
+
+  The `astropy.constants.set_enabled_constants(...)` context manager from 7.x was removed in 8.0 — calling it now raises `AttributeError`.
 - **`astropy.cosmology` submodule shims removed** — `astropy.cosmology.flrw`, `.core`, `.funcs`, `.connect`, `.parameter` no longer exist. Import everything directly from `astropy.cosmology` (e.g., `from astropy.cosmology import FlatLambdaCDM, z_at_value`).
 - **Built-in test runner deprecated** — replace `astropy.test()` / `TestRunner` with direct `pytest` invocation.
 - Deprecations to avoid in new code: passing a table index identifier as the first `.loc` element (`t.loc["b", 2]`) — use `t.loc.with_index("b")[2]` instead (removal planned for 9.0); `astropy.utils.isiterable()` — use `numpy.iterable()`.
