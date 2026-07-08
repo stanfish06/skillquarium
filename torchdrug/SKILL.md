@@ -2,9 +2,7 @@
 name: torchdrug
 description: PyTorch-native graph neural networks for molecules and proteins. Use when building custom GNN architectures for drug discovery, protein modeling, or knowledge graph reasoning. Best for custom model development, protein property prediction, retrosynthesis. For pre-trained models and diverse featurizers use deepchem; for benchmark datasets use pytdc.
 license: Apache-2.0 license
-metadata:
-  version: "1.0"
-  skill-author: K-Dense Inc.
+metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 ---
 
 # TorchDrug
@@ -12,6 +10,9 @@ metadata:
 ## Overview
 
 TorchDrug is a comprehensive PyTorch-based machine learning toolbox for drug discovery and molecular science. Apply graph neural networks, pre-trained models, and task definitions to molecules, proteins, and biological knowledge graphs, including molecular property prediction, protein modeling, knowledge graph reasoning, molecular generation, retrosynthesis planning, with 40+ curated datasets and 20+ model architectures.
+
+> [!WARNING]
+> **Maintenance freeze:** TorchDrug has had no PyPI release since **0.2.1 (July 2023)** and the upstream repository shows no development activity. It is incompatible with **Python ≥3.11** and **PyTorch ≥2.1**, blocking installation on all current environments. For actively maintained alternatives, consider **DeepChem** (drug discovery, broadly equivalent feature set) or **PyTorch Geometric** (custom GNN architectures). Removal may be appropriate — see [issue #188](https://github.com/stanfish06/my-skills/issues/188).
 
 ## When to Use This Skill
 
@@ -44,8 +45,6 @@ This skill should be used when working with:
 ### Installation
 
 TorchDrug **0.2.1** (latest on PyPI, July 2023) requires **Python 3.7–3.10** and **PyTorch 1.8–2.0**. Install PyTorch and `torch-scatter` / `torch-cluster` first (wheel URL depends on your PyTorch and CUDA versions — see [installation docs](https://torchdrug.ai/docs/installation.html)).
-
-> **⚠ Compatibility warning (as of June 2026):** TorchDrug has had no new release since July 2023. The package declares `python_requires=">=3.7,<3.11"`, so **it cannot be installed on Python 3.11 or newer** (which are today's standard defaults). PyTorch 2.1+ is also untested. If your environment uses Python 3.11+ you will need to pin to Python 3.10 (e.g. `uv venv --python 3.10`) or consider an actively-maintained alternative such as [DeepChem](https://github.com/deepchem/deepchem).
 
 ```bash
 uv pip install torch
