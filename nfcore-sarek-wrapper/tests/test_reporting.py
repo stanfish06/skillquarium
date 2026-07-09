@@ -166,6 +166,54 @@ def test_bundle_text_files_use_lf_line_endings(tmp_path: Path) -> None:
 
 
 
+def test_write_reports_stages_external_nextflow_config(tmp_path: Path) -> None:
+    """A -c config living OUTSIDE the output dir must replay out-of-the-box: it is
+    copied into reproducibility/nextflow_configs/ and referenced via $SCRIPT_DIR in
+    commands.sh — no <EDIT_ME>, no host-specific absolute path. Matches the
+    scrnaseq/rnaseq bundles, which also ship user configs."""
+    output_dir = _make_output_dir(tmp_path)
+    external = tmp_path / "elsewhere" / "limits.config"
+    external.parent.mkdir(parents=True)
+    external.write_text("process { resourceLimits = [ memory: '12.GB' ] }\n", encoding="utf-8")
+    command = _minimal_command(output_dir) + ["-c", str(external)]
+    write_reports(
+        output_dir=output_dir,
+        skill_dir=_skill_dir(),
+        params=_minimal_params(),
+        samplesheet_report=_minimal_samplesheet(),
+        pipeline_source=_minimal_pipeline_source(),
+        outputs_report=_FakeOutputsReport(),
+        nextflow_command=command,
+        pipeline_source_kind="remote",
+    )
+    copied = output_dir / "reproducibility" / "nextflow_configs" / "config_01_limits.config"
+    assert copied.read_text() == "process { resourceLimits = [ memory: '12.GB' ] }\n"
+    commands = (output_dir / "reproducibility" / "commands.sh").read_text()
+    assert "$SCRIPT_DIR/nextflow_configs/config_01_limits.config" in commands
+    assert "<EDIT_ME>" not in commands
+    assert str(external) not in commands, "must not bake the host-specific absolute config path"
+
+
+def test_write_reports_leaves_in_bundle_config_untouched(tmp_path: Path) -> None:
+    """A -c already inside the bundle (e.g. reproducibility/macos_docker.config) is not
+    re-copied into nextflow_configs/; only external configs are staged."""
+    output_dir = _make_output_dir(tmp_path)
+    in_bundle = output_dir / "reproducibility" / "macos_docker.config"
+    in_bundle.write_text("docker { runOptions = '--platform=linux/amd64' }\n", encoding="utf-8")
+    command = _minimal_command(output_dir) + ["-c", str(in_bundle)]
+    write_reports(
+        output_dir=output_dir,
+        skill_dir=_skill_dir(),
+        params=_minimal_params(),
+        samplesheet_report=_minimal_samplesheet(),
+        pipeline_source=_minimal_pipeline_source(),
+        outputs_report=_FakeOutputsReport(),
+        nextflow_command=command,
+        pipeline_source_kind="remote",
+    )
+    assert not (output_dir / "reproducibility" / "nextflow_configs").exists()
+
+
 def test_report_md_includes_pairings_when_somatic(tmp_path: Path) -> None:
     output_dir = _make_output_dir(tmp_path)
     artifacts = write_reports(

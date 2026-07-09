@@ -680,6 +680,12 @@ def test_macos_docker_non_tmp_output_has_no_tmp_warning(tmp_path, monkeypatch):
     """A normal (non-/tmp) output directory must not trigger the /tmp guard."""
     _mock_env(monkeypatch)
     monkeypatch.setattr(preflight.sys, "platform", "darwin")
+    # pytest's tmp_path lives under /tmp on Linux CI but under /private/var/... on
+    # macOS, so the real is_under_tmp would fire the guard on Linux and make this
+    # test (which asserts the guard does NOT fire for a non-/tmp output) host-
+    # dependent. Force the "not under /tmp" precondition deterministically; the
+    # under-/tmp branch is covered by its own test.
+    monkeypatch.setattr(preflight, "is_under_tmp", lambda _p: False)
     out = tmp_path / "out"
     result = _run(_args(tmp_path, output=str(out)), _samplesheet(tmp_path))
     assert not any("No such file or directory" in w for w in result["warnings"])

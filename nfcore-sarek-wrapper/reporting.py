@@ -21,6 +21,7 @@ from __future__ import annotations
 import dataclasses
 import gzip
 import json
+import re
 import shutil
 import stat
 import sys
@@ -163,10 +164,16 @@ def write_reports(
 
     # ---- commands.sh -------------------------------------------------------
     commands_sh = repro_dir / "commands.sh"
+    # Copy any user -c config living outside the output dir into the bundle first, so
+    # the replay is self-contained (otherwise _portable_argv would degrade an external
+    # absolute config path to <EDIT_ME>). Matches the scrnaseq/rnaseq bundles.
+    staged_command = _stage_external_nextflow_configs(
+        list(nextflow_command), output_dir=output_dir
+    )
     sh_text, sh_warnings = _build_commands_sh(
         output_dir=output_dir,
         generated_at=generated_at,
-        nextflow_command=list(nextflow_command),
+        nextflow_command=staged_command,
         profile=str(params.get("profile") or profile),
         pipeline_version=pipeline_version,
         pipeline_source_kind=pipeline_source_kind,
@@ -928,6 +935,65 @@ def _build_commands_sh(
     lines.append(_PORTABILITY_TIP)
     lines.append("")
     return "\n".join(lines), warnings
+
+
+def _safe_config_basename(name: str) -> str:
+    safe = re.sub(r"[^A-Za-z0-9_.-]+", "_", name).strip("._")
+    return safe or "nextflow.config"
+
+
+def _within(path: Path, anchor: Path) -> bool:
+    try:
+        path.relative_to(anchor)
+        return True
+    except ValueError:
+        return False
+
+
+def _stage_external_nextflow_configs(
+    argv: list[str], *, output_dir: Path
+) -> list[str]:
+    """Copy each user ``-c`` config that lives OUTSIDE the output dir into
+    ``reproducibility/nextflow_configs/`` and rewrite the argv to point at the copy, so
+    _portable_argv renders it as ``$SCRIPT_DIR/nextflow_configs/<name>`` instead of the
+    ``<EDIT_ME>`` placeholder it must otherwise fall back to for an out-of-tree absolute
+    path. Configs already inside the bundle (e.g. ``reproducibility/macos_docker.config``),
+    non-absolute values, remote URIs, and missing files are left untouched. Mirrors the
+    scrnaseq/rnaseq bundles, which also ship user configs so the replay is self-contained.
+    """
+    outdir_abs = output_dir.resolve()
+    config_dir = output_dir / "reproducibility" / "nextflow_configs"
+    out: list[str] = []
+    copied = 0
+    skip_next = False
+    for i, token in enumerate(argv):
+        if skip_next:
+            skip_next = False
+            continue
+        nxt = argv[i + 1] if i + 1 < len(argv) else None
+        if token == "-c" and isinstance(nxt, str) and _looks_absolute(nxt):
+            try:
+                resolved = Path(nxt).resolve()
+            except OSError:
+                resolved = None
+            if (
+                resolved is not None
+                and resolved.is_file()
+                and not _within(resolved, outdir_abs)
+            ):
+                config_dir.mkdir(parents=True, exist_ok=True)
+                copied += 1
+                destination = (
+                    config_dir
+                    / f"config_{copied:02d}_{_safe_config_basename(resolved.name)}"
+                )
+                shutil.copyfile(resolved, destination)
+                out.append("-c")
+                out.append(destination.as_posix())
+                skip_next = True
+                continue
+        out.append(token)
+    return out
 
 
 def _looks_absolute(token: str) -> bool:

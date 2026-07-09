@@ -6,6 +6,32 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ## [Unreleased] — 0.1.0
 
+### Added
+
+- **Bundle `remap_paths.py` gains `--repair-bundle` (crash-recovery parity).** The
+  shipped standalone `remap_paths.py` can now regenerate the three regenerable
+  reproducibility-bundle files — `checksums.sha256` (recomputed from the current
+  bundle contents), and post-hoc `manifest.json` / `environment.yml` stubs (marked
+  `regenerated_post_hoc: true`) — if the wrapper crashed mid-post-processing and
+  left them missing. This matches the `nfcore-rnaseq-wrapper` / `nfcore-sarek-wrapper`
+  bundles, which already shipped `--repair-bundle`; scrnaseq was the only one
+  without it. `checksums.sha256` is regenerated stdlib-only over **exactly the
+  wrapper's original checksum allowlist** — the normalized samplesheet, `params.yaml`,
+  `logs/stdout.txt` / `logs/stderr.txt`, the h5ad candidates (canonical
+  `*/mtx_conversions/` matrices at both nesting depths, else a full-tree fallback),
+  and the MultiQC report — reconstructed from the bundle on disk so a repaired manifest
+  is byte-identical to one `provenance.write_reproducibility_checksums` would write. The
+  `reproducibility/` provenance JSON tree, `commands.sh`, the `environment.yml` /
+  `manifest.json` stubs, other `upstream/results` outputs, and non-`stdout/stderr` logs
+  are deliberately excluded, matching the original manifest (labels are relative to the
+  output directory so `sha256sum -c` passes). A self-contained `_write_text_lf`
+  (mirroring the sibling bundles) keeps the regenerated files LF-only on every OS.
+  Recompute is triggered **only when `checksums.sha256` itself is missing**, so an
+  existing valid manifest is never silently overwritten when merely a stub is
+  regenerated. `--output-dir` and the `--output`-based resume warning are deliberately
+  **not** added: scrnaseq's `commands.sh` self-anchors to the bundle location via
+  `BASH_SOURCE`, so the output path never needs patching.
+
 ### Documentation
 
 - **`--allow-remote-inputs` semantics clarified.** SKILL.md now states explicitly
@@ -19,6 +45,21 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Fixed
 
+- **`save_align_intermeds` no longer carries an invented `default: true` in the
+  contract.** nf-core/scrnaseq 4.1.0's `nextflow_schema.json` declares no default for
+  `save_align_intermeds` (an opt-in boolean, false when unset — same as
+  `save_reference`); the `OFFICIAL_PARAMS` contract wrongly recorded `default: True`.
+  The annotation was reference-only (never emitted to `params.yaml`, which the wrapper
+  writes only for user-supplied flags, and never used for validation), so no run was
+  affected — but it misrepresented the upstream schema. Corrected to `{"type":
+  "boolean"}` and the contract test now asserts the upstream reality (no `default` key).
+- **`params.yaml` now carries the explanatory header the sibling wrappers emit.**
+  `serialize_params_yaml` wrote a bare `yaml.dump`, so the bundled `params.yaml`
+  lacked the three-line comment header that nfcore-rnaseq / nfcore-sarek prepend
+  (noting that `input`/`outdir` are relative to the Nextflow launch directory and
+  pointing at `reproducibility/commands.sh` for replay). It now emits the same header,
+  adapted to nf-core/scrnaseq. YAML comments do not affect parsing, the reference-path
+  remapper, or the bundle checksum round-trip.
 - **A `protocol` samplesheet column is no longer flagged as unrecognised.**
   nf-core/scrnaseq 4.1.0's `schema_input.json` does not define a `protocol` column,
   but the pipeline's own example samplesheet (`assets/samplesheet.csv`) ships one,

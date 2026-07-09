@@ -81,7 +81,7 @@ OFFICIAL_PARAMS: dict[str, dict[str, object]] = {
     "transcript_fasta": {"type": "string"},
     "gtf": {"type": "string"},
     "save_reference": {"type": "boolean"},
-    "save_align_intermeds": {"type": "boolean", "default": True},
+    "save_align_intermeds": {"type": "boolean"},
     "igenomes_base": {"type": "string", "default": "s3://ngi-igenomes/igenomes/"},
     "txp2gene": {"type": "string"},
     "simpleaf_index": {"type": "string"},

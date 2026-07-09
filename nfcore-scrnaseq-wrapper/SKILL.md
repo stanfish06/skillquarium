@@ -19,7 +19,7 @@ metadata:
     packages:
     - pyyaml
   endpoints:
-    cli: python skills/nfcore-scrnaseq-wrapper/nfcore_scrnaseq_wrapper.py --input {samplesheet} --output {output_dir}
+    cli: python clawbio.py run scrnaseq-pipeline --input {samplesheet} --output {output_dir}
   openclaw:
     requires:
       bins:

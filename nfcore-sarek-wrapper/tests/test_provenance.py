@@ -441,6 +441,9 @@ def test_checksums_excludes_work_and_nextflow(tmp_path: Path):
     # Execution logs (stdout/stderr capture) must never enter the checksums.
     (output_dir / "logs").mkdir()
     (output_dir / "logs" / "stdout.txt").write_text("run stdout")
+    # A leftover --check summary at the root (check → real run in same dir) is a
+    # wrapper artifact, not a pipeline output, so it stays out of the manifest.
+    (output_dir / "check_result.json").write_text("{}")
 
     bundle = write_provenance_bundle(
         output_dir=output_dir,
@@ -460,6 +463,7 @@ def test_checksums_excludes_work_and_nextflow(tmp_path: Path):
     assert ".nextflow" not in text
     assert "run.log" not in text
     assert "logs/" not in text
+    assert "check_result.json" not in text
 
 
 

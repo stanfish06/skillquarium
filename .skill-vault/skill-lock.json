@@ -1384,90 +1384,90 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-academic-search/SKILL.md",
-      "skillFolderHash": "f593307ca3e1d91e55a44aed5acc93c8c780a2fd",
+      "skillFolderHash": "851b2c2eb42366a8748eb0b66d854ffb95d17d59",
       "installedAt": "2026-06-09T11:26:33.282Z",
-      "updatedAt": "2026-07-05T09:21:58.681Z"
+      "updatedAt": "2026-07-09T09:55:53.685Z"
     },
     "nature-citation": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-citation/SKILL.md",
-      "skillFolderHash": "9e35f87e568d7e43be13d170e045713121295a3f",
+      "skillFolderHash": "9d829da6bccd9a9ecb7c7c6362957b352089c6fc",
       "installedAt": "2026-06-09T11:26:33.285Z",
-      "updatedAt": "2026-06-18T08:01:46.743Z"
+      "updatedAt": "2026-07-09T09:55:56.022Z"
     },
     "nature-data": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-data/SKILL.md",
-      "skillFolderHash": "3c51eb8adba66c717b206c5ad9c8dde4349e90cb",
+      "skillFolderHash": "96fa94c29cbc6ee2bc47c63458a06e4b9781f8c0",
       "installedAt": "2026-06-09T11:26:33.288Z",
-      "updatedAt": "2026-06-18T08:01:48.607Z"
+      "updatedAt": "2026-07-09T09:55:58.956Z"
     },
     "nature-figure": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-figure/SKILL.md",
-      "skillFolderHash": "77fcdf3647a0ea5253a8bf0acf024b518dbea021",
+      "skillFolderHash": "1511fa9ec3eff087cd0c49632ea842a7099bf333",
       "installedAt": "2026-06-09T11:26:33.311Z",
-      "updatedAt": "2026-07-06T11:00:36.550Z"
+      "updatedAt": "2026-07-09T09:56:05.778Z"
     },
     "nature-paper2ppt": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-paper2ppt/SKILL.md",
-      "skillFolderHash": "e2c2243b6e60018f8d18991e91270d1628937cd9",
+      "skillFolderHash": "398e75d717d931e468ae0975d74578c0637d1b28",
       "installedAt": "2026-06-09T11:26:33.312Z",
-      "updatedAt": "2026-07-08T08:42:56.581Z"
+      "updatedAt": "2026-07-09T09:56:08.716Z"
     },
     "nature-polishing": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-polishing/SKILL.md",
-      "skillFolderHash": "76ad8debb843470e08e744dd84992225e536c959",
+      "skillFolderHash": "ca23ea071eab173153ce185ca2f70fe4573e26b7",
       "installedAt": "2026-06-09T11:26:33.313Z",
-      "updatedAt": "2026-06-19T08:14:04.167Z"
+      "updatedAt": "2026-07-09T09:56:12.228Z"
     },
     "nature-reader": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reader/SKILL.md",
-      "skillFolderHash": "a2c0077835bb7143ddf94376baa267eb9a7ca5a5",
+      "skillFolderHash": "1368e09c16586e4b3d391378031d26102f324dee",
       "installedAt": "2026-06-09T11:26:33.314Z",
-      "updatedAt": "2026-06-19T08:14:06.452Z"
+      "updatedAt": "2026-07-09T09:56:14.553Z"
     },
     "nature-response": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-response/SKILL.md",
-      "skillFolderHash": "f8f4324c187087ba62fed7977d087520fcf603d8",
+      "skillFolderHash": "7d3804ad49f986d959e720c6c8a54b60185b3c20",
       "installedAt": "2026-06-09T11:26:33.315Z",
-      "updatedAt": "2026-07-05T09:22:01.151Z"
+      "updatedAt": "2026-07-09T09:56:17.116Z"
     },
     "nature-reviewer": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reviewer/SKILL.md",
-      "skillFolderHash": "a511845d36d46ed9dcefcfc60410c341086edd51",
+      "skillFolderHash": "584d6b2b39f7c1191a8cb66363bab7125ee1729d",
       "installedAt": "2026-06-09T11:26:33.316Z",
-      "updatedAt": "2026-07-04T08:49:54.737Z"
+      "updatedAt": "2026-07-09T09:56:19.245Z"
     },
     "nature-writing": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-writing/SKILL.md",
-      "skillFolderHash": "7f895866eaa7fa2621c3a9bc3dc370b636ef4912",
+      "skillFolderHash": "a185c24c47bdc8e869976b1338fca982b64802e6",
       "installedAt": "2026-06-09T11:26:33.318Z",
-      "updatedAt": "2026-06-19T08:14:10.426Z"
+      "updatedAt": "2026-07-09T09:56:22.513Z"
     },
     "paper-2-web": {
       "source": "K-Dense-AI/claude-scientific-writer",
@@ -2032,27 +2032,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-rnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "77a27832818824181c0bfc1433c0223e598b1f0b",
+      "skillFolderHash": "794e32de777d9e2f6bc733473a6d8c555bed971e",
       "installedAt": "2026-06-09T11:30:14.248Z",
-      "updatedAt": "2026-07-05T09:22:05.468Z"
+      "updatedAt": "2026-07-09T09:56:27.012Z"
     },
     "nfcore-sarek-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-sarek-wrapper/SKILL.md",
-      "skillFolderHash": "917c6b6b4701bd04852ca06e11ed8e00a426111c",
+      "skillFolderHash": "ba9b9a2f7af95527c3883987f0c6c212200ad228",
       "installedAt": "2026-06-09T11:30:14.250Z",
-      "updatedAt": "2026-07-05T09:22:10.061Z"
+      "updatedAt": "2026-07-09T09:56:30.678Z"
     },
     "nfcore-scrnaseq-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "649ad2b81dcaa52fc688ebc43bdd92f1cd8e85e3",
+      "skillFolderHash": "51312a8871950a23927de75a74955e405a481951",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-07-05T09:22:14.763Z"
+      "updatedAt": "2026-07-09T09:56:35.220Z"
     },
     "nutrigx-advisor": {
       "source": "ClawBio/ClawBio",

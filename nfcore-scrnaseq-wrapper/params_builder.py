@@ -267,4 +267,11 @@ def write_params_yaml(params: dict[str, object], *, output_dir: Path) -> Path:
 
 
 def serialize_params_yaml(params: dict[str, object]) -> str:
-    return yaml.dump(params, allow_unicode=True, sort_keys=False)
+    # Explanatory header mirrors nfcore-rnaseq/sarek so a reader knows the
+    # relative-path convention and the recommended replay path.
+    header = (
+        "# 'input' and 'outdir' are relative to the Nextflow launch directory (output_dir).\n"
+        "# Use reproducibility/commands.sh for the recommended replay path.\n"
+        "# Manual replay: cd <output_dir> && nextflow run nf-core/scrnaseq -params-file reproducibility/params.yaml\n"
+    )
+    return header + yaml.dump(params, allow_unicode=True, sort_keys=False)

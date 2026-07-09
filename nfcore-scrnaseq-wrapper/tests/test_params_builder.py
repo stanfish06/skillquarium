@@ -8,7 +8,28 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from params_builder import build_effective_params, build_params_file
+from params_builder import (
+    build_effective_params,
+    build_params_file,
+    serialize_params_yaml,
+)
+
+
+def test_params_yaml_has_explanatory_header():
+    """params.yaml must start with the same explanatory comment header the
+    nfcore-rnaseq and nfcore-sarek wrappers emit, so a reader knows input/outdir
+    are relative to the launch dir and how to replay. The header must not break
+    YAML parsing."""
+    text = serialize_params_yaml({"outdir": "upstream/results", "aligner": "star"})
+    lines = text.splitlines()
+    assert lines[0].startswith("# ")
+    assert "relative to the Nextflow launch directory" in text
+    assert "reproducibility/commands.sh" in text
+    assert "nf-core/scrnaseq" in text
+    # Comments must not corrupt the payload.
+    loaded = yaml.safe_load(text)
+    assert loaded["outdir"] == "upstream/results"
+    assert loaded["aligner"] == "star"
 
 
 def _base_args(tmp_path: Path, **overrides) -> Namespace:

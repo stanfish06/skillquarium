@@ -424,7 +424,20 @@ def test_dir_checksum_skips_large_directories(tmp_path, monkeypatch):
                          "st_uid", "st_gid", "st_atime", "st_mtime", "st_ctime"):
                 setattr(self, attr, getattr(original_stat, attr))
 
-    monkeypatch.setattr("pathlib.Path.stat", lambda self, **kw: FakeStat())
+    # Patch stat() ONLY for the target "Genome" file (so it reports 6 GB). Every
+    # other stat — including the directory stats pathlib.Path.rglob() performs while
+    # walking the tree inside _dir_checksum — must use the real implementation. A
+    # globally-mocked Path.stat returns a regular-file st_mode for directories too,
+    # which breaks rglob's is-directory checks and can yield an empty traversal (and
+    # thus a wrong hash) on some Python versions.
+    _real_stat = Path.stat
+
+    def _fake_stat(self, **kw):
+        if self.name == "Genome":
+            return FakeStat()
+        return _real_stat(self, **kw)
+
+    monkeypatch.setattr("pathlib.Path.stat", _fake_stat)
 
     result = provenance_module._dir_checksum(large_dir)
 

@@ -227,6 +227,30 @@ def test_profile_rejects_unsafe_unknown_component():
     assert exc.value.details["invalid_components"] == ["bad profile"]
 
 
+@pytest.mark.parametrize(
+    "checker,binary,code",
+    [
+        ("_check_docker_profile", "docker", "DOCKER_NOT_RUNNING"),
+        ("_check_podman_profile", "podman", "PODMAN_NOT_RUNNING"),
+    ],
+)
+def test_backend_daemon_down_message_matches_sibling_wording(monkeypatch, checker, binary, code):
+    """When the backend is installed but its daemon/socket is down, the message must
+    use the same "<binary> is installed but its service is not available." wording as
+    the nfcore-rnaseq / nfcore-sarek wrappers (cross-wrapper consistency), and be
+    internally consistent between docker and podman."""
+    monkeypatch.setattr(preflight.shutil, "which", lambda name: f"/usr/bin/{name}")
+
+    class _Info:
+        returncode = 1
+
+    monkeypatch.setattr(preflight.subprocess, "run", lambda *a, **k: _Info())
+    with pytest.raises(SkillError) as exc:
+        getattr(preflight, checker)(binary)
+    assert exc.value.error_code == code
+    assert exc.value.message == f"{binary.capitalize()} is installed but its service is not available."
+
+
 def test_preflight_rejects_missing_nextflow_config(tmp_path, monkeypatch):
     args = _args(tmp_path)
     args.extra_config = [str(tmp_path / "missing.config")]

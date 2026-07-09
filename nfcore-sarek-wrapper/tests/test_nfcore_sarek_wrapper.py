@@ -741,8 +741,11 @@ def test_main_demo_check_no_executor_call(module, monkeypatch, tmp_path):
     ])
     assert rc == 0
     assert "execute" not in call_log
-    check_path = tmp_path / "out" / "reproducibility" / "check_result.json"
+    # check_result.json lands at the output root — parallel to result.json and
+    # matching nfcore-rnaseq/scrnaseq (not inside reproducibility/).
+    check_path = tmp_path / "out" / "check_result.json"
     assert check_path.exists()
+    assert not (tmp_path / "out" / "reproducibility" / "check_result.json").exists()
     payload = json.loads(check_path.read_text())
     assert payload["ok"] is True
     assert payload["mode"] == "check"

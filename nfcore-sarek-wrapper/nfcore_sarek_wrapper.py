@@ -1394,10 +1394,12 @@ def _write_check_report(
         },
         "pipeline_source": pipeline_source,
     }
-    repro_dir = output_dir / "reproducibility"
-    repro_dir.mkdir(parents=True, exist_ok=True)
+    # check_result.json lands at the output root — parallel to result.json and
+    # matching nfcore-rnaseq/scrnaseq. Preflight's _IGNORED_ROOT_NAMES tolerates
+    # it so a subsequent real run in the same directory is not blocked.
+    output_dir.mkdir(parents=True, exist_ok=True)
     write_text_lf(
-        repro_dir / "check_result.json", json.dumps(payload, indent=2, default=str)
+        output_dir / "check_result.json", json.dumps(payload, indent=2, default=str)
     )
     _print("[check] Preflight passed.")
     _print(f"  Samples: {payload['samplesheet']['sample_count']}")

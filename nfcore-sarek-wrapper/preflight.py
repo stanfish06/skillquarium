@@ -615,6 +615,16 @@ def _check_macos_docker_tmp(profile: str, output_dir: Path) -> list[str]:
     return []
 
 
+# Root-level entries that must not trip OUTPUT_DIR_NOT_EMPTY: the reproducibility
+# bundle (written by --check and staging), OS/VCS scratch files, and a prior
+# --check summary (check_result.json). Mirrors nfcore-rnaseq/scrnaseq so the
+# three wrappers accept the same set of pre-existing output-dir contents; on
+# macOS, Finder writes .DS_Store into any visited folder.
+_IGNORED_ROOT_NAMES = frozenset(
+    {"reproducibility", ".DS_Store", ".gitkeep", ".gitignore", "Thumbs.db", "check_result.json"}
+)
+
+
 def _check_output_dir(output_dir: Path, *, repo_root: Path, resume: bool) -> None:
     output_dir = output_dir.expanduser().resolve()
     repo_root = repo_root.expanduser().resolve()
@@ -635,7 +645,7 @@ def _check_output_dir(output_dir: Path, *, repo_root: Path, resume: bool) -> Non
     except FileNotFoundError:
         return
     if entries:
-        entries = [entry for entry in entries if entry.name != "reproducibility"]
+        entries = [entry for entry in entries if entry.name not in _IGNORED_ROOT_NAMES]
     if entries:
         raise SkillError(
             stage="preflight",

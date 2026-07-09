@@ -284,7 +284,7 @@ def _check_docker_profile(profile: str) -> dict[str, object]:
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.DOCKER_NOT_RUNNING,
-            message="Docker is installed but the daemon is not available.",
+            message="Docker is installed but its service is not available.",
             fix="Start Docker Desktop or the Docker daemon before running this skill.",
             details={"profile": profile},
         )
@@ -367,7 +367,7 @@ def _check_podman_profile(profile: str) -> dict[str, object]:
         raise SkillError(
             stage="preflight",
             error_code=ErrorCode.PODMAN_NOT_RUNNING,
-            message="Podman is installed but the service is not available.",
+            message="Podman is installed but its service is not available.",
             fix="Start the Podman service or socket before running this skill.",
             details={"profile": profile},
         )

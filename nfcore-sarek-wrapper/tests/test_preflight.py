@@ -346,6 +346,37 @@ def test_output_dir_nonempty_no_resume(tmp_path):
     assert exc.value.error_code == ErrorCode.OUTPUT_DIR_NOT_EMPTY
 
 
+@pytest.mark.parametrize(
+    "junk_name",
+    [".DS_Store", ".gitkeep", ".gitignore", "Thumbs.db", "check_result.json"],
+)
+def test_output_dir_tolerates_ignored_root_files(tmp_path, junk_name):
+    """Stray OS/VCS scratch files and a prior --check summary at the output root
+    must not trip OUTPUT_DIR_NOT_EMPTY (parity with nfcore-rnaseq/scrnaseq). On
+    macOS, Finder writes .DS_Store into any visited folder, so rejecting it would
+    make sarek fail on directories the sibling wrappers accept."""
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    out = tmp_path / "out"
+    out.mkdir()
+    (out / junk_name).write_text("x")
+    # Must not raise.
+    _check_output_dir(out, repo_root=repo, resume=False)
+
+
+def test_output_dir_check_then_run_same_dir(tmp_path):
+    """A --check run writes check_result.json at the output root; a subsequent
+    real run in the same directory must still pass the empty-dir gate."""
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    out = tmp_path / "out"
+    out.mkdir()
+    (out / "check_result.json").write_text("{}")
+    (out / "reproducibility").mkdir()
+    # reproducibility/ + check_result.json only → tolerated.
+    _check_output_dir(out, repo_root=repo, resume=False)
+
+
 
 
 

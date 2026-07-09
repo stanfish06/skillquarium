@@ -26,7 +26,11 @@ def test_contract_version_is_4_1_0():
 def test_official_params_include_known_4_1_0_parameters():
     assert OFFICIAL_PARAMS["aligner"]["default"] == "simpleaf"
     assert OFFICIAL_PARAMS["protocol"]["default"] == "auto"
-    assert OFFICIAL_PARAMS["save_align_intermeds"]["default"] is True
+    # nf-core/scrnaseq 4.1.0 declares no default for save_align_intermeds (it is an
+    # opt-in boolean, false when unset — same as save_reference). The contract must
+    # not invent a `default: True`, which would misrepresent the upstream schema.
+    assert "default" not in OFFICIAL_PARAMS["save_align_intermeds"]
+    assert OFFICIAL_PARAMS["save_align_intermeds"]["type"] == "boolean"
     assert OFFICIAL_PARAMS["skip_emptydrops"]["deprecated"] is True
     assert "cellrangermulti" in OFFICIAL_PARAMS["aligner"]["enum"]
     assert (

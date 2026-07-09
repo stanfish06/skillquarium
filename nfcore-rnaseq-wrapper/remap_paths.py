@@ -43,6 +43,22 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 _BUNDLE_DIR = Path(__file__).resolve().parent
+
+
+def _write_text_lf(path: Path, text: str) -> None:
+    """Write ``text`` with LF line endings on every OS (self-contained).
+
+    This script is shipped inside the reproducibility bundle and runs standalone
+    at replay (no ClawBio package available), so it cannot import the shared
+    ``clawbio.common.textio`` helper. CRLF/CR are normalised to LF and the result
+    is written as bytes (bypassing text-mode newline translation) so a rewrite on
+    Windows never reintroduces CRLF into commands.sh, params.yaml, or checksums.
+    Mirrors the nfcore-sarek-wrapper helper.
+    """
+    normalised = text.replace("\r\n", "\n").replace("\r", "\n")
+    Path(path).write_bytes(normalised.encode("utf-8"))
+
+
 _FASTQ_COLUMNS = ("fastq_1", "fastq_2")
 _BAM_COLUMNS = ("genome_bam", "transcriptome_bam")
 _REMAPPABLE_COLUMNS = _FASTQ_COLUMNS + _BAM_COLUMNS
@@ -179,7 +195,7 @@ def remap_commands_references(
     if not dry_run and changes:
         backup = commands_sh.with_suffix(".sh.bak")
         shutil.copy2(commands_sh, backup)
-        commands_sh.write_text(updated, encoding="utf-8")
+        _write_text_lf(commands_sh, updated)
 
     return changes
 
@@ -232,7 +248,7 @@ def update_commands_output(commands_sh: Path, new_output_dir: str) -> bool:
         return False
     backup = commands_sh.with_suffix(".sh.bak")
     shutil.copy2(commands_sh, backup)
-    commands_sh.write_text(updated, encoding="utf-8")
+    _write_text_lf(commands_sh, updated)
     return True
 
 
@@ -483,10 +499,7 @@ def _regenerate_checksums(bundle_dir: Path) -> None:
             except ValueError:
                 rel = f.name
             lines.append(f"{_sha256_file(f)}  {rel}")
-    checksum_path.write_text(
-        "\n".join(lines) + ("\n" if lines else ""),
-        encoding="utf-8",
-    )
+    _write_text_lf(checksum_path, "\n".join(lines) + ("\n" if lines else ""))
 
 
 def _regenerate_manifest_stub(bundle_dir: Path, commands_sh: Path) -> None:
@@ -507,10 +520,7 @@ def _regenerate_manifest_stub(bundle_dir: Path, commands_sh: Path) -> None:
         "commands_sh": str(commands_sh),
         "regenerated_at": datetime.now(timezone.utc).isoformat(),
     }
-    (bundle_dir / "manifest.json").write_text(
-        json.dumps(manifest, indent=2),
-        encoding="utf-8",
-    )
+    _write_text_lf(bundle_dir / "manifest.json", json.dumps(manifest, indent=2))
 
 
 def _regenerate_environment_stub(bundle_dir: Path) -> None:
@@ -520,13 +530,13 @@ def _regenerate_environment_stub(bundle_dir: Path) -> None:
     at run time.  Without the wrapper context those cannot be reconstructed, so
     this stub records only a named placeholder that auditors can recognise.
     """
-    (bundle_dir / "environment.yml").write_text(
+    _write_text_lf(
+        bundle_dir / "environment.yml",
         "# regenerated post-hoc by remap_paths.py --repair-bundle\n"
         "# Original environment snapshot was lost because the wrapper crashed during\n"
         "# post-processing. For the original snapshot, re-run the wrapper.\n"
         "name: clawbio-nfcore-rnaseq-wrapper\n"
         "regenerated_post_hoc: true\n",
-        encoding="utf-8",
     )
 
 

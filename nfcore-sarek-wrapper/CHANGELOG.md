@@ -16,9 +16,40 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
   incompatible with `NXF_OFFLINE` (under which Nextflow's own nf-schema file-existence
   validation still runs and fails on the remote paths). Shared wording across the
   three wrappers.
+- **"Output Structure" corrected.** The paragraph claimed the `reproducibility/`
+  bundle held `report.md` / `result.json` and that execution logs lived under
+  `reproducibility/logs/` with "no separate top-level `logs/` directory". The code
+  writes `report.md`, `result.json`, and `logs/` at the output root (matching the rest
+  of the same SKILL.md and the sibling wrappers). The paragraph now describes the real
+  layout, and the output tree lists `check_result.json` at the root.
 
 ### Fixed
 
+- **User `-c` configs are now copied into the bundle and replayed portably.** A
+  `--nextflow-config`/`-c` file living outside the output directory was rewritten to a
+  `<EDIT_ME>` placeholder in `commands.sh` (the portable-argv rewriter cannot anchor an
+  out-of-tree absolute path), so the reproduction script failed out-of-the-box unless
+  the user hand-edited it. Each external config is now copied into
+  `reproducibility/nextflow_configs/config_NN_<name>` before `commands.sh` is built, so
+  the argv rewriter resolves it to `$SCRIPT_DIR/nextflow_configs/<name>` — no
+  `<EDIT_ME>`, no host-specific absolute path. Configs already inside the bundle (e.g.
+  `macos_docker.config`), non-absolute values, and remote URIs are left untouched.
+  Matches the nfcore-scrnaseq-wrapper bundle.
+- **Output root tolerates OS/VCS scratch files (macOS parity).** `_check_output_dir`
+  previously rejected any root entry other than `reproducibility/`, so a stray
+  `.DS_Store` / `.gitkeep` / `.gitignore` / `Thumbs.db` at `--output` raised
+  `OUTPUT_DIR_NOT_EMPTY`. On macOS, Finder writes `.DS_Store` into any visited folder,
+  so sarek would spuriously fail on directories the nfcore-rnaseq / nfcore-scrnaseq
+  wrappers already accept. Sarek now shares the same `_IGNORED_ROOT_NAMES` tolerance
+  set.
+- **`check_result.json` moved to the output root.** `--check` wrote its summary to
+  `reproducibility/check_result.json`, whereas nfcore-rnaseq / nfcore-scrnaseq write
+  `<output>/check_result.json` — the check-mode parallel of `<output>/result.json`,
+  which all three already place at the root. Sarek now writes `check_result.json` at
+  the output root too; the new `_IGNORED_ROOT_NAMES` entry keeps a subsequent real run
+  in the same directory from tripping `OUTPUT_DIR_NOT_EMPTY`, and it joins `report.md`
+  / `result.json` in the checksum-manifest exclusion set (a wrapper summary is not a
+  pipeline output).
 - **Custom `--fasta` without `--genome` now disables iGenomes automatically.**
   nf-core/sarek 3.8.1 defaults `genome = 'GATK.GRCh38'` in `nextflow.config`, so a
   custom-reference run that supplied `--fasta` but left `--genome` unset would still

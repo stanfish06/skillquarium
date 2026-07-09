@@ -348,6 +348,24 @@ def test_build_repro_command_args_includes_reference_paths(tmp_path):
     assert command_args["--gtf"] == gtf.resolve().as_posix()
 
 
+def test_build_repro_command_args_records_allow_remote_inputs(tmp_path):
+    """A run that opted into remote inputs must replay with --allow-remote-inputs.
+    rnaseq's commands.sh re-invokes the wrapper (which re-runs preflight), so without
+    the flag the replay fails REMOTE_INPUT_NOT_ALLOWED even though the samplesheet/
+    params.yaml in the bundle carry the remote URIs. (sarek/scrnaseq replay Nextflow
+    directly and never hit the gate, so this only affects rnaseq.)"""
+    command_args = build_repro_command_args(tmp_path, args=_args(tmp_path, allow_remote_inputs=True))
+    assert "--allow-remote-inputs" in command_args
+    assert command_args["--allow-remote-inputs"] is None
+
+
+def test_build_repro_command_args_omits_allow_remote_inputs_when_unset(tmp_path):
+    """The flag is recorded only when the user actually opted in, mirroring every other
+    boolean flag — a local-only run's bundle must not silently enable remote fetches."""
+    command_args = build_repro_command_args(tmp_path, args=_args(tmp_path, allow_remote_inputs=False))
+    assert "--allow-remote-inputs" not in command_args
+
+
 def test_build_repro_command_args_demo_omits_input(tmp_path):
     command_args = build_repro_command_args(tmp_path, args=_args(tmp_path, demo=True))
     assert "--demo" in command_args
@@ -421,21 +439,53 @@ def test_build_repro_command_args_sylph_multi_paths_resolved_individually(tmp_pa
 
 
 def test_build_repro_command_args_nextflow_config_included(tmp_path):
-    """--nextflow-config paths must appear in build_repro_command_args output.
-
-    If a user ran with --nextflow-config hpc.config --nextflow-config rsem.config,
-    commands.sh must include those flags so the replay is reproducible.
-    """
+    """--nextflow-config configs are copied into the bundle and replayed via
+    ${SCRIPT_DIR}, so a run with --nextflow-config hpc.config --nextflow-config
+    rsem.config replays portably (not via host-specific absolute paths)."""
     cfg1 = tmp_path / "hpc.config"
     cfg2 = tmp_path / "rsem.config"
-    cfg1.write_text("", encoding="utf-8")
-    cfg2.write_text("", encoding="utf-8")
+    cfg1.write_text("process { cpus = 2 }\n", encoding="utf-8")
+    cfg2.write_text("params { x = 1 }\n", encoding="utf-8")
     args = _args(tmp_path, nextflow_config=[str(cfg1), str(cfg2)])
     result = build_repro_command_args(tmp_path, args=args)
     assert "--nextflow-config" in result, "--nextflow-config must appear in repro command args"
     configs = result["--nextflow-config"]
-    assert str(cfg1.resolve()) in configs or str(cfg1) in configs
-    assert str(cfg2.resolve()) in configs or str(cfg2) in configs
+    assert configs == [
+        "${SCRIPT_DIR}/nextflow_configs/config_01_hpc.config",
+        "${SCRIPT_DIR}/nextflow_configs/config_02_rsem.config",
+    ]
+    # The files were actually copied into the bundle, verbatim.
+    staged_dir = tmp_path / "reproducibility" / "nextflow_configs"
+    assert (staged_dir / "config_01_hpc.config").read_text() == "process { cpus = 2 }\n"
+    assert (staged_dir / "config_02_rsem.config").read_text() == "params { x = 1 }\n"
+
+
+def test_build_repro_command_args_stages_config_outside_output_dir(tmp_path):
+    """The reported bug: a -c config living OUTSIDE the output directory must still
+    replay out-of-the-box. It is copied into reproducibility/nextflow_configs/ and
+    referenced via ${SCRIPT_DIR}, so commands.sh bakes no absolute host path and no
+    <EDIT_ME> placeholder."""
+    external = tmp_path / "elsewhere" / "limits.config"
+    external.parent.mkdir()
+    external.write_text("process { resourceLimits = [ memory: '12.GB' ] }\n", encoding="utf-8")
+    output_dir = tmp_path / "run"
+    output_dir.mkdir()
+    result = build_repro_command_args(output_dir, args=_args(output_dir, nextflow_config=[str(external)]))
+    configs = result["--nextflow-config"]
+    assert configs == ["${SCRIPT_DIR}/nextflow_configs/config_01_limits.config"]
+    for value in configs:
+        assert "<EDIT_ME>" not in value
+        assert not value.startswith("/"), "must not bake a host-specific absolute path"
+    copied = output_dir / "reproducibility" / "nextflow_configs" / "config_01_limits.config"
+    assert copied.read_text() == "process { resourceLimits = [ memory: '12.GB' ] }\n"
+
+
+def test_build_repro_command_args_remote_config_uri_passed_through(tmp_path):
+    """A remote config URI is not a local file, so it is replayed verbatim (not copied)."""
+    result = build_repro_command_args(
+        tmp_path, args=_args(tmp_path, nextflow_config=["https://example.org/hpc.config"])
+    )
+    assert result["--nextflow-config"] == ["https://example.org/hpc.config"]
 
 
 def test_commands_sh_replays_every_run_affecting_wrapper_flag(tmp_path):

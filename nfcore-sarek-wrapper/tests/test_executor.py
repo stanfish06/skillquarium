@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import shlex
 
 import pytest
 
@@ -71,7 +72,7 @@ def test_memory_limit_failure_hint(tmp_path):
     sig = "Process requirement exceeds available memory -- req: 72 GB; avail: 62.8 GB"
     with pytest.raises(SkillError) as exc:
         execute_nextflow(
-            ["sh", "-c", f"echo '{sig}' 1>&2; exit 1"],
+            ["sh", "-c", f"echo {shlex.quote(sig)} 1>&2; exit 1"],
             cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
         )
     assert "resourceLimits" in exc.value.fix
@@ -85,7 +86,7 @@ def test_network_unreachable_failure_hint(tmp_path):
     sig = "Network is unreachable (connect failed)"
     with pytest.raises(SkillError) as exc:
         execute_nextflow(
-            ["sh", "-c", f"echo '{sig}' 1>&2; exit 1"],
+            ["sh", "-c", f"echo {shlex.quote(sig)} 1>&2; exit 1"],
             cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
         )
     assert "preferIPv6Addresses" in exc.value.fix
@@ -113,7 +114,7 @@ def test_config_parse_failure_hint(tmp_path):
     sig = "Unable to parse config file: '/root/.nextflow/assets/nf-core/rnaseq/nextflow.config'"
     with pytest.raises(SkillError) as exc:
         execute_nextflow(
-            ["sh", "-c", f"echo \"{sig}\" 1>&2; exit 1"],
+            ["sh", "-c", f"echo {shlex.quote(sig)} 1>&2; exit 1"],
             cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
         )
     assert "NXF_OFFLINE" in exc.value.fix

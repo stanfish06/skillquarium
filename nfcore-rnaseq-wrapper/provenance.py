@@ -11,6 +11,7 @@ from typing import Any
 
 from clawbio.common.checksums import sha256_file
 from clawbio.common.reproducibility import write_checksums, write_environment_yml
+from clawbio.common.textio import write_text_lf
 
 _SKILL_DIR = Path(__file__).resolve().parent
 if str(_SKILL_DIR) in sys.path:
@@ -311,13 +312,13 @@ def write_reproducibility_manifest(
     }
     manifest_path = output_dir / "reproducibility" / "manifest.json"
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    write_text_lf(manifest_path, json.dumps(manifest, indent=2))
     return manifest_path
 
 
 def _write_provenance_payloads(provenance_dir: Path, payloads: dict[str, Any]) -> None:
     for filename, payload in payloads.items():
-        (provenance_dir / filename).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        write_text_lf(provenance_dir / filename, json.dumps(payload, indent=2))
 
 
 def _dir_checksum(path: Path) -> str:
