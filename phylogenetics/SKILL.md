@@ -23,6 +23,8 @@ conda install -c bioconda mafft iqtree fasttree
 pip install ete3
 ```
 
+> **⚠ ete3 maintenance warning:** `ete3` (the PyPI package installed above) has had no release since May 2023 and is effectively unmaintained. The actively developed fork is **ete4** (`pip install ete4`), which has a partially changed API (see [ete4 migration docs](https://etetoolkit.github.io/ete4/tutorial/tutorial_intro.html)). For new projects prefer ete4; for ete3-based code, pin your environment and test carefully on Python 3.10+ where ete3 compatibility is fragile.
+
 ## When to Use This Skill
 
 Use phylogenetics when:
