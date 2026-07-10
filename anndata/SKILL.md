@@ -3,7 +3,7 @@ name: anndata
 description: Data structure for annotated matrices in single-cell analysis. Use when working with .h5ad files or integrating with the scverse ecosystem. This is the data format skill—for analysis workflows use scanpy; for probabilistic models use scvi-tools; for population-scale queries use cellxgene-census.
 license: BSD-3-Clause license
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.11+ and uv. Examples target AnnData 0.12.16, with experimental APIs clearly marked where used.
+compatibility: Requires Python 3.12+ and uv. Examples target AnnData 0.13.1, with experimental APIs clearly marked where used.
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -26,16 +26,16 @@ Use this skill when:
 
 ## Installation
 
-Requires Python 3.11+. Current stable release: 0.12.16 (released 2026-05-18).
+Requires Python 3.12+. Current stable release: 0.13.1 (released 2026-07-08).
 
 ```bash
-uv pip install "anndata==0.12.16"
+uv pip install "anndata==0.13.1"
 
 # Lazy I/O and dask-backed operations
-uv pip install "anndata[dask,lazy]==0.12.16"
+uv pip install "anndata[dask,lazy]==0.13.1"
 
 # Development / docs (contributors)
-uv pip install "anndata[dev,test,doc]==0.12.16"
+uv pip install "anndata[dev,test,doc]==0.13.1"
 ```
 
 Use unpinned installs only when intentionally tracking the latest compatible release.
@@ -402,7 +402,7 @@ Use compression and appropriate formats:
 adata.strings_to_categoricals()
 adata.write_h5ad('file.h5ad', compression='gzip')
 
-# Use Zarr for cloud storage; v3 writes are opt-in in anndata 0.12
+# Use Zarr for cloud storage; v3 writes are opt-in in anndata 0.13
 import anndata as ad
 
 ad.settings.zarr_write_format = 3
