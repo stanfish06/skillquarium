@@ -13,6 +13,9 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 
 Molfeat is a comprehensive Python library for molecular featurization that unifies 100+ pre-trained embeddings and hand-crafted featurizers. Convert chemical structures (SMILES strings or RDKit molecules) into numerical representations for machine learning tasks including QSAR modeling, virtual screening, similarity searching, and deep learning applications. Features fast parallel processing, scikit-learn compatible transformers, and built-in caching.
 
+> [!WARNING]
+> **Python ceiling / maintenance risk:** molfeat **0.11.0** (May 2025) still declares `requires-python = ">=3.9,<3.11"`, so it **will not install on Python 3.11+**. Python 3.9 is EOL; 3.10 reaches EOL October 2026. Prefer a dedicated 3.10 env for legacy molfeat work, or use actively maintained alternatives on modern Python: **[[rdkit]]** / **[[datamol]]** fingerprints and descriptors, **[[deepchem]]** featurizers, or **[[torch-geometric]]** for custom GNN inputs.
+
 **Version note:** Examples target **molfeat 0.11.0** (PyPI stable, May 2025). Requires **Python 3.9–3.10** (`requires-python` caps below 3.11). Depends on **datamol ≥0.8.0** and **PyTorch ≥1.13**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically.
 
 ## When to Use This Skill

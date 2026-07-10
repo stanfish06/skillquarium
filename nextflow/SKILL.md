@@ -49,7 +49,13 @@ pip install nf-core            # or: conda install -c bioconda nf-core
 nf-core --version
 ```
 
-Pin the engine for reproducibility: `export NXF_VER=24.10.0` (use an [edge] release only if needed). For air-gapped/HPC, see `references/running-pipelines.md` (offline mode) and `references/configuration.md`.
+Pin the engine for reproducibility: `export NXF_VER=25.10.4` (current LTS as of mid-2026; use an [edge] release only if needed). Latest stable is often newer (e.g. 26.04.x) — prefer LTS for production science.
+
+**Upgrading from 24.10 → 25.10+:**
+- Remove `nextflow.preview.output = true` from configs — workflow `output {}` is stable; the preview flag fails parse in 25.10+.
+- Replace `process.executor = 'google-lifesciences'` with `google-batch` (Life Sciences API was discontinued July 2025).
+
+For air-gapped/HPC, see `references/running-pipelines.md` (offline mode) and `references/configuration.md`.
 
 ## Two Modes of Work
 
