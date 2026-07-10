@@ -14,7 +14,7 @@ created: 2026-06-12
 # performance-optimization
 
 > [!info] What it does
-> Optimizes application performance. Use when performance requirements exist, when you suspect performance regressions, or when Core Web Vitals or load times need improvement. Use when profiling reveals bottlenecks that need fixing.
+> Optimizes application performance across frontend, backend, queries, and databases. Use when performance requirements exist, when you suspect performance regressions, when Core Web Vitals or load times need improvement, when N+1 query patterns need fixing, or when profiling reveals bottlenecks.
 
 **Source:** [performance-optimization/SKILL.md](performance-optimization/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](maps/web-automation-frontend.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 

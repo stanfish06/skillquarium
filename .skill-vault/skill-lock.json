@@ -2406,9 +2406,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/code-review-and-quality/SKILL.md",
-      "skillFolderHash": "49d4d30c3839541abb063446b3b24bc6c0dc5ae6",
+      "skillFolderHash": "1252ada5c8ac5d557f4633d95972c102b8a199fe",
       "installedAt": "2026-06-12T08:07:57.843Z",
-      "updatedAt": "2026-06-23T07:32:38.684Z"
+      "updatedAt": "2026-07-10T09:51:23.700Z"
     },
     "code-simplification": {
       "source": "addyosmani/agent-skills",
@@ -2442,9 +2442,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/deprecation-and-migration/SKILL.md",
-      "skillFolderHash": "d80eaf65b255911ece940e91f9aa6008240fd2bb",
+      "skillFolderHash": "f710bd017dedb2615d78b4ce6ab42ce9f5a542f2",
       "installedAt": "2026-06-12T08:07:57.846Z",
-      "updatedAt": "2026-06-12T08:07:57.846Z"
+      "updatedAt": "2026-07-10T09:51:24.484Z"
     },
     "documentation-and-adrs": {
       "source": "addyosmani/agent-skills",
@@ -2469,9 +2469,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/frontend-ui-engineering/SKILL.md",
-      "skillFolderHash": "7c86ee1c42a9bbe3ef80c774a4bd5a49668513fb",
+      "skillFolderHash": "f70bc8f809c39b8e4b7cf7227f9c7d509d73fa13",
       "installedAt": "2026-06-12T08:07:57.848Z",
-      "updatedAt": "2026-06-12T08:07:57.848Z"
+      "updatedAt": "2026-07-10T09:51:25.202Z"
     },
     "git-workflow-and-versioning": {
       "source": "addyosmani/agent-skills",
@@ -2523,9 +2523,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/performance-optimization/SKILL.md",
-      "skillFolderHash": "f904d17bd259a81493209cfc3f3c00cafd321b3a",
+      "skillFolderHash": "c329c2c8d8b760d794b864a5b642e0a80a49a68e",
       "installedAt": "2026-06-12T08:07:57.853Z",
-      "updatedAt": "2026-06-12T08:07:57.853Z"
+      "updatedAt": "2026-07-10T09:51:25.906Z"
     },
     "planning-and-task-breakdown": {
       "source": "addyosmani/agent-skills",

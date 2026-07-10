@@ -32,7 +32,7 @@ created: 2026-06-13
 - [figma-implement-design](../figma-implement-design.md) — Translates Figma designs into production-ready application code with 1:1 visual fidelity
 - [figma-use](../figma-use.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call
 - [frontend-design](../frontend-design.md) — Create distinctive, production-grade frontend interfaces with high design quality
-- [frontend-ui-engineering](../frontend-ui-engineering.md) — Builds production-quality UIs. Use when building or modifying user-facing interfaces
+- [frontend-ui-engineering](../frontend-ui-engineering.md) — Builds production-quality, accessible, responsive user-facing UIs
 - [full-output-enforcement](../full-output-enforcement.md) — Overrides default LLM truncation behavior
 - [gpt-taste](../gpt-taste.md) — Elite UX/UI & Advanced GSAP Motion Engineer
 - [high-end-visual-design](../high-end-visual-design.md) — Teaches the AI to design like a high-end agency
@@ -41,7 +41,7 @@ created: 2026-06-13
 - [imagegen-frontend-web](../imagegen-frontend-web.md) — Elite frontend image-direction skill for generating premium, conversion-aware website design references
 - [industrial-brutalist-ui](../industrial-brutalist-ui.md) — Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics
 - [minimalist-ui](../minimalist-ui.md) — Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels
-- [performance-optimization](../performance-optimization.md) — Optimizes application performance. Use when performance requirements exist, when you suspect performance regressions, or when Core Web Vitals or load times need improvement
+- [performance-optimization](../performance-optimization.md) — Optimizes application performance across frontend, backend, queries, and databases
 - [playwright-best-practices](../playwright-best-practices.md) — Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling...
 - [playwright-cli](../playwright-cli.md) — Automate browser interactions, test web pages and work with Playwright tests
 - [redesign-existing-projects](../redesign-existing-projects.md) — Upgrades existing websites and apps to premium quality
