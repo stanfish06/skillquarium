@@ -33,17 +33,22 @@ Every request except `GET /openapi.json` requires authentication. Store tokens i
 
 ## Python SDK
 
-**Version note:** `adaptyv-sdk` **0.1.0** (beta) is not yet on PyPI — install from GitHub:
+**Version note:** `adaptyv-sdk` is **not on PyPI** and has **no GitHub releases/tags**. Install from a **pinned commit** so installs are reproducible (unpinned `main` can break silently).
 
 ```bash
-uv pip install "git+https://github.com/adaptyvbio/adaptyv-sdk.git"
+# Pin to a known commit (update deliberately after verifying the API still matches docs)
+# cdf207819ed5 — "align SDK with the deployed Foundry API (v0.0.2)"
+uv pip install "git+https://github.com/adaptyvbio/adaptyv-sdk.git@cdf207819ed5"
 ```
 
 In a project with `pyproject.toml`:
 
 ```bash
-uv add "adaptyv-sdk @ git+https://github.com/adaptyvbio/adaptyv-sdk.git"
+uv add "adaptyv-sdk @ git+https://github.com/adaptyvbio/adaptyv-sdk.git@cdf207819ed5"
 ```
+
+> [!WARNING]
+> There is no stable version number. Prefer commit SHAs over branch names. Re-pin after intentional SDK upgrades and re-check examples against [docs.adaptyvbio.com](https://docs.adaptyvbio.com/api-reference).
 
 **Environment variables** (set in shell or `.env` file):
 

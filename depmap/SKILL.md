@@ -110,16 +110,19 @@ def download_depmap_data(url, output_path):
         for chunk in response.iter_content(chunk_size=8192):
             f.write(chunk)
 
-# DepMap 24Q4 data files (update version as needed)
-FILES = {
-    "crispr_gene_effect": "https://figshare.com/ndownloader/files/...",
-    # OR download from: https://depmap.org/portal/download/all/
-    # Files available:
-    # CRISPRGeneEffect.csv - Chronos gene effect scores
-    # OmicsExpressionProteinCodingGenesTPMLogp1.csv - mRNA expression
-    # OmicsSomaticMutationsMatrixDamaging.csv - mutation binary matrix
-    # OmicsCNGene.csv - copy number
-    # sample_info.csv - cell line metadata
+# Prefer the portal download UI (current release is DepMap 26Q1 as of ~March 2026).
+# Do NOT hardcode figshare /files/... URLs here — file IDs change every quarterly release.
+# 1. Open https://depmap.org/portal/download/all/
+# 2. Download the current release files you need, e.g.:
+#    CRISPRGeneEffect.csv - Chronos gene effect scores
+#    OmicsExpressionProteinCodingGenesTPMLogp1.csv - mRNA expression
+#    OmicsSomaticMutationsMatrixDamaging.csv - mutation binary matrix
+#    OmicsCNGene.csv - copy number
+#    Model.csv / sample_info equivalent - cell line metadata
+# 3. Point loaders at local paths:
+LOCAL_FILES = {
+    "crispr_gene_effect": "CRISPRGeneEffect.csv",
+    "sample_info": "Model.csv",  # name varies by release; check the portal
 }
 
 def load_depmap_gene_effect(filepath="CRISPRGeneEffect.csv"):
@@ -296,4 +299,4 @@ Download all files from: https://depmap.org/portal/download/all/
 - **DepMap paper**: Behan FM et al. (2019) Nature. PMID: 30971826
 - **Chronos paper**: Dempster JM et al. (2021) Nature Methods. PMID: 34349281
 - **GitHub**: https://github.com/broadinstitute/depmap-portal
-- **Figshare**: https://figshare.com/articles/dataset/DepMap_24Q4_Public/27993966
+- **Current release downloads**: https://depmap.org/portal/download/all/ (prefer portal over stale Figshare deep-links; quarterly IDs change)

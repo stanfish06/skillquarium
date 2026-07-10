@@ -2,7 +2,7 @@
 name: torch-geometric
 description: PyTorch Geometric (PyG) for graph neural networks — node/link/graph classification, message passing (GCN, GAT, GraphSAGE, GIN), heterogeneous graphs, neighbor sampling, and custom datasets. Use when working with torch_geometric, not for general NetworkX analytics or non-graph PyTorch models.
 license: MIT license
-compatibility: Requires Python 3.10+, PyTorch 2.6+, and torch-geometric 2.7.x. Optional extension wheels (pyg-lib, torch-scatter, torch-sparse, torch-cluster) must match your PyTorch/CUDA build from https://data.pyg.org/whl.
+compatibility: Requires Python 3.10+, PyTorch 2.9+ (for torch-geometric 2.8.x), and torch-geometric 2.8.x. Optional extension wheels (pyg-lib, torch-scatter, torch-sparse) must match your PyTorch/CUDA build from https://data.pyg.org/whl.
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -12,24 +12,27 @@ PyG is the standard library for Graph Neural Networks built on PyTorch. It provi
 
 ## Installation
 
-Tested against **torch-geometric 2.7.x** (Oct 2025). Requires **Python 3.10+** and **PyTorch 2.6+**.
+Tested against **torch-geometric 2.8.x** (current stable). Requires **Python 3.10+** and **PyTorch 2.9+** (2.8.0 raised the torch floor — PyTorch 2.6–2.8 are no longer supported by latest PyG).
 
 ```bash
 # 1. Install PyTorch first (match your CUDA/CPU setup — see https://pytorch.org/get-started/locally/)
+#    Need torch >=2.9 for PyG 2.8.x
 uv pip install torch
 
 # 2. Core PyG (no extension wheels required for basic usage)
-uv pip install torch_geometric
+uv pip install "torch_geometric>=2.8,<2.9"
 ```
 
-Optional accelerated ops (`pyg-lib`, `torch-scatter`, `torch-sparse`, `torch-cluster`) are **not required** for basic PyG usage (since PyG 2.3). Install version-matched wheels from the [PyG wheel index](https://data.pyg.org/whl) after checking your PyTorch and CUDA versions:
+Optional accelerated ops (`pyg-lib`, `torch-scatter`, `torch-sparse`) are **not required** for basic PyG usage (since PyG 2.3). Install version-matched wheels from the [PyG wheel index](https://data.pyg.org/whl) after checking your PyTorch and CUDA versions:
 
 ```bash
 python -c "import torch; print(torch.__version__, torch.version.cuda)"
-# Then install wheels for your torch+CUDA combo, e.g.:
-uv pip install pyg-lib torch-scatter torch-sparse torch-cluster \
-  -f https://data.pyg.org/whl/torch-2.8.0+cu128.html
+# Then install wheels for your torch+CUDA combo, e.g. torch 2.9 + CUDA 12.8:
+uv pip install pyg-lib torch-scatter torch-sparse \
+  -f https://data.pyg.org/whl/torch-2.9.0+cu128.html
 ```
+
+**Removed in PyG 2.8:** `torch-cluster` and `torch-spline-conv` are no longer part of the optional extension set — drop them from install commands copied from older docs.
 
 Check your version:
 
@@ -38,11 +41,11 @@ import torch_geometric
 print(torch_geometric.__version__)
 ```
 
-**Conda:** the `pyg` conda channel is no longer maintained for PyTorch >2.5 — use `uv pip install` and the wheel index above instead.
+**Conda:** the `pyg` conda channel is no longer maintained for modern PyTorch — use `uv pip install` and the wheel index above instead.
 
-### PyG 2.7 notes
+### PyG 2.8 notes
 
-PyG 2.7 dropped Python 3.9 and PyTorch ≤2.5. See the [2.7.0 release notes](https://github.com/pyg-team/pytorch_geometric/releases/tag/2.7.0) for PyTorch 2.6–2.8 compatibility tables. `torch_geometric.distributed` is deprecated — use standard `torch.distributed` DDP (see `references/scaling.md`).
+PyG 2.8 requires **PyTorch 2.9+** and continues the 2.7 drop of Python 3.9. See the [2.8.0 release notes](https://github.com/pyg-team/pytorch_geometric/releases/tag/2.8.0). `torch_geometric.distributed` remains deprecated — use standard `torch.distributed` DDP (see `references/scaling.md`).
 
 ## Core Concepts
 
