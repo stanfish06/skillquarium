@@ -11,6 +11,9 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 
 TorchDrug is a comprehensive PyTorch-based machine learning toolbox for drug discovery and molecular science. Apply graph neural networks, pre-trained models, and task definitions to molecules, proteins, and biological knowledge graphs, including molecular property prediction, protein modeling, knowledge graph reasoning, molecular generation, retrosynthesis planning, with 40+ curated datasets and 20+ model architectures.
 
+> [!WARNING]
+> **Maintenance freeze:** TorchDrug has had no PyPI release since **0.2.1 (July 2023)** and the upstream repository shows no development activity. It is incompatible with **Python ≥3.11** and **PyTorch ≥2.1**, blocking installation on all current environments. For actively maintained alternatives, consider **DeepChem** (drug discovery, broadly equivalent feature set) or **PyTorch Geometric** (custom GNN architectures). Removal may be appropriate — see [issue #188](https://github.com/stanfish06/my-skills/issues/188).
+
 ## When to Use This Skill
 
 This skill should be used when working with:
