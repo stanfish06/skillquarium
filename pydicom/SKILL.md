@@ -106,13 +106,11 @@ plt.show()
 **Working with color images:**
 
 ```python
-# RGB images have shape (rows, columns, 3)
-if ds.PhotometricInterpretation == 'RGB':
-    rgb_image = ds.pixel_array
-    plt.imshow(rgb_image)
-elif ds.PhotometricInterpretation == 'YBR_FULL':
-    from pydicom.pixel_data_handlers.util import convert_color_space
-    rgb_image = convert_color_space(ds.pixel_array, 'YBR_FULL', 'RGB')
+# pydicom 3.0+: pixel_array auto-converts YCbCr (YBR_FULL, YBR_FULL_422) to RGB
+# by default, so ds.pixel_array already returns an RGB array for these formats.
+# No manual convert_color_space() call is needed.
+if ds.PhotometricInterpretation in ('RGB', 'YBR_FULL', 'YBR_FULL_422'):
+    rgb_image = ds.pixel_array  # RGB array in all cases (pydicom 3.0+)
     plt.imshow(rgb_image)
 ```
 
@@ -290,7 +288,7 @@ print(f"Transfer Syntax Name: {ds.file_meta.TransferSyntaxUID.name}")
 
 # Decompress and save as uncompressed
 ds.decompress()
-ds.save_as('uncompressed.dcm', write_like_original=False)
+ds.save_as('uncompressed.dcm', enforce_file_format=True)
 
 # Or compress when saving (requires appropriate encoder)
 ds_uncompressed = pydicom.dcmread('uncompressed.dcm')
@@ -413,7 +411,7 @@ Detailed reference information is available in the `references/` directory:
 ## Best Practices
 
 1. **Always check for required attributes** before accessing them using `hasattr()` or `get()`
-2. **Preserve file metadata** when modifying files by using `save_as()` with `write_like_original=True`
+2. **Preserve file metadata** when modifying files by using `save_as()` with `enforce_file_format=True` (replaces the deprecated `write_like_original` parameter removed in pydicom v4.0)
 3. **Use Transfer Syntax UIDs** to understand compression format before processing pixel data
 4. **Handle exceptions** when reading files from untrusted sources
 5. **Apply proper windowing** (VOI LUT) for medical image visualization
@@ -428,4 +426,3 @@ Official pydicom documentation: https://pydicom.github.io/pydicom/dev/
 - Tutorials: https://pydicom.github.io/pydicom/dev/tutorials/index.html
 - API Reference: https://pydicom.github.io/pydicom/dev/reference/index.html
 - Examples: https://pydicom.github.io/pydicom/dev/auto_examples/index.html
-
