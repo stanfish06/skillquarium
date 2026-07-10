@@ -19,6 +19,8 @@ created: 2026-06-09
 ## Related skills
 
 - [cellxgene-census](cellxgene-census.md) — Query the CZ CELLxGENE Census programmatically for versioned public single-cell and spatial transcriptomics data
+- [mofaplus-multi-omics](mofaplus-multi-omics.md) — Multi-Omics Factor Analysis v2 (MOFA+) with mofapy2
+- [muon-multiomics-singlecell](muon-multiomics-singlecell.md) — Multi-modal single-cell analysis with muon/MuData
 - [scanpy](scanpy.md) — Standard single-cell RNA-seq analysis pipeline
 - [scirpy-immune-repertoire](scirpy-immune-repertoire.md) — Single-cell immune receptor analysis with Scirpy for scanpy, anndata, and scvi-tools projects
 - [scrna-embedding](scrna-embedding.md) — Local scVI/scANVI-based single-cell latent embedding and batch-aware integration from raw-count .h5ad or 10x Matrix Market input, with stable integrated AnnData export for downstream...

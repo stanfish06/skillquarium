@@ -23,6 +23,7 @@ created: 2026-06-17
 - [fragpipe-pyteomics-proteomics](fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
 - [histolab](histolab.md) — Lightweight WSI tile extraction and preprocessing
 - [matchms](matchms.md) — Spectral similarity and compound identification for metabolomics
+- [mofaplus-multi-omics](mofaplus-multi-omics.md) — Multi-Omics Factor Analysis v2 (MOFA+) with mofapy2
 - [pathway-enrichment](pathway-enrichment.md) — Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results
 - [pyopenms](pyopenms.md) — Complete mass spectrometry analysis platform
 - [spatialdata-squidpy](spatialdata-squidpy.md) — Spatial omics workflows with SpatialData and Squidpy alongside scanpy, anndata, and napari-viz
