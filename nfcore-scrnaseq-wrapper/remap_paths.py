@@ -583,6 +583,27 @@ def cmd_repair_bundle(bundle_dir: Path | None = None) -> int:
     return 0
 
 
+def cmd_output_dir_hint(new_output_dir: str) -> int:
+    """Handle ``--output-dir`` for CLI parity with the rnaseq/sarek wrappers.
+
+    Those wrappers bake an absolute ``--output`` into ``commands.sh`` and expose
+    ``--output-dir`` to rewrite it. The scrnaseq bundle instead self-relocates:
+    ``commands.sh`` resolves its output directory from its own location and
+    ``params.yaml`` stores output-relative paths, so moving the output directory needs
+    no rewrite. This command accepts the flag and explains that, so a user reaching for
+    ``--output-dir`` out of habit gets clear guidance instead of an argument error.
+    """
+    print(
+        "The nfcore-scrnaseq-wrapper reproducibility bundle is self-relocating:\n"
+        "  • commands.sh resolves its output directory from its own location, and\n"
+        "  • params.yaml stores paths relative to that directory.\n"
+        f"So there is nothing to rewrite for a new output directory ({new_output_dir}).\n"
+        "Just move the whole output directory and run `bash reproducibility/commands.sh`.\n"
+        "(If your FASTQ/reference paths also changed, use --old/--new and --refs-old/--refs-new.)"
+    )
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Make this reproducibility bundle portable across machines.",
@@ -632,8 +653,18 @@ examples:
         action="store_true",
         help="Regenerate missing bundle files (manifest.json, checksums.sha256, environment.yml)",
     )
+    parser.add_argument(
+        "--output-dir",
+        metavar="PATH",
+        help=(
+            "Accepted for parity with the rnaseq/sarek wrappers. This bundle "
+            "self-relocates, so no rewrite is needed — just move the output directory."
+        ),
+    )
     args = parser.parse_args()
 
+    if args.output_dir is not None:
+        return cmd_output_dir_hint(args.output_dir)
     if args.repair_bundle:
         return cmd_repair_bundle()
     if args.verify:

@@ -208,6 +208,26 @@ def test_network_unreachable_failure_hint(tmp_path):
     assert "preferIPv6Addresses" in exc.value.fix
 
 
+def test_network_hint_detected_from_nextflow_log(tmp_path):
+    """When Nextflow fails during config parsing, the real cause ('Network is
+    unreachable') is frequently only in `.nextflow.log` (written to the launch cwd),
+    not in stdout/stderr. The environment hint must scan `.nextflow.log` too, or the
+    IPv6/NAT64 `NXF_OPTS='-Djava.net.preferIPv6Addresses=true'` hint never shows on the
+    hosts that need it."""
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    cmd = (
+        "printf 'Caused by: java.net.SocketException: Network is unreachable' > .nextflow.log; "
+        "echo 'Unable to parse config file' 1>&2; exit 1"
+    )
+    with pytest.raises(SkillError) as exc:
+        execute_nextflow(
+            ["sh", "-c", cmd],
+            cwd=output_dir, output_dir=output_dir, timeout_seconds=30,
+        )
+    assert "preferIPv6Addresses" in exc.value.fix
+
+
 def test_no_environment_hint_without_signature(tmp_path):
     """A generic failure with no known signature must not append the env hints."""
     output_dir = tmp_path / "out"

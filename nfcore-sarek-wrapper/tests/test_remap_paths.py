@@ -39,6 +39,29 @@ def test_regenerate_checksums_mirrors_provenance_exclusions(tmp_path: Path):
     assert "checksums.sha256" not in text
 
 
+def test_regenerate_checksums_excludes_nested_upstream_work(tmp_path: Path):
+    """The default Nextflow work dir is <output>/upstream/work — nested one level
+    below the output root. The standalone regenerator must exclude it there too,
+    otherwise a remapped bundle's manifest would list ephemeral scratch files."""
+    output_dir = tmp_path / "out"
+    bundle = output_dir / "reproducibility"
+    (output_dir / "upstream" / "results").mkdir(parents=True)
+    (output_dir / "upstream" / "results" / "var.vcf.gz").write_bytes(b"vcf")
+    bundle.mkdir(parents=True)
+    (bundle / "params.yaml").write_text("x", encoding="utf-8")
+    (output_dir / "upstream" / "work" / "ab" / "cd12").mkdir(parents=True)
+    (output_dir / "upstream" / "work" / "ab" / "cd12" / "task.bam").write_text(
+        "ephemeral", encoding="utf-8"
+    )
+
+    remap_paths._regenerate_checksums(bundle)
+    text = (bundle / "checksums.sha256").read_text()
+
+    assert "upstream/results/var.vcf.gz" in text
+    assert "upstream/work/" not in text
+    assert "task.bam" not in text
+
+
 # ---------------------------------------------------------------------------
 # params.yaml reference remapping (full cross-OS portability)
 # ---------------------------------------------------------------------------

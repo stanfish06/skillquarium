@@ -889,6 +889,32 @@ def _check_genome_known(params: dict[str, Any]) -> list[str]:
         return []
     if _truthy(params.get("igenomes_ignore")):
         return []
+    if genome == "testdata.nf-core.sarek":
+        # nf-core/sarek's tiny test genome is defined only in the test-datasets mirror
+        # (conf/test.config sets igenomes_base to that repo), never in the default
+        # s3://ngi-igenomes catalogue. Used in a normal run without that override it
+        # fails late during nf-schema reference validation with no warning. -profile
+        # test / --demo supply the matching base; otherwise require it explicitly. A
+        # custom mirror is assumed to provide the key (matches the softening below).
+        if _uses_upstream_test_profile(params) or not _is_default_igenomes_base(params):
+            return []
+        raise SkillError(
+            stage="preflight",
+            error_code=ErrorCode.INVALID_GENOME,
+            message=(
+                "--genome 'testdata.nf-core.sarek' is nf-core/sarek's test-only genome; "
+                "it exists only in the nf-core test-datasets mirror, not the default "
+                "iGenomes catalogue, so a normal run without a matching --igenomes-base "
+                "fails late during Nextflow schema validation."
+            ),
+            fix=(
+                "Use --demo (which runs -profile test with the correct mirror), or pass "
+                "--igenomes-base https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ "
+                "to match conf/test.config. For a real analysis use a production genome "
+                "(e.g. GATK.GRCh38) or --fasta with --igenomes-ignore."
+            ),
+            details={"genome": genome},
+        )
     if genome in SUPPORTED_IGENOMES_NAMES:
         return []
     # An upstream test/test_* profile supplies its own reference (and may set a

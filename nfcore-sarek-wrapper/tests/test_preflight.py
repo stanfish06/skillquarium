@@ -1125,6 +1125,29 @@ def test_unknown_genome_with_custom_igenomes_base_warns_not_errors():
     assert warnings and any("MyCustomKey" in w for w in warnings)
 
 
+def test_testdata_genome_rejected_without_matching_igenomes_base():
+    # nf-core/sarek's `testdata.nf-core.sarek` only resolves under the test-datasets
+    # igenomes_base (conf/test.config), not the default s3://ngi-igenomes mirror. Using
+    # it in a normal run without that override fails late at nf-schema validation, so
+    # preflight must reject it early (finding #2).
+    with pytest.raises(SkillError) as exc:
+        _check_genome_known({"genome": "testdata.nf-core.sarek"})
+    assert exc.value.error_code == ErrorCode.INVALID_GENOME
+    assert "testdata.nf-core.sarek" in exc.value.message
+    # The fix must point at both remedies.
+    assert "igenomes-base" in exc.value.fix or "igenomes_base" in exc.value.fix
+    assert "--demo" in exc.value.fix
+
+
+def test_testdata_genome_accepted_with_test_profile():
+    assert _check_genome_known({"genome": "testdata.nf-core.sarek", "profile": "test,docker"}) == []
+
+
+def test_testdata_genome_accepted_with_test_datasets_igenomes_base():
+    base = "https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/"
+    assert _check_genome_known({"genome": "testdata.nf-core.sarek", "igenomes_base": base}) == []
+
+
 def test_macos_docker_tmp_warns(monkeypatch):
     """On macOS + Docker, an output dir under /tmp warns (Colima does not share
     /tmp into its VM). Mirrors nfcore-scrnaseq-wrapper's guard."""

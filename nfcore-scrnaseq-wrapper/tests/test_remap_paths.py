@@ -6,7 +6,17 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from remap_paths import cmd_remap, remap_csv, verify_paths
+from remap_paths import cmd_output_dir_hint, cmd_remap, remap_csv, verify_paths
+
+
+def test_cmd_output_dir_hint_is_accepted_noop(capsys):
+    # CLI parity with the rnaseq/sarek wrappers: --output-dir is accepted, but the
+    # scrnaseq bundle self-relocates (commands.sh anchors to its own location), so it
+    # explains that no rewrite is needed and succeeds (finding #4).
+    rc = cmd_output_dir_hint("/some/new/output")
+    assert rc == 0
+    out = capsys.readouterr().out.lower()
+    assert "self" in out and "no" in out
 
 _FASTQ_HEADER = "sample,fastq_1,fastq_2,expected_cells,seq_center\n"
 

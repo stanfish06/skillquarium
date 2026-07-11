@@ -48,14 +48,24 @@ def _read_log_tail(path: Path, limit: int = 65536) -> str:
         return ""
 
 
-def _environment_failure_hints(stdout_path: Path, stderr_path: Path) -> str:
+def _environment_failure_hints(
+    stdout_path: Path, stderr_path: Path, nextflow_log_path: Path | None = None
+) -> str:
     """Append actionable hints when the captured logs show a known environment
     failure — the host being smaller than a process request, or an unreachable
     network. Diagnosed from the actual Nextflow error text (never predicting
     pipeline resource requirements), so no thresholds are fabricated. Empty string
     when no known signature is present. Shared verbatim across the three wrappers.
+
+    `.nextflow.log` is scanned in addition to stdout/stderr: when Nextflow fails while
+    parsing the config (before the pipeline starts) the top-level stderr may show only
+    "Unable to parse config file", while the underlying cause ("Network is unreachable")
+    is recorded only in `.nextflow.log`. Without it the IPv6/NAT64 hint never shows.
     """
-    blob = (_read_log_tail(stdout_path) + "\n" + _read_log_tail(stderr_path)).lower()
+    parts = [_read_log_tail(stdout_path), _read_log_tail(stderr_path)]
+    if nextflow_log_path is not None:
+        parts.append(_read_log_tail(nextflow_log_path))
+    blob = "\n".join(parts).lower()
     hints: list[str] = []
     if any(sig in blob for sig in _MEMORY_FAILURE_SIGNATURES):
         hints.append(
@@ -172,7 +182,7 @@ def execute_nextflow(
             fix=(
                 "Inspect logs/stdout.txt and logs/stderr.txt, then correct the failing input or environment."
                 + _macos_tmp_failure_hint(output_dir)
-                + _environment_failure_hints(stdout_path, stderr_path)
+                + _environment_failure_hints(stdout_path, stderr_path, cwd / ".nextflow.log")
                 + _cellbender_failure_hint(stdout_path, stderr_path)
             ),
             details={

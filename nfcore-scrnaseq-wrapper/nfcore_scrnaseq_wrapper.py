@@ -743,7 +743,10 @@ def _prepare_demo_samplesheet(
     staging_dir: Path | None,
 ) -> tuple[Path, Path, dict[str, object]]:
     # Apply demo overrides first so all subsequent callers see star.
-    if args.preset != "star":
+    # Only warn when the user *explicitly* asked for a non-star preset; the
+    # bare default (preset_explicit is False) was never a real request, so
+    # claiming "requested: 'standard'" would be misleading.
+    if getattr(args, "preset_explicit", False) and args.preset != "star":
         print(
             f"WARNING: --demo forces preset=star (requested: {args.preset!r}). "
             "The nf-core test profile ships STAR-compatible data.",
@@ -1017,15 +1020,112 @@ def _build_extra_nextflow_configs(
     #   Linux native: no VirtioFS; Docker bind-mounts are direct overlayfs.
     #   Windows/WSL2: Nextflow runs inside WSL2 (reports "Linux"); work dir is on ext4.
     #   Windows native: not officially supported by Nextflow; users should use WSL2.
-    if platform.system() == "Darwin" and profile_includes(args.profile, "docker"):
-        # demo gates the test-profile resource ceilings: real runs get only the
-        # always-safe VirtioFS / Apple-Silicon / STAR-FIFO workarounds (audit H-1).
-        configs.append(
-            write_macos_docker_config(
-                output_dir, demo=bool(getattr(args, "demo", False))
+    if profile_includes(args.profile, "docker"):
+        if platform.system() == "Darwin":
+            # demo gates the test-profile resource ceilings: real runs get only the
+            # always-safe VirtioFS / Apple-Silicon / STAR-FIFO workarounds (audit H-1).
+            configs.append(
+                write_macos_docker_config(
+                    output_dir, demo=bool(getattr(args, "demo", False))
+                )
             )
-        )
+        elif not bool(getattr(args, "demo", False)):
+            # Non-macOS docker uses the local executor, which aborts a real run when a
+            # process's production requirement exceeds this host's RAM (e.g. STARsolo
+            # requesting 72 GB on a 63 GB machine). Cap requests to the host per
+            # nf-core resourceLimits guidance. --demo relies on -profile test's own
+            # (smaller) resourceLimits, so it is deliberately left untouched. Applied
+            # to the live run only — never baked into the portable commands.sh bundle,
+            # which is rebuilt from params.yaml (see repro_commands.py).
+            configs.append(_write_resource_limits_config(output_dir, args=args))
     return configs
+
+
+_RESOURCE_LIMITS_MEMORY_HEADROOM_GB = 4
+_RESOURCE_LIMITS_MEMORY_FLOOR_GB = 8
+
+
+def _host_memory_gb() -> int:
+    """Best-effort total physical RAM in whole GB (portable; falls back to 16)."""
+    try:
+        return max(1, int(os.sysconf("SC_PHYS_PAGES") * os.sysconf("SC_PAGE_SIZE") / (1024 ** 3)))
+    except (ValueError, OSError, AttributeError):
+        return 16
+
+
+def _docker_vm_memory_gb() -> int | None:
+    """Docker runtime's total memory in whole GB, or None when unknown.
+
+    On native Linux this reports the host's cgroup memory (≈ physical RAM). Best-effort:
+    any failure (docker absent, daemon down, unparseable output) returns None.
+    """
+    if not shutil.which("docker"):
+        return None
+    try:
+        proc = subprocess.run(
+            ["docker", "info", "--format", "{{.MemTotal}}"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if proc.returncode != 0:
+        return None
+    raw = proc.stdout.strip()
+    if not raw.isdigit():
+        return None
+    gb = int(int(raw) / (1024 ** 3))
+    return gb or None
+
+
+def _resource_limits_memory_gb() -> int:
+    """Per-process memory ceiling (GB) for the non-macOS resourceLimits config.
+
+    nf-core's guidance is that ``resourceLimits`` should match the machine's maximum
+    (https://nf-co.re/docs/running/configuration/nextflow-for-your-system). Native
+    Linux Docker exposes the full host RAM, so there is no 15 GB macOS-VM ceiling
+    here. We take the smaller of the detected physical RAM and (when known) the Docker
+    runtime's MemTotal, then reserve a few GB of headroom for the OS, the Nextflow JVM
+    and the Docker daemon.
+    """
+    signals = [gb for gb in (_host_memory_gb(), _docker_vm_memory_gb()) if gb]
+    budget = (min(signals) - _RESOURCE_LIMITS_MEMORY_HEADROOM_GB) if signals else 12
+    return max(_RESOURCE_LIMITS_MEMORY_FLOOR_GB, budget)
+
+
+def _write_resource_limits_config(output_dir: Path, *, args: argparse.Namespace) -> Path:
+    """Write a host-scaled ``resourceLimits`` config for non-macOS docker runs.
+
+    Carries only the portable resourceLimits block — none of the macOS-only
+    workarounds (``--platform``, ``stageInMode = 'copy'``, STAR FIFO overrides).
+
+    Written inside ``reproducibility/`` (not the output root) so it ships with the
+    portable bundle: ``commands.sh`` re-applies it on non-macOS replay hosts, letting a
+    from-scratch reproduction on the generating machine succeed instead of re-aborting
+    with "Process requirement exceeds available memory".
+    """
+    config_path = output_dir / "reproducibility" / "resource_limits.config"
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    cpus = max(1, os.cpu_count() or 1)
+    memory_gb = _resource_limits_memory_gb()
+    timeout_hours = getattr(args, "timeout_hours", _DEFAULT_TIMEOUT_HOURS)
+    time_hours = int(_DEFAULT_TIMEOUT_HOURS) if timeout_hours == 0 else max(1, int(timeout_hours))
+    write_text_lf(
+        config_path,
+        "// Cap process resource requests to this host so Nextflow's local executor\n"
+        "// does not abort real runs whose production requirements exceed this machine.\n"
+        "// Follows nf-core resourceLimits guidance (values match the machine maximum):\n"
+        "// https://nf-co.re/docs/running/configuration/nextflow-for-your-system\n"
+        "process {\n"
+        "    resourceLimits = [\n"
+        f"        cpus: {cpus},\n"
+        f"        memory: '{memory_gb}.GB',\n"
+        f"        time: '{time_hours}.h'\n"
+        "    ]\n"
+        "}\n",
+    )
+    return config_path
 
 
 def _nextflow_execution_cwd(output_dir: Path) -> Path:

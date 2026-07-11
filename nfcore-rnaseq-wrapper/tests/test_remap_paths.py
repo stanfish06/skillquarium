@@ -38,6 +38,7 @@ from remap_paths import (
     find_samplesheet,
     remap_commands_references,
     remap_csv,
+    update_commands_output,
     verify_paths,
     verify_reference_paths,
 )
@@ -577,3 +578,27 @@ def test_remap_csv_preserves_unix_line_endings(tmp_path):
     assert b"\r\n" not in raw
     assert raw.endswith(b"\n")
     assert b"/new/data/s1_R1.fastq.gz" in raw
+
+
+def test_update_commands_output_rewrites_resume_guard_manifest(tmp_path):
+    """--output-dir must relocate BOTH the --output argument and the idempotent-resume
+    guard's manifest path, so a remapped bundle checks the NEW output directory for a
+    completed run (not the original one). Otherwise a same-machine remap could
+    wrongly resume against a stale manifest."""
+    commands = tmp_path / "commands.sh"
+    commands.write_text(
+        'CLAWBIO_RESUME=""\n'
+        'if [[ -f "/old/out/reproducibility/manifest.json" ]]; then\n'
+        '  CLAWBIO_RESUME="--resume"\n'
+        'fi\n'
+        '"${PYTHON:-python3}" "$SKILL_SCRIPT" $CLAWBIO_RESUME \\\n'
+        "    --output /old/out \\\n"
+        "    --profile docker\n",
+        encoding="utf-8",
+    )
+    changed = update_commands_output(commands, "/new/out")
+    assert changed
+    updated = commands.read_text(encoding="utf-8")
+    assert 'if [[ -f "/new/out/reproducibility/manifest.json" ]]; then' in updated
+    assert "--output /new/out" in updated
+    assert "/old/out" not in updated

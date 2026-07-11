@@ -617,8 +617,9 @@ def _regenerate_checksums(bundle_dir: Path) -> None:
     Its parent is the output_dir that the wrapper used. Paths in the checksums
     file are relative to that parent so they are location-independent.
 
-    Exclusions mirror provenance.py._iter_checksum_paths exactly: the top-level
-    work/, .nextflow/, reproducibility/ (which also holds logs/) and logs/ trees,
+    Exclusions mirror provenance.py._iter_checksum_paths exactly: the work/,
+    .nextflow/, reproducibility/ (which also holds logs/) and logs/ trees — matched
+    at any depth, so the default nested work dir <output>/upstream/work is caught —
     plus any .log file, are never hashed. Keeping the two generators in lockstep
     means ``sha256sum -c`` still verifies after a remap.
     """
@@ -633,7 +634,11 @@ def _regenerate_checksums(bundle_dir: Path) -> None:
             rel = f.relative_to(output_dir)
         except ValueError:
             continue
-        if rel.parts and rel.parts[0] in exclude_dirs:
+        # Match an excluded tree at any depth, not only the top level: the
+        # Nextflow work dir defaults to <output>/upstream/work, so a parts[0]-only
+        # check would leak that nested scratch tree. Mirrors
+        # provenance.py._iter_checksum_paths exactly.
+        if any(part in exclude_dirs for part in rel.parts[:-1]):
             continue
         if f.suffix == ".log":
             continue

@@ -254,6 +254,24 @@ def test_output_dir_incomplete_prior_run_gives_actionable_error(tmp_path, monkey
     assert "delete" in exc.value.fix.lower()
 
 
+def test_output_dir_with_only_reproducibility_bundle_is_accepted(tmp_path):
+    # The reproducibility/ bundle is entirely wrapper-generated (commands.sh,
+    # checksums.sha256, environment.yml, remap_paths.py, provenance JSON, …), never
+    # user data, so an output dir containing only it (e.g. a copied bundle) must NOT
+    # trip OUTPUT_DIR_NOT_EMPTY. Otherwise a bundle-only dir cannot be re-run without
+    # --resume (Catch-22), and the wrappers diverge — nfcore-sarek already accepts it.
+    out = tmp_path / "out"
+    repro = out / "reproducibility"
+    repro.mkdir(parents=True)
+    for f in (
+        "params.yaml", "samplesheet.valid.csv", "manifest.json", "commands.sh",
+        "checksums.sha256", "environment.yml", "remap_paths.py", "inputs.json", "run.json",
+    ):
+        (repro / f).write_text("x", encoding="utf-8")
+    # Must not raise for a fresh (non-resume) invocation.
+    preflight.check_output_dir_available(out, resume=False)
+
+
 def test_output_dir_inside_repo_is_rejected(tmp_path, monkeypatch):
     _mock_env(monkeypatch)
     inside = _SKILL_DIR / "tmp-test-output"

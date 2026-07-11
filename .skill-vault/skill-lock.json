@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "eb6a23305aea6e340d14b9de3766e721f9f4861b",
+      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
       "installedAt": "2026-05-20T08:43:33.811Z",
-      "updatedAt": "2026-06-24T07:28:43.281Z"
+      "updatedAt": "2026-07-11T08:13:33.544Z"
     },
     "adaptyv": {
       "source": "K-Dense-AI/scientific-agent-skills",
@@ -1348,18 +1348,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "b446ca1be971b952c60544f5bce812df882b2f29",
+      "skillFolderHash": "681e1c3c29f299c6c3514d2f316df81b6620a1df",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-07-04T08:49:45.060Z"
+      "updatedAt": "2026-07-11T08:13:36.368Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "6014470de2297a1195cd57dc26612606caeaa324",
+      "skillFolderHash": "1aa68f9c54052f9eaffa77a8fb2a8e8a843e746c",
       "installedAt": "2026-06-09T11:25:31.106Z",
-      "updatedAt": "2026-07-04T08:49:47.335Z"
+      "updatedAt": "2026-07-11T08:13:38.320Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
@@ -1375,9 +1375,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "9cf9f18c021fa22844e7f1acfb5b004d77ddf7eb",
+      "skillFolderHash": "9ac9b52869382102bcd53ee5d7aeebea4a808b58",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-07-07T09:59:25.425Z"
+      "updatedAt": "2026-07-11T08:13:40.831Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
@@ -2032,27 +2032,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-rnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "794e32de777d9e2f6bc733473a6d8c555bed971e",
+      "skillFolderHash": "fdc300fd25e731fbca204e2b66806009893d61a3",
       "installedAt": "2026-06-09T11:30:14.248Z",
-      "updatedAt": "2026-07-09T09:56:27.012Z"
+      "updatedAt": "2026-07-11T08:13:45.059Z"
     },
     "nfcore-sarek-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-sarek-wrapper/SKILL.md",
-      "skillFolderHash": "ba9b9a2f7af95527c3883987f0c6c212200ad228",
+      "skillFolderHash": "56e2cc8bfdcfe4afca40f5b9d37386ac052cd9b0",
       "installedAt": "2026-06-09T11:30:14.250Z",
-      "updatedAt": "2026-07-09T09:56:30.678Z"
+      "updatedAt": "2026-07-11T08:13:49.276Z"
     },
     "nfcore-scrnaseq-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "51312a8871950a23927de75a74955e405a481951",
+      "skillFolderHash": "a5b9c7dfa2bb83c54d4ae26ef8f7e26c181b4f97",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-07-09T09:56:35.220Z"
+      "updatedAt": "2026-07-11T08:13:53.533Z"
     },
     "nutrigx-advisor": {
       "source": "ClawBio/ClawBio",

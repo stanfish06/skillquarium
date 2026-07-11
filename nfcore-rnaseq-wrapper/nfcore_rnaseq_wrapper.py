@@ -1172,8 +1172,16 @@ def _build_extra_nextflow_configs(args: argparse.Namespace, output_dir: Path) ->
     configs: list[Path] = []
     profile_parts = {p.strip() for p in getattr(args, "profile", "").split(",") if p.strip()}
     arm = bool(getattr(args, "arm", False))
-    if platform.system() == "Darwin" and "docker" in profile_parts:
-        configs.append(_write_macos_docker_config(output_dir, arm=arm, timeout_hours=_resolve_timeout_hours(args)))
+    if "docker" in profile_parts:
+        if platform.system() == "Darwin":
+            configs.append(_write_macos_docker_config(output_dir, arm=arm, timeout_hours=_resolve_timeout_hours(args)))
+        elif not bool(getattr(args, "demo", False)):
+            # Non-macOS docker runs use the local executor, which aborts a real run
+            # when a process's production requirement exceeds this host's RAM (e.g.
+            # PREPARE_GENOME requesting 72 GB on a 63 GB machine). Cap requests to the
+            # host per nf-core resourceLimits guidance. --demo relies on -profile test's
+            # own (smaller) resourceLimits, so it is deliberately left untouched.
+            configs.append(_write_resource_limits_config(output_dir, timeout_hours=_resolve_timeout_hours(args)))
     for user_cfg in getattr(args, "nextflow_config", None) or []:
         # --nextflow-config accepts local paths only; Path.resolve() is intentional.
         # Nextflow's own -c flag also expects local file paths in typical use.
@@ -1283,6 +1291,58 @@ def _write_macos_docker_config(output_dir: Path, *, arm: bool = False, timeout_h
         + platform_opts
         + "}\n"
         + docker_block,
+    )
+    return config_path
+
+
+_RESOURCE_LIMITS_MEMORY_HEADROOM_GB = 4
+
+
+def _resource_limits_memory_gb() -> int:
+    """Per-process memory ceiling (GB) for the resourceLimits config on non-macOS hosts.
+
+    nf-core's guidance is that ``resourceLimits`` should match the machine's maximum
+    (https://nf-co.re/docs/running/configuration/nextflow-for-your-system). Unlike the
+    macOS Docker Desktop VM, native Linux Docker exposes the full host RAM, so there is
+    no 15 GB ceiling here — clamping a large host to 15 GB would starve genuine
+    process_high tasks. We take the smaller of the detected physical RAM and (when
+    Docker runs natively) the Docker runtime's MemTotal, then reserve a few GB of
+    headroom for the OS, the Nextflow JVM and the Docker daemon so a process using its
+    full budget cannot OOM the host. Falls back to the conservative ceiling when the
+    host size cannot be determined.
+    """
+    signals = [gb for gb in (_detect_host_memory_gb(), _docker_vm_memory_gb()) if gb]
+    if not signals:
+        return _MACOS_DOCKER_MEMORY_CEILING_GB
+    budget = min(signals) - _RESOURCE_LIMITS_MEMORY_HEADROOM_GB
+    return max(_MACOS_DOCKER_MEMORY_FLOOR_GB, budget)
+
+
+def _write_resource_limits_config(output_dir: Path, *, timeout_hours: float = DEFAULT_TIMEOUT_HOURS) -> Path:
+    """Write a host-scaled ``resourceLimits`` config for non-macOS docker runs.
+
+    Carries only the portable resourceLimits block — none of the macOS-only
+    workarounds (``--platform linux/amd64``, ``stageInMode = 'copy'``), which would
+    needlessly slow or break a native Linux run.
+    """
+    config_path = output_dir / ".nextflow_resource_limits.config"
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    cpus = max(1, os.cpu_count() or 1)
+    memory_gb = _resource_limits_memory_gb()
+    time_hours = int(DEFAULT_TIMEOUT_HOURS) if timeout_hours == 0 else max(1, int(timeout_hours))
+    write_text_lf(
+        config_path,
+        "// Cap process resource requests to this host so Nextflow's local executor\n"
+        "// does not abort real runs whose production requirements exceed this machine.\n"
+        "// Follows nf-core resourceLimits guidance (values match the machine maximum):\n"
+        "// https://nf-co.re/docs/running/configuration/nextflow-for-your-system\n"
+        "process {\n"
+        "    resourceLimits = [\n"
+        f"        cpus: {cpus},\n"
+        f"        memory: '{memory_gb}.GB',\n"
+        f"        time: '{time_hours}.h'\n"
+        "    ]\n"
+        "}\n",
     )
     return config_path
 
@@ -1442,7 +1502,7 @@ def _run_downstream_handoff(
         '  echo "  CLAWBIO_REPO=/path/to/ClawBio bash ${BASH_SOURCE[0]}" >&2\n'
         "  exit 1\n"
         "fi\n\n"
-        'python "${CLAWBIO_REPO}/clawbio.py" run rnaseq \\\n'
+        '"${PYTHON:-python3}" "${CLAWBIO_REPO}/clawbio.py" run rnaseq \\\n'
         f"  --counts {shlex.quote(counts)} \\\n"
         "  --metadata <your_metadata.csv> \\\n"
         '  --formula "~ batch + condition" \\\n'

@@ -19,7 +19,6 @@ def _build(**overrides):
     kwargs = dict(
         pipeline_source=REMOTE_SOURCE,
         profile="docker",
-        resume=False,
         demo=False,
         macos_docker_config=False,
         nextflow_version=None,
@@ -53,9 +52,30 @@ def test_demo_uses_test_profile_prefix():
     assert "-profile test,docker" in script
 
 
-def test_resume_is_emitted():
-    script = _build(resume=True)
-    assert "-resume" in script
+def test_resource_limits_guard_emitted_when_shipped():
+    # A non-macOS docker real run ships reproducibility/resource_limits.config; the
+    # replay must apply it on non-macOS hosts so a from-scratch reproduction on the
+    # generating (memory-constrained) machine does not re-abort STAR_GENOMEGENERATE.
+    script = _build(resource_limits_config=True)
+    assert 'if [[ "$(uname -s)" != "Darwin" ]]; then' in script
+    assert 'RESOURCE_CONFIG="-c reproducibility/resource_limits.config"' in script
+    assert "$RESOURCE_CONFIG" in script
+
+
+def test_resource_limits_guard_absent_by_default():
+    script = _build()
+    assert "resource_limits.config" not in script
+    assert "RESOURCE_CONFIG" not in script
+
+
+def test_idempotent_resume_guard_always_emitted():
+    # Replay must be idempotent: reuse the previous run's cache when replaying against
+    # a completed output dir, but start fresh on a first run. The guard adds -resume
+    # only when a prior Nextflow session (.nextflow/) exists in the launch dir.
+    script = _build()
+    assert 'if [[ -d ".nextflow" ]]; then' in script
+    assert 'RESUME="-resume"' in script
+    assert "$RESUME" in script
 
 
 def test_local_checkout_emits_portability_warning():

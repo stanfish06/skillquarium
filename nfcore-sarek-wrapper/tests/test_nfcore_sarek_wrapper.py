@@ -840,6 +840,58 @@ def test_macos_docker_memory_scales_to_host(module, monkeypatch, tmp_path):
     assert m3 is not None and int(m3.group(1)) >= 4
 
 
+def _resource_args(module, tmp_path, *, demo=False, profile="docker"):
+    argv = ["--output", str(tmp_path / "out"), "--profile", profile]
+    if demo:
+        argv.append("--demo")
+    else:
+        argv += ["--input", "s.csv", "--genome", "GATK.GRCh38", "--tools", "strelka"]
+    args = module.build_parser().parse_args(argv)
+    return args
+
+
+def test_resource_limits_config_emitted_on_linux_real_run(module, monkeypatch, tmp_path):
+    # The host-scaled resourceLimits cap must be emitted on non-macOS docker runs
+    # so a real run whose production requirements exceed this host does not abort.
+    monkeypatch.setattr(module.sys, "platform", "linux")
+    args = _resource_args(module, tmp_path)
+    cfg = module._write_resource_limits_config(tmp_path / "out", args=args)
+    assert cfg is not None
+    text = cfg.read_text()
+    assert "resourceLimits" in text
+    # None of the macOS-only workarounds (they slow or break native Linux runs).
+    assert "--platform" not in text and "stageInMode" not in text
+
+
+def test_resource_limits_config_scales_with_host(module, monkeypatch, tmp_path):
+    monkeypatch.setattr(module.sys, "platform", "linux")
+    monkeypatch.setattr(module, "_host_memory_gb", lambda: 64)
+    monkeypatch.setattr(module, "_docker_vm_memory_gb", lambda: None)
+    args = _resource_args(module, tmp_path)
+    text = module._write_resource_limits_config(tmp_path / "out", args=args).read_text()
+    import re as _re
+    mem = int(_re.search(r"memory: '(\d+)\.GB'", text).group(1))
+    assert mem > 15 and mem <= 64  # no 15 GB macOS ceiling, never above physical RAM
+
+
+def test_resource_limits_config_none_on_demo(module, monkeypatch, tmp_path):
+    monkeypatch.setattr(module.sys, "platform", "linux")
+    args = _resource_args(module, tmp_path, demo=True)
+    assert module._write_resource_limits_config(tmp_path / "out", args=args) is None
+
+
+def test_resource_limits_config_none_on_macos(module, monkeypatch, tmp_path):
+    monkeypatch.setattr(module.sys, "platform", "darwin")
+    args = _resource_args(module, tmp_path)
+    assert module._write_resource_limits_config(tmp_path / "out", args=args) is None
+
+
+def test_resource_limits_config_none_without_docker(module, monkeypatch, tmp_path):
+    monkeypatch.setattr(module.sys, "platform", "linux")
+    args = _resource_args(module, tmp_path, profile="singularity")
+    assert module._write_resource_limits_config(tmp_path / "out", args=args) is None
+
+
 def test_main_writes_macos_docker_config_when_applicable(module, monkeypatch, tmp_path):
     _patch_heavy(monkeypatch, module)
     monkeypatch.setattr(module.sys, "platform", "darwin")
@@ -886,6 +938,24 @@ def test_main_run_downstream_writes_handoff(module, monkeypatch, tmp_path):
     assert "omics-target-evidence-mapper" in payload["routes"]
     assert "wes-clinical-report-en" in payload["routes"]
     assert "wes-clinical-report-es" in payload["routes"]
+
+
+def test_downstream_handoff_examples_use_python3(module, monkeypatch, tmp_path):
+    """The generated sarek_downstream_handoff.sh lists cross-skill example commands
+    the user runs directly (`bash sarek_downstream_handoff.sh`). They must invoke
+    `python3`, not a bare `python`, for portability to python3-only systems (PEP 394)."""
+    _patch_heavy(monkeypatch, module)
+    rc = module.main([
+        "--output", str(tmp_path / "out"),
+        "--demo",
+        "--no-banner",
+        "--run-downstream",
+        "--downstream-skill", "clinical-variant-reporter",
+    ])
+    assert rc == 0
+    sh = (tmp_path / "out" / "reproducibility" / "sarek_downstream_handoff.sh").read_text()
+    assert "python3 skills/" in sh
+    assert "python skills/" not in sh, "bare `python` is not portable; use python3"
 
 
 def test_main_run_downstream_without_skill_returns_2(module, monkeypatch, tmp_path):

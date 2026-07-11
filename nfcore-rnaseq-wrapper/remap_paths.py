@@ -7,19 +7,19 @@ reference/index paths (--fasta, --gtf, --star-index, etc.) are stored as
 absolute paths (required by Nextflow). Before replaying on a different machine:
 
   1. Remap FASTQ/BAM paths in the samplesheet (if data moved):
-       python remap_paths.py --old /original/data/dir --new /new/data/dir
+       python3 remap_paths.py --old /original/data/dir --new /new/data/dir
 
   2. Remap reference/index paths in commands.sh (if references moved):
-       python remap_paths.py --refs-old /original/refs --refs-new /new/refs
+       python3 remap_paths.py --refs-old /original/refs --refs-new /new/refs
 
   3. Update the --output path in commands.sh (if output dir changed):
-       python remap_paths.py --output-dir /new/output/dir
+       python3 remap_paths.py --output-dir /new/output/dir
 
   4. Verify everything is ready:
-       python remap_paths.py --verify
+       python3 remap_paths.py --verify
 
   5. Regenerate missing bundle files (manifest.json, checksums.sha256, environment.yml):
-       python remap_paths.py --repair-bundle
+       python3 remap_paths.py --repair-bundle
 
   Preview any change without modifying files by adding --dry-run.
 
@@ -100,6 +100,15 @@ _REFERENCE_FLAGS = (
 # may be unquoted, single-quoted, or double-quoted.
 _OUTPUT_FLAG_RE = re.compile(
     r"""^([ \t]+--output[ \t]+)(?P<value>"[^"\n]*"|'[^'\n]*'|\S+)([ \t]*(?:\\[ \t]*)?)$""",
+    re.MULTILINE,
+)
+
+# Matches the idempotent-replay guard line written by reporting.py:
+#   if [[ -f "<output_dir>/reproducibility/manifest.json" ]]; then
+# The captured value is the output directory, kept in sync with the --output flag
+# so a relocated bundle checks the NEW output dir (not the original) for a prior run.
+_RESUME_GUARD_RE = re.compile(
+    r"""^(if \[\[ -f ")(?P<value>[^"\n]*)(/reproducibility/manifest\.json" \]\]; then)$""",
     re.MULTILINE,
 )
 
@@ -244,6 +253,11 @@ def update_commands_output(commands_sh: Path, new_output_dir: str) -> bool:
         lambda m: f"{m.group(1)}{_format_output_value(new_output_dir, old_value=m.group('value'))}{m.group(3)}",
         original,
     )
+    # Keep the idempotent-replay guard's manifest path in sync with the --output flag.
+    updated = _RESUME_GUARD_RE.sub(
+        lambda m: f"{m.group(1)}{new_output_dir}{m.group(3)}",
+        updated,
+    )
     if updated == original:
         return False
     backup = commands_sh.with_suffix(".sh.bak")
@@ -307,7 +321,7 @@ def _report_samplesheet_readiness(samplesheet: Path) -> int:
             print(f"  {m}")
         print(
             "\nStage the data at these paths (or re-run with the correct --new prefix), "
-            "then run `python remap_paths.py --verify` to confirm the bundle is replay-ready."
+            "then run `python3 remap_paths.py --verify` to confirm the bundle is replay-ready."
         )
         return 1
 
@@ -395,7 +409,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
         print(f"FASTQ/BAM paths: {len(missing_reads)} missing in {samplesheet.name}:")
         for m in missing_reads:
             print(f"  {m}")
-        print("  → fix: python remap_paths.py --old <old_prefix> --new <new_prefix>")
+        print("  → fix: python3 remap_paths.py --old <old_prefix> --new <new_prefix>")
 
     commands_sh = find_commands_sh(bundle_dir=bundle_dir)
     if commands_sh is not None:
@@ -424,7 +438,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             else:
                 # Not an error — the wrapper creates the output dir on a fresh replay.
                 print(f"Output dir:  will be created on replay ({output_path})")
-                print("  → to change it: python remap_paths.py --output-dir <new_output_dir>")
+                print("  → to change it: python3 remap_paths.py --output-dir <new_output_dir>")
 
         missing_refs = verify_reference_paths(commands_sh)
         if not missing_refs:
@@ -434,7 +448,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             print(f"Reference paths: {len(missing_refs)} missing in commands.sh:")
             for r in missing_refs:
                 print(f"  {r}")
-            print("  → fix: python remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>")
+            print("  → fix: python3 remap_paths.py --refs-old <old_prefix> --refs-new <new_prefix>")
 
     bd = bundle_dir or _BUNDLE_DIR
     missing_bundle = [f for f in _REQUIRED_BUNDLE_FILES if not (bd / f).exists()]
@@ -445,7 +459,7 @@ def cmd_verify(bundle_dir: Path | None = None) -> int:
             + "".join(f"  {bd / f}\n" for f in missing_bundle)
             + "  This usually means the wrapper crashed during post-processing.\n"
             + "  Run --repair-bundle to regenerate them:\n"
-            + "    python remap_paths.py --repair-bundle"
+            + "    python3 remap_paths.py --repair-bundle"
         )
 
     if ok:
@@ -616,22 +630,22 @@ def main() -> int:
         epilog="""
 examples:
   Remap FASTQ/BAM paths in the samplesheet:
-    python remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs
+    python3 remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs
 
   Remap reference/index paths in commands.sh:
-    python remap_paths.py --refs-old /Users/alice/refs --refs-new /home/bob/refs
+    python3 remap_paths.py --refs-old /Users/alice/refs --refs-new /home/bob/refs
 
   Update the --output directory in commands.sh:
-    python remap_paths.py --output-dir /home/bob/my_run
+    python3 remap_paths.py --output-dir /home/bob/my_run
 
   Preview any change without modifying files:
-    python remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs --dry-run
+    python3 remap_paths.py --old /Users/alice/fastqs --new /home/bob/fastqs --dry-run
 
   Verify everything is ready to replay:
-    python remap_paths.py --verify
+    python3 remap_paths.py --verify
 
   Regenerate missing bundle files (manifest.json, checksums.sha256, environment.yml):
-    python remap_paths.py --repair-bundle
+    python3 remap_paths.py --repair-bundle
 
   Replay (CLAWBIO_REPO is always required):
     CLAWBIO_REPO=/path/to/ClawBio bash commands.sh

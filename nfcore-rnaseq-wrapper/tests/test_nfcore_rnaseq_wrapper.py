@@ -630,6 +630,24 @@ def test_run_downstream_handoff_template_only_without_required_flags(tmp_path):
     assert (tmp_path / "reproducibility" / "rnaseq_de_handoff.sh").exists()
 
 
+def test_downstream_handoff_uses_portable_python_interpreter(tmp_path):
+    """The generated `rnaseq_de_handoff.sh` is executed on possibly-fresh machines
+    (`bash rnaseq_de_handoff.sh`) where only `python3` exists (PEP 394). It must invoke
+    the interpreter portably as `${PYTHON:-python3}`, never a bare `python`, mirroring
+    the `commands.sh` replay patch — a bare `python` fails with `python: command not found`."""
+    module = _load_skill_module()
+    args = Namespace(run_downstream=True, skip_downstream=False, metadata=None, formula=None, contrast=None, downstream_output=None)
+    with patch("subprocess.run"):
+        module._run_downstream_handoff(
+            args,
+            parsed_outputs={"preferred_counts_tsv": "counts.tsv", "handoff_available": True},
+            output_dir=tmp_path,
+        )
+    script = (tmp_path / "reproducibility" / "rnaseq_de_handoff.sh").read_text(encoding="utf-8")
+    assert "\npython " not in script, "bare `python` is not portable; use ${PYTHON:-python3}"
+    assert '"${PYTHON:-python3}"' in script
+
+
 def test_run_downstream_handoff_returns_none_without_run_downstream(tmp_path):
     """Without --run-downstream, NO handoff template is written and None is returned,
     even when counts are available (this is the demo/default path). The report's Next
@@ -892,6 +910,83 @@ def test_docker_vm_memory_none_when_docker_absent(monkeypatch):
     module = _load_skill_module()
     monkeypatch.setattr(module.shutil, "which", lambda name: None)
     assert module._docker_vm_memory_gb() is None
+
+
+# ── Linux resourceLimits gap: the host-scaled resourceLimits config must be
+# emitted on non-macOS docker runs too, not only on macOS. Without it a real
+# (non-demo) run on a Linux host smaller than the pipeline's production process
+# requirements aborts with "Process requirement exceeds available memory".
+
+
+def test_resource_limits_config_has_portable_content(tmp_path):
+    module = _load_skill_module()
+    config_path = module._write_resource_limits_config(tmp_path)
+    assert config_path == tmp_path / ".nextflow_resource_limits.config"
+    content = config_path.read_text(encoding="utf-8")
+    assert "resourceLimits" in content
+    assert "memory:" in content and "cpus:" in content and "time:" in content
+    # Must NOT carry the macOS-only workarounds (they slow or break Linux runs).
+    assert "--platform linux/amd64" not in content
+    assert "stageInMode" not in content
+    assert "containerOptions" not in content
+
+
+def test_resource_limits_memory_scales_with_host_no_macos_ceiling(monkeypatch):
+    module = _load_skill_module()
+    # A large Linux host must NOT be clamped to the 15 GB macOS Docker ceiling.
+    monkeypatch.setattr(module, "_detect_host_memory_gb", lambda: 64)
+    monkeypatch.setattr(module, "_docker_vm_memory_gb", lambda: None)
+    mem = module._resource_limits_memory_gb()
+    assert mem > module._MACOS_DOCKER_MEMORY_CEILING_GB
+    assert mem <= 64  # never above physical RAM
+
+
+def test_resource_limits_memory_capped_to_docker_vm(monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module, "_detect_host_memory_gb", lambda: 64)
+    monkeypatch.setattr(module, "_docker_vm_memory_gb", lambda: 32)
+    assert module._resource_limits_memory_gb() <= 32
+
+
+def test_resource_limits_memory_fallback_when_undetectable(monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module, "_detect_host_memory_gb", lambda: None)
+    monkeypatch.setattr(module, "_docker_vm_memory_gb", lambda: None)
+    assert module._resource_limits_memory_gb() == module._MACOS_DOCKER_MEMORY_CEILING_GB
+
+
+def _extra_config_args(module, **overrides):
+    defaults = dict(profile="docker", arm=False, nextflow_config=None, demo=False, timeout_hours=12.0)
+    defaults.update(overrides)
+    return Namespace(**defaults)
+
+
+def test_extra_configs_emits_resource_limits_on_linux_real_run(tmp_path, monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module.platform, "system", lambda: "Linux")
+    args = _extra_config_args(module)
+    configs = module._build_extra_nextflow_configs(args, tmp_path)
+    names = [p.name for p in configs]
+    assert ".nextflow_resource_limits.config" in names
+    assert ".nextflow_macos_docker.config" not in names
+
+
+def test_extra_configs_skips_resource_limits_on_linux_demo(tmp_path, monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module.platform, "system", lambda: "Linux")
+    args = _extra_config_args(module, demo=True)
+    configs = module._build_extra_nextflow_configs(args, tmp_path)
+    # -profile test carries its own resourceLimits; do not override them.
+    assert ".nextflow_resource_limits.config" not in [p.name for p in configs]
+
+
+def test_extra_configs_macos_unchanged(tmp_path, monkeypatch):
+    module = _load_skill_module()
+    monkeypatch.setattr(module.platform, "system", lambda: "Darwin")
+    args = _extra_config_args(module)
+    names = [p.name for p in module._build_extra_nextflow_configs(args, tmp_path)]
+    assert ".nextflow_macos_docker.config" in names
+    assert ".nextflow_resource_limits.config" not in names
 
 
 def test_rapid_quant_override_sets_profile_implied_args():

@@ -391,20 +391,16 @@ def _check_hpc_profile(profile: str) -> dict[str, object]:
     return {"profile": profile, "backend_path": path, "backend_ready": True}
 
 
+# Root-level entries that must not trip OUTPUT_DIR_NOT_EMPTY. `reproducibility` is the
+# wrapper's own bundle directory (commands.sh, checksums.sha256, environment.yml,
+# remap_paths.py, resource_limits.config, params/samplesheet snapshots, provenance JSON)
+# — never user data — so its entire contents are ignored. Matches nfcore-sarek /
+# nfcore-rnaseq so the three wrappers accept the same set of pre-existing output-dir
+# contents, and avoids a fragile per-file allowlist that silently rejected a copied
+# bundle (OUTPUT_DIR_NOT_EMPTY). Genuine result artifacts (report.md, upstream/,
+# provenance/, result.json at the output root) still block a non-resume re-run.
 _IGNORED_ROOT_NAMES = frozenset(
-    {".DS_Store", ".gitkeep", ".gitignore", "Thumbs.db", "check_result.json"}
-)
-# Pre-execution scaffolding written before Nextflow launches (samplesheet, the
-# effective params.yaml, and — on macOS+docker — the workaround config). These
-# must not block a non-resume re-run after an early/failed run; genuine result
-# artifacts (report.md, upstream/, provenance/, manifest.json, ...) still do.
-_ALLOWED_REPRO_FILES = frozenset(
-    {
-        "samplesheet.valid.csv",
-        "samplesheet.demo.csv",
-        "params.yaml",
-        "macos_docker.config",
-    }
+    {"reproducibility", ".DS_Store", ".gitkeep", ".gitignore", "Thumbs.db", "check_result.json"}
 )
 
 
@@ -448,16 +444,6 @@ def _check_output_dir(output_dir: Path, *, resume: bool) -> None:
     materialized_entries = []
     for entry in output_dir.iterdir():
         if entry.name in _IGNORED_ROOT_NAMES:
-            continue
-        if entry.name == "reproducibility" and entry.is_dir():
-            repro_entries = [
-                child
-                for child in entry.iterdir()
-                if child.name not in _ALLOWED_REPRO_FILES
-                and child.name not in _IGNORED_ROOT_NAMES
-            ]
-            if repro_entries:
-                materialized_entries.append(entry)
             continue
         materialized_entries.append(entry)
     if materialized_entries and not resume:
@@ -871,9 +857,9 @@ def run_preflight(
     output_dir = Path(args.output).expanduser().resolve()
     # Belt-and-suspenders: main() already called check_output_dir_available() before
     # samplesheet normalization. This second call keeps run_preflight() self-consistent
-    # when invoked directly (e.g., tests). reproducibility/samplesheet.valid.csv written
-    # between the two calls is allowlisted in _ALLOWED_REPRO_FILES and does not trigger
-    # OUTPUT_DIR_NOT_EMPTY.
+    # when invoked directly (e.g., tests). The reproducibility/ bundle (including the
+    # samplesheet.valid.csv written between the two calls) is ignored wholesale by the
+    # check, so it never triggers OUTPUT_DIR_NOT_EMPTY.
     check_output_dir_available(output_dir, resume=args.resume)
     refs = {} if args.demo else _check_references(args)
     if not args.demo:

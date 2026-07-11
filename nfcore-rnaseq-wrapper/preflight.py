@@ -114,8 +114,15 @@ _NEXTFLOW_ALLOWED_PARAMS_RE = re.compile(r"^\s*params\.genomes\b")
 # override cannot hide in an included file (audit M2).
 _NEXTFLOW_INCLUDE_RE = re.compile(r"""^\s*includeConfig\s+['"]([^'"]+)['"]""")
 _MAX_CONFIG_INCLUDE_DEPTH = 16
-_IGNORED_ROOT_NAMES = frozenset({".DS_Store", ".gitkeep", ".gitignore", "Thumbs.db", "check_result.json"})
-_ALLOWED_REPRO_FILES = frozenset({"samplesheet.valid.csv", "samplesheet.demo.csv", "samplesheet.noinput.csv", "params.yaml", "manifest.json"})
+# Root-level entries that must not trip OUTPUT_DIR_NOT_EMPTY. `reproducibility` is the
+# wrapper's own bundle directory (commands.sh, checksums.sha256, environment.yml,
+# remap_paths.py, params/samplesheet snapshots, provenance JSON) — never user data — so
+# its entire contents are ignored. Matches nfcore-sarek / nfcore-scrnaseq so the three
+# wrappers accept the same set of pre-existing output-dir contents, and avoids a fragile
+# per-file allowlist that silently rejected a copied bundle (OUTPUT_DIR_NOT_EMPTY).
+_IGNORED_ROOT_NAMES = frozenset(
+    {"reproducibility", ".DS_Store", ".gitkeep", ".gitignore", "Thumbs.db", "check_result.json"}
+)
 _GENCODE_GTF_MARKER_RE = re.compile(r'(^|[;\s])(gene_type|havana_gene)\s+"')
 _GENCODE_GTF_MAX_FEATURE_RECORDS = 10
 
@@ -462,14 +469,6 @@ def _check_output_dir(output_dir: Path, *, resume: bool) -> None:
     materialized = []
     for entry in output_dir.iterdir():
         if entry.name in _IGNORED_ROOT_NAMES:
-            continue
-        if entry.name == "reproducibility" and entry.is_dir():
-            repro_entries = [
-                child for child in entry.iterdir()
-                if child.name not in _ALLOWED_REPRO_FILES and child.name not in _IGNORED_ROOT_NAMES
-            ]
-            if repro_entries:
-                materialized.append(entry)
             continue
         materialized.append(entry)
     if materialized and not resume:

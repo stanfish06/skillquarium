@@ -8,6 +8,12 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Documentation
 
+- **`remap_paths.py --output-dir` documented as a Gotcha.** SKILL.md now explains that
+  relocating the bundle's output directory uses `python3 reproducibility/remap_paths.py
+  --output-dir <new-path>` (the rnaseq bundle bakes `--output` into `commands.sh`),
+  alongside `--old/--new` and `--refs-old/--refs-new`, and notes the scrnaseq bundle
+  self-relocates and accepts `--output-dir` only for parity. Resolves the cross-wrapper
+  CLI inconsistency being undocumented.
 - **`--allow-remote-inputs` semantics clarified.** SKILL.md now states explicitly
   that the flag relaxes only the wrapper's own local-first preflight check: remote
   FASTQ/reference URIs are written into the normalized samplesheet/`params.yaml`
@@ -19,6 +25,96 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Fixed
 
+- **Output-dir "not empty" check now ignores the whole `reproducibility/` bundle.** The
+  check used a per-file allowlist (`_ALLOWED_REPRO_FILES` = samplesheet/params/manifest
+  only), so an output directory containing a *complete* reproducibility bundle — with the
+  wrapper's own `commands.sh`, `checksums.sha256`, `environment.yml`, `remap_paths.py` and
+  provenance JSON — was rejected with `OUTPUT_DIR_NOT_EMPTY` on a non-resume run. The
+  `reproducibility/` directory is entirely wrapper-generated (never user data), so it is
+  now ignored wholesale (added to `_IGNORED_ROOT_NAMES`), matching nfcore-sarek and
+  nfcore-scrnaseq. This removes a fragile allowlist that had to grow with every new bundle
+  file, and makes the three wrappers accept the same pre-existing output-dir contents.
+  Genuine result artifacts at the output root (`report.md`, `result.json`, `upstream/`,
+  `logs/`) still block a non-resume re-run, and the incomplete-prior-run guidance is
+  unchanged.
+- **Host memory auto-cap now also applies on Linux (not only macOS).** The
+  `process.resourceLimits` config that stops Nextflow's local executor from aborting a
+  real run with `Process requirement exceeds available memory` (when an nf-core default
+  process request is larger than the host) was gated behind `platform.system() ==
+  "Darwin"`, so a normal Linux docker run got no cap and failed on any host smaller than
+  the pipeline's production requirements. A docker run on a non-macOS host now writes a
+  portable `resourceLimits` config scaled to the machine — the smaller of physical RAM
+  and the Docker runtime `MemTotal`, minus a few GB of headroom, with no 15 GB macOS-VM
+  ceiling — per nf-core's resourceLimits guidance (values match the machine maximum).
+  `--demo` is untouched (it relies on `-profile test`'s own limits) and the macOS path
+  is byte-for-byte unchanged. The config carries only the resourceLimits block, none of
+  the macOS-only workarounds (`--platform`, `stageInMode = 'copy'`).
+- **IPv6/NAT64 hint now actually shows (scan `.nextflow.log`).** The
+  `EXECUTION_FAILED` environment-hint scanner only read `logs/stdout.txt` and
+  `logs/stderr.txt`. When Nextflow fails while parsing the config (before the pipeline
+  starts), the top-level stderr often shows only "Unable to parse config file" while the
+  real cause ("Network is unreachable") is recorded only in `.nextflow.log` — so the
+  already-implemented IPv6/NAT64 hint (`NXF_OPTS='-Djava.net.preferIPv6Addresses=true'`)
+  never appeared on the hosts that need it. `.nextflow.log` (in the Nextflow launch cwd)
+  is now scanned too. Applied identically to all three wrappers (the hint function is
+  shared verbatim). Covered by a new test.
+- **`commands.sh` is regenerated atomically (no self-corruption on in-place replay).**
+  An in-place `--resume` replay re-invokes the wrapper, which regenerates the very
+  `commands.sh` that bash is still executing. The previous truncate-and-rewrite corrupted
+  bash's mid-run read (a trailing shell error such as `…: No such file or directory`).
+  `commands.sh` is now composed in memory and written once via an atomic
+  `os.replace` (new `write_text_lf_atomic`), so an open reader keeps the original inode
+  intact. Verified with an open-file-descriptor test.
+- **`commands.sh` locates the ClawBio checkout automatically.** The script walked up
+  from its own directory looking for `skills/`, but the bundle always lives OUTSIDE the
+  repo (the wrapper forbids `--output` inside it), so it never found the checkout and
+  required a manual `CLAWBIO_REPO` — contradicting the header. It now bakes the
+  generating checkout as the `CLAWBIO_REPO` default (`REPO_ROOT="${CLAWBIO_REPO:-…}"`),
+  so a same-machine replay needs no manual setup while remaining overridable, and the
+  misleading "from anywhere inside the repository clone" header wording is corrected.
+  Sarek/scRNA-seq don't need this (they replay Nextflow directly). Covered by new tests.
+- **Config re-bundling on replay is idempotent (no `config_01_config_01_…` growth).**
+  A `--nextflow-config` file is staged into `reproducibility/nextflow_configs/` as
+  `config_NN_<name>`. On an in-place `--resume` replay, `commands.sh` re-invokes the
+  wrapper with `--nextflow-config` already pointing at that staged copy
+  (`${SCRIPT_DIR}/nextflow_configs/config_01_<name>`), and the wrapper copied it again
+  under a fresh prefix (`config_01_config_01_<name>`), accumulating a prefix on every
+  replay. Staging now detects that the source already lives in this bundle's
+  `nextflow_configs/` directory and references it in place instead of re-copying.
+  Sarek/scRNA-seq are unaffected (they replay Nextflow directly and do not re-stage
+  configs). Covered by a new test.
+- **`commands.sh` replay uses a portable interpreter at the source.** The shared
+  `clawbio/common/portable_commands` template that builds `commands.sh` emitted a bare
+  `python "$SKILL_SCRIPT"`; this wrapper previously rewrote it to `${PYTHON:-python3}`
+  with a post-generation patch. The interpreter is now `"${PYTHON:-python3}"` directly in
+  the template, so every skill that builds a bundle inherits the fix, and this wrapper's
+  now-redundant post-generation patch has been removed. Behaviour is unchanged; the
+  existing `commands.sh` interpreter test still passes.
+- **`commands.sh` in-place replay is now idempotent.** Because this wrapper's
+  `commands.sh` re-invokes the wrapper (which re-runs preflight, unlike the Sarek/scRNA-seq
+  bundles that replay Nextflow directly), a plain re-run in the original `--output`
+  directory failed with `OUTPUT_DIR_NOT_EMPTY`. `commands.sh` now guards the replay:
+  when the target output directory already holds a completed run of this bundle
+  (`reproducibility/manifest.json` present) it adds `--resume`; a fresh or
+  `remap_paths.py --output-dir`-relocated output directory has no manifest and runs
+  normally. The guard is omitted for `--demo` and for runs that already baked `--resume`.
+  `remap_paths.py --output-dir` rewrites the guard's manifest path in lockstep with the
+  `--output` flag. Covered by new tests.
+- **Reproducibility helper instructions now invoke `python3`, matching the sibling
+  wrappers.** `remap_paths.py` ships a `#!/usr/bin/env python3` shebang, but its own
+  usage/help text and error hints — and the "Portability notice" header emitted into
+  `commands.sh` by `reporting.py` — told users to run it as a bare `python
+  remap_paths.py`. On modern macOS and many Linux distributions only `python3` exists
+  in `PATH` (PEP 394), so the suggested command failed with `python: command not
+  found`. All such instructions now say `python3`, consistent with the
+  nfcore-sarek-wrapper and nfcore-scrnaseq-wrapper reproduction guides. A static guard
+  test (`tests/test_portability_remap_interpreter.py`, mirroring the sibling wrappers)
+  prevents regressions.
+- **Generated `rnaseq_de_handoff.sh` now uses a portable interpreter.** The downstream
+  handoff script — executed on a possibly-fresh machine via `bash rnaseq_de_handoff.sh`
+  — invoked a bare `python "${CLAWBIO_REPO}/clawbio.py"`, which fails on python3-only
+  systems. It now uses `"${PYTHON:-python3}"`, mirroring the `commands.sh` replay patch
+  (defaults to `python3`, honours a `PYTHON` override). Covered by a new test.
 - **`--allow-remote-inputs` is now replayed by `commands.sh`.** A run launched with
   `--allow-remote-inputs` (remote FASTQ/reference URIs) produced a bundle whose
   `commands.sh` omitted the flag, so re-running it failed preflight with

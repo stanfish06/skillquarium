@@ -8,6 +8,35 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Documentation
 
+- **`split_fastq` gotcha: demo-vs-normal difference is a profile effect, not a thread/CPU
+  effect.** The existing gotcha now records that a demo-vs-normal variant difference cannot
+  come from the host-scaled `resourceLimits` CPU count: nf-core/sarek 3.8.1 pins
+  `bwa mem -K 100000000` on every mapping process (`conf/modules/aligner.config`), which
+  fixes the per-batch base count and makes alignment bit-identical regardless of thread
+  count. The divergence is driven by the `-profile test` overrides already documented
+  (`split_fastq = 0`, and the test profile's own `--tools strelka` / reference choices),
+  so a run at 28 CPUs reproduces the same calls as the demo's 4. Documentation only.
+- **Transient first-replay failures documented (upstream/network, auto-recovered).** A new
+  gotcha explains that a demo replay can fail on the *first* attempt because nf-core/sarek's
+  own `conf/test.config` uses a trailing-slash `igenomes_base`/`modules_testdata_base_path`
+  (`…/test-datasets/modules/data/`) that can join into `//` URLs some CDNs momentarily 404,
+  and remote staging occasionally races — upstream behaviour, not a wrapper/bundle defect.
+  The generated `commands.sh` already recovers it: it adds `-resume` whenever a prior
+  `.nextflow/` session exists, so re-invoking `bash commands.sh` resumes from cached tasks
+  and completes without recomputing. Documentation only (the auto-`-resume` mechanism was
+  added in an earlier change).
+- **`remap_paths.py --output-dir` documented.** The portability section now lists
+  `--output-dir <new-path>` (rewrites the baked `--output` in `commands.sh` when a run is
+  relocated) alongside `--old/--new` and `--refs-old/--refs-new`, and notes that the
+  scrnaseq bundle self-relocates and only accepts `--output-dir` for parity.
+- **`split_fastq` gotcha added.** SKILL.md now documents that normal runs use the
+  nf-core/sarek default `split_fastq = 50000000`, while `--demo` (`-profile test`)
+  disables splitting (`0`). The wrapper faithfully passes the pipeline default rather
+  than silently injecting `0`, so a normal run and a `--demo` run of the *same* tiny
+  dataset can produce different variant sets (FASTQ split/merge perturbs calls on
+  degenerate, test-scale inputs — a known nf-core artifact, not a wrapper bug). Pass
+  `--split-fastq 0` to match `-profile test` when reproducing demo/test output; leave the
+  default for production cohorts.
 - **`--allow-remote-inputs` semantics clarified.** SKILL.md now states explicitly
   that the flag relaxes only the wrapper's own local-first preflight check: remote
   FASTQ/reference URIs are written into the normalized samplesheet/`params.yaml`
@@ -25,6 +54,67 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Fixed
 
+- **`checksums.sha256` no longer leaks the nested Nextflow work tree into the manifest.**
+  The checksum generator excluded `work/`, `.nextflow/`, `reproducibility/` and `logs/`
+  by matching only the *first* path component (`rel.parts[0]`). But the default work dir
+  is `<output>/upstream/work`, so every ephemeral scratch file sat at `upstream/work/**`
+  (first component `upstream`) and was hashed into the manifest — the bulk of its lines
+  were transient task files that change every run, defeating the manifest's purpose and
+  breaking `sha256sum -c` reproducibility. Both generators — `provenance._iter_checksum_paths`
+  and the stdlib-only `remap_paths._regenerate_checksums` (kept in lockstep) — now exclude
+  a file when **any** ancestor directory is an excluded tree, so the nested work dir is
+  caught wherever it lives (including a custom `--work-dir` placed under the output root).
+  The manifest now contains only the real `upstream/results/**` outputs. The existing test
+  used an unrealistic flat `output/work/` layout (which the old first-component check
+  happened to catch), masking the bug; new tests in `test_provenance.py` and
+  `test_remap_paths.py` assert exclusion of the real `upstream/work/**` layout.
+- **`--genome testdata.nf-core.sarek` is now rejected early without a matching
+  `--igenomes-base`.** nf-core/sarek's tiny test genome resolves only under the
+  test-datasets mirror (`conf/test.config` sets `igenomes_base` to
+  `https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/`), never the
+  default `s3://ngi-igenomes` catalogue — yet it was accepted like a normal iGenomes
+  key, so a real run without that override failed late during nf-schema reference
+  validation with no warning. `_check_genome_known` now special-cases it: accepted under
+  `-profile test`/`--demo` or with a custom `--igenomes-base`, otherwise rejected at
+  preflight (`INVALID_GENOME`) with a fix naming `--demo` and the exact test-datasets base.
+- **The host resourceLimits cap now ships in the reproducibility bundle and replays.**
+  Previously the cap was applied to the live run but stripped from `commands.sh`, so a
+  from-scratch reproduction on the generating (memory-constrained) host re-aborted with
+  `Process requirement exceeds available memory`. The cap is now written to
+  `reproducibility/resource_limits.config` and `commands.sh` re-applies it via a
+  `uname != Darwin` guard (complementary to the macOS-config guard), so a bundle
+  reproduces the run on the machine that made it. The cap only ever clamps requests, so
+  a larger replay host simply under-uses it.
+- **Host memory auto-cap now also applies on Linux (not only macOS).** The host-scaled
+  `process.resourceLimits` cap that prevents Nextflow's local executor from aborting a
+  real run with `Process requirement exceeds available memory` was written only on
+  macOS+docker (`_write_macos_docker_config` returned `None` off-Darwin), so a normal
+  Linux docker run got no cap and failed whenever an nf-core default process request
+  exceeded the host. A non-macOS docker run now writes a portable resourceLimits config
+  (`.nextflow_resource_limits.config`) scaled to the machine — the smaller of physical
+  RAM and the Docker `MemTotal`, minus headroom, no 15 GB macOS-VM ceiling — per
+  nf-core's resourceLimits guidance. It is applied to the **live** run only and stripped
+  from the portable `commands.sh` replay bundle so a single machine's RAM is never pinned
+  into it. `--demo` and the macOS path are unchanged.
+- **`commands.sh` replay is now idempotent (`-resume`).** The nextflow-direct replay
+  script re-ran the whole pipeline from scratch against an already-completed output dir.
+  It now emits a guard that adds `-resume` when a prior Nextflow session (`.nextflow/`)
+  exists in the launch dir, so a first run starts fresh but a replay reuses the cache —
+  matching the `nfcore-rnaseq-wrapper` bundle. Any `-resume` captured from the original
+  run is stripped so the guard is the single source of truth.
+- **IPv6/NAT64 hint now actually shows (scan `.nextflow.log`).** The `EXECUTION_FAILED`
+  environment-hint scanner read only `logs/stdout.txt` and `logs/stderr.txt`. When
+  Nextflow fails while parsing the config (before the pipeline starts), the underlying
+  "Network is unreachable" cause is often recorded only in `.nextflow.log`, so the
+  IPv6/NAT64 hint (`NXF_OPTS='-Djava.net.preferIPv6Addresses=true'`) never appeared.
+  `.nextflow.log` (in the Nextflow launch cwd) is now scanned too. Shared verbatim with
+  the sibling wrappers; covered by a new test.
+- **Downstream handoff examples now use `python3`.** The generated
+  `sarek_downstream_handoff.sh` listed cross-skill example commands (clinical-variant-reporter,
+  clinical-trial-finder, omics-target-evidence-mapper, wes-clinical-report-en/es) as bare
+  `python skills/<skill>/<script>.py`. On python3-only systems (modern macOS and many Linux
+  distributions, PEP 394) that fails with `python: command not found`. They now use `python3`,
+  matching the wrapper's other reproduction/handoff scripts. Covered by a new test.
 - **User `-c` configs are now copied into the bundle and replayed portably.** A
   `--nextflow-config`/`-c` file living outside the output directory was rewritten to a
   `<EDIT_ME>` placeholder in `commands.sh` (the portable-argv rewriter cannot anchor an

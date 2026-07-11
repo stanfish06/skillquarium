@@ -466,6 +466,41 @@ def test_checksums_excludes_work_and_nextflow(tmp_path: Path):
     assert "check_result.json" not in text
 
 
+def test_checksums_excludes_nested_upstream_work(tmp_path: Path):
+    # Real layout: the pipeline writes results under upstream/results/ and its
+    # ephemeral Nextflow scratch under upstream/work/ (the default work dir is
+    # <output>/upstream/work). The work tree must never enter the manifest even
+    # though it is nested one level below the output root.
+    samplesheet_csv, params_yaml, commands_sh = _write_caller_artifacts(tmp_path)
+    output_dir = tmp_path / "out"
+    output_dir.mkdir()
+    # Real pipeline output under upstream/results/.
+    real = output_dir / "upstream" / "results" / "preprocessing" / "sample.cram"
+    real.parent.mkdir(parents=True)
+    real.write_text("cram", encoding="utf-8")
+    # Nextflow scratch under upstream/work/ — ephemeral, must be excluded.
+    junk = output_dir / "upstream" / "work" / "ab" / "cd1234" / "task.bam"
+    junk.parent.mkdir(parents=True)
+    junk.write_text("ephemeral", encoding="utf-8")
+
+    bundle = write_provenance_bundle(
+        output_dir=output_dir,
+        skill_dir=_SKILL_DIR,
+        samplesheet_csv_src=samplesheet_csv,
+        params_yaml_src=params_yaml,
+        commands_sh_src=commands_sh,
+        params=_base_params(),
+        samplesheet_report=_FakeSamplesheetReport(),
+        pipeline_source=_FakePipelineSource(),
+        outputs_report=_FakeOutputsReport(),
+        nextflow_version="25.10.2",
+    )
+    text = (bundle.bundle_dir / "checksums.sha256").read_text()
+    assert "upstream/results/preprocessing/sample.cram" in text
+    assert "upstream/work/" not in text
+    assert "task.bam" not in text
+
+
 
 # ---------------------------------------------------------------------------
 # load_manifest

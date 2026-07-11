@@ -32,6 +32,15 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
   **not** added: scrnaseq's `commands.sh` self-anchors to the bundle location via
   `BASH_SOURCE`, so the output path never needs patching.
 
+### Added
+
+- **`remap_paths.py --output-dir` accepted for CLI parity.** The rnaseq/sarek bundles
+  expose `--output-dir` to rewrite a baked `--output`; the scrnaseq bundle self-relocates
+  (its `commands.sh` self-anchors and `params.yaml` is output-relative), so it never
+  needed one. `--output-dir` is now accepted as a documented no-op that explains the
+  self-relocation, so a user reaching for it out of habit gets guidance instead of an
+  argument error. SKILL.md documents the difference across all three wrappers.
+
 ### Documentation
 
 - **`--allow-remote-inputs` semantics clarified.** SKILL.md now states explicitly
@@ -45,6 +54,60 @@ and the wrapper version is tracked in `SKILL.md` YAML frontmatter.
 
 ### Fixed
 
+- **`--demo` no longer prints a misleading "requested" preset warning.** Running `--demo`
+  without `--preset` fired `WARNING: --demo forces preset=star (requested: 'standard')`,
+  implying the user had asked for `standard` when it was merely the parser default. The
+  demo-override warning now consults the existing `preset_explicit` flag (set only by
+  `_PresetAction` when `--preset` is actually supplied on the CLI), so it fires **only**
+  when the user explicitly requested a non-`star` preset that `--demo` overrides. Purely
+  cosmetic — the run result was always identical — but the message no longer fabricates a
+  request the user never made.
+- **Output-dir "not empty" check now ignores the whole `reproducibility/` bundle.** The
+  check used a per-file allowlist (`_ALLOWED_REPRO_FILES` = samplesheet/params/macos
+  config only), so an output directory containing a *complete* reproducibility bundle —
+  with the wrapper's own `commands.sh`, `checksums.sha256`, `environment.yml`,
+  `remap_paths.py`, `resource_limits.config` and provenance JSON — was rejected with
+  `OUTPUT_DIR_NOT_EMPTY` on a non-resume run, while nfcore-sarek accepted it. The
+  `reproducibility/` directory is entirely wrapper-generated (never user data), so it is
+  now ignored wholesale (added to `_IGNORED_ROOT_NAMES`), matching nfcore-sarek and
+  nfcore-rnaseq. Genuine result artifacts at the output root (`report.md`, `result.json`,
+  `upstream/`, `logs/`) still block a non-resume re-run.
+- **The host resourceLimits cap now ships in the reproducibility bundle and replays.**
+  Previously the cap was applied to the live run but written outside the bundle, so a
+  from-scratch reproduction on the generating host re-aborted at `STAR_GENOMEGENERATE`
+  with `Process requirement exceeds available memory`. It is now written to
+  `reproducibility/resource_limits.config` and `commands.sh` re-applies it via a
+  `uname != Darwin` guard, so a bundle reproduces the run on the machine that made it.
+  The cap only ever clamps requests, so a larger replay host simply under-uses it.
+- **Host memory auto-cap now also applies on Linux (not only macOS).** The host-scaled
+  `process.resourceLimits` cap that prevents Nextflow's local executor from aborting a
+  real run with `Process requirement exceeds available memory` was written only on
+  macOS+docker, so a normal Linux docker run got no cap and failed whenever a process's
+  production request (e.g. STARsolo's index build) exceeded the host. A non-macOS docker
+  run now writes a portable resourceLimits config (`.nextflow_resource_limits.config`)
+  scaled to the machine — the smaller of physical RAM and the Docker `MemTotal`, minus
+  headroom, no 15 GB macOS-VM ceiling — per nf-core's resourceLimits guidance. It is
+  applied to the **live** run only; the portable `commands.sh` bundle (rebuilt from
+  `params.yaml`) stays host-independent. `--demo` and the macOS path are unchanged.
+- **`commands.sh` replay is now idempotent (`-resume`).** The nextflow-direct replay
+  script re-ran the whole pipeline from scratch against an already-completed output dir.
+  It now emits a guard that adds `-resume` when a prior Nextflow session (`.nextflow/`)
+  exists in the launch dir, so a first run starts fresh but a replay reuses the cache —
+  matching the `nfcore-rnaseq-wrapper` bundle. `build_nextflow_commands_sh` no longer
+  takes a `resume` flag; the guard is the single source of truth.
+- **IPv6/NAT64 hint now actually shows (scan `.nextflow.log`).** The `EXECUTION_FAILED`
+  environment-hint scanner read only `logs/stdout.txt` and `logs/stderr.txt`. When
+  Nextflow fails while parsing the config (before the pipeline starts), the underlying
+  "Network is unreachable" cause is often recorded only in `.nextflow.log`, so the
+  IPv6/NAT64 hint (`NXF_OPTS='-Djava.net.preferIPv6Addresses=true'`) never appeared.
+  `.nextflow.log` (in the Nextflow launch cwd) is now scanned too. Shared verbatim with
+  the sibling wrappers; covered by a new test.
+- **Report "Next Steps" handoff is now portable.** The downstream handoff bullets in
+  `report.md` baked an **absolute** path to `clawbio.py` (resolved on the machine that
+  generated the report, e.g. `/mnt/.../ClawBio/clawbio.py`), so the suggested command did
+  not exist on any other machine, and invoked it with a bare `python`. They now use the
+  repository-relative `clawbio.py` (matching the convention documented across the repo)
+  and `python3` (portable to python3-only systems, PEP 394). Covered by a new test.
 - **`save_align_intermeds` no longer carries an invented `default: true` in the
   contract.** nf-core/scrnaseq 4.1.0's `nextflow_schema.json` declares no default for
   `save_align_intermeds` (an opt-in boolean, false when unset — same as

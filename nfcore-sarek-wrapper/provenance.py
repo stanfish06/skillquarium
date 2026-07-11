@@ -500,7 +500,14 @@ def _iter_checksum_paths(output_dir: Path) -> Iterable[Path]:
         except ValueError:
             continue
         parts = rel.parts
-        if parts and parts[0] in _CHECKSUM_EXCLUDE_DIRS:
+        # Exclude a file when *any* of its ancestor directories is an excluded
+        # tree, not only the top-level one: the Nextflow work dir defaults to
+        # <output>/upstream/work, so `work/` sits one level below the root and a
+        # parts[0]-only check would leak the entire ephemeral scratch tree into
+        # the manifest. (`.nextflow`, `reproducibility` and `logs` live at the
+        # root, but matching them at any depth is harmless and keeps the rule
+        # simple and mirror-identical to remap_paths._regenerate_checksums.)
+        if any(part in _CHECKSUM_EXCLUDE_DIRS for part in parts[:-1]):
             continue
         if len(parts) == 1 and parts[0] in _CHECKSUM_EXCLUDE_ROOT_FILES:
             continue

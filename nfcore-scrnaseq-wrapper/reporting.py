@@ -34,7 +34,11 @@ from schemas import (
     profile_includes,
 )
 
-_CLAWBIO_SCRIPT = (SKILL_DIR.parent.parent / "clawbio.py").as_posix()
+# Repository-relative (not an absolute path resolved on the generating machine): an
+# absolute path baked into the report would not exist on any other machine. Matches
+# the `clawbio.py run ...` convention documented across the repo. Invoked with
+# `python3` for portability to python3-only systems (PEP 394).
+_CLAWBIO_SCRIPT = "clawbio.py"
 
 
 def write_report(
@@ -120,8 +124,8 @@ def _build_handoff_lines(preferred_h5ad: str) -> list[str]:
         return [
             "## Next Steps",
             "",
-            f"- `python {_CLAWBIO_SCRIPT} run scrna --input {preferred_h5ad} --output <dir>`",
-            f"- `python {_CLAWBIO_SCRIPT} run scrna-embedding --input {preferred_h5ad} --output <dir>`",
+            f"- `python3 {_CLAWBIO_SCRIPT} run scrna --input {preferred_h5ad} --output <dir>`",
+            f"- `python3 {_CLAWBIO_SCRIPT} run scrna-embedding --input {preferred_h5ad} --output <dir>`",
             "",
         ]
     return [
@@ -190,16 +194,20 @@ def write_repro_commands(
     copied_extra_configs = _copy_user_nextflow_configs(
         repro_dir, getattr(args, "extra_config", []) or []
     )
+    # The host-scaled resourceLimits cap is written into the bundle by the live run
+    # (only for non-macOS docker real runs). Ship+apply it on replay when present so a
+    # from-scratch reproduction on the generating host does not re-abort on memory.
+    resource_limits_config = (repro_dir / "resource_limits.config").is_file()
     script = build_nextflow_commands_sh(
         pipeline_source=pipeline_source,
         profile=args.profile,
-        resume=bool(args.resume),
         demo=bool(getattr(args, "demo", False)),
         macos_docker_config=macos_docker_config,
         nextflow_version=nextflow_version,
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         extra_configs=copied_extra_configs,
         work_dir=_replay_work_dir(args),
+        resource_limits_config=resource_limits_config,
     )
     if not getattr(args, "demo", False):
         script += _PORTABILITY_NOTICE

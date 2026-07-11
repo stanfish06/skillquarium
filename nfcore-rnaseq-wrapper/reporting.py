@@ -8,9 +8,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from clawbio.common.portable_commands import write_portable_commands_sh
+from clawbio.common.portable_commands import build_portable_commands_sh
 from clawbio.common.report import generate_report_footer, generate_report_header, write_result_json
-from clawbio.common.textio import write_text_lf
+from clawbio.common.textio import write_text_lf, write_text_lf_atomic
 
 _SKILL_DIR = Path(__file__).resolve().parent
 if str(_SKILL_DIR) in sys.path:
@@ -168,16 +168,16 @@ _PORTABILITY_NOTICE = """\
 # Before replaying on a different machine:
 #
 #   1. Remap FASTQ/BAM paths in samplesheet.valid.csv:
-#        python reproducibility/remap_paths.py --old /original/prefix --new /new/prefix
+#        python3 reproducibility/remap_paths.py --old /original/prefix --new /new/prefix
 #
 #   2. Remap reference/index paths in commands.sh (if references moved):
-#        python reproducibility/remap_paths.py --refs-old /original/refs --refs-new /new/refs
+#        python3 reproducibility/remap_paths.py --refs-old /original/refs --refs-new /new/refs
 #
 #   3. Update the --output path above if the output directory changed:
-#        python reproducibility/remap_paths.py --output-dir /new/output/dir
+#        python3 reproducibility/remap_paths.py --output-dir /new/output/dir
 #
 #   4. Verify everything:
-#        python reproducibility/remap_paths.py --verify
+#        python3 reproducibility/remap_paths.py --verify
 #
 # If ClawBio is installed at a non-standard path on this machine:
 #   CLAWBIO_REPO=/path/to/ClawBio bash reproducibility/commands.sh
@@ -189,17 +189,38 @@ _CLAWBIO_REPO_FALLBACK = (
     '  exit 1\n'
     'fi'
 )
-_CLAWBIO_REPO_FALLBACK_PATCHED = (
-    'if [[ ! -d "$REPO_ROOT/skills" ]]; then\n'
-    '  if [[ -n "${CLAWBIO_REPO:-}" && -d "${CLAWBIO_REPO}/skills" ]]; then\n'
-    '    REPO_ROOT="$CLAWBIO_REPO"\n'
-    '  else\n'
-    '    echo "ERROR: Could not locate repo root (no skills/ directory found)" >&2\n'
-    '    echo "If ClawBio is installed elsewhere, set CLAWBIO_REPO:" >&2\n'
-    '    echo "  CLAWBIO_REPO=/path/to/ClawBio bash commands.sh" >&2\n'
-    '    exit 1\n'
-    '  fi\n'
-    'fi'
+# The reproducibility bundle always lives OUTSIDE the ClawBio checkout (the wrapper
+# forbids --output inside the repo), so the template's "walk up to find skills/" never
+# succeeds and the bundle must be told where the checkout is. Bake the generating
+# checkout as the CLAWBIO_REPO default so same-machine replay works with no manual
+# setup; a different machine overrides CLAWBIO_REPO. (Sarek/scRNA-seq do not need this —
+# they replay Nextflow directly and never re-invoke the wrapper.)
+_REPO_ROOT = _SKILL_DIR.parent.parent
+
+
+def _clawbio_repo_fallback_patched() -> str:
+    repo = _REPO_ROOT.as_posix()
+    return (
+        'if [[ ! -d "$REPO_ROOT/skills" ]]; then\n'
+        f'  REPO_ROOT="${{CLAWBIO_REPO:-{repo}}}"\n'
+        '  if [[ ! -d "$REPO_ROOT/skills" ]]; then\n'
+        '    echo "ERROR: Could not locate the ClawBio checkout (no skills/ directory)." >&2\n'
+        '    echo "Set CLAWBIO_REPO to your ClawBio checkout and re-run:" >&2\n'
+        '    echo "  CLAWBIO_REPO=/path/to/ClawBio bash commands.sh" >&2\n'
+        '    exit 1\n'
+        '  fi\n'
+        'fi'
+    )
+
+
+# The shared template header claims replay works "from anywhere inside the repository
+# clone", but this bundle lives outside the clone. Correct the wording to match the
+# baked CLAWBIO_REPO default above.
+_ANCHOR_HEADER_REPLAY_HINT = "# from anywhere inside the repository clone."
+_ANCHOR_HEADER_REPLAY_HINT_PATCHED = (
+    "# from any directory. This bundle lives outside the ClawBio checkout; the script\n"
+    "# locates the checkout it was generated from automatically (set CLAWBIO_REPO to\n"
+    "# replay from a different checkout)."
 )
 
 
@@ -335,9 +356,14 @@ def _build_handoff_lines(parsed_outputs: dict[str, object] | str, *, args=None) 
 
 def write_repro_commands(output_dir: Path, *, args) -> None:
     repro_dir = output_dir / "reproducibility"
+    repro_dir.mkdir(parents=True, exist_ok=True)
     command_args = build_repro_command_args(output_dir, args=args)
-    write_portable_commands_sh(
-        repro_dir,
+    # Build the whole script in memory and write it ONCE, atomically. An in-place
+    # --resume replay re-invokes the wrapper, which regenerates the very commands.sh
+    # that bash is still executing; a truncate-and-rewrite (or several) would corrupt
+    # bash's mid-run read. Composing in memory also removes the previous read/patch/
+    # rewrite cycles.
+    content = build_portable_commands_sh(
         skill_name=SKILL_NAME,
         # Phase 4 owns creating this orchestrator entrypoint; Phase 3 records
         # the planned replay target so generated bundles remain stable.
@@ -345,14 +371,11 @@ def write_repro_commands(output_dir: Path, *, args) -> None:
         args=command_args,
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
     )
-    commands_sh = repro_dir / "commands.sh"
-    _patch_commands_sh_repo_fallback(commands_sh)
-    _patch_commands_sh_python_interpreter(commands_sh)
+    content = _apply_repo_fallback(content)
+    content = _apply_idempotent_resume(content, output_dir)
     if not getattr(args, "demo", False):
-        # Append via the LF choke-point (not open("a"), which would re-introduce
-        # CRLF on Windows) so the whole script — including this notice — stays
-        # byte-stable across OSes, matching the scrnaseq/sarek wrappers.
-        write_text_lf(commands_sh, commands_sh.read_text(encoding="utf-8") + _PORTABILITY_NOTICE)
+        content += _PORTABILITY_NOTICE
+    write_text_lf_atomic(repro_dir / "commands.sh", content)
     _write_remap_script(repro_dir)
 
 
@@ -439,6 +462,14 @@ def _stage_user_nextflow_configs(output_dir: Path, config_paths: list[str]) -> l
             staged.append(source.as_posix())  # defensive: nothing to copy in
             continue
         config_dir.mkdir(parents=True, exist_ok=True)
+        # Idempotent re-bundling: an in-place --resume replay re-invokes the wrapper with
+        # --nextflow-config already pointing at THIS bundle's staged copy
+        # (${SCRIPT_DIR}/nextflow_configs/config_NN_*.config resolves inside config_dir).
+        # Reference it in place instead of copying it again under a new config_NN_ prefix,
+        # which would accumulate config_01_config_01_... on successive replays.
+        if source.parent == config_dir.resolve():
+            staged.append(f"${{SCRIPT_DIR}}/nextflow_configs/{source.name}")
+            continue
         destination = config_dir / f"config_{index:02d}_{_safe_config_basename(source.name)}"
         shutil.copyfile(source, destination)
         staged.append(f"${{SCRIPT_DIR}}/nextflow_configs/{destination.name}")
@@ -538,32 +569,50 @@ def write_check_result(output_dir: Path, payload: dict[str, object]) -> Path:
     return path
 
 
-def _patch_commands_sh_repo_fallback(commands_sh: Path) -> None:
-    if not commands_sh.exists():
-        return
-    content = commands_sh.read_text(encoding="utf-8")
-    if _CLAWBIO_REPO_FALLBACK not in content:
-        return
-    write_text_lf(commands_sh, content.replace(_CLAWBIO_REPO_FALLBACK, _CLAWBIO_REPO_FALLBACK_PATCHED))
+def _apply_repo_fallback(content: str) -> str:
+    """Bake the CLAWBIO_REPO default and correct the misleading replay-hint wording."""
+    if _CLAWBIO_REPO_FALLBACK in content:
+        content = content.replace(_CLAWBIO_REPO_FALLBACK, _clawbio_repo_fallback_patched())
+    content = content.replace(_ANCHOR_HEADER_REPLAY_HINT, _ANCHOR_HEADER_REPLAY_HINT_PATCHED)
+    return content
 
 
-# The shared portable_commands template emits a bare `python "$SKILL_SCRIPT"`, but
-# modern macOS and many Linux distros ship only `python3` (PEP 394) — a bare `python`
-# replay fails with "python: command not found". Rewrite it to a portable form that
-# defaults to python3 and honours a PYTHON override, so the bundle replays on any
-# compatible OS and from any folder. (Root cause is in clawbio/common/portable_commands.py;
-# patched here to keep the fix within this skill's surface.)
-_PYTHON_INVOCATION = 'python "$SKILL_SCRIPT"'
-_PYTHON_INVOCATION_PATCHED = '"${PYTHON:-python3}" "$SKILL_SCRIPT"'
+# The portable interpreter (`${PYTHON:-python3}`) is emitted by the shared
+# clawbio/common/portable_commands template, so no per-skill rewrite is needed here.
+_REPLAY_INVOCATION_LINE = '"${PYTHON:-python3}" "$SKILL_SCRIPT" \\'
 
 
-def _patch_commands_sh_python_interpreter(commands_sh: Path) -> None:
-    if not commands_sh.exists():
-        return
-    content = commands_sh.read_text(encoding="utf-8")
-    if _PYTHON_INVOCATION not in content:
-        return
-    write_text_lf(commands_sh, content.replace(_PYTHON_INVOCATION, _PYTHON_INVOCATION_PATCHED))
+def _apply_idempotent_resume(content: str, output_dir: Path) -> str:
+    """Make an in-place replay idempotent.
+
+    Unlike the Sarek/scRNA-seq bundles (which replay Nextflow directly, and Nextflow
+    tolerates a populated output directory), the RNA-seq bundle re-invokes the wrapper,
+    whose preflight rejects a non-empty --output with OUTPUT_DIR_NOT_EMPTY. So a plain
+    re-run of commands.sh in the same directory fails. This injects a guard that adds
+    `--resume` when the target output directory already holds a completed run of this
+    bundle (reproducibility/manifest.json present); a fresh or `remap_paths.py
+    --output-dir`-relocated output directory has no manifest and runs normally.
+
+    Skipped when the command already carries `--resume` (the run always resumes) or is a
+    `--demo` replay (the test profile is not combined with --resume).
+    """
+    if _REPLAY_INVOCATION_LINE not in content:
+        return content
+    if "\n    --resume" in content or "\n    --demo" in content:
+        return content
+    manifest = f"{output_dir.as_posix()}/reproducibility/manifest.json"
+    guard = (
+        "# Idempotent replay: resume in place if this output directory already holds a\n"
+        "# completed run of this bundle (reproducibility/manifest.json). A fresh or\n"
+        "# remapped output directory (see the remap_paths.py --output-dir note below)\n"
+        "# has no manifest and runs normally.\n"
+        'CLAWBIO_RESUME=""\n'
+        f'if [[ -f "{manifest}" ]]; then\n'
+        '  CLAWBIO_RESUME="--resume"\n'
+        "fi\n"
+        '"${PYTHON:-python3}" "$SKILL_SCRIPT" $CLAWBIO_RESUME \\'
+    )
+    return content.replace(_REPLAY_INVOCATION_LINE, guard, 1)
 
 
 def _write_remap_script(repro_dir: Path) -> None:

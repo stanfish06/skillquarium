@@ -31,7 +31,7 @@ def _purge_local_modules(*names: str) -> None:
 
 _purge_foreign_bare_modules("reporting", "schemas")
 
-from reporting import _REPRO_PATH_FLAGS, build_repro_command_args, write_report, write_repro_commands, write_result
+from reporting import _REPO_ROOT, _REPRO_PATH_FLAGS, build_repro_command_args, write_report, write_repro_commands, write_result
 from schemas import DEFAULT_TIMEOUT_HOURS
 
 _purge_local_modules("reporting", "schemas")
@@ -326,6 +326,69 @@ def test_repro_commands_sh_uses_portable_python_interpreter(tmp_path):
     assert "\npython \"$SKILL_SCRIPT\"" not in content, "bare `python` is not portable"
 
 
+def test_repro_commands_sh_has_idempotent_resume_guard(tmp_path):
+    """Re-running commands.sh in place must be idempotent. The RNA-seq bundle
+    re-invokes the wrapper (which re-runs preflight and rejects a non-empty output
+    dir, unlike the Sarek/scRNA-seq bundles that replay Nextflow directly). The
+    replay therefore guards with --resume when the target output dir already holds a
+    completed run of this bundle (reproducibility/manifest.json present); a fresh or
+    remapped output dir has no manifest and runs normally."""
+    write_repro_commands(tmp_path, args=_args(tmp_path))
+    content = (tmp_path / "reproducibility" / "commands.sh").read_text(encoding="utf-8")
+    manifest = f"{tmp_path.as_posix()}/reproducibility/manifest.json"
+    assert f'if [[ -f "{manifest}" ]]; then' in content
+    assert 'CLAWBIO_RESUME="--resume"' in content
+    assert '"${PYTHON:-python3}" "$SKILL_SCRIPT" $CLAWBIO_RESUME' in content
+
+
+def test_repro_commands_sh_resume_guard_skipped_for_demo(tmp_path):
+    """--demo replays the test profile and is not combined with --resume, so the
+    idempotent-resume guard is not emitted for demo bundles."""
+    write_repro_commands(tmp_path, args=_args(tmp_path, demo=True))
+    content = (tmp_path / "reproducibility" / "commands.sh").read_text(encoding="utf-8")
+    assert "CLAWBIO_RESUME" not in content
+
+
+def test_repro_commands_sh_resume_guard_skipped_when_run_used_resume(tmp_path):
+    """If the original run already used --resume the command always resumes, so the
+    conditional guard is redundant and omitted."""
+    write_repro_commands(tmp_path, args=_args(tmp_path, resume=True))
+    content = (tmp_path / "reproducibility" / "commands.sh").read_text(encoding="utf-8")
+    assert "CLAWBIO_RESUME" not in content
+    assert "\n    --resume" in content
+
+
+def test_write_repro_commands_replaces_commands_sh_atomically(tmp_path):
+    """An in-place --resume replay regenerates commands.sh while bash is still executing
+    it. The write must be atomic (os.replace to a fresh inode), so a reader that already
+    has the file open keeps seeing the ORIGINAL bytes rather than a truncated/rewritten
+    file. Regenerating with different content must not disturb the open reader."""
+    write_repro_commands(tmp_path, args=_args(tmp_path, aligner="star_salmon"))
+    commands_sh = tmp_path / "reproducibility" / "commands.sh"
+    original = commands_sh.read_text(encoding="utf-8")
+    with commands_sh.open("r", encoding="utf-8") as held:
+        head = held.read(20)
+        # Regenerate in place with different content (simulates the wrapper re-invoked
+        # by the very commands.sh under execution).
+        write_repro_commands(tmp_path, args=_args(tmp_path, aligner="star_rsem"))
+        rest = held.read()
+    assert head + rest == original, "open reader saw a truncated/rewritten file — not atomic"
+    assert "star_rsem" not in (head + rest)
+    # The on-disk file is the regenerated version.
+    assert "star_rsem" in commands_sh.read_text(encoding="utf-8")
+
+
+def test_repro_commands_sh_bakes_clawbio_repo_default(tmp_path):
+    """The bundle always lives OUTSIDE the ClawBio checkout, so walking up from the
+    script never finds skills/. commands.sh must bake the generating checkout as the
+    CLAWBIO_REPO default so a same-machine replay needs no manual CLAWBIO_REPO, while
+    remaining overridable. The misleading "inside the repository clone" hint is gone."""
+    write_repro_commands(tmp_path, args=_args(tmp_path))
+    content = (tmp_path / "reproducibility" / "commands.sh").read_text(encoding="utf-8")
+    assert f'REPO_ROOT="${{CLAWBIO_REPO:-{_REPO_ROOT.as_posix()}}}"' in content
+    assert "inside the repository clone" not in content
+
+
 def test_build_repro_command_args_omits_default_trimmer(tmp_path):
     """commands.sh must not record the default --trimmer (trimgalore) — it would
     diverge from params.yaml, which omits defaults ('omit = trust upstream default'),
@@ -478,6 +541,29 @@ def test_build_repro_command_args_stages_config_outside_output_dir(tmp_path):
         assert not value.startswith("/"), "must not bake a host-specific absolute path"
     copied = output_dir / "reproducibility" / "nextflow_configs" / "config_01_limits.config"
     assert copied.read_text() == "process { resourceLimits = [ memory: '12.GB' ] }\n"
+
+
+def test_build_repro_command_args_config_restage_is_idempotent(tmp_path):
+    """On an in-place --resume replay, commands.sh re-invokes the wrapper with
+    --nextflow-config pointing at the ALREADY-staged
+    ${SCRIPT_DIR}/nextflow_configs/config_01_*.config (a file inside THIS bundle).
+    Re-staging must reference it in place, not copy it again under a new config_NN_
+    prefix — otherwise successive replays accumulate config_01_config_01_..."""
+    external = tmp_path / "elsewhere" / "limits.config"
+    external.parent.mkdir()
+    external.write_text("process { resourceLimits = [ memory: '12.GB' ] }\n", encoding="utf-8")
+    output_dir = tmp_path / "run"
+    output_dir.mkdir()
+    first = build_repro_command_args(output_dir, args=_args(output_dir, nextflow_config=[str(external)]))
+    assert first["--nextflow-config"] == ["${SCRIPT_DIR}/nextflow_configs/config_01_limits.config"]
+    staged = output_dir / "reproducibility" / "nextflow_configs" / "config_01_limits.config"
+    assert staged.is_file()
+    # Replay: the wrapper is re-invoked with the already-staged (absolute) path.
+    second = build_repro_command_args(output_dir, args=_args(output_dir, nextflow_config=[str(staged)]))
+    assert second["--nextflow-config"] == ["${SCRIPT_DIR}/nextflow_configs/config_01_limits.config"]
+    config_dir = output_dir / "reproducibility" / "nextflow_configs"
+    names = sorted(p.name for p in config_dir.iterdir())
+    assert names == ["config_01_limits.config"], f"double-prefixed copy created: {names}"
 
 
 def test_build_repro_command_args_remote_config_uri_passed_through(tmp_path):

@@ -139,6 +139,28 @@ def test_write_report_handoff_with_preferred_h5ad(tmp_path):
     assert "scrna" in content
 
 
+def test_write_report_handoff_is_portable(tmp_path):
+    """The Next Steps handoff must be portable: no machine-specific absolute path to
+    clawbio.py (that path only exists on the machine that generated the report), and
+    `python3` rather than a bare `python` (python3-only systems, PEP 394). Uses the
+    repository-relative `clawbio.py` convention."""
+    import re
+
+    preferred = "/output/outs/cellbender.h5ad"
+    write_report(
+        tmp_path,
+        args=_make_args(tmp_path),
+        pipeline_source=_pipeline_source(),
+        preflight_result=_preflight_result(),
+        parsed_outputs=_parsed_outputs(preferred_h5ad=preferred),
+        command_str="nextflow run nf-core/scrnaseq",
+    )
+    content = (tmp_path / "report.md").read_text(encoding="utf-8")
+    assert "python3 clawbio.py run scrna " in content
+    assert "python3 clawbio.py run scrna-embedding " in content
+    assert not re.search(r"/[^\s`]*/clawbio\.py", content), "absolute clawbio.py path is not portable"
+
+
 def test_write_report_handoff_without_preferred_h5ad(tmp_path):
     write_report(
         tmp_path,
@@ -198,6 +220,28 @@ def test_write_repro_commands_demo_uses_test_profile(tmp_path):
     assert "-profile test,docker" in content
     assert "nfcore_scrnaseq_wrapper.py" not in content
     assert "--input" not in content
+
+
+def test_write_repro_commands_applies_shipped_resource_limits(tmp_path):
+    # When the live run shipped reproducibility/resource_limits.config, commands.sh
+    # must re-apply it on non-macOS replay (findings #1/#3).
+    repro = tmp_path / "reproducibility"
+    repro.mkdir(parents=True, exist_ok=True)
+    (repro / "resource_limits.config").write_text(
+        "process { resourceLimits = [ memory: '58.GB' ] }\n", encoding="utf-8"
+    )
+    args = _make_args(tmp_path, profile="docker")
+    write_repro_commands(tmp_path, args=args, pipeline_source=_pipeline_source())
+    content = (repro / "commands.sh").read_text(encoding="utf-8")
+    assert 'RESOURCE_CONFIG="-c reproducibility/resource_limits.config"' in content
+    assert "$RESOURCE_CONFIG" in content
+
+
+def test_write_repro_commands_no_resource_guard_without_config(tmp_path):
+    args = _make_args(tmp_path, profile="docker")
+    write_repro_commands(tmp_path, args=args, pipeline_source=_pipeline_source())
+    content = (tmp_path / "reproducibility" / "commands.sh").read_text(encoding="utf-8")
+    assert "resource_limits.config" not in content
 
 
 def test_write_repro_commands_copies_user_nextflow_configs(tmp_path):
