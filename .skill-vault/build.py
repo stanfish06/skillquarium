@@ -270,7 +270,10 @@ CATEGORIES = [
      "Office document toolkits (docx/pptx/pdf/xlsx), file-to-markdown conversion, and image/report generation.",
      ["research-writing", "literature-discovery"],
      ["docx", "pptx", "pdf", "xlsx", "markitdown", "liteparse", "infographics", "generate-image",
-      "market-research-reports", "doc-coauthoring", "internal-comms", "report-template"]),
+      "market-research-reports", "doc-coauthoring", "internal-comms", "report-template",
+      "officecli", "officecli-docx", "officecli-xlsx", "officecli-pptx",
+      "officecli-academic-paper", "officecli-data-dashboard", "officecli-financial-model",
+      "officecli-pitch-deck", "officecli-word-form", "morph-ppt", "morph-ppt-3d"]),
 
     ("cloud-devops", "Cloud, Infra & MLOps",
      "AWS architecture and operations, serverless GPU compute, developer infrastructure, the Hugging Face CLI, and workflow pipelines.",
