@@ -3030,6 +3030,116 @@
       "skillFolderHash": "3642ecef471a6ee4d9d485feea6df8ba92616b78",
       "installedAt": "2026-07-07T08:16:54.060Z",
       "updatedAt": "2026-07-07T08:16:54.060Z"
+    },
+    "officecli": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli/SKILL.md",
+      "skillFolderHash": "200ee69c4830e0f0341e58368ef3b0ccaccdd0bf",
+      "installedAt": "2026-07-11T22:19:47.967Z",
+      "updatedAt": "2026-07-11T22:19:47.967Z"
+    },
+    "morph-ppt-3d": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/morph-ppt-3d/SKILL.md",
+      "skillFolderHash": "4411a170cce777b800361ad59a4fdec9f208a969",
+      "installedAt": "2026-07-11T22:12:35.211Z",
+      "updatedAt": "2026-07-11T22:12:35.211Z"
+    },
+    "morph-ppt": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/morph-ppt/SKILL.md",
+      "skillFolderHash": "87d271edeb0e66133e200c1a3885aa64e16721ab",
+      "installedAt": "2026-07-11T22:12:40.879Z",
+      "updatedAt": "2026-07-11T22:12:40.879Z"
+    },
+    "officecli-academic-paper": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-academic-paper/SKILL.md",
+      "skillFolderHash": "d039f069c6c790f7aeb4dc2f70181ee5368de918",
+      "installedAt": "2026-07-11T22:12:45.948Z",
+      "updatedAt": "2026-07-11T22:12:45.948Z"
+    },
+    "officecli-data-dashboard": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-data-dashboard/SKILL.md",
+      "skillFolderHash": "f3b893467c1d6eee5c8ebdab411e0774d0af010b",
+      "installedAt": "2026-07-11T22:12:53.321Z",
+      "updatedAt": "2026-07-11T22:12:53.321Z"
+    },
+    "officecli-docx": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-docx/SKILL.md",
+      "skillFolderHash": "80addb20c56d82d0fc189f0e82c0a178a2678355",
+      "installedAt": "2026-07-11T22:12:58.354Z",
+      "updatedAt": "2026-07-11T22:12:58.354Z"
+    },
+    "officecli-financial-model": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-financial-model/SKILL.md",
+      "skillFolderHash": "480002acbb1fb51dae321e6238c08b5b166d5db8",
+      "installedAt": "2026-07-11T22:13:06.760Z",
+      "updatedAt": "2026-07-11T22:13:06.760Z"
+    },
+    "officecli-pitch-deck": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-pitch-deck/SKILL.md",
+      "skillFolderHash": "38688f9db1544a7d0b9bb1842eff6afafc1ff37f",
+      "installedAt": "2026-07-11T22:13:12.240Z",
+      "updatedAt": "2026-07-11T22:13:12.240Z"
+    },
+    "officecli-pptx": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-pptx/SKILL.md",
+      "skillFolderHash": "d3be17be1676dadd81494085fe530eeccf867e79",
+      "installedAt": "2026-07-11T22:13:18.569Z",
+      "updatedAt": "2026-07-11T22:13:18.569Z"
+    },
+    "officecli-word-form": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-word-form/SKILL.md",
+      "skillFolderHash": "15a1540a9a9f32746e668acc15b8ba7e9c9df80a",
+      "installedAt": "2026-07-11T22:13:23.842Z",
+      "updatedAt": "2026-07-11T22:13:23.842Z"
+    },
+    "officecli-xlsx": {
+      "source": "iOfficeAI/OfficeCLI",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/iOfficeAI/OfficeCLI.git",
+      "ref": "main",
+      "skillPath": "skills/officecli-xlsx/SKILL.md",
+      "skillFolderHash": "a9755ff928cfe2d8e9e8648a2e3671eca1101e3f",
+      "installedAt": "2026-07-11T22:17:44.442Z",
+      "updatedAt": "2026-07-11T22:17:44.442Z"
     }
   },
   "dismissed": {

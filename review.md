@@ -36,9 +36,11 @@ created: 2026-06-20
 - [greploop](greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
 - [guidelines-advisor](guidelines-advisor.md) — Smart contract development advisor based on Trail of Bits' best practices
 - [infographics](infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
+- [morph-ppt](morph-ppt.md) — Use this skill when the user wants a .pptx with smooth cross-slide animation — PowerPoint Morph transitions, Keynote-style continuous motion, shapes that grow / move / rotate as the...
 - [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R, plus optional OpenRouter GPT Image 2 manuscript schematic generation when the user explicitly asks for...
 - [nature-reviewer](nature-reviewer.md) — Simulate a Nature-style reviewer assessment from the referee perspective rather than an author rebuttal
 - [neuropixels-analysis](neuropixels-analysis.md) — Analyze Neuropixels extracellular recordings end-to-end with SpikeInterface
+- [officecli-pitch-deck](officecli-pitch-deck.md) — Use this skill when the user is building a fundraising / investor pitch deck — seed, Series A / B / C, convertible note, SAFE round, strategic raise
 - [peer-review](peer-review.md) — Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across...
 - [phoenix-cli](phoenix-cli.md) — Debug LLM applications using the Phoenix CLI
 - [pre-submission-reviewer](pre-submission-reviewer.md) — Runs a pre-submission review of a technical paper across five dimensions: macro logic, writing details, English grammar, LaTeX formatting, and figure quality

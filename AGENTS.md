@@ -136,6 +136,18 @@ Know these by name so you reach for them automatically.
 **Authoring skills**
 - `skill-builder` / `writing-skills` — when creating or editing a skill.
 
+**Office files**
+- For any Word (`.docx`), Excel (`.xlsx`/`.csv`), or PowerPoint (`.pptx`) task,
+  invoke `officecli-docx`, `officecli-xlsx`, or `officecli-pptx` before acting;
+  use `officecli` for general or cross-format work.
+- Also load the matching specialized skill when applicable:
+  `officecli-academic-paper`, `officecli-data-dashboard`,
+  `officecli-financial-model`, `officecli-pitch-deck`,
+  `officecli-word-form`, `morph-ppt`, or `morph-ppt-3d`. Read inherited base
+  skills when the scene-layer skill requires them.
+- Follow the OfficeCLI skill's help-first and delivery/visual-validation rules;
+  run `officecli help` rather than guessing command syntax or properties.
+
 ---
 
 ## Default loop for a coding task
