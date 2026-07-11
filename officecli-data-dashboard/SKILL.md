@@ -245,6 +245,16 @@ Inherit the xlsx baseline (`view issues`, formula error queries, `validate`, HTM
 
 Then run the dashboard-specific Delivery Gates. Each gate uses **COUNT-then-if** pattern with a `.data.*` wrapper — never chain `&& echo OK || echo FAIL`.
 
+Before running the gates, classify the original request explicitly. Set `PRINT_SCOPE_REQUIRED=1` when it asks for print, one-page, board, investor, `一页`, `投资人`, or `董事会` output; otherwise set it to `0`. The gates fail closed when this decision is missing.
+
+```bash
+: "${PRINT_SCOPE_REQUIRED:?Set PRINT_SCOPE_REQUIRED to 1 for print/board/investor output, otherwise 0}"
+case "$PRINT_SCOPE_REQUIRED" in
+  0|1) ;;
+  *) echo "REJECT setup: PRINT_SCOPE_REQUIRED must be 0 or 1"; exit 1 ;;
+esac
+```
+
 **Gate 1 — KPI formula coverage.** Every planned KPI cell must carry a formula. Adjust `-lt 2` to your plan (4 KPIs → `-lt 4`).
 
 ```bash
@@ -338,7 +348,7 @@ Gate 7 must **NEVER** be skipped — skipping ships `###` to the user.
 If scene keywords include print / 一页 / board / 投资人 / 董事会, extend Gate 7 with a structural print-scope check:
 
 ```bash
-if echo "$USER_REQ" | grep -qiE 'print|一页|投资人|董事会|board'; then
+if [ "$PRINT_SCOPE_REQUIRED" = "1" ]; then
   # Every non-Dashboard sheet must be hidden or veryHidden.
   # query sheet --json carries the name in .preview (no .name/.state); visibility lives in
   # each sheet's own get .format.hidden (absent => visible), so iterate + probe per sheet.

@@ -32,7 +32,7 @@ Help is pinned to the installed CLI version. **When this skill and help disagree
 
 ## Mental Model & Inheritance
 
-**Inherits docx v2.** You should have read `skills/officecli-docx/SKILL.md` first. This skill assumes you know how to add paragraphs, set styles, build tables, insert images, manage TOC/footer/headers, force page breaks, and run the Delivery Gate. If any of those are unfamiliar, open a second session on docx v2 before continuing.
+**Inherits docx v2.** You should have loaded the `officecli-docx` skill first. This skill assumes you know how to add paragraphs, set styles, build tables, insert images, manage TOC/footer/headers, force page breaks, and run the Delivery Gate. If any of those are unfamiliar, open a second session on docx v2 before continuing.
 
 ## Shell & Execution Discipline
 

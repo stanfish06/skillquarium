@@ -5,7 +5,7 @@ description: Morph-specific design notes — color + typography floor for deep-s
 
 # Morph Design Essentials
 
-`skills/officecli-pptx/SKILL.md` §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where pptx SKILL.md already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.
+The `officecli-pptx` skill's §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where the base pptx skill already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.
 
 ---
 
@@ -55,7 +55,7 @@ A scene actor that lands on `opacity=0.7` in the content core is usually a mis-c
 
 ### Palette Selection — pick for mood, not for habit
 
-There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 52-style library because cross-slide motion amplifies color mood.
+There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 51-style library because cross-slide motion amplifies color mood.
 
 Decision path:
 

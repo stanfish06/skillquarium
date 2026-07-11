@@ -7,7 +7,7 @@ description: "Use this skill when the user wants to build a financial model — 
 
 **This skill is a scene layer on top of `officecli-xlsx`.** Every xlsx hard rule — shell quoting, incremental execution, Help-First Rule, visual delivery floor, CFO 4-color code (blue input / black formula / green cross-sheet / yellow-fill assumption), number-format standards (years as text, zero as `-`, `%` one decimal, negatives in parens), assumption-cell discipline, CSV batch import, chart data-feed forms (a/b/c), the 5-gate Delivery cycle, cache-drift guidance, Known Issues (the cross-sheet `!` trap, batch + resident for formulas, renderer caveats) — is **inherited, not re-taught**. This file adds only what a **financial model** requires on top: three-zone architecture, 3 model-type recipes (3-statement / DCF / LBO), sensitivity + scenario protocols, financial-function patterns, circular-reference discipline, and model-specific Delivery Gates 4–6.
 
-When the xlsx base rules cover it, the text here says `→ see xlsx v2 §X`. Read `skills/officecli-xlsx/SKILL.md` first if you have not.
+When the xlsx base rules cover it, the text here says `→ see xlsx v2 §X`. Load the `officecli-xlsx` skill first if you have not.
 
 ## Setup
 
@@ -24,7 +24,7 @@ This skill teaches what a financial model requires, not every CLI flag. When a p
 
 ## Mental Model & Inheritance
 
-**Inherits xlsx v2.** Read `skills/officecli-xlsx/SKILL.md` first. This skill assumes you know `create` / `open` / `close`, `set` values/formulas, `batch` heredocs for cross-sheet formulas, `/SheetName/A1` paths, named ranges, the 5-gate Delivery cycle, the cross-sheet `!` trap, and that **cross-sheet formulas go non-resident (single batch OR individual `set`), never batch-while-resident**.
+**Inherits xlsx v2.** Load the `officecli-xlsx` skill first. This skill assumes you know `create` / `open` / `close`, `set` values/formulas, `batch` heredocs for cross-sheet formulas, `/SheetName/A1` paths, named ranges, the 5-gate Delivery cycle, the cross-sheet `!` trap, and that **cross-sheet formulas go non-resident (single batch OR individual `set`), never batch-while-resident**.
 
 ## Shell & Execution Discipline
 

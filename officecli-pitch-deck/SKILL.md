@@ -7,7 +7,7 @@ description: "Use this skill when the user is building a fundraising / investor 
 
 **This skill is a scene layer on top of `officecli-pptx`.** Every pptx hard rule — visual delivery floor (title ≥ 36pt / body ≥ 18pt / title ≥ 2× body), 12-column grid on 33.87×19.05cm, 4 canonical palettes, chart-choice decision table, connector canon (`shape` / `from` / `to` / `tailEnd=triangle`), shell escape, resident + batch, Delivery Gate 1–5a — is inherited, not re-taught. This file adds only what **fundraising** needs on top: stage diagnosis (A / B / C), 5 赛道 arc templates, 10 key-slide recipes (cover / problem / solution / market / product / model / traction / team / financials / ask), pitch-specific numbers convention, a VC ship-check, and a pitch-specific fresh-eyes Gate 6.
 
-When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Read `skills/officecli-pptx/SKILL.md` first if you have not.
+When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Load the `officecli-pptx` skill first if you have not.
 
 ## Setup
 
@@ -32,7 +32,7 @@ Help reflects the installed CLI version. When this skill and help disagree, **he
 
 ## Mental Model & Inheritance
 
-**Inherits pptx v2.** You should have read `skills/officecli-pptx/SKILL.md` first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; write `--prop tailEnd=triangle` on every flow connector; and run the 5-gate Delivery Gate. If any of those are unfamiliar, open a pptx v2 session before continuing.
+**Inherits pptx v2.** You should have loaded the `officecli-pptx` skill first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; write `--prop tailEnd=triangle` on every flow connector; and run the 5-gate Delivery Gate. If any of those are unfamiliar, open a pptx v2 session before continuing.
 
 ## Shell & Execution Discipline
 
