@@ -77,7 +77,7 @@ references:
       path: references/figure-legend-conventions.md
     - condition: "end-to-end walkthroughs: bars, trends, heatmaps"
       path: references/tutorials.md
-    - condition: "radar, 3D sphere, fill_between, scatter patterns"
+    - condition: "radar, 3D sphere, fill_between, scatter, ablation-line, probability/manifold concept patterns"
       path: references/chart-types.md
     - condition: bundled figures4papers Python scripts and output previews for concrete pattern adaptation
       path: references/demos.md

@@ -1,5 +1,7 @@
 # `nature-data` 技能
 
+[English](README_EN.md)
+
 `nature-data` 用于为 Nature / Springer Nature 风格投稿准备或审查 Data Availability statement、数据仓储方案、数据集引用和 FAIR 元数据检查。
 
 该技能支持中文作者笔记。用户可以用中文描述“数据可向通讯作者索取”“原始数据”“受限数据”“公共数据库”等情况；技能会转化为可投稿的英文表述，并在需要时给出中文确认项。

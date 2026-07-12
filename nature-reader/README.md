@@ -1,5 +1,7 @@
 # `nature-reader` 技能
 
+[English](README_EN.md)
+
 `nature-reader` 是以 Markdown 为核心的全文论文阅读工作流。
 
 ## 功能

@@ -1,5 +1,7 @@
 # `nature-response` 技能
 
+[English](README_EN.md)
+
 `nature-response` 用于起草、审查和修改返修通信材料，包括逐点回复审稿人的 response letter、返修 cover letter、标红修改稿和可编辑 LaTeX 模板，适用于 Nature 系列和其他高影响力期刊的返修场景。
 
 该技能支持中英文输入。它可以接收中文或英文审稿意见、编辑决定信、编辑部返修邮件、作者修改说明和 rebuttal 草稿，并生成英文回复包；需要作者确认的信息会用中文提示。

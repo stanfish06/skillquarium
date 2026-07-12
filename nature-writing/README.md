@@ -1,5 +1,7 @@
 # `nature-writing` 技能
 
+[English](README_EN.md)
+
 `nature-writing` 用于根据作者提供的 claims、图表、结果、笔记或中文草稿，起草或重建 Nature 风格手稿章节。
 
 ## 功能

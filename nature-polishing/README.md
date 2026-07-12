@@ -1,5 +1,7 @@
 # `nature-polishing` 技能
 
+[English](README_EN.md)
+
 `nature-polishing` 用于把学术手稿文本润色、重构或翻译成更接近 `Nature` 风格的简洁英文。
 
 ## 来源层级

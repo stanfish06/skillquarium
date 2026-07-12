@@ -1,5 +1,7 @@
 # `nature-reviewer` 技能
 
+[English](README_EN.md)
+
 `nature-reviewer` 用于从审稿人视角模拟 `Nature` 风格的预投稿评审包，而不是从作者 rebuttal 视角写回复。
 
 该技能专门基于 `Nature` 官方 `Editorial criteria and processes` 页面中的审稿相关内容创建：

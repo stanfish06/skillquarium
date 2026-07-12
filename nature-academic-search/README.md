@@ -1,5 +1,7 @@
 # `nature-academic-search` 技能
 
+[English](README_EN.md)
+
 `nature-academic-search` 是面向 Claude Code / Codex 工作流的学术检索技能包，集成 CrossRef、PubMed、arXiv、Scopus 和 ScienceDirect 文献数据源。
 
 ## 功能
