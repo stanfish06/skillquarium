@@ -2,7 +2,10 @@
 name: scvelo
 description: RNA velocity analysis with scVelo. Estimate cell state transitions from unspliced/spliced mRNA dynamics, infer trajectory directions, compute latent time, and identify driver genes in single-cell RNA-seq data. Complements Scanpy/scVI-tools for trajectory inference.
 license: BSD-3-Clause
-metadata: {"version": "1.0", "skill-author": "Kuan-lin Huang"}
+compatibility: Requires Python 3.8+; officially tested on Python 3.8–3.10 (PyPI classifiers). Python 3.11+ is not officially declared but community reports indicate scvelo 0.3.4 installs and runs on 3.11–3.12 in most cases. Scanpy ≥1.10.0 is recommended with scvelo 0.3.4+ on Python ≥3.9 (Scanpy 1.10+ requires Python ≥3.9); on Python 3.8 use Scanpy 1.9.x.
+metadata:
+  version: "1.1"
+  skill-author: Kuan-lin Huang
 ---
 
 # scVelo — RNA Velocity Analysis
