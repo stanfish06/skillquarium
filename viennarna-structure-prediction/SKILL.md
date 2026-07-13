@@ -24,7 +24,7 @@ ViennaRNA is the gold-standard toolkit for RNA secondary structure prediction ba
 
 - **Python packages**: `ViennaRNA` (Python bindings), `matplotlib`, `numpy`
 - **Data requirements**: RNA sequences as strings (ACGU alphabet; T is auto-converted to U by ViennaRNA)
-- **Environment**: Python 3.8+; conda installation strongly recommended (handles C library dependencies)
+- **Environment**: Python 3.9+; conda installation strongly recommended (handles C library dependencies)
 
 ```bash
 # Install via conda (recommended)
@@ -32,14 +32,14 @@ conda install -c conda-forge -c bioconda viennarna
 
 # Verify installation
 python -c "import RNA; print(RNA.__version__)"
-# 2.6.4
+# 2.7.2
 
 # Install additional Python dependencies
 pip install matplotlib numpy pandas
 
 # Optional: verify CLI tools are available
 RNAfold --version
-# RNAfold 2.6.4
+# RNAfold 2.7.2
 ```
 
 ## Quick Start
