@@ -2,50 +2,70 @@
 
 [中文说明](README.md)
 
-## What It Does
+`nature-figure` designs, generates, and audits submission-grade scientific figures for Nature-series papers, high-impact journals, manuscript panels, mechanism schematics, and graphical-abstract drafts.
 
-- Creates, revises, and audits submission-grade scientific figures for Nature and other high-impact journals using Python or R workflows, with optional OpenRouter GPT Image 2 schematic drafting.
+## What To Use It For
 
-## When to Use It
+- Generate Python / R plotting scripts and editable figures from data, legends, or manuscript claims.
+- Redraw existing figures into clearer multi-panel manuscript figures.
+- Plan Figure 1, mechanism diagrams, workflows, graphical abstracts, or supplementary figures.
+- Check panel labels, color, typography, statistical annotations, source data, and export formats.
+- When explicitly requested, call `openai/gpt-image-2` through the OpenRouter Images API to draft AI concept schematics.
 
-- You need publication-quality plots, multi-panel figures, graphical abstracts, or manuscript schematics.
-- You want to convert rough analysis into editable SVG/PDF/TIFF figure outputs.
-- You need a figure QA pass for typography, labels, color, panel logic, and journal constraints.
+## Workflow
 
-## Copy-Paste Prompts
+Start with a figure contract rather than a template:
 
-- `Create a Nature-style multi-panel figure from this dataset and methods description.`
-- `Polish this matplotlib figure for submission and export editable SVG plus high-resolution TIFF.`
-- `Use OpenRouter GPT Image 2 to draft a manuscript schematic from this mechanism description.`
-- `Audit this figure for Nature-style readability, color, labels, and panel layout.`
+- Core conclusion: what the figure must demonstrate.
+- Evidence hierarchy: which panels are primary evidence and which are explanatory.
+- Figure prototype: scatter, box plot, heatmap, mechanism diagram, workflow, multi-panel composition, and so on.
+- Backend choice: Python or R; the first choice can be reused as the default preference.
+- Submission constraints: size, typography, color, resolution, vector format, and source-data traceability.
 
-## Required Inputs
+## Typical Requests
 
-- Data files, analysis code, sketch, figure goal, target journal, panel plan, and preferred backend.
-- Optional Python/R preference. The skill can persist the first backend choice for future use.
-- Optional OpenRouter API key for GPT Image 2 schematic drafting.
+- "Make a Nature-style multi-panel figure from this dataset, preferably in Python."
+- "Use the figures4papers Nature Machine Intelligence layout as a reference and add a method-comparison figure."
+- "Redraw this mechanism schematic, export SVG/PDF, and give me the source-data table."
+- "Use OpenRouter to draft a graphical abstract, but do not treat it as a quantitative data figure."
 
-## Expected Outputs
+## Example Preview
 
-- Editable figure files such as SVG/PDF and high-resolution raster exports when requested.
-- Plotting scripts and reproducibility notes.
-- Schematic-generation prompts or image drafts.
-- Figure QA checklist and revision suggestions.
+| Direction | Preview | Reusable Pattern |
+|-----------|---------|------------------|
+| Multi-panel manuscript figure | <a href="assets/gallery/fig1-material-mechanism-rich.png"><img src="assets/gallery/fig1-material-mechanism-rich.png" width="220" alt="Material design and physical validation"></a> | Mechanism schematic, image panels, quantitative results, and correlation in one evidence chain |
+| Chart-type atlas | <a href="assets/chart-atlas/atlas-03-heatmaps.png"><img src="assets/chart-atlas/atlas-03-heatmaps.png" width="220" alt="Heatmap atlas"></a> | Heatmaps, annotation matrices, cluster blocks, and diverging color scales |
+| figures4papers demo | <a href="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png"><img src="assets/figures4papers/figure_VIGIL/figures/comparison_radar.png" width="220" alt="VIGIL comparison radar"></a> | Layout, legend, and multi-metric comparison grammar from real paper scripts |
 
-## Dependencies / API Keys / Local Environment
+## What You Need To Provide
 
-- Python or R plotting environment depending on the selected backend.
-- Optional OpenRouter credentials for GPT Image 2 image generation.
-- Some outputs may require fonts, vector-export support, or image-conversion tools.
+- Raw data, existing figure, legend, manuscript claim, or intended mechanism.
+- Target journal, single-column / double-column size, output format, and whether source data is required.
+- Python / R preference; if absent, the skill asks or reuses the local preference.
 
-## FAQ
+## Outputs
 
-- **Should I choose Python or R every time?** No. The workflow should ask the first time if needed and reuse the stored preference later.
-- **Can GPT Image 2 generate final publication figures?** Treat generated schematics as drafts; scientific accuracy and editable redraw should still be verified.
-- **What is the preferred output format?** Editable vector output is preferred for manuscript figures, with journal-required raster exports generated as needed.
+- Runnable Python or R plotting script.
+- SVG/PDF/PNG figure files, with editable vector output preferred.
+- Panel notes, source-data mapping, and pre-submission QA checklist.
+- For AI-schematic tasks, a concept draft and a list of elements that need human redrawing or verification.
+
+## Built-In References
+
+- `references/api.md`: OpenRouter AI schematic-generation parameters.
+- `references/chart-types.md`: chart selection and visual rules.
+- `references/demos.md`: `figures4papers` demos and reusable patterns.
+- `references/qa-contract.md`: export QA and source-data constraints.
+- `assets/figures4papers/`: packaged demo scripts and previews.
+
+## Boundaries
+
+- AI-generated images are not treated as real experimental results or quantitative data panels.
+- The skill does not invent statistical tests, sample sizes, error-bar meanings, or experiment conditions.
+- Private templates can be used locally, but user-facing outputs should not expose private paths, filenames, or sources.
 
 ## Related Skills
 
-- [`nature-paper2ppt`](../nature-paper2ppt/README_EN.md)
-- [`nature-writing`](../nature-writing/README_EN.md)
-- [`nature-response`](../nature-response/README_EN.md)
+- `nature-statistics`: check statistical annotations, n definitions, and p-value wording.
+- `nature-writing`: align figure conclusions with manuscript narrative.
+- `nature-paper2ppt`: turn manuscript figures into presentation slides.
