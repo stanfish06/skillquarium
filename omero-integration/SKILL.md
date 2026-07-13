@@ -123,7 +123,7 @@ uv pip install omero-py
 ```
 
 **Requirements:**
-- Python 3.8+ (Python 3.12: preliminary support only — ZeroC Ice binary wheels may not be available on all platforms; see omero-py release notes)
+- Python 3.10+ (Python 3.12: preliminary support only — ZeroC Ice binary wheels may not be available on all platforms; see omero-py release notes)
 - ZeroC Ice 3.6+
 - Access to an OMERO server (host, port, credentials)
 
