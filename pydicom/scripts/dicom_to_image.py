@@ -79,18 +79,10 @@ def convert_dicom_to_image(input_path, output_path, image_format='PNG',
         if apply_window and hasattr(ds, 'WindowCenter'):
             pixel_array = apply_windowing(pixel_array, ds)
 
-        # Handle color images
+        # Handle color images.
+        # pydicom 3.0+: pixel_array already auto-converts YBR_FULL / YBR_FULL_422
+        # to RGB, so do not call convert_color_space() again (would double-convert).
         if len(pixel_array.shape) == 3 and pixel_array.shape[2] in [3, 4]:
-            # RGB or RGBA image
-            if ds.PhotometricInterpretation in ['YBR_FULL', 'YBR_FULL_422']:
-                # Convert from YBR to RGB
-                try:
-                    from pydicom.pixel_data_handlers.util import convert_color_space
-                    pixel_array = convert_color_space(pixel_array,
-                                                     ds.PhotometricInterpretation, 'RGB')
-                except ImportError:
-                    print("Warning: Could not convert color space, using as-is")
-
             image = Image.fromarray(pixel_array)
         else:
             # Grayscale image - normalize to uint8
