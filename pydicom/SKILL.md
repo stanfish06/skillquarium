@@ -411,7 +411,7 @@ Detailed reference information is available in the `references/` directory:
 ## Best Practices
 
 1. **Always check for required attributes** before accessing them using `hasattr()` or `get()`
-2. **Preserve file metadata** when modifying files by using `save_as()` with `enforce_file_format=True` (replaces the deprecated `write_like_original` parameter removed in pydicom v4.0)
+2. **Preserve file metadata** when modifying files by using `save_as()` with `enforce_file_format=False` (default; writes the dataset as-is). Use `enforce_file_format=True` only when you intentionally want DICOM File Format conformance. This replaces the deprecated `write_like_original` parameter removed in pydicom v4.0.
 3. **Use Transfer Syntax UIDs** to understand compression format before processing pixel data
 4. **Handle exceptions** when reading files from untrusted sources
 5. **Apply proper windowing** (VOI LUT) for medical image visualization
