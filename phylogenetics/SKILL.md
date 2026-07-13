@@ -23,6 +23,8 @@ conda install -c bioconda mafft iqtree fasttree
 pip install ete3
 ```
 
+> **⚠ ete3 maintenance warning:** `ete3` (the PyPI package installed above) has had no release since May 2023 and is effectively unmaintained. The actively developed fork is **ete4** (`pip install ete4`), which has a partially changed API (see [ete4 migration docs](https://etetoolkit.github.io/ete/3to4.html)). For new projects prefer ete4; for ete3-based code, pin your environment and test carefully on Python 3.10+ where ete3 compatibility is fragile.
+
 ## When to Use This Skill
 
 Use phylogenetics when:
@@ -362,7 +364,7 @@ def full_phylogenetic_analysis(
 ### DNA Models
 
 | Model | Description | Use case |
-|-------|-------------|---------|
+|-------|-------------|------|
 | `GTR+G4` | General Time Reversible + Gamma | Most flexible DNA model |
 | `HKY+G4` | Hasegawa-Kishino-Yano + Gamma | Two-rate model (common) |
 | `TrN+G4` | Tamura-Nei | Unequal transitions |
@@ -371,7 +373,7 @@ def full_phylogenetic_analysis(
 ### Protein Models
 
 | Model | Description | Use case |
-|-------|-------------|---------|
+|-------|-------------|------|
 | `LG+G4` | Le-Gascuel + Gamma | Best average protein model |
 | `WAG+G4` | Whelan-Goldman | Widely used |
 | `JTT+G4` | Jones-Taylor-Thornton | Classical model |
