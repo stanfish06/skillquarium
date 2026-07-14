@@ -1366,9 +1366,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "322f2ac039e46b9a3b4fe942c3ad58c3bb3ef128",
+      "skillFolderHash": "de38e52dd7b8c8c9a849aaecdf17ed68da542777",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-07-12T08:30:19.785Z"
+      "updatedAt": "2026-07-14T08:26:37.122Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -2032,27 +2032,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-rnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "fdc300fd25e731fbca204e2b66806009893d61a3",
+      "skillFolderHash": "b5557e24edccfb3d3a690deb6cfec3312e946702",
       "installedAt": "2026-06-09T11:30:14.248Z",
-      "updatedAt": "2026-07-11T08:13:45.059Z"
+      "updatedAt": "2026-07-14T08:26:42.293Z"
     },
     "nfcore-sarek-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-sarek-wrapper/SKILL.md",
-      "skillFolderHash": "56e2cc8bfdcfe4afca40f5b9d37386ac052cd9b0",
+      "skillFolderHash": "dd119dd0bb7ae76affe452d48e555cb55c25a0da",
       "installedAt": "2026-06-09T11:30:14.250Z",
-      "updatedAt": "2026-07-11T08:13:49.276Z"
+      "updatedAt": "2026-07-14T08:26:47.301Z"
     },
     "nfcore-scrnaseq-wrapper": {
       "source": "ClawBio/ClawBio",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ClawBio/ClawBio.git",
       "skillPath": "skills/nfcore-scrnaseq-wrapper/SKILL.md",
-      "skillFolderHash": "a5b9c7dfa2bb83c54d4ae26ef8f7e26c181b4f97",
+      "skillFolderHash": "5fc6f6be5e5c6b3d2b5361c817b2a270369e122f",
       "installedAt": "2026-06-09T11:30:14.252Z",
-      "updatedAt": "2026-07-11T08:13:53.533Z"
+      "updatedAt": "2026-07-14T08:26:52.827Z"
     },
     "nutrigx-advisor": {
       "source": "ClawBio/ClawBio",
