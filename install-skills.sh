@@ -3,6 +3,7 @@ set -euo pipefail
 
 # This script lives at ~/.agents/skills/install-skills.sh
 VAULT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
+source "$VAULT_DIR/.skill-vault/install-career-ops.sh"
 
 # Temporarily move gstack/ out of the vault so `npx skills add` doesn't
 # scan it and leak per-skill symlinks to the vault root. gstack is a
@@ -32,6 +33,8 @@ find . -maxdepth 2 -name SKILL.md -type l -lname '*gstack*' -exec sh -c '
 ' _ {} \; 2>/dev/null || true
 # 2. Remove gstack-prefixed directories created by gstack ./setup --prefix
 find . -maxdepth 1 -name 'gstack-*' -not -name 'gstack-*.md' -exec rm -rf {} \; 2>/dev/null || true
+
+install_career_ops
 
 # ─── gstack (Garry Tan's AI engineering workflow) ───────────────
 # gstack is a bundled skill collection — 23 specialist slash commands

@@ -228,6 +228,14 @@ install_career_ops
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("update check failed", result.stderr)
 
+    def test_root_installer_sources_and_calls_career_ops_helper(self):
+        installer = (REPO_ROOT / "install-skills.sh").read_text()
+
+        self.assertIn(
+            'source "$VAULT_DIR/.skill-vault/install-career-ops.sh"', installer
+        )
+        self.assertEqual(installer.count("install_career_ops"), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

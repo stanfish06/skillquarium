@@ -25,6 +25,17 @@ git clone git@github.com:stanfish06/my-skills.git ~/.agent/skills
 cd ~/.agent/skills && ./install-skills.sh
 ```
 
+### Career Ops workspace
+
+`install-skills.sh` also initializes the complete
+[`santifer/career-ops`](https://github.com/santifer/career-ops) workspace at
+`$HOME/career-ops` and uses its native updater on later runs.
+
+- `CAREER_OPS_DIR=/path/to/workspace` changes the location.
+- `CAREER_OPS_SKIP=1` skips Career Ops entirely.
+- `CAREER_OPS_AUTO_UPDATE=0` freezes an existing checkout before you branch or
+  switch it to a self-maintained fork.
+
 ## Navigation
 
 - **[index.md](index.md)** — start here: all skills grouped into 23 domains, plus an A–Z list.
