@@ -87,7 +87,7 @@ install_career_ops
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(
             self.command_log(),
-            [f"npx -y @santifer/career-ops@1.19.0 init {self.workspace}"],
+            [f"npx -y @santifer/career-ops@1.18.0 init {self.workspace}"],
         )
 
     def test_skip_avoids_all_work(self):

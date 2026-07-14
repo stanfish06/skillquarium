@@ -3,7 +3,9 @@
 # Career Ops is a stateful workspace whose skill router depends on the full
 # repository. Keep it outside this vault and delegate updates to its native
 # updater instead of copying individual skill files here.
-CAREER_OPS_SCAFFOLDER_VERSION="1.19.0"
+# Pin to a version verified as published on npm. GitHub releases can appear
+# before their matching scaffolder package reaches the registry.
+CAREER_OPS_SCAFFOLDER_VERSION="1.18.0"
 
 apply_career_ops_update() {
   local career_ops_dir="$1"
