@@ -9,7 +9,7 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 ## Overview
 
-scvi-tools is a comprehensive Python framework for probabilistic models in single-cell genomics. Built on PyTorch and PyTorch Lightning, it provides deep generative models using variational inference for analyzing diverse single-cell data modalities. Current stable release: **scvi-tools 1.4.3** (May 2026).
+scvi-tools is a comprehensive Python framework for probabilistic models in single-cell genomics. Built on PyTorch and PyTorch Lightning, it provides deep generative models using variational inference for analyzing diverse single-cell data modalities. Current stable release: **scvi-tools 1.4.3** (May 2026). Note: scvi-tools 1.5.0 (July 2026) removed JAX support entirely — do not upgrade past 1.4.x without first removing the JAX backend references below.
 
 **Model namespaces matter:** core models (scVI, scANVI, totalVI, MultiVI, PeakVI, AUTOZI, CondSCVI, DestVI, LinearSCVI, AmortizedLDA, JaxSCVI) live under `scvi.model`. Most other models (VeloVI, contrastiveVI, CellAssign, PoissonVI, scBasset, MrVI, MethylVI/MethylANVI, CytoVI, SysVI, Decipher, gimVI, scVIVA, ResolVI, Stereoscope, Solo, totalANVI, DIAGVI) live under `scvi.external`. The reference files specify the correct namespace per model.
 
@@ -184,8 +184,9 @@ uv pip install "scvi-tools[cuda]"
 For reproducible environments, pin a version: `uv pip install scvi-tools==1.4.3`.
 
 **Compute backends:** training defaults to PyTorch (CPU/GPU/TPU). A JAX backend
-(`scvi.model.JaxSCVI`) and an experimental MLX backend for Apple silicon
-(`scvi.model.mlxSCVI`) are available for select models.
+(`scvi.model.JaxSCVI`) is available on the pinned 1.4.x release only — it was
+removed in scvi-tools 1.5.0. An experimental MLX backend for Apple silicon
+(`scvi.model.mlxSCVI`) remains available for select models.
 
 ## Best Practices
 
