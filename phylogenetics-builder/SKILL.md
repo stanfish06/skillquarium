@@ -350,6 +350,8 @@ Do **not** pass raw tool flags from the user directly to the CLI without validat
 | t_coffee | any | optional | High-accuracy MSA for ≤ 20 sequences |
 | prank | any | optional | Codon-aware MSA |
 
+> **⚠ ete3 maintenance warning:** `ete3` (used above for midpoint rooting) has had no release since May 2023 (latest: 3.1.3) and is effectively unmaintained. The actively developed fork is **ete4** (`pip install ete4`), which has a partially changed API (see [ete4 migration docs](https://etetoolkit.github.io/ete4/tutorial/tutorial_intro.html)). Since ete3 is optional here — Bio.Phylo's `root_at_midpoint` is already the fallback — prefer relying on that fallback for new deployments rather than adding a fresh ete3 pin.
+
 Install all bioinformatics binaries:
 ```bash
 conda install -c bioconda iqtree raxml-ng mafft muscle trimal clustalw kalign3 t_coffee prank
