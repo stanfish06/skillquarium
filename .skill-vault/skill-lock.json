@@ -3140,6 +3140,16 @@
       "skillFolderHash": "a9755ff928cfe2d8e9e8648a2e3671eca1101e3f",
       "installedAt": "2026-07-11T22:17:44.442Z",
       "updatedAt": "2026-07-11T22:17:44.442Z"
+    },
+    "fitness-nutrition": {
+      "source": "NousResearch/hermes-agent",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/NousResearch/hermes-agent.git",
+      "ref": "main",
+      "skillPath": "optional-skills/health/fitness-nutrition/SKILL.md",
+      "skillFolderHash": "f565bcdd76de08ff5c3aa1a1bce7684a88163e46",
+      "installedAt": "2026-07-14T02:55:33.397Z",
+      "updatedAt": "2026-07-14T02:55:33.397Z"
     }
   },
   "dismissed": {

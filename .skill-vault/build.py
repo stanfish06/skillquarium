@@ -119,6 +119,7 @@ SYNONYMS = {
     "github-actions-ci": ["GitHub Actions", "CI/CD", "workflows"],
     "test-driven-development": ["TDD"], "using-git-worktrees": ["git worktree"],
     "caveman": ["plain language", "ELI5", "dumb it down", "no jargon"],
+    "fitness-nutrition": ["meal planning", "workout planner", "calorie counter", "TDEE", "one-rep max"],
     "web-artifacts-builder": ["artifacts", "shadcn"],
     "opensrc": ["source code", "package source", "dependency source", "read library source"],
     "greploop": ["Greptile", "PR review loop"], "check-pr": ["PR review", "merge request", "Greptile"],
@@ -203,7 +204,8 @@ CATEGORIES = [
      ["genomics-variants", "bio-databases-platforms", "imaging-signals"],
      ["clinical-reports", "clinical-decision-support", "treatment-plans", "clinical-trial-finder",
       "wes-clinical-report-en", "wes-clinical-report-es", "pharmgx-reporter", "nutrigx-advisor",
-      "drug-photo", "pyhealth", "iso-13485-certification", "profile-report", "methylation-clock"]),
+      "drug-photo", "pyhealth", "iso-13485-certification", "profile-report", "methylation-clock",
+      "fitness-nutrition"]),
 
     ("imaging-signals", "Imaging, Microscopy & Biosignals",
      "Microscopy and pathology images, medical imaging, electrophysiology, flow cytometry, and biosignals.",

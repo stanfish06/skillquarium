@@ -14,12 +14,13 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Imaging, Microscopy & Biosignals](imaging-signals.md)
 
-## Skills (13)
+## Skills (14)
 
 - [clinical-decision-support](../clinical-decision-support.md) — Generate professional clinical decision support (CDS) documents for pharmaceutical and clinical research settings, including patient cohort analyses (biomarker-stratified with...
 - [clinical-reports](../clinical-reports.md) — Write comprehensive clinical reports including case reports (CARE guidelines), diagnostic reports (radiology/pathology/lab), clinical trial reports (ICH-E3, SAE, CSR), and patient...
 - [clinical-trial-finder](../clinical-trial-finder.md) — Find clinical trials for a gene, variant, or condition from ClinicalTrials.gov + EUCTR, with FHIR R4 output
 - [drug-photo](../drug-photo.md) — Medication photo to personalised PGx dosage card via Claude vision — snap a pill, get genotype-informed guidance
+- [fitness-nutrition](../fitness-nutrition.md) — Gym workout planner and nutrition tracker
 - [iso-13485-certification](../iso-13485-certification.md) — Comprehensive toolkit for preparing ISO 13485 certification documentation for medical device Quality Management Systems
 - [methylation-clock](../methylation-clock.md) — Compute epigenetic age from DNA methylation arrays using PyAging clocks from GEO accessions or local files
 - [nutrigx-advisor](../nutrigx-advisor.md) — Personalised nutrition report from consumer genetic data (23andMe, AncestryDNA, VCF) — interrogates nutritionally-relevant SNPs and generates actionable dietary guidance, all computed...
