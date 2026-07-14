@@ -20,9 +20,11 @@ class CareerOpsInstallerTests(unittest.TestCase):
         self.workspace = self.home / "career-ops"
         self.log_path = self.root / "commands.log"
 
-    def make_workspace(self):
+    def make_workspace(self, claude_contents=None):
         (self.workspace / ".git").mkdir(parents=True)
         (self.workspace / "update-system.mjs").write_text("// test updater\n")
+        if claude_contents is not None:
+            (self.workspace / "CLAUDE.md").write_text(claude_contents)
 
     def run_installer(self, **overrides):
         environment = os.environ.copy()
@@ -41,6 +43,27 @@ npx() {{
   printf 'npx' >> "$COMMAND_LOG"
   printf ' %s' "$@" >> "$COMMAND_LOG"
   printf '\n' >> "$COMMAND_LOG"
+}}
+node() {{
+  printf 'node' >> "$COMMAND_LOG"
+  printf ' %s' "$@" >> "$COMMAND_LOG"
+  printf '\n' >> "$COMMAND_LOG"
+
+  if [ "$2" = "check" ]; then
+    if [ -n "${{FAKE_CHECK_OUTPUT+x}}" ]; then
+      printf '%s\n' "$FAKE_CHECK_OUTPUT"
+    else
+      printf '{{"status":"%s"}}\n' "${{FAKE_UPDATE_STATUS:-up-to-date}}"
+    fi
+    return "${{FAKE_CHECK_STATUS:-0}}"
+  fi
+
+  if [ "$2" = "apply" ]; then
+    printf 'new system one\nnew system two\n' > "$CAREER_OPS_DIR/CLAUDE.md"
+    return "${{FAKE_APPLY_STATUS:-0}}"
+  fi
+
+  return 64
 }}
 install_career_ops
 """
@@ -90,6 +113,120 @@ install_career_ops
 
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("not a valid Career Ops workspace", result.stderr)
+
+    def test_up_to_date_does_not_apply(self):
+        self.make_workspace()
+
+        result = self.run_installer(FAKE_UPDATE_STATUS="up-to-date")
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.command_log(), ["node update-system.mjs check"])
+        self.assertIn("up to date", result.stdout)
+
+    def test_offline_status_warns_and_succeeds(self):
+        self.make_workspace()
+
+        result = self.run_installer(FAKE_UPDATE_STATUS="offline")
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("offline", result.stderr)
+        self.assertEqual(self.command_log(), ["node update-system.mjs check"])
+
+    def test_no_remote_version_warns_and_succeeds(self):
+        self.make_workspace()
+
+        result = self.run_installer(FAKE_UPDATE_STATUS="no-remote-version")
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("no-remote-version", result.stderr)
+        self.assertEqual(self.command_log(), ["node update-system.mjs check"])
+
+    def test_available_update_applies_once_and_preserves_local_instructions(self):
+        self.make_workspace("system one\nsystem two\nlocal instruction\n")
+
+        result = self.run_installer(FAKE_UPDATE_STATUS="update-available")
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            self.command_log(),
+            ["node update-system.mjs check", "node update-system.mjs apply"],
+        )
+        self.assertEqual(
+            (self.workspace / "CLAUDE.md").read_text(),
+            "new system one\nnew system two\nlocal instruction\n",
+        )
+
+    def test_failed_apply_restores_local_instructions_and_fails(self):
+        self.make_workspace("system one\nsystem two\nlocal instruction\n")
+
+        result = self.run_installer(
+            FAKE_UPDATE_STATUS="update-available", FAKE_APPLY_STATUS="23"
+        )
+
+        self.assertEqual(result.returncode, 23)
+        self.assertEqual(
+            (self.workspace / "CLAUDE.md").read_text(),
+            "new system one\nnew system two\nlocal instruction\n",
+        )
+        self.assertIn("update failed", result.stderr)
+
+    def test_repeated_updates_do_not_duplicate_local_instructions(self):
+        self.make_workspace("system one\nsystem two\nlocal instruction\n")
+
+        first = self.run_installer(FAKE_UPDATE_STATUS="update-available")
+        second = self.run_installer(FAKE_UPDATE_STATUS="update-available")
+
+        self.assertEqual(first.returncode, 0, first.stderr)
+        self.assertEqual(second.returncode, 0, second.stderr)
+        self.assertEqual(
+            (self.workspace / "CLAUDE.md").read_text(),
+            "new system one\nnew system two\nlocal instruction\n",
+        )
+
+    def test_update_without_local_instruction_tail_keeps_new_template(self):
+        self.make_workspace("system one\nsystem two\n")
+
+        result = self.run_installer(FAKE_UPDATE_STATUS="update-available")
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            (self.workspace / "CLAUDE.md").read_text(),
+            "new system one\nnew system two\n",
+        )
+
+    def test_auto_update_removes_dismissed_marker(self):
+        self.make_workspace()
+        dismissed = self.workspace / ".update-dismissed"
+        dismissed.write_text("career-ops-v1.19.0\n")
+
+        result = self.run_installer(FAKE_UPDATE_STATUS="up-to-date")
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse(dismissed.exists())
+
+    def test_unknown_status_fails(self):
+        self.make_workspace()
+
+        result = self.run_installer(FAKE_UPDATE_STATUS="unexpected")
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("unknown career-ops update status", result.stderr)
+
+    def test_malformed_status_fails(self):
+        self.make_workspace()
+
+        result = self.run_installer(FAKE_CHECK_OUTPUT="{")
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("malformed update status", result.stderr)
+
+    def test_failed_check_fails(self):
+        self.make_workspace()
+
+        result = self.run_installer(FAKE_CHECK_STATUS="9")
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("update check failed", result.stderr)
 
 
 if __name__ == "__main__":
