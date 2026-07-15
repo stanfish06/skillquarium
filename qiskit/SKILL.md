@@ -265,8 +265,8 @@ with Session(backend=backend) as session:
 
 ## Additional Resources
 
-- **Official Docs**: https://quantum.ibm.com/docs
-- **Qiskit Textbook**: https://qiskit.org/learn
+- **Official Docs**: https://quantum.cloud.ibm.com/docs
+- **Qiskit Textbook**: https://quantum.cloud.ibm.com/learning/en
 - **API Reference**: https://docs.quantum.ibm.com/api/qiskit
 - **Patterns Guide**: https://quantum.cloud.ibm.com/docs/en/guides/intro-to-patterns
 
