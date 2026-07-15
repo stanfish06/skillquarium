@@ -47,7 +47,7 @@ metadata:
   dependencies:
     python: '>=3.11'
     packages:
-    - turingdb>=1.29
+    - turingdb>=1.34
     - pandas>=2.0
     - fastapi>=0.110
     - uvicorn>=0.27
@@ -283,7 +283,7 @@ TuringDB's `LOAD GML` stores properties with a type suffix: `displayName` become
 ## Dependencies
 
 **Required**:
-- `turingdb` >= 1.29; graph database engine (includes native daemon binary)
+- `turingdb` >= 1.34; graph database engine (includes native daemon binary)
 - `pandas` >= 2.0; data manipulation and cohort aggregation
 - `tabulate` >= 0.9; `DataFrame.to_markdown()` rendering
 
@@ -299,7 +299,8 @@ TuringDB's `LOAD GML` stores properties with a type suffix: `displayName` become
 - **TuringDB's GROUP BY returns incorrect aggregations.** `RETURN key, count(x)` does not group correctly. Always return raw rows and aggregate in pandas with `groupby().nunique()`.
 - **`LOAD CSV + CREATE` does not deduplicate.** Each CSV row creates a new node unconditionally. TuringDB has no `MERGE`. Pre-dedupe in pandas if you need one-node-per-unique-value.
 - **Writes outside a change do not persist.** Always wrap `CREATE`/`SET` in `new_change()` ... `CHANGE SUBMIT`. This is the most common mistake when extending the skill.
-- **The daemon must match the Python package version.** If `turingdb` was upgraded but an old daemon is still running, `LOAD CSV + CREATE` and other v1.29 features will fail. Stop the old daemon first: `--stop-server`.
+- **The daemon must match the Python package version.** If `turingdb` was upgraded but an old daemon is still running, `LOAD CSV + CREATE` and other features will fail. Stop the old daemon first: `--stop-server`.
+- **Bug list above is not guaranteed evergreen.** TuringDB ships on a fast biweekly release cadence; re-check the `GROUP BY`, string `<` comparison, and `MERGE` limitations against the latest changelog before relying on them, as any may have been fixed in a release since this skill was last updated.
 
 ## Safety
 
