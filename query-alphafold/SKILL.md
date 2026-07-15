@@ -62,7 +62,10 @@ if isinstance(data, list) and data:
     print(f"UniProt: {entry.get('uniprot_accession') or entry.get('uniprotAccession')}")
     print(f"Gene: {entry.get('gene', 'N/A')}")
     print(f"Organism: {entry.get('organism_scientific_name') or entry.get('organismScientificName', 'N/A')}")
-    print(f"Model confidence (mean pLDDT): {entry.get('mean_plddt') or entry.get('globalMetricValue', 'N/A')}")
+    mean_plddt = entry.get('mean_plddt')
+    if mean_plddt is None:
+        mean_plddt = entry.get('globalMetricValue', 'N/A')
+    print(f"Model confidence (mean pLDDT): {mean_plddt}")
     print(f"PDB URL: {entry.get('pdb_url') or entry.get('pdbUrl', 'N/A')}")
     print(f"CIF URL: {entry.get('cif_url') or entry.get('cifUrl', 'N/A')}")
 ```
