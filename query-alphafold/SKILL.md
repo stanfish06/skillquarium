@@ -46,22 +46,28 @@ def get_plddt(uniprot_id):
     r = requests.get(url)
     data = r.json()
     if isinstance(data, list) and data:
-        cif_url = data[0].get("cifUrl", "")
-        # paeImageUrl is being retired; paeDocUrl returns the PAE matrix as JSON.
-        pae_url = data[0].get("paeDocUrl", "")
-        return {"cifUrl": cif_url, "paeDocUrl": pae_url, "data": data[0]}
+        entry = data[0]
+        # AlphaFold EBI API sunset the old camelCase fields on 2026-06-25;
+        # prefer the new snake_case fields, fall back to the old names in
+        # case a cached/mirrored endpoint still serves the pre-sunset schema.
+        cif_url = entry.get("cif_url") or entry.get("cifUrl", "")
+        pae_url = entry.get("pae_url") or entry.get("paeDocUrl", "")
+        return {"cif_url": cif_url, "pae_url": pae_url, "data": entry}
     return data
 
 # Example
 data = get_alphafold_prediction("P04637")  # TP53
 if isinstance(data, list) and data:
     entry = data[0]
-    print(f"UniProt: {entry.get('uniprotAccession')}")
+    print(f"UniProt: {entry.get('uniprot_accession') or entry.get('uniprotAccession')}")
     print(f"Gene: {entry.get('gene', 'N/A')}")
-    print(f"Organism: {entry.get('organismScientificName', 'N/A')}")
-    print(f"Model confidence: {entry.get('globalMetricValue', 'N/A')}")
-    print(f"PDB URL: {entry.get('pdbUrl', 'N/A')}")
-    print(f"CIF URL: {entry.get('cifUrl', 'N/A')}")
+    print(f"Organism: {entry.get('organism_scientific_name') or entry.get('organismScientificName', 'N/A')}")
+    mean_plddt = entry.get('mean_plddt')
+    if mean_plddt is None:
+        mean_plddt = entry.get('globalMetricValue', 'N/A')
+    print(f"Model confidence (mean pLDDT): {mean_plddt}")
+    print(f"PDB URL: {entry.get('pdb_url') or entry.get('pdbUrl', 'N/A')}")
+    print(f"CIF URL: {entry.get('cif_url') or entry.get('cifUrl', 'N/A')}")
 ```
 
 ## Endpoints
