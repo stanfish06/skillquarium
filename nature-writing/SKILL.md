@@ -70,4 +70,4 @@ The files under `references/` are deep references and the example library, not d
 - The static layer is versioned and reviewable. Adding a new journal style, paper type, or section is one new file plus one manifest line.
 - The dynamic layer keeps each invocation cheap: only the fragments relevant to this draft enter context, instead of the full multi-thousand-line reference set.
 - The router itself is short on purpose. Update fragments, not this file, when adding scope.
-- This structure mirrors `nature-polishing` so shared content can later be lifted into a `_shared/` layer used by both skills.
+- This structure mirrors `nature-polishing` so shared content can later be lifted into a `nature-shared/` layer used by both skills.

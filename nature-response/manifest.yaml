@@ -13,7 +13,7 @@ description: >
 # references/intake-and-routing.md, not by loading different large content
 # bodies. There is therefore no content axis; the split is core (always loaded)
 # plus the existing on-demand references. nature-response does not use the
-# prose-oriented _shared layer (it has its own response-specific stance and
+# prose-oriented nature-shared layer (it has its own response-specific stance and
 # source basis).
 
 always_load:

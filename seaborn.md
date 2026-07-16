@@ -20,7 +20,7 @@ created: 2026-06-09
 
 - [adjusttext](adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [matplotlib](matplotlib.md) — Low-level plotting library for full customization
-- [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R, plus optional OpenRouter GPT Image 2 manuscript schematic generation when the user explicitly asks for...
+- [nature-figure](nature-figure.md) — Create, revise, audit, and export submission-grade scientific figures for Nature-family and other high-impact venues in Python (matplotlib/seaborn) or R...
 - [scientific-visualization](scientific-visualization.md) — Meta-skill for publication-ready figures
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

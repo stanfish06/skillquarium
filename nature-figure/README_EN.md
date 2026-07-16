@@ -20,6 +20,8 @@ Start with a figure contract rather than a template:
 - Evidence hierarchy: which panels are primary evidence and which are explanatory.
 - Figure prototype: scatter, box plot, heatmap, mechanism diagram, workflow, multi-panel composition, and so on.
 - Backend choice: Python or R; the first choice can be reused as the default preference.
+- Data integrity: preserve all observations and requested variables by default, and record every exclusion rule with before/after counts.
+- Template compatibility: compare scientific meaning, data shape, and transform constraints before exact reuse, structural adaptation, or style-only inheritance.
 - Submission constraints: size, typography, color, resolution, vector format, and source-data traceability.
 
 ## Typical Requests
@@ -46,22 +48,26 @@ Start with a figure contract rather than a template:
 ## Outputs
 
 - Runnable Python or R plotting script.
-- SVG/PDF/PNG figure files, with editable vector output preferred.
-- Panel notes, source-data mapping, and pre-submission QA checklist.
+- SVG/PDF/TIFF/PNG figure files, with editable vector output preferred.
+- Panel notes, source-data mapping, exclusion counts, and a pre-submission QA record.
 - For AI-schematic tasks, a concept draft and a list of elements that need human redrawing or verification.
 
 ## Built-In References
 
-- `references/api.md`: OpenRouter AI schematic-generation parameters.
+- `references/api.md`: Python palette, style, and plotting-helper conventions.
+- `references/asset-adaptation.md`: semantic matching, field mapping, and data-integrity rules for templates.
+- `references/template-catalog.md`: validated Python CSV templates for volcano, ROC, marker dot plot, marginal, and paired figures.
 - `references/chart-types.md`: chart selection and visual rules.
 - `references/demos.md`: `figures4papers` demos and reusable patterns.
-- `references/qa-contract.md`: export QA and source-data constraints.
+- `references/qa-contract.md`: export QA, source-data constraints, and static-preflight entry points.
+- `scripts/validate_figure.py`: reproducible static QA for Python and R plotting source.
 - `assets/figures4papers/`: packaged demo scripts and previews.
 
 ## Boundaries
 
 - AI-generated images are not treated as real experimental results or quantitative data panels.
 - The skill does not invent statistical tests, sample sizes, error-bar meanings, or experiment conditions.
+- The skill does not silently sample for rendering convenience, ignore requested variables, or remove incomplete observations.
 - Private templates can be used locally, but user-facing outputs should not expose private paths, filenames, or sources.
 
 ## Related Skills

@@ -1366,90 +1366,90 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "de38e52dd7b8c8c9a849aaecdf17ed68da542777",
+      "skillFolderHash": "5d400e09351fd488c376042577336c51e4b44396",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-07-14T08:26:37.122Z"
+      "updatedAt": "2026-07-16T08:32:14.326Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "dee1a510e00233649e2cf52f47e873bbecb9bf7f",
+      "skillFolderHash": "a86b8b11ae738193aefef2b1cab515de564b7ea0",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-07-13T09:46:14.728Z"
+      "updatedAt": "2026-07-16T08:32:16.888Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-academic-search/SKILL.md",
-      "skillFolderHash": "059acbee1b713a3c82d1c7b81cf2132a35e61a33",
+      "skillFolderHash": "03e2c06363a74a0f0ad3d5790ac03316d6eb7ac3",
       "installedAt": "2026-06-09T11:26:33.282Z",
-      "updatedAt": "2026-07-13T09:46:17.335Z"
+      "updatedAt": "2026-07-16T08:32:20.334Z"
     },
     "nature-citation": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-citation/SKILL.md",
-      "skillFolderHash": "bd53b3c05da1d684f533e7154495802d819ed936",
+      "skillFolderHash": "ab381dd9f96d94045df5d6606b59d3bea2155c14",
       "installedAt": "2026-06-09T11:26:33.285Z",
-      "updatedAt": "2026-07-13T09:46:19.482Z"
+      "updatedAt": "2026-07-16T08:32:22.625Z"
     },
     "nature-data": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-data/SKILL.md",
-      "skillFolderHash": "4500ce64442caa03a7de20d69bda8434bc195c15",
+      "skillFolderHash": "418ac2dee78e1424b077644df1f632745cb15df8",
       "installedAt": "2026-06-09T11:26:33.288Z",
-      "updatedAt": "2026-07-13T09:46:21.747Z"
+      "updatedAt": "2026-07-16T08:32:25.030Z"
     },
     "nature-figure": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-figure/SKILL.md",
-      "skillFolderHash": "635328780c78c8e5fb01caaa41e1b2674cca3e51",
+      "skillFolderHash": "9bd8366cccc4f38e0bf40f1153a1e62cdbddfef7",
       "installedAt": "2026-06-09T11:26:33.311Z",
-      "updatedAt": "2026-07-13T09:46:29.496Z"
+      "updatedAt": "2026-07-16T08:32:33.698Z"
     },
     "nature-paper2ppt": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-paper2ppt/SKILL.md",
-      "skillFolderHash": "396835c299d3a3398dce7cbb1fab36ed5ddce4cb",
+      "skillFolderHash": "ef48967cde25b18eed126090062ac42d51183be7",
       "installedAt": "2026-06-09T11:26:33.312Z",
-      "updatedAt": "2026-07-13T09:46:31.916Z"
+      "updatedAt": "2026-07-16T08:32:36.374Z"
     },
     "nature-polishing": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-polishing/SKILL.md",
-      "skillFolderHash": "f572d5300ac0b3baec9425299fa0014138bf7762",
+      "skillFolderHash": "a85c03858cc9a5b56ef53418067f8334a31ffa48",
       "installedAt": "2026-06-09T11:26:33.313Z",
-      "updatedAt": "2026-07-13T09:46:34.333Z"
+      "updatedAt": "2026-07-16T08:32:38.993Z"
     },
     "nature-reader": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reader/SKILL.md",
-      "skillFolderHash": "57161a4a22bc91809bbd16ca61214337eea2eb6f",
+      "skillFolderHash": "a4d252627ef216a3bc5e5bc6fa2779797278f3ee",
       "installedAt": "2026-06-09T11:26:33.314Z",
-      "updatedAt": "2026-07-13T09:46:36.695Z"
+      "updatedAt": "2026-07-16T08:32:42.448Z"
     },
     "nature-response": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-response/SKILL.md",
-      "skillFolderHash": "4eb79c8c2c57000743b9e381090161badf4912e2",
+      "skillFolderHash": "9e4585d6be9a546cd0c1ecab6403795711047b5c",
       "installedAt": "2026-06-09T11:26:33.315Z",
-      "updatedAt": "2026-07-13T09:46:39.179Z"
+      "updatedAt": "2026-07-16T08:32:45.485Z"
     },
     "nature-reviewer": {
       "source": "Yuan1z0825/nature-skills",
@@ -1465,9 +1465,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-writing/SKILL.md",
-      "skillFolderHash": "6be08a8620f3d99a30378f1b91cc506fc3a74789",
+      "skillFolderHash": "303dfc846f69c509731a8c5a5c9d986b21c1cab8",
       "installedAt": "2026-06-09T11:26:33.318Z",
-      "updatedAt": "2026-07-13T09:46:44.845Z"
+      "updatedAt": "2026-07-16T08:32:48.675Z"
     },
     "paper-2-web": {
       "source": "K-Dense-AI/claude-scientific-writer",
@@ -2766,36 +2766,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-add-cmim-pretrain/SKILL.md",
-      "skillFolderHash": "3ff9ba0cb3db164e72baa22eb99a8509139f266c",
+      "skillFolderHash": "489bb3c0fcf5b16347c0b78e56068c5fc12ba1f8",
       "installedAt": "2026-06-28T21:15:35.316Z",
-      "updatedAt": "2026-06-28T21:15:35.316Z"
+      "updatedAt": "2026-07-16T08:32:49.922Z"
     },
     "kermt-continue-pretrain": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-continue-pretrain/SKILL.md",
-      "skillFolderHash": "b302d5bf23f0fbb3baabf2b41d34745752f9ec8c",
+      "skillFolderHash": "a38e4d4ff04e56ab1d243cdbcc2e815a9baefa65",
       "installedAt": "2026-06-28T21:15:35.317Z",
-      "updatedAt": "2026-06-28T21:15:35.317Z"
+      "updatedAt": "2026-07-16T08:32:51.447Z"
     },
     "kermt-embed": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-embed/SKILL.md",
-      "skillFolderHash": "626a82280651f836c8c7076f9d09ac38162a064b",
+      "skillFolderHash": "a8835b986c0bc78075175c6c66d6673826d7e47c",
       "installedAt": "2026-06-28T21:15:35.317Z",
-      "updatedAt": "2026-06-28T21:15:35.317Z"
+      "updatedAt": "2026-07-16T08:32:52.573Z"
     },
     "kermt-finetune": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-finetune/SKILL.md",
-      "skillFolderHash": "4e249a336823a4cfbff4d076216c18f70747063a",
+      "skillFolderHash": "0de7d0380c4b1dce3d004e6bd60e1b78377a3f23",
       "installedAt": "2026-06-28T21:15:35.318Z",
-      "updatedAt": "2026-06-28T21:15:35.318Z"
+      "updatedAt": "2026-07-16T08:32:53.710Z"
     },
     "kermt-infer": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
@@ -2820,9 +2820,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-pretrain-scratch/SKILL.md",
-      "skillFolderHash": "534b2d820c1f88b4bab6b33bda641341017fe662",
+      "skillFolderHash": "3f2ba6e8a77e2d65d00335ba6e329d8eb4554bde",
       "installedAt": "2026-06-28T21:15:35.321Z",
-      "updatedAt": "2026-06-28T21:15:35.321Z"
+      "updatedAt": "2026-07-16T08:32:55.368Z"
     },
     "kermt-setup": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",

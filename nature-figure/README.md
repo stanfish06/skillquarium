@@ -20,6 +20,8 @@
 - 证据层级：哪些面板是主证据，哪些是补充解释。
 - 图件原型：散点、箱线、热图、机制图、流程图、多面板组合等。
 - 后端选择：Python 或 R；第一次选择后会作为默认偏好复用。
+- 数据完整性：默认保留全部观测和指定变量，任何排除都记录规则与前后计数。
+- 模板兼容性：先核对科学含义、数据结构和变换条件，再决定精确复用、结构适配或只继承样式。
 - 投稿约束：尺寸、字体、色彩、分辨率、矢量格式和 source-data 可追溯性。
 
 ## 典型请求
@@ -46,22 +48,26 @@
 ## 产出
 
 - 可运行的 Python 或 R 绘图脚本。
-- SVG/PDF/PNG 等图件文件，优先保留可编辑矢量版本。
-- 面板说明、source data 映射和投稿前 QA 清单。
+- SVG/PDF/TIFF/PNG 等图件文件，优先保留可编辑矢量版本。
+- 面板说明、source data 映射、排除计数和投稿前 QA 记录。
 - AI 示意图任务中，输出概念草稿和需要人工重画/核实的元素列表。
 
 ## 内置参考
 
-- `references/api.md`：OpenRouter AI 示意图生成参数。
+- `references/api.md`：Python 配色、样式和绘图 helper 约定。
+- `references/asset-adaptation.md`：模板语义匹配、字段映射和数据完整性规则。
+- `references/template-catalog.md`：volcano、ROC、marker dot plot、marginal 和 paired 的已验证 Python CSV 模板。
 - `references/chart-types.md`：常见图型选择和视觉规则。
 - `references/demos.md`：`figures4papers` demo 与可借鉴模式。
-- `references/qa-contract.md`：导出前检查项和 source-data 约束。
+- `references/qa-contract.md`：导出前检查项、source-data 约束和静态预检入口。
+- `scripts/validate_figure.py`：Python/R 绘图源码的可复现静态 QA。
 - `assets/figures4papers/`：打包的 demo 脚本与预览图。
 
 ## 边界
 
 - 不会把 AI 生成图片当作真实实验结果或定量数据面板。
 - 不会凭空补统计检验、样本量、误差线含义或实验条件。
+- 不会为了渲染方便静默抽样、忽略变量或删除不完整观测。
 - 私有模板可以在本机使用，但不应在面向用户输出中暴露私有路径、文件名或来源。
 
 ## 相关技能

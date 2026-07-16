@@ -20,7 +20,7 @@ created: 2026-06-09
 
 - [adjusttext](adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [geopandas](geopandas.md) — Python library for working with geospatial vector data including shapefiles, GeoJSON, and GeoPackage files
-- [nature-figure](nature-figure.md) — Submission-grade Nature/high-impact journal figure workflow for Python or R, plus optional OpenRouter GPT Image 2 manuscript schematic generation when the user explicitly asks for...
+- [nature-figure](nature-figure.md) — Create, revise, audit, and export submission-grade scientific figures for Nature-family and other high-impact venues in Python (matplotlib/seaborn) or R...
 - [pdf](pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
 - [scientific-visualization](scientific-visualization.md) — Meta-skill for publication-ready figures
 - [seaborn](seaborn.md) — Statistical visualization with pandas integration
