@@ -1357,27 +1357,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "b9914c2c00656e6fd8ad7296f4fbac18a0630e14",
+      "skillFolderHash": "1406dfe7b7559b8dbcd29ffd9322472ffd4a6b59",
       "installedAt": "2026-06-09T11:25:31.106Z",
-      "updatedAt": "2026-07-15T08:34:16.869Z"
+      "updatedAt": "2026-07-17T08:26:38.545Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "5d400e09351fd488c376042577336c51e4b44396",
+      "skillFolderHash": "342b331f34a70e11d8eddb18abb0abf55561d6fd",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-07-16T08:32:14.326Z"
+      "updatedAt": "2026-07-17T08:26:40.550Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "a86b8b11ae738193aefef2b1cab515de564b7ea0",
+      "skillFolderHash": "179a814a498769fb61c09f084ecbadb63cf509db",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-07-16T08:32:16.888Z"
+      "updatedAt": "2026-07-17T08:26:42.787Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
@@ -1465,9 +1465,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-writing/SKILL.md",
-      "skillFolderHash": "303dfc846f69c509731a8c5a5c9d986b21c1cab8",
+      "skillFolderHash": "98e61a01605174471aabc7697e4ef7c8219b9d17",
       "installedAt": "2026-06-09T11:26:33.318Z",
-      "updatedAt": "2026-07-16T08:32:48.675Z"
+      "updatedAt": "2026-07-17T08:26:45.502Z"
     },
     "paper-2-web": {
       "source": "K-Dense-AI/claude-scientific-writer",
@@ -2451,9 +2451,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/addyosmani/agent-skills.git",
       "skillPath": "skills/documentation-and-adrs/SKILL.md",
-      "skillFolderHash": "df79e5ccc01e5169e61ec0c98196d171617b4458",
+      "skillFolderHash": "85f57bdd7dcddaa589c6f36e8ac87423005c3de0",
       "installedAt": "2026-06-12T08:07:57.847Z",
-      "updatedAt": "2026-06-12T08:07:57.847Z"
+      "updatedAt": "2026-07-17T08:26:46.350Z"
     },
     "doubt-driven-development": {
       "source": "addyosmani/agent-skills",

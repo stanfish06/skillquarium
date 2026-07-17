@@ -29,4 +29,4 @@ created: 2026-06-13
 - [nature-reader](../nature-reader.md) — Build full-paper Chinese-English side-by-side, figure/table-aware, source-grounded Markdown readers for journal or conference papers from PDF, DOI, arXiv, publisher HTML, or pasted text
 - [nature-response](../nature-response.md) — Draft, audit, or revise Nature-style revision correspondence packages: point-by-point reviewer response letters, rebuttal letters, revision cover letters, LaTeX cover/response...
 - [nature-reviewer](../nature-reviewer.md) — Simulate a Nature-style reviewer assessment from the referee perspective rather than an author rebuttal
-- [nature-writing](../nature-writing.md) — Draft, restructure, or plan Nature-style manuscript sections from author-provided claims, results, figures, notes, or Chinese drafts
+- [nature-writing](../nature-writing.md) — Draft, restructure, or plan Nature-style manuscript sections and initial-submission materials from author-provided claims, results, figures, notes, or Chinese drafts

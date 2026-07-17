@@ -2,7 +2,8 @@ name: nature-writing
 version: 1.0.0
 description: >
   Declarative manifest for the static/dynamic split. SKILL.md uses this to
-  decide which fragments to load for a given drafting or restructuring request.
+  decide which fragments to load for a drafting, restructuring, or
+  initial-submission request.
 
 always_load:
   # Shared layer — common to nature-polishing and nature-writing
@@ -16,6 +17,20 @@ always_load:
   - static/core/output-format.md
 
 axes:
+  task:
+    detect: |
+      Use submission-package when the user requests first-submission or
+      pre-submission materials such as an initial cover letter, title page,
+      highlights, author contributions, availability/declaration statements,
+      reviewer suggestions, or a complete submission checklist. Use manuscript
+      for manuscript sections and argument development. Revision correspondence
+      after an editor decision belongs to nature-response, not this skill.
+    values:
+      manuscript:          static/fragments/task/manuscript.md
+      submission-package: static/fragments/task/submission-package.md
+    default: manuscript
+    multi: false
+
   paper_type:
     detect: |
       Decide what kind of paper or section is being drafted. Default to research.
@@ -95,6 +110,8 @@ references:
       path: references/paragraph-flow.md
     - condition: final manuscript self-review, rejection-risk audit, claim-evidence alignment
       path: references/paper-review.md
+    - condition: initial cover letter, title page, highlights, declarations, suggested reviewers, complete first-submission package, or submission-readiness audit
+      path: references/submission-package.md
     - condition: deeper Chinese-author repair patterns beyond the language fragment
       path: references/chinese-author-workflow.md
     - condition: user wants concrete abstract/introduction/method examples
