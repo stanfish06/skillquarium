@@ -43,7 +43,7 @@ This creates an ephemeral environment, runs the script, and disposes the env. Go
 ### Legacy 1.x
 
 ```bash
-uv add 'pyhealth==1.16'     # last 1.x release, Python 3.9+
+uv add 'pyhealth==1.1.6'    # last 1.x release, Python 3.9+
 ```
 
 The 1.x and 2.x APIs differ — examples in this skill target 2.x. If a user is on 1.x, mention the version mismatch before debugging.
