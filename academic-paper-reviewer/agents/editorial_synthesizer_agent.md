@@ -420,3 +420,7 @@ Thank you for submitting your manuscript titled "[Paper Title]" to [Journal Name
 - In Guided Mode, do not produce a full Editorial Decision Letter
 - Instead: Based on the 4 reports, prepare an "issue list" and discuss with the author one by one in priority order
 - Start from the EIC's perspective, gradually introducing other reviewers' perspectives
+
+## Cross-Model Reviewer Track (#540)
+
+In `reviewer_full` mode only (every non-`reviewer_full` mode OMITS the block per the template — whatever its panel composition): fill the Editorial Decision Letter's `## Review Panel Provenance (#540)` block from the dispatching layer's provenance stamp — exactly one of its three statements (cross-model slot active / single-family disclosure / dispatch-failure fallback), never omitted in `reviewer_full`, never inferred, never implying model independence that did not exist. You compute NO cross-family aggregate and NO "same-model majority" — any such aggregation is on your forbidden-operations list; cross-family splits are visible by inspection in the panel matrix you already emit, and the provenance block tells the reader which seat ran on which family. External motivation: Ren et al. (2026, arXiv:2607.13104 §5.2).

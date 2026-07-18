@@ -2,8 +2,8 @@
 name: academic-pipeline
 description: "Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize. Coordinates deep-research, academic-paper, and academic-paper-reviewer into a seamless 10-stage workflow with mandatory integrity verification, two-stage peer review, and reproducible quality gates. Triggers on: academic pipeline, research to paper, full paper workflow, paper pipeline, end-to-end paper, research-to-publication, complete paper workflow, 연구부터 논문까지, 연구 주제 설정부터 논문 완성까지, 논문 전체 워크플로."
 metadata:
-  version: "3.17.0"
-  last_updated: "2026-07-16"
+  version: "3.18.0"
+  last_updated: "2026-07-18"
   depends_on: "deep-research, academic-paper, academic-paper-reviewer"
   status: active
   data_access_level: verified_only
@@ -281,7 +281,7 @@ After user confirmation:
    - Stage 2  --> 2.5: Pass complete paper to integrity_verification_agent
    - Stage 2.5 --> 3: Pass verified paper to reviewer
    - Stage 3  --> 4: Pass Revision Roadmap to academic-paper revision mode
-   - Stage 4  --> 3': Pass revised draft and Response to Reviewers to reviewer
+   - Stage 4  --> 3': Pass revised draft, Response to Reviewers, and the Editorial Decision Letter (its Review Panel Provenance block feeds the #539 Judge Record) to reviewer
    - Stage 3' --> 4': Pass new Revision Roadmap + R&R Traceability Matrix (Schema 11) to academic-paper revision mode
    - Stage 4/4' --> 4.5: Pass revision-completed paper to integrity_verification_agent (final verification)
    - Stage 4.5 --> 5: Pass verified final draft to format-convert mode
@@ -626,8 +626,8 @@ When `ARS_MODEL_TIERING` is set, the dispatching session routes this skill's age
 
 | Item | Content |
 |------|---------|
-| Skill Version | 3.17.0 |
-| Last Updated | 2026-07-16 |
+| Skill Version | 3.18.0 |
+| Last Updated | 2026-07-18 |
 | Maintainer | Cheng-I Wu |
 | Dependent Skills | deep-research v2.0+, academic-paper v2.0+, academic-paper-reviewer v1.1+ |
 | Role | Full academic research workflow orchestrator |

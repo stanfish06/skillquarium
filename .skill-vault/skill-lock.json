@@ -1348,36 +1348,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "a7a96671c27acb2a786f8ded6eaba00667cb12c4",
+      "skillFolderHash": "f566e05eddbe85bbe37d9c041feda455513773fe",
       "installedAt": "2026-06-09T11:25:31.104Z",
-      "updatedAt": "2026-07-12T08:30:14.371Z"
+      "updatedAt": "2026-07-18T08:06:13.776Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "1406dfe7b7559b8dbcd29ffd9322472ffd4a6b59",
+      "skillFolderHash": "2254a14adba488d258a34d680edc827ce827ae0a",
       "installedAt": "2026-06-09T11:25:31.106Z",
-      "updatedAt": "2026-07-17T08:26:38.545Z"
+      "updatedAt": "2026-07-18T08:06:16.051Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "342b331f34a70e11d8eddb18abb0abf55561d6fd",
+      "skillFolderHash": "b0f081f6380db6ce5f48a566733e63afd53cdf1b",
       "installedAt": "2026-06-09T11:25:31.109Z",
-      "updatedAt": "2026-07-17T08:26:40.550Z"
+      "updatedAt": "2026-07-18T08:06:18.547Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "179a814a498769fb61c09f084ecbadb63cf509db",
+      "skillFolderHash": "6556e3a5653280fda180328abda28660d6d0def1",
       "installedAt": "2026-06-09T11:25:31.112Z",
-      "updatedAt": "2026-07-17T08:26:42.787Z"
+      "updatedAt": "2026-07-18T08:06:21.174Z"
     },
     "nature-academic-search": {
       "source": "Yuan1z0825/nature-skills",
@@ -1456,9 +1456,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reviewer/SKILL.md",
-      "skillFolderHash": "d33562f8c7616bbe3c3de509207ce33bb7ea80a0",
+      "skillFolderHash": "8231737d523fdf694f5de33cd86ff5c756a93042",
       "installedAt": "2026-06-09T11:26:33.316Z",
-      "updatedAt": "2026-07-13T09:46:41.623Z"
+      "updatedAt": "2026-07-18T08:06:23.918Z"
     },
     "nature-writing": {
       "source": "Yuan1z0825/nature-skills",
