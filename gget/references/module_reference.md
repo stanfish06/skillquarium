@@ -182,6 +182,8 @@ Query RCSB Protein Data Bank.
 ### gget alphafold
 Predict 3D protein structures using AlphaFold2.
 
+**Deprecation notice:** As of gget 0.30.7, no longer actively maintained upstream; emits a warning when invoked.
+
 **Setup:** Requires OpenMM and `gget setup alphafold` (~4GB download)
 
 **Parameters:**
@@ -341,6 +343,7 @@ Retrieve disease/drug associations from OpenTargets.
 **Current notes:**
 - gget 0.30.5 rewrote this module for the newer OpenTargets API; output column/key names may differ from older releases.
 - The older `--filter_mode` argument was removed upstream. Use CLI `--or` or Python filter logic documented by the current API.
+- gget 0.30.7/0.30.8 changed the `expression` resource again: Open Targets retired `Target.expressions`, so `-r expression` now returns per-biosample statistics instead of per-tissue RNA values.
 - Prefer inspecting returned column names before writing filters, then filter with exact column names such as `protein_a_id` or `gene_b_id`.
 
 **Returns:** Disease/drug associations, tractability, pharmacogenetics, expression, DepMap, interactions

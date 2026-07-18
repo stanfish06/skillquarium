@@ -7,7 +7,7 @@ allowed-tools:
   - Write
   - Edit
   - Bash
-compatibility: Requires Python >=3.8 and gget 0.30.5-compatible APIs. Optional setup modules may install scientific dependencies that lag the newest Python releases; use Python 3.9 or 3.10 if `gget setup cellxgene` or `gget setup alphafold` fails.
+compatibility: Requires Python >=3.12 for gget 0.30.7+ (the minimum supported Python version was raised to 3.12 in 0.30.7, reversing earlier guidance to prefer older Python for setup modules). If pinned to gget 0.30.5 or earlier for reproducibility, Python >=3.8 is sufficient, but note `gget alphafold` and `gget gpt` are no longer actively maintained upstream as of 0.30.7 (see their sections below).
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -17,7 +17,7 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 gget is a command-line bioinformatics tool and Python package providing unified access to 20+ genomic databases and analysis methods. Query gene information, sequence analysis, protein structures, viral sequences, expression data, disease associations, and mouse tissue/cell specificity metrics through a consistent interface. Most gget modules work both as command-line tools and as Python functions.
 
-**Important**: The databases queried by gget are continuously updated, which sometimes changes their structure. Guidance here targets gget 0.30.5 (PyPI current as of 2026-06-07). For reproducible work, pin `gget==0.30.5`; for broken upstream database adapters, update gget after checking release notes.
+**Important**: The databases queried by gget are continuously updated, which sometimes changes their structure. Guidance here targets gget 0.30.8 (PyPI current). For reproducible work, pin `gget==0.30.8`; for broken upstream database adapters, update gget after checking release notes. Note: gget 0.30.7 raised the minimum supported Python version to 3.12 and marked `gget alphafold`/`gget gpt` as no longer actively maintained (see their sections below); it also changed `gget opentargets`'s `expression` resource output columns to match a new upstream Open Targets data model (per-biosample statistics rather than per-tissue RNA values).
 
 ## Installation
 
@@ -27,7 +27,7 @@ Install gget in a clean virtual environment to avoid conflicts:
 # Reproducible install targeting this skill
 uv venv .venv
 source .venv/bin/activate
-uv pip install "gget==0.30.5"
+uv pip install "gget==0.30.8"
 
 # In Python/Jupyter
 import gget
@@ -312,6 +312,8 @@ gget.pdb("7S7U", save=True)
 
 Predict 3D protein structures using simplified AlphaFold2.
 
+**Deprecation notice**: As of gget 0.30.7, `gget alphafold` is no longer actively maintained upstream and emits a warning when invoked. It still works and gained a `jackhmmer_savedir` argument in 0.30.8, but consider `gget.pdb`/other current structure-prediction tools for new work.
+
 **Setup Required**:
 ```bash
 # Installs modified third-party dependencies and downloads model parameters
@@ -520,6 +522,7 @@ Retrieve disease and drug associations from OpenTargets.
 **Current notes**:
 - gget 0.30.5 rewrote this module for the newer OpenTargets API; some output column names differ from older releases.
 - The older `--filter_mode` argument was removed upstream.
+- gget 0.30.7/0.30.8 changed the `expression` resource's output columns again: Open Targets retired the `Target.expressions` field, so `-r expression` now returns per-biosample statistics rather than per-tissue RNA values. Inspect returned column names before reusing older `expression` parsing code.
 
 **Examples**:
 ```bash
@@ -731,6 +734,8 @@ gget.mutate(["ATCGCTAAGCT", "TAGCTA"], ["c.4G>T", "c.1_3inv"], out="mutated.fast
 
 Generate natural language text using OpenAI's API.
 
+**Deprecation notice**: As of gget 0.30.7, `gget gpt` is no longer actively maintained upstream and emits a warning when invoked. It is not gget-specific functionality (a thin OpenAI API wrapper), so calling the OpenAI SDK directly is a reasonable current alternative.
+
 **Setup Required**:
 ```bash
 gget setup gpt
@@ -918,7 +923,7 @@ gget ref -w dna -d homo_sapiens
 - Run `gget setup` before first use of alphafold, cellxgene, elm, gpt
 - For enrichment analysis, use database shortcuts for convenience
 - Cache cBioPortal data with `-dd` to avoid repeated downloads
-- For OpenTargets, inspect returned column names before writing filters; gget 0.30.5 follows the newer OpenTargets API schema
+- For OpenTargets, inspect returned column names before writing filters; the API schema has changed across gget 0.30.5 and again in 0.30.7/0.30.8 (notably for the `expression` resource)
 
 ### Structure Prediction
 - AlphaFold multimer predictions: use `-mr 20` for higher accuracy
@@ -933,7 +938,7 @@ gget ref -w dna -d homo_sapiens
 
 ### Error Handling
 - Database structures change; when an adapter breaks, check upstream release notes and pin the newer fixed version explicitly
-- Pin the known-good version for reproducible environments: `uv pip install "gget==0.30.5"`
+- Pin the known-good version for reproducible environments: `uv pip install "gget==0.30.8"`
 - Process max ~1000 Ensembl IDs at once with gget info
 - For large-scale analyses, implement rate limiting for API queries
 - Use virtual environments to avoid dependency conflicts
