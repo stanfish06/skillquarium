@@ -21,10 +21,10 @@ pipeline = Pipeline([
 ])
 
 # Run on a single slide
-pipeline.run(slide_data)
+slide_data.run(pipeline)
 
 # Run on a dataset
-pipeline.run(dataset, distributed=True, n_workers=8)
+dataset.run(pipeline, distributed=True, n_workers=8)
 ```
 
 **Key features:**
@@ -512,13 +512,13 @@ advanced_pipeline = Pipeline([
 from pathml.core import SlideData
 
 # Load slide
-wsi = SlideData.from_slide("slide.svs")
+wsi = SlideData("slide.svs")
 
 # Generate tiles
 wsi.generate_tiles(level=1, tile_size=256, stride=256)
 
 # Run pipeline
-pipeline.run(wsi)
+wsi.run(pipeline)
 
 # Access processed data
 for tile in wsi.tiles:
@@ -570,7 +570,7 @@ wsi.generate_tiles(level=1, tile_size=256)
 # Run pipeline only on tissue tiles
 for tile in wsi.tiles:
     if tile.masks.get('tissue') is not None:
-        pipeline.run(tile)
+        pipeline.apply(tile)
 ```
 
 ## Performance Optimization

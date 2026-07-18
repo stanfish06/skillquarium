@@ -45,7 +45,7 @@ pipeline = Pipeline([
         model='mesmer'
     )
 ])
-pipeline.run(slide)
+slide.run(pipeline)
 
 # 2. Extract instance segmentation mask
 inst_map = slide.masks['cell_segmentation']
@@ -534,7 +534,7 @@ pipeline = Pipeline([
         model='mesmer'
     )
 ])
-pipeline.run(slide)
+slide.run(pipeline)
 
 # 2. Build cell graph
 inst_map = slide.masks['cell_segmentation']

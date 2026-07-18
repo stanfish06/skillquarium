@@ -81,10 +81,9 @@ Efficiently store and manage large pathology datasets using HDF5 format. PathML 
 ```bash
 # Install PathML
 uv pip install pathml
-
-# With optional dependencies for all features
-uv pip install pathml[all]
 ```
+
+PathML has native prerequisites that must be installed on the system before the Python package will build/import successfully: OpenSlide, OpenJDK (for Bio-Formats), and a C/C++ build toolchain with BLAS/LAPACK (e.g. on Ubuntu: `sudo apt-get install openslide-tools g++ gcc libblas-dev liblapack-dev`, plus a conda-installed `openjdk`). See the upstream README for platform-specific instructions: https://github.com/Dana-Farber-AIOS/pathml
 
 ### Basic Workflow Example
 
@@ -93,7 +92,7 @@ from pathml.core import SlideData
 from pathml.preprocessing import Pipeline, StainNormalizationHE, TissueDetectionHE
 
 # Load a whole-slide image
-wsi = SlideData.from_slide("path/to/slide.svs")
+wsi = SlideData("path/to/slide.svs")
 
 # Create preprocessing pipeline
 pipeline = Pipeline([
@@ -102,7 +101,7 @@ pipeline = Pipeline([
 ])
 
 # Run pipeline
-pipeline.run(wsi)
+wsi.run(pipeline)
 
 # Access processed tiles
 for tile in wsi.tiles:
