@@ -9,6 +9,7 @@
 - Parse editor decision letters, revision emails, and reviewer reports.
 - Split comments into stable IDs such as `E.1`, `R1.1`, and `R2.3`.
 - Build response strategy, manuscript-change actions, and evidence needs for each comment.
+- Track response action, task progress, and package readiness separately, with inspectable evidence for completed work.
 - Draft formal, restrained, submission-ready English point-by-point responses and cover letters.
 - Audit rebuttal drafts for missed replies, defensive tone, unsupported claims, and missing line numbers.
 
@@ -29,6 +30,7 @@
 - Response strategy summary.
 - Point-by-point response letter, revision cover letter, or LaTeX response package.
 - Manuscript-change checklist, missing-information checklist, and risk notes.
+- Per-item tracker with work status, required input, expected output, and finalization-blocking state.
 - Optional red-marked manuscript excerpts; manuscript text must come from the author.
 
 ## Boundaries

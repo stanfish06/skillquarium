@@ -1411,9 +1411,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-figure/SKILL.md",
-      "skillFolderHash": "9bd8366cccc4f38e0bf40f1153a1e62cdbddfef7",
+      "skillFolderHash": "8359fe96a31078748a8ffb46414143de826ee9a3",
       "installedAt": "2026-06-09T11:26:33.311Z",
-      "updatedAt": "2026-07-16T08:32:33.698Z"
+      "updatedAt": "2026-07-19T08:31:45.549Z"
     },
     "nature-paper2ppt": {
       "source": "Yuan1z0825/nature-skills",
@@ -1447,18 +1447,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-response/SKILL.md",
-      "skillFolderHash": "9e4585d6be9a546cd0c1ecab6403795711047b5c",
+      "skillFolderHash": "adc70140dd4167520db4a0130c313d8dd5715577",
       "installedAt": "2026-06-09T11:26:33.315Z",
-      "updatedAt": "2026-07-16T08:32:45.485Z"
+      "updatedAt": "2026-07-19T08:31:48.197Z"
     },
     "nature-reviewer": {
       "source": "Yuan1z0825/nature-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Yuan1z0825/nature-skills.git",
       "skillPath": "skills/nature-reviewer/SKILL.md",
-      "skillFolderHash": "8231737d523fdf694f5de33cd86ff5c756a93042",
+      "skillFolderHash": "f6650dd7318e3cb73ff1add4ca2540f457b6c771",
       "installedAt": "2026-06-09T11:26:33.316Z",
-      "updatedAt": "2026-07-18T08:06:23.918Z"
+      "updatedAt": "2026-07-19T08:31:50.483Z"
     },
     "nature-writing": {
       "source": "Yuan1z0825/nature-skills",

@@ -1,5 +1,5 @@
 name: nature-reviewer
-version: 1.0.0
+version: 1.1.0
 description: >
   Declarative manifest for the Nature-style reviewer assessment workflow. It
   keeps the referee-facing SKILL.md compact while loading source basis, axes,
@@ -20,6 +20,8 @@ references:
       path: references/reviewer-workflow.md
     - condition: weighting originality, scientific importance, interdisciplinary readership, technical soundness, or readability
       path: references/review-axes.md
+    - condition: building the internal concern ledger, checking technical coverage, or anchoring concerns to manuscript claims and evidence locations
+      path: references/technical-concern-taxonomy.md
     - condition: manuscript is clearly in chemistry, engineering, materials, atmospheric science, climate-ecology, hydrology, or remote sensing
       path: references/domain-specific-review-gates.md
     - condition: composing or auditing the exact three-reviewer plus synthesis output structure

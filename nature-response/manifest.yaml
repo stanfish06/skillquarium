@@ -1,5 +1,5 @@
 name: nature-response
-version: 1.0.0
+version: 1.1.0
 description: >
   Declarative manifest for the static/dynamic split. SKILL.md uses this to
   decide which fragments and templates to load for a reviewer-response or
@@ -32,7 +32,7 @@ references:
       path: references/latex-templates.md
     - condition: classify reviewer comments by category and severity
       path: references/comment-taxonomy.md
-    - condition: action labels, tracker fields, and missing-input states
+    - condition: action labels, per-item work status, tracker fields, blocking state, and missing-input states
       path: references/action-mapping.md
     - condition: recommended language, forbidden phrasing, or disagreement tone
       path: references/tone-and-stance.md

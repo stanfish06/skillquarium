@@ -10,6 +10,8 @@
 - Evaluate originality, scientific importance, interdisciplinary readership, technical soundness, and readability using Nature-style review dimensions.
 - Generate three differently focused reviewer reports and one cross-review synthesis.
 - Mark unsupported claims, technical defects, evidence-chain breaks, and barriers for non-specialist readers.
+- Use an internal 12-axis technical checklist and bind each substantive concern to a claim pointer and verifiable evidence location.
+- Check redundancy across the three reports; treat an issue as consensus only when at least two reviewers raise it.
 - Identify which readers would care about the work and why.
 
 ## Typical Requests
@@ -28,6 +30,7 @@
 
 - Three peer-review style reports.
 - Cross-review synthesis: consensus problems, divergent emphases, and editor-level risks.
+- Traceable concerns with stable IDs, claim pointers, evidence pointers, and resolution tests.
 - List of experiments, analyses, narrative changes, or figure evidence that must be strengthened.
 - Explicit labels for judgments that cannot be made from the supplied evidence.
 

@@ -10,6 +10,8 @@
 - 按 Nature 官方审稿维度评估 originality、scientific importance、interdisciplinary readership、technical soundness 和 readability。
 - 生成三份重点不同的 reviewer reports 和一份 cross-review synthesis。
 - 标记无支撑声称、技术缺陷、证据链断点和非专业读者理解障碍。
+- 用内部 12 轴技术清单检查覆盖范围，并为每条实质性意见绑定 claim pointer 和可核验的证据位置。
+- 对三份报告做重复度检查；只有至少两位 reviewer 提出同一问题时才列为共识。
 - 判断哪些读者会关心这项工作，以及为什么。
 
 ## 典型请求
@@ -28,6 +30,7 @@
 
 - 三份 peer-review style reports。
 - Cross-review synthesis：共识问题、分歧重点和编辑层风险。
+- 带稳定编号、claim pointer、evidence pointer 和解决判据的可追溯审稿意见。
 - 必须补强的实验、分析、叙事或图表证据清单。
 - 对无证据判断的明确标记。
 
