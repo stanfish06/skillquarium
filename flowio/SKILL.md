@@ -220,12 +220,13 @@ with open('output.fcs', 'wb') as f:
 **With Custom Metadata:**
 
 ```python
-# Add TEXT segment metadata
+# Add TEXT segment metadata (lowercase keys, no leading '$' —
+# same form as flow.text / the other FlowIO examples)
 metadata = {
-    '$SRC': 'Python script',
-    '$DATE': '19-OCT-2025',
-    '$CYT': 'Synthetic Instrument',
-    '$INST': 'Laboratory A'
+    'src': 'Python script',
+    'date': '19-OCT-2025',
+    'cyt': 'Synthetic Instrument',
+    'inst': 'Laboratory A'
 }
 
 with open('output.fcs', 'wb') as f:
@@ -251,7 +252,7 @@ from flowio import FlowData
 flow = FlowData('original.fcs')
 
 # Write with updated metadata
-flow.write_fcs('modified.fcs', metadata={'$SRC': 'Modified data'})
+flow.write_fcs('modified.fcs', metadata={'src': 'Modified data'})
 ```
 
 **Approach 2: Extract, Modify, and Recreate:**
