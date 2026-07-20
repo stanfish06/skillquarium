@@ -23,6 +23,7 @@ created: 2026-06-12
 
 ## Related skills
 
+- [ray](ray.md) — Distributed Python compute with Ray — @ray.remote tasks/actors for cluster-scale parallelism, Ray Data for large-batch preprocessing, Ray Train for distributed model training...
 - [scikit-learn](scikit-learn.md) — Machine learning in Python with scikit-learn
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

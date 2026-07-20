@@ -18,7 +18,7 @@ created: 2026-07-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [cutadapt](cutadapt.md) — Adapter, primer, and poly-A/T trimming for high-throughput sequencing reads (FASTQ/FASTA)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

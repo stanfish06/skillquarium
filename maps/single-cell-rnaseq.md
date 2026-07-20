@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (28)
+## Skills (29)
 
 - [anndata](../anndata.md) — Data structure for annotated matrices in single-cell analysis
 - [arboreto](../arboreto.md) — Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3)
@@ -32,6 +32,7 @@ created: 2026-06-13
 - [nfcore-scrnaseq-wrapper](../nfcore-scrnaseq-wrapper.md) — Wrapper skill for running nf-core/scrnaseq 4.1.0 upstream single-cell RNA-seq preprocessing from FASTQ with strict preflight, reproducibility outputs, and downstream handoff to ClawBio...
 - [pathway-enricher](../pathway-enricher.md) — Gene-set pathway enrichment analysis using Enrichr — queries KEGG, GO (BP/MF/CC), Reactome, WikiPathways, MSigDB, and Disease Ontology
 - [pathway-enrichment](../pathway-enrichment.md) — Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results
+- [pybigwig](../pybigwig.md) — Fast Python I/O for BigWig (continuous genome signal) and BigBed (interval annotation) files via libBigWig
 - [pydeseq2](../pydeseq2.md) — Differential gene expression analysis for bulk RNA-seq with PyDESeq2, including formulaic designs, Wald tests, FDR correction, LFC shrinkage, and result visualization
 - [rare-disease-rnaseq](../rare-disease-rnaseq.md) — Blood RNA-seq expression-outlier detection for rare-disease diagnostics
 - [rnaseq-de](../rnaseq-de.md) — Differential expression analysis for bulk RNA-seq and pseudo-bulk count matrices with QC, PCA, and contrast testing

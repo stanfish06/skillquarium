@@ -151,7 +151,7 @@ CATEGORIES = [
       "deeptools", "pathway-enricher", "pathway-enrichment", "spatialdata-squidpy",
       "harmonypy", "scirpy-immune-repertoire", "seurat",
       "atac-seq", "chip-seq", "cell-annotation", "scrna-preprocessing-clustering",
-      "differential-expression"]),
+      "differential-expression", "pybigwig"]),
 
     ("proteomics-metabolomics", "Proteomics & Metabolomics",
      "Mass-spec and affinity proteomics, metabolomics spectral analysis, and glycoengineering.",
@@ -185,7 +185,8 @@ CATEGORIES = [
       "gi-annotation", "gi-chromatin", "gi-enhancer", "gi-expression", "gi-promoter", "gi-splice",
       "ngs-cli-toolkit",
       "sequence-analysis", "blast-search", "metagenomics",
-      "evo2-nim", "msa-search-nim", "msa-structure-prediction-pipeline"]),
+      "evo2-nim", "msa-search-nim", "msa-structure-prediction-pipeline",
+      "cutadapt", "sourmash"]),
 
     ("bio-databases-platforms", "Bio Databases, Lab & Cloud Platforms",
      "Biomedical databases, knowledge graphs, ELNs, lab automation, and bioinformatics cloud platforms.",
@@ -219,7 +220,7 @@ CATEGORIES = [
      ["data-science-compute", "drug-discovery-chem", "cloud-devops"],
      ["scikit-learn", "pytorch-lightning", "transformers", "shap", "stable-baselines3", "pufferlib",
       "pufferlib-v2", "pufferlib-v3", "torch-geometric", "umap-learn", "aeon", "timesfm-forecasting", "hugging-science",
-      "optuna", "cuequivariance"]),
+      "optuna", "cuequivariance", "crewai"]),
 
     ("data-science-compute", "Data Science, Stats & Scientific Computing",
      "DataFrames, big-data tooling, statistics, optimization, simulation, geospatial, and plotting.",
@@ -283,7 +284,8 @@ CATEGORIES = [
      ["aws-agentic-ai", "aws-cdk-development", "aws-cost-operations", "aws-mcp-setup",
       "aws-serverless-eda", "modal", "hf-cli", "nextflow", "snakemake-workflow-engine",
       "e2b-sandbox", "devcontainer-setup", "modern-python", "conda-bioconda",
-      "docker-expert", "kubernetes-specialist", "ci-cd-and-automation", "shipping-and-launch"]),
+      "docker-expert", "kubernetes-specialist", "ci-cd-and-automation", "shipping-and-launch",
+      "dvc", "ray"]),
 
     ("software-dev", "Software Development & Engineering",
      "General software-engineering methodology and tooling: TDD, debugging, code review, planning, git worktrees, source-grounded implementation, plus core app primitives (pytest, Docker, FastAPI, CI).",

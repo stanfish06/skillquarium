@@ -28,6 +28,7 @@ created: 2026-06-20
 - [check-pr](check-pr.md) — Checks a GitHub, GitLab, or Perforce (p4) pull request (or merge request, or shelved changelist) for unresolved review comments, failing status checks, and incomplete PR descriptions
 - [chip-seq](chip-seq.md) — ChIP-seq peak calling and downstream interpretation with MACS3, signal track export, annotation, motif analysis, and differential binding review
 - [code-review-and-quality](code-review-and-quality.md) — Conducts multi-axis code review. Use before merging any change
+- [crewai](crewai.md) — Role-based multi-agent orchestration framework for building "Crews" of collaborating LLM agents (each with a role, goal, backstory, and optional tools) that execute sequential or...
 - [deep-research](deep-research.md) — Universal deep research agent team. 13-agent pipeline for rigorous academic research on any topic
 - [differential-review](differential-review.md) — Performs security-focused differential review of code changes (PRs, commits, diffs)
 - [dogfood](dogfood.md) — Systematically explore and test a web application to find bugs, UX issues, and other problems

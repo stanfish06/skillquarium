@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [nextflow](nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
+- [sourmash](sourmash.md) — MinHash/FracMinHash sketching for alignment-free comparison of genomes and metagenomes
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

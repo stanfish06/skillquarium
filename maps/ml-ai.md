@@ -14,9 +14,10 @@ created: 2026-06-13
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Drug Discovery, Cheminformatics & Structural Biology](drug-discovery-chem.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (15)
+## Skills (16)
 
 - [aeon](../aeon.md) — This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
+- [crewai](../crewai.md) — Role-based multi-agent orchestration framework for building "Crews" of collaborating LLM agents (each with a role, goal, backstory, and optional tools) that execute sequential or...
 - [cuequivariance](../cuequivariance.md) — Define custom groups (Irrep subclasses), build segmented tensor products with CG coefficients, create equivariant polynomials and IrDictPolynomials, and use built-in descriptors...
 - [hugging-science](../hugging-science.md) — Use when the user is doing AI/ML work in a scientific domain such as biology, chemistry, physics, astronomy, climate, genomics, materials, medicine, ecology, energy, engineering, math...
 - [optuna](../optuna.md) — Hyperparameter optimization (HPO) for ML models using Optuna

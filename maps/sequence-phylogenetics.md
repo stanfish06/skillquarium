@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (28)
+## Skills (30)
 
 - [analyze-fasta](../analyze-fasta.md) — Analyze a single FASTA file (nucleotide or protein), compute sequence-level metrics (GC, ORFs, MW, pI, GRAVY, secondary-structure fractions) with Biopython, and write a Markdown report...
 - [bioconductor-bridge](../bioconductor-bridge.md) — Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager
@@ -24,6 +24,7 @@ created: 2026-06-13
 - [blast-search](../blast-search.md) — Run BLAST sequence similarity searches. Use when the user asks to BLAST a sequence, find similar sequences, identify a gene/protein, or do homology search
 - [busco-assessor](../busco-assessor.md) — Genome, transcriptome, and protein completeness assessment via BUSCO v6
 - [claw-metagenomics](../claw-metagenomics.md) — Shotgun metagenomics profiling — taxonomy, resistome, and functional pathways
+- [cutadapt](../cutadapt.md) — Adapter, primer, and poly-A/T trimming for high-throughput sequencing reads (FASTQ/FASTA)
 - [etetoolkit](../etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
 - [evo2-nim](../evo2-nim.md) — Generate and analyze DNA sequences using NVIDIA's Evo 2 BioNeMo NIM microservice
 - [gget](../gget.md) — Fast CLI/Python queries to 20+ bioinformatics databases
@@ -44,3 +45,4 @@ created: 2026-06-13
 - [scikit-bio](../scikit-bio.md) — Biological data toolkit. Sequence analysis, alignments, phylogenetic trees, diversity metrics (alpha/beta, UniFrac), ordination (PCoA), PERMANOVA, FASTA/Newick I/O, for microbiome...
 - [seq-wrangler](../seq-wrangler.md) — NGS read QC, alignment, and BAM processing pipeline
 - [sequence-analysis](../sequence-analysis.md) — Analyze DNA/RNA/protein sequences. Use when the user provides a sequence and asks for analysis, translation, GC content, ORFs, motifs, restriction sites, or primer design
+- [sourmash](../sourmash.md) — MinHash/FracMinHash sketching for alignment-free comparison of genomes and metagenomes

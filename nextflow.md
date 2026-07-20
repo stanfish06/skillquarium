@@ -22,10 +22,12 @@ created: 2026-06-09
 
 - [bulk-rnaseq](bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
 - [docker](docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
+- [dvc](dvc.md) — Data Version Control (DVC) for tracking large datasets/models with Git-like semantics, defining reproducible data/ML pipelines (dvc.yaml stages that only re-run when their inputs...
 - [latchbio-integration](latchbio-integration.md) — Latch platform for bioinformatics workflows
 - [pacsomatic](pacsomatic.md) — Operator toolkit for nf-core/pacsomatic matched tumor-normal workflows from BAM inputs
 - [repro-enforcer](repro-enforcer.md) — Export any bioinformatics analysis as a reproducible bundle with Conda environment, Singularity container definition, and Nextflow pipeline
 - [snakemake-workflow-engine](snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines
+- [sourmash](sourmash.md) — MinHash/FracMinHash sketching for alignment-free comparison of genomes and metagenomes
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

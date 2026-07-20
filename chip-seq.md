@@ -20,7 +20,9 @@ created: 2026-06-17
 
 ## Related skills
 
+- [cutadapt](cutadapt.md) — Adapter, primer, and poly-A/T trimming for high-throughput sequencing reads (FASTQ/FASTA)
 - [deeptools](deeptools.md) — NGS analysis toolkit. BAM to bigWig conversion, QC (correlation, PCA, fingerprints), heatmaps/profiles (TSS, peaks), for ChIP-seq, RNA-seq, ATAC-seq visualization
+- [pybigwig](pybigwig.md) — Fast Python I/O for BigWig (continuous genome signal) and BigBed (interval annotation) files via libBigWig
 - [review](review.md) — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

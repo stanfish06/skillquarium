@@ -20,6 +20,7 @@ created: 2026-06-09
 
 - [atac-seq](atac-seq.md) — ATAC-seq processing with assay QC, MACS3 peak calling, consensus peak matrices, differential accessibility, and motif or footprint follow-up
 - [chip-seq](chip-seq.md) — ChIP-seq peak calling and downstream interpretation with MACS3, signal track export, annotation, motif analysis, and differential binding review
+- [pybigwig](pybigwig.md) — Fast Python I/O for BigWig (continuous genome signal) and BigBed (interval annotation) files via libBigWig
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
