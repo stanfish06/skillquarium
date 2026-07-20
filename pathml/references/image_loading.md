@@ -92,12 +92,15 @@ codex_slide = CODEXSlide(
 
 **VectraSlide:**
 ```python
-from pathml.core import types
+from pathml.core import SlideData, types
 
-# Load Vectra multiplex IF data
+# Load Vectra multiplex IF data.
+# backend must be a string backend name ('bioformats', 'openslide', ...);
+# Vectra is a slide_type, not a backend.
 vectra_slide = SlideData(
     "path/to/vectra.qptiff",
-    backend=SlideType.VectraQPTIFF
+    backend="bioformats",
+    slide_type=types.Vectra,
 )
 ```
 
@@ -256,12 +259,12 @@ print(wsi.level_dimensions[0])  # (width, height) at level 0
 PathML supports DICOM WSI through specialized handling:
 
 ```python
-from pathml.core import SlideData, SlideType
+from pathml.core import SlideData
 
-# Load DICOM WSI
+# Load DICOM WSI (backend is a string name; SlideType is not a backend)
 dicom_slide = SlideData(
     "path/to/slide.dcm",
-    backend=SlideType.DICOM
+    backend="dicom",
 )
 
 # DICOM-specific metadata

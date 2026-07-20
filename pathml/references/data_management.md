@@ -19,12 +19,12 @@ HDF5 (Hierarchical Data Format) is the primary storage format for processed Path
 ```python
 from pathml.core import SlideData
 
-# Load and process slide
+# Load and process slide. Pass tiling options into run() —
+# generate_tiles() only yields a generator and is not consumed by run().
 wsi = SlideData("slide.svs")
-wsi.generate_tiles(level=1, tile_size=256, stride=256)
 
-# Run preprocessing pipeline
-wsi.run(pipeline)
+# Run preprocessing pipeline (run generates tiles with these settings)
+wsi.run(pipeline, level=1, tile_size=256, tile_stride=256)
 
 # Save to HDF5
 wsi.to_hdf5("processed_slide.h5")

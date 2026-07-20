@@ -23,8 +23,13 @@ pipeline = Pipeline([
 # Run on a single slide
 slide_data.run(pipeline)
 
-# Run on a dataset
-dataset.run(pipeline, distributed=True, n_workers=8)
+# Run on a dataset with Dask parallelism.
+# SlideDataset.run() accepts client=/distributed=; n_workers is not a
+# valid kwarg and will be forwarded into tile generation (error on OpenSlide).
+from dask.distributed import Client
+
+client = Client(n_workers=8)
+dataset.run(pipeline, distributed=True, client=client)
 ```
 
 **Key features:**

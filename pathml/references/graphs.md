@@ -37,7 +37,9 @@ from pathml.graph import CellGraph
 from pathml.preprocessing import Pipeline, SegmentMIF
 import numpy as np
 
-# 1. Perform cell segmentation
+# 1. Perform cell segmentation. slide.run() applies the pipeline to
+# generated Tile objects and stores masks on each tile — it does not
+# populate slide.masks with tile-level outputs like cell_segmentation.
 pipeline = Pipeline([
     SegmentMIF(
         nuclear_channel='DAPI',
@@ -47,13 +49,14 @@ pipeline = Pipeline([
 ])
 slide.run(pipeline)
 
-# 2. Extract instance segmentation mask
-inst_map = slide.masks['cell_segmentation']
+# 2. Read instance maps from tiles (not slide.masks)
+tile = next(iter(slide.tiles))
+inst_map = tile.masks['cell_segmentation']
 
-# 3. Build cell graph
+# 3. Build cell graph from a tile (or stitched) instance map
 cell_graph = CellGraph.from_instance_map(
     inst_map,
-    image=slide.image,  # Optional: for extracting visual features
+    image=tile.image,  # Optional: for extracting visual features
     connectivity='delaunay',  # 'knn', 'radius', or 'delaunay'
     k=5,  # For knn: number of neighbors
     radius=50  # For radius: distance threshold in pixels
@@ -536,11 +539,12 @@ pipeline = Pipeline([
 ])
 slide.run(pipeline)
 
-# 2. Build cell graph
-inst_map = slide.masks['cell_segmentation']
+# 2. Build cell graph from tile-level masks (run() does not fill slide.masks)
+tile = next(iter(slide.tiles))
+inst_map = tile.masks['cell_segmentation']
 cell_graph = CellGraph.from_instance_map(
     inst_map,
-    image=slide.image,
+    image=tile.image,
     connectivity='knn',
     k=6
 )

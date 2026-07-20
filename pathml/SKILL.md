@@ -88,11 +88,12 @@ PathML has native prerequisites that must be installed on the system before the 
 ### Basic Workflow Example
 
 ```python
-from pathml.core import SlideData
+from pathml.core import HESlide
 from pathml.preprocessing import Pipeline, StainNormalizationHE, TissueDetectionHE
 
-# Load a whole-slide image
-wsi = SlideData("path/to/slide.svs")
+# Load a whole-slide image. H&E transforms read tile.slide_type.stain, so
+# set the slide type (HESlide / slide_type=types.HE) before running them.
+wsi = HESlide("path/to/slide.svs")
 
 # Create preprocessing pipeline
 pipeline = Pipeline([
