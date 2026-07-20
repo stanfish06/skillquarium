@@ -14,11 +14,12 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md)
 
-## Skills (39)
+## Skills (44)
 
 - [agent-browser](../agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting...
 - [agentcore](../agentcore.md) — Run agent-browser on AWS Bedrock AgentCore cloud browsers
 - [algorithmic-art](../algorithmic-art.md) — Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration
+- [baseline-ui](../baseline-ui.md) — Quickly deslop UI code by fixing spacing, hierarchy, typography, and small layout issues
 - [brand-guidelines](../brand-guidelines.md) — Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel
 - [brandkit](../brandkit.md) — Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations
 - [browser-testing-with-devtools](../browser-testing-with-devtools.md) — Tests in real browsers via Chrome DevTools MCP
@@ -31,6 +32,9 @@ created: 2026-06-13
 - [figma-generate-library](../figma-generate-library.md) — Build or update a professional-grade design system in Figma from a codebase
 - [figma-implement-design](../figma-implement-design.md) — Translates Figma designs into production-ready application code with 1:1 visual fidelity
 - [figma-use](../figma-use.md) — **MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call
+- [fixing-accessibility](../fixing-accessibility.md) — Audit and fix HTML accessibility issues including ARIA labels, keyboard navigation, focus management, color contrast, and form errors
+- [fixing-metadata](../fixing-metadata.md) — Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives
+- [fixing-motion-performance](../fixing-motion-performance.md) — Audit and fix animation performance issues including layout thrashing, compositor properties, scroll-linked motion, and blur effects
 - [frontend-design](../frontend-design.md) — Create distinctive, production-grade frontend interfaces with high design quality
 - [frontend-ui-engineering](../frontend-ui-engineering.md) — Builds production-quality, accessible, responsive user-facing UIs
 - [full-output-enforcement](../full-output-enforcement.md) — Overrides default LLM truncation behavior
@@ -39,6 +43,7 @@ created: 2026-06-13
 - [image-to-code](../image-to-code.md) — Elite website image-to-code skill for Codex
 - [imagegen-frontend-mobile](../imagegen-frontend-mobile.md) — Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows
 - [imagegen-frontend-web](../imagegen-frontend-web.md) — Elite frontend image-direction skill for generating premium, conversion-aware website design references
+- [improve-ui](../improve-ui.md) — Audit an existing product surface against its own design evidence, identify verified UI problems, and write self-contained implementation plans for another agent
 - [industrial-brutalist-ui](../industrial-brutalist-ui.md) — Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics
 - [minimalist-ui](../minimalist-ui.md) — Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels
 - [performance-optimization](../performance-optimization.md) — Optimizes application performance across frontend, backend, queries, and databases

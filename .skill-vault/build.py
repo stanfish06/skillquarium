@@ -329,7 +329,10 @@ CATEGORIES = [
       "design-taste-frontend", "design-taste-frontend-v1", "full-output-enforcement",
       "gpt-taste", "high-end-visual-design", "image-to-code",
       "imagegen-frontend-mobile", "imagegen-frontend-web", "industrial-brutalist-ui",
-      "minimalist-ui", "redesign-existing-projects", "stitch-design-taste"]),
+      "minimalist-ui", "redesign-existing-projects", "stitch-design-taste",
+      # ibelick/ui-skills first-party pack
+      "baseline-ui", "fixing-accessibility", "fixing-metadata",
+      "fixing-motion-performance", "improve-ui"]),
 
     ("analytics-engineering", "Analytics Engineering & LLM Operations",
      "dbt analytics engineering, semantic layers, warehouse querying, lineage diagrams, LLM observability, prompt tracing, and evaluation workflows.",
