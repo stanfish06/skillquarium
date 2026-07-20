@@ -7,7 +7,7 @@ Overview of databases queried by gget modules, including update frequencies and 
 The databases queried by gget are continuously being updated, which sometimes changes their structure. gget modules are tested automatically on a biweekly basis and updated to match new database structures when necessary. For reproducible environments matching this skill, pin the current verified version:
 
 ```bash
-uv pip install "gget==0.30.5"
+uv pip install "gget==0.30.8"
 ```
 
 ## Database Directory
@@ -267,7 +267,7 @@ To ensure reproducibility in analyses:
    print(gget.__version__)
    ```
 
-   Current verified version for this skill: `0.30.5` (requires Python >=3.8).
+   Current verified version for this skill: `0.30.8` (requires Python >=3.12; the minimum supported Python version was raised from 3.8 to 3.12 in gget 0.30.7).
 
 3. **Save raw data:**
    ```python
