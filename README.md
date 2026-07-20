@@ -20,21 +20,53 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
 </table>
 
 ## Setup
+
 ```bash
-git clone git@github.com:stanfish06/my-skills.git ~/.agent/skills
-cd ~/.agent/skills && ./install-skills.sh
+git clone git@github.com:stanfish06/my-skills.git ~/.agents/skills
+cd ~/.agents/skills
+./install-skills.sh
 ```
 
-### Career Ops workspace
+Default install:
 
-`install-skills.sh` also initializes the complete
-[`santifer/career-ops`](https://github.com/santifer/career-ops) workspace at
-`$HOME/career-ops` and uses its native updater on later runs.
+1. Symlinks every vault skill into each agent's skills folder (`npx skills add . -s '*' -g`)
+2. Installs / registers [`graphify`](https://github.com/safishamsi/graphify)
 
-- `CAREER_OPS_DIR=/path/to/workspace` changes the location.
-- `CAREER_OPS_SKIP=1` skips Career Ops entirely.
-- `CAREER_OPS_AUTO_UPDATE=0` freezes an existing checkout before you branch or
-  switch it to a self-maintained fork.
+**gstack** and **career-ops are optional** and are **skipped by default**. Opt in with `--extras`:
+
+```bash
+./install-skills.sh --extras gstack          # Garry Tan's gstack workflow
+./install-skills.sh --extras career          # career-ops workspace
+./install-skills.sh --extras gstack career   # both
+./install-skills.sh --extras all             # both
+./install-skills.sh --extras=gstack,career   # comma form also works
+./install-skills.sh --help                   # full flag list
+```
+
+### Optional extras
+
+#### career (`--extras career`)
+
+Initializes the complete [`santifer/career-ops`](https://github.com/santifer/career-ops)
+workspace at `$HOME/career-ops` and uses its native updater on later runs.
+
+| Env | Effect |
+|-----|--------|
+| `CAREER_OPS_DIR=/path/to/workspace` | Change workspace location |
+| `CAREER_OPS_SKIP=1` | Force-skip even with `--extras career` |
+| `CAREER_OPS_AUTO_UPDATE=0` | Freeze an existing checkout (no auto-update) |
+
+#### gstack (`--extras gstack`)
+
+Pins and runs [garrytan/gstack](https://github.com/garrytan/gstack) with `--prefix`
+skill names (`/gstack-qa`, `/gstack-ship`, …) so it does not clobber this vault's
+`/qa`, `/review`, `/ship`, etc.
+
+| Env | Effect |
+|-----|--------|
+| `GSTACK_SKIP=1` | Force-skip even with `--extras gstack` |
+| `GSTACK_SKIP_BUN=1` | Skip bun install (browser skills disabled; methodology skills still work) |
+| `GSTACK_REF=<ref>` | Pin to a git ref (default is a known-good commit) |
 
 ## Navigation
 

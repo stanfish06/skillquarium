@@ -3,12 +3,120 @@ set -euo pipefail
 
 # This script lives at ~/.agents/skills/install-skills.sh
 VAULT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
+
+# Optional extras are OFF by default. Enable with:
+#   ./install-skills.sh --extras gstack
+#   ./install-skills.sh --extras career
+#   ./install-skills.sh --extras gstack career
+#   ./install-skills.sh --extras all
+EXTRA_GSTACK=0
+EXTRA_CAREER=0
+
+usage() {
+  cat <<'EOF'
+Usage: install-skills.sh [options]
+
+Symlink vault skills into each agent, install graphify, and optionally
+install heavier extras that are skipped by default.
+
+Options:
+  --extras <name>...   Install optional extras (default: none).
+                       Names: gstack, career (alias: career-ops), all
+  --extras=<csv>       Comma-separated form (e.g. --extras=gstack,career)
+  -h, --help           Show this help
+
+Examples:
+  ./install-skills.sh
+  ./install-skills.sh --extras gstack
+  ./install-skills.sh --extras career
+  ./install-skills.sh --extras gstack career
+  ./install-skills.sh --extras all
+
+Environment (honored when the matching extra is enabled):
+  GSTACK_SKIP=1              force-skip gstack even with --extras gstack
+  GSTACK_SKIP_BUN=1          skip bun install (browser skills disabled)
+  GSTACK_REF=<ref>           pin gstack to a git ref
+  CAREER_OPS_SKIP=1          force-skip career-ops even with --extras career
+  CAREER_OPS_DIR=<path>      career-ops workspace location (default: ~/career-ops)
+  CAREER_OPS_AUTO_UPDATE=0     freeze an existing career-ops checkout
+EOF
+}
+
+enable_extra() {
+  local name="${1//[[:space:]]/}"
+  if [ -z "$name" ]; then
+    return 0
+  fi
+  case "$name" in
+    gstack)
+      EXTRA_GSTACK=1
+      ;;
+    career|career-ops)
+      EXTRA_CAREER=1
+      ;;
+    all)
+      EXTRA_GSTACK=1
+      EXTRA_CAREER=1
+      ;;
+    *)
+      echo "ERROR: unknown extra '$name' (expected: gstack, career, all)" >&2
+      exit 1
+      ;;
+  esac
+}
+
+enable_extras_csv() {
+  local csv="$1"
+  local part
+  # Accept comma- and/or space-separated lists.
+  csv="${csv//,/ }"
+  # shellcheck disable=SC2086
+  for part in $csv; do
+    enable_extra "$part"
+  done
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    --extras)
+      shift
+      if [ $# -eq 0 ] || [[ "$1" == -* ]]; then
+        echo "ERROR: --extras requires at least one name (gstack, career, all)" >&2
+        exit 1
+      fi
+      while [ $# -gt 0 ] && [[ "$1" != -* ]]; do
+        enable_extras_csv "$1"
+        shift
+      done
+      ;;
+    --extras=*)
+      value="${1#--extras=}"
+      if [ -z "$value" ]; then
+        echo "ERROR: --extras= requires at least one name (gstack, career, all)" >&2
+        exit 1
+      fi
+      enable_extras_csv "$value"
+      shift
+      ;;
+    *)
+      echo "ERROR: unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
 source "$VAULT_DIR/.skill-vault/install-career-ops.sh"
 
 # Temporarily move gstack/ out of the vault so `npx skills add` doesn't
 # scan it and leak per-skill symlinks to the vault root. gstack is a
-# bundled collection (250MB, own .git) installed by the block below, not
-# a set of individual vercel-CLI skills.
+# bundled collection (250MB, own .git) installed by the optional block
+# below when --extras gstack is passed, not a set of individual
+# vercel-CLI skills.
 GSTACK_DIR="$VAULT_DIR/gstack"
 GSTACK_STASH=""
 if [ -d "$GSTACK_DIR/.git" ]; then
@@ -34,9 +142,15 @@ find . -maxdepth 2 -name SKILL.md -type l -lname '*gstack*' -exec sh -c '
 # 2. Remove gstack-prefixed directories created by gstack ./setup --prefix
 find . -maxdepth 1 -name 'gstack-*' -not -name 'gstack-*.md' -exec rm -rf {} \; 2>/dev/null || true
 
-install_career_ops
+if [ "$EXTRA_CAREER" -eq 1 ]; then
+  install_career_ops
+else
+  echo "career-ops: skipped (pass --extras career to install)"
+fi
 
 # ─── gstack (Garry Tan's AI engineering workflow) ───────────────
+# Optional via: ./install-skills.sh --extras gstack
+#
 # gstack is a bundled skill collection — 23 specialist slash commands
 # + 8 power tools that turn Claude Code into a virtual engineering team
 # (CEO, eng manager, designer, reviewer, QA, security, release eng).
@@ -52,8 +166,8 @@ install_career_ops
 #
 # Source: https://github.com/garrytan/gstack  ·  License: MIT
 #
-# Env flags:
-#   GSTACK_SKIP=1         — skip gstack entirely
+# Env flags (when --extras gstack is enabled):
+#   GSTACK_SKIP=1         — force-skip gstack
 #   GSTACK_SKIP_BUN=1     — skip bun install (browser skills disabled;
 #                           methodology skills still work via manual symlink)
 #   GSTACK_REF=<ref>      — pin to a git ref (commit hash or tag). Defaults
@@ -156,7 +270,11 @@ install_gstack() {
   echo "gstack: done. Skills: /gstack-office-hours /gstack-plan-ceo-review /gstack-review /gstack-qa /gstack-ship /gstack-cso /gstack-autoplan /gstack-spec /gstack-retro ..."
 }
 
-install_gstack
+if [ "$EXTRA_GSTACK" -eq 1 ]; then
+  install_gstack
+else
+  echo "gstack: skipped (pass --extras gstack to install)"
+fi
 
 find_graphify() {
   if command -v graphify >/dev/null 2>&1; then

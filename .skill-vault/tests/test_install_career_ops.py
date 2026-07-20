@@ -235,6 +235,41 @@ install_career_ops
             'source "$VAULT_DIR/.skill-vault/install-career-ops.sh"', installer
         )
         self.assertEqual(installer.count("install_career_ops"), 1)
+        # Career ops / gstack are opt-in extras, not default install steps.
+        self.assertIn("--extras", installer)
+        self.assertIn("EXTRA_CAREER", installer)
+        self.assertIn("EXTRA_GSTACK", installer)
+        self.assertIn(
+            'career-ops: skipped (pass --extras career to install)', installer
+        )
+        self.assertIn(
+            'gstack: skipped (pass --extras gstack to install)', installer
+        )
+
+    def test_root_installer_help_and_rejects_unknown_extra(self):
+        installer = REPO_ROOT / "install-skills.sh"
+
+        help_result = subprocess.run(
+            ["bash", str(installer), "--help"],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertEqual(help_result.returncode, 0, help_result.stderr)
+        self.assertIn("--extras", help_result.stdout)
+        self.assertIn("gstack", help_result.stdout)
+        self.assertIn("career", help_result.stdout)
+
+        bad_result = subprocess.run(
+            ["bash", str(installer), "--extras", "not-a-real-extra"],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertNotEqual(bad_result.returncode, 0)
+        self.assertIn("unknown extra", bad_result.stderr)
 
 
 if __name__ == "__main__":
