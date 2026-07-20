@@ -235,6 +235,8 @@ e = cue.descriptors.symmetric_contraction(
 
 ### IrDictPolynomial descriptors
 
+> **Not yet on PyPI.** As of `cuequivariance` 0.10.0 (the current PyPI release), `IrDictPolynomial`, `split_polynomial_by_irreps`, and all `*_ir_dict` descriptor variants below are unreleased — they exist on the `main` branch but ship with no public wheel yet. `pip install cuequivariance` will not have them; importing them raises `ImportError`/`AttributeError`. To use this section, install from source: `pip install git+https://github.com/NVIDIA/cuEquivariance.git`. Check the [releases page](https://github.com/NVIDIA/cuEquivariance/releases) before relying on this in a pinned environment.
+
 Each `_ir_dict` variant returns an `IrDictPolynomial` whose polynomial is already split by irrep. The `input_irreps` and `output_irreps` tuples describe the operand groups.
 
 ```python
@@ -410,7 +412,7 @@ y = np.random.randn(ep.inputs[2].dim)
 | `SegmentedTensorProduct` | `cuequivariance/segmented_polynomials/segmented_tensor_product.py` |
 | `SegmentedPolynomial` | `cuequivariance/segmented_polynomials/segmented_polynomial.py` |
 | `EquivariantPolynomial` | `cuequivariance/group_theory/equivariant_polynomial.py` |
-| `IrDictPolynomial` | `cuequivariance/group_theory/ir_dict_polynomial.py` |
+| `IrDictPolynomial` (main branch only, not in 0.10.0 wheel) | `cuequivariance/group_theory/ir_dict_polynomial.py` |
 | Descriptors | `cuequivariance/group_theory/descriptors/` |
 | Tensor product descriptors | `cuequivariance/group_theory/descriptors/irreps_tp.py` |
 | `spherical_harmonics` | `cuequivariance/group_theory/descriptors/spherical_harmonics_.py` |
