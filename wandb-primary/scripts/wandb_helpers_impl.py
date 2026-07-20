@@ -20,7 +20,7 @@ Key features:
 
 Usage:
     import sys
-    sys.path.insert(0, "wandb-primary/scripts")
+    sys.path.insert(0, "skills/wandb-primary/scripts")
     from wandb_helpers import (
         get_api,             # Create API with large-project-safe timeout
         probe_project,       # Discover project scale, metrics, config keys, artifacts

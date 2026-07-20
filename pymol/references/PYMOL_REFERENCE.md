@@ -9,7 +9,7 @@ reversing the import and `finish_launching()` will crash.
 import pymol
 pymol.pymol_argv = ["pymol", "-cq"]
 pymol.finish_launching()
-from pymol import cmd, util
+from pymol import cmd
 ```
 
 -   `-c` = command-line mode (no GUI)

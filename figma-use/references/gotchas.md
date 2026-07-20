@@ -13,7 +13,6 @@
 - Sequential awaits — batch independent async calls with `Promise.all` (including `import*ByKeyAsync` families)
 - Prefer indexed lookups (`getNodeByIdAsync`, `findAllWithCriteria`, `node.query`) over `findAll`/`findOne` full-tree scans
 - Scope traversal to the smallest known ancestor (never `figma.root.findAll`; prefer `someFrame.findAllWithCriteria` over `figma.currentPage.findAllWithCriteria`)
-- Set `figma.skipInvisibleInstanceChildren = true` for read-only traversal that doesn't need the interior of component instances
 - Variable scopes and mode pitfalls
 - Node cleanup and empty-fill pitfalls
 - "no such property" errors — reading or calling members not defined on the node type
@@ -447,10 +446,9 @@ page.findAllWithCriteria({ pluginData: { keys: ['dsb_key', 'dsb_run_id'] } })
 page.findAllWithCriteria({ sharedPluginData: { namespace: 'dsb', keys: ['key', 'run_id'] } })
 ```
 
-Two more rules that apply to any traversal — see also the dedicated [Scope traversal to the smallest known ancestor](#scope-traversal-to-the-smallest-known-ancestor) gotcha below:
+One more rule applies to any traversal — see also the dedicated [Scope traversal to the smallest known ancestor](#scope-traversal-to-the-smallest-known-ancestor) gotcha below:
 
 1. **Narrow the scope.** `frame.findAll(...)` is much cheaper than `figma.currentPage.findAll(...)`. Hold onto the smallest known subtree.
-2. **Skip invisible instance children when relevant** — see the dedicated [Set `figma.skipInvisibleInstanceChildren = true` for read-only traversal](#set-figmaskipinvisibleinstancechildren--true-for-read-only-traversal) gotcha. One line at the top of the script, up to hundreds of times faster on large files.
 
 ```js
 // WRONG — full-tree scan for a single node you already have an ID for
@@ -491,7 +489,7 @@ Name-only lookups (`findOne(n => n.name === 'X')`) cannot use criteria — they 
 
 ## Scope traversal to the smallest known ancestor
 
-Every `findAll` / `findOne` / `findAllWithCriteria` walks the entire subtree of the receiver. Picking the right receiver is the single biggest performance lever you have — bigger than the type index, bigger than `skipInvisibleInstanceChildren`. Cheapest to most expensive:
+Every `findAll` / `findOne` / `findAllWithCriteria` walks the entire subtree of the receiver. Picking the right receiver is the single biggest performance lever you have — bigger than the type index. Cheapest to most expensive:
 
 | Receiver | Walks… |
 |---|---|
@@ -518,27 +516,6 @@ const inFrame = frame.findAllWithCriteria({ types: ['INSTANCE'] })
 **Never loop `figma.root.children` calling `setCurrentPageAsync(page)` and then `page.findAll(...)`** — that's the same antipattern in slow motion: one whole-page scan per page, plus the cost of switching pages. If work spans multiple pages, **fan out** instead: emit one `use_figma` per page in parallel (see [Set current page once per `use_figma` call](#set-current-page-once-per-use_figma-call--split-multi-page-work-into-parallel-calls)).
 
 When you don't have a frame ID handy, capture one from a parent call and pass it to subsequent calls — `getNodeByIdAsync(id).findAllWithCriteria(...)` beats `figma.currentPage.findAllWithCriteria(...)` every time the target subtree is smaller than the page.
-
-## Set `figma.skipInvisibleInstanceChildren = true` for read-only traversal
-
-**Rule: set `figma.skipInvisibleInstanceChildren = true` at the top of any read-only script that doesn't need the interior of component instances.** It prunes every invisible node inside instances (and that node's descendants, even visible ones) from traversal and from `getNodeByIdAsync`. Per the [Figma docs](https://developers.figma.com/docs/plugins/api/properties/figma-skipinvisibleinstancechildren/), this can make `findAllWithCriteria` up to **hundreds of times faster** on large documents.
-
-```js
-// Top of script — set once, before any traversal.
-figma.skipInvisibleInstanceChildren = true
-
-// Now findAll / findOne / findAllWithCriteria / getNodeByIdAsync all skip
-// invisible content inside instances (and their descendants).
-const components = figma.currentPage.findAllWithCriteria({ types: ['COMPONENT'] })
-return components.map(c => c.id)
-```
-
-**Key points:**
-- **Default is not consistent across surfaces.** `true` in Dev Mode; `false` in Figma and FigJam. Set it explicitly — don't rely on the default.
-- **Only prunes inside `INSTANCE` subtrees.** Invisible nodes outside instances are still traversed normally. COMPONENT (master) subtrees are not affected.
-- **Stale references throw.** Once the flag is `true`, any node handle you previously captured for a pruned (invisible-in-instance) node throws when you read a property on it. Don't toggle the flag mid-script if you've already cached such handles.
-- **Don't set it when you need invisible variants.** Scripts that read or mutate hidden states of a component instance (e.g. inspecting the `disabled` variant's text, restyling all variants of a component set) must leave the flag at `false`.
-- **Safe for almost all read-only discovery and most mutations:** find/replace, style auditing, plugin-data inventory, variable usage scans, idempotency lookups, batch property changes via `setProperties()` on top-level instances. Hidden variants aren't displayed anyway, so skipping them rarely matters.
 
 ## Font style names are file-dependent — use `listAvailableFontsAsync` to discover them
 
@@ -608,6 +585,13 @@ The property exists on every `SceneNode`, but the **value** you can assign depen
 | `'FILL'` | the node is a child of an auto-layout frame, AND not absolute-positioned, AND not inside an immutable frame, AND not a canvas-grid child | `"FILL can only be set on children of auto-layout frames"`, `"FILL cannot be set on absolute positioned auto-layout children"`, `"FILL cannot be set on this node"`, `"FILL cannot be set on canvas grid children"` |
 | any non-`FIXED` value on a node that is neither auto-layout nor inside auto-layout | (none — always rejected) | `"node must be an auto-layout frame or a child of an auto-layout frame"` |
 
+**Common errors thrown** (the runtime prefixes the message with the property setter that rejected the value):
+
+- `Error: in set_layoutSizingHorizontal: node must be an auto-layout frame or a child of an auto-layout frame`
+- `Error: in set_layoutSizingHorizontal: FILL can only be set on children of auto-layout frames`
+
+The same messages surface under `set_layoutSizingVertical` when the vertical axis is the one being set.
+
 Practical consequences:
 
 1. **Append first, then set.** A freshly-created node has no parent, so `child.layoutSizingHorizontal = 'FILL'` immediately after `figma.createFrame()` always throws. `appendChild` to an auto-layout parent first.
@@ -647,6 +631,37 @@ t.layoutSizingHorizontal = 'HUG'     // ok — TEXT child of auto-layout
 `figma.createAutoLayout()` returns a frame with `layoutMode` already set and both axes hugging content, so its children can immediately use `'FILL'`/`'HUG'` after being appended — preferred over `figma.createFrame()` whenever the container holds related children. See Rule 12a in [SKILL.md](../SKILL.md).
 
 The next gotcha (`## HUG parents collapse FILL children`) layers on top of the rules above: even when assignment succeeds, a `HUG` parent gives `FILL` children no room to expand. The validation rule above is about whether the assignment is _allowed_; the next gotcha is about whether it produces useful layout.
+
+## layoutSizing vs AxisSizingMode: two different sizing enums
+
+`layoutSizingHorizontal`/`layoutSizingVertical` and `primaryAxisSizingMode`/`counterAxisSizingMode` look interchangeable but accept **different enums** and are set on **different nodes**. Crossing them throws a value-rejection error.
+
+| Property family | Valid values | Set on |
+| --- | --- | --- |
+| `layoutSizingHorizontal` / `layoutSizingVertical` | `'FIXED'` \| `'HUG'` \| `'FILL'` | a **child** node (or the auto-layout frame itself) |
+| `primaryAxisSizingMode` / `counterAxisSizingMode` | `'FIXED'` \| `'AUTO'` | the **frame** itself |
+
+`'AUTO'` is not a valid `layoutSizing*` value — the equivalent is `'HUG'`:
+
+```js
+// WRONG
+node.layoutSizingVertical = 'AUTO'   // 'AUTO' is not a layoutSizing value
+
+// CORRECT
+node.layoutSizingVertical = 'HUG'
+```
+
+`'FILL'` is not a valid `*AxisSizingMode` value — use `'FIXED'` or `'AUTO'`:
+
+```js
+// WRONG
+frame.counterAxisSizingMode = 'FILL'  // throws: Expected 'FIXED' | 'AUTO', received 'FILL'
+
+// CORRECT
+frame.counterAxisSizingMode = 'FIXED'
+```
+
+`layoutSizingHorizontal/Vertical` is a shorthand that also drives `primaryAxisSizingMode`/`counterAxisSizingMode` under the hood — but the two surfaces accept different value sets, so keep their enums straight. For the structural rules on _when_ `HUG`/`FILL` are legal at all, see the section above.
 
 ## HUG parents collapse FILL children
 

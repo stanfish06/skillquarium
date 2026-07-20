@@ -12,7 +12,7 @@ created: 2026-06-25
 # wandb-primary
 
 > [!info] What it does
-> Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, Signal Builder, and Launch workflows. Use when the task spans multiple W&B surfaces or the user asks generally what is happening in a W&B project.
+> Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, and Launch workflows. Use when the task spans multiple W&B surfaces or the user asks generally what is happening in a W&B project.
 
 **Source:** [wandb-primary/SKILL.md](wandb-primary/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 

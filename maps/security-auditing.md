@@ -30,7 +30,7 @@ created: 2026-06-13
 - [coverage-analysis](../coverage-analysis.md) — Coverage analysis measures code exercised during fuzzing
 - [differential-review](../differential-review.md) — Performs security-focused differential review of code changes (PRs, commits, diffs)
 - [entry-point-analyzer](../entry-point-analyzer.md) — Analyzes smart contract codebases to identify state-changing entry points for security auditing
-- [fp-check](../fp-check.md) — Systematically verifies suspected security bugs to eliminate false positives
+- [fp-check](../fp-check.md) — Systematically verifies suspected security bugs to eliminate false positives, producing a TRUE POSITIVE or FALSE POSITIVE verdict with documented evidence for each
 - [fuzzing-dictionary](../fuzzing-dictionary.md) — Fuzzing dictionaries guide fuzzers with domain-specific tokens
 - [fuzzing-obstacles](../fuzzing-obstacles.md) — Techniques for patching code to overcome fuzzing obstacles
 - [gh-cli](../gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl/WebFetch patterns

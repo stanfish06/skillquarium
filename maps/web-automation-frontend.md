@@ -35,7 +35,7 @@ created: 2026-06-13
 - [fixing-accessibility](../fixing-accessibility.md) — Audit and fix HTML accessibility issues including ARIA labels, keyboard navigation, focus management, color contrast, and form errors
 - [fixing-metadata](../fixing-metadata.md) — Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives
 - [fixing-motion-performance](../fixing-motion-performance.md) — Audit and fix animation performance issues including layout thrashing, compositor properties, scroll-linked motion, and blur effects
-- [frontend-design](../frontend-design.md) — Create distinctive, production-grade frontend interfaces with high design quality
+- [frontend-design](../frontend-design.md) — Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one
 - [frontend-ui-engineering](../frontend-ui-engineering.md) — Builds production-quality, accessible, responsive user-facing UIs
 - [full-output-enforcement](../full-output-enforcement.md) — Overrides default LLM truncation behavior
 - [gpt-taste](../gpt-taste.md) — Elite UX/UI & Advanced GSAP Motion Engineer

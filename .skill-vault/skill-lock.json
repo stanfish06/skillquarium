@@ -1248,19 +1248,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
+      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
       "installedAt": "2026-05-20T16:01:24.522Z",
-      "updatedAt": "2026-05-20T16:01:24.522Z"
+      "updatedAt": "2026-07-20T09:32:06.036Z"
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "c1470a475a0472fceda2401ea6763708a91680a8",
-      "pluginName": "agent-browser",
+      "skillFolderHash": "037e8078db4b20b4aa25c04f21c6de7d335ec449",
       "installedAt": "2026-06-09T19:25:40.380Z",
-      "updatedAt": "2026-06-09T19:25:40.380Z"
+      "updatedAt": "2026-07-20T09:32:06.451Z"
     },
     "agentcore": {
       "source": "vercel-labs/agent-browser",
@@ -1321,9 +1320,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "skillFolderHash": "7f1be9aef5c4435ed99dc74a383ca814d05c82c5",
+      "skillFolderHash": "ef9a12fdadfb2ad4b67d512a10e840979f162c3a",
       "installedAt": "2026-06-09T19:25:48.883Z",
-      "updatedAt": "2026-06-09T19:25:48.883Z"
+      "updatedAt": "2026-07-20T09:32:07.253Z"
     },
     "playwright-best-practices": {
       "source": "currents-dev/playwright-best-practices-skill",
@@ -1375,10 +1374,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "skillPath": "skills/frontend-design/SKILL.md",
-      "skillFolderHash": "928950704df8a8b885c03de5da626331e6f29cf8",
-      "pluginName": "example-skills",
+      "skillFolderHash": "0d5b74a14bdf3ebcd64f352d06376a2ef05ed296",
       "installedAt": "2026-06-09T19:26:19.742Z",
-      "updatedAt": "2026-06-09T19:26:19.742Z"
+      "updatedAt": "2026-07-20T09:32:07.914Z"
     },
     "mcp-builder": {
       "source": "anthropics/skills",
@@ -1522,54 +1520,54 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "4e54fb353d7c89329770b1f5b23a730ac26e25fc",
+      "skillFolderHash": "35b824feae09e42e7ad44af0f8f1e029e771827c",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-06-09T19:26:38.181Z"
+      "updatedAt": "2026-07-20T09:32:09.228Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
       "sourceType": "github",
       "sourceUrl": "https://github.com/arize-ai/phoenix.git",
       "skillPath": ".agents/skills/phoenix-cli/SKILL.md",
-      "skillFolderHash": "87a739b22f051a1ab512061061d8bfc3a449d21c",
+      "skillFolderHash": "3771f725479116e3bcc19dce31a05ba3d0e9827f",
       "installedAt": "2026-06-09T19:26:52.824Z",
-      "updatedAt": "2026-06-09T19:26:52.824Z"
+      "updatedAt": "2026-07-20T09:32:12.342Z"
     },
     "phoenix-evals": {
       "source": "arize-ai/phoenix",
       "sourceType": "github",
       "sourceUrl": "https://github.com/arize-ai/phoenix.git",
       "skillPath": ".agents/skills/phoenix-evals/SKILL.md",
-      "skillFolderHash": "3d4f75c1b166beb51ac3ad59a1200a3da304dd62",
+      "skillFolderHash": "f7e0ce5e290bf387a88c251b882ad8e84bcc3c03",
       "installedAt": "2026-06-09T19:26:52.827Z",
-      "updatedAt": "2026-06-09T19:26:52.827Z"
+      "updatedAt": "2026-07-20T09:32:16.311Z"
     },
     "figma-generate-design": {
       "source": "figma/mcp-server-guide",
       "sourceType": "github",
       "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
       "skillPath": "skills/figma-generate-design/SKILL.md",
-      "skillFolderHash": "dd0efb99962ade532d3029f8518185d0ea4231ce",
+      "skillFolderHash": "1c701fab31c135e10e46d1835a740ee664a4ff99",
       "installedAt": "2026-06-09T19:27:02.244Z",
-      "updatedAt": "2026-06-09T19:27:02.244Z"
+      "updatedAt": "2026-07-20T09:32:17.062Z"
     },
     "figma-generate-library": {
       "source": "figma/mcp-server-guide",
       "sourceType": "github",
       "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
       "skillPath": "skills/figma-generate-library/SKILL.md",
-      "skillFolderHash": "941f3f40e4ef88fcecd6d9cedec5e0ba175e3397",
+      "skillFolderHash": "b4007916784c23ca9f4c5cff0c3170662a52f348",
       "installedAt": "2026-06-09T19:27:02.246Z",
-      "updatedAt": "2026-06-09T19:27:02.246Z"
+      "updatedAt": "2026-07-20T09:32:18.827Z"
     },
     "figma-use": {
       "source": "figma/mcp-server-guide",
       "sourceType": "github",
       "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
       "skillPath": "skills/figma-use/SKILL.md",
-      "skillFolderHash": "5a5bdfb6961156db3e3bca634d7a7bded2f81dba",
+      "skillFolderHash": "4ba2615050e8340a11b0f43f6eee21ce73ff1c56",
       "installedAt": "2026-06-09T19:27:02.247Z",
-      "updatedAt": "2026-06-09T19:27:02.247Z"
+      "updatedAt": "2026-07-20T09:32:20.293Z"
     },
     "e2b-sandbox": {
       "source": "computesdk/sandbox-skills",
@@ -1756,9 +1754,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/semgrep-rule-creator/skills/semgrep-rule-creator/SKILL.md",
-      "skillFolderHash": "6405943529b0109f857e5080defecf5c45181980",
+      "skillFolderHash": "bcf995235debdae24f74eb329dfac14cfcae6700",
       "installedAt": "2026-06-09T19:28:14.017Z",
-      "updatedAt": "2026-06-09T19:28:14.017Z"
+      "updatedAt": "2026-07-20T09:32:21.625Z"
     },
     "sharp-edges": {
       "source": "trailofbits/skills",
@@ -1909,9 +1907,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/c-review/skills/c-review/SKILL.md",
-      "skillFolderHash": "10246b0ff8cd9d676006d2e35b0ddc123608b593",
+      "skillFolderHash": "235dcf0c8695d86bd41f37feee50661701d64b78",
       "installedAt": "2026-06-09T19:28:14.031Z",
-      "updatedAt": "2026-06-09T19:28:14.031Z"
+      "updatedAt": "2026-07-20T09:32:22.711Z"
     },
     "modern-python": {
       "source": "trailofbits/skills",
@@ -1963,9 +1961,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/fp-check/skills/fp-check/SKILL.md",
-      "skillFolderHash": "cf7cfe90decc5aced9f573640de9a799803a84b5",
+      "skillFolderHash": "9f74aca5c287b23ce09287765b20deb4690b4354",
       "installedAt": "2026-06-09T19:28:14.035Z",
-      "updatedAt": "2026-06-09T19:28:14.035Z"
+      "updatedAt": "2026-07-20T09:32:24.876Z"
     },
     "figma-implement-design": {
       "source": "openai/skills",
@@ -2035,27 +2033,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman/SKILL.md",
-      "skillFolderHash": "a22aa2a0a64d7d4b7b59bbddbdb865fedfb40d9c",
+      "skillFolderHash": "166040c027f7764d43df36abc5df0079bfc6394b",
       "installedAt": "2026-06-13T13:23:12.859Z",
-      "updatedAt": "2026-06-13T13:42:44.376Z"
+      "updatedAt": "2026-07-20T09:32:25.969Z"
     },
     "caveman-compress": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "ed28315c564230ce691623a01cd367f222b769e5",
+      "skillFolderHash": "1284ac809fbdaeb9e871f84ee850aebe10c85030",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-06-13T13:42:44.379Z"
+      "updatedAt": "2026-07-20T09:32:27.026Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "de99644a837172940aefcfab4e51f19344ba98df",
+      "skillFolderHash": "326ab384eb445cc0a74608d6f0c0abe6558bb44a",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-06-13T13:42:44.373Z"
+      "updatedAt": "2026-07-20T09:32:28.074Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -2116,27 +2114,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/pymol/SKILL.md",
-      "skillFolderHash": "e35526bdbfef0008fcaabfaa760a96091e685509",
+      "skillFolderHash": "82d5eb154f9853429390b5b5bdd55b158e289ce6",
       "installedAt": "2026-06-25T13:10:41.281Z",
-      "updatedAt": "2026-06-25T13:10:41.281Z"
+      "updatedAt": "2026-07-20T09:32:29.118Z"
     },
     "wandb-primary": {
       "source": "wandb/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/wandb/skills.git",
       "skillPath": "skills/wandb-primary/SKILL.md",
-      "skillFolderHash": "169ec0f19ff1242b12e781949cd0cc7195b89188",
+      "skillFolderHash": "09420c67469f3a18e24635cfd9ef97befdff4565",
       "installedAt": "2026-06-25T13:10:54.224Z",
-      "updatedAt": "2026-06-25T13:10:54.224Z"
+      "updatedAt": "2026-07-20T09:32:30.413Z"
     },
     "airflow": {
       "source": "astronomer/agents",
       "sourceType": "github",
       "sourceUrl": "https://github.com/astronomer/agents.git",
       "skillPath": "skills/airflow/SKILL.md",
-      "skillFolderHash": "d751d0dec23fa0a4316af09e150d27c70e092cfc",
+      "skillFolderHash": "662ca28d0db26b62708cdc39b7cc1f645152e864",
       "installedAt": "2026-06-25T13:10:54.553Z",
-      "updatedAt": "2026-06-25T13:10:54.553Z"
+      "updatedAt": "2026-07-20T09:32:31.279Z"
     },
     "mlflow-onboarding": {
       "source": "mlflow/skills",
@@ -2323,36 +2321,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-add-cmim-pretrain/SKILL.md",
-      "skillFolderHash": "3ff9ba0cb3db164e72baa22eb99a8509139f266c",
+      "skillFolderHash": "489bb3c0fcf5b16347c0b78e56068c5fc12ba1f8",
       "installedAt": "2026-06-28T21:15:35.316Z",
-      "updatedAt": "2026-06-28T21:15:35.316Z"
+      "updatedAt": "2026-07-20T09:32:32.277Z"
     },
     "kermt-continue-pretrain": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-continue-pretrain/SKILL.md",
-      "skillFolderHash": "b302d5bf23f0fbb3baabf2b41d34745752f9ec8c",
+      "skillFolderHash": "a38e4d4ff04e56ab1d243cdbcc2e815a9baefa65",
       "installedAt": "2026-06-28T21:15:35.317Z",
-      "updatedAt": "2026-06-28T21:15:35.317Z"
+      "updatedAt": "2026-07-20T09:32:33.162Z"
     },
     "kermt-embed": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-embed/SKILL.md",
-      "skillFolderHash": "626a82280651f836c8c7076f9d09ac38162a064b",
+      "skillFolderHash": "a8835b986c0bc78075175c6c66d6673826d7e47c",
       "installedAt": "2026-06-28T21:15:35.317Z",
-      "updatedAt": "2026-06-28T21:15:35.317Z"
+      "updatedAt": "2026-07-20T09:32:34.460Z"
     },
     "kermt-finetune": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-finetune/SKILL.md",
-      "skillFolderHash": "4e249a336823a4cfbff4d076216c18f70747063a",
+      "skillFolderHash": "0de7d0380c4b1dce3d004e6bd60e1b78377a3f23",
       "installedAt": "2026-06-28T21:15:35.318Z",
-      "updatedAt": "2026-06-28T21:15:35.318Z"
+      "updatedAt": "2026-07-20T09:32:35.542Z"
     },
     "kermt-infer": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
@@ -2377,9 +2375,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-pretrain-scratch/SKILL.md",
-      "skillFolderHash": "534b2d820c1f88b4bab6b33bda641341017fe662",
+      "skillFolderHash": "3f2ba6e8a77e2d65d00335ba6e329d8eb4554bde",
       "installedAt": "2026-06-28T21:15:35.321Z",
-      "updatedAt": "2026-06-28T21:15:35.321Z"
+      "updatedAt": "2026-07-20T09:32:36.494Z"
     },
     "kermt-setup": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",

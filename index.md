@@ -241,7 +241,7 @@ Secure development, code auditing, static analysis, SARIF, fuzzing, agent securi
 
 ## Uncategorized
 
-- [airflow](airflow.md) — Queries, manages, and troubleshoots Apache Airflow using the af CLI
+- [airflow](airflow.md) — Queries, manages, and troubleshoots Apache Airflow using the `af` CLI
 - [alterlab-qiime2-amplicon](alterlab-qiime2-amplicon.md) — Runs 16S/ITS amplicon (microbiome) analysis with the QIIME 2 amplicon distribution (2026.1
 - [ask-matt](ask-matt.md) — Ask which skill or flow fits your situation
 - [codebase-design](codebase-design.md) — Shared vocabulary for designing deep modules
@@ -288,7 +288,7 @@ Secure development, code auditing, static analysis, SARIF, fuzzing, agent securi
 - [ubiquitous-language](ubiquitous-language.md) — Extract a DDD-style ubiquitous language glossary from the current conversation, flagging ambiguities and proposing canonical terms
 - [viennarna-structure-prediction](viennarna-structure-prediction.md) — Predict RNA secondary structure, MFE folding, base-pair probabilities, RNA-RNA interactions via ViennaRNA Python bindings
 - [vllm-deploy-simple](vllm-deploy-simple.md) — Quick install and deploy vLLM, start serving with a simple LLM, and test OpenAI API
-- [wandb-primary](wandb-primary.md) — Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, Signal Builder, and Launch workflows
+- [wandb-primary](wandb-primary.md) — Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, and Launch workflows
 - [writing-beats](writing-beats.md) — Shape an article as a journey of beats, choose-your-own-adventure style
 - [writing-fragments](writing-fragments.md) — Grilling session that mines the user for fragments — heterogeneous nuggets of writing (claims, vignettes, sharp sentences, half-thoughts) — and appends them to a single document as raw...
 - [writing-great-skills](writing-great-skills.md) — Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable
