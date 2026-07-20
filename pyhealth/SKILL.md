@@ -38,7 +38,7 @@ uv add pyhealth
 uv run python train.py
 ```
 
-For a one-off script without a project, use `uv run --with pyhealth python script.py`. For the legacy 1.x line (Python 3.9+), `uv add pyhealth==1.16`. Detailed install notes, MIMIC access, and GPU/CPU device tips are in `references/installation.md`.
+For a one-off script without a project, use `uv run --with pyhealth python script.py`. For the legacy 1.x line (Python 3.9+), `uv add pyhealth==1.1.6`. Detailed install notes, MIMIC access, and GPU/CPU device tips are in `references/installation.md`.
 
 ## The 5-stage pipeline
 
