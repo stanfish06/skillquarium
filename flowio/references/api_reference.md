@@ -105,7 +105,7 @@ Export the FlowData instance as a new FCS file.
 **Example:**
 ```python
 flow_data = FlowData('sample.fcs')
-flow_data.write_fcs('output.fcs', metadata={'$SRC': 'Modified data'})
+flow_data.write_fcs('output.fcs', metadata={'src': 'Modified data'})
 ```
 
 **Note:** Exports as FCS 3.1 with single-precision floating-point data.
@@ -142,37 +142,38 @@ for i, dataset in enumerate(datasets):
 ### create_fcs()
 
 ```python
-create_fcs(filename,
+create_fcs(file_handle,
            event_data,
            channel_names,
            opt_channel_names=None,
-           metadata=None)
+           metadata_dict=None)
 ```
 
 Create a new FCS file from event data.
 
 **Parameters:**
-- `filename` (str): Output file path
-- `event_data` (ndarray): 2-D NumPy array of event data (rows=events, columns=channels)
+- `file_handle`: Open binary file handle to write to (not a path string — open with `open(path, 'wb')`)
+- `event_data`: Flat (1-D) sequence of values in row-major order (event0_ch0, event0_ch1, ..., event1_ch0, ...), not a 2-D array
 - `channel_names` (list): List of PnN (short) channel names
 - `opt_channel_names` (list): Optional list of PnS (descriptive) channel names
-- `metadata` (dict): Optional dictionary of TEXT segment keywords
+- `metadata_dict` (dict): Optional dictionary of TEXT segment keywords
 
 **Example:**
 ```python
 import numpy as np
 from flowio import create_fcs
 
-# Create synthetic data
-events = np.random.rand(10000, 5)
+# Create synthetic data (flattened to 1-D)
+events = (np.random.rand(10000, 5)).flatten()
 channels = ['FSC-A', 'SSC-A', 'FL1-A', 'FL2-A', 'Time']
 opt_channels = ['Forward Scatter', 'Side Scatter', 'FITC', 'PE', 'Time']
 
-create_fcs('synthetic.fcs',
-           events,
-           channels,
-           opt_channel_names=opt_channels,
-           metadata={'$SRC': 'Synthetic data'})
+with open('synthetic.fcs', 'wb') as f:
+    create_fcs(f,
+               events,
+               channels,
+               opt_channel_names=opt_channels,
+               metadata_dict={'src': 'Synthetic data'})
 ```
 
 ## Exception Classes
@@ -293,9 +294,9 @@ from flowio import FlowData
 
 flow = FlowData('sample.fcs', only_text=True)
 
-# Access metadata
-print(f"Acquisition date: {flow.text.get('$DATE', 'N/A')}")
-print(f"Instrument: {flow.text.get('$CYT', 'N/A')}")
+# Access metadata (flow.text keys are lowercase, no leading '$')
+print(f"Acquisition date: {flow.text.get('date', 'N/A')}")
+print(f"Instrument: {flow.text.get('cyt', 'N/A')}")
 
 # Channel information
 for i, (pnn, pns) in enumerate(zip(flow.pnn_labels, flow.pns_labels)):
@@ -308,22 +309,23 @@ for i, (pnn, pns) in enumerate(zip(flow.pnn_labels, flow.pns_labels)):
 import numpy as np
 from flowio import create_fcs
 
-# Generate or process data
-data = np.random.rand(5000, 3) * 1000
+# Generate or process data (flattened to 1-D)
+data = (np.random.rand(5000, 3) * 1000).flatten()
 
 # Define channels
 channels = ['FSC-A', 'SSC-A', 'FL1-A']
 stains = ['Forward Scatter', 'Side Scatter', 'GFP']
 
 # Create FCS file
-create_fcs('output.fcs',
-           data,
-           channels,
-           opt_channel_names=stains,
-           metadata={
-               '$SRC': 'Python script',
-               '$DATE': '19-OCT-2025'
-           })
+with open('output.fcs', 'wb') as f:
+    create_fcs(f,
+               data,
+               channels,
+               opt_channel_names=stains,
+               metadata_dict={
+                   'src': 'Python script',
+                   'date': '19-OCT-2025'
+               })
 ```
 
 ### Processing Multi-Dataset Files
@@ -364,9 +366,10 @@ events[:, 0] = events[:, 0] * 1.5  # Scale first channel
 # For modifications, use create_fcs() instead:
 from flowio import create_fcs
 
-create_fcs('modified.fcs',
-           events,
-           flow.pnn_labels,
-           opt_channel_names=flow.pns_labels,
-           metadata=flow.text)
+with open('modified.fcs', 'wb') as f:
+    create_fcs(f,
+               events.flatten(),
+               flow.pnn_labels,
+               opt_channel_names=flow.pns_labels,
+               metadata_dict=flow.text)
 ```

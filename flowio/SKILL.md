@@ -58,12 +58,14 @@ events = flow_data.as_array()  # Shape: (events, channels)
 import numpy as np
 from flowio import create_fcs
 
-# Prepare data
-data = np.array([[100, 200, 50], [150, 180, 60]])  # 2 events, 3 channels
+# Prepare data: create_fcs takes a flat (1D) sequence of values in
+# row-major order (event0_ch0, event0_ch1, ..., event1_ch0, ...), not a 2D array
+data = np.array([[100, 200, 50], [150, 180, 60]]).flatten()  # 2 events, 3 channels
 channels = ['FSC-A', 'SSC-A', 'FL1-A']
 
-# Create FCS file
-create_fcs('output.fcs', data, channels)
+# Create FCS file: create_fcs writes to an open binary file handle, not a path string
+with open('output.fcs', 'wb') as f:
+    create_fcs(f, data, channels)
 ```
 
 ## Core Workflows
@@ -102,8 +104,10 @@ flow = FlowData('sample.fcs', only_text=True)
 
 # Access metadata
 metadata = flow.text  # Dictionary of TEXT segment keywords
-print(metadata.get('$DATE'))  # Acquisition date
-print(metadata.get('$CYT'))   # Instrument name
+# Note: flow.text keys are lowercase and have no leading '$'
+# (e.g. 'date', 'cyt'), not the '$DATE'/'$CYT' form used in the FCS spec/HEADER
+print(metadata.get('date'))  # Acquisition date
+print(metadata.get('cyt'))   # Instrument name
 ```
 
 **Handling Problematic Files:**
@@ -137,10 +141,10 @@ FCS files contain rich metadata in the TEXT segment.
 ```python
 flow = FlowData('sample.fcs')
 
-# File-level metadata
+# File-level metadata (keys are lowercase, no leading '$')
 text_dict = flow.text
-acquisition_date = text_dict.get('$DATE', 'Unknown')
-instrument = text_dict.get('$CYT', 'Unknown')
+acquisition_date = text_dict.get('date', 'Unknown')
+instrument = text_dict.get('cyt', 'Unknown')
 data_type = flow.data_type  # 'I', 'F', 'D', 'A'
 
 # Channel metadata
@@ -187,14 +191,16 @@ Generate FCS files from NumPy arrays or other data sources.
 import numpy as np
 from flowio import create_fcs
 
-# Create event data (rows=events, columns=channels)
-events = np.random.rand(10000, 5) * 1000
+# Create event data: create_fcs takes a flat (1D) sequence in row-major
+# order (event0_ch0, event0_ch1, ..., event1_ch0, ...), not a 2D array
+events = (np.random.rand(10000, 5) * 1000).flatten()
 
 # Define channel names
 channel_names = ['FSC-A', 'SSC-A', 'FL1-A', 'FL2-A', 'Time']
 
-# Create FCS file
-create_fcs('output.fcs', events, channel_names)
+# Create FCS file: create_fcs writes to an open binary file handle, not a path string
+with open('output.fcs', 'wb') as f:
+    create_fcs(f, events, channel_names)
 ```
 
 **With Descriptive Channel Names:**
@@ -204,28 +210,31 @@ create_fcs('output.fcs', events, channel_names)
 channel_names = ['FSC-A', 'SSC-A', 'FL1-A', 'FL2-A', 'Time']
 descriptive_names = ['Forward Scatter', 'Side Scatter', 'FITC', 'PE', 'Time']
 
-create_fcs('output.fcs',
-           events,
-           channel_names,
-           opt_channel_names=descriptive_names)
+with open('output.fcs', 'wb') as f:
+    create_fcs(f,
+               events,
+               channel_names,
+               opt_channel_names=descriptive_names)
 ```
 
 **With Custom Metadata:**
 
 ```python
-# Add TEXT segment metadata
+# Add TEXT segment metadata (lowercase keys, no leading '$' —
+# same form as flow.text / the other FlowIO examples)
 metadata = {
-    '$SRC': 'Python script',
-    '$DATE': '19-OCT-2025',
-    '$CYT': 'Synthetic Instrument',
-    '$INST': 'Laboratory A'
+    'src': 'Python script',
+    'date': '19-OCT-2025',
+    'cyt': 'Synthetic Instrument',
+    'inst': 'Laboratory A'
 }
 
-create_fcs('output.fcs',
-           events,
-           channel_names,
-           opt_channel_names=descriptive_names,
-           metadata=metadata)
+with open('output.fcs', 'wb') as f:
+    create_fcs(f,
+               events,
+               channel_names,
+               opt_channel_names=descriptive_names,
+               metadata_dict=metadata)  # note: kwarg is metadata_dict, not metadata
 ```
 
 **Note:** FlowIO exports as FCS 3.1 with single-precision floating-point data.
@@ -243,7 +252,7 @@ from flowio import FlowData
 flow = FlowData('original.fcs')
 
 # Write with updated metadata
-flow.write_fcs('modified.fcs', metadata={'$SRC': 'Modified data'})
+flow.write_fcs('modified.fcs', metadata={'src': 'Modified data'})
 ```
 
 **Approach 2: Extract, Modify, and Recreate:**
@@ -261,11 +270,12 @@ events = flow.as_array(preprocess=False)
 events[:, 0] = events[:, 0] * 1.5  # Scale first channel
 
 # Create new FCS file with modified data
-create_fcs('modified.fcs',
-           events,
-           flow.pnn_labels,
-           opt_channel_names=flow.pns_labels,
-           metadata=flow.text)
+with open('modified.fcs', 'wb') as f:
+    create_fcs(f,
+               events.flatten(),
+               flow.pnn_labels,
+               opt_channel_names=flow.pns_labels,
+               metadata_dict=flow.text)
 ```
 
 ### Handling Multi-Dataset FCS Files
@@ -275,7 +285,8 @@ Some FCS files contain multiple datasets in a single file.
 **Detecting Multi-Dataset Files:**
 
 ```python
-from flowio import FlowData, MultipleDataSetsError
+from flowio.exceptions import MultipleDataSetsError
+from flowio import FlowData
 
 try:
     flow = FlowData('sample.fcs')
@@ -315,7 +326,8 @@ from flowio import FlowData
 first_dataset = FlowData('multi.fcs', nextdata_offset=0)
 
 # Read second dataset using NEXTDATA offset from first
-next_offset = int(first_dataset.text['$NEXTDATA'])
+# (flow.text keys are lowercase with no leading '$')
+next_offset = int(first_dataset.text['nextdata'])
 if next_offset > 0:
     second_dataset = FlowData('multi.fcs', nextdata_offset=next_offset)
 ```
@@ -346,8 +358,8 @@ raw = flow.as_array(preprocess=False)
 Handle common FlowIO exceptions appropriately.
 
 ```python
-from flowio import (
-    FlowData,
+from flowio import FlowData
+from flowio.exceptions import (
     FCSParsingError,
     DataOffsetDiscrepancyError,
     MultipleDataSetsError
@@ -405,7 +417,8 @@ for i, (pnn, pns) in enumerate(zip(flow.pnn_labels, flow.pns_labels)):
     print(f"  [{i}] {pnn:10s} | {pns:30s} | {ch_type}")
 
 print("\nKey Metadata:")
-for key in ['$DATE', '$BTIM', '$ETIM', '$CYT', '$INST', '$SRC']:
+# flow.text keys are lowercase with no leading '$'
+for key in ['date', 'btim', 'etim', 'cyt', 'inst', 'src']:
     value = flow.text.get(key, 'N/A')
     print(f"  {key:15s}: {value}")
 ```
@@ -432,7 +445,7 @@ for fcs_path in fcs_files:
             'version': flow.version,
             'events': flow.event_count,
             'channels': flow.channel_count,
-            'date': flow.text.get('$DATE', 'N/A')
+            'date': flow.text.get('date', 'N/A')
         })
     except Exception as e:
         print(f"Error processing {fcs_path.name}: {e}")
@@ -461,7 +474,7 @@ df = pd.DataFrame(
 
 # Add metadata as attributes
 df.attrs['fcs_version'] = flow.version
-df.attrs['instrument'] = flow.text.get('$CYT', 'Unknown')
+df.attrs['instrument'] = flow.text.get('cyt', 'Unknown')
 
 # Export to CSV
 df.to_csv('output.csv', index=False)
@@ -490,11 +503,12 @@ print(f"Original events: {len(events)}")
 print(f"Filtered events: {len(filtered_events)}")
 
 # Create new FCS file with filtered data
-create_fcs('filtered.fcs',
-           filtered_events,
-           flow.pnn_labels,
-           opt_channel_names=flow.pns_labels,
-           metadata={**flow.text, '$SRC': 'Filtered data'})
+with open('filtered.fcs', 'wb') as f:
+    create_fcs(f,
+               filtered_events.flatten(),
+               flow.pnn_labels,
+               opt_channel_names=flow.pns_labels,
+               metadata_dict={**flow.text, 'src': 'Filtered data'})
 ```
 
 ### Extracting Specific Channels
