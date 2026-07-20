@@ -39,13 +39,13 @@ PathML leverages OpenSlide and other specialized libraries to handle format-spec
 from pathml.core import SlideData
 
 # Load a whole-slide image
-wsi = SlideData.from_slide("path/to/slide.svs")
+wsi = SlideData("path/to/slide.svs")
 
 # Load with specific backend
-wsi = SlideData.from_slide("path/to/slide.svs", backend="openslide")
+wsi = SlideData("path/to/slide.svs", backend="openslide")
 
 # Load from OME-TIFF
-wsi = SlideData.from_slide("path/to/slide.ome.tiff", backend="bioformats")
+wsi = SlideData("path/to/slide.ome.tiff", backend="bioformats")
 ```
 
 **Key attributes:**
@@ -92,12 +92,15 @@ codex_slide = CODEXSlide(
 
 **VectraSlide:**
 ```python
-from pathml.core import types
+from pathml.core import SlideData, types
 
-# Load Vectra multiplex IF data
-vectra_slide = SlideData.from_slide(
+# Load Vectra multiplex IF data.
+# backend must be a string backend name ('bioformats', 'openslide', ...);
+# Vectra is a slide_type, not a backend.
+vectra_slide = SlideData(
     "path/to/vectra.qptiff",
-    backend=SlideType.VectraQPTIFF
+    backend="bioformats",
+    slide_type=types.Vectra,
 )
 ```
 
@@ -119,7 +122,7 @@ For large WSI files, tile-based loading enables memory-efficient processing:
 from pathml.core import SlideData
 
 # Load slide
-wsi = SlideData.from_slide("path/to/slide.svs")
+wsi = SlideData("path/to/slide.svs")
 
 # Generate tiles at specific magnification level
 wsi.generate_tiles(
@@ -256,12 +259,12 @@ print(wsi.level_dimensions[0])  # (width, height) at level 0
 PathML supports DICOM WSI through specialized handling:
 
 ```python
-from pathml.core import SlideData, SlideType
+from pathml.core import SlideData
 
-# Load DICOM WSI
-dicom_slide = SlideData.from_slide(
+# Load DICOM WSI (backend is a string name; SlideType is not a backend)
+dicom_slide = SlideData(
     "path/to/slide.dcm",
-    backend=SlideType.DICOM
+    backend="dicom",
 )
 
 # DICOM-specific metadata
@@ -277,7 +280,7 @@ OME-TIFF provides an open standard for multi-dimensional imaging:
 from pathml.core import SlideData
 
 # Load OME-TIFF
-ome_slide = SlideData.from_slide(
+ome_slide = SlideData(
     "path/to/slide.ome.tiff",
     backend="bioformats"
 )
@@ -374,7 +377,7 @@ from pathml.core import SlideData
 import matplotlib.pyplot as plt
 
 # Load slide
-wsi = SlideData.from_slide("path/to/slide.svs")
+wsi = SlideData("path/to/slide.svs")
 
 # Inspect properties
 print(f"Dimensions: {wsi.level_dimensions}")
@@ -437,7 +440,7 @@ pipeline = Pipeline([
 ])
 
 # Process
-pipeline.run(codex)
+codex.run(pipeline)
 ```
 
 ## Additional Resources

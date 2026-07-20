@@ -591,7 +591,7 @@ import onnxruntime as ort
 
 def run_onnx_inference_pipeline(slide_path, onnx_model_path):
     # Load slide
-    wsi = SlideData.from_slide(slide_path)
+    wsi = SlideData(slide_path)
     wsi.generate_tiles(level=1, tile_size=256, stride=256)
 
     # Load ONNX model

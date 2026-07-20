@@ -19,12 +19,12 @@ HDF5 (Hierarchical Data Format) is the primary storage format for processed Path
 ```python
 from pathml.core import SlideData
 
-# Load and process slide
-wsi = SlideData.from_slide("slide.svs")
-wsi.generate_tiles(level=1, tile_size=256, stride=256)
+# Load and process slide. Pass tiling options into run() —
+# generate_tiles() only yields a generator and is not consumed by run().
+wsi = SlideData("slide.svs")
 
-# Run preprocessing pipeline
-pipeline.run(wsi)
+# Run preprocessing pipeline (run generates tiles with these settings)
+wsi.run(pipeline, level=1, tile_size=256, tile_stride=256)
 
 # Save to HDF5
 wsi.to_hdf5("processed_slide.h5")
@@ -315,11 +315,11 @@ slide_paths = glob.glob('raw_slides/**/*.svs', recursive=True)
 
 for slide_path in slide_paths:
     # Load slide
-    wsi = SlideData.from_slide(slide_path)
+    wsi = SlideData(slide_path)
     wsi.generate_tiles(level=1, tile_size=256, stride=256)
 
     # Process
-    pipeline.run(wsi)
+    wsi.run(pipeline)
 
     # Save
     output_path = slide_path.replace('raw_slides', 'processed').replace('.svs', '.h5')
@@ -415,11 +415,11 @@ parser.add_argument('--slide_path', type=str, required=True)
 args = parser.parse_args()
 
 # Load and process
-wsi = SlideData.from_slide(args.slide_path)
+wsi = SlideData(args.slide_path)
 wsi.generate_tiles(level=1, tile_size=256, stride=256)
 
 pipeline = Pipeline([...])
-pipeline.run(wsi)
+wsi.run(pipeline)
 
 # Save
 output_path = args.slide_path.replace('raw_slides', 'processed').replace('.svs', '.h5')

@@ -101,7 +101,7 @@ codex_pipeline = Pipeline([
 ])
 
 # Run pipeline
-codex_pipeline.run(codex_slide)
+codex_slide.run(codex_pipeline)
 
 # Access results
 segmentation_mask = codex_slide.masks['cell_segmentation']
@@ -240,7 +240,7 @@ Vectra stores data in proprietary `.qptiff` format:
 from pathml.core import SlideData, SlideType
 
 # Load Vectra slide
-vectra_slide = SlideData.from_slide(
+vectra_slide = SlideData(
     'path/to/slide.qptiff',
     backend=SlideType.VectraQPTIFF
 )
@@ -278,7 +278,7 @@ vectra_pipeline = Pipeline([
     )
 ])
 
-vectra_pipeline.run(vectra_slide)
+vectra_slide.run(vectra_pipeline)
 ```
 
 ## Downstream Analysis
@@ -505,7 +505,7 @@ merfish_pipeline = Pipeline([
     )
 ])
 
-merfish_pipeline.run(merfish_slide)
+merfish_slide.run(merfish_pipeline)
 
 # Output: AnnData with gene counts per cell
 gene_expression = merfish_slide.cell_data
