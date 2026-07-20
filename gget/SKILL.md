@@ -24,8 +24,8 @@ gget is a command-line bioinformatics tool and Python package providing unified 
 Install gget in a clean virtual environment to avoid conflicts:
 
 ```bash
-# Reproducible install targeting this skill
-uv venv .venv
+# Reproducible install targeting this skill (Python >=3.12 required for 0.30.7+)
+uv venv --python 3.12 .venv
 source .venv/bin/activate
 uv pip install "gget==0.30.8"
 
@@ -289,15 +289,18 @@ Query RCSB Protein Data Bank for structure and metadata.
 
 **Parameters**:
 - `pdb_id`: PDB identifier (e.g., '7S7U')
-- `-r/--resource`: Data type (pdb, entry, pubmed, assembly, entity types)
+- `-r/--resource`: Data type (`pdb`, `mmcif`, `entry`, `pubmed`, `assembly`, entity types). Default `pdb`. As of gget 0.30.8, large/legacy entries may auto-fall back from PDB to PDBx/mmCIF when the legacy `.pdb` file is unavailable; use `resource="mmcif"` to request mmCIF directly.
 - `-i/--identifier`: Assembly, entity, or chain ID
 
-**Returns**: PDB format (structures) or JSON (metadata)
+**Returns**: Structure payload (PDB or mmCIF/CIF depending on resource and fallback) or JSON (metadata)
 
 **Examples**:
 ```bash
-# Download PDB structure
+# Download PDB structure (may return/save .cif if RCSB has no legacy .pdb)
 gget pdb 7S7U -o 7S7U.pdb
+
+# Request PDBx/mmCIF explicitly (preferred for large entries)
+gget pdb 7S7U -r mmcif -o 7S7U.cif
 
 # Get metadata
 gget pdb 7S7U -r entry
@@ -306,6 +309,7 @@ gget pdb 7S7U -r entry
 ```python
 # Python
 gget.pdb("7S7U", save=True)
+gget.pdb("7S7U", resource="mmcif", save=True)
 ```
 
 #### gget alphafold - Protein Structure Prediction
@@ -325,6 +329,7 @@ gget setup alphafold
 - `-mr/--multimer_recycles`: Recycling iterations (default: 3; recommend 20 for accuracy)
 - `-mfm/--multimer_for_monomer`: Apply multimer model to single proteins
 - `-r/--relax`: AMBER relaxation for top-ranked model
+- `-jhd/--jackhmmer_savedir`: Directory for jackhmmer temp files (~2 GB). Added in 0.30.8 so you can redirect the cache off a small home partition. Python: `jackhmmer_savedir=`
 - `plot`: Python-only; generate interactive 3D visualization (default: True)
 - `show_sidechains`: Python-only; include side chains (default: True)
 
@@ -335,16 +340,20 @@ gget setup alphafold
 # Predict single protein structure
 gget alphafold MKWMFKEDHSLEHRCVESAKIRAKYPDRVPVIVEKVSGSQIVDIDKRKYLVPSDITVAQFMWIIRKRIQLPSEKAIFLFVDKTVPQSR
 
-# Predict multimer with higher accuracy
-gget alphafold sequence1.fasta -mr 20 -r
+# Predict multimer with higher accuracy; redirect jackhmmer cache
+gget alphafold sequence1.fasta -mr 20 -r -jhd /tmp/jackhmmer_cache
 ```
 
 ```python
 # Python with visualization
 gget.alphafold("MKWMFK...", plot=True, show_sidechains=True)
 
-# Multimer prediction
-gget.alphafold(["sequence1", "sequence2"], multimer_recycles=20)
+# Multimer prediction with custom jackhmmer cache
+gget.alphafold(
+    ["sequence1", "sequence2"],
+    multimer_recycles=20,
+    jackhmmer_savedir="/tmp/jackhmmer_cache",
+)
 ```
 
 #### gget elm - Eukaryotic Linear Motifs
@@ -532,8 +541,13 @@ gget opentargets ENSG00000169194 -r diseases -l 5
 # Get associated drugs
 gget opentargets ENSG00000169194 -r drugs -l 10
 
-# Filter interactions by returned column names
-gget opentargets ENSG00000169194 -r interactions --filters protein_a_id=P35225 --filters gene_b_id=ENSG00000077238
+# Filter interactions by current returned column names (0.30.7+);
+# older docs used protein_a_id/gene_b_id — those keys now raise
+# missing-filter-key errors. Prefer sourceDatabase / targetB.* after
+# inspecting the DataFrame columns for your resource.
+gget opentargets ENSG00000169194 -r interactions \
+  --filters sourceDatabase=intact \
+  --filters targetB.id=ENSG00000077238
 ```
 
 ```python
@@ -542,7 +556,10 @@ gget.opentargets("ENSG00000169194", resource="diseases", limit=5)
 gget.opentargets(
     "ENSG00000169194",
     resource="interactions",
-    filters={"protein_a_id": "P35225", "gene_b_id": "ENSG00000077238"},
+    filters={
+        "sourceDatabase": "intact",
+        "targetB.id": "ENSG00000077238",
+    },
 )
 ```
 

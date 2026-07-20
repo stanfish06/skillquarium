@@ -171,11 +171,13 @@ Query RCSB Protein Data Bank.
 | Parameter | Type | Description | Default |
 |-----------|------|-------------|---------|
 | `pdb_id` | str | PDB identifier (e.g., '7S7U') | Required |
-| `-r/--resource` | str | pdb, entry, pubmed, assembly, entity types | 'pdb' |
+| `-r/--resource` | str | `pdb`, `mmcif`, `entry`, `pubmed`, `assembly`, entity types | 'pdb' |
 | `-i/--identifier` | str | Assembly, entity, or chain ID | None |
 | `-o/--out` | str | Output file path | stdout |
 
-**Returns:** PDB format (structures) or JSON (metadata)
+**Returns:** Structure payload (PDB or mmCIF/CIF depending on resource) or JSON (metadata)
+
+**Note (0.30.8):** Prefer `resource="mmcif"` for large entries. When the legacy PDB file is missing, gget may auto-fall back from `pdb` to PDBx/mmCIF and write/save a `.cif` instead of `.pdb`.
 
 ---
 
@@ -194,11 +196,13 @@ Predict 3D protein structures using AlphaFold2.
 | `-o/--out` | str | Output folder path | timestamped |
 | `-mfm/--multimer_for_monomer` | flag | Apply multimer model to monomers | False |
 | `-r/--relax` | flag | AMBER relaxation for top model | False |
+| `-jhd/--jackhmmer_savedir` | str | jackhmmer temp/cache directory (~2 GB; added 0.30.8) | default home cache |
 | `-q/--quiet` | flag | Suppress progress | False |
 
 **Python-only:**
 - `plot` (bool): Generate 3D visualization (default: True)
 - `show_sidechains` (bool): Include side chains (default: True)
+- `jackhmmer_savedir` (str): Same as `-jhd/--jackhmmer_savedir`
 
 **Note:** Multiple sequences automatically trigger multimer modeling
 
@@ -344,7 +348,7 @@ Retrieve disease/drug associations from OpenTargets.
 - gget 0.30.5 rewrote this module for the newer OpenTargets API; output column/key names may differ from older releases.
 - The older `--filter_mode` argument was removed upstream. Use CLI `--or` or Python filter logic documented by the current API.
 - gget 0.30.7/0.30.8 changed the `expression` resource again: Open Targets retired `Target.expressions`, so `-r expression` now returns per-biosample statistics instead of per-tissue RNA values.
-- Prefer inspecting returned column names before writing filters, then filter with exact column names such as `protein_a_id` or `gene_b_id`.
+- Prefer inspecting returned column names before writing filters. Interaction filters in 0.30.7+ use current Open Targets columns such as `sourceDatabase`, `targetB.id`, and `targetB.approvedSymbol` — not the older `protein_a_id` / `gene_b_id` keys.
 
 **Returns:** Disease/drug associations, tractability, pharmacogenetics, expression, DepMap, interactions
 
@@ -487,6 +491,8 @@ Generate mutated nucleotide sequences.
 
 ### gget gpt
 Generate text using OpenAI's API.
+
+**Deprecation notice:** As of gget 0.30.7, no longer actively maintained upstream; emits a warning when invoked. Prefer calling the OpenAI SDK directly for new work.
 
 **Setup:** Requires `gget setup gpt` and OpenAI API key
 
