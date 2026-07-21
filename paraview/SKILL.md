@@ -9,9 +9,9 @@ description: >
 
 # ParaView Scientific Visualization
 
-> **API Documentation Version: 5.12.1**
+> **API Documentation Version: 5.12.1** (ParaView has since released 6.0 and 6.1; this reference has not been re-verified against them)
 >
-> This skill's API reference is based on ParaView 5.12.1. If you're using a different version, some functions may not be available or behave differently.
+> This skill's API reference is based on ParaView 5.12.1. If you're using a different version, some functions may not be available or behave differently. Notably, **ParaView 6.0** replaced the boolean `UseGradientBackground`/`UseTexturedBackground`/`UseSkyboxBackground` render-view properties with a single `BackgroundColorMode` enum — the simple `renderView.Background = [r, g, b]` calls in this skill are unaffected, but code touching those boolean flags directly will need updating.
 >
 > Check version: `from paraview.simple import GetParaViewVersion; print(GetParaViewVersion())`
 
