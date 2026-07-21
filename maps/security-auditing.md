@@ -12,7 +12,7 @@ created: 2026-06-13
 
 [Back to Skill Index](../index.md)
 
-**Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Web Automation, Frontend & Design](web-automation-frontend.md)
+**Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Web Automation, Frontend & Design](web-automation-frontend.md) | [.NET & C# Development](dotnet-development.md)
 
 ## Skills (36)
 

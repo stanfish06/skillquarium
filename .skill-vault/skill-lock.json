@@ -1248,18 +1248,19 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
+      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
       "installedAt": "2026-05-20T16:01:24.522Z",
-      "updatedAt": "2026-07-20T09:32:06.036Z"
+      "updatedAt": "2026-05-20T16:01:24.522Z"
     },
     "agent-browser": {
       "source": "vercel-labs/agent-browser",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "037e8078db4b20b4aa25c04f21c6de7d335ec449",
+      "skillFolderHash": "c1470a475a0472fceda2401ea6763708a91680a8",
+      "pluginName": "agent-browser",
       "installedAt": "2026-06-09T19:25:40.380Z",
-      "updatedAt": "2026-07-20T09:32:06.451Z"
+      "updatedAt": "2026-06-09T19:25:40.380Z"
     },
     "agentcore": {
       "source": "vercel-labs/agent-browser",
@@ -1320,9 +1321,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "skillFolderHash": "ef9a12fdadfb2ad4b67d512a10e840979f162c3a",
+      "skillFolderHash": "7f1be9aef5c4435ed99dc74a383ca814d05c82c5",
       "installedAt": "2026-06-09T19:25:48.883Z",
-      "updatedAt": "2026-07-20T09:32:07.253Z"
+      "updatedAt": "2026-06-09T19:25:48.883Z"
     },
     "playwright-best-practices": {
       "source": "currents-dev/playwright-best-practices-skill",
@@ -1374,9 +1375,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "skillPath": "skills/frontend-design/SKILL.md",
-      "skillFolderHash": "0d5b74a14bdf3ebcd64f352d06376a2ef05ed296",
+      "skillFolderHash": "928950704df8a8b885c03de5da626331e6f29cf8",
+      "pluginName": "example-skills",
       "installedAt": "2026-06-09T19:26:19.742Z",
-      "updatedAt": "2026-07-20T09:32:07.914Z"
+      "updatedAt": "2026-06-09T19:26:19.742Z"
     },
     "mcp-builder": {
       "source": "anthropics/skills",
@@ -1520,54 +1522,54 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "35b824feae09e42e7ad44af0f8f1e029e771827c",
+      "skillFolderHash": "4e54fb353d7c89329770b1f5b23a730ac26e25fc",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-07-20T09:32:09.228Z"
+      "updatedAt": "2026-06-09T19:26:38.181Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
       "sourceType": "github",
       "sourceUrl": "https://github.com/arize-ai/phoenix.git",
       "skillPath": ".agents/skills/phoenix-cli/SKILL.md",
-      "skillFolderHash": "3771f725479116e3bcc19dce31a05ba3d0e9827f",
+      "skillFolderHash": "87a739b22f051a1ab512061061d8bfc3a449d21c",
       "installedAt": "2026-06-09T19:26:52.824Z",
-      "updatedAt": "2026-07-20T09:32:12.342Z"
+      "updatedAt": "2026-06-09T19:26:52.824Z"
     },
     "phoenix-evals": {
       "source": "arize-ai/phoenix",
       "sourceType": "github",
       "sourceUrl": "https://github.com/arize-ai/phoenix.git",
       "skillPath": ".agents/skills/phoenix-evals/SKILL.md",
-      "skillFolderHash": "f7e0ce5e290bf387a88c251b882ad8e84bcc3c03",
+      "skillFolderHash": "3d4f75c1b166beb51ac3ad59a1200a3da304dd62",
       "installedAt": "2026-06-09T19:26:52.827Z",
-      "updatedAt": "2026-07-20T09:32:16.311Z"
+      "updatedAt": "2026-06-09T19:26:52.827Z"
     },
     "figma-generate-design": {
       "source": "figma/mcp-server-guide",
       "sourceType": "github",
       "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
       "skillPath": "skills/figma-generate-design/SKILL.md",
-      "skillFolderHash": "1c701fab31c135e10e46d1835a740ee664a4ff99",
+      "skillFolderHash": "dd0efb99962ade532d3029f8518185d0ea4231ce",
       "installedAt": "2026-06-09T19:27:02.244Z",
-      "updatedAt": "2026-07-20T09:32:17.062Z"
+      "updatedAt": "2026-06-09T19:27:02.244Z"
     },
     "figma-generate-library": {
       "source": "figma/mcp-server-guide",
       "sourceType": "github",
       "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
       "skillPath": "skills/figma-generate-library/SKILL.md",
-      "skillFolderHash": "b4007916784c23ca9f4c5cff0c3170662a52f348",
+      "skillFolderHash": "941f3f40e4ef88fcecd6d9cedec5e0ba175e3397",
       "installedAt": "2026-06-09T19:27:02.246Z",
-      "updatedAt": "2026-07-20T09:32:18.827Z"
+      "updatedAt": "2026-06-09T19:27:02.246Z"
     },
     "figma-use": {
       "source": "figma/mcp-server-guide",
       "sourceType": "github",
       "sourceUrl": "https://github.com/figma/mcp-server-guide.git",
       "skillPath": "skills/figma-use/SKILL.md",
-      "skillFolderHash": "4ba2615050e8340a11b0f43f6eee21ce73ff1c56",
+      "skillFolderHash": "5a5bdfb6961156db3e3bca634d7a7bded2f81dba",
       "installedAt": "2026-06-09T19:27:02.247Z",
-      "updatedAt": "2026-07-20T09:32:20.293Z"
+      "updatedAt": "2026-06-09T19:27:02.247Z"
     },
     "e2b-sandbox": {
       "source": "computesdk/sandbox-skills",
@@ -1754,9 +1756,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/semgrep-rule-creator/skills/semgrep-rule-creator/SKILL.md",
-      "skillFolderHash": "bcf995235debdae24f74eb329dfac14cfcae6700",
+      "skillFolderHash": "6405943529b0109f857e5080defecf5c45181980",
       "installedAt": "2026-06-09T19:28:14.017Z",
-      "updatedAt": "2026-07-20T09:32:21.625Z"
+      "updatedAt": "2026-06-09T19:28:14.017Z"
     },
     "sharp-edges": {
       "source": "trailofbits/skills",
@@ -1907,9 +1909,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/c-review/skills/c-review/SKILL.md",
-      "skillFolderHash": "235dcf0c8695d86bd41f37feee50661701d64b78",
+      "skillFolderHash": "10246b0ff8cd9d676006d2e35b0ddc123608b593",
       "installedAt": "2026-06-09T19:28:14.031Z",
-      "updatedAt": "2026-07-20T09:32:22.711Z"
+      "updatedAt": "2026-06-09T19:28:14.031Z"
     },
     "modern-python": {
       "source": "trailofbits/skills",
@@ -1961,9 +1963,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/fp-check/skills/fp-check/SKILL.md",
-      "skillFolderHash": "9f74aca5c287b23ce09287765b20deb4690b4354",
+      "skillFolderHash": "cf7cfe90decc5aced9f573640de9a799803a84b5",
       "installedAt": "2026-06-09T19:28:14.035Z",
-      "updatedAt": "2026-07-20T09:32:24.876Z"
+      "updatedAt": "2026-06-09T19:28:14.035Z"
     },
     "figma-implement-design": {
       "source": "openai/skills",
@@ -2033,27 +2035,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman/SKILL.md",
-      "skillFolderHash": "166040c027f7764d43df36abc5df0079bfc6394b",
+      "skillFolderHash": "a22aa2a0a64d7d4b7b59bbddbdb865fedfb40d9c",
       "installedAt": "2026-06-13T13:23:12.859Z",
-      "updatedAt": "2026-07-20T09:32:25.969Z"
+      "updatedAt": "2026-06-13T13:42:44.376Z"
     },
     "caveman-compress": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "1284ac809fbdaeb9e871f84ee850aebe10c85030",
+      "skillFolderHash": "ed28315c564230ce691623a01cd367f222b769e5",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-07-20T09:32:27.026Z"
+      "updatedAt": "2026-06-13T13:42:44.379Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "326ab384eb445cc0a74608d6f0c0abe6558bb44a",
+      "skillFolderHash": "de99644a837172940aefcfab4e51f19344ba98df",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-07-20T09:32:28.074Z"
+      "updatedAt": "2026-06-13T13:42:44.373Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -2114,27 +2116,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/pymol/SKILL.md",
-      "skillFolderHash": "82d5eb154f9853429390b5b5bdd55b158e289ce6",
+      "skillFolderHash": "e35526bdbfef0008fcaabfaa760a96091e685509",
       "installedAt": "2026-06-25T13:10:41.281Z",
-      "updatedAt": "2026-07-20T09:32:29.118Z"
+      "updatedAt": "2026-06-25T13:10:41.281Z"
     },
     "wandb-primary": {
       "source": "wandb/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/wandb/skills.git",
       "skillPath": "skills/wandb-primary/SKILL.md",
-      "skillFolderHash": "09420c67469f3a18e24635cfd9ef97befdff4565",
+      "skillFolderHash": "169ec0f19ff1242b12e781949cd0cc7195b89188",
       "installedAt": "2026-06-25T13:10:54.224Z",
-      "updatedAt": "2026-07-20T09:32:30.413Z"
+      "updatedAt": "2026-06-25T13:10:54.224Z"
     },
     "airflow": {
       "source": "astronomer/agents",
       "sourceType": "github",
       "sourceUrl": "https://github.com/astronomer/agents.git",
       "skillPath": "skills/airflow/SKILL.md",
-      "skillFolderHash": "662ca28d0db26b62708cdc39b7cc1f645152e864",
+      "skillFolderHash": "d751d0dec23fa0a4316af09e150d27c70e092cfc",
       "installedAt": "2026-06-25T13:10:54.553Z",
-      "updatedAt": "2026-07-20T09:32:31.279Z"
+      "updatedAt": "2026-06-25T13:10:54.553Z"
     },
     "mlflow-onboarding": {
       "source": "mlflow/skills",
@@ -2321,36 +2323,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-add-cmim-pretrain/SKILL.md",
-      "skillFolderHash": "489bb3c0fcf5b16347c0b78e56068c5fc12ba1f8",
+      "skillFolderHash": "3ff9ba0cb3db164e72baa22eb99a8509139f266c",
       "installedAt": "2026-06-28T21:15:35.316Z",
-      "updatedAt": "2026-07-20T09:32:32.277Z"
+      "updatedAt": "2026-06-28T21:15:35.316Z"
     },
     "kermt-continue-pretrain": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-continue-pretrain/SKILL.md",
-      "skillFolderHash": "a38e4d4ff04e56ab1d243cdbcc2e815a9baefa65",
+      "skillFolderHash": "b302d5bf23f0fbb3baabf2b41d34745752f9ec8c",
       "installedAt": "2026-06-28T21:15:35.317Z",
-      "updatedAt": "2026-07-20T09:32:33.162Z"
+      "updatedAt": "2026-06-28T21:15:35.317Z"
     },
     "kermt-embed": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-embed/SKILL.md",
-      "skillFolderHash": "a8835b986c0bc78075175c6c66d6673826d7e47c",
+      "skillFolderHash": "626a82280651f836c8c7076f9d09ac38162a064b",
       "installedAt": "2026-06-28T21:15:35.317Z",
-      "updatedAt": "2026-07-20T09:32:34.460Z"
+      "updatedAt": "2026-06-28T21:15:35.317Z"
     },
     "kermt-finetune": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-finetune/SKILL.md",
-      "skillFolderHash": "0de7d0380c4b1dce3d004e6bd60e1b78377a3f23",
+      "skillFolderHash": "4e249a336823a4cfbff4d076216c18f70747063a",
       "installedAt": "2026-06-28T21:15:35.318Z",
-      "updatedAt": "2026-07-20T09:32:35.542Z"
+      "updatedAt": "2026-06-28T21:15:35.318Z"
     },
     "kermt-infer": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
@@ -2375,9 +2377,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/kermt-pretrain-scratch/SKILL.md",
-      "skillFolderHash": "3f2ba6e8a77e2d65d00335ba6e329d8eb4554bde",
+      "skillFolderHash": "534b2d820c1f88b4bab6b33bda641341017fe662",
       "installedAt": "2026-06-28T21:15:35.321Z",
-      "updatedAt": "2026-07-20T09:32:36.494Z"
+      "updatedAt": "2026-06-28T21:15:35.321Z"
     },
     "kermt-setup": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
@@ -2523,6 +2525,906 @@
       "skillFolderHash": "dfe1caace864e8a5db1719c4440633cd7f2f7e83",
       "installedAt": "2026-07-20T08:08:47.921Z",
       "updatedAt": "2026-07-20T08:08:47.921Z"
+    },
+    "csharp-scripts": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-advanced/skills/csharp-scripts/SKILL.md",
+      "skillFolderHash": "6dc4766aa0f31c02790a639c9f0d54ae437e4040",
+      "installedAt": "2026-07-21T05:29:02.904Z",
+      "updatedAt": "2026-07-21T05:29:02.904Z"
+    },
+    "microbenchmarking": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-diag/skills/microbenchmarking/SKILL.md",
+      "skillFolderHash": "52f553126798944fa24155c70f715bff877175a6",
+      "installedAt": "2026-07-21T05:30:12.017Z",
+      "updatedAt": "2026-07-21T05:30:20.982Z"
+    },
+    "dotnet-webapi": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-aspnetcore/skills/dotnet-webapi/SKILL.md",
+      "skillFolderHash": "707993793ce3383a787f4e2c9f8810b33330ada6",
+      "installedAt": "2026-07-21T05:30:12.019Z",
+      "updatedAt": "2026-07-21T05:30:20.985Z"
+    },
+    "authoring-github-workflows": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": ".agents/skills/authoring-github-workflows/SKILL.md",
+      "skillFolderHash": "785a9c6b4eed122b1fa0843e8eeef5b54eca1cba",
+      "installedAt": "2026-07-21T05:30:50.005Z",
+      "updatedAt": "2026-07-21T05:30:50.005Z"
+    },
+    "analyzing-dotnet-performance": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-diag/skills/analyzing-dotnet-performance/SKILL.md",
+      "skillFolderHash": "5da692243993b4c103f4b25327ab29ac6f6eb6f2",
+      "installedAt": "2026-07-21T05:30:50.007Z",
+      "updatedAt": "2026-07-21T05:30:50.007Z"
+    },
+    "android-tombstone-symbolication": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-diag/skills/android-tombstone-symbolication/SKILL.md",
+      "skillFolderHash": "fc01f2e38a854cd8811935a0567cf0c60ad4c83a",
+      "installedAt": "2026-07-21T05:30:50.008Z",
+      "updatedAt": "2026-07-21T05:30:50.008Z"
+    },
+    "apple-crash-symbolication": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-diag/skills/apple-crash-symbolication/SKILL.md",
+      "skillFolderHash": "38d3bee3ea24dd5aaf71263fb7da6f6e2151596c",
+      "installedAt": "2026-07-21T05:30:50.009Z",
+      "updatedAt": "2026-07-21T05:30:50.009Z"
+    },
+    "clr-activation-debugging": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-diag/skills/clr-activation-debugging/SKILL.md",
+      "skillFolderHash": "293df938a5c791dd5e8ce689e0fc56fb8fa06f61",
+      "installedAt": "2026-07-21T05:30:50.010Z",
+      "updatedAt": "2026-07-21T05:30:50.010Z"
+    },
+    "binlog-failure-analysis": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/binlog-failure-analysis/SKILL.md",
+      "skillFolderHash": "55568f23667c29bcb7527d44b65fe03d37cc2d84",
+      "installedAt": "2026-07-21T05:30:50.011Z",
+      "updatedAt": "2026-07-21T05:30:50.011Z"
+    },
+    "binlog-generation": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/binlog-generation/SKILL.md",
+      "skillFolderHash": "b0785dec9027bde4cf488bf88f6f52686ddf476a",
+      "installedAt": "2026-07-21T05:30:50.012Z",
+      "updatedAt": "2026-07-21T05:30:50.012Z"
+    },
+    "build-parallelism": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/build-parallelism/SKILL.md",
+      "skillFolderHash": "74ddbd5844cae942cbd23cc3cb2833363337165c",
+      "installedAt": "2026-07-21T05:30:50.013Z",
+      "updatedAt": "2026-07-21T05:30:50.013Z"
+    },
+    "build-perf-baseline": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/build-perf-baseline/SKILL.md",
+      "skillFolderHash": "131bb6cefa75831ee650e4397844974247b7f607",
+      "installedAt": "2026-07-21T05:30:50.014Z",
+      "updatedAt": "2026-07-21T05:30:50.014Z"
+    },
+    "build-perf-diagnostics": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/build-perf-diagnostics/SKILL.md",
+      "skillFolderHash": "0a3afcc867a0642d030c51d0a19f3ad041869fbd",
+      "installedAt": "2026-07-21T05:30:50.016Z",
+      "updatedAt": "2026-07-21T05:30:50.016Z"
+    },
+    "check-bin-obj-clash": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/check-bin-obj-clash/SKILL.md",
+      "skillFolderHash": "59758fd58ae4a623a6ad2bd07cdf12b36c7396d5",
+      "installedAt": "2026-07-21T05:30:50.016Z",
+      "updatedAt": "2026-07-21T05:30:50.016Z"
+    },
+    "assertion-quality": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/assertion-quality/SKILL.md",
+      "skillFolderHash": "0f82a4b0196ee18ef905fb63331a51e4ef79cba2",
+      "installedAt": "2026-07-21T05:30:50.017Z",
+      "updatedAt": "2026-07-21T05:30:50.017Z"
+    },
+    "code-testing-agent": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/code-testing-agent/SKILL.md",
+      "skillFolderHash": "5ac4b04bd2bca3e1777d36108d1424b753c1d57a",
+      "installedAt": "2026-07-21T05:30:50.018Z",
+      "updatedAt": "2026-07-21T05:30:50.018Z"
+    },
+    "code-testing-extensions": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/code-testing-extensions/SKILL.md",
+      "skillFolderHash": "04c0a6ca97b3024b368ac900ca8aa23ecf3af230",
+      "installedAt": "2026-07-21T05:30:50.019Z",
+      "updatedAt": "2026-07-21T05:30:50.019Z"
+    },
+    "author-component": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/author-component/SKILL.md",
+      "skillFolderHash": "af4cb9b05164fe36e18c5e255dcfe95795dc0b9f",
+      "installedAt": "2026-07-21T05:30:50.020Z",
+      "updatedAt": "2026-07-21T05:30:50.020Z"
+    },
+    "dotnet-pinvoke": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-advanced/skills/dotnet-pinvoke/SKILL.md",
+      "skillFolderHash": "4d4e79cb2742798d04a7dc58f93165e577be5911",
+      "installedAt": "2026-07-21T05:32:17.396Z",
+      "updatedAt": "2026-07-21T05:32:17.396Z"
+    },
+    "dotnet-trace-collect": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-diag/skills/dotnet-trace-collect/SKILL.md",
+      "skillFolderHash": "b9e409a930132aa09de5f9daa79a147f0231d12e",
+      "installedAt": "2026-07-21T05:32:17.399Z",
+      "updatedAt": "2026-07-21T05:32:17.399Z"
+    },
+    "copy-to-output-directory": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/copy-to-output-directory/SKILL.md",
+      "skillFolderHash": "01075c126411763c8cb5af39faf2d4c603fc2634",
+      "installedAt": "2026-07-21T05:32:17.400Z",
+      "updatedAt": "2026-07-21T05:32:17.400Z"
+    },
+    "directory-build-organization": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/directory-build-organization/SKILL.md",
+      "skillFolderHash": "0db4a85af1148f79035805a457c8979fcc6a7972",
+      "installedAt": "2026-07-21T05:32:17.400Z",
+      "updatedAt": "2026-07-21T05:32:17.400Z"
+    },
+    "convert-to-cpm": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-nuget/skills/convert-to-cpm/SKILL.md",
+      "skillFolderHash": "4e4a8cc1c3a7aa4be60da2d35c392f1534935cfb",
+      "installedAt": "2026-07-21T05:32:17.401Z",
+      "updatedAt": "2026-07-21T05:32:17.401Z"
+    },
+    "dotnet-aot-compat": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-upgrade/skills/dotnet-aot-compat/SKILL.md",
+      "skillFolderHash": "1b0f12304e76f0072ecd0cfe328e053894eed640",
+      "installedAt": "2026-07-21T05:32:17.402Z",
+      "updatedAt": "2026-07-21T05:32:17.402Z"
+    },
+    "dotnet-maui-doctor": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/dotnet-maui-doctor/SKILL.md",
+      "skillFolderHash": "10aa195e6239157de8c0d1cbef6341acf5430def",
+      "installedAt": "2026-07-21T05:32:17.403Z",
+      "updatedAt": "2026-07-21T05:32:17.403Z"
+    },
+    "crap-score": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/crap-score/SKILL.md",
+      "skillFolderHash": "b47d73d97e3aa996e16dd3758bd1f83396472c96",
+      "installedAt": "2026-07-21T05:32:17.404Z",
+      "updatedAt": "2026-07-21T05:32:17.404Z"
+    },
+    "detect-static-dependencies": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/detect-static-dependencies/SKILL.md",
+      "skillFolderHash": "cbb01cfda7536b14239df01e825c25f859ead7d5",
+      "installedAt": "2026-07-21T05:32:17.405Z",
+      "updatedAt": "2026-07-21T05:32:17.405Z"
+    },
+    "configuring-opentelemetry-dotnet": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-aspnetcore/skills/configuring-opentelemetry-dotnet/SKILL.md",
+      "skillFolderHash": "20007be310b0ccd8fda7add6950c8c39505589f5",
+      "installedAt": "2026-07-21T05:32:17.406Z",
+      "updatedAt": "2026-07-21T05:32:17.406Z"
+    },
+    "convert-blazor-server-to-webapp": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-aspnetcore/skills/convert-blazor-server-to-webapp/SKILL.md",
+      "skillFolderHash": "5ec83c07b4ac4fac14a9bbc450e4cdf0276ef6d9",
+      "installedAt": "2026-07-21T05:32:17.407Z",
+      "updatedAt": "2026-07-21T05:32:17.407Z"
+    },
+    "collect-user-input": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/collect-user-input/SKILL.md",
+      "skillFolderHash": "a58c655a14640af5f1d5ce57b84a29b2634fcb31",
+      "installedAt": "2026-07-21T05:32:17.407Z",
+      "updatedAt": "2026-07-21T05:32:17.407Z"
+    },
+    "configure-auth": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/configure-auth/SKILL.md",
+      "skillFolderHash": "a0345b5a04b578600a18aa92e527ede35c650bb0",
+      "installedAt": "2026-07-21T05:32:17.409Z",
+      "updatedAt": "2026-07-21T05:32:17.409Z"
+    },
+    "coordinate-components": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/coordinate-components/SKILL.md",
+      "skillFolderHash": "03084258c15e8b4addde84f4dbe4df3acb9a9eaa",
+      "installedAt": "2026-07-21T05:32:17.412Z",
+      "updatedAt": "2026-07-21T05:32:17.412Z"
+    },
+    "create-blazor-project": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/create-blazor-project/SKILL.md",
+      "skillFolderHash": "eff82f8fb5e89debc2843b5e62b130613167d7b2",
+      "installedAt": "2026-07-21T05:32:17.413Z",
+      "updatedAt": "2026-07-21T05:32:17.413Z"
+    },
+    "dump-collect": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-diag/skills/dump-collect/SKILL.md",
+      "skillFolderHash": "d46dd9b3fc510d16b44d2def188284acdc04ae44",
+      "installedAt": "2026-07-21T05:32:32.212Z",
+      "updatedAt": "2026-07-21T05:32:32.212Z"
+    },
+    "eval-performance": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/eval-performance/SKILL.md",
+      "skillFolderHash": "0088510afa16bafa2aa822fbb2b5ced928703a4c",
+      "installedAt": "2026-07-21T05:32:32.214Z",
+      "updatedAt": "2026-07-21T05:32:32.214Z"
+    },
+    "extension-points": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/extension-points/SKILL.md",
+      "skillFolderHash": "39ca2b929763375184f4c3dbea56ae71471b0682",
+      "installedAt": "2026-07-21T05:32:32.216Z",
+      "updatedAt": "2026-07-21T05:32:32.216Z"
+    },
+    "including-generated-files": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/including-generated-files/SKILL.md",
+      "skillFolderHash": "2cac8626588ca36806c64b6847b2f7cca7bd5c50",
+      "installedAt": "2026-07-21T05:32:32.217Z",
+      "updatedAt": "2026-07-21T05:32:32.217Z"
+    },
+    "incremental-build": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/incremental-build/SKILL.md",
+      "skillFolderHash": "e0103892045674ac30750600d80c3eba380205be",
+      "installedAt": "2026-07-21T05:32:32.218Z",
+      "updatedAt": "2026-07-21T05:32:32.218Z"
+    },
+    "item-management": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/item-management/SKILL.md",
+      "skillFolderHash": "83691f83cdd3177c3a29381a6cb729c2edff42d2",
+      "installedAt": "2026-07-21T05:32:32.218Z",
+      "updatedAt": "2026-07-21T05:32:32.218Z"
+    },
+    "maui-app-lifecycle": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/maui-app-lifecycle/SKILL.md",
+      "skillFolderHash": "41489997370774493ef00917a43e05b3a5ba58e5",
+      "installedAt": "2026-07-21T05:32:32.219Z",
+      "updatedAt": "2026-07-21T05:32:32.219Z"
+    },
+    "filter-syntax": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/filter-syntax/SKILL.md",
+      "skillFolderHash": "45804e5722444781e72ca144265e9e24255d0e1a",
+      "installedAt": "2026-07-21T05:32:32.220Z",
+      "updatedAt": "2026-07-21T05:32:32.220Z"
+    },
+    "find-untested-sources": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/find-untested-sources/SKILL.md",
+      "skillFolderHash": "e22b4652363ec5cb96f8c50b04c14c612e118878",
+      "installedAt": "2026-07-21T05:32:32.220Z",
+      "updatedAt": "2026-07-21T05:32:32.220Z"
+    },
+    "generate-testability-wrappers": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/generate-testability-wrappers/SKILL.md",
+      "skillFolderHash": "bc6f81b765cdc90c5468549998ccc74ed5a116ff",
+      "installedAt": "2026-07-21T05:32:32.221Z",
+      "updatedAt": "2026-07-21T05:32:32.221Z"
+    },
+    "grade-tests": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/grade-tests/SKILL.md",
+      "skillFolderHash": "3917c05e7187e906184948e43444b605436ecf04",
+      "installedAt": "2026-07-21T05:32:32.222Z",
+      "updatedAt": "2026-07-21T05:32:32.222Z"
+    },
+    "fetch-and-send-data": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/fetch-and-send-data/SKILL.md",
+      "skillFolderHash": "862d44002af11226a02eb99b94d254bfbc604485",
+      "installedAt": "2026-07-21T05:32:32.223Z",
+      "updatedAt": "2026-07-21T05:32:32.223Z"
+    },
+    "exp-mock-usage-analysis": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-experimental/skills/exp-mock-usage-analysis/SKILL.md",
+      "skillFolderHash": "9006b4078a6aa979487722d8c392aa3c85a5a003",
+      "installedAt": "2026-07-21T05:32:32.223Z",
+      "updatedAt": "2026-07-21T05:32:32.223Z"
+    },
+    "exp-simd-vectorization": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-experimental/skills/exp-simd-vectorization/SKILL.md",
+      "skillFolderHash": "12a71daf19fcb5e8dca51d5ff90c99a239b73853",
+      "installedAt": "2026-07-21T05:32:32.224Z",
+      "updatedAt": "2026-07-21T05:32:32.224Z"
+    },
+    "exp-test-maintainability": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-experimental/skills/exp-test-maintainability/SKILL.md",
+      "skillFolderHash": "8d56f66678ef2c0fc6b1e1ab70e65e9d137ca2aa",
+      "installedAt": "2026-07-21T05:32:32.225Z",
+      "updatedAt": "2026-07-21T05:32:32.225Z"
+    },
+    "migrate-dotnet10-to-dotnet11": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-upgrade/skills/migrate-dotnet10-to-dotnet11/SKILL.md",
+      "skillFolderHash": "ea3c79de0240a847fe739e4a236305f71ab0d60a",
+      "installedAt": "2026-07-21T05:32:46.533Z",
+      "updatedAt": "2026-07-21T05:32:46.533Z"
+    },
+    "migrate-dotnet8-to-dotnet9": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-upgrade/skills/migrate-dotnet8-to-dotnet9/SKILL.md",
+      "skillFolderHash": "a4891245269829535bdc9dd4d45f909c1e77dcca",
+      "installedAt": "2026-07-21T05:32:46.535Z",
+      "updatedAt": "2026-07-21T05:32:46.535Z"
+    },
+    "migrate-dotnet9-to-dotnet10": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-upgrade/skills/migrate-dotnet9-to-dotnet10/SKILL.md",
+      "skillFolderHash": "4498155b9f038a7239b60d518d81d3ab49c6273a",
+      "installedAt": "2026-07-21T05:32:46.536Z",
+      "updatedAt": "2026-07-21T05:32:46.536Z"
+    },
+    "maui-collectionview": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/maui-collectionview/SKILL.md",
+      "skillFolderHash": "01495dbef15e90f38ff927a308293a3af5120a26",
+      "installedAt": "2026-07-21T05:32:46.536Z",
+      "updatedAt": "2026-07-21T05:32:46.536Z"
+    },
+    "maui-data-binding": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/maui-data-binding/SKILL.md",
+      "skillFolderHash": "6f480149bb842959741314b341e37de038f3ea80",
+      "installedAt": "2026-07-21T05:32:46.537Z",
+      "updatedAt": "2026-07-21T05:32:46.537Z"
+    },
+    "maui-dependency-injection": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/maui-dependency-injection/SKILL.md",
+      "skillFolderHash": "d28cd9520990f8a8e24ce5f75df74d95f0443a98",
+      "installedAt": "2026-07-21T05:32:46.538Z",
+      "updatedAt": "2026-07-21T05:32:46.538Z"
+    },
+    "maui-safe-area": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/maui-safe-area/SKILL.md",
+      "skillFolderHash": "f4c5283904d9d504def11665948be1426045204c",
+      "installedAt": "2026-07-21T05:32:46.539Z",
+      "updatedAt": "2026-07-21T05:32:46.539Z"
+    },
+    "maui-shell-navigation": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/maui-shell-navigation/SKILL.md",
+      "skillFolderHash": "74387263a15a761089fef5f9f515d86a8d449c4d",
+      "installedAt": "2026-07-21T05:32:46.540Z",
+      "updatedAt": "2026-07-21T05:32:46.540Z"
+    },
+    "maui-theming": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-maui/skills/maui-theming/SKILL.md",
+      "skillFolderHash": "f0e88978b2bf14cd8385c2b21c7147fa75eb8df8",
+      "installedAt": "2026-07-21T05:32:46.541Z",
+      "updatedAt": "2026-07-21T05:32:46.541Z"
+    },
+    "mcp-csharp-create": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-ai/skills/mcp-csharp-create/SKILL.md",
+      "skillFolderHash": "8e348b824699214d9f07027193286da63892d1e6",
+      "installedAt": "2026-07-21T05:32:46.542Z",
+      "updatedAt": "2026-07-21T05:32:46.542Z"
+    },
+    "mcp-csharp-debug": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-ai/skills/mcp-csharp-debug/SKILL.md",
+      "skillFolderHash": "fef2d3c0f694f261215f1dd473b13d9419891a61",
+      "installedAt": "2026-07-21T05:32:46.542Z",
+      "updatedAt": "2026-07-21T05:32:46.542Z"
+    },
+    "mcp-csharp-publish": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-ai/skills/mcp-csharp-publish/SKILL.md",
+      "skillFolderHash": "f05f17498a23f8f43e9ab56467ecc70c6ca2e5be",
+      "installedAt": "2026-07-21T05:32:46.543Z",
+      "updatedAt": "2026-07-21T05:32:46.543Z"
+    },
+    "mcp-csharp-test": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-ai/skills/mcp-csharp-test/SKILL.md",
+      "skillFolderHash": "4d5230ae67b5cc3afaabe29637bdddccde19bcb7",
+      "installedAt": "2026-07-21T05:32:46.544Z",
+      "updatedAt": "2026-07-21T05:32:46.544Z"
+    },
+    "migrate-mstest-v1v2-to-v3": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test-migration/skills/migrate-mstest-v1v2-to-v3/SKILL.md",
+      "skillFolderHash": "d5d2ee439bbe096081ec3d4e75ba30506948ca68",
+      "installedAt": "2026-07-21T05:32:46.545Z",
+      "updatedAt": "2026-07-21T05:32:46.545Z"
+    },
+    "migrate-mstest-v3-to-v4": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test-migration/skills/migrate-mstest-v3-to-v4/SKILL.md",
+      "skillFolderHash": "1a6ccd278434bf2a8ba718c46674a3d7c326df93",
+      "installedAt": "2026-07-21T05:32:46.545Z",
+      "updatedAt": "2026-07-21T05:32:46.545Z"
+    },
+    "nuget-trusted-publishing": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-advanced/skills/nuget-trusted-publishing/SKILL.md",
+      "skillFolderHash": "103058afd1d7a2f17bc58aa9201236a05e8934b1",
+      "installedAt": "2026-07-21T05:32:59.970Z",
+      "updatedAt": "2026-07-21T05:32:59.970Z"
+    },
+    "optimizing-ef-core-queries": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-data/skills/optimizing-ef-core-queries/SKILL.md",
+      "skillFolderHash": "8458b82866515f8e0b413bd121881c17bf11cdc0",
+      "installedAt": "2026-07-21T05:32:59.973Z",
+      "updatedAt": "2026-07-21T05:32:59.973Z"
+    },
+    "msbuild-antipatterns": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/msbuild-antipatterns/SKILL.md",
+      "skillFolderHash": "dc39de6c36fbad315a5c92f959bb9925e65a9d05",
+      "installedAt": "2026-07-21T05:32:59.974Z",
+      "updatedAt": "2026-07-21T05:32:59.974Z"
+    },
+    "msbuild-modernization": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/msbuild-modernization/SKILL.md",
+      "skillFolderHash": "b2a476eb1f84e51c9f67ce73829598e1116a87ed",
+      "installedAt": "2026-07-21T05:32:59.975Z",
+      "updatedAt": "2026-07-21T05:32:59.975Z"
+    },
+    "msbuild-server": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/msbuild-server/SKILL.md",
+      "skillFolderHash": "9b738507efd0779a73bb8aaf0cc34a18d7483ed9",
+      "installedAt": "2026-07-21T05:32:59.976Z",
+      "updatedAt": "2026-07-21T05:32:59.976Z"
+    },
+    "property-patterns": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/property-patterns/SKILL.md",
+      "skillFolderHash": "341d840a42f845b49dc9fb4347fc060bca970fe3",
+      "installedAt": "2026-07-21T05:32:59.976Z",
+      "updatedAt": "2026-07-21T05:32:59.976Z"
+    },
+    "migrate-nullable-references": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-upgrade/skills/migrate-nullable-references/SKILL.md",
+      "skillFolderHash": "d4b78c10642109f2f59b4a265b684b18672330f7",
+      "installedAt": "2026-07-21T05:32:59.977Z",
+      "updatedAt": "2026-07-21T05:32:59.977Z"
+    },
+    "migrate-static-to-wrapper": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/migrate-static-to-wrapper/SKILL.md",
+      "skillFolderHash": "69eb76b1c87c640f911b9e2120ec3611f3bb8835",
+      "installedAt": "2026-07-21T05:32:59.978Z",
+      "updatedAt": "2026-07-21T05:32:59.978Z"
+    },
+    "mtp-hot-reload": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/mtp-hot-reload/SKILL.md",
+      "skillFolderHash": "97ff1bd919fb40e75c08dcdf53da70eec54cc6f9",
+      "installedAt": "2026-07-21T05:32:59.979Z",
+      "updatedAt": "2026-07-21T05:32:59.979Z"
+    },
+    "platform-detection": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/platform-detection/SKILL.md",
+      "skillFolderHash": "fc735e50aab8af8e92c7681f7a7ff4ece73ba4bb",
+      "installedAt": "2026-07-21T05:32:59.980Z",
+      "updatedAt": "2026-07-21T05:32:59.980Z"
+    },
+    "migrate-vstest-to-mtp": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test-migration/skills/migrate-vstest-to-mtp/SKILL.md",
+      "skillFolderHash": "4517b571c142097b6a4c8267702001d17e561afd",
+      "installedAt": "2026-07-21T05:32:59.981Z",
+      "updatedAt": "2026-07-21T05:32:59.981Z"
+    },
+    "migrate-xunit-to-mstest": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test-migration/skills/migrate-xunit-to-mstest/SKILL.md",
+      "skillFolderHash": "65cfa3ec28b1710e2cf621b406aad3d8d98b0c65",
+      "installedAt": "2026-07-21T05:32:59.982Z",
+      "updatedAt": "2026-07-21T05:32:59.982Z"
+    },
+    "migrate-xunit-to-xunit-v3": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test-migration/skills/migrate-xunit-to-xunit-v3/SKILL.md",
+      "skillFolderHash": "113884bef8093b7402c3205cb3fa226abf0757d7",
+      "installedAt": "2026-07-21T05:32:59.983Z",
+      "updatedAt": "2026-07-21T05:32:59.983Z"
+    },
+    "minimal-api-file-upload": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-aspnetcore/skills/minimal-api-file-upload/SKILL.md",
+      "skillFolderHash": "f36203871fb8ff06662a5c8920a6d198e2047f25",
+      "installedAt": "2026-07-21T05:32:59.984Z",
+      "updatedAt": "2026-07-21T05:32:59.984Z"
+    },
+    "plan-ui-change": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/plan-ui-change/SKILL.md",
+      "skillFolderHash": "004520eb31274e0fd3428c7f4ac86991dddaa405",
+      "installedAt": "2026-07-21T05:32:59.985Z",
+      "updatedAt": "2026-07-21T05:32:59.985Z"
+    },
+    "setup-local-sdk": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet/skills/setup-local-sdk/SKILL.md",
+      "skillFolderHash": "0fde121dc04f9ebc9a6fad1a96c12b428872bef7",
+      "installedAt": "2026-07-21T05:33:14.011Z",
+      "updatedAt": "2026-07-21T05:33:14.011Z"
+    },
+    "resolve-project-references": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/resolve-project-references/SKILL.md",
+      "skillFolderHash": "a8778020a0a84c0a05f4495018d6d17728c3c2ee",
+      "installedAt": "2026-07-21T05:33:14.012Z",
+      "updatedAt": "2026-07-21T05:33:14.012Z"
+    },
+    "target-authoring": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-msbuild/skills/target-authoring/SKILL.md",
+      "skillFolderHash": "e402b419f9793701cb952114bdfd9457af9edfd8",
+      "installedAt": "2026-07-21T05:33:14.013Z",
+      "updatedAt": "2026-07-21T05:33:14.013Z"
+    },
+    "technology-selection": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-ai/skills/technology-selection/SKILL.md",
+      "skillFolderHash": "52574808244648370aff62ea4d1141c7e1bc09dc",
+      "installedAt": "2026-07-21T05:33:14.014Z",
+      "updatedAt": "2026-07-21T05:33:14.014Z"
+    },
+    "template-authoring": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-template-engine/skills/template-authoring/SKILL.md",
+      "skillFolderHash": "e6ede37a72da24d971dd891df8a343ac9b1abd58",
+      "installedAt": "2026-07-21T05:33:14.016Z",
+      "updatedAt": "2026-07-21T05:33:14.016Z"
+    },
+    "template-comparison": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-template-engine/skills/template-comparison/SKILL.md",
+      "skillFolderHash": "2a13b3bd4e50f49ecdcce7eda0283c17cc9d9605",
+      "installedAt": "2026-07-21T05:33:14.017Z",
+      "updatedAt": "2026-07-21T05:33:14.017Z"
+    },
+    "template-discovery": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-template-engine/skills/template-discovery/SKILL.md",
+      "skillFolderHash": "bd0ef0812e4bd3252f0b5bf922c44a891f2816c8",
+      "installedAt": "2026-07-21T05:33:14.018Z",
+      "updatedAt": "2026-07-21T05:33:14.018Z"
+    },
+    "template-instantiation": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-template-engine/skills/template-instantiation/SKILL.md",
+      "skillFolderHash": "7fab5eb68a1440c67e867214b1d847246d95ddad",
+      "installedAt": "2026-07-21T05:33:14.019Z",
+      "updatedAt": "2026-07-21T05:33:14.019Z"
+    },
+    "template-smart-defaults": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-template-engine/skills/template-smart-defaults/SKILL.md",
+      "skillFolderHash": "6d77584e62a36449ea583acd4f9a92ceea075788",
+      "installedAt": "2026-07-21T05:33:14.020Z",
+      "updatedAt": "2026-07-21T05:33:14.020Z"
+    },
+    "template-validation": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-template-engine/skills/template-validation/SKILL.md",
+      "skillFolderHash": "f8e025d4abd5a04c1ba0a6eb29aca20a3cdccac4",
+      "installedAt": "2026-07-21T05:33:14.021Z",
+      "updatedAt": "2026-07-21T05:33:14.021Z"
+    },
+    "run-tests": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/run-tests/SKILL.md",
+      "skillFolderHash": "269611c8c9503c19ae726fcbd3e9eb3f8b751b42",
+      "installedAt": "2026-07-21T05:33:14.024Z",
+      "updatedAt": "2026-07-21T05:33:14.024Z"
+    },
+    "test-analysis-extensions": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/test-analysis-extensions/SKILL.md",
+      "skillFolderHash": "2095f9eeeb1f535dbdef6ead329f9c9f8caa25a6",
+      "installedAt": "2026-07-21T05:33:14.025Z",
+      "updatedAt": "2026-07-21T05:33:14.025Z"
+    },
+    "test-anti-patterns": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/test-anti-patterns/SKILL.md",
+      "skillFolderHash": "1aec41971929abc235dabd58a9ae1e832ca70b91",
+      "installedAt": "2026-07-21T05:33:14.026Z",
+      "updatedAt": "2026-07-21T05:33:14.026Z"
+    },
+    "support-prerendering": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/support-prerendering/SKILL.md",
+      "skillFolderHash": "db813925a67a280a110c9998153db837562c16f5",
+      "installedAt": "2026-07-21T05:33:14.027Z",
+      "updatedAt": "2026-07-21T05:33:14.027Z"
+    },
+    "system-text-json-net11": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet11/skills/system-text-json-net11/SKILL.md",
+      "skillFolderHash": "3a9f37201fd04616c391ee6890ac0b73133be681",
+      "installedAt": "2026-07-21T05:33:14.028Z",
+      "updatedAt": "2026-07-21T05:33:14.028Z"
+    },
+    "thread-abort-migration": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-upgrade/skills/thread-abort-migration/SKILL.md",
+      "skillFolderHash": "f96599a3b0fe5345de97250915bfba8d0ab622ad",
+      "installedAt": "2026-07-21T05:33:26.451Z",
+      "updatedAt": "2026-07-21T05:33:26.451Z"
+    },
+    "test-gap-analysis": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/test-gap-analysis/SKILL.md",
+      "skillFolderHash": "7e5e2d2a9fd37e408392f2771cd79269ec6b9cee",
+      "installedAt": "2026-07-21T05:33:26.453Z",
+      "updatedAt": "2026-07-21T05:33:26.453Z"
+    },
+    "test-smell-detection": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/test-smell-detection/SKILL.md",
+      "skillFolderHash": "d5a2aa016f424224003b411b4f5b10bdbafee8ca",
+      "installedAt": "2026-07-21T05:33:26.454Z",
+      "updatedAt": "2026-07-21T05:33:26.454Z"
+    },
+    "test-tagging": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/test-tagging/SKILL.md",
+      "skillFolderHash": "7ad8b3d5a4cdccbcaaaaa93c30aece78dc25f5b6",
+      "installedAt": "2026-07-21T05:33:26.455Z",
+      "updatedAt": "2026-07-21T05:33:26.455Z"
+    },
+    "writing-mstest-tests": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/writing-mstest-tests/SKILL.md",
+      "skillFolderHash": "7be6a0a4b97f61333676b9dc6ac1da19599ac1ef",
+      "installedAt": "2026-07-21T05:33:26.456Z",
+      "updatedAt": "2026-07-21T05:33:26.456Z"
+    },
+    "use-js-interop": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-blazor/skills/use-js-interop/SKILL.md",
+      "skillFolderHash": "c6dfa2bddc3dcd1410968fb6dbb523f47abd2699",
+      "installedAt": "2026-07-21T05:33:26.457Z",
+      "updatedAt": "2026-07-21T05:33:26.457Z"
+    },
+    "dotnet-coverage-analysis": {
+      "source": "dotnet/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/dotnet/skills.git",
+      "skillPath": "plugins/dotnet-test/skills/coverage-analysis/SKILL.md",
+      "skillFolderHash": "b44e9281298428c64c74d1184716449660352ced",
+      "installedAt": "2026-07-21T05:40:00.000Z",
+      "updatedAt": "2026-07-21T05:40:00.000Z"
     }
   },
   "dismissed": {

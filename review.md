@@ -19,6 +19,8 @@ created: 2026-06-20
 - [academic-paper-reviewer](academic-paper-reviewer.md) — Multi-perspective academic paper review with dynamic reviewer personas
 - [academic-pipeline](academic-pipeline.md) — Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize
 - [audit-prep-assistant](audit-prep-assistant.md) — Prepares codebases for security review using Trail of Bits' checklist
+- [author-component](author-component.md) — Create or review Blazor components (.razor files) with correct architecture
+- [authoring-github-workflows](authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [bio-human-feedback](bio-human-feedback.md) — Phase 2.6 of the bio-manuscript pipeline: human review checkpoint
 - [bio-manuscript-refine](bio-manuscript-refine.md) — Refinement loop for the bio-manuscript pipeline: three-reviewer iterative optimization (editor, computational, biological)
 - [c-review](c-review.md) — Performs comprehensive C/C++ security review for memory corruption, integer overflows, race conditions, and platform-specific vulnerabilities
@@ -30,15 +32,18 @@ created: 2026-06-20
 - [code-review-and-quality](code-review-and-quality.md) — Conducts multi-axis code review. Use before merging any change
 - [crewai](crewai.md) — Role-based multi-agent orchestration framework for building "Crews" of collaborating LLM agents (each with a role, goal, backstory, and optional tools) that execute sequential or...
 - [deep-research](deep-research.md) — Universal deep research agent team. 13-agent pipeline for rigorous academic research on any topic
+- [detect-static-dependencies](detect-static-dependencies.md) — Scan C# source files for hard-to-test static dependencies — DateTime.Now/UtcNow, File.*, Directory.*, Environment.*, HttpClient, Console.*, Process.*, and other untestable statics
 - [differential-review](differential-review.md) — Performs security-focused differential review of code changes (PRs, commits, diffs)
 - [dogfood](dogfood.md) — Systematically explore and test a web application to find bugs, UX issues, and other problems
 - [doubt-driven-development](doubt-driven-development.md) — Subjects every non-trivial decision to a fresh-context adversarial review before it stands
 - [executing-plans](executing-plans.md) — Use when you have a written implementation plan to execute in a separate session with review checkpoints
+- [exp-mock-usage-analysis](exp-mock-usage-analysis.md) — Audits .NET test mock usage by tracing each mock setup through the production code's execution path to find dead, unreachable, redundant, or replaceable mocks
 - [greploop](greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
 - [guidelines-advisor](guidelines-advisor.md) — Smart contract development advisor based on Trail of Bits' best practices
 - [improve-ui](improve-ui.md) — Audit an existing product surface against its own design evidence, identify verified UI problems, and write self-contained implementation plans for another agent
 - [infographics](infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
 - [morph-ppt](morph-ppt.md) — Use this skill when the user wants a .pptx with smooth cross-slide animation — PowerPoint Morph transitions, Keynote-style continuous motion, shapes that grow / move / rotate as the...
+- [msbuild-antipatterns](msbuild-antipatterns.md) — Detect and fix MSBuild anti-patterns in project and build files
 - [nature-figure](nature-figure.md) — Create, revise, audit, and export submission-grade scientific figures for Nature-family and other high-impact venues in Python (matplotlib/seaborn) or R...
 - [nature-reviewer](nature-reviewer.md) — Simulate a Nature-style reviewer assessment from the referee perspective rather than an author rebuttal
 - [neuropixels-analysis](neuropixels-analysis.md) — Analyze Neuropixels extracellular recordings end-to-end with SpikeInterface
@@ -50,7 +55,10 @@ created: 2026-06-20
 - [research-grants](research-grants.md) — Write competitive research proposals for NSF, NIH, DOE, and DARPA
 - [scientific-schematics](scientific-schematics.md) — Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement
 - [sds-gel-review](sds-gel-review.md) — Review SDS-PAGE or protein purification gel images using DNA sequence, protein sequence, base-pair length, expected protein size, and lane labels
+- [test-anti-patterns](test-anti-patterns.md) — Audits an existing test file or suite in any language for anti-patterns and quality issues — produces a severity-ranked report (Critical/Warning/Info)
+- [use-js-interop](use-js-interop.md) — Add, review, or fix JavaScript interop in Blazor components
 - [web-design-guidelines](web-design-guidelines.md) — Review UI code for Web Interface Guidelines compliance
+- [writing-mstest-tests](writing-mstest-tests.md) — Write, create, modernize, or fix comprehensive MSTest unit tests with MSTest 3.x/4.x APIs
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

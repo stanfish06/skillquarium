@@ -12,7 +12,7 @@ created: 2026-06-13
 
 [Back to Skill Index](../index.md)
 
-**Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md)
+**Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
 ## Skills (44)
 

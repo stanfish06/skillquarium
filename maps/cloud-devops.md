@@ -12,7 +12,7 @@ created: 2026-06-13
 
 [Back to Skill Index](../index.md)
 
-**Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
+**Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md) | [.NET & C# Development](dotnet-development.md)
 
 ## Skills (19)
 

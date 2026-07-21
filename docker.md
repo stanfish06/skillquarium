@@ -23,11 +23,13 @@ created: 2026-06-10
 - [devcontainer-setup](devcontainer-setup.md) — Creates devcontainers with Claude Code, language-specific tooling (Python/Node/Rust/Go), and persistent volumes
 - [diffdock-nim](diffdock-nim.md) — Run DiffDock molecular docking via NVIDIA NIM to predict small-molecule binding poses against protein targets
 - [docker-expert](docker-expert.md) — You are an advanced Docker containerization expert with comprehensive, practical knowledge of container optimization, security hardening, multi-stage builds, orchestration patterns...
+- [dump-collect](dump-collect.md) — Configure and collect crash dumps for modern .NET applications
 - [evo2-nim](evo2-nim.md) — Generate and analyze DNA sequences using NVIDIA's Evo 2 BioNeMo NIM microservice
 - [fastapi](fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
 - [genmol-nim](genmol-nim.md) — Generate novel drug-like molecules using the GenMol NIM microservice
 - [kermt-monitor](kermt-monitor.md) — Check progress for a detached KERMT run (pretrain, finetune, or any kermt_run_detached invocation)
 - [kermt-setup](kermt-setup.md) — Bootstrap the KERMT agent environment — verify host docker + nvidia-container-toolkit, build the kermt:latest image from the repo's Dockerfile if it doesn't yet exist, and run a GPU...
+- [mcp-csharp-publish](mcp-csharp-publish.md) — Publish and deploy C# MCP servers. Covers NuGet packaging for stdio servers, Docker containerization for HTTP servers, Azure Container Apps and App Service deployment, and publishing...
 - [modal](modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
 - [molmim-nim](molmim-nim.md) — Use this skill for MolMIM, NVIDIA's BioNeMo NIM microservice for small-molecule latent-space generation and optimization
 - [msa-search-nim](msa-search-nim.md) — Generate multiple sequence alignments (MSAs) for protein sequences using the ColabFold MSA-Search NIM
