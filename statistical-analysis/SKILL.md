@@ -32,11 +32,13 @@ Use **uv** to install the libraries used in this skill. Pin versions in producti
 # Core frequentist stack (Python 3.10+; 3.12+ recommended for latest SciPy/ArviZ)
 uv pip install "pingouin>=0.6" "scipy>=1.11" "statsmodels>=0.14.6" pandas matplotlib seaborn
 
-# Bayesian modeling (PyMC 5 + ArviZ)
-uv pip install "pymc>=5.0" "arviz>=1.0"
+# Bayesian modeling (PyMC 6 + ArviZ)
+uv pip install "pymc>=6.0" "arviz>=1.0"
 ```
 
-**Compatibility notes (verified against pingouin 0.6.1, statsmodels 0.14.6, arviz 1.2, 2026):**
+**Compatibility notes (verified against pingouin 0.6.1, statsmodels 0.14.6, arviz 1.2, pymc 6.1.0, 2026):**
+
+- **PyMC 6.0** switched the default sampling backend from C to Numba (via the `nutpie` sampler) and dropped some deprecated APIs (e.g. `samples=` in `sample_prior_predictive`, WAIC in favor of PSIS-LOO-CV). If you're following older PyMC 5.x examples, expect these differences.
 
 - **Pingouin 0.6.0** renamed output columns to remove special characters: `p_val`, `cohen_d`, `CI95`, `p_unc` (previously `p-val`, `cohen-d`, `CI95%`, `p-unc` in 0.5.x). Examples below use the current names; if stuck on 0.5.x, use the hyphenated forms.
 - **statsmodels + SciPy**: use `statsmodels>=0.14.6` with `scipy>=1.11` to avoid `_lazywhere` import errors on SciPy 1.16+.
