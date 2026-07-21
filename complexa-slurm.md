@@ -20,7 +20,7 @@ created: 2026-06-28
 
 ## Related skills
 
-- [complexa-sweep](complexa-sweep.md) — Use this skill whenever the user wants to run a parameter sweep over a Proteina-Complexa design pipeline — cartesian-product hyperparameter scans, Pareto search over...
+_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
