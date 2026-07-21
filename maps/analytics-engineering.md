@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Machine Learning & AI](ml-ai.md) | [Security & Auditing](security-auditing.md)
 
-## Skills (17)
+## Skills (20)
 
 - [adding-dbt-unit-test](../adding-dbt-unit-test.md) — Creates unit test YAML definitions that mock upstream model inputs and validate expected outputs
 - [answering-natural-language-questions-with-dbt](../answering-natural-language-questions-with-dbt.md) — Writes and executes SQL queries against the data warehouse using dbt's Semantic Layer or ad-hoc SQL to answer business questions
@@ -24,6 +24,9 @@ created: 2026-06-13
 - [fetching-dbt-docs](../fetching-dbt-docs.md) — Retrieves and searches dbt documentation pages in LLM-friendly markdown format
 - [langfuse](../langfuse.md) — Interact with Langfuse and access its documentation
 - [llm-observability-evals](../llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
+- [logfire-instrumentation](../logfire-instrumentation.md) — Add Pydantic Logfire observability to applications and send as much useful telemetry as possible
+- [logfire-query](../logfire-query.md) — Query and analyze Logfire telemetry data — traces, logs, spans, metrics, summaries, and SQL results
+- [logfire-ui](../logfire-ui.md) — Open or return Logfire project pages, live views, trace links, and Explore pages in the Codex browser without querying telemetry first
 - [migrating-dbt-core-to-fusion](../migrating-dbt-core-to-fusion.md) — Use when a user needs help triaging dbt-core to Fusion migration errors
 - [migrating-dbt-project-across-platforms](../migrating-dbt-project-across-platforms.md) — Use when migrating a dbt project from one data platform or data warehouse to another (e.g., Snowflake to Databricks, Databricks to Snowflake) using dbt Fusion's real-time compilation...
 - [observability-and-instrumentation](../observability-and-instrumentation.md) — Instruments code so production behavior is visible and diagnosable

@@ -220,7 +220,9 @@ CATEGORIES = [
      ["data-science-compute", "drug-discovery-chem", "cloud-devops"],
      ["scikit-learn", "pytorch-lightning", "transformers", "shap", "stable-baselines3", "pufferlib",
       "pufferlib-v2", "pufferlib-v3", "torch-geometric", "umap-learn", "aeon", "timesfm-forecasting", "hugging-science",
-      "optuna", "cuequivariance", "crewai"]),
+      "optuna", "cuequivariance", "crewai",
+      # pydantic/skills — Pydantic AI agents + harness
+      "building-pydantic-ai-agents", "pydantic-ai-harness"]),
 
     ("data-science-compute", "Data Science, Stats & Scientific Computing",
      "DataFrames, big-data tooling, statistics, optimization, simulation, geospatial, and plotting.",
@@ -345,7 +347,9 @@ CATEGORIES = [
       "using-dbt-for-analytics-engineering", "working-with-dbt-mesh",
       "migrating-dbt-core-to-fusion", "migrating-dbt-project-across-platforms",
       "langfuse", "phoenix-cli", "phoenix-evals", "llm-observability-evals",
-      "observability-and-instrumentation"]),
+      "observability-and-instrumentation",
+      # pydantic/skills — Logfire observability
+      "logfire-instrumentation", "logfire-query", "logfire-ui"]),
 
     ("security-auditing", "Security & Auditing",
      "Secure development, code auditing, static analysis, SARIF, fuzzing, agent security, supply-chain risk, and smart-contract review helpers.",

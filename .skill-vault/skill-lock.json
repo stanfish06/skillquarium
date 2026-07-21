@@ -3423,6 +3423,51 @@
       "skillFolderHash": "b44e9281298428c64c74d1184716449660352ced",
       "installedAt": "2026-07-21T05:40:00.000Z",
       "updatedAt": "2026-07-21T05:40:00.000Z"
+    },
+    "building-pydantic-ai-agents": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/building-pydantic-ai-agents/SKILL.md",
+      "skillFolderHash": "692c3ff68205d5635358817eddb1407b455d4588",
+      "installedAt": "2026-07-21T11:27:04.643Z",
+      "updatedAt": "2026-07-21T11:27:04.643Z"
+    },
+    "logfire-instrumentation": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/logfire-instrumentation/SKILL.md",
+      "skillFolderHash": "f137b50547665eda06678f04118a4ae113b09895",
+      "installedAt": "2026-07-21T11:27:04.645Z",
+      "updatedAt": "2026-07-21T11:27:04.645Z"
+    },
+    "logfire-query": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/logfire-query/SKILL.md",
+      "skillFolderHash": "56de0a5f2c0cc1159b1d73d54b578d9ea26d8af6",
+      "installedAt": "2026-07-21T11:27:04.647Z",
+      "updatedAt": "2026-07-21T11:27:04.647Z"
+    },
+    "logfire-ui": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/logfire-ui/SKILL.md",
+      "skillFolderHash": "211768b71a9fd50b937228ea4c8d665fbe737b73",
+      "installedAt": "2026-07-21T11:27:04.648Z",
+      "updatedAt": "2026-07-21T11:27:04.648Z"
+    },
+    "pydantic-ai-harness": {
+      "source": "pydantic/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pydantic/skills.git",
+      "skillPath": "skills/pydantic-ai-harness/SKILL.md",
+      "skillFolderHash": "bb8b1936b6789db4e24c740dbc172170a26281cd",
+      "installedAt": "2026-07-21T11:27:04.649Z",
+      "updatedAt": "2026-07-21T11:27:04.649Z"
     }
   },
   "dismissed": {
