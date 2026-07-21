@@ -11,7 +11,7 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 
 ## Overview
 
-Pymoo is a comprehensive Python framework for optimization with emphasis on multi-objective problems. Solve single and multi-objective optimization using state-of-the-art algorithms (NSGA-II/III, MOEA/D, SPEA2), benchmark problems (ZDT, DTLZ), customizable genetic operators, and multi-criteria decision making methods. Excels at finding trade-off solutions (Pareto fronts) for problems with conflicting objectives. Current stable release: **pymoo 0.6.1.6** (November 2025).
+Pymoo is a comprehensive Python framework for optimization with emphasis on multi-objective problems. Solve single and multi-objective optimization using state-of-the-art algorithms (NSGA-II/III, MOEA/D, SPEA2), benchmark problems (ZDT, DTLZ), customizable genetic operators, and multi-criteria decision making methods. Excels at finding trade-off solutions (Pareto fronts) for problems with conflicting objectives. Current stable release: **pymoo 0.6.2** (June 2026).
 
 ## Installation
 
@@ -19,9 +19,9 @@ Pymoo is a comprehensive Python framework for optimization with emphasis on mult
 uv pip install pymoo
 ```
 
-For reproducible environments, pin a version: `uv pip install "pymoo==0.6.1.6"`.
+For reproducible environments, pin a version: `uv pip install "pymoo==0.6.2"`.
 
-**Dependencies:** NumPy (2.x compatible since 0.6.1.3), SciPy, matplotlib (visualization). Autograd is optional for gradient-based features (since 0.6.1.3).
+**Dependencies:** NumPy 2.x support requires `cma>=3.4.0` (bumped in 0.6.2 to restore CMA-ES compatibility with NumPy 2.x), SciPy, matplotlib (visualization). Autograd is optional for gradient-based features (since 0.6.1.3). 0.6.2 also adds the Omni-Optimizer algorithm.
 
 **Documentation:** https://pymoo.org/ — LLM-friendly index: https://pymoo.org/llms.txt
 
