@@ -176,7 +176,7 @@ curl http://localhost:8000/v1/chat/completions \
 
 **Out of memory:**
 - Use a smaller model (e.g., Qwen2.5-0.5B-Instruct)
-- Reduce `--gpu-memory-utilization` parameter
+- Reduce `--gpu_memory_utilization` parameter
 - Close other GPU-intensive applications
 
 **Wrong backend detected:**
