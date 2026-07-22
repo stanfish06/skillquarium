@@ -45,7 +45,7 @@ import matplotlib.pyplot as plt
 
 ## Installation
 
-Tested against scikit-learn **1.8.0** (Python 3.11–3.14). Install the PyPI package `scikit-learn` (import as `sklearn`).
+Tested against scikit-learn **1.9.0** (Python 3.11–3.14). Install the PyPI package `scikit-learn` (import as `sklearn`).
 
 ```bash
 # Using uv (recommended)
