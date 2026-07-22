@@ -3429,9 +3429,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pydantic/skills.git",
       "skillPath": "skills/building-pydantic-ai-agents/SKILL.md",
-      "skillFolderHash": "692c3ff68205d5635358817eddb1407b455d4588",
+      "skillFolderHash": "2932513002793d23fa7d5aab49b0228254cc8f84",
       "installedAt": "2026-07-21T11:27:04.643Z",
-      "updatedAt": "2026-07-21T11:27:04.643Z"
+      "updatedAt": "2026-07-22T08:42:33.001Z"
     },
     "logfire-instrumentation": {
       "source": "pydantic/skills",
