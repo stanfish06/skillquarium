@@ -354,7 +354,9 @@ x = da.from_zarr('large_dataset.zarr')
 # Process in chunks
 normalized = (x - x.mean()) / x.std()
 
-# Save result (use mode= for overwrite; zarr_array_kwargs for compression)
+# Save result (use mode= for overwrite)
+# Note: the `zarr_array_kwargs` parameter was removed in dask 2026.3.0 — configure
+# compression/chunking on the target zarr array before writing instead.
 da.to_zarr(normalized, 'normalized.zarr', mode='w')
 ```
 
