@@ -15,7 +15,7 @@ This skill provides comprehensive guidance for machine learning tasks using scik
 
 ## Installation
 
-Tested against **scikit-learn 1.8.0** (stable; December 2025). Requires **Python 3.11–3.14** (free-threaded CPython 3.14 wheels available in 1.8+).
+Tested against **scikit-learn 1.9.0** (stable; June 2026). Requires **Python 3.11–3.14** (free-threaded CPython 3.14 wheels available in 1.8+).
 
 Install the PyPI package **`scikit-learn`** (not the deprecated `sklearn` package on PyPI). Import in code as `sklearn`.
 
