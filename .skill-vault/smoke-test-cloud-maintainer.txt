@@ -1,0 +1,3 @@
+Skillquarium Cloud Maintainer smoke test.
+
+This file exists only to verify branch, commit, and pull-request creation through the connected GitHub tools. It should not be merged and may be removed by closing the smoke-test PR and deleting its branch.
