@@ -17,10 +17,10 @@ The Hugging Face Transformers library provides access to thousands of pre-traine
 
 ## Installation
 
-Tested against **transformers 5.12.0** (current PyPI release; June 2026). Requires **Python 3.10+**; the `torch` extra currently requires **PyTorch 2.4+**.
+Tested against **transformers 5.14.1** (current PyPI release; July 2026). Requires **Python 3.10+**; the `torch` extra currently requires **PyTorch 2.4+**.
 
 ```bash
-uv pip install "transformers[torch]==5.12.0" huggingface_hub==1.19.0 datasets==5.0.0 evaluate==0.4.6 accelerate==1.14.0
+uv pip install "transformers[torch]==5.14.1" huggingface_hub==1.24.0 datasets==5.0.0 evaluate==0.4.6 accelerate==1.14.0
 ```
 
 For vision tasks, add:
@@ -95,10 +95,13 @@ result = generator("The future of AI is", max_new_tokens=50)
 # Text classification
 classifier = pipeline("text-classification")
 result = classifier("This movie was excellent!")
+```
 
-# Question answering
-qa = pipeline("question-answering")
-result = qa(question="What is AI?", context="AI is artificial intelligence...")
+The `question-answering` pipeline (and `Text2TextGenerationPipeline`/`SummarizationPipeline`/`TranslationPipeline`) were removed in Transformers v5 — see the [v5 migration guide](https://github.com/huggingface/transformers/blob/main/MIGRATION_GUIDE_V5.md). For extractive-QA-style tasks, prompt an instruction-tuned model directly:
+
+```python
+qa = pipeline("text-generation", model="Qwen/Qwen2.5-1.5B-Instruct")
+result = qa([{"role": "user", "content": "Context: AI is artificial intelligence...\nQuestion: What is AI?"}], max_new_tokens=50)
 ```
 
 ## Core Capabilities
