@@ -1520,9 +1520,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "bad72c46625127a50bbaaf8b8370c6509d1377a4",
+      "skillFolderHash": "94d9d2e7eecf81c7a7dbefcad525a9ba0340f5f6",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-07-21T08:42:23.633Z"
+      "updatedAt": "2026-07-23T08:43:09.577Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
