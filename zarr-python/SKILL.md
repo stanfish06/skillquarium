@@ -161,9 +161,12 @@ z = zarr.zeros((10000, 10000), chunks=(1000, 1000))  # Square chunks
 
 ### Rectilinear Chunks and Sharding
 
-Zarr 3.2 supports **rectilinear chunks** for uneven grids. Pass nested chunk lengths when a dimension has variable tile sizes:
+Zarr 3.2 supports **rectilinear chunks** for uneven grids. This feature is **experimental and disabled by default** — calling `create_array` with nested chunk lengths raises `ValueError` until it's enabled:
 
 ```python
+zarr.config.set({"array.rectilinear_chunks": True})
+# or: export ZARR_ARRAY__RECTILINEAR_CHUNKS=True
+
 z = zarr.create_array(
     store="rectilinear.zarr",
     shape=(60, 100),
