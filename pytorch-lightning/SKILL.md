@@ -104,7 +104,7 @@ Integrate with multiple logging platforms:
 - Comet (CometLogger)
 - CSV (CSVLogger)
 
-Note: `NeptuneLogger` was removed in lightning 2.6.4. Use W&B, MLflow, or TensorBoard instead.
+Note: `NeptuneLogger` was removed in lightning 2.6.4 after Neptune was sunset; Lightning's designated replacement is `LitLogger` (https://github.com/lightning-ai/litlogger). W&B, MLflow, and TensorBoard remain available as built-in alternatives.
 
 Log metrics using `self.log("metric_name", value)` in any LightningModule method.
 
@@ -186,4 +186,3 @@ Detailed documentation for each PyTorch Lightning component:
 - `logging.md` - Logger integrations and usage
 - `distributed_training.md` - DDP, FSDP, DeepSpeed comparison and setup
 - `best_practices.md` - Common patterns, tips, and pitfalls
-
