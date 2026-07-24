@@ -1356,9 +1356,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/react-view-transitions/SKILL.md",
-      "skillFolderHash": "394c075e3b28315afc5fe1a6b4492ec20cb2a89f",
+      "skillFolderHash": "c1f5334f06b177d8cc966c6d8c1be2c55787dd15",
       "installedAt": "2026-06-09T19:26:11.069Z",
-      "updatedAt": "2026-07-21T08:42:20.997Z"
+      "updatedAt": "2026-07-24T08:40:40.833Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -1520,9 +1520,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "94d9d2e7eecf81c7a7dbefcad525a9ba0340f5f6",
+      "skillFolderHash": "c143a04e48f0dbe72cb2b1dd2999afcf7829fa61",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-07-23T08:43:09.577Z"
+      "updatedAt": "2026-07-24T08:40:41.656Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
@@ -2402,9 +2402,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/NVIDIA-BioNeMo/bionemo-agent-toolkit.git",
       "skillPath": "plugins/bionemo-agent-toolkit/skills/msa-search-nim/SKILL.md",
-      "skillFolderHash": "85e1c4508cc929f72fb0c247735391c8b569a70d",
+      "skillFolderHash": "892dad6c084605afee2a041986241222246686e4",
       "installedAt": "2026-06-28T21:15:35.323Z",
-      "updatedAt": "2026-06-28T21:15:35.323Z"
+      "updatedAt": "2026-07-24T08:40:42.482Z"
     },
     "msa-structure-prediction-pipeline": {
       "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
@@ -3429,9 +3429,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pydantic/skills.git",
       "skillPath": "skills/building-pydantic-ai-agents/SKILL.md",
-      "skillFolderHash": "2932513002793d23fa7d5aab49b0228254cc8f84",
+      "skillFolderHash": "b466a7964423de23a9f4cf39e85ecabb8f744dbb",
       "installedAt": "2026-07-21T11:27:04.643Z",
-      "updatedAt": "2026-07-22T08:42:33.001Z"
+      "updatedAt": "2026-07-24T08:40:44.215Z"
     },
     "logfire-instrumentation": {
       "source": "pydantic/skills",
