@@ -4,6 +4,8 @@ aliases:
   - writing great skills
 tags:
   - skill
+  - domain/vault-meta
+domain: vault-meta
 status: untried
 source: writing-great-skills/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable.
 
-**Source:** [writing-great-skills/SKILL.md](writing-great-skills/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [writing-great-skills/SKILL.md](writing-great-skills/SKILL.md)  ·  **Domain:** [Vault, Skills & Workflow Meta](maps/vault-meta.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

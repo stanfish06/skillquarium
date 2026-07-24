@@ -4,6 +4,8 @@ aliases:
   - writing fragments
 tags:
   - skill
+  - domain/research-writing
+domain: research-writing
 status: untried
 source: writing-fragments/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Grilling session that mines the user for fragments — heterogeneous nuggets of writing (claims, vignettes, sharp sentences, half-thoughts) — and appends them to a single document as raw material for a future article. Use when the user wants to develop ideas before imposing structure, or mentions "fragments", "ideate", or "raw material" for writing.
 
-**Source:** [writing-fragments/SKILL.md](writing-fragments/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [writing-fragments/SKILL.md](writing-fragments/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](maps/research-writing.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

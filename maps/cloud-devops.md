@@ -14,8 +14,9 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (19)
+## Skills (24)
 
+- [airflow](../airflow.md) — Queries, manages, and troubleshoots Apache Airflow using the `af` CLI
 - [aws-agentic-ai](../aws-agentic-ai.md) — AWS Bedrock AgentCore comprehensive expert for deploying and managing AI agents at scale
 - [aws-cdk-development](../aws-cdk-development.md) — AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python
 - [aws-cost-operations](../aws-cost-operations.md) — AWS cost optimization, monitoring, and operational excellence expert
@@ -29,9 +30,13 @@ created: 2026-06-13
 - [e2b-sandbox](../e2b-sandbox.md) — Guide for creating and managing E2B sandboxes using ComputeSDK
 - [hf-cli](../hf-cli.md) — Hugging Face Hub CLI (`hf`) for downloading, uploading, and managing models, datasets, spaces, buckets, repos, papers, jobs, and more on the Hugging Face Hub
 - [kubernetes-specialist](../kubernetes-specialist.md) — Use when deploying or managing Kubernetes workloads
+- [mlflow-onboarding](../mlflow-onboarding.md) — Onboards users to MLflow by determining their use case (GenAI agents/apps or traditional ML/deep learning) and guiding them through relevant quickstart tutorials and initial integration
 - [modal](../modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
 - [modern-python](../modern-python.md) — Configures Python projects with modern tooling (uv, ruff, ty)
 - [nextflow](../nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
 - [ray](../ray.md) — Distributed Python compute with Ray — @ray.remote tasks/actors for cluster-scale parallelism, Ray Data for large-batch preprocessing, Ray Train for distributed model training...
 - [shipping-and-launch](../shipping-and-launch.md) — Prepares production launches. Use when preparing to deploy to production
 - [snakemake-workflow-engine](../snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines
+- [terraform](../terraform.md) — Terraform and OpenTofu infrastructure-as-code (IaC) — declare cloud/SaaS resources in HCL, manage state with remote backends and locking, author and consume modules, and run the...
+- [vllm-deploy-simple](../vllm-deploy-simple.md) — Quick install and deploy vLLM, start serving with a simple LLM, and test OpenAI API
+- [wandb-primary](../wandb-primary.md) — Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, and Launch workflows

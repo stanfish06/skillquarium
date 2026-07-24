@@ -4,6 +4,8 @@ aliases:
   - improve codebase architecture
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: improve-codebase-architecture/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
 
-**Source:** [improve-codebase-architecture/SKILL.md](improve-codebase-architecture/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [improve-codebase-architecture/SKILL.md](improve-codebase-architecture/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

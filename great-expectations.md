@@ -4,6 +4,8 @@ aliases:
   - great expectations
 tags:
   - skill
+  - domain/data-science-compute
+domain: data-science-compute
 status: untried
 source: great-expectations/SKILL.md
 created: 2026-06-25
@@ -14,7 +16,7 @@ created: 2026-06-25
 > [!info] What it does
 > Data validation using Great Expectations. Expectation suites, checkpoints, and data docs for pipeline monitoring.
 
-**Source:** [great-expectations/SKILL.md](great-expectations/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [great-expectations/SKILL.md](great-expectations/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

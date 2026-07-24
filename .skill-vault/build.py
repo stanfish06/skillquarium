@@ -945,6 +945,59 @@ def update_graph(taxonomy):
     print(f"graph.json: wrote {len(cfg['colorGroups'])} color groups + filter")
 
 
+# Manual domain assignments for skills not enumerated in a CATEGORIES skills list.
+# Bridges the gap until domains are derived from each SKILL.md's frontmatter (MNT-7).
+# Keys must be valid CATEGORIES domain keys; applied only if the skill exists on disk
+# and is not already assigned via CATEGORIES.
+EXTRA_ASSIGNMENTS = {
+    # Cloud, Infra & MLOps
+    "airflow": "cloud-devops", "mlflow-onboarding": "cloud-devops",
+    "vllm-deploy-simple": "cloud-devops", "wandb-primary": "cloud-devops",
+    "terraform": "cloud-devops",
+    # Data Science, Stats & Scientific Computing
+    "numba": "data-science-compute", "lifelines": "data-science-compute",
+    "great-expectations": "data-science-compute", "scikit-image": "data-science-compute",
+    "pandas": "data-science-compute", "plotly": "data-science-compute",
+    # Machine Learning & AI
+    "dspy": "ml-ai", "jax-best-practices": "ml-ai",
+    "llamaindex-development": "ml-ai", "qdrant-clients-sdk": "ml-ai",
+    # Single-Cell, RNA-seq & Functional Genomics
+    "mofaplus-multi-omics": "single-cell-rnaseq",
+    "muon-multiomics-singlecell": "single-cell-rnaseq",
+    "cell-communication": "single-cell-rnaseq",
+    # Drug Discovery, Cheminformatics & Structural Biology
+    "pymol": "drug-discovery-chem", "molecular-docking": "drug-discovery-chem",
+    # Sequence Analysis, NGS & Phylogenetics
+    "alterlab-qiime2-amplicon": "sequence-phylogenetics",
+    "fastp-fastq-preprocessing": "sequence-phylogenetics",
+    "viennarna-structure-prediction": "sequence-phylogenetics",
+    # Scientific Writing, Figures & Publishing
+    "edit-article": "research-writing", "writing-beats": "research-writing",
+    "writing-fragments": "research-writing", "writing-shape": "research-writing",
+    # Software Development & Engineering
+    "codebase-design": "software-dev", "diagnosing-bugs": "software-dev",
+    "domain-modeling": "software-dev", "git-guardrails-claude-code": "software-dev",
+    "handoff": "software-dev", "implement": "software-dev",
+    "improve-codebase-architecture": "software-dev", "migrate-to-shoehorn": "software-dev",
+    "prototype": "software-dev", "qa": "software-dev",
+    "request-refactor-plan": "software-dev", "resolving-merge-conflicts": "software-dev",
+    "review": "software-dev", "setup-pre-commit": "software-dev", "tdd": "software-dev",
+    "to-issues": "software-dev", "to-prd": "software-dev", "triage": "software-dev",
+    "ubiquitous-language": "software-dev", "teach": "software-dev",
+    "scaffold-exercises": "software-dev", "modern-typescript": "software-dev",
+    # Vault, Skills & Workflow Meta
+    "ask-matt": "vault-meta", "obsidian-vault": "vault-meta",
+    "setup-matt-pocock-skills": "vault-meta", "writing-great-skills": "vault-meta",
+    # Reasoning, Ideation & Decision
+    "decision-mapping": "reasoning-ideation", "grill-me": "reasoning-ideation",
+    "grill-with-docs": "reasoning-ideation", "grilling": "reasoning-ideation",
+    # Web Automation, Frontend & Design
+    "design-an-interface": "web-automation-frontend",
+    # .NET & C# Development
+    "migrate-dotnetfx-to-net": "dotnet-development",
+}
+
+
 def main():
     title_by_key = {k: t for k, t, _, _, _ in CATEGORIES}
     key_by_skill, assigned = {}, {}
@@ -1017,6 +1070,10 @@ def main():
             if parent_key and parent_key != "uncategorized":
                 assigned[skill] = parent_key
                 key_by_skill[skill] = parent_key
+    for skill, key in EXTRA_ASSIGNMENTS.items():
+        if skill in on_disk and skill not in assigned and key in title_by_key:
+            assigned[skill] = key
+            key_by_skill[skill] = key
     unsorted = sorted(on_disk - set(assigned))
     if unsorted:
         print(f"WARNING: not categorized: {unsorted}", file=sys.stderr)

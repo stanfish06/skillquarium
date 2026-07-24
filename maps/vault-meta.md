@@ -14,8 +14,9 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (15)
+## Skills (19)
 
+- [ask-matt](../ask-matt.md) — Ask which skill or flow fits your situation
 - [auditing-skills](../auditing-skills.md) — Use when checking skills for security or quality issues, reviewing audit results from skills.sh or Tessl, or remediating findings across published skills
 - [autoskill](../autoskill.md) — Observe the user's screen via screenpipe, detect repeated research workflows, match them against existing scientific-agent-skills, and draft new skills (or composition recipes that...
 - [bio-orchestrator](../bio-orchestrator.md) — Meta-agent that routes bioinformatics requests to specialised sub-skills
@@ -27,7 +28,10 @@ created: 2026-06-13
 - [obsidian-bases](../obsidian-bases.md) — Create and edit Obsidian Bases (.base files) with views, filters, formulas, and summaries
 - [obsidian-cli](../obsidian-cli.md) — Interact with Obsidian vaults using the Obsidian CLI to read, create, search, and manage notes, tasks, properties, and more
 - [obsidian-markdown](../obsidian-markdown.md) — Create and edit Obsidian Flavored Markdown with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax
+- [obsidian-vault](../obsidian-vault.md) — Search, create, and manage notes in the Obsidian vault with wikilinks and index notes
 - [plugin-creator](../plugin-creator.md) — Scaffold a complete cave plugin bundle — generates .cave-plugin/plugin.json manifest and the standard directory structure (commands/, skills/, agents/, themes/, hooks/)
 - [repro-enforcer](../repro-enforcer.md) — Export any bioinformatics analysis as a reproducible bundle with Conda environment, Singularity container definition, and Nextflow pipeline
+- [setup-matt-pocock-skills](../setup-matt-pocock-skills.md) — Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout
 - [skill-builder](../skill-builder.md) — Scaffold a new ClawBio skill from a spec file (JSON/YAML) or interactively — generates SKILL.md, Python skeleton, tests, and updates catalog.json
 - [skills-hub](../skills-hub.md) — Browse and install community skills from the BioClaw Skills Hub
+- [writing-great-skills](../writing-great-skills.md) — Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable

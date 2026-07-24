@@ -2,6 +2,8 @@
 title: tdd
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: tdd/SKILL.md
 created: 2026-06-20
@@ -12,7 +14,7 @@ created: 2026-06-20
 > [!info] What it does
 > Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
 
-**Source:** [tdd/SKILL.md](tdd/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [tdd/SKILL.md](tdd/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

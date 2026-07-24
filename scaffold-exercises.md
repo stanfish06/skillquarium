@@ -4,6 +4,8 @@ aliases:
   - scaffold exercises
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: scaffold-exercises/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
 
-**Source:** [scaffold-exercises/SKILL.md](scaffold-exercises/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [scaffold-exercises/SKILL.md](scaffold-exercises/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

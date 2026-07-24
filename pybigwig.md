@@ -21,6 +21,7 @@ created: 2026-07-20
 - [atac-seq](atac-seq.md) — ATAC-seq processing with assay QC, MACS3 peak calling, consensus peak matrices, differential accessibility, and motif or footprint follow-up
 - [chip-seq](chip-seq.md) — ChIP-seq peak calling and downstream interpretation with MACS3, signal track export, annotation, motif analysis, and differential binding review
 - [deeptools](deeptools.md) — NGS analysis toolkit. BAM to bigWig conversion, QC (correlation, PCA, fingerprints), heatmaps/profiles (TSS, peaks), for ChIP-seq, RNA-seq, ATAC-seq visualization
+- [pandas](pandas.md) — The workhorse library for in-memory tabular data in Python
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

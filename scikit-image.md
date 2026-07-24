@@ -4,6 +4,8 @@ aliases:
   - scikit image
 tags:
   - skill
+  - domain/data-science-compute
+domain: data-science-compute
 status: untried
 source: scikit-image/SKILL.md
 created: 2026-06-25
@@ -14,7 +16,7 @@ created: 2026-06-25
 > [!info] What it does
 > A collection of algorithms for image processing in Python. Built on NumPy, SciPy, and Cython. It focuses on scientific image analysis including segmentation, geometric transformations, color space manipulation, analysis, and filtering.
 
-**Source:** [scikit-image/SKILL.md](scikit-image/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [scikit-image/SKILL.md](scikit-image/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](maps/data-science-compute.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

@@ -4,6 +4,8 @@ aliases:
   - qdrant clients sdk
 tags:
   - skill
+  - domain/ml-ai
+domain: ml-ai
 status: untried
 source: qdrant-clients-sdk/SKILL.md
 created: 2026-06-25
@@ -14,7 +16,7 @@ created: 2026-06-25
 > [!info] What it does
 > Qdrant provides client SDKs for various programming languages, allowing easy integration with Qdrant deployments.
 
-**Source:** [qdrant-clients-sdk/SKILL.md](qdrant-clients-sdk/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [qdrant-clients-sdk/SKILL.md](qdrant-clients-sdk/SKILL.md)  ·  **Domain:** [Machine Learning & AI](maps/ml-ai.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

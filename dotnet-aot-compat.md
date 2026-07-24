@@ -20,7 +20,7 @@ created: 2026-07-21
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
+- [migrate-dotnetfx-to-net](migrate-dotnetfx-to-net.md) — Migrate a .NET Framework (4.x) project or solution to modern .NET (8/9), the large cross-runtime jump — not a version bump
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

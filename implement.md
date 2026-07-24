@@ -2,6 +2,8 @@
 title: implement
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: implement/SKILL.md
 created: 2026-06-20
@@ -12,7 +14,7 @@ created: 2026-06-20
 > [!info] What it does
 > Implement a piece of work based on a PRD or set of issues.
 
-**Source:** [implement/SKILL.md](implement/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [implement/SKILL.md](implement/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

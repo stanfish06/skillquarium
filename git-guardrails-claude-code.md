@@ -4,6 +4,8 @@ aliases:
   - git guardrails claude code
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: git-guardrails-claude-code/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.
 
-**Source:** [git-guardrails-claude-code/SKILL.md](git-guardrails-claude-code/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [git-guardrails-claude-code/SKILL.md](git-guardrails-claude-code/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

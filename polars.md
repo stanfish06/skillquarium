@@ -20,6 +20,7 @@ created: 2026-06-09
 
 - [dask](dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
 - [fragpipe-pyteomics-proteomics](fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
+- [pandas](pandas.md) — The workhorse library for in-memory tabular data in Python
 - [polars-bio](polars-bio.md) — High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames
 - [pybedtools](pybedtools.md) — Python genomic interval arithmetic with BEDTools, complementing pysam, polars, and query for downstream tables
 - [xarray-pandera-duckdb](xarray-pandera-duckdb.md) — Labeled array, schema validation, and embedded SQL analytics workflows with xarray, pandera-validation, duckdb-docs, query, read-file, and polars

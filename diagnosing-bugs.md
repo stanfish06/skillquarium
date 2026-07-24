@@ -4,6 +4,8 @@ aliases:
   - diagnosing bugs
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: diagnosing-bugs/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow.
 
-**Source:** [diagnosing-bugs/SKILL.md](diagnosing-bugs/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [diagnosing-bugs/SKILL.md](diagnosing-bugs/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

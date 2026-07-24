@@ -14,8 +14,9 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (30)
+## Skills (33)
 
+- [alterlab-qiime2-amplicon](../alterlab-qiime2-amplicon.md) — Runs 16S/ITS amplicon (microbiome) analysis with the QIIME 2 amplicon distribution (2026.1
 - [analyze-fasta](../analyze-fasta.md) — Analyze a single FASTA file (nucleotide or protein), compute sequence-level metrics (GC, ORFs, MW, pI, GRAVY, secondary-structure fractions) with Biopython, and write a Markdown report...
 - [bioconductor-bridge](../bioconductor-bridge.md) — Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager
 - [biopython](../biopython.md) — Comprehensive molecular biology toolkit
@@ -27,6 +28,7 @@ created: 2026-06-13
 - [cutadapt](../cutadapt.md) — Adapter, primer, and poly-A/T trimming for high-throughput sequencing reads (FASTQ/FASTA)
 - [etetoolkit](../etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
 - [evo2-nim](../evo2-nim.md) — Generate and analyze DNA sequences using NVIDIA's Evo 2 BioNeMo NIM microservice
+- [fastp-fastq-preprocessing](../fastp-fastq-preprocessing.md) — All-in-one FASTQ QC and adapter trimming
 - [gget](../gget.md) — Fast CLI/Python queries to 20+ bioinformatics databases
 - [gi-annotation](../gi-annotation.md) — Predict gene and transcript structure (intervals, exons, strand) from a DNA sequence using the Genomic Intelligence DNA Annotation model, via the hosted /v1/tasks/annotation/predict API
 - [gi-chromatin](../gi-chromatin.md) — Predict chromatin state — histone marks, DNase, TF binding — across 919 tracks (DeepSEA-style) for DNA sequences, via the hosted Genomic Intelligence /v1/tasks/chromatin/predict API
@@ -46,3 +48,4 @@ created: 2026-06-13
 - [seq-wrangler](../seq-wrangler.md) — NGS read QC, alignment, and BAM processing pipeline
 - [sequence-analysis](../sequence-analysis.md) — Analyze DNA/RNA/protein sequences. Use when the user provides a sequence and asks for analysis, translation, GC content, ORFs, motifs, restriction sites, or primer design
 - [sourmash](../sourmash.md) — MinHash/FracMinHash sketching for alignment-free comparison of genomes and metagenomes
+- [viennarna-structure-prediction](../viennarna-structure-prediction.md) — Predict RNA secondary structure, MFE folding, base-pair probabilities, RNA-RNA interactions via ViennaRNA Python bindings

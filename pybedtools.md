@@ -20,6 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
+- [pandas](pandas.md) — The workhorse library for in-memory tabular data in Python
 - [polars](polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
 - [pysam](pysam.md) — Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines
 

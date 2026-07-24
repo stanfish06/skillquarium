@@ -19,6 +19,7 @@ created: 2026-06-09
 ## Related skills
 
 - [datamol](datamol.md) — Pythonic wrapper around RDKit with simplified interface and sensible defaults
+- [molecular-docking](molecular-docking.md) — Classical, physics-based protein-ligand docking with AutoDock Vina (and smina, plus GNINA for CNN-rescoring)
 - [nvmolkit-usage](nvmolkit-usage.md) — Write code that calls the installed nvMolKit Python API for GPU-accelerated, batched RDKit-style operations - Morgan fingerprints, Tanimoto/cosine similarity, ETKDG conformer...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

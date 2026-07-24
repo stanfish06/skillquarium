@@ -4,6 +4,8 @@ aliases:
   - grill with docs
 tags:
   - skill
+  - domain/reasoning-ideation
+domain: reasoning-ideation
 status: untried
 source: grill-with-docs/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.
 
-**Source:** [grill-with-docs/SKILL.md](grill-with-docs/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [grill-with-docs/SKILL.md](grill-with-docs/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](maps/reasoning-ideation.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

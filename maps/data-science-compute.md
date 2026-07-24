@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Quantum, Physics & Materials](quantum-physics.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md)
 
-## Skills (32)
+## Skills (38)
 
 - [adjusttext](../adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [attach-db](../attach-db.md) — Attach a DuckDB database file for use with /duckdb-skills:query
@@ -24,18 +24,24 @@ created: 2026-06-13
 - [exploratory-data-analysis](../exploratory-data-analysis.md) — Perform comprehensive exploratory data analysis on scientific data files across 200+ file formats
 - [geomaster](../geomaster.md) — Comprehensive geospatial science skill covering remote sensing, GIS, spatial analysis, machine learning for earth observation, and 30+ scientific domains
 - [geopandas](../geopandas.md) — Python library for working with geospatial vector data including shapefiles, GeoJSON, and GeoPackage files
+- [great-expectations](../great-expectations.md) — Data validation using Great Expectations
 - [install-duckdb](../install-duckdb.md) — Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g
+- [lifelines](../lifelines.md) — Complete survival analysis library in Python
 - [matlab](../matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
 - [matplotlib](../matplotlib.md) — Low-level plotting library for full customization
 - [networkx](../networkx.md) — Create, analyze, and visualize complex networks and graphs in Python with NetworkX
+- [numba](../numba.md) — A Just-In-Time (JIT) compiler for Python that translates a subset of Python and NumPy code into fast machine code
 - [optimize-for-gpu](../optimize-for-gpu.md) — GPU-accelerate Python code using CuPy, Numba CUDA, Warp, cuDF, cuML, cuGraph, KvikIO, cuCIM, cuxfilter, cuVS, cuSpatial, and RAFT
+- [pandas](../pandas.md) — The workhorse library for in-memory tabular data in Python
 - [pandera-validation](../pandera-validation.md) — DataFrame schema validation using pandera
 - [paraview](../paraview.md) — ParaView scientific visualization for volume data and meshes
+- [plotly](../plotly.md) — Interactive, web-based visualization in Python
 - [polars](../polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
 - [pymc](../pymc.md) — Bayesian modeling with PyMC. Build hierarchical models, MCMC (NUTS), variational inference, LOO/WAIC comparison, posterior checks, for probabilistic programming and inference
 - [pymoo](../pymoo.md) — Multi-objective optimization framework. NSGA-II, NSGA-III, MOEA/D, Pareto fronts, constraint handling, benchmarks (ZDT, DTLZ), for engineering design and optimization problems
 - [query](../query.md) — Run SQL queries against the attached DuckDB database or ad-hoc against files
 - [read-file](../read-file.md) — Read any data file (CSV, JSON, Parquet, Avro, Excel, spatial, SQLite) or remote URL (S3, HTTPS)
+- [scikit-image](../scikit-image.md) — A collection of algorithms for image processing in Python
 - [scikit-survival](../scikit-survival.md) — Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival
 - [seaborn](../seaborn.md) — Statistical visualization with pandas integration
 - [simpy](../simpy.md) — Process-based discrete-event simulation framework in Python

@@ -14,19 +14,23 @@ created: 2026-06-13
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Drug Discovery, Cheminformatics & Structural Biology](drug-discovery-chem.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (18)
+## Skills (22)
 
 - [aeon](../aeon.md) — This skill should be used for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
 - [building-pydantic-ai-agents](../building-pydantic-ai-agents.md) — Build AI agents with Pydantic AI — tools, capabilities (including on-demand loading), structured output, streaming, testing, and multi-agent patterns
 - [crewai](../crewai.md) — Role-based multi-agent orchestration framework for building "Crews" of collaborating LLM agents (each with a role, goal, backstory, and optional tools) that execute sequential or...
 - [cuequivariance](../cuequivariance.md) — Define custom groups (Irrep subclasses), build segmented tensor products with CG coefficients, create equivariant polynomials and IrDictPolynomials, and use built-in descriptors...
+- [dspy](../dspy.md) — DSPy declarative framework for automatic prompt optimization treating prompts as code with systematic evaluation and compilers
 - [hugging-science](../hugging-science.md) — Use when the user is doing AI/ML work in a scientific domain such as biology, chemistry, physics, astronomy, climate, genomics, materials, medicine, ecology, energy, engineering, math...
+- [jax-best-practices](../jax-best-practices.md) — Expert in JAX for high-performance numerical computing and machine learning
+- [llamaindex-development](../llamaindex-development.md) — Expert guidance for LlamaIndex development including RAG applications, vector stores, document processing, query engines, and building production AI applications
 - [optuna](../optuna.md) — Hyperparameter optimization (HPO) for ML models using Optuna
 - [pufferlib](../pufferlib.md) — High-performance reinforcement learning framework optimized for speed and scale
 - [pufferlib-v2](../pufferlib-v2.md) — PufferLib 2.x reinforcement learning workflows for the Dec 2024 API generation
 - [pufferlib-v3](../pufferlib-v3.md) — PufferLib 3.x reinforcement learning workflows for the Jun 2025 API generation
 - [pydantic-ai-harness](../pydantic-ai-harness.md) — Extend Pydantic AI agents with batteries-included capabilities from pydantic-ai-harness -- Code Mode (collapse many tool calls into one sandboxed Python execution), a filesystem and...
 - [pytorch-lightning](../pytorch-lightning.md) — Deep learning framework (PyTorch Lightning / lightning package)
+- [qdrant-clients-sdk](../qdrant-clients-sdk.md) — Qdrant provides client SDKs for various programming languages, allowing easy integration with Qdrant deployments
 - [scikit-learn](../scikit-learn.md) — Machine learning in Python with scikit-learn
 - [shap](../shap.md) — Model interpretability and explainability using SHAP (SHapley Additive exPlanations)
 - [stable-baselines3](../stable-baselines3.md) — Production-ready reinforcement learning algorithms (PPO, SAC, DQN, TD3, DDPG, A2C) with scikit-learn-like API

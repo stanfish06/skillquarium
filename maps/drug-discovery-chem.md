@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Machine Learning & AI](ml-ai.md)
 
-## Skills (46)
+## Skills (48)
 
 - [adaptyv](../adaptyv.md) — How to use the Adaptyv Bio Foundry API and Python SDK for protein experiment design, submission, and results retrieval
 - [boltz2-nim](../boltz2-nim.md) — Use Boltz2 NIM for biomolecular structure prediction and binding affinity
@@ -45,6 +45,7 @@ created: 2026-06-13
 - [kermt-pretrain-scratch](../kermt-pretrain-scratch.md) — Pretrain a fresh KERMT model from scratch on a user-provided corpus
 - [kermt-setup](../kermt-setup.md) — Bootstrap the KERMT agent environment — verify host docker + nvidia-container-toolkit, build the kermt:latest image from the repo's Dockerfile if it doesn't yet exist, and run a GPU...
 - [medchem](../medchem.md) — Medicinal chemistry filters for compound triage
+- [molecular-docking](../molecular-docking.md) — Classical, physics-based protein-ligand docking with AutoDock Vina (and smina, plus GNINA for CNN-rescoring)
 - [molecular-dynamics](../molecular-dynamics.md) — Run and analyze molecular dynamics simulations with OpenMM and MDAnalysis
 - [molfeat](../molfeat.md) — Molecular featurization for ML (100+ featurizers)
 - [molmim-nim](../molmim-nim.md) — Use this skill for MolMIM, NVIDIA's BioNeMo NIM microservice for small-molecule latent-space generation and optimization
@@ -53,6 +54,7 @@ created: 2026-06-13
 - [openfold2-nim](../openfold2-nim.md) — Use this skill for OpenFold2, NVIDIA's BioNeMo NIM microservice for monomer protein structure prediction
 - [openfold3-nim](../openfold3-nim.md) — Use this skill for OpenFold3, NVIDIA's BioNeMo NIM microservice for biomolecular structure prediction
 - [proteinmpnn-nim](../proteinmpnn-nim.md) — Run ProteinMPNN inverse folding via NVIDIA NIM to design protein sequences for a target backbone
+- [pymol](../pymol.md) — Visualize, analyze, and render protein and molecular structures using PyMOL
 - [pytdc](../pytdc.md) — Therapeutics Data Commons. AI-ready drug discovery datasets (ADME, toxicity, DTI), benchmarks, scaffold splits, molecular oracles, for therapeutic ML and pharmacological prediction
 - [rdkit](../rdkit.md) — Cheminformatics toolkit for fine-grained molecular control
 - [rfdiffusion-nim](../rfdiffusion-nim.md) — Run RFDiffusion protein backbone design via NVIDIA NIM

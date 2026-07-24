@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (44)
+## Skills (45)
 
 - [agent-browser](../agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites, including navigating pages, filling forms, clicking buttons, taking screenshots, extracting...
 - [agentcore](../agentcore.md) — Run agent-browser on AWS Bedrock AgentCore cloud browsers
@@ -24,6 +24,7 @@ created: 2026-06-13
 - [brandkit](../brandkit.md) — Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations
 - [browser-testing-with-devtools](../browser-testing-with-devtools.md) — Tests in real browsers via Chrome DevTools MCP
 - [core](../core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
+- [design-an-interface](../design-an-interface.md) — Generate multiple radically different interface designs for a module using parallel sub-agents
 - [design-taste-frontend](../design-taste-frontend.md) — Anti-slop frontend skill for landing pages, portfolios, and redesigns
 - [design-taste-frontend-v1](../design-taste-frontend-v1.md) — The original v1 taste-skill, preserved for projects depending on its exact behavior
 - [dogfood](../dogfood.md) — Systematically explore and test a web application to find bugs, UX issues, and other problems

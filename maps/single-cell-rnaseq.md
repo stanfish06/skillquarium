@@ -14,13 +14,14 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (29)
+## Skills (32)
 
 - [anndata](../anndata.md) — Data structure for annotated matrices in single-cell analysis
 - [arboreto](../arboreto.md) — Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3)
 - [atac-seq](../atac-seq.md) — ATAC-seq processing with assay QC, MACS3 peak calling, consensus peak matrices, differential accessibility, and motif or footprint follow-up
 - [bulk-rnaseq](../bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
 - [cell-annotation](../cell-annotation.md) — Automated and marker-guided single-cell cell type annotation using CellTypist, marker review, reference transfer, and confidence-aware label curation
+- [cell-communication](../cell-communication.md) — Cell-cell / ligand-receptor communication analysis for single-cell data using LIANA+ (recommended consensus default), CellPhoneDB, CellChat (R), and squidpy's ligrec
 - [cellxgene-census](../cellxgene-census.md) — Query the CZ CELLxGENE Census programmatically for versioned public single-cell and spatial transcriptomics data
 - [chip-seq](../chip-seq.md) — ChIP-seq peak calling and downstream interpretation with MACS3, signal track export, annotation, motif analysis, and differential binding review
 - [de-summary](../de-summary.md) — Summarise pre-computed differential expression results with ranked gene lists, biological themes, and publication-ready interpretation
@@ -28,6 +29,8 @@ created: 2026-06-13
 - [diff-visualizer](../diff-visualizer.md) — Rich downstream visualisation and reporting for bulk RNA-seq differential expression and scRNA marker/contrast outputs
 - [differential-expression](../differential-expression.md) — Bulk transcriptomics differential expression with count-aware modeling, design validation, contrast handling, thresholded exports, and publication-ready DE figures
 - [harmonypy](../harmonypy.md) — Harmony batch correction for single-cell data in scanpy workflows, with scvi-tools as the heavier alternative
+- [mofaplus-multi-omics](../mofaplus-multi-omics.md) — Multi-Omics Factor Analysis v2 (MOFA+) with mofapy2
+- [muon-multiomics-singlecell](../muon-multiomics-singlecell.md) — Multi-modal single-cell analysis with muon/MuData
 - [nfcore-rnaseq-wrapper](../nfcore-rnaseq-wrapper.md) — Wrapper skill for running nf-core/rnaseq bulk RNA-seq preprocessing from FASTQ or BAM inputs with strict preflight, reproducibility outputs, and downstream handoff to ClawBio bulk...
 - [nfcore-scrnaseq-wrapper](../nfcore-scrnaseq-wrapper.md) — Wrapper skill for running nf-core/scrnaseq 4.1.0 upstream single-cell RNA-seq preprocessing from FASTQ with strict preflight, reproducibility outputs, and downstream handoff to ClawBio...
 - [pathway-enricher](../pathway-enricher.md) — Gene-set pathway enrichment analysis using Enrichr — queries KEGG, GO (BP/MF/CC), Reactome, WikiPathways, MSigDB, and Disease Ontology

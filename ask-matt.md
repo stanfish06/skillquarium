@@ -4,6 +4,8 @@ aliases:
   - ask matt
 tags:
   - skill
+  - domain/vault-meta
+domain: vault-meta
 status: untried
 source: ask-matt/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
 
-**Source:** [ask-matt/SKILL.md](ask-matt/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [ask-matt/SKILL.md](ask-matt/SKILL.md)  ·  **Domain:** [Vault, Skills & Workflow Meta](maps/vault-meta.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

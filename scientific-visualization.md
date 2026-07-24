@@ -23,6 +23,7 @@ created: 2026-06-09
 - [adjusttext](adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [bulk-rnaseq](bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
 - [matplotlib](matplotlib.md) — Low-level plotting library for full customization
+- [plotly](plotly.md) — Interactive, web-based visualization in Python
 - [seaborn](seaborn.md) — Statistical visualization with pandas integration
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

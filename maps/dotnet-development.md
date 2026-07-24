@@ -14,7 +14,7 @@ created: 2026-07-21
 
 **Related maps:** [Software Development & Engineering](software-dev.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Web Automation, Frontend & Design](web-automation-frontend.md) | [Security & Auditing](security-auditing.md)
 
-## Skills (100)
+## Skills (101)
 
 - [analyzing-dotnet-performance](../analyzing-dotnet-performance.md) — Scans .NET code for ~50 performance anti-patterns across async, memory, strings, collections, LINQ, regex, serialization, and I/O with tiered severity classification
 - [android-tombstone-symbolication](../android-tombstone-symbolication.md) — Symbolicate the .NET runtime frames in an Android tombstone file
@@ -78,6 +78,7 @@ created: 2026-07-21
 - [migrate-dotnet10-to-dotnet11](../migrate-dotnet10-to-dotnet11.md) — Migrate a .NET 10 project or solution to .NET 11 and resolve all breaking changes
 - [migrate-dotnet8-to-dotnet9](../migrate-dotnet8-to-dotnet9.md) — Migrate a .NET 8 project to .NET 9 and resolve all breaking changes
 - [migrate-dotnet9-to-dotnet10](../migrate-dotnet9-to-dotnet10.md) — Migrate a .NET 9 project or solution to .NET 10 and resolve all breaking changes
+- [migrate-dotnetfx-to-net](../migrate-dotnetfx-to-net.md) — Migrate a .NET Framework (4.x) project or solution to modern .NET (8/9), the large cross-runtime jump — not a version bump
 - [migrate-mstest-v1v2-to-v3](../migrate-mstest-v1v2-to-v3.md) — Migrate MSTest v1 or v2 test projects to MSTest v3
 - [migrate-mstest-v3-to-v4](../migrate-mstest-v3-to-v4.md) — Fix build errors and breaking changes after upgrading MSTest from v3 to v4, or plan a complete MSTest v3-to-v4 migration
 - [migrate-nullable-references](../migrate-nullable-references.md) — Enable nullable reference types in a C# project and systematically resolve all warnings

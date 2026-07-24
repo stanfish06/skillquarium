@@ -4,6 +4,8 @@ aliases:
   - request refactor plan
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: request-refactor-plan/SKILL.md
 created: 2026-06-20
@@ -14,7 +16,7 @@ created: 2026-06-20
 > [!info] What it does
 > Create a detailed refactor plan with tiny commits via user interview, then file it as a GitHub issue. Use when user wants to plan a refactor, create a refactoring RFC, or break a refactor into safe incremental steps.
 
-**Source:** [request-refactor-plan/SKILL.md](request-refactor-plan/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [request-refactor-plan/SKILL.md](request-refactor-plan/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

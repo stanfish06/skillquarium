@@ -22,6 +22,7 @@ created: 2026-06-09
 
 - [diffdock-nim](diffdock-nim.md) — Run DiffDock molecular docking via NVIDIA NIM to predict small-molecule binding poses against protein targets
 - [drug-discovery-pipeline](drug-discovery-pipeline.md) — Run a complete computational drug discovery pipeline using NVIDIA BioNeMo NIMs: generate drug-like molecules with GenMol, dock them to a protein target with DiffDock, then predict...
+- [molecular-docking](molecular-docking.md) — Classical, physics-based protein-ligand docking with AutoDock Vina (and smina, plus GNINA for CNN-rescoring)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Vault, Skills & Workflow Meta](vault-meta.md)
 
-## Skills (17)
+## Skills (21)
 
 - [cavecrew](../cavecrew.md) — Decision guide for delegating to caveman-style subagents
 - [caveman](../caveman.md) — Ultra-compressed communication mode. Cuts output tokens 65% (measured) by speaking like caveman while keeping full technical accuracy
@@ -24,7 +24,11 @@ created: 2026-06-13
 - [caveman-review](../caveman-review.md) — Ultra-compressed code review comments. Cuts noise from PR feedback while preserving the actionable signal
 - [caveman-stats](../caveman-stats.md) — Show real token usage and estimated savings for the current session
 - [consciousness-council](../consciousness-council.md) — Run a multi-perspective Mind Council deliberation on any question, decision, or creative challenge
+- [decision-mapping](../decision-mapping.md) — Turn a loose idea into a sequenced map of investigation tickets, then drive them to resolution one at a time
 - [dhdna-profiler](../dhdna-profiler.md) — Extract cognitive patterns and thinking fingerprints from any text
+- [grill-me](../grill-me.md) — A relentless interview to sharpen a plan or design
+- [grill-with-docs](../grill-with-docs.md) — A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go
+- [grilling](../grilling.md) — Interview the user relentlessly about a plan or design
 - [hypogenic](../hypogenic.md) — Automated LLM-driven hypothesis generation and testing on tabular datasets
 - [hypothesis-generation](../hypothesis-generation.md) — Generate testable hypotheses. Formulate from observations, design experiments, explore competing explanations, develop predictions, propose mechanisms, for scientific inquiry across...
 - [idea-evaluator](../idea-evaluator.md) — Evaluates a preliminary research idea against a five-dimension framework (Higher, Faster, Stronger, Cheaper, Broader) plus idea-lifecycle and student-capability matching...
