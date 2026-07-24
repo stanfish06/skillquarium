@@ -2,6 +2,8 @@
 title: qa
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: qa/SKILL.md
 created: 2026-06-20
@@ -12,7 +14,7 @@ created: 2026-06-20
 > [!info] What it does
 > Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues. Explores the codebase in the background for context and domain language. Use when user wants to report bugs, do QA, file issues conversationally, or mentions "QA session".
 
-**Source:** [qa/SKILL.md](qa/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [qa/SKILL.md](qa/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 

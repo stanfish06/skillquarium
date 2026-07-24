@@ -2,6 +2,8 @@
 title: review
 tags:
   - skill
+  - domain/software-dev
+domain: software-dev
 status: untried
 source: review/SKILL.md
 created: 2026-06-20
@@ -12,7 +14,7 @@ created: 2026-06-20
 > [!info] What it does
 > Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/PRD asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to "review since X".
 
-**Source:** [review/SKILL.md](review/SKILL.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
+**Source:** [review/SKILL.md](review/SKILL.md)  ·  **Domain:** [Software Development & Engineering](maps/software-dev.md)  ·  **Table:** [skills.base](skills.base)  ·  **Index:** [Skills Index](index.md)
 
 ## Related skills
 
