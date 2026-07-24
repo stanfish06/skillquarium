@@ -45,6 +45,9 @@ metadata:
 
 # Methylation Clock
 
+> [!note] Running these commands in this vault
+> The CLI examples below are written for the upstream **ClawBio** repo layout, where skills live under `skills/` and a `clawbio.py` orchestrator exists. This flat skills vault has no `clawbio.py`: run the script directly and drop the `skills/` prefix — e.g. `python methylation-clock/methylation_clock.py ...`.
+
 ## Domain Decisions
 
 Epigenetic age workflows are difficult to reproduce because preprocessing and clock inputs differ across tools and publications.
@@ -67,7 +70,7 @@ This skill standardizes a PyAging-first pipeline from ingestion to report genera
 
 ### Demo And Usage
 
-Demo fixture provenance and checksum are documented in `skills/methylation-clock/data/PROVENANCE.md`.
+Demo fixture provenance and checksum are documented in `methylation-clock/data/PROVENANCE.md` (`data/PROVENANCE.md` relative to this skill).
 
 Install optional methylation-clock dependency (not part of the global base requirements):
 

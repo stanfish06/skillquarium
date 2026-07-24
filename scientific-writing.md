@@ -25,3 +25,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-13
+> Use this for general, discipline-agnostic scientific manuscript drafting (IMRAD prose, citations, reporting guidelines); for a staged life-sciences manuscript-planning pipeline (innovation check, dataset/metric/figure design, refinement) use `bio-manuscript-pipeline`. General drafting vs life-sciences staged pipeline is the distinguishing axis.

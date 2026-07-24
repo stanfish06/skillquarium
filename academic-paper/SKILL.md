@@ -15,6 +15,9 @@ metadata:
 
 # Academic Paper — Academic Paper Writing Agent Team
 
+> [!note] Vault audit 2026-07-24 — USE-1
+> Use this to write, plan, and revise academic-paper *content* via the multi-agent pipeline (LaTeX / PDF / DOCX-via-Pandoc output, review and rebuttal modes); for producing a formatted academic .docx (citation styles, equation numbering, SEQ/PAGEREF cross-refs, bibliography layout) via officecli use `officecli-academic-paper`. Distinguishing axis: content-authoring pipeline vs officecli .docx formatting.
+
 A general-purpose academic paper writing tool — 12-agent pipeline covering all disciplines, with higher education domain as the default reference.
 
 **v2.5** adds two writing quality features:

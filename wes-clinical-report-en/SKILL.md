@@ -56,6 +56,9 @@ metadata:
 
 # WES Clinical Report (English)
 
+> [!note] Running these commands in this vault
+> The CLI examples below use the upstream **ClawBio** repo layout, where skills live under `skills/`. This flat skills vault has no `skills/` prefix: run the script directly — e.g. `python wes-clinical-report-en/wes_clinical_report_en.py ...`.
+
 Skill for generating professional clinical PDF reports in English from
 whole exome sequencing (WES) data. Designed for Novogene WES data
 (GATK + ANNOVAR pipeline) but adaptable to any WES pipeline with

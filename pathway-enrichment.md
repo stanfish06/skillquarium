@@ -28,3 +28,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!info] Vault audit 2026-07-24 — DEP-8 (canonical)
+> Canonical pathway / gene-set enrichment skill (v1.0: ORA + GSEA + preranked + ssGSEA/GSVA). Supersedes `pathway-enricher` (Enrichr-only ORA, v0.1.0).

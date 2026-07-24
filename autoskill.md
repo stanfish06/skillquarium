@@ -23,3 +23,10 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — MNT-10
+> References a superseded model id `claude-opus-4-7` and hardcodes a stale sibling count ("135 skills") in two places — both are drift. Use a current model id and don't trust the hardcoded count (the vault has ~1250 skills).
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._
+
+> [!note] Vault audit 2026-07-24 — USE-10
+> Use this to auto-draft skills from repeated workflows observed on your screen (screenpipe); to hand-scaffold a new skill from a spec use `skill-builder`, to eval-tune an existing skill use `clawpathy-autoresearch`, to package a plugin bundle use `plugin-creator`. Distinguishing axis: authoring mode (screen-observation vs manual scaffold vs eval-tuning vs plugin packaging).

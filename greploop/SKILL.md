@@ -15,6 +15,9 @@ allowed-tools: Bash(gh:*) Bash(glab:*) Bash(git:*) Bash(p4:*)
 
 # Greploop
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Use this to iteratively drive a PR/MR/CL to a perfect Greptile 5/5 score; for a one-pass PR-comment/check triage use `check-pr`. NOT the human review methodology (`code-review-and-quality`), requesting a review (`requesting-code-review`), or responding to feedback (`receiving-code-review`). Distinguishing axis (use this NOT that): automated Greptile-scored loop vs one-pass triage vs the review activity.
+
 Iteratively fix a PR/MR/CL until Greptile gives a perfect review: 5/5 confidence, zero unresolved comments.
 
 ## Inputs

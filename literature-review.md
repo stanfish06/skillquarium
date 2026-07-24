@@ -26,3 +26,7 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — MNT-6
+> `gget search pubmed` / `gget search biorxiv` (SKILL.md ~L97–98, 304, 322) don't exist — `gget search` is Ensembl-gene-only and has no bioRxiv module, so those commands fail. Use the `paper-lookup` skill / NCBI Entrez / the bioRxiv API for literature search instead.
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._

@@ -24,3 +24,7 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — DEP-4 (deprecated)
+> `torchdrug` is frozen — no PyPI release since 0.2.1 (Jul 2023), incompatible with Python ≥3.11 / PyTorch ≥2.1, so effectively uninstallable on current stacks. Prefer `deepchem` + `torch-geometric` for molecular ML / GNN work; treat this skill as archived.
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._

@@ -26,3 +26,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-11
+> Use this when working directly with the `esm` SDK (ESM3/ESMC, Forge/Biohub clients, ESMFold folding); for AlphaFold-family folding use `colabfold` (local) or the OpenFold NIMs, and to retrieve deposited structures use `structural-biology`. ESM-native SDK vs AlphaFold-family predictors vs retrieve is the routing axis.

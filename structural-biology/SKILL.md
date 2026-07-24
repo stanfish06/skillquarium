@@ -7,6 +7,9 @@ primary_tool: AlphaFold DB
 
 # Structural Biology
 
+> [!note] Vault audit 2026-07-24 — USE-11
+> Use this to retrieve and interpret existing structures (PDB download, AlphaFold DB, PAE/pLDDT reading, structure-guided annotation); to predict new structures use `colabfold` / `struct-predictor` (local) or the `boltz2-nim` / `openfold2-nim` / `openfold3-nim` NIMs. Retrieve vs predict is the routing axis.
+
 ## Version Compatibility
 
 Reference examples assume:

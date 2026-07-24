@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-4
+> Use this for Parallel-cli web search, bulk enrichment, and deep multi-source research; for Exa-backed scholarly filtering use `exa-search`, and for a multi-DB scholarly paper hunt use `paper-lookup`. `research-lookup` is a thin alias over this skill. Distinguishing axis: search backend.

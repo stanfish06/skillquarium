@@ -30,3 +30,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 
 ## Notes
 
+> [!note] Vault audit 2026-07-24 — USE-18
+> Use this only for consumer fitness/nutrition (workout planning, calorie/macro tracking); it is a consumer-health tool, NOT clinical — for clinical nutrition or medical decisions use a clinical/medical skill. Distinguishing axis: consumer-health vs clinical/medical.
+

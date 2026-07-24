@@ -14,9 +14,8 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Documents, Office & Media](documents-office.md)
 
-## Skills (15)
+## Skills (14)
 
-- [bgpt-mcp](../bgpt-mcp.md) — Search scientific papers via the BGPT MCP server and retrieve structured experimental data — methods, results, conclusions, quality scores, and 25+ metadata fields per paper
 - [bgpt-paper-search](../bgpt-paper-search.md) — Search scientific papers and retrieve structured experimental data extracted from full-text studies via the BGPT MCP server
 - [claw-semantic-sim](../claw-semantic-sim.md) — Semantic Similarity Index for disease research literature using PubMedBERT embeddings
 - [data-extractor](../data-extractor.md) — Extract numerical data from scientific figure images using Claude vision + OpenCV calibration

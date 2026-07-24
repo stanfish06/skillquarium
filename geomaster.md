@@ -23,3 +23,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-18
+> Use this for remote-sensing / Earth-observation workflows (satellite imagery, raster, spatial ML, STAC/COG); for general vector GIS work in Python use `geopandas`. Distinguishing axis: remote-sensing/raster niche vs vector GIS.

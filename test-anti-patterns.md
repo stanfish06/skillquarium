@@ -42,3 +42,6 @@ created: 2026-07-21
 
 ## Notes
 
+> [!note] Vault audit 2026-07-24 — USE-19
+> Use this for language-agnostic test anti-pattern audits across any suite; it is filed under the .NET map but is not .NET-specific — for .NET/MSTest authoring use `writing-mstest-tests` and for .NET coverage/CRAP use `dotnet-coverage-analysis`. Distinguishing axis: polyglot test analysis vs .NET-only tooling.
+

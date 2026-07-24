@@ -14,13 +14,12 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (16)
+## Skills (15)
 
 - [auditing-skills](../auditing-skills.md) — Use when checking skills for security or quality issues, reviewing audit results from skills.sh or Tessl, or remediating findings across published skills
 - [autoskill](../autoskill.md) — Observe the user's screen via screenpipe, detect repeated research workflows, match them against existing scientific-agent-skills, and draft new skills (or composition recipes that...
 - [bio-orchestrator](../bio-orchestrator.md) — Meta-agent that routes bioinformatics requests to specialised sub-skills
 - [clawpathy-autoresearch](../clawpathy-autoresearch.md) — Eval-driven skill tuning. Given a task and an LLM-judge rubric, iteratively rewrites a SKILL.md until a downstream executor agent performs well against the judge
-- [dynamic-resources](../dynamic-resources.md) — Example skill loaded from resources_discover
 - [find-skills](../find-skills.md) — Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending...
 - [get-available-resources](../get-available-resources.md) — This skill should be used at the start of any computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
 - [json-canvas](../json-canvas.md) — Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections

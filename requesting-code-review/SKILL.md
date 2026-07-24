@@ -5,6 +5,9 @@ description: Use when completing tasks, implementing major features, or before m
 
 # Requesting Code Review
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Use this when you authored a change and want to dispatch a reviewer subagent; NOT for doing the review yourself (`code-review-and-quality`), responding to feedback (`receiving-code-review`), or working a hosted PR's comments/checks (`check-pr`, `greploop`). Distinguishing axis (use this NOT that): your role — requester vs reviewer vs recipient vs PR-platform operator.
+
 Dispatch a code reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
 
 **Core principle:** Review early, review often.

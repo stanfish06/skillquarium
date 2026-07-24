@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-4
+> Use this for Exa-backed web/URL search with scholarly `category=research paper` filtering; for Parallel-backed search or deep research use `parallel-web`, and for a scholarly-DB paper hunt use `paper-lookup`. Distinguishing axis: search backend.

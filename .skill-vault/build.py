@@ -501,6 +501,21 @@ def wrapper_filename(skill):
     return skill.replace("/", "-") + ".md"
 
 
+def is_gstack_subskill(skill):
+    """Transient gstack bundle sub-skills / install artifacts. The optional
+    gstack extra (skipped by default) installs each sub-skill as a top-level
+    ``gstack-<name>/`` dir and also ships a ``gstack/<name>`` bundle tree; those
+    wrappers are gitignored and come/go with the install. They are excluded from
+    the index count, the flat A–Z list, and the Uncategorized section so the
+    committed navigation does not churn with install state. The bare ``gstack``
+    entry point is kept. See VAULT-AUDIT SCALE-3 / MNT-12."""
+    return (
+        skill.startswith("gstack/")
+        or skill.startswith("gstack-")
+        or skill.startswith("_gstack")
+    )
+
+
 def is_scientific_agents_profile(skill):
     path = os.path.join(ROOT, skill, "SKILL.md")
     if not os.path.isfile(path):
@@ -1010,6 +1025,8 @@ def main():
 
     skills_by_key = {key: [] for key, *_ in CATEGORIES}
     for s in on_disk:
+        if is_gstack_subskill(s):
+            continue  # transient gstack sub-skills: keep out of cards/maps/subtotals (SCALE-3)
         skills_by_key.setdefault(key_by_skill.get(s, "uncategorized"), []).append(s)
 
     skills_sorted = sorted(on_disk)
@@ -1094,7 +1111,8 @@ def main():
             f.write("\n".join(L))
 
     # ---- index -------------------------------------------------------------
-    total = len(on_disk)
+    # Count excludes transient gstack bundle sub-skills (SCALE-3 / MNT-12).
+    total = sum(1 for s in on_disk if not is_gstack_subskill(s))
     index_path = os.path.join(ROOT, "index.md")
     index_created = existing_created(index_path)
     I = ["---", "title: Skills Index", "tags:", "  - moc", "  - skill-index",
@@ -1119,20 +1137,35 @@ def main():
         chips = ", ".join(f"[{s}]({wrapper_filename(s)})" for s in preview)
         more = f" … [see all {len(live)} →](maps/{key}.md)" if len(live) > len(preview) else ""
         I += [chips + more, ""]
-    I += ["## All skills (A–Z)", ""]
+    # Flat A–Z excludes the expert-persona profiles (browse them via the
+    # Scientific Expert Profiles map) and bundled sub-skills (e.g. gstack/*),
+    # so the actionable tool skills stay scannable. See VAULT-AUDIT USE-3 / SCALE-3.
+    az_skills = [
+        s for s in on_disk
+        if key_by_skill.get(s) != EXPERT_DOMAIN
+        and "/" not in s
+        and not is_gstack_subskill(s)
+    ]
+    persona_count = len(skills_by_key.get(EXPERT_DOMAIN, []))
+    I += ["## All skills (A–Z)", "",
+          f"_{len(az_skills)} tool skills. The {persona_count} expert-persona entries "
+          f"(discipline profiles + the scientific-agents dispatcher) are omitted here to "
+          f"keep this list scannable — browse them via "
+          f"[Scientific Expert Profiles](maps/{EXPERT_DOMAIN}.md)._", ""]
     cur, bucket = None, []
     def flush():
         if bucket:
             I.append(" · ".join(bucket)); I.append("")
-    for s in sorted(on_disk, key=str.lower):
+    for s in sorted(az_skills, key=str.lower):
         letter = s[0].upper()
         if letter != cur:
             flush(); bucket = []; cur = letter; I.append(f"**{letter}**")
         bucket.append(f"[{s}]({wrapper_filename(s)})")
     flush()
-    if unsorted:
+    unsorted_display = [s for s in unsorted if not is_gstack_subskill(s)]
+    if unsorted_display:
         I += ["## Uncategorized", ""]
-        I += [f"- [{s}]({wrapper_filename(s)}) — {short[s]}" for s in unsorted]
+        I += [f"- [{s}]({wrapper_filename(s)}) — {short[s]}" for s in unsorted_display]
         I.append("")
     with open(index_path, "w", encoding="utf-8") as f:
         f.write("\n".join(I))
@@ -1166,8 +1199,9 @@ def main():
                   file=sys.stderr)
 
     edge_count = sum(len(v) for v in related.values()) // 2
-    print(f"OK: {total} wrappers, {len(CATEGORIES)} maps, {edge_count} related-links, "
-          f"unsorted={len(unsorted)}, pruned={len(pruned)}")
+    print(f"OK: {len(on_disk)} wrappers ({total} indexed skills), {len(CATEGORIES)} maps, "
+          f"{edge_count} related-links, unsorted={len(unsorted_display)} "
+          f"(+{len(unsorted) - len(unsorted_display)} gstack), pruned={len(pruned)}")
     return 0
 
 

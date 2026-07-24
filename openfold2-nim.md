@@ -26,3 +26,6 @@ created: 2026-06-28
 
 ## Notes
 
+> [!note] Vault audit 2026-07-24 — USE-11
+> Use this for the hosted NVIDIA OpenFold2 NIM (AlphaFold2-like monomer folding only); for monomer-or-complex prediction use `openfold3-nim`, and for local AF2 folding use `colabfold`. Hosted monomer NIM vs complex-capable NIM vs local is the routing axis.
+

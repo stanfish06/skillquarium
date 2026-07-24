@@ -16,6 +16,9 @@ allowed-tools: Bash(gh:*) Bash(glab:*) Bash(git:*) Bash(p4:*)
 
 # Check PR
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Use this for a one-pass triage of a hosted PR/MR/CL's unresolved comments, failing checks, and description; for an autonomous loop to a Greptile 5/5 use `greploop`. NOT the review methodology itself (`code-review-and-quality`), requesting a review (`requesting-code-review`), or responding to feedback (`receiving-code-review`). Distinguishing axis (use this NOT that): acting on a live PR platform vs the review activity itself.
+
 Analyze a pull request (GitHub), merge request (GitLab), or shelved changelist (Perforce) for review comments, status checks, and description completeness, then help address any issues found.
 
 ## Inputs

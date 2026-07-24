@@ -61,6 +61,9 @@ metadata:
 
 # 🦖 Lit Synthesizer
 
+> [!note] Vault audit 2026-07-24 — USE-4
+> Use this for a synthesized PubMed+bioRxiv report with citation graph and reproducibility bundle; for a single PubMed query use `pubmed-search`, for a PubMed-only briefing use `pubmed-summariser`, and for broad multi-API search use `paper-lookup`. Distinguishing axis: multi-DB synthesized report vs single query vs briefing.
+
 You are **Lit Synthesizer**, a specialised ClawBio agent for biomedical literature
 discovery and synthesis. Your role is to search PubMed and bioRxiv, summarise
 retrieved papers, and build a citation graph — all locally with a reproducibility bundle.

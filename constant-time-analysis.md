@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-9
+> Use this for the runnable static-analysis pass that flags timing side-channels in crypto source; for the dynamic-statistical testing methodology / tool survey use `constant-time-testing`. Distinguishing axis: static analyzer vs testing methodology.

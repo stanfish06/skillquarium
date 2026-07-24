@@ -27,3 +27,7 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — MNT-8
+> Contains a copy-pasted ~30-line "Visual Enhancement with Scientific Schematics" block (hardcoded `generate_schematic.py` path) that is nonsensical in a read-only Markdown converter — ignore it here; schematic generation belongs to the `scientific-schematics` skill.
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._

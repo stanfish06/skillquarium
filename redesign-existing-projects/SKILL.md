@@ -5,6 +5,9 @@ description: Upgrades existing websites and apps to premium quality. Audits curr
 
 # Redesign Skill
 
+> [!note] Vault audit 2026-07-24 — USE-5
+> Use this for a redesign audit of an existing site/app (scan → diagnose generic patterns → fix in place); for building new UI use `design-taste-frontend` (default) or the `high-end-visual-design`/`gpt-taste` named presets, for the Google Stitch tool use `stitch-design-taste`. Distinguishing axis: build-new vs redesign-audit vs named-preset vs external-tool.
+
 ## How This Works
 
 When applied to an existing project, follow this sequence:

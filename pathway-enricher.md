@@ -28,3 +28,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — DEP-8 (superseded → `pathway-enrichment`)
+> Enrichr-only ORA (v0.1.0) superseded by `pathway-enrichment` (v1.0: ORA + GSEA + preranked + ssGSEA/GSVA, with background handling). Prefer `pathway-enrichment`. Kept for its bubble-chart / report-bundle output (`pathway_enricher.py`) until that is folded into `pathway-enrichment`.

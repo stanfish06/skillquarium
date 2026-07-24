@@ -31,3 +31,6 @@ created: 2026-07-21
 
 ## Notes
 
+> [!note] Vault audit 2026-07-24 — USE-19
+> Use this for language-agnostic assertion-quality analysis across any test suite (.NET, Python, TS/JS, Java, Go, Ruby, Rust, …); it is filed under the .NET map but is not .NET-specific, and for MSTest-specific authoring use `writing-mstest-tests`. Distinguishing axis: polyglot test analysis vs .NET-only authoring.
+

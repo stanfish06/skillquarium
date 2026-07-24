@@ -28,3 +28,9 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-1
+> Use this as the raw-OOXML fallback — low-level .docx inspection, text extraction, tracked-changes/comment plumbing; for authoring or richly formatting Word documents use the canonical `officecli-docx` (and its scene layers). Distinguishing axis: raw OOXML processing vs officecli document generation.
+
+> [!note] Vault audit 2026-07-24 — MNT-8
+> The "Visual Enhancement with Scientific Schematics" block in the source skill (hardcoded `scripts/generate_schematic.py` path) is copy-pasted across docx/pptx/xlsx/pdf and can drift; for schematic/diagram generation cross-reference the `scientific-schematics` skill rather than relying on the duplicated block.

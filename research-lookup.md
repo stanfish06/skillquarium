@@ -27,3 +27,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-4
+> Explicit alias — this is a thin router over `parallel-web` (dispatching to parallel-cli search or the Parallel deep-research API); prefer `parallel-web` directly, use `exa-search` for Exa-backed scholarly filtering, and `paper-lookup` for a scholarly-DB paper hunt. Distinguishing axis: convenience wrapper, not a separate backend.

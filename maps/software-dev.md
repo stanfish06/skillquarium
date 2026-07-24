@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (42)
+## Skills (43)
 
 - [api-and-interface-design](../api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
 - [brainstorming](../brainstorming.md) — You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior
@@ -38,6 +38,7 @@ created: 2026-06-13
 - [git-workflow-and-versioning](../git-workflow-and-versioning.md) — Structures git workflow practices. Use when making any code change
 - [github-actions-ci](../github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
 - [greploop](../greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
+- [gstack](../gstack.md) — Fast headless browser for QA testing and site dogfooding
 - [incremental-implementation](../incremental-implementation.md) — Delivers changes incrementally. Use when implementing any feature or change that touches more than one file
 - [jest](../jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [linear](../linear.md) — Linear project management — create and manage issues, projects, cycles, and roadmaps via the Linear API, MCP server, or web browser

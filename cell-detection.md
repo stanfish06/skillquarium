@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — DEP-10 (superseded by `cellpose-cell-segmentation`)
+> Narrow Cellpose 4.0 cpsam wrapper (v0.1.0) superseded by `cellpose-cell-segmentation` (v1.1, Cellpose 4.2.x) — prefer that. Kept (not deleted) for its distinct report.md / reproducibility CLI, which `cellpose-cell-segmentation` (remote-managed) can't absorb upstream.

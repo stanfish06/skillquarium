@@ -5,6 +5,9 @@ description: Use when encountering any bug, test failure, or unexpected behavior
 
 # Systematic Debugging
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Pick ONE debugging discipline — these overlap, do not stack them. Use this for root-cause-first investigation (Iron Law: no fix before root cause); use `diagnosing-bugs` when the priority is building a tight pass/fail feedback loop for a hard bug or perf regression, and `debugging-and-error-recovery` for triage-checklist / stop-the-line recovery across test/build/runtime incidents. Distinguishing axis (use this NOT that): mutually-exclusive methodologies.
+
 ## Overview
 
 Random fixes waste time and create new bugs. Quick patches mask underlying issues.

@@ -7,8 +7,6 @@ description: >
   extracted before the bilingual reader is built.
 
 always_load:
-  # Shared layer — common to the nature-* skills
-  - ../nature-shared/core/terminology-ledger.md
   # Skill-local core
   - static/core/principles.md
   - static/core/workflow.md

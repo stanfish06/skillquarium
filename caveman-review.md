@@ -25,3 +25,6 @@ created: 2026-06-13
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-17
+> Use this only on explicit opt-in (`/caveman-review` or active caveman mode); do NOT let its broad "code review" / "review the diff" auto-trigger hijack normal review — for standard review use `code-review-and-quality` or `review`. Distinguishing axis: explicit opt-in only, not auto-triggered.

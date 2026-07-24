@@ -25,3 +25,7 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — DEP-12 (deprecated API)
+> This skill teaches the v1 top-level PuffeRL API, but its `uv pip install pufferlib` (SKILL.md ~L425) is unpinned and installs 3.x, which `pufferlib-v2`/`pufferlib-v3` flag as a different/deprecated API — a broken combination. Pin `pufferlib==1.0.0` to match this skill, or use `pufferlib-v3` for current PufferLib.
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._

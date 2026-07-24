@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-5
+> Use this for general build-new visual-design guidance (aesthetic direction, typography); for a redesign audit of existing UI use `redesign-existing-projects`, for opinionated named presets use `high-end-visual-design`/`gpt-taste`/`design-taste-frontend`, and for the Google Stitch tool use `stitch-design-taste`. Distinguishing axis: build-new vs redesign-audit vs named-preset vs external-tool.

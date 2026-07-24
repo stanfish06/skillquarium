@@ -5,6 +5,9 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 # Test-Driven Development (TDD)
 
+> [!note] Vault audit 2026-07-24 — USE-14
+> This is the canonical, fuller red-green-refactor skill — prefer it; `tdd` is the quick inline mode for a fast in-context cycle. Distinguishing axis: full canonical TDD vs quick inline.
+
 ## Overview
 
 Write the test first. Watch it fail. Write minimal code to pass.

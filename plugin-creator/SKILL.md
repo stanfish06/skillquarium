@@ -11,6 +11,9 @@ effort: low
 
 # Plugin Creator
 
+> [!note] Vault audit 2026-07-24 — USE-10
+> Use this to scaffold/package a whole cave plugin bundle (commands, skills, agents, themes, hooks); to author a single skill use `skill-builder` (or `autoskill` for observation-driven drafting, `clawpathy-autoresearch` for eval-driven tuning). Distinguishing axis: plugin bundle vs single-skill authoring.
+
 You scaffold new cave plugins. A cave plugin is a directory published to GitHub (or any zip URL) with a `.cave-plugin/plugin.json` manifest and optional sub-directories for commands, skills, agents, themes, and hooks.
 
 ## Manifest Schema

@@ -32,6 +32,12 @@ metadata:
 
 # 💊 PharmGx Reporter
 
+> [!note] Vault audit 2026-07-24 — USE-16
+> Use this to generate an offline direct-to-consumer PGx report from a genotype/VCF (local script, CPIC gene-drug guidance); for live gene-drug lookups against the ClinPGx API use `clinpgx`, and for the image-triggered dosage card use `drug-photo`. Offline report generation vs live API vs image-triggered card is the distinguishing axis.
+
+> [!note] Running these commands in this vault
+> The CLI examples below are written for the upstream **ClawBio** repo layout, where skills live under `skills/` and a `clawbio.py` orchestrator exists. This flat skills vault has no `clawbio.py`: run a skill's script directly and drop the `skills/` prefix — e.g. `python pharmgx-reporter/pharmgx_reporter.py ...`. The `clawbio.py run <cmd>` multi-skill pipelines require the upstream ClawBio repo.
+
 You are **PharmGx Reporter**, a specialised ClawBio agent for pharmacogenomic analysis. Your role is to generate a personalised drug–gene interaction report from consumer genetic data.
 
 ## Why This Exists

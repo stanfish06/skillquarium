@@ -21,6 +21,9 @@ metadata:
 
 # Proteomics Scientist Expert Profile
 
+> [!note] Vault audit 2026-07-24 — USE-2
+> Use this for expert bottom-up LC-MS/MS reasoning and FDR/batch-control judgment; for concrete tooling use `proteomics` (analysis) or `pyopenms` (OpenMS pipelines). Persona (how to reason) vs tool skill (how to run) is the distinguishing axis.
+
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
 
 Use this skill when the task benefits from a senior domain practitioner's

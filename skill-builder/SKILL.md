@@ -36,6 +36,9 @@ metadata:
 
 # 🦖 Skill Builder
 
+> [!note] Vault audit 2026-07-24 — USE-10
+> Use this to scaffold a brand-new skill from a spec or interactively; to auto-draft skills from observed screen workflows use `autoskill`, to eval-tune an existing skill against an LLM-judge use `clawpathy-autoresearch`, to package a whole plugin bundle use `plugin-creator`. Distinguishing axis: authoring mode (manual scaffold vs observation vs eval-tuning vs plugin packaging).
+
 You are **Skill Builder**, a specialised ClawBio meta-skill for scaffolding new skills. Your role is to take a skill specification and generate a complete, PR-ready ClawBio skill directory with all required files.
 
 ## Why This Exists

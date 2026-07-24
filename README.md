@@ -70,7 +70,7 @@ skill names (`/gstack-qa`, `/gstack-ship`, …) so it does not clobber this vaul
 
 ## Navigation
 
-- **[index.md](index.md)** — start here: all skills grouped into 23 domains, plus an A–Z list.
+- **[index.md](index.md)** — start here: all skills grouped into 24 domains, plus an A–Z list.
 - **[skills.base](skills.base)** — filterable / sortable table (by domain, status, rating).
 - **[recipes/](recipes/index.md)** — goal-oriented workflows that chain skills together.
 - **[maps/](maps)** — one map note per domain, with cross-links between domains.
@@ -93,6 +93,20 @@ python3 .skill-vault/build.py
 
 Your edits are preserved: the `## Notes` section of each wrapper and any `status`,
 `rating`, or `aliases` you set in frontmatter survive a rebuild.
+
+> [!note] Keeping the navigation layer consistent
+> The wrappers, maps, and `index.md` are **generated** from the skills on disk, so they
+> drift whenever skills are added, removed, or recategorized. Re-run `build.py` (and commit
+> its output) as part of any change that touches the skill set — treat a dirty diff after a
+> rebuild as a signal that the committed navigation layer is stale. Domain membership is
+> currently driven by the hardcoded `CATEGORIES` list in `build.py`; new skills that aren't
+> listed there surface under **Uncategorized** (and a `WARNING: not categorized` line), so
+> check that output after adding skills. (A future improvement is to derive the domain from
+> each `SKILL.md`'s frontmatter, as the expert-persona importer already does.)
+>
+> `skill-lock.json` is **not** a full manifest — it records only skills installed from a
+> remote source (via the skills CLI); locally-authored skills have no lock entry. Don't read
+> a missing lock entry as corruption.
 
 Flags:
 

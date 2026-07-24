@@ -29,3 +29,6 @@ created: 2026-06-13
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-17
+> Use this only on explicit opt-in (`/caveman` or when the user asks for caveman mode); do NOT let its broad "be brief" / token-efficiency auto-trigger hijack normal output. Distinguishing axis: explicit opt-in only, not auto-triggered.

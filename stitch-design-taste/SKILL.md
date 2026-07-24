@@ -5,6 +5,9 @@ description: Semantic Design System Skill for Google Stitch. Generates agent-fri
 
 # Stitch Design Taste — Semantic Design System Skill
 
+> [!note] Vault audit 2026-07-24 — USE-5
+> Use this only for the Google Stitch external tool (it generates a `DESIGN.md` for Stitch screen generation); for building new UI in code use `design-taste-frontend`/`high-end-visual-design`/`gpt-taste`, for a redesign audit use `redesign-existing-projects`. Distinguishing axis: external-tool vs build-new vs redesign-audit.
+
 ## Overview
 This skill generates `DESIGN.md` files optimized for Google Stitch screen generation. It translates the battle-tested anti-slop frontend engineering directives into Stitch's native semantic design language — descriptive, natural-language rules paired with precise values that Stitch's AI agent can interpret to produce premium, non-generic interfaces.
 

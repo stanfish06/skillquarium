@@ -21,6 +21,9 @@ metadata:
 
 # Statistician Expert Profile
 
+> [!note] Vault audit 2026-07-24 — USE-2
+> Use this for expert statistical-inference and analysis-plan reasoning; for actually running analyses use `statistical-analysis` or `statsmodels`. Persona (how to reason) vs concrete tool skill (how to run) is the distinguishing axis.
+
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
 
 Use this skill when the task benefits from a senior domain practitioner's

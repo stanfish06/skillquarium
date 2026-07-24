@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-13
+> Use this to critique published scientific claims and grade evidence quality (GRADE, Cochrane ROB) — this is unique content, not a peer-review duplicate; to review a manuscript/grant for submission use `peer-review`, and for a scored ScholarEval assessment use `scholar-evaluation`. Published-literature critique/GRADE vs manuscript review is the distinguishing axis.

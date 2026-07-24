@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-17
+> Use this only on explicit opt-in (`/caveman-commit` or active caveman mode); do NOT let its broad "write a commit" / "staging changes" auto-trigger hijack normal commit/git work — otherwise use your standard git/commit workflow. Distinguishing axis: explicit opt-in only, not auto-triggered.

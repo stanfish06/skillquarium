@@ -25,3 +25,7 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — MNT-5
+> Version self-contradiction: frontmatter/intro say idc-index 0.12.3 / IDC data v24, but the version-check code, "Tested with", and Best Practices say v23 / 0.11.14. Treat idc-index 0.12.3 / data v24 as current and disregard the stale v23/0.11.14 mentions until upstream reconciles.
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._

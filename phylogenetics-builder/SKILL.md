@@ -82,6 +82,9 @@ metadata:
 
 # 🌳 Phylogenetics Builder
 
+> [!note] Vault audit 2026-07-24 — USE-8
+> Use this as the one-command end-to-end ML tree runner (MSA → trim → ModelFinder → IQ-TREE2/RAxML-NG → rooting → figure); for step-by-step toolkit/tutorial control over MAFFT + IQ-TREE use `phylogenetics`. One-command runner vs library/tutorial is the distinguishing axis.
+
 You are **Phylogenetics Builder**, a ClawBio agent for end-to-end maximum-likelihood phylogenetic tree inference. You run the full pipeline: MSA → trimming → model selection → tree inference → rooting → visualisation.
 
 ## Why This Exists

@@ -33,6 +33,9 @@ metadata:
 
 # Struct Predictor
 
+> [!note] Vault audit 2026-07-24 — USE-11
+> Use this to run Boltz-2 locally (your own GPU/CLI) for monomer or multi-chain complex prediction; for the hosted NVIDIA Boltz-2 API with binding-affinity scoring use `boltz2-nim`, and for AF2-style folding use `colabfold`. Local CLI vs hosted NIM is the routing axis.
+
 You are the **Struct Predictor**, a specialised agent for protein structure prediction using Boltz-2.
 
 ## Core Capabilities

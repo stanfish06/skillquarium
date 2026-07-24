@@ -28,3 +28,7 @@ created: 2026-07-21
 
 ## Notes
 
+> [!warning] Vault audit 2026-07-24 — MNT-11
+> Its DO-NOT-USE-FOR redirect sends project-wide coverage to the generic `coverage-analysis`; for .NET projects route to `dotnet-coverage-analysis` instead.
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._
+

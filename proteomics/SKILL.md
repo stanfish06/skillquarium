@@ -7,6 +7,9 @@ primary_tool: pyopenms
 
 # Proteomics
 
+> [!note] Vault audit 2026-07-24 — USE-16
+> Use this for general mass-spec proteomics analysis and interpretation; for OpenMS-based pipelines use `pyopenms`, for differential-expression statistics use `proteomics-de`, and for the FragPipe/pyteomics workflow use `fragpipe-pyteomics-proteomics`. Which mass-spec tool/stage you need is the distinguishing axis.
+
 ## Version Compatibility
 
 Reference examples assume:

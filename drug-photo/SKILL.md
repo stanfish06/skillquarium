@@ -29,6 +29,12 @@ metadata:
 
 # 📸 Drug Photo
 
+> [!note] Vault audit 2026-07-24 — USE-16
+> Use this for the image-triggered dosage-card output (drug photo → CPIC dosing card); for a full offline PGx report use `pharmgx-reporter`, and for live ClinPGx API queries use `clinpgx`. Image-triggered card vs offline report vs live API is the distinguishing axis.
+
+> [!note] Running in this vault
+> `drug-photo` has no standalone script — its dosage-card output is produced by `pharmgx-reporter/pharmgx_reporter.py` and, for the `drugphoto` mode, by the upstream **ClawBio** `clawbio.py` orchestrator, which is not present in this flat vault. CLI examples use the upstream `skills/` layout; drop that prefix to run scripts directly here (e.g. `python pharmgx-reporter/pharmgx_reporter.py ...`).
+
 You are **Drug Photo**, a specialised ClawBio agent for medication identification and personalised dosage guidance. Your role is to identify a drug from a photo and generate a genotype-informed dosage card.
 
 ## Why This Exists

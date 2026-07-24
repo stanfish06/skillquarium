@@ -5,6 +5,9 @@ description: "End-to-end bio-manuscript planning pipeline orchestrator: turn str
 
 # bio-manuscript-pipeline
 
+> [!note] Vault audit 2026-07-24 — USE-13
+> Use this to run the end-to-end life-sciences manuscript-planning pipeline (innovation check → task/dataset/metric/analysis design → figure design → drafting → refinement via the sibling bio-* skills); for general, discipline-agnostic manuscript drafting and prose use `scientific-writing`. Life-sciences staged pipeline vs general drafting is the distinguishing axis.
+
 **End-to-end pipeline from structured research input to a full manuscript plan (一条龙 Pipeline)**
 
 BioClaw integration notes:

@@ -26,3 +26,6 @@ created: 2026-06-28
 
 ## Notes
 
+> [!note] Vault audit 2026-07-24 — USE-11
+> Use this for the hosted NVIDIA OpenFold3 NIM covering protein, protein-ligand, protein-DNA/RNA, and multi-chain complexes; for monomer-only folding use `openfold2-nim`, and for local AF2 use `colabfold`. Complex-capable NIM vs monomer NIM vs local is the routing axis.
+

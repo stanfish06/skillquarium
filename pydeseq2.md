@@ -26,3 +26,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!info] Vault audit 2026-07-24 — DEP-9 (canonical bulk DE)
+> Canonical bulk/pseudo-bulk DESeq2 differential-expression skill. `rnaseq-de` and `differential-expression` overlap heavily — prefer `pydeseq2` for the DE step. (All three now use the PyDESeq2 0.5.x formulaic `design="~..."` API.)

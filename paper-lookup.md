@@ -25,3 +25,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-4
+> Use this for a multi-DB scholarly search across 10 APIs (PubMed, PMC, bioRxiv, arXiv, OpenAlex, Crossref…) with DOI/PMID/citation-graph lookups; for a single PubMed query use `pubmed-search`, and for a synthesized briefing/report use `pubmed-summariser` or `lit-synthesizer`. Distinguishing axis: single query vs multi-DB lookup vs synthesized report.

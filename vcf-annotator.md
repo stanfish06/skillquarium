@@ -26,3 +26,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — DEP-5 (deprecated → `variant-annotation`)
+> Near-total duplicate of `variant-annotation` (same VEP/ClinVar/gnomAD annotator) and the inferior implementation. Use `variant-annotation` — the canonical partner of `clinical-variant-reporter`. NOT deleted: `vcf-annotator` is still cross-referenced by ~8 other skills' SKILL.md, so clean removal needs a coordinated reference sweep first.

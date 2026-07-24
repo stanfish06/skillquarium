@@ -11,7 +11,7 @@ primary_tool: PyDESeq2
 
 Reference examples assume:
 
-- `pydeseq2` 0.4+
+- `pydeseq2` >= 0.5 (the formulaic `design=` API used below was introduced in 0.5.0)
 - `pandas` 2.2+
 - `numpy` 1.26+
 - `matplotlib` 3.8+
@@ -78,7 +78,7 @@ from pydeseq2.ds import DeseqStats
 dds = DeseqDataSet(
     counts=counts_df,
     metadata=metadata_df,
-    design_factors=["condition", "batch"],
+    design="~batch + condition",  # PyDESeq2 0.5.x formulaic API (replaces the deprecated design_factors=[...]); the explicit contrast below selects the condition effect.
 )
 dds.deseq2()
 stats = DeseqStats(dds, contrast=("condition", "treated", "control"))

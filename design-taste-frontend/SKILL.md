@@ -5,6 +5,9 @@ description: Anti-slop frontend skill for landing pages, portfolios, and redesig
 
 # tasteskill: Anti-Slop Frontend Skill
 
+> [!note] Vault audit 2026-07-24 — USE-5
+> Use this as the default build-new (brief-inference, contextual, audit-first on redesigns); for a fixed named preset use `high-end-visual-design`/`gpt-taste`, for a dedicated redesign audit use `redesign-existing-projects`, for the Google Stitch tool use `stitch-design-taste`. Distinguishing axis: build-new vs redesign-audit vs named-preset vs external-tool.
+
 > Landing pages, portfolios, and redesigns. Not dashboards, not data tables, not multi-step product UI.
 > Every rule below is **contextual**. None of it fires automatically. First read the brief, then pull only what fits.
 

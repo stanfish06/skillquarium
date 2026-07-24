@@ -14,6 +14,9 @@ license: CC-BY-4.0
 
 # Pre-Submission Reviewer
 
+> [!note] Vault audit 2026-07-24 — USE-13
+> Use this to polish your own draft before submission — writing/LaTeX/figure mechanics, AI-tone vocabulary, and grammar, tagged CRITICAL/MAJOR/MINOR; for reviewer-side scientific evaluation of methodology and stats use `peer-review`, and to critique published claims use `scientific-critical-thinking`. Author-side pre-submission polish vs reviewer-side scientific evaluation is the distinguishing axis.
+
 ## Overview
 
 Three to five days before a submission deadline is the window where

@@ -5,6 +5,9 @@ description: Guides systematic root-cause debugging. Use when tests fail, builds
 
 # Debugging and Error Recovery
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Pick ONE debugging discipline — these overlap, do not stack them. Use this for structured triage / stop-the-line recovery across test, build, runtime, and production errors; use `systematic-debugging` for strict root-cause-first investigation and `diagnosing-bugs` for feedback-loop-first work on hard bugs / perf regressions. Distinguishing axis (use this NOT that): mutually-exclusive methodologies.
+
 ## Overview
 
 Systematic debugging with structured triage. When something breaks, stop adding features, preserve evidence, and follow a structured process to find and fix the root cause. Guessing wastes time. The triage checklist works for test failures, build errors, runtime bugs, and production incidents.

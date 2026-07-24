@@ -26,3 +26,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!info] Vault audit 2026-07-24 — DEP-10 (canonical of pair)
+> Canonical Cellpose segmentation skill (v1.1, Cellpose 4.2.x). Supersedes `cell-detection` (v0.1.0, Cellpose 4.0 cpsam wrapper) — prefer this skill. `cell-detection`'s only distinct value is its report.md / reproducibility CLI.

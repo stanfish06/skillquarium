@@ -5,6 +5,9 @@ description: Fast AlphaFold2/ColabFold protein structure prediction. Use when pr
 
 # ColabFold
 
+> [!note] Vault audit 2026-07-24 — USE-11
+> Use this for local/batch AlphaFold2-style monomer or multimer folding from FASTA; for the hosted OpenFold NIMs use `openfold2-nim` (monomer) / `openfold3-nim` (complex), for local Boltz-2 use `struct-predictor`, and to just retrieve existing/AlphaFold DB structures use `structural-biology`. Local AF2 predict vs hosted NIM vs retrieve is the routing axis.
+
 Use this skill for local or batch AlphaFold2-style protein structure prediction with ColabFold. It is especially useful when users need a familiar reference workflow, multimer predictions, or many FASTA sequences processed consistently.
 
 ## Routing

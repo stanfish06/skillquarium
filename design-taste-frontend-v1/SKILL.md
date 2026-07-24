@@ -5,6 +5,9 @@ description: The original v1 taste-skill, preserved for projects depending on it
 
 # High-Agency Frontend Skill
 
+> [!note] Vault audit 2026-07-24 — USE-5
+> Superseded v1 — prefer `design-taste-frontend` (v2) unless you need exact backward-compatible behavior; for a redesign audit use `redesign-existing-projects`, for the Google Stitch tool use `stitch-design-taste`. Distinguishing axis: superseded preset vs current build-new default.
+
 ## 1. ACTIVE BASELINE CONFIGURATION
 * DESIGN_VARIANCE: 8 (1=Perfect Symmetry, 10=Artsy Chaos)
 * MOTION_INTENSITY: 6 (1=Static/No movement, 10=Cinematic/Magic Physics)

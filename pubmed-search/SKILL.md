@@ -5,6 +5,9 @@ description: Search PubMed for scientific literature. Use when the user asks to 
 
 # PubMed Search
 
+> [!note] Vault audit 2026-07-24 — USE-4
+> Use this for a single raw PubMed query (Entrez search → results); for a multi-DB scholarly search use `paper-lookup`, and for a synthesized briefing/report use `pubmed-summariser` (PubMed briefing) or `lit-synthesizer` (PubMed+bioRxiv report with citation graph). Distinguishing axis: single query vs multi-DB lookup vs synthesized report.
+
 Search NCBI PubMed for scientific literature using BioPython's Entrez module.
 
 ## When to Use

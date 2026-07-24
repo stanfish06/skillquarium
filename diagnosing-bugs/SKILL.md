@@ -5,6 +5,9 @@ description: Diagnosis loop for hard bugs and performance regressions. Use when 
 
 # Diagnosing Bugs
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Pick ONE debugging discipline — these overlap, do not stack them. Use this to build a tight pass/fail feedback loop for a hard bug or performance regression; use `systematic-debugging` for root-cause-first discipline and `debugging-and-error-recovery` for triage-checklist / stop-the-line recovery. Distinguishing axis (use this NOT that): mutually-exclusive methodologies.
+
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
 When exploring the codebase, read `CONTEXT.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.

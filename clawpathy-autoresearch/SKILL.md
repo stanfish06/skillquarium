@@ -42,6 +42,9 @@ metadata:
 
 # clawpathy-autoresearch
 
+> [!note] Vault audit 2026-07-24 — USE-10
+> Use this for eval-driven tuning that iteratively rewrites an existing SKILL.md against an LLM-judge rubric; to scaffold a new skill from scratch use `skill-builder`, to auto-draft from observed workflows use `autoskill`, to package a plugin bundle use `plugin-creator`. Distinguishing axis: authoring mode (eval-tuning vs manual scaffold vs observation vs plugin packaging).
+
 Eval-driven skill development. The system iteratively rewrites a `SKILL.md`
 so a downstream executor agent performs better at a task class, as judged
 by an LLM against a paper/task-specific rubric.

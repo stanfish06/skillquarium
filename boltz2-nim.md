@@ -26,3 +26,6 @@ created: 2026-06-28
 
 ## Notes
 
+> [!note] Vault audit 2026-07-24 — USE-11
+> Use this for hosted/Docker NVIDIA Boltz-2 (protein-ligand/DNA/RNA complexes with pIC50/IC50 binding-affinity scoring); to run Boltz-2 locally via CLI use `struct-predictor`, and for AF2-style monomer/multimer folding use `colabfold`. Hosted NIM (adds affinity) vs local CLI vs AF2-family is the routing axis.
+

@@ -5,6 +5,9 @@ description: Test-driven development. Use when the user wants to build features 
 
 # Test-Driven Development
 
+> [!note] Vault audit 2026-07-24 — USE-14
+> Prefer `test-driven-development` as the canonical, fuller red-green-refactor skill; use this `tdd` only as the quick inline mode for a fast in-context cycle. Distinguishing axis: quick inline vs full canonical TDD.
+
 ## Philosophy
 
 **Core principle**: Tests should verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't.

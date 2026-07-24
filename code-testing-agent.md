@@ -36,3 +36,6 @@ created: 2026-07-21
 
 ## Notes
 
+> [!note] Vault audit 2026-07-24 — USE-19
+> Use this to generate new tests in any language (C#/.NET, Python, TS/JS, Go, Rust, Java); it is filed under the .NET map but is not .NET-specific — for MSTest-specific authoring/modernization use `writing-mstest-tests`. Distinguishing axis: polyglot test generation vs .NET-only authoring.
+

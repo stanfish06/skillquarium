@@ -5,6 +5,9 @@ description: "Use this skill any time a .docx file is involved -- as input, outp
 
 # OfficeCLI DOCX Skill
 
+> [!note] Vault audit 2026-07-24 — USE-1
+> Use this as the canonical skill for creating and richly editing .docx files; for raw OOXML inspection or plain text extraction use the native `docx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.
+
 ## Setup
 
 If `officecli` is missing:

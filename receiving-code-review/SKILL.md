@@ -5,6 +5,9 @@ description: Use when receiving code review feedback, before implementing sugges
 
 # Code Review Reception
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Use this when responding to review feedback you received; NOT for performing a review (`code-review-and-quality`), requesting one (`requesting-code-review`), or acting on a hosted PR's comments/checks (`check-pr`, `greploop`). Distinguishing axis (use this NOT that): your role — recipient vs reviewer vs requester vs PR-platform operator.
+
 ## Overview
 
 Code review requires technical evaluation, not emotional performance.

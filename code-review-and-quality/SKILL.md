@@ -5,6 +5,9 @@ description: Conducts multi-axis code review. Use before merging any change. Use
 
 # Code Review and Quality
 
+> [!note] Vault audit 2026-07-24 — USE-12
+> Use this to actually perform a multi-axis review of code in front of you; NOT to request a review (dispatch a reviewer with `requesting-code-review`), respond to feedback (`receiving-code-review`), or work a hosted PR's comments/checks (`check-pr`, or `greploop` for a Greptile 5/5). Distinguishing axis (use this NOT that): your role — reviewer vs requester vs recipient vs PR-platform operator.
+
 ## Overview
 
 Multi-dimensional code review with quality gates. Every change gets reviewed before merge — no exceptions. Review covers five axes: correctness, readability, architecture, security, and performance.

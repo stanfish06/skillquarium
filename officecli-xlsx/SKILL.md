@@ -5,6 +5,9 @@ description: "Use this skill any time a .xlsx file is involved -- as input, outp
 
 # OfficeCLI XLSX Skill
 
+> [!note] Vault audit 2026-07-24 — USE-1
+> Use this as the canonical skill for creating and richly editing .xlsx/.csv workbooks; for raw OOXML inspection or plain data extraction use the native `xlsx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.
+
 ## Setup
 
 If `officecli` is missing:

@@ -25,3 +25,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — DEP-3 (unimplemented stub)
+> SKILL.md is an unimplemented stub ("Planned — Week 6", no `repro_enforcer.py`) yet claims executable capabilities. NOT deleted: `bio-orchestrator` (`orchestrator.py`), `protocols-io`, `multiqc-reporter`, and `nextflow` reference it as a pipeline stage — deleting would break them. Either implement it or remove those references first.

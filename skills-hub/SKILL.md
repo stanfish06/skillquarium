@@ -5,6 +5,9 @@ description: Browse and install community skills from the BioClaw Skills Hub. Us
 
 # Skills Hub Browser
 
+> [!note] Vault audit 2026-07-24 — USE-10
+> Use this to browse/install bioinformatics community skills from the BioClaw Skills Hub; for discovering skills across the general skill ecosystem use `find-skills`. Distinguishing axis: bio/BioClaw domain vs general ecosystem.
+
 Search, browse, and install community-contributed skills from the [BioClaw Skills Hub](https://github.com/zongtingwei/Bioclaw_Skills_Hub).
 
 The Hub contains 70+ specialized bioinformatics skills organized into domains. Skills downloaded from the Hub are cached locally so they persist for the rest of the session.

@@ -26,3 +26,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-13
+> Use this to formally review a specific manuscript or grant at journal-submission time (methodology, statistics, reproducibility, figure integrity); to critique already-published claims and grade evidence use `scientific-critical-thinking`, and for a rubric-scored assessment use `scholar-evaluation`. Manuscript/grant peer review vs published-literature critique is the distinguishing axis.

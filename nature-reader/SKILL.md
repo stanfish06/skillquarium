@@ -22,7 +22,7 @@ Follow these five steps every time the skill is invoked.
 
 Read [manifest.yaml](manifest.yaml). It declares the `source_format` axis, the allowed values, and the file paths each value maps to.
 
-Also read every file listed under `always_load`. These hold the core principles, the reading workflow, and the output contract that apply to every reading job, plus the shared Terminology Ledger used to build the recurring-term table.
+Also read every file listed under `always_load`. These hold the core principles, the reading workflow, and the output contract that apply to every reading job. Maintain a Terminology Ledger while reading to build the recurring-term table.
 
 ### 2. Detect the source format
 
@@ -49,7 +49,7 @@ Apply the loaded fragments in this priority order:
 3. Reading workflow (`core/workflow.md`) — the six-step source-map-first process.
 4. Output contract (`core/output-contract.md`) — required files and the pre-response verification checklist.
 
-Build the Terminology Ledger as you translate (`../nature-shared/core/terminology-ledger.md`); it becomes the `paper.md` recurring-term table and the `source_map.json` glossary.
+Build the Terminology Ledger as you translate — a running table of source→target term choices maintained for this job; it becomes the `paper.md` recurring-term table and the `source_map.json` glossary.
 
 If constraints prevent full processing, still create a draft reader and label missing pages, figures, or low-confidence crops in `translation_notes.md`. Do not switch to summary mode.
 
@@ -66,4 +66,4 @@ The files under `references/` are deep references, not defaults. Open them on de
 - The static layer is versioned and reviewable. Adding a new source format is one new fragment plus one manifest line.
 - The dynamic layer keeps each invocation cheap: only the fragment relevant to this input enters context.
 - The router itself is short on purpose. Update fragments, not this file, when adding scope.
-- This structure mirrors `nature-writing` and `nature-polishing` so shared content lives in `nature-shared/`.
+- This structure mirrors `nature-writing` and `nature-polishing`; shared content is currently kept skill-local under `static/core/` (a consolidated `nature-shared/` layer is planned but not yet built).

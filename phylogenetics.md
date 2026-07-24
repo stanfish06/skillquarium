@@ -27,3 +27,6 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-8
+> Use this as the library/tutorial toolkit for building and analyzing trees with step-by-step control (MAFFT, IQ-TREE 2, FastTree, ETE3); for a single end-to-end command that runs the whole ML pipeline use `phylogenetics-builder`. Toolkit/tutorial vs one-command runner is the distinguishing axis.

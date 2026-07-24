@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-10
+> Use this to discover/install skills across the general skill ecosystem; for bioinformatics/BioClaw community skills use `skills-hub`. Distinguishing axis: general ecosystem vs bio/BioClaw domain.

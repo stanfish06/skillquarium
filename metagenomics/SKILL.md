@@ -7,6 +7,9 @@ primary_tool: Kraken2
 
 # Metagenomics
 
+> [!note] Vault audit 2026-07-24 — USE-15
+> Use this for host-depletion-aware shotgun metagenomics (remove host reads before Bracken/HUMAnN/AMR); for a single-command run centered on WHO-critical resistome profiling use `claw-metagenomics`. Host-depletion-aware workflow vs single-command AMR/resistome-focused runner is the distinguishing axis (these overlap but are not duplicates).
+
 ## Version Compatibility
 
 Reference examples assume:

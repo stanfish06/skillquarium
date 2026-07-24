@@ -26,3 +26,7 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!warning] Vault audit 2026-07-24 — MNT-9
+> Cross-references a nonexistent `semgrep-rule-variant-creator` skill — the actual skill is `semgrep-rule-creator`. Use that name.
+> _Remote-managed skill — the durable fix belongs upstream; this wrapper note is the local record._

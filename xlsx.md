@@ -27,3 +27,9 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-1
+> Use this as the raw-OOXML fallback — low-level .xlsx/.csv inspection and data extraction; for authoring formatted workbooks, models, or dashboards use the canonical `officecli-xlsx` (scene layers: `officecli-financial-model`, `officecli-data-dashboard`). Distinguishing axis: raw spreadsheet processing vs officecli workbook generation.
+
+> [!note] Vault audit 2026-07-24 — MNT-8
+> The "Visual Enhancement with Scientific Schematics" block in the source skill (hardcoded `scripts/generate_schematic.py` path) is copy-pasted across docx/pptx/xlsx/pdf and can drift; for schematic/diagram generation cross-reference the `scientific-schematics` skill rather than relying on the duplicated block.

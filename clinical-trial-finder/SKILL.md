@@ -102,6 +102,9 @@ metadata:
     - variant
 ---
 
+> [!note] Running these commands in this vault
+> The `cli_*` examples below are written for the upstream **ClawBio** repo layout, where skills live under `skills/`. This flat skills vault has no `skills/` prefix: run the script directly — e.g. `python clinical-trial-finder/clinical_trial_finder.py --gene BRCA1 --output <dir>`.
+
 ## Domain Decisions
 
 - **Source database**: ClinicalTrials.gov API v2 (`https://clinicaltrials.gov/api/v2`) — the authoritative US registry mandated by FDAAA 801 (2007) and mirrored by WHO ICTRP. Chosen over EudraCT/EUCTR because it covers the largest global trial volume (>500 000 studies), provides a stable versioned REST API, and is the primary registry for FDA-regulated interventions. Reference: Zarin et al., *NEJM* 2011; 364:852–860.

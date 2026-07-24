@@ -21,6 +21,8 @@ created: 2026-06-09
 - [academic-paper](academic-paper.md) — 12-agent academic paper writing pipeline
 - [clinical-decision-support](clinical-decision-support.md) — Generate professional clinical decision support (CDS) documents for pharmaceutical and clinical research settings, including patient cohort analyses (biomarker-stratified with...
 - [etetoolkit](etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
+- [gstack-make-pdf](gstack-make-pdf.md) — Turn any markdown file into a publication-quality PDF
+- [gstack/make-pdf](gstack-make-pdf.md) — Turn any markdown file into a publication-quality PDF
 - [liteparse](liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
 - [markitdown](markitdown.md) — Convert files and office documents to Markdown
 - [matplotlib](matplotlib.md) — Low-level plotting library for full customization
@@ -40,3 +42,9 @@ created: 2026-06-09
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-1
+> Use this for PDF-specific work — extract text/tables, merge/split, fill forms, create PDFs programmatically (no officecli PDF equivalent exists); for authoring .docx/.pptx/.xlsx use the canonical `officecli` family. Distinguishing axis: PDF manipulation vs officecli Office-document generation.
+
+> [!note] Vault audit 2026-07-24 — MNT-8
+> The "Visual Enhancement with Scientific Schematics" block in the source skill (hardcoded `scripts/generate_schematic.py` path) is copy-pasted across docx/pptx/xlsx/pdf and can drift; for schematic/diagram generation cross-reference the `scientific-schematics` skill rather than relying on the duplicated block.

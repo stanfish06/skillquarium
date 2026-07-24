@@ -8,8 +8,6 @@ description: >
   on-demand references so each invocation stays cheap.
 
 always_load:
-  # Shared layer — common to the nature-* skills
-  - ../nature-shared/core/terminology-ledger.md
   # Skill-local core
   - static/core/principles.md
   - static/core/toolchain.md

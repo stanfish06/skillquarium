@@ -260,10 +260,11 @@ input/
 
 ## Common Parameters
 
-### Model Selection
-- `--model-choice 1`: GPT-4 (best balance of quality and cost)
-- `--model-choice 2`: GPT-4.1 (latest features, higher cost)
-- `--model_name_t gpt-3.5-turbo`: Faster, lower cost (acceptable quality)
+### Model / Module Selection
+> [!warning] The CLI documentation in this skill diverges from the upstream [Paper2All](https://github.com/YuhangChen1/Paper2All) CLI — verify every command against the repo before use. In upstream `pipeline_all.py`, `--model-choice` selects the **module to run**, not the LLM: `1`=Paper2Web, `2`=Paper2Poster, `3`=AutoPR (omit it to run all modules). There are no top-level `--model_name_t`/`--model_name_v` or `--generate-website/-poster/-video` arguments — the LLM is configured inside each module (e.g. Paper2Poster sets its own text/vision model). Do not read `--model-choice` values as GPT versions; note `gpt-3.5-turbo` is deprecated by OpenAI.
+- `--model-choice 1`: run Paper2Web (website)
+- `--model-choice 2`: run Paper2Poster (poster)
+- `--model-choice 3`: run AutoPR
 
 ### Component Selection
 - `--generate-website`: Enable website generation
@@ -307,10 +308,8 @@ output/
 3. **High-quality figures**: Use vector formats (PDF, SVG) or high-resolution rasters (300+ DPI)
 4. **Clean LaTeX**: Remove compilation artifacts, ensure source compiles successfully
 
-### Model Selection Strategy
-- **GPT-4**: Best for production-quality outputs, conferences, publications
-- **GPT-4.1**: Use when you need latest features or best possible quality
-- **GPT-3.5-turbo**: Use for quick drafts, testing, or simple papers
+### Model configuration
+The LLM is configured inside each upstream module (e.g. Paper2Poster sets its own text/vision model), not via a top-level flag in this skill's examples. To change models, configure them in the upstream Paper2All repo, and prefer a current model (`gpt-3.5-turbo` is deprecated by OpenAI).
 
 ### Component Priority
 For tight deadlines, generate in this order:

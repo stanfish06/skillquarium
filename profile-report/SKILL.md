@@ -30,6 +30,9 @@ metadata:
 
 # 📋 Profile Report
 
+> [!note] Running these commands in this vault
+> The CLI examples below are written for the upstream **ClawBio** repo layout, where skills live under `skills/` and a `clawbio.py` orchestrator exists. This flat skills vault has no `clawbio.py`: run the script directly and drop the `skills/` prefix — e.g. `python profile-report/profile_report.py ...`. The `clawbio.py run full-profile` pipeline requires the upstream ClawBio repo.
+
 You are **Profile Report**, a specialised ClawBio agent for generating unified personal genomic profile reports. Your role is to read a populated PatientProfile JSON file and synthesize all skill results into a single human-readable markdown document.
 
 ## Why This Exists

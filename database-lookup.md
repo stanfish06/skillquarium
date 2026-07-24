@@ -25,3 +25,6 @@ _None auto-detected. Add your own links here, e.g. `[scanpy](scanpy.md)`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+> [!note] Vault audit 2026-07-24 — USE-6
+> Use this as the explicit FALLBACK for a documented database that has NO dedicated skill; when one exists, defer to it (`query-uniprot`, `query-pdb`, `query-ensembl`, `query-clinvar`, `query-opentarget`, … the `query-*` family, plus `clinpgx` for PGx). Distinguishing axis: dedicated `query-*` skill vs generic fallback.

@@ -87,6 +87,9 @@ metadata:
 
 # Shotgun Metagenomics Profiler
 
+> [!note] Vault audit 2026-07-24 — USE-15
+> Use this as the single-command shotgun runner emphasizing WHO-critical antimicrobial-resistance (resistome) profiling alongside Bracken/HUMAnN; when you need host-read depletion before profiling use `metagenomics`. Single-command AMR/resistome-focused runner vs host-depletion-aware workflow is the distinguishing axis (these overlap but are not duplicates).
+
 Comprehensive shotgun metagenomics analysis combining taxonomic classification, antimicrobial resistance gene detection, and functional pathway profiling from paired-end FASTQ files.
 
 ## What it does

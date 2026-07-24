@@ -5,6 +5,9 @@ description: 3D Morph PPT — extends morph-ppt with GLB model insertion, cinema
 
 # Morph PPT — 3D Extension
 
+> [!note] Vault audit 2026-07-24 — USE-19
+> Use this only for a .pptx embedding a `.glb` 3D model with cinematographic camera plus Morph transitions (triggers: '3D model', 'GLB', '3D morph', 'camera move', 'model-content layout'). DO NOT invoke for 2D Morph decks with no 3D model — use `morph-ppt`; and for a generic or pitch deck with no cross-slide motion route to `officecli-pptx` or `officecli-pitch-deck`. Distinguishing axis: 3D GLB scene vs 2D morph vs static deck.
+
 This skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.
 This file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.
 
