@@ -110,7 +110,7 @@ trainer = L.Trainer(logger=comet_logger)
 
 ### NeptuneLogger (removed in 2.6.4+)
 
-`NeptuneLogger` was removed in lightning 2.6.4 ([release notes](https://github.com/Lightning-AI/pytorch-lightning/releases/tag/2.6.4)). Use WandbLogger, MLFlowLogger, or TensorBoardLogger instead.
+`NeptuneLogger` was removed in lightning 2.6.4 ([release notes](https://github.com/Lightning-AI/pytorch-lightning/releases/tag/2.6.4)) after Neptune was sunset. Lightning's `loggers/__init__.py` now lists [`LitLogger`](https://github.com/lightning-ai/litlogger) as the designated replacement; WandbLogger, MLFlowLogger, or TensorBoardLogger remain available as built-in alternatives.
 
 ### CSVLogger
 
