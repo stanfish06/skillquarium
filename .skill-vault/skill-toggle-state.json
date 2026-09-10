@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-08-25T09:13:28.549892+00:00",
-  "root": "/home/stan/.agents",
+  "saved_at": "2026-09-10T16:06:29.623621+00:00",
+  "root": "/home/stan/.agent",
   "skills": {
     "academic-paper": {
       "claude_enabled": false,
@@ -822,6 +822,10 @@
     "build-complexheatmaps": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "build-iterated-agentic-loop": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "build-model": {
       "claude_enabled": true,
@@ -2010,6 +2014,10 @@
     "design-an-interface": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "design-control-loop": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "design-md-library": {
       "claude_enabled": true,
@@ -3219,10 +3227,6 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
-    "gstack": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "gtars": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -3514,6 +3518,10 @@
     "implement": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "improve-claude-md": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "improve-codebase-architecture": {
       "claude_enabled": true,
@@ -4612,6 +4620,10 @@
       "codex_enabled": false
     },
     "napari-viz": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "narrow-react-prop-types": {
       "claude_enabled": false,
       "codex_enabled": false
     },
@@ -5891,6 +5903,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "protobuf": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "protocol-reverse": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -6879,6 +6895,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "show-me": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "sign-in-with-vercel": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -6902,6 +6922,10 @@
     "skill-builder": {
       "claude_enabled": true,
       "codex_enabled": true
+    },
+    "skill-doctor": {
+      "claude_enabled": false,
+      "codex_enabled": false
     },
     "skills-hub": {
       "claude_enabled": true,
@@ -7815,6 +7839,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "use-modern-go": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "usfiscaldata": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -7968,6 +7996,10 @@
       "codex_enabled": false
     },
     "visualization-strategy-and-critique": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "vite": {
       "claude_enabled": true,
       "codex_enabled": true
     },
