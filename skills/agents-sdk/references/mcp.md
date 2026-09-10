@@ -1,6 +1,6 @@
 # MCP Server Integration
 
-Fetch `docs/mcp-client.md` and `docs/mcp-servers.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.
+Fetch `docs/agents/mcp-client.md` and `docs/agents/mcp-servers.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.
 
 Agents include a multi-server MCP client for connecting to external MCP servers.
 

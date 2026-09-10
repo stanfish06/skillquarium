@@ -11566,6 +11566,24 @@
       "skillFolderHash": "0bdb821a21e793a4f6f82a7078c052154447e5cc",
       "installedAt": "2026-09-06T05:14:37.476Z",
       "updatedAt": "2026-09-06T05:14:37.476Z"
+    },
+    "sqlite-expert": {
+      "source": "rightnow-ai/openfang",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/rightnow-ai/openfang.git",
+      "skillPath": "crates/openfang-skills/bundled/sqlite-expert/SKILL.md",
+      "skillFolderHash": "9af9df875fd3b3b65622662bb060524f27a19f05",
+      "installedAt": "2026-09-10T15:29:57.696Z",
+      "updatedAt": "2026-09-10T15:29:57.696Z"
+    },
+    "htmx": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mindrally/skills.git",
+      "skillPath": "htmx/SKILL.md",
+      "skillFolderHash": "c2e40b71da494a1b59e4bcaa30a3d599e651423b",
+      "installedAt": "2026-09-10T15:30:07.974Z",
+      "updatedAt": "2026-09-10T15:30:07.974Z"
     }
   },
   "dismissed": {

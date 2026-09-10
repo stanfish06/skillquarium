@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (115)
+## Skills (116)
 
 - [accessibility-and-inclusive-visualization](../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [admission-control](../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
@@ -86,6 +86,7 @@ created: 2026-06-13
 - [graphql-schema](../notes/web-automation-frontend/graphql-schema.md) — Guide for designing GraphQL schemas following industry best practices
 - [gsap](../notes/web-automation-frontend/gsap.md) — GSAP animation reference for HyperFrames
 - [high-end-visual-design](../notes/web-automation-frontend/high-end-visual-design.md) — Teaches the AI to design like a high-end agency
+- [htmx](../notes/web-automation-frontend/htmx.md) — HTMX development guidelines for building dynamic web applications with minimal JavaScript using HTML attributes
 - [image-to-code](../notes/web-automation-frontend/image-to-code.md) — Elite website image-to-code skill for Codex
 - [imagegen-frontend-mobile](../notes/web-automation-frontend/imagegen-frontend-mobile.md) — Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows
 - [imagegen-frontend-web](../notes/web-automation-frontend/imagegen-frontend-web.md) — Elite frontend image-direction skill for generating premium, conversion-aware website design references
