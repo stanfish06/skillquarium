@@ -1363,6 +1363,9 @@ EXTRA_ASSIGNMENTS = {
     "case-review": "security-auditing", "cloud-k8s": "security-auditing",
     "code-audit": "security-auditing",
     "database-security": "security-auditing", "diagram-generator": "software-dev",
+    # tech-leads-club/agent-skills (2026-09-13)
+    "security-best-practices": "security-auditing", "mermaid-studio": "software-dev",
+    "tlc-generative-engine-optimization": "web-automation-frontend",
     "digital-forensics": "security-auditing", "docs-generator": "software-dev",
     "dotnet-reverse": "security-auditing", "edr-bypass-re": "security-auditing",
     "email-security": "security-auditing", "firmware-pentest": "security-auditing",

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Web Automation, Frontend & Design](web-automation-frontend.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (89)
+## Skills (90)
 
 - [aflpp](../notes/security-auditing/aflpp.md) — Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast
 - [agentic-actions-auditor](../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
@@ -86,6 +86,7 @@ created: 2026-06-13
 - [sarif-parsing](../notes/security-auditing/sarif-parsing.md) — Parses and processes SARIF files from static analysis tools like CodeQL, Semgrep, or other scanners
 - [secure-workflow-guide](../notes/security-auditing/secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
 - [security-and-hardening](../notes/security-auditing/security-and-hardening.md) — Hardens code against vulnerabilities. Use when handling user input, authentication, data storage, or external integrations
+- [security-best-practices](../notes/security-auditing/security-best-practices.md) — Perform language and framework specific security best-practice reviews and suggest improvements
 - [security-diff-scan](../notes/security-auditing/security-diff-scan.md) — Use when the user asks for a security review of a pull request, commit, branch diff, working-tree patch, or other Git-backed change set
 - [security-scan](../notes/security-auditing/security-scan.md) — Use for a standard, single-pass security audit of an entire repository or a scoped path, package folder, or submodule with no diff to review
 - [semgrep](../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...

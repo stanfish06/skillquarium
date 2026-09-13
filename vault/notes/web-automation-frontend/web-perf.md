@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [tlc-generative-engine-optimization](../../notes/web-automation-frontend/tlc-generative-engine-optimization.md) — Generative Engine Optimization (GEO): the on-page technical work that makes a page or site discoverable, parseable, trustworthy, quotable, and fresh for AI answer engines (Google AI...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -11982,6 +11982,33 @@
       "skillFolderHash": "e28b6a246e636adcac927d883bc69e72258842b1",
       "installedAt": "2026-09-13T13:48:23.275Z",
       "updatedAt": "2026-09-13T13:48:23.275Z"
+    },
+    "security-best-practices": {
+      "source": "tech-leads-club/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tech-leads-club/agent-skills.git",
+      "skillPath": "packages/skills-catalog/skills/(security)/security-best-practices/SKILL.md",
+      "skillFolderHash": "e2ee7217371faefc8d4bb336cc9471f2da770d12",
+      "installedAt": "2026-09-13T23:11:44.621Z",
+      "updatedAt": "2026-09-13T23:11:44.621Z"
+    },
+    "tlc-generative-engine-optimization": {
+      "source": "tech-leads-club/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tech-leads-club/agent-skills.git",
+      "skillPath": "packages/skills-catalog/skills/(quality)/tlc-generative-engine-optimization/SKILL.md",
+      "skillFolderHash": "612e006c0edac64b978904e00f9ae446161e6961",
+      "installedAt": "2026-09-13T23:11:44.621Z",
+      "updatedAt": "2026-09-13T23:11:44.621Z"
+    },
+    "mermaid-studio": {
+      "source": "tech-leads-club/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/tech-leads-club/agent-skills.git",
+      "skillPath": "packages/skills-catalog/skills/(tooling)/mermaid-studio/SKILL.md",
+      "skillFolderHash": "0b9b81b250bbec27932ed8870e10d62ea2edf7aa",
+      "installedAt": "2026-09-13T23:11:44.621Z",
+      "updatedAt": "2026-09-13T23:11:44.621Z"
     }
   },
   "dismissed": {
