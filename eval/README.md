@@ -10,4 +10,4 @@ Generates code with and without a skill in the system prompt, gates it, scores t
 ./run-eval.sh runs
 ```
 
-Results: `runs/<id>/report.md`. Pairs, model, reps: `src/config.ts`. Skills under test: `skills/<id>/skill.ts`. Tasks: `tasks/<id>/`. Language gates and benches: `bench/`.
+Results: `runs/<id>/report.md`; committed rounds in `archive/`. Pairs, model, reps: `src/config.ts`. Skills under test: `skills/<id>/skill.ts`. Tasks: `tasks/<id>/`. Language gates and benches: `bench/`.

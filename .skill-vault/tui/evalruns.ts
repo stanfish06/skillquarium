@@ -73,17 +73,29 @@ export class FsEvalSource implements EvalSource {
     return kept
   }
 
-  async runIds(): Promise<string[]> {
-    const names = await dirNames(resolve(this.evalDir, "runs"))
-    const kept: string[] = []
-    for (const name of names) {
-      if (await exists(resolve(this.evalDir, "runs", name, "summary.json"))) kept.push(name)
+  // runs/ is gitignored scratch; archive/ is committed
+  private readonly runDirs = ["archive", "runs"]
+
+  private async runDir(runId: string): Promise<string> {
+    for (const base of this.runDirs) {
+      const dir = resolve(this.evalDir, base, runId)
+      if (await exists(resolve(dir, "summary.json"))) return dir
     }
-    return kept
+    throw new Error(`no run ${runId} under ${this.runDirs.join(" or ")}`)
+  }
+
+  async runIds(): Promise<string[]> {
+    const kept = new Set<string>()
+    for (const base of this.runDirs) {
+      for (const name of await dirNames(resolve(this.evalDir, base))) {
+        if (await exists(resolve(this.evalDir, base, name, "summary.json"))) kept.add(name)
+      }
+    }
+    return [...kept].sort()
   }
 
   async loadRun(runId: string): Promise<EvalRun> {
-    const dir = resolve(this.evalDir, "runs", runId)
+    const dir = await this.runDir(runId)
     const manifest = (await Bun.file(resolve(dir, "manifest.json")).json()) as {
       runId: string
       startedAt?: string
