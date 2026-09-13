@@ -631,6 +631,18 @@ describe("benchmarks tab", () => {
     await setup.waitFor(() => setup!.captureCharFrame().includes("run-a"))
     expect(setup.captureCharFrame()).toContain("77.8→90.0")
 
+    setup.mockInput.pressKey("?")
+    await setup.renderOnce()
+    frame = setup.captureCharFrame()
+    expect(frame).toContain("Benchmark columns")
+    expect(frame).toContain("blind traits included")
+    setup.mockInput.pressKey("ARROW_DOWN")
+    await setup.renderOnce()
+    expect(detailText("bench-detail-panel-text")).toStartWith("modern-typescript on ts-settings-parser")
+    setup.mockInput.pressKey("?")
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).not.toContain("Benchmark columns")
+
     setup.mockInput.pressKey("1")
     await setup.renderOnce()
     frame = setup.captureCharFrame()

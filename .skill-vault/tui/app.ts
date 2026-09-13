@@ -234,6 +234,7 @@ export class SkillquariumApp {
   private runIndex = -1
   private run: EvalRun | null = null
   private benchError: string | null = null
+  private readonly help: BoxRenderable
 
   constructor(
     private readonly renderer: CliRenderer,
@@ -545,6 +546,52 @@ export class SkillquariumApp {
     this.benchView.add(benchContent)
     this.root.add(this.benchView)
 
+    this.help = new BoxRenderable(renderer, {
+      id: "bench-help-overlay",
+      position: "absolute",
+      left: "10%",
+      top: 4,
+      width: "80%",
+      zIndex: 10,
+      visible: false,
+      borderStyle: "rounded",
+      borderColor: COLORS.accent,
+      title: " Benchmark columns ",
+      titleColor: COLORS.accent,
+      backgroundColor: COLORS.panelAlt,
+      padding: 1,
+      onMouseDown: (event) => {
+        event.stopPropagation()
+        this.toggleHelp()
+      },
+    })
+    this.help.add(
+      new TextRenderable(renderer, {
+        id: "bench-help-text",
+        fg: COLORS.text,
+        width: "100%",
+        content: [
+          "Every task has a rubric of traits, each a regex checked against the generated code. A trait is",
+          "either prescribed by the skill under test or blind: a quality check no skill asks for.",
+          "",
+          "skill%   traits prescribed by this skill that the code satisfies, as a percentage of those traits",
+          "full%    traits satisfied out of the whole rubric, blind traits included",
+          "b→s      baseline arm → skill arm. Baseline is the task alone; skill adds SKILL.md to the system prompt",
+          "Δskill   skill% in the skill arm minus skill% in the baseline arm, percentage points",
+          "Δfull    same for full%",
+          "gate     cells that compiled and passed the task's behaviour check / cells that reached the gate,",
+          "         per arm. Only gate-passing cells count toward the percentages",
+          "trunc    generations that hit the output token cap",
+          "err      gateway or tool failures",
+          "think    median reasoning tokens per generation",
+          "bench    median over gate-passing cells; compare arms on B/op and allocs/op, ns/op is noisy",
+          "",
+          "? or Esc closes",
+        ].join("\n"),
+      }),
+    )
+    this.root.add(this.help)
+
     const footer = new BoxRenderable(renderer, {
       id: "footer",
       width: "100%",
@@ -780,7 +827,12 @@ export class SkillquariumApp {
     this.search.blur()
     this.skillsView.visible = tab === "skills"
     this.benchView.visible = tab === "bench"
+    if (tab !== "bench") this.toggleHelp(false)
     this.updateTabChrome()
+  }
+
+  private toggleHelp(force?: boolean): void {
+    this.help.visible = force ?? !this.help.visible
   }
 
   private updateTabChrome(): void {
@@ -792,7 +844,7 @@ export class SkillquariumApp {
     this.shortcuts.content =
       this.activeTab === "skills"
         ? "/ search   ↑↓ move   M mark   C Claude   X Codex   Space both   F status   G category   Ctrl-S/R/P   Tab benchmarks   Q quit"
-        : "↑↓ move   [ ] switch run   Tab skills   Q quit"
+        : "↑↓ move   [ ] switch run   ? columns   Tab skills   Q quit"
     this.updateSummary()
   }
 
@@ -1326,6 +1378,10 @@ export class SkillquariumApp {
       this.showTab("bench")
       return
     }
+    if (this.help.visible) {
+      if (key.name === "?" || key.name === "escape" || key.name === "q") this.toggleHelp(false)
+      return
+    }
     if (key.name === "q" || key.name === "escape") {
       this.renderer.destroy()
       return
@@ -1333,6 +1389,9 @@ export class SkillquariumApp {
 
     if (this.activeTab === "bench") {
       switch (key.name) {
+        case "?":
+          this.toggleHelp(true)
+          return
         case "up":
         case "k":
           this.moveBenchSelection(-1)
