@@ -584,7 +584,11 @@ export class SkillquariumApp {
           "trunc    generations that hit the output token cap",
           "err      gateway or tool failures",
           "think    median reasoning tokens per generation",
-          "bench    median over gate-passing cells; compare arms on B/op and allocs/op, ns/op is noisy",
+          "",
+          "Bench rows in the detail pane, medians over gate-passing cells:",
+          "time per call         nanoseconds for one run of the task's benchmark body; varies with machine load",
+          "bytes per call        heap bytes the code allocated during one run; stable, compare arms on this",
+          "allocations per call  number of heap allocations during one run; .NET cannot count these",
           "",
           "? or Esc closes",
         ].join("\n"),
@@ -1310,9 +1314,9 @@ export class SkillquariumApp {
     const r = item.row
     const b = r.baseline
     const s = r.withSkill
-    const col = (value: string) => value.padEnd(11)
+    const col = (value: string) => value.padEnd(12)
     const line = (label: string, base: string, skill: string, extra = "") =>
-      `${label.padEnd(16)}${col(base)}${s ? col(skill) : ""}${extra}`
+      `${label.padEnd(17)}${col(base)}${s ? col(skill) : ""}${extra}`
     const bench = (stats: ArmStats | null, field: "ns" | "bytes" | "allocs") => (stats?.bench ? num(stats.bench[field]) : "-")
     const info = run.skills[item.skill]
     const hash = run.provenance[`skill:${item.skill}`]
@@ -1330,10 +1334,10 @@ export class SkillquariumApp {
       line("think (median)", num(b.reasoning), s ? num(s.reasoning) : ""),
       line("tool calls", num(b.toolCalls), s ? num(s.toolCalls) : ""),
       "",
-      line("bench ns/op", bench(b, "ns"), bench(s, "ns")),
-      line("bench B/op", bench(b, "bytes"), bench(s, "bytes")),
-      line("bench allocs/op", bench(b, "allocs"), bench(s, "allocs")),
-      line("bench failed", String(b.benchFailures), s ? String(s.benchFailures) : ""),
+      line("time per call", bench(b, "ns") + (b.bench ? " ns" : ""), bench(s, "ns") + (s?.bench ? " ns" : "")),
+      line("bytes per call", bench(b, "bytes"), bench(s, "bytes")),
+      line("allocs per call", bench(b, "allocs"), bench(s, "allocs")),
+      line("bench failures", String(b.benchFailures), s ? String(s.benchFailures) : ""),
       "",
       info ? `injection ${info.injection}${info.version ? `   version ${info.version}` : ""}` : "",
       hash ? `skill dir hash ${hash}` : "",
