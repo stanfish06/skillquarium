@@ -52,28 +52,13 @@ const PAIRS = [
 
 const BASELINE_TASKS = ["c-run-length"];
 
-export const CONFIGS: Record<string, RunConfig> = {
-  smoke: {
-    id: "smoke",
-    models: ["deepseek/deepseek-v4-flash"],
-    reps: 3,
-    maxOutputTokens: 32000,
-    pairs: PAIRS,
-    baselineTasks: BASELINE_TASKS,
-  },
-  full: {
-    id: "full",
-    models: [
-      "deepseek/deepseek-v4-flash",
-      "openai/gpt-5.4",
-      "anthropic/claude-sonnet-5",
-      "google/gemini-3.1-flash",
-    ],
-    reps: 5,
-    maxOutputTokens: 32000,
-    pairs: PAIRS,
-    baselineTasks: BASELINE_TASKS,
-  },
+export const CONFIG: RunConfig = {
+  id: "default",
+  models: ["openai/gpt-5.6-luna"],
+  reps: 3,
+  maxOutputTokens: 500_000,
+  pairs: PAIRS,
+  baselineTasks: BASELINE_TASKS,
 };
 
 export async function skillHash(dir: string): Promise<string> {

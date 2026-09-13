@@ -1,7 +1,7 @@
 import { mkdir, rm } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { CONFIGS, EVAL_DIR, loadSkills, loadTasks, provenance, type RunConfig } from "./config.ts";
+import { CONFIG, EVAL_DIR, loadSkills, loadTasks, provenance, type RunConfig } from "./config.ts";
 import { buildSystem, generate } from "./inject.ts";
 import { scoreTrait, verifyTraits } from "./score.ts";
 import { moduleFor } from "../bench/index.ts";
@@ -215,9 +215,7 @@ export async function selftest(): Promise<number> {
   const { tasks, skills } = await loadAll();
   const failures: string[] = [];
 
-  for (const cfg of Object.values(CONFIGS)) {
-    try { validateConfig(cfg, tasks, skills); } catch (e) { failures.push(e instanceof Error ? e.message : String(e)); }
-  }
+  try { validateConfig(CONFIG, tasks, skills); } catch (e) { failures.push(e instanceof Error ? e.message : String(e)); }
   for (const s of skills.values()) {
     if (!existsSync(resolve(s.dir, "SKILL.md"))) failures.push(`skill ${s.id}: no SKILL.md in ${s.dir}`);
     for (const part of s.tools?.command ?? []) {
