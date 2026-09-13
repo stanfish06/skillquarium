@@ -2,11 +2,7 @@ import type { Task } from "../../src/types.ts";
 
 const ZZ = ["zz-prefix"];
 
-/** Harness self-check, not a measurement of TypeScript quality.
- *
- *  The control lives on its own task because it renames exports, which would
- *  fight a behaviour check with fixed export names. So this task is gated by
- *  tsc alone and the prompt deliberately does not name its exports. */
+/** Harness positive control; gated by tsc alone because the control renames exports. */
 export const task: Task = {
   id: "ts-control-probe",
   lang: "ts",

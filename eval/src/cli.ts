@@ -1,5 +1,5 @@
 import { CONFIGS, EVAL_DIR } from "./config.ts";
-import { runEval, loadRun, replayRun } from "./run.ts";
+import { runEval, loadRun, replayRun, selftest } from "./run.ts";
 import { writeReport } from "./report.ts";
 import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -11,7 +11,10 @@ const flag = (name: string, dflt: string) => {
 };
 const positional: string[] = [];
 for (let i = 0; i < rest.length; i++) {
-  if (rest[i]!.startsWith("--")) { i++; continue; }
+  if (rest[i]!.startsWith("--")) {
+    i++;
+    continue;
+  }
   positional.push(rest[i]!);
 }
 
@@ -57,6 +60,9 @@ switch (cmd) {
     for (const e of (await readdir(dir).catch(() => [])).sort()) console.log(e);
     break;
   }
+  case "selftest": {
+    process.exit((await selftest()) ? 1 : 0);
+  }
   default:
-    console.log(`usage: bun run src/cli.ts <run|replay|report|runs> [--config smoke|full] [--concurrency N] [runId]`);
+    console.log(`usage: bun run src/cli.ts <run|replay|report|runs|selftest> [--config smoke|full] [--concurrency N] [runId]`);
 }

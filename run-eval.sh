@@ -5,6 +5,7 @@
 #   ./run-eval.sh replay [id]  -> re-score a saved run offline, no API calls
 #   ./run-eval.sh report [id]  -> print a saved run's report
 #   ./run-eval.sh runs         -> list saved runs
+#   ./run-eval.sh selftest     -> offline: fixtures, configs, reference solutions through every gate
 set -euo pipefail
 cd "$(dirname "$0")/eval"
 
@@ -17,5 +18,6 @@ case "${1:-smoke}" in
   replay) exec mise exec -- bun run src/cli.ts replay "${@:2}" ;;
   report) exec mise exec -- bun run src/cli.ts report "${@:2}" ;;
   runs)   exec mise exec -- bun run src/cli.ts runs ;;
-  *)      echo "usage: $0 [smoke|full|replay|report|runs] [runId]" >&2; exit 2 ;;
+  selftest) mise run setup && exec mise exec -- bun run src/cli.ts selftest ;;
+  *)      echo "usage: $0 [smoke|full|replay|report|runs|selftest] [runId]" >&2; exit 2 ;;
 esac

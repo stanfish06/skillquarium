@@ -4,6 +4,9 @@
 [tools]
 bun = "1.4.0"   # harness runtime + package manager
 go  = "1.27.0"  # Go task gate (build/vet) + go-modern-guidelines CLI
+rust = "1.98.1" # Rust task gate (cargo build/test) + bench
+# gcc, g++ and dotnet come from flake.nix (see bench/common.ts nixToolchain):
+# on NixOS the user-profile gcc cannot link and mise's dotnet cannot start.
 
 [env]
 # Secrets come from eval/.env, created by `mise run setup` from ../vercel-api.txt.
@@ -14,14 +17,19 @@ EVAL_ROOT = "{{config_root}}"
 description = "Install deps and materialize .env from ../vercel-api.txt"
 run = "bash scripts/setup.sh"
 
-[tasks.smoke]
-description = "End-to-end smoke run (1 model, 2 tasks, 3 skills, k=3)"
+[tasks.selftest]
+description = "Offline check: trait fixtures, config ids, every task's reference solution through its gate and bench"
 depends = ["setup"]
+run = "bun run src/cli.ts selftest"
+
+[tasks.smoke]
+description = "End-to-end smoke run (1 model, 7 tasks, 6 skills, k=3)"
+depends = ["selftest"]
 run = "bun run src/cli.ts run --config smoke"
 
 [tasks.full]
 description = "Full run (all configured models)"
-depends = ["setup"]
+depends = ["selftest"]
 run = "bun run src/cli.ts run --config full"
 
 [tasks.replay]
