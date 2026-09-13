@@ -10,7 +10,7 @@ This repo is two layers over the same folders:
 
 - **Agent layer** — each `skills/<skill>/SKILL.md` is the real, executable skill. These
   are managed by the [Vercel skills CLI](https://github.com/vercel-labs/skills)
-  (`npx skills`). Navigation tooling never edits them; `skill-toggle` changes only
+  (`npx skills`). Navigation tooling never edits them; `skillquarium` changes only
   their explicit Claude Code/Codex invocation fields at the user's request.
 - **Human layer** — generated for Obsidian / Neovim navigation, all under `vault/`:
   - `vault/notes/<domain>/<skill>.md` — a wrapper note per skill, grouped by
@@ -36,8 +36,8 @@ This directory holds the machinery that keeps the human layer in sync.
 | `apply-local-overrides.py` | Re-applies the fixes in `local-overrides.json` after each upstream pull. Run: `python3 .skill-vault/apply-local-overrides.py [--check]` |
 | `check-upstream-drift.py` | Compares recorded provenance against the upstream repos and reports what the sync failed to pull. Run: `python3 .skill-vault/check-upstream-drift.py [--fail-on-drift]` |
 | `local-overrides.json` | The in-vault fixes to upstream-managed skills, as `find`/`replace` pairs keyed by skill name. |
-| `skill_toggle.py` | Safe metadata backend for `./skill-toggle`: catalog JSON, product-specific changes, snapshots, reload, and metadata-only Git reset. |
-| `tui/` | OpenTUI 0.5.1 application with mouse/keyboard navigation, fuzzy search, status/category filters, and separate Claude Code/Codex controls. |
+| `skill_toggle.py` | Safe metadata backend for `./skillquarium`: catalog JSON, product-specific changes, snapshots, reload, and metadata-only Git reset. |
+| `tui/` | Skillquarium, the OpenTUI 0.5.1 application: a Skills tab (fuzzy search, status/category filters, Claude Code/Codex toggles) and a Benchmarks tab (eval/ results per skill and run). |
 | *(none)* | The CLI's provenance lock is the tracked `.skill-lock.json` at the repo root, not a copy in here. It records where each skill came from so CI can update them. |
 
 ## Scientific expert taxonomy

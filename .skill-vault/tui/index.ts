@@ -1,8 +1,9 @@
 import { createCliRenderer } from "@opentui/core"
 import { resolve } from "node:path"
 
-import { SkillToggleApp } from "./app"
+import { SkillquariumApp } from "./app"
 import { PythonSkillBackend } from "./backend"
+import { FsEvalSource } from "./evalruns"
 
 interface Options {
   root: string
@@ -49,5 +50,5 @@ const renderer = await createCliRenderer({
   backgroundColor: "#111318",
 })
 
-renderer.setTerminalTitle("Skill Invocation Control")
-new SkillToggleApp(renderer, backend, catalog, options.query)
+renderer.setTerminalTitle("Skillquarium")
+new SkillquariumApp(renderer, backend, catalog, options.query, new FsEvalSource(resolve(options.root, "eval")))
