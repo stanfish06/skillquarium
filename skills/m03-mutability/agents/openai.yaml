@@ -1,0 +1,7 @@
+interface:
+  display_name: "M03 Mutability"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $m03-mutability for this task."
+
+policy:
+  allow_implicit_invocation: false
