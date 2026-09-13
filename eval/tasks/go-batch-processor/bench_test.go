@@ -30,8 +30,7 @@ func TestProcessBatchesOrder(t *testing.T) {
 }
 
 func TestProcessBatchesAggregatesErrors(t *testing.T) {
-	// Two distinct failures, so an implementation that reports only the first
-	// (or only the last) and wraps it in errors.Join cannot pass.
+	// two distinct failures; both must be discoverable with errors.Is
 	errLow := errors.New("low batch failed")
 	errHigh := errors.New("high batch failed")
 	fn := func(b []int) (int, error) {
@@ -76,8 +75,6 @@ func TestProcessBatchesEdgeCases(t *testing.T) {
 	}
 }
 
-// Harness-owned benchmark. It uses b.Loop() deliberately: that idiom is itself
-// one of the guidelines under test, so the model must not supply it.
 func BenchmarkProcessBatches(b *testing.B) {
 	items := make([]int, 10_000)
 	for i := range items {

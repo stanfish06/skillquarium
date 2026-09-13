@@ -1,8 +1,11 @@
 import { mkdir, rm } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { EVAL_DIR, SKILLS, loadTasks, provenance, guidelinesVersion, type RunConfig } from "./config.ts";
+import { CONFIGS, EVAL_DIR, loadSkills, loadTasks, provenance, type RunConfig } from "./config.ts";
 import { buildSystem, generate } from "./inject.ts";
-import { gate, bench, scoreTrait, verifyTraits } from "./score.ts";
+import { scoreTrait, verifyTraits } from "./score.ts";
+import { moduleFor } from "../bench/index.ts";
+import { nixToolchain, taskDir } from "../bench/common.ts";
 import type { Arm, Cell, SkillDef, Task } from "./types.ts";
 
 const CACHE = resolve(EVAL_DIR, ".cache/gen");
@@ -29,31 +32,67 @@ async function poolMap<T, R>(items: T[], limit: number, fn: (t: T, i: number) =>
   return out;
 }
 
-export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
-  const tasks = await loadTasks();
-
-  const problems = await verifyTraits(tasks);
-  if (problems.length) {
-    throw new Error(`trait self-test failed — refusing to score:\n${problems.join("\n")}`);
+function validateConfig(cfg: RunConfig, tasks: Map<string, Task>, skills: Map<string, SkillDef>) {
+  const missing: string[] = [];
+  for (const p of cfg.pairs) {
+    if (!skills.has(p.skill)) missing.push(`skill "${p.skill}" (eval/skills/${p.skill}/skill.ts)`);
+    if (!tasks.has(p.task)) missing.push(`task "${p.task}" (eval/tasks/${p.task}/task.ts)`);
   }
-  console.log(`trait self-test: ok (${[...tasks.values()].reduce((n, t) => n + t.traits.length, 0)} traits)`);
+  for (const t of cfg.baselineTasks ?? []) if (!tasks.has(t)) missing.push(`task "${t}" (eval/tasks/${t}/task.ts)`);
+  if (missing.length) throw new Error(`config ${cfg.id} names things that do not exist:\n  ${[...new Set(missing)].join("\n  ")}`);
+}
 
-  const skillById = new Map(SKILLS.map((s) => [s.id, s]));
-  const usedTasks = [...new Set(cfg.pairs.map((p) => p.task))];
+async function loadAll() {
+  const [tasks, skills] = await Promise.all([loadTasks(), loadSkills()]);
+  const problems = await verifyTraits(tasks);
+  if (problems.length) throw new Error(`trait self-test failed — refusing to score:\n${problems.join("\n")}`);
+  console.log(`trait self-test: ok (${[...tasks.values()].reduce((n, t) => n + t.traits.length, 0)} traits, ${tasks.size} tasks, ${skills.size} skills)`);
+  return { tasks, skills };
+}
+
+async function score(task: Task, code: string, workRoot: string, key: string, cell: Cell) {
+  const mod = moduleFor(task.lang);
+  const dir = resolve(workRoot, key);
+  await rm(dir, { recursive: true, force: true });
+  await mkdir(dir, { recursive: true });
+  const g = await mod.gate(task, code, dir);
+  cell.gate = g;
+  cell.outcome = g.pass ? "ok" : "gate-fail";
+  cell.traits = await Promise.all(task.traits.map((t) => scoreTrait(t, code, task.lang, dir)));
+  if (g.pass && task.bench && mod.bench) {
+    const b = await mod.bench(task, dir);
+    cell.bench = b.result;
+    cell.benchError = b.error;
+  } else {
+    cell.bench = null;
+    cell.benchError = null;
+  }
+  await rm(dir, { recursive: true, force: true });
+}
+
+function usedSkills(cfg: RunConfig, skills: Map<string, SkillDef>): SkillDef[] {
+  return [...new Set(cfg.pairs.map((p) => p.skill))].map((id) => skills.get(id)!);
+}
+
+export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
+  const { tasks, skills } = await loadAll();
+  validateConfig(cfg, tasks, skills);
+
+  const usedTasks = [...new Set([...cfg.pairs.map((p) => p.task), ...(cfg.baselineTasks ?? [])])];
+  const versions = new Map<string, string>();
+  for (const s of usedSkills(cfg, skills)) if (s.version) versions.set(s.id, await s.version());
 
   const plans: Plan[] = [];
   for (const model of cfg.models) {
     for (let rep = 0; rep < cfg.reps; rep++) {
-      // Baselines are per (model, task, rep) — shared by every skill on that task.
+      // one baseline per (model, task, rep), shared by every skill on the task
       for (const tid of usedTasks) plans.push({ task: tasks.get(tid)!, skill: null, arm: "baseline", rep, model });
       for (const p of cfg.pairs) {
-        plans.push({ task: tasks.get(p.task)!, skill: skillById.get(p.skill)!, arm: "skill", rep, model });
+        plans.push({ task: tasks.get(p.task)!, skill: skills.get(p.skill)!, arm: "skill", rep, model });
       }
     }
   }
 
-  // Random suffix so two runs started in the same second cannot overwrite each
-  // other's manifests, reports or scratch directories.
   const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
   const runId = `${stamp}-${cfg.id}-${Math.random().toString(36).slice(2, 8)}`;
   const runDir = resolve(EVAL_DIR, "runs", runId);
@@ -61,19 +100,18 @@ export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
   await mkdir(runDir, { recursive: true });
   await mkdir(CACHE, { recursive: true });
 
-  // The guidelines CLI can change its rules while every SKILL.md stays
-  // byte-identical, so it belongs in the cache key, not just the manifest.
-  const toolVersion = await guidelinesVersion();
-
   console.log(`run ${runId}: ${plans.length} cells (${cfg.models.length} models x ${cfg.reps} reps)`);
 
   let done = 0;
   const cells = await poolMap(plans, opts.concurrency, async (p) => {
     const system = await buildSystem(p.arm, p.skill);
     const key = hash([
-      p.model, system, p.task.prompt, String(p.rep),
+      p.model,
+      system,
+      p.task.prompt,
+      String(p.rep),
       p.skill?.injection ?? "none",
-      p.skill?.injection === "tool" ? toolVersion : "",
+      (p.skill && versions.get(p.skill.id)) ?? "",
       String(cfg.maxOutputTokens),
     ]);
     const cacheFile = resolve(CACHE, `${key}.json`);
@@ -83,44 +121,49 @@ export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
     const t0 = performance.now();
     if (!gen) {
       gen = await generate({
-        model: p.model, system, task: p.task, skill: p.skill, arm: p.arm,
+        model: p.model,
+        system,
+        task: p.task,
+        skill: p.skill,
+        arm: p.arm,
         maxOutputTokens: cfg.maxOutputTokens,
       });
-      // Never cache a truncated or empty generation — it would replay forever.
+      // never cache truncated or empty generations
       if (!gen.error && gen.code && gen.finishReason !== "length") {
         await Bun.write(cacheFile, JSON.stringify(gen));
       }
     }
     const ms = Math.round(performance.now() - t0);
 
-    // A length-capped response is truncated even when it carries partial code.
-    // Gating that partial file would report truncation as a code failure.
     const truncated = gen.finishReason === "length" || !gen.code;
 
     const cell: Cell = {
-      runId, key, model: p.model, taskId: p.task.id, skillId: p.skill?.id ?? null,
-      arm: p.arm, rep: p.rep, system, prompt: p.task.prompt,
-      code: gen.code, raw: gen.raw, toolCalls: gen.toolCalls, steps: gen.steps,
+      runId,
+      key,
+      model: p.model,
+      taskId: p.task.id,
+      skillId: p.skill?.id ?? null,
+      arm: p.arm,
+      rep: p.rep,
+      system,
+      prompt: p.task.prompt,
+      code: gen.code,
+      raw: gen.raw,
+      toolCalls: gen.toolCalls,
+      steps: gen.steps,
       finishReason: gen.finishReason,
       outcome: gen.error ? "error" : truncated ? "empty" : "gate-fail",
-      usage: gen.usage, ms, cached, error: gen.error,
-      gate: null, traits: [], bench: null, benchError: null,
+      usage: gen.usage,
+      ms,
+      cached,
+      error: gen.error,
+      gate: null,
+      traits: [],
+      bench: null,
+      benchError: null,
     };
 
-    if (cell.outcome === "gate-fail") {
-      const g = await gate(p.task, gen.code, workRoot, key);
-      cell.gate = { pass: g.pass, detail: g.detail };
-      cell.outcome = g.pass ? "ok" : "gate-fail";
-      cell.traits = await Promise.all(
-        p.task.traits.map((t) => scoreTrait(t, gen.code, p.task.lang, g.dir)),
-      );
-      if (g.pass && p.task.bench) {
-        const b = await bench(g.dir);
-        cell.bench = b.result;
-        cell.benchError = b.error;
-      }
-      await rm(g.dir, { recursive: true, force: true });
-    }
+    if (cell.outcome === "gate-fail") await score(p.task, gen.code, workRoot, key, cell);
 
     done++;
     const tag = `${p.model.split("/")[1]} ${p.task.id} ${p.arm}${p.skill ? `:${p.skill.id}` : ""} r${p.rep}`;
@@ -134,7 +177,8 @@ export async function runEval(cfg: RunConfig, opts: { concurrency: number }) {
   const manifest = {
     runId,
     config: cfg,
-    provenance: await provenance(),
+    provenance: await provenance(usedSkills(cfg, skills)),
+    skills: Object.fromEntries(usedSkills(cfg, skills).map((s) => [s.id, { injection: s.injection, version: versions.get(s.id) ?? null }])),
     startedAt: new Date().toISOString(),
     cells: cells.length,
   };
@@ -151,33 +195,75 @@ export async function loadRun(runId: string) {
   return { runId, runDir, cells, manifest };
 }
 
-/** Offline re-score: reuse the saved generations, run gates and traits again.
- *  No API calls, so scorer changes are testable for free. */
+/** Re-score saved generations offline; no API calls. */
 export async function replayRun(runId: string) {
   const { runDir, cells, manifest } = await loadRun(runId);
-  const tasks = await loadTasks();
-  const problems = await verifyTraits(tasks);
-  if (problems.length) throw new Error(`trait self-test failed:\n${problems.join("\n")}`);
-
+  const { tasks } = await loadAll();
   const workRoot = resolve(EVAL_DIR, "work", `replay-${runId}`);
   for (const cell of cells) {
     const task = tasks.get(cell.taskId);
     if (!task || cell.outcome === "error" || cell.outcome === "empty") continue;
-    const g = await gate(task, cell.code, workRoot, cell.key);
-    cell.gate = { pass: g.pass, detail: g.detail };
-    cell.outcome = g.pass ? "ok" : "gate-fail";
-    cell.traits = await Promise.all(task.traits.map((t) => scoreTrait(t, cell.code, task.lang, g.dir)));
-    if (g.pass && task.bench) {
-      const b = await bench(g.dir);
-      cell.bench = b.result;
-      cell.benchError = b.error;
-    } else {
-      cell.bench = null;
-      cell.benchError = null;
-    }
-    await rm(g.dir, { recursive: true, force: true });
+    await score(task, cell.code, workRoot, cell.key, cell);
   }
   await rm(workRoot, { recursive: true, force: true });
   await Bun.write(resolve(runDir, "cells.jsonl"), cells.map((c) => JSON.stringify(c)).join("\n") + "\n");
-  return { runId, runDir, cells, manifest };
+  return { runDir, cells, manifest };
+}
+
+/** Offline check: trait fixtures, config ids, skill files, reference solutions through gate and bench. */
+export async function selftest(): Promise<number> {
+  const { tasks, skills } = await loadAll();
+  const failures: string[] = [];
+
+  for (const cfg of Object.values(CONFIGS)) {
+    try { validateConfig(cfg, tasks, skills); } catch (e) { failures.push(e instanceof Error ? e.message : String(e)); }
+  }
+  for (const s of skills.values()) {
+    if (!existsSync(resolve(s.dir, "SKILL.md"))) failures.push(`skill ${s.id}: no SKILL.md in ${s.dir}`);
+    for (const part of s.tools?.command ?? []) {
+      if (part.startsWith("/") && !existsSync(part)) failures.push(`skill ${s.id}: tool command file missing: ${part}`);
+    }
+  }
+
+  const tc = await nixToolchain();
+  console.log(`toolchain: gcc=${tc.gcc ?? "MISSING"} g++=${tc["g++"] ?? "MISSING"} dotnet=${tc.dotnet ?? "MISSING"}`);
+
+  const workRoot = resolve(EVAL_DIR, "work", `selftest-${Date.now().toString(36)}`);
+  console.log("");
+  console.log("task                    lang    gate  detail");
+  for (const task of tasks.values()) {
+    const mod = moduleFor(task.lang);
+    const ref = resolve(taskDir(task.id), mod.referenceFile);
+    const row = (gate: string, detail: string) =>
+      console.log(`${task.id.padEnd(23)} ${task.lang.padEnd(7)} ${gate.padEnd(5)} ${detail}`);
+    if (!existsSync(ref)) {
+      failures.push(`${task.id}: no ${mod.referenceFile}`);
+      row("-", `no ${mod.referenceFile}`);
+      continue;
+    }
+    const code = await Bun.file(ref).text();
+    const cell = { outcome: "gate-fail", gate: null, traits: [], bench: null, benchError: null } as unknown as Cell;
+    const t0 = performance.now();
+    await score(task, code, workRoot, `ref-${task.id}`, cell);
+    const ms = Math.round(performance.now() - t0);
+    const sat = cell.traits.filter((t) => t.satisfied).length;
+    const bench = cell.bench
+      ? `bench ${Math.round(cell.bench.nsPerOp)} ns/op ${Math.round(cell.bench.bytesPerOp)} B/op ${cell.bench.allocsPerOp === null ? "-" : Math.round(cell.bench.allocsPerOp)} allocs/op`
+      : !task.bench ? "no bench"
+      : cell.outcome !== "ok" ? "bench skipped"
+      : `bench FAILED: ${cell.benchError}`;
+    row(cell.outcome === "ok" ? "ok" : "FAIL", `${cell.gate!.detail.split("\n")[0]!.slice(0, 80)} | traits ${sat}/${cell.traits.length} | ${bench} | ${ms}ms`);
+    if (cell.outcome !== "ok") failures.push(`${task.id}: reference failed the gate: ${cell.gate!.detail.slice(0, 300)}`);
+    if (task.bench && cell.outcome === "ok" && !cell.bench) failures.push(`${task.id}: reference bench failed: ${cell.benchError}`);
+  }
+  await rm(workRoot, { recursive: true, force: true });
+
+  console.log("");
+  if (failures.length) {
+    console.log(`selftest: ${failures.length} problem(s)`);
+    for (const f of failures) console.log(`  - ${f}`);
+  } else {
+    console.log(`selftest: ok (${tasks.size} tasks, ${skills.size} skills)`);
+  }
+  return failures.length;
 }

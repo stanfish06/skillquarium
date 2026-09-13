@@ -1,0 +1,9 @@
+import { resolve } from "node:path";
+import { REPO_DIR } from "../../src/config.ts";
+import type { SkillDef } from "../../src/types.ts";
+
+export const skill: SkillDef = {
+  id: "csharp-developer",
+  dir: resolve(REPO_DIR, "skills/csharp-developer"),
+  injection: "prose",
+};

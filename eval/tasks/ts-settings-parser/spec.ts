@@ -1,5 +1,3 @@
-// Harness-owned behaviour check. Compiling is not enough: a module can declare
-// a tagged union and a never-exhaustiveness helper without parsing anything.
 import { strict as assert } from "node:assert";
 import { parseSetting, renderSetting } from "./solution.ts";
 

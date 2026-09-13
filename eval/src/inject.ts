@@ -1,47 +1,38 @@
-import { resolve } from "node:path";
-import { generateText, tool, stepCountIs } from "ai";
-import { z } from "zod";
+import { streamText, tool, stepCountIs } from "ai";
+import { EVAL_DIR } from "./config.ts";
+import { moduleFor } from "../bench/index.ts";
 import type { SkillDef, Task, Arm } from "./types.ts";
 
-/** Identical across arms so the baseline generation is cache-shared by every
- *  skill paired with the same task. */
 export const BASE_SYSTEM =
   "You are an expert software engineer. Produce production-quality code that " +
   "satisfies the request exactly. Return only the requested file's contents in " +
   "a single fenced code block, with no commentary before or after it.";
 
-/** Bridges the skill's shell commands onto AI SDK tools without editing the
- *  skill body — the body is what is under test. */
-const TOOL_BRIDGE =
-  "\n\n---\n\nMechanism note: the CLI described above is exposed to you as the " +
-  "tools `go_guidelines_list` and `go_guidelines_explain`. Call those tools " +
-  "instead of shell commands. Everything else in the instructions applies " +
-  "unchanged.";
-
 export async function skillText(skill: SkillDef): Promise<string> {
-  return await Bun.file(resolve(skill.dir, "SKILL.md")).text();
+  return await Bun.file(`${skill.dir}/SKILL.md`).text();
 }
 
 export async function buildSystem(arm: Arm, skill: SkillDef | null): Promise<string> {
   if (arm === "baseline" || !skill) return BASE_SYSTEM;
   const body = await skillText(skill);
-  return `${BASE_SYSTEM}\n\n---\n\n${body}${skill.injection === "tool" ? TOOL_BRIDGE : ""}`;
+  const note = skill.tools ? `\n\n---\n\n${skill.tools.bridgeNote}` : "";
+  return `${BASE_SYSTEM}\n\n---\n\n${body}${note}`;
 }
 
-async function runSkillCli(skillDir: string, args: string[]): Promise<string> {
-  const proc = Bun.spawn(["mise", "exec", "--", "sh", "scripts/run-tool.sh", ...args], {
-    cwd: skillDir,
+// run under mise exec from the eval dir to put the pinned toolchains on PATH
+async function runSkillCli(skill: SkillDef, args: string[]): Promise<string> {
+  const bridge = skill.tools!;
+  const proc = Bun.spawn(["mise", "exec", "--", ...bridge.command, ...args], {
+    cwd: EVAL_DIR,
     stdout: "pipe",
     stderr: "pipe",
-    signal: AbortSignal.timeout(120_000),
+    signal: AbortSignal.timeout(bridge.timeoutMs ?? 120_000),
   });
   const [out, err] = await Promise.all([
     new Response(proc.stdout).text(),
     new Response(proc.stderr).text(),
   ]);
   const code = await proc.exited;
-  // Returning diagnostics as a successful tool result would let an install or
-  // lookup failure be scored as a real skill-arm sample.
   if (code !== 0) {
     throw new Error(`skill CLI \`${args.join(" ")}\` exited ${code}: ${(err || out).slice(0, 400)}`);
   }
@@ -49,33 +40,26 @@ async function runSkillCli(skillDir: string, args: string[]): Promise<string> {
 }
 
 function skillTools(skill: SkillDef, onFailure: (e: unknown) => void) {
-  const version = skill.goVersion ?? "1.27";
   const guard = (fn: () => Promise<string>) => fn().catch((e) => { onFailure(e); throw e; });
-  return {
-    go_guidelines_list: tool({
-      description:
-        "List the modern Go guidelines that apply to a Go version. Returns one line per guideline, newest first. Read the whole list.",
-      inputSchema: z.object({ goVersion: z.string().describe("e.g. 1.27") }),
-      execute: async ({ goVersion }) => guard(() => runSkillCli(skill.dir, ["list", "--go-version", goVersion || version])),
-    }),
-    go_guidelines_explain: tool({
-      description:
-        "Explain specific guideline IDs, with details and before/after examples. Pass only the IDs you intend to apply.",
-      inputSchema: z.object({ ids: z.array(z.string()).min(1) }),
-      execute: async ({ ids }) => guard(() => runSkillCli(skill.dir, ["explain", ...ids.slice(0, 12)])),
-    }),
-  };
+  return Object.fromEntries(
+    Object.entries(skill.tools!.tools).map(([name, def]) => [
+      name,
+      tool({
+        description: def.description,
+        inputSchema: def.inputSchema as any,
+        execute: async (input: unknown) => guard(() => runSkillCli(skill, def.args(input))),
+      }),
+    ]),
+  );
 }
 
-const FENCE = /```(\w+)?\n([\s\S]*?)```/g;
+const FENCE = /```(\S+)?\n([\s\S]*?)```/g;
 
-/** Models wrap code in prose. Prefer a fence tagged with the task language,
- *  else the longest fence, else the raw text. */
-export function extractCode(raw: string, lang: Task["lang"]): string {
-  const tags = lang === "ts" ? ["ts", "typescript", "tsx"] : ["go", "golang"];
+// fence tagged with the language, else the longest fence, else the raw text
+export function extractCode(raw: string, fenceTags: string[]): string {
   const blocks = [...raw.matchAll(FENCE)].map((m) => ({ tag: (m[1] ?? "").toLowerCase(), body: m[2] ?? "" }));
   if (!blocks.length) return raw.trim();
-  const tagged = blocks.filter((b) => tags.includes(b.tag));
+  const tagged = blocks.filter((b) => fenceTags.includes(b.tag));
   const pool = tagged.length ? tagged : blocks;
   return pool.sort((a, b) => b.body.length - a.body.length)[0]!.body.trim();
 }
@@ -98,35 +82,38 @@ export async function generate(opts: {
   arm: Arm;
   maxOutputTokens: number;
 }): Promise<GenResult> {
-  const useTools = opts.arm === "skill" && opts.skill?.injection === "tool";
+  const useTools = opts.arm === "skill" && !!opts.skill?.tools;
   let toolFailure: string | null = null;
+  let streamError: unknown = null;
   try {
-    const r = await generateText({
+    // streaming keeps the gateway connection alive across multi-minute generations
+    const r = streamText({
       model: opts.model,
       system: opts.system,
       prompt: opts.task.prompt,
       temperature: 0.2,
       maxOutputTokens: opts.maxOutputTokens,
+      timeout: { chunkMs: 180_000 },
       ...(useTools
         ? {
             tools: skillTools(opts.skill!, (e) => {
               toolFailure ??= e instanceof Error ? e.message : String(e);
             }),
-            stopWhen: stepCountIs(8),
+            stopWhen: stepCountIs(opts.skill!.tools!.maxSteps ?? 8),
           }
         : {}),
     });
-    const toolCalls = r.steps.flatMap((s) =>
-      s.toolCalls.map((c) => ({ name: c.toolName, input: c.input })),
-    );
+    await r.consumeStream({ onError: (e) => { streamError ??= e; } });
+    if (streamError) throw streamError;
+    const [text, steps, finishReason, usage] = await Promise.all([r.text, r.steps, r.finishReason, r.totalUsage]);
+    const toolCalls = steps.flatMap((s) => s.toolCalls.map((c) => ({ name: c.toolName, input: c.input })));
     return {
-      raw: r.text,
-      code: extractCode(r.text, opts.task.lang),
+      raw: text,
+      code: extractCode(text, moduleFor(opts.task.lang).fenceTags),
       toolCalls,
-      steps: r.steps.length,
-      finishReason: r.finishReason ?? null,
-      usage: (r.usage ?? null) as Record<string, unknown> | null,
-      // Infrastructure failure must not be reported as a skill result.
+      steps: steps.length,
+      finishReason: finishReason ?? null,
+      usage: (usage ?? null) as Record<string, unknown> | null,
       error: toolFailure,
     };
   } catch (e) {
