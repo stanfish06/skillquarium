@@ -1,0 +1,77 @@
+{
+  "runId": "2026-09-13T15-52-43-default-d5jsf7",
+  "config": {
+    "id": "default",
+    "models": [
+      "openai/gpt-5.6-luna"
+    ],
+    "reps": 3,
+    "maxOutputTokens": 500000,
+    "pairs": [
+      {
+        "skill": "zz-prefix",
+        "task": "ts-control-probe"
+      },
+      {
+        "skill": "modern-typescript",
+        "task": "ts-settings-parser"
+      },
+      {
+        "skill": "use-modern-go",
+        "task": "go-batch-processor"
+      },
+      {
+        "skill": "rust-coding-guidelines",
+        "task": "rust-record-parser"
+      },
+      {
+        "skill": "cpp-pro",
+        "task": "cpp-lru-cache"
+      },
+      {
+        "skill": "csharp-developer",
+        "task": "csharp-order-parser"
+      }
+    ],
+    "baselineTasks": [
+      "c-run-length"
+    ]
+  },
+  "provenance": {
+    "skill:zz-prefix": "fccb08fff0710d2d",
+    "skill:modern-typescript": "8936df5f3be477f8",
+    "skill:use-modern-go": "0eedae8d06286f89",
+    "skill:use-modern-go:version": "v0.1.1",
+    "skill:rust-coding-guidelines": "8fc1f8308be0360a",
+    "skill:cpp-pro": "7b07444d80b08705",
+    "skill:csharp-developer": "aa401a06abae8614"
+  },
+  "skills": {
+    "zz-prefix": {
+      "injection": "prose",
+      "version": null
+    },
+    "modern-typescript": {
+      "injection": "prose",
+      "version": null
+    },
+    "use-modern-go": {
+      "injection": "tool",
+      "version": "v0.1.1"
+    },
+    "rust-coding-guidelines": {
+      "injection": "prose",
+      "version": null
+    },
+    "cpp-pro": {
+      "injection": "prose",
+      "version": null
+    },
+    "csharp-developer": {
+      "injection": "prose",
+      "version": null
+    }
+  },
+  "startedAt": "2026-09-13T15:56:07.941Z",
+  "cells": 39
+}
