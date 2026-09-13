@@ -1,7 +1,0 @@
-interface:
-  display_name: "Meta Cognition Parallel"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $meta-cognition-parallel for this task."
-
-policy:
-  allow_implicit_invocation: false

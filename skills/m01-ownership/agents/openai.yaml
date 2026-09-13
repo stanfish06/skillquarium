@@ -1,7 +1,0 @@
-interface:
-  display_name: "M01 Ownership"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $m01-ownership for this task."
-
-policy:
-  allow_implicit_invocation: false

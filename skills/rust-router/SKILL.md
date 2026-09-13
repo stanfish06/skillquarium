@@ -15,7 +15,6 @@ description: |-
   问题, problem, question, 怎么用, how to use, 如何, how to, 为什么, why,
   什么是, what is, 帮我写, help me write, 实现, implement, 解释, explain
 globs: ["**/Cargo.toml", "**/*.rs"]
-disable-model-invocation: true
 ---
 
 ---

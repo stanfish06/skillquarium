@@ -1,7 +1,0 @@
-interface:
-  display_name: "M09 Domain"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $m09-domain for this task."
-
-policy:
-  allow_implicit_invocation: false

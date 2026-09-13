@@ -1,7 +1,0 @@
-interface:
-  display_name: "Rust Deps Visualizer"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $rust-deps-visualizer for this task."
-
-policy:
-  allow_implicit_invocation: false

@@ -11,7 +11,6 @@ metadata:
   scope: implementation
   output-format: code
   related-skills: rust-engineer, embedded-systems
-disable-model-invocation: true
 ---
 
 # C++ Pro

@@ -1,7 +1,0 @@
-interface:
-  display_name: "Coding Guidelines"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $coding-guidelines for this task."
-
-policy:
-  allow_implicit_invocation: false

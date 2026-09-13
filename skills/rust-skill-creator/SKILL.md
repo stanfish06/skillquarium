@@ -4,7 +4,6 @@ description: "Use when creating skills for Rust crates or std library documentat
 argument-hint: "<crate_name|std::module>"
 context: fork
 agent: general-purpose
-disable-model-invocation: true
 ---
 
 # Rust Skill Creator

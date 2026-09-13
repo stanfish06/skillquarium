@@ -11,7 +11,6 @@ metadata:
   scope: implementation
   output-format: code
   related-skills: api-designer, database-optimizer, devops-engineer
-disable-model-invocation: true
 ---
 
 # C# Developer

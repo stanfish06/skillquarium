@@ -2,7 +2,6 @@
 name: domain-cloud-native
 description: "Use when building cloud-native apps. Keywords: kubernetes, k8s, docker, container, grpc, tonic, microservice, service mesh, observability, tracing, metrics, health check, cloud, deployment, 云原生, 微服务, 容器"
 user-invocable: false
-disable-model-invocation: true
 ---
 
 # Cloud-Native Domain

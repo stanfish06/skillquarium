@@ -1,7 +1,0 @@
-interface:
-  display_name: "Rust Daily"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $rust-daily for this task."
-
-policy:
-  allow_implicit_invocation: false
