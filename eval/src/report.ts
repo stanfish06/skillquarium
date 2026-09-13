@@ -109,10 +109,10 @@ export function renderReport(rows: Row[], manifest: any): string {
   const benched = rows.filter((r) => r.baseline.bench || r.withSkill?.bench || r.withSkill?.benchFailures || r.baseline.benchFailures);
   if (benched.length) {
     L.push("");
-    L.push("## bench (median over gate-passing cells)");
+    L.push("## bench (medians over gate-passing cells)");
     L.push("");
     L.push("```");
-    L.push(line(["model", "task", "skill", "arm", "", "ns/op", "B/op", "allocs", "failed"]));
+    L.push(line(["model", "task", "skill", "arm", "", "ns/call", "bytes", "allocs", "failed"]));
     const benchLine = (first: string[], arm: string, s: Stats) => {
       const b = s.bench;
       return line([...first, arm, "",
@@ -128,7 +128,7 @@ export function renderReport(rows: Row[], manifest: any): string {
       L.push("");
     }
     L.push("```");
-    L.push("ns/op is machine noise across runs; compare arms on B/op and allocs/op. allocs is `-` where the runtime cannot count (.NET).");
+    L.push("Per call of the task's benchmark body. Time varies with machine load; compare arms on bytes and allocations. allocs is `-` where the runtime cannot count (.NET).");
   }
 
   const toolInjected = new Set(
