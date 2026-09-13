@@ -6,6 +6,7 @@ metadata:
   author: Fernando Paladini - github.com/paladini
   source: https://github.com/tech-leads-club/agent-skills
 license: MIT
+disable-model-invocation: true
 ---
 
 # GEO Specialist
