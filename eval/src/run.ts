@@ -228,12 +228,12 @@ export async function selftest(): Promise<number> {
 
   const workRoot = resolve(EVAL_DIR, "work", `selftest-${Date.now().toString(36)}`);
   console.log("");
-  console.log("task                    lang    gate  detail");
+  console.log("task                    lang    compiled  detail");
   for (const task of tasks.values()) {
     const mod = moduleFor(task.lang);
     const ref = resolve(taskDir(task.id), mod.referenceFile);
     const row = (gate: string, detail: string) =>
-      console.log(`${task.id.padEnd(23)} ${task.lang.padEnd(7)} ${gate.padEnd(5)} ${detail}`);
+      console.log(`${task.id.padEnd(23)} ${task.lang.padEnd(7)} ${gate.padEnd(9)} ${detail}`);
     if (!existsSync(ref)) {
       failures.push(`${task.id}: no ${mod.referenceFile}`);
       row("-", `no ${mod.referenceFile}`);

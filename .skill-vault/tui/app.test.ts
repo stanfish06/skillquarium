@@ -624,7 +624,7 @@ describe("benchmarks tab", () => {
     setup.mockInput.pressKey("ARROW_DOWN")
     await setup.renderOnce()
     expect(detailText("bench-detail-panel-text")).toStartWith("modern-typescript on ts-settings-parser")
-    expect(detailText("bench-detail-panel-text")).toContain("bytes per call")
+    expect(detailText("bench-detail-panel-text")).toContain("bytes")
     expect(detailText("bench-detail-panel-text")).toContain("skill dir hash 8936df5f3be477f8")
 
     setup.mockInput.pressKey("[")
@@ -635,7 +635,7 @@ describe("benchmarks tab", () => {
     await setup.renderOnce()
     frame = setup.captureCharFrame()
     expect(frame).toContain("Benchmark columns")
-    expect(frame).toContain("blind traits included")
+    expect(frame).toContain("percent of all specified traits")
     setup.mockInput.pressKey("ARROW_DOWN")
     await setup.renderOnce()
     expect(detailText("bench-detail-panel-text")).toStartWith("modern-typescript on ts-settings-parser")
