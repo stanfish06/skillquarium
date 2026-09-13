@@ -80,7 +80,7 @@ export function renderReport(rows: Row[], manifest: any): string {
   L.push("trunc = hit the output cap. err = gateway or tool failure; both shrink the sample.");
   L.push("");
 
-  const head = ["model", "task", "skill", "arm", "n", "gate", "trunc", "err", "skill%", "full%", "think"];
+  const head = ["model", "task", "skill", "prompt", "n", "gate", "trunc", "err", "skill%", "full%", "think"];
   const widths = [22, 20, 22, 8, 3, 6, 5, 3, 7, 7, 6];
   const line = (c: string[]) => c.map((v, i) => v.padEnd(widths[i]!)).join(" ").trimEnd();
   const statLine = (first: string[], arm: string, s: Stats) =>
@@ -112,7 +112,7 @@ export function renderReport(rows: Row[], manifest: any): string {
     L.push("## bench (medians over gate-passing cells)");
     L.push("");
     L.push("```");
-    L.push(line(["model", "task", "skill", "arm", "", "ns/call", "bytes", "allocs", "failed"]));
+    L.push(line(["model", "task", "skill", "prompt", "", "ns/call", "bytes", "allocs", "failed"]));
     const benchLine = (first: string[], arm: string, s: Stats) => {
       const b = s.bench;
       return line([...first, arm, "",
@@ -128,7 +128,7 @@ export function renderReport(rows: Row[], manifest: any): string {
       L.push("");
     }
     L.push("```");
-    L.push("Per call of the task's benchmark body. Time varies with machine load; compare arms on bytes and allocations. allocs is `-` where the runtime cannot count (.NET).");
+    L.push("Per call of the task's benchmark body. Time depends on machine load; bytes and allocations do not. allocs is `-` where the runtime cannot count (.NET).");
   }
 
   const toolInjected = new Set(
