@@ -10,7 +10,7 @@ const med = (xs: number[]) => {
   return s.length % 2 ? s[mid]! : (s[mid - 1]! + s[mid]!) / 2;
 };
 
-// gate-passing cells only
+// compiled cells only
 function subsetScore(cells: Cell[], skillId: string | null): number {
   const per = cells
     .filter((c) => c.outcome === "ok")
@@ -75,13 +75,12 @@ export function renderReport(rows: Row[], manifest: any): string {
   L.push(`config: ${manifest.config.id} | models: ${manifest.config.models.length} | reps: ${manifest.config.reps} | cells: ${manifest.cells}`);
   L.push(`provenance: ${Object.entries(manifest.provenance).map(([k, v]) => `${k}=${String(v).slice(0, 12)}`).join(" ")}`);
   L.push("");
-  L.push("skill%  = traits this skill prescribes. full%  = whole rubric, incl. blind traits no skill asks for.");
-  L.push("Percentages average only gate-passing cells. gate = passed / reached the gate.");
-  L.push("trunc = hit the output cap. err = gateway or tool failure; both shrink the sample.");
+  L.push("skill% = traits specified in the skill that the code implements. full% = all specified traits that the code implements.");
+  L.push("compiled = compiled and passed tests / total. trunc = hit the output cap. err = gateway or tool failure.");
   L.push("");
 
-  const head = ["model", "task", "skill", "prompt", "n", "gate", "trunc", "err", "skill%", "full%", "think"];
-  const widths = [22, 20, 22, 8, 3, 6, 5, 3, 7, 7, 6];
+  const head = ["model", "task", "skill", "prompt", "n", "compiled", "trunc", "err", "skill%", "full%", "think"];
+  const widths = [22, 20, 22, 8, 3, 8, 5, 3, 7, 7, 6];
   const line = (c: string[]) => c.map((v, i) => v.padEnd(widths[i]!)).join(" ").trimEnd();
   const statLine = (first: string[], arm: string, s: Stats) =>
     line([...first, arm, String(s.n), `${s.ok}/${s.gated}`, String(s.empty), String(s.errors), pct(s.subset), pct(s.full),
@@ -109,7 +108,7 @@ export function renderReport(rows: Row[], manifest: any): string {
   const benched = rows.filter((r) => r.baseline.bench || r.withSkill?.bench || r.withSkill?.benchFailures || r.baseline.benchFailures);
   if (benched.length) {
     L.push("");
-    L.push("## bench (medians over gate-passing cells)");
+    L.push("## bench (medians over compiled cells)");
     L.push("");
     L.push("```");
     L.push(line(["model", "task", "skill", "prompt", "", "ns/call", "bytes", "allocs", "failed"]));
@@ -128,7 +127,7 @@ export function renderReport(rows: Row[], manifest: any): string {
       L.push("");
     }
     L.push("```");
-    L.push("Per call of the task's benchmark body. Time depends on machine load; bytes and allocations do not. allocs is `-` where the runtime cannot count (.NET).");
+    L.push("Per call of the benchmark body. allocs is `-` for .NET.");
   }
 
   const toolInjected = new Set(
