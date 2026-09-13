@@ -32,6 +32,7 @@ created: 2026-06-20
 - [plugin-bundle-size](../../notes/web-automation-frontend/plugin-bundle-size.md) — Optimise Grafana app plugin bundle size using React.lazy, Suspense, and webpack code splitting
 - [pytorch-lightning](../../notes/ml-ai/pytorch-lightning.md) — Deep learning framework (PyTorch Lightning / lightning package)
 - [reconciler-logic](../../notes/web-automation-frontend/reconciler-logic.md) — Implement reconcilers and watchers for grafana-app-sdk apps — write `TypedReconciler[*MyKind]` reconcile functions, apply generation-based skip patterns, do conflict-safe status...
+- [rust-router](../../notes/software-dev/rust-router.md) — CRITICAL: Use for ALL Rust questions including errors, design, and coding
 - [scrollytelling-and-parallax-data-visualization](../../notes/data-visualization/scrollytelling-and-parallax-data-visualization.md) — Design and implement parallax scrolling and scrollytelling data visualizations
 - [spec-kit](../../notes/software-dev/spec-kit.md) — Runs the Spec-Kit (GitHub SDD) artifact pipeline — constitution, spec, clarify, plan, tasks, analyze, implement — using its templates
 - [swiftui-liquid-glass](../../notes/mobile-native-dev/swiftui-liquid-glass.md) — Implement and review iOS 26+ SwiftUI Liquid Glass UI

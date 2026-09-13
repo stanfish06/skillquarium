@@ -39,6 +39,7 @@ created: 2026-08-07
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [complexa-sweep](../../notes/drug-discovery-chem/complexa-sweep.md) — Use this skill whenever the user wants to run a parameter sweep over a Proteina-Complexa design pipeline — cartesian-product hyperparameter scans, Pareto search over...
 - [core](../../notes/web-automation-frontend/core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
+- [core-actionbook](../../notes/software-dev/core-actionbook.md) — Internal support skill for actionbook MCP selectors used by Rust documentation research workflows
 - [deployments-cicd](../../notes/hosting-edge-platforms/deployments-cicd.md) — Vercel deployment and CI/CD expert guidance
 - [design-control-loop](../../notes/vault-meta/design-control-loop.md) — interview the user to design an agentic control loop (sensor, controller, actuator under disturbances) tailored to their codebase, then build it as locally-runnable components plus a...
 - [doc-coauthoring](../../notes/documents-office/doc-coauthoring.md) — Guide users through a structured workflow for co-authoring documentation
