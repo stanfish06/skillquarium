@@ -511,5 +511,101 @@
       "find": "- Implement server-side caching for frequently requested endpoints\n- P",
       "replace": "- Implement server-side caching for frequently requested endpoints, and send `Vary: HX-Request` on any route whose body differs between an htmx request and a full page load; without it a cached fragment can be served for a normal navigation, or the reverse\n- P"
     }
+  ],
+  "security-best-practices": [
+    {
+      "id": "threat-model-pointer",
+      "source": "tech-leads-club/agent-skills",
+      "find": "threat modeling (use security-threat-model)",
+      "replace": "threat modeling (use threat-model)"
+    }
+  ],
+  "tlc-generative-engine-optimization": [
+    {
+      "id": "description-vault-pointers",
+      "source": "tech-leads-club/agent-skills",
+      "find": "description: \"Generative Engine Optimization (GEO) specialist — the technical, on-page publishing work that makes a given page or site discoverable, understandable, trustworthy, quotable, and fresh for AI answer engines (Google AI Overviews, ChatGPT Search, Bing Copilot, Perplexity). Use when asked to 'optimize this page/site for GEO', 'optimize for AI search / answer engines', 'get my page cited by ChatGPT/Perplexity', 'improve AI visibility/citability', 'write an llms.txt', 'add citation-ready structure or schema for AI answers', 'otimizar para busca com IA', or to audit/create/improve a codebase for generative search. Do NOT use for AI-driven SEO content strategy or programmatic pages at scale (use ai-seo), classic keyword/SERP ranking (use seo), accessibility (use web-accessibility), or multi-area site audits (use web-quality-audit).\"",
+      "replace": "description: \"Generative Engine Optimization (GEO): the on-page technical work that makes a page or site discoverable, parseable, trustworthy, quotable, and fresh for AI answer engines (Google AI Overviews, ChatGPT Search, Bing Copilot, Perplexity). Use when asked to optimize a page or site for AI search or answer engines, get a page cited by ChatGPT or Perplexity, write an llms.txt, allow or block AI crawlers in robots.txt, or add citation-ready structure and JSON-LD for AI answers. Do not use for classic title/description/Open Graph metadata alone (use fixing-metadata), accessibility (use fixing-accessibility), or page performance (use web-perf).\""
+    },
+    {
+      "id": "metadata-source",
+      "source": "tech-leads-club/agent-skills",
+      "find": "  author: Fernando Paladini - github.com/paladini\nlicense: MIT",
+      "replace": "  author: Fernando Paladini - github.com/paladini\n  source: https://github.com/tech-leads-club/agent-skills\nlicense: MIT"
+    },
+    {
+      "id": "body-vault-pointers",
+      "source": "tech-leads-club/agent-skills",
+      "find": "- AI-driven content strategy or programmatic pages at scale → use `ai-seo`\n- Classic keyword/SERP ranking work → use `seo`\n- Accessibility audits → use `web-accessibility`\n- Multi-area site health audits → use `web-quality-audit`",
+      "replace": "- Classic metadata fixes alone (title, description, canonical, Open Graph) → use `fixing-metadata`\n- Accessibility audits → use `fixing-accessibility`\n- Page performance and Core Web Vitals → use `web-perf`"
+    }
+  ],
+  "mermaid-studio": [
+    {
+      "id": "description-narrow-triggers",
+      "source": "tech-leads-club/agent-skills",
+      "find": "description: Expert Mermaid diagram creation, validation, and rendering with dual-engine output (SVG/PNG/ASCII). Supports all 20+ diagram types including C4 architecture, AWS architecture-beta with service icons, flowcharts, sequence, ERD, state, class, mindmap, timeline, git graph, sankey, and more. Features code-to-diagram analysis, batch rendering, 15+ themes, and syntax validation. Use when users ask to create diagrams, visualize architecture, render mermaid files, generate ASCII diagrams, document system flows, model databases, draw AWS infrastructure, analyze code structure, or anything involving \"mermaid\", \"diagram\", \"flowchart\", \"architecture diagram\", \"sequence diagram\", \"ERD\", \"C4\", \"ASCII diagram\". Do NOT use for non-Mermaid image generation, data plotting with chart libraries, or general documentation writing.",
+      "replace": "description: Validate and render Mermaid diagrams to SVG, PNG, or ASCII with bundled scripts (mermaid-cli, beautiful-mermaid, Puppeteer icon packs), plus styling rules for C4 and AWS architecture-beta diagrams. Use when a .mmd file needs a syntax check, a rendered image, batch rendering, ASCII output, an AWS icon diagram, a C4 diagram, or one of the 20 bundled themes. Do not use for choosing a diagram type or writing Mermaid inside markdown docs (use markdown-mermaid-writing or diagram-generator), or for previewing in the terminal (use mermaid-terminal)."
+    },
+    {
+      "id": "metadata-source",
+      "source": "tech-leads-club/agent-skills",
+      "find": "  version: 1.0.1\n---",
+      "replace": "  version: 1.0.1\n  source: https://github.com/tech-leads-club/agent-skills\n---"
+    },
+    {
+      "id": "skill-dir-path",
+      "source": "tech-leads-club/agent-skills",
+      "find": "$SKILL_DIR/",
+      "replace": "~/.agents/skills/mermaid-studio/"
+    },
+    {
+      "id": "setup-deps-location",
+      "source": "tech-leads-club/agent-skills",
+      "find": "This auto-installs both rendering engines and icon pack dependencies. Run once per environment.",
+      "replace": "Installs mermaid-cli, beautiful-mermaid, mermaid, puppeteer, and Chromium into `${XDG_CACHE_HOME:-~/.cache}/mermaid-studio` (override with `MERMAID_STUDIO_DIR`). Run once per environment."
+    },
+    {
+      "id": "deps-dir-validate",
+      "source": "tech-leads-club/agent-skills",
+      "find": "const SKILL_DIR = resolve(__dirname, \"..\");\nconst DEPS_DIR = process.env.MERMAID_STUDIO_DIR || resolve(SKILL_DIR, \".deps\");",
+      "replace": "// deps live outside the vault so npm installs never land in the skill folder\nconst DEPS_DIR =\n  process.env.MERMAID_STUDIO_DIR ||\n  resolve(process.env.XDG_CACHE_HOME || resolve(process.env.HOME, \".cache\"), \"mermaid-studio\");",
+      "file": "scripts/validate.mjs"
+    },
+    {
+      "id": "deps-dir-render",
+      "source": "tech-leads-club/agent-skills",
+      "find": "const SKILL_DIR = resolve(__dirname, \"..\");\nconst DEPS_DIR = process.env.MERMAID_STUDIO_DIR || resolve(SKILL_DIR, \".deps\");",
+      "replace": "// deps live outside the vault so npm installs never land in the skill folder\nconst DEPS_DIR =\n  process.env.MERMAID_STUDIO_DIR ||\n  resolve(process.env.XDG_CACHE_HOME || resolve(process.env.HOME, \".cache\"), \"mermaid-studio\");",
+      "file": "scripts/render.mjs"
+    },
+    {
+      "id": "deps-dir-render-ascii",
+      "source": "tech-leads-club/agent-skills",
+      "find": "const SKILL_DIR = resolve(__dirname, \"..\");\nconst DEPS_DIR = process.env.MERMAID_STUDIO_DIR || resolve(SKILL_DIR, \".deps\");",
+      "replace": "// deps live outside the vault so npm installs never land in the skill folder\nconst DEPS_DIR =\n  process.env.MERMAID_STUDIO_DIR ||\n  resolve(process.env.XDG_CACHE_HOME || resolve(process.env.HOME, \".cache\"), \"mermaid-studio\");",
+      "file": "scripts/render-ascii.mjs"
+    },
+    {
+      "id": "deps-dir-setup",
+      "source": "tech-leads-club/agent-skills",
+      "find": "INSTALL_DIR=\"${MERMAID_STUDIO_DIR:-$SKILL_DIR/.deps}\"",
+      "replace": "# deps live outside the vault so npm installs never land in the skill folder\nINSTALL_DIR=\"${MERMAID_STUDIO_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/mermaid-studio}\"",
+      "file": "scripts/setup.sh"
+    },
+    {
+      "id": "validate-imports",
+      "source": "tech-leads-club/agent-skills",
+      "file": "scripts/validate.mjs",
+      "find": "import { existsSync, readFileSync } from \"fs\";\nimport { basename, dirname, resolve } from \"path\";\n",
+      "replace": "import { execFileSync } from \"child_process\";\nimport { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from \"fs\";\nimport { tmpdir } from \"os\";\nimport { basename, dirname, join, resolve } from \"path\";\n"
+    },
+    {
+      "id": "validate-via-mmdc",
+      "source": "tech-leads-club/agent-skills",
+      "file": "scripts/validate.mjs",
+      "find": "async function mermaidParserValidation(content) {\n  // Try to use the mermaid library parser for deep validation\n  try {\n",
+      "replace": "// mmdc parses in headless Chromium, so it needs no DOM shim; the in-process\n// mermaid import below fails on valid input with \"purify.addHook is not a\n// function\" because DOMPurify has no window in Node.\nfunction mmdcParserValidation(content) {\n  const mmdc = resolve(DEPS_DIR, \"node_modules/.bin/mmdc\");\n  if (!existsSync(mmdc)) return { available: false };\n  const dir = mkdtempSync(join(tmpdir(), \"mermaid-validate-\"));\n  const input = join(dir, \"input.mmd\");\n  const output = join(dir, \"output.svg\");\n  writeFileSync(input, content);\n  const args = [\"-i\", input, \"-o\", output, \"-q\"];\n  const puppeteerConfig = resolve(DEPS_DIR, \"puppeteer-config.json\");\n  if (existsSync(puppeteerConfig)) args.push(\"-p\", puppeteerConfig);\n  try {\n    execFileSync(mmdc, args, { stdio: \"pipe\", timeout: 60000 });\n    return { available: true, valid: true };\n  } catch (e) {\n    // mmdc prints the mermaid parse error on stderr; keep the first lines\n    const stderr = (e.stderr?.toString() || e.message || String(e)).trim();\n    const lines = stderr.split(\"\\n\").filter((l) => l.trim());\n    const trace = lines.findIndex((l) => /^\\s*(at |\\S+\\.parseError)/.test(l));\n    const message = (trace > 0 ? lines.slice(0, trace) : lines.slice(0, 6)).join(\"\\n  \");\n    return { available: true, valid: false, error: message };\n  } finally {\n    rmSync(dir, { recursive: true, force: true });\n  }\n}\n\nasync function mermaidParserValidation(content) {\n  const viaMmdc = mmdcParserValidation(content);\n  if (viaMmdc.available) return viaMmdc;\n  // Fallback: the mermaid library parser in-process\n  try {\n"
+    }
   ]
 }

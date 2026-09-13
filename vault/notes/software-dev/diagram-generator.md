@@ -20,7 +20,7 @@ created: 2026-08-19
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [mermaid-studio](../../notes/software-dev/mermaid-studio.md) — Validate and render Mermaid diagrams to SVG, PNG, or ASCII with bundled scripts (mermaid-cli, beautiful-mermaid, Puppeteer icon packs), plus styling rules for C4 and AWS...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

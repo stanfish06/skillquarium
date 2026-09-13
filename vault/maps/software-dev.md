@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (146)
+## Skills (147)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -94,6 +94,7 @@ created: 2026-06-13
 - [m13-domain-error](../notes/software-dev/m13-domain-error.md) — Use when designing domain error handling
 - [m14-mental-model](../notes/software-dev/m14-mental-model.md) — Use when learning Rust concepts. Keywords: mental model, how to think about ownership, understanding borrow checker, visualizing memory layout, analogy, misconception, explaining...
 - [m15-anti-pattern](../notes/software-dev/m15-anti-pattern.md) — Use when reviewing code for anti-patterns
+- [mermaid-studio](../notes/software-dev/mermaid-studio.md) — Validate and render Mermaid diagrams to SVG, PNG, or ASCII with bundled scripts (mermaid-cli, beautiful-mermaid, Puppeteer icon packs), plus styling rules for C4 and AWS...
 - [meta-cognition-parallel](../notes/software-dev/meta-cognition-parallel.md) — EXPERIMENTAL: Three-layer parallel meta-cognition analysis
 - [migrate-to-shoehorn](../notes/software-dev/migrate-to-shoehorn.md) — Migrate test files from `as` type assertions to @total-typescript/shoehorn
 - [modern-typescript](../notes/software-dev/modern-typescript.md) — Modern TypeScript 5.x idioms — strict tsconfig (strict, noUncheckedIndexedAccess), the type system (unions/intersections, generics + constraints, narrowing, discriminated unions...

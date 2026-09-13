@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [security-best-practices](../../notes/security-auditing/security-best-practices.md) — Perform language and framework specific security best-practice reviews and suggest improvements
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
