@@ -1,6 +1,6 @@
 # State & Scheduling
 
-Fetch `docs/state.md` and `docs/scheduling.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.
+Fetch `docs/agents/state.md` and `docs/agents/scheduling.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.
 
 ## State Management
 

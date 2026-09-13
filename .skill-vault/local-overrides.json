@@ -306,5 +306,210 @@
       "find": "Bash(open path/to/show-me-{description}.html)\n```",
       "replace": "Bash(open path/to/show-me-{description}.html)     # macOS\nBash(xdg-open path/to/show-me-{description}.html) # Linux\n```"
     }
+  ],
+  "agents-sdk": [
+    {
+      "id": "docs-agents-path-table",
+      "issue": 851,
+      "source": "openai/plugins",
+      "find": "| Getting started | `docs/getting-started.md` | First agent, project setup |\n| State | `docs/state.md` | `setState`, `validateStateChange`, persistence |\n| Routing | `docs/routing.md` | URL patterns, `routeAgentRequest`, `basePath` |\n| Callable methods | `docs/callable-methods.md` | `@callable`, RPC, streaming, timeouts |\n| Scheduling | `docs/scheduling.md` | `schedule()`, `scheduleEvery()`, cron |\n| Workflows | `docs/workflows.md` | `AgentWorkflow`, durable multi-step tasks |\n| HTTP/WebSockets | `docs/http-websockets.md` | Lifecycle hooks, hibernation |\n| Email | `docs/email.md` | Email routing, secure reply resolver |\n| MCP client | `docs/mcp-client.md` | Connecting to MCP servers |\n| MCP server | `docs/mcp-servers.md` | Building MCP servers with `McpAgent` |\n| Client SDK | `docs/client-sdk.md` | `useAgent`, `useAgentChat`, React hooks |\n| Human-in-the-loop | `docs/human-in-the-loop.md` | Approval flows, pausing workflows |\n| Resumable streaming | `docs/resumable-streaming.md` | Stream recovery on disconnect |",
+      "replace": "| Getting started | `docs/agents/getting-started.md` | First agent, project setup |\n| State | `docs/agents/state.md` | `setState`, `validateStateChange`, persistence |\n| Routing | `docs/agents/routing.md` | URL patterns, `routeAgentRequest`, `basePath` |\n| Callable methods | `docs/agents/callable-methods.md` | `@callable`, RPC, streaming, timeouts |\n| Scheduling | `docs/agents/scheduling.md` | `schedule()`, `scheduleEvery()`, cron |\n| Workflows | `docs/agents/workflows.md` | `AgentWorkflow`, durable multi-step tasks |\n| HTTP/WebSockets | `docs/agents/http-websockets.md` | Lifecycle hooks, hibernation |\n| Email | `docs/agents/email.md` | Email routing, secure reply resolver |\n| MCP client | `docs/agents/mcp-client.md` | Connecting to MCP servers |\n| MCP server | `docs/agents/mcp-servers.md` | Building MCP servers with `McpAgent` |\n| Client SDK | `docs/agents/client-sdk.md` | `useAgent`, `useAgentChat`, React hooks |\n| Human-in-the-loop | `docs/agents/human-in-the-loop.md` | Approval flows, pausing workflows |\n| Resumable streaming | `docs/agents/resumable-streaming.md` | Stream recovery on disconnect |"
+    },
+    {
+      "id": "docs-agents-path-callable",
+      "issue": 851,
+      "source": "openai/plugins",
+      "file": "references/callable.md",
+      "find": "Fetch `docs/callable-methods.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.",
+      "replace": "Fetch `docs/agents/callable-methods.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation."
+    },
+    {
+      "id": "docs-agents-path-email",
+      "issue": 851,
+      "source": "openai/plugins",
+      "file": "references/email.md",
+      "find": "Fetch `docs/email.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.",
+      "replace": "Fetch `docs/agents/email.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation."
+    },
+    {
+      "id": "docs-agents-path-mcp",
+      "issue": 851,
+      "source": "openai/plugins",
+      "file": "references/mcp.md",
+      "find": "Fetch `docs/mcp-client.md` and `docs/mcp-servers.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.",
+      "replace": "Fetch `docs/agents/mcp-client.md` and `docs/agents/mcp-servers.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation."
+    },
+    {
+      "id": "docs-agents-path-state-scheduling",
+      "issue": 851,
+      "source": "openai/plugins",
+      "file": "references/state-scheduling.md",
+      "find": "Fetch `docs/state.md` and `docs/scheduling.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.",
+      "replace": "Fetch `docs/agents/state.md` and `docs/agents/scheduling.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation."
+    },
+    {
+      "id": "docs-agents-path-streaming-chat",
+      "issue": 851,
+      "source": "openai/plugins",
+      "file": "references/streaming-chat.md",
+      "find": "Fetch `docs/resumable-streaming.md` and `docs/client-sdk.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.",
+      "replace": "Fetch `docs/agents/resumable-streaming.md` and `docs/agents/client-sdk.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation."
+    },
+    {
+      "id": "docs-agents-path-workflows",
+      "issue": 851,
+      "source": "openai/plugins",
+      "file": "references/workflows.md",
+      "find": "Fetch `docs/workflows.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.",
+      "replace": "Fetch `docs/agents/workflows.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation."
+    }
+  ],
+  "datamol": [
+    {
+      "id": "pin-datamol-0130",
+      "issue": 865,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install datamol\n```",
+      "replace": "uv pip install datamol==0.13.0\n```"
+    },
+    {
+      "id": "pin-0130-2",
+      "issue": 865,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "RDKit is installed automatically with datamol. For remote file paths (S3, GCS, HTTP), install the matching fsspec backend:\n\n```bash\nuv pip install s3fs   # AWS S3\nuv pip install gcsfs  # Google Cloud Storage\n```",
+      "replace": "RDKit is installed automatically with datamol. Since 0.13.0 the cloud-I/O,\nExcel/Parquet, visualization and SELFIES backends are core dependencies too, so\n`s3fs`, `gcsfs`, `openpyxl`, `pyarrow`, `matplotlib`, `nglview` and `selfies`\nno longer need a separate install."
+    },
+    {
+      "id": "pin-0130-3",
+      "issue": 865,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "compatibility: Requires Python 3.8+ and datamol (uv pip install). RDKit is installed automatically as a datamol dependency (since 0.12.2). Optional s3fs/gcsfs for cloud I/O via fsspec.",
+      "replace": "compatibility: Requires Python 3.11+ and datamol (uv pip install). RDKit is installed automatically as a datamol dependency (since 0.12.2). Cloud I/O via fsspec (s3fs/gcsfs) ships in the core install since 0.13.0."
+    },
+    {
+      "id": "pin-0130-4",
+      "issue": 865,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "> **Maintenance freeze:** No new releases since **0.12.5 (June 10, 2024), 2+ years**. The project still installs and works as documented, but it predates two years of RDKit/NumPy/Python releases with no upstream compatibility follow-up — pin versions deliberately rather than assuming active maintenance. `medchem` (also in this vault) depends on datamol and inherits the same risk. Tracked: issue [#92](https://github.com/stanfish06/my-skills/issues/92).",
+      "replace": "> **Version pin:** Maintenance resumed with **0.13.0 (September 9, 2026)** after a two-year gap, and it is a breaking release: the Python floor moved to **3.11**, RDKit to **>=2024.9.1**, and the I/O, visualization and SELFIES extras are now core dependencies. Install commands here pin `0.13.0` deliberately rather than floating, since the next gap is as likely as the last. `medchem` (also in this vault) depends on datamol; keep the two pins in step."
+    },
+    {
+      "id": "pin-0130-5",
+      "issue": 865,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "**Version note:** Examples target **datamol 0.12.x** (PyPI stable: **0.12.5**, June 2024).",
+      "replace": "**Version note:** Examples target **datamol 0.13.0** (PyPI stable, September 2026); they were originally written against 0.12.x and every documented top-level function is still exported in 0.13.0."
+    }
+  ],
+  "medchem": [
+    {
+      "id": "pin-210-1",
+      "issue": 866,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install medchem datamol\n```",
+      "replace": "uv pip install medchem==2.1.0 datamol==0.13.0\n```"
+    },
+    {
+      "id": "pin-210-2",
+      "issue": 866,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "compatibility: Requires Python 3.9+ and datamol (installed with medchem). Optional Lilly demerit filter requires separate `lilly-medchem-rules` conda package.",
+      "replace": "compatibility: Requires Python 3.11+ and datamol (installed with medchem). Optional Lilly demerit filter requires separate `lilly-medchem-rules` conda package."
+    },
+    {
+      "id": "pin-210-3",
+      "issue": 866,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "> **Maintenance freeze:** No stable release since **2.0.5 (November 18, 2024), 19+ months** (only a `v2.0.5-alpha` pre-release in Jan 2025 since). medchem also hard-depends on `datamol`, which has had no release at all in ~2 years (see [datamol#92](https://github.com/stanfish06/my-skills/issues/92)), so staleness risk is compounded. The filters documented here are unchanged and still work — pin versions deliberately rather than assuming active upstream maintenance. Tracked: issue [#93](https://github.com/stanfish06/my-skills/issues/93).",
+      "replace": "> **Version pin:** Maintenance resumed with **2.1.0 (September 9, 2026)** after a two-year gap, alongside `datamol` 0.13.0. It is a breaking release: the Python floor moved to **3.11**, and it ships Lilly rules 2.1. Install commands here pin both `medchem==2.1.0` and `datamol==0.13.0` deliberately rather than floating — medchem hard-depends on datamol, so the two pins must move together."
+    },
+    {
+      "id": "pin-210-4",
+      "issue": 866,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "**Version note:** Examples target **medchem 2.0.5** (PyPI stable, Nov 2024). Requires **Python ≥3.9**.",
+      "replace": "**Version note:** Examples target **medchem 2.1.0** (PyPI stable, September 2026); they were written against 2.0.5 and every documented module and rule function is still present in 2.1.0. Requires **Python ≥3.11**."
+    },
+    {
+      "id": "pin-210-5",
+      "issue": 866,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "- PyPI: https://pypi.org/project/medchem/ (2.0.5)",
+      "replace": "- PyPI: https://pypi.org/project/medchem/ (2.1.0)"
+    }
+  ],
+  "sqlite-expert": [
+    {
+      "id": "single-file-only-without-wal",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "- Understand that SQLite is serverless and single-file; its strength is simplicity and reliability, not high-concurrency multi-writer workloads\n\n##",
+      "replace": "- Understand that SQLite is serverless and, in the default rollback-journal mode, a single file; enabling WAL adds `-wal` and `-shm` sidecars that must travel with the database when copying or backing it up. Its strength is simplicity and reliability, not high-concurrency multi-writer workloads\n\n##"
+    },
+    {
+      "id": "upsert-needs-unique-constraint",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "- Implement UPSERT with INSERT ... ON CONFLICT (column) DO UPDATE SET for atomic insert-or-update operations\n\n##",
+      "replace": "- Implement UPSERT with INSERT ... ON CONFLICT (column) DO UPDATE SET for atomic insert-or-update operations; the conflict target must be covered by a UNIQUE or PRIMARY KEY constraint or a unique index, since UPSERT processing happens only for uniqueness constraints\n\n##"
+    },
+    {
+      "id": "synchronous-normal-durability",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "- Set performance PRAGMAs at connection open: journal_mode=WAL, synchronous=NORMAL, cache_size=-64000 (64MB), mmap_size=268435456, temp_store=MEMORY\n- U",
+      "replace": "synchronous=NORMAL stays consistent and survives an application crash, but drops durability against the machine: a committed transaction can roll back after a power loss or OS crash. Use synchronous=FULL where a commit must survive that\n- U"
+    },
+    {
+      "id": "auto-vacuum-precondition",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "- **Incremental Vacuum**: Use PRAGMA auto_vacuum=INCREMENTAL with periodic PRAGMA incremental_vacuum to reclaim space without a full VACUUM lock\n- *",
+      "replace": "Set it before any table is created; on an existing database the pragma alone is a no-op — run `PRAGMA auto_vacuum=INCREMENTAL` first and then `VACUUM` to rewrite the file before it takes effect\n- *"
+    },
+    {
+      "id": "description-triggers",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "description: \"SQLite expert for WAL mode, query optimization, embedded patterns, and advanced features\"\n---",
+      "replace": "description: \"SQLite expert for WAL mode, query optimization, embedded patterns, and advanced features. Use when working with .sqlite/.db files, SQLite schema design or migrations, PRAGMA tuning, FTS5 full-text search, JSON1, EXPLAIN QUERY PLAN, SQLITE_BUSY or locking errors, or choosing between SQLite and a client-server database.\"\n---"
+    },
+    {
+      "id": "wal-same-host-only",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "- Enable WAL mode (PRAGMA journal_mode=WAL) for concurrent read/write access; it allows readers to proceed without blocking writers and vice versa\n- U",
+      "replace": "- Enable WAL mode (PRAGMA journal_mode=WAL) for concurrent read/write access; it allows readers to proceed without blocking writers and vice versa. WAL keeps its wal-index in shared memory, so every process using the database must be on the same host — it does not work over NFS, SMB or any other network filesystem\n- U"
+    },
+    {
+      "id": "wal-no-cross-db-atomicity",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "- **Multi-database Access**: Use ATTACH DATABASE to query across multiple SQLite files in a single connection, joining tables from different databases\n- *",
+      "replace": "- **Multi-database Access**: Use ATTACH DATABASE to query across multiple SQLite files in a single connection, joining tables from different databases. In WAL mode a transaction spanning attached databases is atomic per database but not across the set; use rollback-journal mode when you need all-or-nothing across files\n- *"
+    },
+    {
+      "id": "migration-in-one-transaction",
+      "issue": 867,
+      "source": "rightnow-ai/openfang",
+      "find": "- **Schema Migration**: Use PRAGMA user_version to track schema version and apply migration scripts sequentially on application startup\n\n##",
+      "replace": "- **Schema Migration**: Use PRAGMA user_version to track schema version and apply migration scripts sequentially on application startup. Wrap each step and its user_version bump in one BEGIN/COMMIT — SQLite DDL is transactional, so a failure then leaves neither a half-applied schema nor a version that lies about it\n\n##"
+    }
+  ],
+  "htmx": [
+    {
+      "id": "error-responses-not-swapped-by-default",
+      "issue": 868,
+      "source": "mindrally/skills",
+      "find": "- Return appropriate HTTP status codes (4xx for client errors, 5xx for server errors)\n- P",
+      "replace": "- Return appropriate HTTP status codes (4xx for client errors, 5xx for server errors). htmx does not swap non-2xx responses by default — it raises `htmx:responseError` instead — so a 422 carrying an error fragment renders nothing until you opt in, either via `htmx.config.responseHandling` (e.g. `{\"code\":\"422\", \"swap\": true}`) or by setting `shouldSwap` in an `htmx:beforeSwap` handler\n- P"
+    },
+    {
+      "id": "vary-hx-request-when-caching",
+      "issue": 868,
+      "source": "mindrally/skills",
+      "find": "- Implement server-side caching for frequently requested endpoints\n- P",
+      "replace": "- Implement server-side caching for frequently requested endpoints, and send `Vary: HX-Request` on any route whose body differs between an htmx request and a full page load; without it a cached fragment can be served for a normal navigation, or the reverse\n- P"
+    }
   ]
 }

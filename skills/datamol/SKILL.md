@@ -3,7 +3,7 @@ name: datamol
 description: Pythonic wrapper around RDKit with simplified interface and sensible defaults. Preferred for standard drug discovery including SMILES parsing, standardization, descriptors, fingerprints, clustering, 3D conformers, parallel processing. Returns native rdkit.Chem.Mol objects. For advanced control or custom parameters, use rdkit directly.
 license: Apache-2.0 license
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.8+ and datamol (uv pip install). RDKit is installed automatically as a datamol dependency (since 0.12.2). Optional s3fs/gcsfs for cloud I/O via fsspec.
+compatibility: Requires Python 3.11+ and datamol (uv pip install). RDKit is installed automatically as a datamol dependency (since 0.12.2). Cloud I/O via fsspec (s3fs/gcsfs) ships in the core install since 0.13.0.
 metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 ---
 
@@ -12,11 +12,11 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 ## Overview
 
 > [!WARNING]
-> **Maintenance freeze:** No new releases since **0.12.5 (June 10, 2024), 2+ years**. The project still installs and works as documented, but it predates two years of RDKit/NumPy/Python releases with no upstream compatibility follow-up — pin versions deliberately rather than assuming active maintenance. `medchem` (also in this vault) depends on datamol and inherits the same risk. Tracked: issue [#92](https://github.com/stanfish06/my-skills/issues/92).
+> **Version pin:** Maintenance resumed with **0.13.0 (September 9, 2026)** after a two-year gap, and it is a breaking release: the Python floor moved to **3.11**, RDKit to **>=2024.9.1**, and the I/O, visualization and SELFIES extras are now core dependencies. Install commands here pin `0.13.0` deliberately rather than floating, since the next gap is as likely as the last. `medchem` (also in this vault) depends on datamol; keep the two pins in step.
 
 Datamol is a Python library that provides a lightweight, Pythonic abstraction layer over RDKit for molecular cheminformatics. Simplify complex molecular operations with sensible defaults, efficient parallelization, and modern I/O capabilities. All molecular objects are native `rdkit.Chem.Mol` instances, ensuring full compatibility with the RDKit ecosystem.
 
-**Version note:** Examples target **datamol 0.12.x** (PyPI stable: **0.12.5**, June 2024). Since 0.10.0, modules are lazy-loaded by default (set `DATAMOL_DISABLE_LAZY_LOADING=1` to disable). Since 0.12.2, RDKit is a direct PyPI dependency of datamol. Fingerprints use RDKit's `rdFingerprintGenerator` API (0.12.5+).
+**Version note:** Examples target **datamol 0.13.0** (PyPI stable, September 2026); they were originally written against 0.12.x and every documented top-level function is still exported in 0.13.0. Since 0.10.0, modules are lazy-loaded by default (set `DATAMOL_DISABLE_LAZY_LOADING=1` to disable). Since 0.12.2, RDKit is a direct PyPI dependency of datamol. Fingerprints use RDKit's `rdFingerprintGenerator` API (0.12.5+).
 
 **Key capabilities**:
 - Molecular format conversion (SMILES, SELFIES, InChI)
@@ -35,15 +35,13 @@ Datamol is a Python library that provides a lightweight, Pythonic abstraction la
 Guide users to install datamol:
 
 ```bash
-uv pip install datamol
+uv pip install datamol==0.13.0
 ```
 
-RDKit is installed automatically with datamol. For remote file paths (S3, GCS, HTTP), install the matching fsspec backend:
-
-```bash
-uv pip install s3fs   # AWS S3
-uv pip install gcsfs  # Google Cloud Storage
-```
+RDKit is installed automatically with datamol. Since 0.13.0 the cloud-I/O,
+Excel/Parquet, visualization and SELFIES backends are core dependencies too, so
+`s3fs`, `gcsfs`, `openpyxl`, `pyarrow`, `matplotlib`, `nglview` and `selfies`
+no longer need a separate install.
 
 **Import convention**:
 ```python
