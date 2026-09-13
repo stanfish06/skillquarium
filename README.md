@@ -11,7 +11,7 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
   <tr>
     <th>Obsidian graph</th>
     <th>Graphifyy graph</th>
-    <th>Skill invocation TUI</th>
+    <th>Skillquarium TUI</th>
   </tr>
   <tr>
      <td width="33%">
@@ -21,7 +21,7 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
        <img src="./graphifyy.png" width="300" alt="Graphifyy graph view of skill relationships" />
      </td>
      <td width="33%">
-       <img src="./skill-toggle.png" width="300" alt="Skill toggle TUI for enabling and disabling skills" />
+       <img src="./skill-toggle.png" width="300" alt="Skillquarium TUI: skill toggles and benchmark results" />
      </td>
   </tr>
 </table>
@@ -108,21 +108,28 @@ skill names (`/gstack-qa`, `/gstack-ship`, …) so it does not clobber this vaul
   discipline index and its per-discipline maps; each lists primary experts first,
   then cross-disciplinary experts, with bridges to broader capability maps.
 
-### Toggle model invocation
+### Skillquarium TUI
 
 Run the [OpenTUI](https://github.com/anomalyco/opentui) interface from the vault root:
 
 ```bash
-./skill-toggle
+./skillquarium
 ```
 
 The launcher requires [Bun](https://bun.sh) and installs the pinned OpenTUI dependency on
-first use. The interface supports mouse clicks, wheel scrolling, fuzzy search across names,
-descriptions, and categories, and separate Claude Code/Codex switches. Click the status and
-category controls to cycle filters; Ctrl-click cycles backward. Reset returns both filters to
-`all` without changing the search query.
+first use. It has two tabs, switched with Tab, `1`/`2`, or a click:
 
-Keyboard controls:
+- **Skills** toggles model invocation. Mouse clicks, wheel scrolling, fuzzy search across
+  names, descriptions, and categories, and separate Claude Code/Codex switches. Click the
+  status and category controls to cycle filters; Ctrl-click cycles backward. Reset returns
+  both filters to `all` without changing the search query.
+- **Benchmarks** lists the skills under evaluation in `eval/skills/` and the results of a
+  saved `eval/runs/<id>/` run: gate pass rate, `skill%` and `full%` for the baseline and
+  skill arms with their deltas, and bench numbers in the detail pane. `[` and `]` switch
+  runs; the latest is shown first. See [eval/README.md](eval/README.md) for what the
+  numbers mean.
+
+Keyboard controls (Skills tab):
 
 - `/` focuses search; arrows or `J`/`K` move through results; `M` marks or unmarks the current row.
 - `C` toggles Claude Code, `X` toggles Codex, and Space toggles both for all marked rows. With no marks, they affect only the current row. A mixed batch is normalized on; a fully enabled batch is normalized off.
@@ -153,22 +160,22 @@ but you can still invoke them manually if needed.
 Scriptable commands use the same safe backend:
 
 ```bash
-./skill-toggle list
-./skill-toggle enable academic-paper atac-seq
-./skill-toggle enable --product claude academic-paper
-./skill-toggle disable --product codex atac-seq
-./skill-toggle disable academic-paper atac-seq
-./skill-toggle toggle academic-paper
-./skill-toggle save
-./skill-toggle load
-./skill-toggle pre-commit-reset
-./skill-toggle --query "single cell"
+./skillquarium list
+./skillquarium enable academic-paper atac-seq
+./skillquarium enable --product claude academic-paper
+./skillquarium disable --product codex atac-seq
+./skillquarium disable academic-paper atac-seq
+./skillquarium toggle academic-paper
+./skillquarium save
+./skillquarium load
+./skillquarium pre-commit-reset
+./skillquarium --query "single cell"
 ```
 
 Each skill has a wrapper note (e.g. `scanpy.md`) at the vault root that links to its
 source `SKILL.md`, lists related skills, and holds your personal notes / status / aliases.
 Navigation generation never modifies the original `*/SKILL.md` folders, so the skills CLI
-can manage them remotely. `skill-toggle` is the deliberate exception: it changes only the
+can manage them remotely. `skillquarium` is the deliberate exception: it changes only the
 two product invocation fields described above.
 
 As of 2026-08-09, claude code and pi can reliably toggle skills and

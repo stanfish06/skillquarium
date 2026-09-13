@@ -27,7 +27,7 @@ if [ "$BACKEND" = true ]; then
 fi
 
 if ! command -v bun >/dev/null 2>&1; then
-  echo "skill-toggle: Bun is required for the OpenTUI interface (https://bun.sh)" >&2
+  echo "skillquarium: Bun is required for the OpenTUI interface (https://bun.sh)" >&2
   exit 2
 fi
 

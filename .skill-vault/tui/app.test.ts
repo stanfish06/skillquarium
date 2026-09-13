@@ -2,8 +2,9 @@ import { afterEach, describe, expect, test } from "bun:test"
 import { type BoxRenderable, type ScrollBoxRenderable, type TextRenderable } from "@opentui/core"
 import { createTestRenderer, type TestRendererSetup } from "@opentui/core/testing"
 
-import { SkillToggleApp, filterSkills, fuzzyScore } from "./app"
+import { SkillquariumApp, buildBenchItems, filterSkills, fuzzyScore } from "./app"
 import type { Catalog, Product, SkillBackend, SkillRecord } from "./backend"
+import type { ArmStats, EvalRun, EvalSource } from "./evalruns"
 
 function makeSkill(
   key: string,
@@ -100,11 +101,11 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const frame = setup.captureCharFrame()
-    expect(frame).toContain("Skill Invocation Control")
+    expect(frame).toContain("Skillquarium")
     expect(frame).toContain("alpha")
     expect(frame).toContain("Claude")
     expect(frame).toContain("Codex")
@@ -124,7 +125,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
@@ -152,7 +153,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const focusedRow = setup.renderer.root.findDescendantById("skill-agent-browser") as BoxRenderable
@@ -182,7 +183,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const listPanel = setup.renderer.root.findDescendantById("list-panel") as BoxRenderable
@@ -224,7 +225,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const status = setup.renderer.root.findDescendantById("button-status-filter") as BoxRenderable
@@ -258,7 +259,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     setup.mockInput.pressEnter()
@@ -280,7 +281,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     setup.mockInput.pressEnter()
@@ -305,7 +306,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     setup.mockInput.pressEnter()
@@ -327,7 +328,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     setup.mockInput.pressEnter()
@@ -350,7 +351,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
@@ -372,7 +373,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
@@ -401,7 +402,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
@@ -427,7 +428,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
@@ -453,7 +454,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
@@ -475,7 +476,7 @@ describe("OpenTUI interaction", () => {
     }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 24 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     const list = setup.renderer.root.findDescendantById("skill-list") as ScrollBoxRenderable
@@ -501,7 +502,7 @@ describe("OpenTUI interaction", () => {
     const catalog: Catalog = { skills: [broken], categories: ["software-dev"] }
     const backend = new FakeBackend(catalog)
     setup = await createTestRenderer({ width: 140, height: 28 })
-    new SkillToggleApp(setup.renderer, backend, await backend.catalog())
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
     await setup.renderOnce()
 
     setup.mockInput.pressEnter()
@@ -510,5 +511,155 @@ describe("OpenTUI interaction", () => {
 
     expect(setup.captureCharFrame()).toContain("0 marked")
     expect(backend.calls).toEqual([])
+  })
+})
+
+function arm(overrides: Partial<ArmStats> = {}): ArmStats {
+  return {
+    n: 3,
+    ok: 3,
+    gated: 3,
+    empty: 0,
+    errors: 0,
+    benchFailures: 0,
+    subset: 0.5,
+    full: 0.6,
+    bench: null,
+    reasoning: 1000,
+    toolCalls: 0,
+    ...overrides,
+  }
+}
+
+function makeRun(runId: string, subsetWithSkill: number): EvalRun {
+  return {
+    runId,
+    startedAt: "2026-09-13T12:00:00Z",
+    configId: "smoke",
+    models: ["deepseek/deepseek-v4-flash"],
+    reps: 3,
+    cells: 6,
+    provenance: { "skill:modern-typescript": "8936df5f3be477f8" },
+    skills: { "modern-typescript": { injection: "prose", version: null } },
+    rows: [
+      {
+        model: "deepseek/deepseek-v4-flash",
+        task: "ts-settings-parser",
+        skill: "modern-typescript",
+        baseline: arm({ subset: 0.778, full: 0.867 }),
+        withSkill: arm({ ok: 2, gated: 2, errors: 1, subset: subsetWithSkill, full: 1, bench: { ns: 100, bytes: 2048, allocs: null } }),
+      },
+      {
+        model: "deepseek/deepseek-v4-flash",
+        task: "c-run-length",
+        skill: null,
+        baseline: arm({ subset: null, full: 1, bench: { ns: 51273, bytes: 0, allocs: 0 } }),
+        withSkill: null,
+      },
+    ],
+  }
+}
+
+class FakeEvalSource implements EvalSource {
+  constructor(readonly runs: EvalRun[], readonly skills = ["modern-typescript", "zz-prefix"]) {}
+  async benchmarkedSkills() {
+    return this.skills
+  }
+  async runIds() {
+    return this.runs.map((run) => run.runId)
+  }
+  async loadRun(runId: string) {
+    const run = this.runs.find((candidate) => candidate.runId === runId)
+    if (!run) throw new Error(`no run ${runId}`)
+    return structuredClone(run)
+  }
+}
+
+const detailText = (id: string) =>
+  (setup!.renderer.root.findDescendantById(id) as TextRenderable).content.chunks.map((chunk) => chunk.text).join("")
+
+describe("benchmark items", () => {
+  test("adds a placeholder for every benchmarked skill the run lacks", () => {
+    const items = buildBenchItems(makeRun("run-a", 1), ["modern-typescript", "zz-prefix"])
+    expect(items.map((item) => [item.skill, item.task])).toEqual([
+      ["(none)", "c-run-length"],
+      ["modern-typescript", "ts-settings-parser"],
+      ["zz-prefix", "-"],
+    ])
+    expect(buildBenchItems(null, ["zz-prefix"])[0].row).toBeNull()
+  })
+})
+
+describe("benchmarks tab", () => {
+  test("Tab and 2 switch views; the table shows arms, deltas and placeholders", async () => {
+    const catalog: Catalog = { skills: [makeSkill("alpha")], categories: ["software-dev"] }
+    const backend = new FakeBackend(catalog)
+    const evalSource = new FakeEvalSource([makeRun("run-a", 0.9), makeRun("run-b", 1)])
+    setup = await createTestRenderer({ width: 160, height: 30 })
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog(), "", evalSource)
+    await setup.waitFor(() => setup!.renderer.root.findDescendantById("bench-modern-typescript|ts-settings-parser|deepseek/deepseek-v4-flash") !== null)
+    await setup.renderOnce()
+
+    let frame = setup.captureCharFrame()
+    expect(frame).toContain("Skillquarium")
+    expect(frame).toContain("[ ]")
+    expect(frame).not.toContain("Benchmarked skills")
+
+    setup.mockInput.pressKey("TAB")
+    await setup.renderOnce()
+    frame = setup.captureCharFrame()
+    expect(frame).toContain("Benchmarked skills")
+    expect(frame).not.toContain("Category:")
+    expect(frame).toContain("run-b")
+    expect(frame).toContain("77.8→100.0")
+    expect(frame).toContain("+22.2")
+    expect(frame).toContain("3/3|2/2")
+    expect(frame).toContain("zz-prefix")
+    expect(frame).toContain("no run")
+    expect(frame).toContain("c-run-length")
+
+    const detail = detailText("bench-detail-panel-text")
+    expect(detail).toStartWith("c-run-length (baseline only)")
+
+    setup.mockInput.pressKey("ARROW_DOWN")
+    await setup.renderOnce()
+    expect(detailText("bench-detail-panel-text")).toStartWith("modern-typescript on ts-settings-parser")
+    expect(detailText("bench-detail-panel-text")).toContain("bench B/op")
+    expect(detailText("bench-detail-panel-text")).toContain("skill dir hash 8936df5f3be477f8")
+
+    setup.mockInput.pressKey("[")
+    await setup.waitFor(() => setup!.captureCharFrame().includes("run-a"))
+    expect(setup.captureCharFrame()).toContain("77.8→90.0")
+
+    setup.mockInput.pressKey("1")
+    await setup.renderOnce()
+    frame = setup.captureCharFrame()
+    expect(frame).toContain("Category:")
+    expect(frame).not.toContain("Benchmarked skills")
+    setup.mockInput.pressKey("2")
+    await setup.renderOnce()
+    expect(setup.captureCharFrame()).toContain("Benchmarked skills")
+  })
+
+  test("without an eval source the tab explains itself and movement keys stay on skills", async () => {
+    const catalog: Catalog = { skills: [makeSkill("alpha"), makeSkill("beta")], categories: ["software-dev"] }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 28 })
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+    setup.mockInput.pressKey("TAB")
+    setup.mockInput.pressKey("TAB")
+    await setup.renderOnce()
+    setup.mockInput.pressKey("ARROW_DOWN")
+    await setup.renderOnce()
+    expect(detailText("detail-text")).toStartWith("beta")
+
+    const tab = setup.renderer.root.findDescendantById("button-tab-bench") as BoxRenderable
+    await setup.mockMouse.click(tab.screenX + 1, tab.screenY)
+    await setup.renderOnce()
+    expect(detailText("bench-detail-panel-text")).toContain("No eval source configured")
+    setup.mockInput.pressKey("ARROW_DOWN")
+    await setup.renderOnce()
+    expect(detailText("detail-text")).toStartWith("beta")
   })
 })
