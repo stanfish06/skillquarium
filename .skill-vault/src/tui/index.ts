@@ -2,12 +2,12 @@ import { resolve } from "node:path";
 import { createCliRenderer } from "@opentui/core";
 
 import { SkillquariumApp } from "./app";
-import { PythonSkillBackend } from "./backend";
+import { LocalSkillBackend } from "./backend";
 import { FsEvalSource } from "./evalruns";
 
-// Boot the OpenTUI renderer against the Python backend; resolves when the renderer is destroyed.
+// Boot the OpenTUI renderer over the in-process toggle backend; resolves when the renderer is destroyed.
 export async function runTui(root: string, query: string): Promise<number> {
-  const backend = new PythonSkillBackend(root, resolve(import.meta.dir, "../../skill_toggle.py"));
+  const backend = new LocalSkillBackend(root);
   const catalog = await backend.catalog();
   const renderer = await createCliRenderer({
     screenMode: "alternate-screen",

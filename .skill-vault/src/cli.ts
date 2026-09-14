@@ -14,8 +14,16 @@ export type ContextOverrides = Partial<Pick<Context, "out" | "err" | "config">>;
 const commands: Record<string, () => Promise<{ run: Command; help: string }>> = {
   doctor: () => import("./doctor"),
   tui: () => import("./tui/command"),
-  // later tasks add: query, grep, embed, build, validate, list, catalog, preview,
-  // enable, disable, toggle, save, load, "pre-commit-reset", install, update, overrides,
+  list: () => import("./toggle/cli").then((m) => m.list),
+  catalog: () => import("./toggle/cli").then((m) => m.catalog),
+  preview: () => import("./toggle/cli").then((m) => m.preview),
+  enable: () => import("./toggle/cli").then((m) => m.enable),
+  disable: () => import("./toggle/cli").then((m) => m.disable),
+  toggle: () => import("./toggle/cli").then((m) => m.toggle),
+  save: () => import("./toggle/cli").then((m) => m.save),
+  load: () => import("./toggle/cli").then((m) => m.load),
+  "pre-commit-reset": () => import("./toggle/cli").then((m) => m.preCommitReset),
+  // later tasks add: query, grep, embed, build, validate, install, update, overrides,
   // drift, soften, import, eval
 };
 
