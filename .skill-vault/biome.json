@@ -1,7 +1,12 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
   "files": {
-    "includes": ["src/**", "test/**", "!test/fixtures/**", "!src/build/categories.json"]
+    "includes": [
+      "src/**",
+      "test/**",
+      "!test/fixtures/**",
+      "!src/build/categories.json"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -24,7 +29,12 @@
   },
   "overrides": [
     {
-      "includes": ["src/tui/app.ts", "src/tui/app.test.ts", "src/tui/backend.ts", "src/tui/evalruns.ts"],
+      "includes": [
+        "src/tui/app.ts",
+        "src/tui/app.test.ts",
+        "src/tui/backend.ts",
+        "src/tui/evalruns.ts"
+      ],
       "formatter": {
         "enabled": false
       },
@@ -35,6 +45,22 @@
         "rules": {
           "style": {
             "noNonNullAssertion": "off"
+          },
+          "complexity": {
+            "useLiteralKeys": "off",
+            "useOptionalChain": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "test/install/**"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noTemplateCurlyInString": "off"
           }
         }
       }
