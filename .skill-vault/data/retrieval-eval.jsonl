@@ -1,0 +1,40 @@
+{"query":"batch correct single cell data and find markers","expect":["scanpy","harmonypy"]}
+{"query":"single cell rna seq clustering and annotation","expect":["scanpy","cell-annotation","scrna-preprocessing-clustering"]}
+{"query":"probabilistic integration of scRNA-seq with batch effects","expect":["scvi-tools"]}
+{"query":"h5ad file format annotated matrix","expect":["anndata"]}
+{"query":"rna velocity trajectories","expect":["scvelo"]}
+{"query":"joint RNA and ATAC multiome analysis","expect":["muon-multiomics-singlecell"]}
+{"query":"bulk rna-seq differential expression to pathways","expect":["bulk-rnaseq","pydeseq2","pathway-enrichment"]}
+{"query":"deseq2 in python","expect":["pydeseq2"]}
+{"query":"gene set enrichment over-representation","expect":["pathway-enrichment","pathway-enricher"]}
+{"query":"trim adapters from fastq reads","expect":["cutadapt","fastp-fastq-preprocessing"]}
+{"query":"fastq quality control report","expect":["ngs-fastq-qc","multiqc-reporter"]}
+{"query":"write a nextflow pipeline","expect":["nextflow","nfcore-rnaseq-wrapper"]}
+{"query":"snakemake workflow","expect":["snakemake-workflow-engine"]}
+{"query":"blast a protein sequence","expect":["blast-search","ncbi-blast-skill"]}
+{"query":"build a phylogenetic tree","expect":["phylogenetics","phylogenetics-builder"]}
+{"query":"predict rna secondary structure","expect":["viennarna-structure-prediction"]}
+{"query":"search pubmed and summarize papers","expect":["pubmed-search","pubmed-summariser"]}
+{"query":"systematic literature review with prisma","expect":["deep-research","literature-review"]}
+{"query":"manage citations and bibtex","expect":["citation-management","citations"]}
+{"query":"write the methods section of a paper","expect":["scientific-writing","academic-paper"]}
+{"query":"make a conference poster in latex","expect":["latex-posters"]}
+{"query":"survival analysis kaplan meier","expect":["lifelines","scikit-survival"]}
+{"query":"bayesian model with mcmc","expect":["pymc"]}
+{"query":"time series forecasting","expect":["timesfm-forecasting","aeon"]}
+{"query":"dataframe library faster than pandas","expect":["polars"]}
+{"query":"statistical plots in python","expect":["seaborn","matplotlib"]}
+{"query":"interactive charts","expect":["plotly","data-visualization"]}
+{"query":"run a gpu job on the cloud","expect":["modal","ray"]}
+{"query":"fine tune a huggingface model","expect":["huggingface-llm-trainer","transformers"]}
+{"query":"serve an llm with vllm","expect":["vllm-deploy-simple"]}
+{"query":"build an mcp server","expect":["mcp-builder"]}
+{"query":"multi agent workflow graph","expect":["langgraph","crewai"]}
+{"query":"github pull requests from the terminal","expect":["gh-cli"]}
+{"query":"parallel git worktrees","expect":["worktrunk","using-git-worktrees"]}
+{"query":"structural code search","expect":["ast-grep"]}
+{"query":"fuzz a c library","expect":["libfuzzer","aflpp"]}
+{"query":"reverse engineer a binary","expect":["ghidra-reverse","radare2","reverse-engineering"]}
+{"query":"threat model a web app","expect":["threat-model"]}
+{"query":"static analysis rules","expect":["semgrep","codeql"]}
+{"query":"calorie counter","expect":["fitness-nutrition"]}

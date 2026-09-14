@@ -1,0 +1,92 @@
+[
+ {
+  "kind": "SHAPES",
+  "id": "P1 in_domain>=1",
+  "status": "PASS",
+  "detail": "0 skills without a domain"
+ },
+ {
+  "kind": "SHAPES",
+  "id": "P2 orphan rate",
+  "status": "WARN",
+  "detail": "5.9% vs baseline 48.1%, gate 5% (127 skills)"
+ },
+ {
+  "kind": "SHAPES",
+  "id": "P3 provenance",
+  "status": "PASS",
+  "detail": "0 edges missing provenance or justification"
+ },
+ {
+  "kind": "SHAPES",
+  "id": "P4 PROPOSED gate",
+  "status": "PASS",
+  "detail": "0 unreviewed edges marked retrievable"
+ },
+ {
+  "kind": "SHAPES",
+  "id": "P5 chains acyclic",
+  "status": "PASS",
+  "detail": "0 back-edges"
+ },
+ {
+  "kind": "SHAPES",
+  "id": "P6 alt symmetric",
+  "status": "PASS",
+  "detail": "0 asymmetric alternative_to edges"
+ },
+ {
+  "kind": "SHAPES",
+  "id": "P7 term ambiguity",
+  "status": "PASS",
+  "detail": "34 ambiguous aliases parked; 4 flagged artifact terms, no unflagged collisions"
+ },
+ {
+  "kind": "SHAPES",
+  "id": "P8 recipe steps",
+  "status": "PASS",
+  "detail": "0 recipe steps do not resolve to a skill"
+ },
+ {
+  "kind": "CQ",
+  "id": "CQ1 fastq->pathway",
+  "status": "PASS",
+  "detail": "48 FASTQ skills reach 57 skills in 4 hops; pathway endpoint reached: pathway-enrichment"
+ },
+ {
+  "kind": "CQ",
+  "id": "CQ2 alternatives",
+  "status": "NOT_YET",
+  "detail": "0 alternative_to edges \u2014 rule R4 is disabled until Capability and Tool are populated (Phase 4); firing it now would assert near-equivalence on no evidence"
+ },
+ {
+  "kind": "CQ",
+  "id": "CQ3 prerequisites",
+  "status": "PASS",
+  "detail": "scvi-tools -> 28 related (anndata, atac-seq, bio-orchestrator, cell-annotation, cellxgene-census...)"
+ },
+ {
+  "kind": "CQ",
+  "id": "CQ4 by capability",
+  "status": "NOT_YET",
+  "detail": "0 Capability nodes \u2014 population needs curation or the gated LLM pass (measured: n-gram mining returns template boilerplate)"
+ },
+ {
+  "kind": "CQ",
+  "id": "CQ5 set completion",
+  "status": "PASS",
+  "detail": "7/7 recipes recoverable from their first step alone"
+ },
+ {
+  "kind": "CQ",
+  "id": "CQ6 gaps",
+  "status": "PASS",
+  "detail": "127 unconnected skills, 0 artifacts with no skill \u2014 this is the growth queue, not a failure"
+ },
+ {
+  "kind": "CQ",
+  "id": "CQ7 staleness",
+  "status": "NOT_YET",
+  "detail": "0 skills have usage data, 0 deprecated \u2014 needs observation ingestion (Phase 3)"
+ }
+]
