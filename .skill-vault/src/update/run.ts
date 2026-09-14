@@ -4,6 +4,7 @@ import { buildVault } from "../build/run";
 import type { Command, Context } from "../cli";
 import { run as embedRun } from "../embed/command";
 import { buildGraph } from "../kg/build";
+import { run as validateCommand } from "../kg/validateCommand";
 import { writeGraph } from "../kg/write";
 import { runDrift } from "./drift";
 import { applyOverrides, loadOverrides, overridesPath, reportOverrides } from "./overrides";
@@ -56,29 +57,6 @@ function kgStep(ctx: Context): number {
   return 0;
 }
 
-interface OptionalModule {
-  run?: Command;
-}
-
-/**
- * `validate` lives in src/kg and is registered by cli.ts; import it through a variable so the
- * chain still runs while that module is landing.
- */
-async function optionalStep(specifier: string, ctx: Context): Promise<number> {
-  let module: OptionalModule;
-  try {
-    module = (await import(specifier)) as OptionalModule;
-  } catch {
-    ctx.err(`update: ${specifier} is not available; step skipped`);
-    return 0;
-  }
-  if (typeof module.run !== "function") {
-    ctx.err(`update: ${specifier} exports no command; step skipped`);
-    return 0;
-  }
-  return module.run([], ctx);
-}
-
 /** The update-skills.yml step chain: fetch, re-apply, rebuild, validate, embed, report. */
 export async function update(options: UpdateOptions, ctx: Context): Promise<number> {
   const config = await ctx.config();
@@ -98,7 +76,7 @@ export async function update(options: UpdateOptions, ctx: Context): Promise<numb
     ["soften", () => softenVault(ctx.root, {}, ctx)],
     ["build", () => buildVault(ctx.root, { prune: true, graph: false }, { out: ctx.out, err: ctx.err })],
     ["kg", () => kgStep(ctx)],
-    ["validate", () => optionalStep("../kg/validate", ctx)],
+    ["validate", () => validateCommand([], ctx)],
   ];
   if (!options.skipEmbed) steps.push(["embed", () => embedRun([], ctx)]);
 

@@ -4,8 +4,8 @@ description: Validate and render Mermaid diagrams to SVG, PNG, or ASCII with bun
 license: CC-BY-4.0
 metadata:
   author: Felipe Rodrigues - github.com/felipfr
-  version: 1.0.1
   source: https://github.com/tech-leads-club/agent-skills
+  version: 1.0.1
 disable-model-invocation: true
 ---
 

@@ -550,8 +550,8 @@
     {
       "id": "metadata-source",
       "source": "tech-leads-club/agent-skills",
-      "find": "  version: 1.0.1\n---",
-      "replace": "  version: 1.0.1\n  source: https://github.com/tech-leads-club/agent-skills\n---"
+      "find": "  author: Felipe Rodrigues - github.com/felipfr\n  version: 1.0.1\n",
+      "replace": "  author: Felipe Rodrigues - github.com/felipfr\n  source: https://github.com/tech-leads-club/agent-skills\n  version: 1.0.1\n"
     },
     {
       "id": "skill-dir-path",

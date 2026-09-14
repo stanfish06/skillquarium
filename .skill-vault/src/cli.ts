@@ -26,7 +26,12 @@ const commands: Record<string, () => Promise<{ run: Command; help: string }>> = 
   build: () => import("./build/command"),
   validate: () => import("./kg/validateCommand"),
   embed: () => import("./embed/command"),
-  // later tasks add: query, grep, install, update, overrides, drift, soften, import, eval
+  install: () => import("./install/command"),
+  overrides: () => import("./update/cli").then((m) => m.overrides),
+  drift: () => import("./update/cli").then((m) => m.drift),
+  soften: () => import("./update/cli").then((m) => m.soften),
+  update: () => import("./update/cli").then((m) => m.update),
+  // later tasks add: query, grep, import, eval
 };
 
 // Build a Context; `config` memoizes loadConfig(root) so commands share one parse.
