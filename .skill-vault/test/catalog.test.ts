@@ -18,6 +18,7 @@ import {
   readScalar,
   splitFrontmatter,
 } from "../src/catalog";
+import { isInstallableExtra } from "./transientKeys";
 
 const tmpDirs: string[] = [];
 function tmp(prefix: string): string {
@@ -339,9 +340,14 @@ describe("isUiUxProMaxSkill", () => {
   });
 });
 
-// Regenerate the golden from the vault root with:
-//   python3 .skill-vault/skill_toggle.py --root . catalog > .skill-vault/test/fixtures/catalog.golden.json
-describe("parity with the Python golden", () => {
+/**
+ * A regression fixture, not a parity oracle: it was recorded from skill_toggle.py, the port was
+ * verified against it byte for byte (f0522248, a2b7ba65, 05c65af4), and that Python is now deleted.
+ * The skill set varies per checkout — an optional extra like gstack adds keys the golden cannot
+ * have — so the golden's keys must all still be discovered, an extra key is tolerated only when it
+ * is a known installable extra, and name/description are compared over the keys they share.
+ */
+describe("catalog regression fixture", () => {
   interface Golden {
     skills: { key: string; name: string; description: string; error: string | null }[];
   }
@@ -350,9 +356,12 @@ describe("parity with the Python golden", () => {
     readFileSync(join(import.meta.dir, "fixtures/catalog.golden.json"), "utf8"),
   ) as Golden;
 
-  test("toggle-mode discovery and description/name match skill_toggle.py output", () => {
+  test("toggle-mode discovery and description/name match the recorded catalog", () => {
     const entries = discoverSkills(root, { bundles: false, excludeTransient: true });
-    expect(entries.map((e) => e.id)).toEqual(golden.skills.map((s) => s.key).sort());
+    const ids = new Set(entries.map((e) => e.id));
+    const goldenKeys = new Set(golden.skills.map((s) => s.key));
+    expect([...goldenKeys].sort().filter((key) => !ids.has(key))).toEqual([]);
+    expect([...ids].filter((id) => !goldenKeys.has(id) && !isInstallableExtra(id))).toEqual([]);
     const byKey = new Map(golden.skills.map((s) => [s.key, s]));
     const mismatches: string[] = [];
     for (const e of entries) {

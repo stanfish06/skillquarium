@@ -28,6 +28,7 @@ import { preCommitReset } from "../src/toggle/reset";
 import { loadSnapshot, saveSnapshot } from "../src/toggle/snapshot";
 import { discover, loadSkill } from "../src/toggle/state";
 import golden from "./fixtures/catalog.golden.json";
+import { isInstallableExtra } from "./transientKeys";
 
 const VAULT_ROOT = resolve(import.meta.dir, "..", "..");
 const roots: string[] = [];
@@ -236,31 +237,71 @@ describe("skill toggle", () => {
   });
 });
 
-describe("golden parity with skill_toggle.py", () => {
-  test("catalog matches catalog.golden.json", async () => {
+/**
+ * Regression fixtures, not a parity oracle. They were recorded from skill_toggle.py, the port was
+ * verified against them byte for byte (f0522248, a2b7ba65, 05c65af4), and that Python is now
+ * deleted; what is left is catching an unintended change to catalog/list output.
+ *
+ * Two things differ per checkout and are therefore not compared. Toggle state: it lives in
+ * .skill-vault/data/skill-toggle-state.json and never in a committed skill (the pre-commit-reset
+ * convention), so claude_enabled / codex_enabled / state are local — they are covered directly by
+ * the "skill toggle" unit tests above. And the skill set itself: installing an optional extra such
+ * as gstack adds keys the golden cannot have. So the assertion is key/name/description/category
+ * over the keys the golden and the tree share, every golden key must still be present, and an
+ * extra key is tolerated only when it is a known installable extra.
+ */
+describe("catalog and list regression fixtures", () => {
+  const STABLE = ["key", "name", "description", "category"] as const;
+  const GOLDEN_KEYS = new Set(golden.skills.map((s) => s.key));
+
+  test("catalog key/name/description/category match catalog.golden.json", async () => {
     const c = capture();
     expect(await main(["--root", VAULT_ROOT, "catalog"], c.overrides)).toBe(0);
     expect(c.out).toHaveLength(1);
     const actual = JSON.parse(c.out[0] ?? "") as typeof golden;
-    // The golden was recorded from one checkout; only the root prefix of `directory` may differ.
     const first = golden.skills[0];
     if (!first) throw new Error("empty golden");
-    const goldenRoot = first.directory.slice(0, -`/skills/${first.key}`.length);
-    const expected = golden.skills.map((s) => ({
-      ...s,
-      directory: VAULT_ROOT + s.directory.slice(goldenRoot.length),
-    }));
-    expect(actual.skills).toEqual(expected);
-    expect(actual.categories).toEqual(golden.categories);
+    // The row shape is still pinned, including the fields whose values are local.
     expect(Object.keys(actual.skills[0] ?? {})).toEqual(Object.keys(first));
+
+    const byKey = new Map(actual.skills.map((s) => [s.key, s]));
+    expect(golden.skills.map((s) => s.key).filter((key) => !byKey.has(key))).toEqual([]);
+    expect(
+      actual.skills.map((s) => s.key).filter((key) => !GOLDEN_KEYS.has(key) && !isInstallableExtra(key)),
+    ).toEqual([]);
+
+    const mismatches: string[] = [];
+    for (const want of golden.skills) {
+      const got = byKey.get(want.key);
+      if (!got) continue;
+      for (const field of STABLE) if (got[field] !== want[field]) mismatches.push(`${want.key}: ${field}`);
+    }
+    expect(mismatches).toEqual([]);
+
+    // `categories` is derived from the skills present, so an extra may introduce one of its own.
+    expect(golden.categories.filter((c) => !actual.categories.includes(c))).toEqual([]);
+    const fromExtras = new Set(actual.skills.filter((s) => !GOLDEN_KEYS.has(s.key)).map((s) => s.category));
+    expect(actual.categories.filter((c) => !golden.categories.includes(c) && !fromExtras.has(c))).toEqual([]);
   });
 
-  test("list matches list.golden.tsv line for line", async () => {
+  test("list key/category/description columns match list.golden.tsv", async () => {
     const c = capture();
     expect(await main(["--root", VAULT_ROOT, "list"], c.overrides)).toBe(0);
-    const expected = readFileSync(join(import.meta.dir, "fixtures", "list.golden.tsv"), "utf8").split("\n");
-    expected.pop();
-    expect(c.out).toEqual(expected);
+    const lines = readFileSync(join(import.meta.dir, "fixtures", "list.golden.tsv"), "utf8").split("\n");
+    lines.pop();
+    // The row is `state\tkey\tcategory\tdescription`; the state column is local and skipped.
+    const columns = (line: string): [string, string] => {
+      const [, key, ...rest] = line.split("\t");
+      return [key ?? "", rest.join("\t")];
+    };
+    const actual = new Map(c.out.map(columns));
+    const expected = lines.map(columns);
+
+    expect(expected.filter(([key]) => !actual.has(key)).map(([key]) => key)).toEqual([]);
+    expect([...actual.keys()].filter((key) => !GOLDEN_KEYS.has(key) && !isInstallableExtra(key))).toEqual([]);
+    expect(
+      expected.filter(([key, rest]) => actual.has(key) && actual.get(key) !== rest).map(([key]) => key),
+    ).toEqual([]);
   });
 });
 
