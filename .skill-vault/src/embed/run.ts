@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { discoverSkills, isInstallableExtra, readDescriptionForBuild, type SkillEntry } from "../catalog";
 import type { EmbedClient } from "./client";
-import { embeddedText, HASH_VERSION, hashSkillText } from "./hash";
+import { HASH_VERSION, hashSkillText, untoggledText } from "./hash";
 import {
   clearStaging,
   commitStaged,
@@ -145,7 +145,7 @@ export async function embedVault(
     if (!staleSet.has(e.id)) continue;
     // The toggle line is stripped before embedding as well as before hashing, so the index a
     // rebuild produces does not depend on which skills happen to be enabled locally.
-    const text = embeddedText(readFileSync(e.file, "utf8"));
+    const text = untoggledText(readFileSync(e.file, "utf8"));
     const truncated = text.length > MAX_CHARS;
     pending.push({
       id: e.id,

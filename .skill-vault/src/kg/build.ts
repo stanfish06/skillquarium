@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { collapseWhitespace, discoverSkills, MetadataError, universalNewlines } from "../catalog";
+import { untoggledText } from "../embed/hash";
 import {
   highPrecisionMentions,
   ngramHits,
@@ -154,7 +155,8 @@ export function buildGraph(root: string): Graph {
   const descs = new Map<string, string>();
   const isProfile = new Map<string, boolean>();
   for (const entry of entries) {
-    const text = universalNewlines(readFileSync(entry.file, "utf8"));
+    // untoggledText: a local toggle must not move the window and change the edges CI rebuilds.
+    const text = untoggledText(universalNewlines(readFileSync(entry.file, "utf8")));
     bodies.set(entry.id, sliceCodePoints(text, window));
     descs.set(entry.id, readFrontmatterDescription(text));
     isProfile.set(entry.id, profiles.has(entry.id) && entry.id !== DISPATCHER);

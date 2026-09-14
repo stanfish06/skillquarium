@@ -4,11 +4,11 @@
   "skills": 2134,
   "expert_profiles": 503,
   "nodes": 2207,
-  "edges": 15777,
+  "edges": 15787,
   "generic_names_blocked": 32,
-  "tier1_edges": 4745,
+  "tier1_edges": 4750,
   "tier2_edges": 702,
-  "alias_edges": 4490,
+  "alias_edges": 4494,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
@@ -20,13 +20,13 @@
   "orphan_count": 127,
   "orphan_rate": 0.0595,
   "by_provenance": {
-   "EXTRACTED": 14991,
+   "EXTRACTED": 15001,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2134,
-   "references": 12332,
+   "references": 12342,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -48825,6 +48825,15 @@
   {
    "src": "cellular-neuroscientist",
    "rel": "references",
+   "dst": "parasitologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of parasitologist appears in cellular-neuroscientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "cellular-neuroscientist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -59670,6 +59679,15 @@
   {
    "src": "data-engineer",
    "rel": "references",
+   "dst": "protobuf",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "protobuf named in data-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "data-engineer",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -62761,6 +62779,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "deep-agents-memory",
+   "rel": "references",
+   "dst": "ecosystem-primer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "deep-agents-memory named in ecosystem-primer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -68584,6 +68611,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "deep-agents-core named in ecosystem-primer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ecosystem-primer",
+   "rel": "references",
+   "dst": "deep-agents-memory",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "deep-agents-memory named in ecosystem-primer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -97374,7 +97410,7 @@
    "dst": "matlab-theming",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "matlab-build-app named in matlab-theming/SKILL.md body",
+   "justification": "matlab-theming named in matlab-build-app/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98436,7 +98472,7 @@
    "dst": "matlab-build-app",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "matlab-build-app named in matlab-theming/SKILL.md body",
+   "justification": "matlab-theming named in matlab-build-app/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -101515,6 +101551,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "run-tests named in migrate-xunit-to-mstest/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "migrate-xunit-to-mstest",
+   "rel": "references",
+   "dst": "writing-mstest-tests",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "writing-mstest-tests named in migrate-xunit-to-mstest/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -117799,6 +117844,15 @@
    "status": "accepted"
   },
   {
+   "src": "outlook-calendar",
+   "rel": "references",
+   "dst": "sharepoint",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sharepoint named in outlook-calendar/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "outlook-calendar-daily-brief",
    "rel": "in_domain",
    "dst": "domain:comms-productivity",
@@ -119029,6 +119083,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "parasitologist",
+   "rel": "references",
+   "dst": "cellular-neuroscientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of parasitologist appears in cellular-neuroscientist/SKILL.md",
    "status": "accepted"
   },
   {
@@ -127732,6 +127795,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "code-review named in protobuf/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "protobuf",
+   "rel": "references",
+   "dst": "data-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "protobuf named in data-engineer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -149593,6 +149665,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in sharepoint/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "sharepoint",
+   "rel": "references",
+   "dst": "outlook-calendar",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sharepoint named in outlook-calendar/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -172237,6 +172318,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "migrate-mstest-v3-to-v4 named in writing-mstest-tests/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "writing-mstest-tests",
+   "rel": "references",
+   "dst": "migrate-xunit-to-mstest",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "writing-mstest-tests named in migrate-xunit-to-mstest/SKILL.md body",
    "status": "accepted"
   },
   {

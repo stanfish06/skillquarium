@@ -19,12 +19,14 @@ function sha256(text: string): string {
 }
 
 /**
- * The text an embedding is computed over, and the text the hash covers: SKILL.md with every
- * `disable-model-invocation` frontmatter line removed. The toggle says whether the model may pick
- * the skill up on its own, never what the skill covers, so it belongs in neither. Never throws: a
- * file whose frontmatter does not parse is used as it stands.
+ * SKILL.md with every `disable-model-invocation` frontmatter line removed. The toggle says whether
+ * the model may pick the skill up on its own, never what the skill covers, so it belongs in nothing
+ * derived from the skill's content: the embedding, its hash, and the graph's body window all read
+ * this. Without it a committed artifact depends on whose toggles happen to be applied — the line
+ * shifts the 8 KB window and changes which mentions fall inside it. Never throws: a file whose
+ * frontmatter does not parse is used as it stands.
  */
-export function embeddedText(text: string): string {
+export function untoggledText(text: string): string {
   // One substring scan rejects the untoggled majority before any line splitting.
   if (!text.includes(`\n${CLAUDE_FIELD}:`)) return text;
   const fm = splitFrontmatter(text);
@@ -41,12 +43,12 @@ export function skillContentHash(path: string): string {
 }
 
 /**
- * sha256 over embeddedText, so the digest covers exactly the bytes that produced the vector.
+ * sha256 over untoggledText, so the digest covers exactly the bytes that produced the vector.
  * `agents/openai.yaml` is left out: nothing in it reaches the embedder, so hashing it would cost
  * 2,133 extra reads per `--check` and could only ever report staleness a vector cannot have.
  */
 export function hashSkillText(text: string): string {
-  return sha256(embeddedText(text));
+  return sha256(untoggledText(text));
 }
 
 /**
