@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import { discoverSkills, isInstallableExtra, readDescriptionForBuild, type SkillEntry } from "../catalog";
 import type { EmbedClient } from "./client";
 import {
+  clearStaging,
+  commitStaged,
   type Manifest,
   type ManifestEntry,
   pruneOrphans,
@@ -145,36 +147,46 @@ export async function embedVault(
   let dim = manifest?.dim ?? 0;
   let dimFromRun = 0;
   let done = 0;
-  for (const batch of batches(pending, opts.batchSize)) {
-    const inputs = batch.flatMap((p) => [p.desc, p.body]);
-    let vectors: Float32Array[];
-    try {
-      vectors = await client.embed(inputs);
-    } catch (e) {
-      throw new Error(`embedding ${batch.map((p) => p.id).join(", ")}: ${(e as Error).message}`);
-    }
-    if (vectors.length !== inputs.length) {
-      throw new Error(
-        `embedding ${batch.map((p) => p.id).join(", ")}: got ${vectors.length} of ${inputs.length} vectors`,
-      );
-    }
-    if (dimFromRun === 0) {
-      dimFromRun = vectors[0]?.length ?? 0;
-      if (manifest && manifest.dim !== dimFromRun && !opts.force) {
-        throw new Error(`dim changed from ${manifest.dim} to ${dimFromRun}; rerun with --force`);
+  // A forced refresh rewrites rows the manifest hashes still match, so writing them in place would
+  // leave a half-new-model index that the next --check calls current. They go to staging and move
+  // in together. Rows staged by an earlier run that died there were never part of the index.
+  clearStaging(root);
+  try {
+    for (const batch of batches(pending, opts.batchSize)) {
+      const inputs = batch.flatMap((p) => [p.desc, p.body]);
+      let vectors: Float32Array[];
+      try {
+        vectors = await client.embed(inputs);
+      } catch (e) {
+        throw new Error(`embedding ${batch.map((p) => p.id).join(", ")}: ${(e as Error).message}`);
       }
-      dim = dimFromRun;
+      if (vectors.length !== inputs.length) {
+        throw new Error(
+          `embedding ${batch.map((p) => p.id).join(", ")}: got ${vectors.length} of ${inputs.length} vectors`,
+        );
+      }
+      if (dimFromRun === 0) {
+        dimFromRun = vectors[0]?.length ?? 0;
+        if (manifest && manifest.dim !== dimFromRun && !opts.force) {
+          throw new Error(`dim changed from ${manifest.dim} to ${dimFromRun}; rerun with --force`);
+        }
+        dim = dimFromRun;
+      }
+      for (let j = 0; j < batch.length; j++) {
+        const p = batch[j];
+        const desc = vectors[j * 2];
+        const body = vectors[j * 2 + 1];
+        if (!p || !desc || !body) continue;
+        writeSkill(root, p.id, { desc, body }, forceAll);
+        fresh.set(p.id, p.entry);
+      }
+      done += batch.length;
+      opts.log?.(`embedded ${done}/${pending.length}`);
     }
-    for (let j = 0; j < batch.length; j++) {
-      const p = batch[j];
-      const desc = vectors[j * 2];
-      const body = vectors[j * 2 + 1];
-      if (!p || !desc || !body) continue;
-      writeSkill(root, p.id, { desc, body });
-      fresh.set(p.id, p.entry);
-    }
-    done += batch.length;
-    opts.log?.(`embedded ${done}/${pending.length}`);
+    if (forceAll) commitStaged(root);
+  } catch (e) {
+    clearStaging(root);
+    throw e;
   }
 
   for (const id of removed) removeSkill(root, id);

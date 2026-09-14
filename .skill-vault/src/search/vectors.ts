@@ -13,9 +13,8 @@ export function loadVectorIndex(root: string): VectorIndex | null {
 }
 
 function dot(a: Float32Array, b: Float32Array): number {
-  const n = Math.min(a.length, b.length);
   let sum = 0;
-  for (let i = 0; i < n; i++) sum += (a[i] ?? 0) * (b[i] ?? 0);
+  for (let i = 0; i < a.length; i++) sum += (a[i] ?? 0) * (b[i] ?? 0);
   return sum;
 }
 
@@ -23,8 +22,13 @@ function dot(a: Float32Array, b: Float32Array): number {
  * Each skill scores as its better half: the description row answers a query that names the
  * skill's subject, the body row one that names something only the instructions mention. Rows are
  * L2-normalized on write, so a dot product is the cosine.
+ *
+ * null when the query vector is not index.dim long, which means the endpoint has moved to another
+ * model: scoring the overlap would fuse rankings that are not cosine similarities at all, so the
+ * caller reports the mismatch and drops the signal.
  */
-export function semanticRank(index: VectorIndex, queryVec: Float32Array, n: number): Ranked[] {
+export function semanticRank(index: VectorIndex, queryVec: Float32Array, n: number): Ranked[] | null {
+  if (queryVec.length !== index.dim) return null;
   const scored = index.ids.map((id, i) => {
     const desc = index.desc[i];
     const body = index.body[i];

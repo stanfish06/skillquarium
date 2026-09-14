@@ -57,6 +57,23 @@ function jsonResponse(body: unknown): Response {
   return new Response(JSON.stringify(body), { headers: { "content-type": "application/json" } });
 }
 
+/**
+ * A second model behind the same endpoint: every vector it returns differs from fakeClient's, so a
+ * row that reached the index is visible byte for byte. Post number `failAt` answers 502.
+ */
+function v2Client(failAt = 0) {
+  let posts = 0;
+  return llamaCppClient(endpoint, async (url, init) => {
+    if (url.endsWith("/v1/models")) return jsonResponse({ data: [{ id: "fake-embed-v2" }] });
+    posts++;
+    if (posts === failAt) return new Response("upstream connect error", { status: 502 });
+    const inputs = (JSON.parse(String(init?.body)) as { input: string[] }).input;
+    return jsonResponse({
+      data: inputs.map((t, index) => ({ index, embedding: Array.from(fakeVector(`v2:${t}`)) })),
+    });
+  });
+}
+
 describe("embedVault", () => {
   test("first run embeds every skill, second run embeds none", async () => {
     const root = vault();
@@ -286,6 +303,47 @@ describe("embedVault", () => {
     const after = await embedVault(root, fakeClient(), { batchSize: 16, today: () => "2026-03-03" });
     expect(after.embedded).toBe(3);
     expect(readdirSync(join(root, EMBED_DIR)).sort()).toEqual(["a.f16", "b.f16", "c.f16", "manifest.json"]);
+    expect(readIndex(root)?.stale.size).toBe(0);
+  });
+
+  test("a forced refresh that fails partway leaves the committed index whole", async () => {
+    const root = vault();
+    await embedVault(root, fakeClient(), { batchSize: 16, today });
+    const rows = new Map(
+      ["a", "b", "c"].map((id) => [id, readFileSync(join(root, EMBED_DIR, `${id}.f16`))] as const),
+    );
+    const manifest = readFileSync(join(root, EMBED_DIR, "manifest.json"), "utf8");
+
+    // The endpoint has moved to another model, so every skill is refreshed even though no
+    // SKILL.md changed. batchSize 2 is one skill per request: a succeeds, b 502s, c never goes out.
+    await expect(embedVault(root, v2Client(2), { batchSize: 2, today: () => "2026-03-03" })).rejects.toThrow(
+      /embedding b: .*HTTP 502/,
+    );
+
+    // None of the refreshed rows reached the index, and no staging is left behind.
+    expect(readdirSync(join(root, EMBED_DIR)).sort()).toEqual(["a.f16", "b.f16", "c.f16", "manifest.json"]);
+    for (const [id, bytes] of rows) {
+      expect(readFileSync(join(root, EMBED_DIR, `${id}.f16`))).toEqual(bytes);
+    }
+    expect(readFileSync(join(root, EMBED_DIR, "manifest.json"), "utf8")).toBe(manifest);
+
+    // Index and manifest still describe the same model, so --check is telling the truth here.
+    const checked = await embedVault(root, fakeClient({ fail: true }), {
+      batchSize: 16,
+      check: true,
+      today,
+    });
+    expect(checked.stale).toEqual([]);
+    expect(checked.model).toBe("fake-embed");
+
+    // The model change is still pending, so the next run refreshes every skill and every row moves.
+    const after = await embedVault(root, v2Client(), { batchSize: 16, today: () => "2026-03-03" });
+    expect(after.embedded).toBe(3);
+    expect(readManifest(root)?.model).toBe("fake-embed-v2");
+    expect(readdirSync(join(root, EMBED_DIR)).sort()).toEqual(["a.f16", "b.f16", "c.f16", "manifest.json"]);
+    for (const [id, bytes] of rows) {
+      expect(readFileSync(join(root, EMBED_DIR, `${id}.f16`))).not.toEqual(bytes);
+    }
     expect(readIndex(root)?.stale.size).toBe(0);
   });
 

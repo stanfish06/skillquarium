@@ -95,7 +95,17 @@ export async function gatherSignals(
       if (failure !== null) notices.push(`semantic search unavailable: ${failure}`);
       else if (vector === undefined)
         notices.push("semantic search unavailable: the endpoint returned no vector");
-      else signals.push({ name: "semantic", results: semanticRank(index, vector, width) });
+      else {
+        const results = semanticRank(index, vector, width);
+        // A width the index was not built at is a changed endpoint model, not a bad query.
+        if (results === null) {
+          notices.push(
+            `semantic search unavailable: the endpoint returned ${vector.length}-dimension vectors ` +
+              `but the index at ${join(root, EMBED_DIR)} holds ${index.dim}-dimension rows; ` +
+              "run 'skillquarium embed --force' to rebuild it",
+          );
+        } else signals.push({ name: "semantic", results });
+      }
     }
   }
 

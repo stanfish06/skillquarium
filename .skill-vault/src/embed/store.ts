@@ -88,8 +88,36 @@ export function writeManifest(root: string, m: Manifest): void {
   writeAtomic(embedPath(root, MANIFEST), text);
 }
 
-export function writeSkill(root: string, id: string, rows: { desc: Float32Array; body: Float32Array }): void {
-  writeAtomic(embedPath(root, `${id}.f16`), packF16([rows.desc, rows.body]));
+/** Holds a forced refresh's rows until every batch has landed; never part of the index itself. */
+const STAGING = ".staging";
+
+export function writeSkill(
+  root: string,
+  id: string,
+  rows: { desc: Float32Array; body: Float32Array },
+  staged = false,
+): void {
+  const name = staged ? join(STAGING, `${id}.f16`) : `${id}.f16`;
+  writeAtomic(embedPath(root, name), packF16([rows.desc, rows.body]));
+}
+
+/** Moves the staged rows into the index and drops the staging dir. Returns the ids moved. */
+export function commitStaged(root: string): string[] {
+  const dir = embedPath(root, STAGING);
+  if (!existsSync(dir)) return [];
+  const moved: string[] = [];
+  for (const name of readdirSync(dir)) {
+    if (!name.endsWith(".f16")) continue;
+    renameSync(join(dir, name), embedPath(root, name));
+    moved.push(name.slice(0, -".f16".length));
+  }
+  rmSync(dir, { recursive: true, force: true });
+  return moved.sort();
+}
+
+/** Rows staged by a refresh that died partway: they never entered the index, so drop them. */
+export function clearStaging(root: string): void {
+  rmSync(embedPath(root, STAGING), { recursive: true, force: true });
 }
 
 export function removeSkill(root: string, id: string): void {

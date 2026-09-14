@@ -178,6 +178,29 @@ test("an endpoint that throws is one notice naming it, not a failure", async () 
   for (const r of run.results) expect(r.signals.semantic).toBeUndefined();
 });
 
+test("a query vector of the wrong width is one notice naming both widths, not a silent score", async () => {
+  const run = await runQuery(
+    ROOT,
+    PROBE,
+    opts({ semantic: true }),
+    deps({
+      vectors: () => fakeIndex("pymc", ["anndata", "scanpy"]),
+      // Four dimensions against a two-dimension index: the endpoint has moved to another model.
+      embed: () => ({
+        embed: async () => [Float32Array.from([1, 0, 0, 0])],
+        modelName: async () => "other",
+      }),
+    }),
+  );
+  expect(run.notices).toHaveLength(1);
+  expect(run.notices[0]).toContain("4-dimension");
+  expect(run.notices[0]).toContain("2-dimension");
+  // The truncated dot product would have put pymc at semantic rank 1; instead no signal is recorded.
+  expect(run.results.length).toBe(8);
+  for (const r of run.results) expect(r.signals.semantic).toBeUndefined();
+  expect(run.results.map((r) => r.skill)).toContain("harmonypy");
+});
+
 test("an unusable file index is one notice, not a failure", async () => {
   const run = await runQuery(
     ROOT,

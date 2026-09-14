@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import {
+  chmodSync,
   existsSync,
   lstatSync,
   mkdirSync,
@@ -25,6 +26,7 @@ const NPX_STUB = [
   "printf 'rewritten by the CLI\\n' >> \"$FAKE_VAULT/skills/clean/SKILL.md\"",
   "printf 'rewritten by the CLI\\n' >> \"$FAKE_VAULT/skills/dirty/SKILL.md\"",
   "printf 'generated\\n' > \"$FAKE_VAULT/untracked-after.txt\"",
+  '[ -n "$STUB_DELETES" ] && rm -f "$FAKE_VAULT/$STUB_DELETES"',
   'mkdir -p "$FAKE_VAULT/.agents/skills" "$FAKE_VAULT/skills/.pi"',
   "printf 'link root\\n' > \"$FAKE_VAULT/.agents/skills/x\"",
   "printf 'link root\\n' > \"$FAKE_VAULT/skills/.pi/x\"",
@@ -32,7 +34,7 @@ const NPX_STUB = [
   "",
 ].join("\n");
 
-const ENV_KEYS = ["HOME", "PATH", "COMMAND_LOG", "FAKE_VAULT"];
+const ENV_KEYS = ["HOME", "PATH", "COMMAND_LOG", "FAKE_VAULT", "STUB_DELETES"];
 
 let sandbox = "";
 let root = "";
@@ -87,6 +89,7 @@ beforeEach(() => {
   process.env.PATH = `${bin}:${process.env.PATH ?? ""}`;
   process.env.COMMAND_LOG = logPath;
   process.env.FAKE_VAULT = root;
+  delete process.env.STUB_DELETES;
   out = [];
   err = [];
 });
@@ -140,14 +143,47 @@ describe("install run", () => {
 
     // Clean before the run: the CLI's rewrite is undone.
     expect(read("skills", "clean", "SKILL.md")).toBe("---\nname: clean\n---\nbase\n");
-    // Dirty before the run: never touched, so the local edit survives.
-    expect(read("skills", "dirty", "SKILL.md")).toBe(
-      "---\nname: dirty\n---\nbase\nlocal edit\nrewritten by the CLI\n",
-    );
+    // Dirty before the run and rewritten by the CLI: back to the exact pre-install bytes, with
+    // nothing the CLI appended left on top of the local edit.
+    expect(read("skills", "dirty", "SKILL.md")).toBe("---\nname: dirty\n---\nbase\nlocal edit\n");
     // Untracked after the run only: removed. Untracked before it: kept.
     expect(existsSync(join(root, "untracked-after.txt"))).toBe(false);
     expect(read("untracked-before.txt")).toBe("mine\n");
+    expect(out).toContain(
+      "vault: 1 file(s) reverted, 3 generated file(s) removed, 1 pre-existing edit(s) restored",
+    );
   });
+
+  test("a dirty file the CLI deletes comes back byte for byte", async () => {
+    process.env.STUB_DELETES = "untracked-before.txt";
+    expect(await install()).toBe(0);
+    expect(read("untracked-before.txt")).toBe("mine\n");
+  });
+
+  test("a path the user deleted stays deleted when the CLI recreates it", async () => {
+    // " D" in git status: the snapshot has no bytes to put back, so restoring means deleting again.
+    rmSync(join(root, "skills", "dirty", "SKILL.md"));
+    expect(await install()).toBe(0);
+    expect(existsSync(join(root, "skills", "dirty", "SKILL.md"))).toBe(false);
+  });
+
+  test.skipIf(process.getuid?.() === 0)(
+    "a restore git cannot apply fails the install and names the path",
+    async () => {
+      // Read-only directory: the CLI can still append to the file inside it, but git checkout
+      // has to unlink and recreate, which it cannot.
+      chmodSync(join(root, "skills", "clean"), 0o500);
+      try {
+        expect(await install()).toBe(1);
+        expect(err.join("\n")).toContain("could not restore 1 path(s)");
+        expect(err.join("\n")).toContain("skills/clean/SKILL.md");
+        // The rewrite is still there: the failure is reported rather than papered over.
+        expect(read("skills", "clean", "SKILL.md")).toContain("rewritten by the CLI");
+      } finally {
+        chmodSync(join(root, "skills", "clean"), 0o700);
+      }
+    },
+  );
 
   test("removes the link roots the CLI creates inside the vault", async () => {
     expect(await install()).toBe(0);

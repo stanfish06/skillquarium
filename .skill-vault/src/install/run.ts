@@ -1,6 +1,9 @@
 import {
+  constants,
+  copyFileSync,
   existsSync,
   lstatSync,
+  mkdirSync,
   mkdtempSync,
   readdirSync,
   readlinkSync,
@@ -8,9 +11,10 @@ import {
   rmdirSync,
   rmSync,
   statSync,
+  symlinkSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import type { Context } from "../cli";
 import { installCareerOps } from "./careerOps";
 import { installGstack } from "./gstack";
@@ -195,30 +199,155 @@ function chunked(paths: string[], size: number): string[][] {
   return out;
 }
 
+/** One path as it stood before the skills CLI ran, and what it takes to put it back. */
+type DirtyEntry =
+  /** Regular file; `copy` holds the pre-run bytes. */
+  | { kind: "file"; stamp: string; copy: string }
+  | { kind: "link"; stamp: string; target: string }
+  /** Dirty because the user deleted it: restoring means deleting it again. */
+  | { kind: "deleted" }
+  /** Over the snapshot budget, so the bytes were not kept and the path is left as the CLI left it. */
+  | { kind: "unsaved"; stamp: string };
+
+export interface DirtyState {
+  entries: Map<string, DirtyEntry>;
+  /** Paths the budget skipped, for the warning line. */
+  unsaved: string[];
+  /** Deletes the copies; safe to call more than once. */
+  release(): void;
+}
+
 /**
- * Undo only what the skills CLI touched: paths dirty before it ran keep their edits.
- * `before` is the status map captured ahead of the CLI.
+ * Ceilings on the pre-run snapshot. The 2,100 SKILL.md files are ~10MB in total, so a fully dirty
+ * vault fits with room to spare while a stray multi-gigabyte artifact is never copied.
+ */
+const MAX_SNAPSHOT_FILE = 8 * 1024 * 1024;
+const MAX_SNAPSHOT_TOTAL = 256 * 1024 * 1024;
+
+/** Size and mtime: what tells a path the CLI rewrote from one it never opened. */
+function stamp(st: { size: bigint; mtimeNs: bigint }): string {
+  return `${st.size}:${st.mtimeNs}`;
+}
+
+function stampOf(full: string): string | undefined {
+  const st = lstatSync(full, { bigint: true, throwIfNoEntry: false });
+  return st === undefined ? undefined : stamp(st);
+}
+
+/**
+ * Copies the bytes of every already-dirty path aside before the skills CLI runs. Skipping such a
+ * path afterwards would leave the CLI's rewrite sitting on top of the user's uncommitted edit; the
+ * copy is what makes the promise that dirty work survives an install true.
+ */
+export function snapshotDirty(root: string, before: Map<string, string>): DirtyState {
+  const entries = new Map<string, DirtyEntry>();
+  const unsaved: string[] = [];
+  let stash: string | undefined;
+  let budget = MAX_SNAPSHOT_TOTAL;
+  for (const path of before.keys()) {
+    const full = join(root, path);
+    const st = lstatSync(full, { bigint: true, throwIfNoEntry: false });
+    if (st === undefined) {
+      entries.set(path, { kind: "deleted" });
+      continue;
+    }
+    const size = Number(st.size);
+    if (st.isSymbolicLink()) {
+      entries.set(path, { kind: "link", stamp: stamp(st), target: readlinkSync(full) });
+      continue;
+    }
+    // A directory reaches the status map only as a nested git repo; there is nothing to copy.
+    if (!st.isFile() || size > MAX_SNAPSHOT_FILE || size > budget) {
+      entries.set(path, { kind: "unsaved", stamp: stamp(st) });
+      unsaved.push(path);
+      continue;
+    }
+    stash ??= mkdtempSync(join(tmpdir(), "sq-dirty."));
+    const copy = join(stash, path);
+    mkdirSync(dirname(copy), { recursive: true });
+    // FICLONE reflinks on btrfs/xfs and falls back to a byte copy everywhere else.
+    copyFileSync(full, copy, constants.COPYFILE_FICLONE);
+    budget -= size;
+    entries.set(path, { kind: "file", stamp: stamp(st), copy });
+  }
+  return {
+    entries,
+    unsaved,
+    release() {
+      if (stash !== undefined) rmSync(stash, { recursive: true, force: true });
+      stash = undefined;
+    },
+  };
+}
+
+function touchedByCli(full: string, entry: DirtyEntry): boolean {
+  if (entry.kind === "deleted") return lstatSync(full, { throwIfNoEntry: false }) !== undefined;
+  // No bytes were kept for an unsaved path, so there is nothing to put back.
+  if (entry.kind === "unsaved") return false;
+  return stampOf(full) !== entry.stamp;
+}
+
+function restoreSnapshot(full: string, entry: DirtyEntry): void {
+  if (entry.kind === "unsaved") return;
+  // What the CLI left goes first either way: it may be read-only, or a file where a link belongs.
+  rmSync(full, { recursive: true, force: true });
+  if (entry.kind === "deleted") return;
+  mkdirSync(dirname(full), { recursive: true });
+  if (entry.kind === "link") symlinkSync(entry.target, full);
+  else copyFileSync(entry.copy, full);
+}
+
+/** One failing path must not condemn its whole chunk: rerun the chunk a path at a time. */
+async function narrow(root: string, runner: Runner, argv: string[], chunk: string[]): Promise<string[]> {
+  const failed: string[] = [];
+  for (const path of chunk) {
+    const result = await runner.exec(["git", "-C", root, ...argv, path]);
+    if (result.code !== 0) failed.push(path);
+  }
+  return failed;
+}
+
+/**
+ * Undo only what the skills CLI touched. A path that was clean goes back through git; a path that
+ * was already dirty and the CLI also rewrote comes back from the snapshot, byte for byte. `failed`
+ * names every path that resisted, so the caller can fail rather than report a successful install.
  */
 export async function restoreCliChanges(
   root: string,
   runner: Runner,
-  before: Map<string, string>,
-): Promise<{ reverted: string[]; cleaned: string[] }> {
+  dirty: DirtyState,
+): Promise<{ reverted: string[]; cleaned: string[]; restored: string[]; failed: string[] }> {
   const reverted: string[] = [];
   const cleaned: string[] = [];
+  const restored: string[] = [];
+  const failed: string[] = [];
   for (const [path, code] of gitStatus(root)) {
-    if (before.has(path)) continue;
+    if (dirty.entries.has(path)) continue;
     if (code === "??") cleaned.push(path);
     else reverted.push(path);
   }
+  // Walked from the snapshot, not from the status map: a dirty path the CLI deleted no longer
+  // appears there under its own code.
+  for (const [path, entry] of dirty.entries) {
+    const full = join(root, path);
+    if (!touchedByCli(full, entry)) continue;
+    try {
+      restoreSnapshot(full, entry);
+      restored.push(path);
+    } catch {
+      failed.push(path);
+    }
+  }
   // Chunked so a vault-wide rewrite cannot overflow the argument list.
   for (const chunk of chunked(reverted, 200)) {
-    await runner.exec(["git", "-C", root, "checkout", "--", ...chunk]);
+    const result = await runner.exec(["git", "-C", root, "checkout", "--", ...chunk]);
+    if (result.code !== 0) failed.push(...(await narrow(root, runner, ["checkout", "--"], chunk)));
   }
   for (const chunk of chunked(cleaned, 200)) {
-    await runner.exec(["git", "-C", root, "clean", "-f", "--", ...chunk]);
+    const result = await runner.exec(["git", "-C", root, "clean", "-f", "--", ...chunk]);
+    if (result.code !== 0) failed.push(...(await narrow(root, runner, ["clean", "-f", "--"], chunk)));
   }
-  return { reverted, cleaned };
+  return { reverted, cleaned, restored, failed: failed.sort() };
 }
 
 // Link roots some skills-cli hosts create inside the vault even for a global install.
@@ -239,6 +368,8 @@ export async function installVault(ctx: Context, opts: { extras: Extras; dryRun:
   // gstack is a 250MB bundle with its own .git; moving it aside keeps `skills add`
   // from scanning it and leaking per-skill symlinks into the vault root.
   let stash: string | undefined;
+  let dirty: DirtyState | undefined;
+  let restoreFailed = false;
   const restoreGstack = () => {
     if (stash === undefined) return;
     const stashed = join(stash, "gstack");
@@ -283,20 +414,36 @@ export async function installVault(ctx: Context, opts: { extras: Extras; dryRun:
     // skills-cli >= 1.5.19 skips any skill already inside the global store, and this
     // vault is that store, so `add` prints ✓ without linking; linkClaude does the work.
     const before = opts.dryRun ? new Map<string, string>() : gitStatus(ctx.root);
+    dirty = snapshotDirty(ctx.root, before);
     const add = await runner.exec(
       ["npx", "-y", `skills@${cfg.skillsCliVersion}`, "add", ".", "-s", "*", "-g"],
       { cwd: ctx.root },
     );
     if (opts.dryRun) {
-      ctx.out("+ git checkout / git clean the paths the skills CLI changed (dirty paths kept)");
+      ctx.out("+ git checkout / git clean the paths the skills CLI changed (dirty paths restored)");
     } else {
-      const { reverted, cleaned } = await restoreCliChanges(ctx.root, runner, before);
-      ctx.out(`vault: ${reverted.length} file(s) reverted, ${cleaned.length} generated file(s) removed`);
+      const { reverted, cleaned, restored, failed } = await restoreCliChanges(ctx.root, runner, dirty);
+      ctx.out(
+        `vault: ${reverted.length} file(s) reverted, ${cleaned.length} generated file(s) removed, ` +
+          `${restored.length} pre-existing edit(s) restored`,
+      );
+      if (dirty.unsaved.length > 0) {
+        ctx.err(
+          `WARNING: too large to snapshot, left as the skills CLI wrote them: ${dirty.unsaved.join(", ")}`,
+        );
+      }
+      if (failed.length > 0) {
+        ctx.err(
+          `ERROR: could not restore ${failed.length} path(s) after the skills CLI: ${failed.join(", ")}`,
+        );
+        restoreFailed = true;
+      }
     }
     if (add.code !== 0) {
       ctx.err(`ERROR: skills CLI failed with exit code ${add.code}.`);
       return add.code;
     }
+    if (restoreFailed) return 1;
 
     // Generated link roots, not source: Pi would rediscover them as project skills, and
     // `skills/` is scanned three levels deep, so a stale root inside it becomes skills.
@@ -348,5 +495,6 @@ export async function installVault(ctx: Context, opts: { extras: Extras; dryRun:
     process.off("SIGINT", onInterrupt);
     process.off("SIGTERM", onTerminate);
     restoreGstack();
+    dirty?.release();
   }
 }
