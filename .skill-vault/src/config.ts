@@ -4,13 +4,14 @@ import { z } from "zod";
 
 // Layers, lowest to highest: schema defaults, .skill-vault/config.json (committed),
 // .skill-vault/config.local.json (gitignored), then SKILLQUARIUM_* / CLAUDE_SKILLS_DIR /
-// SKILLS_CLI_VERSION env vars.
-const Schema = z.object({
+// SKILLS_CLI_VERSION env vars. Strict objects so a misspelled key fails instead of
+// silently falling back to a default.
+const Schema = z.strictObject({
   skillsCliVersion: z.string().default("1.5.23"),
   claudeSkillsDir: z.string().default(join(homedir(), ".claude/skills")),
   embed: z
-    .object({
-      url: z.url().default("http://127.0.0.1:8080"),
+    .strictObject({
+      url: z.url({ protocol: /^https?$/ }).default("http://127.0.0.1:8080"),
       model: z.string().nullable().default(null),
       batchSize: z.number().int().positive().default(16),
       timeoutMs: z.number().int().positive().default(120_000),
@@ -18,11 +19,11 @@ const Schema = z.object({
     })
     .prefault({}),
   query: z
-    .object({
+    .strictObject({
       k: z.number().int().positive().default(8),
       rrfK: z.number().positive().default(60),
       weights: z
-        .object({
+        .strictObject({
           lexical: z.number().default(1),
           fuzzy: z.number().default(1),
           semantic: z.number().default(1),
@@ -39,11 +40,17 @@ function isObj(v: unknown): v is Obj {
   return typeof v === "object" && v !== null && !Array.isArray(v);
 }
 
-// Read a JSON file as a plain object; a missing file is an empty layer, a non-object is an error.
+// Read a JSON file as a plain object; a missing file is an empty layer. Parse and shape
+// errors carry the file path so the user knows which layer is broken.
 async function readLayer(path: string): Promise<Obj> {
   const f = Bun.file(path);
   if (!(await f.exists())) return {};
-  const data: unknown = await f.json();
+  let data: unknown;
+  try {
+    data = JSON.parse(await f.text());
+  } catch (e) {
+    throw new Error(`config: ${path}: ${(e as Error).message}`);
+  }
   if (!isObj(data)) throw new Error(`config: ${path}: expected a JSON object`);
   return data;
 }
@@ -75,10 +82,9 @@ export async function loadConfig(root: string): Promise<Config> {
   const merged = deepMerge(deepMerge(committed, local), envLayer());
   const parsed = Schema.safeParse(merged);
   if (!parsed.success) {
-    // Report the first issue with its dotted path so the user can find the offending key.
-    const issue = parsed.error.issues[0];
-    const where = issue ? issue.path.map(String).join(".") : "";
-    throw new Error(`config: ${where}: ${issue?.message ?? "invalid"}`);
+    // One line listing every issue as "<dotted.path>: <message>".
+    const issues = parsed.error.issues.map((i) => `${i.path.map(String).join(".")}: ${i.message}`);
+    throw new Error(`config: ${issues.join("; ")}`);
   }
   return parsed.data;
 }
