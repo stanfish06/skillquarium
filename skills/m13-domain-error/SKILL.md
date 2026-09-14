@@ -2,7 +2,6 @@
 name: m13-domain-error
 description: "Use when designing domain error handling. Keywords: domain error, error categorization, recovery strategy, retry, fallback, domain error hierarchy, user-facing vs internal errors, error code design, circuit breaker, graceful degradation, resilience, error context, backoff, retry with backoff, error recovery, transient vs permanent error, 领域错误, 错误分类, 恢复策略, 重试, 熔断器, 优雅降级"
 user-invocable: false
-disable-model-invocation: true
 ---
 
 # Domain Error Strategy

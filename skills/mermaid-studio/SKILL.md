@@ -6,7 +6,6 @@ metadata:
   author: Felipe Rodrigues - github.com/felipfr
   version: 1.0.1
   source: https://github.com/tech-leads-club/agent-skills
-disable-model-invocation: true
 ---
 
 # Mermaid Studio

@@ -3,7 +3,6 @@ name: domain-web
 description: "Use when building web services. Keywords: web server, HTTP, REST API, GraphQL, WebSocket, axum, actix, warp, rocket, tower, hyper, reqwest, middleware, router, handler, extractor, state management, authentication, authorization, JWT, session, cookie, CORS, rate limiting, web 开发, HTTP 服务, API 设计, 中间件, 路由"
 globs: ["**/Cargo.toml"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 # Web Domain

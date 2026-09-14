@@ -3,7 +3,6 @@ name: coding-guidelines
 description: "Use when asking about Rust code style or best practices. Keywords: naming, formatting, comment, clippy, rustfmt, lint, code style, best practice, P.NAM, G.FMT, code review, naming convention, variable naming, function naming, type naming, 命名规范, 代码风格, 格式化, 最佳实践, 代码审查, 怎么命名"
 source: https://rust-coding-guidelines.github.io/rust-coding-guidelines-zh/
 user-invocable: false
-disable-model-invocation: true
 ---
 
 # Rust Coding Guidelines (50 Core Rules)

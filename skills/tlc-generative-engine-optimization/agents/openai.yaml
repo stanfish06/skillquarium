@@ -2,6 +2,3 @@ interface:
   display_name: "Generative Engine Optimization"
   short_description: "Make pages citable by AI answer engines"
   default_prompt: "Use $tlc-generative-engine-optimization to audit this site for AI answer-engine visibility and apply the fixes."
-
-policy:
-  allow_implicit_invocation: false

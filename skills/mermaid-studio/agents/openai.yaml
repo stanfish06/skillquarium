@@ -2,6 +2,3 @@ interface:
   display_name: "Mermaid Studio"
   short_description: "Validate and render Mermaid to SVG, PNG, or ASCII"
   default_prompt: "Use $mermaid-studio to validate and render this Mermaid diagram."
-
-policy:
-  allow_implicit_invocation: false

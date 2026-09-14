@@ -3,7 +3,6 @@ name: domain-embedded
 description: "Use when developing embedded/no_std Rust. Keywords: embedded, no_std, microcontroller, MCU, ARM, RISC-V, bare metal, firmware, HAL, PAC, RTIC, embassy, interrupt, DMA, peripheral, GPIO, SPI, I2C, UART, embedded-hal, cortex-m, esp32, stm32, nrf, 嵌入式, 单片机, 固件, 裸机"
 globs: ["**/Cargo.toml", "**/.cargo/config.toml"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 ## Project Context (Auto-Injected)

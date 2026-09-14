@@ -7,7 +7,6 @@ description: |
 argument-hint: "[today|week|month]"
 context: fork
 agent: Explore
-disable-model-invocation: true
 ---
 
 # Rust Daily Report

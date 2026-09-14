@@ -2,7 +2,6 @@
 name: core-actionbook
 description: "Internal support skill for actionbook MCP selectors used by Rust documentation research workflows. Use only when another rust-skills workflow explicitly requests actionbook-backed selectors."
 user-invocable: false
-disable-model-invocation: true
 ---
 
 # Actionbook

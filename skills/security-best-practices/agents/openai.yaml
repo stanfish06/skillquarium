@@ -2,6 +2,3 @@ interface:
   display_name: "Security Best Practices"
   short_description: "Framework-specific secure-coding review and fixes"
   default_prompt: "Use $security-best-practices to review this project against the security guidance for its language and framework."
-
-policy:
-  allow_implicit_invocation: false

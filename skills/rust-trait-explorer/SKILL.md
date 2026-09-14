@@ -3,7 +3,6 @@ name: rust-trait-explorer
 description: "Explore Rust trait implementations using LSP. Triggers on: /trait-impl, find implementations, who implements, trait 实现, 谁实现了, 实现了哪些trait"
 argument-hint: "<TraitName|StructName>"
 allowed-tools: ["LSP", "Read", "Glob", "Grep"]
-disable-model-invocation: true
 ---
 
 # Rust Trait Explorer

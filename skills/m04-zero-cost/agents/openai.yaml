@@ -2,6 +2,3 @@ interface:
   display_name: "M04 Zero Cost"
   short_description: "Invoke this skill explicitly when needed."
   default_prompt: "Use $m04-zero-cost for this task."
-
-policy:
-  allow_implicit_invocation: false

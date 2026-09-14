@@ -3,7 +3,6 @@ name: domain-cli
 description: "Use when building CLI tools. Keywords: CLI, command line, terminal, clap, structopt, argument parsing, subcommand, interactive, TUI, ratatui, crossterm, indicatif, progress bar, colored output, shell completion, config file, environment variable, 命令行, 终端应用, 参数解析"
 globs: ["**/Cargo.toml"]
 user-invocable: false
-disable-model-invocation: true
 ---
 
 # CLI Domain

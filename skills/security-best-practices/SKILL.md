@@ -4,7 +4,6 @@ description: Perform language and framework specific security best-practice revi
 metadata:
   author: github.com/openai/skills
   version: '1.0.0'
-disable-model-invocation: true
 ---
 
 # Security Best Practices

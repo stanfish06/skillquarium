@@ -3,7 +3,6 @@ name: rust-refactor-helper
 description: "Safe Rust refactoring with LSP analysis. Triggers on: /refactor, rename symbol, move function, extract, 重构, 重命名, 提取函数, 安全重构"
 argument-hint: "<action> <target> [--dry-run]"
 allowed-tools: ["LSP", "Read", "Glob", "Grep", "Edit"]
-disable-model-invocation: true
 ---
 
 # Rust Refactor Helper

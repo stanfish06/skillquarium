@@ -2,7 +2,6 @@
 name: m15-anti-pattern
 description: "Use when reviewing code for anti-patterns. Keywords: anti-pattern, common mistake, pitfall, code smell, bad practice, code review, is this an anti-pattern, better way to do this, common mistake to avoid, why is this bad, idiomatic way, beginner mistake, fighting borrow checker, clone everywhere, unwrap in production, should I refactor, 反模式, 常见错误, 代码异味, 最佳实践, 地道写法"
 user-invocable: false
-disable-model-invocation: true
 ---
 
 # Anti-Patterns
