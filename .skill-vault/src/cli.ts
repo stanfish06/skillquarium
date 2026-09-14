@@ -31,7 +31,9 @@ const commands: Record<string, () => Promise<{ run: Command; help: string }>> = 
   drift: () => import("./update/cli").then((m) => m.drift),
   soften: () => import("./update/cli").then((m) => m.soften),
   update: () => import("./update/cli").then((m) => m.update),
-  // later tasks add: query, grep, import, eval
+  import: () => import("./import/command"),
+  eval: () => import("./evalCommand"),
+  // later tasks add: query, grep
 };
 
 // Build a Context; `config` memoizes loadConfig(root) so commands share one parse.
