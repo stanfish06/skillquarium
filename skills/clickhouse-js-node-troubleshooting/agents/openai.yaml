@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clickhouse Js Node Troubleshooting"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $clickhouse-js-node-troubleshooting for this task."

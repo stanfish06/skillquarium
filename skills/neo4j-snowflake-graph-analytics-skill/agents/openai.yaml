@@ -1,0 +1,4 @@
+interface:
+  display_name: "Neo4J Snowflake Graph Analytics Skill"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $neo4j-snowflake-graph-analytics-skill for this task."

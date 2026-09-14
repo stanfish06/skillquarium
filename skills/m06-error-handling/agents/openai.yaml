@@ -1,0 +1,4 @@
+interface:
+  display_name: "M06 Error Handling"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $m06-error-handling for this task."

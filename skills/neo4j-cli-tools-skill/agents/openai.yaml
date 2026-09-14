@@ -1,0 +1,4 @@
+interface:
+  display_name: "Neo4J Cli Tools Skill"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $neo4j-cli-tools-skill for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Csharp Developer"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $csharp-developer for this task."

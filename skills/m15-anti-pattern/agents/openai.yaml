@@ -1,0 +1,4 @@
+interface:
+  display_name: "M15 Anti Pattern"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $m15-anti-pattern for this task."

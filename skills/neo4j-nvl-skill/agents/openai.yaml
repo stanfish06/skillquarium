@@ -1,0 +1,4 @@
+interface:
+  display_name: "Neo4J Nvl Skill"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $neo4j-nvl-skill for this task."

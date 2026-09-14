@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clickhouse Managed Postgres Rca"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $clickhouse-managed-postgres-rca for this task."

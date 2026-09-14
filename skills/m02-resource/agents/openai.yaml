@@ -1,0 +1,4 @@
+interface:
+  display_name: "M02 Resource"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $m02-resource for this task."

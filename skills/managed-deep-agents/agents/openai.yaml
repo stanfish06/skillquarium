@@ -1,0 +1,4 @@
+interface:
+  display_name: "Managed Deep Agents"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $managed-deep-agents for this task."

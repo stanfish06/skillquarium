@@ -1,0 +1,4 @@
+interface:
+  display_name: "Graphql Operations"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $graphql-operations for this task."

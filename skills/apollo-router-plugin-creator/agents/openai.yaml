@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apollo Router Plugin Creator"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $apollo-router-plugin-creator for this task."

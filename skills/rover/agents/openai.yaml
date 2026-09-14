@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rover"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $rover for this task."

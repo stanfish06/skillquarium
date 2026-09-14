@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unsafe Checker"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $unsafe-checker for this task."

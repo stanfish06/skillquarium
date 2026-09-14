@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prisma Database Setup"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $prisma-database-setup for this task."

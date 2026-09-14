@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apollo Federation"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $apollo-federation for this task."

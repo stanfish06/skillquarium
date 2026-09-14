@@ -1,0 +1,4 @@
+interface:
+  display_name: "Redis Core"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $redis-core for this task."

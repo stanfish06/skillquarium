@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rust Refactor Helper"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $rust-refactor-helper for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apollo Connectors"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $apollo-connectors for this task."

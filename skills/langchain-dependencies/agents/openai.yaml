@@ -1,0 +1,4 @@
+interface:
+  display_name: "Langchain Dependencies"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $langchain-dependencies for this task."

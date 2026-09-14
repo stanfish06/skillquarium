@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rust Code Navigator"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $rust-code-navigator for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Check Npm"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $check-npm for this task."

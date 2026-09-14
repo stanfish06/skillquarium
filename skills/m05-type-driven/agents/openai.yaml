@@ -1,0 +1,4 @@
+interface:
+  display_name: "M05 Type Driven"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $m05-type-driven for this task."

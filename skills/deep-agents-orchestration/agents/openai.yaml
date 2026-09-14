@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deep Agents Orchestration"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $deep-agents-orchestration for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prisma Upgrade V7"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $prisma-upgrade-v7 for this task."

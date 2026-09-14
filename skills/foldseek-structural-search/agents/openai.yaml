@@ -1,0 +1,4 @@
+interface:
+  display_name: "Foldseek Structural Search"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $foldseek-structural-search for this task."

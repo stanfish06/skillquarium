@@ -1,0 +1,4 @@
+interface:
+  display_name: "Langgraph Cli"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $langgraph-cli for this task."
