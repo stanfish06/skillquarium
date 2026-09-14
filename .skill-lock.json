@@ -11983,6 +11983,404 @@
       "installedAt": "2026-09-10T15:30:07.974Z",
       "updatedAt": "2026-09-10T15:30:07.974Z"
     },
+    "coding-guidelines": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/coding-guidelines/SKILL.md",
+      "skillFolderHash": "f2f38082001e5dda0652c498458cf5030496ec4d",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.182Z",
+      "updatedAt": "2026-09-13T13:47:50.182Z"
+    },
+    "core-actionbook": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/core-actionbook/SKILL.md",
+      "skillFolderHash": "399ca5aafe81e6dbf26f9e1c9aaf069557dc5728",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.186Z",
+      "updatedAt": "2026-09-13T13:47:50.186Z"
+    },
+    "core-agent-browser": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/core-agent-browser/SKILL.md",
+      "skillFolderHash": "e1bfdc4c043df1b3f71cd95a530244c9a529cf3e",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.189Z",
+      "updatedAt": "2026-09-13T13:47:50.189Z"
+    },
+    "core-dynamic-skills": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/core-dynamic-skills/SKILL.md",
+      "skillFolderHash": "c5d0f1b334d27d22e82632fa7fb3f42a231b29d4",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.193Z",
+      "updatedAt": "2026-09-13T13:47:50.193Z"
+    },
+    "core-fix-skill-docs": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/core-fix-skill-docs/SKILL.md",
+      "skillFolderHash": "fad3c1b260d20ec6aac790fab29edd5465517423",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.197Z",
+      "updatedAt": "2026-09-13T13:47:50.197Z"
+    },
+    "domain-cli": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/domain-cli/SKILL.md",
+      "skillFolderHash": "a021a48d16804de5aa043454c4daecd8e28d758c",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.203Z",
+      "updatedAt": "2026-09-13T13:47:50.203Z"
+    },
+    "domain-cloud-native": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/domain-cloud-native/SKILL.md",
+      "skillFolderHash": "c1840f8cce37d83551e920699dfb8418b3e4cb69",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.205Z",
+      "updatedAt": "2026-09-13T13:47:50.205Z"
+    },
+    "domain-embedded": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/domain-embedded/SKILL.md",
+      "skillFolderHash": "b5d3b6feb10e5e0dced3e01ed49877b7cf20774e",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.209Z",
+      "updatedAt": "2026-09-13T13:47:50.209Z"
+    },
+    "domain-fintech": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/domain-fintech/SKILL.md",
+      "skillFolderHash": "90dbf8de6fc50505da1946df66a7ce6c189fd7d1",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.213Z",
+      "updatedAt": "2026-09-13T13:47:50.213Z"
+    },
+    "domain-iot": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/domain-iot/SKILL.md",
+      "skillFolderHash": "86f7a35f6dd6becd8a566cca4dec1e1f85bd017b",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.216Z",
+      "updatedAt": "2026-09-13T13:47:50.216Z"
+    },
+    "domain-ml": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/domain-ml/SKILL.md",
+      "skillFolderHash": "fd4e853bd0c757d908aabbef753c65299acea211",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.219Z",
+      "updatedAt": "2026-09-13T13:47:50.219Z"
+    },
+    "domain-web": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/domain-web/SKILL.md",
+      "skillFolderHash": "e9ef7691541e6e6b3e780051456f1fd1f5f141bd",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.223Z",
+      "updatedAt": "2026-09-13T13:47:50.223Z"
+    },
+    "m01-ownership": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m01-ownership/SKILL.md",
+      "skillFolderHash": "d45f2f4c4a492d1783169f333488c85454805812",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.229Z",
+      "updatedAt": "2026-09-13T13:47:50.229Z"
+    },
+    "m02-resource": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m02-resource/SKILL.md",
+      "skillFolderHash": "4927fae1ba07e37da5911eabe7b74a745cf0b2f5",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.233Z",
+      "updatedAt": "2026-09-13T13:47:50.233Z"
+    },
+    "m03-mutability": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m03-mutability/SKILL.md",
+      "skillFolderHash": "a01b98aa9c81d194523e09dd840fe8233ef46d74",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.237Z",
+      "updatedAt": "2026-09-13T13:47:50.237Z"
+    },
+    "m04-zero-cost": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m04-zero-cost/SKILL.md",
+      "skillFolderHash": "a3cc41f333d3dd7d41498d0c6442c4b5831b643b",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.240Z",
+      "updatedAt": "2026-09-13T13:47:50.240Z"
+    },
+    "m05-type-driven": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m05-type-driven/SKILL.md",
+      "skillFolderHash": "6b040396b9e50f4e7ec320934483f54a3c870f31",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.244Z",
+      "updatedAt": "2026-09-13T13:47:50.244Z"
+    },
+    "m06-error-handling": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m06-error-handling/SKILL.md",
+      "skillFolderHash": "47c04e309319fd97d6cef4f50778d4e497fff57d",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.248Z",
+      "updatedAt": "2026-09-13T13:47:50.248Z"
+    },
+    "m07-concurrency": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m07-concurrency/SKILL.md",
+      "skillFolderHash": "2441813554275759779d05725e6219a94009116e",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.252Z",
+      "updatedAt": "2026-09-13T13:47:50.252Z"
+    },
+    "m09-domain": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m09-domain/SKILL.md",
+      "skillFolderHash": "b1dc5897aa4b461bda241515d03ab340b46c102f",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.256Z",
+      "updatedAt": "2026-09-13T13:47:50.256Z"
+    },
+    "m10-performance": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m10-performance/SKILL.md",
+      "skillFolderHash": "d6f7981c8c2bdb66a2542d65327547b680e27cf0",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.260Z",
+      "updatedAt": "2026-09-13T13:47:50.260Z"
+    },
+    "m11-ecosystem": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m11-ecosystem/SKILL.md",
+      "skillFolderHash": "e46f6f84ebb46a088c932c9352dbc8a298dad332",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.263Z",
+      "updatedAt": "2026-09-13T13:47:50.263Z"
+    },
+    "m12-lifecycle": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m12-lifecycle/SKILL.md",
+      "skillFolderHash": "d3763297b46ce8ada2ba1fe6e4c617583d7d77af",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.266Z",
+      "updatedAt": "2026-09-13T13:47:50.266Z"
+    },
+    "m13-domain-error": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m13-domain-error/SKILL.md",
+      "skillFolderHash": "8e9d31c3cd9764b026c516540cfe0ced4bd068bb",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.269Z",
+      "updatedAt": "2026-09-13T13:47:50.269Z"
+    },
+    "m14-mental-model": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m14-mental-model/SKILL.md",
+      "skillFolderHash": "773900346db456cc86c76c11d6c070cf4e9b9f40",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.273Z",
+      "updatedAt": "2026-09-13T13:47:50.273Z"
+    },
+    "m15-anti-pattern": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/m15-anti-pattern/SKILL.md",
+      "skillFolderHash": "44d2b1226ec9a23afd6bc18f08f8d2623cfa94f4",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.276Z",
+      "updatedAt": "2026-09-13T13:47:50.276Z"
+    },
+    "meta-cognition-parallel": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/meta-cognition-parallel/SKILL.md",
+      "skillFolderHash": "b1555b79129e0d311dcded2c712c52a432937b96",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.279Z",
+      "updatedAt": "2026-09-13T13:47:50.279Z"
+    },
+    "rust-call-graph": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-call-graph/SKILL.md",
+      "skillFolderHash": "e0213f95974750283cf06040c033d407edd41176",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.283Z",
+      "updatedAt": "2026-09-13T13:47:50.283Z"
+    },
+    "rust-code-navigator": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-code-navigator/SKILL.md",
+      "skillFolderHash": "abb823f1f39d5345694a8ba2980eb9b5e614a2a2",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.287Z",
+      "updatedAt": "2026-09-13T13:47:50.287Z"
+    },
+    "rust-daily": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-daily/SKILL.md",
+      "skillFolderHash": "5b8129920b4d13b18909fb6382da037e117e5259",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.291Z",
+      "updatedAt": "2026-09-13T13:47:50.291Z"
+    },
+    "rust-deps-visualizer": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-deps-visualizer/SKILL.md",
+      "skillFolderHash": "33827ddeef351eecfe5a9029c71fb7d6f65e1001",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.295Z",
+      "updatedAt": "2026-09-13T13:47:50.295Z"
+    },
+    "rust-learner": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-learner/SKILL.md",
+      "skillFolderHash": "9e34e3315f871e23cf3d063f1dea09d57da34e4b",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.300Z",
+      "updatedAt": "2026-09-13T13:47:50.300Z"
+    },
+    "rust-refactor-helper": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-refactor-helper/SKILL.md",
+      "skillFolderHash": "f66e42acb07e7077d5f021163770737090d75080",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.303Z",
+      "updatedAt": "2026-09-13T13:47:50.303Z"
+    },
+    "rust-router": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-router/SKILL.md",
+      "skillFolderHash": "8e7be8aaec26dfec4b35d2020c8e6d943de4a09c",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.306Z",
+      "updatedAt": "2026-09-13T13:47:50.306Z"
+    },
+    "rust-skill-creator": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-skill-creator/SKILL.md",
+      "skillFolderHash": "7b473264076b30081977a70918768117001e7d13",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.309Z",
+      "updatedAt": "2026-09-13T13:47:50.309Z"
+    },
+    "rust-symbol-analyzer": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-symbol-analyzer/SKILL.md",
+      "skillFolderHash": "6e0acc863fc1befc8fca634ce133fd500b68095a",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.312Z",
+      "updatedAt": "2026-09-13T13:47:50.312Z"
+    },
+    "rust-trait-explorer": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/rust-trait-explorer/SKILL.md",
+      "skillFolderHash": "e9b877f255af875807505948d82c3ec6953d3f32",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.315Z",
+      "updatedAt": "2026-09-13T13:47:50.315Z"
+    },
+    "unsafe-checker": {
+      "source": "actionbook/rust-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/actionbook/rust-skills.git",
+      "skillPath": "skills/unsafe-checker/SKILL.md",
+      "skillFolderHash": "9ff044650f9926dec1cd3f55e7eb48d5794148d0",
+      "pluginName": "rust-skills",
+      "installedAt": "2026-09-13T13:47:50.318Z",
+      "updatedAt": "2026-09-13T13:47:50.318Z"
+    },
+    "cpp-pro": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Jeffallan/claude-skills.git",
+      "skillPath": "skills/cpp-pro/SKILL.md",
+      "skillFolderHash": "f2b9c2ecaaf60dc9b0e44ad12bd439213aaf6e48",
+      "installedAt": "2026-09-13T13:48:23.269Z",
+      "updatedAt": "2026-09-13T13:48:23.269Z"
+    },
+    "csharp-developer": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/Jeffallan/claude-skills.git",
+      "skillPath": "skills/csharp-developer/SKILL.md",
+      "skillFolderHash": "e28b6a246e636adcac927d883bc69e72258842b1",
+      "installedAt": "2026-09-13T13:48:23.275Z",
+      "updatedAt": "2026-09-13T13:48:23.275Z"
+    },
     "security-best-practices": {
       "source": "tech-leads-club/agent-skills",
       "sourceType": "github",
