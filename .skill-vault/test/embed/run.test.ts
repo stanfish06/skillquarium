@@ -12,7 +12,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { Config } from "../../src/config";
 import { llamaCppClient } from "../../src/embed/client";
-import { embedVault } from "../../src/embed/run";
+import { embedVault, MAX_BATCH_CHARS, MAX_CHARS } from "../../src/embed/run";
 import { EMBED_DIR, readIndex, readManifest, writeManifest } from "../../src/embed/store";
 import { FAKE_DIM, fakeClient, fakeVector } from "./fakeClient";
 
@@ -175,27 +175,29 @@ describe("embedVault", () => {
     expect(client.calls.map((c) => c.length)).toEqual([2, 2, 2]);
   });
 
-  test("bodies over 50,000 chars are truncated and flagged", async () => {
+  test("bodies over the character cap are truncated and flagged", async () => {
     const root = vault();
-    skill(root, "big", "x".repeat(60_000));
+    skill(root, "big", "x".repeat(MAX_CHARS + 10_000));
     const client = fakeClient();
     await embedVault(root, client, { batchSize: 16, today });
-    // The oversized body exceeds MAX_BATCH_CHARS on its own, so it travels in its own request.
-    const bigCall = client.calls.find((c) => c.some((s) => s.includes("name: big")));
-    expect(bigCall?.map((s) => s.length)).toEqual([20, 50_000]);
+    // The body follows its own description in the same request, cut to the cap.
+    const call = client.calls.find((c) => c.includes("big: big does things"));
+    const at = call?.indexOf("big: big does things") ?? -1;
+    expect(call?.[at + 1]?.length).toBe(MAX_CHARS);
     expect(readManifest(root)?.skills.big?.truncated).toBe(true);
     expect(readManifest(root)?.skills.a?.truncated).toBeUndefined();
   });
 
   test("a batch closes on the character budget before the input count", async () => {
     const root = tmp("sq-run-");
-    // Three skills of ~18,000 chars: two fit in one 40,000-char request, the third starts the next.
-    for (const id of ["a", "b", "c"]) skill(root, id, "x".repeat(18_000));
+    // Three skills just over a third of the budget each: two fit in one request, the third starts
+    // the next, even though batchSize alone would allow all six inputs in one.
+    for (const id of ["a", "b", "c"]) skill(root, id, "x".repeat(Math.floor(MAX_BATCH_CHARS / 2) - 200));
     const client = fakeClient();
     await embedVault(root, client, { batchSize: 16, today });
-    expect(client.calls.map((c) => c.map((s) => s.length).reduce((x, y) => x + y, 0))).toEqual([
-      36_120, 18_060,
-    ]);
+    expect(client.calls.map((c) => c.length)).toEqual([4, 2]);
+    const chars = client.calls.map((c) => c.reduce((n, s) => n + s.length, 0));
+    expect(chars.every((n) => n <= MAX_BATCH_CHARS)).toBe(true);
   });
 
   test("a dim change without force or model change is an error", async () => {

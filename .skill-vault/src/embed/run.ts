@@ -14,15 +14,18 @@ import {
   writeSkill,
 } from "./store";
 
-/** Longest body sent to the endpoint; above ~14k tokens the server answers HTTP 500. */
-export const MAX_CHARS = 50_000;
+/**
+ * Longest body sent to the endpoint, tracking the server's batch limit rather than its context:
+ * n_ctx is 8192 tokens but ubatch is capped below that, and a 22,000-char document comes back as
+ * HTTP 502 with an empty body. At ~3.5 chars per token for this corpus this is ~2,300 tokens.
+ */
+export const MAX_CHARS = 8_000;
 
 /**
- * Characters per request, over and above the batchSize input cap. The endpoint's context is
- * 14,336 tokens (~3.5 chars each); requests several times that size took the server down
- * mid-run, so a batch closes on whichever limit it reaches first.
+ * Characters per request, over and above the batchSize input cap. Two full-length bodies, sized
+ * to the same server batch limit; a batch closes on whichever limit it reaches first.
  */
-export const MAX_BATCH_CHARS = 40_000;
+export const MAX_BATCH_CHARS = 16_000;
 
 export interface EmbedOptions {
   force?: boolean;
