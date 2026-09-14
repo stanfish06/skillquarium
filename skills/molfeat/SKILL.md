@@ -3,7 +3,7 @@ name: molfeat
 description: Molecular featurization for ML (100+ featurizers). ECFP, MACCS, descriptors, pretrained models (ChemBERTa), convert SMILES to features, for QSAR and molecular ML.
 license: Apache-2.0 license
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.9–3.10 (molfeat 0.11.0 does not support 3.11+). Requires datamol, PyTorch, and optional extras for GNN/transformer models.
+compatibility: Requires Python 3.11+ (molfeat 1.0.0 dropped 3.9/3.10 support). Requires datamol, PyTorch, and optional extras for transformer models; legacy DGL/Graphormer adapters were removed in 1.0.0.
 metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 ---
 
@@ -14,9 +14,9 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 Molfeat is a comprehensive Python library for molecular featurization that unifies 100+ pre-trained embeddings and hand-crafted featurizers. Convert chemical structures (SMILES strings or RDKit molecules) into numerical representations for machine learning tasks including QSAR modeling, virtual screening, similarity searching, and deep learning applications. Features fast parallel processing, scikit-learn compatible transformers, and built-in caching.
 
 > [!WARNING]
-> **Python ceiling / maintenance risk:** molfeat **0.11.0** (May 2025) still declares `requires-python = ">=3.9,<3.11"`, so it **will not install on Python 3.11+**. Python 3.9 is EOL; 3.10 reaches EOL October 2026. Prefer a dedicated 3.10 env for legacy molfeat work, or use actively maintained alternatives on modern Python: **[[rdkit]]** / **[[datamol]]** fingerprints and descriptors, **[[deepchem]]** featurizers, or **[[torch-geometric]]** for custom GNN inputs.
+> **Legacy GNN/Graphormer adapters removed:** molfeat **1.0.0** (Sep 2026) requires `requires-python = ">=3.11"` and narrows the project to small-molecule featurization, dropping the legacy DGL, DGLLife, Graphormer, and protein adapters. If your workflow depends on the `dgl`/`graphormer` extras or the `gin-supervised-*`/`Graphormer-*` pretrained models shown below, pin to molfeat 0.11.0 on Python 3.10, or use **[[torch-geometric]]** for custom GNN inputs.
 
-**Version note:** Examples target **molfeat 0.11.0** (PyPI stable, May 2025). Requires **Python 3.9–3.10** (`requires-python` caps below 3.11). Depends on **datamol ≥0.8.0** and **PyTorch ≥1.13**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically.
+**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically.
 
 ## When to Use This Skill
 
@@ -31,22 +31,23 @@ This skill should be used when working with:
 
 ## Installation
 
-Use a Python 3.9 or 3.10 environment (molfeat does not install on 3.11+ as of 0.11.0):
+Use a Python 3.11+ environment (molfeat 1.0.0 requires 3.11+; the 0.11.0 line is the last release supporting Python 3.9–3.10):
 
 ```bash
-uv pip install "molfeat==0.11.0"
+uv pip install "molfeat==1.0.0"
 
 # With all pip-installable optional dependencies
-uv pip install "molfeat[all]==0.11.0"
+uv pip install "molfeat[all]==1.0.0"
 ```
 
-**Optional dependency extras (PyPI):**
-- `molfeat[dgl]` — GNN models (GIN variants); upstream recommends `dgl<=2.0` (graphbolt issues in newer DGL)
-- `molfeat[graphormer]` — Graphormer models
+**Optional dependency extras (PyPI, 1.0.0):**
 - `molfeat[transformer]` — ChemBERTa, ChemGPT, MolT5
 - `molfeat[fcd]` — FCD descriptors
 - `molfeat[pyg]` — PyTorch Geometric featurizers
 - `molfeat[viz]` — NGLView visualization widgets
+- `molfeat[selfies]`, `molfeat[cache]`, `molfeat[cloud]`, `molfeat[mordred]` — see PyPI project page for full list
+
+The `dgl` and `graphormer` extras from earlier releases were removed in 1.0.0 along with the DGL/DGLLife/Graphormer/protein adapters; they remain available only on the pinned 0.11.0 / Python 3.10 line described in the warning above.
 
 **External featurizers:** MAP4 is not bundled in molfeat extras — install from [reymond-group/map4](https://github.com/reymond-group/map4) separately. Some heavy deps (DGL, dgllife, graphormer-pretrained) are easier via conda-forge; see [optional dependencies](https://molfeat-docs.datamol.io/stable/).
 
@@ -201,12 +202,15 @@ PretrainedMolTransformer("ChemGPT-1.2B")
 ```
 
 **Graph neural networks:**
+
+> The `gin-supervised-*` and `Graphormer-*` pretrained models below require the `dgl`/`graphormer` extras, which molfeat 1.0.0 removed. They only work on the pinned 0.11.0 / Python 3.10 line (see warning above); on 1.0.0+ use **[[torch-geometric]]** for custom GNN inputs instead.
+
 ```python
-# GIN models with different pre-training objectives
+# GIN models with different pre-training objectives (molfeat 0.11.0 only)
 PretrainedMolTransformer("gin-supervised-masking")
 PretrainedMolTransformer("gin-supervised-infomax")
 
-# Graphormer for quantum chemistry
+# Graphormer for quantum chemistry (molfeat 0.11.0 only)
 PretrainedMolTransformer("Graphormer-pcqm4mv2")
 ```
 
@@ -502,9 +506,9 @@ Process in chunks or use streaming approaches for datasets > 100K molecules.
 ### Pretrained Model Dependencies
 Some models require additional packages. Install specific extras (pin version for reproducibility):
 ```bash
-uv pip install "molfeat[transformer]==0.11.0"  # For ChemBERTa/ChemGPT
-uv pip install "molfeat[dgl]==0.11.0"          # For GIN models
-uv pip install "molfeat[graphormer]==0.11.0"   # For Graphormer
+uv pip install "molfeat[transformer]==1.0.0"   # For ChemBERTa/ChemGPT
+uv pip install "molfeat[dgl]==0.11.0"          # For GIN models (0.11.0 only; removed in 1.0.0)
+uv pip install "molfeat[graphormer]==0.11.0"   # For Graphormer (0.11.0 only; removed in 1.0.0)
 ```
 
 ### Reproducibility
