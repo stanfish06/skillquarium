@@ -370,18 +370,54 @@ describe("rollback and atomic writes", () => {
     expect(existsSync(join(directory, "agents"))).toBe(false);
   });
 
-  test("preCommitReset leaves no temp files when a write fails", () => {
+  test("preCommitReset rolls every written file back when a later write fails", () => {
     const root = tmp();
     const first = makeSkill(root, "aaa", { claude: true });
     const second = makeSkill(root, "zzz", { claude: true });
     commitFixture(root);
-    // A read-only skill directory fails the second SKILL.md rewrite. Restoring that same path
-    // fails too, as it does in Python, so only the temp-file cleanup is asserted here.
+    const firstPath = join(first, "SKILL.md");
+    const secondPath = join(second, "SKILL.md");
+    const firstBefore = read(firstPath);
+    const secondBefore = read(secondPath);
+    // A read-only skill directory fails the second SKILL.md rewrite, after the first has been
+    // rewritten. The failing op was never completed, so the rollback reaches the first one.
     chmodSync(second, 0o500);
     try {
-      expect(() => preCommitReset(root)).toThrow();
+      let thrown: unknown;
+      try {
+        preCommitReset(root);
+      } catch (e) {
+        thrown = e;
+      }
+      expect((thrown as Error | undefined)?.message).toContain("zzz");
+      // The failing op never entered the rollback list, so the error is the write failure itself
+      // and not a phantom "could not restore" for a file that was never rewritten.
+      expect((thrown as Error).message).not.toContain("could not restore");
+      expect(read(firstPath)).toBe(firstBefore);
+      expect(read(secondPath)).toBe(secondBefore);
+      expect(loadSkill(first).claude_enabled).toBe(false);
       expect(tempFiles(first)).toEqual([]);
       expect(tempFiles(second)).toEqual([]);
+    } finally {
+      chmodSync(second, 0o700);
+    }
+  });
+
+  test("restoreOriginalFiles reports the file it could not restore and still restores the rest", () => {
+    const root = tmp();
+    const first = makeSkill(root, "aaa", { claude: true });
+    const second = makeSkill(root, "zzz", { claude: true });
+    const firstPath = join(first, "SKILL.md");
+    const originals = [captureOriginal(firstPath), captureOriginal(join(second, "SKILL.md"))];
+    const firstBefore = read(firstPath);
+
+    setSkillProductStates(loadSkill(first), { claude: true, codex: null });
+    expect(read(firstPath)).not.toBe(firstBefore);
+    chmodSync(second, 0o500);
+    try {
+      // zzz is restored first (reverse order) and cannot be written; aaa must still come back.
+      expect(restoreOriginalFiles(originals)).toEqual([join(second, "SKILL.md")]);
+      expect(read(firstPath)).toBe(firstBefore);
     } finally {
       chmodSync(second, 0o700);
     }

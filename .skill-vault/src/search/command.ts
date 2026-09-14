@@ -18,6 +18,13 @@ interface CommandModule {
 
 const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy", "semantic"];
 
+/**
+ * First-contact timeout for the one vector a query needs. The configured embed.timeoutMs sizes the
+ * batch `embed` path, where a 16-input request against a busy GPU host legitimately takes minutes;
+ * here it only decides how long an interactive query waits before dropping the semantic signal.
+ */
+const QUERY_TIMEOUT_MS = 5_000;
+
 const queryHelp = `usage: skillquarium [--json] query <text...> [--k N] [--no-semantic] [--no-fuzzy] [--explain] [--eval]
 
 Retrieve skills by fusing BM25 over the graph, fuzzy path search and semantic vectors,
@@ -89,7 +96,7 @@ async function queryDeps(ctx: Context): Promise<QueryDeps> {
       if (vectors === undefined) vectors = loadVectorIndex(ctx.root);
       return vectors;
     },
-    embed: () => llamaCppClient(cfg.embed),
+    embed: () => llamaCppClient({ ...cfg.embed, timeoutMs: Math.min(cfg.embed.timeoutMs, QUERY_TIMEOUT_MS) }),
     fuzzy: () => {
       ranker ??= fffRanker(ctx.root);
       return ranker;

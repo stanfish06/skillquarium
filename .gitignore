@@ -132,4 +132,3 @@ vercel-api.txt
 /eval/runs/
 /eval/.cache/
 /eval/work/
-/.skill-vault/test/fixtures/graph.python.json

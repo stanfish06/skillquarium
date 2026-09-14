@@ -51,7 +51,7 @@ describe("llamaCppClient", () => {
 
   test("non-2xx throws with the status and the start of the body", async () => {
     const client = llamaCppClient(cfg, async () => new Response("x".repeat(500), { status: 500 }));
-    await expect(client.embed(["a"])).rejects.toThrow(/^HTTP 500: x{200}$/);
+    await expect(client.embed(["a"])).rejects.toThrow(/^http:\/\/x\/v1\/embeddings: HTTP 500: x{200}$/);
   });
 
   test("retries with backoff, then succeeds", async () => {

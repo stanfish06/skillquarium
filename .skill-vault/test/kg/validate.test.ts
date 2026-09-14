@@ -3,6 +3,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { makeContext } from "../../src/cli";
+import { writeSkill } from "../../src/embed/store";
 import type { Graph, GraphEdge } from "../../src/kg/types";
 import type { Report, Row, ValidateDeps } from "../../src/kg/validate";
 import { failed, renderReport, validateGraph } from "../../src/kg/validate";
@@ -307,6 +308,11 @@ describe("the EMBED row", () => {
   test("warns, never fails, when a manifest hash no longer matches SKILL.md", () => {
     const vault = fixtureRoot();
     try {
+      // Row files as well as the manifest: an entry with no `<id>.f16` counts as stale too, so a
+      // manifest alone would warn 4/4 and hide the hash mismatch this asserts.
+      for (const id of ["alpha", "beta", "gamma", "workflow"]) {
+        writeSkill(vault.root, id, { desc: new Float32Array(4), body: new Float32Array(4) });
+      }
       write(
         join(vault.root, "vault/embeddings/manifest.json"),
         JSON.stringify({

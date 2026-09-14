@@ -5,7 +5,7 @@ import {
   atomicWrite,
   defaultOpenaiYaml,
   type Original,
-  restoreOriginalFiles,
+  rollback,
   transformOpenaiYamlField,
   transformSkillMdField,
 } from "./edit";
@@ -101,7 +101,6 @@ export function preCommitReset(root: string, snapshotArg?: string): [string, num
   const completed: Original[] = [];
   try {
     for (const op of operations) {
-      completed.push(op);
       if (op.updated === null) {
         rmSync(op.path, { force: true });
         try {
@@ -112,10 +111,12 @@ export function preCommitReset(root: string, snapshotArg?: string): [string, num
       } else {
         atomicWrite(op.path, op.updated, op.mode);
       }
+      // After the write, never before: an op that threw is not completed, and rolling it back
+      // first would throw again for the same reason and strand every file already rewritten.
+      completed.push(op);
     }
   } catch (e) {
-    restoreOriginalFiles(completed);
-    throw e;
+    rollback(completed, e);
   }
   return [snapshot, operations.length];
 }

@@ -1,12 +1,6 @@
 import { isAbsolute, join, resolve } from "node:path";
 import { MetadataError } from "../catalog";
-import {
-  atomicWrite,
-  captureOriginal,
-  type Original,
-  restoreOriginalFiles,
-  setSkillProductStates,
-} from "./edit";
+import { atomicWrite, captureOriginal, type Original, rollback, setSkillProductStates } from "./edit";
 import { discover, pyJsonDumps, readUtf8, resolveRoot, type Skill } from "./state";
 
 export const SNAPSHOT_SCHEMA_VERSION = 1;
@@ -100,8 +94,7 @@ export function loadSnapshot(root: string, path?: string): { source: string; cha
       }
     }
   } catch (e) {
-    restoreOriginalFiles(originals);
-    throw e;
+    rollback(originals, e);
   }
   return { source, changed };
 }

@@ -1,11 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { buildGraph } from "../../src/kg/build";
 import type { Graph, GraphEdge, GraphNode } from "../../src/kg/types";
 
-// The oracle: vault/graph/graph.json as build_kg.py produced it on this tree. Gitignored (5.4 MB),
-// so the suite skips rather than fails where it is absent.
+// The oracle: vault/graph/graph.json as kg/build_kg.py produced it on this tree, committed (5.4 MB)
+// because that Python is deleted and this is the only way left to re-verify the port.
 const FIXTURE = join(import.meta.dir, "..", "fixtures", "graph.python.json");
 const ROOT = resolve(dirname(import.meta.dir), "..", "..");
 
@@ -78,9 +78,7 @@ function expectSameKeyed<T>(
   }
 }
 
-const hasFixture = existsSync(FIXTURE);
-
-describe.skipIf(!hasFixture)("build_kg parity with the Python oracle", () => {
+describe("build_kg parity with the Python oracle", () => {
   const expected = JSON.parse(readFileSync(FIXTURE, "utf8")) as Graph;
   const actual = buildGraph(ROOT);
 

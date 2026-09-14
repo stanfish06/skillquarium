@@ -104,7 +104,7 @@ export async function embedVault(
   const removed = removedSkills(manifest, entries);
 
   if (opts.check) {
-    const differing = [...new Set([...staleSkills(manifest, entries), ...removed])].sort();
+    const differing = [...new Set([...staleSkills(root, manifest, entries), ...removed])].sort();
     return {
       embedded: 0,
       removed: removed.length,
@@ -117,7 +117,7 @@ export async function embedVault(
   const model = await client.modelName();
   // A different model invalidates every stored vector, as does an explicit --force.
   const forceAll = opts.force === true || (manifest !== null && manifest.model !== model);
-  const stale = forceAll ? entries.map((e) => e.id) : staleSkills(manifest, entries);
+  const stale = forceAll ? entries.map((e) => e.id) : staleSkills(root, manifest, entries);
 
   const day = opts.today ?? today;
   const staleSet = new Set(stale);

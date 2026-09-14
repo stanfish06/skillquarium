@@ -63,6 +63,9 @@ jobs:
       - name: Install CLI dependencies
         run: bun install --frozen-lockfile --cwd .skill-vault
 
+      - name: Test
+        run: bun test --cwd .skill-vault
+
       - name: Update all global skills from upstream
         id: update
         env:
@@ -116,9 +119,6 @@ jobs:
         # Embedding staleness is a warning, not a failure — see the "Embeddings"
         # note in the header. Never add an `embed` step to this workflow.
         run: ./skillquarium validate
-
-      - name: Test
-        run: bun test --cwd .skill-vault
 
       - name: Commit updated skills + index
         run: |

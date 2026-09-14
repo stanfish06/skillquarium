@@ -102,6 +102,32 @@ describe("embedVault", () => {
     expect(m?.skills.a?.updated).toBe("2026-01-01");
   });
 
+  test("a lost row file is re-embedded, and --check reports it instead of clean", async () => {
+    const root = vault();
+    const client = fakeClient();
+    await embedVault(root, client, { batchSize: 16, today });
+    rmSync(join(root, EMBED_DIR, "b.f16"));
+
+    // Nothing touched b's SKILL.md, so its manifest hash still matches: only the row-file check
+    // sees that b has dropped out of the index.
+    const checked = await embedVault(root, client, { batchSize: 16, check: true, today });
+    expect(checked.stale).toEqual(["b"]);
+
+    const r = await embedVault(root, client, { batchSize: 16, today: () => "2026-02-02" });
+    expect(r.embedded).toBe(1);
+    expect(r.stale).toEqual(["b"]);
+    expect(client.calls[1]).toEqual([
+      "b: b does things",
+      "---\nname: b\ndescription: b does things\n---\nbody\n",
+    ]);
+    expect(existsSync(join(root, EMBED_DIR, "b.f16"))).toBe(true);
+    expect(readIndex(root)?.ids).toEqual(["a", "b", "c"]);
+    // The untouched skills keep their original entries: only b was re-embedded.
+    const m = readManifest(root);
+    expect(m?.skills.b?.updated).toBe("2026-02-02");
+    expect(m?.skills.a?.updated).toBe("2026-01-01");
+  });
+
   test("deleting a skill removes its row file and manifest entry", async () => {
     const root = vault();
     const client = fakeClient();
@@ -244,7 +270,7 @@ describe("embedVault", () => {
     });
     // batchSize 2 is one skill per request: a succeeds, b fails, c never goes out.
     await expect(embedVault(root, client, { batchSize: 2, today: () => "2026-03-03" })).rejects.toThrow(
-      /embedding b: HTTP 502/,
+      /embedding b: http:\/\/offline\.invalid\/v1\/embeddings: HTTP 502/,
     );
     expect(posts).toBe(2);
     expect(readFileSync(join(root, EMBED_DIR, "manifest.json"), "utf8")).toBe(before);

@@ -186,20 +186,42 @@ export function captureOriginal(path: string): Original {
   return { path, text: present ? readUtf8(path) : null, mode: present ? fileMode(path) : null };
 }
 
-/** Undo edits newest-first: rewrite captured text, or remove a created file and its now-empty parent. */
-export function restoreOriginalFiles(originals: Original[]): void {
+/**
+ * Undo edits newest-first: rewrite captured text, or remove a created file and its now-empty
+ * parent. Returns the paths it could not restore. Each entry is attempted on its own, because
+ * whatever broke the forward write (an unwritable directory, say) breaks its own rollback too,
+ * and one such entry must not strand the files that were rewritten before it.
+ */
+export function restoreOriginalFiles(originals: Original[]): string[] {
+  const failed: string[] = [];
   for (const { path, text, mode } of [...originals].reverse()) {
-    if (text === null) {
-      rmSync(path, { force: true });
-      try {
-        rmdirSync(dirname(path));
-      } catch {
-        // parent still holds other files
+    try {
+      if (text === null) {
+        rmSync(path, { force: true });
+        try {
+          rmdirSync(dirname(path));
+        } catch {
+          // parent still holds other files
+        }
+      } else {
+        atomicWrite(path, text, mode);
       }
-    } else {
-      atomicWrite(path, text, mode);
+    } catch {
+      failed.push(path);
     }
   }
+  return failed;
+}
+
+/**
+ * Roll `completed` back and rethrow `cause`. A rollback that could not put every file back changes
+ * the error, so a half-reset vault is never reported as a plain write failure.
+ */
+export function rollback(completed: Original[], cause: unknown): never {
+  const failed = restoreOriginalFiles(completed);
+  if (failed.length === 0) throw cause;
+  const message = cause instanceof Error ? cause.message : String(cause);
+  throw new MetadataError(`${message}; could not restore ${failed.join(", ")}`);
 }
 
 export interface ProductStates {
@@ -243,8 +265,7 @@ export function setSkillProductStates(skill: Skill, states: ProductStates): Skil
       completed.push(op);
     }
   } catch (e) {
-    restoreOriginalFiles(completed);
-    throw e;
+    rollback(completed, e);
   }
   return loadSkill(skill.directory, skill.category);
 }

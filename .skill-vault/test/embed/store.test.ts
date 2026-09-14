@@ -157,6 +157,7 @@ describe("staleSkills / removedSkills", () => {
     const a = skill(root, "a");
     const b = skill(root, "b");
     const c = skill(root, "c");
+    for (const id of ["a", "b"]) writeSkill(root, id, { desc: fakeVector(id), body: fakeVector(id) });
     const manifest: Manifest = {
       model: "fake-embed",
       dim: FAKE_DIM,
@@ -167,10 +168,29 @@ describe("staleSkills / removedSkills", () => {
       },
     };
     const entries = [c, b, a];
-    expect(staleSkills(manifest, entries)).toEqual(["b", "c"]);
+    expect(staleSkills(root, manifest, entries)).toEqual(["b", "c"]);
     expect(removedSkills(manifest, entries)).toEqual(["zzz"]);
-    expect(staleSkills(null, entries)).toEqual(["a", "b", "c"]);
+    expect(staleSkills(root, null, entries)).toEqual(["a", "b", "c"]);
     expect(removedSkills(null, entries)).toEqual([]);
+  });
+
+  test("a manifest entry whose .f16 is gone is stale even though its SKILL.md is unchanged", () => {
+    const root = tmp("sq-store-");
+    const entries = ["a", "b", "c"].map((id) => skill(root, id));
+    const manifest: Manifest = { model: "fake-embed", dim: FAKE_DIM, skills: {} };
+    for (const e of entries) {
+      writeSkill(root, e.id, { desc: fakeVector(e.id), body: fakeVector(e.id) });
+      manifest.skills[e.id] = { sha256: sha256File(e.file), updated: "2026-01-01" };
+    }
+    writeManifest(root, manifest);
+    expect(staleSkills(root, manifest, entries)).toEqual([]);
+
+    rmSync(join(root, EMBED_DIR, "b.f16"));
+    expect(staleSkills(root, manifest, entries)).toEqual(["b"]);
+    // readIndex drops it from the searchable ids and reports it stale rather than reporting clean.
+    const idx = readIndex(root);
+    expect(idx?.ids).toEqual(["a", "c"]);
+    expect([...(idx?.stale ?? [])]).toEqual(["b"]);
   });
 
   test("sha256File matches a known digest", () => {

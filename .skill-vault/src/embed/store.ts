@@ -115,12 +115,21 @@ export function sha256File(path: string): string {
   return createHash("sha256").update(readFileSync(path)).digest("hex");
 }
 
-/** Manifest ids whose SKILL.md hash differs, plus ids on disk the manifest never saw. Sorted. */
-export function staleSkills(manifest: Manifest | null, entries: SkillEntry[]): string[] {
+/**
+ * Manifest ids whose SKILL.md hash differs, ids on disk the manifest never saw, and ids the
+ * manifest lists whose `<id>.f16` is gone. Sorted. The row-file check is what makes a lost or
+ * hand-deleted row visible: readIndex silently skips it, so hash-only staleness reported the
+ * index clean while the skill had dropped out of semantic search.
+ */
+export function staleSkills(root: string, manifest: Manifest | null, entries: SkillEntry[]): string[] {
   const stale: string[] = [];
   for (const e of entries) {
     const recorded = manifest?.skills[e.id];
-    if (!recorded || recorded.sha256 !== sha256File(e.file)) stale.push(e.id);
+    if (!recorded || recorded.sha256 !== sha256File(e.file)) {
+      stale.push(e.id);
+      continue;
+    }
+    if (!existsSync(embedPath(root, `${e.id}.f16`))) stale.push(e.id);
   }
   return stale.sort();
 }
@@ -153,6 +162,6 @@ export function readIndex(root: string): EmbedIndex | null {
     body.push(b);
   }
   const entries = discoverSkills(root, { bundles: false, excludeTransient: true });
-  const stale = new Set([...staleSkills(manifest, entries), ...removedSkills(manifest, entries)]);
+  const stale = new Set([...staleSkills(root, manifest, entries), ...removedSkills(manifest, entries)]);
   return { dim: manifest.dim, ids, desc, body, stale, manifest };
 }

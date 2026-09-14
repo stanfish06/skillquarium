@@ -58,7 +58,9 @@ export function llamaCppClient(
         await Bun.sleep(500 * 2 ** attempt);
       }
     }
-    throw last instanceof Error ? last : new Error(String(last));
+    // Name the endpoint: a connect failure from fetch says only that it could not connect, and the
+    // caller (a query notice, an `embed` batch error) has no other way to report which host it was.
+    throw new Error(`${base}${path}: ${last instanceof Error ? last.message : String(last)}`);
   }
 
   return {

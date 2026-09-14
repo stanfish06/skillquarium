@@ -36,7 +36,7 @@ function loadEmbedState(root: string): EmbedState | null {
   const manifest = readManifest(root);
   if (!manifest) return null;
   const entries = discoverSkills(root, { bundles: false, excludeTransient: true });
-  return { stale: staleSkills(manifest, entries), total: entries.length };
+  return { stale: staleSkills(root, manifest, entries), total: entries.length };
 }
 
 /** schema.json, lexicon.json and vault/embeddings: the inputs the checks need beside the graph. */

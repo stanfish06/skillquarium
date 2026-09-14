@@ -154,6 +154,30 @@ test("a missing vault/embeddings is one notice, not a failure", async () => {
   expect(run.results.map((r) => r.skill)).toContain("harmonypy");
 });
 
+test("an endpoint that throws is one notice naming it, not a failure", async () => {
+  const run = await runQuery(
+    ROOT,
+    PROBE,
+    opts({ semantic: true }),
+    deps({
+      vectors: () => fakeIndex("pymc", ["anndata", "scanpy"]),
+      embed: () => ({
+        embed: async () => {
+          throw new Error("http://127.0.0.1:1/v1/embeddings: Unable to connect");
+        },
+        modelName: async () => "fake",
+      }),
+    }),
+  );
+  expect(run.notices).toEqual([
+    "semantic search unavailable: http://127.0.0.1:1/v1/embeddings: Unable to connect",
+  ]);
+  // The remaining signals still fuse and expand: a full page of results, none of them semantic.
+  expect(run.results.length).toBe(8);
+  expect(run.results.map((r) => r.skill)).toContain("harmonypy");
+  for (const r of run.results) expect(r.signals.semantic).toBeUndefined();
+});
+
 test("an unusable file index is one notice, not a failure", async () => {
   const run = await runQuery(
     ROOT,

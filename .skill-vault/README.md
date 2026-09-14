@@ -14,6 +14,11 @@ New skill ids go in `extraAssignments` in `src/build/categories.json`, else they
 Uncategorized. `test/python/` holds the one suite that stays Python, because the code it tests
 ships inside four skills; `test/reviewFailure.test.ts` runs it under `bun test`.
 
+`test/fixtures/graph.python.json` (5.4 MB, committed) is `vault/graph/graph.json` as the deleted
+`kg/build_kg.py` produced it on this tree. `test/kg/parity.test.ts` deep-equals `buildGraph()`
+against it; the three `test/search/` suites load it so their goldens stay comparable whatever the
+current build writes. Nothing regenerates it, so a clone without it fails those four suites.
+
 ## Sync
 
 `skills update` only touches `sourceType: github` lock entries, and skips an entry whose `skillPath` is gone upstream. `./skillquarium drift` lists both. Fixes to github-sourced skills go in `data/local-overrides.json` or the next sync reverts them; `./skillquarium overrides --check` reports any that stopped applying.

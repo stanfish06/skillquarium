@@ -82,8 +82,19 @@ export async function gatherSignals(
           "run 'skillquarium embed' to build it",
       );
     } else {
-      const [vector] = await deps.embed().embed([text]);
-      if (vector === undefined) notices.push("semantic search unavailable: the endpoint returned no vector");
+      // An unreachable or erroring endpoint drops the signal the way a missing index does: a fresh
+      // clone has never pointed at one, and a query must still answer from the other signals. The
+      // client names the endpoint in its error, so the notice says which host failed.
+      let vector: Float32Array | undefined;
+      let failure: string | null = null;
+      try {
+        [vector] = await deps.embed().embed([text]);
+      } catch (e) {
+        failure = e instanceof Error ? e.message : String(e);
+      }
+      if (failure !== null) notices.push(`semantic search unavailable: ${failure}`);
+      else if (vector === undefined)
+        notices.push("semantic search unavailable: the endpoint returned no vector");
       else signals.push({ name: "semantic", results: semanticRank(index, vector, width) });
     }
   }
