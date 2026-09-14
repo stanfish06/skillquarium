@@ -1,7 +1,8 @@
+import { MetadataError } from "../catalog";
 import { setSkillEnabled, setSkillProductStates, toggleSkill } from "./edit";
 import { preCommitReset } from "./reset";
 import { loadSnapshot, saveSnapshot } from "./snapshot";
-import { discover, MetadataError, resolveRoot, type Skill } from "./state";
+import { discover, resolveRoot, type Skill } from "./state";
 
 export type Product = "both" | "claude" | "codex";
 

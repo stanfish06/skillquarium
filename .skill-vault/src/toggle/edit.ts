@@ -1,14 +1,13 @@
 import { randomBytes } from "node:crypto";
 import { chmodSync, existsSync, mkdirSync, renameSync, rmdirSync, rmSync, writeFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
-import { pyStrip } from "../catalog";
+import { frontmatterOrThrow, MetadataError, pyStrip } from "../catalog";
 import {
+  atPath,
   CLAUDE_FIELD,
   CODEX_FIELD,
   fileMode,
-  frontmatterLines,
   loadSkill,
-  MetadataError,
   pyJsonDumps,
   readUtf8,
   type Skill,
@@ -40,7 +39,7 @@ function replaceBooleanLine(line: string, field: string, value: boolean, topLeve
 
 /** Set (`true`/`false`) or drop (`null`) `disable-model-invocation` in the SKILL.md frontmatter. */
 export function transformSkillMdField(text: string, path: string, disabled: boolean | null): string {
-  const { lines, closingIndex, newline } = frontmatterLines(text, path);
+  const { lines, closingIndex, newline } = atPath(path, () => frontmatterOrThrow(text));
   const matches: number[] = [];
   for (let i = 1; i < closingIndex; i++) {
     if ((lines[i] ?? "").startsWith(`${CLAUDE_FIELD}:`)) matches.push(i);

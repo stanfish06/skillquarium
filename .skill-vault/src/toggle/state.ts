@@ -3,21 +3,16 @@ import { basename, join, resolve } from "node:path";
 import {
   collapseWhitespace,
   discoverSkills,
-  type Frontmatter,
-  pyStrip,
+  frontmatterBody,
+  frontmatterOrThrow,
+  MetadataError,
   readBooleanField,
   readScalar,
-  splitFrontmatter,
 } from "../catalog";
 
 export const CLAUDE_FIELD = "disable-model-invocation";
 export const CODEX_FIELD = "allow_implicit_invocation";
 export const NOTES_SUBDIR = "vault/notes";
-
-/** Invocation metadata cannot be read or changed without guessing (skill_toggle.py MetadataError). */
-export class MetadataError extends Error {
-  override name = "MetadataError";
-}
 
 export type InvocationState = "enabled" | "disabled" | "mixed" | "error";
 
@@ -65,21 +60,13 @@ export function fileMode(path: string): number {
   return statSync(path).mode;
 }
 
-// skill_toggle.py _frontmatter_lines, with its two error messages.
-export function frontmatterLines(text: string, path: string): Frontmatter {
-  const fm = splitFrontmatter(text);
-  if (fm) return fm;
-  const first = /^[^\n]*/.exec(text)?.[0] ?? "";
-  if (pyStrip(first) !== "---") throw new MetadataError(`${path}: SKILL.md has no YAML frontmatter`);
-  throw new MetadataError(`${path}: SKILL.md frontmatter is not closed`);
-}
-
-// Boolean field read with the file path prefixed to the catalog reader's messages.
-function readFlag(text: string, field: string, fallback: boolean, path: string, topLevel: boolean): boolean {
+/** Run a catalog reader; a MetadataError comes back prefixed with `<path>: ` as Python's messages are. */
+export function atPath<T>(path: string, read: () => T): T {
   try {
-    return readBooleanField(text, field, topLevel) ?? fallback;
+    return read();
   } catch (e) {
-    throw new MetadataError(`${path}: ${e instanceof Error ? e.message : String(e)}`);
+    if (e instanceof MetadataError) throw new MetadataError(`${path}: ${e.message}`);
+    throw e;
   }
 }
 
@@ -89,15 +76,15 @@ export function loadSkill(directory: string, category = "uncategorized"): Skill 
   const skillPath = join(directory, "SKILL.md");
   try {
     const skillText = readUtf8(skillPath);
-    const fm = frontmatterLines(skillText, skillPath);
+    const fm = atPath(skillPath, () => frontmatterOrThrow(skillText));
     const name = readScalar(fm, "name") || key;
     const description = readScalar(fm, "description") ?? "";
     // The Claude flag is top-level frontmatter only; the Codex flag is nested anywhere in the yaml.
-    const body = fm.lines.slice(1, fm.closingIndex).join("");
-    const claudeDisabled = readFlag(body, CLAUDE_FIELD, false, skillPath, true);
+    const claudeDisabled =
+      atPath(skillPath, () => readBooleanField(frontmatterBody(fm), CLAUDE_FIELD, true)) ?? false;
     const openaiPath = join(directory, "agents", "openai.yaml");
     const codexEnabled = existsSync(openaiPath)
-      ? readFlag(readUtf8(openaiPath), CODEX_FIELD, true, openaiPath, false)
+      ? (atPath(openaiPath, () => readBooleanField(readUtf8(openaiPath), CODEX_FIELD, false)) ?? true)
       : true;
     return {
       key,
@@ -150,12 +137,7 @@ export function wrapperCategories(root: string): Map<string, string> {
 /** All toggleable skills sorted by (name, key) case-insensitively (skill_toggle.py discover_skills). */
 export function discover(root: string): Skill[] {
   const resolved = resolveRoot(root);
-  let entries: ReturnType<typeof discoverSkills>;
-  try {
-    entries = discoverSkills(resolved, { bundles: false, excludeTransient: true });
-  } catch (e) {
-    throw new MetadataError(e instanceof Error ? e.message : String(e));
-  }
+  const entries = discoverSkills(resolved, { bundles: false, excludeTransient: true });
   const categories = wrapperCategories(resolved);
   const skills = entries.map((entry) => loadSkill(entry.dir, categories.get(entry.id) ?? "uncategorized"));
   return skills.sort((a, b) => {

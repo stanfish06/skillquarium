@@ -1,5 +1,6 @@
 import { existsSync, rmdirSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { MetadataError } from "../catalog";
 import {
   atomicWrite,
   defaultOpenaiYaml,
@@ -9,7 +10,7 @@ import {
   transformSkillMdField,
 } from "./edit";
 import { saveSnapshot } from "./snapshot";
-import { discover, fileMode, MetadataError, readUtf8, resolveRoot } from "./state";
+import { discover, fileMode, readUtf8, resolveRoot } from "./state";
 
 /** HEAD blob text per repo-relative path (null when HEAD lacks it), from one `git cat-file --batch`. */
 export function gitHeadTexts(root: string, relativePaths: string[]): Map<string, string | null> {

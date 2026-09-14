@@ -1,4 +1,5 @@
 import { isAbsolute, join, resolve } from "node:path";
+import { MetadataError } from "../catalog";
 import {
   atomicWrite,
   captureOriginal,
@@ -6,7 +7,7 @@ import {
   restoreOriginalFiles,
   setSkillProductStates,
 } from "./edit";
-import { discover, MetadataError, pyJsonDumps, readUtf8, resolveRoot, type Skill } from "./state";
+import { discover, pyJsonDumps, readUtf8, resolveRoot, type Skill } from "./state";
 
 export const SNAPSHOT_SCHEMA_VERSION = 1;
 
