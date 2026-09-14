@@ -78,8 +78,8 @@ describe("catalog filtering", () => {
   ]
 
   test("fuzzy search matches non-contiguous names", () => {
-    expect(fuzzyScore("acppr", skills[0])).toBeNumber()
-    expect(fuzzyScore("zzzz", skills[0])).toBeNull()
+    expect(fuzzyScore("acppr", skills[0]!)).toBeNumber()
+    expect(fuzzyScore("zzzz", skills[0]!)).toBeNull()
   })
 
   test("combines status and category filters", () => {
@@ -204,8 +204,8 @@ describe("OpenTUI interaction", () => {
       ["column-claude", "claude-a-short-skill"],
       ["column-codex", "codex-a-short-skill"],
     ]) {
-      const header = setup.renderer.root.findDescendantById(headerId)!
-      const row = setup.renderer.root.findDescendantById(rowId)!
+      const header = setup.renderer.root.findDescendantById(headerId!)!
+      const row = setup.renderer.root.findDescendantById(rowId!)!
       expect([header.screenX, header.width]).toEqual([row.screenX, row.width])
     }
 
@@ -586,7 +586,7 @@ describe("benchmark items", () => {
       ["modern-typescript", "ts-settings-parser"],
       ["zz-prefix", "-"],
     ])
-    expect(buildBenchItems(null, ["zz-prefix"])[0].row).toBeNull()
+    expect(buildBenchItems(null, ["zz-prefix"])[0]?.row).toBeNull()
   })
 })
 

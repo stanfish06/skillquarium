@@ -995,14 +995,14 @@ export class SkillquariumApp {
   private cycleStatus(direction: number): void {
     this.search.blur()
     const index = STATUS_FILTERS.indexOf(this.statusFilter)
-    this.statusFilter = STATUS_FILTERS[(index + direction + STATUS_FILTERS.length) % STATUS_FILTERS.length]
+    this.statusFilter = STATUS_FILTERS[(index + direction + STATUS_FILTERS.length) % STATUS_FILTERS.length]!
     this.applyFilters()
   }
 
   private cycleCategory(direction: number): void {
     this.search.blur()
     const index = Math.max(0, this.categories.indexOf(this.categoryFilter))
-    this.categoryFilter = this.categories[(index + direction + this.categories.length) % this.categories.length]
+    this.categoryFilter = this.categories[(index + direction + this.categories.length) % this.categories.length]!
     this.applyFilters()
   }
 
@@ -1018,7 +1018,7 @@ export class SkillquariumApp {
     if (this.filtered.length === 0) return
     const current = this.filtered.findIndex((skill) => skill.key === this.selectedKey)
     const next = Math.max(0, Math.min(this.filtered.length - 1, (current < 0 ? 0 : current) + amount))
-    const skill = this.filtered[next]
+    const skill = this.filtered[next]!
     this.selectKey(skill.key)
     this.list.scrollChildIntoView(`skill-${skill.key}`)
   }
@@ -1158,7 +1158,7 @@ export class SkillquariumApp {
       const current = this.run?.runId
       const keep = current ? runIds.indexOf(current) : -1
       this.runIndex = keep >= 0 ? keep : runIds.length - 1
-      this.run = this.runIndex >= 0 ? await this.evalSource.loadRun(runIds[this.runIndex]) : null
+      this.run = this.runIndex >= 0 ? await this.evalSource.loadRun(runIds[this.runIndex]!) : null
       this.benchError = null
       if (announce) this.setMessage(`Loaded ${runIds.length} run${runIds.length === 1 ? "" : "s"}`)
     } catch (error) {
@@ -1178,7 +1178,7 @@ export class SkillquariumApp {
     const next = (this.runIndex + direction + this.runIds.length) % this.runIds.length
     if (next === this.runIndex) return
     try {
-      this.run = await this.evalSource.loadRun(this.runIds[next])
+      this.run = await this.evalSource.loadRun(this.runIds[next]!)
       this.runIndex = next
       this.benchError = null
     } catch (error) {
@@ -1275,7 +1275,7 @@ export class SkillquariumApp {
     if (this.benchItems.length === 0) return
     const current = this.benchItems.findIndex((item) => item.key === this.benchSelectedKey)
     const next = Math.max(0, Math.min(this.benchItems.length - 1, (current < 0 ? 0 : current) + amount))
-    const item = this.benchItems[next]
+    const item = this.benchItems[next]!
     this.selectBench(item.key)
     this.benchList.scrollChildIntoView(`bench-${item.key}`)
   }
