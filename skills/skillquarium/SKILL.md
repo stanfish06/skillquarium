@@ -100,6 +100,6 @@ local llama.cpp endpoint configured in the gitignored `.skill-vault/config.local
 **No search command ever contacts that endpoint.** Building the index needs it; using it does
 not. With no index at all, `query` still answers from BM25, fuzzy matching, and the graph.
 
-`embed --check` lists what has drifted without touching the network. Toggling a skill changes its
-file and so marks it stale, which is noise rather than a problem: a toggle line does not change
-what a skill is about, and stale vectors are still used.
+`embed --check` lists what has drifted without touching the network. Toggling is not drift: the
+toggle fields are stripped before hashing and before embedding, so a vector cannot depend on
+whether the skill is switched on, and a rebuilt index is the same bytes whoever runs it.
