@@ -20,10 +20,50 @@ any transient API error.
 import importlib.util
 import inspect
 import sys
+import types
 import unittest
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
+
+
+def install_requests_stub():
+    """Stand in for `requests` when it is not installed.
+
+    The skill scripts ``sys.exit(1)`` at import time if ``requests`` is missing.
+    Nothing here reaches the network -- ``_make_request`` is always replaced --
+    so a stub keeps the tests runnable on a bare python3.
+    """
+    try:
+        import requests  # noqa: F401
+    except ImportError:
+        pass
+    else:
+        return
+
+    exceptions = types.ModuleType("requests.exceptions")
+
+    class RequestException(Exception):
+        pass
+
+    class Timeout(RequestException):
+        pass
+
+    exceptions.RequestException = RequestException
+    exceptions.Timeout = Timeout
+
+    stub = types.ModuleType("requests")
+    stub.exceptions = exceptions
+
+    def post(*_args, **_kwargs):
+        raise RequestException("requests is stubbed; tests must not call the network")
+
+    stub.post = post
+    sys.modules["requests"] = stub
+    sys.modules["requests.exceptions"] = exceptions
+
+
+install_requests_stub()
 
 # Model ids known not to exist in the OpenRouter catalogue.
 DEAD_MODEL_IDS = {"google/gemini-3-pro"}

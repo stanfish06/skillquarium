@@ -252,11 +252,7 @@ export function loadTaxonomy(path: string, inputs: TaxonomyInputs): ExpertTaxono
 
     // Python's item.get("secondary", []) defaults only on a missing key, so an
     // explicit null must reach stringList and be rejected there.
-    const secondary = stringList(
-      "secondary" in item ? item.secondary : [],
-      `${slug}.secondary`,
-      errors,
-    );
+    const secondary = stringList("secondary" in item ? item.secondary : [], `${slug}.secondary`, errors);
     if (secondary.length > 3) errors.push(`${slug}.secondary: at most 3 disciplines are allowed`);
     for (const value of duplicates(secondary)) {
       errors.push(`${slug}.secondary: duplicate discipline ${value}`);

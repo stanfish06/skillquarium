@@ -1,17 +1,22 @@
 # .skill-vault
 
-Tooling behind the generated `vault/` layer. `skills/` is the Vercel skills CLI's flat store and stays flat.
+The `skillquarium` CLI (Bun + TypeScript) and the data it reads. `src/` holds one folder per
+command group, `test/` mirrors it. `skills/` is the Vercel skills CLI's flat store and stays flat;
+everything under `vault/` is generated from it.
 
 ```sh
-python3 .skill-vault/build.py                                       # regenerate vault/
-python3 -m unittest discover -s .skill-vault/tests -p 'test_*.py'   # after a rebuild
+bun install --frozen-lockfile   # from .skill-vault/
+bun test                        # bun run typecheck, bun run lint
+./skillquarium build            # from the repo root: regenerate vault/
 ```
 
-New skill ids go in `EXTRA_ASSIGNMENTS` in `build.py`, else they land in Uncategorized.
+New skill ids go in `extraAssignments` in `src/build/categories.json`, else they land in
+Uncategorized. `test/python/` holds the one suite that stays Python, because the code it tests
+ships inside four skills; `test/reviewFailure.test.ts` runs it under `bun test`.
 
 ## Sync
 
-`skills update` only touches `sourceType: github` lock entries, and skips an entry whose `skillPath` is gone upstream. `check-upstream-drift.py` lists both. Fixes to github-sourced skills go in `local-overrides.json` or the next sync reverts them.
+`skills update` only touches `sourceType: github` lock entries, and skips an entry whose `skillPath` is gone upstream. `./skillquarium drift` lists both. Fixes to github-sourced skills go in `data/local-overrides.json` or the next sync reverts them; `./skillquarium overrides --check` reports any that stopped applying.
 
 ## Vendored bundles
 
@@ -22,7 +27,7 @@ New skill ids go in `EXTRA_ASSIGNMENTS` in `build.py`, else they land in Uncateg
 
 ```sh
 git clone https://github.com/K-Dense-AI/scientific-agents /tmp/scientific-agents
-python3 .skill-vault/import-scientific-agents.py /tmp/scientific-agents   # reapplies scientific-agent-patches.json
+./skillquarium import scientific-agents /tmp/scientific-agents   # reapplies data/scientific-agent-patches.json
 ```
 
 MATLAB: copy the group folders over `skills/matlab-*/`, keep each `LICENSE.md`.

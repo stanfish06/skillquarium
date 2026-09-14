@@ -1289,7 +1289,7 @@ export class SkillquariumApp {
     if (!item) {
       this.benchDetail.content = this.run
         ? "This run has no rows."
-        : "No saved runs.\n\nRun ./run-eval.sh from the vault root, then Refresh."
+        : "No saved runs.\n\nRun ./skillquarium eval from the vault root, then Refresh."
       return
     }
     const run = this.run
@@ -1301,7 +1301,7 @@ export class SkillquariumApp {
         run ? `Not in run ${run.runId}.` : "No saved runs yet.",
         info ? `injection ${info.injection}` : "",
         "",
-        "Pair it with a task in eval/src/config.ts and run ./run-eval.sh.",
+        "Pair it with a task in eval/src/config.ts and run ./skillquarium eval.",
       ].join("\n")
       return
     }

@@ -10,17 +10,13 @@ A collection of AI agent skills, organized as an Obsidian vault for easier human
 <table width="100%">
   <tr>
     <th>Obsidian graph</th>
-    <th>Graphifyy graph</th>
     <th>Skillquarium TUI</th>
   </tr>
   <tr>
-     <td width="33%">
+     <td width="50%">
        <img src="./screenshot.png" width="300" alt="Obsidian graph view of the skill vault" />
      </td>
-     <td width="33%">
-       <img src="./graphifyy.png" width="300" alt="Graphifyy graph view of skill relationships" />
-     </td>
-     <td width="33%">
+     <td width="50%">
        <img src="./skill-toggle.png" width="300" alt="Skillquarium TUI: skill toggles and benchmark results" />
      </td>
   </tr>
@@ -34,25 +30,24 @@ git init
 git remote add origin git@github.com:stanfish06/skillquarium.git
 git fetch origin
 git checkout -f master
-./install-skills.sh
+./skillquarium install
 ```
 
-Default install:
-
-1. Symlinks every vault skill into each agent's skills folder (`npx skills add . -s '*' -g`)
-2. Installs / registers [`graphify`](https://github.com/safishamsi/graphify)
+`install` symlinks every vault skill into each agent's skills folder
+(`npx skills add . -s '*' -g`). It needs [Bun](https://bun.sh); the `skillquarium`
+launcher installs the CLI's own dependencies on first run.
 
 **gstack**, **career-ops**, and **UI/UX Pro Max** are optional and are
 **skipped by default**. Opt in with `--extras`:
 
 ```bash
-./install-skills.sh --extras gstack          # Garry Tan's gstack workflow
-./install-skills.sh --extras career          # career-ops workspace
-./install-skills.sh --extras ui-ux           # UI/UX Pro Max seven-skill bundle
-./install-skills.sh --extras gstack career ui-ux
-./install-skills.sh --extras all             # all optional extras
-./install-skills.sh --extras=gstack,ui-ux    # comma form also works
-./install-skills.sh --help                   # full flag list
+./skillquarium install --extras gstack          # Garry Tan's gstack workflow
+./skillquarium install --extras career          # career-ops workspace
+./skillquarium install --extras ui-ux           # UI/UX Pro Max seven-skill bundle
+./skillquarium install --extras gstack career ui-ux
+./skillquarium install --extras all             # all optional extras
+./skillquarium install --extras=gstack,ui-ux    # comma form also works
+./skillquarium install --help                   # full flag list
 ```
 
 ## Navigation
@@ -94,7 +89,7 @@ The table shows four combined states:
 - `mixed` — the Claude Code and Codex fields disagree; toggling makes both enabled.
 - `error` — malformed metadata must be repaired before the tool will change it.
 
-Save writes `.skill-vault/skill-toggle-state.json` . Reload reapplies both products
+Save writes `.skill-vault/data/skill-toggle-state.json`. Reload reapplies both products
 from that snapshot.
 
 The tool writes `disable-model-invocation` in `SKILL.md` for Claude Code and
@@ -114,17 +109,42 @@ Scriptable commands use the same safe backend:
 ./skillquarium save
 ./skillquarium load
 ./skillquarium pre-commit-reset
-./skillquarium --query "single cell"
+./skillquarium tui --query "single cell"
 ```
+
+`./skillquarium -h` lists every subcommand. Beyond the toggles above:
+`doctor`, `catalog`, `preview`, `build`, `validate`, `embed`, `install`,
+`overrides`, `drift`, `soften`, `update`, `import`, `eval`, `query`, `grep`.
+Each takes `--help`.
 
 As of 2026-08-09, claude code and pi can reliably toggle skills and
 reduce context usage, codex is not working well.
 As a workaround, one can use pi as the harness for gpt models.
 
-## Regenerating the navigation layer
-
-After adding or removing skills, rebuild the wrappers, maps, and index:
+## Searching the vault
 
 ```bash
-python3 .skill-vault/build.py
+./skillquarium query "raw fastq to enriched pathways"   # ranked skills, --k N, --json, --explain
+./skillquarium grep "AnnData"                           # literal text in skills/, grouped by skill
+./skillquarium embed                                    # refresh the vectors query searches
+```
+
+`query` fuses three rankings — BM25 over the skill graph, typo-tolerant filename matching,
+and cosine similarity over sentence embeddings — then walks the graph's `chains_to` /
+`co_occurs_with` edges so the neighbouring steps of a workflow come back with the step you
+asked for.
+
+The embedding index lives in `vault/embeddings/` and **is committed**: one `<skill>.f16` file
+per skill holding a float16 vector for its description and one for its body. `./skillquarium
+embed` rebuilds only the skills whose text changed, against a local llama.cpp
+`/v1/embeddings` endpoint whose URL goes in the gitignored `.skill-vault/config.local.json`.
+Nobody needs that endpoint to search — with no index, or with `--no-semantic`, `query` falls
+back to the lexical and fuzzy signals plus graph expansion.
+
+## Regenerating the navigation layer
+
+After adding or removing skills, rebuild the wrappers, maps, index, and knowledge graph:
+
+```bash
+./skillquarium build
 ```
