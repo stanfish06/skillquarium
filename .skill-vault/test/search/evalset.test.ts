@@ -156,13 +156,15 @@ test("the cache refuses a query it has no row for rather than scoring it as a mi
 });
 
 /**
- * Pinned from the offline sweep over the real graph and the committed index at 3c8e8a39. These are
- * the numbers `query --eval` prints for config.json's weights on the tree they were measured on.
+ * Pinned from the offline sweep over the real graph and the committed index. These are the numbers
+ * `query --eval` prints for config.json's weights on the corpus they were measured on. Re-pinned
+ * after 50 skills were re-embedded (the activation commit rewrote them post-index): only the
+ * fuzzy-on MRR moved, by 0.002, since fff indexes every file under skills/.
  */
 const PINNED = {
   lexical: { recall: 0.804, mrr: 0.735 },
   semantic: { recall: 0.904, mrr: 0.774 },
-  withFuzzy: { fused: { recall: 0.892, mrr: 0.815 }, final: { recall: 0.871, mrr: 0.81 } },
+  withFuzzy: { fused: { recall: 0.892, mrr: 0.813 }, final: { recall: 0.871, mrr: 0.808 } },
   withoutFuzzy: { fused: { recall: 0.879, mrr: 0.806 }, final: { recall: 0.858, mrr: 0.801 } },
 };
 
