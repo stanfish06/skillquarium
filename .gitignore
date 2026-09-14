@@ -132,3 +132,4 @@ vercel-api.txt
 /eval/runs/
 /eval/.cache/
 /eval/work/
+/.skill-vault/.bun-install.err

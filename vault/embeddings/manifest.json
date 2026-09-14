@@ -956,7 +956,7 @@
       "updated": "2026-09-14"
     },
     "build-iterated-agentic-loop": {
-      "sha256": "698a6ccb1f29b422e104776b5e035fb1a7c5d4444865094006657599e1c8b3fa",
+      "sha256": "dea5c29e2cb6133896b0bb518775e18863df377ebe0198f8d867e28e52155671",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -1613,7 +1613,7 @@
       "updated": "2026-09-14"
     },
     "coding-guidelines": {
-      "sha256": "57349eb0a934227cbcab402d4c64e22d44af5372bd93b314b294d8114c2ee2c8",
+      "sha256": "00945c153714a4b459856a3d1decddef885084c733593854ea343b63fc4dfba8",
       "updated": "2026-09-14"
     },
     "cognitive-neuroscientist": {
@@ -1873,19 +1873,19 @@
       "updated": "2026-09-14"
     },
     "core-actionbook": {
-      "sha256": "859035157169673b9083d83632a5e683f39c4e3302c1504ed385a6e9b58751cd",
+      "sha256": "ec142e92c6c4eedfb18caa4578daa899dc1e2862a9747f16ce2464bc2c1ff97f",
       "updated": "2026-09-14"
     },
     "core-agent-browser": {
-      "sha256": "f73bcd217a5764258a54dbe87fbfa4972e35f8c41f543dcb4058253218193bce",
+      "sha256": "d2388507eca04e4e9dbe2c74f6a0b5e9be0c0c090f0514c0d3a82f198760f1ed",
       "updated": "2026-09-14"
     },
     "core-dynamic-skills": {
-      "sha256": "2534d59e57852fa3a9b203945d2b37b78df8fa30c581cfb8fbd39c913a7079e9",
+      "sha256": "a9d397b98de76ca74bae469e513b0728047bec5b1d42c1bf7134a28f4358eb7a",
       "updated": "2026-09-14"
     },
     "core-fix-skill-docs": {
-      "sha256": "7b8fd7636601cc1da04ea8ef859b5f4d8f261c74eea05fd1388b41edf30bb6c8",
+      "sha256": "d93083902ba41a26984ec3d43a780dc069c48720e997364fb70e9731491608a1",
       "updated": "2026-09-14"
     },
     "corrosion-engineer": {
@@ -1913,7 +1913,7 @@
       "updated": "2026-09-14"
     },
     "cpp-pro": {
-      "sha256": "899e02c92abb4d092118dff2450dbc719cf4cfb6e1b015dce0c4ef90af85619b",
+      "sha256": "a08e1b284deb806b9912730c7e1902592f7c8c5b19e729ce09a8153eb85120d6",
       "updated": "2026-09-14"
     },
     "crap-score": {
@@ -1983,7 +1983,7 @@
       "updated": "2026-09-14"
     },
     "csharp-developer": {
-      "sha256": "ce9eb0ca151441058c63f129b5ba78fca97ad51adf1904276544c0619385076a",
+      "sha256": "a0fd3be38f9c374f214163fd1b586998147815c0060ccd1917bd49035589b7a0",
       "updated": "2026-09-14"
     },
     "csharp-scripts": {
@@ -2375,7 +2375,7 @@
       "updated": "2026-09-14"
     },
     "design-control-loop": {
-      "sha256": "0de26e73973a5d4f629d7593e28c4be40e2ea34de7849c0716377959b7c32478",
+      "sha256": "4e31d397362b23a88c7bd027cc5935fb3e5aa24eb0a5f934be0967f8974fc080",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -2526,27 +2526,27 @@
       "updated": "2026-09-14"
     },
     "domain-cli": {
-      "sha256": "095feacf1a5250f99425f9c9673b012c52dd8dc0906cb9b4af6c8dbfb3f6d18e",
+      "sha256": "82faba357adb435db2e738635097cd5f514c09e2e272b963ed5d89617dda75d7",
       "updated": "2026-09-14"
     },
     "domain-cloud-native": {
-      "sha256": "f80d951afedfb58141d292367b09ef1cf72c70adf86b79ba6ae86cb37513d36b",
+      "sha256": "89b98395dd457744cb9a289faa13ad001ed3e4b9a6c95a5bd687fa4c4fab46c9",
       "updated": "2026-09-14"
     },
     "domain-embedded": {
-      "sha256": "36fb7698a371e2e73d247ba383a30772fd251f53bf12d1cc18006fd182fe835f",
+      "sha256": "539dc699a77abe5ac8afb2747248278ef10239ab6391bfdb199f24d4bf611f09",
       "updated": "2026-09-14"
     },
     "domain-fintech": {
-      "sha256": "f866bcc73dab620763dec731fa5c0247dbd4b88dae9ca99af2c05bf89b7f6d56",
+      "sha256": "4b087fff092991248ed982e3fa9afafce1f56f460bcc87aebbabfe41aec38c43",
       "updated": "2026-09-14"
     },
     "domain-iot": {
-      "sha256": "2f88d2c6c04a8fd254ab44bc8eabae59cab16106521bbd87ec1b5c4319da2129",
+      "sha256": "a1adf393ab51bded7e8352f918d1344f8a2d91cd678b9acf0f35c05311265e7b",
       "updated": "2026-09-14"
     },
     "domain-ml": {
-      "sha256": "8235fe599c912543fd772b3b2fe409bf469f8d5e2175a077bacc0c76eb6ff0e8",
+      "sha256": "27db4b6a8e891ff903aa5a5f10bc4f28c9f319c9a1c7012cbb34f50148033d20",
       "updated": "2026-09-14"
     },
     "domain-modeling": {
@@ -2554,7 +2554,7 @@
       "updated": "2026-09-14"
     },
     "domain-web": {
-      "sha256": "93117b696d26479ccef66c9d40d1a9b993acb878737e2a2972f04abfa0a06f9d",
+      "sha256": "a7e6625d4ee7ce61fc94fc3e8fb3c299a2a51028b4e6791f7654d207c715fa46",
       "updated": "2026-09-14"
     },
     "dotnet-aot-compat": {
@@ -4134,7 +4134,7 @@
       "updated": "2026-09-14"
     },
     "improve-claude-md": {
-      "sha256": "5843b9d6aa5780cbc25f621f236f57f622aef78ee996124b4ce01778cddf8148",
+      "sha256": "dbc3019c52f2409c031c4261664381c338d206b53ed700120743e374a87a9b8c",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -4643,59 +4643,59 @@
       "updated": "2026-09-14"
     },
     "m01-ownership": {
-      "sha256": "68a4b235f9e09644a3cc9e7b0e6fc8e85d0ee3282e61528e86891629dc308c12",
+      "sha256": "cb4ebbeefbbace5f163cc51a0f693b7ee46980c0a1303c12525ee596d854c3b4",
       "updated": "2026-09-14"
     },
     "m02-resource": {
-      "sha256": "a5cc0229b76880408229743ccbcb3b29762c5757ecef4e3dd8e15904493d6fb4",
+      "sha256": "00e54bc7e81d13cbaf15b66949065d675f0ab2950110eef40ff5ecfe8928ba03",
       "updated": "2026-09-14"
     },
     "m03-mutability": {
-      "sha256": "eee593b331647402d88d477360f1f21f5553261111e423c5f0fbf436dd1366d5",
+      "sha256": "1e2d270dbfd2841238783bcfed109fbf6b67e4132d698a4a015232a217078c23",
       "updated": "2026-09-14"
     },
     "m04-zero-cost": {
-      "sha256": "3b947e3a2e9af59f35f1be059709661d8c7cf4667634b2e515024df7bf4bddf3",
+      "sha256": "3a2eed8faf0a0087aa5c823d66341123cc6f43ef36d1767c3fdbcc86cf8b4b54",
       "updated": "2026-09-14"
     },
     "m05-type-driven": {
-      "sha256": "348cb9f73d53943d839d290744d506aa00f16f033992ab559893dcfbb9e27798",
+      "sha256": "56895dac5c47ad3fb22e90167eff5a6c501a2b9c088a8b8a6ceb323438c6babd",
       "updated": "2026-09-14"
     },
     "m06-error-handling": {
-      "sha256": "c1eeac6286e10dbe46f760eced7aa44f638e32985c2da52b0b465f3524bb1946",
+      "sha256": "9760e9433bfaacdecf320ed128bd32e72296386d757abeeaa1d53387da073185",
       "updated": "2026-09-14"
     },
     "m07-concurrency": {
-      "sha256": "550bf0f07a10c1829fcd7a8df7cf01d812e37ec798d0165176ba7e76118d64df",
+      "sha256": "c2a3e990e34c45aad75a8acbc1c98658fe1021f0674b9662112060e388b56c5e",
       "updated": "2026-09-14"
     },
     "m09-domain": {
-      "sha256": "e92f5835c9cdac4fe6cf3aa36e56e7f9cf629524b86c6c2a1ba7a0dea52dff0c",
+      "sha256": "a05f32b475b01d630d54a38a4b9942499b8ea873bc6d2627144fcd8b85b8b53a",
       "updated": "2026-09-14"
     },
     "m10-performance": {
-      "sha256": "98ef23d2a5970622aece3609a899373e8f063c435a3de8470c49372aaec91248",
+      "sha256": "6661cd16c27d031746985f8053c5515d50820d665957bde8a0660f4e36eb9bc7",
       "updated": "2026-09-14"
     },
     "m11-ecosystem": {
-      "sha256": "806cd5d753b190076bc7b2b62d529cb389b32bd4b1ea2a167b7fcc913dab0034",
+      "sha256": "49ebf716fbff900e52f114bef4ee090932118037cd560b3cbc8949e71424e070",
       "updated": "2026-09-14"
     },
     "m12-lifecycle": {
-      "sha256": "729574cc8168b5f86ac8bd8047a6d1faadcc0b81138d121a920ae622d0d481e8",
+      "sha256": "db6f0af49dcf61dae73e343b2051dbf087a58b6621db0591612208967a1078bd",
       "updated": "2026-09-14"
     },
     "m13-domain-error": {
-      "sha256": "f865ff2cc011a7ce7a02dfe5a2ba9f43a604e5c0143d55feef7dac44589f826a",
+      "sha256": "8b20e875534e615d7a98875f804a4d5e26504029c12e656a342efef4433c8dc9",
       "updated": "2026-09-14"
     },
     "m14-mental-model": {
-      "sha256": "5944d905ec321ba426b92ca4849cd493e6a8a3901b8d15e5e0d0de3b807c8e89",
+      "sha256": "a2f9a54dc7708a2d79d394896c3e2f3221f8a73c05f1aa17aeed2c10e1c2a836",
       "updated": "2026-09-14"
     },
     "m15-anti-pattern": {
-      "sha256": "7a7666df3933b228a6b26f0bbe3207de717af4909d8b23d44dbc5294020aa188",
+      "sha256": "bcbb49e47b76620b6303f508c323bd12897a730b80a29f7a760bbaed9a6002f2",
       "updated": "2026-09-14"
     },
     "machine-learning-engineer": {
@@ -5101,7 +5101,7 @@
       "updated": "2026-09-14"
     },
     "mermaid-studio": {
-      "sha256": "681e6e35f3b7135925bbb3ba44bf58184a7d3ca2cee8389af0eb5c2d6ae0917e",
+      "sha256": "5cda47007c4dacf1e479e7b751a63aee4507011df15a7fd7f2010c5d346688b6",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -5110,7 +5110,7 @@
       "updated": "2026-09-14"
     },
     "meta-cognition-parallel": {
-      "sha256": "67732f7152a0cc1282756c2c35da030eb3b0421fe3d6738b1067dd03e2c15d60",
+      "sha256": "dbb3b241678d3f60a35a1c3c5513d965af8529b8edec0ea46b44a23098b3d398",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -5504,7 +5504,7 @@
       "updated": "2026-09-14"
     },
     "narrow-react-prop-types": {
-      "sha256": "d82de4dba8faf98bfc74cdc1e41d2ef205c9a5bd9520d4466ad1d74c98423d06",
+      "sha256": "bfcea79a20074a9178c6aa21c34629951d9646ea381e8be4c83a0a136e3aa288",
       "updated": "2026-09-14"
     },
     "native-data-fetching": {
@@ -7699,45 +7699,45 @@
       "updated": "2026-09-14"
     },
     "rust-call-graph": {
-      "sha256": "735eaf12ad4a39fcf49e449b6818892e9689fd28875988a812dbede2cd282ea8",
+      "sha256": "ae233c69dffb3e4958d2c4d9b7be26fbc2930a99af84277ec9d41d3ca4b3cc12",
       "updated": "2026-09-14"
     },
     "rust-code-navigator": {
-      "sha256": "525b369846a908abbdbfcf387ef6e373595a9269ccc70c7b91761876b1a76293",
+      "sha256": "a4d1082bfc4bf06cebbb09b87979949902f37868427a9ba6534613c4e4ff77d1",
       "updated": "2026-09-14"
     },
     "rust-daily": {
-      "sha256": "a2dbc356b766bb1c64771e0f946bf2498afd8cd2e75a9224682d5bad23af422b",
+      "sha256": "8a3cd3532a98275062d0615b40d70c9426d0fa36ab49c8d9acae4ce659ca3cb5",
       "updated": "2026-09-14"
     },
     "rust-deps-visualizer": {
-      "sha256": "97dc354de16da48caed36923b094f4db15e6f3038b65e67a31ff8bc700b6f25e",
+      "sha256": "960d1c9741f8bb075cfe58afbf07f37e4c83ac0872c864ceff9736f2f6cfb9c7",
       "updated": "2026-09-14"
     },
     "rust-learner": {
-      "sha256": "a24e979b634f72ba1cc303ccd81ee8899704865d6e8104db1927b4fa39ff5fdb",
+      "sha256": "5f4d26d3d0783859d8871a71ef2522a1ce6292c372b700e713bfda6e017584cb",
       "truncated": true,
       "updated": "2026-09-14"
     },
     "rust-refactor-helper": {
-      "sha256": "e3d73806d75d4e25ef3c699c8df03d83498c3a5606291e5bf57d411d724af301",
+      "sha256": "acda4e50e8bf5f9075dc0d9670ebd6e7b80969c71e2be7fe8131130d73a51a82",
       "updated": "2026-09-14"
     },
     "rust-router": {
-      "sha256": "3a9661dcc5ef938fb3229207de5e0e10759f216c393b99b4094d9932d1568c64",
+      "sha256": "f510a8050011eb171de05c5166eed17baf2b6db82fc39740906941868e3b7eb3",
       "truncated": true,
       "updated": "2026-09-14"
     },
     "rust-skill-creator": {
-      "sha256": "feb8ddf73594c676e80fc9940b64877441acb812bc9fce6773133ce54ec2a7a8",
+      "sha256": "a41f0430610d797a191b589ecd08fd459dc065f93092a4997b71bacc44aa7992",
       "updated": "2026-09-14"
     },
     "rust-symbol-analyzer": {
-      "sha256": "280e44dbbdaa047857a940a1c4a4c16be1d5f6d6d1961bc826d39b1736c404aa",
+      "sha256": "1be1ac481eefd25a5737060fed4110ed6ecf647ee29eb521c6e71e681adca9aa",
       "updated": "2026-09-14"
     },
     "rust-trait-explorer": {
-      "sha256": "336828a9ab37d00ff3d1c8dd1c0ac76dafa20a777a649169c64973bbc35e9da5",
+      "sha256": "abe63f35e341e5d447d2d6d37c13fa9717ac697d9277634ae87ceb66e95aede1",
       "updated": "2026-09-14"
     },
     "sample-qc-triage": {
@@ -7901,7 +7901,7 @@
       "updated": "2026-09-14"
     },
     "security-best-practices": {
-      "sha256": "7453e1a240f2ef6c1bd857fa51e247c974161652002a65c8527eda0302c60790",
+      "sha256": "31ce680addb64e1a67e87741b38333ddf39ecf913c0d6562861833aa699ea633",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -8150,7 +8150,7 @@
       "updated": "2026-09-14"
     },
     "show-me": {
-      "sha256": "e113f17d3c4656844a171fed2b601f97af3d30982c85e11faa3881844a46afb8",
+      "sha256": "71b3fd27ebc2852d6b20aed5bab8dc31569df4fedd4b26e4132266f2496d3e5b",
       "updated": "2026-09-14"
     },
     "sign-in-with-vercel": {
@@ -8182,7 +8182,7 @@
       "updated": "2026-09-14"
     },
     "skill-doctor": {
-      "sha256": "b087a456b04269b592259c2ff8ac1510a3f98c68acde1b6d818f6ee66eb00fbc",
+      "sha256": "2cd9eb4d0a707320211e536456bb541eb7d737388f559bb2688bdcf50dcd512b",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -8791,7 +8791,7 @@
       "updated": "2026-09-14"
     },
     "tlc-generative-engine-optimization": {
-      "sha256": "bc796aab3c1b6eecb8e3be48a8c45e759e433be9c52666c27d00dfdf6eaf836a",
+      "sha256": "7ef62989ec99ac3b3de8fa91a61d061744c7ab790fcf6870089638fec604cd4e",
       "truncated": true,
       "updated": "2026-09-14"
     },
@@ -9226,7 +9226,7 @@
       "updated": "2026-09-14"
     },
     "unsafe-checker": {
-      "sha256": "493b81c61734241b60c9aa3c9089d1fe2a0c15f8653e75407ec4d24c80ffd47c",
+      "sha256": "61dc44bbbe4df93391119d1a4daeb4b331eb5711821a5db7ab7e16bd0f4e048b",
       "updated": "2026-09-14"
     },
     "upgrade-stripe": {

@@ -39,8 +39,6 @@ jobs:
       - name: Install ripgrep
         run: sudo apt-get install -y --no-install-recommends ripgrep
 
-      - name: Test
-        run: bun test --cwd .skill-vault
 
       - name: Rebuild navigation layer and knowledge graph
         run: ./skillquarium build
@@ -52,6 +50,9 @@ jobs:
         # `embed` step here, the embedding endpoint is on a private tailnet and
         # is unreachable from GitHub-hosted runners.
         run: ./skillquarium validate
+
+      - name: Test
+        run: bun test --cwd .skill-vault
 
       - name: Commit regenerated files
         run: |

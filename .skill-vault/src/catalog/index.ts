@@ -13,5 +13,5 @@ export {
 } from "./frontmatter";
 export { collapseWhitespace, escapeRegExp, pyStrip, universalNewlines } from "./pytext";
 export { decodeScalar } from "./scalar";
-export { isUiUxProMaxSkill } from "./transient";
+export { isInstallableExtra, isUiUxProMaxSkill } from "./transient";
 export type { Frontmatter, SkillEntry } from "./types";

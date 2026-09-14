@@ -3,7 +3,7 @@ import type { Command, Context } from "../cli";
 import { llamaCppClient } from "../embed/client";
 import { graphPath } from "../kg/write";
 import type { EvalReport } from "./evalSet";
-import { runEval } from "./evalSet";
+import { offlineEmbed, runEval } from "./evalSet";
 import { destroyFinder, type FuzzyRanker, fffRanker } from "./fff";
 import type { SignalName } from "./fusion";
 import { loadGraph } from "./graph";
@@ -44,6 +44,7 @@ Results are grouped by skill.`;
 interface QueryArgs extends QueryOptions {
   text: string;
   eval: boolean;
+  live: boolean;
 }
 
 class UsageError extends Error {}
@@ -57,6 +58,7 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     fuzzy: true,
     explain: false,
     eval: false,
+    live: false,
   };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i] ?? "";
@@ -67,6 +69,7 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     else if (arg === "--no-fuzzy") parsed.fuzzy = false;
     else if (arg === "--explain") parsed.explain = true;
     else if (arg === "--eval") parsed.eval = true;
+    else if (arg === "--live") parsed.live = true;
     else if (arg.startsWith("--")) throw new UsageError(`unknown option ${arg}`);
     else {
       words.push(arg);
@@ -150,7 +153,9 @@ const queryRun: Command = async (args, ctx) => {
   }
   try {
     if (parsed.eval) {
-      const report = await runEval(ctx.root, deps, parsed);
+      // The committed query vectors are why the eval scores without the endpoint; --live re-embeds.
+      const client = parsed.live ? undefined : offlineEmbed(ctx.root);
+      const report = await runEval(ctx.root, deps, parsed, client);
       for (const notice of report.notices) ctx.err(notice);
       if (ctx.json) ctx.out(JSON.stringify(report, null, 1));
       else printEval(ctx, report);

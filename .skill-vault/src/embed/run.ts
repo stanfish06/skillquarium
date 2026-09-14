@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { discoverSkills, readDescriptionForBuild, type SkillEntry } from "../catalog";
+import { discoverSkills, isInstallableExtra, readDescriptionForBuild, type SkillEntry } from "../catalog";
 import type { EmbedClient } from "./client";
 import {
   type Manifest,
@@ -99,7 +99,10 @@ export async function embedVault(
   client: EmbedClient,
   opts: EmbedOptions,
 ): Promise<EmbedResult> {
-  const entries = discoverSkills(root, { bundles: false, excludeTransient: true });
+  // The index is committed, so an optional extra installed locally must never enter it.
+  const entries = discoverSkills(root, { bundles: false, excludeTransient: true }).filter(
+    (e) => !isInstallableExtra(e.id),
+  );
   const manifest = readManifest(root);
   const removed = removedSkills(manifest, entries);
 
