@@ -1,17 +1,17 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2133,
+  "skills": 2134,
   "expert_profiles": 503,
-  "nodes": 2206,
+  "nodes": 2207,
   "edges": 15777,
   "generic_names_blocked": 32,
-  "tier1_edges": 4747,
-  "tier2_edges": 701,
-  "alias_edges": 4494,
+  "tier1_edges": 4745,
+  "tier2_edges": 702,
+  "alias_edges": 4490,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
-  "artifact_edges": 524,
+  "artifact_edges": 525,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
@@ -25,10 +25,10 @@
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2133,
-   "references": 12334,
+   "in_domain": 2134,
+   "references": 12332,
    "in_discipline": 599,
-   "touches": 524,
+   "touches": 525,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -26990,6 +26990,19 @@
    "deprecated": false
   },
   {
+   "id": "skillquarium",
+   "type": "Skill",
+   "label": "skillquarium",
+   "description": "Search this vault's 2,100+ skills and manage them with the skillquarium CLI. Use when looking for a skill to do something, when native description matching returns nothing useful, when you need every skill covering a topic rather than the single best match, when searching skill text for an exact string, or when adding, toggling, rebuilding, or updating skills in ~/.agents.",
+   "source": "skills/skillquarium/SKILL.md",
+   "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "skills-hub",
    "type": "Skill",
    "label": "skills-hub",
@@ -48812,15 +48825,6 @@
   {
    "src": "cellular-neuroscientist",
    "rel": "references",
-   "dst": "parasitologist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of parasitologist appears in cellular-neuroscientist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "cellular-neuroscientist",
-   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -59666,15 +59670,6 @@
   {
    "src": "data-engineer",
    "rel": "references",
-   "dst": "protobuf",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "protobuf named in data-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "data-engineer",
-   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -62766,15 +62761,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "deep-agents-memory",
-   "rel": "references",
-   "dst": "ecosystem-primer",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "deep-agents-memory named in ecosystem-primer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -68598,15 +68584,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "deep-agents-core named in ecosystem-primer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "ecosystem-primer",
-   "rel": "references",
-   "dst": "deep-agents-memory",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "deep-agents-memory named in ecosystem-primer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -83696,6 +83673,15 @@
   {
    "src": "harmonypy",
    "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "harmonypy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "harmonypy",
+   "rel": "references",
    "dst": "umap-learn",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -97388,7 +97374,7 @@
    "dst": "matlab-theming",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "matlab-theming named in matlab-build-app/SKILL.md body",
+   "justification": "matlab-build-app named in matlab-theming/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98450,7 +98436,7 @@
    "dst": "matlab-build-app",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "matlab-theming named in matlab-build-app/SKILL.md body",
+   "justification": "matlab-build-app named in matlab-theming/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -101529,15 +101515,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "run-tests named in migrate-xunit-to-mstest/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "migrate-xunit-to-mstest",
-   "rel": "references",
-   "dst": "writing-mstest-tests",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "writing-mstest-tests named in migrate-xunit-to-mstest/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -117822,15 +117799,6 @@
    "status": "accepted"
   },
   {
-   "src": "outlook-calendar",
-   "rel": "references",
-   "dst": "sharepoint",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "sharepoint named in outlook-calendar/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "outlook-calendar-daily-brief",
    "rel": "in_domain",
    "dst": "domain:comms-productivity",
@@ -119061,15 +119029,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "parasitologist",
-   "rel": "references",
-   "dst": "cellular-neuroscientist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of parasitologist appears in cellular-neuroscientist/SKILL.md",
    "status": "accepted"
   },
   {
@@ -127778,15 +127737,6 @@
   {
    "src": "protobuf",
    "rel": "references",
-   "dst": "data-engineer",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "protobuf named in data-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "protobuf",
-   "rel": "references",
    "dst": "databricks-zerobus-ingest",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -129609,6 +129559,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pydeseq2 named in seurat/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "pydeseq2",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pydeseq2 named in skillquarium/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -131571,6 +131530,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in sentry/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "query",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "query referenced in code/link context in skillquarium/SKILL.md",
    "status": "accepted"
   },
   {
@@ -140004,6 +139972,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scanpy named in single-cell-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scanpy",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in skillquarium/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -149621,15 +149598,6 @@
   {
    "src": "sharepoint",
    "rel": "references",
-   "dst": "outlook-calendar",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "sharepoint named in outlook-calendar/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "sharepoint",
-   "rel": "references",
    "dst": "outlook-calendar-meeting-prep",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -151146,6 +151114,60 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "in_domain",
+   "dst": "domain:vault-meta",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "harmonypy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "harmonypy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "pydeseq2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pydeseq2 named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "query referenced in code/link context in skillquarium/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "scanpy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "touches",
+   "dst": "artifact:fastq",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "FASTQ reads named in skillquarium/SKILL.md",
    "status": "accepted"
   },
   {
@@ -172215,15 +172237,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "migrate-mstest-v3-to-v4 named in writing-mstest-tests/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "writing-mstest-tests",
-   "rel": "references",
-   "dst": "migrate-xunit-to-mstest",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "writing-mstest-tests named in migrate-xunit-to-mstest/SKILL.md body",
    "status": "accepted"
   },
   {

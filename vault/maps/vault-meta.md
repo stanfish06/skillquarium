@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (35)
+## Skills (36)
 
 - [ask-matt](../notes/vault-meta/ask-matt.md) — Ask which skill or flow fits your situation
 - [auditing-skills](../notes/vault-meta/auditing-skills.md) — Use when checking skills for security or quality issues, reviewing audit results from skills.sh or Tessl, or remediating findings across published skills
@@ -45,6 +45,7 @@ created: 2026-06-13
 - [show-me](../notes/vault-meta/show-me.md) — Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts
 - [skill-builder](../notes/vault-meta/skill-builder.md) — Scaffold a new ClawBio skill from a spec file (JSON/YAML) or interactively — generates SKILL.md, Python skeleton, tests, and updates catalog.json
 - [skill-doctor](../notes/vault-meta/skill-doctor.md) — Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report
+- [skillquarium](../notes/vault-meta/skillquarium.md) — Search this vault's 2,100+ skills and manage them with the skillquarium CLI
 - [skills-hub](../notes/vault-meta/skills-hub.md) — Browse and install community skills from the BioClaw Skills Hub
 - [start](../notes/vault-meta/start.md) — Use when starting Zoom work
 - [template](../notes/vault-meta/template.md) — Canonical rules and HTML/CSS contract for the page chrome (head boilerplate, cover, table of contents, section block, sources-section wrapper, footer, outlook-badge, design tokens)...
