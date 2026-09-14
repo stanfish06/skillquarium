@@ -23,7 +23,8 @@ const commands: Record<string, () => Promise<{ run: Command; help: string }>> = 
   save: () => import("./toggle/cli").then((m) => m.save),
   load: () => import("./toggle/cli").then((m) => m.load),
   "pre-commit-reset": () => import("./toggle/cli").then((m) => m.preCommitReset),
-  // later tasks add: query, grep, embed, build, validate, install, update, overrides,
+  build: () => import("./build/command"),
+  // later tasks add: query, grep, embed, validate, install, update, overrides,
   // drift, soften, import, eval
 };
 
