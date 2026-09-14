@@ -43,7 +43,8 @@ test("a pattern with a colon survives the path:line:text split", async () => {
   expect(hits[0]?.text.trim()).toBe("Vary: HX-Request");
 });
 
-test("extra ripgrep flags are passed through", async () => {
+// rgArgs reach ripgrep itself, so without it the fff fallback answers and ignores them.
+test.skipIf(!Bun.which("rg"))("extra ripgrep flags are passed through", async () => {
   // -w makes `run` a whole word, which the line "Run harmonize() on PCA." only matches case-folded.
   expect((await grepSkills(root, "run", { rgArgs: ["-w"] })).length).toBe(2);
   expect((await grepSkills(root, "run", { rgArgs: ["-w", "--case-sensitive"] })).length).toBe(1);

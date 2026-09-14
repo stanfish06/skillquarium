@@ -35,6 +35,9 @@ jobs:
 
       - name: Install CLI dependencies
         run: bun install --frozen-lockfile --cwd .skill-vault
+      # skillquarium grep shells out to ripgrep; without it the tests exercise only the fallback.
+      - name: Install ripgrep
+        run: sudo apt-get install -y --no-install-recommends ripgrep
 
       - name: Test
         run: bun test --cwd .skill-vault
