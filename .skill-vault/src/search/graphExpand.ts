@@ -4,9 +4,29 @@ import { isSkill, neighbours, targets, type VaultGraph } from "./graph";
 import type { Completion, Ranked } from "./types";
 
 export const DIRECT_WHY = "matched the query directly";
+/** Prefix of a semantic pick's why; the rest of the string names the seed it was close to. */
+export const SIMILAR_WHY = "similar to";
 
 /** Neighbours a co_occurs_with hub would otherwise flood the result set with. */
 const CO_OCCURS_CAP = 4;
+
+/**
+ * Stage E's split of the k slots: direct matches first, the rest for anything expansion derived.
+ * Direct gets at most ceil(0.7k), or BM25 fills every slot whenever the query has strong lexical
+ * hits and expansion adds nothing.
+ */
+function directSlots(k: number): number {
+  return Math.ceil(k * 0.7);
+}
+
+/**
+ * How many of the derived slots the semantic expansion may claim: half, rounded up, so a seed's
+ * near-duplicates can never take the whole derived budget from the graph's own edges. At the
+ * default k=8 that is one slot out of two.
+ */
+export function similarityBudget(k: number): number {
+  return Math.ceil((k - directSlots(k)) / 2);
+}
 
 export interface Expanded {
   id: string;
@@ -17,11 +37,15 @@ export interface Expanded {
 /**
  * Every traversal is sorted. The adjacency is sets and derived picks share a handful of
  * constant scores, so an unsorted traversal leaks set iteration order into the answer.
+ *
+ * `similar` is the vector expansion's offers: same shape and same stage as the graph's own edges,
+ * so a skill reached both ways keeps whichever score is higher and the `why` that earned it.
  */
 export function expand(
   graph: VaultGraph,
   seeds: readonly Ranked[],
   k: number,
+  similar: readonly Expanded[] = [],
 ): { ranked: Expanded[]; completions: Completion[] } {
   const picks = new Map<string, { score: number; why: string }>();
 
@@ -50,6 +74,10 @@ export function expand(
       offer(co, 0.5, `usually used together with ${s}`);
     }
   }
+  // Cosine neighbours of the seeds, offered before stage D so they can complete a recipe the way a
+  // chains_to neighbour can. Sliced here rather than trusted from the caller: the budget belongs
+  // with the rest of stage E's arithmetic.
+  for (const s of similar.slice(0, similarityBudget(k))) offer(s.id, s.score, s.why);
 
   // --- D set-complete: the COMP fix -------------------------------------
   const chosen = new Set(picks.keys());
@@ -66,12 +94,10 @@ export function expand(
   }
 
   // --- E order + budget -------------------------------------------------
-  // Direct matches get at most ceil(0.7k); the rest of the budget is the graph's, or BM25
-  // fills every slot whenever the query has strong lexical hits and stage D adds nothing.
   const entries: Expanded[] = [...picks].map(([id, pick]) => ({ id, ...pick }));
   const direct = entries.filter((e) => e.why === DIRECT_WHY).sort(byScoreDesc);
   const derived = entries.filter((e) => e.why !== DIRECT_WHY).sort(byScoreDesc);
-  const ranked = direct.slice(0, Math.ceil(k * 0.7));
+  const ranked = direct.slice(0, directSlots(k));
   ranked.push(...derived.slice(0, k - ranked.length));
   if (ranked.length < k) {
     const taken = new Set(ranked.map((e) => e.id));

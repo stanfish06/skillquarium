@@ -1,18 +1,27 @@
-// The hybrid query: BM25, fff path fuzz and semantic vectors fused by rank, then graph-expanded.
+// The hybrid query: BM25 and fff path fuzz fused by rank, then expanded through the knowledge
+// graph and through cosine similarity between the stored skill vectors. Both signals are
+// model-free and the query text is never embedded, so a dead endpoint costs the query nothing.
 import { join } from "node:path";
-import type { EmbedClient } from "../embed/client";
 import { EMBED_DIR } from "../embed/store";
 import { indexFor } from "./bm25";
 import type { FuzzyRanker } from "./fff";
 import { rrf, type Signal, type SignalName } from "./fusion";
 import type { VaultGraph } from "./graph";
-import { DIRECT_WHY, expand } from "./graphExpand";
+import { DIRECT_WHY, type Expanded, expand, SIMILAR_WHY, similarityBudget } from "./graphExpand";
 import { retrieve, shapeResults } from "./retrieve";
 import type { Completion, QueryResult, Ranked } from "./types";
-import { semanticRank, type VectorIndex } from "./vectors";
+import { nearestTo, type VectorIndex } from "./vectors";
 
 /** The order signal names are listed in, everywhere they are listed. */
-const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy", "semantic"];
+const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy"];
+
+/**
+ * Cosine a neighbour has to clear to be worth a result slot. Measured over the committed index,
+ * 0.80 admits a median of 4 skills out of 2,133 for a seed that has relatives at all and nothing
+ * whatsoever for 27% of seeds, which is the behaviour wanted: an isolated skill expands to nothing
+ * rather than to the least distant thing in the vault.
+ */
+const SIMILARITY_FLOOR = 0.8;
 
 export interface QueryOptions {
   k: number;
@@ -25,7 +34,6 @@ export interface QueryOptions {
 export interface QueryDeps {
   graph: VaultGraph;
   vectors: () => VectorIndex | null;
-  embed: () => EmbedClient;
   fuzzy: () => FuzzyRanker;
   rrfK: number;
   weights: Record<SignalName, number>;
@@ -47,13 +55,14 @@ export interface QueryRun {
 export interface Gathered {
   signals: Signal[];
   notices: string[];
-  /** The vector index if one was loaded, for the stale tag. */
+  /** The vector index if one was loaded and semantic expansion is on; null skips the expansion. */
   index: VectorIndex | null;
 }
 
 /**
- * Runs every enabled signal over the same query text, each returning 2k candidates. A signal that
- * cannot run becomes a notice and drops out of the fusion; the query never fails because of one.
+ * Runs every enabled signal over the same query text, each returning 2k candidates, and loads the
+ * vector index the expansion will need. A signal that cannot run becomes a notice and drops out of
+ * the fusion; the query never fails because of one.
  */
 export async function gatherSignals(
   root: string,
@@ -78,34 +87,9 @@ export async function gatherSignals(
     index = deps.vectors();
     if (index === null) {
       notices.push(
-        `semantic search unavailable: no vector index at ${join(root, EMBED_DIR)}; ` +
+        `semantic expansion unavailable: no vector index at ${join(root, EMBED_DIR)}; ` +
           "run 'skillquarium embed' to build it",
       );
-    } else {
-      // An unreachable or erroring endpoint drops the signal the way a missing index does: a fresh
-      // clone has never pointed at one, and a query must still answer from the other signals. The
-      // client names the endpoint in its error, so the notice says which host failed.
-      let vector: Float32Array | undefined;
-      let failure: string | null = null;
-      try {
-        [vector] = await deps.embed().embed([text]);
-      } catch (e) {
-        failure = e instanceof Error ? e.message : String(e);
-      }
-      if (failure !== null) notices.push(`semantic search unavailable: ${failure}`);
-      else if (vector === undefined)
-        notices.push("semantic search unavailable: the endpoint returned no vector");
-      else {
-        const results = semanticRank(index, vector, width);
-        // A width the index was not built at is a changed endpoint model, not a bad query.
-        if (results === null) {
-          notices.push(
-            `semantic search unavailable: the endpoint returned ${vector.length}-dimension vectors ` +
-              `but the index at ${join(root, EMBED_DIR)} holds ${index.dim}-dimension rows; ` +
-              "run 'skillquarium embed --force' to rebuild it",
-          );
-        } else signals.push({ name: "semantic", results });
-      }
     }
   }
 
@@ -113,19 +97,53 @@ export async function gatherSignals(
 }
 
 /**
- * Fused seeds through Task 7's graph expansion. Graph-derived picks carry fixed scores in
- * [0.4, 0.6] while a fused score is about 1/rrfK, so seeds are remapped onto (1, 2] in fused
- * order: any rrfK and any weights then still leave every direct hit above every derived one.
+ * One neighbour per seed, taken in seed order until the budget is full. The seeds are the best
+ * answer the model-free signals have, so the skill closest to the best of them is the expansion
+ * worth a slot; a seed with nothing above the floor contributes nothing and the next seed gets
+ * the slot instead. One per seed rather than several keeps a single dense cluster — scanpy's
+ * nearest six are all single-cell skills — from spending the whole budget on restatements.
+ *
+ * Scores are the raw cosine. Seeds were remapped onto (1, 2] and a cosine cannot reach 1, so a
+ * skill that is already a direct hit keeps its direct score and its `why` when its own expansion
+ * offers it back.
+ */
+export function similarToSeeds(index: VectorIndex, seeds: readonly Ranked[], budget: number): Expanded[] {
+  const offers: Expanded[] = [];
+  if (budget <= 0) return offers;
+  const skip = new Set(seeds.map((s) => s.id));
+  for (const seed of seeds) {
+    const near = nearestTo(index, seed.id, SIMILARITY_FLOOR, skip);
+    if (near === null) continue;
+    skip.add(near.id);
+    // The cosine rides in the why rather than in --explain: it is the only thing that says how
+    // close "close" was, and the CLI prints a derived pick's why as its label either way.
+    offers.push({
+      id: near.id,
+      score: near.score,
+      why: `${SIMILAR_WHY} ${seed.id} (cosine ${near.score.toFixed(2)})`,
+    });
+    if (offers.length === budget) break;
+  }
+  return offers;
+}
+
+/**
+ * Fused seeds through Task 7's graph expansion, plus the vector expansion off the same seeds.
+ * Derived picks carry scores in [0.4, 0.6] from the graph and in [0.8, 1) from cosine, while a
+ * fused score is about 1/rrfK, so seeds are remapped onto (1, 2] in fused order: any rrfK and any
+ * weights then still leave every direct hit above every derived one.
  */
 export function expandFused(
   deps: QueryDeps,
   signals: Signal[],
   k: number,
+  index: VectorIndex | null,
 ): { results: QueryResult[]; completions: Completion[]; fused: Ranked[] } {
   const fused = rrf(signals, deps.rrfK, deps.weights);
   const top = fused[0]?.score ?? 1;
   const seeds: Ranked[] = fused.slice(0, k * 2).map((r) => ({ ...r, score: 1 + r.score / top }));
-  const { ranked, completions } = expand(deps.graph, seeds, k);
+  const similar = index === null ? [] : similarToSeeds(index, seeds, similarityBudget(k));
+  const { ranked, completions } = expand(deps.graph, seeds, k, similar);
   return { results: shapeResults(deps.graph, ranked), completions, fused };
 }
 
@@ -193,7 +211,7 @@ export async function runQuery(
   }
 
   const { signals, notices, index } = await gatherSignals(root, text, opts, deps);
-  const { results, completions, fused } = expandFused(deps, signals, opts.k);
+  const { results, completions, fused } = expandFused(deps, signals, opts.k, index);
   const d: Decoration = {
     ranks: ranksById(signals),
     index,

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, test } from "bun:test"
-import { type BoxRenderable, type ScrollBoxRenderable, type TextRenderable } from "@opentui/core"
+import type { BoxRenderable, ScrollBoxRenderable, TextRenderable } from "@opentui/core"
 import { createTestRenderer, type TestRendererSetup } from "@opentui/core/testing"
 
 import { SkillquariumApp, buildBenchItems, filterSkills, fuzzyScore } from "./app"

@@ -222,7 +222,7 @@ const config: Config = {
   skillsCliVersion: "1.5.23",
   claudeSkillsDir: "/nonexistent",
   embed: { url: "http://127.0.0.1:1", model: null, batchSize: 16, timeoutMs: 100, retries: 0 },
-  query: { k: 8, rrfK: 60, weights: { lexical: 1, fuzzy: 1, semantic: 1 } },
+  query: { k: 8, rrfK: 60, weights: { lexical: 1, fuzzy: 1 } },
 };
 
 function context(): Context {

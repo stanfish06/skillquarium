@@ -12,15 +12,9 @@ afterAll(() => {
   for (const c of cleanups) c();
 });
 
-function capture(): { out: string[]; err: string[]; overrides: ContextOverrides } {
-  const out: string[] = [];
-  const err: string[] = [];
-  return { out, err, overrides: { out: (l) => out.push(l), err: (l) => err.push(l) } };
-}
-
 /**
  * The kg fixture vault with a graph and an embedding index on disk, and an embed endpoint pointed
- * at a closed port so the semantic signal's first request is refused rather than timing out.
+ * at a closed port: nothing in the query path may want it.
  */
 function vaultWithDeadEndpoint(): string {
   const fixture = buildFixtureGraph();
@@ -46,13 +40,44 @@ function vaultWithDeadEndpoint(): string {
   return fixture.root;
 }
 
-test("query exits 0 with results and a notice when the embedding endpoint is unreachable", async () => {
+function capture(): { out: string[]; err: string[]; overrides: ContextOverrides } {
+  const out: string[] = [];
+  const err: string[] = [];
+  return { out, err, overrides: { out: (l) => out.push(l), err: (l) => err.push(l) } };
+}
+
+/** Runs argv with fetch replaced by a thrower, so any network call fails the test outright. */
+async function withoutNetwork(argv: string[], c: ReturnType<typeof capture>): Promise<number> {
+  const real = globalThis.fetch;
+  const thrower = (input: RequestInfo | URL): never => {
+    throw new Error(`the query made a network request to ${String(input)}`);
+  };
+  globalThis.fetch = Object.assign(thrower, { preconnect: real.preconnect });
+  try {
+    return await main(argv, c.overrides);
+  } finally {
+    globalThis.fetch = real;
+  }
+}
+
+test("query answers with an index on disk and never contacts the endpoint", async () => {
   const root = vaultWithDeadEndpoint();
   const c = capture();
 
-  expect(await main(["--root", root, "query", "fastq reads", "--k", "3", "--no-fuzzy"], c.overrides)).toBe(0);
+  expect(await withoutNetwork(["--root", root, "query", "fastq reads", "--k", "3", "--no-fuzzy"], c)).toBe(0);
   expect(c.out.some((l) => l.includes("alpha"))).toBe(true);
-  const notice = c.err.find((l) => l.startsWith("semantic search unavailable:"));
-  expect(notice).toBeDefined();
-  expect(notice).toContain("http://127.0.0.1:1/v1/embeddings");
+  expect(c.err).toEqual([]);
+}, 20_000);
+
+test("query answers without an index at all, as one notice", async () => {
+  const fixture = buildFixtureGraph();
+  cleanups.push(fixture.cleanup);
+  writeGraph(fixture.root, fixture.graph);
+  const c = capture();
+
+  const argv = ["--root", fixture.root, "query", "fastq reads", "--k", "3", "--no-fuzzy"];
+  expect(await withoutNetwork(argv, c)).toBe(0);
+  expect(c.out.some((l) => l.includes("alpha"))).toBe(true);
+  expect(c.err).toHaveLength(1);
+  expect(c.err[0]).toContain("semantic expansion unavailable");
 }, 20_000);
