@@ -10,4 +10,4 @@ Generates code with and without a skill in the system prompt, gates it, scores t
 ./skillquarium eval runs
 ```
 
-Results: `runs/<id>/report.md`; committed rounds in `archive/`. Pairs, model, reps: `src/config.ts`. Skills under test: `skills/<id>/skill.ts`. Tasks: `tasks/<id>/`. Language gates and benches: `bench/`.
+`runs/` is gitignored; a round worth keeping is copied into `archive/`.
