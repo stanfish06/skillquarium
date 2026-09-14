@@ -1,14 +1,16 @@
-import { collapseWhitespace } from "../catalog";
+import { collapseWhitespace, MetadataError } from "../catalog";
 import type { Command, Context } from "../cli";
 import { type Product, ToggleService } from "./service";
-import { pyJsonDumps, type Skill } from "./state";
+import { isCodedError, pyJsonDumps, type Skill } from "./state";
 
 interface CommandModule {
   run: Command;
   help: string;
 }
 
-// Toggle commands report failures as `skill-toggle: <message>` with status 2 (skill_toggle.py main).
+// Toggle commands report failures as `skill-toggle: <message>` with status 2, for the errors
+// Python's main catches -- (MetadataError, OSError) plus argparse usage errors. Anything else is a
+// bug and propagates to main's handler, which reports it as `skillquarium <command>: ...` and exits 1.
 function guarded(
   help: string,
   body: (args: string[], ctx: Context, service: ToggleService) => void,
@@ -20,7 +22,8 @@ function guarded(
         body(args, ctx, new ToggleService(ctx.root));
         return 0;
       } catch (e) {
-        ctx.err(`skill-toggle: ${e instanceof Error ? e.message : String(e)}`);
+        if (!(e instanceof MetadataError || e instanceof UsageError || isCodedError(e))) throw e;
+        ctx.err(`skill-toggle: ${e.message}`);
         return 2;
       }
     },

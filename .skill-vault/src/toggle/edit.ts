@@ -161,12 +161,16 @@ export function atomicWrite(path: string, text: string, mode: number | null): vo
   const dir = dirname(path);
   mkdirSync(dir, { recursive: true });
   const temporary = join(dir, `.${basename(path)}.${randomBytes(6).toString("hex")}`);
+  // Only ever unlink a temp file this call created and has not yet renamed away.
+  let created = false;
   try {
     writeFileSync(temporary, text, { flag: "wx", mode: 0o600 });
+    created = true;
     if (mode !== null) chmodSync(temporary, mode & 0o7777);
     renameSync(temporary, path);
+    created = false;
   } finally {
-    rmSync(temporary, { force: true });
+    if (created) rmSync(temporary, { force: true });
   }
 }
 

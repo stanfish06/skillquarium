@@ -98,9 +98,8 @@ export function loadSkill(directory: string, category = "uncategorized"): Skill 
       error: null,
     };
   } catch (e) {
-    // Python catches (MetadataError, OSError, UnicodeError): metadata, fs (`code`-bearing) and
-    // TextDecoder errors land in `error`; anything else is a bug and propagates.
-    if (!(e instanceof MetadataError || isFsError(e) || e instanceof TypeError)) throw e;
+    // Python catches (MetadataError, OSError, UnicodeError); anything else is a bug and propagates.
+    if (!(e instanceof MetadataError || isCodedError(e))) throw e;
     return {
       key,
       name: key,
@@ -115,7 +114,11 @@ export function loadSkill(directory: string, category = "uncategorized"): Skill 
   }
 }
 
-function isFsError(e: unknown): e is Error & { code: string } {
+/**
+ * Errors carrying a Node `code`: fs failures (Python's OSError) and the fatal TextDecoder's
+ * ERR_ENCODING_INVALID_ENCODED_DATA, a TypeError that stands in for Python's UnicodeError.
+ */
+export function isCodedError(e: unknown): e is Error & { code: string } {
   return e instanceof Error && typeof (e as { code?: unknown }).code === "string";
 }
 
@@ -140,6 +143,7 @@ export function discover(root: string): Skill[] {
   const entries = discoverSkills(resolved, { bundles: false, excludeTransient: true });
   const categories = wrapperCategories(resolved);
   const skills = entries.map((entry) => loadSkill(entry.dir, categories.get(entry.id) ?? "uncategorized"));
+  // toLowerCase stands in for Python's casefold, which agrees with it on this vault's ASCII ids.
   return skills.sort((a, b) => {
     const an = a.name.toLowerCase();
     const bn = b.name.toLowerCase();

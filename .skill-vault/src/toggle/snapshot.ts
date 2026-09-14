@@ -31,10 +31,13 @@ export interface SnapshotPayload {
   skills: Record<string, { claude_enabled: boolean | null; codex_enabled: boolean | null }>;
 }
 
-/** Skills with a metadata error are left out so `load` never writes guessed flags. */
+/**
+ * Skills with a metadata error are left out so `load` never writes guessed flags. Keys keep
+ * discover order (name, then key), which is the insertion order Python's dict serializes.
+ */
 export function snapshotPayload(root: string, skills: Skill[]): SnapshotPayload {
   const states: SnapshotPayload["skills"] = {};
-  for (const skill of [...skills].sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))) {
+  for (const skill of skills) {
     if (skill.error === null) {
       states[skill.key] = { claude_enabled: skill.claude_enabled, codex_enabled: skill.codex_enabled };
     }

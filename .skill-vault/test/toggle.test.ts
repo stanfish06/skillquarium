@@ -1,17 +1,29 @@
 import { afterAll, describe, expect, test } from "bun:test";
 import {
+  chmodSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
+  readdirSync,
   readFileSync,
   rmSync,
+  statSync,
   symlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { type ContextOverrides, main } from "../src/cli";
-import { setSkillEnabled, setSkillProductStates, toggleSkill } from "../src/toggle/edit";
+import {
+  atomicWrite,
+  captureOriginal,
+  restoreOriginalFiles,
+  setSkillEnabled,
+  setSkillProductStates,
+  toggleSkill,
+  transformOpenaiYamlField,
+  transformSkillMdField,
+} from "../src/toggle/edit";
 import { preCommitReset } from "../src/toggle/reset";
 import { loadSnapshot, saveSnapshot } from "../src/toggle/snapshot";
 import { discover, loadSkill } from "../src/toggle/state";
@@ -249,5 +261,230 @@ describe("golden parity with skill_toggle.py", () => {
     const expected = readFileSync(join(import.meta.dir, "fixtures", "list.golden.tsv"), "utf8").split("\n");
     expected.pop();
     expect(c.out).toEqual(expected);
+  });
+});
+
+/** Leftover `.SKILL.md.<hex>` / `.openai.yaml.<hex>` temp files from an interrupted atomicWrite. */
+function tempFiles(dir: string): string[] {
+  return readdirSync(dir).filter((name) => /^\.(SKILL\.md|openai\.yaml)\./.test(name));
+}
+
+describe("error classification", () => {
+  test("invalid UTF-8 in SKILL.md becomes an error row, not a throw", () => {
+    const root = tmp();
+    const directory = join(root, "skills", "binary");
+    mkdirSync(directory, { recursive: true });
+    writeFileSync(join(directory, "SKILL.md"), Buffer.from([0x2d, 0x2d, 0x2d, 0x0a, 0xff, 0xfe, 0x0a]));
+    const skill = loadSkill(directory);
+    expect(skill.state).toBe("error");
+    expect(skill.claude_enabled).toBeNull();
+    expect(skill.error).toContain("not valid for encoding utf-8");
+  });
+
+  test("metadata and fs errors print skill-toggle and exit 2", async () => {
+    const root = tmp();
+    makeSkill(root, "alpha");
+    const unknown = capture();
+    expect(await main(["--root", root, "preview", "nope"], unknown.overrides)).toBe(2);
+    expect(unknown.err).toEqual(["skill-toggle: unknown skill: nope"]);
+
+    // A snapshot path whose parent is a file: mkdir fails with a coded fs error (Python's OSError).
+    writeFileSync(join(root, "blocker"), "not a directory\n");
+    const fs = capture();
+    expect(await main(["--root", root, "save", join(root, "blocker", "snap.json")], fs.overrides)).toBe(2);
+    expect(fs.err[0]).toStartWith("skill-toggle: ");
+  });
+
+  test("an unexpected error propagates to the router instead of exiting 2", async () => {
+    const root = tmp();
+    makeSkill(root, "alpha");
+    const err: string[] = [];
+    const status = await main(["--root", root, "list"], {
+      out: () => {
+        throw new Error("boom");
+      },
+      err: (l) => err.push(l),
+    });
+    expect(status).toBe(1);
+    expect(err).toEqual(["skillquarium list: boom"]);
+  });
+});
+
+describe("rollback and atomic writes", () => {
+  test("a failed second write rolls the first file back byte-for-byte", () => {
+    const root = tmp();
+    const directory = makeSkill(root, "alpha");
+    const skillPath = join(directory, "SKILL.md");
+    const original = read(skillPath);
+    // `agents` as a file makes the openai.yaml write fail after SKILL.md has been rewritten.
+    writeFileSync(join(directory, "agents"), "not a directory\n");
+
+    expect(() => setSkillProductStates(loadSkill(directory), { claude: false, codex: false })).toThrow();
+    expect(read(skillPath)).toBe(original);
+    expect(tempFiles(directory)).toEqual([]);
+    expect(loadSkill(directory).claude_enabled).toBe(true);
+  });
+
+  test("loadSnapshot restores rewritten and newly created files when one entry is invalid", () => {
+    const root = tmp();
+    const alpha = makeSkill(root, "alpha");
+    makeSkill(root, "zeta");
+    const skillPath = join(alpha, "SKILL.md");
+    const original = read(skillPath);
+    const snapshot = saveSnapshot(root);
+    writeFileSync(
+      snapshot,
+      JSON.stringify({
+        schema_version: 1,
+        saved_at: "2026-01-01T00:00:00+00:00",
+        root,
+        skills: {
+          alpha: { claude_enabled: false, codex_enabled: false },
+          zeta: { claude_enabled: "nope", codex_enabled: true },
+        },
+      }),
+    );
+
+    expect(() => loadSnapshot(root)).toThrow(`${snapshot}: invalid state for zeta`);
+    expect(read(skillPath)).toBe(original);
+    expect(existsSync(join(alpha, "agents"))).toBe(false);
+    expect(tempFiles(alpha)).toEqual([]);
+    expect(loadSkill(alpha).state).toBe("enabled");
+  });
+
+  test("restoreOriginalFiles rewrites captured files and removes created ones", () => {
+    const root = tmp();
+    const directory = makeSkill(root, "alpha");
+    const skillPath = join(directory, "SKILL.md");
+    chmodSync(skillPath, 0o640);
+    const originals = [captureOriginal(skillPath), captureOriginal(join(directory, "agents", "openai.yaml"))];
+    const before = read(skillPath);
+
+    setSkillProductStates(loadSkill(directory), { claude: false, codex: false });
+    expect(existsSync(join(directory, "agents", "openai.yaml"))).toBe(true);
+
+    restoreOriginalFiles(originals);
+    expect(read(skillPath)).toBe(before);
+    expect(statSync(skillPath).mode & 0o777).toBe(0o640);
+    // The created file goes, and so does the agents/ directory it was the only entry of.
+    expect(existsSync(join(directory, "agents"))).toBe(false);
+  });
+
+  test("preCommitReset leaves no temp files when a write fails", () => {
+    const root = tmp();
+    const first = makeSkill(root, "aaa", { claude: true });
+    const second = makeSkill(root, "zzz", { claude: true });
+    commitFixture(root);
+    // A read-only skill directory fails the second SKILL.md rewrite. Restoring that same path
+    // fails too, as it does in Python, so only the temp-file cleanup is asserted here.
+    chmodSync(second, 0o500);
+    try {
+      expect(() => preCommitReset(root)).toThrow();
+      expect(tempFiles(first)).toEqual([]);
+      expect(tempFiles(second)).toEqual([]);
+    } finally {
+      chmodSync(second, 0o700);
+    }
+  });
+
+  test("atomicWrite keeps the original file mode", () => {
+    const root = tmp();
+    const directory = makeSkill(root, "alpha");
+    const skillPath = join(directory, "SKILL.md");
+    chmodSync(skillPath, 0o640);
+
+    atomicWrite(skillPath, "replaced\n", statSync(skillPath).mode);
+    expect(read(skillPath)).toBe("replaced\n");
+    expect(statSync(skillPath).mode & 0o777).toBe(0o640);
+
+    // The same mode survives a real toggle, which reads it back off the file it is rewriting.
+    writeFileSync(skillPath, "---\nname: alpha\n---\n");
+    chmodSync(skillPath, 0o640);
+    setSkillProductStates(loadSkill(directory), { claude: false });
+    expect(statSync(skillPath).mode & 0o777).toBe(0o640);
+  });
+});
+
+describe("line endings and metadata errors", () => {
+  test("a CRLF SKILL.md keeps CRLF through disable and enable", () => {
+    const root = tmp();
+    const directory = join(root, "skills", "crlf");
+    mkdirSync(directory, { recursive: true });
+    const skillPath = join(directory, "SKILL.md");
+    writeFileSync(skillPath, "---\r\nname: crlf\r\ndescription: crlf\r\n---\r\n\r\n# crlf\r\n");
+
+    setSkillEnabled(loadSkill(directory), false);
+    let text = read(skillPath);
+    expect(text).toContain("disable-model-invocation: true\r\n");
+    expect(text.replaceAll("\r\n", "")).not.toContain("\n");
+
+    setSkillEnabled(loadSkill(directory), true);
+    text = read(skillPath);
+    expect(text).toContain("disable-model-invocation: false\r\n");
+    expect(text.replaceAll("\r\n", "")).not.toContain("\n");
+    // The generated yaml is always LF, as Python's template is.
+    expect(read(join(directory, "agents", "openai.yaml"))).not.toContain("\r");
+  });
+
+  test("duplicate and non-boolean fields surface as path-prefixed metadata errors", () => {
+    const root = tmp();
+    const directory = join(root, "skills", "broken");
+    mkdirSync(join(directory, "agents"), { recursive: true });
+    const skillPath = join(directory, "SKILL.md");
+    const head = "---\nname: broken\ndescription: broken\n";
+    writeFileSync(skillPath, `${head}disable-model-invocation: true\ndisable-model-invocation: false\n---\n`);
+    writeFileSync(join(directory, "agents", "openai.yaml"), "policy:\n  allow_implicit_invocation: true\n");
+
+    const duplicate = loadSkill(directory);
+    expect(duplicate.state).toBe("error");
+    expect(duplicate.error).toBe(`${skillPath}: duplicate disable-model-invocation fields`);
+    // An error skill cannot be edited: the message is re-raised rather than guessed at.
+    expect(() => setSkillEnabled(duplicate, true)).toThrow(duplicate.error ?? "");
+
+    writeFileSync(skillPath, `${head}disable-model-invocation: maybe\n---\n`);
+    expect(loadSkill(directory).error).toBe(`${skillPath}: disable-model-invocation must be true or false`);
+
+    writeFileSync(skillPath, `${head}---\n`);
+    const openaiPath = join(directory, "agents", "openai.yaml");
+    writeFileSync(
+      openaiPath,
+      "policy:\n  allow_implicit_invocation: true\n  allow_implicit_invocation: false\n",
+    );
+    expect(loadSkill(directory).error).toBe(`${openaiPath}: duplicate allow_implicit_invocation fields`);
+  });
+
+  test("transforms reject duplicate fields, duplicate policy blocks and inline policy", () => {
+    const path = "/tmp/openai.yaml";
+    expect(() => transformSkillMdField("---\na: 1\n---\n", path, true)).not.toThrow();
+    expect(() =>
+      transformSkillMdField(
+        "---\ndisable-model-invocation: true\ndisable-model-invocation: false\n---\n",
+        path,
+        null,
+      ),
+    ).toThrow(`${path}: duplicate disable-model-invocation fields`);
+    expect(() => transformSkillMdField("---\ndisable-model-invocation: maybe\n---\n", path, true)).toThrow(
+      `${path}: disable-model-invocation must be true or false`,
+    );
+    expect(() => transformSkillMdField("no frontmatter\n", path, true)).toThrow(
+      `${path}: SKILL.md has no YAML frontmatter`,
+    );
+
+    expect(() =>
+      transformOpenaiYamlField(
+        "policy:\n  allow_implicit_invocation: true\n  allow_implicit_invocation: false\n",
+        path,
+        null,
+      ),
+    ).toThrow(`${path}: duplicate allow_implicit_invocation fields`);
+    expect(() => transformOpenaiYamlField("policy:\n  a: 1\npolicy:\n  b: 2\n", path, true)).toThrow(
+      `${path}: duplicate policy blocks`,
+    );
+    expect(() => transformOpenaiYamlField("policy: {products: [codex]}\n", path, true)).toThrow(
+      `${path}: inline policy mappings are not supported`,
+    );
+    expect(() =>
+      transformOpenaiYamlField("policy:\n  allow_implicit_invocation: maybe\n", path, true),
+    ).toThrow(`${path}: allow_implicit_invocation must be true or false`);
   });
 });
