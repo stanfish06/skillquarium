@@ -14,3 +14,9 @@ export interface QueryResult {
   source: string;
   domains: string[];
 }
+
+/** A skill that set-completion pulled in, with the label of the recipe that pulled it. */
+export interface Completion {
+  skill: string;
+  recipe: string;
+}

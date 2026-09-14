@@ -1,7 +1,7 @@
 // Stages C, D and E of query.py retrieve(): traversal, set-completion, order and budget.
 import { pySorted } from "../kg/ngram";
 import { isSkill, neighbours, targets, type VaultGraph } from "./graph";
-import type { Ranked } from "./types";
+import type { Completion, Ranked } from "./types";
 
 export const DIRECT_WHY = "matched the query directly";
 
@@ -22,7 +22,7 @@ export function expand(
   graph: VaultGraph,
   seeds: readonly Ranked[],
   k: number,
-): { ranked: Expanded[]; completions: string[] } {
+): { ranked: Expanded[]; completions: Completion[] } {
   const picks = new Map<string, { score: number; why: string }>();
 
   // Re-setting an existing key keeps its insertion position, which is the tie-break in stage E.
@@ -53,14 +53,14 @@ export function expand(
 
   // --- D set-complete: the COMP fix -------------------------------------
   const chosen = new Set(picks.keys());
-  const completions: string[] = [];
+  const completions: Completion[] = [];
   for (const recipe of graph.recipes) {
     const members = new Set(recipe.members);
     let hits = 0;
     for (const member of members) if (chosen.has(member)) hits += 1;
     if (hits < 2) continue;
     for (const member of recipe.steps.length ? recipe.steps : pySorted(members)) {
-      if (!picks.has(member)) completions.push(member);
+      if (!picks.has(member)) completions.push({ skill: member, recipe: recipe.label });
       offer(member, 0.55, `completes the '${recipe.label}' workflow`);
     }
   }

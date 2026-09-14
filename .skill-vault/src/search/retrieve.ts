@@ -2,8 +2,8 @@
 import { sliceCodePoints } from "../kg/ngram";
 import { indexFor } from "./bm25";
 import { domainsOf, type VaultGraph } from "./graph";
-import { expand } from "./graphExpand";
-import type { QueryResult } from "./types";
+import { type Expanded, expand } from "./graphExpand";
+import type { Completion, QueryResult } from "./types";
 
 /** Longest description the result carries; query.py slices code points, not UTF-16 units. */
 const DESCRIPTION_CHARS = 160;
@@ -12,9 +12,14 @@ export function retrieve(
   graph: VaultGraph,
   query: string,
   k = 8,
-): { results: QueryResult[]; completions: string[] } {
+): { results: QueryResult[]; completions: Completion[] } {
   const { ranked, completions } = expand(graph, indexFor(graph).topK(query, k), k);
-  const results = ranked.map(({ id, score, why }) => {
+  return { results: shapeResults(graph, ranked), completions };
+}
+
+/** query.py L190-205: the printed record for each expanded pick. Shared with the hybrid query. */
+export function shapeResults(graph: VaultGraph, ranked: readonly Expanded[]): QueryResult[] {
+  return ranked.map(({ id, score, why }) => {
     const node = graph.nodes.get(id);
     return {
       skill: id,
@@ -25,7 +30,6 @@ export function retrieve(
       domains: domainsOf(graph, id),
     };
   });
-  return { results, completions };
 }
 
 /**
