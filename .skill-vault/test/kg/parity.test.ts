@@ -78,7 +78,10 @@ function expectSameKeyed<T>(
   }
 }
 
-describe("build_kg parity with the Python oracle", () => {
+// The oracle is frozen at the skills/ tree the port was verified against, while the daily upstream
+// sync keeps changing that tree. Run it on demand (SKILLQUARIUM_PARITY=1 bun test test/kg/parity)
+// when touching src/kg; leaving it on in CI would fail on skill churn, not on a port regression.
+describe.skipIf(!process.env.SKILLQUARIUM_PARITY)("build_kg parity with the Python oracle", () => {
   const expected = JSON.parse(readFileSync(FIXTURE, "utf8")) as Graph;
   const actual = buildGraph(ROOT);
 
