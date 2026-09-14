@@ -1,10 +1,22 @@
-import { expect, test } from "bun:test";
+import { afterAll, expect, test } from "bun:test";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
-import type { EmbedIndex } from "../../src/embed/store";
-import { readEvalSet, runEval } from "../../src/search/evalSet";
+import { loadConfig } from "../../src/config";
+import { type EmbedIndex, type Manifest, readManifest } from "../../src/embed/store";
+import { graphPath } from "../../src/kg/write";
+import {
+  cachedEmbed,
+  offlineEmbed,
+  type QueryVectors,
+  readEvalSet,
+  readQueryVectors,
+  runEval,
+  staleQueryVectors,
+} from "../../src/search/evalSet";
+import { destroyFinder, type FuzzyRanker, fffRanker } from "../../src/search/fff";
 import { loadGraph } from "../../src/search/graph";
 import type { QueryDeps, QueryOptions } from "../../src/search/query";
+import { loadVectorIndex } from "../../src/search/vectors";
 
 const ROOT = resolve(import.meta.dir, "../../..");
 const FIXTURE = resolve(import.meta.dir, "../fixtures/graph.python.json");
@@ -102,4 +114,103 @@ test("the per-query rows report what the fused pipeline actually returned", asyn
     expect(row.recall).toBe(row.expect.filter((id) => row.final.includes(id)).length / row.expect.length);
   }
   expect(report.notices).toEqual([]);
+});
+
+// --- the offline path: committed query vectors against the committed index ------------------
+
+const manifest = readManifest(ROOT);
+const cache = readQueryVectors(ROOT);
+
+test("the cached query vectors cover every eval query and match the committed index", () => {
+  expect(manifest).not.toBeNull();
+  expect(cache.model).toBe(manifest?.model ?? "");
+  expect(cache.dim).toBe(manifest?.dim ?? 0);
+  expect(Object.keys(cache.vectors).length).toBe(rows.length);
+  for (const row of rows) {
+    const vector = cache.vectors[row.query];
+    expect(vector?.length).toBe(cache.dim);
+  }
+});
+
+test("a cache built from another model or width is refused, and says which", () => {
+  const index: Manifest = { model: "qwen3-embed-0.6b", dim: 1024, skills: {} };
+  const ok: QueryVectors = { model: "qwen3-embed-0.6b", dim: 1024, vectors: { a: [1] } };
+  expect(staleQueryVectors(ok, index)).toBeNull();
+
+  expect(staleQueryVectors({ ...ok, model: "other-model" }, index)).toMatch(
+    /stale: model 'other-model' but the index is 'qwen3-embed-0.6b'/,
+  );
+  expect(staleQueryVectors({ ...ok, dim: 768 }, index)).toMatch(/stale: dim 768 but the index is 1024/);
+  expect(staleQueryVectors(ok, null)).toMatch(/no index manifest/);
+
+  expect(() => cachedEmbed({ ...ok, model: "other-model" }, index)).toThrow(/stale: model/);
+  expect(() => cachedEmbed({ ...ok, dim: 768 }, index)).toThrow(/stale: dim/);
+  expect(() => cachedEmbed(ok, null)).toThrow(/no index manifest/);
+});
+
+test("the cache refuses a query it has no row for rather than scoring it as a miss", async () => {
+  const client = cachedEmbed(cache, manifest);
+  await expect(client.embed(["a query nobody embedded"])).rejects.toThrow(
+    /no row for "a query nobody embedded"/,
+  );
+});
+
+/**
+ * Pinned from the offline sweep over the real graph and the committed index. These are the numbers
+ * `query --eval` prints for config.json's weights, so a change to the weights, the index, the eval
+ * set or any signal has to restate them here deliberately.
+ */
+const PINNED = {
+  lexical: { recall: 0.804, mrr: 0.735 },
+  semantic: { recall: 0.904, mrr: 0.774 },
+  withFuzzy: { fused: { recall: 0.892, mrr: 0.815 }, final: { recall: 0.871, mrr: 0.81 } },
+  withoutFuzzy: { fused: { recall: 0.879, mrr: 0.806 }, final: { recall: 0.858, mrr: 0.801 } },
+};
+
+let ranker: FuzzyRanker | undefined;
+afterAll(() => destroyFinder(ROOT));
+
+test("the offline eval reproduces the committed scores for the configured weights", async () => {
+  const cfg = await loadConfig(ROOT);
+  expect(cfg.query.weights).toEqual({ lexical: 1, fuzzy: 1, semantic: 2.5 });
+  const index = loadVectorIndex(ROOT);
+  expect(index).not.toBeNull();
+  if (index === null) return;
+
+  const vaultDeps: QueryDeps = {
+    graph: loadGraph(graphPath(ROOT)),
+    vectors: () => index,
+    embed: () => {
+      throw new Error("the offline eval must not reach the endpoint");
+    },
+    fuzzy: () => {
+      ranker ??= fffRanker(ROOT);
+      return ranker;
+    },
+    rrfK: cfg.query.rrfK,
+    weights: cfg.query.weights,
+  };
+  const opts: QueryOptions = { k: cfg.query.k, semantic: true, fuzzy: true, explain: false };
+  const report = await runEval(ROOT, vaultDeps, opts, offlineEmbed(ROOT));
+
+  expect(report.queries).toBe(40);
+  for (const [name, want] of [
+    ["lexical", PINNED.lexical],
+    ["semantic", PINNED.semantic],
+  ] as const) {
+    expect(scoreOf(report.scores, name).recall).toBeCloseTo(want.recall, 3);
+    expect(scoreOf(report.scores, name).mrr).toBeCloseTo(want.mrr, 3);
+  }
+
+  // The fff index is a native binary. Where it cannot run the signal drops out with a notice and
+  // the fusion is lexical + semantic only, which is pinned separately rather than skipped.
+  const ran = report.notices.length === 0;
+  const want = ran ? PINNED.withFuzzy : PINNED.withoutFuzzy;
+  for (const name of ["fused", "final"] as const) {
+    expect(scoreOf(report.scores, name).recall).toBeCloseTo(want[name].recall, 3);
+    expect(scoreOf(report.scores, name).mrr).toBeCloseTo(want[name].mrr, 3);
+  }
+
+  // The tuned weights have to stay ahead of the {1,1,1} default they replaced: final MRR 0.723.
+  expect(scoreOf(report.scores, "final").mrr).toBeGreaterThan(0.78);
 });
