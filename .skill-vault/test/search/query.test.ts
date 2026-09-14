@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { HASH_VERSION } from "../../src/embed/hash";
 import type { EmbedIndex } from "../../src/embed/store";
 import type { FuzzyRanker } from "../../src/search/fff";
 import { loadGraph } from "../../src/search/graph";
@@ -55,7 +56,7 @@ function fakeIndex(angles: Record<string, number>, stale: string[] = []): EmbedI
     desc: rows,
     body: rows,
     stale: new Set(stale),
-    manifest: { model: "fake", dim: 2, skills: {} },
+    manifest: { model: "fake", dim: 2, hashVersion: HASH_VERSION, skills: {} },
   };
 }
 

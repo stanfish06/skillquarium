@@ -1,5 +1,6 @@
 {
   "dim": 1024,
+  "hashVersion": 2,
   "model": "qwen3-embed-0.6b",
   "skills": {
     "academic-paper": {
@@ -8184,6 +8185,10 @@
     "skill-doctor": {
       "sha256": "2cd9eb4d0a707320211e536456bb541eb7d737388f559bb2688bdcf50dcd512b",
       "truncated": true,
+      "updated": "2026-09-14"
+    },
+    "skillquarium": {
+      "sha256": "69ded52b759d3af2dbdeecd0d64bcda91fbb8e41689e591293ee02e607891c9a",
       "updated": "2026-09-14"
     },
     "skills-hub": {

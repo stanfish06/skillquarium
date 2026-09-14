@@ -3,6 +3,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { makeContext } from "../../src/cli";
+import { HASH_VERSION } from "../../src/embed/hash";
 import { writeSkill } from "../../src/embed/store";
 import type { Graph, GraphEdge } from "../../src/kg/types";
 import type { Report, Row, ValidateDeps } from "../../src/kg/validate";
@@ -335,6 +336,41 @@ describe("the EMBED row", () => {
         detail: "1/4 skills changed since embedding — run embed",
       });
       expect(failed(report)).toEqual([]);
+    } finally {
+      vault.cleanup();
+    }
+  });
+
+  test("passes with a locally installed extra present, which the index never holds", () => {
+    const vault = fixtureRoot();
+    try {
+      const ids = ["alpha", "beta", "gamma", "workflow"];
+      for (const id of ids) {
+        writeSkill(vault.root, id, { desc: new Float32Array(4), body: new Float32Array(4) });
+      }
+      // gstack is installed locally and embedVault filters it out, so it has no manifest entry.
+      write(
+        join(vault.root, "skills/gstack/SKILL.md"),
+        "---\nname: gstack\ndescription: An optional extra.\n---\n# gstack\n",
+      );
+      write(
+        join(vault.root, "vault/embeddings/manifest.json"),
+        JSON.stringify({
+          dim: 4,
+          hashVersion: HASH_VERSION,
+          model: "test",
+          skills: Object.fromEntries(
+            ids.map((id) => [id, { sha256: sha256Of(vault.root, id), updated: "2026-01-01" }]),
+          ),
+        }),
+      );
+      const graph = JSON.parse(readFileSync(join(vault.root, "vault/graph/graph.json"), "utf8")) as Graph;
+      expect(rowOf(validateGraph(graph, loadDeps(vault.root)), "stale vectors")).toEqual({
+        kind: "EMBED",
+        id: "stale vectors",
+        status: "PASS",
+        detail: "4 skills match the manifest",
+      });
     } finally {
       vault.cleanup();
     }

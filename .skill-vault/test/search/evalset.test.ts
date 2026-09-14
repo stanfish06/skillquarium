@@ -2,6 +2,7 @@ import { afterAll, describe, expect, test } from "bun:test";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { loadConfig } from "../../src/config";
+import { HASH_VERSION } from "../../src/embed/hash";
 import type { EmbedIndex } from "../../src/embed/store";
 import { graphPath } from "../../src/kg/write";
 import { readEvalSet, runEval } from "../../src/search/evalSet";
@@ -47,7 +48,7 @@ function index(aligned: boolean): EmbedIndex {
     desc: vectors,
     body: vectors,
     stale: new Set<string>(),
-    manifest: { model: "fake", dim: rows.length, skills: {} },
+    manifest: { model: "fake", dim: rows.length, hashVersion: HASH_VERSION, skills: {} },
   };
 }
 

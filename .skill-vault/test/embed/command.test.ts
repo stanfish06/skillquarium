@@ -65,6 +65,8 @@ describe("embed command", () => {
       embedded: 0,
       removed: 0,
       stale: ["a", "b", "c"],
+      migrated: 0,
+      unproven: 0,
       model: "",
       dim: 0,
     });

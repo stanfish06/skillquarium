@@ -1,7 +1,8 @@
 import { afterAll, expect, test } from "bun:test";
 import { join } from "node:path";
 import { type ContextOverrides, main } from "../../src/cli";
-import { sha256File, writeManifest, writeSkill } from "../../src/embed/store";
+import { HASH_VERSION, skillContentHash } from "../../src/embed/hash";
+import { writeManifest, writeSkill } from "../../src/embed/store";
 import { writeGraph } from "../../src/kg/write";
 import { FAKE_DIM, fakeVector } from "../embed/fakeClient";
 import { buildFixtureGraph, write } from "../kg/fixtureVault";
@@ -26,10 +27,11 @@ function vaultWithDeadEndpoint(): string {
   writeManifest(fixture.root, {
     model: "fake-embed",
     dim: FAKE_DIM,
+    hashVersion: HASH_VERSION,
     skills: Object.fromEntries(
       SKILLS.map((id) => [
         id,
-        { sha256: sha256File(join(fixture.root, "skills", id, "SKILL.md")), updated: "2026-01-01" },
+        { sha256: skillContentHash(join(fixture.root, "skills", id, "SKILL.md")), updated: "2026-01-01" },
       ]),
     ),
   });

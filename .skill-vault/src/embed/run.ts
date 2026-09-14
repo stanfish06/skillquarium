@@ -1,16 +1,17 @@
 import { readFileSync } from "node:fs";
 import { discoverSkills, isInstallableExtra, readDescriptionForBuild, type SkillEntry } from "../catalog";
 import type { EmbedClient } from "./client";
+import { embeddedText, HASH_VERSION, hashSkillText } from "./hash";
 import {
   clearStaging,
   commitStaged,
   type Manifest,
   type ManifestEntry,
+  migrateHashes,
   pruneOrphans,
   readManifest,
   removedSkills,
   removeSkill,
-  sha256File,
   staleSkills,
   writeManifest,
   writeSkill,
@@ -42,6 +43,10 @@ export interface EmbedResult {
   removed: number;
   /** Ids embedded this run; under `check`, the ids that differ from the index (removals included). */
   stale: string[];
+  /** Manifest entries an older hash scheme left behind that were rehashed in place, not re-embedded. */
+  migrated: number;
+  /** Entries the migration could not prove unchanged; they stay stale and are re-embedded. */
+  unproven: number;
   model: string;
   dim: number;
 }
@@ -105,7 +110,14 @@ export async function embedVault(
   const entries = discoverSkills(root, { bundles: false, excludeTransient: true }).filter(
     (e) => !isInstallableExtra(e.id),
   );
-  const manifest = readManifest(root);
+  // Hashes recorded under an older scheme are recomputed here, before anything is called stale.
+  const { manifest, migrated, unproven } = migrateHashes(readManifest(root), entries);
+  if (migrated.length > 0 || unproven.length > 0) {
+    opts.log?.(
+      `hash scheme ${HASH_VERSION}: migrated ${migrated.length} manifest entries, ` +
+        `${unproven.length} left stale`,
+    );
+  }
   const removed = removedSkills(manifest, entries);
 
   if (opts.check) {
@@ -114,6 +126,8 @@ export async function embedVault(
       embedded: 0,
       removed: removed.length,
       stale: differing,
+      migrated: migrated.length,
+      unproven: unproven.length,
       model: manifest?.model ?? "",
       dim: manifest?.dim ?? 0,
     };
@@ -129,14 +143,16 @@ export async function embedVault(
   const pending: Pending[] = [];
   for (const e of entries) {
     if (!staleSet.has(e.id)) continue;
-    const text = readFileSync(e.file, "utf8");
+    // The toggle line is stripped before embedding as well as before hashing, so the index a
+    // rebuild produces does not depend on which skills happen to be enabled locally.
+    const text = embeddedText(readFileSync(e.file, "utf8"));
     const truncated = text.length > MAX_CHARS;
     pending.push({
       id: e.id,
       desc: `${e.id}: ${readDescriptionForBuild(text) ?? ""}`,
       body: truncated ? text.slice(0, MAX_CHARS) : text,
       entry: {
-        sha256: sha256File(e.file),
+        sha256: hashSkillText(text),
         updated: day(),
         ...(truncated ? { truncated: true as const } : {}),
       },
@@ -193,11 +209,24 @@ export async function embedVault(
 
   // Manifest last and only here: it is the record of what is on disk, so a run that dies partway
   // leaves the previous manifest in place and the next --check recomputes from the file hashes.
-  const next: Manifest = { model, dim, skills: manifestSkills(entries, fresh, manifest) };
+  const next: Manifest = {
+    model,
+    dim,
+    hashVersion: HASH_VERSION,
+    skills: manifestSkills(entries, fresh, manifest),
+  };
   writeManifest(root, next);
   // Rows the manifest does not list cannot be read back; drop them rather than commit them.
   const orphans = pruneOrphans(root, new Set(Object.keys(next.skills)));
   if (orphans.length > 0) opts.log?.(`dropped unreferenced rows: ${orphans.join(", ")}`);
 
-  return { embedded: fresh.size, removed: removed.length, stale, model, dim };
+  return {
+    embedded: fresh.size,
+    removed: removed.length,
+    stale,
+    migrated: migrated.length,
+    unproven: unproven.length,
+    model,
+    dim,
+  };
 }
