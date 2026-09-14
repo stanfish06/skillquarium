@@ -12,8 +12,11 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { Config } from "../../src/config";
 import { llamaCppClient } from "../../src/embed/client";
+import { FULL_FILE_HASH_VERSION, HASH_VERSION } from "../../src/embed/hash";
 import { embedVault, MAX_BATCH_CHARS, MAX_CHARS } from "../../src/embed/run";
 import { EMBED_DIR, readIndex, readManifest, writeManifest } from "../../src/embed/store";
+import { setSkillEnabled } from "../../src/toggle/edit";
+import { loadSkill } from "../../src/toggle/state";
 import { FAKE_DIM, fakeClient, fakeVector } from "./fakeClient";
 
 const tmpDirs: string[] = [];
@@ -84,6 +87,8 @@ describe("embedVault", () => {
       embedded: 3,
       removed: 0,
       stale: ["a", "b", "c"],
+      migrated: 0,
+      unproven: 0,
       model: "fake-embed",
       dim: FAKE_DIM,
     });
@@ -180,11 +185,27 @@ describe("embedVault", () => {
   test("check mode contacts no endpoint and lists stale and removed ids", async () => {
     const root = vault();
     const r0 = await embedVault(root, fakeClient({ fail: true }), { batchSize: 16, check: true, today });
-    expect(r0).toEqual({ embedded: 0, removed: 0, stale: ["a", "b", "c"], model: "", dim: 0 });
+    expect(r0).toEqual({
+      embedded: 0,
+      removed: 0,
+      stale: ["a", "b", "c"],
+      migrated: 0,
+      unproven: 0,
+      model: "",
+      dim: 0,
+    });
 
     await embedVault(root, fakeClient(), { batchSize: 16, today });
     const r1 = await embedVault(root, fakeClient({ fail: true }), { batchSize: 16, check: true, today });
-    expect(r1).toEqual({ embedded: 0, removed: 0, stale: [], model: "fake-embed", dim: FAKE_DIM });
+    expect(r1).toEqual({
+      embedded: 0,
+      removed: 0,
+      stale: [],
+      migrated: 0,
+      unproven: 0,
+      model: "fake-embed",
+      dim: FAKE_DIM,
+    });
 
     skill(root, "a", "edited");
     rmSync(join(root, "skills", "c"), { recursive: true });
@@ -355,6 +376,64 @@ describe("embedVault", () => {
     await embedVault(root, fakeClient(), { batchSize: 16, log: (l) => log.push(l), today });
     expect(readdirSync(join(root, EMBED_DIR)).sort()).toEqual(["a.f16", "b.f16", "c.f16", "manifest.json"]);
     expect(log).toContain("dropped unreferenced rows: zz");
+  });
+
+  test("toggling a skill invalidates nothing; editing its body still does", async () => {
+    const root = vault();
+    const client = fakeClient();
+    await embedVault(root, client, { batchSize: 16, today });
+    setSkillEnabled(loadSkill(join(root, "skills", "b")), false);
+    setSkillEnabled(loadSkill(join(root, "skills", "c")), true);
+
+    const check = await embedVault(root, fakeClient({ fail: true }), {
+      batchSize: 16,
+      check: true,
+      today,
+    });
+    expect(check.stale).toEqual([]);
+    const again = await embedVault(root, client, { batchSize: 16, today });
+    expect(again.embedded).toBe(0);
+    expect(client.calls).toHaveLength(1);
+
+    skill(root, "b", "a genuinely different body");
+    const edited = await embedVault(root, client, { batchSize: 16, today });
+    expect(edited.stale).toEqual(["b"]);
+    // The toggle line never reaches the endpoint, so the body sent is the file without it.
+    expect(client.calls[1]?.[1]).toBe(
+      "---\nname: b\ndescription: b does things\n---\na genuinely different body\n",
+    );
+  });
+
+  test("a scheme-1 manifest migrates in place instead of re-embedding", async () => {
+    const root = vault();
+    const client = fakeClient();
+    await embedVault(root, client, { batchSize: 16, today });
+    // Nothing is toggled yet, so the recorded digests are already whole-file digests: relabel them.
+    const embedded = readManifest(root);
+    if (!embedded) throw new Error("no manifest");
+    writeManifest(root, { ...embedded, hashVersion: FULL_FILE_HASH_VERSION });
+    setSkillEnabled(loadSkill(join(root, "skills", "a")), false);
+    skill(root, "c", "rewritten");
+
+    const log: string[] = [];
+    const check = await embedVault(root, fakeClient({ fail: true }), {
+      batchSize: 16,
+      check: true,
+      log: (l) => log.push(l),
+      today,
+    });
+    expect(check).toMatchObject({ stale: ["c"], migrated: 2, unproven: 1 });
+    expect(log).toEqual([`hash scheme ${HASH_VERSION}: migrated 2 manifest entries, 1 left stale`]);
+    // check writes nothing: the manifest on disk is still the old scheme.
+    expect(readManifest(root)?.hashVersion).toBe(FULL_FILE_HASH_VERSION);
+
+    const run = await embedVault(root, client, { batchSize: 16, today: () => "2026-02-02" });
+    expect(run).toMatchObject({ embedded: 1, stale: ["c"], migrated: 2, unproven: 1 });
+    const after = readManifest(root);
+    expect(after?.hashVersion).toBe(HASH_VERSION);
+    expect(after?.skills.a?.updated).toBe("2026-01-01");
+    expect(after?.skills.c?.updated).toBe("2026-02-02");
+    expect(await embedVault(root, client, { batchSize: 16, today })).toMatchObject({ stale: [] });
   });
 
   test("a failing batch names the skills in it", async () => {

@@ -1,7 +1,7 @@
 import { statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { buildVault } from "../build/run";
-import type { Command, Context } from "../cli";
+import type { Context } from "../cli";
 import { run as embedRun } from "../embed/command";
 import { buildGraph } from "../kg/build";
 import { run as validateCommand } from "../kg/validateCommand";

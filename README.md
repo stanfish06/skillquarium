@@ -129,17 +129,19 @@ As a workaround, one can use pi as the harness for gpt models.
 ./skillquarium embed                                    # refresh the vectors query searches
 ```
 
-`query` fuses three rankings — BM25 over the skill graph, typo-tolerant filename matching,
-and cosine similarity over sentence embeddings — then walks the graph's `chains_to` /
-`co_occurs_with` edges so the neighbouring steps of a workflow come back with the step you
-asked for.
+`query` fuses two model-free rankings — BM25 over the skill graph and typo-tolerant filename
+matching — and expands the seeds they agree on twice over: along the graph's `chains_to` /
+`co_occurs_with` edges, so the neighbouring steps of a workflow come back with the step you
+asked for, and by cosine over the committed vectors, so the skill nearest a seed comes back
+even when it shares no words with the query.
 
 The embedding index lives in `vault/embeddings/` and **is committed**: one `<skill>.f16` file
 per skill holding a float16 vector for its description and one for its body. `./skillquarium
 embed` rebuilds only the skills whose text changed, against a local llama.cpp
 `/v1/embeddings` endpoint whose URL goes in the gitignored `.skill-vault/config.local.json`.
-Nobody needs that endpoint to search — with no index, or with `--no-semantic`, `query` falls
-back to the lexical and fuzzy signals plus graph expansion.
+That endpoint is a build-time dependency of `embed` alone: `query` never embeds the query text
+and makes no request, so search works with the endpoint switched off. `--no-semantic` skips the
+similarity expansion and leaves the index unread.
 
 ## Regenerating the navigation layer
 

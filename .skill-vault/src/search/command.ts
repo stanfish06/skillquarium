@@ -1,9 +1,8 @@
 import { existsSync } from "node:fs";
 import type { Command, Context } from "../cli";
-import { llamaCppClient } from "../embed/client";
 import { graphPath } from "../kg/write";
 import type { EvalReport } from "./evalSet";
-import { offlineEmbed, runEval } from "./evalSet";
+import { runEval } from "./evalSet";
 import { destroyFinder, type FuzzyRanker, fffRanker } from "./fff";
 import type { SignalName } from "./fusion";
 import { loadGraph } from "./graph";
@@ -16,25 +15,19 @@ interface CommandModule {
   help: string;
 }
 
-const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy", "semantic"];
-
-/**
- * First-contact timeout for the one vector a query needs. The configured embed.timeoutMs sizes the
- * batch `embed` path, where a 16-input request against a busy GPU host legitimately takes minutes;
- * here it only decides how long an interactive query waits before dropping the semantic signal.
- */
-const QUERY_TIMEOUT_MS = 5_000;
+const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy"];
 
 const queryHelp = `usage: skillquarium [--json] query <text...> [--k N] [--no-semantic] [--no-fuzzy] [--explain] [--eval]
 
-Retrieve skills by fusing BM25 over the graph, fuzzy path search and semantic vectors,
-then expanding through the knowledge graph.
+Retrieve skills by fusing BM25 over the graph with fuzzy path search, then expanding those
+seeds through the knowledge graph and through the nearest skills in the committed vectors.
+The query text is never embedded, so no embedding endpoint is contacted.
 
   --k N           results to return (default: config query.k)
-  --no-semantic   skip the vector signal; no embedding request is made
+  --no-semantic   skip the similarity expansion; the vector index is not read
   --no-fuzzy      skip the fff path signal
-  --explain       add each result's per-signal rank and fused contribution
-  --eval          score the signals over data/retrieval-eval.jsonl instead of querying`;
+  --explain       add each result's per-signal rank, fused contribution and cosine
+  --eval          score the pipeline over data/retrieval-eval.jsonl instead of querying`;
 
 const grepHelp = `usage: skillquarium [--json] grep <pattern> [-- rg flags]
 
@@ -44,7 +37,6 @@ Results are grouped by skill.`;
 interface QueryArgs extends QueryOptions {
   text: string;
   eval: boolean;
-  live: boolean;
 }
 
 class UsageError extends Error {}
@@ -58,7 +50,6 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     fuzzy: true,
     explain: false,
     eval: false,
-    live: false,
   };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i] ?? "";
@@ -69,7 +60,6 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     else if (arg === "--no-fuzzy") parsed.fuzzy = false;
     else if (arg === "--explain") parsed.explain = true;
     else if (arg === "--eval") parsed.eval = true;
-    else if (arg === "--live") parsed.live = true;
     else if (arg.startsWith("--")) throw new UsageError(`unknown option ${arg}`);
     else {
       words.push(arg);
@@ -99,7 +89,6 @@ async function queryDeps(ctx: Context): Promise<QueryDeps> {
       if (vectors === undefined) vectors = loadVectorIndex(ctx.root);
       return vectors;
     },
-    embed: () => llamaCppClient({ ...cfg.embed, timeoutMs: Math.min(cfg.embed.timeoutMs, QUERY_TIMEOUT_MS) }),
     fuzzy: () => {
       ranker ??= fffRanker(ctx.root);
       return ranker;
@@ -132,7 +121,7 @@ function printResults(ctx: Context, run: Awaited<ReturnType<typeof runQuery>>, a
 
 function printEval(ctx: Context, report: EvalReport): void {
   ctx.out(`retrieval eval: ${report.queries} queries, k=${report.k}\n`);
-  ctx.out(`  ${"signal".padEnd(10)}${`recall@${report.k}`.padStart(10)}${"MRR".padStart(8)}`);
+  ctx.out(`  ${"stage".padEnd(10)}${`recall@${report.k}`.padStart(10)}${"MRR".padStart(8)}`);
   for (const s of report.scores) {
     ctx.out(`  ${s.name.padEnd(10)}${s.recall.toFixed(3).padStart(10)}${s.mrr.toFixed(3).padStart(8)}`);
   }
@@ -153,9 +142,7 @@ const queryRun: Command = async (args, ctx) => {
   }
   try {
     if (parsed.eval) {
-      // The committed query vectors are why the eval scores without the endpoint; --live re-embeds.
-      const client = parsed.live ? undefined : offlineEmbed(ctx.root);
-      const report = await runEval(ctx.root, deps, parsed, client);
+      const report = await runEval(ctx.root, deps, parsed);
       for (const notice of report.notices) ctx.err(notice);
       if (ctx.json) ctx.out(JSON.stringify(report, null, 1));
       else printEval(ctx, report);

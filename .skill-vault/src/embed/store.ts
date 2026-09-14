@@ -1,16 +1,16 @@
-import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { z } from "zod";
 import { discoverSkills, type SkillEntry } from "../catalog";
 import { packF16, unpackF16 } from "./f16";
+import { FULL_FILE_HASH_VERSION, HASH_VERSION, hashSkillText, matchesRecorded } from "./hash";
 
 /** Index location under the vault root; committed, so both files are deterministic. */
 export const EMBED_DIR = "vault/embeddings";
 const MANIFEST = "manifest.json";
 
 export interface ManifestEntry {
-  /** sha256 of SKILL.md as embedded; a mismatch marks the skill stale. */
+  /** Digest of the embedded text under the manifest's hashVersion; a mismatch marks the skill stale. */
   sha256: string;
   updated: string;
   truncated?: true;
@@ -19,6 +19,8 @@ export interface ManifestEntry {
 export interface Manifest {
   model: string;
   dim: number;
+  /** Hash scheme every entry's sha256 was written under. See HASH_VERSION. */
+  hashVersion: number;
   skills: Record<string, ManifestEntry>;
 }
 
@@ -35,6 +37,8 @@ export interface EmbedIndex {
 const ManifestSchema = z.strictObject({
   model: z.string(),
   dim: z.number().int().nonnegative(),
+  // Manifests written before the scheme was named carry no field and are full-file digests.
+  hashVersion: z.number().int().positive().default(FULL_FILE_HASH_VERSION),
   skills: z.record(
     z.string(),
     z.strictObject({
@@ -84,7 +88,7 @@ export function writeManifest(root: string, m: Manifest): void {
       ? { sha256: e.sha256, truncated: true, updated: e.updated }
       : { sha256: e.sha256, updated: e.updated };
   }
-  const text = `${JSON.stringify({ dim: m.dim, model: m.model, skills }, null, 2)}\n`;
+  const text = `${JSON.stringify({ dim: m.dim, hashVersion: m.hashVersion, model: m.model, skills }, null, 2)}\n`;
   writeAtomic(embedPath(root, MANIFEST), text);
 }
 
@@ -139,10 +143,6 @@ export function pruneOrphans(root: string, keep: Set<string>): string[] {
   return dropped.sort();
 }
 
-export function sha256File(path: string): string {
-  return createHash("sha256").update(readFileSync(path)).digest("hex");
-}
-
 /**
  * Manifest ids whose SKILL.md hash differs, ids on disk the manifest never saw, and ids the
  * manifest lists whose `<id>.f16` is gone. Sorted. The row-file check is what makes a lost or
@@ -150,16 +150,78 @@ export function sha256File(path: string): string {
  * index clean while the skill had dropped out of semantic search.
  */
 export function staleSkills(root: string, manifest: Manifest | null, entries: SkillEntry[]): string[] {
+  const version = manifest?.hashVersion ?? HASH_VERSION;
   const stale: string[] = [];
   for (const e of entries) {
     const recorded = manifest?.skills[e.id];
-    if (!recorded || recorded.sha256 !== sha256File(e.file)) {
+    if (!recorded) {
+      stale.push(e.id);
+      continue;
+    }
+    let text: string;
+    try {
+      text = readFileSync(e.file, "utf8");
+    } catch {
+      // Unreadable now but listed as embedded: report it rather than silently keeping the vector.
+      stale.push(e.id);
+      continue;
+    }
+    if (!matchesRecorded(text, e.file, recorded.sha256, version)) {
       stale.push(e.id);
       continue;
     }
     if (!existsSync(embedPath(root, `${e.id}.f16`))) stale.push(e.id);
   }
   return stale.sort();
+}
+
+/** What migrateHashes did: the rewritten manifest plus the ids on each side of the proof. */
+export interface HashMigration {
+  manifest: Manifest | null;
+  /** Ids proved unchanged under the old scheme and rehashed in place, no re-embedding. */
+  migrated: string[];
+  /** Ids whose recorded digest could not be reproduced; left for staleSkills to report. */
+  unproven: string[];
+}
+
+/**
+ * Brings a manifest written under an older hash scheme up to HASH_VERSION without touching a
+ * vector. An entry is rehashed only when matchesRecorded can reproduce its stored digest from the
+ * file on disk, which proves the embedded text is still what SKILL.md says today; entries that
+ * fail keep their old digest, so the very next staleSkills reports them and they are re-embedded.
+ * Manifest ids with no skill on disk are left alone — that is a removal, not a migration.
+ */
+export function migrateHashes(manifest: Manifest | null, entries: SkillEntry[]): HashMigration {
+  if (!manifest || manifest.hashVersion === HASH_VERSION) {
+    return { manifest, migrated: [], unproven: [] };
+  }
+  const byId = new Map(entries.map((e) => [e.id, e]));
+  const skills: Record<string, ManifestEntry> = {};
+  const migrated: string[] = [];
+  const unproven: string[] = [];
+  for (const [id, recorded] of Object.entries(manifest.skills)) {
+    skills[id] = recorded;
+    const entry = byId.get(id);
+    if (!entry) continue;
+    let text: string;
+    try {
+      text = readFileSync(entry.file, "utf8");
+    } catch {
+      unproven.push(id);
+      continue;
+    }
+    if (matchesRecorded(text, entry.file, recorded.sha256, manifest.hashVersion)) {
+      skills[id] = { ...recorded, sha256: hashSkillText(text) };
+      migrated.push(id);
+    } else {
+      unproven.push(id);
+    }
+  }
+  return {
+    manifest: { ...manifest, hashVersion: HASH_VERSION, skills },
+    migrated: migrated.sort(),
+    unproven: unproven.sort(),
+  };
 }
 
 /** Manifest ids with no skill on disk any more. Sorted. */

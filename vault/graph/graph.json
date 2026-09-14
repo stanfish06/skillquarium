@@ -1,17 +1,17 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2133,
+  "skills": 2134,
   "expert_profiles": 503,
-  "nodes": 2206,
-  "edges": 15777,
+  "nodes": 2207,
+  "edges": 15787,
   "generic_names_blocked": 32,
-  "tier1_edges": 4747,
-  "tier2_edges": 701,
+  "tier1_edges": 4750,
+  "tier2_edges": 702,
   "alias_edges": 4494,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
-  "artifact_edges": 524,
+  "artifact_edges": 525,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
@@ -20,15 +20,15 @@
   "orphan_count": 127,
   "orphan_rate": 0.0595,
   "by_provenance": {
-   "EXTRACTED": 14991,
+   "EXTRACTED": 15001,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2133,
-   "references": 12334,
+   "in_domain": 2134,
+   "references": 12342,
    "in_discipline": 599,
-   "touches": 524,
+   "touches": 525,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -26983,6 +26983,19 @@
    "aliases": [
     "skill doctor"
    ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "skillquarium",
+   "type": "Skill",
+   "label": "skillquarium",
+   "description": "Search this vault's 2,100+ skills and manage them with the skillquarium CLI. Use when looking for a skill to do something, when native description matching returns nothing useful, when you need every skill covering a topic rather than the single best match, when searching skill text for an exact string, or when adding, toggling, rebuilding, or updating skills in ~/.agents.",
+   "source": "skills/skillquarium/SKILL.md",
+   "aliases": [],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -83696,6 +83709,15 @@
   {
    "src": "harmonypy",
    "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "harmonypy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "harmonypy",
+   "rel": "references",
    "dst": "umap-learn",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -129613,6 +129635,15 @@
   },
   {
    "src": "pydeseq2",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pydeseq2 named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "pydeseq2",
    "rel": "touches",
    "dst": "artifact:count-matrix",
    "weight": 1,
@@ -131571,6 +131602,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in sentry/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "query",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "query referenced in code/link context in skillquarium/SKILL.md",
    "status": "accepted"
   },
   {
@@ -140004,6 +140044,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scanpy named in single-cell-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scanpy",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in skillquarium/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -151146,6 +151195,60 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "in_domain",
+   "dst": "domain:vault-meta",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "harmonypy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "harmonypy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "pydeseq2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pydeseq2 named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "query referenced in code/link context in skillquarium/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "scanpy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "touches",
+   "dst": "artifact:fastq",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "FASTQ reads named in skillquarium/SKILL.md",
    "status": "accepted"
   },
   {

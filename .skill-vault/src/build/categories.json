@@ -2046,7 +2046,8 @@
     "rust-trait-explorer": "software-dev",
     "unsafe-checker": "software-dev",
     "cpp-pro": "software-dev",
-    "csharp-developer": "software-dev"
+    "csharp-developer": "software-dev",
+    "skillquarium": "vault-meta"
   },
   "synonyms": {
     "pydeseq2": [

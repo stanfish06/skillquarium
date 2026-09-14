@@ -236,7 +236,12 @@ describe("renderSkill parity with the committed tree", () => {
     expect(agent).toBeDefined();
     if (!agent) return;
 
-    const committed = readFileSync(join(REPO_ROOT, "skills/accelerator-physicist/SKILL.md"), "utf8");
+    // The tree carries whatever toggle state the user has loaded; renderSkill never emits that
+    // field, so drop it before comparing rather than pinning the test to one toggle state.
+    const committed = readFileSync(join(REPO_ROOT, "skills/accelerator-physicist/SKILL.md"), "utf8").replace(
+      "disable-model-invocation: true\n",
+      "",
+    );
     const commit = committed.split("  source-commit: ")[1]?.split("\n")[0] ?? "";
     const marker = "\n## Imported Profile\n\n";
     const body = committed.slice(committed.indexOf(marker) + marker.length);

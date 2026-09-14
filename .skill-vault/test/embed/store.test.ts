@@ -1,21 +1,25 @@
 import { afterAll, describe, expect, test } from "bun:test";
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { SkillEntry } from "../../src/catalog";
+import { FULL_FILE_HASH_VERSION, HASH_VERSION, hashSkillText, skillContentHash } from "../../src/embed/hash";
 import {
   EMBED_DIR,
   type Manifest,
+  migrateHashes,
   pruneOrphans,
   readIndex,
   readManifest,
   removedSkills,
   removeSkill,
-  sha256File,
   staleSkills,
   writeManifest,
   writeSkill,
 } from "../../src/embed/store";
+import { setSkillEnabled, setSkillProductStates } from "../../src/toggle/edit";
+import { loadSkill } from "../../src/toggle/state";
 import { FAKE_DIM, fakeVector } from "./fakeClient";
 
 const tmpDirs: string[] = [];
@@ -51,7 +55,8 @@ describe("writeSkill / readIndex", () => {
     writeManifest(root, {
       model: "fake-embed",
       dim: FAKE_DIM,
-      skills: { a: { sha256: sha256File(a.file), updated: "2026-01-01" } },
+      hashVersion: HASH_VERSION,
+      skills: { a: { sha256: skillContentHash(a.file), updated: "2026-01-01" } },
     });
     const idx = readIndex(root);
     expect(idx).not.toBeNull();
@@ -75,8 +80,9 @@ describe("writeSkill / readIndex", () => {
     writeManifest(root, {
       model: "fake-embed",
       dim: FAKE_DIM,
+      hashVersion: HASH_VERSION,
       skills: {
-        a: { sha256: sha256File(a.file), updated: "2026-01-01" },
+        a: { sha256: skillContentHash(a.file), updated: "2026-01-01" },
         gone: { sha256: "0".repeat(64), updated: "2026-01-01" },
       },
     });
@@ -119,6 +125,7 @@ describe("manifest", () => {
         a: { truncated: true, updated: "2026-01-01", sha256: "aa" },
       },
       dim: 8,
+      hashVersion: HASH_VERSION,
       model: "fake-embed",
     };
     writeManifest(root, m);
@@ -128,6 +135,7 @@ describe("manifest", () => {
       `${JSON.stringify(
         {
           dim: 8,
+          hashVersion: HASH_VERSION,
           model: "fake-embed",
           skills: {
             a: { sha256: "aa", truncated: true, updated: "2026-01-01" },
@@ -161,10 +169,11 @@ describe("staleSkills / removedSkills", () => {
     const manifest: Manifest = {
       model: "fake-embed",
       dim: FAKE_DIM,
+      hashVersion: HASH_VERSION,
       skills: {
-        a: { sha256: sha256File(a.file), updated: "2026-01-01" },
+        a: { sha256: skillContentHash(a.file), updated: "2026-01-01" },
         b: { sha256: "deadbeef", updated: "2026-01-01" },
-        zzz: { sha256: sha256File(c.file), updated: "2026-01-01" },
+        zzz: { sha256: skillContentHash(c.file), updated: "2026-01-01" },
       },
     };
     const entries = [c, b, a];
@@ -177,10 +186,15 @@ describe("staleSkills / removedSkills", () => {
   test("a manifest entry whose .f16 is gone is stale even though its SKILL.md is unchanged", () => {
     const root = tmp("sq-store-");
     const entries = ["a", "b", "c"].map((id) => skill(root, id));
-    const manifest: Manifest = { model: "fake-embed", dim: FAKE_DIM, skills: {} };
+    const manifest: Manifest = {
+      model: "fake-embed",
+      dim: FAKE_DIM,
+      hashVersion: HASH_VERSION,
+      skills: {},
+    };
     for (const e of entries) {
       writeSkill(root, e.id, { desc: fakeVector(e.id), body: fakeVector(e.id) });
-      manifest.skills[e.id] = { sha256: sha256File(e.file), updated: "2026-01-01" };
+      manifest.skills[e.id] = { sha256: skillContentHash(e.file), updated: "2026-01-01" };
     }
     writeManifest(root, manifest);
     expect(staleSkills(root, manifest, entries)).toEqual([]);
@@ -193,10 +207,150 @@ describe("staleSkills / removedSkills", () => {
     expect([...(idx?.stale ?? [])]).toEqual(["b"]);
   });
 
-  test("sha256File matches a known digest", () => {
-    const root = tmp("sq-store-");
-    const p = join(root, "x.txt");
-    writeFileSync(p, "abc");
-    expect(sha256File(p)).toBe("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+  test("hashSkillText matches a known digest of the text it is given", () => {
+    expect(hashSkillText("abc")).toBe("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+  });
+});
+
+describe("toggle-insensitive hashing", () => {
+  function toggledPair(id: string): { plain: SkillEntry; toggled: SkillEntry } {
+    const plain = skill(tmp("sq-hash-"), id);
+    const toggled = skill(tmp("sq-hash-"), id);
+    setSkillEnabled(loadSkill(toggled.dir), false);
+    return { plain, toggled };
+  }
+
+  test("disabling a skill rewrites SKILL.md but not its hash", () => {
+    const { plain, toggled } = toggledPair("a");
+    expect(readFileSync(toggled.file, "utf8")).toContain("disable-model-invocation: true");
+    expect(readFileSync(toggled.file, "utf8")).not.toBe(readFileSync(plain.file, "utf8"));
+    expect(skillContentHash(toggled.file)).toBe(skillContentHash(plain.file));
+    // Re-enabling writes `false` rather than dropping the line; that must not move the hash either.
+    setSkillEnabled(loadSkill(toggled.dir), true);
+    expect(readFileSync(toggled.file, "utf8")).toContain("disable-model-invocation: false");
+    expect(skillContentHash(toggled.file)).toBe(skillContentHash(plain.file));
+  });
+
+  test("a toggled skill is not stale; an edited one is", () => {
+    const root = tmp("sq-hash-");
+    const a = skill(root, "a");
+    const b = skill(root, "b");
+    const manifest: Manifest = {
+      model: "fake-embed",
+      dim: FAKE_DIM,
+      hashVersion: HASH_VERSION,
+      skills: {
+        a: { sha256: skillContentHash(a.file), updated: "2026-01-01" },
+        b: { sha256: skillContentHash(b.file), updated: "2026-01-01" },
+      },
+    };
+    for (const id of ["a", "b"]) writeSkill(root, id, { desc: fakeVector(id), body: fakeVector(id) });
+    expect(staleSkills(root, manifest, [a, b])).toEqual([]);
+
+    setSkillEnabled(loadSkill(a.dir), false);
+    expect(staleSkills(root, manifest, [a, b])).toEqual([]);
+
+    writeFileSync(b.file, "---\nname: b\ndescription: b skill\n---\nrewritten body\n");
+    expect(staleSkills(root, manifest, [a, b])).toEqual(["b"]);
+  });
+
+  test("agents/openai.yaml is outside the hash, so the Codex toggle never ages a vector", () => {
+    const root = tmp("sq-hash-");
+    const a = skill(root, "a");
+    writeSkill(root, "a", { desc: fakeVector("a"), body: fakeVector("a") });
+    const manifest: Manifest = {
+      model: "fake-embed",
+      dim: FAKE_DIM,
+      hashVersion: HASH_VERSION,
+      skills: { a: { sha256: skillContentHash(a.file), updated: "2026-01-01" } },
+    };
+    const before = skillContentHash(a.file);
+    setSkillProductStates(loadSkill(a.dir), { codex: false });
+    expect(readFileSync(join(a.dir, "agents", "openai.yaml"), "utf8")).toContain(
+      "allow_implicit_invocation: false",
+    );
+    expect(skillContentHash(a.file)).toBe(before);
+    expect(staleSkills(root, manifest, [a])).toEqual([]);
+  });
+});
+
+describe("migrateHashes", () => {
+  /** A scheme-1 manifest: sha256 over each SKILL.md exactly as it stands, toggle line included. */
+  function legacyManifest(entries: SkillEntry[]): Manifest {
+    const skills: Record<string, { sha256: string; updated: string }> = {};
+    for (const e of entries) {
+      skills[e.id] = {
+        sha256: createHash("sha256").update(readFileSync(e.file)).digest("hex"),
+        updated: "2026-01-01",
+      };
+    }
+    return {
+      model: "fake-embed",
+      dim: FAKE_DIM,
+      hashVersion: FULL_FILE_HASH_VERSION,
+      skills,
+    };
+  }
+
+  test("rehashes what it can prove unchanged and leaves a real edit stale", () => {
+    const root = tmp("sq-migrate-");
+    const entries = ["a", "b", "c", "d"].map((id) => skill(root, id));
+    for (const e of entries) writeSkill(root, e.id, { desc: fakeVector(e.id), body: fakeVector(e.id) });
+    const legacy = legacyManifest(entries);
+    const [a, b, c, d] = entries as [SkillEntry, SkillEntry, SkillEntry, SkillEntry];
+
+    setSkillEnabled(loadSkill(a.dir), false);
+    setSkillEnabled(loadSkill(b.dir), true);
+    writeFileSync(c.file, "---\nname: c\ndescription: c skill\n---\ndifferent body\n");
+
+    // Even before migrating, the old digests are read under their own scheme, so only c is stale.
+    expect(staleSkills(root, legacy, entries)).toEqual(["c"]);
+
+    const { manifest, migrated, unproven } = migrateHashes(legacy, entries);
+    expect(migrated).toEqual(["a", "b", "d"]);
+    expect(unproven).toEqual(["c"]);
+    expect(manifest?.hashVersion).toBe(HASH_VERSION);
+    expect(manifest?.skills.a?.sha256).toBe(skillContentHash(a.file));
+    expect(manifest?.skills.b?.sha256).toBe(skillContentHash(b.file));
+    expect(manifest?.skills.d?.sha256).toBe(skillContentHash(d.file));
+    // The one it could not prove keeps its scheme-1 digest, which no longer matches anything.
+    expect(manifest?.skills.c?.sha256).toBe(legacy.skills.c?.sha256);
+    expect(manifest?.skills.a?.updated).toBe("2026-01-01");
+    expect(staleSkills(root, manifest, entries)).toEqual(["c"]);
+  });
+
+  test("no-ops on a current manifest and on no manifest at all", () => {
+    const root = tmp("sq-migrate-");
+    const entries = ["a"].map((id) => skill(root, id));
+    const current: Manifest = {
+      model: "fake-embed",
+      dim: FAKE_DIM,
+      hashVersion: HASH_VERSION,
+      skills: { a: { sha256: "whatever", updated: "2026-01-01" } },
+    };
+    expect(migrateHashes(current, entries)).toEqual({ manifest: current, migrated: [], unproven: [] });
+    expect(migrateHashes(null, entries)).toEqual({ manifest: null, migrated: [], unproven: [] });
+  });
+
+  test("a manifest id with no skill on disk is a removal, not a failed migration", () => {
+    const root = tmp("sq-migrate-");
+    const entries = [skill(root, "a")];
+    const legacy = legacyManifest(entries);
+    legacy.skills.gone = { sha256: "0".repeat(64), updated: "2026-01-01" };
+    const { manifest, migrated, unproven } = migrateHashes(legacy, entries);
+    expect(migrated).toEqual(["a"]);
+    expect(unproven).toEqual([]);
+    expect(manifest?.skills.gone?.sha256).toBe("0".repeat(64));
+    expect(removedSkills(manifest, entries)).toEqual(["gone"]);
+  });
+
+  test("an unrecognised newer scheme is never trusted", () => {
+    const root = tmp("sq-migrate-");
+    const entries = [skill(root, "a")];
+    const future: Manifest = {
+      ...legacyManifest(entries),
+      hashVersion: HASH_VERSION + 1,
+    };
+    expect(staleSkills(root, future, entries)).toEqual(["a"]);
   });
 });

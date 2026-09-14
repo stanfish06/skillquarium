@@ -26,7 +26,6 @@ const Schema = z.strictObject({
         .strictObject({
           lexical: z.number().default(1),
           fuzzy: z.number().default(1),
-          semantic: z.number().default(1),
         })
         .prefault({}),
     })

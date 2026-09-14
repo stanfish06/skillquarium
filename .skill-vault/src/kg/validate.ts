@@ -176,7 +176,7 @@ function checkShapes(graph: Graph, deps: ValidateDeps, idx: Index, add: AddRow):
     "SHAPES",
     "P5 chains acyclic",
     cycles.length ? "WARN" : "PASS",
-    `${cycles.length} back-edges` + (cycles.length ? ` e.g. ${pyPairs(cycles.slice(0, 2))}` : ""),
+    `${cycles.length} back-edges${cycles.length ? ` e.g. ${pyPairs(cycles.slice(0, 2))}` : ""}`,
   );
 
   // Reverse lookup through the index: `out` already de-duplicates the pairs.
