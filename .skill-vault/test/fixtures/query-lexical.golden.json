@@ -1,0 +1,395 @@
+{
+ "batch correct single cell data and find markers": [
+  "harmonypy",
+  "single-cell-biologist",
+  "scrna-orchestrator",
+  "scrna-embedding",
+  "scvi-tools",
+  "stem-cell-biologist",
+  "cellxgene-census",
+  "scientific-visualization"
+ ],
+ "single cell rna seq clustering and annotation": [
+  "ngs-scrna-seq",
+  "scrna-orchestrator",
+  "scanpy",
+  "seurat",
+  "chip-seq",
+  "scrna-seq-qc",
+  "scvi-tools",
+  "cellxgene-census"
+ ],
+ "probabilistic integration of scRNA-seq with batch effects": [
+  "scvi-tools",
+  "scrna-embedding",
+  "harmonypy",
+  "scrna-preprocessing-clustering",
+  "ngs-scrna-seq",
+  "scrna-seq-qc",
+  "cellxgene-census",
+  "scientific-visualization"
+ ],
+ "h5ad file format annotated matrix": [
+  "anndata",
+  "scrna-orchestrator",
+  "cell-communication",
+  "scrna-embedding",
+  "scanpy",
+  "caveman-compress",
+  "scvi-tools",
+  "cellxgene-census"
+ ],
+ "rna velocity trajectories": [
+  "scvelo",
+  "rna-biologist",
+  "viennarna-structure-prediction",
+  "muon-multiomics-singlecell",
+  "nfcore-rnaseq-wrapper",
+  "query-geo",
+  "arboreto",
+  "molecular-dynamics"
+ ],
+ "joint RNA and ATAC multiome analysis": [
+  "muon-multiomics-singlecell",
+  "deeptools",
+  "pybigwig",
+  "atac-seq",
+  "scvelo",
+  "sequence-analysis",
+  "rna-biologist",
+  "cutadapt"
+ ],
+ "bulk rna-seq differential expression to pathways": [
+  "ngs-bulk-rnaseq-differential-expression",
+  "bulk-rnaseq",
+  "ngs-bulk-rnaseq",
+  "rnaseq-de",
+  "diff-visualizer",
+  "pydeseq2",
+  "pathway-enrichment",
+  "scientific-visualization"
+ ],
+ "deseq2 in python": [
+  "langgraph-python-quickstart",
+  "langchain-python-quickstart",
+  "deepagents-python-quickstart",
+  "atheris",
+  "bioinformatician",
+  "bulk-rnaseq",
+  "pydeseq2",
+  "pathway-enrichment"
+ ],
+ "gene set enrichment over-representation": [
+  "bulk-rnaseq",
+  "pathway-enricher",
+  "genebass-gene-burden-skill",
+  "knowledge-representation-researcher",
+  "gget",
+  "pydeseq2",
+  "pathway-enrichment",
+  "scientific-visualization"
+ ],
+ "trim adapters from fastq reads": [
+  "fastp-fastq-preprocessing",
+  "cutadapt",
+  "ngs-fastq-qc",
+  "bulk-rnaseq",
+  "ngs-bcl-to-fastq",
+  "netlify-frameworks",
+  "pydeseq2",
+  "pathway-enrichment"
+ ],
+ "fastq quality control report": [
+  "fastp-fastq-preprocessing",
+  "report-template",
+  "sec-report",
+  "ngs-fastq-qc",
+  "ngs-bcl-to-fastq",
+  "cutadapt",
+  "quality-six-sigma-engineer",
+  "bioqc-mcp"
+ ],
+ "write a nextflow pipeline": [
+  "nextflow",
+  "repro-enforcer",
+  "academic-pipeline",
+  "bioinformatics-engineer",
+  "pacsomatic",
+  "alloy",
+  "bio-manuscript-pipeline",
+  "msa-structure-prediction-pipeline"
+ ],
+ "snakemake workflow": [
+  "snakemake-workflow-engine",
+  "latchbio-integration",
+  "computational-scientist",
+  "sourmash",
+  "workflow",
+  "dvc",
+  "git-workflow-and-versioning",
+  "genomics-workflow-acceleration"
+ ],
+ "blast a protein sequence": [
+  "blast-search",
+  "ncbi-blast-skill",
+  "gget",
+  "sequence-analysis",
+  "biopython",
+  "query-uniprot",
+  "sds-gel-review",
+  "analyze-fasta"
+ ],
+ "build a phylogenetic tree": [
+  "etetoolkit",
+  "phylogenetics",
+  "phylogenetics-builder",
+  "supply-chain-risk-auditor",
+  "security-diff-scan",
+  "fastreer",
+  "build-model",
+  "evolutionary-biologist"
+ ],
+ "predict rna secondary structure": [
+  "viennarna-structure-prediction",
+  "boltz-structure-and-binding",
+  "msa-structure-prediction-pipeline",
+  "gi-annotation",
+  "analyze-fasta",
+  "struct-predictor",
+  "diffdock",
+  "medchem"
+ ],
+ "search pubmed and summarize papers": [
+  "pubmed-search",
+  "pubmed-summariser",
+  "lit-synthesizer",
+  "huggingface-papers",
+  "paper-lookup",
+  "firecrawl-research-index",
+  "citation-management",
+  "scientific-writing"
+ ],
+ "systematic literature review with prisma": [
+  "literature-review",
+  "idea-evaluator",
+  "peer-review",
+  "prisma-postgres",
+  "prisma-mongodb-upgrade",
+  "prisma-cli",
+  "deep-research",
+  "academic-paper"
+ ],
+ "manage citations and bibtex": [
+  "zotero",
+  "lit-synthesizer",
+  "citations",
+  "nature-academic-search",
+  "twilio-whatsapp-manage-senders",
+  "wix-manage",
+  "citation-management",
+  "scientific-writing"
+ ],
+ "write the methods section of a paper": [
+  "benchmark-paper-template",
+  "nature-polishing",
+  "bgpt-paper-search",
+  "nature-writing",
+  "academic-pipeline",
+  "figma-generate-design",
+  "tech-paper-template",
+  "firecrawl-research-index"
+ ],
+ "make a conference poster in latex": [
+  "latex-posters",
+  "pptx-posters",
+  "paper-2-web",
+  "scientific-slides",
+  "twilio-conference-calls",
+  "venue-templates",
+  "twilio-voice-outbound-calls",
+  "nature-reader"
+ ],
+ "survival analysis kaplan meier": [
+  "lifelines",
+  "data-extractor",
+  "scikit-survival",
+  "clinical-decision-support",
+  "palliative-care-researcher",
+  "biostatistician",
+  "deep-learning-scientist",
+  "gerontologist"
+ ],
+ "bayesian model with mcmc": [
+  "bayesian-statistician",
+  "pymc",
+  "paleoclimatologist",
+  "statistical-analysis",
+  "statistician",
+  "build-model",
+  "cognitive-scientist",
+  "shap"
+ ],
+ "time series forecasting": [
+  "timesfm-forecasting",
+  "aeon",
+  "statsmodels",
+  "adaptive-metrics",
+  "officecli-pitch-deck",
+  "matlab-analyze-data",
+  "outlook-calendar-free-up-time",
+  "google-calendar-free-up-time"
+ ],
+ "dataframe library faster than pandas": [
+  "pandas",
+  "polars",
+  "chdb-datastore",
+  "dask",
+  "fastp-fastq-preprocessing",
+  "m10-performance",
+  "chdb-sql",
+  "pandera-validation"
+ ],
+ "statistical plots in python": [
+  "seaborn",
+  "matplotlib",
+  "statsmodels",
+  "statistical-and-uncertainty-visualization",
+  "adjusttext",
+  "statistical-physicist",
+  "academic-paper",
+  "academic-paper-reviewer"
+ ],
+ "interactive charts": [
+  "plotly",
+  "pathway-enricher",
+  "matlab-build-chart",
+  "scrollytelling-and-parallax-data-visualization",
+  "support-prerendering",
+  "gantt-chart-visualization",
+  "diagram-generator",
+  "supply-chain"
+ ],
+ "run a gpu job on the cloud": [
+  "troubleshooting-dbt-job-errors",
+  "render-cron-jobs",
+  "modal",
+  "agentcore",
+  "k6-manage",
+  "k6-cloud-investigate-test",
+  "kermt-setup",
+  "render-background-workers"
+ ],
+ "fine tune a huggingface model": [
+  "huggingface-llm-trainer",
+  "huggingface-vision-trainer",
+  "ray",
+  "huggingface-community-evals",
+  "huggingface-gradio",
+  "huggingface-papers",
+  "huggingface-datasets",
+  "huggingface-paper-publisher"
+ ],
+ "serve an llm with vllm": [
+  "vllm-deploy-simple",
+  "llm-agent-security-redteam",
+  "llm-observability-evals",
+  "clawpathy-autoresearch",
+  "llm-security",
+  "langgraph",
+  "phoenix-cli",
+  "crewai"
+ ],
+ "build an mcp server": [
+  "building-mcp-server-on-cloudflare",
+  "build-chatgpt-app",
+  "apollo-mcp-server",
+  "bioqc-mcp",
+  "configuring-dbt-mcp-server",
+  "render-mcp",
+  "assistant-mcp",
+  "aws-mcp-setup"
+ ],
+ "multi agent workflow graph": [
+  "crewai",
+  "langgraph",
+  "databricks-agent-bricks",
+  "snakemake-workflow-engine",
+  "firecrawl-agent",
+  "neo4j-agent-memory-skill",
+  "turingdb-graph",
+  "rust-call-graph"
+ ],
+ "github pull requests from the terminal": [
+  "github",
+  "gh-cli",
+  "gh-address-comments",
+  "mermaid-terminal",
+  "agentic-workflows",
+  "firecrawl-developer-index",
+  "yeet",
+  "twilio-cli-reference"
+ ],
+ "parallel git worktrees": [
+  "using-git-worktrees",
+  "git-workflow-and-versioning",
+  "git-guardrails-claude-code",
+  "meta-cognition-parallel",
+  "dispatching-parallel-agents",
+  "parallel-web",
+  "netlify-cli-and-deploy",
+  "worktrunk"
+ ],
+ "structural code search": [
+  "ast-grep",
+  "foldseek-structural-search",
+  "structural-engineer",
+  "msa-search-nim",
+  "cryo-em-structural-biologist",
+  "structural-biology",
+  "structural-biologist",
+  "structural-geologist"
+ ],
+ "fuzz a c library": [
+  "cargo-fuzz",
+  "harness-writing",
+  "aflpp",
+  "ossfuzz",
+  "libfuzzer",
+  "dotnet-pinvoke",
+  "design-md-library",
+  "csharp-scripts"
+ ],
+ "reverse engineer a binary": [
+  "protocol-reverse",
+  "ida-reverse",
+  "reverse-skill-router",
+  "binary-diff",
+  "js-reverse",
+  "apk-reverse",
+  "power-systems-engineer",
+  "macos-reverse"
+ ],
+ "threat model a web app": [
+  "threat-model",
+  "convert-blazor-server-to-webapp",
+  "threat-hunting",
+  "security-best-practices",
+  "deep-security-scan",
+  "create-blazor-project",
+  "electron",
+  "audit-context-building"
+ ],
+ "static analysis rules": [
+  "malware-analysis",
+  "semgrep-rule-creator",
+  "render-static-sites",
+  "detect-static-dependencies",
+  "cuopt-user-rules",
+  "loki-label-analyzer",
+  "semgrep",
+  "migrate-static-to-wrapper"
+ ],
+ "calorie counter": [
+  "fitness-nutrition"
+ ]
+}
