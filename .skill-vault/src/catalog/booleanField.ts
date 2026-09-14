@@ -1,9 +1,8 @@
-function escapeRegExp(s: string): string {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+import { MetadataError } from "./errors";
+import { escapeRegExp } from "./pytext";
 
 // skill_toggle.py _read_boolean_field. `text` is whatever load_skill passes: the frontmatter body
-// (lines between the fences) for SKILL.md, the whole file for agents/openai.yaml.
+// (frontmatterBody(fm)) for SKILL.md, the whole file for agents/openai.yaml.
 export function readBooleanField(text: string, field: string, topLevel: boolean): boolean | null {
   const f = escapeRegExp(field);
   const indent = topLevel ? "" : "[ \\t]+";
@@ -18,8 +17,8 @@ export function readBooleanField(text: string, field: string, topLevel: boolean)
     if (m?.[1] !== undefined) values.push(m[1]);
     if (anyField.test(line)) seen += 1;
   }
-  if (seen > 1 || values.length > 1) throw new Error(`duplicate ${field} fields`);
-  if (seen > 0 && values.length === 0) throw new Error(`${field} must be true or false`);
+  if (seen > 1 || values.length > 1) throw new MetadataError(`duplicate ${field} fields`);
+  if (seen > 0 && values.length === 0) throw new MetadataError(`${field} must be true or false`);
   const v = values[0];
   return v === undefined ? null : v === "true";
 }

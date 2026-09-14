@@ -1,5 +1,6 @@
 import { readdirSync, realpathSync, statSync } from "node:fs";
 import { isAbsolute, join, relative, resolve } from "node:path";
+import { MetadataError } from "./errors";
 import type { SkillEntry } from "./types";
 
 // Bundles whose one-level children register as "<bundle>/<child>" (build.py discover_skills).
@@ -46,8 +47,8 @@ export function discoverSkills(
 ): SkillEntry[] {
   const skillsRoot = join(resolveRoot(root), "skills");
   if (!isDir(skillsRoot)) {
-    throw new Error(
-      `cannot discover skills: ${skillsRoot}: no skills directory under the vault root. ` +
+    throw new MetadataError(
+      `${skillsRoot}: no skills directory under the vault root. ` +
         "Pass --root pointing at the vault (the parent of skills/).",
     );
   }

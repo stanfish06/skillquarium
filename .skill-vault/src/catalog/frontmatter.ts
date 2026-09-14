@@ -1,12 +1,9 @@
 import { closeSync, openSync, readSync } from "node:fs";
+import { MetadataError } from "./errors";
+import { collapseWhitespace, escapeRegExp, PY_WS, pyStrip, universalNewlines } from "./pytext";
+import { decodeScalar } from "./scalar";
 import type { Frontmatter } from "./types";
 
-// Python's str.isspace() set, which its re `\s`, str.split() and str.strip() all use.
-// Differs from JS `\s` by \x1c-\x1f and \x85 (included) and \ufeff (excluded).
-const PY_WS =
-  "\\t\\n\\v\\f\\r\\x1c-\\x1f \\x85\\xa0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000";
-const WS_RUN = new RegExp(`[${PY_WS}]+`);
-const WS_EDGES = new RegExp(`^[${PY_WS}]+|[${PY_WS}]+$`, "g");
 // build.py: re.match(r"^---\s*\n(.*?)\n---\s*\n", text, re.DOTALL)
 const FM_BLOCK = new RegExp(`^---[${PY_WS}]*\\n([\\s\\S]*?)\\n---[${PY_WS}]*\\n`);
 const DESCRIPTION_KEY = new RegExp(`^description:[${PY_WS}]*([^\\n]*)$`);
@@ -15,26 +12,8 @@ const SCI_PROFILE = new RegExp(`(?:^|\\n)[${PY_WS}]*scientific-agents-profile:[$
 const SCI_SOURCE = new RegExp(`(?:^|\\n)[${PY_WS}]*source-repo:[${PY_WS}]*K-Dense-AI/scientific-agents\\b`);
 const BLOCK_INDICATORS = new Set([">", ">-", ">+", "|", "|-", "|+"]);
 
-/** Python str.strip() with no arguments. */
-export function pyStrip(s: string): string {
-  return s.replace(WS_EDGES, "");
-}
-
-/** Python `" ".join(s.split())`. */
-export function collapseWhitespace(s: string): string {
-  return s.split(WS_RUN).filter(Boolean).join(" ");
-}
-
-// Python opens files in universal-newline mode: "\r\n" and lone "\r" both read as "\n".
-function universalNewlines(text: string): string {
-  return text.replace(/\r\n?/g, "\n");
-}
-
-function escapeRegExp(s: string): string {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-// skill_toggle.py _frontmatter_lines; line endings are kept so a rewrite can preserve them.
+// skill_toggle.py _frontmatter_lines. No newline translation here, unlike Python's read_text:
+// Python's toggle rewrites CRLF files as LF, this port keeps each line's ending so rewrites preserve CRLF.
 export function splitFrontmatter(text: string): Frontmatter | null {
   const lines = text.match(/[^\n]*\n|[^\n]+$/g) ?? [];
   const first = lines[0];
@@ -45,6 +24,20 @@ export function splitFrontmatter(text: string): Frontmatter | null {
     }
   }
   return null;
+}
+
+/** splitFrontmatter with skill_toggle.py's MetadataError messages (minus the path prefix). */
+export function frontmatterOrThrow(text: string): Frontmatter {
+  const fm = splitFrontmatter(text);
+  if (fm) return fm;
+  const first = text.match(/^[^\n]*\n?/)?.[0] ?? "";
+  if (first === "" || pyStrip(first) !== "---") throw new MetadataError("SKILL.md has no YAML frontmatter");
+  throw new MetadataError("SKILL.md frontmatter is not closed");
+}
+
+/** Lines between the fences, endings kept: load_skill's `"".join(lines[1:closing_index])`. */
+export function frontmatterBody(fm: Frontmatter): string {
+  return fm.lines.slice(1, fm.closingIndex).join("");
 }
 
 // build.py read_description: only the description key, folded and quote-stripped for the vault notes.
@@ -59,6 +52,7 @@ export function readDescriptionForBuild(text: string): string | null {
       if (!km) continue;
       capturing = true;
       const rest = pyStrip(km[1] ?? "");
+      // build.py omits `>+` / `|+` from its indicator set, so those stay as description text.
       if (rest && ![">", "|", ">-", "|-"].includes(rest)) parts.push(rest);
     } else {
       // Only an unindented `key:` line or a `---` ends the block; indented `key:` lines are kept as text.
@@ -74,107 +68,6 @@ export function readDescriptionForBuild(text: string): string | null {
     raw = raw.replace(/^['"]+|['"]+$/g, "");
   }
   return collapseWhitespace(pyStrip(raw)) || null;
-}
-
-const SIMPLE_ESCAPES: Record<string, string> = {
-  "\\": "\\",
-  "'": "'",
-  '"': '"',
-  a: "\x07",
-  b: "\b",
-  f: "\f",
-  n: "\n",
-  r: "\r",
-  t: "\t",
-  v: "\v",
-};
-
-// Python string-literal escapes; null for \N{...}, which needs the Unicode name table.
-function decodePyEscapes(body: string): string | null {
-  let out = "";
-  for (let i = 0; i < body.length; i++) {
-    const ch = body[i] as string;
-    if (ch !== "\\") {
-      out += ch;
-      continue;
-    }
-    const next = body[i + 1];
-    if (next === undefined) return null;
-    const s = SIMPLE_ESCAPES[next];
-    if (s !== undefined) {
-      out += s;
-      i += 1;
-      continue;
-    }
-    if (next === "N") return null;
-    const oct = /^[0-7]{1,3}/.exec(body.slice(i + 1));
-    if (oct) {
-      out += String.fromCodePoint(Number.parseInt(oct[0], 8));
-      i += oct[0].length;
-      continue;
-    }
-    const hexLen = next === "x" ? 2 : next === "u" ? 4 : next === "U" ? 8 : 0;
-    if (hexLen > 0) {
-      const hex = body.slice(i + 2, i + 2 + hexLen);
-      const code = new RegExp(`^[0-9A-Fa-f]{${hexLen}}$`).test(hex) ? Number.parseInt(hex, 16) : Number.NaN;
-      if (Number.isNaN(code) || code > 0x10ffff) return null;
-      out += String.fromCodePoint(code);
-      i += 1 + hexLen;
-      continue;
-    }
-    // Unknown escapes keep the backslash, as Python does.
-    out += ch;
-  }
-  return out;
-}
-
-// ast.literal_eval on a value that starts and ends with `'`: adjacent literals concatenate
-// (so YAML's `''` collapses to nothing), escapes decode; null where Python raises.
-function pyLiteralEval(value: string): string | null {
-  let out = "";
-  let i = 0;
-  while (i < value.length) {
-    const ch = value[i];
-    if (ch === " " || ch === "\t") {
-      i += 1;
-      continue;
-    }
-    if (ch !== "'") return null;
-    let j = i + 1;
-    let body = "";
-    while (j < value.length && value[j] !== "'") {
-      if (value[j] === "\\") {
-        if (j + 1 >= value.length) return null;
-        body += value.slice(j, j + 2);
-        j += 2;
-      } else {
-        body += value[j];
-        j += 1;
-      }
-    }
-    if (j >= value.length) return null;
-    const decoded = decodePyEscapes(body);
-    if (decoded === null) return null;
-    out += decoded;
-    i = j + 1;
-  }
-  return out;
-}
-
-// skill_toggle.py _decode_scalar
-function decodeScalar(raw: string): string {
-  const value = pyStrip(raw);
-  if (value.length >= 2 && value.startsWith('"') && value.endsWith('"')) {
-    try {
-      return String(JSON.parse(value));
-    } catch {
-      return value.slice(1, -1);
-    }
-  }
-  if (value.length >= 2 && value.startsWith("'") && value.endsWith("'")) {
-    return pyLiteralEval(value) ?? value.slice(1, -1).replaceAll("''", "'");
-  }
-  return value;
 }
 
 // skill_toggle.py _frontmatter_scalar; null when the key is absent, "" when present but empty.
@@ -197,25 +90,34 @@ export function readScalar(fm: Frontmatter, key: string): string | null {
   return null;
 }
 
-// build.py is_scientific_agents_profile: Python's f.read(4096) yields 4096 code points after
-// newline translation, so decode a 16 KiB prefix (4 bytes per code point at most) and slice.
-export function isScientificAgentsProfile(file: string): boolean {
-  let text: string;
+/** First `bytes` of a file decoded as UTF-8; null when it cannot be read. */
+export function readHead(file: string, bytes: number): string | null {
   try {
     const fd = openSync(file, "r");
     try {
-      const buf = Buffer.alloc(16384);
-      const n = readSync(fd, buf, 0, buf.length, 0);
-      text = buf.subarray(0, n).toString("utf8");
+      const buf = Buffer.alloc(bytes);
+      const n = readSync(fd, buf, 0, bytes, 0);
+      return buf.subarray(0, n).toString("utf8");
     } finally {
       closeSync(fd);
     }
   } catch {
-    return false;
+    return null;
   }
-  const head = Array.from(universalNewlines(text)).slice(0, 4096).join("");
-  const m = FM_BLOCK.exec(head);
+}
+
+// build.py is_scientific_agents_profile over the text Python's f.read(4096) returns:
+// 4096 code points after newline translation, and the frontmatter must close inside them.
+export function isScientificAgentsHead(head: string): boolean {
+  const text = Array.from(universalNewlines(head)).slice(0, 4096).join("");
+  const m = FM_BLOCK.exec(text);
   if (!m) return false;
   const fm = m[1] ?? "";
   return SCI_PROFILE.test(fm) || SCI_SOURCE.test(fm);
+}
+
+// 16 KiB covers 4096 code points at 4 bytes each.
+export function isScientificAgentsProfile(file: string): boolean {
+  const head = readHead(file, 16384);
+  return head === null ? false : isScientificAgentsHead(head);
 }
