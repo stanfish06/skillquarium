@@ -24,8 +24,9 @@ const commands: Record<string, () => Promise<{ run: Command; help: string }>> = 
   load: () => import("./toggle/cli").then((m) => m.load),
   "pre-commit-reset": () => import("./toggle/cli").then((m) => m.preCommitReset),
   build: () => import("./build/command"),
-  // later tasks add: query, grep, embed, validate, install, update, overrides,
-  // drift, soften, import, eval
+  validate: () => import("./kg/validateCommand"),
+  embed: () => import("./embed/command"),
+  // later tasks add: query, grep, install, update, overrides, drift, soften, import, eval
 };
 
 // Build a Context; `config` memoizes loadConfig(root) so commands share one parse.
@@ -47,7 +48,8 @@ export function makeContext(root: string, json: boolean, overrides: ContextOverr
 
 // Split global flags (--root, --json) from the command and its arguments.
 export function parseGlobal(argv: string[]): { root: string; json: boolean; rest: string[] } {
-  let root = process.env.SKILLQUARIUM_ROOT ?? resolve(import.meta.dir, "../..");
+  // `||` not `??`: an empty SKILLQUARIUM_ROOT falls back to the repo root, as build.py did.
+  let root = process.env.SKILLQUARIUM_ROOT || resolve(import.meta.dir, "../..");
   let json = false;
   const rest: string[] = [];
   for (let i = 0; i < argv.length; i++) {

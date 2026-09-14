@@ -1,5 +1,14 @@
 import type { Command } from "../cli";
+import { buildGraph } from "../kg/build";
+import { writeGraph } from "../kg/write";
 import { buildVault } from "./run";
+
+// The graph reads domain assignments from the notes layer, so notes are rebuilt first.
+function buildKnowledgeGraph(root: string, out: (line: string) => void): void {
+  const graph = buildGraph(root);
+  const path = writeGraph(root, graph);
+  out(`wrote ${path} (${graph.nodes.length} nodes, ${graph.edges.length} edges)`);
+}
 
 export const help = `usage: skillquarium build [--prune] [--graph] [--force-aliases] [--notes-only|--kg-only]
 
@@ -8,8 +17,11 @@ Regenerate vault/notes, vault/maps and vault/index.md from skills/*/SKILL.md.
   --prune          delete wrapper notes whose skill folder is gone
   --graph          rewrite .obsidian/graph.json color groups and filter
   --force-aliases  regenerate aliases even where a note already has them
-  --notes-only     build the navigation layer only (the default)
-  --kg-only        build the knowledge graph only`;
+  --notes-only     build the navigation layer only
+  --kg-only        build the knowledge graph only
+
+Without --notes-only or --kg-only, both run: the navigation layer first, then the
+knowledge graph, which reads the domain assignments the notes layer writes.`;
 
 export const run: Command = async (args, ctx) => {
   const flags = new Set(args);
@@ -26,10 +38,10 @@ export const run: Command = async (args, ctx) => {
     return 2;
   }
   if (flags.has("--kg-only")) {
-    ctx.err("knowledge graph build lands in Task 5");
-    return 1;
+    buildKnowledgeGraph(ctx.root, ctx.out);
+    return 0;
   }
-  return buildVault(
+  const code = await buildVault(
     ctx.root,
     {
       prune: flags.has("--prune"),
@@ -38,4 +50,7 @@ export const run: Command = async (args, ctx) => {
     },
     { out: ctx.out, err: ctx.err },
   );
+  if (code !== 0 || flags.has("--notes-only")) return code;
+  buildKnowledgeGraph(ctx.root, ctx.out);
+  return 0;
 };
