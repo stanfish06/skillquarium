@@ -33,7 +33,8 @@ const commands: Record<string, () => Promise<{ run: Command; help: string }>> = 
   update: () => import("./update/cli").then((m) => m.update),
   import: () => import("./import/command"),
   eval: () => import("./evalCommand"),
-  // later tasks add: query, grep
+  query: () => import("./search/command").then((m) => m.query),
+  grep: () => import("./search/command").then((m) => m.grep),
 };
 
 // Build a Context; `config` memoizes loadConfig(root) so commands share one parse.
