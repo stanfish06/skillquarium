@@ -20,5 +20,9 @@ export async function runTui(root: string, query: string): Promise<number> {
 
   renderer.setTerminalTitle("Skillquarium");
   new SkillquariumApp(renderer, backend, catalog, query, new FsEvalSource(resolve(root, "eval")));
-  return 0;
+  // Resolve once the renderer is gone (q/Escape call destroy(); Ctrl-C does too via exitOnCtrlC).
+  // The "destroy" event fires before the terminal is restored, so defer to the next macrotask.
+  return new Promise<number>((done) => {
+    renderer.on("destroy", () => setImmediate(() => done(0)));
+  });
 }
