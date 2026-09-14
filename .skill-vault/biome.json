@@ -25,8 +25,19 @@
   "overrides": [
     {
       "includes": ["src/tui/app.ts", "src/tui/app.test.ts", "src/tui/backend.ts", "src/tui/evalruns.ts"],
-      "formatter": { "enabled": false },
-      "assist": { "enabled": false }
+      "formatter": {
+        "enabled": false
+      },
+      "assist": {
+        "enabled": false
+      },
+      "linter": {
+        "rules": {
+          "style": {
+            "noNonNullAssertion": "off"
+          }
+        }
+      }
     }
   ]
 }

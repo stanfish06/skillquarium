@@ -1,6 +1,12 @@
 #!/bin/sh
 set -eu
 VAULT_DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)
+PKG_DIR="$VAULT_DIR/.skill-vault"
+STAMP="$PKG_DIR/node_modules/.bun-install-stamp"
 command -v bun >/dev/null 2>&1 || { echo "skillquarium: bun is required (https://bun.sh)" >&2; exit 2; }
-[ -d "$VAULT_DIR/.skill-vault/node_modules/@opentui/core" ] || bun install --cwd "$VAULT_DIR/.skill-vault" --frozen-lockfile >/dev/null
-exec bun "$VAULT_DIR/.skill-vault/src/cli.ts" --root "$VAULT_DIR" "$@"
+# Reinstall when node_modules is missing or bun.lock changed since the last install.
+if [ ! -d "$PKG_DIR/node_modules/@opentui/core" ] || [ ! -e "$STAMP" ] || [ "$PKG_DIR/bun.lock" -nt "$STAMP" ]; then
+  bun install --frozen-lockfile --cwd "$PKG_DIR" >/dev/null
+  touch "$STAMP"
+fi
+exec bun "$PKG_DIR/src/cli.ts" --root "$VAULT_DIR" "$@"
