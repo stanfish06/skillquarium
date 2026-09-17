@@ -78,6 +78,7 @@ created: 2026-08-07
 - [rowan](../../notes/drug-discovery-chem/rowan.md) — Rowan is a cloud-native molecular modeling and medicinal-chemistry workflow platform with a Python API
 - [scikit-survival](../../notes/data-science-compute/scikit-survival.md) — Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival
 - [secure-workflow-guide](../../notes/security-auditing/secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
+- [security-audit](../../notes/security-auditing/security-audit.md) — Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons
 - [semgrep](../../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 - [slack](../../notes/web-automation-frontend/slack.md) — Read Slack context, route to the right Slack workflow, and prepare or perform Slack writes that match the user's intent
 - [snakemake-workflow-engine](../../notes/cloud-devops/snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines

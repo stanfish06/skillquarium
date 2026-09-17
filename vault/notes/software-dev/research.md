@@ -72,6 +72,7 @@ created: 2026-08-19
 - [scientific-critical-thinking](../../notes/research-writing/scientific-critical-thinking.md) — Evaluate research rigor. Assess methodology, experimental design, statistical validity, biases, confounding, evidence quality (GRADE, Cochrane ROB), for critical analysis of scientific...
 - [scientific-slides](../../notes/research-writing/scientific-slides.md) — Build slide decks and presentations for research talks
 - [scientific-writing](../../notes/research-writing/scientific-writing.md) — Core skill for the deep research and writing tool
+- [security-audit](../../notes/security-auditing/security-audit.md) — Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons
 - [statistical-analysis](../../notes/data-science-compute/statistical-analysis.md) — Guided statistical analysis for research data - test selection, assumption checking, effect sizes, power analysis, Bayesian alternatives, and APA-formatted reporting
 - [tech-paper-template](../../notes/research-writing/tech-paper-template.md) — Structures a technical paper's full logical skeleton using a thinking-template table (research background, limitations, key idea or goal, challenges, methodology modules...
 - [test-smell-detection](../../notes/dotnet-development/test-smell-detection.md) — Deep-dive audit using the full testsmells.org 19-smell academic catalog for tests in any language
