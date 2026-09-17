@@ -1590,6 +1590,7 @@
     "finding-discovery": "security-auditing",
     "fix-finding": "security-auditing",
     "propose-security-hardening": "security-auditing",
+    "security-audit": "security-auditing",
     "security-diff-scan": "security-auditing",
     "security-scan": "security-auditing",
     "threat-model": "security-auditing",

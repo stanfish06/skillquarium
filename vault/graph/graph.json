@@ -1,32 +1,32 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2134,
+  "skills": 2135,
   "expert_profiles": 503,
-  "nodes": 2207,
-  "edges": 15787,
+  "nodes": 2208,
+  "edges": 15806,
   "generic_names_blocked": 32,
-  "tier1_edges": 4750,
-  "tier2_edges": 702,
-  "alias_edges": 4494,
+  "tier1_edges": 4758,
+  "tier2_edges": 703,
+  "alias_edges": 4502,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.81,
+  "mean_skill_degree": 5.82,
   "median_skill_degree": 4,
   "orphan_count": 127,
   "orphan_rate": 0.0595,
   "by_provenance": {
-   "EXTRACTED": 15001,
+   "EXTRACTED": 15020,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2134,
-   "references": 12342,
+   "in_domain": 2135,
+   "references": 12360,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -26054,6 +26054,21 @@
    "deprecated": false
   },
   {
+   "id": "security-audit",
+   "type": "Skill",
+   "label": "security-audit",
+   "description": "Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons. Use for security questions, focused reviews, vulnerability research, security audits, or pen tests. Run the complete workflow only for explicit codebase audit or pen-test requests, full/comprehensive/end-to-end reviews, or requested report artifacts.",
+   "source": "skills/security-audit/SKILL.md",
+   "aliases": [
+    "security audit"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "security-best-practices",
    "type": "Skill",
    "label": "security-best-practices",
@@ -39987,6 +40002,15 @@
   {
    "src": "audit-prep-assistant",
    "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in audit-prep-assistant/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "audit-prep-assistant",
+   "rel": "references",
    "dst": "semgrep",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -40009,6 +40033,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of llm-agent-security-redteam appears in auditing-skills/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "auditing-skills",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in auditing-skills/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -50535,6 +50568,15 @@
   {
    "src": "ci-cd-and-automation",
    "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in ci-cd-and-automation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ci-cd-and-automation",
+   "rel": "references",
    "dst": "setup-pre-commit",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -53428,6 +53470,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "reverse-skill-router named in code-audit/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "code-audit",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in code-audit/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -69835,6 +69886,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in entry-point-analyzer/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "entry-point-analyzer",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in entry-point-analyzer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -102343,6 +102403,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pytest named in modern-python/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-python",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in modern-python/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -136476,6 +136545,15 @@
   {
    "src": "research",
    "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "research referenced in code/link context in security-audit/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "research",
+   "rel": "references",
    "dst": "wayfinder",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -147670,6 +147748,96 @@
    "status": "accepted"
   },
   {
+   "src": "security-audit",
+   "rel": "in_domain",
+   "dst": "domain:security-auditing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "audit-prep-assistant",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in audit-prep-assistant/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "auditing-skills",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in auditing-skills/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "ci-cd-and-automation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in ci-cd-and-automation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "code-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in code-audit/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "entry-point-analyzer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in entry-point-analyzer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "modern-python",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in modern-python/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "research",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "research referenced in code/link context in security-audit/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in security-scan/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "semgrep",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in semgrep/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "security-best-practices",
    "rel": "in_domain",
    "dst": "domain:security-auditing",
@@ -147874,6 +148042,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "security-scan named in secure-workflow-guide/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-scan",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in security-scan/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -148126,6 +148303,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "semgrep named in sarif-parsing/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "semgrep",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in semgrep/SKILL.md body",
    "status": "accepted"
   },
   {
