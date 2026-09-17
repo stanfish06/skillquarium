@@ -607,5 +607,14 @@
       "find": "async function mermaidParserValidation(content) {\n  // Try to use the mermaid library parser for deep validation\n  try {\n",
       "replace": "// mmdc parses in headless Chromium, so it needs no DOM shim; the in-process\n// mermaid import below fails on valid input with \"purify.addHook is not a\n// function\" because DOMPurify has no window in Node.\nfunction mmdcParserValidation(content) {\n  const mmdc = resolve(DEPS_DIR, \"node_modules/.bin/mmdc\");\n  if (!existsSync(mmdc)) return { available: false };\n  const dir = mkdtempSync(join(tmpdir(), \"mermaid-validate-\"));\n  const input = join(dir, \"input.mmd\");\n  const output = join(dir, \"output.svg\");\n  writeFileSync(input, content);\n  const args = [\"-i\", input, \"-o\", output, \"-q\"];\n  const puppeteerConfig = resolve(DEPS_DIR, \"puppeteer-config.json\");\n  if (existsSync(puppeteerConfig)) args.push(\"-p\", puppeteerConfig);\n  try {\n    execFileSync(mmdc, args, { stdio: \"pipe\", timeout: 60000 });\n    return { available: true, valid: true };\n  } catch (e) {\n    // mmdc prints the mermaid parse error on stderr; keep the first lines\n    const stderr = (e.stderr?.toString() || e.message || String(e)).trim();\n    const lines = stderr.split(\"\\n\").filter((l) => l.trim());\n    const trace = lines.findIndex((l) => /^\\s*(at |\\S+\\.parseError)/.test(l));\n    const message = (trace > 0 ? lines.slice(0, trace) : lines.slice(0, 6)).join(\"\\n  \");\n    return { available: true, valid: false, error: message };\n  } finally {\n    rmSync(dir, { recursive: true, force: true });\n  }\n}\n\nasync function mermaidParserValidation(content) {\n  const viaMmdc = mmdcParserValidation(content);\n  if (viaMmdc.available) return viaMmdc;\n  // Fallback: the mermaid library parser in-process\n  try {\n"
     }
+  ],
+  "audit-prep-assistant": [
+    {
+      "id": "dylint-through-cargo",
+      "issue": 539,
+      "source": "trailofbits/skills",
+      "find": "```bash\ndylint --all\n```",
+      "replace": "```bash\ncargo dylint --all\n```"
+    }
   ]
 }
