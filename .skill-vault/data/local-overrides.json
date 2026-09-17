@@ -810,5 +810,52 @@
       "find": "```bash\ndylint --all\n```",
       "replace": "```bash\ncargo dylint --all\n```"
     }
+  ],
+  "secure-workflow-guide": [
+    {
+      "id": "step4-tool-list",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "find": "- **Manticore**: Formal verification with symbolic execution",
+      "replace": "- **Halmos** or **Kontrol**: Formal verification with symbolic execution (Trail of Bits archived Manticore in June 2026)"
+    },
+    {
+      "id": "step4-report-line",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "find": "- **Step 4**: Documented security properties and testing setup (Echidna/Manticore)",
+      "replace": "- **Step 4**: Documented security properties and testing setup (Echidna/Halmos)"
+    },
+    {
+      "id": "step4-checklist-line",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "find": "- [ ] Testing to set up (Echidna/Manticore)",
+      "replace": "- [ ] Testing to set up (Echidna/Halmos)"
+    },
+    {
+      "id": "example-report-next-step",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "file": "resources/EXAMPLE_REPORT.md",
+      "find": "**Next Step:** Run Manticore for formal verification (optional, 2-3 days)",
+      "replace": "**Next Step:** Run Halmos for formal verification (optional, 2-3 days)"
+    },
+    {
+      "id": "example-report-action-item",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "file": "resources/EXAMPLE_REPORT.md",
+      "find": "6. **Add Manticore formal verification**",
+      "replace": "6. **Add Halmos formal verification**"
+    },
+    {
+      "id": "workflow-steps-tool",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "file": "resources/WORKFLOW_STEPS.md",
+      "find": "**Manticore (formal verification)**:\n- Define properties in Solidity or Python\n- Set up symbolic execution\n- Validate critical paths",
+      "replace": "**Halmos / Kontrol (formal verification)**:\n- Trail of Bits archived Manticore in June 2026 (\"no longer internally developed and maintained\"); symbolic execution for Foundry projects now goes through Halmos (a16z) or Kontrol (Runtime Verification)\n- Define properties as Foundry test invariants\n- Set up symbolic execution (`halmos --contract <Test>`, or `kontrol prove`)\n- Validate critical paths"
+    }
   ]
 }
