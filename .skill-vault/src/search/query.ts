@@ -3,7 +3,8 @@
 // model-free and the query text is never embedded, so a dead endpoint costs the query nothing.
 import { join } from "node:path";
 import { EMBED_DIR } from "../embed/store";
-import { indexFor } from "./bm25";
+import { indexFor, type Tokenizer } from "./bm25";
+import { TOKENIZER_PATH } from "./bpe";
 import type { FuzzyRanker } from "./fff";
 import { rrf, type Signal, type SignalName } from "./fusion";
 import type { VaultGraph } from "./graph";
@@ -12,8 +13,14 @@ import { retrieve, shapeResults } from "./retrieve";
 import type { Completion, QueryResult, Ranked } from "./types";
 import { nearestTo, type VectorIndex } from "./vectors";
 
+/** A signal a result can carry a rank from: the fused ones, plus BPE, which appends and never fuses. */
+export type ResultSignal = SignalName | "bpe";
+
 /** The order signal names are listed in, everywhere they are listed. */
-const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy"];
+export const SIGNAL_ORDER: readonly ResultSignal[] = ["lexical", "fuzzy", "bpe"];
+
+/** The `why` of a skill BPE appended: the list lacked it and BPE ranked it in its own top k. */
+export const BPE_WHY = "matched word pieces of the query (bpe)";
 
 /**
  * Cosine a neighbour has to clear to be worth a result slot. Measured over the committed index,
@@ -28,6 +35,8 @@ export interface QueryOptions {
   semantic: boolean;
   fuzzy: boolean;
   explain: boolean;
+  /** Append skills BPE finds that the result list lacks; absent means off. */
+  bpe?: boolean;
 }
 
 /** Everything the query reads from outside itself; the loaders run only for enabled signals. */
@@ -37,11 +46,13 @@ export interface QueryDeps {
   fuzzy: () => FuzzyRanker;
   rrfK: number;
   weights: Record<SignalName, number>;
+  /** The trained BPE model (null when untrained) and how many skills it may append. */
+  bpe?: { tokenizer: () => Tokenizer | null; extra: number };
 }
 
 export interface HybridResult extends QueryResult {
   /** Signal name -> the rank this skill took in that signal's own list. */
-  signals: Partial<Record<SignalName, number>>;
+  signals: Partial<Record<ResultSignal, number>>;
   stale?: true;
 }
 
@@ -127,6 +138,51 @@ export function similarToSeeds(index: VectorIndex, seeds: readonly Ranked[], bud
   return offers;
 }
 
+export interface Augmented {
+  /** Skills BPE ranked in its top k that `results` lacks, best first, at most `extra` of them. */
+  extras: QueryResult[];
+  /** id -> rank in BPE's top k, for every skill it ranked, including ones already in `results`. */
+  ranks: Map<string, number>;
+  notice: string | null;
+}
+
+const NOT_AUGMENTED: Augmented = { extras: [], ranks: new Map(), notice: null };
+
+/**
+ * BPE as an addon to the ASCII list, never a replacement: BM25 over the trained model's word
+ * pieces, whose top-k hits are appended after `results` only where `results` lacks them. Nothing
+ * already in the list moves, so a query with BPE on returns its ASCII answer unchanged as a prefix.
+ */
+export function augment(
+  root: string,
+  text: string,
+  results: readonly QueryResult[],
+  opts: QueryOptions,
+  deps: QueryDeps,
+): Augmented {
+  if (!opts.bpe || deps.bpe === undefined || deps.bpe.extra <= 0) return NOT_AUGMENTED;
+  const tokenizer = deps.bpe.tokenizer();
+  if (tokenizer === null) {
+    return {
+      ...NOT_AUGMENTED,
+      notice:
+        `bpe augmentation unavailable: no model at ${join(root, TOKENIZER_PATH)}; ` +
+        "run 'skillquarium tokenizer' to train it",
+    };
+  }
+  const hits = indexFor(deps.graph, tokenizer).topK(text, opts.k);
+  const ranks = new Map(hits.map((r) => [r.id, r.rank]));
+  const taken = new Set(results.map((r) => r.skill));
+  const picks: Expanded[] = [];
+  for (const hit of hits) {
+    if (picks.length >= deps.bpe.extra) break;
+    // Deprecated skills never surface through expansion either; BM25 itself does not filter them.
+    if (taken.has(hit.id) || deps.graph.nodes.get(hit.id)?.deprecated) continue;
+    picks.push({ id: hit.id, score: hit.score, why: BPE_WHY });
+  }
+  return { extras: shapeResults(deps.graph, picks), ranks, notice: null };
+}
+
 /**
  * Fused seeds through Task 7's graph expansion, plus the vector expansion off the same seeds.
  * Derived picks carry scores in [0.4, 0.6] from the graph and in [0.8, 1) from cosine, while a
@@ -162,6 +218,7 @@ function ranksById(signals: Signal[]): Map<string, Partial<Record<SignalName, nu
 
 interface Decoration {
   ranks: Map<string, Partial<Record<SignalName, number>>>;
+  bpeRanks: Map<string, number>;
   index: VectorIndex | null;
   fused: Map<string, number> | null;
   deps: QueryDeps;
@@ -169,15 +226,20 @@ interface Decoration {
 }
 
 function decorate(result: QueryResult, d: Decoration): HybridResult {
-  const signals = d.ranks.get(result.skill) ?? {};
+  const signals: Partial<Record<ResultSignal, number>> = { ...d.ranks.get(result.skill) };
+  const bpeRank = d.bpeRanks.get(result.skill);
+  if (bpeRank !== undefined) signals.bpe = bpeRank;
   const hit = SIGNAL_ORDER.filter((name) => signals[name] !== undefined);
+  // The why names only the fused signals, which ranked the skill; BPE's rank rides in `signals`.
+  const fusedHit = hit.filter((name) => name !== "bpe");
   let why = result.why;
-  if (why === DIRECT_WHY && hit.length > 0) why = `${DIRECT_WHY} (${hit.join(", ")})`;
+  if (why === DIRECT_WHY && fusedHit.length > 0) why = `${DIRECT_WHY} (${fusedHit.join(", ")})`;
   if (d.explain && hit.length > 0) {
     const parts = hit.map((name) => {
       const rank = signals[name] ?? 0;
-      // No fused map means no fusion ran (lexical only), so there is no contribution to report.
-      if (d.fused === null) return `${name} #${rank}`;
+      // No fused map means no fusion ran (lexical only), so there is no contribution to report;
+      // BPE never enters the fusion, so it has none either.
+      if (d.fused === null || name === "bpe") return `${name} #${rank}`;
       return `${name} #${rank} +${(d.deps.weights[name] / (d.deps.rrfK + rank)).toFixed(4)}`;
     });
     const total = d.fused?.get(result.skill);
@@ -200,24 +262,33 @@ export async function runQuery(
   if (!opts.semantic && !opts.fuzzy) {
     const { results, completions } = retrieve(deps.graph, text, opts.k);
     const lexical: Signal[] = [{ name: "lexical", results: indexFor(deps.graph).topK(text, opts.k) }];
+    const { extras, ranks: bpeRanks, notice } = augment(root, text, results, opts, deps);
     const d: Decoration = {
       ranks: ranksById(lexical),
+      bpeRanks,
       index: null,
       fused: null,
       deps,
       explain: opts.explain,
     };
-    return { results: results.map((r) => decorate(r, d)), completions, notices: [] };
+    return {
+      results: [...results, ...extras].map((r) => decorate(r, d)),
+      completions,
+      notices: notice === null ? [] : [notice],
+    };
   }
 
   const { signals, notices, index } = await gatherSignals(root, text, opts, deps);
   const { results, completions, fused } = expandFused(deps, signals, opts.k, index);
+  const { extras, ranks: bpeRanks, notice } = augment(root, text, results, opts, deps);
+  if (notice !== null) notices.push(notice);
   const d: Decoration = {
     ranks: ranksById(signals),
+    bpeRanks,
     index,
     fused: new Map(fused.map((r) => [r.id, r.score])),
     deps,
     explain: opts.explain,
   };
-  return { results: results.map((r) => decorate(r, d)), completions, notices };
+  return { results: [...results, ...extras].map((r) => decorate(r, d)), completions, notices };
 }

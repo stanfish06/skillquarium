@@ -3,10 +3,19 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { HASH_VERSION } from "../../src/embed/hash";
 import type { EmbedIndex } from "../../src/embed/store";
+import type { Tokenizer } from "../../src/search/bm25";
+import { Bpe } from "../../src/search/bpe";
 import type { FuzzyRanker } from "../../src/search/fff";
-import { loadGraph } from "../../src/search/graph";
+import { buildGraph, loadGraph } from "../../src/search/graph";
 import { DIRECT_WHY, SIMILAR_WHY, similarityBudget } from "../../src/search/graphExpand";
-import { type QueryDeps, type QueryOptions, runQuery } from "../../src/search/query";
+import {
+  augment,
+  BPE_WHY,
+  type HybridResult,
+  type QueryDeps,
+  type QueryOptions,
+  runQuery,
+} from "../../src/search/query";
 import { retrieve } from "../../src/search/retrieve";
 import type { QueryResult, Ranked } from "../../src/search/types";
 
@@ -239,4 +248,110 @@ test("explain adds the per-signal rank and the fused contribution", async () => 
   // An expansion pick was in no signal, so explain has nothing to add to what its why already says.
   const pymc = run.results.find((r) => r.skill === "pymc");
   expect(pymc?.why).toBe(`${SIMILAR_WHY} ${TOP_SEED} (cosine 0.94)`);
+});
+
+// --- BPE augmentation ---------------------------------------------------------
+
+const BPE_FIXTURE = resolve(import.meta.dir, "../fixtures/tokenizer/tokenizer.json");
+const fixtureBpe = Bpe.load(BPE_FIXTURE);
+const BPE: Tokenizer = { name: "bpe", encode: (t) => fixtureBpe.encode(t ?? "") };
+
+function withBpe(extra = 3, tokenizer: Tokenizer | null = BPE): Partial<QueryDeps> {
+  return { bpe: { tokenizer: () => tokenizer, extra } };
+}
+
+/** What ranking decided: signals are left out, since BPE adds its own rank there. */
+function ranking(r: HybridResult): Omit<HybridResult, "signals"> {
+  const { signals: _, ...rest } = r;
+  return rest;
+}
+
+test("bpe leaves every ASCII list intact as a prefix, lexical-only and hybrid, all 40 queries", async () => {
+  const index = fakeIndex({ harmonypy: 0, pymc: 20 });
+  let appended = 0;
+  for (const query of queries) {
+    for (const o of [opts(), opts({ semantic: true, fuzzy: true })]) {
+      const d = { vectors: () => index, fuzzy: fakeFuzzy([]) };
+      const ascii = await runQuery(ROOT, query, o, deps(d));
+      const both = await runQuery(ROOT, query, { ...o, bpe: true }, deps({ ...d, ...withBpe() }));
+      expect(both.results.slice(0, ascii.results.length).map(ranking)).toEqual(ascii.results.map(ranking));
+      expect(both.completions).toEqual(ascii.completions);
+      const extras = both.results.slice(ascii.results.length);
+      expect(extras.length).toBeLessThanOrEqual(3);
+      const seen = new Set(ascii.results.map((r) => r.skill));
+      for (const e of extras) {
+        expect(seen.has(e.skill)).toBe(false);
+        seen.add(e.skill);
+        expect(e.why).toBe(BPE_WHY);
+        // It may carry a lexical rank too: ASCII ranked it, just below the cut.
+        expect(e.signals.bpe).toBeDefined();
+      }
+      appended += extras.length;
+    }
+  }
+  // The property is vacuous if BPE never appends anything.
+  expect(appended).toBeGreaterThan(0);
+});
+
+test("bpe off, absent, or given no slots appends nothing and says nothing", async () => {
+  const base = await runQuery(ROOT, PROBE, opts(), deps());
+  for (const [o, d] of [
+    [opts({ bpe: false }), deps(withBpe())],
+    [opts({ bpe: true }), deps()],
+    [opts({ bpe: true }), deps(withBpe(0))],
+  ] as const) {
+    const run = await runQuery(ROOT, PROBE, o, d);
+    expect(run.results).toEqual(base.results);
+    expect(run.notices).toEqual([]);
+  }
+});
+
+test("an untrained model is one notice and the ASCII list alone", async () => {
+  const base = await runQuery(ROOT, PROBE, opts(), deps());
+  const run = await runQuery(ROOT, PROBE, opts({ bpe: true }), deps(withBpe(3, null)));
+  expect(run.results).toEqual(base.results);
+  expect(run.notices).toHaveLength(1);
+  expect(run.notices[0]).toContain("bpe augmentation unavailable");
+});
+
+test("bpe appends at most the configured count, best BPE rank first", async () => {
+  const one = await runQuery(ROOT, PROBE, opts({ bpe: true }), deps(withBpe(1)));
+  const three = await runQuery(ROOT, PROBE, opts({ bpe: true }), deps(withBpe(3)));
+  const tail = (r: typeof one) => r.results.filter((x) => x.why === BPE_WHY);
+  expect(tail(one).length).toBe(1);
+  expect(tail(three)[0]?.skill).toBe(tail(one)[0]?.skill);
+  const ranks = tail(three).map((r) => r.signals.bpe ?? 0);
+  expect(ranks).toEqual([...ranks].sort((a, b) => a - b));
+});
+
+test("a deprecated skill is never appended", () => {
+  const tiny = buildGraph({
+    nodes: [
+      {
+        id: "old-parser",
+        type: "Skill",
+        label: "old-parser",
+        description: "parse binaries",
+        deprecated: true,
+      },
+      { id: "new-parser", type: "Skill", label: "new-parser", description: "parse binaries" },
+      { id: "plotter", type: "Skill", label: "plotter", description: "draw charts" },
+    ],
+    edges: [],
+  });
+  const { extras } = augment(ROOT, "binaries", [], opts({ bpe: true }), deps({ graph: tiny, ...withBpe() }));
+  expect(extras.map((r) => r.skill)).toEqual(["new-parser"]);
+});
+
+test("explain shows a BPE rank on an ASCII hit without a fused contribution", async () => {
+  let checked = 0;
+  for (const query of queries) {
+    const run = await runQuery(ROOT, query, opts({ bpe: true, explain: true }), deps(withBpe()));
+    for (const r of run.results) {
+      if (!r.why.startsWith(DIRECT_WHY) || r.signals.bpe === undefined) continue;
+      checked += 1;
+      expect(r.why).toBe(`${DIRECT_WHY} (lexical) [lexical #${r.signals.lexical}, bpe #${r.signals.bpe}]`);
+    }
+  }
+  expect(checked).toBeGreaterThan(0);
 });
