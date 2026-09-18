@@ -107,7 +107,7 @@ whether the skill is switched on, and a rebuilt index is the same bytes whoever 
 
 ## The BPE addon
 
-After the regular results, `query` appends up to `query.bpeExtra` (default 3) skills from a second
+After the regular results, `query` appends up to `query.bpeExtra` (default 5) skills from a second
 BM25 over the word pieces of `vault/tokenizer/tokenizer.json`, skipping any already listed. They are
 tagged `[bpe #N]` and catch word forms ASCII matching misses: `binary` and `binaries` share a piece.
 Nothing before them moves, so the first k results are the same with or without it. The pieces also

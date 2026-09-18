@@ -138,7 +138,7 @@ test("bpe appends after the ASCII list and never reorders or drops it", async ()
   expect(withBpe.slice(0, ascii.length)).toEqual(ascii);
   const extras = withBpe.slice(ascii.length);
   expect(extras.length).toBeGreaterThan(0);
-  expect(extras.length).toBeLessThanOrEqual(3);
+  expect(extras.length).toBeLessThanOrEqual(5);
   for (const e of extras) {
     expect(e.why).toBe("matched word pieces of the query (bpe)");
     expect(ascii.map((r) => r.skill)).not.toContain(e.skill);

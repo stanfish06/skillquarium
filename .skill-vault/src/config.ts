@@ -30,7 +30,7 @@ const Schema = z.strictObject({
       k: z.number().int().positive().default(8),
       rrfK: z.number().positive().default(60),
       // Skills the trained BPE model may append after the ASCII list; 0 turns BPE off.
-      bpeExtra: z.number().int().min(0).default(3),
+      bpeExtra: z.number().int().min(0).default(5),
       weights: z
         .strictObject({
           lexical: z.number().default(1),
