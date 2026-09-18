@@ -496,6 +496,136 @@
       "replace": "- **Schema Migration**: Use PRAGMA user_version to track schema version and apply migration scripts sequentially on application startup. Wrap each step and its user_version bump in one BEGIN/COMMIT — SQLite DDL is transactional, so a failure then leaves neither a half-applied schema nor a version that lies about it\n\n##"
     }
   ],
+  "semgrep": [
+    {
+      "id": "registry-js-framework-ids",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.js`, `.jsx` | `p/javascript` | `p/react`, `p/nodejs`, `p/express`, `p/nextjs`, `p/angular` |",
+      "replace": "| `.js`, `.jsx` | `p/javascript` | `p/react`, `p/nodejs`, `p/expressjs`, `p/nextjs` |"
+    },
+    {
+      "id": "registry-ts-framework-ids",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.ts`, `.tsx` | `p/typescript` | `p/react`, `p/nodejs`, `p/express`, `p/nextjs`, `p/angular` |",
+      "replace": "| `.ts`, `.tsx` | `p/typescript` | `p/react`, `p/nodejs`, `p/expressjs`, `p/nextjs` |"
+    },
+    {
+      "id": "registry-go-no-alias",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.go` | `p/golang` | `p/go` (alias) |",
+      "replace": "| `.go` | `p/golang` | - |"
+    },
+    {
+      "id": "registry-java-no-spring",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.java` | `p/java` | `p/spring`, `p/findsecbugs` |",
+      "replace": "| `.java` | `p/java` | `p/findsecbugs` |"
+    },
+    {
+      "id": "registry-kotlin-no-spring",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.kt` | `p/kotlin` | `p/spring` |",
+      "replace": "| `.kt` | `p/kotlin` | - |"
+    },
+    {
+      "id": "registry-ruby-brakeman",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.rb` | `p/ruby` | `p/rails` |",
+      "replace": "| `.rb` | `p/ruby` | `p/brakeman` |"
+    },
+    {
+      "id": "registry-php-framework-ids",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.php` | `p/php` | `p/symfony`, `p/laravel`, `p/phpcs-security-audit` |",
+      "replace": "| `.php` | `p/php` | `p/php-laravel`, `p/phpcs-security-audit` |"
+    },
+    {
+      "id": "registry-drop-yaml-language-row",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.yaml`, `.yml` | `p/yaml` | K8s, GitHub Actions, docker-compose patterns |\n",
+      "replace": ""
+    },
+    {
+      "id": "registry-drop-angular-hint",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| Angular | `angular.json`, `@angular/` dependencies | `p/angular` |\n",
+      "replace": ""
+    },
+    {
+      "id": "registry-express-hint-id",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `express` in package.json, `app.use()` patterns | `p/express` |",
+      "replace": "| `express` in package.json, `app.use()` patterns | `p/expressjs` |"
+    },
+    {
+      "id": "registry-drop-spring-hint",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| Spring | `pom.xml` with spring, `@SpringBootApplication` | `p/spring` |\n",
+      "replace": ""
+    },
+    {
+      "id": "registry-rails-hint-id",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `Gemfile` with rails, `config/routes.rb` | `p/rails` |",
+      "replace": "| `Gemfile` with rails, `config/routes.rb` | `p/brakeman` |"
+    },
+    {
+      "id": "registry-laravel-hint-id",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `composer.json` with laravel, `artisan` | `p/laravel` |",
+      "replace": "| `composer.json` with laravel, `artisan` | `p/php-laravel` |"
+    },
+    {
+      "id": "registry-drop-symfony-hint",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| Symfony | `composer.json` with symfony, `config/packages/` | `p/symfony` |\n",
+      "replace": ""
+    },
+    {
+      "id": "registry-drop-cloudformation-row",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| CloudFormation | `p/cloudformation` | AWS infrastructure security |\n",
+      "replace": ""
+    },
+    {
+      "id": "registry-drop-yaml-infra-row",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.yaml`, `.yml` | `p/yaml` | Generic YAML patterns (K8s, docker-compose) |\n",
+      "replace": ""
+    }
+  ],
   "htmx": [
     {
       "id": "error-responses-not-swapped-by-default",
