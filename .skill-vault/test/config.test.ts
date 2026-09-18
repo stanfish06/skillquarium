@@ -56,7 +56,7 @@ describe("config", () => {
     expect(c.embed.url).toBe("http://127.0.0.1:8080");
     expect(c.embed.model).toBeNull();
     expect(c.query.rrfK).toBe(60);
-    expect(c.query.bpeExtra).toBe(3);
+    expect(c.query.bpeExtra).toBe(5);
     expect(c.tokenizer).toEqual({ bin: "skill-tokenizer", vocabSize: 4000 });
     expect(c.skillsCliVersion).toBe("1.5.23");
   });

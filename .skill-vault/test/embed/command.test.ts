@@ -19,7 +19,7 @@ const config: Config = {
   // Unroutable on purpose: every assertion here must stay off the network.
   embed: { url: "http://127.0.0.1:1", model: null, batchSize: 16, timeoutMs: 100, retries: 0 },
   tokenizer: { bin: "skill-tokenizer", vocabSize: 4000 },
-  query: { k: 8, rrfK: 60, bpeExtra: 3, weights: { lexical: 1, fuzzy: 1 } },
+  query: { k: 8, rrfK: 60, bpeExtra: 5, weights: { lexical: 1, fuzzy: 1 } },
 };
 
 function vault(): { root: string; ctx: Context; out: string[]; err: string[] } {
