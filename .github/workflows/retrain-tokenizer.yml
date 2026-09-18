@@ -1,0 +1,119 @@
+name: Retrain BPE tokenizer
+
+# Retrains vault/tokenizer/tokenizer.json, the BPE model `skillquarium query`
+# uses to append [bpe #N] results, whenever the skill markdown it is trained on
+# changes, and commits it back. Queries never need this: they encode with the
+# committed model in-process. Only training needs the Rust skill-tokenizer
+# binary, which is built here and cached per pinned revision.
+#
+# Triggers
+# --------
+# update-skills.yml commits with [skip ci], so its daily sync never fires a
+# push trigger; workflow_run catches it instead. It runs whatever that job
+# concluded: update-skills goes red on a partial update even after committing
+# the part that succeeded (#827), and that part still needs a retrain.
+#
+# Concurrency
+# -----------
+# Not in the shared vault-write group: GitHub keeps one pending run per group
+# and cancels the older one, so a third member could cancel a queued
+# rebuild-index. This job commits only vault/tokenizer/tokenizer.json, which no
+# other workflow writes, so its pull --rebase retry cannot conflict.
+#
+# Training is deterministic: an unchanged corpus reproduces the committed
+# model byte for byte, so a run with nothing new commits nothing.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "skills/**/*.md"
+      - ".skill-vault/src/tokenizer/**"
+      - ".github/workflows/retrain-tokenizer.yml"
+  workflow_run:
+    workflows: ["Update skills + rebuild"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tokenizer-retrain
+  cancel-in-progress: false
+
+env:
+  # Pinned for reproducibility; bump deliberately. Changing it retrains.
+  SKILL_TOKENIZER_REV: 3affbe835c54bbf6d77aa2806c5e4a31006ca1b5
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore skill-tokenizer binary
+        id: bin
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/skill-tokenizer-bin
+          key: skill-tokenizer-${{ runner.os }}-${{ runner.arch }}-${{ env.SKILL_TOKENIZER_REV }}
+
+      - name: Check out skill-tokenizer
+        if: steps.bin.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: stanfish06/skill-tokenizer
+          ref: ${{ env.SKILL_TOKENIZER_REV }}
+          # vendors/tokenizers is a submodule the workspace builds from.
+          submodules: recursive
+          path: .skill-tokenizer-src
+          persist-credentials: false
+
+      - name: Build skill-tokenizer
+        if: steps.bin.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          cargo build --release --locked -p skill-tokenizer --manifest-path .skill-tokenizer-src/Cargo.toml
+          mkdir -p "$RUNNER_TEMP/skill-tokenizer-bin"
+          cp .skill-tokenizer-src/target/release/skill-tokenizer "$RUNNER_TEMP/skill-tokenizer-bin/"
+          rm -rf .skill-tokenizer-src
+
+      - name: Put skill-tokenizer on PATH
+        run: echo "$RUNNER_TEMP/skill-tokenizer-bin" >> "$GITHUB_PATH"
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+
+      - name: Install CLI dependencies
+        run: bun install --frozen-lockfile --cwd .skill-vault
+
+      - name: Retrain tokenizer
+        # Trains on tracked skills/**/*.md with toggle fields stripped, and refuses
+        # to install a model the in-process encoder cannot load or that has no merges.
+        run: ./skillquarium tokenizer
+
+      - name: Record retrieval eval
+        # Visibility, not a gate: +bpe vs its same-length ascii@N control, per run.
+        run: |
+          set -euo pipefail
+          {
+            echo '### Retrieval eval after retrain'
+            echo '```'
+            ./skillquarium query --eval
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit retrained model
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vault/tokenizer/tokenizer.json
+          if git diff --cached --quiet; then
+            echo "Tokenizer already matches the current skills — nothing to commit."
+          else
+            git commit -m "chore(tokenizer): retrain on current skills [skip ci]"
+            git push || { git pull --rebase origin master && git push; }
+          fi

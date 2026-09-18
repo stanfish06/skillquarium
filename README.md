@@ -136,7 +136,8 @@ No other command contacts it.
 `query` ranks with BM25 over ASCII words (runs of `[a-z0-9]`), then appends up to
 `query.bpeExtra` (default 5) skills that BM25 over the committed BPE model's word pieces finds and
 that list lacks, tagged `[bpe #N]`. The ASCII list itself never changes; `--no-bpe` or
-`bpeExtra: 0` turns the addon off. `tokenizer` retrains the model with
+`bpeExtra: 0` turns the addon off. The `retrain-tokenizer` workflow retrains and commits the model
+whenever skill markdown changes on master; locally, `tokenizer` retrains it with
 [skill-tokenizer](https://github.com/stanfish06/skill-tokenizer) on PATH or at `tokenizer.bin`;
 queries encode in-process and never run the binary.
 

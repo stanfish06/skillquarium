@@ -182,7 +182,7 @@ Know these by name so you reach for them automatically.
   It needs the llama.cpp endpoint named in `.skill-vault/config.local.json`; without it
   `query` still runs on BM25, fuzzy matching, and the graph.
 - `query` appends up to 5 skills found by BM25 over a trained BPE model's word pieces, after
-  the regular results and tagged `[bpe #N]`. `./skillquarium tokenizer` retrains that model on the
-  tracked skill markdown; it needs the `skill-tokenizer` binary, queries do not.
+  the regular results and tagged `[bpe #N]`. CI retrains that model when skills change; to do it
+  locally, `./skillquarium tokenizer` needs the `skill-tokenizer` binary. Queries need neither.
 - This `AGENTS.md` is the canonical guide; symlink or copy it to wherever each tool looks
   (e.g. a project root, or alongside your tool's global instructions).
