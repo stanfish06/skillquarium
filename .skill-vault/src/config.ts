@@ -18,15 +18,23 @@ const Schema = z.strictObject({
       retries: z.number().int().min(0).default(3),
     })
     .prefault({}),
+  // Build-time only: `skillquarium tokenizer` runs `bin` to train vault/tokenizer/tokenizer.json.
+  tokenizer: z
+    .strictObject({
+      bin: z.string().default("skill-tokenizer"),
+      vocabSize: z.number().int().positive().default(4000),
+    })
+    .prefault({}),
   query: z
     .strictObject({
       k: z.number().int().positive().default(8),
       rrfK: z.number().positive().default(60),
+      // Skills the trained BPE model may append after the ASCII list; 0 turns BPE off.
+      bpeExtra: z.number().int().min(0).default(5),
       weights: z
         .strictObject({
           lexical: z.number().default(1),
           fuzzy: z.number().default(1),
-          semantic: z.number().default(1),
         })
         .prefault({}),
     })

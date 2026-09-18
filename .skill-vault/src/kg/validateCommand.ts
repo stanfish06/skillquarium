@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
-import { discoverSkills } from "../catalog";
+import { discoverSkills, isInstallableExtra } from "../catalog";
 import type { Command } from "../cli";
 import { EMBED_DIR, readManifest, staleSkills } from "../embed/store";
 import type { Graph } from "./types";
@@ -35,7 +35,11 @@ function loadEmbedState(root: string): EmbedState | null {
   if (!existsSync(join(root, EMBED_DIR))) return null;
   const manifest = readManifest(root);
   if (!manifest) return null;
-  const entries = discoverSkills(root, { bundles: false, excludeTransient: true });
+  // The same set embedVault indexes: a locally installed extra is never in the committed manifest,
+  // so counting it here would report an unfixable stale skill on every run.
+  const entries = discoverSkills(root, { bundles: false, excludeTransient: true }).filter(
+    (e) => !isInstallableExtra(e.id),
+  );
   return { stale: staleSkills(root, manifest, entries), total: entries.length };
 }
 

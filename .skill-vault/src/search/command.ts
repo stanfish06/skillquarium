@@ -1,14 +1,14 @@
 import { existsSync } from "node:fs";
 import type { Command, Context } from "../cli";
-import { llamaCppClient } from "../embed/client";
 import { graphPath } from "../kg/write";
+import type { Tokenizer } from "./bm25";
+import { loadBpeTokenizer } from "./bpe";
 import type { EvalReport } from "./evalSet";
-import { offlineEmbed, runEval } from "./evalSet";
+import { runEval } from "./evalSet";
 import { destroyFinder, type FuzzyRanker, fffRanker } from "./fff";
-import type { SignalName } from "./fusion";
 import { loadGraph } from "./graph";
 import { grepSkills } from "./grep";
-import { type HybridResult, type QueryDeps, type QueryOptions, runQuery } from "./query";
+import { type HybridResult, type QueryDeps, type QueryOptions, runQuery, SIGNAL_ORDER } from "./query";
 import { loadVectorIndex, type VectorIndex } from "./vectors";
 
 interface CommandModule {
@@ -16,25 +16,22 @@ interface CommandModule {
   help: string;
 }
 
-const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy", "semantic"];
+const queryHelp = `usage: skillquarium [--json] query <text...> [--k N] [--no-semantic] [--no-fuzzy] [--no-bpe] [--explain] [--eval]
 
-/**
- * First-contact timeout for the one vector a query needs. The configured embed.timeoutMs sizes the
- * batch `embed` path, where a 16-input request against a busy GPU host legitimately takes minutes;
- * here it only decides how long an interactive query waits before dropping the semantic signal.
- */
-const QUERY_TIMEOUT_MS = 5_000;
+Retrieve skills by fusing BM25 over the graph with fuzzy path search, then expanding those
+seeds through the knowledge graph and through the nearest skills in the committed vectors.
+The query text is never embedded, so no embedding endpoint is contacted.
 
-const queryHelp = `usage: skillquarium [--json] query <text...> [--k N] [--no-semantic] [--no-fuzzy] [--explain] [--eval]
-
-Retrieve skills by fusing BM25 over the graph, fuzzy path search and semantic vectors,
-then expanding through the knowledge graph.
+After that list, up to config query.bpeExtra more skills are appended from BM25 over the word
+pieces of the model 'skillquarium tokenizer' trains, where the list lacks them. They are tagged
+[bpe #N]; nothing before them moves.
 
   --k N           results to return (default: config query.k)
-  --no-semantic   skip the vector signal; no embedding request is made
+  --no-semantic   skip the similarity expansion; the vector index is not read
   --no-fuzzy      skip the fff path signal
-  --explain       add each result's per-signal rank and fused contribution
-  --eval          score the signals over data/retrieval-eval.jsonl instead of querying`;
+  --no-bpe        append nothing from the BPE model; the list is exactly the ASCII one
+  --explain       add each result's per-signal rank, fused contribution and cosine
+  --eval          score the pipeline over data/retrieval-eval.jsonl instead of querying`;
 
 const grepHelp = `usage: skillquarium [--json] grep <pattern> [-- rg flags]
 
@@ -44,7 +41,6 @@ Results are grouped by skill.`;
 interface QueryArgs extends QueryOptions {
   text: string;
   eval: boolean;
-  live: boolean;
 }
 
 class UsageError extends Error {}
@@ -57,8 +53,8 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     semantic: true,
     fuzzy: true,
     explain: false,
+    bpe: true,
     eval: false,
-    live: false,
   };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i] ?? "";
@@ -67,9 +63,9 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     else if (arg.startsWith("--k=")) k = arg.slice("--k=".length);
     else if (arg === "--no-semantic") parsed.semantic = false;
     else if (arg === "--no-fuzzy") parsed.fuzzy = false;
+    else if (arg === "--no-bpe") parsed.bpe = false;
     else if (arg === "--explain") parsed.explain = true;
     else if (arg === "--eval") parsed.eval = true;
-    else if (arg === "--live") parsed.live = true;
     else if (arg.startsWith("--")) throw new UsageError(`unknown option ${arg}`);
     else {
       words.push(arg);
@@ -92,14 +88,21 @@ async function queryDeps(ctx: Context): Promise<QueryDeps> {
   const cfg = await ctx.config();
   let ranker: FuzzyRanker | undefined;
   let vectors: VectorIndex | null | undefined;
+  let bpe: Tokenizer | null | undefined;
   return {
     graph: loadGraph(path),
+    bpe: {
+      tokenizer: () => {
+        if (bpe === undefined) bpe = loadBpeTokenizer(ctx.root);
+        return bpe;
+      },
+      extra: cfg.query.bpeExtra,
+    },
     // Read once per process: --eval asks 40 times and the index is one file per skill.
     vectors: () => {
       if (vectors === undefined) vectors = loadVectorIndex(ctx.root);
       return vectors;
     },
-    embed: () => llamaCppClient({ ...cfg.embed, timeoutMs: Math.min(cfg.embed.timeoutMs, QUERY_TIMEOUT_MS) }),
     fuzzy: () => {
       ranker ??= fffRanker(ctx.root);
       return ranker;
@@ -132,9 +135,14 @@ function printResults(ctx: Context, run: Awaited<ReturnType<typeof runQuery>>, a
 
 function printEval(ctx: Context, report: EvalReport): void {
   ctx.out(`retrieval eval: ${report.queries} queries, k=${report.k}\n`);
-  ctx.out(`  ${"signal".padEnd(10)}${`recall@${report.k}`.padStart(10)}${"MRR".padStart(8)}`);
+  ctx.out(`  ${"stage".padEnd(10)}${`recall@${report.k}`.padStart(10)}${"MRR".padStart(8)}`);
   for (const s of report.scores) {
     ctx.out(`  ${s.name.padEnd(10)}${s.recall.toFixed(3).padStart(10)}${s.mrr.toFixed(3).padStart(8)}`);
+  }
+  if (report.augmented !== null) {
+    ctx.out(
+      `\n  +bpe and ascii@${report.augmented} score lists of up to ${report.augmented}; the rest score ${report.k}.`,
+    );
   }
 }
 
@@ -153,9 +161,7 @@ const queryRun: Command = async (args, ctx) => {
   }
   try {
     if (parsed.eval) {
-      // The committed query vectors are why the eval scores without the endpoint; --live re-embeds.
-      const client = parsed.live ? undefined : offlineEmbed(ctx.root);
-      const report = await runEval(ctx.root, deps, parsed, client);
+      const report = await runEval(ctx.root, deps, parsed);
       for (const notice of report.notices) ctx.err(notice);
       if (ctx.json) ctx.out(JSON.stringify(report, null, 1));
       else printEval(ctx, report);

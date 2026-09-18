@@ -113,7 +113,7 @@ Scriptable commands use the same safe backend:
 ```
 
 `./skillquarium -h` lists every subcommand. Beyond the toggles above:
-`doctor`, `catalog`, `preview`, `build`, `validate`, `embed`, `install`,
+`doctor`, `catalog`, `preview`, `build`, `validate`, `embed`, `tokenizer`, `install`,
 `overrides`, `drift`, `soften`, `update`, `import`, `eval`, `query`, `grep`.
 Each takes `--help`.
 
@@ -126,20 +126,20 @@ As a workaround, one can use pi as the harness for gpt models.
 ```bash
 ./skillquarium query "raw fastq to enriched pathways"   # ranked skills, --k N, --json, --explain
 ./skillquarium grep "AnnData"                           # literal text in skills/, grouped by skill
-./skillquarium embed                                    # refresh the vectors query searches
+./skillquarium embed                                    # refresh vault/embeddings/ (committed)
+./skillquarium tokenizer                                # retrain vault/tokenizer/tokenizer.json (committed)
 ```
 
-`query` fuses three rankings — BM25 over the skill graph, typo-tolerant filename matching,
-and cosine similarity over sentence embeddings — then walks the graph's `chains_to` /
-`co_occurs_with` edges so the neighbouring steps of a workflow come back with the step you
-asked for.
+`embed` needs a llama.cpp `/v1/embeddings` URL in the gitignored `.skill-vault/config.local.json`.
+No other command contacts it.
 
-The embedding index lives in `vault/embeddings/` and **is committed**: one `<skill>.f16` file
-per skill holding a float16 vector for its description and one for its body. `./skillquarium
-embed` rebuilds only the skills whose text changed, against a local llama.cpp
-`/v1/embeddings` endpoint whose URL goes in the gitignored `.skill-vault/config.local.json`.
-Nobody needs that endpoint to search — with no index, or with `--no-semantic`, `query` falls
-back to the lexical and fuzzy signals plus graph expansion.
+`query` ranks with BM25 over ASCII words (runs of `[a-z0-9]`), then appends up to
+`query.bpeExtra` (default 5) skills that BM25 over the committed BPE model's word pieces finds and
+that list lacks, tagged `[bpe #N]`. The ASCII list itself never changes; `--no-bpe` or
+`bpeExtra: 0` turns the addon off. The `retrain-tokenizer` workflow retrains and commits the model
+whenever skill markdown changes on master; locally, `tokenizer` retrains it with
+[skill-tokenizer](https://github.com/stanfish06/skill-tokenizer) on PATH or at `tokenizer.bin`;
+queries encode in-process and never run the binary.
 
 ## Regenerating the navigation layer
 

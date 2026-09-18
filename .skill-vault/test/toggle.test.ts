@@ -248,7 +248,8 @@ describe("skill toggle", () => {
  * the "skill toggle" unit tests above. And the skill set itself: installing an optional extra such
  * as gstack adds keys the golden cannot have. So the assertion is key/name/description/category
  * over the keys the golden and the tree share, every golden key must still be present, and an
- * extra key is tolerated only when it is a known installable extra.
+ * key the golden has never seen is normal — the vault syncs upstream daily and skills get added
+ * by hand — so only a golden key the tree has LOST fails here.
  */
 describe("catalog and list regression fixtures", () => {
   const STABLE = ["key", "name", "description", "category"] as const;
@@ -266,9 +267,6 @@ describe("catalog and list regression fixtures", () => {
 
     const byKey = new Map(actual.skills.map((s) => [s.key, s]));
     expect(golden.skills.map((s) => s.key).filter((key) => !byKey.has(key))).toEqual([]);
-    expect(
-      actual.skills.map((s) => s.key).filter((key) => !GOLDEN_KEYS.has(key) && !isInstallableExtra(key)),
-    ).toEqual([]);
 
     const mismatches: string[] = [];
     for (const want of golden.skills) {
@@ -298,7 +296,6 @@ describe("catalog and list regression fixtures", () => {
     const expected = lines.map(columns);
 
     expect(expected.filter(([key]) => !actual.has(key)).map(([key]) => key)).toEqual([]);
-    expect([...actual.keys()].filter((key) => !GOLDEN_KEYS.has(key) && !isInstallableExtra(key))).toEqual([]);
     expect(
       expected.filter(([key, rest]) => actual.has(key) && actual.get(key) !== rest).map(([key]) => key),
     ).toEqual([]);

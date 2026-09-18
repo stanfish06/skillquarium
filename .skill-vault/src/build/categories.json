@@ -1590,6 +1590,7 @@
     "finding-discovery": "security-auditing",
     "fix-finding": "security-auditing",
     "propose-security-hardening": "security-auditing",
+    "security-audit": "security-auditing",
     "security-diff-scan": "security-auditing",
     "security-scan": "security-auditing",
     "threat-model": "security-auditing",
@@ -2046,7 +2047,8 @@
     "rust-trait-explorer": "software-dev",
     "unsafe-checker": "software-dev",
     "cpp-pro": "software-dev",
-    "csharp-developer": "software-dev"
+    "csharp-developer": "software-dev",
+    "skillquarium": "vault-meta"
   },
   "synonyms": {
     "pydeseq2": [

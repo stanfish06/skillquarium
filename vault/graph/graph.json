@@ -1,34 +1,34 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2133,
+  "skills": 2135,
   "expert_profiles": 503,
-  "nodes": 2206,
-  "edges": 15777,
+  "nodes": 2208,
+  "edges": 15806,
   "generic_names_blocked": 32,
-  "tier1_edges": 4747,
-  "tier2_edges": 701,
-  "alias_edges": 4494,
+  "tier1_edges": 4758,
+  "tier2_edges": 703,
+  "alias_edges": 4502,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
-  "artifact_edges": 524,
+  "artifact_edges": 525,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.81,
+  "mean_skill_degree": 5.82,
   "median_skill_degree": 4,
   "orphan_count": 127,
   "orphan_rate": 0.0595,
   "by_provenance": {
-   "EXTRACTED": 14991,
+   "EXTRACTED": 15020,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2133,
-   "references": 12334,
+   "in_domain": 2135,
+   "references": 12360,
    "in_discipline": 599,
-   "touches": 524,
+   "touches": 525,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -26054,6 +26054,21 @@
    "deprecated": false
   },
   {
+   "id": "security-audit",
+   "type": "Skill",
+   "label": "security-audit",
+   "description": "Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons. Use for security questions, focused reviews, vulnerability research, security audits, or pen tests. Run the complete workflow only for explicit codebase audit or pen-test requests, full/comprehensive/end-to-end reviews, or requested report artifacts.",
+   "source": "skills/security-audit/SKILL.md",
+   "aliases": [
+    "security audit"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "security-best-practices",
    "type": "Skill",
    "label": "security-best-practices",
@@ -26983,6 +26998,19 @@
    "aliases": [
     "skill doctor"
    ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "skillquarium",
+   "type": "Skill",
+   "label": "skillquarium",
+   "description": "Search this vault's 2,100+ skills and manage them with the skillquarium CLI. Use when looking for a skill to do something, when native description matching returns nothing useful, when you need every skill covering a topic rather than the single best match, when searching skill text for an exact string, or when adding, toggling, rebuilding, or updating skills in ~/.agents.",
+   "source": "skills/skillquarium/SKILL.md",
+   "aliases": [],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -39974,6 +40002,15 @@
   {
    "src": "audit-prep-assistant",
    "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in audit-prep-assistant/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "audit-prep-assistant",
+   "rel": "references",
    "dst": "semgrep",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -39996,6 +40033,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of llm-agent-security-redteam appears in auditing-skills/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "auditing-skills",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in auditing-skills/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -50522,6 +50568,15 @@
   {
    "src": "ci-cd-and-automation",
    "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in ci-cd-and-automation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ci-cd-and-automation",
+   "rel": "references",
    "dst": "setup-pre-commit",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -53415,6 +53470,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "reverse-skill-router named in code-audit/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "code-audit",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in code-audit/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -69825,6 +69889,15 @@
    "status": "accepted"
   },
   {
+   "src": "entry-point-analyzer",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in entry-point-analyzer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "env-vars",
    "rel": "in_domain",
    "dst": "domain:hosting-edge-platforms",
@@ -83691,6 +83764,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "harmonypy named in seurat/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "harmonypy",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "harmonypy named in skillquarium/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -102321,6 +102403,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pytest named in modern-python/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-python",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in modern-python/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -129613,6 +129704,15 @@
   },
   {
    "src": "pydeseq2",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pydeseq2 named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "pydeseq2",
    "rel": "touches",
    "dst": "artifact:count-matrix",
    "weight": 1,
@@ -131571,6 +131671,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in sentry/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "query",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "query referenced in code/link context in skillquarium/SKILL.md",
    "status": "accepted"
   },
   {
@@ -136436,6 +136545,15 @@
   {
    "src": "research",
    "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "research referenced in code/link context in security-audit/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "research",
+   "rel": "references",
    "dst": "wayfinder",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -140004,6 +140122,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scanpy named in single-cell-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scanpy",
+   "rel": "references",
+   "dst": "skillquarium",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in skillquarium/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -147621,6 +147748,96 @@
    "status": "accepted"
   },
   {
+   "src": "security-audit",
+   "rel": "in_domain",
+   "dst": "domain:security-auditing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "audit-prep-assistant",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in audit-prep-assistant/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "auditing-skills",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in auditing-skills/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "ci-cd-and-automation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in ci-cd-and-automation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "code-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in code-audit/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "entry-point-analyzer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in entry-point-analyzer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "modern-python",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in modern-python/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "research",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "research referenced in code/link context in security-audit/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in security-scan/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-audit",
+   "rel": "references",
+   "dst": "semgrep",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in semgrep/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "security-best-practices",
    "rel": "in_domain",
    "dst": "domain:security-auditing",
@@ -147825,6 +148042,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "security-scan named in secure-workflow-guide/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-scan",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in security-scan/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -148077,6 +148303,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "semgrep named in sarif-parsing/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "semgrep",
+   "rel": "references",
+   "dst": "security-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-audit named in semgrep/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -151146,6 +151381,60 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "in_domain",
+   "dst": "domain:vault-meta",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "harmonypy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "harmonypy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "pydeseq2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pydeseq2 named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "query referenced in code/link context in skillquarium/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "references",
+   "dst": "scanpy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in skillquarium/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "skillquarium",
+   "rel": "touches",
+   "dst": "artifact:fastq",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "FASTQ reads named in skillquarium/SKILL.md",
    "status": "accepted"
   },
   {

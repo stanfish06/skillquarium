@@ -2,17 +2,12 @@ import { afterAll, describe, expect, test } from "bun:test";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { loadConfig } from "../../src/config";
-import { type EmbedIndex, type Manifest, readManifest } from "../../src/embed/store";
+import { HASH_VERSION } from "../../src/embed/hash";
+import type { EmbedIndex } from "../../src/embed/store";
 import { graphPath } from "../../src/kg/write";
-import {
-  cachedEmbed,
-  offlineEmbed,
-  type QueryVectors,
-  readEvalSet,
-  readQueryVectors,
-  runEval,
-  staleQueryVectors,
-} from "../../src/search/evalSet";
+import type { Tokenizer } from "../../src/search/bm25";
+import { Bpe } from "../../src/search/bpe";
+import { readEvalSet, runEval } from "../../src/search/evalSet";
 import { destroyFinder, type FuzzyRanker, fffRanker } from "../../src/search/fff";
 import { loadGraph } from "../../src/search/graph";
 import type { QueryDeps, QueryOptions } from "../../src/search/query";
@@ -27,14 +22,26 @@ const OPTS: QueryOptions = { k: 8, semantic: true, fuzzy: false, explain: false 
 
 /**
  * One dimension per eval query. `aligned` puts a 1 at query i on every skill query i expects, so
- * the semantic list for query i is exactly its expected ids; `blind` leaves every row at zero, so
- * the same ids come back in id order no matter what was asked.
+ * two skills the same query expects sit on top of each other and each is the other's nearest
+ * neighbour; `blind` points every skill the same way, so every skill is equally close to every
+ * other and the expansion picks whichever id sorts first.
  */
 function index(aligned: boolean): EmbedIndex {
   const ids = [...new Set(rows.flatMap((r) => r.expect))].sort();
   const vectors = ids.map((id) => {
     const v = new Float32Array(rows.length);
-    if (aligned) for (const [i, row] of rows.entries()) if (row.expect.includes(id)) v[i] = 1;
+    if (!aligned) {
+      v[0] = 1;
+      return v;
+    }
+    let hits = 0;
+    for (const [i, row] of rows.entries()) {
+      if (!row.expect.includes(id)) continue;
+      v[i] = 1;
+      hits += 1;
+    }
+    // L2-normalized the way the committed rows are, so a dot product is the cosine.
+    if (hits > 1) for (let i = 0; i < v.length; i++) v[i] = (v[i] ?? 0) / Math.sqrt(hits);
     return v;
   });
   return {
@@ -43,30 +50,19 @@ function index(aligned: boolean): EmbedIndex {
     desc: vectors,
     body: vectors,
     stale: new Set<string>(),
-    manifest: { model: "fake", dim: rows.length, skills: {} },
+    manifest: { model: "fake", dim: rows.length, hashVersion: HASH_VERSION, skills: {} },
   };
 }
 
-function deps(aligned: boolean): QueryDeps {
-  const store = index(aligned);
+function deps(store: EmbedIndex | null): QueryDeps {
   return {
     graph,
     vectors: () => store,
-    embed: () => ({
-      embed: async (inputs) =>
-        inputs.map((text) => {
-          const v = new Float32Array(rows.length);
-          const at = rows.findIndex((r) => r.query === text);
-          if (at >= 0) v[at] = 1;
-          return v;
-        }),
-      modelName: async () => "fake",
-    }),
     fuzzy: () => {
       throw new Error("the file index must not be started");
     },
     rrfK: 60,
-    weights: { lexical: 1, fuzzy: 1, semantic: 1 },
+    weights: { lexical: 1, fuzzy: 1 },
   };
 }
 
@@ -92,22 +88,63 @@ test("every eval query is unique and non-empty", () => {
   }
 });
 
-test("a signal that returns the expected ids scores 1.0, a blind one scores far less", async () => {
-  const good = await runEval(ROOT, deps(true), OPTS);
-  const bad = await runEval(ROOT, deps(false), OPTS);
-  expect(good.queries).toBe(40);
-  expect(good.scores.map((s) => s.name)).toEqual(["lexical", "semantic", "fused", "final"]);
-  expect(scoreOf(good.scores, "semantic").recall).toBe(1);
-  expect(scoreOf(good.scores, "semantic").mrr).toBe(1);
-  expect(scoreOf(bad.scores, "semantic").recall).toBeLessThan(0.2);
-  // Lexical is the same BM25 both times; only the semantic half of the fusion changed.
-  expect(scoreOf(good.scores, "lexical")).toEqual(scoreOf(bad.scores, "lexical"));
-  expect(scoreOf(good.scores, "fused").recall).toBeGreaterThan(scoreOf(bad.scores, "fused").recall);
-  expect(scoreOf(good.scores, "final").recall).toBeGreaterThan(scoreOf(bad.scores, "final").recall);
+test("bpe adds a +bpe row and a same-length ascii control, both past the k-length rows", async () => {
+  const bpe = Bpe.load(resolve(import.meta.dir, "../fixtures/tokenizer/tokenizer.json"));
+  const tokenizer: Tokenizer = { name: "bpe", encode: (t) => bpe.encode(t ?? "") };
+  const on = { ...OPTS, bpe: true };
+  const report = await runEval(
+    ROOT,
+    { ...deps(index(true)), bpe: { tokenizer: () => tokenizer, extra: 3 } },
+    on,
+  );
+  expect(report.augmented).toBe(11);
+  expect(report.scores.map((s) => s.name)).toEqual([
+    "lexical",
+    "fused",
+    "modelfree",
+    "semantic",
+    "+bpe",
+    "ascii@11",
+  ]);
+  // +bpe only appends to the semantic list, so it can only gain recall over it.
+  expect(scoreOf(report.scores, "+bpe").recall).toBeGreaterThanOrEqual(
+    scoreOf(report.scores, "semantic").recall,
+  );
+  expect(scoreOf(report.scores, "+bpe").mrr).toBeGreaterThanOrEqual(scoreOf(report.scores, "semantic").mrr);
+
+  const untrained = await runEval(
+    ROOT,
+    { ...deps(index(true)), bpe: { tokenizer: () => null, extra: 3 } },
+    on,
+  );
+  expect(untrained.augmented).toBeNull();
+  expect(untrained.scores.map((s) => s.name)).toEqual(["lexical", "fused", "modelfree", "semantic"]);
+  expect(untrained.notices.some((n) => n.includes("bpe augmentation unavailable"))).toBe(true);
 });
 
-test("the per-query rows report what the fused pipeline actually returned", async () => {
-  const report = await runEval(ROOT, deps(true), OPTS);
+test("an index that groups the expected skills beats the model-free baseline, a blind one does not", async () => {
+  const good = await runEval(ROOT, deps(index(true)), OPTS);
+  const bad = await runEval(ROOT, deps(index(false)), OPTS);
+  expect(good.queries).toBe(40);
+  expect(good.scores.map((s) => s.name)).toEqual(["lexical", "fused", "modelfree", "semantic"]);
+  // The baseline never opens the index, so it is the same list both times.
+  expect(scoreOf(good.scores, "modelfree")).toEqual(scoreOf(bad.scores, "modelfree"));
+  expect(scoreOf(good.scores, "lexical")).toEqual(scoreOf(bad.scores, "lexical"));
+  expect(scoreOf(good.scores, "semantic").recall).toBeGreaterThan(scoreOf(good.scores, "modelfree").recall);
+  expect(scoreOf(bad.scores, "semantic").recall).toBeLessThan(scoreOf(good.scores, "semantic").recall);
+});
+
+test("no index at all is one notice and the model-free numbers, not a failure", async () => {
+  const report = await runEval(ROOT, deps(null), OPTS);
+  expect(report.notices.length).toBe(1);
+  expect(report.notices[0]).toContain("vault/embeddings");
+  const bare = scoreOf(report.scores, "modelfree");
+  const expanded = scoreOf(report.scores, "semantic");
+  expect([expanded.recall, expanded.mrr]).toEqual([bare.recall, bare.mrr]);
+});
+
+test("the per-query rows report what the pipeline actually returned", async () => {
+  const report = await runEval(ROOT, deps(index(true)), OPTS);
   expect(report.rows.length).toBe(40);
   for (const row of report.rows) {
     expect(row.final.length).toBeLessThanOrEqual(OPTS.k);
@@ -116,56 +153,27 @@ test("the per-query rows report what the fused pipeline actually returned", asyn
   expect(report.notices).toEqual([]);
 });
 
-// --- the offline path: committed query vectors against the committed index ------------------
-
-const manifest = readManifest(ROOT);
-const cache = readQueryVectors(ROOT);
-
-test("the cached query vectors cover every eval query and match the committed index", () => {
-  expect(manifest).not.toBeNull();
-  expect(cache.model).toBe(manifest?.model ?? "");
-  expect(cache.dim).toBe(manifest?.dim ?? 0);
-  expect(Object.keys(cache.vectors).length).toBe(rows.length);
-  for (const row of rows) {
-    const vector = cache.vectors[row.query];
-    expect(vector?.length).toBe(cache.dim);
-  }
-});
-
-test("a cache built from another model or width is refused, and says which", () => {
-  const index: Manifest = { model: "qwen3-embed-0.6b", dim: 1024, skills: {} };
-  const ok: QueryVectors = { model: "qwen3-embed-0.6b", dim: 1024, vectors: { a: [1] } };
-  expect(staleQueryVectors(ok, index)).toBeNull();
-
-  expect(staleQueryVectors({ ...ok, model: "other-model" }, index)).toMatch(
-    /stale: model 'other-model' but the index is 'qwen3-embed-0.6b'/,
-  );
-  expect(staleQueryVectors({ ...ok, dim: 768 }, index)).toMatch(/stale: dim 768 but the index is 1024/);
-  expect(staleQueryVectors(ok, null)).toMatch(/no index manifest/);
-
-  expect(() => cachedEmbed({ ...ok, model: "other-model" }, index)).toThrow(/stale: model/);
-  expect(() => cachedEmbed({ ...ok, dim: 768 }, index)).toThrow(/stale: dim/);
-  expect(() => cachedEmbed(ok, null)).toThrow(/no index manifest/);
-});
-
-test("the cache refuses a query it has no row for rather than scoring it as a miss", async () => {
-  const client = cachedEmbed(cache, manifest);
-  await expect(client.embed(["a query nobody embedded"])).rejects.toThrow(
-    /no row for "a query nobody embedded"/,
-  );
-});
+// --- the offline path: the committed index, no endpoint anywhere ----------------------------
 
 /**
- * Pinned from the offline sweep over the real graph and the committed index. These are the numbers
- * `query --eval` prints for config.json's weights on the corpus they were measured on. Re-pinned
- * after 50 skills were re-embedded (the activation commit rewrote them post-index): only the
- * fuzzy-on MRR moved, by 0.002, since fff indexes every file under skills/.
+ * Pinned from the offline sweep over the real graph and the committed index. `modelfree` is
+ * lexical + fuzzy fused and graph-expanded; `semantic` is that plus the similarity expansion, so
+ * the pair is the measured value of the expansion: +0.038 recall for +0.003 MRR. The
+ * query-embedding pipeline this replaced scored 0.871 / 0.808 here and this design does not reach
+ * it — the eval set is all prose, which is exactly what embedding the query text was good at.
  */
 const PINNED = {
-  lexical: { recall: 0.804, mrr: 0.735 },
-  semantic: { recall: 0.904, mrr: 0.774 },
-  withFuzzy: { fused: { recall: 0.892, mrr: 0.813 }, final: { recall: 0.871, mrr: 0.808 } },
-  withoutFuzzy: { fused: { recall: 0.879, mrr: 0.806 }, final: { recall: 0.858, mrr: 0.801 } },
+  lexical: { recall: 0.804, mrr: 0.7348 },
+  withFuzzy: {
+    fused: { recall: 0.804, mrr: 0.7036 },
+    modelfree: { recall: 0.8083, mrr: 0.6905 },
+    semantic: { recall: 0.8458, mrr: 0.6932 },
+  },
+  withoutFuzzy: {
+    fused: { recall: 0.804, mrr: 0.7348 },
+    modelfree: { recall: 0.8083, mrr: 0.7217 },
+    semantic: { recall: 0.8458, mrr: 0.7244 },
+  },
 };
 
 let ranker: FuzzyRanker | undefined;
@@ -174,31 +182,30 @@ let ranker: FuzzyRanker | undefined;
 afterAll(() => destroyFinder(ROOT));
 
 /**
- * Not assertable on an arbitrary checkout. `lexical` and `semantic` read committed artifacts and
- * reproduce anywhere, but the fuzzy signal indexes every file under skills/, so `fused` and `final`
- * belong to the tree they were measured on: an installed extra (gstack, ui-ux-pro-max) adds paths,
- * and so does local toggle state, since disabling a skill writes an agents/openai.yaml. The pins
- * were taken on the 2,133-skill corpus the weights were tuned against, with 1,411 skills disabled;
- * the withoutFuzzy pair still reproduces exactly, the withFuzzy pair no longer does.
+ * Not assertable on an arbitrary checkout. `lexical`, `modelfree` and `semantic` with fuzzy off
+ * read committed artifacts only and reproduce exactly anywhere. The fuzzy signal does not: it
+ * indexes every file under skills/, so an installed extra (gstack, ui-ux-pro-max) adds paths and
+ * so does local toggle state, since disabling a skill writes an agents/openai.yaml. Worse, the fff
+ * scan keeps warming after waitForScan returns — "structural code search" matches nothing on a
+ * cold index and matches foldseek-structural-search on a warm one, which is worth 0.013 MRR — so
+ * the withFuzzy trio is only stable for a process that queries it the way the CLI does. The pins
+ * were taken on the 2,133-skill corpus with 1,411 skills disabled.
  *
  * Run as SKILLQUARIUM_PARITY=1 bun test test/search/evalset on that corpus when touching the
- * weights, the index, the eval set or any signal. Re-pinning to a machine's own numbers verifies
- * nothing, so the drift stays visible here instead.
+ * weights, the index, the eval set, the similarity floor or any signal. Re-pinning to a machine's
+ * own numbers verifies nothing, so the drift stays visible here instead.
  */
 describe.skipIf(!process.env.SKILLQUARIUM_PARITY)("the pinned offline eval", () => {
   test("the offline eval reproduces the committed scores for the configured weights", async () => {
     const cfg = await loadConfig(ROOT);
-    expect(cfg.query.weights).toEqual({ lexical: 1, fuzzy: 1, semantic: 2.5 });
-    const index = loadVectorIndex(ROOT);
-    expect(index).not.toBeNull();
-    if (index === null) return;
+    expect(cfg.query.weights).toEqual({ lexical: 1, fuzzy: 1 });
+    const store = loadVectorIndex(ROOT);
+    expect(store).not.toBeNull();
+    if (store === null) return;
 
     const vaultDeps: QueryDeps = {
       graph: loadGraph(graphPath(ROOT)),
-      vectors: () => index,
-      embed: () => {
-        throw new Error("the offline eval must not reach the endpoint");
-      },
+      vectors: () => store,
       fuzzy: () => {
         ranker ??= fffRanker(ROOT);
         return ranker;
@@ -207,27 +214,24 @@ describe.skipIf(!process.env.SKILLQUARIUM_PARITY)("the pinned offline eval", () 
       weights: cfg.query.weights,
     };
     const opts: QueryOptions = { k: cfg.query.k, semantic: true, fuzzy: true, explain: false };
-    const report = await runEval(ROOT, vaultDeps, opts, offlineEmbed(ROOT));
+    const report = await runEval(ROOT, vaultDeps, opts);
 
     expect(report.queries).toBe(40);
-    for (const [name, want] of [
-      ["lexical", PINNED.lexical],
-      ["semantic", PINNED.semantic],
-    ] as const) {
-      expect(scoreOf(report.scores, name).recall).toBeCloseTo(want.recall, 3);
-      expect(scoreOf(report.scores, name).mrr).toBeCloseTo(want.mrr, 3);
-    }
+    expect(scoreOf(report.scores, "lexical").recall).toBeCloseTo(PINNED.lexical.recall, 3);
+    expect(scoreOf(report.scores, "lexical").mrr).toBeCloseTo(PINNED.lexical.mrr, 3);
 
     // The fff index is a native binary. Where it cannot run the signal drops out with a notice and
-    // the fusion is lexical + semantic only, which is pinned separately rather than skipped.
+    // the fusion is lexical only, which is pinned separately rather than skipped.
     const ran = report.notices.length === 0;
     const want = ran ? PINNED.withFuzzy : PINNED.withoutFuzzy;
-    for (const name of ["fused", "final"] as const) {
+    for (const name of ["fused", "modelfree", "semantic"] as const) {
       expect(scoreOf(report.scores, name).recall).toBeCloseTo(want[name].recall, 3);
       expect(scoreOf(report.scores, name).mrr).toBeCloseTo(want[name].mrr, 3);
     }
 
-    // The tuned weights have to stay ahead of the {1,1,1} default they replaced: final MRR 0.723.
-    expect(scoreOf(report.scores, "final").mrr).toBeGreaterThan(0.78);
+    // The expansion has to earn its slot: it may cost MRR, but not recall.
+    expect(scoreOf(report.scores, "semantic").recall).toBeGreaterThan(
+      scoreOf(report.scores, "modelfree").recall,
+    );
   });
 });

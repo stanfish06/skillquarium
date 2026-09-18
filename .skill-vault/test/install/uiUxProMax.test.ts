@@ -164,7 +164,8 @@ describe("ui-ux-pro-max installer", () => {
       skillsCliVersion: "1.5.23",
       claudeSkillsDir: join(sandbox, "claude"),
       embed: { url: "http://127.0.0.1:1", model: null, batchSize: 16, timeoutMs: 100, retries: 0 },
-      query: { k: 8, rrfK: 60, weights: { lexical: 1, fuzzy: 1, semantic: 1 } },
+      tokenizer: { bin: "skill-tokenizer", vocabSize: 4000 },
+      query: { k: 8, rrfK: 60, bpeExtra: 5, weights: { lexical: 1, fuzzy: 1 } },
     };
     const ctx: Context = { root, json: false, out: io.out, err: io.err, config: async () => config };
     expect(await run(["--help"], ctx)).toBe(0);

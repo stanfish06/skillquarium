@@ -1,8 +1,9 @@
-// Reciprocal rank fusion of the retrieval signals. Only rank positions cross the boundary, so
-// BM25 scores, fff path scores and cosine similarities never have to be made commensurate.
+// Reciprocal rank fusion of the model-free retrieval signals. Only rank positions cross the
+// boundary, so BM25 scores and fff path scores never have to be made commensurate. Semantic is not
+// here: it expands the fused seeds afterwards rather than ranking the query against every skill.
 import type { Ranked } from "./types";
 
-export type SignalName = "lexical" | "fuzzy" | "semantic";
+export type SignalName = "lexical" | "fuzzy";
 
 export interface Signal {
   name: SignalName;
