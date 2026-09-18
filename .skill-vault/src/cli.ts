@@ -26,6 +26,7 @@ const commands: Record<string, () => Promise<{ run: Command; help: string }>> = 
   build: () => import("./build/command"),
   validate: () => import("./kg/validateCommand"),
   embed: () => import("./embed/command"),
+  tokenizer: () => import("./tokenizer/command"),
   install: () => import("./install/command"),
   overrides: () => import("./update/cli").then((m) => m.overrides),
   drift: () => import("./update/cli").then((m) => m.drift),
