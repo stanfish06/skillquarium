@@ -115,9 +115,11 @@ produce false hits (`rowbinary` shares `binar`), which is why they are appended 
 `--no-bpe` or `bpeExtra: 0` turns it off. `query --eval` scores the appended list as `+bpe` next
 to `ascii@N`, the regular pipeline asked for the same number of results.
 
-`./skillquarium tokenizer [--vocab-size N]` retrains the model from the tracked markdown under
-`skills/`, toggle fields stripped, using the `skill-tokenizer` binary on PATH or at
-`tokenizer.bin`. Queries encode in-process and never run it. The corpus alphabet is about 2,800
+The `retrain-tokenizer` GitHub workflow retrains and commits the model whenever skill markdown
+changes on master and after each upstream sync; training is deterministic, so an unchanged corpus
+commits nothing. To retrain by hand, `./skillquarium tokenizer [--vocab-size N]` trains from the
+tracked markdown under `skills/`, toggle fields stripped, using the `skill-tokenizer` binary on PATH
+or at `tokenizer.bin`. Queries encode in-process and never run it. The corpus alphabet is about 2,800
 characters and the trainer spends vocab on those first, so a vocab below that yields no merges;
 `tokenizer` refuses to install such a model. If the model file is missing, `query` returns the
 regular list and says so on stderr.
