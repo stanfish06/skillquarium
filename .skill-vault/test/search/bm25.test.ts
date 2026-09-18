@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
 import type { GraphEdge, GraphNode } from "../../src/kg/types";
-import { Bm25Index, tok } from "../../src/search/bm25";
+import { ASCII, Bm25Index, indexFor, tok } from "../../src/search/bm25";
 import { buildGraph, type GraphData, type VaultGraph } from "../../src/search/graph";
 
 function skill(id: string, fields: Partial<GraphNode> = {}): GraphNode {
@@ -85,4 +85,28 @@ test("ties break on id descending, as Python's sorted(reverse=True) does", () =>
   const index = new Bm25Index(graph);
   // Every skill scores identically on "tool", so only the id tie-break orders them.
   expect(index.topK("tool", 3).map((r) => r.id)).toEqual(["zzz-tool", "mmm-tool", "aaa-tool"]);
+});
+
+test("an injected tokenizer handles documents and query alike", () => {
+  const graph = tiny([
+    skill("alpha-tool", { description: "zebra" }),
+    skill("beta-tool", { description: "yak" }),
+  ]);
+  // Reversing every term only matches if both sides went through it.
+  const reversed = {
+    name: "reversed",
+    encode: (t: string | null | undefined) => tok(t).map((w) => [...w].reverse().join("")),
+  };
+  const index = new Bm25Index(graph, reversed);
+  expect(index.topK("zebra", 2).map((r) => r.id)).toEqual(["alpha-tool"]);
+  expect(index.score(["arbez"], "alpha-tool")).toBeGreaterThan(0);
+  expect(index.score(["zebra"], "alpha-tool")).toBe(0);
+});
+
+test("indexFor keeps one index per graph and tokenizer", () => {
+  const graph = tiny([skill("alpha-tool")]);
+  const other = { name: "other", encode: tok };
+  expect(indexFor(graph)).toBe(indexFor(graph, ASCII));
+  expect(indexFor(graph, other)).toBe(indexFor(graph, other));
+  expect(indexFor(graph, other)).not.toBe(indexFor(graph));
 });

@@ -56,7 +56,19 @@ describe("config", () => {
     expect(c.embed.url).toBe("http://127.0.0.1:8080");
     expect(c.embed.model).toBeNull();
     expect(c.query.rrfK).toBe(60);
+    expect(c.query.bpeExtra).toBe(3);
+    expect(c.tokenizer).toEqual({ bin: "skill-tokenizer", vocabSize: 4000 });
     expect(c.skillsCliVersion).toBe("1.5.23");
+  });
+
+  test("bpeExtra is a count, and 0 turns BPE off", async () => {
+    const r = root();
+    writeCommitted(r, JSON.stringify({ query: { bpeExtra: 0 } }));
+    expect((await loadConfig(r)).query.bpeExtra).toBe(0);
+    writeCommitted(r, JSON.stringify({ query: { bpeExtra: -1 } }));
+    await expect(loadConfig(r)).rejects.toThrow(/^config: query\.bpeExtra: /);
+    writeCommitted(r, JSON.stringify({ query: { tokenizer: "bpe" } }));
+    await expect(loadConfig(r)).rejects.toThrow(/^config: query: /);
   });
 
   test("local file overrides committed file per key, env overrides both", async () => {

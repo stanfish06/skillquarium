@@ -1,13 +1,14 @@
 import { existsSync } from "node:fs";
 import type { Command, Context } from "../cli";
 import { graphPath } from "../kg/write";
+import type { Tokenizer } from "./bm25";
+import { loadBpeTokenizer } from "./bpe";
 import type { EvalReport } from "./evalSet";
 import { runEval } from "./evalSet";
 import { destroyFinder, type FuzzyRanker, fffRanker } from "./fff";
-import type { SignalName } from "./fusion";
 import { loadGraph } from "./graph";
 import { grepSkills } from "./grep";
-import { type HybridResult, type QueryDeps, type QueryOptions, runQuery } from "./query";
+import { type HybridResult, type QueryDeps, type QueryOptions, runQuery, SIGNAL_ORDER } from "./query";
 import { loadVectorIndex, type VectorIndex } from "./vectors";
 
 interface CommandModule {
@@ -15,17 +16,20 @@ interface CommandModule {
   help: string;
 }
 
-const SIGNAL_ORDER: readonly SignalName[] = ["lexical", "fuzzy"];
-
-const queryHelp = `usage: skillquarium [--json] query <text...> [--k N] [--no-semantic] [--no-fuzzy] [--explain] [--eval]
+const queryHelp = `usage: skillquarium [--json] query <text...> [--k N] [--no-semantic] [--no-fuzzy] [--no-bpe] [--explain] [--eval]
 
 Retrieve skills by fusing BM25 over the graph with fuzzy path search, then expanding those
 seeds through the knowledge graph and through the nearest skills in the committed vectors.
 The query text is never embedded, so no embedding endpoint is contacted.
 
+After that list, up to config query.bpeExtra more skills are appended from BM25 over the word
+pieces of the model 'skillquarium tokenizer' trains, where the list lacks them. They are tagged
+[bpe #N]; nothing before them moves.
+
   --k N           results to return (default: config query.k)
   --no-semantic   skip the similarity expansion; the vector index is not read
   --no-fuzzy      skip the fff path signal
+  --no-bpe        append nothing from the BPE model; the list is exactly the ASCII one
   --explain       add each result's per-signal rank, fused contribution and cosine
   --eval          score the pipeline over data/retrieval-eval.jsonl instead of querying`;
 
@@ -49,6 +53,7 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     semantic: true,
     fuzzy: true,
     explain: false,
+    bpe: true,
     eval: false,
   };
   for (let i = 0; i < args.length; i++) {
@@ -58,6 +63,7 @@ function parseQueryArgs(args: string[], defaultK: number): QueryArgs {
     else if (arg.startsWith("--k=")) k = arg.slice("--k=".length);
     else if (arg === "--no-semantic") parsed.semantic = false;
     else if (arg === "--no-fuzzy") parsed.fuzzy = false;
+    else if (arg === "--no-bpe") parsed.bpe = false;
     else if (arg === "--explain") parsed.explain = true;
     else if (arg === "--eval") parsed.eval = true;
     else if (arg.startsWith("--")) throw new UsageError(`unknown option ${arg}`);
@@ -82,8 +88,16 @@ async function queryDeps(ctx: Context): Promise<QueryDeps> {
   const cfg = await ctx.config();
   let ranker: FuzzyRanker | undefined;
   let vectors: VectorIndex | null | undefined;
+  let bpe: Tokenizer | null | undefined;
   return {
     graph: loadGraph(path),
+    bpe: {
+      tokenizer: () => {
+        if (bpe === undefined) bpe = loadBpeTokenizer(ctx.root);
+        return bpe;
+      },
+      extra: cfg.query.bpeExtra,
+    },
     // Read once per process: --eval asks 40 times and the index is one file per skill.
     vectors: () => {
       if (vectors === undefined) vectors = loadVectorIndex(ctx.root);
@@ -124,6 +138,11 @@ function printEval(ctx: Context, report: EvalReport): void {
   ctx.out(`  ${"stage".padEnd(10)}${`recall@${report.k}`.padStart(10)}${"MRR".padStart(8)}`);
   for (const s of report.scores) {
     ctx.out(`  ${s.name.padEnd(10)}${s.recall.toFixed(3).padStart(10)}${s.mrr.toFixed(3).padStart(8)}`);
+  }
+  if (report.augmented !== null) {
+    ctx.out(
+      `\n  +bpe and ascii@${report.augmented} score lists of up to ${report.augmented}; the rest score ${report.k}.`,
+    );
   }
 }
 

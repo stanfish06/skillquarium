@@ -10,20 +10,32 @@ export function tok(text: string | null | undefined): string[] {
   return (text ?? "").toLowerCase().match(WORD) ?? [];
 }
 
+/** Text to BM25 terms. Documents and queries go through the same one, or nothing matches. */
+export interface Tokenizer {
+  readonly name: string;
+  encode(text: string | null | undefined): string[];
+}
+
+/** query.py's tokenizer; the lexical golden is pinned to it. */
+export const ASCII: Tokenizer = { name: "ascii", encode: tok };
+
 /**
  * Term frequencies are counted once at construction, not per query: score() runs for every
  * skill on every query, and recounting each document there was the whole cost.
  */
 export class Bm25Index {
   private readonly graph: VaultGraph;
+  private readonly tokenizer: Tokenizer;
   private readonly tf = new Map<string, Map<string, number>>();
   private readonly dl = new Map<string, number>();
   private readonly df = new Map<string, number>();
   readonly n: number;
   readonly avglen: number;
 
-  constructor(graph: VaultGraph) {
+  constructor(graph: VaultGraph, tokenizer: Tokenizer = ASCII) {
     this.graph = graph;
+    this.tokenizer = tokenizer;
+    const t = (text: string | null | undefined) => tokenizer.encode(text);
     let totalLength = 0;
     for (const sid of graph.skills) {
       const node = graph.nodes.get(sid);
@@ -32,14 +44,14 @@ export class Bm25Index {
         .map((d) => stripPrefix(d).replaceAll("-", " "))
         .join(" ");
       // The id tokens repeated 3x are the field weighting: a name hit outweighs a prose hit.
-      const idWords = tok(sid.replaceAll("-", " "));
+      const idWords = t(sid.replaceAll("-", " "));
       const words = [
         ...idWords,
         ...idWords,
         ...idWords,
-        ...tok(node.description),
-        ...tok(domains),
-        ...tok((node.aliases ?? []).join(" ")),
+        ...t(node.description),
+        ...t(domains),
+        ...t((node.aliases ?? []).join(" ")),
       ];
       const counts = new Map<string, number>();
       for (const word of words) counts.set(word, (counts.get(word) ?? 0) + 1);
@@ -73,7 +85,7 @@ export class Bm25Index {
    * cut, exactly as in query.py, so it reweights seeds without changing which ones are seeds.
    */
   topK(query: string, k: number): Ranked[] {
-    const qwords = tok(query);
+    const qwords = this.tokenizer.encode(query);
     const scored = this.graph.skills.map((id) => ({ id, score: this.score(qwords, id) }));
     // Python sorts (score, id) tuples with reverse=True: score descending, then id descending.
     scored.sort((a, b) => (a.score === b.score ? -pyCompare(a.id, b.id) : a.score < b.score ? 1 : -1));
@@ -87,14 +99,19 @@ export class Bm25Index {
   }
 }
 
-const indexes = new WeakMap<VaultGraph, Bm25Index>();
+const indexes = new WeakMap<VaultGraph, Map<Tokenizer, Bm25Index>>();
 
-/** One index per graph: query.py builds it inside VaultGraph.__init__. */
-export function indexFor(graph: VaultGraph): Bm25Index {
-  let index = indexes.get(graph);
+/** One index per graph and tokenizer: query.py builds it inside VaultGraph.__init__. */
+export function indexFor(graph: VaultGraph, tokenizer: Tokenizer = ASCII): Bm25Index {
+  let byTokenizer = indexes.get(graph);
+  if (byTokenizer === undefined) {
+    byTokenizer = new Map();
+    indexes.set(graph, byTokenizer);
+  }
+  let index = byTokenizer.get(tokenizer);
   if (index === undefined) {
-    index = new Bm25Index(graph);
-    indexes.set(graph, index);
+    index = new Bm25Index(graph, tokenizer);
+    byTokenizer.set(tokenizer, index);
   }
   return index;
 }

@@ -5,6 +5,8 @@ import { loadConfig } from "../../src/config";
 import { HASH_VERSION } from "../../src/embed/hash";
 import type { EmbedIndex } from "../../src/embed/store";
 import { graphPath } from "../../src/kg/write";
+import type { Tokenizer } from "../../src/search/bm25";
+import { Bpe } from "../../src/search/bpe";
 import { readEvalSet, runEval } from "../../src/search/evalSet";
 import { destroyFinder, type FuzzyRanker, fffRanker } from "../../src/search/fff";
 import { loadGraph } from "../../src/search/graph";
@@ -84,6 +86,40 @@ test("every eval query is unique and non-empty", () => {
     expect(row.query.length).toBeGreaterThan(0);
     expect(row.expect.length).toBeGreaterThan(0);
   }
+});
+
+test("bpe adds a +bpe row and a same-length ascii control, both past the k-length rows", async () => {
+  const bpe = Bpe.load(resolve(import.meta.dir, "../fixtures/tokenizer/tokenizer.json"));
+  const tokenizer: Tokenizer = { name: "bpe", encode: (t) => bpe.encode(t ?? "") };
+  const on = { ...OPTS, bpe: true };
+  const report = await runEval(
+    ROOT,
+    { ...deps(index(true)), bpe: { tokenizer: () => tokenizer, extra: 3 } },
+    on,
+  );
+  expect(report.augmented).toBe(11);
+  expect(report.scores.map((s) => s.name)).toEqual([
+    "lexical",
+    "fused",
+    "modelfree",
+    "semantic",
+    "+bpe",
+    "ascii@11",
+  ]);
+  // +bpe only appends to the semantic list, so it can only gain recall over it.
+  expect(scoreOf(report.scores, "+bpe").recall).toBeGreaterThanOrEqual(
+    scoreOf(report.scores, "semantic").recall,
+  );
+  expect(scoreOf(report.scores, "+bpe").mrr).toBeGreaterThanOrEqual(scoreOf(report.scores, "semantic").mrr);
+
+  const untrained = await runEval(
+    ROOT,
+    { ...deps(index(true)), bpe: { tokenizer: () => null, extra: 3 } },
+    on,
+  );
+  expect(untrained.augmented).toBeNull();
+  expect(untrained.scores.map((s) => s.name)).toEqual(["lexical", "fused", "modelfree", "semantic"]);
+  expect(untrained.notices.some((n) => n.includes("bpe augmentation unavailable"))).toBe(true);
 });
 
 test("an index that groups the expected skills beats the model-free baseline, a blind one does not", async () => {

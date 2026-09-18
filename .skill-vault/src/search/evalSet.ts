@@ -2,7 +2,7 @@
 // pipeline returns without the vector index, and what the semantic expansion adds on top.
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { expandFused, gatherSignals, type QueryDeps, type QueryOptions } from "./query";
+import { augment, expandFused, gatherSignals, type QueryDeps, type QueryOptions } from "./query";
 
 export const EVAL_SET = ".skill-vault/data/retrieval-eval.jsonl";
 
@@ -24,6 +24,12 @@ export interface EvalReport {
   queries: number;
   /** Each signal alone, their fusion, the model-free pipeline, then the same plus similarity. */
   scores: EvalScore[];
+  /**
+   * List length the `+bpe` row and its `ascii@N` control are scored at, k plus the BPE extras, or
+   * null when BPE did not run. The control is the whole pipeline asked for N results with no BPE,
+   * so the two rows differ only in what fills the extra slots.
+   */
+  augmented: number | null;
   rows: { query: string; expect: string[]; final: string[]; recall: number }[];
   notices: string[];
 }
@@ -53,6 +59,9 @@ function reciprocalRank(got: readonly string[], expect: readonly string[]): numb
  */
 export async function runEval(root: string, deps: QueryDeps, opts: QueryOptions): Promise<EvalReport> {
   const rows = readEvalSet(root);
+  const extra = opts.bpe && deps.bpe !== undefined ? deps.bpe.extra : 0;
+  const wide = opts.k + extra;
+  let augmented: number | null = null;
   const totals = new Map<string, { recall: number; mrr: number }>();
   const notices = new Set<string>();
   const detail: EvalReport["rows"] = [];
@@ -89,6 +98,23 @@ export async function runEval(root: string, deps: QueryDeps, opts: QueryOptions)
       gathered.index === null ? bare : expandFused(deps, gathered.signals, opts.k, gathered.index);
     const final = expanded.results.map((r) => r.skill);
     record("semantic", final, row.expect);
+    if (extra > 0) {
+      const added = augment(root, row.query, expanded.results, opts, deps);
+      if (added.notice !== null) notices.add(added.notice);
+      else {
+        augmented = wide;
+        record("+bpe", [...final, ...added.extras.map((r) => r.skill)], row.expect);
+        // Gathered again at the wider k, so the control gets the seeds a real --k run would.
+        const widened = { ...opts, k: wide };
+        const regathered = await gatherSignals(root, row.query, widened, deps);
+        const control = expandFused(deps, regathered.signals, wide, regathered.index);
+        record(
+          `ascii@${wide}`,
+          control.results.map((r) => r.skill),
+          row.expect,
+        );
+      }
+    }
     detail.push({ query: row.query, expect: row.expect, final, recall: recallAt(final, row.expect) });
   }
 
@@ -97,6 +123,7 @@ export async function runEval(root: string, deps: QueryDeps, opts: QueryOptions)
     k: opts.k,
     queries: rows.length,
     scores: [...totals].map(([name, t]) => ({ name, recall: t.recall / n, mrr: t.mrr / n })),
+    augmented,
     rows: detail,
     notices: [...notices],
   };
