@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (36)
+## Skills (37)
 
 - [ask-matt](../notes/vault-meta/ask-matt.md) — Ask which skill or flow fits your situation
 - [auditing-skills](../notes/vault-meta/auditing-skills.md) — Use when checking skills for security or quality issues, reviewing audit results from skills.sh or Tessl, or remediating findings across published skills
@@ -32,6 +32,7 @@ created: 2026-06-13
 - [initiate](../notes/vault-meta/initiate.md) — Initiate coverage — generate both research note (HTML) and Excel model (.xlsx)
 - [json-canvas](../notes/vault-meta/json-canvas.md) — Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections
 - [mcp-builder](../notes/vault-meta/mcp-builder.md) — Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools
+- [mcp-skills-extension](../notes/vault-meta/mcp-skills-extension.md) — Implement and troubleshoot the MCP Skills extension (io.modelcontextprotocol/skills)
 - [minimal-skill](../notes/vault-meta/minimal-skill.md) — Minimal example skill for plugin-eval tests
 - [obsidian-bases](../notes/vault-meta/obsidian-bases.md) — Create and edit Obsidian Bases (.base files) with views, filters, formulas, and summaries
 - [obsidian-cli](../notes/vault-meta/obsidian-cli.md) — Interact with Obsidian vaults using the Obsidian CLI to read, create, search, and manage notes, tasks, properties, and more

@@ -2048,7 +2048,8 @@
     "unsafe-checker": "software-dev",
     "cpp-pro": "software-dev",
     "csharp-developer": "software-dev",
-    "skillquarium": "vault-meta"
+    "skillquarium": "vault-meta",
+    "mcp-skills-extension": "vault-meta"
   },
   "synonyms": {
     "pydeseq2": [
