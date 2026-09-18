@@ -1,4 +1,36 @@
 {
+  "neo4j-document-import-skill": [
+    {
+      "id": "anthropic-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "- `AnthropicLLM(model_name=\"claude-3-5-sonnet-20241022\")`",
+      "replace": "- `AnthropicLLM(model_name=\"claude-sonnet-4-6\")`"
+    },
+    {
+      "id": "bedrock-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "- `BedrockLLM(model_id=\"anthropic.claude-3-5-sonnet-20241022-v2:0\")` — Amazon Bedrock (v1.15.0+)",
+      "replace": "- `BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")` — Amazon Bedrock (v1.15.0+); use the inference-profile ID, region prefix must match your deployment"
+    }
+  ],
+  "neo4j-graphrag-skill": [
+    {
+      "id": "anthropic-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "llm = AnthropicLLM(model_name=\"claude-3-5-sonnet-20241022\")",
+      "replace": "llm = AnthropicLLM(model_name=\"claude-sonnet-4-6\")"
+    },
+    {
+      "id": "bedrock-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "llm = BedrockLLM(model_id=\"anthropic.claude-3-5-sonnet-20241022-v2:0\")",
+      "replace": "llm = BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")  # use the inference-profile ID; region prefix (us./eu./global.) must match your Bedrock deployment"
+    }
+  ],
   "docker-expert": [
     {
       "id": "compose-v2-cli",
