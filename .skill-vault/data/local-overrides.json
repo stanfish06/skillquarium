@@ -607,5 +607,43 @@
       "find": "async function mermaidParserValidation(content) {\n  // Try to use the mermaid library parser for deep validation\n  try {\n",
       "replace": "// mmdc parses in headless Chromium, so it needs no DOM shim; the in-process\n// mermaid import below fails on valid input with \"purify.addHook is not a\n// function\" because DOMPurify has no window in Node.\nfunction mmdcParserValidation(content) {\n  const mmdc = resolve(DEPS_DIR, \"node_modules/.bin/mmdc\");\n  if (!existsSync(mmdc)) return { available: false };\n  const dir = mkdtempSync(join(tmpdir(), \"mermaid-validate-\"));\n  const input = join(dir, \"input.mmd\");\n  const output = join(dir, \"output.svg\");\n  writeFileSync(input, content);\n  const args = [\"-i\", input, \"-o\", output, \"-q\"];\n  const puppeteerConfig = resolve(DEPS_DIR, \"puppeteer-config.json\");\n  if (existsSync(puppeteerConfig)) args.push(\"-p\", puppeteerConfig);\n  try {\n    execFileSync(mmdc, args, { stdio: \"pipe\", timeout: 60000 });\n    return { available: true, valid: true };\n  } catch (e) {\n    // mmdc prints the mermaid parse error on stderr; keep the first lines\n    const stderr = (e.stderr?.toString() || e.message || String(e)).trim();\n    const lines = stderr.split(\"\\n\").filter((l) => l.trim());\n    const trace = lines.findIndex((l) => /^\\s*(at |\\S+\\.parseError)/.test(l));\n    const message = (trace > 0 ? lines.slice(0, trace) : lines.slice(0, 6)).join(\"\\n  \");\n    return { available: true, valid: false, error: message };\n  } finally {\n    rmSync(dir, { recursive: true, force: true });\n  }\n}\n\nasync function mermaidParserValidation(content) {\n  const viaMmdc = mmdcParserValidation(content);\n  if (viaMmdc.available) return viaMmdc;\n  // Fallback: the mermaid library parser in-process\n  try {\n"
     }
+  ],
+  "molfeat": [
+    {
+      "id": "molfeat-compat-311",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "compatibility: Requires Python 3.9–3.10 (molfeat 0.11.0 does not support 3.11+). Requires datamol, PyTorch, and optional extras for GNN/transformer models.",
+      "replace": "compatibility: Requires Python 3.11+ (molfeat 1.0.0 dropped 3.9/3.10 support). Requires datamol, PyTorch, and optional extras for transformer models; legacy DGL/Graphormer adapters were removed in 1.0.0."
+    },
+    {
+      "id": "molfeat-version-note-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "**Version note:** Examples target **molfeat 0.11.0** (PyPI stable, May 2025). Requires **Python 3.9–3.10** (`requires-python` caps below 3.11). Depends on **datamol ≥0.8.0** and **PyTorch ≥1.13**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically.",
+      "replace": "**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically. molfeat 1.0.0 removed the legacy DGL, DGLLife, Graphormer, and protein adapters; the `dgl`/`graphormer` extras and the GIN/Graphormer pretrained models in [references/choosing_a_featurizer.md](references/choosing_a_featurizer.md) now require pinning to 0.11.0 on Python 3.10."
+    },
+    {
+      "id": "molfeat-install-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "Use a Python 3.9 or 3.10 environment (molfeat does not install on 3.11+ as of 0.11.0):\n\n```bash\nuv pip install \"molfeat==0.11.0\"\n\n# With all pip-installable optional dependencies\nuv pip install \"molfeat[all]==0.11.0\"\n```\n\n**Optional dependency extras (PyPI):**\n- `molfeat[dgl]` — GNN models (GIN variants); upstream recommends `dgl<=2.0` (graphbolt issues in newer DGL)\n- `molfeat[graphormer]` — Graphormer models\n- `molfeat[transformer]` — ChemBERTa, ChemGPT, MolT5\n- `molfeat[fcd]` — FCD descriptors\n- `molfeat[pyg]` — PyTorch Geometric featurizers\n- `molfeat[viz]` — NGLView visualization widgets",
+      "replace": "Use a Python 3.11+ environment (molfeat 1.0.0 requires 3.11+; the 0.11.0 line is the last release supporting Python 3.9–3.10):\n\n```bash\nuv pip install \"molfeat==1.0.0\"\n\n# With all pip-installable optional dependencies\nuv pip install \"molfeat[all]==1.0.0\"\n```\n\n**Optional dependency extras (PyPI, 1.0.0):**\n- `molfeat[transformer]` — ChemBERTa, ChemGPT, MolT5\n- `molfeat[fcd]` — FCD descriptors\n- `molfeat[pyg]` — PyTorch Geometric featurizers\n- `molfeat[viz]` — NGLView visualization widgets\n- `molfeat[selfies]`, `molfeat[cache]`, `molfeat[cloud]`, `molfeat[mordred]` — see PyPI project page for full list\n\nThe `dgl` and `graphormer` extras from earlier releases were removed in 1.0.0 along with the DGL/DGLLife/Graphormer/protein adapters; they remain available only on the pinned 0.11.0 / Python 3.10 line."
+    },
+    {
+      "id": "molfeat-troubleshooting-extras-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"molfeat[transformer]==0.11.0\"  # For ChemBERTa/ChemGPT\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer",
+      "replace": "uv pip install \"molfeat[transformer]==1.0.0\"   # For ChemBERTa/ChemGPT\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models (0.11.0 only; removed in 1.0.0)\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer (0.11.0 only; removed in 1.0.0)"
+    },
+    {
+      "id": "molfeat-gnn-examples-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/choosing_a_featurizer.md",
+      "find": "**Graph neural networks:**\n```python\n# GIN models with different pre-training objectives\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```",
+      "replace": "**Graph neural networks:**\n\n> The `gin-supervised-*` and `Graphormer-*` pretrained models below require the `dgl`/`graphormer` extras, which molfeat 1.0.0 removed. They only work on the pinned 0.11.0 / Python 3.10 line (see the compatibility note in [SKILL.md](../SKILL.md)); on 1.0.0+ use `torch-geometric` for custom GNN inputs instead.\n\n```python\n# GIN models with different pre-training objectives (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```"
+    }
   ]
 }
