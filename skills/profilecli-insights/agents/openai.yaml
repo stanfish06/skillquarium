@@ -1,0 +1,4 @@
+interface:
+  display_name: "Profilecli Insights"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $profilecli-insights for this task."

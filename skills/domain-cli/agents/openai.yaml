@@ -1,0 +1,4 @@
+interface:
+  display_name: "Domain Cli"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $domain-cli for this task."

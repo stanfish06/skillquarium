@@ -1,0 +1,4 @@
+interface:
+  display_name: "Alloy"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $alloy for this task."

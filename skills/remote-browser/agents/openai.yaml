@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remote Browser"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $remote-browser for this task."

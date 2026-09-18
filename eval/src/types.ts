@@ -1,50 +1,63 @@
 import { z } from "zod";
 
-/** Arm is a 3-value enum on purpose: `placebo` (length-matched filler) is
- *  wired but unused in v0, so adding it later is config, not a refactor. */
+/** `placebo` is declared but not run in v0. */
 export const Arm = z.enum(["baseline", "placebo", "skill"]);
 export type Arm = z.infer<typeof Arm>;
 
-/** A trait is one checkable fact about the produced code.
- *  `prescribedBy` is the Q1 answer: [] means a blind quality trait that no
- *  skill under test asks for, so it catches collateral damage. */
+/** One module per language under bench/. */
+export const Lang = z.enum(["ts", "go", "rust", "c", "cpp", "csharp"]);
+export type Lang = z.infer<typeof Lang>;
+
 export const Trait = z.object({
   id: z.string(),
   polarity: z.enum(["require", "forbid"]),
   kind: z.enum(["regex", "ast-grep"]),
   pattern: z.string(),
+  /** [] = blind trait no skill under test prescribes. */
   prescribedBy: z.array(z.string()).default([]),
   note: z.string().optional(),
-  /** Self-test. The harness refuses to score until every trait classifies
-   *  both of these correctly — a bad pattern must fail loudly, not silently. */
+  /** Self-test samples; scoring refuses to start if either misclassifies. */
   fixture: z.object({ satisfies: z.string(), violates: z.string() }),
 });
 export type Trait = z.infer<typeof Trait>;
 
 export const Task = z.object({
   id: z.string(),
-  lang: z.enum(["ts", "go"]),
+  lang: Lang,
   prompt: z.string(),
   traits: z.array(Trait),
-  /** Go only: run the harness-owned benchmark after the build gate passes. */
   bench: z.boolean().default(false),
-  /** Run the task-owned behaviour check (spec.ts / bench_test.go) in the gate.
-   *  Without it a module can declare the idioms a rubric looks for without
-   *  implementing anything. */
+  /** Run the task's behaviour check in the gate. */
   spec: z.boolean().default(false),
 });
 export type Task = z.infer<typeof Task>;
 
-export const SkillDef = z.object({
-  id: z.string(),
-  dir: z.string(),
-  /** prose = paste SKILL.md; tool = expose the skill's CLI as AI SDK tools.
-   *  use-modern-go has zero rules in its SKILL.md, so pasting it measures
-   *  nothing — it must be evaluated through its CLI. */
-  injection: z.enum(["prose", "tool"]),
-  goVersion: z.string().optional(),
-});
-export type SkillDef = z.infer<typeof SkillDef>;
+/** `args` maps validated tool input to argv appended to `ToolBridge.command`. */
+export type ToolDef = {
+  description: string;
+  inputSchema: z.ZodType;
+  args: (input: any) => string[];
+};
+
+export type ToolBridge = {
+  /** argv prefix, absolute paths. */
+  command: string[];
+  bridgeNote: string;
+  tools: Record<string, ToolDef>;
+  maxSteps?: number;
+  timeoutMs?: number;
+};
+
+/** Exported as `skill` from eval/skills/<id>/skill.ts. */
+export type SkillDef = {
+  id: string;
+  dir: string;
+  /** prose = paste SKILL.md; tool = also expose its CLI as tools. */
+  injection: "prose" | "tool";
+  tools?: ToolBridge;
+  /** Version of anything the skill shells out to; part of the cache key. */
+  version?: () => Promise<string>;
+};
 
 export const TraitResult = z.object({
   id: z.string(),
@@ -54,15 +67,15 @@ export const TraitResult = z.object({
 });
 export type TraitResult = z.infer<typeof TraitResult>;
 
+/** allocsPerOp is null where the runtime cannot count (.NET). */
 export const BenchResult = z.object({
   nsPerOp: z.number(),
   bytesPerOp: z.number(),
-  allocsPerOp: z.number(),
+  allocsPerOp: z.number().nullable(),
 });
 export type BenchResult = z.infer<typeof BenchResult>;
 
-/** One generation + its scores. This is the unit written to gen.jsonl and is
- *  everything needed to re-score offline. */
+/** One row of cells.jsonl. */
 export const Cell = z.object({
   runId: z.string(),
   key: z.string(),
@@ -78,8 +91,6 @@ export const Cell = z.object({
   toolCalls: z.array(z.object({ name: z.string(), input: z.unknown() })),
   steps: z.number(),
   finishReason: z.string().nullable(),
-  /** Distinguishes "model produced nothing" from "code failed to compile" —
-   *  conflating them would read as the skill breaking the code. */
   outcome: z.enum(["ok", "gate-fail", "empty", "error"]),
   usage: z.record(z.string(), z.unknown()).nullable(),
   ms: z.number(),

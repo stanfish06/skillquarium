@@ -1,0 +1,4 @@
+interface:
+  display_name: "Domain Iot"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $domain-iot for this task."

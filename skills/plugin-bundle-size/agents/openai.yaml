@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plugin Bundle Size"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $plugin-bundle-size for this task."

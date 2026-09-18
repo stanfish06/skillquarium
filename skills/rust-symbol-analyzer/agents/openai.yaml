@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rust Symbol Analyzer"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $rust-symbol-analyzer for this task."

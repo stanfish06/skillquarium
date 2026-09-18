@@ -1,0 +1,23 @@
+{
+  "name": "skillquarium",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src test"
+  },
+  "dependencies": {
+    "@ff-labs/fff-bun": "0.10.6",
+    "@opentui/core": "0.5.1",
+    "zod": "4.1.11"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4",
+    "@types/bun": "1.3.14",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "bun": ">=1.4.0"
+  }
+}

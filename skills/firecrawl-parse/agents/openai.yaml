@@ -1,0 +1,4 @@
+interface:
+  display_name: "Firecrawl Parse"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $firecrawl-parse for this task."

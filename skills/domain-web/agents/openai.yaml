@@ -1,0 +1,4 @@
+interface:
+  display_name: "Domain Web"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $domain-web for this task."

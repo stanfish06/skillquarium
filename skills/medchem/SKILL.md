@@ -3,7 +3,7 @@ name: medchem
 description: Medicinal chemistry filters for compound triage. Apply drug-likeness rules (Lipinski, Veber, CNS), structural alert catalogs (PAINS, NIBR, ChEMBL), complexity metrics, and the medchem query language for library filtering.
 license: Apache-2.0 license
 allowed-tools: Read Write Edit Bash
-compatibility: Requires Python 3.9+ and datamol (installed with medchem). Optional Lilly demerit filter requires separate `lilly-medchem-rules` conda package.
+compatibility: Requires Python 3.11+ and datamol (installed with medchem). Optional Lilly demerit filter requires separate `lilly-medchem-rules` conda package.
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -12,11 +12,11 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ## Overview
 
 > [!WARNING]
-> **Maintenance freeze:** No stable release since **2.0.5 (November 18, 2024), 19+ months** (only a `v2.0.5-alpha` pre-release in Jan 2025 since). medchem also hard-depends on `datamol`, which has had no release at all in ~2 years (see [datamol#92](https://github.com/stanfish06/my-skills/issues/92)), so staleness risk is compounded. The filters documented here are unchanged and still work — pin versions deliberately rather than assuming active upstream maintenance. Tracked: issue [#93](https://github.com/stanfish06/my-skills/issues/93).
+> **Version pin:** Maintenance resumed with **2.1.0 (September 9, 2026)** after a two-year gap, alongside `datamol` 0.13.0. It is a breaking release: the Python floor moved to **3.11**, and it ships Lilly rules 2.1. Install commands here pin both `medchem==2.1.0` and `datamol==0.13.0` deliberately rather than floating — medchem hard-depends on datamol, so the two pins must move together.
 
 Medchem is a Python library from [datamol-io](https://github.com/datamol-io/medchem) for molecular filtering and prioritization in drug discovery. Apply literature-derived drug-likeness rules, named alert catalogs, complexity thresholds, chemical-group detection, and a custom query language to triage compound libraries at scale. Filters are context-specific guidelines — combine with domain expertise and target knowledge.
 
-**Version note:** Examples target **medchem 2.0.5** (PyPI stable, Nov 2024). Requires **Python ≥3.9**. Depends on **datamol** and **RDKit** (installed automatically). `RuleFilters` and structural filter classes return **pandas DataFrames**. Lilly demerits require optional native binaries (`mamba install lilly-medchem-rules`).
+**Version note:** Examples target **medchem 2.1.0** (PyPI stable, September 2026); they were written against 2.0.5 and every documented module and rule function is still present in 2.1.0. Requires **Python ≥3.11**. Depends on **datamol** and **RDKit** (installed automatically). `RuleFilters` and structural filter classes return **pandas DataFrames**. Lilly demerits require optional native binaries (`mamba install lilly-medchem-rules`).
 
 ## When to Use This Skill
 
@@ -31,7 +31,7 @@ This skill should be used when:
 ## Installation
 
 ```bash
-uv pip install medchem datamol
+uv pip install medchem==2.1.0 datamol==0.13.0
 ```
 
 Optional — Eli Lilly demerit filter (requires conda-forge native binaries):
@@ -319,4 +319,4 @@ uv run python scripts/filter_molecules.py input.csv \
 
 - Official docs: https://medchem-docs.datamol.io/
 - GitHub: https://github.com/datamol-io/medchem
-- PyPI: https://pypi.org/project/medchem/ (2.0.5)
+- PyPI: https://pypi.org/project/medchem/ (2.1.0)

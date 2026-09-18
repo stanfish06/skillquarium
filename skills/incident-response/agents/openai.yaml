@@ -1,0 +1,4 @@
+interface:
+  display_name: "Incident Response"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $incident-response for this task."

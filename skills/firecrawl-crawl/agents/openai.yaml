@@ -1,0 +1,4 @@
+interface:
+  display_name: "Firecrawl Crawl"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $firecrawl-crawl for this task."

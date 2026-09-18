@@ -4,59 +4,63 @@ import type { SkillDef, Task } from "./types.ts";
 export const EVAL_DIR = resolve(import.meta.dir, "..");
 export const REPO_DIR = resolve(EVAL_DIR, "..");
 
-export const SKILLS: SkillDef[] = [
-  { id: "zz-prefix", dir: resolve(EVAL_DIR, "control/zz-prefix"), injection: "prose" },
-  { id: "modern-typescript", dir: resolve(REPO_DIR, "skills/modern-typescript"), injection: "prose" },
-  { id: "use-modern-go", dir: resolve(REPO_DIR, "skills/use-modern-go"), injection: "tool", goVersion: "1.27" },
-];
-
-const TASK_IDS = ["ts-settings-parser", "ts-control-probe", "go-batch-processor"] as const;
-
-export async function loadTasks(): Promise<Map<string, Task>> {
-  const out = new Map<string, Task>();
-  for (const id of TASK_IDS) {
-    const mod = await import(resolve(EVAL_DIR, `tasks/${id}/task.ts`));
-    out.set(id, mod.task as Task);
+async function importAll<T>(glob: string, key: string, expectId: (dir: string, v: T) => void): Promise<Map<string, T>> {
+  const out = new Map<string, T>();
+  const files = [...new Bun.Glob(glob).scanSync({ cwd: EVAL_DIR, onlyFiles: true })].sort();
+  for (const rel of files) {
+    const mod = await import(resolve(EVAL_DIR, rel));
+    const v = mod[key] as T | undefined;
+    if (!v) throw new Error(`${rel} does not export \`${key}\``);
+    const dirName = rel.split("/").at(-2)!;
+    expectId(dirName, v);
+    out.set(dirName, v);
   }
   return out;
+}
+
+export function loadSkills(): Promise<Map<string, SkillDef>> {
+  return importAll<SkillDef>("skills/*/skill.ts", "skill", (dir, s) => {
+    if (s.id !== dir) throw new Error(`skills/${dir}/skill.ts declares id "${s.id}"; must match the folder`);
+  });
+}
+
+export function loadTasks(): Promise<Map<string, Task>> {
+  return importAll<Task>("tasks/*/task.ts", "task", (dir, t) => {
+    if (t.id !== dir) throw new Error(`tasks/${dir}/task.ts declares id "${t.id}"; must match the folder`);
+  });
 }
 
 export type RunConfig = {
   id: string;
   models: string[];
   reps: number;
-  /** Reasoning tokens count against this, so it must clear the thinking
-   *  budget or generations come back truncated and empty. */
+  /** Must clear the model's thinking budget; reasoning tokens count against it. */
   maxOutputTokens: number;
-  /** One skill at a time — no combinatorial skill interaction in v0. */
   pairs: { skill: string; task: string }[];
+  /** Run in the baseline arm only. */
+  baselineTasks?: string[];
 };
 
 const PAIRS = [
   { skill: "zz-prefix", task: "ts-control-probe" },
   { skill: "modern-typescript", task: "ts-settings-parser" },
   { skill: "use-modern-go", task: "go-batch-processor" },
+  { skill: "rust-coding-guidelines", task: "rust-record-parser" },
+  { skill: "cpp-pro", task: "cpp-lru-cache" },
+  { skill: "csharp-developer", task: "csharp-order-parser" },
 ];
 
-export const CONFIGS: Record<string, RunConfig> = {
-  smoke: { id: "smoke", models: ["deepseek/deepseek-v4-flash"], reps: 3, maxOutputTokens: 32000, pairs: PAIRS },
-  full: {
-    id: "full",
-    models: [
-      "deepseek/deepseek-v4-flash",
-      "openai/gpt-5.4",
-      "anthropic/claude-sonnet-5",
-      "google/gemini-3.1-flash",
-    ],
-    reps: 5,
-    maxOutputTokens: 32000,
-    pairs: PAIRS,
-  },
+const BASELINE_TASKS = ["c-run-length"];
+
+export const CONFIG: RunConfig = {
+  id: "default",
+  models: ["openai/gpt-5.6-luna"],
+  reps: 3,
+  maxOutputTokens: 500_000,
+  pairs: PAIRS,
+  baselineTasks: BASELINE_TASKS,
 };
 
-/** Hash of a skill directory's own contents. The install lock is not
- *  authoritative here — it has no entry for vault-authored skills or for the
- *  local control — so every tested skill is hashed from its files. */
 export async function skillHash(dir: string): Promise<string> {
   const files = [...new Bun.Glob("**/*").scanSync({ cwd: dir, onlyFiles: true })].sort();
   const h = new Bun.CryptoHasher("sha256");
@@ -67,16 +71,11 @@ export async function skillHash(dir: string): Promise<string> {
   return h.digest("hex").slice(0, 16);
 }
 
-/** The guidelines CLI is a second version axis: its rules can change while
- *  every SKILL.md stays byte-identical. */
-export async function guidelinesVersion(): Promise<string> {
-  return (await Bun.file(resolve(REPO_DIR, "skills/use-modern-go/scripts/VERSION")).text().catch(() => "unknown")).trim();
-}
-
-/** Recorded per run so an old result stays interpretable after a skill drifts. */
-export async function provenance(): Promise<Record<string, string>> {
+export async function provenance(skills: Iterable<SkillDef>): Promise<Record<string, string>> {
   const out: Record<string, string> = {};
-  for (const s of SKILLS) out[`skill:${s.id}`] = await skillHash(s.dir).catch(() => "unreadable");
-  out["go-modern-guidelines"] = await guidelinesVersion();
+  for (const s of skills) {
+    out[`skill:${s.id}`] = await skillHash(s.dir).catch(() => "unreadable");
+    if (s.version) out[`skill:${s.id}:version`] = await s.version().catch(() => "unknown");
+  }
   return out;
 }

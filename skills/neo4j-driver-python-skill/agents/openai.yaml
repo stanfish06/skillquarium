@@ -1,0 +1,4 @@
+interface:
+  display_name: "Neo4J Driver Python Skill"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $neo4j-driver-python-skill for this task."

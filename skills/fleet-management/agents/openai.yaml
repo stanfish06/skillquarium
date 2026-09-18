@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fleet Management"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $fleet-management for this task."

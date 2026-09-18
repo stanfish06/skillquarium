@@ -1,6 +1,6 @@
 # Callable Methods
 
-Fetch `docs/callable-methods.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.
+Fetch `docs/agents/callable-methods.md` from `https://github.com/cloudflare/agents/tree/main/docs` for complete documentation.
 
 ## Overview
 

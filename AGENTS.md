@@ -11,16 +11,16 @@ than improvising.** This file tells you how to find and use them.
   mechanism (e.g. Claude Code loads every skill's name + description into context and matches
   on it). You usually don't need to look anywhere to *know a skill exists* — it's already
   available to invoke.
-- **`install-skills.sh` wires them in.** The script (`npx skills add . -s '*' -g`) symlinks
-  every skill in this repo into each agent's own skills folder, so your native loader picks
+- **`./skillquarium install` wires them in.** It runs `npx skills add . -s '*' -g`, symlinking
+  every skill in this repo into each agent's own skills folder so your native loader picks
   them up. The skill folders here are the single source of truth.
-- **This vault is the query layer.** `~/.agents/` adds an Obsidian navigation layer on
-  top of the raw skills — wrapper notes, per-domain maps, an index, a filterable table,
-  aliases, tags, and an optional `graphify-out/` knowledge graph. Reach for it when you
-  want **comprehensive discovery** beyond your agent's built-in matching: searching by
-  concept/synonym, browsing a whole domain, or querying relationships with `graphify`,
-  `obsidian-cli`, or `rg`. For a quick single-skill match, your native mechanism is enough;
-  for "what do we have across X?", query the vault.
+- **This vault is the query layer.** `~/.agents/` adds an Obsidian navigation layer on top of
+  the raw skills — wrapper notes, per-domain maps, an index, a filterable table, aliases,
+  tags — plus a knowledge graph and an embedding index that `./skillquarium query` searches.
+  Reach for it when you want **comprehensive discovery** beyond your agent's built-in
+  matching: searching by concept/synonym, browsing a whole domain, or finding every skill a
+  multi-step workflow touches. For a quick single-skill match, your native mechanism is
+  enough; for "what do we have across X?", query the vault.
 
 ---
 
@@ -30,9 +30,8 @@ than improvising.** This file tells you how to find and use them.
    skill already covers the task (see *Finding a skill* below). If one exists, read its
    `SKILL.md` and follow it — do not reinvent it from memory.
 2. **Establish context before editing.** Don't code against a dependency, framework, or
-   unfamiliar repo from assumptions. Pull the **real source** with `opensrc` and/or build a
-   queryable map with `graphify`, then work from what's actually there (see *Establishing
-   context*).
+   unfamiliar repo from assumptions. Pull the **real source** with `opensrc` and work from
+   what's actually there (see *Establishing context*).
 
 These two steps are cheap and prevent most wasted work. Do them at the start of a task and
 again whenever you hit something unfamiliar.
@@ -48,25 +47,32 @@ Try these in order; stop when you have a match.
    `/name`). This covers most cases. The skill's full instructions live at
    `~/.agents/skills/<name>/SKILL.md`.
 
-2. **Query the knowledge graph** (headless, ranked, no dependencies) — when native matching
-   isn't enough, when you need a *complete set* of skills rather than the single best
-   match, or when you want everything related to a concept:
+2. **Query the vault** — when native matching isn't enough, when you need a *complete set* of
+   skills rather than the single best match, or when you want everything related to a concept:
    ```bash
    cd ~/.agents
-   python3 .skill-vault/kg/query.py "batch correct single cell data and find markers"
-   python3 .skill-vault/kg/query.py "raw fastq to enriched pathways" --k 10 --json
+   ./skillquarium query "batch correct single cell data and find markers"
+   ./skillquarium query "raw fastq to enriched pathways" --k 10 --json
    ```
-   This is usually the right call for **multi-step work**. Native description matching
-   ranks skills independently, so it reliably finds `scanpy` and just as reliably misses
-   `harmonypy` and `pathway-enrichment` — high recall, incomplete answer. The graph
-   expands along `chains_to` / `co_occurs_with` and completes known workflows, and every
-   result says *why* it was included so you can judge it.
+   This is usually the right call for **multi-step work**. Native description matching ranks
+   skills independently, so it reliably finds `scanpy` and just as reliably misses
+   `harmonypy` and `pathway-enrichment` — high recall, incomplete answer. `query` fuses BM25
+   over the skill graph, typo-tolerant filename matching, and semantic vectors from a local
+   embedding model, then expands the fused hits along the graph's `chains_to` /
+   `co_occurs_with` edges — so a query naming one step of a workflow surfaces the neighbouring
+   steps too. Each result is tagged with the signals that found it, or with the edge that
+   pulled it in, so you can judge it. `--explain` adds the per-signal ranks.
+
+   For literal text — a function name, a flag, an error string — search the skill bodies
+   instead:
+   ```bash
+   ./skillquarium grep "AnnData"      # ripgrep over skills/, grouped by skill
+   ```
 
    Other query paths, still available:
    ```bash
    obsidian-cli search query="single cell batch correction" limit=8
-   # zero-dependency fallback (works anywhere ripgrep is installed):
-   rg -li "batch correction|integration|harmony" ~/.agents/*.md
+   rg -li "batch correction|integration|harmony" ~/.agents/vault/notes
    ```
    The `*.md` files under `vault/notes/<domain>/` are one-line "wrapper" notes (description + domain +
    aliases) — the fast index. Read the underlying `<name>/SKILL.md` once you've picked one.
@@ -96,16 +102,6 @@ capturing as a new skill (`skill-builder` / `writing-skills`).
   ```
   Pin a version with `pkg@1.2.3` when it must match what's installed. See
   [`skills/opensrc/SKILL.md`](skills/opensrc/SKILL.md).
-- **Understand an unfamiliar codebase or doc set** by turning it into a knowledge graph with
-  `graphify`, then query it.
-- **For this skills vault itself, query the local graph when present**:
-  ```bash
-  cd ~/.agents
-  graphify query "How is the skill library organized?" --graph graphify-out/graph.json
-  ```
-  If the graph is missing or stale, rebuild it manually with
-  `python3 .skill-vault/build-graphify.py`. This is separate from `build.py` because graph
-  extraction can be LLM-backed and heavier than CI should run.
 - **Always read the chosen skill's full `SKILL.md`** before acting — the wrapper note is only
   a summary.
 
@@ -117,8 +113,6 @@ Know these by name so you reach for them automatically.
 
 **Context & grounding**
 - `opensrc` — read the actual source of any npm/PyPI/crate/GitHub dependency.
-- `graphify` — turn a codebase/docs into a queryable knowledge graph (global skill, not in
-  this vault).
 - `gh-cli` — authenticated GitHub access (PRs, issues, raw files) over ad-hoc curl.
 - `find-skills` — discover & install skills you don't have yet.
 
@@ -166,7 +160,7 @@ Know these by name so you reach for them automatically.
 ## Default loop for a coding task
 
 1. **Skill check** — is there a skill for this? If yes, read its `SKILL.md` and follow it.
-2. **Context** — `opensrc`/`graphify` the relevant dependency or codebase; read real code.
+2. **Context** — `opensrc` the relevant dependency; read its real code.
 3. **Plan** — for anything multi-step, `brainstorming` → `writing-plans`.
 4. **Implement** — `test-driven-development`; isolate with `using-git-worktrees` if risky.
 5. **Verify** — `verification-before-completion`: run tests/lint, show the output.
@@ -178,14 +172,17 @@ Know these by name so you reach for them automatically.
 
 - Skills are managed by the Vercel `skills` CLI; folders live in `skills/` and are never
   hand-edited by the navigation layer.
-- Run [`install-skills.sh`](install-skills.sh) to symlink every skill here into each agent's
-  skills folder so their native loaders pick them up. gstack, career-ops, and UI/UX Pro Max
-  are optional extras: pass `--extras gstack`, `--extras career`, `--extras ui-ux`, or
-  `--extras all` to install them (skipped by default).
-- After adding/removing a skill, regenerate wrappers/maps/index:
-  `python3 .skill-vault/build.py` (see [`README.md`](README.md)).
-- To refresh the optional local graphify graph for vault queries, run
-  `python3 .skill-vault/build-graphify.py`. Use `--dry-run` to inspect the command and
-  `--full` only when you intentionally want every skill folder included.
+- Run `./skillquarium install` to symlink every skill here into each agent's skills folder so
+  their native loaders pick them up. gstack, career-ops, and UI/UX Pro Max are optional
+  extras: pass `--extras gstack`, `--extras career`, `--extras ui-ux`, or `--extras all` to
+  install them (skipped by default).
+- After adding/removing a skill, regenerate the wrappers, maps, index, and knowledge graph:
+  `./skillquarium build` (see [`README.md`](README.md)).
+- After a description changes, refresh the vectors `query` searches: `./skillquarium embed`.
+  It needs the llama.cpp endpoint named in `.skill-vault/config.local.json`; without it
+  `query` still runs on BM25, fuzzy matching, and the graph.
+- `query` appends up to 5 skills found by BM25 over a trained BPE model's word pieces, after
+  the regular results and tagged `[bpe #N]`. CI retrains that model when skills change; to do it
+  locally, `./skillquarium tokenizer` needs the `skill-tokenizer` binary. Queries need neither.
 - This `AGENTS.md` is the canonical guide; symlink or copy it to wherever each tool looks
   (e.g. a project root, or alongside your tool's global instructions).

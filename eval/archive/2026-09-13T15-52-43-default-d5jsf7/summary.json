@@ -1,0 +1,246 @@
+{
+  "runId": "2026-09-13T15-52-43-default-d5jsf7",
+  "rows": [
+    {
+      "model": "openai/gpt-5.6-luna",
+      "task": "ts-control-probe",
+      "skill": "zz-prefix",
+      "baseline": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0,
+        "full": 0.3333333333333333,
+        "bench": null,
+        "reasoning": 516,
+        "toolCalls": 0
+      },
+      "withSkill": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 1,
+        "full": 1,
+        "bench": null,
+        "reasoning": 413,
+        "toolCalls": 0
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "task": "ts-settings-parser",
+      "skill": "modern-typescript",
+      "baseline": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 1,
+        "full": 1,
+        "bench": null,
+        "reasoning": 1034,
+        "toolCalls": 0
+      },
+      "withSkill": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 1,
+        "full": 1,
+        "bench": null,
+        "reasoning": 516,
+        "toolCalls": 0
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "task": "go-batch-processor",
+      "skill": "use-modern-go",
+      "baseline": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0.4000000000000001,
+        "full": 0.5714285714285714,
+        "bench": {
+          "ns": 22555,
+          "bytes": 15511,
+          "allocs": 203
+        },
+        "reasoning": 516,
+        "toolCalls": 0
+      },
+      "withSkill": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0.9333333333333332,
+        "full": 0.9523809523809524,
+        "bench": {
+          "ns": 22698,
+          "bytes": 14712,
+          "allocs": 203
+        },
+        "reasoning": 526,
+        "toolCalls": 1
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "task": "rust-record-parser",
+      "skill": "rust-coding-guidelines",
+      "baseline": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0.25,
+        "full": 0.4761904761904761,
+        "bench": {
+          "ns": 781776.557,
+          "bytes": 1375060,
+          "allocs": 15012
+        },
+        "reasoning": 516,
+        "toolCalls": 0
+      },
+      "withSkill": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0.25,
+        "full": 0.5238095238095238,
+        "bench": {
+          "ns": 799275.385,
+          "bytes": 1375060,
+          "allocs": 15012
+        },
+        "reasoning": 516,
+        "toolCalls": 0
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "task": "cpp-lru-cache",
+      "skill": "cpp-pro",
+      "baseline": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0.6666666666666666,
+        "full": 0.7619047619047619,
+        "bench": {
+          "ns": 131399.134,
+          "bytes": 213688,
+          "allocs": 8199
+        },
+        "reasoning": 1807,
+        "toolCalls": 0
+      },
+      "withSkill": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0.7333333333333334,
+        "full": 0.8095238095238094,
+        "bench": {
+          "ns": 132721.211,
+          "bytes": 213688,
+          "allocs": 8199
+        },
+        "reasoning": 2504,
+        "toolCalls": 0
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "task": "csharp-order-parser",
+      "skill": "csharp-developer",
+      "baseline": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0,
+        "full": 0.5714285714285714,
+        "bench": {
+          "ns": 631675.195,
+          "bytes": 1448144.078,
+          "allocs": null
+        },
+        "reasoning": 1552,
+        "toolCalls": 0
+      },
+      "withSkill": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 0,
+        "full": 0.5714285714285714,
+        "bench": {
+          "ns": 528351.074,
+          "bytes": 1408160.039,
+          "allocs": null
+        },
+        "reasoning": 1663,
+        "toolCalls": 0
+      }
+    },
+    {
+      "model": "openai/gpt-5.6-luna",
+      "task": "c-run-length",
+      "skill": null,
+      "baseline": {
+        "n": 3,
+        "ok": 3,
+        "gated": 3,
+        "empty": 0,
+        "errors": 0,
+        "benchFailures": 0,
+        "subset": 1,
+        "full": 1,
+        "bench": {
+          "ns": 50394.786,
+          "bytes": 0,
+          "allocs": 0
+        },
+        "reasoning": 2070,
+        "toolCalls": 0
+      },
+      "withSkill": null
+    }
+  ]
+}

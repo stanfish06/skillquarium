@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clickstack Otel Collector"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $clickstack-otel-collector for this task."

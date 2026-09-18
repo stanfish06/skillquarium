@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rust Skill Creator"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $rust-skill-creator for this task."

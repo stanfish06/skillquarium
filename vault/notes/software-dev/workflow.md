@@ -39,6 +39,7 @@ created: 2026-08-07
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [complexa-sweep](../../notes/drug-discovery-chem/complexa-sweep.md) — Use this skill whenever the user wants to run a parameter sweep over a Proteina-Complexa design pipeline — cartesian-product hyperparameter scans, Pareto search over...
 - [core](../../notes/web-automation-frontend/core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
+- [core-actionbook](../../notes/software-dev/core-actionbook.md) — Internal support skill for actionbook MCP selectors used by Rust documentation research workflows
 - [deployments-cicd](../../notes/hosting-edge-platforms/deployments-cicd.md) — Vercel deployment and CI/CD expert guidance
 - [design-control-loop](../../notes/vault-meta/design-control-loop.md) — interview the user to design an agentic control loop (sensor, controller, actuator under disturbances) tailored to their codebase, then build it as locally-runnable components plus a...
 - [doc-coauthoring](../../notes/documents-office/doc-coauthoring.md) — Guide users through a structured workflow for co-authoring documentation
@@ -77,6 +78,7 @@ created: 2026-08-07
 - [rowan](../../notes/drug-discovery-chem/rowan.md) — Rowan is a cloud-native molecular modeling and medicinal-chemistry workflow platform with a Python API
 - [scikit-survival](../../notes/data-science-compute/scikit-survival.md) — Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival
 - [secure-workflow-guide](../../notes/security-auditing/secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
+- [security-audit](../../notes/security-auditing/security-audit.md) — Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons
 - [semgrep](../../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 - [slack](../../notes/web-automation-frontend/slack.md) — Read Slack context, route to the right Slack workflow, and prepare or perform Slack writes that match the user's intent
 - [snakemake-workflow-engine](../../notes/cloud-devops/snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines

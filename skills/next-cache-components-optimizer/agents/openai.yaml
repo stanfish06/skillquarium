@@ -1,0 +1,4 @@
+interface:
+  display_name: "Next Cache Components Optimizer"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $next-cache-components-optimizer for this task."

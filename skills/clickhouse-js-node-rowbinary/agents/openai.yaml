@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clickhouse Js Node Rowbinary"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $clickhouse-js-node-rowbinary for this task."

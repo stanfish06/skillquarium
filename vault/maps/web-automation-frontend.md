@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (115)
+## Skills (117)
 
 - [accessibility-and-inclusive-visualization](../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [admission-control](../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
@@ -86,6 +86,7 @@ created: 2026-06-13
 - [graphql-schema](../notes/web-automation-frontend/graphql-schema.md) — Guide for designing GraphQL schemas following industry best practices
 - [gsap](../notes/web-automation-frontend/gsap.md) — GSAP animation reference for HyperFrames
 - [high-end-visual-design](../notes/web-automation-frontend/high-end-visual-design.md) — Teaches the AI to design like a high-end agency
+- [htmx](../notes/web-automation-frontend/htmx.md) — HTMX development guidelines for building dynamic web applications with minimal JavaScript using HTML attributes
 - [image-to-code](../notes/web-automation-frontend/image-to-code.md) — Elite website image-to-code skill for Codex
 - [imagegen-frontend-mobile](../notes/web-automation-frontend/imagegen-frontend-mobile.md) — Elite mobile app image-generation skill for creating premium, app-native screen concepts and flows
 - [imagegen-frontend-web](../notes/web-automation-frontend/imagegen-frontend-web.md) — Elite frontend image-direction skill for generating premium, conversion-aware website design references
@@ -117,6 +118,7 @@ created: 2026-06-13
 - [stitch-design-taste](../notes/web-automation-frontend/stitch-design-taste.md) — Semantic Design System Skill for Google Stitch
 - [swr](../notes/web-automation-frontend/swr.md) — SWR data-fetching expert guidance. Use when building React apps with client-side data fetching, caching, revalidation, mutations, optimistic UI, pagination, or infinite loading using...
 - [theme-factory](../notes/web-automation-frontend/theme-factory.md) — Toolkit for styling artifacts with a theme
+- [tlc-generative-engine-optimization](../notes/web-automation-frontend/tlc-generative-engine-optimization.md) — Generative Engine Optimization (GEO): the on-page technical work that makes a page or site discoverable, parseable, trustworthy, quotable, and fresh for AI answer engines (Google AI...
 - [turbopack](../notes/web-automation-frontend/turbopack.md) — Turbopack expert guidance. Use when configuring the Next.js bundler, optimizing HMR, debugging build issues, or understanding the Turbopack vs Webpack differences
 - [turborepo](../notes/web-automation-frontend/turborepo.md) — Turborepo expert guidance. Use when setting up or optimizing monorepo builds, configuring task caching, remote caching, parallel execution, or the --affected flag for incremental CI
 - [ui-css-primitives](../notes/web-automation-frontend/ui-css-primitives.md) — Specifies CSS-level implementation primitives for UI work — OKLCH palette construction, motion duration and easing tokens, interactive and input state coverage, text-on-fill contrast...

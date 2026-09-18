@@ -1,0 +1,55 @@
+name: CLI CI
+
+# Checks the skillquarium CLI (.skill-vault/, Bun + TypeScript) on every pull
+# request and on pushes to any branch other than master. Read-only: it never
+# commits or pushes, so it shares no concurrency group with the vault-write
+# workflows. master is covered by rebuild-index.yml instead.
+
+on:
+  pull_request:
+    paths:
+      - ".skill-vault/**"
+      - "skillquarium"
+      - ".github/workflows/ci.yml"
+  push:
+    branches-ignore: [master]
+    paths:
+      - ".skill-vault/**"
+      - "skillquarium"
+      - ".github/workflows/ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+
+      - run: bun install --frozen-lockfile --cwd .skill-vault
+      # skillquarium grep shells out to ripgrep; without it the tests exercise only the fallback.
+      - name: Install ripgrep
+        run: sudo apt-get install -y --no-install-recommends ripgrep
+
+      - run: bun run --cwd .skill-vault typecheck
+
+      - run: bun test --cwd .skill-vault
+
+      - name: Build must not churn the committed vault
+        # The generated layer is committed, so a CLI change that silently
+        # rewrites all 2,176 generated files would otherwise land unreviewed.
+        # Rebuilding here and diffing makes that churn fail the PR.
+        run: |
+          ./skillquarium build
+          git diff --exit-code --stat -- vault/notes vault/maps vault/index.md vault/graph/graph.json
+
+      - name: Validate knowledge graph
+        # Embedding staleness is reported as a warning, never a failure: the
+        # embedding endpoint is on a private tailnet and unreachable from
+        # GitHub-hosted runners. Do not add an `embed` step here.
+        run: ./skillquarium validate

@@ -1,5 +1,5 @@
-import { CONFIGS, EVAL_DIR } from "./config.ts";
-import { runEval, loadRun, replayRun } from "./run.ts";
+import { CONFIG, EVAL_DIR } from "./config.ts";
+import { runEval, loadRun, replayRun, selftest } from "./run.ts";
 import { writeReport } from "./report.ts";
 import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -11,7 +11,10 @@ const flag = (name: string, dflt: string) => {
 };
 const positional: string[] = [];
 for (let i = 0; i < rest.length; i++) {
-  if (rest[i]!.startsWith("--")) { i++; continue; }
+  if (rest[i]!.startsWith("--")) {
+    i++;
+    continue;
+  }
   positional.push(rest[i]!);
 }
 
@@ -26,9 +29,7 @@ async function latestRun(): Promise<string> {
 
 switch (cmd) {
   case "run": {
-    const name = flag("config", "smoke");
-    const cfg = CONFIGS[name];
-    if (!cfg) throw new Error(`unknown config "${name}" (have: ${Object.keys(CONFIGS).join(", ")})`);
+    const cfg = CONFIG;
     if (!process.env.AI_GATEWAY_API_KEY) throw new Error("AI_GATEWAY_API_KEY not set — run `mise run setup`");
     const concurrency = Number(flag("concurrency", "4"));
     if (!Number.isInteger(concurrency) || concurrency < 1) {
@@ -57,6 +58,9 @@ switch (cmd) {
     for (const e of (await readdir(dir).catch(() => [])).sort()) console.log(e);
     break;
   }
+  case "selftest": {
+    process.exit((await selftest()) ? 1 : 0);
+  }
   default:
-    console.log(`usage: bun run src/cli.ts <run|replay|report|runs> [--config smoke|full] [--concurrency N] [runId]`);
+    console.log(`usage: bun run src/cli.ts <run|replay|report|runs|selftest> [--concurrency N] [runId]`);
 }

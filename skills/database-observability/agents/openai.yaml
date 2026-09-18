@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Observability"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $database-observability for this task."

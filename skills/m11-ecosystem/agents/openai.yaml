@@ -1,0 +1,4 @@
+interface:
+  display_name: "M11 Ecosystem"
+  short_description: "Invoke this skill explicitly when needed."
+  default_prompt: "Use $m11-ecosystem for this task."

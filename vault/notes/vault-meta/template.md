@@ -20,6 +20,7 @@ created: 2026-08-07
 
 - [citations](../../notes/literature-discovery/citations.md) — Canonical rules and HTML/CSS contract for inline `[n]` citation references, end-of-document Citations blocks, and optional per-section citation recaps used across Moody's Agentic...
 - [cloudformation-to-pulumi](../../notes/cloud-devops/cloudformation-to-pulumi.md) — Convert, migrate, or import AWS CloudFormation stacks or templates into Pulumi programs
+- [cpp-pro](../../notes/software-dev/cpp-pro.md) — Writes, optimizes, and debugs C++ applications using modern C++20/23 features, template metaprogramming, and high-performance systems techniques
 - [dashboarding](../../notes/cloud-devops/dashboarding.md) — Build, modify, and ship Grafana dashboards as JSON via the HTTP API — panel types (timeseries / stat / gauge / table / heatmap / logs / traces / node-graph), `gridPos` 24-column...
 - [email](../../notes/comms-productivity/email.md) — Email sending integration guidance — Resend (native Vercel Marketplace) with React Email templates
 - [figma-code-connect](../../notes/web-automation-frontend/figma-code-connect.md) — Creates and maintains Figma Code Connect template files that map Figma components to code snippets
