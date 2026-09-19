@@ -115,9 +115,9 @@ Map findings to categories:
 - path under `.github/workflows/` → GitHub Actions
 - `apiVersion:` together with `kind:` → Kubernetes
 - `AWSTemplateFormatVersion:`, or `Resources:` with a `Type: AWS::` member → CloudFormation
-- anything else → YAML
+- anything else → **no category**
 
-These are not exclusive; assign every category that matches. Include the generic YAML category whenever any YAML is present, since `p/yaml` carries patterns the specific rulesets do not.
+These are not exclusive; assign every category that matches. Generic YAML has no registry ruleset (`p/yaml` was removed), so a file that matches none of the markers above gets no category, as with JSON below. Keep detecting CloudFormation so it can be reported: `p/cloudformation` was removed too, so list the category under Did Not Run as skipped instead of selecting a ruleset for it.
 
 **Disambiguating JSON.** Unlike YAML, `.json` has no catch-all: most JSON in a repository is build configuration that no ruleset covers, so the default is to assign nothing. Read a sample and assign only on these markers:
 

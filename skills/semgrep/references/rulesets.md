@@ -85,6 +85,7 @@ For each detected language, add the primary ruleset. If a framework is detected,
 |-----------|-----------------|-------|
 | `.sol` | No official ruleset | Use Decurity third-party rules |
 | `Dockerfile` | `p/dockerfile` | Limited rules |
+| `.yaml`, `.yml` | No registry ruleset | `p/yaml` was removed; select `p/kubernetes`, `p/github-actions`, or `p/docker-compose` by content |
 | `.json` | `r/json.aws` | AWS IAM policies; use `r/json.*` for specific rules |
 | Bash scripts | - | Community support |
 | Cairo, Circom | - | Experimental, smart contracts |
@@ -110,6 +111,7 @@ For each detected language, add the primary ruleset. If a framework is detected,
 | `Dockerfile` | `p/dockerfile` | Container security, best practices |
 | `.tf`, `.hcl` | `p/terraform` | IaC misconfigurations, CIS benchmarks, AWS/Azure/GCP |
 | k8s manifests | `p/kubernetes` | K8s security, RBAC issues |
+| CloudFormation | No registry ruleset | `p/cloudformation` was removed; list the category under Did Not Run as skipped |
 | GitHub Actions | `p/github-actions` | CI/CD security, secrets exposure |
 | AWS IAM JSON | `r/json.aws` | IAM policy misconfigurations (use `--config r/json.aws`) |
 
