@@ -4,11 +4,11 @@
   "skills": 2135,
   "expert_profiles": 503,
   "nodes": 2208,
-  "edges": 15806,
+  "edges": 15802,
   "generic_names_blocked": 32,
-  "tier1_edges": 4758,
+  "tier1_edges": 4756,
   "tier2_edges": 703,
-  "alias_edges": 4502,
+  "alias_edges": 4501,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
@@ -20,13 +20,13 @@
   "orphan_count": 127,
   "orphan_rate": 0.0595,
   "by_provenance": {
-   "EXTRACTED": 15020,
+   "EXTRACTED": 15016,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2135,
-   "references": 12360,
+   "references": 12356,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -63294,15 +63294,6 @@
   {
    "src": "deepchem",
    "rel": "references",
-   "dst": "molfeat",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "deepchem named in molfeat/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "deepchem",
-   "rel": "references",
    "dst": "pytdc",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -102390,15 +102381,6 @@
   {
    "src": "modern-python",
    "rel": "references",
-   "dst": "molfeat",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "modern-python named in molfeat/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "modern-python",
-   "rel": "references",
    "dst": "pytest",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -103330,24 +103312,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "datamol named in molfeat/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "molfeat",
-   "rel": "references",
-   "dst": "deepchem",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "deepchem named in molfeat/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "molfeat",
-   "rel": "references",
-   "dst": "modern-python",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "modern-python named in molfeat/SKILL.md body",
    "status": "accepted"
   },
   {
