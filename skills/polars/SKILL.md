@@ -3,7 +3,7 @@ name: polars
 description: High-performance DataFrame library for Python ETL, analytics, and pandas migration. Use for expression-based data manipulation with lazy query optimization, parallel execution, streaming out-of-core processing, Arrow interoperability, and optional GPU execution.
 license: https://github.com/pola-rs/polars/blob/main/LICENSE
 allowed-tools: Read
-compatibility: Requires Python 3.10+ for polars 1.41.x. Install with uv pip install; optional extras enable Excel, database, cloud, pandas/NumPy, and GPU integrations.
+compatibility: Requires Python 3.10+ for polars 1.44.x. Install with uv pip install; optional extras enable Excel, database, cloud, pandas/NumPy, and GPU integrations.
 metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 ---
 
@@ -19,12 +19,12 @@ Polars is a lightning-fast DataFrame library for Python and Rust built on Apache
 
 Install the current stable Polars release verified during this refresh:
 ```bash
-uv pip install "polars==1.41.2"
+uv pip install "polars==1.44.2"
 ```
 
 Install optional integrations only when needed:
 ```bash
-uv pip install "polars[excel,database,fsspec,pandas,numpy]==1.41.2"
+uv pip install "polars[excel,database,fsspec,pandas,numpy]==1.44.2"
 ```
 
 Basic DataFrame creation and operations:

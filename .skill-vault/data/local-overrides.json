@@ -857,5 +857,28 @@
       "find": "**Manticore (formal verification)**:\n- Define properties in Solidity or Python\n- Set up symbolic execution\n- Validate critical paths",
       "replace": "**Halmos / Kontrol (formal verification)**:\n- Trail of Bits archived Manticore in June 2026 (\"no longer internally developed and maintained\"); symbolic execution for Foundry projects now goes through Halmos (a16z) or Kontrol (Runtime Verification)\n- Define properties as Foundry test invariants\n- Set up symbolic execution (`halmos --contract <Test>`, or `kontrol prove`)\n- Validate critical paths"
     }
+  ],
+  "polars": [
+    {
+      "id": "compat-1442",
+      "issue": 909,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "Requires Python 3.10+ for polars 1.41.x.",
+      "replace": "Requires Python 3.10+ for polars 1.44.x."
+    },
+    {
+      "id": "install-1442",
+      "issue": 909,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"polars==1.41.2\"",
+      "replace": "uv pip install \"polars==1.44.2\""
+    },
+    {
+      "id": "install-extras-1442",
+      "issue": 909,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.41.2\"",
+      "replace": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.44.2\""
+    }
   ]
 }
