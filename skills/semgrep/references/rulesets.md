@@ -59,13 +59,13 @@ For each detected language, add the primary ruleset. If a framework is detected,
 | Detection | Primary Ruleset | Framework Rulesets | Pro Rule Count |
 |-----------|-----------------|-------------------|----------------|
 | `.py` | `p/python` | `p/django`, `p/flask`, `p/fastapi` | 710+ |
-| `.js`, `.jsx` | `p/javascript` | `p/react`, `p/nodejs`, `p/express`, `p/nextjs`, `p/angular` | 250+ (JS), 70+ (JSX) |
-| `.ts`, `.tsx` | `p/typescript` | `p/react`, `p/nodejs`, `p/express`, `p/nextjs`, `p/angular` | 230+ |
-| `.go` | `p/golang` | `p/go` (alias) | 80+ |
-| `.java` | `p/java` | `p/spring`, `p/findsecbugs` | 190+ |
-| `.kt` | `p/kotlin` | `p/spring` | 60+ |
-| `.rb` | `p/ruby` | `p/rails` | 40+ |
-| `.php` | `p/php` | `p/symfony`, `p/laravel`, `p/phpcs-security-audit` | 50+ |
+| `.js`, `.jsx` | `p/javascript` | `p/react`, `p/nodejs`, `p/expressjs`, `p/nextjs` | 250+ (JS), 70+ (JSX) |
+| `.ts`, `.tsx` | `p/typescript` | `p/react`, `p/nodejs`, `p/expressjs`, `p/nextjs` | 230+ |
+| `.go` | `p/golang` | - | 80+ |
+| `.java` | `p/java` | `p/findsecbugs` | 190+ |
+| `.kt` | `p/kotlin` | - | 60+ |
+| `.rb` | `p/ruby` | `p/brakeman` | 40+ |
+| `.php` | `p/php` | `p/php-laravel`, `p/phpcs-security-audit` | 50+ |
 | `.c`, `.cpp`, `.h` | `p/c` | - | 150+ |
 | `.rs` | `p/rust` | - | 40+ |
 | `.cs` | `p/csharp` | - | 170+ |
@@ -85,7 +85,7 @@ For each detected language, add the primary ruleset. If a framework is detected,
 |-----------|-----------------|-------|
 | `.sol` | No official ruleset | Use Decurity third-party rules |
 | `Dockerfile` | `p/dockerfile` | Limited rules |
-| `.yaml`, `.yml` | `p/yaml` | K8s, GitHub Actions, docker-compose patterns |
+| `.yaml`, `.yml` | No registry ruleset | `p/yaml` was removed; select `p/kubernetes`, `p/github-actions`, or `p/docker-compose` by content |
 | `.json` | `r/json.aws` | AWS IAM policies; use `r/json.*` for specific rules |
 | Bash scripts | - | Community support |
 | Cairo, Circom | - | Experimental, smart contracts |
@@ -99,13 +99,10 @@ For each detected language, add the primary ruleset. If a framework is detected,
 | FastAPI | `fastapi` in requirements, `@app.get/post` | `p/fastapi` |
 | React | `package.json` with react dependency, `.jsx`/`.tsx` files | `p/react` |
 | Next.js | `next.config.js`, `pages/` or `app/` directory | `p/nextjs` |
-| Angular | `angular.json`, `@angular/` dependencies | `p/angular` |
-| Express | `express` in package.json, `app.use()` patterns | `p/express` |
+| Express | `express` in package.json, `app.use()` patterns | `p/expressjs` |
 | NestJS | `@nestjs/` dependencies, `@Controller` decorators | `p/nodejs` |
-| Spring | `pom.xml` with spring, `@SpringBootApplication` | `p/spring` |
-| Rails | `Gemfile` with rails, `config/routes.rb` | `p/rails` |
-| Laravel | `composer.json` with laravel, `artisan` | `p/laravel` |
-| Symfony | `composer.json` with symfony, `config/packages/` | `p/symfony` |
+| Rails | `Gemfile` with rails, `config/routes.rb` | `p/brakeman` |
+| Laravel | `composer.json` with laravel, `artisan` | `p/php-laravel` |
 
 ### Step 3: Add Infrastructure Rulesets
 
@@ -114,9 +111,8 @@ For each detected language, add the primary ruleset. If a framework is detected,
 | `Dockerfile` | `p/dockerfile` | Container security, best practices |
 | `.tf`, `.hcl` | `p/terraform` | IaC misconfigurations, CIS benchmarks, AWS/Azure/GCP |
 | k8s manifests | `p/kubernetes` | K8s security, RBAC issues |
-| CloudFormation | `p/cloudformation` | AWS infrastructure security |
+| CloudFormation | No registry ruleset | `p/cloudformation` was removed; list the category under Did Not Run as skipped |
 | GitHub Actions | `p/github-actions` | CI/CD security, secrets exposure |
-| `.yaml`, `.yml` | `p/yaml` | Generic YAML patterns (K8s, docker-compose) |
 | AWS IAM JSON | `r/json.aws` | IAM policy misconfigurations (use `--config r/json.aws`) |
 
 ### Step 4: Add Third-Party Rulesets
