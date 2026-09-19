@@ -1,14 +1,14 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2135,
+  "skills": 2136,
   "expert_profiles": 503,
-  "nodes": 2208,
-  "edges": 15806,
+  "nodes": 2209,
+  "edges": 15809,
   "generic_names_blocked": 32,
-  "tier1_edges": 4758,
+  "tier1_edges": 4759,
   "tier2_edges": 703,
-  "alias_edges": 4502,
+  "alias_edges": 4503,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
@@ -20,13 +20,13 @@
   "orphan_count": 127,
   "orphan_rate": 0.0595,
   "by_provenance": {
-   "EXTRACTED": 15020,
+   "EXTRACTED": 15023,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2135,
-   "references": 12360,
+   "in_domain": 2136,
+   "references": 12362,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -16682,6 +16682,21 @@
    "source": "skills/mcp-csharp-test/SKILL.md",
    "aliases": [
     "mcp csharp test"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "mcp-skills-extension",
+   "type": "Skill",
+   "label": "mcp-skills-extension",
+   "description": "Implement and troubleshoot the MCP Skills extension (io.modelcontextprotocol/skills). Use when serving Agent Skills from an MCP server, adding skill discovery and verified loading to a host, or debugging skills/list, skills/get, and skill resource retrieval.",
+   "source": "skills/mcp-skills-extension/SKILL.md",
+   "aliases": [
+    "mcp skills extension"
    ],
    "uses": 0,
    "successes": 0,
@@ -99114,6 +99129,15 @@
   {
    "src": "mcp-builder",
    "rel": "references",
+   "dst": "mcp-skills-extension",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "mcp-builder named in mcp-skills-extension/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "mcp-builder",
+   "rel": "references",
    "dst": "using-superpowers",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -99289,6 +99313,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "run-tests named in mcp-csharp-test/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "mcp-skills-extension",
+   "rel": "in_domain",
+   "dst": "domain:vault-meta",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "mcp-skills-extension",
+   "rel": "references",
+   "dst": "mcp-builder",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "mcp-builder named in mcp-skills-extension/SKILL.md body",
    "status": "accepted"
   },
   {
