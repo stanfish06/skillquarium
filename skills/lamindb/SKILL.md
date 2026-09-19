@@ -163,10 +163,10 @@ LaminDB provides six interconnected capability areas, each documented in detail 
 ### 6. Setup and Deployment
 
 **Installation:**
-- Current stable baseline: `lamindb==2.7.0` (released 2026-06-29; Python >=3.10, <=3.14)
-- Basic: `uv pip install 'lamindb==2.7.0'`
-- With extras: `uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.7.0'`
-- Minimal namespace only: `uv pip install 'lamindb-core==2.6.1'` (as of 2026-07-08, latest published `lamindb-core` release; `lamindb` and `lamindb-core` version out-of-sync — pin core to its own latest release, not to the `lamindb` version)
+- Current stable baseline: `lamindb==2.10.0` (released 2026-08-26; Python >=3.10, <=3.14)
+- Basic: `uv pip install 'lamindb==2.10.0'`
+- With extras: `uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.10.0'`
+- Minimal namespace only: `uv pip install 'lamindb-core==2.10.0'` (as of this refresh, `lamindb` and `lamindb-core` ship in lockstep — pin both to the same release)
 - Bionty module: included in the LaminDB docs and available as `uv pip install 'bionty==2.4.0'`
 - Optional modules: pin reviewed releases for wetlab or clinical schema modules rather than installing floating latest versions
 
