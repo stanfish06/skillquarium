@@ -92,9 +92,10 @@ I'll help you document critical security properties:
 - Configure echidna.yaml
 - Run fuzzing campaign
 
-**Manticore (formal verification)**:
-- Define properties in Solidity or Python
-- Set up symbolic execution
+**Halmos / Kontrol (formal verification)**:
+- Trail of Bits archived Manticore in June 2026 ("no longer internally developed and maintained"); symbolic execution for Foundry projects now goes through Halmos (a16z) or Kontrol (Runtime Verification)
+- Define properties as Foundry test invariants
+- Set up symbolic execution (`halmos --contract <Test>`, or `kontrol prove`)
 - Validate critical paths
 
 **Custom Slither Checks**:
