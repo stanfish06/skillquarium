@@ -49,6 +49,15 @@
       "replace": "# ENV cannot shell out, so resolve the path at build time and link it to a fixed one\nRUN ln -s \"$(python -c 'import atheris; print(atheris.path())')/asan_with_fuzzer.so\" \\\n    /usr/local/lib/asan_with_fuzzer.so\nENV LD_PRELOAD \"/usr/local/lib/asan_with_fuzzer.so\""
     }
   ],
+  "lamindb": [
+    {
+      "id": "pin-2100",
+      "issue": 907,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "- Current stable baseline: `lamindb==2.5.1` (released 2026-06-01; Python >=3.10, <=3.14)\n- Basic: `uv pip install 'lamindb==2.5.1'`\n- With extras: `uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.5.1'`\n- Minimal namespace only: `uv pip install 'lamindb-core==2.5.1'`",
+      "replace": "- Current stable baseline: `lamindb==2.10.0` (released 2026-08-26; Python >=3.10, <=3.14)\n- Basic: `uv pip install 'lamindb==2.10.0'`\n- With extras: `uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.10.0'`\n- Minimal namespace only: `uv pip install 'lamindb-core==2.10.0'` (as of this refresh, `lamindb` and `lamindb-core` ship in lockstep — pin both to the same release)"
+    }
+  ],
   "catalyst-by-zoho": [
     {
       "id": "zcatalyst-real-podspec-repo",
