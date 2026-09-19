@@ -160,10 +160,10 @@ pipeline = SimpleKGPipeline(
 ```
 
 **LLM alternatives** (same interface):
-- `AnthropicLLM(model_name="claude-3-5-sonnet-20241022")`
+- `AnthropicLLM(model_name="claude-sonnet-4-6")`
 - `VertexAILLM(model_name="gemini-2.0-flash")`
 - `OllamaLLM(model_name="llama3")` — local; no API key needed
-- `BedrockLLM(model_id="anthropic.claude-3-5-sonnet-20241022-v2:0")` — Amazon Bedrock (v1.15.0+)
+- `BedrockLLM(model_id="us.anthropic.claude-sonnet-4-6")` — Amazon Bedrock (v1.15.0+); use the inference-profile ID, region prefix must match your deployment
 
 ---
 

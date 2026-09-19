@@ -28,6 +28,7 @@ created: 2026-06-20
 - [gh-address-comments](../../notes/software-dev/gh-address-comments.md) — Address actionable GitHub pull request review feedback
 - [image-to-code](../../notes/web-automation-frontend/image-to-code.md) — Elite website image-to-code skill for Codex
 - [liquid-glass](../../notes/mobile-native-dev/liquid-glass.md) — Implement and review macOS SwiftUI Liquid Glass UI
+- [mcp-skills-extension](../../notes/vault-meta/mcp-skills-extension.md) — Implement and troubleshoot the MCP Skills extension (io.modelcontextprotocol/skills)
 - [phaser-2d-game](../../notes/game-development/phaser-2d-game.md) — Implement 2D browser games with Phaser. Use when the user wants a Phaser, TypeScript, and Vite stack for scenes, gameplay systems, cameras, sprite animation, and DOM-overlay HUD...
 - [plugin-bundle-size](../../notes/web-automation-frontend/plugin-bundle-size.md) — Optimise Grafana app plugin bundle size using React.lazy, Suspense, and webpack code splitting
 - [pytorch-lightning](../../notes/ml-ai/pytorch-lightning.md) — Deep learning framework (PyTorch Lightning / lightning package)

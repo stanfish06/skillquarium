@@ -5,7 +5,7 @@ description: Vite 8 Rolldown bundler and Oxc transformer migration
 
 # Rolldown Migration (Vite 8)
 
-Vite 8 replaces esbuild+Rollup with Rolldown, a unified Rust-based bundler.
+Vite 8 (stable since March 2026) replaces esbuild+Rollup with Rolldown, a unified Rust-based bundler.
 
 ## What Changed
 
@@ -151,6 +151,7 @@ When framework depends on older Vite:
 
 <!--
 Source references:
+- https://vite.dev/blog/announcing-vite8
 - https://vite.dev/blog/announcing-vite8-beta
 - https://vite.dev/blog/announcing-vite7
 - https://vite.dev/config/shared-options#oxc

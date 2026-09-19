@@ -5,7 +5,7 @@ description: "The base44 CLI covers base44 projects: resource configuration (ent
 metadata:
   sourcePackage:
     name: base44
-    version: 0.0.50
+    version: 0.1.15
 ---
 
 # Base44 CLI

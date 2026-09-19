@@ -1,4 +1,36 @@
 {
+  "neo4j-document-import-skill": [
+    {
+      "id": "anthropic-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "- `AnthropicLLM(model_name=\"claude-3-5-sonnet-20241022\")`",
+      "replace": "- `AnthropicLLM(model_name=\"claude-sonnet-4-6\")`"
+    },
+    {
+      "id": "bedrock-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "- `BedrockLLM(model_id=\"anthropic.claude-3-5-sonnet-20241022-v2:0\")` — Amazon Bedrock (v1.15.0+)",
+      "replace": "- `BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")` — Amazon Bedrock (v1.15.0+); use the inference-profile ID, region prefix must match your deployment"
+    }
+  ],
+  "neo4j-graphrag-skill": [
+    {
+      "id": "anthropic-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "llm = AnthropicLLM(model_name=\"claude-3-5-sonnet-20241022\")",
+      "replace": "llm = AnthropicLLM(model_name=\"claude-sonnet-4-6\")"
+    },
+    {
+      "id": "bedrock-retired-model",
+      "issue": 895,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "llm = BedrockLLM(model_id=\"anthropic.claude-3-5-sonnet-20241022-v2:0\")",
+      "replace": "llm = BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")  # use the inference-profile ID; region prefix (us./eu./global.) must match your Bedrock deployment"
+    }
+  ],
   "docker-expert": [
     {
       "id": "compose-v2-cli",
@@ -47,6 +79,15 @@
       "source": "trailofbits/skills",
       "find": "ENV LD_PRELOAD \"$VIRTUAL_ENV/lib/python3.11/site-packages/asan_with_fuzzer.so\"",
       "replace": "# ENV cannot shell out, so resolve the path at build time and link it to a fixed one\nRUN ln -s \"$(python -c 'import atheris; print(atheris.path())')/asan_with_fuzzer.so\" \\\n    /usr/local/lib/asan_with_fuzzer.so\nENV LD_PRELOAD \"/usr/local/lib/asan_with_fuzzer.so\""
+    }
+  ],
+  "lamindb": [
+    {
+      "id": "pin-2100",
+      "issue": 907,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "- Current stable baseline: `lamindb==2.5.1` (released 2026-06-01; Python >=3.10, <=3.14)\n- Basic: `uv pip install 'lamindb==2.5.1'`\n- With extras: `uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.5.1'`\n- Minimal namespace only: `uv pip install 'lamindb-core==2.5.1'`",
+      "replace": "- Current stable baseline: `lamindb==2.10.0` (released 2026-08-26; Python >=3.10, <=3.14)\n- Basic: `uv pip install 'lamindb==2.10.0'`\n- With extras: `uv pip install 'lamindb[gcp,zarr-v2,fcs]==2.10.0'`\n- Minimal namespace only: `uv pip install 'lamindb-core==2.10.0'` (as of this refresh, `lamindb` and `lamindb-core` ship in lockstep — pin both to the same release)"
     }
   ],
   "catalyst-by-zoho": [
@@ -153,6 +194,29 @@
       "file": "references/core-plugin-api.md",
       "find": "    return command === 'build' && !config.build.ssr",
       "replace": "    return command === 'build' && !config.build?.ssr"
+    },
+    {
+      "id": "vite8-stable",
+      "issue": 873,
+      "source": "antfu/skills",
+      "find": "> Based on Vite 8 beta (Rolldown-powered).",
+      "replace": "> Based on Vite 8 (stable, released March 2026; Rolldown-powered)."
+    },
+    {
+      "id": "vite8-stable-migration",
+      "issue": 873,
+      "source": "antfu/skills",
+      "file": "references/rolldown-migration.md",
+      "find": "Vite 8 replaces esbuild+Rollup with Rolldown",
+      "replace": "Vite 8 (stable since March 2026) replaces esbuild+Rollup with Rolldown"
+    },
+    {
+      "id": "vite8-ga-source",
+      "issue": 873,
+      "source": "antfu/skills",
+      "file": "references/rolldown-migration.md",
+      "find": "Source references:\n- https://vite.dev/blog/announcing-vite8-beta",
+      "replace": "Source references:\n- https://vite.dev/blog/announcing-vite8\n- https://vite.dev/blog/announcing-vite8-beta"
     }
   ],
   "protobuf": [
@@ -496,6 +560,136 @@
       "replace": "- **Schema Migration**: Use PRAGMA user_version to track schema version and apply migration scripts sequentially on application startup. Wrap each step and its user_version bump in one BEGIN/COMMIT — SQLite DDL is transactional, so a failure then leaves neither a half-applied schema nor a version that lies about it\n\n##"
     }
   ],
+  "semgrep": [
+    {
+      "id": "registry-js-framework-ids",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.js`, `.jsx` | `p/javascript` | `p/react`, `p/nodejs`, `p/express`, `p/nextjs`, `p/angular` |",
+      "replace": "| `.js`, `.jsx` | `p/javascript` | `p/react`, `p/nodejs`, `p/expressjs`, `p/nextjs` |"
+    },
+    {
+      "id": "registry-ts-framework-ids",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.ts`, `.tsx` | `p/typescript` | `p/react`, `p/nodejs`, `p/express`, `p/nextjs`, `p/angular` |",
+      "replace": "| `.ts`, `.tsx` | `p/typescript` | `p/react`, `p/nodejs`, `p/expressjs`, `p/nextjs` |"
+    },
+    {
+      "id": "registry-go-no-alias",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.go` | `p/golang` | `p/go` (alias) |",
+      "replace": "| `.go` | `p/golang` | - |"
+    },
+    {
+      "id": "registry-java-no-spring",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.java` | `p/java` | `p/spring`, `p/findsecbugs` |",
+      "replace": "| `.java` | `p/java` | `p/findsecbugs` |"
+    },
+    {
+      "id": "registry-kotlin-no-spring",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.kt` | `p/kotlin` | `p/spring` |",
+      "replace": "| `.kt` | `p/kotlin` | - |"
+    },
+    {
+      "id": "registry-ruby-brakeman",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.rb` | `p/ruby` | `p/rails` |",
+      "replace": "| `.rb` | `p/ruby` | `p/brakeman` |"
+    },
+    {
+      "id": "registry-php-framework-ids",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.php` | `p/php` | `p/symfony`, `p/laravel`, `p/phpcs-security-audit` |",
+      "replace": "| `.php` | `p/php` | `p/php-laravel`, `p/phpcs-security-audit` |"
+    },
+    {
+      "id": "registry-yaml-language-row-no-ruleset",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `.yaml`, `.yml` | `p/yaml` | K8s, GitHub Actions, docker-compose patterns |",
+      "replace": "| `.yaml`, `.yml` | No registry ruleset | `p/yaml` was removed; select `p/kubernetes`, `p/github-actions`, or `p/docker-compose` by content |"
+    },
+    {
+      "id": "registry-drop-angular-hint",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| Next.js | `next.config.js`, `pages/` or `app/` directory | `p/nextjs` |\n| Angular | `angular.json`, `@angular/` dependencies | `p/angular` |",
+      "replace": "| Next.js | `next.config.js`, `pages/` or `app/` directory | `p/nextjs` |"
+    },
+    {
+      "id": "registry-express-hint-id",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `express` in package.json, `app.use()` patterns | `p/express` |",
+      "replace": "| `express` in package.json, `app.use()` patterns | `p/expressjs` |"
+    },
+    {
+      "id": "registry-drop-spring-hint",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| NestJS | `@nestjs/` dependencies, `@Controller` decorators | `p/nodejs` |\n| Spring | `pom.xml` with spring, `@SpringBootApplication` | `p/spring` |",
+      "replace": "| NestJS | `@nestjs/` dependencies, `@Controller` decorators | `p/nodejs` |"
+    },
+    {
+      "id": "registry-rails-hint-id",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| `Gemfile` with rails, `config/routes.rb` | `p/rails` |",
+      "replace": "| `Gemfile` with rails, `config/routes.rb` | `p/brakeman` |"
+    },
+    {
+      "id": "registry-laravel-hint-id",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| Laravel | `composer.json` with laravel, `artisan` | `p/laravel` |\n| Symfony | `composer.json` with symfony, `config/packages/` | `p/symfony` |",
+      "replace": "| Laravel | `composer.json` with laravel, `artisan` | `p/php-laravel` |"
+    },
+    {
+      "id": "registry-cloudformation-row-no-ruleset",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| CloudFormation | `p/cloudformation` | AWS infrastructure security |",
+      "replace": "| CloudFormation | No registry ruleset | `p/cloudformation` was removed; list the category under Did Not Run as skipped |"
+    },
+    {
+      "id": "registry-drop-yaml-infra-row",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "references/rulesets.md",
+      "find": "| GitHub Actions | `p/github-actions` | CI/CD security, secrets exposure |\n| `.yaml`, `.yml` | `p/yaml` | Generic YAML patterns (K8s, docker-compose) |",
+      "replace": "| GitHub Actions | `p/github-actions` | CI/CD security, secrets exposure |"
+    },
+    {
+      "id": "scan-workflow-yaml-no-category",
+      "issue": 830,
+      "source": "trailofbits/skills",
+      "file": "workflows/scan-workflow.md",
+      "find": "- anything else → YAML\n\nThese are not exclusive; assign every category that matches. Include the generic YAML category whenever any YAML is present, since `p/yaml` carries patterns the specific rulesets do not.",
+      "replace": "- anything else → **no category**\n\nThese are not exclusive; assign every category that matches. Generic YAML has no registry ruleset (`p/yaml` was removed), so a file that matches none of the markers above gets no category, as with JSON below. Keep detecting CloudFormation so it can be reported: `p/cloudformation` was removed too, so list the category under Did Not Run as skipped instead of selecting a ruleset for it."
+    }
+  ],
   "htmx": [
     {
       "id": "error-responses-not-swapped-by-default",
@@ -643,6 +837,62 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "**Graph neural networks:**\n```python\n# GIN models with different pre-training objectives\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```",
       "replace": "**Graph neural networks:**\n\n> The `gin-supervised-*` and `Graphormer-*` pretrained models below require the `dgl`/`graphormer` extras, which molfeat 1.0.0 removed. They only work on the pinned 0.11.0 / Python 3.10 line (see warning above); on 1.0.0+ use **[[torch-geometric]]** for custom GNN inputs instead.\n\n```python\n# GIN models with different pre-training objectives (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```"
+    }
+  ],
+  "audit-prep-assistant": [
+    {
+      "id": "dylint-through-cargo",
+      "issue": 539,
+      "source": "trailofbits/skills",
+      "find": "```bash\ndylint --all\n```",
+      "replace": "```bash\ncargo dylint --all\n```"
+    }
+  ],
+  "secure-workflow-guide": [
+    {
+      "id": "step4-tool-list",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "find": "- **Manticore**: Formal verification with symbolic execution",
+      "replace": "- **Halmos** or **Kontrol**: Formal verification with symbolic execution (Trail of Bits archived Manticore in June 2026)"
+    },
+    {
+      "id": "step4-report-line",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "find": "- **Step 4**: Documented security properties and testing setup (Echidna/Manticore)",
+      "replace": "- **Step 4**: Documented security properties and testing setup (Echidna/Halmos)"
+    },
+    {
+      "id": "step4-checklist-line",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "find": "- [ ] Testing to set up (Echidna/Manticore)",
+      "replace": "- [ ] Testing to set up (Echidna/Halmos)"
+    },
+    {
+      "id": "example-report-next-step",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "file": "resources/EXAMPLE_REPORT.md",
+      "find": "**Next Step:** Run Manticore for formal verification (optional, 2-3 days)",
+      "replace": "**Next Step:** Run Halmos for formal verification (optional, 2-3 days)"
+    },
+    {
+      "id": "example-report-action-item",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "file": "resources/EXAMPLE_REPORT.md",
+      "find": "6. **Add Manticore formal verification**",
+      "replace": "6. **Add Halmos formal verification**"
+    },
+    {
+      "id": "workflow-steps-tool",
+      "issue": 688,
+      "source": "trailofbits/skills",
+      "file": "resources/WORKFLOW_STEPS.md",
+      "find": "**Manticore (formal verification)**:\n- Define properties in Solidity or Python\n- Set up symbolic execution\n- Validate critical paths",
+      "replace": "**Halmos / Kontrol (formal verification)**:\n- Trail of Bits archived Manticore in June 2026 (\"no longer internally developed and maintained\"); symbolic execution for Foundry projects now goes through Halmos (a16z) or Kontrol (Runtime Verification)\n- Define properties as Foundry test invariants\n- Set up symbolic execution (`halmos --contract <Test>`, or `kontrol prove`)\n- Validate critical paths"
     }
   ]
 }
