@@ -185,6 +185,29 @@
       "file": "references/core-plugin-api.md",
       "find": "    return command === 'build' && !config.build.ssr",
       "replace": "    return command === 'build' && !config.build?.ssr"
+    },
+    {
+      "id": "vite8-stable",
+      "issue": 873,
+      "source": "antfu/skills",
+      "find": "> Based on Vite 8 beta (Rolldown-powered).",
+      "replace": "> Based on Vite 8 (stable, released March 2026; Rolldown-powered)."
+    },
+    {
+      "id": "vite8-stable-migration",
+      "issue": 873,
+      "source": "antfu/skills",
+      "file": "references/rolldown-migration.md",
+      "find": "Vite 8 replaces esbuild+Rollup with Rolldown",
+      "replace": "Vite 8 (stable since March 2026) replaces esbuild+Rollup with Rolldown"
+    },
+    {
+      "id": "vite8-ga-source",
+      "issue": 873,
+      "source": "antfu/skills",
+      "file": "references/rolldown-migration.md",
+      "find": "Source references:\n- https://vite.dev/blog/announcing-vite8-beta",
+      "replace": "Source references:\n- https://vite.dev/blog/announcing-vite8\n- https://vite.dev/blog/announcing-vite8-beta"
     }
   ],
   "protobuf": [
