@@ -17,7 +17,7 @@ Use this skill when you need to provision, change, or tear down infrastructure r
 
 ## Installation
 
-Current stable as of mid-2026: **Terraform ~1.15.x** (1.16 in development) and **OpenTofu ~1.12.x**. HCL and the core CLI are stable across the 1.x line, so the workflow below is version-agnostic; check release notes for exact newest.
+Current stable as of mid-September 2026: **Terraform ~1.16.x** (1.17 in development) and **OpenTofu ~1.12.x**. HCL and the core CLI are stable across the 1.x line, so the workflow below is version-agnostic; check release notes for exact newest.
 
 ```bash
 # macOS (Homebrew)
