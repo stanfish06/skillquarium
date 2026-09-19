@@ -71,6 +71,14 @@ Cache verified files on demand. Include server identity and URI in materialized
 paths, and keep the cache outside all local filesystem-skill discovery paths.
 Preserve the MCP origin after restart or disconnection.
 
+Partition caches by authorization context. `cacheScope: "public"` marks a response
+without user-specific data that may be shared; a `"private"` `skills/list`,
+`skills/get`, or `resources/read` result may be reused only within the authorization
+context that produced it, so its cache key includes that context (for example the
+access token) together with server identity and URI. `ttlMs` and `cacheScope` are
+freshness and sharing hints, not integrity properties; the digest checks in this
+guide apply to every cached read.
+
 Either make cached files immutable in a location writable only by the host, or
 recompute their byte digests against the held entry on every access. A stored hash
 label or modification time does not verify mutable cached bytes. Local storage
