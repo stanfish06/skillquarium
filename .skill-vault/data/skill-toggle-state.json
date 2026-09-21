@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-09-14T07:36:06.306000+00:00",
-  "root": "/home/stan/.agents",
+  "saved_at": "2026-09-21T01:34:10.868000+00:00",
+  "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
       "claude_enabled": false,
@@ -507,6 +507,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "banner-design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "base44-cli": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -780,6 +784,10 @@
       "codex_enabled": false
     },
     "brainstorming": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "brand": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -2039,6 +2047,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "design-an-interface": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -2048,6 +2060,10 @@
       "codex_enabled": false
     },
     "design-md-library": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "design-system": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -4358,6 +4374,10 @@
     "mcp-csharp-test": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "mcp-skills-extension": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "mechanical-design-engineer": {
       "claude_enabled": false,
@@ -6847,6 +6867,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "security-audit": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "security-best-practices": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -7099,6 +7123,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "skillquarium": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "skills-hub": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -7130,6 +7158,10 @@
     "sleep-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "slides": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "smart-file-renaming": {
       "claude_enabled": true,
@@ -7967,7 +7999,15 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "ui-styling": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "ui-toolkit": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "ui-ux-pro-max": {
       "claude_enabled": true,
       "codex_enabled": true
     },
