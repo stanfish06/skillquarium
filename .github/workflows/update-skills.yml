@@ -99,12 +99,25 @@ jobs:
           echo "exit_code=$update_exit" >> "$GITHUB_OUTPUT"
 
       - name: Re-apply local fixes to upstream-managed skills
+        id: overrides
         # `skills update` reinstalls any skill whose upstream folder changed,
         # which silently reverts merged in-vault fixes (#665). Every such fix is
         # recorded in .skill-vault/data/local-overrides.json; this puts it back.
         # Exits non-zero when an override no longer matches, so a fix that
         # upstream has rewritten gets re-derived instead of vanishing.
-        run: ./skillquarium overrides
+        #
+        # Same shape as the update step above: the CLI re-applies every override
+        # it can and *then* exits 1 for the stale ones. Under `set -e` that
+        # aborted the job before the commit step, so 4 stale entries discarded
+        # 46 re-applied overrides plus the entire upstream sync, every day from
+        # 2026-08-30 (#893). Record the code and carry on; the gate at the end
+        # turns the job red once the work is committed.
+        run: |
+          set +e
+          ./skillquarium overrides
+          overrides_exit=$?
+          set -e
+          echo "exit_code=$overrides_exit" >> "$GITHUB_OUTPUT"
 
       - name: Soften coercive skill descriptions
         # Upstream SKILL.md files ship MUST / ALWAYS catalog copy that hijacks
@@ -149,12 +162,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./skillquarium drift --fail-on-drift
 
-      - name: Fail on partial upstream update
-        # Last, so a partially failed update never blocks the part that succeeded.
-        # A lock entry whose local name differs from the upstream `name:` frontmatter
-        # can never match the CLI's --skill selector; 66 such entries have never
-        # updated once (#827). This keeps that visible instead of silent.
-        if: steps.update.outputs.exit_code != '0'
+      - name: Fail on partial upstream update or stale override
+        # Last, so a partial failure never blocks the part that succeeded.
+        #  - update exit != 0: a lock entry whose local name differs from the upstream
+        #    `name:` frontmatter can never match the CLI's --skill selector; 66 such
+        #    entries have never updated once (#827).
+        #  - overrides exit != 0: a recorded local fix no longer applies because
+        #    upstream rewrote the region, and has to be re-derived by hand (#893).
+        # Both keep the problem visible instead of silent.
+        if: steps.update.outputs.exit_code != '0' || steps.overrides.outputs.exit_code != '0'
         run: |
-          echo "::error::skills update exited ${{ steps.update.outputs.exit_code }}: at least one skill did not update. Everything that did update was committed."
+          if [ "${{ steps.update.outputs.exit_code }}" != "0" ]; then
+            echo "::error::skills update exited ${{ steps.update.outputs.exit_code }}: at least one skill did not update."
+          fi
+          if [ "${{ steps.overrides.outputs.exit_code }}" != "0" ]; then
+            echo "::error::skillquarium overrides exited ${{ steps.overrides.outputs.exit_code }}: at least one local override is stale or missing and must be re-derived against current upstream."
+          fi
+          echo "Everything that did update or re-apply was committed."
           exit 1
