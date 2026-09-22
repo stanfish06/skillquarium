@@ -2049,7 +2049,8 @@
     "cpp-pro": "software-dev",
     "csharp-developer": "software-dev",
     "skillquarium": "vault-meta",
-    "mcp-skills-extension": "vault-meta"
+    "mcp-skills-extension": "vault-meta",
+    "video-use": "documents-office"
   },
   "synonyms": {
     "pydeseq2": [

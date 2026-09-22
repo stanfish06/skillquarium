@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Literature Search & Knowledge Discovery](literature-discovery.md)
 
-## Skills (25)
+## Skills (26)
 
 - [doc-coauthoring](../notes/documents-office/doc-coauthoring.md) — Guide users through a structured workflow for co-authoring documentation
 - [docx](../notes/documents-office/docx.md) — Document toolkit (.docx). Create/edit documents, tracked changes, comments, formatting preservation, text extraction, for professional document processing
@@ -40,4 +40,5 @@ created: 2026-06-13
 - [quarto-authoring](../notes/documents-office/quarto-authoring.md) — Use when the user is explicitly working with Quarto, .qmd files, _quarto.yml, Quarto projects, or Quarto features such as callouts, cross-references, citations, Mermaid diagrams...
 - [report-template](../notes/documents-office/report-template.md) — Publication-quality PDF report generation using Typst templates
 - [reports-pdfs-and-slide-automation](../notes/documents-office/reports-pdfs-and-slide-automation.md) — Lay out and export data-rich reports and documents
+- [video-use](../notes/documents-office/video-use.md) — Edit any video by conversation. Transcribe, cut, color grade, generate overlay animations, burn subtitles — for talking heads, montages, tutorials, travel, interviews
 - [xlsx](../notes/documents-office/xlsx.md) — Spreadsheet toolkit (.xlsx/.csv). Create/edit with formulas/formatting, analyze data, visualization, recalculate formulas, for spreadsheet processing and analysis
