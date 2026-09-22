@@ -815,7 +815,7 @@
       "issue": 880,
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "**Version note:** Examples target **molfeat 0.11.0** (PyPI stable, May 2025). Requires **Python 3.9–3.10** (`requires-python` caps below 3.11). Depends on **datamol ≥0.8.0** and **PyTorch ≥1.13**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically.",
-      "replace": "**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically."
+      "replace": "**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically. molfeat 1.0.0 also removed the legacy DGL, DGLLife, Graphormer, and protein adapters — pin to 0.11.0 on Python 3.10 for GIN/Graphormer work, or use `torch-geometric` for custom GNN inputs on 1.0.0+."
     },
     {
       "id": "molfeat-install-100",
@@ -829,7 +829,7 @@
       "issue": 880,
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "uv pip install \"molfeat[transformer]==0.11.0\"  # For ChemBERTa/ChemGPT\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer",
-      "replace": "uv pip install \"molfeat[transformer]==1.0.0\"   # For ChemBERTa/ChemGPT\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models (0.11.0 only; removed in 1.0.0)\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer (0.11.0 only; removed in 1.0.0)"
+      "replace": "uv pip install \"molfeat[transformer]==1.0.0\"   # For ChemBERTa/ChemGPT\n```\n\nThe `dgl` and `graphormer` extras were removed in 1.0.0 (see the compatibility note above). Installing them needs a separate Python 3.10 environment — the 3.11+ environment from Installation will not accept them:\n\n```bash\nuv venv --python 3.10 .venv-molfeat-legacy && source .venv-molfeat-legacy/bin/activate\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models (0.11.0 only; removed in 1.0.0)\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer (0.11.0 only; removed in 1.0.0)"
     },
     {
       "id": "molfeat-gnn-examples-100",
@@ -837,6 +837,30 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "**Graph neural networks:**\n```python\n# GIN models with different pre-training objectives\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```",
       "replace": "**Graph neural networks:**\n\n> The `gin-supervised-*` and `Graphormer-*` pretrained models below require the `dgl`/`graphormer` extras, which molfeat 1.0.0 removed. They only work on the pinned 0.11.0 / Python 3.10 line (see warning above); on 1.0.0+ use **[[torch-geometric]]** for custom GNN inputs instead.\n\n```python\n# GIN models with different pre-training objectives (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```"
+    },
+    {
+      "id": "molfeat-examples-install-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/examples.md",
+      "find": "Requires Python 3.9 or 3.10 (molfeat 0.11.0 does not support 3.11+):\n\n```bash\nuv pip install \"molfeat==0.11.0\"\n\n# With all pip-installable optional dependencies\nuv pip install \"molfeat[all]==0.11.0\"\n\n# With specific dependencies\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GNN models\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer\nuv pip install \"molfeat[transformer]==0.11.0\"  # For ChemBERTa, ChemGPT\nuv pip install \"molfeat[pyg]==0.11.0\"          # For PyTorch Geometric\nuv pip install \"molfeat[viz]==0.11.0\"          # For NGLView widgets\n```",
+      "replace": "Requires Python 3.11+ (molfeat 1.0.0 dropped 3.9/3.10 support):\n\n```bash\nuv pip install \"molfeat==1.0.0\"\n\n# With all pip-installable optional dependencies (excludes dgl/graphormer, removed in 1.0.0)\nuv pip install \"molfeat[all]==1.0.0\"\n\n# With specific dependencies\nuv pip install \"molfeat[transformer]==1.0.0\"   # For ChemBERTa, ChemGPT\nuv pip install \"molfeat[pyg]==1.0.0\"           # For PyTorch Geometric\nuv pip install \"molfeat[viz]==1.0.0\"           # For NGLView widgets\n```\n\nThe `dgl` and `graphormer` extras were removed in 1.0.0. They still work on the last release\nthat had them, in a separate Python 3.10 environment:\n\n```bash\nuv venv --python 3.10 .venv-molfeat-legacy && source .venv-molfeat-legacy/bin/activate\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GNN models\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer\n```"
+    },
+    {
+      "id": "molfeat-featurizers-deep-learning-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/available_featurizers.md",
+      "find": "**For deep learning:**\n- Use **ChemBERTa** or **ChemGPT** for transformer embeddings\n- Use **gin-supervised-*** for graph neural network embeddings\n- Consider **Graphormer** for quantum property predictions",
+      "replace": "**For deep learning:**\n- Use **ChemBERTa** or **ChemGPT** for transformer embeddings\n- Use **gin-supervised-*** for graph neural network embeddings (0.11.0 only — removed in molfeat 1.0.0)\n- Consider **Graphormer** for quantum property predictions (0.11.0 only — removed in molfeat 1.0.0)"
+    },
+    {
+      "id": "molfeat-featurizers-deps-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/available_featurizers.md",
+      "find": "Some featurizers require optional dependencies (molfeat 0.11.0):\n\n- **DGL models** (gin-*, jtvae): `uv pip install \"molfeat[dgl]==0.11.0\"` (upstream recommends `dgl<=2.0`)\n- **Graphormer**: `uv pip install \"molfeat[graphormer]==0.11.0\"`\n- **Transformers** (ChemBERTa, ChemGPT, MolT5): `uv pip install \"molfeat[transformer]==0.11.0\"`\n- **FCD**: `uv pip install \"molfeat[fcd]==0.11.0\"`\n- **PyTorch Geometric**: `uv pip install \"molfeat[pyg]==0.11.0\"`\n- **Visualization**: `uv pip install \"molfeat[viz]==0.11.0\"`\n- **MAP4**: external package — see [reymond-group/map4](https://github.com/reymond-group/map4) (not a molfeat PyPI extra)\n- **All pip extras**: `uv pip install \"molfeat[all]==0.11.0\"`",
+      "replace": "Some featurizers require optional dependencies. Since molfeat 1.0.0, `dgl` and `graphormer`\nare removed — those two need a separate Python 3.10 environment pinned to 0.11.0; everything\nelse installs into a normal 1.0.0 / Python 3.11+ environment:\n\n- **DGL models** (gin-*, jtvae, Python 3.10 only): `uv pip install \"molfeat[dgl]==0.11.0\"` (upstream recommends `dgl<=2.0`)\n- **Graphormer** (Python 3.10 only): `uv pip install \"molfeat[graphormer]==0.11.0\"`\n- **Transformers** (ChemBERTa, ChemGPT, MolT5): `uv pip install \"molfeat[transformer]==1.0.0\"`\n- **FCD**: `uv pip install \"molfeat[fcd]==1.0.0\"`\n- **PyTorch Geometric**: `uv pip install \"molfeat[pyg]==1.0.0\"`\n- **Visualization**: `uv pip install \"molfeat[viz]==1.0.0\"`\n- **MAP4**: external package — see [reymond-group/map4](https://github.com/reymond-group/map4) (not a molfeat PyPI extra)\n- **All pip extras** (excludes dgl/graphormer): `uv pip install \"molfeat[all]==1.0.0\"`"
     }
   ],
   "audit-prep-assistant": [
