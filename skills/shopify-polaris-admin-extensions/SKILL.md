@@ -64,7 +64,7 @@ CLI Command to Scaffold a new Admin Print Action Extension:
 shopify app generate extension --template admin_print --name my-admin-print-extension
 ```
 
-version: 2026-01
+version: 2026-07
 
 ## Target APIs
 
