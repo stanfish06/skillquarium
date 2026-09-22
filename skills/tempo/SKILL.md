@@ -95,8 +95,10 @@ curl -sG --data-urlencode 'q={resource.service.name="frontend" && duration > 1s}
 ### 4. Deploy on Kubernetes (Helm)
 
 ```bash
-helm repo add grafana https://grafana.github.io/helm-charts
-helm install tempo grafana/tempo-distributed --version 1.61.3 \
+# The chart moved from grafana/helm-charts to grafana-community/helm-charts on 2026-01-30;
+# the old repo no longer receives updates or support.
+helm repo add grafana-community https://grafana-community.github.io/helm-charts
+helm install tempo grafana-community/tempo-distributed --version 3.7.0 \
   --set storage.trace.backend=s3 \
   --set storage.trace.s3.bucket=my-tempo-bucket \
   --set storage.trace.s3.region=us-east-1
