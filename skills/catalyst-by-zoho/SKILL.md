@@ -307,18 +307,18 @@ Without these, `catalyst deploy` either crashes or deploys to nowhere. Every fil
    > **Never skip this sequence.** Never guess org or project IDs. See `references/zoho-mcp-tools.md`
    > for the full flow, ID mismatch gotchas, and troubleshooting.
 
-## ⚠️ Deprecation notices (as of May 2026)
+## ⚠️ End-of-life notice (as of September 2026)
 
-The following Catalyst components are **deprecated** and will be removed in a future update
-(originally scheduled for April 30, 2026, currently still functional with deprecation warnings):
+The following Catalyst components reached **end-of-life on April 30, 2026** and **no longer function**
+— any business logic still configured to use them is already broken, not merely deprecated:
 
 - **Event Listeners** → replaced by **Signals** (event bus service)
 - **File Store** → replaced by **Stratus** (S3-compatible object storage)
 - **Cron** → replaced by **Job Scheduling** (managed job pools)
 
-**Never recommend deprecated components for new projects.** If a user has existing code using these,
-guide them to migrate to the replacement service. File Store supports direct migration to Stratus via
-the console. Event Listeners and Cron require manual migration of business logic.
+**Never recommend these components for new or existing projects.** If a user has existing code using
+these, treat it as already broken and migrate it now, not "when convenient": File Store supports direct
+migration to Stratus via the console; Event Listeners and Cron require manual migration of business logic.
 
 Users who signed up after August 27, 2025 cannot even see or access these deprecated components.
 
@@ -341,11 +341,11 @@ For deep-dive details on any service, load the appropriate Tier 2 reference file
 | **Communication** | Mail (domain verification required); Push Notifications (APNs + FCM) | `references/cloud-scale.md` |
 | **Developer Tools** | CLI (`zcatalyst-cli`), SDKs (Node.js/Java/Python + Web/Android/iOS/Flutter), REST APIs, VS Code Extension, CodeLib, Zia AI Assistant, Tunneling | `references/functions-and-sdk.md`, `references/project-and-cli.md` |
 
-**Deprecated — never recommend for new projects:**
+**End-of-life since April 30, 2026 — no longer function, never recommend:**
 - ~~File Store~~ → use **Stratus**
 - ~~Event Listeners~~ → use **Signals**
 - ~~Cron~~ → use **Job Scheduling**
-- Users who signed up after Aug 27, 2025 cannot access deprecated components.
+- Users who signed up after Aug 27, 2025 cannot access these components at all.
 
 ## Quick reference: Function handler signatures (Node.js)
 
@@ -512,7 +512,7 @@ catalyst deploy slate --production    # Deploy to Production environment
 - **Cache values are strings only** — serialize/deserialize JSON yourself
 - **Integration Functions NOT available** in EU, AU, IN, or CA data centers
 - **CLI always deploys to Development** — production deployment via web console only
-- **New users after Aug 27, 2025** cannot access File Store, Event Listeners, or Cron — these services are deprecated (originally scheduled for removal April 30, 2026 — still functional with deprecation warnings, removal date TBD)
+- **File Store, Event Listeners, and Cron reached end-of-life on April 30, 2026** — they no longer function; users who signed up after Aug 27, 2025 never had access at all
 - **DataStore App User permissions are OFF by default (REQUIRED setup step)** — Newly created tables give App Users **zero permissions** — no Select, Insert, Update, or Delete. This is not optional configuration; it's a required step after creating every table. Go to **Console → Data Store → {Table} → Scopes & Permissions → Table Permissions → App User → check Select, Insert, Update, Delete**. Without this, any user-authenticated function call will fail silently or return permissions errors. Alternative: use admin-scoped SDK `catalyst.initialize(req, { scope: 'admin' })` to bypass user permissions.
 - **Web client → function fetch must include `credentials: 'include'`** — without it, auth cookies are not forwarded and server-side `userManagement().getCurrentUser()` throws with 401, even when both web client and function are on the same Catalyst domain.
 - **Web SDK `catalyst.auth.getCurrentUser()` does NOT exist** — use `catalyst.auth.isUserAuthenticated()` instead. It resolves with the full user object (`result.content.email_id`, etc.) on success and rejects with 401 on failure. The SDK does NOT auto-redirect — you must redirect manually to `/__catalyst/auth/login`.

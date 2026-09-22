@@ -98,6 +98,48 @@
       "file": "references/sdk-mobile.md",
       "find": "pod 'ZCatalyst', :git => 'https://github.com/nicetomeetyou/ZCatalyst.git', :tag => '2.2.2'",
       "replace": "pod 'ZCatalyst', :git => 'https://github.com/catalystbyzoho/Catalyst-iOS-SDK.git', :tag => '3.0.1'"
+    },
+    {
+      "id": "catalyst-eol-1",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "## ⚠️ Deprecation notices (as of May 2026)",
+      "replace": "## ⚠️ End-of-life notice (as of September 2026)"
+    },
+    {
+      "id": "catalyst-eol-2",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "The following Catalyst components are **deprecated** and will be removed in a future update\n(originally scheduled for April 30, 2026, currently still functional with deprecation warnings):",
+      "replace": "The following Catalyst components reached **end-of-life on April 30, 2026** and **no longer function**\n— any business logic still configured to use them is already broken, not merely deprecated:"
+    },
+    {
+      "id": "catalyst-eol-3",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "**Never recommend deprecated components for new projects.** If a user has existing code using these,\nguide them to migrate to the replacement service. File Store supports direct migration to Stratus via\nthe console. Event Listeners and Cron require manual migration of business logic.",
+      "replace": "**Never recommend these components for new or existing projects.** If a user has existing code using\nthese, treat it as already broken and migrate it now, not \"when convenient\": File Store supports direct\nmigration to Stratus via the console; Event Listeners and Cron require manual migration of business logic."
+    },
+    {
+      "id": "catalyst-eol-4",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "**Deprecated — never recommend for new projects:**",
+      "replace": "**End-of-life since April 30, 2026 — no longer function, never recommend:**"
+    },
+    {
+      "id": "catalyst-eol-5",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "- Users who signed up after Aug 27, 2025 cannot access deprecated components.",
+      "replace": "- Users who signed up after Aug 27, 2025 cannot access these components at all."
+    },
+    {
+      "id": "catalyst-eol-6",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "- **New users after Aug 27, 2025** cannot access File Store, Event Listeners, or Cron — these services are deprecated (originally scheduled for removal April 30, 2026 — still functional with deprecation warnings, removal date TBD)",
+      "replace": "- **File Store, Event Listeners, and Cron reached end-of-life on April 30, 2026** — they no longer function; users who signed up after Aug 27, 2025 never had access at all"
     }
   ],
   "cellxgene-census": [
@@ -815,7 +857,7 @@
       "issue": 880,
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "**Version note:** Examples target **molfeat 0.11.0** (PyPI stable, May 2025). Requires **Python 3.9–3.10** (`requires-python` caps below 3.11). Depends on **datamol ≥0.8.0** and **PyTorch ≥1.13**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically.",
-      "replace": "**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically."
+      "replace": "**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically. molfeat 1.0.0 also removed the legacy DGL, DGLLife, Graphormer, and protein adapters — pin to 0.11.0 on Python 3.10 for GIN/Graphormer work, or use `torch-geometric` for custom GNN inputs on 1.0.0+."
     },
     {
       "id": "molfeat-install-100",
@@ -829,7 +871,7 @@
       "issue": 880,
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "uv pip install \"molfeat[transformer]==0.11.0\"  # For ChemBERTa/ChemGPT\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer",
-      "replace": "uv pip install \"molfeat[transformer]==1.0.0\"   # For ChemBERTa/ChemGPT\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models (0.11.0 only; removed in 1.0.0)\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer (0.11.0 only; removed in 1.0.0)"
+      "replace": "uv pip install \"molfeat[transformer]==1.0.0\"   # For ChemBERTa/ChemGPT\n```\n\nThe `dgl` and `graphormer` extras were removed in 1.0.0 (see the compatibility note above). Installing them needs a separate Python 3.10 environment — the 3.11+ environment from Installation will not accept them:\n\n```bash\nuv venv --python 3.10 .venv-molfeat-legacy && source .venv-molfeat-legacy/bin/activate\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GIN models (0.11.0 only; removed in 1.0.0)\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer (0.11.0 only; removed in 1.0.0)"
     },
     {
       "id": "molfeat-gnn-examples-100",
@@ -837,6 +879,30 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "**Graph neural networks:**\n```python\n# GIN models with different pre-training objectives\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```",
       "replace": "**Graph neural networks:**\n\n> The `gin-supervised-*` and `Graphormer-*` pretrained models below require the `dgl`/`graphormer` extras, which molfeat 1.0.0 removed. They only work on the pinned 0.11.0 / Python 3.10 line (see warning above); on 1.0.0+ use **[[torch-geometric]]** for custom GNN inputs instead.\n\n```python\n# GIN models with different pre-training objectives (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"gin-supervised-masking\")\nPretrainedMolTransformer(\"gin-supervised-infomax\")\n\n# Graphormer for quantum chemistry (molfeat 0.11.0 only)\nPretrainedMolTransformer(\"Graphormer-pcqm4mv2\")\n```"
+    },
+    {
+      "id": "molfeat-examples-install-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/examples.md",
+      "find": "Requires Python 3.9 or 3.10 (molfeat 0.11.0 does not support 3.11+):\n\n```bash\nuv pip install \"molfeat==0.11.0\"\n\n# With all pip-installable optional dependencies\nuv pip install \"molfeat[all]==0.11.0\"\n\n# With specific dependencies\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GNN models\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer\nuv pip install \"molfeat[transformer]==0.11.0\"  # For ChemBERTa, ChemGPT\nuv pip install \"molfeat[pyg]==0.11.0\"          # For PyTorch Geometric\nuv pip install \"molfeat[viz]==0.11.0\"          # For NGLView widgets\n```",
+      "replace": "Requires Python 3.11+ (molfeat 1.0.0 dropped 3.9/3.10 support):\n\n```bash\nuv pip install \"molfeat==1.0.0\"\n\n# With all pip-installable optional dependencies (excludes dgl/graphormer, removed in 1.0.0)\nuv pip install \"molfeat[all]==1.0.0\"\n\n# With specific dependencies\nuv pip install \"molfeat[transformer]==1.0.0\"   # For ChemBERTa, ChemGPT\nuv pip install \"molfeat[pyg]==1.0.0\"           # For PyTorch Geometric\nuv pip install \"molfeat[viz]==1.0.0\"           # For NGLView widgets\n```\n\nThe `dgl` and `graphormer` extras were removed in 1.0.0. They still work on the last release\nthat had them, in a separate Python 3.10 environment:\n\n```bash\nuv venv --python 3.10 .venv-molfeat-legacy && source .venv-molfeat-legacy/bin/activate\nuv pip install \"molfeat[dgl]==0.11.0\"          # For GNN models\nuv pip install \"molfeat[graphormer]==0.11.0\"   # For Graphormer\n```"
+    },
+    {
+      "id": "molfeat-featurizers-deep-learning-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/available_featurizers.md",
+      "find": "**For deep learning:**\n- Use **ChemBERTa** or **ChemGPT** for transformer embeddings\n- Use **gin-supervised-*** for graph neural network embeddings\n- Consider **Graphormer** for quantum property predictions",
+      "replace": "**For deep learning:**\n- Use **ChemBERTa** or **ChemGPT** for transformer embeddings\n- Use **gin-supervised-*** for graph neural network embeddings (0.11.0 only — removed in molfeat 1.0.0)\n- Consider **Graphormer** for quantum property predictions (0.11.0 only — removed in molfeat 1.0.0)"
+    },
+    {
+      "id": "molfeat-featurizers-deps-100",
+      "issue": 880,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/available_featurizers.md",
+      "find": "Some featurizers require optional dependencies (molfeat 0.11.0):\n\n- **DGL models** (gin-*, jtvae): `uv pip install \"molfeat[dgl]==0.11.0\"` (upstream recommends `dgl<=2.0`)\n- **Graphormer**: `uv pip install \"molfeat[graphormer]==0.11.0\"`\n- **Transformers** (ChemBERTa, ChemGPT, MolT5): `uv pip install \"molfeat[transformer]==0.11.0\"`\n- **FCD**: `uv pip install \"molfeat[fcd]==0.11.0\"`\n- **PyTorch Geometric**: `uv pip install \"molfeat[pyg]==0.11.0\"`\n- **Visualization**: `uv pip install \"molfeat[viz]==0.11.0\"`\n- **MAP4**: external package — see [reymond-group/map4](https://github.com/reymond-group/map4) (not a molfeat PyPI extra)\n- **All pip extras**: `uv pip install \"molfeat[all]==0.11.0\"`",
+      "replace": "Some featurizers require optional dependencies. Since molfeat 1.0.0, `dgl` and `graphormer`\nare removed — those two need a separate Python 3.10 environment pinned to 0.11.0; everything\nelse installs into a normal 1.0.0 / Python 3.11+ environment:\n\n- **DGL models** (gin-*, jtvae, Python 3.10 only): `uv pip install \"molfeat[dgl]==0.11.0\"` (upstream recommends `dgl<=2.0`)\n- **Graphormer** (Python 3.10 only): `uv pip install \"molfeat[graphormer]==0.11.0\"`\n- **Transformers** (ChemBERTa, ChemGPT, MolT5): `uv pip install \"molfeat[transformer]==1.0.0\"`\n- **FCD**: `uv pip install \"molfeat[fcd]==1.0.0\"`\n- **PyTorch Geometric**: `uv pip install \"molfeat[pyg]==1.0.0\"`\n- **Visualization**: `uv pip install \"molfeat[viz]==1.0.0\"`\n- **MAP4**: external package — see [reymond-group/map4](https://github.com/reymond-group/map4) (not a molfeat PyPI extra)\n- **All pip extras** (excludes dgl/graphormer): `uv pip install \"molfeat[all]==1.0.0\"`"
     }
   ],
   "audit-prep-assistant": [
@@ -916,6 +982,81 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.41.2\"",
       "replace": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.44.2\""
+    }
+  ],
+  "esm": [
+    {
+      "id": "esm-3441post1-1",
+      "issue": 949,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "Install from PyPI ([`esm` on PyPI](https://pypi.org/project/esm/) by EvolutionaryScale). Current PyPI release: **3.2.3** (Oct 14, 2025). Requires **Python >=3.12,<3.13**.",
+      "replace": "Install from PyPI ([`esm` on PyPI](https://pypi.org/project/esm/) by EvolutionaryScale). Current PyPI release: **3.4.1.post1** (Sep 16, 2026), which adds full ESMC/ESMFold2 support and a HuggingFace compatibility layer over the 3.2.x line. (3.4.1 was yanked for a bug — install `3.4.1.post1`, not `3.4.1`.) Requires **Python >=3.12,<3.13**."
+    },
+    {
+      "id": "esm-3441post1-2",
+      "issue": 949,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"esm==3.2.3\"",
+      "replace": "uv pip install \"esm==3.4.1.post1\""
+    }
+  ],
+  "tempo": [
+    {
+      "id": "tempo-helm-community-1",
+      "issue": 945,
+      "source": "grafana/skills",
+      "find": "helm repo add grafana https://grafana.github.io/helm-charts\nhelm install tempo grafana/tempo-distributed --version 1.61.3 \\",
+      "replace": "# The chart moved from grafana/helm-charts to grafana-community/helm-charts on 2026-01-30;\n# the old repo no longer receives updates or support.\nhelm repo add grafana-community https://grafana-community.github.io/helm-charts\nhelm install tempo grafana-community/tempo-distributed --version 3.7.0 \\"
+    }
+  ],
+  "shopify-polaris-customer-account-extensions": [
+    {
+      "id": "api-version-2026-07-1",
+      "issue": 926,
+      "source": "openai/plugins",
+      "find": "version: 2026-01",
+      "replace": "version: 2026-07"
+    }
+  ],
+  "shopify-polaris-admin-extensions": [
+    {
+      "id": "api-version-2026-07-1",
+      "issue": 926,
+      "source": "openai/plugins",
+      "find": "version: 2026-01",
+      "replace": "version: 2026-07"
+    }
+  ],
+  "shopify-polaris-checkout-extensions": [
+    {
+      "id": "api-version-2026-07-1",
+      "issue": 926,
+      "source": "openai/plugins",
+      "find": "version: 2026-01",
+      "replace": "version: 2026-07"
+    }
+  ],
+  "prisma-upgrade-v7": [
+    {
+      "id": "prisma-7100-1",
+      "issue": 925,
+      "source": "prisma/skills",
+      "find": "  version: \"7.6.0\"",
+      "replace": "  version: \"7.10.0\""
+    },
+    {
+      "id": "prisma-7100-2",
+      "issue": 925,
+      "source": "prisma/skills",
+      "find": "- **Latest stable Prisma ORM version**: `7.6.0`",
+      "replace": "- **Latest stable Prisma ORM version**: `7.10.0` (Prisma 8 is in release-candidate; check for a v8 guide before assuming this is still current)"
+    },
+    {
+      "id": "prisma-7100-3",
+      "issue": 925,
+      "source": "prisma/skills",
+      "find": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.6.0 packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path.",
+      "replace": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.x packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path."
     }
   ]
 }

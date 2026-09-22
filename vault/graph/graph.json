@@ -1,14 +1,14 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2136,
+  "skills": 2137,
   "expert_profiles": 503,
-  "nodes": 2209,
-  "edges": 15805,
+  "nodes": 2210,
+  "edges": 15812,
   "generic_names_blocked": 32,
-  "tier1_edges": 4757,
+  "tier1_edges": 4760,
   "tier2_edges": 703,
-  "alias_edges": 4502,
+  "alias_edges": 4503,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
@@ -18,15 +18,15 @@
   "mean_skill_degree": 5.82,
   "median_skill_degree": 4,
   "orphan_count": 127,
-  "orphan_rate": 0.0595,
+  "orphan_rate": 0.0594,
   "by_provenance": {
-   "EXTRACTED": 15019,
+   "EXTRACTED": 15026,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2136,
-   "references": 12358,
+   "in_domain": 2137,
+   "references": 12364,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -31014,6 +31014,21 @@
    "source": "skills/vibration-dynamics-engineer/SKILL.md",
    "aliases": [
     "vibration dynamics engineer"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "video-use",
+   "type": "Skill",
+   "label": "video-use",
+   "description": "Edit any video by conversation. Transcribe, cut, color grade, generate overlay animations, burn subtitles — for talking heads, montages, tutorials, travel, interviews. No presets, no menus. Ask questions, confirm the plan, execute, iterate, persist. Production-correctness rules are hard; everything else is artistic freedom.",
+   "source": "skills/video-use/SKILL.md",
+   "aliases": [
+    "video use"
    ],
    "uses": 0,
    "successes": 0,
@@ -81408,6 +81423,15 @@
   {
    "src": "google-drive",
    "rel": "references",
+   "dst": "video-use",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "video-use named in google-drive/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "google-drive",
+   "rel": "references",
    "dst": "xlsx",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -86200,6 +86224,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "hyperframes named in hyperframes-registry/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "hyperframes",
+   "rel": "references",
+   "dst": "video-use",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "hyperframes named in video-use/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -146073,6 +146106,15 @@
   {
    "src": "scribe",
    "rel": "references",
+   "dst": "video-use",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scribe named in video-use/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scribe",
+   "rel": "references",
    "dst": "zoom-general",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -169666,6 +169708,42 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in vibration-dynamics-engineer/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "video-use",
+   "rel": "in_domain",
+   "dst": "domain:documents-office",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "video-use",
+   "rel": "references",
+   "dst": "google-drive",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "video-use named in google-drive/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "video-use",
+   "rel": "references",
+   "dst": "hyperframes",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "hyperframes named in video-use/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "video-use",
+   "rel": "references",
+   "dst": "scribe",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scribe named in video-use/SKILL.md body",
    "status": "accepted"
   },
   {

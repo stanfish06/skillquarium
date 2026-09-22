@@ -12018,6 +12018,15 @@
       "skillFolderHash": "ccbc33ed119b28c3ef7b44a7e2081ab191ad63af",
       "installedAt": "2026-09-17T07:53:01.148Z",
       "updatedAt": "2026-09-17T07:53:01.148Z"
+    },
+    "video-use": {
+      "source": "browser-use/video-use",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/browser-use/video-use.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "9575612f066aa517354790a645fd90f9f95a743b",
+      "installedAt": "2026-09-22T17:33:06.564Z",
+      "updatedAt": "2026-09-22T17:33:06.564Z"
     }
   },
   "dismissed": {
