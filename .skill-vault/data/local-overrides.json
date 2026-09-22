@@ -98,6 +98,48 @@
       "file": "references/sdk-mobile.md",
       "find": "pod 'ZCatalyst', :git => 'https://github.com/nicetomeetyou/ZCatalyst.git', :tag => '2.2.2'",
       "replace": "pod 'ZCatalyst', :git => 'https://github.com/catalystbyzoho/Catalyst-iOS-SDK.git', :tag => '3.0.1'"
+    },
+    {
+      "id": "catalyst-eol-1",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "## ⚠️ Deprecation notices (as of May 2026)",
+      "replace": "## ⚠️ End-of-life notice (as of September 2026)"
+    },
+    {
+      "id": "catalyst-eol-2",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "The following Catalyst components are **deprecated** and will be removed in a future update\n(originally scheduled for April 30, 2026, currently still functional with deprecation warnings):",
+      "replace": "The following Catalyst components reached **end-of-life on April 30, 2026** and **no longer function**\n— any business logic still configured to use them is already broken, not merely deprecated:"
+    },
+    {
+      "id": "catalyst-eol-3",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "**Never recommend deprecated components for new projects.** If a user has existing code using these,\nguide them to migrate to the replacement service. File Store supports direct migration to Stratus via\nthe console. Event Listeners and Cron require manual migration of business logic.",
+      "replace": "**Never recommend these components for new or existing projects.** If a user has existing code using\nthese, treat it as already broken and migrate it now, not \"when convenient\": File Store supports direct\nmigration to Stratus via the console; Event Listeners and Cron require manual migration of business logic."
+    },
+    {
+      "id": "catalyst-eol-4",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "**Deprecated — never recommend for new projects:**",
+      "replace": "**End-of-life since April 30, 2026 — no longer function, never recommend:**"
+    },
+    {
+      "id": "catalyst-eol-5",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "- Users who signed up after Aug 27, 2025 cannot access deprecated components.",
+      "replace": "- Users who signed up after Aug 27, 2025 cannot access these components at all."
+    },
+    {
+      "id": "catalyst-eol-6",
+      "issue": 947,
+      "source": "openai/plugins",
+      "find": "- **New users after Aug 27, 2025** cannot access File Store, Event Listeners, or Cron — these services are deprecated (originally scheduled for removal April 30, 2026 — still functional with deprecation warnings, removal date TBD)",
+      "replace": "- **File Store, Event Listeners, and Cron reached end-of-life on April 30, 2026** — they no longer function; users who signed up after Aug 27, 2025 never had access at all"
     }
   ],
   "cellxgene-census": [
@@ -940,6 +982,81 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.41.2\"",
       "replace": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.44.2\""
+    }
+  ],
+  "esm": [
+    {
+      "id": "esm-3441post1-1",
+      "issue": 949,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "Install from PyPI ([`esm` on PyPI](https://pypi.org/project/esm/) by EvolutionaryScale). Current PyPI release: **3.2.3** (Oct 14, 2025). Requires **Python >=3.12,<3.13**.",
+      "replace": "Install from PyPI ([`esm` on PyPI](https://pypi.org/project/esm/) by EvolutionaryScale). Current PyPI release: **3.4.1.post1** (Sep 16, 2026), which adds full ESMC/ESMFold2 support and a HuggingFace compatibility layer over the 3.2.x line. (3.4.1 was yanked for a bug — install `3.4.1.post1`, not `3.4.1`.) Requires **Python >=3.12,<3.13**."
+    },
+    {
+      "id": "esm-3441post1-2",
+      "issue": 949,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"esm==3.2.3\"",
+      "replace": "uv pip install \"esm==3.4.1.post1\""
+    }
+  ],
+  "tempo": [
+    {
+      "id": "tempo-helm-community-1",
+      "issue": 945,
+      "source": "grafana/skills",
+      "find": "helm repo add grafana https://grafana.github.io/helm-charts\nhelm install tempo grafana/tempo-distributed --version 1.61.3 \\",
+      "replace": "# The chart moved from grafana/helm-charts to grafana-community/helm-charts on 2026-01-30;\n# the old repo no longer receives updates or support.\nhelm repo add grafana-community https://grafana-community.github.io/helm-charts\nhelm install tempo grafana-community/tempo-distributed --version 3.7.0 \\"
+    }
+  ],
+  "shopify-polaris-customer-account-extensions": [
+    {
+      "id": "api-version-2026-07-1",
+      "issue": 926,
+      "source": "openai/plugins",
+      "find": "version: 2026-01",
+      "replace": "version: 2026-07"
+    }
+  ],
+  "shopify-polaris-admin-extensions": [
+    {
+      "id": "api-version-2026-07-1",
+      "issue": 926,
+      "source": "openai/plugins",
+      "find": "version: 2026-01",
+      "replace": "version: 2026-07"
+    }
+  ],
+  "shopify-polaris-checkout-extensions": [
+    {
+      "id": "api-version-2026-07-1",
+      "issue": 926,
+      "source": "openai/plugins",
+      "find": "version: 2026-01",
+      "replace": "version: 2026-07"
+    }
+  ],
+  "prisma-upgrade-v7": [
+    {
+      "id": "prisma-7100-1",
+      "issue": 925,
+      "source": "prisma/skills",
+      "find": "  version: \"7.6.0\"",
+      "replace": "  version: \"7.10.0\""
+    },
+    {
+      "id": "prisma-7100-2",
+      "issue": 925,
+      "source": "prisma/skills",
+      "find": "- **Latest stable Prisma ORM version**: `7.6.0`",
+      "replace": "- **Latest stable Prisma ORM version**: `7.10.0` (Prisma 8 is in release-candidate; check for a v8 guide before assuming this is still current)"
+    },
+    {
+      "id": "prisma-7100-3",
+      "issue": 925,
+      "source": "prisma/skills",
+      "find": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.6.0 packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path.",
+      "replace": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.x packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path."
     }
   ]
 }
