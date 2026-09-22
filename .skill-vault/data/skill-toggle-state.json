@@ -8207,6 +8207,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "video-use": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "viennarna-structure-prediction": {
       "claude_enabled": true,
       "codex_enabled": true
