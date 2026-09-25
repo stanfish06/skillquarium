@@ -1058,5 +1058,15 @@
       "find": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.6.0 packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path.",
       "replace": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.x packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path."
     }
+  ],
+  "supabase-postgres-best-practices": [
+    {
+      "id": "vacuum-docs-url-moved",
+      "issue": 954,
+      "source": "openai/plugins",
+      "file": "references/monitor-vacuum-analyze.md",
+      "find": "Reference: [VACUUM](https://supabase.com/docs/guides/database/database-size#vacuum-operations)",
+      "replace": "Reference: [VACUUM](https://supabase.com/docs/guides/platform/database-size#vacuum-operations)"
+    }
   ]
 }
