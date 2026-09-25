@@ -1058,5 +1058,14 @@
       "find": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.6.0 packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path.",
       "replace": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.x packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path."
     }
+  ],
+  "building-mcp-server-on-cloudflare": [
+    {
+      "id": "mcp-docs-url-404",
+      "issue": 952,
+      "source": "openai/plugins",
+      "find": "| MCP docs | `https://developers.cloudflare.com/agents/mcp/` | Server setup, auth, deployment |",
+      "replace": "| MCP docs | `https://developers.cloudflare.com/agents/model-context-protocol/` | Server setup, auth, deployment |"
+    }
   ]
 }
