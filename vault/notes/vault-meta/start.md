@@ -22,6 +22,7 @@ created: 2026-08-07
 - [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish build performance baselines and apply systematic optimization techniques
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [design-md-library](../../notes/web-automation-frontend/design-md-library.md) — Library of 74 ready-to-use DESIGN.md files — complete design systems (color tokens, type scale, components, layout, motion, do's/don'ts) reverse-engineered from real product and brand...
+- [docker-destructive-guardrails](../../notes/cloud-devops/docker-destructive-guardrails.md) — Use this skill before running, or recommending, any Docker command that deletes, wipes, resets, or otherwise irreversibly changes state — even if the user just says to "clean up"...
 - [dynamo-router-starter](../../notes/software-dev/dynamo-router-starter.md) — Start or patch Dynamo router modes and run router endpoint smoke checks
 - [eqtl-catalogue-region-fetch](../../notes/genomics-variants/eqtl-catalogue-region-fetch.md) — Fetch a region of cis-eQTL summary statistics from EBI eQTL Catalogue v7+ via tabix-on-FTP
 - [get-available-resources](../../notes/vault-meta/get-available-resources.md) — Use at the start of computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)

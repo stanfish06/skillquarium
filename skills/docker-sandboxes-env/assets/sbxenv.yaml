@@ -1,0 +1,8 @@
+# Complete minimal environment; sbx env is experimental.
+# This file sits at the root of its workspace mount, so default read-only
+# masking protects it from agent edits. No host hooks or provider secrets.
+schemaVersion: "1"
+agent: shell
+workspace: .
+env:
+  IS_SANDBOX_ENV_EXAMPLE: "1"

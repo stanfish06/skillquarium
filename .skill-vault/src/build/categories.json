@@ -2050,7 +2050,18 @@
     "csharp-developer": "software-dev",
     "skillquarium": "vault-meta",
     "mcp-skills-extension": "vault-meta",
-    "video-use": "documents-office"
+    "video-use": "documents-office",
+    "docker-agent-config": "cloud-devops",
+    "docker-agent-deploy": "cloud-devops",
+    "docker-agent-run": "cloud-devops",
+    "docker-build-strategies": "cloud-devops",
+    "docker-compose-patterns": "cloud-devops",
+    "docker-destructive-guardrails": "cloud-devops",
+    "docker-project-foundations": "cloud-devops",
+    "docker-sandboxes-env": "cloud-devops",
+    "docker-sandboxes-kits": "cloud-devops",
+    "docker-sandboxes-lifecycle": "cloud-devops",
+    "docker-sandboxes-network-credentials": "cloud-devops"
   },
   "synonyms": {
     "pydeseq2": [
