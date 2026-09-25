@@ -1,0 +1,9 @@
+# Complete sandbox kit; save as spec.yaml in its own directory.
+# Inherits the embedded shell image and launch configuration.
+schemaVersion: "2"
+kind: sandbox
+name: my-shell
+extends: shell
+environment:
+  variables:
+    MY_KIT: "1"

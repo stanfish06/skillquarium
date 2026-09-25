@@ -30,6 +30,7 @@ created: 2026-08-07
 - [databricks-app-design](../../notes/analytics-engineering/databricks-app-design.md) — Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit...
 - [databricks-apps-python](../../notes/analytics-engineering/databricks-apps-python.md) — Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex
 - [databricks-core](../../notes/analytics-engineering/databricks-core.md) — Databricks CLI operations and the parent/entry-point skill for Databricks CLI use: authentication, profile selection, and bundles
+- [docker-agent-deploy](../../notes/cloud-devops/docker-agent-deploy.md) — Use this skill when exposing a Docker Agent as a server (MCP, HTTP API, A2A, ACP, or OpenAI-compatible chat), distributing an agent via an OCI registry with `docker agent share`, or...
 - [figma-generate-diagram](../../notes/web-automation-frontend/figma-generate-diagram.md) — Load this skill BEFORE every `generate_diagram` tool call
 - [insecure-defaults](../../notes/security-auditing/insecure-defaults.md) — Detects fail-open insecure defaults (hardcoded secrets, weak auth, permissive security) that allow apps to run insecurely in production
 - [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
