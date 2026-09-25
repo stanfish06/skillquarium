@@ -2163,7 +2163,51 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "docker-agent-config": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-agent-deploy": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-agent-run": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-build-strategies": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-compose-patterns": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-destructive-guardrails": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "docker-expert": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-project-foundations": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-sandboxes-env": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-sandboxes-kits": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-sandboxes-lifecycle": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "docker-sandboxes-network-credentials": {
       "claude_enabled": true,
       "codex_enabled": true
     },
