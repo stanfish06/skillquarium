@@ -487,11 +487,22 @@ An attacker can bypass middleware-based authorization by sending a crafted `x-mi
 
 **Mitigation**: Never rely on middleware/proxy as the only auth layer. Always re-validate authorization in Server Components, Server Actions, or Route Handlers. If you cannot patch immediately, block `x-middleware-subrequest` at your reverse proxy or WAF.
 
+### CVE-2026-94545 — ImageResponse Remote Code Execution (CVSS 9.5, Critical)
+
+Disclosed 2026-09-22 as an out-of-band release. The Node.js runtime implementation of `ImageResponse` (`next/og`) is vulnerable to RCE when attacker-controlled input reaches SVG content, attributes, or styles during server-side image generation — specially crafted values can execute arbitrary code on the application server.
+
+- Affects: Next.js `>= 16.2.0, < 16.3.6` using `ImageResponse` on the Node.js runtime. Next.js 15.x is not affected by the RCE (15.5.26 ships related hardening only).
+- Fixed in: **`next@16.3.6`** (upgrades the upstream Satori dependency).
+
+**Mitigation**: Upgrade to `16.3.6`+ immediately if you call `ImageResponse` on the Node.js runtime. There is no workaround short of removing the affected code path.
+
 ### Patched Versions
 
-Minimum safe version: **`next@15.5.21`** or **`next@16.2.11`** (both published 2026-07-21).
+Minimum safe version: **`next@15.5.21`** or **`next@16.3.6`** (16.2.11 alone is no longer sufficient on the 16.x line — see CVE-2026-94545 above).
 
-There is no per-release-line patch below that. The nine advisories published 2026-07-22 (CVE-2026-64641 through CVE-2026-64649, four rated High) have vulnerable ranges `>= 12.0.0, < 15.5.21` and `>= 16.0.0, < 16.2.11`, so 14.x, 15.0.x–15.4.x, 16.0.x and 16.1.x have no fixed release at all — `14.2.35`, `16.0.11` and `16.1.7` are the last patches ever published on those lines and every one of them sits inside the vulnerable range. Remediating those lines requires a minor-version move, not a patch bump.
+There is no per-release-line patch below `15.5.21` / `16.2.11`. The nine advisories published 2026-07-22 (CVE-2026-64641 through CVE-2026-64649, four rated High) have vulnerable ranges `>= 12.0.0, < 15.5.21` and `>= 16.0.0, < 16.2.11`, so 14.x, 15.0.x–15.4.x, 16.0.x and 16.1.x have no fixed release at all — `14.2.35`, `16.0.11` and `16.1.7` are the last patches ever published on those lines and every one of them sits inside the vulnerable range. Remediating those lines requires a minor-version move, not a patch bump.
+
+**A further scheduled security release (16.3.8 / 15.5.27) is expected around 2026-09-30**, covering nine additional advisories (one critical, reported as an SSRF in rewrites/redirects). Full advisory details were not yet published at the time of writing — check `npm audit` or the Next.js security blog (https://nextjs.org/blog/tag/security) before treating 16.3.6 as sufficient once that release ships.
 
 Upgrade the React RSC packages (`react-server-dom-webpack`, `-turbopack`, `-parcel`) to at least **19.0.8** / **19.1.9** / **19.2.8** — the floor for CVE-2026-44907 (High, 2026-07-24). The earlier 19.0.1 / 19.1.2 / 19.2.1 covers only the CVE-2025-55182 RCE.
 
