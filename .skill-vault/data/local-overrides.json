@@ -1194,5 +1194,23 @@
       "find": "openlit==1.42.0",
       "replace": "openlit==1.45.0"
     }
+  ],
+  "nextjs": [
+    {
+      "id": "next-security-2026-09",
+      "issue": 975,
+      "source": "openai/plugins",
+      "find": "### Patched Versions\n\nMinimum safe version: **`next@15.5.21`** or **`next@16.2.11`** (both published 2026-07-21).\n\nThere is no per-release-line patch below that.",
+      "replace": "### CVE-2026-94545 — ImageResponse Remote Code Execution (CVSS 9.5, Critical)\n\nDisclosed 2026-09-22 as an out-of-band release. The Node.js runtime implementation of `ImageResponse` (`next/og`) is vulnerable to RCE when attacker-controlled input reaches SVG content, attributes, or styles during server-side image generation — specially crafted values can execute arbitrary code on the application server.\n\n- Affects: Next.js `>= 16.2.0, < 16.3.6` using `ImageResponse` on the Node.js runtime. Next.js 15.x is not affected by the RCE (15.5.26 ships related hardening only).\n- Fixed in: **`next@16.3.6`** (upgrades the upstream Satori dependency).\n\n**Mitigation**: Upgrade to `16.3.6`+ immediately if you call `ImageResponse` on the Node.js runtime. There is no workaround short of removing the affected code path.\n\n### Patched Versions\n\nMinimum safe version: **`next@15.5.27`** or **`next@16.3.8`** (both published 2026-09-30). 16.3.8 fixes the seven advisories published that day, the most severe being CVE-2026-94483 (High, CVSS 8.3): server-side request forgery in Image Optimization through an allow-listed `images.remotePatterns` host. Two of the seven, both SSG/ISR cache poisoning (CVE-2026-94543, CVE-2026-94484), also affect 15.x and are fixed in 15.5.27. On 16.x, anything below 16.3.6 is also exposed to CVE-2026-94545 above.\n\nThere is no per-release-line patch below `15.5.21` / `16.2.11`."
+    }
+  ],
+  "apollo-router": [
+    {
+      "id": "router-lifecycle-2026-10",
+      "issue": 976,
+      "source": "apollographql/skills",
+      "find": "    Note: Apollo ended active support for v1.x. The v2.10 LTS (Dec 2025)\n    is the current baseline. Migration is strongly recommended.",
+      "replace": "    Note: Router v1.x reached End of Support in March 2026, including the\n    v1.61 LTS, and gets no further patches, security fixes included. The\n    v2.10 LTS reached End of Support in September 2026. The current LTS is\n    v2.16 (supported until March 2027); the latest Active release is v2.18.\n    Check https://www.apollographql.com/docs/graphos/reference/router-release-lifecycle\n    before pinning. Migrate off v1.x."
+    }
   ]
 }
