@@ -44,8 +44,12 @@ Quick guide:
   • Pick v2 if: you're starting fresh, using Apollo Connectors for REST APIs,
     or want backpressure-based overload protection.
   • Pick v1 if: you have an existing deployment and haven't migrated yet.
-    Note: Apollo ended active support for v1.x. The v2.10 LTS (Dec 2025)
-    is the current baseline. Migration is strongly recommended.
+    Note: Router v1.x reached End of Support in March 2026, including the
+    v1.61 LTS, and gets no further patches, security fixes included. The
+    v2.10 LTS reached End of Support in September 2026. The current LTS is
+    v2.16 (supported until March 2027); the latest Active release is v2.18.
+    Check https://www.apollographql.com/docs/graphos/reference/router-release-lifecycle
+    before pinning. Migrate off v1.x.
 
   Tip: If you have an existing router.yaml, you can auto-migrate it:
     router config upgrade router.yaml
