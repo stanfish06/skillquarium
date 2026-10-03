@@ -1177,5 +1177,22 @@
       "find": "pip install pyroscope-io==1.0.11",
       "replace": "pip install pyroscope-io==1.2.5"
     }
+  ],
+  "app-observability": [
+    {
+      "id": "openlit-1450-1",
+      "issue": 968,
+      "source": "grafana/skills",
+      "find": "pip install openlit==1.42.0",
+      "replace": "pip install openlit==1.45.0"
+    },
+    {
+      "id": "openlit-1450-2",
+      "issue": 968,
+      "source": "grafana/skills",
+      "file": "references/ai-observability.md",
+      "find": "openlit==1.42.0",
+      "replace": "openlit==1.45.0"
+    }
   ]
 }
