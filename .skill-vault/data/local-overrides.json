@@ -1160,5 +1160,22 @@
       "find": "**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-clones)",
       "replace": "**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/clones-resource)"
     }
+  ],
+  "pyroscope": [
+    {
+      "id": "pyroscope-io-125-1",
+      "issue": 967,
+      "source": "grafana/skills",
+      "find": "pip install pyroscope-io==1.0.11",
+      "replace": "pip install pyroscope-io==1.2.5"
+    },
+    {
+      "id": "pyroscope-io-125-2",
+      "issue": 967,
+      "source": "grafana/skills",
+      "file": "references/sdks.md",
+      "find": "pip install pyroscope-io==1.0.11",
+      "replace": "pip install pyroscope-io==1.2.5"
+    }
   ]
 }

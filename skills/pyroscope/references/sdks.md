@@ -5,7 +5,7 @@ Each SDK pushes profiles to `server_address`. For Grafana Cloud Profiles, use th
 ## Python
 
 ```bash
-pip install pyroscope-io==1.2.4
+pip install pyroscope-io==1.2.5
 ```
 
 ```python
