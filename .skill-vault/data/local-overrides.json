@@ -1058,5 +1058,107 @@
       "find": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.6.0 packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path.",
       "replace": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.x packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path."
     }
+  ],
+  "building-mcp-server-on-cloudflare": [
+    {
+      "id": "mcp-docs-url-404",
+      "issue": 952,
+      "source": "openai/plugins",
+      "find": "| MCP docs | `https://developers.cloudflare.com/agents/mcp/` | Server setup, auth, deployment |",
+      "replace": "| MCP docs | `https://developers.cloudflare.com/agents/model-context-protocol/` | Server setup, auth, deployment |"
+    }
+  ],
+  "cloudflare": [
+    {
+      "id": "realtimekit-docs-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/realtime-sfu/README.md",
+      "find": "- [RealtimeKit Docs](https://developers.cloudflare.com/workers-ai/realtimekit/)",
+      "replace": "- [RealtimeKit Docs](https://developers.cloudflare.com/realtime/realtimekit/)"
+    },
+    {
+      "id": "workers-vpc-postgres-tutorial-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/workers-vpc/README.md",
+      "find": "- [Connect to databases guide](https://developers.cloudflare.com/workers/tutorials/connect-to-postgres/)",
+      "replace": "- [Connect to databases guide](https://developers.cloudflare.com/workers/tutorials/postgres/)"
+    },
+    {
+      "id": "cni-locations-pdf-404-readme",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/network-interconnect/README.md",
+      "find": "- See [locations PDF](https://developers.cloudflare.com/network-interconnect/static/cni-locations-2026-01.pdf)",
+      "replace": "- See [locations list](https://developers.cloudflare.com/network-interconnect/locations/)"
+    },
+    {
+      "id": "cni-locations-pdf-404-gotchas",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/network-interconnect/gotchas.md",
+      "find": "**Solution:** Check [locations PDF](https://developers.cloudflare.com/network-interconnect/static/cni-locations-2026-01.pdf) for valid codes",
+      "replace": "**Solution:** Check [locations list](https://developers.cloudflare.com/network-interconnect/locations/) for valid codes"
+    },
+    {
+      "id": "argo-docs-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/network-interconnect/patterns.md",
+      "find": "- [Argo Smart Routing](https://developers.cloudflare.com/argo/)",
+      "replace": "- [Argo Smart Routing](https://developers.cloudflare.com/argo-smart-routing/)"
+    },
+    {
+      "id": "workers-sdk-templates-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/wrangler/gotchas.md",
+      "find": "- Examples: https://github.com/cloudflare/workers-sdk/tree/main/templates",
+      "replace": "- Examples: https://github.com/cloudflare/templates"
+    },
+    {
+      "id": "vitest-pool-workers-examples-renamed",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/cron-triggers/gotchas.md",
+      "find": "- [Vitest Pool Workers](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-pool-workers-examples)",
+      "replace": "- [Vitest plugin examples](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-plugin-examples)"
+    }
+  ],
+  "supabase-postgres-best-practices": [
+    {
+      "id": "vacuum-docs-url-moved",
+      "issue": 954,
+      "source": "openai/plugins",
+      "file": "references/monitor-vacuum-analyze.md",
+      "find": "Reference: [VACUUM](https://supabase.com/docs/guides/database/database-size#vacuum-operations)",
+      "replace": "Reference: [VACUUM](https://supabase.com/docs/guides/platform/database-size#vacuum-operations)"
+    }
+  ],
+  "twilio-sendgrid-webhooks": [
+    {
+      "id": "event-webhook-security-doc-url",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "[Signed Event Webhook Requests](https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook-security)",
+      "replace": "[Signed Event Webhook Requests](https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features)"
+    }
+  ],
+  "twilio-regulatory-compliance-bundles": [
+    {
+      "id": "copies-and-replace-items-doc-urls",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "**Docs:** [Bundle Copies](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-copies) | [Replace Items](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-replace-items)",
+      "replace": "**Docs:** [Bundle Copies](https://www.twilio.com/docs/phone-numbers/regulatory/api/copies-resource) | [Replace Items](https://www.twilio.com/docs/phone-numbers/regulatory/api/replace-items-resource)"
+    },
+    {
+      "id": "clones-doc-url",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-clones)",
+      "replace": "**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/clones-resource)"
+    }
   ]
 }
