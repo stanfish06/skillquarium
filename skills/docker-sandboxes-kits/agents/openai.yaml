@@ -1,0 +1,6 @@
+interface:
+  display_name: 'Docker Sandboxes: Kits (spec.yaml)'
+  short_description: Author, validate, package, sign, and compose reusable sandbox/mixin kits (spec.yaml, schema v2). Experimental.
+  default_prompt: Use this skill when authoring, validating, packaging, signing, or composing a Docker Sandboxes kit spec.yaml (`sbx kit ...`).
+policy:
+  allow_implicit_invocation: true

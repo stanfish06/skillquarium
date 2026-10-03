@@ -1,0 +1,16 @@
+# Complete mixin; save as spec.yaml in its own directory.
+# Adds no credentials, avoiding duplicate-service definitions.
+schemaVersion: "2"
+kind: mixin
+name: extra-egress
+permissions:
+  network:
+    allow:
+      - registry.npmjs.org
+environment:
+  variables:
+    MY_MIXIN: "1"
+agentInstructions:
+  content: |
+    This mixin adds registry.npmjs.org to the sandbox's allowed egress.
+    Global and per-sandbox policy still determine effective access.
