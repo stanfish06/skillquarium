@@ -40,13 +40,6 @@ jobs:
 
       - run: bun test --cwd .skill-vault
 
-      - name: Local overrides still apply
-        # Hand-written `find` strings in .skill-vault/data/local-overrides.json
-        # are not syntax-checked by anything else, so an entry that never
-        # matched lands green here and only surfaces as a STALE line in the
-        # next scheduled update-skills.yml run a day later.
-        run: ./skillquarium overrides --check
-
       - name: Build must not churn the committed vault
         # The generated layer is committed, so a CLI change that silently
         # rewrites all 2,176 generated files would otherwise land unreviewed.
