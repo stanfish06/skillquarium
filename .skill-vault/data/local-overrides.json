@@ -1125,5 +1125,15 @@
       "find": "- [Vitest Pool Workers](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-pool-workers-examples)",
       "replace": "- [Vitest plugin examples](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-plugin-examples)"
     }
+  ],
+  "supabase-postgres-best-practices": [
+    {
+      "id": "vacuum-docs-url-moved",
+      "issue": 954,
+      "source": "openai/plugins",
+      "file": "references/monitor-vacuum-analyze.md",
+      "find": "Reference: [VACUUM](https://supabase.com/docs/guides/database/database-size#vacuum-operations)",
+      "replace": "Reference: [VACUUM](https://supabase.com/docs/guides/platform/database-size#vacuum-operations)"
+    }
   ]
 }
