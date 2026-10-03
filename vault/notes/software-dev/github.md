@@ -26,6 +26,7 @@ created: 2026-08-07
 - [chat-sdk](../../notes/saas-platforms/chat-sdk.md) — Vercel Chat SDK expert guidance. Use when building multi-platform chat bots — Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear — with a single codebase
 - [check-pr](../../notes/software-dev/check-pr.md) — Checks a GitHub, GitLab, or Perforce (p4) pull request (or merge request, or shelved changelist) for unresolved review comments, failing status checks, and incomplete PR descriptions
 - [datasources-provisioning](../../notes/cloud-devops/datasources-provisioning.md) — Generate a copy-paste Grafana data source provisioning file (YAML or Terraform) for any plugin from its standardized settings schema on the plugins CDN
+- [docker-sandboxes-network-credentials](../../notes/cloud-devops/docker-sandboxes-network-credentials.md) — Use this skill when configuring what a Docker Sandboxes (`sbx`) sandbox can reach on the network or which credentials it authenticates with, even if the user just says they want to...
 - [gantt-chart-visualization](../../notes/data-visualization/gantt-chart-visualization.md) — Design, critique, route, and implement Gantt charts and schedule visualizations
 - [gh-address-comments](../../notes/software-dev/gh-address-comments.md) — Address actionable GitHub pull request review feedback
 - [gh-cli](../../notes/security-auditing/gh-cli.md) — Enforces authenticated gh CLI workflows over unauthenticated curl, WebFetch, and MCP fetch patterns

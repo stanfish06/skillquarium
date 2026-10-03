@@ -1,32 +1,32 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2137,
+  "skills": 2148,
   "expert_profiles": 503,
-  "nodes": 2210,
-  "edges": 15812,
-  "generic_names_blocked": 32,
-  "tier1_edges": 4760,
-  "tier2_edges": 703,
-  "alias_edges": 4503,
+  "nodes": 2221,
+  "edges": 15795,
+  "generic_names_blocked": 33,
+  "tier1_edges": 4750,
+  "tier2_edges": 712,
+  "alias_edges": 4534,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 525,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.82,
+  "mean_skill_degree": 5.77,
   "median_skill_degree": 4,
   "orphan_count": 127,
-  "orphan_rate": 0.0594,
+  "orphan_rate": 0.0591,
   "by_provenance": {
-   "EXTRACTED": 15026,
+   "EXTRACTED": 15009,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2137,
-   "references": 12364,
+   "in_domain": 2148,
+   "references": 12336,
    "in_discipline": 599,
    "touches": 525,
    "has_step": 69,
@@ -8259,6 +8259,96 @@
    "deprecated": false
   },
   {
+   "id": "docker-agent-config",
+   "type": "Skill",
+   "label": "docker-agent-config",
+   "description": "Use this skill when creating or editing an agent.yaml (or .yml/.hcl) configuration file for Docker Agent (cagent), including defining agents, models/providers, built-in or MCP toolsets, multi-agent teams with sub_agents. Even if the user just says they want to \"build an AI agent with Docker\", \"make a coding agent config\", \"add a tool to my agent\", or \"set up a team of agents\", this skill applies. Covers agent properties (model, instruction, toolsets, sub_agents, fallback), the models/providers sections, built-in toolsets (filesystem, shell, think, todo, memory, fetch), MCP toolset references, and named commands.",
+   "source": "skills/docker-agent-config/SKILL.md",
+   "aliases": [
+    "docker agent config"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-agent-deploy",
+   "type": "Skill",
+   "label": "docker-agent-deploy",
+   "description": "Use this skill when exposing a Docker Agent as a server (MCP, HTTP API, A2A, ACP, or OpenAI-compatible chat), distributing an agent via an OCI registry with `docker agent share`, or measuring agent quality with `docker agent eval`. Even if the user just says they want to \"turn my agent into an MCP server\", \"let Claude Desktop use my agent\", \"publish my agent to Docker Hub\", \"push my agent like an image\", or \"test my agent in CI\", this skill applies. Covers `serve mcp/api/a2a/acp/chat` listen addresses and auth flags, `share push/pull`, eval session JSON format, scoring metrics, and the `--baseline` regression gate.",
+   "source": "skills/docker-agent-deploy/SKILL.md",
+   "aliases": [
+    "docker agent deploy"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-agent-run",
+   "type": "Skill",
+   "label": "docker-agent-run",
+   "description": "Use this skill when running a Docker Agent with `docker agent run`, choosing a safety/approval mode, using the `--sandbox` isolation flag, setting up aliases, or troubleshooting a run (missing credentials, worktrees). Even if the user just says they want to \"run my agent\", \"make my agent auto-approve tool calls\", \"run this agent safely\", or \"why can't my agent see my API key\", this skill applies. Covers `--safety` (strict/balanced/restricted/autonomous), `--yolo`, `--sandbox` and its network allowlist, `--worktree`, `docker agent alias`, and `docker agent doctor`.",
+   "source": "skills/docker-agent-run/SKILL.md",
+   "aliases": [
+    "docker agent run"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-build-strategies",
+   "type": "Skill",
+   "label": "docker-build-strategies",
+   "description": "Use this skill when writing, reviewing, or optimizing Dockerfiles, even if the user just says their image is too large, their build is slow, or they need to harden a container for production. Covers multi-stage builds, layer caching, .dockerignore, non-root users, and image size optimization.",
+   "source": "skills/docker-build-strategies/SKILL.md",
+   "aliases": [
+    "docker build strategies"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-compose-patterns",
+   "type": "Skill",
+   "label": "docker-compose-patterns",
+   "description": "Use this skill when creating, modifying, or debugging Docker Compose configurations, even if the user just says they need to wire services together, add a database to their stack, or set up a local development environment with multiple containers. Covers service definitions, health checks, dependency ordering, volumes, networks, environment variables, and development overrides.",
+   "source": "skills/docker-compose-patterns/SKILL.md",
+   "aliases": [
+    "docker compose patterns"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-destructive-guardrails",
+   "type": "Skill",
+   "label": "docker-destructive-guardrails",
+   "description": "Use this skill before running, or recommending, any Docker command that deletes, wipes, resets, or otherwise irreversibly changes state — even if the user just says to \"clean up\", \"clear the cache\", \"start fresh\", \"wipe everything\", \"nuke it\", \"reset\", \"force remove\", or \"tear down\" Docker resources. Covers generic Docker CLI destructive operations not owned by a more specific skill — `docker rm`, `docker rm -f`, `docker container prune`, `docker kill`, `docker system prune`, `docker rmi`/`docker image rm`, `docker image prune -a`, `docker network rm`, `docker network prune`, `docker builder prune`, `docker buildx rm`, `docker context rm`, and standalone (non-Compose) `docker volume rm`/`docker volume prune`. Also indexes destructive commands owned by other Docker skills (Compose, sandbox, Desktop). Core rule — state exactly what will be lost and get explicit confirmation first, except narrow, low-friction Tier 1 container cleanup.",
+   "source": "skills/docker-destructive-guardrails/SKILL.md",
+   "aliases": [
+    "docker destructive guardrails"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "docker-expert",
    "type": "Skill",
    "label": "docker-expert",
@@ -8266,6 +8356,81 @@
    "source": "skills/docker-expert/SKILL.md",
    "aliases": [
     "docker expert"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-project-foundations",
+   "type": "Skill",
+   "label": "docker-project-foundations",
+   "description": "Use this skill when setting up, initializing, or Dockerizing a project, even if the user doesn't explicitly mention Docker but describes a need for containerized local development, adding a database or cache dependency, or running services without host-level installs. Covers Dockerfile, compose.yaml, and .dockerignore creation with Docker best practices.",
+   "source": "skills/docker-project-foundations/SKILL.md",
+   "aliases": [
+    "docker project foundations"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-sandboxes-env",
+   "type": "Skill",
+   "label": "docker-sandboxes-env",
+   "description": "Use this skill when authoring, planning, or running a declarative `sbxenv.yaml` file for Docker Sandboxes (`sbx env create/run/plan/exec/rm`), even if the user just says they want to \"check in a sandbox config\", \"make onboarding reproducible for a sandbox\", \"run a setup script before the agent starts\", or \"define arguments for a shared sandbox environment\". Covers the sbxenv.yaml schema (schemaVersion, agent, kits, workspace/additionalWorkspaces, args, env, secrets, registries, bindings, mcp, ports, sandboxOptions), host `lifecycle:` commands (initialize/postCreate/preRemove) and their approval-plan model, multi-file merge (`-f`-style deep merge and the user-level `.sbxenv.yaml` base layer), and file-write-protection (`sandboxOptions.writableEnvFiles`).",
+   "source": "skills/docker-sandboxes-env/SKILL.md",
+   "aliases": [
+    "docker sandboxes env"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-sandboxes-kits",
+   "type": "Skill",
+   "label": "docker-sandboxes-kits",
+   "description": ">- Use this skill when authoring, validating, packaging, signing, or composing a Docker Sandboxes kit `spec.yaml` (`sbx kit add/inspect/pack/pull/push/sign/validate/verify`), even if the user just says they want to \"add a tool to a sandbox agent\", \"build a reusable sandbox extension\", \"publish a kit to a registry\", or \"give a mixin its own credentials and network access\". Covers the kit-spec v2 grammar (`kind: sandbox` vs `kind: mixin`, the `sandbox:` block, `permissions.network`, `ports`, `credentials` apiKey/oauth, `environment`, `setup` install/startup/files, `volumes`, `args`, `extends`, `mixins`, `requires.agent`), composition via `--kit`/`sbx kit add`, and distribution (pack/push/pull/sign/verify/provenance).",
+   "source": "skills/docker-sandboxes-kits/SKILL.md",
+   "aliases": [
+    "docker sandboxes kits"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-sandboxes-lifecycle",
+   "type": "Skill",
+   "label": "docker-sandboxes-lifecycle",
+   "description": "Use this skill when creating, running, reattaching to, listing, stopping, or removing Docker Sandboxes (the standalone `sbx` CLI that runs AI coding agents in isolated microVMs), even if the user just says they want to \"run claude in a sandbox\", \"isolate an agent from my repo\", \"give an agent its own git clone\", or \"clean up old sandboxes\". Covers `sbx run`/`sbx create` (including the built-in agents claude, codex, cursor, devin, docker-agent, gemini, opencode, shell), workspace bind-mount vs `--clone` isolation, additional read-only workspaces, reattaching by `--name`, `sbx ls`/`stop`/`rm`/`prune`, `sbx exec`, `sbx cp`, and `sbx ports`.",
+   "source": "skills/docker-sandboxes-lifecycle/SKILL.md",
+   "aliases": [
+    "docker sandboxes lifecycle"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "docker-sandboxes-network-credentials",
+   "type": "Skill",
+   "label": "docker-sandboxes-network-credentials",
+   "description": "Use this skill when configuring what a Docker Sandboxes (`sbx`) sandbox can reach on the network or which credentials it authenticates with, even if the user just says they want to \"let the agent call an internal API\", \"block all network access\", \"give the agent a GitHub token\", or \"use a private registry image for a sandbox\". Covers `sbx policy init/allow/deny/ls/inspect/log/check/rm network` (global and per-sandbox egress rules, deny-over-allow precedence) and `sbx secret set/set-custom/ls/rm/import` (service secrets, dynamic secrets via --ref/--command, and registry pull credentials with their host-pulls-only-by-default injection scope).",
+   "source": "skills/docker-sandboxes-network-credentials/SKILL.md",
+   "aliases": [
+    "docker sandboxes network credentials"
    ],
    "uses": 0,
    "successes": 0,
@@ -33523,15 +33688,6 @@
    "status": "accepted"
   },
   {
-   "src": "aerospace-engineer",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in aerospace-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "affinity-proteomics",
    "rel": "in_domain",
    "dst": "domain:proteomics-metabolomics",
@@ -34144,15 +34300,6 @@
    "status": "accepted"
   },
   {
-   "src": "agentic-workflows",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in agentic-workflows/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "agents-sdk",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -34716,7 +34863,7 @@
    "dst": "telemetry",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry named in ai-sdk/SKILL.md body",
+   "justification": "telemetry referenced in code/link context in ai-sdk/SKILL.md",
    "status": "accepted"
   },
   {
@@ -35617,15 +35764,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "alloy named in semiconductor-physicist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "alloy",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in alloy/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -37290,7 +37428,7 @@
    "dst": "telemetry",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry named in apollo-router/SKILL.md body",
+   "justification": "telemetry referenced in code/link context in apollo-router/SKILL.md",
    "status": "accepted"
   },
   {
@@ -38758,15 +38896,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in astronautical-engineer/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "astronautical-engineer",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in astronautical-engineer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -40428,15 +40557,6 @@
   {
    "src": "autoskill",
    "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in autoskill/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "autoskill",
-   "rel": "references",
    "dst": "transformers",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -41197,15 +41317,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prometheus named in beyla/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "beyla",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in beyla/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -46236,7 +46347,7 @@
    "dst": "telemetry",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry named in build-run-debug/SKILL.md body",
+   "justification": "telemetry referenced in code/link context in build-run-debug/SKILL.md",
    "status": "accepted"
   },
   {
@@ -47533,15 +47644,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in cardiologist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "cardiologist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in cardiologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -51361,15 +51463,6 @@
    "status": "accepted"
   },
   {
-   "src": "clickhouse-architecture-advisor",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in clickhouse-architecture-advisor/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "clickhouse-best-practices",
    "rel": "in_domain",
    "dst": "domain:analytics-engineering",
@@ -51556,15 +51649,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "opentelemetry named in clickstack-otel-collector/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "clickstack-otel-collector",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in clickstack-otel-collector/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -55530,15 +55614,6 @@
   {
    "src": "comparative-medicine-researcher",
    "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in comparative-medicine-researcher/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "comparative-medicine-researcher",
-   "rel": "references",
    "dst": "veterinary-microbiologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -57420,15 +57495,6 @@
   {
    "src": "conservation-scientist",
    "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in conservation-scientist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "conservation-scientist",
-   "rel": "references",
    "dst": "wind-engineering-specialist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -58216,15 +58282,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "promql named in cost-management/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "cost-management",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in cost-management/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -61576,15 +61633,6 @@
    "status": "accepted"
   },
   {
-   "src": "databricks-ml-training",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in databricks-ml-training/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "databricks-mlflow-evaluation",
    "rel": "in_domain",
    "dst": "domain:analytics-engineering",
@@ -63925,15 +63973,6 @@
    "status": "accepted"
   },
   {
-   "src": "design-control-loop",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in design-control-loop/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "design-md-library",
    "rel": "in_domain",
    "dst": "domain:web-automation-frontend",
@@ -66159,6 +66198,15 @@
   {
    "src": "docker",
    "rel": "references",
+   "dst": "docker-project-foundations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker referenced in code/link context in docker-project-foundations/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker",
+   "rel": "references",
    "dst": "e2b-sandbox",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -66220,6 +66268,258 @@
    "status": "accepted"
   },
   {
+   "src": "docker-agent-config",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-config",
+   "rel": "references",
+   "dst": "docker-agent-deploy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-agent-deploy named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-config",
+   "rel": "references",
+   "dst": "docker-agent-run",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-agent-run named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-config",
+   "rel": "references",
+   "dst": "docker-build-strategies",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-config",
+   "rel": "references",
+   "dst": "docker-compose-patterns",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-compose-patterns named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-config",
+   "rel": "references",
+   "dst": "github",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "github referenced in code/link context in docker-agent-config/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-deploy",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-deploy",
+   "rel": "references",
+   "dst": "docker-agent-config",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-agent-deploy named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-deploy",
+   "rel": "references",
+   "dst": "docker-agent-run",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-agent-run named in docker-agent-deploy/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-run",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-run",
+   "rel": "references",
+   "dst": "docker-agent-config",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-agent-run named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-run",
+   "rel": "references",
+   "dst": "docker-agent-deploy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-agent-run named in docker-agent-deploy/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-run",
+   "rel": "references",
+   "dst": "docker-sandboxes-lifecycle",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-lifecycle named in docker-agent-run/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-run",
+   "rel": "references",
+   "dst": "docker-sandboxes-network-credentials",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-agent-run/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-agent-run",
+   "rel": "references",
+   "dst": "github",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "github referenced in code/link context in docker-agent-run/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-build-strategies",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-build-strategies",
+   "rel": "references",
+   "dst": "docker-agent-config",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-build-strategies",
+   "rel": "references",
+   "dst": "docker-compose-patterns",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-compose-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-build-strategies",
+   "rel": "references",
+   "dst": "docker-project-foundations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-project-foundations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-compose-patterns",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-compose-patterns",
+   "rel": "references",
+   "dst": "docker-agent-config",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-compose-patterns named in docker-agent-config/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-compose-patterns",
+   "rel": "references",
+   "dst": "docker-build-strategies",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-compose-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-compose-patterns",
+   "rel": "references",
+   "dst": "docker-destructive-guardrails",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-destructive-guardrails named in docker-compose-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-compose-patterns",
+   "rel": "references",
+   "dst": "docker-project-foundations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-project-foundations named in docker-compose-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-destructive-guardrails",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-destructive-guardrails",
+   "rel": "references",
+   "dst": "docker-compose-patterns",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-destructive-guardrails named in docker-compose-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-destructive-guardrails",
+   "rel": "references",
+   "dst": "docker-project-foundations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-destructive-guardrails named in docker-project-foundations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-destructive-guardrails",
+   "rel": "references",
+   "dst": "start",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "start referenced in code/link context in docker-destructive-guardrails/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "docker-expert",
    "rel": "in_domain",
    "dst": "domain:cloud-devops",
@@ -66262,6 +66562,231 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "performance-optimization named in docker-expert/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-project-foundations",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-project-foundations",
+   "rel": "references",
+   "dst": "docker",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker referenced in code/link context in docker-project-foundations/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-project-foundations",
+   "rel": "references",
+   "dst": "docker-build-strategies",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-project-foundations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-project-foundations",
+   "rel": "references",
+   "dst": "docker-compose-patterns",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-project-foundations named in docker-compose-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-project-foundations",
+   "rel": "references",
+   "dst": "docker-destructive-guardrails",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-destructive-guardrails named in docker-project-foundations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-env",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-env",
+   "rel": "references",
+   "dst": "docker-sandboxes-kits",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-kits named in docker-sandboxes-env/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-env",
+   "rel": "references",
+   "dst": "docker-sandboxes-lifecycle",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-lifecycle named in docker-sandboxes-env/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-env",
+   "rel": "references",
+   "dst": "docker-sandboxes-network-credentials",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-sandboxes-env/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-kits",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-kits",
+   "rel": "references",
+   "dst": "docker-sandboxes-env",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-kits named in docker-sandboxes-env/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-kits",
+   "rel": "references",
+   "dst": "docker-sandboxes-lifecycle",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-lifecycle named in docker-sandboxes-kits/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-kits",
+   "rel": "references",
+   "dst": "docker-sandboxes-network-credentials",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-sandboxes-kits/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-kits",
+   "rel": "references",
+   "dst": "github",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "github referenced in code/link context in docker-sandboxes-kits/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-kits",
+   "rel": "references",
+   "dst": "setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "setup referenced in code/link context in docker-sandboxes-kits/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-lifecycle",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-lifecycle",
+   "rel": "references",
+   "dst": "docker-agent-run",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-lifecycle named in docker-agent-run/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-lifecycle",
+   "rel": "references",
+   "dst": "docker-sandboxes-env",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-lifecycle named in docker-sandboxes-env/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-lifecycle",
+   "rel": "references",
+   "dst": "docker-sandboxes-kits",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-lifecycle named in docker-sandboxes-kits/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-lifecycle",
+   "rel": "references",
+   "dst": "docker-sandboxes-network-credentials",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-sandboxes-lifecycle/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-network-credentials",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-network-credentials",
+   "rel": "references",
+   "dst": "docker-agent-run",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-agent-run/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-network-credentials",
+   "rel": "references",
+   "dst": "docker-sandboxes-env",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-sandboxes-env/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-network-credentials",
+   "rel": "references",
+   "dst": "docker-sandboxes-kits",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-sandboxes-kits/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-network-credentials",
+   "rel": "references",
+   "dst": "docker-sandboxes-lifecycle",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-sandboxes-network-credentials named in docker-sandboxes-lifecycle/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -67144,15 +67669,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain-iot named in rust-router/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "domain-iot",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in domain-iot/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -68893,15 +69409,6 @@
    "status": "accepted"
   },
   {
-   "src": "edge-embedded-ai-engineer",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in edge-embedded-ai-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "edit-article",
    "rel": "in_domain",
    "dst": "domain:research-writing",
@@ -68962,15 +69469,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "reverse-skill-router named in edr-bypass-re/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "edr-bypass-re",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in edr-bypass-re/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -75355,15 +75853,6 @@
    "status": "accepted"
   },
   {
-   "src": "fleet-management",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in fleet-management/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "flow-bio",
    "rel": "in_domain",
    "dst": "domain:bio-databases-platforms",
@@ -80617,6 +81106,33 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of check-pr appears in github/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "github",
+   "rel": "references",
+   "dst": "docker-agent-config",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "github referenced in code/link context in docker-agent-config/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "github",
+   "rel": "references",
+   "dst": "docker-agent-run",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "github referenced in code/link context in docker-agent-run/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "github",
+   "rel": "references",
+   "dst": "docker-sandboxes-kits",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "github referenced in code/link context in docker-sandboxes-kits/SKILL.md",
    "status": "accepted"
   },
   {
@@ -87642,15 +88158,6 @@
   {
    "src": "industrial-brutalist-ui",
    "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in industrial-brutalist-ui/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "industrial-brutalist-ui",
-   "rel": "references",
    "dst": "veterinarian",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -90925,15 +91432,6 @@
    "status": "accepted"
   },
   {
-   "src": "landscape-ecologist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in landscape-ecologist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "langchain-dependencies",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -93310,15 +93808,6 @@
    "status": "accepted"
   },
   {
-   "src": "logfire-instrumentation",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in logfire-instrumentation/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "logfire-query",
    "rel": "in_domain",
    "dst": "domain:analytics-engineering",
@@ -93373,15 +93862,6 @@
    "status": "accepted"
   },
   {
-   "src": "logfire-query",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in logfire-query/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "logfire-ui",
    "rel": "in_domain",
    "dst": "domain:analytics-engineering",
@@ -93433,15 +93913,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in logfire-ui/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "logfire-ui",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in logfire-ui/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -95515,15 +95986,6 @@
    "status": "accepted"
   },
   {
-   "src": "mammalogist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in mammalogist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "managed-deep-agents",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -95791,15 +96253,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in marine-biologist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "marine-biologist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in marine-biologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -100786,15 +101239,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "k6 named in microbenchmarking/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "microbenchmarking",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in microbenchmarking/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -109393,15 +109837,6 @@
    "status": "accepted"
   },
   {
-   "src": "network-engineer",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in network-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "network-scientist",
    "rel": "in_discipline",
    "dst": "discipline:computing-data-science",
@@ -109966,15 +110401,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in neurologist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "neurologist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in neurologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -114642,15 +115068,6 @@
   {
    "src": "observability",
    "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in observability/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "observability",
-   "rel": "references",
    "dst": "verification",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -114754,15 +115171,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "shipping-and-launch named in observability-and-instrumentation/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "observability-and-instrumentation",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in observability-and-instrumentation/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -126000,15 +126408,6 @@
   {
    "src": "private-connectivity",
    "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in private-connectivity/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "private-connectivity",
-   "rel": "references",
    "dst": "terraform",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -126067,15 +126466,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "probe-sdk",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in probe-sdk/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -126607,15 +126997,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "slack named in prometheus/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "prometheus",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in prometheus/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -148383,15 +148764,6 @@
   {
    "src": "semgrep",
    "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in semgrep/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "semgrep",
-   "rel": "references",
    "dst": "variant-analysis",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -149143,6 +149515,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "dcf named in setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "setup",
+   "rel": "references",
+   "dst": "docker-sandboxes-kits",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "setup referenced in code/link context in docker-sandboxes-kits/SKILL.md",
    "status": "accepted"
   },
   {
@@ -153310,6 +153691,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "start referenced in code/link context in deepnote-notebook-editing/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "start",
+   "rel": "references",
+   "dst": "docker-destructive-guardrails",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "start referenced in code/link context in docker-destructive-guardrails/SKILL.md",
    "status": "accepted"
   },
   {
@@ -157545,37 +157935,10 @@
   {
    "src": "telemetry",
    "rel": "references",
-   "dst": "aerospace-engineer",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in aerospace-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "agentic-workflows",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in agentic-workflows/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
    "dst": "ai-sdk",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry named in ai-sdk/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "alloy",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in alloy/SKILL.md body",
+   "justification": "telemetry referenced in code/link context in ai-sdk/SKILL.md",
    "status": "accepted"
   },
   {
@@ -157584,34 +157947,7 @@
    "dst": "apollo-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry named in apollo-router/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "astronautical-engineer",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in astronautical-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "autoskill",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in autoskill/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "beyla",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in beyla/SKILL.md body",
+   "justification": "telemetry referenced in code/link context in apollo-router/SKILL.md",
    "status": "accepted"
   },
   {
@@ -157620,295 +157956,7 @@
    "dst": "build-run-debug",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry named in build-run-debug/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "cardiologist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in cardiologist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "clickhouse-architecture-advisor",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in clickhouse-architecture-advisor/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "clickstack-otel-collector",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in clickstack-otel-collector/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "comparative-medicine-researcher",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in comparative-medicine-researcher/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "conservation-scientist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in conservation-scientist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "cost-management",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in cost-management/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "databricks-ml-training",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in databricks-ml-training/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "design-control-loop",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in design-control-loop/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "domain-iot",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in domain-iot/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "edge-embedded-ai-engineer",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in edge-embedded-ai-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "edr-bypass-re",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in edr-bypass-re/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "fleet-management",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in fleet-management/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "industrial-brutalist-ui",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in industrial-brutalist-ui/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "landscape-ecologist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in landscape-ecologist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "logfire-instrumentation",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in logfire-instrumentation/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "logfire-query",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in logfire-query/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "logfire-ui",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in logfire-ui/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "mammalogist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in mammalogist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "marine-biologist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in marine-biologist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "microbenchmarking",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in microbenchmarking/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "network-engineer",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in network-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "neurologist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in neurologist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "observability",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in observability/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "observability-and-instrumentation",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in observability-and-instrumentation/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "private-connectivity",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in private-connectivity/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "probe-sdk",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in probe-sdk/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "prometheus",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in prometheus/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "semgrep",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in semgrep/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "turbomachinery-engineer",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in turbomachinery-engineer/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "water-resources-scientist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in water-resources-scientist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "wildlife-biologist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in wildlife-biologist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "telemetry",
-   "rel": "references",
-   "dst": "zoologist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in zoologist/SKILL.md body",
+   "justification": "telemetry referenced in code/link context in build-run-debug/SKILL.md",
    "status": "accepted"
   },
   {
@@ -161554,15 +161602,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in turbomachinery-engineer/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "turbomachinery-engineer",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in turbomachinery-engineer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -170818,15 +170857,6 @@
    "status": "accepted"
   },
   {
-   "src": "water-resources-scientist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in water-resources-scientist/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "wayfinder",
    "rel": "in_domain",
    "dst": "domain:reasoning-ideation",
@@ -171679,15 +171709,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in wildlife-biologist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "wildlife-biologist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in wildlife-biologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -173659,15 +173680,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in zoologist/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "zoologist",
-   "rel": "references",
-   "dst": "telemetry",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "telemetry named in zoologist/SKILL.md body",
    "status": "accepted"
   },
   {

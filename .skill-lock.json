@@ -12027,6 +12027,105 @@
       "skillFolderHash": "9575612f066aa517354790a645fd90f9f95a743b",
       "installedAt": "2026-09-22T17:33:06.564Z",
       "updatedAt": "2026-09-22T17:33:06.564Z"
+    },
+    "docker-agent-config": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-agent-config/SKILL.md",
+      "skillFolderHash": "d5cd4975476436218d9b014de6052f9630e954bb",
+      "installedAt": "2026-09-25T17:57:41.706Z",
+      "updatedAt": "2026-09-25T17:57:41.706Z"
+    },
+    "docker-agent-deploy": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-agent-deploy/SKILL.md",
+      "skillFolderHash": "9e2f175fd30b017b8689c62cca2c0ab63cf9578a",
+      "installedAt": "2026-09-25T17:57:41.715Z",
+      "updatedAt": "2026-09-25T17:57:41.715Z"
+    },
+    "docker-agent-run": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-agent-run/SKILL.md",
+      "skillFolderHash": "014b316c089a6309b7b08133d02e9e0dad5f09f9",
+      "installedAt": "2026-09-25T17:57:41.722Z",
+      "updatedAt": "2026-09-25T17:57:41.722Z"
+    },
+    "docker-build-strategies": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-build-strategies/SKILL.md",
+      "skillFolderHash": "245219a31cbc6f493ef924bfeec408e5e2224c4d",
+      "installedAt": "2026-09-25T17:57:41.727Z",
+      "updatedAt": "2026-09-25T17:57:41.727Z"
+    },
+    "docker-compose-patterns": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-compose-patterns/SKILL.md",
+      "skillFolderHash": "d05ca356e5d5b3f2faeb15003c851b8c0365deaa",
+      "installedAt": "2026-09-25T17:57:41.733Z",
+      "updatedAt": "2026-09-25T17:57:41.733Z"
+    },
+    "docker-destructive-guardrails": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-destructive-guardrails/SKILL.md",
+      "skillFolderHash": "7a2acb5897ea48a3ff3299783574819e61fd24f7",
+      "installedAt": "2026-09-25T17:57:41.741Z",
+      "updatedAt": "2026-09-25T17:57:41.741Z"
+    },
+    "docker-project-foundations": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-project-foundations/SKILL.md",
+      "skillFolderHash": "14eb864f89eb52d3769528b3e6b2835911edbb4b",
+      "installedAt": "2026-09-25T17:57:41.746Z",
+      "updatedAt": "2026-09-25T17:57:41.746Z"
+    },
+    "docker-sandboxes-env": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-sandboxes-env/SKILL.md",
+      "skillFolderHash": "758b5b341ac32eca8d87d84c891607a8c17a6d2f",
+      "installedAt": "2026-09-25T17:57:41.750Z",
+      "updatedAt": "2026-09-25T17:57:41.750Z"
+    },
+    "docker-sandboxes-kits": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-sandboxes-kits/SKILL.md",
+      "skillFolderHash": "1a00cc0a54690764122347cebd6e6886360c3cd3",
+      "installedAt": "2026-09-25T17:57:41.755Z",
+      "updatedAt": "2026-09-25T17:57:41.755Z"
+    },
+    "docker-sandboxes-lifecycle": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-sandboxes-lifecycle/SKILL.md",
+      "skillFolderHash": "3ea28bfb1aabaf8cb456880b03a505214be60805",
+      "installedAt": "2026-09-25T17:57:41.762Z",
+      "updatedAt": "2026-09-25T17:57:41.762Z"
+    },
+    "docker-sandboxes-network-credentials": {
+      "source": "docker/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/docker/skills.git",
+      "skillPath": "skills/docker-sandboxes-network-credentials/SKILL.md",
+      "skillFolderHash": "97077df7ed67a94fb52a78157d665d4d74c9754d",
+      "installedAt": "2026-09-25T17:57:41.770Z",
+      "updatedAt": "2026-09-25T17:57:41.770Z"
     }
   },
   "dismissed": {

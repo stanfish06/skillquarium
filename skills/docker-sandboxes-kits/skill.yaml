@@ -1,0 +1,22 @@
+schema: v1
+id: docker-sandboxes-kits
+version: 0.1.0
+title: 'Docker Sandboxes: Kits (spec.yaml)'
+description: Author, validate, package, sign, and compose reusable sandbox/mixin kits (spec.yaml, schema v2).
+owns:
+  - spec.yaml
+  - sbx-kit
+  - kit-spec-v2
+use_when:
+  - The user wants to write, validate, or pack a spec.yaml for a kind sandbox or kind mixin kit.
+  - The user wants a mixin to add a tool, credential, network allowance, or files to an existing built-in agent.
+  - The user wants to publish a kit to or pull one from an OCI registry, sign it, or verify a signature or provenance attestation.
+  - The user is debugging a kit-validation error, an argument-substitution error, or sbx kit add's recreate-aware requirement.
+do_not_use_when:
+  - The task is creating, running, or removing the sandbox a kit is composed into, independent of the kit's own content.
+  - The task is what a credential or network rule a kit declares actually does at runtime, or secrets/policy unrelated to any kit.
+  - The task is the sbxenv.yaml file format that references kits via its own kits block.
+delegates_to:
+  - docker-sandboxes-lifecycle
+  - docker-sandboxes-network-credentials
+  - docker-sandboxes-env
