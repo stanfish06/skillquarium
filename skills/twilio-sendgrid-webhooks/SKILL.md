@@ -44,7 +44,7 @@ The Mail Send API returns `202 Accepted` (queued) — it does NOT confirm delive
 
 **Critical:** SendGrid posts **batched arrays** of events, not single objects. Your handler must parse an array.
 
-> **Security:** SendGrid webhook endpoints are unauthenticated by default. Enable [Signed Event Webhook Requests](https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook-security) and verify signatures in production to prevent spoofed event data.
+> **Security:** SendGrid webhook endpoints are unauthenticated by default. Enable [Signed Event Webhook Requests](https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features) and verify signatures in production to prevent spoofed event data.
 
 **Python (Flask)**
 ```python

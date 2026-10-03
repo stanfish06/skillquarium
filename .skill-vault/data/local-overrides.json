@@ -1135,5 +1135,14 @@
       "find": "Reference: [VACUUM](https://supabase.com/docs/guides/database/database-size#vacuum-operations)",
       "replace": "Reference: [VACUUM](https://supabase.com/docs/guides/platform/database-size#vacuum-operations)"
     }
+  ],
+  "twilio-sendgrid-webhooks": [
+    {
+      "id": "event-webhook-security-doc-url",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "[Signed Event Webhook Requests](https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook-security)",
+      "replace": "[Signed Event Webhook Requests](https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features)"
+    }
   ]
 }
