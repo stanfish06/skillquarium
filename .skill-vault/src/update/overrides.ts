@@ -140,3 +140,71 @@ export function reportOverrides(result: OverrideResult, check: boolean, io: Over
   if (result.stale.length || result.missing.length) return 1;
   return check && result.pending.length ? 1 : 0;
 }
+
+/** Folder names of the skills with a stale or missing override, sorted and unique. */
+export function unappliedSkills(result: OverrideResult): string[] {
+  const labels = [...result.stale, ...result.missing];
+  return [...new Set(labels.map((label) => label.slice(0, label.indexOf("/"))))].sort();
+}
+
+function git(root: string, argv: string[]): { code: number; stdout: string } {
+  const proc = Bun.spawnSync(["git", "-C", root, ...argv], { stdout: "pipe", stderr: "pipe" });
+  return { code: proc.exitCode, stdout: proc.stdout.toString("utf8") };
+}
+
+/**
+ * Hold each skill at its committed version: the folder from HEAD, minus any file upstream added,
+ * and the .skill-lock.json entry from HEAD. Restoring the lock entry makes the next sync fetch the
+ * skill again; leaving upstream's hash would mark it current while it still holds the old text.
+ * Returns the skills that could not be restored.
+ */
+export function quarantineSkills(root: string, skills: string[]): string[] {
+  if (!skills.length) return [];
+  const head = git(root, ["show", "HEAD:.skill-lock.json"]);
+  if (head.code !== 0) return [...skills];
+  const headLock = JSON.parse(head.stdout) as { skills: Record<string, unknown> };
+  const lockPath = join(root, ".skill-lock.json");
+  const lockText = readFileSync(lockPath, "utf8");
+  const lock = JSON.parse(lockText) as { skills: Record<string, unknown> };
+
+  const failed: string[] = [];
+  for (const skill of skills) {
+    const dir = `skills/${skill}`;
+    // A folder HEAD never had is all untracked, so `clean` alone removes it.
+    const tracked = git(root, ["cat-file", "-e", `HEAD:${dir}`]).code === 0;
+    if (tracked && git(root, ["checkout", "HEAD", "--", dir]).code !== 0) {
+      failed.push(skill);
+      continue;
+    }
+    if (git(root, ["clean", "-fdq", "--", dir]).code !== 0) {
+      failed.push(skill);
+      continue;
+    }
+    const entry = headLock.skills[skill];
+    if (entry === undefined) delete lock.skills[skill];
+    else lock.skills[skill] = entry;
+  }
+  // The skills CLI writes JSON.stringify(lock, null, 2); keep whatever trailing newline it left.
+  writeFileSync(lockPath, JSON.stringify(lock, null, 2) + (lockText.endsWith("\n") ? "\n" : ""), "utf8");
+  return failed;
+}
+
+/**
+ * `overrides --quarantine`: re-apply every override, then quarantine each skill left stale or
+ * missing so one upstream rewrite holds back that skill instead of the whole sync. For
+ * update-skills.yml's clean checkout only: on a working tree it discards uncommitted edits and
+ * toggle state in those skills.
+ * Exit 0 when everything applied, 1 when a skill was quarantined, 2 when one could not be restored.
+ */
+export function applyOrQuarantine(root: string, io: OverridesIo): number {
+  const result = applyOverrides(loadOverrides(overridesPath(root)), root, true);
+  const code = reportOverrides(result, false, io);
+  const skills = unappliedSkills(result);
+  const failed = quarantineSkills(root, skills);
+  for (const skill of skills) {
+    if (failed.includes(skill)) io.err(`  QUARANTINE FAILED: ${skill} — it still holds upstream's text`);
+    else io.err(`  QUARANTINED: ${skill} — held at HEAD until its overrides are re-derived`);
+  }
+  if (failed.length) return 2;
+  return skills.length ? 1 : code;
+}

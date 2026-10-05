@@ -209,6 +209,86 @@
       "file": "scripts/calculate_scores.py",
       "find": "    # Normalize if not all dimensions were scored\n    if total_weight > 0:\n        return total_score / total_weight * (sum(weights.values()) / total_weight)\n    return 0.0",
       "replace": "    # Divide by the weight actually scored; the extra sum(weights)/total_weight factor\n    # inflated any partial evaluation instead of normalizing it\n    if total_weight > 0:\n        return total_score / total_weight\n    return 0.0"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            return True\n\n    return False\n\n\nclass ScientificSchematicGenerator:\n",
+      "replace": "            return True\n\n    return False\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass ScientificSchematicGenerator:\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 8.0\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            # Don't fail the whole process if review fails - assume acceptable\n            return \"Image generated successfully (review skipped)\", 7.5, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Check if quality is acceptable - STOP EARLY if so\n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n",
+      "replace": "            # Check if quality is acceptable - STOP EARLY if so\n            if review_ok and score >= threshold and not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Quality below threshold - improve prompt for next iteration\n            print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            print(f\"Improving prompt based on feedback...\")\n",
+      "replace": "            # Quality below threshold - improve prompt for next iteration\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
     }
   ],
   "huggingface-llm-trainer": [
@@ -1211,6 +1291,396 @@
       "source": "apollographql/skills",
       "find": "    Note: Apollo ended active support for v1.x. The v2.10 LTS (Dec 2025)\n    is the current baseline. Migration is strongly recommended.",
       "replace": "    Note: Router v1.x reached End of Support in March 2026, including the\n    v1.61 LTS, and gets no further patches, security fixes included. The\n    v2.10 LTS reached End of Support in September 2026. The current LTS is\n    v2.16 (supported until March 2027); the latest Active release is v2.18.\n    Check https://www.apollographql.com/docs/graphos/reference/router-release-lifecycle\n    before pinning. Migrate off v1.x."
+    }
+  ],
+  "scientific-slides": [
+    {
+      "id": "openrouter-key-via-env-generate-slide-image-1",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image.py",
+      "find": "    \n    if api_key:\n        cmd.extend([\"--api-key\", api_key])\n    \n    if args.verbose:\n",
+      "replace": "    \n    if args.verbose:\n"
+    },
+    {
+      "id": "openrouter-key-via-env-generate-slide-image-2",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image.py",
+      "find": "    \n    # Execute\n    try:\n        result = subprocess.run(cmd, check=False)\n        sys.exit(result.returncode)\n",
+      "replace": "    \n    # Execute — pass API key via environment to avoid exposure in process listings\n    try:\n        env = os.environ.copy()\n        if api_key:\n            env[\"OPENROUTER_API_KEY\"] = api_key\n        result = subprocess.run(cmd, check=False, env=env)\n        sys.exit(result.returncode)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "1. Generate initial image with Nano Banana Pro\n2. Quality review using Gemini 3 Pro\n3. Only regenerate if quality is below threshold\n",
+      "replace": "1. Generate initial image with Nano Banana Pro\n2. Quality review using Gemini 3.1 Pro\n3. Only regenerate if quality is below threshold\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            break\n            \n    return False\n\n\nclass SlideImageGenerator:\n",
+      "replace": "            break\n            \n    return False\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass SlideImageGenerator:\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3 Pro for quality review\n        self.review_model = \"google/gemini-3-pro\"\n        \n",
+      "replace": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3.1 Pro for quality review\n        self.review_model = \"google/gemini-3.1-pro-preview\"\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "                    max_iterations: int = 2) -> Tuple[str, float, bool]:\n        \"\"\"Review generated image using Gemini 3 Pro.\"\"\"\n        image_data_url = self._image_to_base64(image_path)\n",
+      "replace": "                    max_iterations: int = 2) -> Tuple[str, float, bool]:\n        \"\"\"Review generated image using Gemini 3.1 Pro.\"\"\"\n        image_data_url = self._image_to_base64(image_path)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 7.0, False\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            return \"Image generated successfully (review skipped)\", 7.0, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            \n            print(f\"Reviewing image with Gemini 3 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n",
+      "replace": "            \n            print(f\"Reviewing image with Gemini 3.1 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {self.QUALITY_THRESHOLD}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {self.QUALITY_THRESHOLD}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-11",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            \n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {self.QUALITY_THRESHOLD})\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "            \n            if review_ok and score >= self.QUALITY_THRESHOLD and not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {self.QUALITY_THRESHOLD})\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-12",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n            \n            print(f\"\\n⚠ Quality below threshold ({score} < {self.QUALITY_THRESHOLD})\")\n            print(f\"Improving prompt...\")\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n            \n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {self.QUALITY_THRESHOLD})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt...\")\n"
+    }
+  ],
+  "scientific-schematics": [
+    {
+      "id": "openrouter-key-via-env-generate-schematic-1",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic.py",
+      "find": "    \n    if api_key:\n        cmd.extend([\"--api-key\", api_key])\n    \n    if args.verbose:\n",
+      "replace": "    \n    if args.verbose:\n"
+    },
+    {
+      "id": "openrouter-key-via-env-generate-schematic-2",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic.py",
+      "find": "    \n    # Execute\n    try:\n        result = subprocess.run(cmd, check=False)\n        sys.exit(result.returncode)\n",
+      "replace": "    \n    # Execute — pass API key via environment to avoid exposure in process listings\n    try:\n        env = os.environ.copy()\n        if api_key:\n            env[\"OPENROUTER_API_KEY\"] = api_key\n        result = subprocess.run(cmd, check=False, env=env)\n        sys.exit(result.returncode)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "1. Generate initial image with Nano Banana Pro\n2. AI quality review using Gemini 3 Pro for scientific critique\n3. Only regenerate if quality is below threshold for document type\n",
+      "replace": "1. Generate initial image with Nano Banana Pro\n2. AI quality review using Gemini 3.1 Pro for scientific critique\n3. Only regenerate if quality is below threshold for document type\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "    return False\n\n\nclass ScientificSchematicGenerator:\n    \"\"\"Generate scientific schematics using AI with smart iterative refinement.\n    \n    Uses Gemini 3 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated schematic doesn't meet the\n",
+      "replace": "    return False\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass ScientificSchematicGenerator:\n    \"\"\"Generate scientific schematics using AI with smart iterative refinement.\n    \n    Uses Gemini 3.1 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated schematic doesn't meet the\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3 Pro for quality review - excellent vision and reasoning\n        self.review_model = \"google/gemini-3-pro\"\n        \n",
+      "replace": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3.1 Pro for quality review - excellent vision and reasoning\n        self.review_model = \"google/gemini-3.1-pro-preview\"\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        \"\"\"\n        Review generated image using Gemini 3 Pro for quality analysis.\n        \n        Uses Gemini 3 Pro's superior vision and reasoning capabilities to\n        evaluate the schematic quality and determine if regeneration is needed.\n",
+      "replace": "        \"\"\"\n        Review generated image using Gemini 3.1 Pro for quality analysis.\n        \n        Uses Gemini 3.1 Pro's superior vision and reasoning capabilities to\n        evaluate the schematic quality and determine if regeneration is needed.\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        \"\"\"\n        # Use Gemini 3 Pro for review - excellent vision and analysis\n        image_data_url = self._image_to_base64(image_path)\n",
+      "replace": "        \"\"\"\n        # Use Gemini 3.1 Pro for review - excellent vision and analysis\n        image_data_url = self._image_to_base64(image_path)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        try:\n            # Use Gemini 3 Pro for high-quality review\n            response = self._make_request(\n",
+      "replace": "        try:\n            # Use Gemini 3.1 Pro for high-quality review\n            response = self._make_request(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 8.0\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            # Don't fail the whole process if review fails - assume acceptable\n            return \"Image generated successfully (review skipped)\", 7.5, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            \n            # Review image using Gemini 3 Pro\n            print(f\"Reviewing image with Gemini 3 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n",
+      "replace": "            \n            # Review image using Gemini 3.1 Pro\n            print(f\"Reviewing image with Gemini 3.1 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-11",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-12",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-13",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Check if quality is acceptable - STOP EARLY if so\n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n",
+      "replace": "            # Check if quality is acceptable - STOP EARLY if so\n            if review_ok and score >= threshold and not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-14",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-15",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-16",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Quality below threshold - improve prompt for next iteration\n            print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            print(f\"Improving prompt based on feedback...\")\n",
+      "replace": "            # Quality below threshold - improve prompt for next iteration\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
+    }
+  ],
+  "infographics": [
+    {
+      "id": "openrouter-key-via-env-generate-infographic-1",
+      "issue": 526,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic.py",
+      "find": "    \n    if api_key:\n        cmd.extend([\"--api-key\", api_key])\n    \n    if args.verbose:\n",
+      "replace": "    \n    if args.verbose:\n"
+    },
+    {
+      "id": "openrouter-key-via-env-generate-infographic-2",
+      "issue": 526,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic.py",
+      "find": "    \n    # Execute\n    try:\n        result = subprocess.run(cmd, check=False)\n        sys.exit(result.returncode)\n",
+      "replace": "    \n    # Execute — pass API key via environment to avoid exposure in process listings\n    try:\n        env = os.environ.copy()\n        if api_key:\n            env[\"OPENROUTER_API_KEY\"] = api_key\n        result = subprocess.run(cmd, check=False, env=env)\n        sys.exit(result.returncode)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "2. Generate initial infographic with Nano Banana Pro\n3. AI quality review using Gemini 3 Pro for infographic critique\n4. Only regenerate if quality is below threshold for document type\n",
+      "replace": "2. Generate initial infographic with Nano Banana Pro\n3. AI quality review using Gemini 3.1 Pro for infographic critique\n4. Only regenerate if quality is below threshold for document type\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "}\n\n\nclass InfographicGenerator:\n    \"\"\"Generate infographics using AI with smart iterative refinement.\n    \n    Uses Gemini 3 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated infographic doesn't meet the\n",
+      "replace": "}\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass InfographicGenerator:\n    \"\"\"Generate infographics using AI with smart iterative refinement.\n    \n    Uses Gemini 3.1 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated infographic doesn't meet the\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3 Pro for quality review\n        self.review_model = \"google/gemini-3-pro\"\n        \n",
+      "replace": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3.1 Pro for quality review\n        self.review_model = \"google/gemini-3.1-pro-preview\"\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "        \"\"\"\n        Review generated infographic using Gemini 3 Pro for quality analysis.\n        \n",
+      "replace": "        \"\"\"\n        Review generated infographic using Gemini 3.1 Pro for quality analysis.\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 7.5, False\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            return \"Image generated successfully (review skipped)\", 7.5, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            \n            # Review image using Gemini 3 Pro\n            print(f\"Reviewing with Gemini 3 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n",
+      "replace": "            \n            # Review image using Gemini 3.1 Pro\n            print(f\"Reviewing with Gemini 3.1 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-11",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            # Check if quality is acceptable\n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {threshold})\")\n",
+      "replace": "            # Check if quality is acceptable\n            if review_ok and score >= threshold and not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {threshold})\")\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-12",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-13",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-14",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            # Quality below threshold - improve prompt\n            print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            print(f\"Improving prompt based on feedback...\")\n",
+      "replace": "            # Quality below threshold - improve prompt\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
     }
   ]
 }
