@@ -136,7 +136,7 @@ databricks auth login --host https://your-workspace.cloud.databricks.com --profi
 2. A browser window opens automatically with the Databricks login page
 3. You authenticate in the browser using your Databricks credentials
 4. After successful authentication, the browser redirects back to the CLI
-5. `~/.databrickscfg` gets a profile entry with the host and `auth_type = databricks-cli`. **The OAuth tokens themselves are not stored in this file** — on CLI v1.0+ (current stable), they go to the OS-native secure store (Keychain on macOS, Credential Manager on Windows, Secret Service on Linux). The CLI falls back to a file-backed token cache automatically when no OS keyring is reachable (e.g. headless Linux containers with no D-Bus session bus — see Containerized Environments below), or when `auth_storage = plaintext` is set under `[__settings__]` in `~/.databrickscfg` (or `DATABRICKS_AUTH_STORAGE=plaintext` is exported).
+5. The CLI saves the OAuth tokens to `~/.databrickscfg`
 6. You should see: `Profile <profile-name> was successfully saved`
 
 ## Profile Management
@@ -412,17 +412,6 @@ Error: default auth: cannot configure default credentials
 ```bash
 databricks auth login --host <workspace-url> --profile <profile-name>
 # Example: databricks auth login --host https://company-workspace.cloud.databricks.com --profile staging
-```
-
-### Just Upgraded the CLI (Profile Exists but Auth Fails)
-
-**Symptom**: `databricks auth profiles` still lists the profile, but commands fail with an auth error after upgrading the `databricks` CLI, even though nothing else changed.
-
-**Cause**: Upgrading across the v1.0 boundary moved OAuth token storage from the file-backed `token-cache.json` to the OS-native secure store. Tokens cached by a pre-v1.0 CLI are **not** automatically migrated into the keyring.
-
-**Solution**: Re-run `databricks auth login` once per affected profile:
-```bash
-databricks auth login --host <workspace-url> --profile <profile-name>
 ```
 
 ### Browser Doesn't Open Automatically
