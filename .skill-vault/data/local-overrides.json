@@ -1212,5 +1212,23 @@
       "find": "    Note: Apollo ended active support for v1.x. The v2.10 LTS (Dec 2025)\n    is the current baseline. Migration is strongly recommended.",
       "replace": "    Note: Router v1.x reached End of Support in March 2026, including the\n    v1.61 LTS, and gets no further patches, security fixes included. The\n    v2.10 LTS reached End of Support in September 2026. The current LTS is\n    v2.16 (supported until March 2027); the latest Active release is v2.18.\n    Check https://www.apollographql.com/docs/graphos/reference/router-release-lifecycle\n    before pinning. Migrate off v1.x."
     }
+  ],
+  "maui-shell-navigation": [
+    {
+      "id": "deep-linking-docs-split-by-platform",
+      "issue": 1008,
+      "source": "dotnet/skills",
+      "find": "see [.NET MAUI deep linking docs](https://learn.microsoft.com/dotnet/maui/fundamentals/app-links)",
+      "replace": "see [Android app links](https://learn.microsoft.com/dotnet/maui/android/app-links) and [Apple universal links](https://learn.microsoft.com/dotnet/maui/macios/universal-links)"
+    }
+  ],
+  "maui-data-binding": [
+    {
+      "id": "multibinding-docs-path-singular",
+      "issue": 1008,
+      "source": "dotnet/skills",
+      "find": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibindings)",
+      "replace": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibinding)"
+    }
   ]
 }
