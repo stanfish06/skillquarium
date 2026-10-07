@@ -37,7 +37,7 @@ Do **not** use this skill for:
 from pydantic_ai import Agent
 
 agent = Agent(
-    'anthropic:claude-sonnet-4-6',
+    'anthropic:claude-sonnet-5',
     name='hello_world_agent',
     instructions='Be concise, reply with one sentence.',
 )
@@ -163,7 +163,7 @@ from pydantic_ai import Agent
 from pydantic_ai.capabilities import Thinking, WebSearch
 
 agent = Agent(
-    'anthropic:claude-opus-4-6',
+    'anthropic:claude-opus-5-5',
     name='research_assistant_agent',
     instructions='You are a research assistant. Be thorough and cite sources.',
     capabilities=[
@@ -202,7 +202,7 @@ Use `Agent.from_file` to load agents from YAML or JSON — no Python agent const
 from pydantic_ai import Agent
 
 # agent.yaml:
-# model: anthropic:claude-opus-4-6
+# model: anthropic:claude-opus-5-5
 # instructions: You are a helpful research assistant.
 # capabilities:
 #   - WebSearch
@@ -241,7 +241,7 @@ Load [Architecture and Decision Guide](./references/ARCHITECTURE.md) only when t
 | Comparison Tables | Output modes, model provider prefixes, tool decorators, built-in capabilities, agent methods |
 | Architecture Overview | Execution flow, generic types, construction patterns, lifecycle hooks, model string format |
 
-**Quick reference — model string format:** `"provider:model-name"` (e.g., `"openai:gpt-5.2"`, `"anthropic:claude-sonnet-4-6"`, `"google:gemini-3-pro-preview"`)
+**Quick reference — model string format:** `"provider:model-name"` (e.g., `"openai:gpt-5.2"`, `"anthropic:claude-sonnet-5"`, `"google:gemini-3-pro-preview"`)
 
 **Quick reference — key agent methods:** `run()`, `run_sync()`, `run_stream()`, `run_stream_sync()`, `run_stream_events()`, `iter()`
 
