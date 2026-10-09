@@ -43,6 +43,8 @@ export function renderIndex(options: RenderIndexOptions): string {
       "original `SKILL.md` and holds your personal notes, status, and aliases.",
     "",
     "> [!tip] How to navigate",
+    // A blank quote line keeps the list off the callout title (MD032); Obsidian renders the same.
+    ">",
     "> - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).",
     "> - **Browse a domain:** open a map below for grouped, cross-linked skills.",
     "> - **Filter by attribute:** open [skills.base](skills.base) to sort/filter by domain, status, rating.",

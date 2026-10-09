@@ -11,6 +11,7 @@ created: 2026-06-13
 A navigable map of the **2148 agent skills** in this vault, grouped into 32 domains. Each entry links to a per-skill note that wraps the original `SKILL.md` and holds your personal notes, status, and aliases.
 
 > [!tip] How to navigate
+>
 > - **Find by name/synonym:** quick-switcher or grep (skills carry aliases like `DESeq2`, `single cell`).
 > - **Browse a domain:** open a map below for grouped, cross-linked skills.
 > - **Filter by attribute:** open [skills.base](skills.base) to sort/filter by domain, status, rating.

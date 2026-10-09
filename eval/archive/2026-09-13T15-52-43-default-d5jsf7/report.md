@@ -6,7 +6,7 @@ provenance: skill:zz-prefix=fccb08fff071 skill:modern-typescript=8936df5f3be4 sk
 skill% = traits specified in the skill that the code implements. full% = all specified traits that the code implements.
 compiled = compiled and passed tests / total. trunc = hit the output cap. err = gateway or tool failure.
 
-```
+```text
 model                  task                 skill                  prompt   n   compiled trunc err skill%  full%   think
 ---------------------- -------------------- ---------------------- -------- --- -------- ----- --- ------- ------- ------
 gpt-5.6-luna           ts-control-probe     (none)                 baseline 3   3/3      0     0   0.0     33.3    516
@@ -39,7 +39,7 @@ gpt-5.6-luna           c-run-length         (baseline only)        baseline 3   
 
 ## bench (medians over compiled cells)
 
-```
+```text
 model                  task                 skill                  prompt       ns/call  bytes allocs failed
 gpt-5.6-luna           go-batch-processor   (none)                 baseline     22555    15511 203 0
                                             use-modern-go          skill        22698    14712 203 0
@@ -56,6 +56,7 @@ gpt-5.6-luna           csharp-order-parser  (none)                 baseline     
 gpt-5.6-luna           c-run-length         (baseline only)        baseline     50395    0     0   0
 
 ```
+
 Per call of the benchmark body. allocs is `-` for .NET.
 
 ## tool-injected skills — routing check
