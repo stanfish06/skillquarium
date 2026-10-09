@@ -18,13 +18,23 @@ function cli(command: string): string {
 }
 
 interface Row {
+  key: string;
   directory: string;
   claude_enabled: boolean | null;
   codex_enabled: boolean | null;
   state: string;
+  error: string | null;
 }
 
 const catalog = JSON.parse(cli("catalog")) as { skills: Row[]; categories: string[] };
+// `catalog` exits 0 with an error row for a skill it cannot read; blessing that row into the golden
+// would let the tests accept a broken skill, so refuse and leave the old fixtures in place.
+const broken = catalog.skills.filter((skill) => skill.error !== null);
+if (broken.length) {
+  for (const skill of broken) console.error(`${skill.key}: ${skill.error}`);
+  console.error(`regenerateGoldens: ${broken.length} skill(s) have catalog errors; fixtures not written`);
+  process.exit(1);
+}
 for (const skill of catalog.skills) {
   skill.directory = relative(ROOT, skill.directory);
   skill.claude_enabled = null;

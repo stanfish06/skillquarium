@@ -147,45 +147,83 @@ export function unappliedSkills(result: OverrideResult): string[] {
   return [...new Set(labels.map((label) => label.slice(0, label.indexOf("/"))))].sort();
 }
 
-function git(root: string, argv: string[]): { code: number; stdout: string } {
+function git(root: string, argv: string[]): { code: number; stdout: string; stderr: string } {
   const proc = Bun.spawnSync(["git", "-C", root, ...argv], { stdout: "pipe", stderr: "pipe" });
-  return { code: proc.exitCode, stdout: proc.stdout.toString("utf8") };
+  return {
+    code: proc.exitCode,
+    stdout: proc.stdout.toString("utf8"),
+    stderr: proc.stderr.toString("utf8").trim(),
+  };
+}
+
+type Lock = { skills: Record<string, unknown> };
+
+/** Parse lock JSON; throws with `label` when it is not an object with a `skills` object. */
+function parseLock(text: string, label: string): Lock {
+  const lock = JSON.parse(text) as unknown;
+  const skills = (lock as { skills?: unknown } | null)?.skills;
+  if (typeof skills !== "object" || skills === null || Array.isArray(skills)) {
+    throw new Error(`${label} has no "skills" object`);
+  }
+  return lock as Lock;
+}
+
+/** A skill quarantine could not restore, and why. */
+export interface QuarantineFailure {
+  skill: string;
+  reason: string;
 }
 
 /**
  * Hold each skill at its committed version: the folder from HEAD, minus any file upstream added,
  * and the .skill-lock.json entry from HEAD. Restoring the lock entry makes the next sync fetch the
  * skill again; leaving upstream's hash would mark it current while it still holds the old text.
+ * Both locks are read before any folder is touched, so an unreadable lock fails every skill.
  * Returns the skills that could not be restored.
  */
-export function quarantineSkills(root: string, skills: string[]): string[] {
+export function quarantineSkills(root: string, skills: string[]): QuarantineFailure[] {
   if (!skills.length) return [];
+  const failAll = (reason: string) => skills.map((skill) => ({ skill, reason }));
   const head = git(root, ["show", "HEAD:.skill-lock.json"]);
-  if (head.code !== 0) return [...skills];
-  const headLock = JSON.parse(head.stdout) as { skills: Record<string, unknown> };
+  if (head.code !== 0) return failAll(`git show HEAD:.skill-lock.json: ${head.stderr}`);
   const lockPath = join(root, ".skill-lock.json");
-  const lockText = readFileSync(lockPath, "utf8");
-  const lock = JSON.parse(lockText) as { skills: Record<string, unknown> };
+  let headLock: Lock;
+  let lock: Lock;
+  let lockText: string;
+  try {
+    headLock = parseLock(head.stdout, "HEAD:.skill-lock.json");
+    lockText = readFileSync(lockPath, "utf8");
+    lock = parseLock(lockText, ".skill-lock.json");
+  } catch (e) {
+    return failAll(`lock unreadable: ${e instanceof Error ? e.message : String(e)}`);
+  }
 
-  const failed: string[] = [];
+  const failed: QuarantineFailure[] = [];
   for (const skill of skills) {
     const dir = `skills/${skill}`;
     // A folder HEAD never had is all untracked, so `clean` alone removes it.
     const tracked = git(root, ["cat-file", "-e", `HEAD:${dir}`]).code === 0;
-    if (tracked && git(root, ["checkout", "HEAD", "--", dir]).code !== 0) {
-      failed.push(skill);
+    const checkout = tracked ? git(root, ["checkout", "HEAD", "--", dir]) : null;
+    if (checkout && checkout.code !== 0) {
+      failed.push({ skill, reason: `git checkout: ${checkout.stderr}` });
       continue;
     }
-    if (git(root, ["clean", "-fdq", "--", dir]).code !== 0) {
-      failed.push(skill);
+    const clean = git(root, ["clean", "-fdq", "--", dir]);
+    if (clean.code !== 0) {
+      failed.push({ skill, reason: `git clean: ${clean.stderr}` });
       continue;
     }
     const entry = headLock.skills[skill];
     if (entry === undefined) delete lock.skills[skill];
     else lock.skills[skill] = entry;
   }
-  // The skills CLI writes JSON.stringify(lock, null, 2); keep whatever trailing newline it left.
-  writeFileSync(lockPath, JSON.stringify(lock, null, 2) + (lockText.endsWith("\n") ? "\n" : ""), "utf8");
+  try {
+    // The skills CLI writes JSON.stringify(lock, null, 2); keep whatever trailing newline it left.
+    writeFileSync(lockPath, JSON.stringify(lock, null, 2) + (lockText.endsWith("\n") ? "\n" : ""), "utf8");
+  } catch (e) {
+    // folders are back at HEAD but their lock entries still carry upstream's hash
+    return failAll(`lock not written: ${e instanceof Error ? e.message : String(e)}`);
+  }
   return failed;
 }
 
@@ -202,8 +240,11 @@ export function applyOrQuarantine(root: string, io: OverridesIo): number {
   const skills = unappliedSkills(result);
   const failed = quarantineSkills(root, skills);
   for (const skill of skills) {
-    if (failed.includes(skill)) io.err(`  QUARANTINE FAILED: ${skill} — it still holds upstream's text`);
-    else io.err(`  QUARANTINED: ${skill} — held at HEAD until its overrides are re-derived`);
+    const failure = failed.find((f) => f.skill === skill);
+    if (failure) {
+      io.err(`  QUARANTINE FAILED: ${skill} — it still holds upstream's text`);
+      io.err(`    ${failure.reason}`);
+    } else io.err(`  QUARANTINED: ${skill} — held at HEAD until its overrides are re-derived`);
   }
   if (failed.length) return 2;
   return skills.length ? 1 : code;

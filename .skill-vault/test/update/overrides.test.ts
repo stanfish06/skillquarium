@@ -208,6 +208,31 @@ describe("quarantine", () => {
     const { err, sink } = io();
     expect(applyOrQuarantine(root, sink)).toBe(2);
     expect(err).toContain("  QUARANTINE FAILED: demo — it still holds upstream's text");
+    // git's own message reaches the log, not just the generic line
+    expect(
+      err.some((line) => line.startsWith("    git show HEAD:.skill-lock.json: ") && line.length > 40),
+    ).toBe(true);
+  });
+
+  test("an unreadable working lock exits 2 before any folder is restored", () => {
+    const root = syncedRepo("upstream rewrote this section\n");
+    writeFileSync(join(root, ".skill-lock.json"), "{ truncated", "utf8");
+    const { err, sink } = io();
+
+    expect(applyOrQuarantine(root, sink)).toBe(2);
+
+    expect(readFileSync(join(root, "skills/demo/SKILL.md"), "utf8")).toBe("upstream rewrote this section\n");
+    expect(existsSync(join(root, "skills/demo/added.md"))).toBe(true);
+    expect(err).toContain("  QUARANTINE FAILED: demo — it still holds upstream's text");
+    expect(err.some((line) => line.startsWith("    lock unreadable: "))).toBe(true);
+  });
+
+  test("a working lock without a skills object exits 2 too", () => {
+    const root = syncedRepo("upstream rewrote this section\n");
+    writeFileSync(join(root, ".skill-lock.json"), JSON.stringify({ version: 3 }), "utf8");
+    const { err, sink } = io();
+    expect(applyOrQuarantine(root, sink)).toBe(2);
+    expect(err).toContain('    lock unreadable: .skill-lock.json has no "skills" object');
   });
 });
 
