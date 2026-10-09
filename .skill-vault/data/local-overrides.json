@@ -45,6 +45,34 @@
       "source": "sickn33/antigravity-awesome-skills",
       "find": "```yaml\nversion: '3.8'\nservices:\n",
       "replace": "```yaml\nservices:\n"
+    },
+    {
+      "id": "node22-base-images-1",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine AS deps",
+      "replace": "FROM node:22-alpine AS deps"
+    },
+    {
+      "id": "node22-base-images-2",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine AS build",
+      "replace": "FROM node:22-alpine AS build"
+    },
+    {
+      "id": "node22-base-images-3",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine AS runtime",
+      "replace": "FROM node:22-alpine AS runtime"
+    },
+    {
+      "id": "node22-base-images-4",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine",
+      "replace": "FROM node:22-alpine"
     }
   ],
   "alphagenome-single-variant-analysis": [
@@ -1264,6 +1292,130 @@
       "source": "dotnet/skills",
       "find": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibindings)",
       "replace": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibinding)"
+    }
+  ],
+  "render-scaling": [
+    {
+      "id": "compute-plans-2026-1",
+      "issue": 1043,
+      "source": "openai/plugins",
+      "file": "references/instance-types.md",
+      "find": "Approximate **plan** specs for Web Services, Private Services, and Background Workers. **Prices change**—verify at [Render pricing](https://render.com/pricing).",
+      "replace": "**Plan** specs for Web Services, Private Services, and Background Workers, from Render's\n[Compute Plans](https://render.com/docs/compute-plans) reference. Private Services and\nBackground Workers have the same ladder minus `free`, which is web-service only."
+    },
+    {
+      "id": "compute-plans-2026-2",
+      "issue": 1043,
+      "source": "openai/plugins",
+      "file": "references/instance-types.md",
+      "find": "| Plan | CPU | RAM | Monthly Base |\n|------|-----|-----|--------------|\n| free | Shared | 512 MB | $0 |\n| starter | Shared | 512 MB | $7 |\n| starter_plus | 1 | 1 GB | $13 |\n| standard | 1 | 2 GB | $25 |\n| standard_plus | 2 | 4 GB | $50 |\n| pro | 4 | 8 GB | $95 |\n| pro_plus | 8 | 16 GB | $175 |\n| pro_max | 16 | 32 GB | $350 |\n| pro_ultra | 32 | 64 GB | $700 |",
+      "replace": "| Plan ID | Legacy name | CPU | RAM |\n|---------|-------------|-----|-----|\n| `free` | — | 0.1 | 512 MB |\n| `0.5c-512mb` | `starter` | 0.5 | 512 MB |\n| `1c-2g` | `standard` | 1 | 2 GB |\n| `2c-4g` | `pro` | 2 | 4 GB |\n| `2c-8g` | — | 2 | 8 GB |\n| `2c-16g` | — | 2 | 16 GB |\n| `4c-8g` | `pro_plus` | 4 | 8 GB |\n| `4c-16g` | `pro_max` | 4 | 16 GB |\n| `4c-32g` | — | 4 | 32 GB |\n| `8c-16g` | — | 8 | 16 GB |\n| `8c-32g` | `pro_ultra` | 8 | 32 GB |\n| `8c-64g` | — | 8 | 64 GB |\n| `12c-24g` | — | 12 | 24 GB |\n| `12c-48g` | — | 12 | 48 GB |\n| `12c-96g` | — | 12 | 96 GB |"
+    },
+    {
+      "id": "compute-plans-2026-3",
+      "issue": 1043,
+      "source": "openai/plugins",
+      "file": "references/instance-types.md",
+      "find": "> **Note:** Monthly figures are **approximate** and may not match your invoice (usage, proration, and promotions differ). Always use [render.com/pricing](https://render.com/pricing) for authoritative rates.",
+      "replace": "Plan IDs are what the dashboard, API, and docs show; the six legacy names are still\naccepted in `render.yaml` and the API. `starter_plus` and `standard_plus` are not —\nthey were removed from the lineup and a blueprint that sets either is rejected.\nMonthly prices are per-plan on [Render pricing](https://render.com/pricing); read\nthem there rather than from a table that goes stale.\n\n> **Note:** CPU and RAM above are the documented plan specs. Billing depends on usage, proration, and promotions, so use [render.com/pricing](https://render.com/pricing) for rates."
+    }
+  ],
+  "render-workflows": [
+    {
+      "id": "workflow-plans-flex-1",
+      "issue": 1041,
+      "source": "openai/plugins",
+      "find": "| Plan | Specs |\n|------|-------|\n| `starter` | 0.5 CPU / 512 MB |\n| `standard` (default) | 1 CPU / 2 GB |\n| `pro` | 2 CPU / 4 GB |\n| `pro_plus` | 4 CPU / 8 GB |\n| `pro_max` | 8 CPU / 16 GB |\n| `pro_ultra` | 16 CPU / 32 GB |",
+      "replace": "| Plan ID | Legacy name | Specs |\n|---------|-------------|-------|\n| `flex` (default) | — | up to 1 CPU / up to 4 GB, billed on actual usage |\n| `2c-4g` | `pro` | 2 CPU / 4 GB |\n| `2c-8g` | — | 2 CPU / 8 GB |\n| `4c-8g` | `pro_plus` | 4 CPU / 8 GB |\n| `4c-16g` | `pro_max` | 4 CPU / 16 GB |\n| `8c-32g` | `pro_ultra` | 8 CPU / 32 GB |"
+    },
+    {
+      "id": "workflow-plans-flex-2",
+      "issue": 1041,
+      "source": "openai/plugins",
+      "find": "\n`pro_plus`, `pro_max`, and `pro_ultra` require requesting access. Set via the `plan` task option.\n\nFor current pricing, see [Limits and Pricing for Render Workflows](https://render.com/docs/workflows-limits).",
+      "replace": "\n`pro_plus`, `pro_max`, and `pro_ultra` require requesting access. Set via the `plan` task option.\n\nThe Workflows beta's `starter` and `standard` plans are discontinued. A task that still sets either one runs on `flex` instead, and `flex` is the default for any task that does not set `plan` at all.\n\nFor current pricing, see [Limits and Pricing for Render Workflows](https://render.com/docs/workflows-limits)."
+    },
+    {
+      "id": "workflow-plans-flex-3",
+      "issue": 1041,
+      "source": "openai/plugins",
+      "file": "references/quick-reference.md",
+      "find": "| Plan | Specs |\n|------|-------|\n| `starter` | 0.5 CPU / 512 MB |\n| `standard` (default) | 1 CPU / 2 GB |\n| `pro` | 2 CPU / 4 GB |\n| `pro_plus` | 4 CPU / 8 GB |\n| `pro_max` | 8 CPU / 16 GB |\n| `pro_ultra` | 16 CPU / 32 GB |",
+      "replace": "| Plan ID | Legacy name | Specs |\n|---------|-------------|-------|\n| `flex` (default) | — | up to 1 CPU / up to 4 GB, billed on actual usage |\n| `2c-4g` | `pro` | 2 CPU / 4 GB |\n| `2c-8g` | — | 2 CPU / 8 GB |\n| `4c-8g` | `pro_plus` | 4 CPU / 8 GB |\n| `4c-16g` | `pro_max` | 4 CPU / 16 GB |\n| `8c-32g` | `pro_ultra` | 8 CPU / 32 GB |"
+    }
+  ],
+  "protocol-reverse": [
+    {
+      "id": "bbpb-rename-1",
+      "issue": 1033,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "□ Protobuf：.proto 恢复（blackboxprotobuf / pbtk / protoc --decode_raw）",
+      "replace": "□ Protobuf：.proto 恢复（bbpb / pbtk / protoc --decode_raw）"
+    },
+    {
+      "id": "bbpb-rename-2",
+      "issue": 1033,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "| blackboxprotobuf | 可选 | 未知 protobuf | pip |",
+      "replace": "| bbpb (原 blackboxprotobuf，已改名为官方包) | 可选 | 未知 protobuf | pip |"
+    }
+  ],
+  "mcp-csharp-debug": [
+    {
+      "id": "inspector-unpin-v2-1",
+      "issue": 1032,
+      "source": "dotnet/skills",
+      "find": "- [MCP Inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector/v/0.21.1) — Interactive debugging tool for MCP servers",
+      "replace": "- [MCP Inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector) — Interactive debugging tool for MCP servers. Current major (v2) requires Node >=22.19 and changed CLI config (`--config`/`--catalog`) from v1; if you need v1 behavior, run `npx @modelcontextprotocol/inspector@v1-latest` instead."
+    }
+  ],
+  "kubernetes-specialist": [
+    {
+      "id": "eso-v1-apiversion-1",
+      "issue": 1025,
+      "source": "jeffallan/claude-skills",
+      "file": "references/configuration.md",
+      "find": "apiVersion: external-secrets.io/v1beta1",
+      "replace": "apiVersion: external-secrets.io/v1"
+    }
+  ],
+  "building-pydantic-ai-agents": [
+    {
+      "id": "claude-5-model-ids-1",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "    'anthropic:claude-sonnet-4-6',",
+      "replace": "    'anthropic:claude-sonnet-5',"
+    },
+    {
+      "id": "claude-5-model-ids-2",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "    'anthropic:claude-opus-4-6',",
+      "replace": "    'anthropic:claude-opus-5-5',"
+    },
+    {
+      "id": "claude-5-model-ids-3",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "# model: anthropic:claude-opus-4-6",
+      "replace": "# model: anthropic:claude-opus-5-5"
+    },
+    {
+      "id": "claude-5-model-ids-4",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "**Quick reference — model string format:** `\"provider:model-name\"` (e.g., `\"openai:gpt-5.2\"`, `\"anthropic:claude-sonnet-4-6\"`, `\"google:gemini-3-pro-preview\"`)",
+      "replace": "**Quick reference — model string format:** `\"provider:model-name\"` (e.g., `\"openai:gpt-5.2\"`, `\"anthropic:claude-sonnet-5\"`, `\"google:gemini-3-pro-preview\"`)"
+    }
+  ],
+  "transformers": [
+    {
+      "id": "pillow-1230-1",
+      "issue": 1015,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install timm==1.0.27 pillow==12.2.0",
+      "replace": "uv pip install timm==1.0.27 pillow==12.3.0"
     }
   ]
 }
