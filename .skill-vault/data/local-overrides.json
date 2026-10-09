@@ -1247,5 +1247,23 @@
       "find": "Source: [CircleCI docs, \"Caching strategies\"](https://circleci.com/docs/guides/optimize/caching-strategy/)",
       "replace": "Source: [CircleCI docs, \"Caching dependencies\"](https://circleci.com/docs/guides/optimize/caching/)"
     }
+  ],
+  "maui-shell-navigation": [
+    {
+      "id": "deep-linking-docs-split-by-platform",
+      "issue": 1008,
+      "source": "dotnet/skills",
+      "find": "see [.NET MAUI deep linking docs](https://learn.microsoft.com/dotnet/maui/fundamentals/app-links)",
+      "replace": "see [Android app links](https://learn.microsoft.com/dotnet/maui/android/app-links) and [Apple universal links](https://learn.microsoft.com/dotnet/maui/macios/universal-links)"
+    }
+  ],
+  "maui-data-binding": [
+    {
+      "id": "multibinding-docs-path-singular",
+      "issue": 1008,
+      "source": "dotnet/skills",
+      "find": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibindings)",
+      "replace": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibinding)"
+    }
   ]
 }
