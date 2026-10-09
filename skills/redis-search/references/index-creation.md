@@ -121,7 +121,7 @@ r.ft("idx:bicycle").create_index(
 
 ```java
 // Jedis — STEP_START create_index
-// Mirrors SearchQuickstartExample.java
+// Mirrors SearchQuickstartExample.java + SearchWithParamsCommandsTestBase.java (testHNSWVectorSimilarity)
 import redis.clients.jedis.UnifiedJedis;
 import redis.clients.jedis.search.FTCreateParams;
 import redis.clients.jedis.search.IndexDataType;
@@ -151,5 +151,5 @@ RedisVL higher-level schema-from-dict and `SearchIndex` usage are covered in [cl
 ## Upstream sources
 
 - redis-py: [`doctests/search_quickstart.py`](https://github.com/redis/redis-py/blob/master/doctests/search_quickstart.py), [`doctests/search_vss.py`](https://github.com/redis/redis-py/blob/master/doctests/search_vss.py)
-- Jedis: [`SearchQuickstartExample.java`](https://github.com/redis/jedis/blob/master/src/test/java/io/redis/examples/SearchQuickstartExample.java)
+- Jedis: [`SearchQuickstartExample.java`](https://github.com/redis/jedis/blob/master/src/test/java/io/redis/examples/SearchQuickstartExample.java), [`SearchWithParamsCommandsTestBase.java`](https://github.com/redis/jedis/blob/master/src/test/java/redis/clients/jedis/commands/unified/search/SearchWithParamsCommandsTestBase.java)
 - Reference: [FT.CREATE](https://redis.io/docs/latest/commands/ft.create/), [Indexing](https://redis.io/docs/latest/develop/interact/search-and-query/indexing/), [Vector Reference](https://redis.io/docs/latest/develop/interact/search-and-query/advanced-concepts/vectors/)
