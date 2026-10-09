@@ -86,7 +86,7 @@ export function renderReport(rows: Row[], manifest: any): string {
     line([...first, arm, String(s.n), `${s.ok}/${s.gated}`, String(s.empty), String(s.errors), pct(s.subset), pct(s.full),
       Number.isFinite(s.reasoning) ? String(Math.round(s.reasoning)) : "-"]);
   const sign = (x: number) => (Number.isFinite(x) ? `${x >= 0 ? "+" : ""}${x.toFixed(1)}` : "-");
-  L.push("```");
+  L.push("```text");
   L.push(line(head));
   L.push(widths.map((w) => "-".repeat(w)).join(" "));
   for (const r of rows) {
@@ -110,7 +110,7 @@ export function renderReport(rows: Row[], manifest: any): string {
     L.push("");
     L.push("## bench (medians over compiled cells)");
     L.push("");
-    L.push("```");
+    L.push("```text");
     L.push(line(["model", "task", "skill", "prompt", "", "ns/call", "bytes", "allocs", "failed"]));
     const benchLine = (first: string[], arm: string, s: Stats) => {
       const b = s.bench;
@@ -127,6 +127,7 @@ export function renderReport(rows: Row[], manifest: any): string {
       L.push("");
     }
     L.push("```");
+    L.push("");
     L.push("Per call of the benchmark body. allocs is `-` for .NET.");
   }
 
