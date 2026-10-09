@@ -343,6 +343,7 @@ describe("isUiUxProMaxSkill", () => {
 /**
  * A regression fixture, not a parity oracle: it was recorded from skill_toggle.py, the port was
  * verified against it byte for byte (f0522248, a2b7ba65, 05c65af4), and that Python is now deleted.
+ * The jobs that commit skill content regenerate it (test/regenerateGoldens.ts).
  * The skill set varies per checkout — an optional extra like gstack adds keys the golden cannot
  * have, and upstream syncs add more — so the golden's keys must all still be discovered, and
  * name/description are compared over the keys they share. A key only the tree has is not a failure.
