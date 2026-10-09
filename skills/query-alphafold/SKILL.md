@@ -76,7 +76,7 @@ if isinstance(data, list) and data:
 
 Read `pdbUrl`, `cifUrl`, or `bcifUrl` off the prediction response rather than building a filename. AlphaFold DB serves only the latest version per entry -- `AF-{UNIPROT_ID}-F1-model_v6.*` today, with v4 and v5 both 404 -- so any pinned version breaks at the next release.
 
-- PAE image: `paeImageUrl`; PAE matrix JSON: `paeDocUrl`
+- PAE matrix JSON: `paeDocUrl`. `paeImageUrl` was removed from the API (sunset 2026-06-25, per EBI's breaking-changes notice) with no image-field replacement -- render the PAE plot yourself from `paeDocUrl`'s JSON instead of reading an image URL.
 
 ## Follow-up Suggestions
 
