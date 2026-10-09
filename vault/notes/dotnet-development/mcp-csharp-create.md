@@ -27,4 +27,3 @@ created: 2026-07-21
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
-

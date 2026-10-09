@@ -30,4 +30,3 @@ created: 2026-07-21
 
 > [!note] Vault audit 2026-07-24 — USE-7
 > Use this only when the user explicitly wants Pydantic Logfire; for vendor-neutral "add observability/tracing/metrics/logging" with no backend chosen yet, use `observability-and-instrumentation`. Distinguishing axis: Logfire-specific vs vendor-neutral.
-

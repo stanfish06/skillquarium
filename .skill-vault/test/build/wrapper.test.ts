@@ -114,6 +114,21 @@ test("an expert wrapper renders its metadata, navigation and preserved fields", 
   expect(rendered).not.toContain("[electron](electron.md)");
 });
 
+test("a preserved personal block ends the note with one newline", () => {
+  // Notes written before the template settled carry `\n\n` at EOF; markdownlint flags it as MD012.
+  const rendered = renderWrapper("alpha", {
+    key: "uncategorized",
+    domainTitle: "Uncategorized",
+    description: "Alpha.",
+    shortDescriptions: new Map(),
+    related: new Set(),
+    existing: { aliases: [], personal: `${PERSONAL_MARKER}\n\n## Notes\n\nKeep this.\n\n\n` },
+    today: "2025-01-02",
+    forceAliases: false,
+  });
+  expect(rendered.endsWith("\n\nKeep this.\n")).toBe(true);
+});
+
 test("a non-expert wrapper keeps its related section byte for byte", () => {
   const rendered = renderWrapper("alpha", {
     ...NON_EXPERT,
