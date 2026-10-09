@@ -1212,5 +1212,30 @@
       "find": "    Note: Apollo ended active support for v1.x. The v2.10 LTS (Dec 2025)\n    is the current baseline. Migration is strongly recommended.",
       "replace": "    Note: Router v1.x reached End of Support in March 2026, including the\n    v1.61 LTS, and gets no further patches, security fixes included. The\n    v2.10 LTS reached End of Support in September 2026. The current LTS is\n    v2.16 (supported until March 2027); the latest Active release is v2.18.\n    Check https://www.apollographql.com/docs/graphos/reference/router-release-lifecycle\n    before pinning. Migrate off v1.x."
     }
+  ],
+  "databricks-core": [
+    {
+      "id": "cli-v1-compatibility-floor",
+      "issue": 1002,
+      "source": "databricks/databricks-agent-skills",
+      "find": "compatibility: Requires databricks CLI (>= v0.292.0)",
+      "replace": "compatibility: Requires databricks CLI (>= v1.0.0 recommended; auth guidance below also covers pre-v1.0 file-backed token storage)"
+    },
+    {
+      "id": "oauth-token-storage-keyring",
+      "issue": 1002,
+      "source": "databricks/databricks-agent-skills",
+      "file": "databricks-cli-auth.md",
+      "find": "5. The CLI saves the OAuth tokens to `~/.databrickscfg`",
+      "replace": "5. `~/.databrickscfg` gets a profile entry with the host and `auth_type = databricks-cli`. **The OAuth tokens themselves are not stored in this file** — on CLI v1.0+ (current stable), they go to the OS-native secure store (Keychain on macOS, Credential Manager on Windows, Secret Service on Linux). The CLI falls back to a file-backed token cache automatically when no OS keyring is reachable (e.g. headless Linux containers with no D-Bus session bus — see Containerized Environments below), or when `auth_storage = plaintext` is set under `[__settings__]` in `~/.databrickscfg` (or `DATABRICKS_AUTH_STORAGE=plaintext` is exported)."
+    },
+    {
+      "id": "post-upgrade-reauth-troubleshooting",
+      "issue": 1002,
+      "source": "databricks/databricks-agent-skills",
+      "file": "databricks-cli-auth.md",
+      "find": "# Example: databricks auth login --host https://company-workspace.cloud.databricks.com --profile staging\n```\n\n### Browser Doesn't Open Automatically",
+      "replace": "# Example: databricks auth login --host https://company-workspace.cloud.databricks.com --profile staging\n```\n\n### Just Upgraded the CLI (Profile Exists but Auth Fails)\n\n**Symptom**: `databricks auth profiles` still lists the profile, but commands fail with an auth error after upgrading the `databricks` CLI, even though nothing else changed.\n\n**Cause**: Upgrading across the v1.0 boundary moved OAuth token storage from the file-backed `token-cache.json` to the OS-native secure store. Tokens cached by a pre-v1.0 CLI are **not** automatically migrated into the keyring.\n\n**Solution**: Re-run `databricks auth login` once per affected profile:\n```bash\ndatabricks auth login --host <workspace-url> --profile <profile-name>\n```\n\n### Browser Doesn't Open Automatically"
+    }
   ]
 }
