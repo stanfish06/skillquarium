@@ -29,7 +29,7 @@ Implement page navigation in .NET MAUI apps using Shell. Shell provides URI-base
 
 ## When Not to Use
 
-- Deep linking from external URLs or app links — see [.NET MAUI deep linking docs](https://learn.microsoft.com/dotnet/maui/fundamentals/app-links)
+- Deep linking from external URLs or app links — see [Android app links](https://learn.microsoft.com/dotnet/maui/android/app-links) and [Apple universal links](https://learn.microsoft.com/dotnet/maui/macios/universal-links)
 - Data binding on navigation target pages — use `maui-data-binding`
 - Dependency injection for pages and view models — use `maui-dependency-injection`
 - Apps using `NavigationPage` without Shell (different navigation API)

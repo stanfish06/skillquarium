@@ -387,5 +387,5 @@ MainThread.BeginInvokeOnMainThread(() => Items.Add(newItem));
 - [Compiled bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/compiled-bindings)
 - [Value converters](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/converters)
 - [Relative bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/relative-bindings)
-- [Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibindings)
+- [Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibinding)
 - [CommunityToolkit.Mvvm](https://learn.microsoft.com/dotnet/communitytoolkit/mvvm/)

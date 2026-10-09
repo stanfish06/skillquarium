@@ -1,22 +1,36 @@
 # Instance types on Render
 
-Approximate **plan** specs for Web Services, Private Services, and Background Workers. **Prices change**—verify at [Render pricing](https://render.com/pricing).
+**Plan** specs for Web Services, Private Services, and Background Workers, from Render's
+[Compute Plans](https://render.com/docs/compute-plans) reference. Private Services and
+Background Workers have the same ladder minus `free`, which is web-service only.
 
 ## Plan and spec table
 
-| Plan | CPU | RAM | Monthly Base |
-|------|-----|-----|--------------|
-| free | Shared | 512 MB | $0 |
-| starter | Shared | 512 MB | $7 |
-| starter_plus | 1 | 1 GB | $13 |
-| standard | 1 | 2 GB | $25 |
-| standard_plus | 2 | 4 GB | $50 |
-| pro | 4 | 8 GB | $95 |
-| pro_plus | 8 | 16 GB | $175 |
-| pro_max | 16 | 32 GB | $350 |
-| pro_ultra | 32 | 64 GB | $700 |
+| Plan ID | Legacy name | CPU | RAM |
+|---------|-------------|-----|-----|
+| `free` | — | 0.1 | 512 MB |
+| `0.5c-512mb` | `starter` | 0.5 | 512 MB |
+| `1c-2g` | `standard` | 1 | 2 GB |
+| `2c-4g` | `pro` | 2 | 4 GB |
+| `2c-8g` | — | 2 | 8 GB |
+| `2c-16g` | — | 2 | 16 GB |
+| `4c-8g` | `pro_plus` | 4 | 8 GB |
+| `4c-16g` | `pro_max` | 4 | 16 GB |
+| `4c-32g` | — | 4 | 32 GB |
+| `8c-16g` | — | 8 | 16 GB |
+| `8c-32g` | `pro_ultra` | 8 | 32 GB |
+| `8c-64g` | — | 8 | 64 GB |
+| `12c-24g` | — | 12 | 24 GB |
+| `12c-48g` | — | 12 | 48 GB |
+| `12c-96g` | — | 12 | 96 GB |
 
-> **Note:** Monthly figures are **approximate** and may not match your invoice (usage, proration, and promotions differ). Always use [render.com/pricing](https://render.com/pricing) for authoritative rates.
+Plan IDs are what the dashboard, API, and docs show; the six legacy names are still
+accepted in `render.yaml` and the API. `starter_plus` and `standard_plus` are not —
+they were removed from the lineup and a blueprint that sets either is rejected.
+Monthly prices are per-plan on [Render pricing](https://render.com/pricing); read
+them there rather than from a table that goes stale.
+
+> **Note:** CPU and RAM above are the documented plan specs. Billing depends on usage, proration, and promotions, so use [render.com/pricing](https://render.com/pricing) for rates.
 
 ## Flexible vs non-flexible plans
 
