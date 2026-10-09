@@ -1,6 +1,6 @@
 # AGENTS.md — operating guide for agents
 
-You have access to a curated library of **1,800+ agent skills** at `~/.agents/skills/`
+You have access to a curated library of **2,100+ agent skills** at `~/.agents/skills/`
 (the `skills/` subtree of this repo, which is rooted at `~/.agents`). A *skill* is a folder with a `SKILL.md` holding battle-tested instructions for
 a specific tool, library, or workflow. **Using a relevant skill is faster and more reliable
 than improvising.** This file tells you how to find and use them.
