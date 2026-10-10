@@ -40,9 +40,9 @@ Follow only the subsection(s) needed by the representative service selected in S
 Before writing any code, `logfire run` can auto-configure and auto-instrument a script or module for one run, with no code changes at all — useful as a fast look at what's detected, not as the permanent setup (that still needs `configure()`/`instrument_*()` calls written into the code, below, so the instrumentation survives outside this one invocation):
 
 ```bash
-uv run --with 'logfire==4.41.0' logfire --non-interactive run --summary path/to/script.py
+uv run --with 'logfire==5.1.1' logfire --non-interactive run --summary path/to/script.py
 # or, for an ASGI app:
-uv run --with 'logfire==4.41.0' logfire --non-interactive run --summary -m uvicorn main:app
+uv run --with 'logfire==5.1.1' logfire --non-interactive run --summary -m uvicorn main:app
 ```
 
 These examples use `uv run --with` so the temporary Logfire CLI can still see the project's installed dependencies; use the equivalent command for the project's environment manager. An isolated `uvx` environment cannot detect or import them. `--summary` prints which installed packages got instrumented and which detected-but-uninstrumented packages it recommends adding extras for. `--exclude <package>` skips one. Treat this as a diagnostic, not a substitute for Step 3's explicit setup below.
@@ -194,7 +194,7 @@ Instrumentation isn't done when the code compiles or an SDK reports "connected."
 1. **Run the app and trigger it.** Start the real application, run one representative request, job, or agent run, and note an identifiable service name and operation that should appear. If Step 1 found an ambient `LOGFIRE_TOKEN` while the local SDK is meant to use the newly selected `.logfire/` credential, omit that variable from the child application process too and make sure an env loader does not reintroduce an unrelated token. Do not mutate the parent shell or silently rewrite existing environment files.
 2. **Confirm fresh data reached the exact project `whoami` reported** — not just "a project." Use the same verified CLI path and token policy as Step 1. The commands below always exclude an ambient `LOGFIRE_TOKEN`; use the OAuth and project credentials selected in Step 1. With `uv`:
    ```bash
-   env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> projects status --json
+   env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> projects status --json
    ```
    For a JS/TS project without `uv`:
    ```bash
@@ -208,8 +208,8 @@ Instrumentation isn't done when the code compiles or an SDK reports "connected."
    If it reports no usable read token, create one for the exact project `whoami` reported and retry — `--project` goes on `read-tokens` itself, before `create`:
    ```bash
    # Python CLI
-   env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> read-tokens --project <organization>/<project> create --save
-   env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> projects status --json
+   env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> read-tokens --project <organization>/<project> create --save
+   env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> projects status --json
 
    # JS CLI (POSIX shell)
    npm_cache="$(mktemp -d)"

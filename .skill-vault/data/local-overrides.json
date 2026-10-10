@@ -1,4 +1,22 @@
 {
+  "logfire-instrumentation": [
+    {
+      "id": "logfire-5-1-1-pin-skill",
+      "issue": 1057,
+      "source": "pydantic/skills",
+      "find": "logfire==4.41.0",
+      "replace": "logfire==5.1.1"
+    },
+    {
+      "id": "logfire-5-1-1-pin-auth-ref",
+      "issue": 1057,
+      "source": "pydantic/skills",
+      "file": "references/auth.md",
+      "find": "logfire==4.41.0",
+      "replace": "logfire==5.1.1"
+    }
+  ]
+,
   "neo4j-document-import-skill": [
     {
       "id": "anthropic-retired-model",
