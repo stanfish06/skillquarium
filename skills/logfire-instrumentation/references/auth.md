@@ -24,13 +24,13 @@ With `uv`, use an isolated, config-free, version-pinned environment and invoke P
 
 ```bash
 # Logfire Cloud:
-env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> whoami
+env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> whoami
 
 # Explicitly supplied non-cloud origin:
 (
   credential_probe_dir="$(mktemp -d)" || exit 1
   trap 'rm -rf -- "$credential_probe_dir"' EXIT
-  env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive --base-url '<canonical-origin>' whoami --data-dir "$credential_probe_dir"
+  env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive --base-url '<canonical-origin>' whoami --data-dir "$credential_probe_dir"
 )
 ```
 
@@ -60,10 +60,10 @@ If that already reports the right project and resolved target (`--region` for Lo
 
 ```bash
 # Python CLI (uvx --isolated) -- always include --non-interactive:
-env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> auth
-env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> projects list --json
-env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> projects use <project-name> --org <organization-name>
-env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==4.41.0' python -I -m logfire --non-interactive <target> whoami
+env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> auth
+env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> projects list --json
+env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> projects use <project-name> --org <organization-name>
+env -u LOGFIRE_TOKEN uvx --isolated --no-config --from 'logfire==5.1.1' python -I -m logfire --non-interactive <target> whoami
 
 # JS CLI (POSIX shell) -- include the helper in this shell; drop --non-interactive:
 npm_cache="$(mktemp -d)"
