@@ -4,6 +4,7 @@ description: >-
   Interact with Langfuse and access its documentation: tracing, monitoring, creating datasets, running experiments, and evaluating AI applications. Use when needing to (1) query or modify Langfuse data, (2) look up Langfuse documentation, concepts, integration guides, a feature or SDK usage, or (3) do any AI engineering task (AI observability, prompt engineering/management, evaluation and evaluator management, experimentation, dataset management, evaluation-driven CI/CD, feedback collection). Invoke it for tasks in this scope even when Langfuse is not configured or explicitly mentioned.
 allowed-tools:
   - WebFetch(domain:langfuse.com)
+  - Bash(curl *langfuse.com/*)
   - Bash(npx langfuse-cli api __schema *)
   - Bash(npx langfuse-cli api * --help *)
   - Bash(npx langfuse-cli api * list *)
@@ -36,12 +37,10 @@ Follow these principles for ALL Langfuse work:
 - migrating prompts from a codebase into Langfuse: references/prompt-migration.md
 - creating a prompt or changing any part of an existing prompt, including small edits and debugging/tuning: references/prompt-engineering.md
 - setting up evals when the user needs to identify gaps across signal capture, monitoring, and evaluator metrics ("I have traces, how do I set up evals?"): references/setting-up-evals.md
-- capturing user feedback (thumbs, ratings, implicit signals) as scores on traces: references/user-feedback.md
+- capturing user feedback signals (explicit ratings, behavioral events, conversation signals, task outcomes) as scores: references/user-feedback.md
 - further tips on using the Langfuse CLI: references/cli.md
-- upgrading or migrating Langfuse SDKs and preserving application instrumentation attributes: references/sdk-upgrade.md
-- upgrading legacy trace-level or dataset-item evaluators to observation-level or experiment evaluators: references/trace-evaluator-upgrade.md. Use the [evaluator migration guide](https://langfuse.com/faq/all/llm-as-a-judge-migration) as the primary reference.
 - preparing a Langfuse project for the v4 platform migration: references/v4-project-migration.md
-- judge calibration (LLM-as-a-Judge reliability, simple accuracy checks, advanced split-based validation, confusion matrices, and metric ingestion): references/judge-calibration.md
+- calibrating a new or existing LLM-as-a-Judge against labeled examples, iterating on its prompt, and deploying the approved judge: references/judge-calibration.md
 - systematic error analysis when requested directly or eval setup still lacks concrete failure modes after agent-led trace inspection: references/error-analysis.md
 - setting up CI/CD experiment gates with `langfuse/experiment-action`: references/ci-cd.md
 - submitting feedback about this skill: references/skill-feedback.md
@@ -83,6 +82,8 @@ For common workflows, tips, and full usage patterns, see [references/cli.md](ref
 ## 2. Langfuse Documentation
 
 Three methods to access Langfuse docs, in order of preference. **Always prefer your application's native web fetch and search tools** (e.g., `WebFetch`, `WebSearch`, `mcp_fetch`, etc.) over `curl` when available. The URLs and patterns below work with any fetching method — the `curl` examples are just illustrative.
+
+When working with self-hosted Langfuse, prefer the [API reference served by the deployment](https://langfuse.com/faq/all/self-hosting-api-reference) so it matches the installed version.
 
 ### 2a. Documentation Index (llms.txt)
 

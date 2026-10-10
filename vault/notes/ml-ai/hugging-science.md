@@ -14,13 +14,13 @@ created: 2026-06-09
 # hugging-science
 
 > [!info] What it does
-> Use when the user is doing AI/ML work in a scientific domain such as biology, chemistry, physics, astronomy, climate, genomics, materials, medicine, ecology, energy, engineering, math, drug discovery, protein design, weather modeling, theorem proving, single-cell, or PDE solving. Hugging Science is a curated catalog of scientific datasets, models, blog posts, and interactive Spaces. This skill helps discover and use resources via `datasets`, `transformers`, the HF Inference API, `gradio_client`, and methodology citations.
+> Discovers and evaluates scientific datasets, models, methodology posts, and Spaces through the Hugging Science catalog. Used when selecting scientific ML resources in biology, chemistry, genomics, materials, climate, physics, astronomy, medicine, mathematics, protein design, single-cell analysis, or PDE modeling, and when checking their actual datasets, Transformers, native-runtime, Inference Providers, or Gradio interfaces.
 
 **Source:** [skills/hugging-science/SKILL.md](../../../skills/hugging-science/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [citations](../../notes/literature-discovery/citations.md) — Canonical rules and HTML/CSS contract for inline `[n]` citation references, end-of-document Citations blocks, and optional per-section citation recaps used across Moody's Agentic...
+- [gradio](../../notes/ml-ai/gradio.md) — Building ML demos and web UIs in Python with Gradio 6 — gr.Interface for wrapping a function, gr.Blocks for custom layouts with event listeners, gr.ChatInterface for LLM chat...
 - [transformers](../../notes/ml-ai/transformers.md) — Hugging Face Transformers for loading Hub models, running pipeline inference, text generation, and Trainer fine-tuning on NLP, vision, audio, and multimodal tasks
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

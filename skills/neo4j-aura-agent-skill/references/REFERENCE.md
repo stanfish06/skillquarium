@@ -116,7 +116,7 @@ All fields optional: `name`, `description`, `system_prompt`, `dbid`, `is_private
 
 ## Embedding Provider Options
 
-Always confirm `provider`, `model`, and `dimension` with the user before writing a SimilaritySearch tool config. Do not default.
+`provider`, `model`: from request, else ask. `dimension`: from index (`vector.dimensions`). Never pick provider/model that neither request nor index implies.
 
 ### OpenAI (`provider: "openai"`)
 
@@ -154,7 +154,6 @@ Always confirm `provider`, `model`, and `dimension` with the user before writing
   "is_mcp_enabled": false,
   "enabled": true,
   "endpoint_link": "https://api.neo4j.io/v2beta1/organizations/.../invoke",
-  "mcp_endpoint_link": "https://api.neo4j.io/v2beta1/organizations/.../mcp",
   "tools": [...]
 }
 ```
@@ -353,9 +352,18 @@ External endpoint URL format:
 https://api.neo4j.io/v2beta1/organizations/{orgId}/projects/{projectId}/agents/{agentId}/invoke
 ```
 
-MCP server URL format:
+REST endpoint: `api.neo4j.io` OAuth2 bearer token from Aura API credentials (`AURA_CLIENT_ID` / `AURA_CLIENT_SECRET`), not Neo4j DB credentials.
+
+MCP server URL (Streamable HTTP; not in agent response — copy from Aura console or build):
 ```
-https://api.neo4j.io/v2beta1/organizations/{orgId}/projects/{projectId}/agents/{agentId}/mcp
+https://mcp.neo4j.io/agent?project_id={projectId}&agent_id={agentId}
 ```
 
-Both require the same OAuth2 bearer token. Use Aura API credentials (`AURA_CLIENT_ID` / `AURA_CLIENT_SECRET`) — not Neo4j database credentials.
+MCP auth differs from REST ([docs](https://neo4j.com/docs/aura/aura-agent/)):
+- **Interactive clients (e.g. Claude Desktop custom connector):** log in with Aura console credentials when prompted; no token.
+- **Machine clients:** create client credential in Aura console (Account settings → Client credentials → Aura Agent & MCP); exchange at MCP gateway, not `api.neo4j.io`:
+  ```
+  POST https://mcp.neo4j.io/oauth/token
+  grant_type=client_credentials&client_id=<id>&client_secret=<secret>&audience=https://agent-mcp.neo4j.io
+  ```
+  Send token as `Authorization: Bearer <token>` on `POST /agent`. Token endpoint limit: 15 requests/hour/`client_id` — cache token for `expires_in`.

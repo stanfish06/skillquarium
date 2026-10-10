@@ -14,7 +14,7 @@ created: 2026-08-07
 # google-slides
 
 > [!info] What it does
-> Google Slides work for finding, reading, summarizing, creating, importing, template following, visual cleanup, source-deck adaptation, structural repair, and content edits in native Slides decks.
+> Route Google Slides authoring requests and derive a design system from a native template or reference deck. Use this skill when the user provides an existing native Google Slides deck as a template, reference, or prior-period source, or asks to edit, update, repair, restyle, or clean up an existing native Google Slides deck. Use the Presentations skill instead for net-new presentation creation when no existing native Google Slides deck must be followed.
 
 **Source:** [skills/google-slides/SKILL.md](../../../skills/google-slides/SKILL.md)  ·  **Domain:** [Communication & Productivity Suites](../../maps/comms-productivity.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

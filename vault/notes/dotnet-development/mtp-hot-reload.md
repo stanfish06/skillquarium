@@ -15,17 +15,16 @@ created: 2026-07-21
 # mtp-hot-reload
 
 > [!info] What it does
-> Suggests using Microsoft Testing Platform (MTP) hot reload to iterate fixes on failing tests without rebuilding. Use when user says "hot reload tests", "iterate on test fix", "run tests without rebuilding", "speed up test loop", "fix test faster", or needs to set up MTP hot reload to rapidly iterate on test failures. Covers setup (NuGet package, environment variable, launchSettings.json) and the iterative workflow for fixing tests. DO NOT USE FOR: writing test code, diagnosing test failures, running tests normally with dotnet test (use run-tests), applying test filters, producing TRX reports, CI/CD pipeline configuration, or Visual Studio Test Explorer hot reload (which is a different feature).
+> Set up or recover MTP hot reload for a long-lived console-host edit/re-run loop in a Microsoft Testing Platform project. Use for explicit MTP console requests such as "enable hot reload", "dotnet run to rerun on edit", or unsupported/rude edits. Covers setup, run/watch, restarts, filters, and the VSTest no-mutation fallback. For one-time runs, exact commands, filter errors, TRX/dumps, or merely a failing test, use run-tests. Do not use when Test Explorer or an IDE should rerun tests without an MTP console host. Excludes editor integration, CI, and writing/debugging tests.
 
 **Source:** [skills/mtp-hot-reload/SKILL.md](../../../skills/mtp-hot-reload/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [filter-syntax](../../notes/dotnet-development/filter-syntax.md) — Reference data for test filter syntax across all platform and framework combinations: VSTest --filter expressions, MTP filters for MSTest/NUnit/xUnit v3/TUnit, and VSTest-to-MTP filter...
-- [platform-detection](../../notes/dotnet-development/platform-detection.md) — Reference data for detecting the test platform (VSTest vs Microsoft.Testing.Platform) and test framework (MSTest, xUnit, NUnit, TUnit) from project files
-- [run-tests](../../notes/dotnet-development/run-tests.md) — Recommend or run the exact `dotnet test` command
+- [filter-syntax](../../notes/dotnet-development/filter-syntax.md) — Reference-only filter syntax for VSTest and MTP with MSTest, NUnit, xUnit v3, and TUnit
+- [platform-detection](../../notes/dotnet-development/platform-detection.md) — Identify a .NET project's test platform, framework, command mode, and SDK-style vs classic project system
+- [run-tests](../../notes/dotnet-development/run-tests.md) — Use before running .NET tests or answering with a test command or flags
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
-- [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

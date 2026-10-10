@@ -15,16 +15,14 @@ created: 2026-07-21
 # item-management
 
 > [!info] What it does
-> Patterns for managing MSBuild item groups: Include/Remove/Update semantics, item metadata, batching with %(Metadata), transforms, per-item filtering, and cross-product batching pitfalls. USE FOR: diagnosing and fixing item group anti-patterns in .csproj files, reviewing item management for correctness, fixing CS2002 duplicate file warnings from SDK globbing, fixing targets that run more times than expected due to cross-product batching, fixing Include vs Update misuse on SDK-globbed items, fixing FileWrites registration for generated file clean support, moving generated files to IntermediateOutputPath. DO NOT USE FOR: target chain architecture (use target-authoring), property patterns (use property-patterns), incrementality (use incremental-build), general anti-patterns (use msbuild-antipatterns), non-MSBuild build systems.
+> Own concrete MSBuild ItemGroup and item-expression questions. USE FOR: Include, Remove, Update, item identity and metadata, transforms, filtering, batching, duplicate or overlapping items, and reviews that verify whether those operations are correct. Generated items stay in scope when the central defect is item identity, metadata, batching, duplicate declarations, or glob/Remove/Update semantics. For a generated artifact missing from compilation or output, wrong target timing/path, or FileWrites clean tracking without a broader item-semantics defect, use including-generated-files. The item operation may be broken, suspected, or already correct. Exclude property-only issues, general incrementality with no item question, broad reviews with no concrete item concern, and non-MSBuild systems.
 
 **Source:** [skills/item-management/SKILL.md](../../../skills/item-management/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
-- [msbuild-antipatterns](../../notes/dotnet-development/msbuild-antipatterns.md) — Detect and fix MSBuild anti-patterns in project and build files
-- [property-patterns](../../notes/dotnet-development/property-patterns.md) — MSBuild property definition patterns: conditional defaults, composition/concatenation, path normalization, trailing-slash handling, TFM detection helpers, and evaluation order
-- [target-authoring](../../notes/dotnet-development/target-authoring.md) — Canonical patterns for writing custom MSBuild targets
+- [including-generated-files](../../notes/dotnet-development/including-generated-files.md) — Own MSBuild generated-artifact integration
+- [msbuild-antipatterns](../../notes/dotnet-development/msbuild-antipatterns.md) — DO NOT INVOKE when the primary request explicitly asks to convert, migrate, modernize, or rewrite a legacy/old-style project to SDK style
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

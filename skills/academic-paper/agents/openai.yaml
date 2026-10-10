@@ -1,4 +1,0 @@
-interface:
-  display_name: "Academic Paper"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $academic-paper for this task."

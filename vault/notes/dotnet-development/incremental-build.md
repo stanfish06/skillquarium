@@ -20,12 +20,12 @@ created: 2026-07-21
 
 ## Related skills
 
-- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Diagnose and fix under-parallelized MSBuild builds
-- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish build performance baselines and apply systematic optimization techniques
+- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Analyze an MSBuild solution, solution filter, or Build.proj that schedules multiple project files
+- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish MSBuild/.NET build performance baselines before optimizing
 - [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild build performance bottlenecks using binary log analysis
 - [copy-to-output-directory](../../notes/dotnet-development/copy-to-output-directory.md) — Choosing an MSBuild CopyToOutputDirectory / CopyToPublishDirectory mode: Never, PreserveNewest, Always, and IfDifferent (MSBuild 17.13+), plus $(SkipUnchangedFilesOnCopyAlways)
 - [eval-performance](../../notes/dotnet-development/eval-performance.md) — Guide for diagnosing and improving MSBuild project evaluation performance
-- [item-management](../../notes/dotnet-development/item-management.md) — Patterns for managing MSBuild item groups: Include/Remove/Update semantics, item metadata, batching with %(Metadata), transforms, per-item filtering, and cross-product batching pitfalls
+- [extension-points](../../notes/dotnet-development/extension-points.md) — Own MSBuild import and hook discovery. USE FOR: CustomBefore/CustomAfter hooks, ordered wildcard and NuGet auto-imports, control properties, build/buildTransitive packed layout...
 - [target-authoring](../../notes/dotnet-development/target-authoring.md) — Canonical patterns for writing custom MSBuild targets
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

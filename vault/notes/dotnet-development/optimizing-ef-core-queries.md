@@ -14,7 +14,7 @@ created: 2026-07-21
 # optimizing-ef-core-queries
 
 > [!info] What it does
-> Optimize Entity Framework Core queries by fixing N+1 problems, choosing correct tracking modes, using compiled queries, and avoiding common performance traps. Use when EF Core queries are slow, generating excessive SQL, or causing high database load.
+> Optimize and improve the performance of slow Entity Framework Core (EF Core) queries: make them generate less SQL, make fewer database round-trips, and return results faster. Use whenever an EF Core or DbContext query or data-access path is slow or should be made faster — whether or not EF Core owns the database schema. For EF Core, not Dapper or raw ADO.NET.
 
 **Source:** [skills/optimizing-ef-core-queries/SKILL.md](../../../skills/optimizing-ef-core-queries/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

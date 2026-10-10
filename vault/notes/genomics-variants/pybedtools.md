@@ -22,7 +22,7 @@ created: 2026-06-09
 
 - [pandas](../../notes/data-science-compute/pandas.md) — The workhorse library for in-memory tabular data in Python
 - [polars](../../notes/data-science-compute/polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
-- [pysam](../../notes/genomics-variants/pysam.md) — Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines
+- [pysam](../../notes/genomics-variants/pysam.md) — Provides Python/HTSlib workflows for genomic files
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

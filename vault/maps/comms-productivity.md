@@ -29,16 +29,16 @@ created: 2026-08-09
 - [google-calendar-free-up-time](../notes/comms-productivity/google-calendar-free-up-time.md) — Find ways to open up meaningful free time in a connected Google Calendar
 - [google-calendar-group-scheduler](../notes/comms-productivity/google-calendar-group-scheduler.md) — Find and rank good meeting times for multiple people using connected Google Calendar data
 - [google-calendar-meeting-prep](../notes/comms-productivity/google-calendar-meeting-prep.md) — Build a practical meeting prep brief from a connected Google Calendar event and its nearby context
-- [google-docs](../notes/comms-productivity/google-docs.md) — Connector-first Google Docs creation and editing in local Codex plugin sessions, with direct native create and batchUpdate workflows for simple docs, DOCX-first import for polished...
+- [google-docs](../notes/comms-productivity/google-docs.md) — Prompt- and template-complete Google Docs creation and editing with explicit-instruction-authoritative structural preservation, including semantic roles, relationships, comparison...
 - [google-drive](../notes/comms-productivity/google-drive.md) — Use connected Google Drive as the single entrypoint for Drive, Docs, Sheets, and Slides work
 - [google-drive-comments](../notes/comms-productivity/google-drive-comments.md) — Write, reply to, and resolve Google Drive comments on Docs, Sheets, Slides, and Drive files with evidence-backed location context
 - [google-sheets](../notes/comms-productivity/google-sheets.md) — Analyze and edit connected Google Sheets with range precision
-- [google-slides](../notes/comms-productivity/google-slides.md) — Google Slides work for finding, reading, summarizing, creating, importing, template following, visual cleanup, source-deck adaptation, structural repair, and content edits in native...
+- [google-slides](../notes/comms-productivity/google-slides.md) — Route Google Slides authoring requests and derive a design system from a native template or reference deck
 - [irl-tracker](../notes/comms-productivity/irl-tracker.md) — Information Request List (IRL) Tracker skill for Datasite deal rooms
 - [meeting-scheduler](../notes/comms-productivity/meeting-scheduler.md) — Handles end-to-end meeting scheduling using the Superhuman Mail MCP server — from finding available times to sending the invite or proposing times via email
 - [morning-briefing](../notes/comms-productivity/morning-briefing.md) — Generates a morning briefing that triages your inbox and previews your day using the Superhuman Mail MCP server — acting as an AI chief of staff
 - [notion-knowledge-capture](../notes/comms-productivity/notion-knowledge-capture.md) — Capture conversations and decisions into structured Notion pages
-- [notion-meeting-intelligence](../notes/comms-productivity/notion-meeting-intelligence.md) — Prepare meeting materials with Notion context and Codex research
+- [notion-meeting-intelligence](../notes/comms-productivity/notion-meeting-intelligence.md) — Prepare meeting materials with Notion context and supplemental research
 - [notion-research-documentation](../notes/comms-productivity/notion-research-documentation.md) — Research across Notion and synthesize into structured documentation
 - [notion-spec-to-implementation](../notes/comms-productivity/notion-spec-to-implementation.md) — Turn Notion specs into implementation plans, tasks, and progress tracking
 - [outlook-calendar](../notes/comms-productivity/outlook-calendar.md) — Handle Outlook Calendar workflows, including delegated/shared calendar writes

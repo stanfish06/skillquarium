@@ -16,7 +16,7 @@ created: 2026-07-26
 
 ## Skills (31)
 
-- [matlab](../notes/matlab-development/matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
+- [matlab](../notes/matlab-development/matlab.md) — Builds, reviews, migrates, and plans MATLAB or GNU Octave numerical workflows
 - [matlab-analyze-data](../notes/matlab-development/matlab-analyze-data.md) — Analyze data using MATLAB. Use when the task involves tables, timetables, time-series data, numeric arrays, sensor matrices, or gridded data — including but not limited to exploring...
 - [matlab-analyze-dependencies](../notes/matlab-development/matlab-analyze-dependencies.md) — Analyze the effective toolbox file set to produce a Dependency Manifest — classify all transitive dependencies as included, product, add-on, or external-unresolved, then present...
 - [matlab-assess-toolbox](../notes/matlab-development/matlab-assess-toolbox.md) — Assess toolbox readiness and suggest improvements — validates help text, tests, coverage, code issues, dependencies, and function signatures

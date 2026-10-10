@@ -72,11 +72,11 @@ created: 2026-08-09
 - [supabase](../notes/hosting-edge-platforms/supabase.md) — Use when doing ANY task involving Supabase
 - [supabase-postgres-best-practices](../notes/hosting-edge-platforms/supabase-postgres-best-practices.md) — Postgres performance optimization and best practices from Supabase
 - [telemetry](../notes/hosting-edge-platforms/telemetry.md) — Add and verify lightweight macOS runtime telemetry
-- [temporal-developer](../notes/hosting-edge-platforms/temporal-developer.md) — Develop, debug, and manage Temporal applications across Python, TypeScript, Go, and Java
+- [temporal-developer](../notes/hosting-edge-platforms/temporal-developer.md) — Develop, debug, and manage Temporal applications across Python, TypeScript, Go, Java, .NET, Ruby, and Rust
 - [vercel-agent](../notes/hosting-edge-platforms/vercel-agent.md) — Vercel Agent guidance — AI-powered code review, incident investigation, and SDK installation
 - [vercel-api](../notes/hosting-edge-platforms/vercel-api.md) — Vercel app and REST API expert guidance
-- [vercel-cli](../notes/hosting-edge-platforms/vercel-cli.md) — Vercel CLI expert guidance. Use when deploying, managing environment variables, linking projects, viewing logs, managing domains, or interacting with the Vercel platform from the...
-- [vercel-firewall](../notes/hosting-edge-platforms/vercel-firewall.md) — Vercel Firewall and security expert guidance
+- [vercel-cli](../notes/hosting-edge-platforms/vercel-cli.md) — Vercel CLI expert guidance. Use when deploying, managing environment variables, linking projects, viewing logs, querying metrics, managing domains, or interacting with the Vercel...
+- [vercel-firewall](../notes/hosting-edge-platforms/vercel-firewall.md) — Vercel Firewall expert guidance — automatic DDoS mitigation, the Vercel WAF (custom rules, IP blocking, managed rulesets, rate limiting), Attack Mode, system bypass, bot management...
 - [vercel-flags](../notes/hosting-edge-platforms/vercel-flags.md) — Vercel Flags guidance — feature flags platform with unified dashboard, Flags Explorer, gradual rollouts, A/B testing, and provider adapters
 - [vercel-functions](../notes/hosting-edge-platforms/vercel-functions.md) — Vercel Functions expert guidance — Serverless Functions, Edge Functions, Fluid Compute, streaming, Cron Jobs, and runtime configuration
 - [vercel-queues](../notes/hosting-edge-platforms/vercel-queues.md) — Vercel Queues guidance (public beta) — durable event streaming with topics, consumer groups, retries, and delayed delivery

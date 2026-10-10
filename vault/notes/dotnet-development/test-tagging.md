@@ -14,16 +14,17 @@ created: 2026-07-21
 # test-tagging
 
 > [!info] What it does
-> Analyzes test suites in any language and tags each test with standardized traits (positive, negative, critical-path, boundary, smoke, regression, integration, performance, security). Use when the user wants to categorize, audit, or label tests with traits. Works across .NET (MSTest/xUnit/NUnit/TUnit), Python (pytest), TS/JS (Jest/Vitest), Java, Go, Ruby, Rust, Swift, Kotlin, PowerShell, and C++ — auto-editing when the framework has canonical tag syntax, otherwise report-only. Do not use for writing new tests, running tests, or migrating frameworks.
+> Classifies existing tests by standard traits and reports their distribution. USE FOR: tagging all tests with category attributes, categorizing/tagging/ labeling each test, compare happy vs error paths, audit the test mix, describe coverage shape by test type, or tag then verify the project builds. Read bodies when names mislead. Apply canonical attributes; otherwise report only. DO NOT USE FOR: requests owned by test-anti-patterns, coverage-analysis, crap-score, test-gap-analysis, code-testing, or migration skills.
 
 **Source:** [skills/test-tagging/SKILL.md](../../../skills/test-tagging/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [jest](../../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
-- [pytest](../../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
+- [coverage-analysis](../../notes/security-auditing/coverage-analysis.md) — Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output
+- [crap-score](../../notes/dotnet-development/crap-score.md) — Calculates CRAP (Change Risk Anti-Patterns) for a named .NET method, class, or file
 - [test-analysis-extensions](../../notes/dotnet-development/test-analysis-extensions.md) — Provides file paths to language-specific reference files for the test ANALYSIS skills (assertion-quality, test-anti-patterns, test-gap-analysis, test-smell-detection, test-tagging)
-- [vitest](../../notes/software-dev/vitest.md) — JavaScript/TypeScript unit testing with Vitest — fast Vite-native test runner with Jest-compatible API
+- [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audit a test file or suite; produce a severity-ranked diagnostic report
+- [test-gap-analysis](../../notes/dotnet-development/test-gap-analysis.md) — Pseudo-mutation analysis ONLY: answer whether tests would catch a bug if production code changed, which meaningful changes would still pass, or which caller-visible mutations existing...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

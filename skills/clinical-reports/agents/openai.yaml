@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clinical Reports"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $clinical-reports for this task."

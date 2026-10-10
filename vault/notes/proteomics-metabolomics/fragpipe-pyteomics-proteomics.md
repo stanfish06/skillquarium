@@ -23,10 +23,10 @@ created: 2026-06-09
 
 ## Related skills
 
-- [matchms](../../notes/proteomics-metabolomics/matchms.md) — Spectral similarity and compound identification for metabolomics
+- [matchms](../../notes/proteomics-metabolomics/matchms.md) — Processes, cleans, compares, and searches tandem mass spectra with matchms
 - [polars](../../notes/data-science-compute/polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
 - [proteomics](../../notes/proteomics-metabolomics/proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
-- [pyopenms](../../notes/proteomics-metabolomics/pyopenms.md) — Complete mass spectrometry analysis platform
+- [pyopenms](../../notes/proteomics-metabolomics/pyopenms.md) — Processes mass spectrometry data with pyOpenMS
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

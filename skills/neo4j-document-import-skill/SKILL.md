@@ -9,7 +9,7 @@ description: Ingests unstructured and semi-structured documents into Neo4j as a 
   Does NOT handle structured CSV/relational import — use neo4j-import-skill.
   Does NOT handle GraphRAG retrieval after ingestion — use neo4j-graphrag-skill.
   Does NOT handle vector index creation — use neo4j-vector-search-skill.
-version: 1.0.5
+version: 1.0.6
 status: stable
 allowed-tools: Bash WebFetch
 ---
@@ -83,7 +83,7 @@ patterns = [
 ]
 
 # Option B — Rich GraphSchema (production; best extraction quality)
-from neo4j_graphrag.experimental.components.schema import (
+from neo4j_graphrag.components.schema import (
     GraphSchema, NodeType, RelationshipType, PropertyType, ConstraintType
 )
 schema = GraphSchema(
@@ -208,7 +208,7 @@ asyncio.run(ingest_all(list(pdf_dir.glob("*.pdf"))))
 Default splitter: `FixedSizeSplitter(chunk_size=300, chunk_overlap=50)`.
 
 ```python
-from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import FixedSizeSplitter
+from neo4j_graphrag.components.text_splitters.fixed_size_splitter import FixedSizeSplitter
 
 splitter = FixedSizeSplitter(
     chunk_size=512,       # tokens; 300–512 typical for GPT-4o
@@ -238,7 +238,7 @@ Rule: chunk must fit within LLM context for extraction + within embedding model 
 Merge duplicate extracted entities after pipeline run.
 
 ```python
-from neo4j_graphrag.experimental.components.resolver import (
+from neo4j_graphrag.components.resolver import (
     SinglePropertyExactMatchResolver,   # identical name → merge
     FuzzyMatchResolver,                  # Levenshtein similarity; needs rapidfuzz
     SpaCySemanticMatchResolver,          # cosine similarity; needs neo4j-graphrag[nlp]
@@ -249,7 +249,7 @@ resolver = SinglePropertyExactMatchResolver(driver)
 asyncio.run(resolver.run())
 
 # Fuzzy match (handles typos / alternate spellings)
-from neo4j_graphrag.experimental.components.resolver import FuzzyMatchResolver
+from neo4j_graphrag.components.resolver import FuzzyMatchResolver
 resolver = FuzzyMatchResolver(driver, threshold=0.9)
 asyncio.run(resolver.run())
 
@@ -465,7 +465,7 @@ If rows returned: wait, then re-run. ONLINE = safe to ingest.
 `entities`/`relations`/`potential_schema` are deprecated. Use `schema=GraphSchema(...)`.
 
 ```python
-from neo4j_graphrag.experimental.components.schema import (
+from neo4j_graphrag.components.schema import (
     GraphSchema, NodeType, RelationshipType, PropertyType,
     ConstraintType, GraphConstraintType,
 )
@@ -504,7 +504,7 @@ When no `schema` is passed to `SimpleKGPipeline`, `SchemaFromTextExtractor` runs
 To run it explicitly:
 
 ```python
-from neo4j_graphrag.experimental.components.graph_schema_extraction import (
+from neo4j_graphrag.components.graph_schema_extraction import (
     SchemaFromTextExtractor,
     SchemaFromExistingGraphExtractor,
 )
@@ -521,7 +521,7 @@ schema = asyncio.run(extractor.run())
 ### Parquet Export (experimental, v1.14.0+)
 
 ```python
-from neo4j_graphrag.experimental.components.parquet_output import ParquetWriter
+from neo4j_graphrag.components.parquet_output import ParquetWriter
 
 # Use ParquetWriter instead of KGWriter inside a Pipeline to export to Parquet files
 writer = ParquetWriter(output_dir="/data/kg_export/")
@@ -535,7 +535,7 @@ writer = ParquetWriter(output_dir="/data/kg_export/")
 
 Override default lexical layer labels (keep defaults unless integrating with existing graph):
 ```python
-from neo4j_graphrag.experimental.components.types import LexicalGraphConfig
+from neo4j_graphrag.components.types import LexicalGraphConfig
 # All fields have sensible defaults — only override what differs from your graph's conventions
 config = LexicalGraphConfig(
     document_node_label="Article",             # default: "Document"
@@ -554,8 +554,8 @@ Default `file_loader` auto-dispatches by extension (`.pdf`→`PdfLoader`, `.md`�
 Supports fsspec URIs (`s3://`, `gcs://`). Subclass `DataLoader` for HTML/web/custom formats:
 
 ```python
-from neo4j_graphrag.experimental.components.data_loader import DataLoader
-from neo4j_graphrag.experimental.components.types import DocumentInfo, LoadedDocument
+from neo4j_graphrag.components.data_loader import DataLoader
+from neo4j_graphrag.components.types import DocumentInfo, LoadedDocument
 
 class WebPageLoader(DataLoader):
     async def run(self, filepath, metadata=None):

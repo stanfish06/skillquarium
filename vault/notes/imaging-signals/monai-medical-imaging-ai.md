@@ -22,10 +22,10 @@ created: 2026-06-09
 ## Related skills
 
 - [cellpose-stardist-bioimage](../../notes/imaging-signals/cellpose-stardist-bioimage.md) — Bioimage cell and nucleus segmentation routing with cellpose-cell-segmentation, Cellpose, StarDist, napari-viz, and monai-medical-imaging-ai
-- [histolab](../../notes/imaging-signals/histolab.md) — Lightweight WSI tile extraction and preprocessing
+- [histolab](../../notes/imaging-signals/histolab.md) — Extracts and preprocesses whole-slide histology image tiles with Histolab
 - [napari-viz](../../notes/imaging-signals/napari-viz.md) — Headless bioimage and microscopy visualization with napari
-- [pathml](../../notes/imaging-signals/pathml.md) — Full-featured computational pathology toolkit
-- [pydicom](../../notes/imaging-signals/pydicom.md) — Python library for working with DICOM (Digital Imaging and Communications in Medicine) files
+- [pathml](../../notes/imaging-signals/pathml.md) — Supports local computational pathology research with PathML: slide loading and tiling, preprocessing and QC, h5path storage, multiplex quantification, spatial graphs, and bounded model...
+- [pydicom](../../notes/imaging-signals/pydicom.md) — Reads, inspects, writes, transforms, and preflights local DICOM datasets and pixel data
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

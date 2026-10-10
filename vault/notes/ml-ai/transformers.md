@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [hugging-science](../../notes/ml-ai/hugging-science.md) — Use when the user is doing AI/ML work in a scientific domain such as biology, chemistry, physics, astronomy, climate, genomics, materials, medicine, ecology, energy, engineering, math...
+- [hugging-science](../../notes/ml-ai/hugging-science.md) — Discovers and evaluates scientific datasets, models, methodology posts, and Spaces through the Hugging Science catalog
 - [huggingface-community-evals](../../notes/ml-ai/huggingface-community-evals.md) — Run evaluations for Hugging Face Hub models using inspect-ai and lighteval on local hardware
 - [huggingface-vision-trainer](../../notes/ml-ai/huggingface-vision-trainer.md) — Trains and fine-tunes vision models for object detection (D-FINE, RT-DETR v2, DETR, YOLOS), image classification (timm models — MobileNetV3, MobileViT, ResNet, ViT/DINOv3 — plus any...
 - [transformers-js](../../notes/ml-ai/transformers-js.md) — Use Transformers.js to run state-of-the-art machine learning models directly in JavaScript/TypeScript

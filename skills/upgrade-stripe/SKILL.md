@@ -1,6 +1,7 @@
 ---
 name: upgrade-stripe
 description: Guide for upgrading Stripe API versions and SDKs
+
 ---
 
 The latest Stripe API version is 2026-07-29.dahlia - use this version when upgrading unless the user specifies a different target version.
@@ -11,11 +12,12 @@ This guide covers upgrading Stripe API versions, server-side SDKs, Stripe.js, an
 
 ## Understanding Stripe API Versioning
 
-Stripe uses date-based API versions (e.g., `2026-07-29.dahlia`, `2026-02-25.clover`, `2025-08-27.basil`, `2024-12-18.acacia`). Your account's API version determines request/response behavior.
+Stripe uses date-based API versions (e.g., `2026-07-29.dahlia`, `2025-08-27.basil`, `2024-12-18.acacia`). Your account’s API version determines request/response behavior.
 
 ### Types of Changes
 
-**Backward-Compatible Changes** (do not require code updates):
+**Backward-Compatible Changes** (don’t require code updates):
+
 - New API resources
 - New optional request parameters
 - New properties in existing responses
@@ -23,6 +25,7 @@ Stripe uses date-based API versions (e.g., `2026-07-29.dahlia`, `2026-02-25.clov
 - New webhook event types
 
 **Breaking Changes** (require code updates):
+
 - Field renames or removals
 - Behavioral modifications
 - Removed endpoints or parameters
@@ -38,6 +41,7 @@ See [SDK Version Management](https://docs.stripe.com/sdks/set-version.md) for de
 These SDKs offer flexible version control:
 
 **Global Configuration:**
+
 ```python
 import stripe
 stripe.api_version = '2026-07-29.dahlia'
@@ -54,6 +58,7 @@ const stripe = require('stripe')('sk_test_xxx', {
 ```
 
 **Per-Request Override:**
+
 ```python
 stripe.Customer.create(
   email="customer@example.com",
@@ -63,11 +68,11 @@ stripe.Customer.create(
 
 ### Strongly-Typed Languages (Java, Go, .NET)
 
-These use a fixed API version matching the SDK release date. Do not set a different API version for strongly-typed languages because response objects might not match the strong types in the SDK. Instead, update the SDK to target a new API version.
+These use a fixed API version matching the SDK release date. Don’t set a different API version for strongly-typed languages because response objects might not match the strong types in the SDK. Instead, update the SDK to target a new API version.
 
 ### Best Practice
 
-Always specify the API version you're integrating against in your code instead of relying on your account's default API version:
+Always specify the API version you’re integrating against in your code instead of relying on your account’s default API version:
 
 ```javascript
 // Good: Explicit version
@@ -83,16 +88,18 @@ const stripe = require('stripe')('sk_test_xxx');
 
 See [Stripe.js Versioning](https://docs.stripe.com/sdks/stripejs-versioning.md) for details.
 
-Stripe.js uses an evergreen model with major releases (Acacia, Basil, Clover) on a biannual basis.
+Stripe.js uses an evergreen model with major releases (Acacia, Basil, Clover, Dahlia) on a biannual basis.
 
 ### Loading Versioned Stripe.js
 
 **Via Script Tag:**
+
 ```html
-<script src="https://js.stripe.com/clover/stripe.js"></script>
+<script src="https://js.stripe.com/dahlia/stripe.js"></script>
 ```
 
 **Via npm:**
+
 ```bash
 npm install @stripe/stripe-js
 ```
@@ -102,10 +109,11 @@ Major npm versions correspond to specific Stripe.js versions.
 ### API Version Pairing
 
 Each Stripe.js version automatically pairs with its corresponding API version. For instance:
-- Clover Stripe.js uses `2026-02-25.clover` API
+
+- Dahlia Stripe.js uses `2026-07-29.dahlia` API
 - Acacia Stripe.js uses `2024-12-18.acacia` API
 
-You cannot override this association.
+You can’t override this association.
 
 ### Migrating from v3
 
@@ -121,6 +129,7 @@ See [Mobile SDK Versioning](https://docs.stripe.com/sdks/mobile-sdk-versioning.m
 ### iOS and Android SDKs
 
 Both platforms follow **semantic versioning** (MAJOR.MINOR.PATCH):
+
 - **MAJOR**: Breaking API changes
 - **MINOR**: New functionality (backward-compatible)
 - **PATCH**: Bug fixes (backward-compatible)
@@ -130,6 +139,7 @@ New features and fixes release only on the latest major version. Upgrade regular
 ### React Native SDK
 
 Uses a different model (0.x.y schema):
+
 - **Minor version changes** (x): Breaking changes AND new features
 - **Patch updates** (y): Critical bug fixes only
 

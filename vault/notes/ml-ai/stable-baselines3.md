@@ -18,13 +18,13 @@ created: 2026-06-09
 # stable-baselines3
 
 > [!info] What it does
-> Production-ready reinforcement learning algorithms (PPO, SAC, DQN, TD3, DDPG, A2C) with scikit-learn-like API. Use for standard RL experiments, quick prototyping, and well-documented algorithm implementations. Best for single-agent RL with Gymnasium environments. For high-performance parallel training, multi-agent systems, or custom vectorized environments, use pufferlib instead.
+> Trains and evaluates single-agent reinforcement learning with Stable Baselines3 (PPO, SAC, DQN, TD3, DDPG, A2C), Gymnasium custom environments, vectorized rollouts, callbacks, and checkpoint normalization. Applies to reproducible RL experiments, continuous control, discrete actions, and SB3-Contrib recurrent or masked policies.
 
 **Source:** [skills/stable-baselines3/SKILL.md](../../../skills/stable-baselines3/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [pufferlib](../../notes/ml-ai/pufferlib.md) — High-performance reinforcement learning framework optimized for speed and scale
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

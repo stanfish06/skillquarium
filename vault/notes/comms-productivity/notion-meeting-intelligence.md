@@ -14,7 +14,7 @@ created: 2026-08-07
 # notion-meeting-intelligence
 
 > [!info] What it does
-> Prepare meeting materials with Notion context and Codex research; use when gathering context, drafting agendas/pre-reads, and tailoring materials to attendees.
+> Prepare meeting materials with Notion context and supplemental research; use when gathering context, drafting agendas/pre-reads, and tailoring materials to attendees.
 
 **Source:** [skills/notion-meeting-intelligence/SKILL.md](../../../skills/notion-meeting-intelligence/SKILL.md)  ·  **Domain:** [Communication & Productivity Suites](../../maps/comms-productivity.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

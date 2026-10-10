@@ -1,7 +1,6 @@
 ---
 name: firecrawl-agent
-description: |
-  Autonomous multi-page extraction into structured JSON. Use when the user wants website data matching a schema — pricing tiers, product listings — beyond a single-page scrape.
+description: Autonomously navigate websites and extract structured data across pages. Use when the task requires navigation or no suitable ready-made workflow or data provider covers it.
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl-cli *)
@@ -10,6 +9,8 @@ allowed-tools:
 # firecrawl agent
 
 AI-powered autonomous extraction. The agent navigates sites and extracts structured data (takes 2-5 minutes).
+
+Before starting autonomous extraction for structured records or listings, check `firecrawl search alexandria '<data you need>'` for a ready-made workflow or data provider. Inspect a matching contract with `firecrawl list <provider> <capability> --pretty` and execute with `firecrawl scrape --alexandria <provider>/<capability> --options '<input JSON>'` if it covers the task. Use the exact provider, capability, and input fields from that contract. Continue with Agent when no suitable tool exists or the task requires autonomous navigation.
 
 ## Quick start
 
@@ -27,6 +28,16 @@ firecrawl agent "get feature list" --urls "<url>" --wait --json -o .firecrawl/fe
 Run `firecrawl agent --help` for the full option list.
 
 **Done when:** the output file contains valid JSON answering the request — or a job ID was intentionally returned for later polling.
+
+## Alexandria providers
+
+A run uses connected Alexandria data providers only when it starts with an Alexandria flag: `--alexandria`, `--toolkits <slugs>` (up to 5), `--max-calls <n>`, `--require-approval`, or `--on-terms-required skip|ask`. Follow-ups on its thread keep those settings.
+
+```bash
+firecrawl agent "find the head of sales at <company>" --toolkits apollo,crunchbase --wait --json -o .firecrawl/contacts.json
+```
+
+With `--require-approval` (needs `--mode chat`), a run can end on a `pendingApproval` instead of making a paid call. Ask the user, then answer it on the same thread with `firecrawl agent "<follow-up prompt>" --thread <threadId> --mode chat --approve <approvalId>` (or `--decline <approvalId>`). A `terms` approval only continues once the provider's terms are accepted for the organization, either in the dashboard or by showing the user `firecrawl alexandria terms show <provider>` and, only after they explicitly agree, running `firecrawl alexandria terms accept <provider> --terms-version <version> --digest <digest> --confirm` with the version and digest it returned. Approving does not accept them.
 
 ## Job IDs
 
@@ -56,3 +67,7 @@ firecrawl agent "<job-id>" --cancel
 - [firecrawl-interact](../firecrawl-interact/SKILL.md) — scrape + interact for manual page interaction (more control)
 - [firecrawl-crawl](../firecrawl-crawl/SKILL.md) — bulk extraction without AI
 - [firecrawl-build-scrape](https://github.com/firecrawl/skills/tree/main/skills/build/firecrawl-build-scrape) — building structured extraction into an app instead of running it here
+
+## Alexandria session feedback
+
+To report an Alexandria session outcome or a provider/capability gap, use `firecrawl alexandria feedback --rating good|partial|bad --url <website> --requested-functionality '<what was needed>' --objective '<the underlying goal of the task>' --rationale '<what happened>' --json`. Use observed results in the rationale. No job ID is needed; send it within 20 minutes of your last Alexandria search, discovery, or execution, or it is rejected. Each submission refunds 1 credit, up to 10 per website and 100 per team each UTC day. Optional `--provider-feedback` and `--capability-feedback` JSON arrays describe specific gaps; inspect `firecrawl alexandria feedback --help` for their fields. Use the capability issue `missing_capability` when a provider exists but lacks the needed capability, and `new_capability_request` (with `requestedFunctionality`) to ask for one.

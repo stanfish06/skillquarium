@@ -14,13 +14,13 @@ created: 2026-06-09
 # scikit-survival
 
 > [!info] What it does
-> Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival. Use this skill when working with censored survival data, performing time-to-event analysis, fitting Cox models, Random Survival Forests, Gradient Boosting models, or Survival SVMs, evaluating survival predictions with concordance index or Brier score, handling competing risks, or implementing any survival analysis workflow with the scikit-survival library.
+> Builds, evaluates, and audits right-censored or competing-risk survival workflows with scikit-survival, including leakage-safe preprocessing, model selection, probability prediction, and censoring-aware metrics.
 
 **Source:** [skills/scikit-survival/SKILL.md](../../../skills/scikit-survival/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](../../maps/data-science-compute.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

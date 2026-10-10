@@ -21,7 +21,7 @@ created: 2026-06-25
 ## Related skills
 
 - [cellpose-cell-segmentation](../../notes/imaging-signals/cellpose-cell-segmentation.md) — DL cell/nucleus segmentation for fluorescence and brightfield microscopy with Cellpose 4's Cellpose-SAM and CellposeDINO models
-- [optimize-for-gpu](../../notes/data-science-compute/optimize-for-gpu.md) — GPU-accelerate Python code using CuPy, Numba CUDA, Warp, cuDF, cuML, cuGraph, KvikIO, cuCIM, cuxfilter, cuVS, cuSpatial, and RAFT
+- [optimize-for-gpu](../../notes/data-science-compute/optimize-for-gpu.md) — GPU-accelerates scientific Python on NVIDIA hardware and verifies that the result is correct and faster
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

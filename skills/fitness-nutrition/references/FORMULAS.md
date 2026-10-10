@@ -79,8 +79,7 @@ BF% = 86.010 × log₁₀(waist − neck) − 70.041 × log₁₀(height) + 36.7
 
 BF% = 163.205 × log₁₀(waist + hip − neck) − 97.684 × log₁₀(height) − 78.387
 
-Measurements in inches. `scripts/body_calc.py` takes centimetres and divides
-by 2.54 before applying these coefficients.
+All measurements in centimeters.
 
 | Category      | Male   | Female |
 |--------------|--------|--------|

@@ -19,13 +19,13 @@ created: 2026-07-24
 ## Related skills
 
 - [chdb-datastore](../../notes/analytics-engineering/chdb-datastore.md) — Use when the user has tabular data (pandas DataFrame, parquet, csv, Arrow, json) and wants to filter, group, aggregate, join, or speed up slow pandas
-- [dask](../../notes/data-science-compute/dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
+- [dask](../../notes/data-science-compute/dask.md) — Scales pandas, NumPy, and custom Python research workflows beyond memory or across clusters with Dask
 - [mixpanel-headless-setup](../../notes/saas-platforms/mixpanel-headless-setup.md) — This skill installs mixpanel_headless, pandas, numpy, matplotlib, seaborn, networkx, anytree, scipy (and pyarrow on Python 3.11+), then verifies Mixpanel credentials
-- [optimize-for-gpu](../../notes/data-science-compute/optimize-for-gpu.md) — GPU-accelerate Python code using CuPy, Numba CUDA, Warp, cuDF, cuML, cuGraph, KvikIO, cuCIM, cuxfilter, cuVS, cuSpatial, and RAFT
+- [optimize-for-gpu](../../notes/data-science-compute/optimize-for-gpu.md) — GPU-accelerates scientific Python on NVIDIA hardware and verifies that the result is correct and faster
 - [polars](../../notes/data-science-compute/polars.md) — High-performance DataFrame library for Python ETL, analytics, and pandas migration
 - [pybedtools](../../notes/genomics-variants/pybedtools.md) — Python genomic interval arithmetic with BEDTools, complementing pysam, polars, and query for downstream tables
 - [pybigwig](../../notes/single-cell-rnaseq/pybigwig.md) — Fast Python I/O for BigWig (continuous genome signal) and BigBed (interval annotation) files via libBigWig
-- [seaborn](../../notes/data-science-compute/seaborn.md) — Statistical visualization with pandas integration
+- [seaborn](../../notes/data-science-compute/seaborn.md) — Creates Seaborn statistical visualizations with pandas integration for distributions, relationships, categorical comparisons, regression displays, pair plots, and heatmaps
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

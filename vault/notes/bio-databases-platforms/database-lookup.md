@@ -14,7 +14,7 @@ created: 2026-06-09
 # database-lookup
 
 > [!info] What it does
-> Query documented public database APIs with explicit endpoints, filters, pagination, and provenance. Use when a scientific, regulatory, financial, or other database-backed fact must be retrieved reproducibly from a named source rather than inferred from general knowledge.
+> Queries documented public database APIs with explicit endpoints, filters, pagination, and provenance. Used when a scientific, regulatory, financial, or other database-backed fact must be retrieved reproducibly from a named source rather than inferred from general knowledge.
 
 **Source:** [skills/database-lookup/SKILL.md](../../../skills/database-lookup/SKILL.md)  ·  **Domain:** [Bio Databases, Lab & Cloud Platforms](../../maps/bio-databases-platforms.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

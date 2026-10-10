@@ -14,7 +14,7 @@ created: 2026-08-23
 # databricks-pipelines
 
 > [!info] What it does
-> Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks. Use when building batch or streaming data pipelines with Python or SQL. Invoke BEFORE starting implementation.
+> Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks. Use when building batch or streaming data pipelines with Python or SQL, including Auto CDC from event streams or periodic complete snapshots. Invoke BEFORE starting implementation.
 
 **Source:** [skills/databricks-pipelines/SKILL.md](../../../skills/databricks-pipelines/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

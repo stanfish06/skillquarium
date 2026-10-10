@@ -20,7 +20,7 @@ created: 2026-07-26
 
 ## Related skills
 
-- [matlab](../../notes/matlab-development/matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
+- [matlab](../../notes/matlab-development/matlab.md) — Builds, reviews, migrates, and plans MATLAB or GNU Octave numerical workflows
 - [validation](../../notes/software-dev/validation.md) — Use when Codex is already in the validation phase of a security scan or the user explicitly asks to determine whether one or more candidate security findings are valid
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

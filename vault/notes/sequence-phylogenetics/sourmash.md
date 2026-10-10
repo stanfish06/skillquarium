@@ -19,7 +19,7 @@ created: 2026-07-20
 ## Related skills
 
 - [nextflow](../../notes/cloud-devops/nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
-- [phylogenetics](../../notes/sequence-phylogenetics/phylogenetics.md) — Build and analyze phylogenetic trees using MAFFT (multiple alignment), IQ-TREE 2 (maximum likelihood), and FastTree (fast NJ/ML)
+- [phylogenetics](../../notes/sequence-phylogenetics/phylogenetics.md) — Builds and analyzes phylogenetic trees using MAFFT multiple sequence alignment, IQ-TREE maximum likelihood with ModelFinder and branch support, and FastTree approximate inference
 - [snakemake-workflow-engine](../../notes/cloud-devops/snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

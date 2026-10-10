@@ -43,6 +43,7 @@ created: 2026-06-10
 - [genmol-nim](../../notes/drug-discovery-chem/genmol-nim.md) — Generate novel drug-like molecules using the GenMol NIM microservice
 - [kermt-monitor](../../notes/drug-discovery-chem/kermt-monitor.md) — Check progress for a detached KERMT run (pretrain, finetune, or any kermt_run_detached invocation)
 - [kermt-setup](../../notes/drug-discovery-chem/kermt-setup.md) — Bootstrap the KERMT agent environment — verify host docker + nvidia-container-toolkit, build the kermt:latest image from the repo's Dockerfile if it doesn't yet exist, and run a GPU...
+- [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to application code — traces, logs, metrics, and AI/agent spans
 - [mcp-csharp-publish](../../notes/dotnet-development/mcp-csharp-publish.md) — Publish and deploy C# MCP servers. Covers NuGet packaging for stdio servers, Docker containerization for HTTP servers, Azure Container Apps and App Service deployment, and publishing...
 - [modal](../../notes/cloud-devops/modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
 - [molmim-nim](../../notes/drug-discovery-chem/molmim-nim.md) — Use this skill for MolMIM, NVIDIA's BioNeMo NIM microservice for small-molecule latent-space generation and optimization

@@ -20,12 +20,10 @@ created: 2026-07-21
 
 ## Related skills
 
-- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Diagnose and fix under-parallelized MSBuild builds
-- [extension-points](../../notes/dotnet-development/extension-points.md) — Guide for MSBuild extensibility: CustomBefore/CustomAfter hooks, wildcard imports with alphabetic ordering, import gating with control properties, NuGet package build extension layout...
+- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Analyze an MSBuild solution, solution filter, or Build.proj that schedules multiple project files
+- [extension-points](../../notes/dotnet-development/extension-points.md) — Own MSBuild import and hook discovery. USE FOR: CustomBefore/CustomAfter hooks, ordered wildcard and NuGet auto-imports, control properties, build/buildTransitive packed layout...
 - [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
-- [item-management](../../notes/dotnet-development/item-management.md) — Patterns for managing MSBuild item groups: Include/Remove/Update semantics, item metadata, batching with %(Metadata), transforms, per-item filtering, and cross-product batching pitfalls
-- [msbuild-antipatterns](../../notes/dotnet-development/msbuild-antipatterns.md) — Detect and fix MSBuild anti-patterns in project and build files
-- [property-patterns](../../notes/dotnet-development/property-patterns.md) — MSBuild property definition patterns: conditional defaults, composition/concatenation, path normalization, trailing-slash handling, TFM detection helpers, and evaluation order
+- [msbuild-antipatterns](../../notes/dotnet-development/msbuild-antipatterns.md) — DO NOT INVOKE when the primary request explicitly asks to convert, migrate, modernize, or rewrite a legacy/old-style project to SDK style
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -14,20 +14,17 @@ created: 2026-07-21
 # run-tests
 
 > [!info] What it does
-> Recommend or run the exact `dotnet test` command. Use when the user asks to run, filter, or troubleshoot .NET tests or wants the precise command, flags, or argument order — the right syntax depends on the test platform (VSTest vs Microsoft.Testing.Platform) and SDK version and is easy to get wrong from memory. USE FOR: running all tests or a subset (a specific class, category, or trait) via filters; a single framework in a multi-TFM project (`--framework`); TRX reports; crash or hang dumps; whether MTP args need the `--` separator (SDK 8/9) or pass directly (SDK 10+); diagnosing why `dotnet test` fails or uses wrong argument syntax. Detects the platform (VSTest vs MTP) and framework (MSTest/xUnit/NUnit/TUnit), then picks the matching command and filter flag (--filter, --filter-class, --filter-trait, --filter-query, --treenode-filter). DO NOT USE FOR: writing test code (use code-testing-agent), iterating on failing tests without rebuilding (use mtp-hot-reload), CI/CD config, or debugging test logic.
+> Use before running .NET tests or answering with a test command or flags. Trigger on "run the tests", "exact dotnet test command", one test/class/category/trait/target framework, combined filters, `--filter-query`, `--no-build`, `--diag`, diagnostic logs, TRX, coverage collection, crash/hang dumps, filter errors, or unrecognized options. Chooses repository-compatible classic, VSTest, bridged MTP, or native MTP syntax for MSTest/xUnit/NUnit/TUnit. DO NOT USE for platform identification alone (platform-detection), writing or debugging test code, interpreting an existing coverage report, CI investigation, migration, or a persistent hot reload/watch loop.
 
 **Source:** [skills/run-tests/SKILL.md](../../../skills/run-tests/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [code-testing-agent](../../notes/dotnet-development/code-testing-agent.md) — Generates and writes new unit tests for any programming language — scaffolds test projects and configures coverage tooling (coverlet, pytest-cov, @vitest/coverage-v8) as part of test...
 - [dotnet-coverage-analysis](../../notes/dotnet-development/dotnet-coverage-analysis.md) — Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects
-- [filter-syntax](../../notes/dotnet-development/filter-syntax.md) — Reference data for test filter syntax across all platform and framework combinations: VSTest --filter expressions, MTP filters for MSTest/NUnit/xUnit v3/TUnit, and VSTest-to-MTP filter...
-- [mtp-hot-reload](../../notes/dotnet-development/mtp-hot-reload.md) — Suggests using Microsoft Testing Platform (MTP) hot reload to iterate fixes on failing tests without rebuilding
-- [platform-detection](../../notes/dotnet-development/platform-detection.md) — Reference data for detecting the test platform (VSTest vs Microsoft.Testing.Platform) and test framework (MSTest, xUnit, NUnit, TUnit) from project files
-- [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audits an existing test file or suite in any language for anti-patterns and quality issues — produces a severity-ranked report (Critical/Warning/Info)
-- [test-smell-detection](../../notes/dotnet-development/test-smell-detection.md) — Deep-dive audit using the full testsmells.org 19-smell academic catalog for tests in any language
-- [writing-mstest-tests](../../notes/dotnet-development/writing-mstest-tests.md) — Write, create, modernize, or fix comprehensive MSTest unit tests with MSTest 3.x/4.x APIs
+- [filter-syntax](../../notes/dotnet-development/filter-syntax.md) — Reference-only filter syntax for VSTest and MTP with MSTest, NUnit, xUnit v3, and TUnit
+- [mtp-hot-reload](../../notes/dotnet-development/mtp-hot-reload.md) — Set up or recover MTP hot reload for a long-lived console-host edit/re-run loop in a Microsoft Testing Platform project
+- [platform-detection](../../notes/dotnet-development/platform-detection.md) — Identify a .NET project's test platform, framework, command mode, and SDK-style vs classic project system
+- [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audit a test file or suite; produce a severity-ranked diagnostic report
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

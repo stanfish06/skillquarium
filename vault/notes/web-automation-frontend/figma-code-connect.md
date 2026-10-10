@@ -20,7 +20,6 @@ created: 2026-08-07
 
 ## Related skills
 
-- [figma-design-to-code](../../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
 - [template](../../notes/vault-meta/template.md) — Canonical rules and HTML/CSS contract for the page chrome (head boilerplate, cover, table of contents, section block, sources-section wrapper, footer, outlook-badge, design tokens)...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

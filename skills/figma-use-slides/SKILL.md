@@ -1,6 +1,7 @@
 ---
 name: figma-use-slides
 description: "This skill helps agents use Figma's use_figma MCP tool in the Slides context. Can be used alongside figma-use which has foundational context for using the use_figma tool."
+disable-model-invocation: false
 ---
 
 # use_figma — Figma Plugin API Skill for Slides

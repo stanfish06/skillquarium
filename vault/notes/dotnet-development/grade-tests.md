@@ -14,14 +14,13 @@ created: 2026-07-21
 # grade-tests
 
 > [!info] What it does
-> Grades a specified set of test methods individually and produces a concise table mapping each test (fully-qualified name) to a letter grade (A–F), a score band, and a one-line note — designed to be posted as a PR comment. Use when the caller wants per-test feedback on a curated list of methods (for example, the new or modified tests in a pull request), not a suite-wide audit. Polyglot: .NET, Python, TS/JS, Java, Go, Ruby, Rust, Swift, Kotlin, PowerShell, C++. Input is a list of test methods (or method bodies / file+line spans); output is a compact markdown table plus a short summary. DO NOT USE FOR: full suite audits (use test-quality-auditor agent or test-anti-patterns), writing new tests (use code-testing-generator agent or writing-mstest-tests), fixing failures, or measuring code coverage.
+> Grade a curated list of individual tests for readiness, A-F quality, and concrete improvements. Use FOR: grade tests, review only a named test, per-test readiness decisions, or quality bands for supplied methods, bodies, file spans, or bounded PR diffs, including existing tests. Produce a PR-ready Pass, Failed, Uncertain, or Not applicable table; unresolved or empty scopes omit the grade. Compose read-only per-test mutation evidence when available. Polyglot: .NET, Python, TS/JS, Java, Go, Ruby, Rust, Swift, Kotlin, PowerShell, C++. DO NOT USE FOR: suite-wide audits (test-engineer or test-anti-patterns), writing or fixing tests, or measuring coverage.
 
 **Source:** [skills/grade-tests/SKILL.md](../../../skills/grade-tests/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audits an existing test file or suite in any language for anti-patterns and quality issues — produces a severity-ranked report (Critical/Warning/Info)
-- [writing-mstest-tests](../../notes/dotnet-development/writing-mstest-tests.md) — Write, create, modernize, or fix comprehensive MSTest unit tests with MSTest 3.x/4.x APIs
+- [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audit a test file or suite; produce a severity-ranked diagnostic report
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -9,7 +9,7 @@ description: Migrates Neo4j driver code and Cypher queries from older versions (
   Does NOT cover DB administration or server ops — use neo4j-cli-tools-skill.
   Does NOT provision new Neo4j instances — use neo4j-getting-started-skill.
 allowed-tools: WebFetch Bash
-version: 1.0.9
+version: 1.0.11
 ---
 
 ## When to Use
@@ -316,8 +316,12 @@ Full migration guide: [references/go-driver.md](references/go-driver.md)
 | 2025.06+ | Cypher 5 or 25 | Yes | Cypher 25 new default |
 | 2026.01+ | Cypher 25 | Yes | `SEARCH` clause available |
 | 2026.07.0 | Cypher 25 | Yes | **Skip this patch** — block-format UTF-8 regression makes `trim()` fail queries and corrupt stored strings; upgrade target is 2026.07.1 |
+| 2026.08+ | Cypher 25 | Yes | `UUID` type + string interpolation added; `UUID` properties require driver >= 6.2 (Python >= 6.3) — older drivers return placeholder `MAP` and warn `03N95`; 2026.08 bundles Java driver 6.2.1; **skip 2026.08.0** (query-failure bug) — target 2026.08.1+ |
+| 2026.09+ | Cypher 25 | Yes | `SEARCH` clause accepts `FULLTEXT INDEX`; page cache reserves full `server.memory.pagecache.size` at startup |
 
-Store format: no changes between 4.4 and 2026.x. `block` format default for new Enterprise dbs since 5.22. `high_limit` and `standard` deprecated in 5.23, removed after 2026 LTS.
+Store format: no changes between 4.4 and 2026.x. `block` format default for new Enterprise dbs since 5.22. `high_limit` and `standard` deprecated in 5.23, removed after 2026 LTS — Neo4j refuses to start on a `high_limit` store after that LTS; run offline `neo4j-admin database migrate --to-format=block <db>` on or before the LTS.
+
+Server JVM: 2026.x runs on Java SE 21 or 25; Java 21 support ends with the 2026 LTS — move servers to Java 25 [2026.08 deprecation].
 
 **No downgrades supported** — take a backup before any server upgrade.
 

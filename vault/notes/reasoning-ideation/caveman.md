@@ -17,14 +17,14 @@ created: 2026-06-13
 # caveman
 
 > [!info] What it does
-> Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy. Levels: lite, full, ultra and the wenyan variants. Use for /caveman, "caveman mode", "talk like caveman", "be brief" or "less tokens".
+> Terse caveman voice: answer first, fluff gone, every technical fact kept. Use for /caveman, "caveman mode", "talk like caveman", "be brief", "less tokens". Stays on until "stop caveman" or "normal mode".
 
 **Source:** [skills/caveman/SKILL.md](../../../skills/caveman/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
 - [caveman-compress](../../notes/reasoning-ideation/caveman-compress.md) — Compress a memory file such as CLAUDE.md or a todo list into caveman format to save input tokens, keeping a readable backup
-- [caveman-help](../../notes/reasoning-ideation/caveman-help.md) — Quick-reference card for caveman modes, skills and commands
+- [caveman-help](../../notes/reasoning-ideation/caveman-help.md) — Quick-reference card for the three caveman skills and their commands
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

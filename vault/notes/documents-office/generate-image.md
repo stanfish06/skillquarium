@@ -16,13 +16,12 @@ created: 2026-06-09
 # generate-image
 
 > [!info] What it does
-> Generate or edit images using AI models (FLUX, Gemini). Use for general-purpose image generation including photos, illustrations, artwork, visual assets, concept art, and any image that isn't a technical diagram or schematic. For flowcharts, circuits, pathways, and technical diagrams, use the scientific-schematics skill instead.
+> Generates or edits images with AI models through the OpenRouter Image API (Gemini, Seedream, Recraft, GPT-Image, Riverflow). Use for photos, illustrations, artwork, concept art, visual assets, logos, and image editing or compositing from reference images. For flowcharts, circuits, pathways, and other technical diagrams, use the scientific-schematics skill instead.
 
 **Source:** [skills/generate-image/SKILL.md](../../../skills/generate-image/SKILL.md)  ·  **Domain:** [Documents, Office & Media](../../maps/documents-office.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [market-research-reports](../../notes/documents-office/market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
 - [scientific-schematics](../../notes/research-writing/scientific-schematics.md) — Create publication-quality scientific diagrams using Nano Banana 2 AI with smart iterative refinement
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

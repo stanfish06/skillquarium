@@ -12,14 +12,15 @@ created: 2026-06-09
 # pathml
 
 > [!info] What it does
-> Full-featured computational pathology toolkit. Use for advanced WSI analysis including multiplexed immunofluorescence (CODEX, Vectra), nucleus segmentation, tissue graph construction, and ML model training on pathology data. Supports 160+ slide formats. For simple tile extraction from H&E slides, histolab may be simpler.
+> Supports local computational pathology research with PathML: slide loading and tiling, preprocessing and QC, h5path storage, multiplex quantification, spatial graphs, and bounded model inference. Use for whole-slide H&E, CODEX, Vectra, Mesmer, HoVer-Net, and HACTNet workflows.
 
 **Source:** [skills/pathml/SKILL.md](../../../skills/pathml/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](../../maps/imaging-signals.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [histolab](../../notes/imaging-signals/histolab.md) — Lightweight WSI tile extraction and preprocessing
+- [histolab](../../notes/imaging-signals/histolab.md) — Extracts and preprocesses whole-slide histology image tiles with Histolab
 - [monai-medical-imaging-ai](../../notes/imaging-signals/monai-medical-imaging-ai.md) — Medical imaging deep learning with MONAI, PyTorch, pydicom, pathml, histolab, and napari-viz
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

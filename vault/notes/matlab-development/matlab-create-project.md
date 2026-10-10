@@ -20,7 +20,7 @@ created: 2026-07-26
 
 ## Related skills
 
-- [matlab](../../notes/matlab-development/matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
+- [matlab](../../notes/matlab-development/matlab.md) — Builds, reviews, migrates, and plans MATLAB or GNU Octave numerical workflows
 - [matlab-create-buildfile](../../notes/matlab-development/matlab-create-buildfile.md) — Generate a MATLAB buildfile.m with tasks for static analysis, testing, coverage reporting, and packaging
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

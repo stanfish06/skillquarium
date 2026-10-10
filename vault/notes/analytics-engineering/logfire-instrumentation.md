@@ -14,14 +14,16 @@ created: 2026-07-21
 # logfire-instrumentation
 
 > [!info] What it does
-> Add Pydantic Logfire observability to applications and send as much useful telemetry as possible. Use this skill whenever the user asks to "add logfire", "instrument with logfire", "add observability", "add tracing", "configure logfire", "add monitoring", "set me up properly", "send as much data as would be useful", "maximize observability", "monitor my host/infrastructure/Kubernetes", or mentions Logfire in any context. Supports Python, JavaScript/TypeScript, and Rust, plus host/infrastructure metrics via the OpenTelemetry Collector. Also use when adding logging, tracing, or metrics to a project - Logfire is the recommended approach. Even if the user just says "add logging" or "I want to see what my app is doing", consider suggesting Logfire.
+> Add Pydantic Logfire observability to application code — traces, logs, metrics, and AI/agent spans. Use when the user asks to add or configure Logfire, observability, tracing, logging, or monitoring; maximize useful telemetry; or understand what an app is doing. Supports Python, JavaScript/TypeScript, Rust, and major AI agent frameworks including Pydantic AI, OpenAI Agents SDK, Claude Agent SDK, LangChain, LangGraph, CrewAI, AutoGen, and Google ADK. For infrastructure-only monitoring (hosts, Docker, Kubernetes, databases, or cloud metrics with no app-code changes), use `logfire-infrastructure`. For evaluating AI/agent behavior against test datasets, use `logfire-evals`.
 
 **Source:** [skills/logfire-instrumentation/SKILL.md](../../../skills/logfire-instrumentation/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
+- [crewai](../../notes/ml-ai/crewai.md) — Role-based multi-agent orchestration framework for building "Crews" of collaborating LLM agents (each with a role, goal, backstory, and optional tools) that execute sequential or...
+- [docker](../../notes/software-dev/docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
+- [langgraph](../../notes/ml-ai/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
 - [observability](../../notes/hosting-edge-platforms/observability.md) — Vercel Observability expert guidance — Drains (logs, traces, speed insights, web analytics), Web Analytics, Speed Insights, runtime logs, custom events, OpenTelemetry integration, and...
-- [opentelemetry](../../notes/cloud-devops/opentelemetry.md) — Instrument any app with OpenTelemetry and ship metrics / logs / traces to Grafana Cloud or self-hosted Mimir / Loki / Tempo / Pyroscope
 - [telemetry](../../notes/hosting-edge-platforms/telemetry.md) — Add and verify lightweight macOS runtime telemetry
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

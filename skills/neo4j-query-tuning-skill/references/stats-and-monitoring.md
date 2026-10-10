@@ -175,6 +175,8 @@ db.logs.query.page_logging_enabled=true
 
 Each log entry includes: `{elapsedMs} ms: {query}` with optional params, allocated bytes, page hits/misses.
 
+`LIMIT`/`SKIP` integer literals and `LOAD CSV ... FIELDTERMINATOR` strings appear unobfuscated [2026.08]; earlier releases masked them as sensitive literals.
+
 ---
 
 ## Page Cache Sizing
@@ -193,3 +195,5 @@ Or from SHOW TRANSACTIONS/QUERIES:
 - `pageFaults` > 1% of pageHits → increase `server.memory.pagecache.size` in `neo4j.conf`
 
 Set page cache to hold the entire graph store (`graph.db/` directory size).
+
+[2026.09] Page cache reserves its full configured size at startup and never exceeds `server.memory.pagecache.size` — heap + page cache + OS headroom must fit host RAM from startup, not just under load [derived].

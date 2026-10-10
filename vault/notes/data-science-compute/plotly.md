@@ -18,9 +18,9 @@ created: 2026-07-24
 
 ## Related skills
 
-- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Low-level plotting library for full customization
-- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Meta-skill for publication-ready figures
-- [seaborn](../../notes/data-science-compute/seaborn.md) — Statistical visualization with pandas integration
+- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
+- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Creates and audits truthful, accessible, publication-ready scientific figures with Matplotlib, Seaborn, or Plotly
+- [seaborn](../../notes/data-science-compute/seaborn.md) — Creates Seaborn statistical visualizations with pandas integration for distributions, relationships, categorical comparisons, regression displays, pair plots, and heatmaps
 - [threejs-data-visualization](../../notes/data-visualization/threejs-data-visualization.md) — Render WebGL-accelerated data visualizations with Three.js, raw WebGL, deck.gl, luma.gl, PixiJS, Sigma.js, Plotly WebGL traces, ECharts GL, CesiumJS, Babylon.js, or related GPU...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

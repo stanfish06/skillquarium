@@ -30,10 +30,11 @@ created: 2026-08-07
 - [databricks-app-design](../../notes/analytics-engineering/databricks-app-design.md) — Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit...
 - [databricks-apps-python](../../notes/analytics-engineering/databricks-apps-python.md) — Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex
 - [databricks-core](../../notes/analytics-engineering/databricks-core.md) — Databricks CLI operations and the parent/entry-point skill for Databricks CLI use: authentication, profile selection, and bundles
+- [databricks-zerobus-ingest](../../notes/analytics-engineering/databricks-zerobus-ingest.md) — Push records from apps, services, devices, or scripts directly into Unity Catalog Delta tables with Zerobus Ingest: SDKs (Python, TypeScript, Go, Java, Rust, C++, .NET), REST, OTLP...
 - [docker-agent-deploy](../../notes/cloud-devops/docker-agent-deploy.md) — Use this skill when exposing a Docker Agent as a server (MCP, HTTP API, A2A, ACP, or OpenAI-compatible chat), distributing an agent via an OCI registry with `docker agent share`, or...
 - [figma-generate-diagram](../../notes/web-automation-frontend/figma-generate-diagram.md) — Load this skill BEFORE every `generate_diagram` tool call
 - [insecure-defaults](../../notes/security-auditing/insecure-defaults.md) — Detects fail-open insecure defaults (hardcoded secrets, weak auth, permissive security) that allow apps to run insecurely in production
-- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
+- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and managing third-party integrations via the `vercel integration` CLI
 - [neo4j-aura-agent-skill](../../notes/analytics-engineering/neo4j-aura-agent-skill.md) — Manages Neo4j Aura Agents via the v2beta1 REST API — create, list, get, update, delete, and invoke Aura agents backed by an AuraDB instance
 - [neo4j-aura-provisioning-skill](../../notes/analytics-engineering/neo4j-aura-provisioning-skill.md) — Provisions and manages Neo4j Aura instances via CLI (aura-cli v1.7+) or REST API
 - [neo4j-security-skill](../../notes/analytics-engineering/neo4j-security-skill.md) — Programmatic security management in Neo4j — RBAC/ABAC, user lifecycle (CREATE/ALTER/DROP USER), role lifecycle (CREATE/GRANT ROLE/DROP ROLE), privilege grants and denies...
@@ -43,7 +44,7 @@ created: 2026-08-07
 - [openfold3-nim](../../notes/drug-discovery-chem/openfold3-nim.md) — Use this skill for OpenFold3, NVIDIA's BioNeMo NIM microservice for biomolecular structure prediction
 - [playwright-best-practices](../../notes/web-automation-frontend/playwright-best-practices.md) — Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling...
 - [prisma-compute](../../notes/software-dev/prisma-compute.md) — Prisma Compute deployment and hosting guide
-- [promptfoo-provider-setup](../../notes/ml-ai/promptfoo-provider-setup.md) — Configure promptfoo providers or redteam targets for hosted models, live HTTP APIs, Python/JavaScript local scripts, agent SDKs, or multi-input systems
+- [promptfoo-provider-setup](../../notes/ml-ai/promptfoo-provider-setup.md) — Connect Promptfoo to a model, live HTTP API, local Python/JavaScript provider, or app code
 - [render-cli](../../notes/hosting-edge-platforms/render-cli.md) — Installs and uses the Render CLI for deploys, logs, SSH, psql, Blueprint validation, and automation
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
 - [shopify-admin](../../notes/saas-platforms/shopify-admin.md) — Write or explain **Admin GraphQL** queries and mutations for apps and integrations that extend the Shopify admin

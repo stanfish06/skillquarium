@@ -17,25 +17,24 @@ created: 2026-07-21
 # test-anti-patterns
 
 > [!info] What it does
-> Audits an existing test file or suite in any language for anti-patterns and quality issues — produces a severity-ranked report (Critical/Warning/Info). INVOKE whenever asked to audit or review tests, find what's wrong with a suite, judge whether tests are any good, or check for: tests that pass but verify nothing, missing assertions, swallowed exceptions, self-comparing / tautological assertions, coverage-touching tests, broad exceptions, flaky or order-dependent tests (Thread.Sleep, DateTime.Now, shared state), duplicated tests, or magic values — in .NET, Python/pytest, TS/Jest, Java, Go, Ruby or C++. DO NOT USE FOR: writing new tests (use code-testing-agent, or writing-mstest-tests for MSTest); running tests (use run-tests); migration; assertion-diversity metrics (use assertion-quality); coverage/CRAP metrics (use coverage-analysis); the testsmells.org academic catalog (use test-smell-detection); fixing or modernizing MSTest tests, assertions, attributes, or lifecycle (use writing-mstest-tests).
+> Audit a test file or suite; produce a severity-ranked diagnostic report. Use for tests that verify nothing, missing/tautological assertions, swallowed/broad exceptions, flaky/order-dependent tests, duplication, or magic values. Polyglot. DO NOT USE for direct edits: writing-mstest-tests owns supplied MSTest assertions/attributes/lifecycle; code-testing owns new tests. Exclude running tests, migration, assertion metrics (assertion-quality), raw .NET coverage collection (run-tests), non-.NET coverage collection/analysis (native tooling), project-wide .NET coverage/CRAP (coverage-analysis), named-target .NET CRAP (crap-score), behavioral/pseudo-mutation gaps (test-gap-analysis), test-mix/ happy-vs-error classification and trait distributions (test-tagging), or the testsmells.org catalog (test-smell-detection).
 
 **Source:** [skills/test-anti-patterns/SKILL.md](../../../skills/test-anti-patterns/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyzes the variety and depth of assertions across test suites in any language
-- [code-testing-agent](../../notes/dotnet-development/code-testing-agent.md) — Generates and writes new unit tests for any programming language — scaffolds test projects and configures coverage tooling (coverlet, pytest-cov, @vitest/coverage-v8) as part of test...
+- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze assertion quality, depth, variety, and false confidence in existing tests
 - [coverage-analysis](../../notes/security-auditing/coverage-analysis.md) — Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output
+- [crap-score](../../notes/dotnet-development/crap-score.md) — Calculates CRAP (Change Risk Anti-Patterns) for a named .NET method, class, or file
 - [dotnet-coverage-analysis](../../notes/dotnet-development/dotnet-coverage-analysis.md) — Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects
 - [exp-test-maintainability](../../notes/dotnet-development/exp-test-maintainability.md) — Detects duplicate boilerplate, copy-paste tests, and structural maintainability issues across .NET test suites
-- [grade-tests](../../notes/dotnet-development/grade-tests.md) — Grades a specified set of test methods individually and produces a concise table mapping each test (fully-qualified name) to a letter grade (A–F), a score band, and a one-line note —...
-- [jest](../../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
-- [pytest](../../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
-- [run-tests](../../notes/dotnet-development/run-tests.md) — Recommend or run the exact `dotnet test` command
+- [grade-tests](../../notes/dotnet-development/grade-tests.md) — Grade a curated list of individual tests for readiness, A-F quality, and concrete improvements
+- [run-tests](../../notes/dotnet-development/run-tests.md) — Use before running .NET tests or answering with a test command or flags
 - [test-analysis-extensions](../../notes/dotnet-development/test-analysis-extensions.md) — Provides file paths to language-specific reference files for the test ANALYSIS skills (assertion-quality, test-anti-patterns, test-gap-analysis, test-smell-detection, test-tagging)
-- [test-gap-analysis](../../notes/dotnet-development/test-gap-analysis.md) — Performs pseudo-mutation analysis on production code in any language to find gaps in existing tests
-- [test-smell-detection](../../notes/dotnet-development/test-smell-detection.md) — Deep-dive audit using the full testsmells.org 19-smell academic catalog for tests in any language
-- [writing-mstest-tests](../../notes/dotnet-development/writing-mstest-tests.md) — Write, create, modernize, or fix comprehensive MSTest unit tests with MSTest 3.x/4.x APIs
+- [test-gap-analysis](../../notes/dotnet-development/test-gap-analysis.md) — Pseudo-mutation analysis ONLY: answer whether tests would catch a bug if production code changed, which meaningful changes would still pass, or which caller-visible mutations existing...
+- [test-smell-detection](../../notes/dotnet-development/test-smell-detection.md) — Audits existing tests in any language using formal, research-backed test smell names and the testsmells.org 19-smell academic taxonomy
+- [test-tagging](../../notes/dotnet-development/test-tagging.md) — Classifies existing tests by standard traits and reports their distribution
+- [writing-mstest-tests](../../notes/dotnet-development/writing-mstest-tests.md) — Use when asked to fix, rewrite, update, improve, modernize, show corrected code for, or explain existing MSTest tests or MSTest-specific configuration
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

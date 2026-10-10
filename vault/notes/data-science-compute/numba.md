@@ -20,7 +20,7 @@ created: 2026-06-25
 
 ## Related skills
 
-- [optimize-for-gpu](../../notes/data-science-compute/optimize-for-gpu.md) — GPU-accelerate Python code using CuPy, Numba CUDA, Warp, cuDF, cuML, cuGraph, KvikIO, cuCIM, cuxfilter, cuVS, cuSpatial, and RAFT
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

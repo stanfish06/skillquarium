@@ -14,7 +14,7 @@ created: 2026-06-09
 # phoenix-cli
 
 > [!info] What it does
-> Debug LLM applications using the Phoenix CLI. Fetch traces, analyze errors, structure trace review with open coding and axial coding, inspect datasets, review experiments, query annotation configs, and use the GraphQL API. Use whenever the user is analyzing traces or spans, investigating LLM/agent failures, deciding what to do after instrumenting an app, building failure taxonomies, choosing what evals to write, or asking "what's going wrong", "what kinds of mistakes", or "where do I focus" — even without naming a technique.
+> Debug LLM applications using the Phoenix CLI. Fetch traces, spans, and sessions, annotate them, analyze errors, inspect datasets, review experiments, query annotation configs, and use the GraphQL API. Use whenever the user works with a Phoenix instance from the terminal.
 
 **Source:** [skills/phoenix-cli/SKILL.md](../../../skills/phoenix-cli/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

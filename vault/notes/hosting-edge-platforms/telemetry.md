@@ -22,8 +22,9 @@ created: 2026-08-07
 - [apollo-router](../../notes/web-automation-frontend/apollo-router.md) — Version-aware guide for configuring and running Apollo Router for federated GraphQL supergraphs
 - [clickstack-otel-collector](../../notes/analytics-engineering/clickstack-otel-collector.md) — Use when a user wants to wire an OpenTelemetry collector into a Managed ClickStack service on ClickHouse Cloud, either by deploying a new local collector (Docker run or Docker Compose)...
 - [cost-management](../../notes/cloud-devops/cost-management.md) — Cut your Grafana Cloud bill by attributing spend to teams and reducing telemetry volume
+- [databricks-zerobus-ingest](../../notes/analytics-engineering/databricks-zerobus-ingest.md) — Push records from apps, services, devices, or scripts directly into Unity Catalog Delta tables with Zerobus Ingest: SDKs (Python, TypeScript, Go, Java, Rust, C++, .NET), REST, OTLP...
 - [domain-iot](../../notes/software-dev/domain-iot.md) — Use when building IoT apps. Keywords: IoT, Internet of Things, sensor, MQTT, device, edge computing, telemetry, actuator, smart home, gateway, protocol, 物联网, 传感器, 边缘计算, 智能家居
-- [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to applications and send as much useful telemetry as possible
+- [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to application code — traces, logs, metrics, and AI/agent spans
 - [logfire-query](../../notes/analytics-engineering/logfire-query.md) — Query and analyze Logfire telemetry data — traces, logs, spans, metrics, summaries, and SQL results
 - [logfire-ui](../../notes/analytics-engineering/logfire-ui.md) — Open or return Logfire project pages, live views, trace links, and Explore pages in the Codex browser without querying telemetry first
 - [microbenchmarking](../../notes/dotnet-development/microbenchmarking.md) — Activate this skill when BenchmarkDotNet (BDN) is involved in the task — creating, running, configuring, or reviewing BDN benchmarks

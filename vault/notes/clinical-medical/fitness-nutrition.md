@@ -18,7 +18,7 @@ created: 2026-07-13
 # fitness-nutrition
 
 > [!info] What it does
-> Gym workout planner and nutrition tracker. Search 690+ exercises by muscle, equipment, or category via wger. Look up macros and calories for 380,000+ foods via USDA FoodData Central. Compute BMI, TDEE, one-rep max, macro splits, and body fat — pure Python, no pip installs. Built for anyone chasing gains, cutting weight, or just trying to eat better.
+> Workout planning, macros, and body metrics via wger/USDA.
 
 **Source:** [skills/fitness-nutrition/SKILL.md](../../../skills/fitness-nutrition/SKILL.md)  ·  **Domain:** [Clinical, Medical & Pharmacogenomics](../../maps/clinical-medical.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

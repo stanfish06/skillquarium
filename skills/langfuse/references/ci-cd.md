@@ -1,12 +1,6 @@
 ---
 name: langfuse-ci-cd
 description: Set up or extend agent regression checks / gating in GitHub Actions CI/CD using `langfuse/experiment-action`.
-metadata:
-  required_access:
-    - CODEBASE
-    - LANGFUSE_PROJECT_INTERFACE
-    - LANGFUSE_PROJECT_SCRIPT
-    - GITHUB
 ---
 
 # Langfuse CI/CD
@@ -25,10 +19,9 @@ metadata:
 
 ### GitHub specific checklist
 - [ ] Ask the user how they want the [workflow to be triggered](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)
-- [ ] If available, use `gh secret list` to check whether these already exist:
+- [ ] If available, use the `gh` CLI to check secret existence / set secrets for:
       - Langfuse credentials
       - Credentials required by the evaluator task (e.g. OpenAI or Anthropic API keys)
-- [ ] For any that are missing, hand the user the `gh secret set` commands to run themselves, naming the repository and each secret. Do not run `gh secret set` without their explicit confirmation, and do not read secret values out of your own environment
 
 ## Common Issues
 

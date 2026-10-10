@@ -14,7 +14,7 @@ created: 2026-08-23
 # neo4j-aura-agent-skill
 
 > [!info] What it does
-> Manages Neo4j Aura Agents via the v2beta1 REST API — create, list, get, update, delete, and invoke Aura agents backed by an AuraDB instance. Use when configuring Aura Agent tools (CypherTemplate, SimilaritySearch, Text2Cypher), setting system prompts, deploying agents to REST or MCP endpoints, or invoking agents with natural language queries. Covers OAuth2 auth, organization/project scoping, tool parameter schemas, and InvokeAgentResponse format. Does NOT cover AuraDB instance provisioning — use neo4j-aura-provisioning-skill. Does NOT cover vector index creation — use neo4j-vector-index-skill.
+> Manages Neo4j Aura Agents via the v2beta1 REST API — create, list, get, update, delete, and invoke Aura agents backed by an AuraDB instance. Use when configuring Aura Agent tools (CypherTemplate, SimilaritySearch, Text2Cypher), setting system prompts, deploying agents to REST or MCP endpoints, invoking agents with natural language queries, or generating evaluation datasets (max 50 questions) for the Aura Agent evaluation feature. Covers OAuth2 auth, organization/project scoping, tool parameter schemas, and InvokeAgentResponse format. Does NOT cover AuraDB instance provisioning — use neo4j-aura-provisioning-skill. Does NOT cover vector index creation — use neo4j-vector-index-skill.
 
 **Source:** [skills/neo4j-aura-agent-skill/SKILL.md](../../../skills/neo4j-aura-agent-skill/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

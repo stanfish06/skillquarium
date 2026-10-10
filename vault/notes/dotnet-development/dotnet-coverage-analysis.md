@@ -20,9 +20,9 @@ created: 2026-07-21
 
 ## Related skills
 
-- [crap-score](../../notes/dotnet-development/crap-score.md) — Calculates targeted CRAP (Change Risk Anti-Patterns) scores for a named .NET method, class, or single source file
-- [run-tests](../../notes/dotnet-development/run-tests.md) — Recommend or run the exact `dotnet test` command
-- [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audits an existing test file or suite in any language for anti-patterns and quality issues — produces a severity-ranked report (Critical/Warning/Info)
+- [crap-score](../../notes/dotnet-development/crap-score.md) — Calculates CRAP (Change Risk Anti-Patterns) for a named .NET method, class, or file
+- [run-tests](../../notes/dotnet-development/run-tests.md) — Use before running .NET tests or answering with a test command or flags
+- [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audit a test file or suite; produce a severity-ranked diagnostic report
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -22,9 +22,9 @@ created: 2026-06-09
 
 - [cns-plot](../../notes/research-writing/cns-plot.md) — Create, restyle, compose, and export compact publication-ready scientific figures with the Python cnsplots library or its source-derived Cell/Nature/Science plotting patterns
 - [infographics](../../notes/documents-office/infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
-- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Low-level plotting library for full customization
+- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
 - [pdf](../../notes/documents-office/pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
-- [seaborn](../../notes/data-science-compute/seaborn.md) — Statistical visualization with pandas integration
+- [seaborn](../../notes/data-science-compute/seaborn.md) — Creates Seaborn statistical visualizations with pandas integration for distributions, relationships, categorical comparisons, regression displays, pair plots, and heatmaps
 - [template](../../notes/vault-meta/template.md) — Canonical rules and HTML/CSS contract for the page chrome (head boilerplate, cover, table of contents, section block, sources-section wrapper, footer, outlook-badge, design tokens)...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

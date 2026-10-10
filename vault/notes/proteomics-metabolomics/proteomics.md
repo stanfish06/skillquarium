@@ -19,14 +19,12 @@ created: 2026-06-17
 ## Related skills
 
 - [affinity-proteomics](../../notes/proteomics-metabolomics/affinity-proteomics.md) — Unified analysis pipeline for affinity-based proteomics platforms — Olink (PEA, NPX) and SomaLogic SomaScan (SOMAmer, RFU)
-- [exploratory-data-analysis](../../notes/data-science-compute/exploratory-data-analysis.md) — Perform comprehensive exploratory data analysis on scientific data files across 200+ file formats
 - [fragpipe-pyteomics-proteomics](../../notes/proteomics-metabolomics/fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
-- [histolab](../../notes/imaging-signals/histolab.md) — Lightweight WSI tile extraction and preprocessing
-- [matchms](../../notes/proteomics-metabolomics/matchms.md) — Spectral similarity and compound identification for metabolomics
+- [matchms](../../notes/proteomics-metabolomics/matchms.md) — Processes, cleans, compares, and searches tandem mass spectra with matchms
 - [mofaplus-multi-omics](../../notes/single-cell-rnaseq/mofaplus-multi-omics.md) — Multi-Omics Factor Analysis v2 (MOFA+) with mofapy2
 - [pathway-enrichment](../../notes/single-cell-rnaseq/pathway-enrichment.md) — Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results
 - [pride-skill](../../notes/bio-databases-platforms/pride-skill.md) — Submit compact PRIDE Archive API requests for proteomics project discovery and project-level metadata
-- [pyopenms](../../notes/proteomics-metabolomics/pyopenms.md) — Complete mass spectrometry analysis platform
+- [pyopenms](../../notes/proteomics-metabolomics/pyopenms.md) — Processes mass spectrometry data with pyOpenMS
 - [spatialdata-squidpy](../../notes/single-cell-rnaseq/spatialdata-squidpy.md) — Spatial omics workflows with SpatialData and Squidpy alongside scanpy, anndata, and napari-viz
 - [ukb-ppp-region-fetch](../../notes/genomics-variants/ukb-ppp-region-fetch.md) — Fetch a regional slice of plasma pQTL summary statistics from the UK Biobank Pharma Proteomics Project (UKB-PPP
 

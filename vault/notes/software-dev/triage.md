@@ -21,6 +21,7 @@ created: 2026-06-20
 - [aflpp](../../notes/security-auditing/aflpp.md) — Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast
 - [audit-and-reduce-dependencies](../../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
 - [circleci-builds](../../notes/hosting-edge-platforms/circleci-builds.md) — Diagnose and fix failing CircleCI builds quickly and safely
+- [diffdock](../../notes/drug-discovery-chem/diffdock.md) — Predicts protein-small-molecule binding poses with DiffDock and DiffDock-L from PDB or sequence plus SMILES/SDF/MOL2
 - [digital-forensics](../../notes/security-auditing/digital-forensics.md) — Use for authorized digital forensics including memory dumps, disk timelines, PCAP investigation, artifact triage, and IR evidence preservation
 - [github](../../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
 - [gmail](../../notes/comms-productivity/gmail.md) — Manage Gmail inbox triage, mailbox search, thread summaries, action extraction, reply drafting, and email forwarding through connected Gmail data
@@ -43,7 +44,7 @@ created: 2026-06-20
 - [teams](../../notes/comms-productivity/teams.md) — Search through Microsoft Teams chats or channels, triage unread or recent activity, draft follow-ups, and manage Planner tasks through connected Teams data
 - [teams-notification-triage](../../notes/comms-productivity/teams-notification-triage.md) — Triage recent Microsoft Teams activity into a priority queue or task list for the user
 - [test-triage](../../notes/software-dev/test-triage.md) — Triage macOS tests across Xcode and SwiftPM
-- [triage-finding](../../notes/security-auditing/triage-finding.md) — Use when the user supplies or imports existing security findings, vulnerability reports, or security/vulnerability Jira/Linear tickets from scanners, advisories, GitHub, Atlassian...
+- [triage-finding](../../notes/security-auditing/triage-finding.md) — Triage supplied or imported security findings against a repository using its security policy and static code evidence
 - [triage-issue](../../notes/software-dev/triage-issue.md) — Intelligently triage bug reports and error messages by searching for duplicates in Jira and offering to create new issues or add comments to existing ones
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

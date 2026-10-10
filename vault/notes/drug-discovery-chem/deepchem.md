@@ -12,14 +12,13 @@ created: 2026-06-09
 # deepchem
 
 > [!info] What it does
-> Molecular ML with diverse featurizers and pre-built datasets. Use for property prediction (ADMET, toxicity) with traditional ML or GNNs when you want extensive featurization options and MoleculeNet benchmarks. Best for quick experiments with pre-trained models, diverse molecular representations. For graph-first PyTorch workflows use torchdrug; for benchmark datasets use pytdc.
+> Builds molecular property prediction and MoleculeNet workflows with DeepChem, including SMILES featurization, scaffold or grouped holdouts, masked labels, graph models and explicit pretrained encoder transfer. Used for ADMET, toxicity, solubility and chemistry ML when DeepChem data/model contracts and scientific validation are needed.
 
 **Source:** [skills/deepchem/SKILL.md](../../../skills/deepchem/SKILL.md)  ·  **Domain:** [Drug Discovery, Cheminformatics & Structural Biology](../../maps/drug-discovery-chem.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [pytdc](../../notes/drug-discovery-chem/pytdc.md) — Therapeutics Data Commons. AI-ready drug discovery datasets (ADME, toxicity, DTI), benchmarks, scaffold splits, molecular oracles, for therapeutic ML and pharmacological prediction
-- [torchdrug](../../notes/drug-discovery-chem/torchdrug.md) — PyTorch-native graph neural networks for molecules and proteins
+- [validation](../../notes/software-dev/validation.md) — Use when Codex is already in the validation phase of a security scan or the user explicitly asks to determine whether one or more candidate security findings are valid
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

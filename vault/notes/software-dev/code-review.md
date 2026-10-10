@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-- [msbuild-antipatterns](../../notes/dotnet-development/msbuild-antipatterns.md) — Detect and fix MSBuild anti-patterns in project and build files
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

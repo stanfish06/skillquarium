@@ -15,14 +15,13 @@ created: 2026-06-09
 # get-available-resources
 
 > [!info] What it does
-> Use at the start of computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space). It creates a JSON file with resource information and strategic recommendations that inform computational approach decisions such as whether to use parallel processing (joblib, multiprocessing), out-of-core computing (Dask, Zarr), GPU acceleration (PyTorch, JAX), or memory-efficient strategies. Use this skill before running analyses, training models, processing large datasets, or any task where resource constraints matter.
+> Detects host inventory and effective CPU, memory, disk, scheduler, container, and accelerator limits when a user asks for resource-aware planning or before a clearly resource-sensitive local workload. Produces a redacted JSON snapshot and conservative planning helpers without stress tests or assuming visible host hardware is usable.
 
 **Source:** [skills/get-available-resources/SKILL.md](../../../skills/get-available-resources/SKILL.md)  ·  **Domain:** [Vault, Skills & Workflow Meta](../../maps/vault-meta.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [dask](../../notes/data-science-compute/dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
-- [start](../../notes/vault-meta/start.md) — Use when starting Zoom work
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

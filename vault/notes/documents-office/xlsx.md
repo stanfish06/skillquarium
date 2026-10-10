@@ -20,7 +20,6 @@ created: 2026-06-09
 
 - [firecrawl-parse](../../notes/web-automation-frontend/firecrawl-parse.md) — Convert a local file (PDF, DOCX, XLSX, HTML, …) to markdown, or answer questions about its content
 - [initiate](../../notes/vault-meta/initiate.md) — Initiate coverage — generate both research note (HTML) and Excel model (.xlsx)
-- [markitdown](../../notes/documents-office/markitdown.md) — Convert files and office documents to Markdown
 - [officecli](../../notes/documents-office/officecli.md) — Create, analyze, proofread, and modify Office documents (.docx, .xlsx, .pptx) using the officecli CLI tool
 - [officecli-data-dashboard](../../notes/documents-office/officecli-data-dashboard.md) — Use this skill to build a multi-element Excel dashboard — Dashboard sheet on open, multiple formula-driven KPI cards, multiple charts, sparklines, and conditional formatting — from CSV...
 - [officecli-financial-model](../../notes/documents-office/officecli-financial-model.md) — Use this skill when the user wants to build a financial model — 3-statement model, DCF valuation, LBO, SaaS unit economics, sensitivity / scenario analysis, debt schedule, or...

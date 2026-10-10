@@ -20,7 +20,6 @@ created: 2026-06-09
 
 ## Related skills
 
-- [figma-design-to-code](../../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
 - [figma-generate-design](../../notes/web-automation-frontend/figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
 - [figma-generate-library](../../notes/web-automation-frontend/figma-generate-library.md) — Build or update a professional-grade design system in Figma from a codebase
 - [figma-implement-design](../../notes/web-automation-frontend/figma-implement-design.md) — Translates Figma designs into production-ready application code with 1:1 visual fidelity

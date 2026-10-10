@@ -22,7 +22,6 @@ created: 2026-07-20
 
 ## Related skills
 
-- [optimize-for-gpu](../../notes/data-science-compute/optimize-for-gpu.md) — GPU-accelerate Python code using CuPy, Numba CUDA, Warp, cuDF, cuML, cuGraph, KvikIO, cuCIM, cuxfilter, cuVS, cuSpatial, and RAFT
 - [optuna](../../notes/ml-ai/optuna.md) — Hyperparameter optimization (HPO) for ML models using Optuna
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

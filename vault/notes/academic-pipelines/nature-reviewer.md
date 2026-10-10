@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [peer-review](../../notes/research-writing/peer-review.md) — Systematic peer review toolkit. Evaluate methodology, statistics, design, reproducibility, ethics, figure integrity, reporting standards, for manuscript and grant review across...
+- [peer-review](../../notes/research-writing/peer-review.md) — Prepares evidence-bounded, constructive peer-review drafts and structured manuscript assessments
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

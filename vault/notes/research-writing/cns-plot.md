@@ -22,10 +22,10 @@ created: 2026-07-28
 
 - [adjusttext](../../notes/data-science-compute/adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [build-complexheatmaps](../../notes/data-science-compute/build-complexheatmaps.md) — Build, debug, and polish ComplexHeatmap figures in R, including HeatmapList sizing, unequal-row multi-panel layouts, row and column annotations, anno_mark labels, shared legends, title...
-- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Low-level plotting library for full customization
+- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
 - [nature-figure](../../notes/academic-pipelines/nature-figure.md) — Create, revise, audit, and export submission-grade scientific figures for Nature-family and other high-impact venues in Python (matplotlib/seaborn) or R...
-- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Meta-skill for publication-ready figures
-- [seaborn](../../notes/data-science-compute/seaborn.md) — Statistical visualization with pandas integration
+- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Creates and audits truthful, accessible, publication-ready scientific figures with Matplotlib, Seaborn, or Plotly
+- [seaborn](../../notes/data-science-compute/seaborn.md) — Creates Seaborn statistical visualizations with pandas integration for distributions, relationships, categorical comparisons, regression displays, pair plots, and heatmaps
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

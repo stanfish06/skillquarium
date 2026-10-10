@@ -20,7 +20,7 @@ created: 2026-06-28
 
 ## Related skills
 
-- [diffdock](../../notes/drug-discovery-chem/diffdock.md) — DiffDock and DiffDock-L molecular docking
+- [diffdock](../../notes/drug-discovery-chem/diffdock.md) — Predicts protein-small-molecule binding poses with DiffDock and DiffDock-L from PDB or sequence plus SMILES/SDF/MOL2
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

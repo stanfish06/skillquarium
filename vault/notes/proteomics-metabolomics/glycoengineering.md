@@ -12,7 +12,7 @@ created: 2026-06-09
 # glycoengineering
 
 > [!info] What it does
-> Analyze and engineer protein glycosylation. Scan sequences for N-glycosylation sequons (N-X-S/T), predict O-glycosylation hotspots, and access curated glycoengineering tools (NetOGlyc, GlycoShield, GlycoWorkbench). For glycoprotein engineering, therapeutic antibody optimization, and vaccine design.
+> Analyzes and engineers protein glycosylation by scanning canonical N-glycosylation sequons, describing S/T-rich regions, checking curated glycan evidence, and preparing NetNGlyc, NetOGlyc and GlycoSHIELD workflows. Use for glycoprotein engineering, antibody Fc glycosylation, glycan shielding, and site-specific glycoproteomics interpretation.
 
 **Source:** [skills/glycoengineering/SKILL.md](../../../skills/glycoengineering/SKILL.md)  ·  **Domain:** [Proteomics & Metabolomics](../../maps/proteomics-metabolomics.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

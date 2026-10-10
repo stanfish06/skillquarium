@@ -39,7 +39,7 @@ created: 2026-08-07
 - [email](../../notes/comms-productivity/email.md) — Email sending integration guidance — Resend (native Vercel Marketplace) with React Email templates
 - [exp-mock-usage-analysis](../../notes/dotnet-development/exp-mock-usage-analysis.md) — Audits .NET test mock usage by tracing each mock setup through the production code's execution path to find dead, unreachable, redundant, or replaceable mocks
 - [exp-test-maintainability](../../notes/dotnet-development/exp-test-maintainability.md) — Detects duplicate boilerplate, copy-paste tests, and structural maintainability issues across .NET test suites
-- [generate-testability-wrappers](../../notes/dotnet-development/generate-testability-wrappers.md) — Generate wrapper interfaces and DI registration for hard-to-test static dependencies in C#, when the abstraction does NOT exist yet
+- [fluidsim](../../notes/quantum-physics/fluidsim.md) — Plans, configures, inspects, restarts, and analyzes bounded FluidSim computational-fluid-dynamics simulations with explicit numerical-validity and HPC safety checks
 - [heygen-avatar](../../notes/saas-platforms/heygen-avatar.md) — Use when creating or configuring a persistent HeyGen avatar or digital twin for the agent, the user, or a named presenter, including prompt-based avatar creation, photo-based identity...
 - [heygen-video](../../notes/saas-platforms/heygen-video.md) — Use when generating a HeyGen presenter video, personalized video message, talking-head explainer, tutorial, product demo, video pitch, or avatar-led update
 - [huggingface-jobs](../../notes/ml-ai/huggingface-jobs.md) — Use when users want to run any workload on Hugging Face Jobs infrastructure
@@ -52,12 +52,12 @@ created: 2026-08-07
 - [mcp-csharp-debug](../../notes/dotnet-development/mcp-csharp-debug.md) — Run and debug C# MCP servers locally. Covers IDE configuration, MCP Inspector testing, GitHub Copilot Agent Mode integration, logging setup, and troubleshooting
 - [microbenchmarking](../../notes/dotnet-development/microbenchmarking.md) — Activate this skill when BenchmarkDotNet (BDN) is involved in the task — creating, running, configuring, or reviewing BDN benchmarks
 - [molecular-docking](../../notes/drug-discovery-chem/molecular-docking.md) — Use when running classical protein-ligand docking with AutoDock Vina, smina, or GNINA, including receptor or ligand preparation, search-box setup, docking, pose analysis, virtual...
-- [mtp-hot-reload](../../notes/dotnet-development/mtp-hot-reload.md) — Suggests using Microsoft Testing Platform (MTP) hot reload to iterate fixes on failing tests without rebuilding
+- [mtp-hot-reload](../../notes/dotnet-development/mtp-hot-reload.md) — Set up or recover MTP hot reload for a long-lived console-host edit/re-run loop in a Microsoft Testing Platform project
 - [nemoclaw-user-get-started](../../notes/ml-ai/nemoclaw-user-get-started.md) — Installs NemoClaw, launches a sandbox, and runs the first agent prompt
 - [neo4j-aura-provisioning-skill](../../notes/analytics-engineering/neo4j-aura-provisioning-skill.md) — Provisions and manages Neo4j Aura instances via CLI (aura-cli v1.7+) or REST API
 - [neo4j-driver-java-skill](../../notes/analytics-engineering/neo4j-driver-java-skill.md) — Neo4j Java Driver v6 — driver lifecycle, Maven/Gradle setup, executableQuery, executeRead/Write managed transactions, explicit transactions, async/reactive patterns, error handling...
 - [neo4j-driver-javascript-skill](../../notes/analytics-engineering/neo4j-driver-javascript-skill.md) — Neo4j JavaScript/TypeScript Driver v6 — driver lifecycle, executeQuery, managed transactions (executeRead/executeWrite), session.run, Integer handling, JSON serialization, record...
-- [neo4j-gds-skill](../../notes/analytics-engineering/neo4j-gds-skill.md) — Neo4j Graph Data Science (GDS) embedded plugin via Python client or Cypher — covers GraphDataScience, gds.v2 plugin endpoints, gds.version, native projection, Cypher projection, graph...
+- [neo4j-gds-skill](../../notes/analytics-engineering/neo4j-gds-skill.md) — Neo4j Graph Data Science (GDS) embedded plugin via Python client or Cypher — covers graphdatascience client 2.x, GraphDataScience, gds.graph.project.native, gds.graph.project.cypher...
 - [neo4j-graphrag-skill](../../notes/analytics-engineering/neo4j-graphrag-skill.md) — Build GraphRAG retrieval pipelines on Neo4j using the neo4j-graphrag Python package (v1.16.0+)
 - [neo4j-import-skill](../../notes/analytics-engineering/neo4j-import-skill.md) — Import structured data into Neo4j — LOAD CSV, CALL IN TRANSACTIONS, neo4j-admin database import full (offline bulk), apoc.load.csv/json, apoc.periodic.iterate, driver batch writes
 - [neo4j-nvl-skill](../../notes/analytics-engineering/neo4j-nvl-skill.md) — Neo4j Visualization Library (NVL) — framework-agnostic graph rendering for the browser
@@ -70,23 +70,23 @@ created: 2026-08-07
 - [openai-ads-conversions-setup](../../notes/ml-ai/openai-ads-conversions-setup.md) — Guide Codex through instrumenting or extending repositories with OpenAI Ads Measurement Pixel and optional Conversions API (CAPI)
 - [openai-platform-api-key](../../notes/ml-ai/openai-platform-api-key.md) — Use when Codex is asked to build, run, test, debug, or configure an OpenAI-backed or provider-unspecified AI app, UI, script, CLI, generator, or tool, especially requests phrased only...
 - [openfold3-nim](../../notes/drug-discovery-chem/openfold3-nim.md) — Use this skill for OpenFold3, NVIDIA's BioNeMo NIM microservice for biomolecular structure prediction
+- [opentrons-integration](../../notes/bio-databases-platforms/opentrons-integration.md) — Authors, reviews, migrates, simulates, and troubleshoots official Opentrons Python Protocol API v2 protocols for Flex and OT-2 robots
 - [ossfuzz](../../notes/security-auditing/ossfuzz.md) — Enrolls a project in OSS-Fuzz, Google's free continuous fuzzing service for open source, and drives it locally
 - [payments](../../notes/saas-platforms/payments.md) — Stripe payments integration guidance — native Vercel Marketplace setup, checkout sessions, webhook handling, subscription billing, and the Stripe SDK
 - [physical-ai-infrastructure-setup-and-resilient-scaling](../../notes/game-development/physical-ai-infrastructure-setup-and-resilient-scaling.md) — Use when the user wants to set up, scale, validate, or harden NVIDIA physical AI infrastructure for synthetic data generation workflows across local MicroK8s or Azure AKS, including...
 - [physical-ai-neural-reconstruction](../../notes/game-development/physical-ai-neural-reconstruction.md) — Router for NVIDIA NuRec/NRE: USDZ rendering, NCore conversion, 3DGS, gRPC sensor sim, PhysicalAI HF datasets
 - [playwright-best-practices](../../notes/web-automation-frontend/playwright-best-practices.md) — Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling...
-- [prisma-database-setup](../../notes/software-dev/prisma-database-setup.md) — Guides for configuring Prisma with different database providers (PostgreSQL, MySQL, SQLite, MongoDB, etc.)
-- [prisma-postgres](../../notes/software-dev/prisma-postgres.md) — Prisma Postgres setup and operations guidance across Console, create-db CLI, Management API, and Management API SDK
+- [prisma-cli](../../notes/software-dev/prisma-cli.md) — Prisma ORM 7 CLI reference for existing Prisma 7 applications or explicitly selected Prisma 7 workflows
+- [prisma-postgres-setup](../../notes/software-dev/prisma-postgres-setup.md) — Obtain or reuse a Prisma Postgres database and connect an application
 - [promptfoo-evals](../../notes/ml-ai/promptfoo-evals.md) — Write, refine, run, and QA promptfoo evaluation suites: promptfooconfig.yaml, prompts, providers, vars, tests, assertions, model-graded rubrics, transforms, datasets, exports, and CI...
-- [promptfoo-redteam-run](../../notes/ml-ai/promptfoo-redteam-run.md) — Run, rerun, inspect, and QA promptfoo redteam scans from generated redteam YAML or an existing redteam setup config
-- [promptfoo-redteam-setup](../../notes/ml-ai/promptfoo-redteam-setup.md) — Create or refine promptfoo redteam setup configs: purpose, targets, plugins, strategies, frameworks, multi-input target inputs, policy text, grader guidance, contexts, and...
+- [promptfoo-provider-setup](../../notes/ml-ai/promptfoo-provider-setup.md) — Connect Promptfoo to a model, live HTTP API, local Python/JavaScript provider, or app code
 - [render-domains](../../notes/hosting-edge-platforms/render-domains.md) — Configures custom domains and TLS certificates on Render—DNS setup, CNAME records, apex domains, wildcard domains, and certificate troubleshooting
 - [render-mcp](../../notes/hosting-edge-platforms/render-mcp.md) — Connects and configures the Render MCP server for AI coding tools—setup per tool (Cursor, Claude Code, Codex), authentication, workspace selection, tool catalog, and troubleshooting
 - [replay-qa-api](../../notes/saas-platforms/replay-qa-api.md) — Use when calling Replay QA's REST API directly from Codex
 - [shopify-admin](../../notes/saas-platforms/shopify-admin.md) — Write or explain **Admin GraphQL** queries and mutations for apps and integrations that extend the Shopify admin
 - [shopify-onboarding-merchant](../../notes/saas-platforms/shopify-onboarding-merchant.md) — Set up and connect a Shopify store from your AI assistant
 - [shopify-use-shopify-cli](../../notes/saas-platforms/shopify-use-shopify-cli.md) — Choose when the user needs **Shopify CLI** to run or fix something now: validate app or extension config on disk (`shopify.app.toml`, `shopify.app.<name>.toml`...
-- [skill-doctor](../../notes/vault-meta/skill-doctor.md) — Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report
+- [skill-doctor](../../notes/vault-meta/skill-doctor.md) — Grades agent skills by scoring agent conversations for efficiency, code quality, procedure compliance, and verbosity, then drafts concrete skill edits and a shareable report
 - [stripe-best-practices](../../notes/saas-platforms/stripe-best-practices.md) — Guides Stripe integration decisions — API selection (Checkout Sessions vs PaymentIntents), Connect platform setup (Accounts v2, controller properties), billing/subscriptions, Treasury...
 - [test-analysis-extensions](../../notes/dotnet-development/test-analysis-extensions.md) — Provides file paths to language-specific reference files for the test ANALYSIS skills (assertion-quality, test-anti-patterns, test-gap-analysis, test-smell-detection, test-tagging)
 - [test-triage](../../notes/software-dev/test-triage.md) — Triage macOS tests across Xcode and SwiftPM
@@ -99,7 +99,7 @@ created: 2026-08-07
 - [ucp](../../notes/saas-platforms/ucp.md) — Use when the user wants to use the UCP CLI to find, compare, buy, or track products from online merchants, or to set up and troubleshoot the local UCP profile required for...
 - [vdr-index-setup](../../notes/finance-investment/vdr-index-setup.md) — VDR Index Setup skill for Datasite deal rooms
 - [web-3d-asset-pipeline](../../notes/game-development/web-3d-asset-pipeline.md) — Prepare and optimize browser-game 3D assets
-- [writing-mstest-tests](../../notes/dotnet-development/writing-mstest-tests.md) — Write, create, modernize, or fix comprehensive MSTest unit tests with MSTest 3.x/4.x APIs
+- [writing-mstest-tests](../../notes/dotnet-development/writing-mstest-tests.md) — Use when asked to fix, rewrite, update, improve, modernize, show corrected code for, or explain existing MSTest tests or MSTest-specific configuration
 - [zoom-meeting-sdk-react-native](../../notes/saas-platforms/zoom-meeting-sdk-react-native.md) — Zoom Meeting SDK for React Native. Use when embedding Zoom meetings in React Native iOS/Android apps with @zoom/meetingsdk-react-native, JWT auth, join/start flows, platform setup, and...
 - [zoom-meeting-sdk-web](../../notes/saas-platforms/zoom-meeting-sdk-web.md) — Zoom Meeting SDK for Web - Embed Zoom meeting capabilities into web applications
 

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Dhdna Profiler"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $dhdna-profiler for this task."

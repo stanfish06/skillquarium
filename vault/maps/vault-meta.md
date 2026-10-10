@@ -18,7 +18,7 @@ created: 2026-06-13
 
 - [ask-matt](../notes/vault-meta/ask-matt.md) — Ask which skill or flow fits your situation
 - [auditing-skills](../notes/vault-meta/auditing-skills.md) — Use when checking skills for security or quality issues, reviewing audit results from skills.sh or Tessl, or remediating findings across published skills
-- [autoskill](../notes/vault-meta/autoskill.md) — Observe the user's screen via screenpipe, detect repeated research workflows, match them against existing scientific-agent-skills, and draft new skills (or composition recipes that...
+- [autoskill](../notes/vault-meta/autoskill.md) — Analyzes user-requested Screenpipe history windows to detect repeated research workflows, match existing scientific skills, and stage new skill drafts or composition recipes for review
 - [bio-orchestrator](../notes/vault-meta/bio-orchestrator.md) — Meta-agent that routes bioinformatics requests to specialised sub-skills
 - [build-iterated-agentic-loop](../notes/vault-meta/build-iterated-agentic-loop.md) — build a repo-local skill and install a matching iterated coding-agent GitHub Actions workflow, prompt, memory file, and reference templates
 - [clawpathy-autoresearch](../notes/vault-meta/clawpathy-autoresearch.md) — Eval-driven skill tuning. Given a task and an LLM-judge rubric, iteratively rewrites a SKILL.md until a downstream executor agent performs well against the judge
@@ -26,7 +26,7 @@ created: 2026-06-13
 - [evaluate-plugin](../notes/vault-meta/evaluate-plugin.md) — Evaluate a local Codex plugin in engineer-friendly language
 - [evaluate-skill](../notes/vault-meta/evaluate-skill.md) — Evaluate a local Codex skill in engineer-friendly terms
 - [find-skills](../notes/vault-meta/find-skills.md) — Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending...
-- [get-available-resources](../notes/vault-meta/get-available-resources.md) — Use at the start of computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
+- [get-available-resources](../notes/vault-meta/get-available-resources.md) — Detects host inventory and effective CPU, memory, disk, scheduler, container, and accelerator limits when a user asks for resource-aware planning or before a clearly resource-sensitive...
 - [improve-claude-md](../notes/vault-meta/improve-claude-md.md) — improve a CLAUDE.md file using <important if> blocks to improve instruction adherence
 - [improve-skill](../notes/vault-meta/improve-skill.md) — Turn plugin-eval findings into a concrete rewrite brief for a Codex skill
 - [initiate](../notes/vault-meta/initiate.md) — Initiate coverage — generate both research note (HTML) and Excel model (.xlsx)
@@ -45,7 +45,7 @@ created: 2026-06-13
 - [setup-matt-pocock-skills](../notes/vault-meta/setup-matt-pocock-skills.md) — Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout
 - [show-me](../notes/vault-meta/show-me.md) — Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts
 - [skill-builder](../notes/vault-meta/skill-builder.md) — Scaffold a new ClawBio skill from a spec file (JSON/YAML) or interactively — generates SKILL.md, Python skeleton, tests, and updates catalog.json
-- [skill-doctor](../notes/vault-meta/skill-doctor.md) — Grades agent skills by scoring agent conversations against efficiency and code-quality rubrics, then drafts concrete skill edits and a shareable report
+- [skill-doctor](../notes/vault-meta/skill-doctor.md) — Grades agent skills by scoring agent conversations for efficiency, code quality, procedure compliance, and verbosity, then drafts concrete skill edits and a shareable report
 - [skillquarium](../notes/vault-meta/skillquarium.md) — Search this vault's 2,100+ skills and manage them with the skillquarium CLI
 - [skills-hub](../notes/vault-meta/skills-hub.md) — Browse and install community skills from the BioClaw Skills Hub
 - [start](../notes/vault-meta/start.md) — Use when starting Zoom work

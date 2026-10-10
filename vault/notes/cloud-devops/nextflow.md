@@ -21,9 +21,10 @@ created: 2026-06-09
 ## Related skills
 
 - [bulk-rnaseq](../../notes/single-cell-rnaseq/bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
+- [dnanexus-integration](../../notes/bio-databases-platforms/dnanexus-integration.md) — Builds and operates reproducible genomics workloads on DNAnexus with the dx CLI, dxpy, apps/applets, native workflows, dxCompiler, and Nextflow
 - [docker](../../notes/software-dev/docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
 - [dvc](../../notes/cloud-devops/dvc.md) — Data Version Control (DVC) for tracking large datasets/models with Git-like semantics, defining reproducible data/ML pipelines (dvc.yaml stages that only re-run when their inputs...
-- [latchbio-integration](../../notes/bio-databases-platforms/latchbio-integration.md) — Latch platform for bioinformatics workflows
+- [latchbio-integration](../../notes/bio-databases-platforms/latchbio-integration.md) — Builds, registers, debugs, and operates bioinformatics workflows on Latch using the Python SDK, CLI, Latch Data and Registry, Nextflow, Snakemake, programmatic execution, and Latch MCP
 - [pacsomatic](../../notes/genomics-variants/pacsomatic.md) — Operator toolkit for nf-core/pacsomatic matched tumor-normal workflows from BAM inputs
 - [repro-enforcer](../../notes/vault-meta/repro-enforcer.md) — Export any bioinformatics analysis as a reproducible bundle with Conda environment, Singularity container definition, and Nextflow pipeline
 - [snakemake-workflow-engine](../../notes/cloud-devops/snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines

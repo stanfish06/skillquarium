@@ -20,7 +20,7 @@ created: 2026-06-13
 
 ## Related skills
 
-- [caveman](../../notes/reasoning-ideation/caveman.md) — Ultra-compressed communication mode that cuts output tokens while keeping technical accuracy
+- [caveman](../../notes/reasoning-ideation/caveman.md) — Terse caveman voice: answer first, fluff gone, every technical fact kept
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

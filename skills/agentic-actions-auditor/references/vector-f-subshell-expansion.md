@@ -9,7 +9,7 @@ Tool restriction lists include commands that support subshell expansion (e.g., `
 | Gemini CLI | **Confirmed RCE** | PoCs 1-2 achieved RCE via `run_shell_command(echo)`. The `coreTools` array in settings restricts to specific tool names, but shell expansion bypasses this. |
 | Claude Code Action | Medium confidence | `Bash(echo:*)` in `--allowedTools` is structurally similar -- allows the `echo` command through Bash, which may evaluate subshell expansion. Unconfirmed at runtime. |
 | OpenAI Codex | Medium confidence | If restricted shell commands are allowed via `codex-args`, subshell expansion may apply. Unconfirmed at runtime. |
-| GitHub AI Inference | Conditional | No shell under `provider: github-models`. Under `provider: copilot`, `copilot-allow-tools` entries such as `shell(echo:*)` are the same restricted-shell-allowlist pattern and expansion may apply. |
+| GitHub AI Inference | Not applicable | No shell access -- this action calls a model API, not a shell environment. |
 
 **Confidence note:** This vector is CONFIRMED for Gemini CLI (PoCs 1-2 achieved arbitrary command execution via `echo $(env)` and `echo $(whoami)`). For Claude Code Action and OpenAI Codex, the attack is structurally similar but behavior under subshell expansion needs runtime testing to confirm exploitability.
 
@@ -35,14 +35,14 @@ The critical insight: the restriction is on the **command name**, not on shell i
 ## What to Look For
 
 1. **Gemini CLI:** `with.settings` JSON containing a `coreTools` array that includes `run_shell_command(echo)` or other shell commands supporting expansion
-2. **Claude Code Action:** `with.claude_args` containing `--allowedTools` with `Bash(echo:*)`, `Bash(cat:*)`, `Bash(printf:*)`, or similar restricted-but-expandable command patterns
+2. **Claude Code Action:** `with.claude_args` containing `--allowedTools`, or the pre-v1 `with.allowed_tools` input, with `Bash(echo:*)`, `Bash(cat:*)`, `Bash(printf:*)`, or similar restricted-but-expandable command patterns
 3. **General:** Any tool restriction pattern that allows a shell command supporting `$()`, backtick substitution, or process substitution (`<()`)
 4. **Dangerous expandable commands:** `echo`, `cat`, `printf`, `tee`, `head`, `tail`, `wc`, `sort`, and most standard Unix utilities -- these all pass arguments through a shell that evaluates subshell expressions
 
 ## Where to Look
 
 1. `with.settings` (Gemini CLI) -- parse the JSON string for `coreTools` arrays containing shell command names
-2. `with.claude_args` (Claude Code Action) -- look for `--allowedTools` flags with `Bash(command:*)` patterns
+2. `with.claude_args` (Claude Code Action) -- look for `--allowedTools` flags with `Bash(command:*)` patterns. Pre-v1 workflows carry the same patterns in a `with.allowed_tools` string instead
 3. `with.codex-args` (OpenAI Codex) -- check for tool restriction flags
 4. Look specifically for patterns suggesting **restricted** tool access rather than fully open access -- fully open tool access is Vector H, not Vector F
 

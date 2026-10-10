@@ -14,13 +14,13 @@ created: 2026-08-23
 # firecrawl-agent
 
 > [!info] What it does
-> Autonomous multi-page extraction into structured JSON. Use when the user wants website data matching a schema — pricing tiers, product listings — beyond a single-page scrape.
+> Autonomously navigate websites and extract structured data across pages. Use when the task requires navigation or no suitable ready-made workflow or data provider covers it.
 
 **Source:** [skills/firecrawl-agent/SKILL.md](../../../skills/firecrawl-agent/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](../../maps/web-automation-frontend.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

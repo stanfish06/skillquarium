@@ -50,6 +50,12 @@ FOR (c:Chunk) ON EACH [c.text];
 
 If fulltext analyzer, multi-property, or Lucene query syntax details matter, load `neo4j-cypher-skill`.
 
+Fulltext branch below uses `db.index.fulltext.queryNodes` (works 2025.x+). On 2026.09+, swap for SEARCH clause:
+```cypher
+  MATCH (chunk:Chunk)
+    SEARCH chunk IN (FULLTEXT INDEX chunk_fulltext FOR query LIMIT $sourceK) SCORE AS score
+```
+
 ## Parameters
 
 ```json

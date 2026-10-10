@@ -3,7 +3,7 @@ import re
 from collections import Counter
 from pathlib import Path
 
-URL_REGEX = re.compile(r"https?://[^\s)]+")
+URL_REGEX = re.compile(r"https?://[^\s)`]+")  # a backtick is never part of a URL
 FENCE_OPEN_REGEX = re.compile(r"^(\s{0,3})(`{3,}|~{3,})(.*)$")
 
 # A line that is nothing but a fence marker plus an optional info string, at ANY
@@ -72,6 +72,13 @@ def extract_code_blocks(text):
     fence must use same char and be at least as long as opening). Supports
     nested fences (e.g. an outer 4-backtick block wrapping inner 3-backtick
     content).
+
+    Merges fenced and indented blocks by their DOCUMENT POSITION, not by
+    type. validate_code_blocks compares this list positionally (c1 != c2),
+    so a type-grouped return (all fenced, then all indented) makes two
+    blocks that swapped RELATIVE order in the document produce the same
+    list on both sides: the comparison passes while the invariant it
+    exists to check (block order preserved) has actually been violated.
     """
     blocks = []
     lines = text.split("\n")
@@ -82,6 +89,7 @@ def extract_code_blocks(text):
         if not m:
             i += 1
             continue
+        start = i
         fence_char = m.group(2)[0]
         fence_len = len(m.group(2))
         open_line = lines[i]
@@ -103,10 +111,11 @@ def extract_code_blocks(text):
             block_lines.append(lines[i])
             i += 1
         if closed:
-            blocks.append("\n".join(block_lines))
+            blocks.append((start, "\n".join(block_lines)))
         # Unclosed fences are silently skipped — they indicate malformed markdown
         # and including them would cause false-positive validation failures.
-    return blocks + extract_indented_code_blocks(text)
+    ordered = sorted(blocks + extract_indented_code_blocks(text), key=lambda pair: pair[0])
+    return [block_text for _, block_text in ordered]
 
 
 def extract_indented_code_blocks(text):
@@ -123,6 +132,10 @@ def extract_indented_code_blocks(text):
     prose the compressor SHOULD rewrite. A run is only treated as code when the
     document is not inside a list and the run is preceded by a blank line — so
     this adds detections, it never turns existing passes into false failures.
+
+    Returns (start_line, text) pairs rather than bare text: extract_code_blocks
+    needs each block's document position to merge it with fenced blocks in
+    order (see that function's docstring).
     """
     blocks = []
     lines = text.split("\n")
@@ -150,6 +163,7 @@ def extract_indented_code_blocks(text):
         elif indent == 0:
             in_list = False
         if not in_list and previous_blank and indent >= 4:
+            start = i
             run = []
             while i < n and i not in fenced:
                 current = lines[i]
@@ -170,7 +184,7 @@ def extract_indented_code_blocks(text):
                 run.append(current)
                 i += 1
             if run:
-                blocks.append("\n".join(run))
+                blocks.append((start, "\n".join(run)))
             previous_blank = False
             continue
         previous_blank = False
@@ -249,7 +263,19 @@ def extract_inline_codes(text):
         "" if FENCE_MARKER_LINE_REGEX.match(line) else line
         for line in text_without_fences.split("\n")
     )
-    return re.findall(r"`([^`]+)`", text_without_fences)
+    # Run-aware pairing (CommonMark): a span opens with a backtick run and
+    # closes with an equal-length run. A mid-line ``` in prose ("inside a
+    # ```diff fence") has no equal closer, so it matches nothing — instead of
+    # its trailing backtick shifting the pairing of every following span.
+    # The opener is the WHOLE run (`(?!`)` after it), so a lone ``` can never
+    # shrink to a single backtick and pair with the next span. The content may
+    # hold a run of a different length (``a`b``), so it is "anything, lazily"
+    # up to the first equal run, not "anything but a backtick"; DOTALL keeps
+    # hard-wrapped spans in the comparison set.
+    return [
+        m.group(2)
+        for m in re.finditer(r"(?<!`)(`+)(?!`)(.+?)(?<!`)\1(?!`)", text_without_fences, re.DOTALL)
+    ]
 
 
 # ---------- Validators ----------

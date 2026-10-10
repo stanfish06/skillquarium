@@ -14,7 +14,7 @@ created: 2026-08-23
 # mutation-testing
 
 > [!info] What it does
-> Configures mewt or muton mutation testing campaigns — scopes targets, tunes timeouts, and optimizes long-running runs. Use when the user mentions mewt, muton, mutation testing, or wants to configure or optimize a mutation testing campaign.
+> Configures mewt or muton campaigns, analyzes surviving mutants, and investigates bugs exposed by testing gaps. Use when setting up mutation testing, reviewing campaign results, identifying equivalent mutants, or finding bugs from surviving mutations.
 
 **Source:** [skills/mutation-testing/SKILL.md](../../../skills/mutation-testing/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

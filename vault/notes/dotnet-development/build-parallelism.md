@@ -14,13 +14,13 @@ created: 2026-07-21
 # build-parallelism
 
 > [!info] What it does
-> Diagnose and fix under-parallelized MSBuild builds. USE WHEN a multi-project solution build is slower than expected, doesn't speed up when you add cores, pegs a single core while others idle, or you want to know why `-m` isn't helping. Note: `/maxcpucount` default is 1 (sequential) — always pass `-m` for parallel builds. Covers finding the critical path (longest serial ProjectReference chain), graph build (`/graph`), BuildInParallel, and solution filters (`.slnf`). DO NOT USE FOR: single-project builds, incremental issues (use incremental-build), compilation slowness inside one project (use build-perf-diagnostics), non-MSBuild build systems.
+> Analyze an MSBuild solution, solution filter, or Build.proj that schedules multiple project files. USE FOR: measured idle worker nodes, `-m` that does not scale, a serial ProjectReference critical path, graph builds, or an MSBuild task that builds a Projects list. Requires at least two distinct project files whose scheduling or throughput must be analyzed. DO NOT USE for non-MSBuild build systems.
 
 **Source:** [skills/build-parallelism/SKILL.md](../../../skills/build-parallelism/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish build performance baselines and apply systematic optimization techniques
+- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish MSBuild/.NET build performance baselines before optimizing
 - [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild build performance bottlenecks using binary log analysis
 - [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
 - [target-authoring](../../notes/dotnet-development/target-authoring.md) — Canonical patterns for writing custom MSBuild targets

@@ -8,5 +8,5 @@
 - https://docs.docker.com/ai/docker-agent/providers/overview/ — supported providers, quick comparison table, additional built-in provider aliases and their env vars.
 - https://docs.docker.com/ai/docker-agent/providers/custom/ — `providers:` section, provider properties, shorthand syntax, global providers in `~/.config/cagent/config.yaml`.
 - https://github.com/docker/docker-agent/blob/main/docs/index.md — top-level concepts, "why Docker Agent", MCP catalog and Docker Model Runner composition, glossary (Agent, Tool, MCP, A2A, TUI, OCI).
-- https://docs.docker.com/desktop/features/agent/ — product overview, GA status, install paths (Docker Desktop 4.63+, Homebrew, winget, GitHub releases), example agent.yaml.
-- https://docs.docker.com/ai/docker-agent/troubleshooting/ — "No model is currently available" / "model ... is not pulled" pitfalls and `docker agent doctor` usage.
+- https://docs.docker.com/ai/docker-agent/ — product overview, install paths (Docker Desktop 4.63+, Homebrew, winget, GitHub releases), example agent.yaml.
+- https://docs.docker.com/ai/docker-agent/community/troubleshooting/ — "No model is currently available" / "model ... is not pulled" pitfalls and `docker agent doctor` usage.

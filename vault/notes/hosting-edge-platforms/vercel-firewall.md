@@ -14,7 +14,7 @@ created: 2026-08-07
 # vercel-firewall
 
 > [!info] What it does
-> Vercel Firewall and security expert guidance. Use when configuring DDoS protection, WAF rules, rate limiting, bot filtering, IP allow/block lists, OWASP rulesets, Attack Challenge Mode, or any security configuration on the Vercel platform.
+> Vercel Firewall expert guidance — automatic DDoS mitigation, the Vercel WAF (custom rules, IP blocking, managed rulesets, rate limiting), Attack Mode, system bypass, bot management, and the `vercel firewall` CLI. Use when configuring platform-level security, responding to attacks, or staging firewall rules.
 
 **Source:** [skills/vercel-firewall/SKILL.md](../../../skills/vercel-firewall/SKILL.md)  ·  **Domain:** [Hosting, Edge & Deployment Platforms](../../maps/hosting-edge-platforms.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

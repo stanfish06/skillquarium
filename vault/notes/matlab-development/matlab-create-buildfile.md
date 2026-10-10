@@ -20,7 +20,7 @@ created: 2026-07-26
 
 ## Related skills
 
-- [matlab](../../notes/matlab-development/matlab.md) — MATLAB and GNU Octave numerical computing for matrix operations, data analysis, visualization, and scientific computing
+- [matlab](../../notes/matlab-development/matlab.md) — Builds, reviews, migrates, and plans MATLAB or GNU Octave numerical workflows
 - [matlab-create-project](../../notes/matlab-development/matlab-create-project.md) — Creates a MATLAB project for an existing folder of MATLAB files using the matlab.project.* APIs via MCP
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

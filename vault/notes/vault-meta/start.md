@@ -19,13 +19,12 @@ created: 2026-08-07
 ## Related skills
 
 - [audit-prep-assistant](../../notes/security-auditing/audit-prep-assistant.md) — Prepares codebases for security review using Trail of Bits' checklist
-- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish build performance baselines and apply systematic optimization techniques
+- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish MSBuild/.NET build performance baselines before optimizing
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [design-md-library](../../notes/web-automation-frontend/design-md-library.md) — Library of 74 ready-to-use DESIGN.md files — complete design systems (color tokens, type scale, components, layout, motion, do's/don'ts) reverse-engineered from real product and brand...
 - [docker-destructive-guardrails](../../notes/cloud-devops/docker-destructive-guardrails.md) — Use this skill before running, or recommending, any Docker command that deletes, wipes, resets, or otherwise irreversibly changes state — even if the user just says to "clean up"...
 - [dynamo-router-starter](../../notes/software-dev/dynamo-router-starter.md) — Start or patch Dynamo router modes and run router endpoint smoke checks
 - [eqtl-catalogue-region-fetch](../../notes/genomics-variants/eqtl-catalogue-region-fetch.md) — Fetch a region of cis-eQTL summary statistics from EBI eQTL Catalogue v7+ via tabix-on-FTP
-- [get-available-resources](../../notes/vault-meta/get-available-resources.md) — Use at the start of computationally intensive scientific task to detect and report available system resources (CPU cores, GPUs, memory, disk space)
 - [gwas-catalog-region-fetch](../../notes/genomics-variants/gwas-catalog-region-fetch.md) — Fetch a region of GWAS summary statistics from the NHGRI-EBI GWAS Catalog harmonised collection via tabix-on-FTP
 - [ida-reverse](../../notes/security-auditing/ida-reverse.md) — IDA Pro 逆向分析辅助技能。当用户提到逆向、反编译、分析二进制/PE/ELF/APK/DLL/SO、破解、找密码、漏洞分析、病毒分析、firmware 固件分析，或需要分析 exe/dll/so/elf/macho/sys 等文件时，务必使用此技能。 Ensure to use this skill when the user wants to analyze...
 - [infra-clickhouse](../../notes/analytics-engineering/infra-clickhouse.md) — Sets up and manages ClickHouse using the clickhousectl CLI — installs and runs a local ClickHouse server for development, and creates managed ClickHouse Cloud services for production...
@@ -37,6 +36,7 @@ created: 2026-08-07
 - [render-debug](../../notes/hosting-edge-platforms/render-debug.md) — Debug failed Render deployments by analyzing logs, metrics, and database state
 - [secure-workflow-guide](../../notes/security-auditing/secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
 - [shopify-onboarding-merchant](../../notes/saas-platforms/shopify-onboarding-merchant.md) — Set up and connect a Shopify store from your AI assistant
+- [temporal-developer](../../notes/hosting-edge-platforms/temporal-developer.md) — Develop, debug, and manage Temporal applications across Python, TypeScript, Go, Java, .NET, Ruby, and Rust
 - [thread-abort-migration](../../notes/dotnet-development/thread-abort-migration.md) — Guides migration of .NET Framework Thread.Abort usage to cooperative cancellation in modern .NET
 - [twilio-messaging-overview](../../notes/saas-platforms/twilio-messaging-overview.md) — Twilio Messaging channel overview and onboarding guide
 - [verification](../../notes/software-dev/verification.md) — Full-story verification — infers what the user is building, then verifies the complete flow end-to-end: browser → API → data → response

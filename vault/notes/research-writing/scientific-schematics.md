@@ -20,8 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [generate-image](../../notes/documents-office/generate-image.md) — Generate or edit images using AI models (FLUX, Gemini)
-- [market-research-reports](../../notes/documents-office/market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
+- [generate-image](../../notes/documents-office/generate-image.md) — Generates or edits images with AI models through the OpenRouter Image API (Gemini, Seedream, Recraft, GPT-Image, Riverflow)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

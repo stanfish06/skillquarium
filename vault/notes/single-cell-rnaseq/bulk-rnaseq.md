@@ -27,9 +27,9 @@ created: 2026-06-09
 - [differential-expression](../../notes/single-cell-rnaseq/differential-expression.md) — Bulk transcriptomics differential expression with count-aware modeling, design validation, contrast handling, thresholded exports, and publication-ready DE figures
 - [nextflow](../../notes/cloud-devops/nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
 - [pathway-enrichment](../../notes/single-cell-rnaseq/pathway-enrichment.md) — Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results
-- [pydeseq2](../../notes/single-cell-rnaseq/pydeseq2.md) — Differential gene expression analysis for bulk RNA-seq with PyDESeq2, including formulaic designs, Wald tests, FDR correction, LFC shrinkage, and result visualization
-- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Standard single-cell RNA-seq analysis pipeline
-- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Meta-skill for publication-ready figures
+- [pydeseq2](../../notes/single-cell-rnaseq/pydeseq2.md) — Performs bulk RNA-seq differential expression analysis with PyDESeq2, including count validation, formula designs, explicit contrasts, Wald tests, FDR correction, coefficient-matched...
+- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Performs Scanpy single-cell RNA-seq QC, normalization, HVG selection, PCA/UMAP/t-SNE, clustering, exploratory marker ranking, pseudobulk preparation, visualization, and Seurat or...
+- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Creates and audits truthful, accessible, publication-ready scientific figures with Matplotlib, Seaborn, or Plotly
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

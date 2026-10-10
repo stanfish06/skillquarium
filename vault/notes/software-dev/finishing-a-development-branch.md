@@ -14,7 +14,7 @@ created: 2026-06-10
 # finishing-a-development-branch
 
 > [!info] What it does
-> Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup
+> Use when implementation is complete, all tests pass, and you need to decide how to integrate the work
 
 **Source:** [skills/finishing-a-development-branch/SKILL.md](../../../skills/finishing-a-development-branch/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -16,7 +16,7 @@ created: 2026-06-13
 
 ## Skills (147)
 
-- [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
+- [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw design, creation, diagnosis, patching, active debugging, and upgrade requests to the right strategies
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
 - [ast-grep](../notes/software-dev/ast-grep.md) — Guide for writing ast-grep rules to perform structural code search and analysis
 - [ast-grep-outline](../notes/software-dev/ast-grep-outline.md) — Use when exploring or modifying a codebase and you need a cheap structural map of files, directories, imports, exports, or direct members before reading full source
@@ -62,7 +62,7 @@ created: 2026-06-13
 - [dynamo-router-starter](../notes/software-dev/dynamo-router-starter.md) — Start or patch Dynamo router modes and run router endpoint smoke checks
 - [executing-plans](../notes/software-dev/executing-plans.md) — Use when you have a written implementation plan to execute in a separate session with review checkpoints
 - [fastapi](../notes/software-dev/fastapi.md) — Building HTTP/JSON APIs in Python with FastAPI — path/query/body params, Pydantic v2 models, async endpoints, dependency injection, the lifespan startup/shutdown pattern, error...
-- [finishing-a-development-branch](../notes/software-dev/finishing-a-development-branch.md) — Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for...
+- [finishing-a-development-branch](../notes/software-dev/finishing-a-development-branch.md) — Use when implementation is complete, all tests pass, and you need to decide how to integrate the work
 - [gap-analysis](../notes/software-dev/gap-analysis.md) — Data Room Gap Analysis skill for Datasite deal rooms
 - [gh-address-comments](../notes/software-dev/gh-address-comments.md) — Address actionable GitHub pull request review feedback
 - [gh-fix-ci](../notes/software-dev/gh-fix-ci.md) — Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions
@@ -98,17 +98,17 @@ created: 2026-06-13
 - [meta-cognition-parallel](../notes/software-dev/meta-cognition-parallel.md) — EXPERIMENTAL: Three-layer parallel meta-cognition analysis
 - [migrate-to-shoehorn](../notes/software-dev/migrate-to-shoehorn.md) — Migrate test files from `as` type assertions to @total-typescript/shoehorn
 - [modern-typescript](../notes/software-dev/modern-typescript.md) — Modern TypeScript 5.x idioms — strict tsconfig (strict, noUncheckedIndexedAccess), the type system (unions/intersections, generics + constraints, narrowing, discriminated unions...
-- [mutation-testing](../notes/software-dev/mutation-testing.md) — Configures mewt or muton mutation testing campaigns — scopes targets, tunes timeouts, and optimizes long-running runs
+- [mutation-testing](../notes/software-dev/mutation-testing.md) — Configures mewt or muton campaigns, analyzes surviving mutants, and investigates bugs exposed by testing gaps
 - [opensrc](../notes/software-dev/opensrc.md) — Give coding agents the actual source code of any dependency
 - [planning-and-task-breakdown](../notes/software-dev/planning-and-task-breakdown.md) — Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks
-- [prisma-cli](../notes/software-dev/prisma-cli.md) — Prisma ORM CLI commands reference covering init, generate, migrate, db, dev, complete, studio, validate, format, debug, and mcp
+- [prisma-cli](../notes/software-dev/prisma-cli.md) — Prisma ORM 7 CLI reference for existing Prisma 7 applications or explicitly selected Prisma 7 workflows
 - [prisma-client-api](../notes/software-dev/prisma-client-api.md) — Prisma Client API reference covering model queries, filters, operators, and client methods
 - [prisma-compute](../notes/software-dev/prisma-compute.md) — Prisma Compute deployment and hosting guide
-- [prisma-database-setup](../notes/software-dev/prisma-database-setup.md) — Guides for configuring Prisma with different database providers (PostgreSQL, MySQL, SQLite, MongoDB, etc.)
+- [prisma-database-setup](../notes/software-dev/prisma-database-setup.md) — Deprecated compatibility name for prisma-orm-setup
 - [prisma-driver-adapter-implementation](../notes/software-dev/prisma-driver-adapter-implementation.md) — Required reference for Prisma ORM 7 SQL driver adapter work
 - [prisma-mongodb-upgrade](../notes/software-dev/prisma-mongodb-upgrade.md) — Decision and migration guide for Prisma ORM MongoDB projects on v6, which have no upgrade path to v7
-- [prisma-postgres](../notes/software-dev/prisma-postgres.md) — Prisma Postgres setup and operations guidance across Console, create-db CLI, Management API, and Management API SDK
-- [prisma-postgres-setup](../notes/software-dev/prisma-postgres-setup.md) — Set up a new Prisma Postgres database and connect it to a local project using the Management API
+- [prisma-postgres](../notes/software-dev/prisma-postgres.md) — Deprecated compatibility name for prisma-postgres-setup
+- [prisma-postgres-setup](../notes/software-dev/prisma-postgres-setup.md) — Obtain or reuse a Prisma Postgres database and connect an application
 - [prisma-upgrade-v7](../notes/software-dev/prisma-upgrade-v7.md) — Complete migration guide from Prisma ORM v6 to v7 covering all breaking changes
 - [protobuf](../notes/software-dev/protobuf.md) — Use when working with Protocol Buffer (.proto) files, buf.yaml, buf.gen.yaml, or buf.lock
 - [prototype](../notes/software-dev/prototype.md) — Build a throwaway prototype to answer a design question
@@ -153,7 +153,7 @@ created: 2026-06-13
 - [use-modern-go](../notes/software-dev/use-modern-go.md) — Use the Modern Go Guidelines CLI whenever writing, modifying, fixing, or refactoring Go code
 - [using-agent-skills](../notes/software-dev/using-agent-skills.md) — Discovers and invokes agent skills. Use when starting a session or when you need to discover which skill applies to the current task
 - [using-git-worktrees](../notes/software-dev/using-git-worktrees.md) — Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git...
-- [using-superpowers](../notes/software-dev/using-superpowers.md) — Use when discovering which skill applies — establishes how to find and use skills
+- [using-superpowers](../notes/software-dev/using-superpowers.md) — Use when discovering which skill applies — establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
 - [validation](../notes/software-dev/validation.md) — Use when Codex is already in the validation phase of a security scan or the user explicitly asks to determine whether one or more candidate security findings are valid
 - [verification](../notes/software-dev/verification.md) — Full-story verification — infers what the user is building, then verifies the complete flow end-to-end: browser → API → data → response
 - [verification-before-completion](../notes/software-dev/verification-before-completion.md) — Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success...
@@ -162,4 +162,4 @@ created: 2026-06-13
 - [workflow](../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 - [worktrunk](../notes/software-dev/worktrunk.md) — Guidance for Worktrunk (the `wt` CLI) — git worktree management, hooks, and config
 - [writing-plans](../notes/software-dev/writing-plans.md) — Use when you have a spec or requirements for a multi-step task, before touching code
-- [writing-skills](../notes/software-dev/writing-skills.md) — Provides a test-driven method for creating and validating agent skills
+- [writing-skills](../notes/software-dev/writing-skills.md) — Use when creating new skills, editing existing skills, or verifying skills work before deployment

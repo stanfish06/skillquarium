@@ -16,13 +16,13 @@ created: 2026-06-09
 # arboreto
 
 > [!info] What it does
-> Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3). Use when analyzing transcriptomics data (bulk RNA-seq, single-cell RNA-seq) to identify transcription factor-target gene relationships and regulatory interactions. Supports distributed computation for large-scale datasets.
+> Infers candidate gene regulatory networks from bulk or single-cell expression data using AertsLab Arboreto GRNBoost2 and GENIE3. Use for transcription factor-target association ranking, compatible Dask execution, sparse expression inputs, and network stability checks.
 
 **Source:** [skills/arboreto/SKILL.md](../../../skills/arboreto/SKILL.md)  ·  **Domain:** [Single-Cell, RNA-seq & Functional Genomics](../../maps/single-cell-rnaseq.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [dask](../../notes/data-science-compute/dask.md) — Scales pandas, NumPy, and custom Python research workflows beyond memory or across clusters with Dask
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -18,10 +18,9 @@ created: 2026-06-09
 
 ## Related skills
 
-- [dask](../../notes/data-science-compute/dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
 - [fragpipe-pyteomics-proteomics](../../notes/proteomics-metabolomics/fragpipe-pyteomics-proteomics.md) — DDA/DIA mass-spectrometry proteomics workflows with FragPipe, MSFragger, IonQuant, DIA-NN, Pyteomics, pyopenms, matchms, polars, and query
 - [pandas](../../notes/data-science-compute/pandas.md) — The workhorse library for in-memory tabular data in Python
-- [polars-bio](../../notes/genomics-variants/polars-bio.md) — High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames
+- [polars-bio](../../notes/genomics-variants/polars-bio.md) — Performs genomic interval overlap, nearest, merge, coverage, complement and subtraction on Polars DataFrames, and reads or writes BED, VCF, BCF, BAM, CRAM, GFF, GTF, FASTA and FASTQ...
 - [pybedtools](../../notes/genomics-variants/pybedtools.md) — Python genomic interval arithmetic with BEDTools, complementing pysam, polars, and query for downstream tables
 - [xarray-pandera-duckdb](../../notes/data-science-compute/xarray-pandera-duckdb.md) — Labeled array, schema validation, and embedded SQL analytics workflows with xarray, pandera-validation, duckdb-docs, query, read-file, and polars
 

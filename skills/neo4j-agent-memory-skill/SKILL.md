@@ -1,7 +1,7 @@
 ---
 name: neo4j-agent-memory-skill
 description: Authoritative reference for the neo4j-agent-memory Python package — a graph-native memory system for AI agents built on Neo4j — and for the hosted service (NAMS) at memory.neo4jlabs.com. Use this skill whenever the user mentions neo4j-agent-memory, agent memory with Neo4j, context graphs, the POLE+O model, MemoryClient/MemorySettings, the memory MCP server, or any of the framework integrations (LangChain, PydanticAI, CrewAI, AWS Strands, Google ADK, Microsoft Agent Framework, OpenAI Agents, LlamaIndex). Also use when the user mentions the hosted service at memory.neo4jlabs.com, NAMS, the Neo4j Agent Memory Service, the `nams_` API key prefix, or the hosted MCP endpoint. Also use when writing documentation, blog posts, tutorials, PRDs, or code samples for the project, when comparing agent memory approaches, or when positioning graph-native memory against vector-only approaches — even if the user doesn't explicitly name the package.
-version: 1.0.6
+version: 1.0.7
 ---
 
 # neo4j-agent-memory
@@ -35,12 +35,12 @@ Authoritative reference for the `neo4j-agent-memory` Python package — a Neo4j 
 | GitHub | https://github.com/neo4j-labs/agent-memory |
 | Canonical docs | https://neo4j.com/labs/agent-memory/ |
 | Hosted service | https://memory.neo4jlabs.com (NAMS — early-access, not yet documented on official project pages) |
-| Hosted MCP endpoint | https://memory.neo4jlabs.com/mcp (SSE, bearer auth) |
+| Hosted MCP endpoint | https://memory.neo4jlabs.com/mcp (Streamable HTTP, bearer auth) |
 | License | Apache-2.0 |
 | Python | 3.10+ |
 | Neo4j | 5.20+ (required for vector indexes) |
 | Status | Experimental (Neo4j Labs, community-supported) |
-| Current version (at time of writing) | **0.1.1** — **always verify PyPI before citing** |
+| Current version (at time of writing) | **0.6.0** — **always verify PyPI before citing** |
 
 ## What It Is (One Sentence)
 
@@ -93,7 +93,7 @@ pip install neo4j-agent-memory[langchain]       # + LangChain
 pip install neo4j-agent-memory[all]             # Everything
 ```
 
-**Full extras list** (subject to change — verify PyPI): `all`, `anthropic`, `aws`, `bedrock`, `cli`, `crewai`, `extraction`, `full`, `fuzzy`, `gliner`, `google`, `google-adk`, `langchain`, `llamaindex`, `mcp`, `microsoft-agent`, `observability`, `openai`, `openai-agents`, `opentelemetry`, `opik`, `pydantic-ai`, `sentence-transformers`, `spacy`, `strands`, `vertex-ai`.
+**Full extras list** (subject to change — verify PyPI): `all`, `anthropic`, `aws`, `bedrock`, `cli`, `crewai`, `extraction`, `full`, `fuzzy`, `gliner`, `google`, `google-adk`, `instructor`, `langchain`, `langchain-agents`, `litellm`, `llamaindex`, `mcp`, `microsoft-agent`, `nams`, `observability`, `openai`, `openai-agents`, `opentelemetry`, `opik`, `pydantic-ai`, `sentence-transformers`, `spacy`, `strands`, `vertex-ai`.
 
 ## Python API (Quickstart)
 
@@ -159,8 +159,8 @@ neo4j-agent-memory mcp serve --password <pw>
 # stdio (default — Claude Desktop, Claude Code)
 neo4j-agent-memory mcp serve --password <pw>
 
-# SSE (network deployment)
-neo4j-agent-memory mcp serve --transport sse --port 8080 --password <pw>
+# Streamable HTTP (network; endpoint /mcp/). `--transport sse` deprecated — serves Streamable HTTP with warning
+neo4j-agent-memory mcp serve --transport http --port 8080 --password <pw>
 
 # Core profile — fewer tools, less context overhead
 neo4j-agent-memory mcp serve --profile core --password <pw>
@@ -204,7 +204,7 @@ claude mcp add neo4j-agent-memory -- \
 }
 ```
 
-> For the **hosted** MCP endpoint at `memory.neo4jlabs.com/mcp`, see the **Hosted Service (NAMS)** section below — it uses SSE transport and bearer-token auth, not a local `uvx` invocation.
+> For the **hosted** MCP endpoint at `memory.neo4jlabs.com/mcp`, see the **Hosted Service (NAMS)** section below — it uses Streamable HTTP transport and bearer-token auth, not a local `uvx` invocation.
 
 ## Hosted Service (NAMS)
 
@@ -217,7 +217,7 @@ claude mcp add neo4j-agent-memory -- \
 - **Base URL:** `https://memory.neo4jlabs.com`
 - **Web console:** root URL — workspace management, memory browsing, entity visualization
 - **REST API:** `https://memory.neo4jlabs.com/v1/` — OpenAPI spec at `/openapi.json`; covers conversations, entities, observations, reasoning traces, and read-only Cypher
-- **MCP endpoint:** `https://memory.neo4jlabs.com/mcp` — SSE transport, exposes the hosted tool set, bearer-token auth
+- **MCP endpoint:** `https://memory.neo4jlabs.com/mcp` — Streamable HTTP transport, exposes the hosted tool set, bearer-token auth
 
 ### Auth
 
@@ -237,7 +237,7 @@ Usage counters are tracked per API key / workspace. Exact limits are not publicl
 ### Claude Code Registration (Hosted MCP)
 
 ```bash
-claude mcp add --transport sse neo4j-agent-memory-hosted \
+claude mcp add --transport http neo4j-agent-memory-hosted \
   https://memory.neo4jlabs.com/mcp \
   --header "Authorization: Bearer <nams_api_key>"
 ```
@@ -249,7 +249,7 @@ claude mcp add --transport sse neo4j-agent-memory-hosted \
   "mcpServers": {
     "neo4j-agent-memory-hosted": {
       "url": "https://memory.neo4jlabs.com/mcp",
-      "transport": "sse",
+      "type": "http",
       "headers": {
         "Authorization": "Bearer nams_..."
       }
@@ -328,7 +328,7 @@ When editing or reviewing content about this project, check for:
 3. **Inferred API surface** — if code samples weren't run, flag them; prefer patterns from the GitHub README or official examples.
 4. **Missing "Labs" framing** — experimental/community-supported should be clear.
 5. **Conflating with other Neo4j MCP servers** — there are several (`mcp-neo4j-cypher`, `mcp-neo4j-memory` — the old knowledge graph memory server, etc.). `neo4j-agent-memory`'s MCP server is distinct and ships as part of the package under the `[mcp]` extra.
-6. **Confusing NAMS with the self-hosted library** — same underlying project, different consumption models. Connection strings, auth, and tool sets differ: self-hosted uses a local `uvx` invocation and a Neo4j `--password`; NAMS uses an SSE MCP URL and a `nams_`-prefixed bearer token. Don't mix them.
+6. **Confusing NAMS with the self-hosted library** — same underlying project, different consumption models. Connection strings, auth, and tool sets differ: self-hosted uses a local `uvx` invocation and a Neo4j `--password`; NAMS uses a Streamable HTTP MCP URL and a `nams_`-prefixed bearer token. Don't mix them.
 7. **Over-promising NAMS availability** — the hosted service is not yet referenced in the GitHub README or `neo4j.com/labs/agent-memory/`. Avoid "officially supported," SLAs, pricing claims, or "production-ready" framing. Treat it as early-access.
 
 ## Related Projects in the Ecosystem
@@ -408,7 +408,7 @@ Before publishing any content about this project, verify:
 - **CHANGELOG:** https://github.com/neo4j-labs/agent-memory/blob/main/CHANGELOG.md
 - **NAMS (hosted service):** https://memory.neo4jlabs.com
 - **NAMS REST API:** https://memory.neo4jlabs.com/v1/ (OpenAPI at `/openapi.json`)
-- **NAMS MCP endpoint:** https://memory.neo4jlabs.com/mcp (SSE)
+- **NAMS MCP endpoint:** https://memory.neo4jlabs.com/mcp (Streamable HTTP)
 - **create-context-graph (scaffolder):** https://create-context-graph.dev
 - **Community Forum:** https://community.neo4j.com
 - **Microsoft Learn integration page:** https://learn.microsoft.com/en-us/agent-framework/integrations/neo4j-memory

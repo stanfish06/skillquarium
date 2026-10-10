@@ -14,6 +14,7 @@ Before scaffolding, decide which data pattern the app needs:
 | **Lakebase (OLTP)** (read/write) | CRUD forms, persistent state, user data | `--features lakebase --set lakebase.postgres.branch=<BRANCH> --set lakebase.postgres.database=<DB>` |
 | **Genie** (NL queries) | Chat interface over Unity Catalog tables | `--features genie --set genie.<resourceKey>.<field>=<value>` (check manifest) |
 | **Model Serving** (ML inference) | Chat, AI features, model predictions | `--features serving --set serving.serving-endpoint.name=<NAME>` (check manifest) |
+| **Agents** (tool-using LLM, **beta**) | AI assistant that calls tools (SQL, files, Genie, MCP), delegates to sub-agents, streamed chat + HITL approval | `--features agents` (+ tool-provider plugins like analytics/files/genie); backend A also `--set agents.agents-serving-endpoint.name=<STREAMING_ENDPOINT>` (check manifest), backend B needs none — see [Agents](agents.md) |
 | **Jobs** (trigger Lakeflow Jobs) | Kick off and monitor pre-existing notebooks / Python / SQL / dbt jobs | `--features jobs --set jobs.<resourceKey>.<field>=<JOB_ID>` (check manifest) |
 | **Multiple** | Combine plugins as needed (e.g. dashboard + CRUD, analytics + Genie) | `--features analytics,lakebase,genie,...` with all required `--set` flags per plugin |
 
@@ -23,7 +24,7 @@ See [Genie Guide](genie.md) for space creation, plugin setup, and frontend compo
 ## Workflow
 
 1. **Scaffold**: Run `databricks apps manifest`, then `databricks apps init` with `--features` and `--set` as in parent SKILL.md (App Manifest and Scaffolding)
-2. **Develop**: `cd <NAME> && npm install && npm run dev`
+2. **Develop**: `cd <NAME> && <pm> install && <pm> run dev`
 3. **Validate**: `databricks apps validate`
 4. **Deploy**: `databricks apps deploy --profile <PROFILE>` (⚠️ USER CONSENT REQUIRED)
 
@@ -36,7 +37,7 @@ See [Genie Guide](genie.md) for space creation, plugin setup, and frontend compo
 Before writing App.tsx, complete these steps:
 
 1. ✅ Create SQL files in `config/queries/`
-2. ✅ Run `npm run typegen` to generate query types
+2. ✅ Run `<pm> run typegen` to generate query types
 3. ✅ Read `client/src/appKitTypes.d.ts` to see available query result types
 4. ✅ Verify component props via `npx @databricks/appkit docs` (check the relevant component page)
 5. ✅ Plan smoke test updates (default expects "Minimal Databricks App")
@@ -49,7 +50,7 @@ Before running `databricks apps validate`:
 
 1. ✅ Update `tests/smoke.spec.ts` heading selector to match your app title
 2. ✅ Update or remove the 'hello world' text assertion
-3. ✅ Verify `npm run typegen` has been run after all SQL files are finalized
+3. ✅ Verify `<pm> run typegen` has been run after all SQL files are finalized
 4. ✅ Ensure all numeric SQL values use `Number()` conversion in display code
 
 ## Project Structure
@@ -88,7 +89,7 @@ For type generation details, see: `npx @databricks/appkit docs ./docs/developmen
 
 **Quick workflow:**
 1. Add/modify SQL in `config/queries/`
-2. Types auto-generate during dev via the Vite plugin (or run `npm run typegen` manually)
+2. Types auto-generate during dev via the Vite plugin (or run `<pm> run typegen` manually)
 3. Types appear in `client/src/appKitTypes.d.ts`
 
 ## Adding Visualizations
@@ -113,8 +114,8 @@ import { BarChart } from '@databricks/appkit-ui/react';
 **Always use AppKit docs as the source of truth for API details.**
 
 ```bash
-npx @databricks/appkit docs                              # show the docs index (start here)
-npx @databricks/appkit docs <query>                      # look up a section by name or doc path
+npx @databricks/appkit docs          # show the docs index (start here)
+npx @databricks/appkit docs <query>  # look up a section by name or doc path
 ```
 
 Do not guess paths — run without args first, then pick from the index.
@@ -131,6 +132,7 @@ Do not guess paths — run without args first, then pick from the index.
 | Use Lakebase for CRUD / persistent state | [Lakebase](lakebase.md) — Lakebase plugin API, `onPluginsReady` patterns, schema init |
 | Add Genie chat | [Genie](genie.md) — space creation, plugin setup, frontend components |
 | Call ML model serving endpoints | [Model Serving](model-serving.md) — serving plugin, frontend hooks |
+| Host a tool-using AI agent (**beta**) | [Agents](agents.md) — `agents()` plugin, model backends, `useAgentChat`, tools opt-in, HITL |
 | Trigger / monitor Lakeflow Jobs from the app | [Jobs](jobs.md) — env discovery, JobHandle API, SSE streaming |
 
 ## Critical Rules

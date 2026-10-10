@@ -7,7 +7,7 @@ description: Generates, optimizes, and validates Cypher 25 queries for Neo4j 202
   Does NOT handle driver migration or API changes — use neo4j-migration-skill.
   Does NOT cover DB administration or server ops — use neo4j-cli-tools-skill.
 compatibility: Neo4j >= 2025.01 (safe baseline); Cypher 25
-version: 1.0.22
+version: 1.0.27
 ---
 
 ## When to Use
@@ -210,6 +210,29 @@ CYPHER 25 CREATE (a:Node)-[:$($relType)]->(b:Node)
 CYPHER 25 MATCH  (a:Node)-[:$($relType)]->(b:Node) RETURN a.name, b.name
 ```
 
+### String interpolation [2026.08, Cypher 25]
+```cypher
+CYPHER 25
+MATCH (p:Person {id: $id})
+RETURN s"Hello, {p.name}, age {p.age}" AS greeting   // S"..." and s'...' equivalent
+```
+- Each `{expr}` converts with `toString()`
+- `MAP`, `LIST`, `NODE`, `PATH`, `RELATIONSHIP` rejected
+- Escape literal braces with `\{` and `\}`
+- Interpolated strings can nest
+- Never interpolate untrusted values into Cypher text passed to `apoc.cypher.run*()`; pass `$parameters` instead
+
+### UUID type [2026.08, Cypher 25]
+```cypher
+CYPHER 25
+CREATE (sess:Session {sessionId: uuid()});            // random UUID value
+
+CYPHER 25
+MATCH (sess:Session {sessionId: uuid($uuidString)})   // STRING 8-4-4-4-12 → UUID
+RETURN toString(sess.sessionId) AS sessionId, uuid.mostSignificantBits(sess.sessionId) AS msb
+```
+`UUID` properties require Neo4j 2026.08+. Older drivers may return a placeholder `MAP` plus warning `03N95 Neo.ClientNotification.UnknownType` — check the per-driver skill for exact support (`neo4j-driver-python-skill` needs >= 6.3); otherwise keep `randomUUID()` STRING ids.
+
 ### Spatial / Point
 ```cypher
 // WGS84 geographic point
@@ -236,11 +259,6 @@ Non-aggregating expressions in `RETURN`/`WITH` are implicit grouping keys — `G
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, d.name, count(*) AS collaborations
 ORDER BY collaborations DESC
-
-// GROUP BY states keys explicitly [2026.07, Cypher 25]
-MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
-RETURN p.name AS actor, m.genre AS genre, avg(m.rating) AS avgRating
-GROUP BY actor, genre
 ```
 Explicit `GROUP BY` subclause on `WITH`/`RETURN` [2026.07, Cypher 25] states grouping keys explicitly — GQL-aligned alternative to implicit grouping; implicit grouping stays valid:
 ```cypher
@@ -267,9 +285,9 @@ ORDER BY collaborations DESC
 | `UNWIND list AS x WHERE x>5` | `UNWIND list AS x WITH x WHERE x>5` |
 | `least(a,b)` / `greatest(a,b)` | `CASE WHEN a<b THEN a ELSE b END` |
 | `-- comment` | `// comment` |
-| `shortestPath((a)-[*]->(b))` | `SHORTEST 1 (a)(()-[]->()){1,}(b)` |
+| `shortestPath((a)-[*]->(b))` (still valid) | Prefer `SHORTEST 1 (a)(()-[]->()){1,}(b)` |
 | `id(n)` | `elementId(n)` |
-| `[:REL*1..5]` | `(()-[:REL]->()){1,5}` |
+| `[:REL*1..5]` (still valid) | Prefer `(()-[:REL]->()){1,5}` |
 | `CALL { WITH x ... }` | `CALL (x) { ... }` |
 | `COLLECT { (a)-[:R]->(b) }` | `COLLECT { MATCH ... RETURN b }` |
 | `SET n = {k:v}` partial update | `SET n += {k:v}` |
@@ -329,17 +347,21 @@ Default to 2025.01-safe features when version unknown.
 | Match modes (`DIFFERENT RELATIONSHIPS`, `REPEATABLE ELEMENTS`) | 2025.01 | require 2025+ |
 | Dynamic labels `$($expr)`, `coll.sort()` | 2025.01 | APOC or app-side |
 | `CONCURRENT TRANSACTIONS`, `REPORT STATUS` | 2025.01 | drop / omit |
-| `SEARCH` clause (vector/fulltext) | 2026.01 | `CALL db.index.vector.queryNodes(...)` (deprecated 2026.04) |
+| `SEARCH` clause — `VECTOR INDEX` | 2026.01 | `CALL db.index.vector.queryNodes(...)` (deprecated 2026.04) |
+| `SEARCH` clause — `FULLTEXT INDEX` (`WITH ANALYZER`, `SKIP`/`OFFSET`) | 2026.09 | `CALL db.index.fulltext.queryNodes(...)` / `queryRelationships(...)` |
 | `ACYCLIC` path mode (no repeated nodes in path) | 2026.03 | post-filter with `size(nodes(p)) = size(apoc.coll.toSet(nodes(p)))` |
 | `string.indexOf()`, `string.join()`, `string.regexReplace()` | 2026.05 | `apoc.text.*` or app-side |
-| `GROUP BY` subclause on `WITH`/`RETURN`, `cardinality()` | 2026.07 | implicit grouping keys; `size()` / `size(keys(map))` |
-| `WHERE` on procedure calls run against the `system` database | 2026.07 | filter rows client-side |
 | GQL aliases: `FOR`=`UNWIND`, `PROPERTY_EXISTS`=`IS NOT NULL`, `IS [NOT] LABELED`=`n:Label`; function aliases (`local_time`, `zoned_datetime`, `duration_between`, `collect_list`, etc.) | 2026.02–04 | GQL compliance only — use Cypher equivalents; full list → [references/cypher-syntax.md](references/cypher-syntax.md) |
 | **GRAPH TYPE** schema DDL (`ALTER CURRENT GRAPH TYPE SET/ADD/ALTER/DROP`, `SHOW CURRENT GRAPH TYPE`) | 2026.02 (preview), **GA 2026.06** | Use individual `CREATE CONSTRAINT` / `CREATE INDEX` |
 | `GROUP BY` subclause on `WITH`/`RETURN` (explicit grouping keys, GQL alignment) | 2026.07 | Implicit grouping — list non-aggregating expressions in the projection |
 | `cardinality()` — keys in a MAP, elements in a LIST, nodes+rels in a PATH | 2026.07 | `size()` for LIST/MAP keys, `length()` for PATH |
 | Aggregation functions in `ORDER BY`/`WHERE` that are not projection items (aggregating projection only) | 2026.07 | Project the aggregate as an alias, then order/filter on the alias |
 | `WHERE` after `YIELD` in procedure calls on the `system` database | 2026.07 | `YIELD` + `RETURN`, filter client-side |
+| String interpolation `s"...{expr}..."` / `S"…"` | 2026.08 | `+` concatenation with `toString()` or `string.join()` |
+| `UUID` type; `uuid()`, `uuid(name)`, `uuid(mostSigBits, leastSigBits)`, `uuid.mostSignificantBits()`, `uuid.leastSignificantBits()` | 2026.08 | `randomUUID()` STRING property |
+| `null / 0` returns `null` instead of raising division-by-zero | 2026.08 | `CASE WHEN d = 0 THEN null ELSE n / d END` |
+| Map comprehension `{k: v IN map \| keyExpr: valueExpr}` | 2026.09 | `apoc.map.fromPairs([k IN keys(m) \| [k, m[k]]])` |
+| `toString()`, `toStringList()`, `toStringOrNull()` on `LIST`, `MAP`, `NODE`, `RELATIONSHIP`, `PATH` | 2026.09 | convert scalar components individually, then `string.join()` |
 
 ---
 
@@ -378,7 +400,7 @@ Full anti-patterns → [references/performance.md](references/performance.md)
 - Long-running query progress [2026.03]: `SHOW TRANSACTIONS YIELD currentQuery, status, currentQueryProgress`
 - DateTime mismatch: `ZONED DATETIME >= date(...)` → 0 rows; use `datetime()` or `.year`
 - `Z` suffix ≠ UTC timezone: ISO strings with `Z` are stored as a UTC-offset, not the UTC zone — range queries across `Z` and `UTC` stored values return 0 rows. Coerce on write: `datetime({datetime: datetime($isoStr), timezone: 'UTC'})`
-- Duration: `.inDays`/`.inMonths` don't exist; use `.days`/`.months`
+- Duration: `duration.between(d1,d2).days` = days *component* (Jan 1 → Mar 15: 14), not total. Total days: `duration.inDays(d1,d2).days` (73); same for `inMonths`, `inSeconds`. `.inDays` is not an accessor on duration values
 - `Cannot merge node using null property value`: MERGE key resolved to null — validate params first
 - `IndexNotFoundError`: `SHOW INDEXES YIELD name, state WHERE state <> 'ONLINE'`
 
@@ -388,7 +410,7 @@ Full anti-patterns → [references/performance.md](references/performance.md)
 
 Load on demand:
 - [references/indexes.md](references/indexes.md) — index types (RANGE/TEXT/FULLTEXT/POINT/COMPOSITE/LOOKUP), constraints, MERGE lock semantics, fulltext Lucene syntax, import pre-flight
-- [references/cypher-syntax.md](references/cypher-syntax.md) — full syntax reference: WITH, DELETE, ORDER BY, CASE, null, lists, strings, dates, spatial/point, LOAD CSV, subqueries, QPEs, dynamic labels, SEARCH; conditional CALL (WHEN/THEN/ELSE); label pattern expressions; allReduce; NEXT clause; compact CASE WHEN; normalize(); index/constraint types table; functions annotated with version introduced
+- [references/cypher-syntax.md](references/cypher-syntax.md) — full syntax reference: WITH, DELETE, ORDER BY, CASE, null, lists, strings, dates, spatial/point, LOAD CSV, subqueries, QPEs, dynamic labels, SEARCH (vector [2026.01], fulltext [2026.09]); conditional CALL (WHEN/THEN/ELSE); label pattern expressions; allReduce; NEXT clause; compact CASE WHEN; normalize(); string interpolation; UUID type + `uuid()` functions [2026.08]; map comprehension [2026.09]; index/constraint types table; functions annotated with version introduced
 - [references/syntax-traps.md](references/syntax-traps.md) — 40+ syntax trap table
 - [references/performance.md](references/performance.md) — anti-patterns, text vs fulltext indexes, Eager (3 fix strategies), label inference, batching best practices, parallel runtime
 - [references/advanced-patterns.md](references/advanced-patterns.md) — REPEATABLE ELEMENTS patterns, allReduce stateful traversal, multi-stop QPE, route planning simulation, DAG critical path, temporal fraud detection component graph, cycle detection, OPTIONAL CALL

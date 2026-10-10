@@ -19,17 +19,17 @@ created: 2026-06-13
 - [alterlab-qiime2-amplicon](../notes/sequence-phylogenetics/alterlab-qiime2-amplicon.md) — Runs 16S/ITS amplicon (microbiome) analysis with the QIIME 2 amplicon distribution (2026.1
 - [analyze-fasta](../notes/sequence-phylogenetics/analyze-fasta.md) — Analyze a single FASTA file (nucleotide or protein), compute sequence-level metrics (GC, ORFs, MW, pI, GRAVY, secondary-structure fractions) with Biopython, and write a Markdown report...
 - [bioconductor-bridge](../notes/sequence-phylogenetics/bioconductor-bridge.md) — Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager
-- [biopython](../notes/sequence-phylogenetics/biopython.md) — Comprehensive molecular biology toolkit
+- [biopython](../notes/sequence-phylogenetics/biopython.md) — Provides Biopython workflows for sequence manipulation, file parsing (FASTA/GenBank/PDB), phylogenetics, and programmatic NCBI/PubMed access (Bio.Entrez)
 - [bioqc-mcp](../notes/sequence-phylogenetics/bioqc-mcp.md) — Automated sequencing quality control and advanced visualization wrapping FastQC, MultiQC, and custom chart generation
-- [bioservices](../notes/sequence-phylogenetics/bioservices.md) — Unified Python interface to 40+ bioinformatics services
+- [bioservices](../notes/sequence-phylogenetics/bioservices.md) — Provides a Python interface to bioinformatics services including UniProt, KEGG, ChEMBL, Reactome, QuickGO, and UniChem
 - [blast-search](../notes/sequence-phylogenetics/blast-search.md) — Run BLAST sequence similarity searches. Use when the user asks to BLAST a sequence, find similar sequences, identify a gene/protein, or do homology search
 - [busco-assessor](../notes/sequence-phylogenetics/busco-assessor.md) — Genome, transcriptome, and protein completeness assessment via BUSCO v6
 - [claw-metagenomics](../notes/sequence-phylogenetics/claw-metagenomics.md) — Shotgun metagenomics profiling — taxonomy, resistome, and functional pathways
 - [cutadapt](../notes/sequence-phylogenetics/cutadapt.md) — Adapter, primer, and poly-A/T trimming for high-throughput sequencing reads (FASTQ/FASTA)
-- [etetoolkit](../notes/sequence-phylogenetics/etetoolkit.md) — Phylogenetic tree toolkit (ETE). Tree manipulation (Newick/NHX), evolutionary event detection, orthology/paralogy, NCBI taxonomy, visualization (PDF/SVG), for phylogenomics
+- [etetoolkit](../notes/sequence-phylogenetics/etetoolkit.md) — Analyzes, manipulates, compares, annotates, and visualizes phylogenetic or other hierarchical trees with ETE 4
 - [evo2-nim](../notes/sequence-phylogenetics/evo2-nim.md) — Generate and analyze DNA sequences using NVIDIA's Evo 2 BioNeMo NIM microservice
 - [fastp-fastq-preprocessing](../notes/sequence-phylogenetics/fastp-fastq-preprocessing.md) — All-in-one FASTQ QC and adapter trimming
-- [gget](../notes/sequence-phylogenetics/gget.md) — Fast CLI/Python queries to 20+ bioinformatics databases
+- [gget](../notes/sequence-phylogenetics/gget.md) — Queries 20+ bioinformatics resources through CLI/Python
 - [gi-annotation](../notes/sequence-phylogenetics/gi-annotation.md) — Predict gene and transcript structure (intervals, exons, strand) from a DNA sequence using the Genomic Intelligence DNA Annotation model, via the hosted /v1/tasks/annotation/predict API
 - [gi-chromatin](../notes/sequence-phylogenetics/gi-chromatin.md) — Predict chromatin state — histone marks, DNase, TF binding — across 919 tracks (DeepSEA-style) for DNA sequences, via the hosted Genomic Intelligence /v1/tasks/chromatin/predict API
 - [gi-enhancer](../notes/sequence-phylogenetics/gi-enhancer.md) — Predict enhancer activity in DNA sequences using the Genomic Intelligence G0 DeepSTARR model, via the hosted /v1/tasks/enhancer/predict API
@@ -48,7 +48,7 @@ created: 2026-06-13
 - [ngs-fastq-qc](../notes/sequence-phylogenetics/ngs-fastq-qc.md) — Validate FASTQ inputs, run local FastQC/MultiQC QC, interpret QC signals, and optionally execute fastp or Cutadapt trimming branches without overwriting raw reads
 - [ngs-runtime-env](../notes/sequence-phylogenetics/ngs-runtime-env.md) — Check whether public NGS tools and packages already exist before downloading, installing, or running a sequencing pipeline
 - [ngs-shotgun-metagenomics](../notes/sequence-phylogenetics/ngs-shotgun-metagenomics.md) — Kick off public shotgun metagenomics QC, host-depletion, taxonomic profiling, and functional profiling workflows using nf-core/taxprofiler, Kraken2, Bracken, MetaPhlAn, and HUMAnN
-- [phylogenetics](../notes/sequence-phylogenetics/phylogenetics.md) — Build and analyze phylogenetic trees using MAFFT (multiple alignment), IQ-TREE 2 (maximum likelihood), and FastTree (fast NJ/ML)
+- [phylogenetics](../notes/sequence-phylogenetics/phylogenetics.md) — Builds and analyzes phylogenetic trees using MAFFT multiple sequence alignment, IQ-TREE maximum likelihood with ModelFinder and branch support, and FastTree approximate inference
 - [phylogenetics-builder](../notes/sequence-phylogenetics/phylogenetics-builder.md) — End-to-end ML phylogenetic tree inference — MSA, trimming, ModelFinder, IQ-TREE2/RAxML-NG
 - [rnacentral-skill](../notes/sequence-phylogenetics/rnacentral-skill.md) — Submit compact RNAcentral API requests for RNA entry browsing, single-entry lookup, and cross-reference retrieval
 - [scikit-bio](../notes/sequence-phylogenetics/scikit-bio.md) — Biological data toolkit. Sequence analysis, alignments, phylogenetic trees, diversity metrics (alpha/beta, UniFrac), ordination (PCoA), PERMANOVA, FASTA/Newick I/O, for microbiome...

@@ -21,7 +21,7 @@ created: 2026-09-13
 ## Related skills
 
 - [diagram-generator](../../notes/software-dev/diagram-generator.md) — generate, refine, validate, and render diagrams from natural language, notes, code snippets, schemas, tables, or existing diagram source
-- [markdown-mermaid-writing](../../notes/research-writing/markdown-mermaid-writing.md) — Comprehensive markdown and Mermaid diagram writing skill
+- [markdown-mermaid-writing](../../notes/research-writing/markdown-mermaid-writing.md) — Writes scientific Markdown documentation and Mermaid diagrams for workflows, relationships, timelines, and schemas
 - [mermaid-terminal](../../notes/data-visualization/mermaid-terminal.md) — Render Mermaid source locally and preview it in Ghostty, Kitty, or another Kitty-graphics-compatible terminal
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

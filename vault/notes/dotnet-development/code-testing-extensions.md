@@ -14,7 +14,7 @@ created: 2026-07-21
 # code-testing-extensions
 
 > [!info] What it does
-> Provides file paths to language-specific extension files for the code-testing pipeline. Call this skill to discover available extension guidance files (e.g., dotnet.md for .NET, cpp.md for C++). Do not use directly — invoked by code-testing agents and skills that need language-specific references.
+> Provides file paths to language-specific extension files for the code-testing pipeline. Read this reference-only catalog for extension guidance files (e.g., dotnet.md for .NET, cpp.md for C++). Agents and skills read its bundled files directly; do not invoke this catalog through the model's skill tool.
 
 **Source:** [skills/code-testing-extensions/SKILL.md](../../../skills/code-testing-extensions/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -33,9 +33,9 @@ created: 2026-08-09
 - [build-zoom-team-chat-app](../notes/saas-platforms/build-zoom-team-chat-app.md) — Use when building Team Chat
 - [build-zoom-video-sdk-app](../notes/saas-platforms/build-zoom-video-sdk-app.md) — Use when using Video SDK
 - [build-zoom-virtual-agent](../notes/saas-platforms/build-zoom-virtual-agent.md) — Use when using Virtual Agent
-- [canva-branded-presentation](../notes/saas-platforms/canva-branded-presentation.md) — Create on-brand Canva presentations from a brief, outline, existing Canva doc, or design link
+- [canva-branded-presentation](../notes/saas-platforms/canva-branded-presentation.md) — Create on-brand Canva presentations from an outline or brief
 - [canva-resize-for-all-social-media](../notes/saas-platforms/canva-resize-for-all-social-media.md) — Resize a Canva design into standard social media formats and prepare export-ready results
-- [canva-translate-design](../notes/saas-platforms/canva-translate-design.md) — Translate the text in a Canva design into another language while preserving the original layout as much as possible
+- [canva-translate-design](../notes/saas-platforms/canva-translate-design.md) — Translate all text in a Canva design to another language, creating a translated copy
 - [catalyst-by-zoho](../notes/saas-platforms/catalyst-by-zoho.md) — Expert coding assistant for Catalyst by Zoho — full-stack serverless cloud platform
 - [chat-sdk](../notes/saas-platforms/chat-sdk.md) — Vercel Chat SDK expert guidance. Use when building multi-platform chat bots — Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear — with a single codebase
 - [choose-zoom-approach](../notes/saas-platforms/choose-zoom-approach.md) — Use when choosing architecture
@@ -54,7 +54,7 @@ created: 2026-08-09
 - [hyperframes-registry](../notes/saas-platforms/hyperframes-registry.md) — Install and wire registry blocks and components into HyperFrames compositions
 - [inflection](../notes/saas-platforms/inflection.md) — Auto-detect biggest acceleration/deceleration inflections across all metrics
 - [magicpath](../notes/saas-platforms/magicpath.md) — Use when the user mentions MagicPath, designs, UI components, themes, canvas selections, or repo-to-canvas UI work
-- [marketplace](../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
+- [marketplace](../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and managing third-party integrations via the `vercel integration` CLI
 - [mixpanel-auth](../notes/saas-platforms/mixpanel-auth.md) — Manage Mixpanel Headless authentication: check session state, list/add/use accounts, run OAuth login, switch projects/workspaces, manage targets, and check bridge credentials
 - [mixpanel-headless-setup](../notes/saas-platforms/mixpanel-headless-setup.md) — This skill installs mixpanel_headless, pandas, numpy, matplotlib, seaborn, networkx, anytree, scipy (and pyarrow on Python 3.11+), then verifies Mixpanel credentials
 - [mixpanelyst](../notes/saas-platforms/mixpanelyst.md) — Use when the user asks about Mixpanel product analytics, event data, funnel analysis, retention curves, cohort analysis, segmentation queries, user behavior, conversion rates, churn...

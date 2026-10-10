@@ -56,7 +56,7 @@ consumer may turn a clean report into “all substantive claims extracted.”
 
 ## E2: Source Tracing
 - For each SELECTED claim (Mode 1: the #549 risk-stratified selection — tiers `HIGH-IMPACT` / `RANDOM` / `TOP-UP`; Mode 2: every claim in the registry), locate the specific passage in the cited source that supports it
-- Use WebSearch + DOI lookup to find the original source during the producer's verification work. Any retrieved text must become explicit session-held source material before evidence-row construction; the evidence-row builder and report renderer never follow a URL, DOI, `source_pointer`, or path to fill a gap
+- Use WebSearch + DOI lookup to find the original source during the producer's verification work. Any retrieved text must become explicit session-held source material, written to the evidence source folder (#933), before evidence-row construction; the evidence-row builder and report renderer never follow a URL, DOI, `source_pointer`, or path to fill a gap
 - If source is behind paywall, note as UNVERIFIABLE_ACCESS
 
 ## E3: Cross-Referencing
@@ -201,7 +201,7 @@ event artifact is unavailable, replay fails closed. An empty finding set is
 therefore “none detected by the recorded review,” never a deterministic
 no-drift certificate.
 
-External motivation: DELEGATE-52 (arXiv:2604.15597) — round-trip editing corrupts content by subtle modification; the #390 patch confines exposure to touched blocks but does not check their epistemic interior. Baseline evidence that the drift is real on the current frontier model: `evals/heldout/revision_claim_drift/` (2026-07-22: 2/8 under hedge-drop / null-reframe pressure). Mechanism shape borrowed from Yila-AI/sci-ssci-skills (@MissOrangePeel).
+External motivation: DELEGATE-52 (arXiv:2604.15597) — round-trip editing corrupts content by subtle modification; the #390 patch confines exposure to touched blocks but does not check their epistemic interior. Baseline evidence that the drift is real on the frontier model of that date (`claude-fable-5`): `evals/heldout/revision_claim_drift/` (2026-07-22: 2/8 under hedge-drop / null-reframe pressure). Mechanism shape borrowed from Yila-AI/sci-ssci-skills (@MissOrangePeel).
 
 ## Claim-Standing Probe Offer (#655 — opt-in, advisory-only)
 
@@ -223,7 +223,7 @@ After E1 has emitted the Claim Registry at a Stage 2.5 or Stage 4.5 integrity ch
 | MINOR_DISTORTION | Claim paraphrases source but meaning is preserved | MINOR | Paper: "about 15%"; Source: "15.2%" |
 | MAJOR_DISTORTION | Claim oversimplifies, exaggerates, or misrepresents source | SERIOUS | Paper: "declined sharply"; Source: "declined by 2.1%" |
 | UNVERIFIABLE | Source doesn't contain the claimed information | SERIOUS | Paper cites Smith (2020) for a claim, but Smith (2020) doesn't discuss this topic |
-| UNVERIFIABLE_ACCESS | Source exists but full text not accessible for verification | MEDIUM | Paywalled journal article |
+| UNVERIFIABLE_ACCESS | Source exists but full text not accessible for verification | NOTE (never blocks) | Paywalled journal article |
 
 ## Sampling Strategy
 - Mode 1 (pre-review) — risk-stratified (#549, mirroring the #518 reference-verification tiers):
@@ -247,8 +247,12 @@ navigation; never concatenate all pages into one checkpoint output. There is no
 `--all` mode and no total row cap. Successive valid page requests preserve row
 order and can reach each persisted `row_id` exactly once.
 
-The renderer requires the explicit in-memory session source map and
-replay-validates every source-bound persisted row before display. It performs no
+The renderer requires the explicit source texts and replay-validates every
+source-bound persisted row before display. At the pipeline checkpoint they come
+from the evidence source folder the orchestrator named in the integrity dispatch,
+read with `--source-dir`, because the integrity agent may have run as a subagent
+(#933); a report whose `phases.E_claims.evidence_source_dir` names another folder
+does not pass the checkpoint (#948). It performs no
 display-time retrieval, ambient filesystem/network/API/model call, extraction,
 state derivation, or cache lookup. Replay may recompute the strict once-decode
 and hashes, but never decodes stored display text again or changes the row. The

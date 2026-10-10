@@ -23,7 +23,7 @@ created: 2026-06-13
 - [agentcore](../notes/web-automation-frontend/agentcore.md) — Run agent-browser on AWS Bedrock AgentCore cloud browsers
 - [algorithmic-art](../notes/web-automation-frontend/algorithmic-art.md) — Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration
 - [apollo-client](../notes/web-automation-frontend/apollo-client.md) — Guide for building React applications with Apollo Client 4.x
-- [apollo-connectors](../notes/web-automation-frontend/apollo-connectors.md) — Guide for integrating REST APIs into GraphQL supergraphs using Apollo Connectors with @source and @connect directives
+- [apollo-connectors](../notes/web-automation-frontend/apollo-connectors.md) — DEPRECATED: superseded by the graphos-factory skill (npx skills add apollographql/skills@graphos-factory), which builds and maintains a Connectors subgraph from a REST API with...
 - [apollo-federation](../notes/web-automation-frontend/apollo-federation.md) — Guide for authoring Apollo Federation subgraph schemas
 - [apollo-mcp-server](../notes/web-automation-frontend/apollo-mcp-server.md) — Guide for using Apollo MCP Server to connect AI agents with GraphQL APIs
 - [apollo-router](../notes/web-automation-frontend/apollo-router.md) — Version-aware guide for configuring and running Apollo Router for federated GraphQL supergraphs
@@ -47,7 +47,7 @@ created: 2026-06-13
 - [electron](../notes/web-automation-frontend/electron.md) — Automate Electron desktop apps (VS Code, Slack, Discord, Figma, Notion, Spotify, etc.) using agent-browser via Chrome DevTools Protocol
 - [figma-code-connect](../notes/web-automation-frontend/figma-code-connect.md) — Creates and maintains Figma Code Connect template files that map Figma components to code snippets
 - [figma-create-new-file](../notes/web-automation-frontend/figma-create-new-file.md) — Load this skill before every `create_new_file` tool call
-- [figma-design-to-code](../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
+- [figma-design-to-code](../notes/web-automation-frontend/figma-design-to-code.md) — You MUST invoke this skill BEFORE calling the `get_design_context` Figma MCP tool
 - [figma-generate-design](../notes/web-automation-frontend/figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
 - [figma-generate-diagram](../notes/web-automation-frontend/figma-generate-diagram.md) — Load this skill BEFORE every `generate_diagram` tool call
 - [figma-generate-library](../notes/web-automation-frontend/figma-generate-library.md) — Build or update a professional-grade design system in Figma from a codebase
@@ -59,17 +59,17 @@ created: 2026-06-13
 - [figma-use-motion](../notes/web-automation-frontend/figma-use-motion.md) — Motion / animation context for the `use_figma` MCP tool — animating Figma nodes via manual keyframes, animation styles, easing, and timeline duration
 - [figma-use-slides](../notes/web-automation-frontend/figma-use-slides.md) — This skill helps agents use Figma's use_figma MCP tool in the Slides context
 - [firecrawl](../notes/web-automation-frontend/firecrawl.md) — Any live-web task via the Firecrawl CLI — including ordinary web research: searching the web, reading or extracting pages, gathering sources, discovering site URLs, bulk extraction...
-- [firecrawl-agent](../notes/web-automation-frontend/firecrawl-agent.md) — Autonomous multi-page extraction into structured JSON
+- [firecrawl-agent](../notes/web-automation-frontend/firecrawl-agent.md) — Autonomously navigate websites and extract structured data across pages
 - [firecrawl-crawl](../notes/web-automation-frontend/firecrawl-crawl.md) — Bulk-extract many pages from one site or section
-- [firecrawl-developer-index](../notes/web-automation-frontend/firecrawl-developer-index.md) — Search issues, merged pull requests, READMEs, and documentation
+- [firecrawl-developer-index](../notes/web-automation-frontend/firecrawl-developer-index.md) — Search an index of public repositories, GitHub issues, merged pull requests, repository READMEs, and curated documentation sites
 - [firecrawl-download](../notes/web-automation-frontend/firecrawl-download.md) — Save a site or section as local files (markdown, screenshots)
 - [firecrawl-interact](../notes/web-automation-frontend/firecrawl-interact.md) — Drive a live browser on a scraped page: click, fill forms, log in, paginate, infinite-scroll
 - [firecrawl-map](../notes/web-automation-frontend/firecrawl-map.md) — Discover and list a site's URLs, with search filtering
 - [firecrawl-monitor](../notes/web-automation-frontend/firecrawl-monitor.md) — Alert by webhook/email on web changes — use for "monitor/watch/track/alert me when": recurring checks on known URLs (prefer over repeated one-off scrapes) or web-wide watches for new...
 - [firecrawl-parse](../notes/web-automation-frontend/firecrawl-parse.md) — Convert a local file (PDF, DOCX, XLSX, HTML, …) to markdown, or answer questions about its content
 - [firecrawl-research-index](../notes/web-automation-frontend/firecrawl-research-index.md) — Find the papers that answer a research query in Firecrawl's research paper index — a corpus of paper abstracts whose largest share is biomedical and life-science literature (PubMed...
-- [firecrawl-scrape](../notes/web-automation-frontend/firecrawl-scrape.md) — Extract a URL's content as clean markdown, including JS-rendered pages
-- [firecrawl-search](../notes/web-automation-frontend/firecrawl-search.md) — Web search with full page content. Use when no URL is known: finding sources, articles, or news
+- [firecrawl-scrape](../notes/web-automation-frontend/firecrawl-scrape.md) — Read a known webpage or execute a discovered workflow or data-provider capability
+- [firecrawl-search](../notes/web-automation-frontend/firecrawl-search.md) — Find web sources with query-relevant page excerpts and optional full-page content, and discover workflows, data APIs, and indexes
 - [fixing-accessibility](../notes/web-automation-frontend/fixing-accessibility.md) — Audit and fix HTML accessibility issues including ARIA labels, keyboard navigation, focus management, color contrast, and form errors
 - [fixing-metadata](../notes/web-automation-frontend/fixing-metadata.md) — Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives
 - [fixing-motion-performance](../notes/web-automation-frontend/fixing-motion-performance.md) — Audit and fix animation performance issues including layout thrashing, compositor properties, scroll-linked motion, and blur effects
@@ -83,7 +83,7 @@ created: 2026-06-13
 - [gpt-taste](../notes/web-automation-frontend/gpt-taste.md) — Elite UX/UI & Advanced GSAP Motion Engineer
 - [grafana-scenes](../notes/web-automation-frontend/grafana-scenes.md) — Build Grafana plugin pages using the @grafana/scenes framework
 - [graphql-operations](../notes/web-automation-frontend/graphql-operations.md) — Guide for writing GraphQL operations (queries, mutations, fragments) following best practices
-- [graphql-schema](../notes/web-automation-frontend/graphql-schema.md) — Guide for designing GraphQL schemas following industry best practices
+- [graphql-schema](../notes/web-automation-frontend/graphql-schema.md) — Guide for designing and changing GraphQL schemas following industry best practices
 - [gsap](../notes/web-automation-frontend/gsap.md) — GSAP animation reference for HyperFrames
 - [high-end-visual-design](../notes/web-automation-frontend/high-end-visual-design.md) — Teaches the AI to design like a high-end agency
 - [htmx](../notes/web-automation-frontend/htmx.md) — HTMX development guidelines for building dynamic web applications with minimal JavaScript using HTML attributes
@@ -96,7 +96,7 @@ created: 2026-06-13
 - [minimalist-ui](../notes/web-automation-frontend/minimalist-ui.md) — Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels
 - [narrow-react-prop-types](../notes/web-automation-frontend/narrow-react-prop-types.md) — narrow React component prop types to match live code paths
 - [next-cache-components-adoption](../notes/web-automation-frontend/next-cache-components-adoption.md) — Turn on Cache Components in a Next.js app and resolve the blocking routes it surfaces
-- [next-cache-components-optimizer](../notes/web-automation-frontend/next-cache-components-optimizer.md) — Drive a Next.js route to instant navigation by setting up an agentic loop, under Cache Components / PPR, on initial load (hard navigation) and client-side navigation (soft navigation)
+- [next-cache-components-optimizer](../notes/web-automation-frontend/next-cache-components-optimizer.md) — Optimize the meaningful UI available immediately from a Next.js route on an initial load (hard navigation) or named client-side navigation (soft navigation)
 - [next-dev-loop](../notes/web-automation-frontend/next-dev-loop.md) — Verify Next.js runtime behavior after editing app code
 - [next-forge](../notes/web-automation-frontend/next-forge.md) — next-forge expert guidance — production-grade Turborepo monorepo SaaS starter by Vercel
 - [next-partial-prefetching-adoption](../notes/web-automation-frontend/next-partial-prefetching-adoption.md) — Turn on Partial Prefetching in a Next.js app and work through the insights it surfaces

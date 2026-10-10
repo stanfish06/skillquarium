@@ -23,14 +23,12 @@ created: 2026-08-07
 - [academic-pipeline](../../notes/academic-pipelines/academic-pipeline.md) — Orchestrator for the full academic research pipeline: research -> write -> integrity check -> review -> revise -> re-review -> re-revise -> final integrity check -> finalize
 - [accessibility-and-inclusive-visualization](../../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [agentic-actions-auditor](../../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
-- [agentic-workflows](../../notes/software-dev/agentic-workflows.md) — Route gh-aw workflow design/create/debug/upgrade requests to the right prompts
 - [app-sdk-concepts](../../notes/web-automation-frontend/app-sdk-concepts.md) — Use when starting any grafana-app-sdk work — scaffolding a Grafana app, initializing a Grafana App Platform app, picking a deployment mode (standalone operator / grafana/apps /...
 - [audit-and-reduce-dependencies](../../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
 - [authoring-github-workflows](../../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [bio-human-feedback](../../notes/research-writing/bio-human-feedback.md) — Phase 2.6 of the bio-manuscript pipeline: human review checkpoint
 - [bio-manuscript-pipeline](../../notes/research-writing/bio-manuscript-pipeline.md) — End-to-end bio-manuscript planning pipeline orchestrator: turn structured research input into a full manuscript plan
 - [bioconductor-bridge](../../notes/sequence-phylogenetics/bioconductor-bridge.md) — Bioconductor package discovery, workflow recommendation, setup inspection, and starter code generation grounded in official Bioconductor containers and BiocManager
-- [bioservices](../../notes/sequence-phylogenetics/bioservices.md) — Unified Python interface to 40+ bioinformatics services
 - [build-chatgpt-app](../../notes/ml-ai/build-chatgpt-app.md) — Build, scaffold, refactor, and troubleshoot ChatGPT Apps SDK applications that combine an MCP server and widget UI
 - [build-iterated-agentic-loop](../../notes/vault-meta/build-iterated-agentic-loop.md) — build a repo-local skill and install a matching iterated coding-agent GitHub Actions workflow, prompt, memory file, and reference templates
 - [bulk-rnaseq](../../notes/single-cell-rnaseq/bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
@@ -42,10 +40,12 @@ created: 2026-08-07
 - [core-actionbook](../../notes/software-dev/core-actionbook.md) — Internal support skill for actionbook MCP selectors used by Rust documentation research workflows
 - [deployments-cicd](../../notes/hosting-edge-platforms/deployments-cicd.md) — Vercel deployment and CI/CD expert guidance
 - [design-control-loop](../../notes/vault-meta/design-control-loop.md) — interview the user to design an agentic control loop (sensor, controller, actuator under disturbances) tailored to their codebase, then build it as locally-runnable components plus a...
+- [dnanexus-integration](../../notes/bio-databases-platforms/dnanexus-integration.md) — Builds and operates reproducible genomics workloads on DNAnexus with the dx CLI, dxpy, apps/applets, native workflows, dxCompiler, and Nextflow
 - [doc-coauthoring](../../notes/documents-office/doc-coauthoring.md) — Guide users through a structured workflow for co-authoring documentation
 - [expo-cicd-workflows](../../notes/mobile-native-dev/expo-cicd-workflows.md) — Helps understand and write EAS workflow YAML files for Expo projects
-- [figma-design-to-code](../../notes/web-automation-frontend/figma-design-to-code.md) — Use this skill when implementing a Figma design as code (design → code) — the read-FROM-Figma direction
 - [figma-generate-design](../../notes/web-automation-frontend/figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
+- [firecrawl-agent](../../notes/web-automation-frontend/firecrawl-agent.md) — Autonomously navigate websites and extract structured data across pages
+- [firecrawl-scrape](../../notes/web-automation-frontend/firecrawl-scrape.md) — Read a known webpage or execute a discovered workflow or data-provider capability
 - [galaxy-bridge](../../notes/bio-databases-platforms/galaxy-bridge.md) — Galaxy tool discovery, intelligent recommendation, and execution — 8,000+ bioinformatics tools from usegalaxy.org with multi-signal scoring and workflow suggestions
 - [game-studio](../../notes/game-development/game-studio.md) — Route early browser-game work. Use when the user needs stack selection and workflow planning across design, implementation, assets, and playtesting before moving to a specialist skill
 - [genomics-workflow-acceleration](../../notes/genomics-variants/genomics-workflow-acceleration.md) — Use when accelerating existing genomics workflows with NVIDIA Parabricks, improving runtime or price/performance, converting pipeline steps to GPUs, or comparing CPU and GPU workflow...
@@ -58,17 +58,16 @@ created: 2026-08-07
 - [jest](../../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [lamindb](../../notes/bio-databases-platforms/lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models
 - [langgraph](../../notes/ml-ai/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
-- [latchbio-integration](../../notes/bio-databases-platforms/latchbio-integration.md) — Latch platform for bioinformatics workflows
 - [matlab-install-products](../../notes/matlab-development/matlab-install-products.md) — Deterministic workflow to download MATLAB Package Manager (mpm) and install MathWorks products from the OS command line with consistent, repeatable behavior
 - [matlab-optimize-memory](../../notes/matlab-development/matlab-optimize-memory.md) — Guides the 7-step MATLAB memory optimization workflow: baseline, profile, identify, optimize, measure, verify, report
 - [matlab-optimize-performance](../../notes/matlab-development/matlab-optimize-performance.md) — Read BEFORE optimizing any MATLAB code for speed
 - [matlab-read-doc](../../notes/matlab-development/matlab-read-doc.md) — Guides the agent to reference official MathWorks Documentation and Help
 - [metagenomics](../../notes/sequence-phylogenetics/metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
-- [mtp-hot-reload](../../notes/dotnet-development/mtp-hot-reload.md) — Suggests using Microsoft Testing Platform (MTP) hot reload to iterate fixes on failing tests without rebuilding
 - [nextflow](../../notes/cloud-devops/nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
 - [nvmolkit-usage](../../notes/drug-discovery-chem/nvmolkit-usage.md) — Write code that calls the installed nvMolKit Python API for GPU-accelerated, batched RDKit-style operations - Morgan fingerprints, Tanimoto/cosine similarity, ETKDG conformer...
 - [omniverse-cad-to-simready](../../notes/game-development/omniverse-cad-to-simready.md) — Coordinate the end-to-end CAD/source-asset to SimReady workflow
 - [omniverse-usd-performance-tuning](../../notes/game-development/omniverse-usd-performance-tuning.md) — Top-level workflow skill for USD performance diagnosis and optimization
+- [opentrons-integration](../../notes/bio-databases-platforms/opentrons-integration.md) — Authors, reviews, migrates, simulates, and troubleshoots official Opentrons Python Protocol API v2 protocols for Flex and OT-2 robots
 - [physical-ai-infrastructure-setup-and-resilient-scaling](../../notes/game-development/physical-ai-infrastructure-setup-and-resilient-scaling.md) — Use when the user wants to set up, scale, validate, or harden NVIDIA physical AI infrastructure for synthetic data generation workflows across local MicroK8s or Azure AKS, including...
 - [propose-security-hardening](../../notes/security-auditing/propose-security-hardening.md) — Develop evidence-backed structural and architectural security hardening proposals from vulnerability disclosures, supplied findings, incident or assessment documents, source code, or a...
 - [proteomics-de](../../notes/proteomics-metabolomics/proteomics-de.md) — Differential expression analysis for label-free quantitative (LFQ) intensity data with standard MaxQuant and DIA-NN output
@@ -76,12 +75,12 @@ created: 2026-08-07
 - [render-workflows](../../notes/hosting-edge-platforms/render-workflows.md) — Sets up, develops, tests, and deploys Render Workflows
 - [replay-qa-api](../../notes/saas-platforms/replay-qa-api.md) — Use when calling Replay QA's REST API directly from Codex
 - [rowan](../../notes/drug-discovery-chem/rowan.md) — Rowan is a cloud-native molecular modeling and medicinal-chemistry workflow platform with a Python API
-- [scikit-survival](../../notes/data-science-compute/scikit-survival.md) — Comprehensive toolkit for survival analysis and time-to-event modeling in Python using scikit-survival
 - [secure-workflow-guide](../../notes/security-auditing/secure-workflow-guide.md) — Guides through Trail of Bits' 5-step secure development workflow
 - [security-audit](../../notes/security-auditing/security-audit.md) — Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons
 - [semgrep](../../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 - [slack](../../notes/web-automation-frontend/slack.md) — Read Slack context, route to the right Slack workflow, and prepare or perform Slack writes that match the user's intent
 - [snakemake-workflow-engine](../../notes/cloud-devops/snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines
+- [temporal-developer](../../notes/hosting-edge-platforms/temporal-developer.md) — Develop, debug, and manage Temporal applications across Python, TypeScript, Go, Java, .NET, Ruby, and Rust
 - [twilio-debugging-observability](../../notes/saas-platforms/twilio-debugging-observability.md) — Debug Twilio integrations and set up production observability
 - [twilio-whatsapp-send-message](../../notes/saas-platforms/twilio-whatsapp-send-message.md) — WhatsApp messaging deep-dive reference. Covers the 24-hour service window rules (free-form vs template mode), sandbox setup for testing, template approval workflow, production sender...
 - [vercel-queues](../../notes/hosting-edge-platforms/vercel-queues.md) — Vercel Queues guidance (public beta) — durable event streaming with topics, consumer groups, retries, and delayed delivery

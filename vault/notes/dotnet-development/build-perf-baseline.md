@@ -14,13 +14,13 @@ created: 2026-07-21
 # build-perf-baseline
 
 > [!info] What it does
-> Establish build performance baselines and apply systematic optimization techniques. USE FOR: diagnosing slow builds, establishing before/after measurements (cold, warm, no-op scenarios), applying optimization strategies like MSBuild Server, static graph builds, artifacts output, and dependency graph trimming. Start here before diving into build-perf-diagnostics, incremental-build, or build-parallelism. DO NOT USE FOR: non-MSBuild build systems, detailed bottleneck analysis (use build-perf-diagnostics after baselining).
+> Establish MSBuild/.NET build performance baselines before optimizing. USE FOR: a .NET build or solution that is slow or has build-performance concerns; cold, warm, incremental, or no-op measurements; before/after comparisons; CI build output caching; static graph build decisions; artifacts output; and dependency graph trimming. Start here before build-perf-diagnostics, incremental-build, or build-parallelism. DO NOT USE for webpack, npm, JavaScript bundlers, or other non-MSBuild build systems. For detailed target/task/analyzer bottleneck analysis after baselining, use build-perf-diagnostics.
 
 **Source:** [skills/build-perf-baseline/SKILL.md](../../../skills/build-perf-baseline/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Diagnose and fix under-parallelized MSBuild builds
+- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Analyze an MSBuild solution, solution filter, or Build.proj that schedules multiple project files
 - [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild build performance bottlenecks using binary log analysis
 - [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
 - [start](../../notes/vault-meta/start.md) — Use when starting Zoom work

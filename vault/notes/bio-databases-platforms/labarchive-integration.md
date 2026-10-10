@@ -14,13 +14,13 @@ created: 2026-06-09
 # labarchive-integration
 
 > [!info] What it does
-> Electronic lab notebook API integration. Access notebooks, manage entries/attachments, backup notebooks, integrate with Protocols.io/Jupyter/REDCap, for programmatic ELN workflows.
+> Integrates with the official LabArchives ELN REST-like API and Inventory API v1. Supports regional endpoint selection, signed-request construction, user authorization and UID flows, local LA container validation, and verified LabArchives integration workflows.
 
 **Source:** [skills/labarchive-integration/SKILL.md](../../../skills/labarchive-integration/SKILL.md)  ·  **Domain:** [Bio Databases, Lab & Cloud Platforms](../../maps/bio-databases-platforms.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [validation](../../notes/software-dev/validation.md) — Use when Codex is already in the validation phase of a security scan or the user explicitly asks to determine whether one or more candidate security findings are valid
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

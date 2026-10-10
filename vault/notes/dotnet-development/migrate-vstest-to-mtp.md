@@ -15,15 +15,13 @@ created: 2026-07-21
 # migrate-vstest-to-mtp
 
 > [!info] What it does
-> Migrates .NET test projects from VSTest to Microsoft.Testing.Platform (MTP). Use when user asks to "migrate to MTP", "switch from VSTest", "enable Microsoft.Testing.Platform", "use MTP runner", set OutputType=Exe only for test projects in Directory.Build.props, or mentions EnableMSTestRunner, EnableNUnitRunner, or UseMicrosoftTestingPlatformRunner. USE FOR: MTP behavioral differences vs VSTest (exit code 8, zero tests discovered, --ignore-exit-code, TESTINGPLATFORM_EXITCODE_IGNORE); centralizing MTP properties and OutputType=Exe on test projects via MSBuildProjectName, not IsTestProject. Supports MSTest, NUnit, xUnit.net v2 (via YTest.MTP.XUnit2), and xUnit.net v3. Covers runner enablement, CLI argument and filter translation (--filter-class/--filter-trait/--filter-query), global.json config, CI/CD updates, and extension packages. DO NOT USE FOR: migrating between test frameworks (MSTest/xUnit/NUnit), xUnit.net v2 to v3 API migration, MSTest version upgrades, TFM upgrades, or UWP/WinUI test projects.
+> Use this skill before answering, planning, or editing whenever .NET tests or CI are switching from VSTest to Microsoft.Testing.Platform (MTP), or an MTP migration behaves differently. Triggers include "switch from VSTest"; MSTest/NUnit/xUnit MTP enablement; OutputType=Exe only for test projects in Directory.Build.props; EnableMSTestRunner, EnableNUnitRunner, UseMicrosoftTestingPlatformRunner, or YTest.MTP.XUnit2; .NET 10 global.json test.runner and TestingPlatformDotnetTestSupport; translating VSTest filters, logger, coverage, blame, or dump arguments; replacing VSTest@3; and exit code 8 or zero tests. Also use for xUnit v3 MTP filters during a v2-to-v3 upgrade. Do not use for framework conversion, TFM, UWP, or WinUI.
 
 **Source:** [skills/migrate-vstest-to-mtp/SKILL.md](../../../skills/migrate-vstest-to-mtp/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [filter-syntax](../../notes/dotnet-development/filter-syntax.md) — Reference data for test filter syntax across all platform and framework combinations: VSTest --filter expressions, MTP filters for MSTest/NUnit/xUnit v3/TUnit, and VSTest-to-MTP filter...
-- [migrate-xunit-to-xunit-v3](../../notes/dotnet-development/migrate-xunit-to-xunit-v3.md) — Migrates .NET test projects from xUnit.net v2 to xUnit.net v3
-- [platform-detection](../../notes/dotnet-development/platform-detection.md) — Reference data for detecting the test platform (VSTest vs Microsoft.Testing.Platform) and test framework (MSTest, xUnit, NUnit, TUnit) from project files
+- [migrate-xunit-to-xunit-v3](../../notes/dotnet-development/migrate-xunit-to-xunit-v3.md) — Migrate .NET test projects from xUnit.net v2 to xunit.v3 and fix v3 breaks
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

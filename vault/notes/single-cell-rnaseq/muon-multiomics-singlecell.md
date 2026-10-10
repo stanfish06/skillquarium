@@ -20,7 +20,7 @@ created: 2026-07-09
 
 ## Related skills
 
-- [anndata](../../notes/single-cell-rnaseq/anndata.md) — Data structure for annotated matrices in single-cell analysis
+- [anndata](../../notes/single-cell-rnaseq/anndata.md) — Handles annotated matrices in single-cell analysis, .h5ad and Zarr files, and integration with the scverse ecosystem
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

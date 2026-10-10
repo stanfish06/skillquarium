@@ -14,15 +14,14 @@ created: 2026-07-21
 # generate-testability-wrappers
 
 > [!info] What it does
-> Generate wrapper interfaces and DI registration for hard-to-test static dependencies in C#, when the abstraction does NOT exist yet. Produces IFileSystem, IEnvironmentProvider, IConsole, IProcessRunner wrappers, or guides first-time adoption of TimeProvider and IHttpClientFactory and registering them in DI. USE FOR: generate wrapper for static, create IFileSystem wrapper, wrap DateTime.Now, make static testable, make class testable, create abstraction for File.*, generate DI registration, set up/adopt TimeProvider when it is not registered yet, IHttpClientFactory setup, testability wrapper, create the right abstraction to mock, what abstraction for Environment, how to make statics injectable, adopt System.IO.Abstractions. DO NOT USE FOR: detecting statics (use detect-static-dependencies), migrating call sites or replacing existing DateTime.*/File.* usages once the wrapper is created or already registered in DI (use migrate-static-to-wrapper), general interface design.
+> DO NOT USE when the target already consumes an injected interface or built-in abstraction such as IFileSystem or TimeProvider, even if the request says "generate a wrapper"; no new wrapper is needed. Use only when C# source calls an ambient/static dependency and no injectable seam exists: first-time TimeProvider, IHttpClientFactory, or System.IO.Abstractions adoption; minimal Environment/Console/Process wrappers; IProcessRunner; DI registration; or an ambient seam that preserves a static API. Exclude static detection (detect-static-dependencies), migration to an existing/registered abstraction (migrate-static-to-wrapper), one blocked behavior plus deterministic tests (testability-obstacle), and general interface design.
 
 **Source:** [skills/generate-testability-wrappers/SKILL.md](../../../skills/generate-testability-wrappers/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [detect-static-dependencies](../../notes/dotnet-development/detect-static-dependencies.md) — Scan C# source files for hard-to-test static dependencies — DateTime.Now/UtcNow, File.*, Directory.*, Environment.*, HttpClient, Console.*, Process.*, and other untestable statics
-- [migrate-static-to-wrapper](../../notes/dotnet-development/migrate-static-to-wrapper.md) — Replace existing static dependency call sites with a wrapper or built-in abstraction that already exists or is registered in DI
-- [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
+- [detect-static-dependencies](../../notes/dotnet-development/detect-static-dependencies.md) — ACTIVATION PREREQUISITE: the request or discovered target must explicitly identify C#, .NET, `.cs`, or `.csproj`
+- [migrate-static-to-wrapper](../../notes/dotnet-development/migrate-static-to-wrapper.md) — Use when asked to migrate, replace, or make testable existing C# static calls with a named wrapper or built-in abstraction: DateTime.UtcNow/Now or DateTimeOffset.UtcNow to...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

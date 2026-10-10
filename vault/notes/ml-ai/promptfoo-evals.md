@@ -20,6 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
+- [promptfoo-provider-setup](../../notes/ml-ai/promptfoo-provider-setup.md) — Connect Promptfoo to a model, live HTTP API, local Python/JavaScript provider, or app code
 - [qa](../../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
 

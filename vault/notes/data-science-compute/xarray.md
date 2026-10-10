@@ -18,9 +18,9 @@ created: 2026-06-09
 
 ## Related skills
 
-- [dask](../../notes/data-science-compute/dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
+- [dask](../../notes/data-science-compute/dask.md) — Scales pandas, NumPy, and custom Python research workflows beyond memory or across clusters with Dask
 - [xarray-pandera-duckdb](../../notes/data-science-compute/xarray-pandera-duckdb.md) — Labeled array, schema validation, and embedded SQL analytics workflows with xarray, pandera-validation, duckdb-docs, query, read-file, and polars
-- [zarr-python](../../notes/data-science-compute/zarr-python.md) — Chunked N-D arrays for cloud storage (Zarr-Python 3)
+- [zarr-python](../../notes/data-science-compute/zarr-python.md) — Stores and queries chunked N-D scientific arrays with Zarr-Python 3, including codecs, sharding, S3/GCS storage, and NumPy/Dask/Xarray integration
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

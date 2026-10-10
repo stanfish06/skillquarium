@@ -35,7 +35,10 @@ if ($e2 -notmatch "superseded by F-CONSOL-2") { throw "ps1 did not mark supersed
 $demo = Join-Path $scratch "ctf"
 Copy-Item (Join-Path $root "examples\ctf-demo") $demo -Recurse
 python (Join-Path $root "skills\scripts\consolidate_evidence.py") --case-root $demo --evidence-ids "E-001" --finding-id F-001 --title "keep contract" --description "ok" --severity info --status validated --confidence medium --location "E-001" | Out-Null
-# F-001 already exists in ctf-demo report; just check parse of superseded evidence
-python (Join-Path $root "skills\case-review\scripts\review_case.py") $demo --verify-hashes 2>&1 | Select-Object -Last 8
+# F-001 already exists in ctf-demo report; just check the case still PARSES with
+# superseded evidence. --verify-hashes cannot pass here by design: consolidation
+# rewrites E-001.md (adds the superseded marker), which changes its SHA-256.
+$review = python (Join-Path $root "skills\case-review\scripts\review_case.py") $demo 2>&1 | Select-Object -Last 8
+if ($LASTEXITCODE -ne 0) { throw "review_case failed to parse consolidated case:`n$($review -join [Environment]::NewLine)" }
 Write-Host "CONSOLIDATE_ALIGN_OK"
 Remove-Item $scratch -Recurse -Force

@@ -14,7 +14,7 @@ created: 2026-06-09
 # dhdna-profiler
 
 > [!info] What it does
-> Extract cognitive patterns and thinking fingerprints from any text. Use this skill when the user wants to analyze how someone thinks, understand cognitive style, profile writing or speech patterns, compare thinking styles between people, asks "what's my thinking style", "analyze how this person reasons", "cognitive profile", "thinking pattern", "DHDNA", "digital DNA", or wants to understand the mind behind any text. Also trigger when the user provides text and wants deeper insight into the author's reasoning patterns, decision-making style, or cognitive signature.
+> Applies the DHDNA framework as an exploratory rubric for reasoning and writing patterns in supplied text. Used for explicit requests for DHDNA, cognitive-style reflection, a thinking-pattern profile, or comparisons of textual reasoning. Scores describe evidence in the sample, not validated psychological traits or personal identity.
 
 **Source:** [skills/dhdna-profiler/SKILL.md](../../../skills/dhdna-profiler/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

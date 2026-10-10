@@ -4,7 +4,7 @@
 
 ```python
 # All collections (flat list including nested)
-all_cols = zot.collections()
+all_cols = zot.everything(zot.collections())
 
 # Only top-level collections
 top_cols = zot.collections_top()
@@ -45,24 +45,31 @@ zot.create_collections([{
     'parentCollection': 'PARENTCOLKEY'
 }])
 
-# Create multiple at once
-zot.create_collections([
-    {'name': 'Collection A'},
-    {'name': 'Collection B'},
-    {'name': 'Sub-B', 'parentCollection': 'BKEY'},
-])
+# Create a parent, inspect the result, then use its real key for a child.
+result = zot.create_collections([{'name': 'Collection B'}])
+if result.get('failed'):
+    raise RuntimeError(result['failed'])
+parent_key = result['successful']['0']['key']
+child_result = zot.create_collections([{'name': 'Sub-B', 'parentCollection': parent_key}])
+if child_result.get('failed'):
+    raise RuntimeError(child_result['failed'])
 ```
 
 ## Updating Collections
 
 ```python
 cols = zot.collections()
-# Rename the first collection
-cols[0]['data']['name'] = 'Renamed Collection'
-zot.update_collection(cols[0])
+# Rename the first collection, if there is one
+if cols:
+    cols[0]['data']['name'] = 'Renamed Collection'
+    zot.update_collection(cols[0])
 
-# Update multiple collections (auto-chunked at 50)
-zot.update_collections(cols)
+# For multiple collections, use individually versioned updates.
+# Re-fetch after a prior write to avoid reusing the old version.
+for col in cols:
+    fresh = zot.collection(col['key'])
+    fresh['data']['name'] = col['data']['name']
+    zot.update_collection(fresh)
 ```
 
 ## Deleting Collections
@@ -72,14 +79,12 @@ zot.update_collections(cols)
 col = zot.collection('COLKEY')
 zot.delete_collection(col)
 
-# Delete multiple collections — always scope the selection
-cols = [c for c in zot.collections() if c['data']['name'].startswith('Import 2024-')]
-zot.delete_collection(cols)  # pass a list of dicts
+# Delete multiple collections
+cols = zot.collections(limit=50)  # review the selected keys; max 50
+library_version = int(zot.request.headers['Last-Modified-Version'])
+if cols:
+    zot.delete_collection(cols, last_modified=library_version)
 ```
-
-Deletion is irreversible and hits the user's live library. Never pass an unfiltered
-`zot.collections()` to `delete_collection` — that removes every collection. Show the
-selected names and confirm with the user before deleting.
 
 ## Managing Items in Collections
 
@@ -88,11 +93,16 @@ selected names and confirm with the user before deleting.
 item = zot.item('ITEMKEY')
 zot.addto_collection('COLKEY', item)
 
-# Remove an item from a collection
+# Remove an item from a collection (re-fetch after any earlier write)
+item = zot.item('ITEMKEY')
 zot.deletefrom_collection('COLKEY', item)
 
+# Move between collections with one version-checked request
+item = zot.item('ITEMKEY')
+zot.moveto_collection('OLDCOLKEY', 'NEWCOLKEY', item)
+
 # Get all items in a collection
-items = zot.collection_items('COLKEY')
+items = zot.everything(zot.collection_items('COLKEY'))
 
 # Get only top-level items in a collection
 top_items = zot.collection_items_top('COLKEY')
@@ -115,3 +125,7 @@ def find_collection(zot, name):
 
 key = find_collection(zot, 'Machine Learning Papers')
 ```
+
+Collection deletion also removes descendant collections, but preserves their items in the library. Create and batch-update responses use the same `successful`/`success`/`unchanged`/`failed` maps as items; creation accepts at most 50 collections per request.
+
+In Pyzotero 1.15.2, `update_collections()` routes collection dictionaries through the item-field validator and can reject `name`/`parentCollection`; the per-collection `update_collection()` example avoids that path. Its single-object precondition is the collection version; multi-delete needs the library version.

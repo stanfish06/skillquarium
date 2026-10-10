@@ -12,7 +12,7 @@ created: 2026-06-09
 # simpy
 
 > [!info] What it does
-> Process-based discrete-event simulation framework in Python. Use this skill when building simulations of systems with processes, queues, resources, and time-based events such as manufacturing systems, service operations, network traffic, logistics, or any system where entities interact with shared resources over time.
+> Builds, inspects, tests, and analyzes bounded process-based discrete-event simulations with SimPy. Use for event scheduling, resource queues, interrupts, monitoring, independent replications, warm-up, and reproducible output analysis.
 
 **Source:** [skills/simpy/SKILL.md](../../../skills/simpy/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](../../maps/data-science-compute.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -12,7 +12,7 @@ created: 2026-06-09
 # gtars
 
 > [!info] What it does
-> High-performance toolkit for genomic interval analysis in Rust with Python bindings. Use when working with genomic regions, BED files, coverage tracks, overlap detection, tokenization for ML models, or fragment analysis in computational genomics and machine learning applications.
+> Supports Gtars for local genomic interval models and set algebra, overlaps and counts, consensus and coverage, tokenization, fragment processing, and refget/BEDbase planning across Python, Rust, and the CLI.
 
 **Source:** [skills/gtars/SKILL.md](../../../skills/gtars/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](../../maps/genomics-variants.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

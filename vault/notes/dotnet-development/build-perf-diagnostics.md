@@ -21,8 +21,8 @@ created: 2026-07-21
 ## Related skills
 
 - [binlog-generation](../../notes/dotnet-development/binlog-generation.md) — Generate MSBuild binary logs (binlogs) for build diagnostics and analysis
-- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Diagnose and fix under-parallelized MSBuild builds
-- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish build performance baselines and apply systematic optimization techniques
+- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Analyze an MSBuild solution, solution filter, or Build.proj that schedules multiple project files
+- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish MSBuild/.NET build performance baselines before optimizing
 - [eval-performance](../../notes/dotnet-development/eval-performance.md) — Guide for diagnosing and improving MSBuild project evaluation performance
 - [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
 - [resolve-project-references](../../notes/dotnet-development/resolve-project-references.md) — Guide for interpreting ResolveProjectReferences time in MSBuild performance summaries

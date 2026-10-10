@@ -24,7 +24,7 @@ created: 2026-08-23
 - [databricks-model-serving](../../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
 - [langgraph](../../notes/ml-ai/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
 - [optuna](../../notes/ml-ai/optuna.md) — Hyperparameter optimization (HPO) for ML models using Optuna
-- [scikit-learn](../../notes/ml-ai/scikit-learn.md) — Machine learning in Python with scikit-learn
+- [scikit-learn](../../notes/ml-ai/scikit-learn.md) — Supports machine learning in Python with scikit-learn
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

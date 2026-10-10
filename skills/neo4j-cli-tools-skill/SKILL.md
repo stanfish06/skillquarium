@@ -9,7 +9,7 @@ description: Use when working with Neo4j command-line tools — neo4j-cli (moder
   Does NOT cover driver upgrades — use neo4j-migration-skill.
   Does NOT cover full MCP editor configuration — use neo4j-mcp-skill.
 allowed-tools: WebFetch, Bash
-version: 1.0.12
+version: 1.0.15
 ---
 
 # Neo4j CLI Tools skill
@@ -100,7 +100,7 @@ neo4j-cli skill check                            # detect drift after upgrades
 
 **Credentials precedence:** flag > OS env (`NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD`, `NEO4J_DATABASE`) > `.env` walk-up > stored credential.
 
-**Supported agents:** Claude Code, Cursor, Windsurf, Copilot, Gemini CLI, Cline, Codex, OpenCode, Junie, and more.
+**Supported agents:** Claude Code, Cursor, Windsurf, Copilot, Gemini CLI, Antigravity CLI, Cline, Codex, OpenCode, Junie, and more. Antigravity: skills land in `~/.gemini/antigravity/skills`.
 
 Full reference: `neo4j-cli skill install` keeps an always-in-sync skill in your agent.
 

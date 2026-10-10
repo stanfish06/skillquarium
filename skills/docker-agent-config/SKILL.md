@@ -27,7 +27,7 @@ Activate this skill when:
 ## Do not use this skill when
 Do not use this skill when:
 - The task is about running the CLI (`docker agent run` flags, `--safety`, `--sandbox`, aliases, worktrees) — use `docker-agent-run`.
-- The task is about exposing an agent as a server (`serve mcp/api/a2a/acp/chat`), distributing it (`share push/pull`), or evaluating it (`docker agent eval`) — use `docker-agent-deploy`.
+- The task is about exposing an agent as a server (`serve mcp/api/a2a/acp/chat`), distributing it (`share push/pull`), or evaluating it (evaluation sessions, `--baseline` regression gates) — use `docker-agent-deploy`.
 - The task is about a generic Dockerfile or Compose service unrelated to Docker Agent — use `docker-build-strategies` or `docker-compose-patterns`.
 
 ## Core guidance
