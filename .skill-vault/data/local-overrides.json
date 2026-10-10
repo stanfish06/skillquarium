@@ -1,4 +1,23 @@
 {
+  "k6": [
+    {
+      "id": "k6-drop-removed-externally-controlled-header",
+      "issue": 1058,
+      "source": "grafana/skills",
+      "file": "examples/executors.js",
+      "find": " * Covers all 7 executors with realistic configuration examples.\n * Pick the relevant scenario block and remove the others.\n *\n * Executors:\n *   constant-vus          — fixed VU count for a duration\n *   ramping-vus           — variable VU count (realistic traffic curves)\n *   constant-arrival-rate — fixed iteration rate (RPS), regardless of response time\n *   ramping-arrival-rate  — variable RPS over time\n *   per-vu-iterations     — each VU runs N iterations exactly\n *   shared-iterations     — total iteration budget shared across VUs\n *   externally-controlled — VU count controlled at runtime via k6 REST API\n */",
+      "replace": " * Covers all 6 executors with realistic configuration examples.\n * Pick the relevant scenario block and remove the others.\n *\n * Executors:\n *   constant-vus          — fixed VU count for a duration\n *   ramping-vus           — variable VU count (realistic traffic curves)\n *   constant-arrival-rate — fixed iteration rate (RPS), regardless of response time\n *   ramping-arrival-rate  — variable RPS over time\n *   per-vu-iterations     — each VU runs N iterations exactly\n *   shared-iterations     — total iteration budget shared across VUs\n */"
+    },
+    {
+      "id": "k6-drop-removed-externally-controlled-block",
+      "issue": 1058,
+      "source": "grafana/skills",
+      "file": "examples/executors.js",
+      "find": "  // },\n\n  // ── 7. externally-controlled: VU count set via k6 REST API ─────────────\n  // scenarios: {\n  //   dynamic: {\n  //     executor: 'externally-controlled',\n  //     vus: 10,\n  //     maxVUs: 100,\n  //     duration: '10m',\n  //   },\n  // },\n\n  thresholds: {",
+      "replace": "  // },\n\n  thresholds: {"
+    }
+  ]
+,
   "neo4j-document-import-skill": [
     {
       "id": "anthropic-retired-model",
