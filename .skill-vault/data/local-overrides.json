@@ -1,4 +1,13 @@
 {
+  "agent-browser": [
+    {
+      "id": "mismatched-docs-url",
+      "issue": 1101,
+      "source": "openai/plugins",
+      "find": "  docs:\n    - \"https://openai.com/index/introducing-codex/\"",
+      "replace": "  docs:\n    - \"https://agent-browser.dev\""
+    }
+  ],
   "logfire-instrumentation": [
     {
       "id": "logfire-5-1-1-pin-skill",
