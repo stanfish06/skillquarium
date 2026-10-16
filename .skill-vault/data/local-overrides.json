@@ -1,4 +1,22 @@
 {
+  "render-deploy": [
+    {
+      "id": "free-plan-cpu-blueprint-spec",
+      "issue": 1045,
+      "source": "openai/plugins",
+      "file": "references/blueprint-spec.md",
+      "find": "| `free` | 512 MB | 0.5 | Free (750 hrs/mo) |",
+      "replace": "| `free` | 512 MB | 0.1 | Free (750 hrs/mo) |"
+    },
+    {
+      "id": "free-plan-cpu-configuration-guide",
+      "issue": 1045,
+      "source": "openai/plugins",
+      "file": "references/configuration-guide.md",
+      "find": "- 0.5 CPU per service",
+      "replace": "- 0.1 CPU per service"
+    }
+  ],
   "logfire-instrumentation": [
     {
       "id": "logfire-5-1-1-pin-skill",

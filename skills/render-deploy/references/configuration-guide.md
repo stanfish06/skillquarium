@@ -404,7 +404,7 @@ buildCommand: npm ci && npx prisma migrate deploy
 - 1 PostgreSQL database (1 GB storage, 97 MB RAM)
 - 750 hours/month compute
 - 512 MB RAM per service
-- 0.5 CPU per service
+- 0.1 CPU per service
 - 100 GB bandwidth/month
 
 ### Resource Limits
