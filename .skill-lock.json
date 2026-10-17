@@ -2092,9 +2092,9 @@
       "updatedAt": "2026-10-10T12:47:30.051Z"
     },
     "docker-expert": {
-      "source": "sickn33/antigravity-awesome-skills",
+      "source": "sickn33/agentic-awesome-skills",
       "sourceType": "github",
-      "sourceUrl": "https://github.com/sickn33/antigravity-awesome-skills.git",
+      "sourceUrl": "https://github.com/sickn33/agentic-awesome-skills.git",
       "skillPath": "skills/docker-expert/SKILL.md",
       "skillFolderHash": "ac8fbe7507377c5dc8ae7eb56a790ae36edf44ff",
       "installedAt": "2026-06-13T23:42:53.903Z",
