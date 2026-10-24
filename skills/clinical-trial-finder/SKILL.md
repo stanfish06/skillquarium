@@ -1,6 +1,6 @@
 ---
 name: clinical-trial-finder
-description: Find clinical trials for a gene, variant, or condition from ClinicalTrials.gov + EUCTR, with FHIR R4 output
+description: Find clinical trials for a gene, variant, or condition from ClinicalTrials.gov, with FHIR R4 output
 license: MIT
 metadata:
   version: 0.1.0
@@ -139,7 +139,7 @@ metadata:
 
 - **Country filter** (`--country`): Uses CT.gov `query.locn` parameter to restrict results to trials in a specific country. Accepts ISO 3166-1 country names or codes. Applied at the API level (not post-fetch) to reduce bandwidth and improve relevance.
 
-- **EU Clinical Trials Register** (`--euctr`): Secondary European source queried as a best-effort complement. The EUCTR API returns XML with no versioning guarantees and may be unavailable. Results are normalised to the same schema as CT.gov trials and merged with deduplication. All EUCTR failures degrade gracefully to an empty list — the skill never fails due to EUCTR unavailability.
+- **European registry coverage is unavailable.** The configured legacy EUCTR `/rest/search` endpoint returns HTTP 404 (verified 2026-10-24). `--euctr` exits with an error before any query or output; `fetch_euctr()` raises an explicit error rather than returning zero matches. Run without the flag for ClinicalTrials.gov only. Search Directive-era EudraCT records in the [EU Clinical Trials Register](https://www.clinicaltrialsregister.eu/ctr-search/search) and Clinical Trials Regulation records in [CTIS](https://euclinicaltrials.eu/). These are manual search routes, not implemented API replacements; see [EMA registry coverage](https://www.ema.europa.eu/en/human-regulatory-overview/research-development/clinical-trials-human-medicines/clinical-trials-information-system-ctis).
 
 - **Variant-to-trial pipeline** (`--rsid`): Queries the EBI GWAS Catalog REST API (`/singleNucleotidePolymorphisms/{rsid}/associations?projection=associationBySnp`) to resolve a dbSNP rsID to genome-wide significant disease traits (p < 5 x 10^-8), then searches CT.gov for each trait. Disease traits are ranked above biomarker measurements to maximise trial relevance. Gene symbols are extracted from `authorReportedGenes` in the association loci. Reference: Buniello et al., *Nucleic Acids Research* 2019; 47:D1005--D1012 (GWAS Catalog).
 

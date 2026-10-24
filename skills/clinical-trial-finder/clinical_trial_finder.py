@@ -84,7 +84,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "--euctr",
         action="store_true",
-        help="Also search EU Clinical Trials Register (EUCTR)",
+        help="Unavailable: legacy EUCTR integration (see error for registry links)",
     )
 
     # OpenTargets parameters (only used with --gene)
@@ -110,7 +110,13 @@ def _build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     """Entry point: resolve input mode, fetch trials, write all outputs."""
-    args = _build_parser().parse_args()
+    parser = _build_parser()
+    args = parser.parse_args()
+    if args.euctr:
+        from euctr import EUCTR_UNAVAILABLE
+
+        # Reject incomplete coverage before fetching data or writing reports.
+        parser.error(EUCTR_UNAVAILABLE)
 
     gene_context: dict | None = None
     trials: list[dict] = []
@@ -237,25 +243,7 @@ def main() -> None:
         recruiting = count_recruiting(trials)
         print(f"Found {len(trials)} trials ({recruiting} recruiting)")
 
-    # --- Optional EUCTR merge (step 14) ---
-
-    if args.euctr:
-        import euctr
-
-        query_str = query_info["query"]
-        print(f"Querying EU Clinical Trials Register: {query_str!r}")
-        eu_trials = euctr.fetch_euctr(query_str)
-        if eu_trials:
-            seen_ids = {t["nct_id"] for t in trials}
-            added = [t for t in eu_trials if t["nct_id"] not in seen_ids]
-            trials.extend(added)
-            print(f"  EUCTR: {len(eu_trials)} found, {len(added)} new (merged)")
-        else:
-            print(
-                "  EUCTR: no results or API unavailable (continuing with CT.gov only)"
-            )
-
-    # --- Optional status filter (applied post-fetch, after merge) ---
+    # --- Optional status filter (applied post-fetch) ---
 
     if args.status:
         trials = [t for t in trials if t["status"] == args.status]

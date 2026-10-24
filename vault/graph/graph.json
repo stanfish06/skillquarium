@@ -5055,7 +5055,7 @@
    "id": "clinical-trial-finder",
    "type": "Skill",
    "label": "clinical-trial-finder",
-   "description": "Find clinical trials for a gene, variant, or condition from ClinicalTrials.gov + EUCTR, with FHIR R4 output",
+   "description": "Find clinical trials for a gene, variant, or condition from ClinicalTrials.gov, with FHIR R4 output",
    "source": "skills/clinical-trial-finder/SKILL.md",
    "aliases": [
     "clinical trial finder"

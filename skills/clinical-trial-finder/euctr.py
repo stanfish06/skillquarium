@@ -1,19 +1,18 @@
-"""EU Clinical Trials Register (EUCTR) client -- secondary European source.
+"""Unavailable EUCTR integration; retain legacy parsers for historical fixtures.
 
-Queries the EUCTR REST API as a complement to ClinicalTrials.gov.
-Results are normalised to the same dict schema as api._normalise_trial()
-so they can be merged and deduplicated transparently.
-
-The EUCTR API is best-effort: it returns XML, has no versioning guarantees,
-and may be unavailable.  All failures degrade gracefully to an empty list.
+The configured /rest/search endpoint returns HTTP 404. No supported replacement
+client has been implemented, so fetch_euctr must not return a false empty result.
 """
 
-import urllib.error
-import urllib.parse
-import urllib.request
 import xml.etree.ElementTree as ET
 
-from constants import EUCTR_API
+EUCTR_UNAVAILABLE = (
+    "EUCTR integration is unavailable: the configured legacy /rest/search endpoint "
+    "returns HTTP 404. No European registry search was performed. "
+    "Rerun without --euctr for ClinicalTrials.gov only. Search legacy EudraCT "
+    "records at https://www.clinicaltrialsregister.eu/ctr-search/search and "
+    "Clinical Trials Regulation records at https://euclinicaltrials.eu/."
+)
 
 # EUCTR uses different status strings than CT.gov. Normalise to CT.gov
 # constants so --status filter and FHIR_STATUS mapping work uniformly.
@@ -31,20 +30,8 @@ _EUCTR_STATUS_MAP: dict[str, str] = {
 
 
 def fetch_euctr(query: str, max_results: int = 10) -> list[dict]:
-    """Search the EU Clinical Trials Register and return normalised records.
-
-    Returns an empty list on any error (network, parse, API change).
-    """
-    url = f"{EUCTR_API}{urllib.parse.quote(query)}&page=1&mode=current_page"
-
-    try:
-        req = urllib.request.Request(url, headers={"Accept": "application/xml"})
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            raw = resp.read().decode("utf-8", errors="replace")
-    except (urllib.error.URLError, OSError):
-        return []
-
-    return _parse_euctr_response(raw, max_results)
+    """Reject unavailable European coverage without making a network request."""
+    raise RuntimeError(EUCTR_UNAVAILABLE)
 
 
 def _parse_euctr_response(raw: str, max_results: int) -> list[dict]:

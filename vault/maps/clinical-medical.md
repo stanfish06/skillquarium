@@ -18,7 +18,7 @@ created: 2026-06-13
 
 - [clinical-decision-support](../notes/clinical-medical/clinical-decision-support.md) — Prepares and validates research-only clinical decision-support evaluation, evidence-profile, cohort, survival, biomarker/model, privacy, and governance artifacts
 - [clinical-reports](../notes/clinical-medical/clinical-reports.md) — Creates safety-bounded draft structures and runs local deterministic checks for clinical case, diagnostic, trial, safety, and aggregate research reports
-- [clinical-trial-finder](../notes/clinical-medical/clinical-trial-finder.md) — Find clinical trials for a gene, variant, or condition from ClinicalTrials.gov + EUCTR, with FHIR R4 output
+- [clinical-trial-finder](../notes/clinical-medical/clinical-trial-finder.md) — Find clinical trials for a gene, variant, or condition from ClinicalTrials.gov, with FHIR R4 output
 - [drug-photo](../notes/clinical-medical/drug-photo.md) — Medication photo to personalised PGx dosage card via Claude vision — snap a pill, get genotype-informed guidance
 - [fitness-nutrition](../notes/clinical-medical/fitness-nutrition.md) — Workout planning, macros, and body metrics via wger/USDA
 - [iso-13485-certification](../notes/clinical-medical/iso-13485-certification.md) — Comprehensive toolkit for preparing ISO 13485 certification documentation for medical device Quality Management Systems
