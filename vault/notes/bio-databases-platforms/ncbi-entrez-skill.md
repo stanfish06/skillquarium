@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [ncbi-pmc-skill](../../notes/literature-discovery/ncbi-pmc-skill.md) — Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
