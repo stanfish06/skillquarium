@@ -4,11 +4,11 @@
   "skills": 2149,
   "expert_profiles": 503,
   "nodes": 2222,
-  "edges": 15718,
+  "edges": 15724,
   "generic_names_blocked": 32,
-  "tier1_edges": 4684,
+  "tier1_edges": 4687,
   "tier2_edges": 723,
-  "alias_edges": 4455,
+  "alias_edges": 4459,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 519,
@@ -20,13 +20,13 @@
   "orphan_count": 124,
   "orphan_rate": 0.0577,
   "by_provenance": {
-   "EXTRACTED": 14932,
+   "EXTRACTED": 14938,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2149,
-   "references": 12264,
+   "references": 12270,
    "in_discipline": 599,
    "touches": 519,
    "has_step": 69,
@@ -18672,7 +18672,7 @@
    "id": "ncbi-pmc-skill",
    "type": "Skill",
    "label": "ncbi-pmc-skill",
-   "description": "Submit compact NCBI PMC Open Access requests for article/file availability metadata. Use when a user wants concise PMC Open Access summaries; save raw XML only on request.",
+   "description": "Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi. The service is retired; route current PMC retrieval to paper-lookup or ncbi-entrez-skill.",
    "source": "skills/ncbi-pmc-skill/SKILL.md",
    "aliases": [
     "ncbi pmc skill"
@@ -106995,6 +106995,15 @@
   {
    "src": "ncbi-entrez-skill",
    "rel": "references",
+   "dst": "paper-lookup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "paper-lookup named in ncbi-entrez-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ncbi-entrez-skill",
+   "rel": "references",
    "dst": "research-router-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -107040,10 +107049,19 @@
   {
    "src": "ncbi-pmc-skill",
    "rel": "references",
-   "dst": "research-router-skill",
+   "dst": "paper-lookup",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "ncbi-pmc-skill named in research-router-skill/SKILL.md body",
+   "justification": "paper-lookup named in ncbi-pmc-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ncbi-pmc-skill",
+   "rel": "references",
+   "dst": "synthetic-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of synthetic-biologist appears in ncbi-pmc-skill/SKILL.md",
    "status": "accepted"
   },
   {
@@ -119343,6 +119361,24 @@
   {
    "src": "paper-lookup",
    "rel": "references",
+   "dst": "ncbi-entrez-skill",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "paper-lookup named in ncbi-entrez-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "paper-lookup",
+   "rel": "references",
+   "dst": "ncbi-pmc-skill",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "paper-lookup named in ncbi-pmc-skill/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "paper-lookup",
+   "rel": "references",
    "dst": "pubmed-search",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -119356,6 +119392,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "paper-lookup named in pubmed-summariser/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "paper-lookup",
+   "rel": "references",
+   "dst": "research-router-skill",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "paper-lookup named in research-router-skill/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -137244,19 +137289,19 @@
   {
    "src": "research-router-skill",
    "rel": "references",
-   "dst": "ncbi-pmc-skill",
+   "dst": "opentargets-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "ncbi-pmc-skill named in research-router-skill/SKILL.md body",
+   "justification": "opentargets-skill named in research-router-skill/SKILL.md body",
    "status": "accepted"
   },
   {
    "src": "research-router-skill",
    "rel": "references",
-   "dst": "opentargets-skill",
+   "dst": "paper-lookup",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "opentargets-skill named in research-router-skill/SKILL.md body",
+   "justification": "paper-lookup named in research-router-skill/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -156058,6 +156103,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of synthetic-biologist appears in ncbi-entrez-skill/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "synthetic-biologist",
+   "rel": "references",
+   "dst": "ncbi-pmc-skill",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of synthetic-biologist appears in ncbi-pmc-skill/SKILL.md",
    "status": "accepted"
   },
   {

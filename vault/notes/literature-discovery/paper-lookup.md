@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [citations](../../notes/literature-discovery/citations.md) — Canonical rules and HTML/CSS contract for inline `[n]` citation references, end-of-document Citations blocks, and optional per-section citation recaps used across Moody's Agentic...
+- [ncbi-pmc-skill](../../notes/literature-discovery/ncbi-pmc-skill.md) — Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi
 - [pdf](../../notes/documents-office/pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

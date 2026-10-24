@@ -63,6 +63,7 @@ created: 2026-08-07
 - [matlab-optimize-performance](../../notes/matlab-development/matlab-optimize-performance.md) — Read BEFORE optimizing any MATLAB code for speed
 - [matlab-read-doc](../../notes/matlab-development/matlab-read-doc.md) — Guides the agent to reference official MathWorks Documentation and Help
 - [metagenomics](../../notes/sequence-phylogenetics/metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
+- [ncbi-pmc-skill](../../notes/literature-discovery/ncbi-pmc-skill.md) — Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi
 - [nextflow](../../notes/cloud-devops/nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
 - [nvmolkit-usage](../../notes/drug-discovery-chem/nvmolkit-usage.md) — Write code that calls the installed nvMolKit Python API for GPU-accelerated, batched RDKit-style operations - Morgan fingerprints, Tanimoto/cosine similarity, ETKDG conformer...
 - [omniverse-cad-to-simready](../../notes/game-development/omniverse-cad-to-simready.md) — Coordinate the end-to-end CAD/source-asset to SimReady workflow

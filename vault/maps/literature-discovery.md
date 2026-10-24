@@ -26,7 +26,7 @@ created: 2026-06-13
 - [exa-search](../notes/literature-discovery/exa-search.md) — Searches scientific and technical web content with Exa and extracts page or PDF text from URLs in batches
 - [lit-synthesizer](../notes/literature-discovery/lit-synthesizer.md) — Search PubMed and bioRxiv for bioinformatics literature, synthesise results into a structured report, and build a citation graph — all locally, with a reproducibility bundle
 - [literature-review](../notes/literature-discovery/literature-review.md) — Conducts systematic, scoping, and narrative literature reviews using PubMed, arXiv, bioRxiv, Semantic Scholar, and other appropriate sources
-- [ncbi-pmc-skill](../notes/literature-discovery/ncbi-pmc-skill.md) — Submit compact NCBI PMC Open Access requests for article/file availability metadata
+- [ncbi-pmc-skill](../notes/literature-discovery/ncbi-pmc-skill.md) — Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi
 - [open-notebook](../notes/literature-discovery/open-notebook.md) — Organizes research with the self-hosted Open Notebook alternative to NotebookLM
 - [paper-lookup](../notes/literature-discovery/paper-lookup.md) — Searches 18 scholarly APIs for papers, preprints, citations, open-access full text, repository records, and journal OA status, and returns results with reproducible provenance
 - [paperzilla](../notes/literature-discovery/paperzilla.md) — Reads projects, searches project feeds, and retrieves recommendations and canonical papers in Paperzilla through the pz CLI

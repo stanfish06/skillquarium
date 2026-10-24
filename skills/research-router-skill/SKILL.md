@@ -81,7 +81,7 @@ Examples:
 - clinical and translational:
   `clinicaltrials-skill`, `cbioportal-skill`, `civic-skill`
 - literature and dataset discovery:
-  `ncbi-entrez-skill`, `ncbi-pmc-skill`, `biorxiv-skill`, `biostudies-arrayexpress-skill`, `ncbi-datasets-skill`
+  `ncbi-entrez-skill`, `paper-lookup` (eligible PMC full text), `biorxiv-skill`, `biostudies-arrayexpress-skill`, `ncbi-datasets-skill`
 
 Prefer direct lookups before expensive multi-step chains.
 
