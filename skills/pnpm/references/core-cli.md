@@ -39,7 +39,7 @@ pnpm clean --lockfile            # also delete pnpm-lock.yaml
 
 ```bash
 pnpm run <script>        # or just: pnpm <script>
-pnpm run build -- --watch
+pnpm run build --watch
 pnpm run --if-present build
 pnpm set-script test "vitest run"   # add/update a scripts entry (alias: ss)
 pnpm exec <cmd>          # run a local binary, e.g. pnpm exec eslint .

@@ -9,6 +9,16 @@ Best practices for using pnpm in CI/CD environments for fast, reliable builds.
 
 > **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).
 
+## Pin the project version
+
+The examples below require a committed `packageManager` field matching the pnpm version that generated `pnpm-lock.yaml`. For example:
+
+```json
+{ "packageManager": "pnpm@12.11.2" }
+```
+
+Use your project's tested exact version. GitHub Actions reads this pin, and GitLab prepares that same version instead of resolving `latest`.
+
 ## Installing pnpm in CI
 
 Outside GitHub Actions (which has its own action), the docs now recommend the **standalone install script** over Corepack:
@@ -43,8 +53,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - uses: actions/setup-node@v4
         with:
@@ -64,8 +72,6 @@ For larger projects, cache the pnpm store:
 
 ```yaml
 - uses: pnpm/action-setup@v4
-  with:
-    version: 10
 
 - name: Get pnpm store directory
   shell: bash
@@ -109,7 +115,7 @@ jobs:
 ## GitLab CI
 
 ```yaml
-image: node:20
+image: node:24
 
 stages:
   - install
@@ -118,11 +124,11 @@ stages:
 
 variables:
   PNPM_HOME: /root/.local/share/pnpm
-  PATH: $PNPM_HOME:$PATH
+  PATH: $PNPM_HOME/bin:$PATH
 
 before_script:
   - corepack enable
-  - corepack prepare pnpm@latest --activate
+  - corepack prepare "$(node -p 'require("./package.json").packageManager')" --activate
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -132,17 +138,18 @@ cache:
 install:
   stage: install
   script:
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install --frozen-lockfile
+    - pnpm install --frozen-lockfile --store-dir .pnpm-store
 
 test:
   stage: test
   script:
+    - pnpm install --frozen-lockfile --store-dir .pnpm-store
     - pnpm test
 
 build:
   stage: build
   script:
+    - pnpm install --frozen-lockfile --store-dir .pnpm-store
     - pnpm build
 ```
 
@@ -151,6 +158,8 @@ build:
 > **PATH change (v11):** global pnpm binaries now live in `$PNPM_HOME/bin`. In Docker set `ENV PATH="$PNPM_HOME/bin:$PATH"` (not `$PNPM_HOME`). There is also an official image `ghcr.io/pnpm/pnpm:<version>` (Debian slim, pnpm only — choose Node yourself via `pnpm runtime set node <ver> -g` or `devEngines.runtime`).
 
 ### Multi-Stage Build
+
+This example assumes a root app at `dist/index.js` plus workspace packages `core` and `api`, each building its runtime files into `dist/`. Include every workspace manifest and runtime asset your app needs; the explicit copies preserve package paths. Exclude `node_modules` from the build context with `.dockerignore`.
 
 ```dockerfile
 # Build stage
@@ -163,7 +172,8 @@ WORKDIR /app
 
 # Copy package files first for layer caching
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY packages/*/package.json ./packages/
+COPY packages/core/package.json ./packages/core/
+COPY packages/api/package.json ./packages/api/
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -173,14 +183,17 @@ COPY . .
 RUN pnpm build
 
 # Production stage
-FROM node:20-slim AS runner
+FROM node:24-slim AS runner
 
 RUN corepack enable
 WORKDIR /app
 
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/pnpm-lock.yaml ./
+COPY --from=builder /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./
+COPY --from=builder /app/packages/core/package.json ./packages/core/
+COPY --from=builder /app/packages/core/dist ./packages/core/dist
+COPY --from=builder /app/packages/api/package.json ./packages/api/
+COPY --from=builder /app/packages/api/dist ./packages/api/dist
 
 # Production install
 RUN pnpm install --frozen-lockfile --prod
@@ -191,12 +204,12 @@ CMD ["node", "dist/index.js"]
 ### Optimized for Monorepos
 
 ```dockerfile
-FROM node:20-slim AS builder
+FROM node:24-slim AS builder
 RUN corepack enable
 WORKDIR /app
 
-# Copy workspace config
-COPY pnpm-lock.yaml pnpm-workspace.yaml ./
+# Copy root and workspace config
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Copy all package.json files maintaining structure
 COPY packages/core/package.json ./packages/core/
@@ -243,8 +256,7 @@ pnpm install --frozen-lockfile --ignore-scripts
 Pin with `packageManager` (exact) or `devEngines.packageManager` (range, resolved version stored in the lockfile):
 
 ```json
-// package.json
-{ "packageManager": "pnpm@10.0.0" }
+{ "packageManager": "pnpm@12.11.2" }
 ```
 
 The standalone install script and `pnpm/action-setup` both honor this pin. To skip the pin check when version management is external (asdf/mise/Volta), set `pmOnFail: ignore` in `pnpm-workspace.yaml`, or run a one-off with `pnpm with current <cmd>`.

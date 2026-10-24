@@ -48,11 +48,11 @@ pnpm add crate:serde
 pnpm add crate:serde@^1.0.200
 ```
 
-- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. It writes a source-replacement block into `.cargo/config.toml` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).
-- `cargo build` then compiles **offline** against vendored sources; pnpm compiles nothing.
+- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. Source replacements go in `.pnpm/crates/config.toml`; `.cargo/config.toml` receives an optional `[[include]]` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).
+- Cargo 1.95+ reads that include, so `cargo build` compiles **offline** against vendored sources; pnpm compiles nothing.
 - Crates are recorded only in `Cargo.lock`, never `pnpm-lock.yaml`. `--lockfile-only`/`--frozen-lockfile`/`--offline` apply.
 - **Registry:** declare a sparse index via `registries` with `ecosystem: cargo` (default crates.io); only one index per workspace. `cargo.indexUrl` is no longer supported. Auth reuses URL-scoped credentials plus `CARGO_REGISTRY_TOKEN`/`$CARGO_HOME/credentials.toml`.
-- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds; workspaces with overrides/git deps require the default crates.io index.
+- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds. Resolving them through pnpm requires the default crates.io sparse index; with a custom index, generate and commit `Cargo.lock` using Cargo before installing with pnpm.
 - Reuse Cargo build state across runs/worktrees with `pnpm pipeline` and `tasks.<name>.cargoTargetDir`.
 
 ## pnpr acceleration

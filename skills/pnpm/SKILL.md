@@ -11,7 +11,7 @@ pnpm is a fast, disk space efficient package manager. It uses a content-addressa
 
 **pnpm v12 is a Rust rewrite** of v11: stable, and keeps v11's commands, flags, settings, and lockfile format — so most guidance here applies to both. A handful of v12 behaviors differ (git deps resolve via HTTPS, project-aware global bins, other package managers, `packageImportMethod: auto` hardlinks first on Linux, `--resolution-only` removed) — see best-practices-migration.
 
-**Configuration model (important):** pnpm settings live in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` is used **only** for authentication/registry credentials, and the `pnpm` field of `package.json` is no longer read. When working in a pnpm project, check `pnpm-workspace.yaml` for settings/workspace structure and `.npmrc` only for auth. Always use `--frozen-lockfile` (or `pnpm ci`) in CI.
+**Configuration model:** put pnpm settings in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Check both files before migrating configuration; the `pnpm` field of `package.json` is no longer read. Always use `--frozen-lockfile` (or `pnpm ci`) in CI.
 
 > The skill is based on pnpm 12.x, generated at 2026-09-25. It covers v11+v12 behavior (config split, isolated global packages, `allowBuilds`, `pmOnFail`, global virtual store, native release management, workspace task orchestration, and experimental Python/Cargo support) where current docs describe them.
 

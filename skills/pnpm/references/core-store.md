@@ -57,10 +57,10 @@ Store/linker settings live in `pnpm-workspace.yaml` (camelCase), not `.npmrc`.
 ### Store Location
 
 ```yaml title="pnpm-workspace.yaml"
-storeDir: ~/.local/share/pnpm/store
+storeDir: /absolute/path/to/pnpm/store
 ```
 
-The default store path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS). Find it with `pnpm store path`.
+Replace the placeholder with an absolute path on the project's filesystem. The default path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS) and may move to the project's volume for hard links. Check the effective location with `pnpm store path`; an explicit store on another filesystem requires copies.
 
 ### Virtual Store
 

@@ -2276,6 +2276,278 @@
       "file": "references/core-cli.md",
       "find": "pnpm --filter \"...@scope/app\" build   # package + its dependencies\npnpm --filter \"@scope/core...\" test   # package + its dependents",
       "replace": "pnpm --filter \"@scope/app...\" build   # package + its dependencies\npnpm --filter \"...@scope/core\" test   # package + its dependents"
+    },
+    {
+      "id": "gitlab-install-in-each-job",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "install:\n  stage: install\n  script:\n    - pnpm config set store-dir .pnpm-store\n    - pnpm install --frozen-lockfile\n\ntest:\n  stage: test\n  script:\n    - pnpm test\n\nbuild:\n  stage: build\n  script:\n    - pnpm build",
+      "replace": "install:\n  stage: install\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n\ntest:\n  stage: test\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n    - pnpm test\n\nbuild:\n  stage: build\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n    - pnpm build"
+    },
+    {
+      "id": "script-watch-argument-forwarding",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-cli.md",
+      "find": "pnpm run build -- --watch",
+      "replace": "pnpm run build --watch"
+    },
+    {
+      "id": "git-fork-dependency-protocol",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-aliases.md",
+      "find": "\"my-fork\": \"npm:user/repo#commit\"",
+      "replace": "\"my-fork\": \"github:user/repo#commit\""
+    },
+    {
+      "id": "auth-config-locations",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "| **Auth & registry credentials** (`_authToken`, `cert`, `key`, …) | `.npmrc` (project, gitignored) and global `rc` | INI |",
+      "replace": "| **Registry credentials and TLS** (`_authToken`, `cert`, `key`, …) | Project `.npmrc` for literal settings; user-level `auth.ini`/`~/.npmrc` for interpolated auth; global `config.yaml` for `_auth` | INI or structured YAML |"
+    },
+    {
+      "id": "global-auth-file-location",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "The companion global `rc` file (same directory, named `rc`) holds only registry/auth settings.",
+      "replace": "The companion `auth.ini` in the same directory holds user-level INI auth settings written by `pnpm config set`. Since pnpm v12.1, `pnpm login` saves tokens in the global `config.yaml` under `_auth`. The legacy global `rc` file remains readable for registry/auth compatibility."
+    },
+    {
+      "id": "interpolated-auth-user-file",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "Keep auth tokens out of the repo (gitignore the project `.npmrc`). Auth files, highest priority first:\n\n1. `<workspace root>/.npmrc` (project, gitignored)\n2. `<pnpm config>/auth.ini` (written by `pnpm login`)\n3. `~/.npmrc` (fallback for npm compatibility)\n\n```ini title=\".npmrc\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n@myorg:registry=https://npm.myorg.com/\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```",
+      "replace": "Keep secret values out of git. Project `.npmrc` files can contain literal auth settings and non-secret registry URLs, but pnpm ignores interpolated credentials there. Auth files, highest priority first:\n\n1. `<workspace root>/.npmrc` (project; gitignore files containing secrets)\n2. `<pnpm config>/auth.ini` (written by `pnpm config set` for auth keys)\n3. `~/.npmrc` (user-level fallback for npm compatibility)\n\nPut environment-variable token references in a user-level auth file:\n\n```ini title=\"~/.npmrc (user-level auth)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```\n\nNon-secret static registry routing can remain in a project `.npmrc`:\n\n```ini title=\".npmrc (project; no secrets)\"\n@myorg:registry=https://npm.myorg.com/\n```\n\nIn CI, use a user-level auth file or the structured authentication environment variable below. Do not move interpolated token lines into the project file."
+    },
+    {
+      "id": "auth-config-command-comment",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "# Writes to global config.yaml / rc by default",
+      "replace": "# Writes settings to global config.yaml; INI auth keys go to auth.ini"
+    },
+    {
+      "id": "qualify-npmrc-configuration-model",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "SKILL.md",
+      "find": "**Configuration model (important):** pnpm settings live in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` is used **only** for authentication/registry credentials, and the `pnpm` field of `package.json` is no longer read. When working in a pnpm project, check `pnpm-workspace.yaml` for settings/workspace structure and `.npmrc` only for auth. Always use `--frozen-lockfile` (or `pnpm ci`) in CI.",
+      "replace": "**Configuration model:** put pnpm settings in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Check both files before migrating configuration; the `pnpm` field of `package.json` is no longer read. Always use `--frozen-lockfile` (or `pnpm ci`) in CI."
+    },
+    {
+      "id": "qualify-npmrc-description",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "description: Configuring pnpm via pnpm-workspace.yaml (settings), the global config.yaml, and .npmrc (auth only)",
+      "replace": "description: Configuring pnpm via pnpm-workspace.yaml, global config.yaml, and npm-compatible registry, auth, and certificate settings"
+    },
+    {
+      "id": "qualify-npmrc-settings",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`, and `.npmrc` is now used **only** for authentication/registry credentials. Everything else belongs in `pnpm-workspace.yaml`. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files.",
+      "replace": "> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`. Put pnpm/install settings in `pnpm-workspace.yaml`; `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files."
+    },
+    {
+      "id": "qualify-npmrc-heading",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "## .npmrc — authentication only",
+      "replace": "## .npmrc — registry, authentication, and certificates"
+    },
+    {
+      "id": "scope-structured-auth-trust-claim",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "so a checked-out repo can never supply auth.",
+      "replace": "so a checked-out repo cannot define this structured credential map."
+    },
+    {
+      "id": "compatible-package-manager-policies",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "  \"packageManager\": \"pnpm@10.0.0\",\n  \"devEngines\": {\n    \"packageManager\": { \"name\": \"pnpm\", \"version\": \">=11.0.0 <12.0.0\", \"onFail\": \"download\" },",
+      "replace": "  \"packageManager\": \"pnpm@12.11.2\",\n  \"devEngines\": {\n    \"packageManager\": { \"name\": \"pnpm\", \"version\": \">=12.0.0 <13.0.0\", \"onFail\": \"download\" },"
+    },
+    {
+      "id": "qualify-npmrc-key-point",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "- All pnpm settings go in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; `.npmrc` is auth/registry only.",
+      "replace": "- Put pnpm settings in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; retain supported registry/auth, certificate, and legacy network settings in INI files when needed."
+    },
+    {
+      "id": "current-pnpm-release-line",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "> `latest` on npm still points at the v11 line; install v12 from the `latest-12` tag until it graduates.",
+      "replace": "> pnpm 12 is the current release line, and npm's `latest` tag points to it. Pin the exact version used to generate your project's lockfile."
+    },
+    {
+      "id": "migration-preserves-npmrc-certificates",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "- **Splits `.npmrc`**: only auth/registry settings stay in `.npmrc`; every other key moves to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Per-subproject `.npmrc` files become `packageConfigs[\"<name>\"]`.",
+      "replace": "- **Splits `.npmrc`**: pnpm/install settings move to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Registry/authentication and certificate settings remain supported in INI files; check legacy network settings before migrating. Per-subproject pnpm settings become `packageConfigs[\"<name>\"]`."
+    },
+    {
+      "id": "migration-interpolated-auth-user-file",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "Keep only **auth/registry** in `.npmrc`; put everything else in `pnpm-workspace.yaml` (camelCase).\n\n```ini title=\".npmrc (auth only, gitignored)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```",
+      "replace": "Put pnpm/install settings in `pnpm-workspace.yaml` (camelCase). Registry/authentication and certificate settings remain supported in INI files. Static non-secret registry URLs may stay in a project `.npmrc`; environment-variable credentials must use a user-level auth file or `pnpm_config__auth`. Keep secret values out of git.\n\n```ini title=\"~/.npmrc (user-level auth)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```"
+    },
+    {
+      "id": "valid-before-after-script-json",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "```json\n{\n  \"scripts\": {\n    // npm: recursive scripts\n    \"build:all\": \"npm run build --workspaces\",\n    // pnpm: use -r flag\n    \"build:all\": \"pnpm -r run build\",\n    \n    // npm: run in specific workspace  \n    \"dev:app\": \"npm run dev -w packages/app\",\n    // pnpm: use --filter\n    \"dev:app\": \"pnpm --filter @myorg/app run dev\"\n  }\n}\n```",
+      "replace": "Before (npm):\n\n```json\n{\n  \"scripts\": {\n    \"build:all\": \"npm run build --workspaces\",\n    \"dev:app\": \"npm run dev -w packages/app\"\n  }\n}\n```\n\nAfter (pnpm):\n\n```json\n{\n  \"scripts\": {\n    \"build:all\": \"pnpm -r run build\",\n    \"dev:app\": \"pnpm --filter @myorg/app run dev\"\n  }\n}\n```"
+    },
+    {
+      "id": "migration-pin-current-major",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "Add to `package.json` for Corepack:\n```json\n{\n  \"packageManager\": \"pnpm@10.0.0\"\n}\n```",
+      "replace": "Pin the exact pnpm version used to generate the lockfile in `package.json` (12.11.2 is an example):\n\n```json\n{\n  \"packageManager\": \"pnpm@12.11.2\"\n}\n```"
+    },
+    {
+      "id": "cargo-generated-config-include",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-multi-ecosystem.md",
+      "find": "- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. It writes a source-replacement block into `.cargo/config.toml` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).\n- `cargo build` then compiles **offline** against vendored sources; pnpm compiles nothing.",
+      "replace": "- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. Source replacements go in `.pnpm/crates/config.toml`; `.cargo/config.toml` receives an optional `[[include]]` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).\n- Cargo 1.95+ reads that include, so `cargo build` compiles **offline** against vendored sources; pnpm compiles nothing."
+    },
+    {
+      "id": "cargo-custom-index-with-existing-lock",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-multi-ecosystem.md",
+      "find": "- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds; workspaces with overrides/git deps require the default crates.io index.",
+      "replace": "- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds. Resolving them through pnpm requires the default crates.io sparse index; with a custom index, generate and commit `Cargo.lock` using Cargo before installing with pnpm."
+    },
+    {
+      "id": "explicit-absolute-store-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-store.md",
+      "find": "storeDir: ~/.local/share/pnpm/store",
+      "replace": "storeDir: /absolute/path/to/pnpm/store"
+    },
+    {
+      "id": "explain-explicit-store-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-store.md",
+      "find": "The default store path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS). Find it with `pnpm store path`.",
+      "replace": "Replace the placeholder with an absolute path on the project's filesystem. The default path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS) and may move to the project's volume for hard links. Check the effective location with `pnpm store path`; an explicit store on another filesystem requires copies."
+    },
+    {
+      "id": "ci-project-version-prerequisite",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "---\nname: pnpm-ci-cd-setup\ndescription: Optimizing pnpm for continuous integration and deployment workflows\n---\n\n# pnpm CI/CD Setup\n\nBest practices for using pnpm in CI/CD environments for fast, reliable builds.\n\n> **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).\n\n## Installing pnpm in CI",
+      "replace": "---\nname: pnpm-ci-cd-setup\ndescription: Optimizing pnpm for continuous integration and deployment workflows\n---\n\n# pnpm CI/CD Setup\n\nBest practices for using pnpm in CI/CD environments for fast, reliable builds.\n\n> **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).\n\n## Pin the project version\n\nThe examples below require a committed `packageManager` field matching the pnpm version that generated `pnpm-lock.yaml`. For example:\n\n```json\n{ \"packageManager\": \"pnpm@12.11.2\" }\n```\n\nUse your project's tested exact version. GitHub Actions reads this pin, and GitLab prepares that same version instead of resolving `latest`.\n\n## Installing pnpm in CI"
+    },
+    {
+      "id": "github-use-project-pin-basic",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "      - uses: pnpm/action-setup@v4\n        with:\n          version: 10",
+      "replace": "      - uses: pnpm/action-setup@v4"
+    },
+    {
+      "id": "github-use-project-pin-cache",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "- uses: pnpm/action-setup@v4\n  with:\n    version: 10",
+      "replace": "- uses: pnpm/action-setup@v4"
+    },
+    {
+      "id": "gitlab-use-project-pin",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "image: node:20\n\nstages:",
+      "replace": "image: node:24\n\nstages:"
+    },
+    {
+      "id": "gitlab-pnpm-bin-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "  PATH: $PNPM_HOME:$PATH",
+      "replace": "  PATH: $PNPM_HOME/bin:$PATH"
+    },
+    {
+      "id": "gitlab-prepare-project-exact-version",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "  - corepack prepare pnpm@latest --activate",
+      "replace": "  - corepack prepare \"$(node -p 'require(\"./package.json\").packageManager')\" --activate"
+    },
+    {
+      "id": "docker-workspace-layout-prerequisite",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "### Multi-Stage Build\n\n```dockerfile",
+      "replace": "### Multi-Stage Build\n\nThis example assumes a root app at `dist/index.js` plus workspace packages `core` and `api`, each building its runtime files into `dist/`. Include every workspace manifest and runtime asset your app needs; the explicit copies preserve package paths. Exclude `node_modules` from the build context with `.dockerignore`.\n\n```dockerfile"
+    },
+    {
+      "id": "docker-preserve-workspace-manifest-paths",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "COPY packages/*/package.json ./packages/",
+      "replace": "COPY packages/core/package.json ./packages/core/\nCOPY packages/api/package.json ./packages/api/"
+    },
+    {
+      "id": "docker-runner-workspace-metadata",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "FROM node:20-slim AS runner\n\nRUN corepack enable\nWORKDIR /app\n\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/package.json ./\nCOPY --from=builder /app/pnpm-lock.yaml ./",
+      "replace": "FROM node:24-slim AS runner\n\nRUN corepack enable\nWORKDIR /app\n\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./\nCOPY --from=builder /app/packages/core/package.json ./packages/core/\nCOPY --from=builder /app/packages/core/dist ./packages/core/dist\nCOPY --from=builder /app/packages/api/package.json ./packages/api/\nCOPY --from=builder /app/packages/api/dist ./packages/api/dist"
+    },
+    {
+      "id": "docker-monorepo-root-manifest",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "FROM node:20-slim AS builder\nRUN corepack enable\nWORKDIR /app\n\n# Copy workspace config\nCOPY pnpm-lock.yaml pnpm-workspace.yaml ./",
+      "replace": "FROM node:24-slim AS builder\nRUN corepack enable\nWORKDIR /app\n\n# Copy root and workspace config\nCOPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./"
+    },
+    {
+      "id": "ci-pin-current-major",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "```json\n// package.json\n{ \"packageManager\": \"pnpm@10.0.0\" }\n```",
+      "replace": "```json\n{ \"packageManager\": \"pnpm@12.11.2\" }\n```"
     }
   ],
   "deno": [
@@ -2285,6 +2557,73 @@
       "source": "denoland/skills",
       "find": "To convert an existing project, see the `migrate-to-deno` skill.",
       "replace": "To convert an existing project, consult the [Node/npm compatibility guidance](https://docs.deno.com/runtime/fundamentals/node/)."
+    },
+    {
+      "id": "hoisted-linker-manual-mode",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "{ \"nodeModulesLinker\": \"hoisted\" }\n```\n\n`nodeModulesDir` applies only to projects without a `package.json`, so it is\nrarely the right knob.",
+      "replace": "{ \"nodeModulesDir\": \"manual\", \"nodeModulesLinker\": \"hoisted\" }\n```\n\nThe hoisted linker requires `nodeModulesDir: \"manual\"`. `nodeModulesDir`\ncontrols whether Deno creates and manages a local `node_modules`, including\nprojects with a `package.json`; run `deno install` to populate it in manual mode."
+    },
+    {
+      "id": "eval-permissions-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Deno grants no filesystem, network, environment, or subprocess access unless\nasked.",
+      "replace": "`deno run` grants no filesystem, network, environment, or subprocess access\nunless asked. `deno eval` has all permissions implicitly and does not accept\nscoped `--allow-*` flags. Use `deno run` with explicit grants when access must\nbe restricted."
+    },
+    {
+      "id": "workspace-glob-semantics",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Members are explicit or single-level globs (`\"packages/*\"`); `**` and negation\nare unsupported. Run a task across members with `deno task --filter '*' build`.",
+      "replace": "Members can be explicit paths or globs: `\"packages/*\"` matches one level,\n`\"packages/*/*\"` matches two, and `\"packages/**\"` recurses. Prefix a pattern\nwith `!` to exclude matching members. Run a task across members with\n`deno task --filter '*' build`."
+    },
+    {
+      "id": "create-prefixed-initializer-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "deno create vite my-app       # scaffold from a package initializer\n```\n\n`deno create` is `npm create` / `yarn create` and covers that ecosystem\n(`deno create astro`, etc). Unprefixed names are npm; `--jsr` selects JSR.",
+      "replace": "deno create npm:vite -- my-app # scaffold from a package initializer\n```\n\n`deno create` is `npm create` / `yarn create` and covers that ecosystem\n(`deno create npm:astro`, etc). Use an `npm:` or `jsr:` prefix, or select\nunprefixed names with `--npm` or `--jsr`. Pass initializer arguments after `--`."
+    },
+    {
+      "id": "bump-version-workspace-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Provenance attestation is automatic on GitHub Actions. `deno bump-version patch`\nbumps the version, across every member at a workspace root.",
+      "replace": "Provenance attestation is automatic on GitHub Actions. `deno bump-version patch`\nbumps a single package, or each versioned JSR package in workspace mode."
+    },
+    {
+      "id": "create-initializer-args-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "| `deno create <pkg> <dir>` | Scaffold from a package initializer |",
+      "replace": "| `deno create npm:<pkg> -- <dir>` | Scaffold from a package initializer |",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "create-prefixed-initializer-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "`deno create` is the `npm create` / `yarn create` equivalent and covers that\nwhole ecosystem: `deno create vite`, `deno create astro`, and so on. Unprefixed\nnames are treated as npm packages; `--jsr` selects JSR, and `-y` bypasses the\nprompt and runs with full permissions.",
+      "replace": "`deno create` is the `npm create` / `yarn create` equivalent and covers that\nwhole ecosystem: `deno create npm:vite`, `deno create npm:astro`, and so on.\nUse an `npm:` or `jsr:` prefix, or select unprefixed names with `--npm` or\n`--jsr`. Pass initializer arguments after `--`, for example\n`deno create npm:vite -- my-app`. `-y` bypasses the prompt and runs with full\npermissions.",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "bump-version-workspace-only-inference-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "`deno bump-version` takes `major`, `minor`, `patch`, `premajor`, `preminor`,\n`prepatch`, `prerelease`. At a workspace root it applies to every member and\nrewrites `jsr:` references in the root import map. With no increment it derives\nper-package bumps from conventional commits since the last tag and prepends a\nrelease note to `Releases.md`.",
+      "replace": "`deno bump-version` takes `major`, `minor`, `patch`, `premajor`, `preminor`,\n`prepatch`, `prerelease`. Single-package mode with no increment prints the\ncurrent version without changing files. Workspace mode is selected at the\nworkspace root when more than one JSR package is present, or with `--workspace`;\n`--config` targets one manifest. Workspace mode updates versioned JSR packages\nand rewrites `jsr:` references in the root import map. Only workspace mode with\nno increment derives per-package bumps from conventional commits since the\nlast tag and prepends a release note to `Releases.md`.",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "eval-permissions-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Applies to `run`, `serve`, `test`, `bench`, `compile`, and `eval`.",
+      "replace": "Applies to `run`, `serve`, `test`, `bench`, and `compile`. `deno eval` has all\npermissions implicitly and does not accept scoped `--allow-*` flags. Use\n`deno run` with explicit grants when access must be restricted.",
+      "file": "references/CLI.md"
     }
   ]
 }

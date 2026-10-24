@@ -133,12 +133,14 @@ and Markdown blocks — a good way to keep documentation examples honest.
 | `deno init <dir>`         | Script, test, and `deno.json`       |
 | `deno init --empty <dir>` | Just `main.ts` and `deno.json`      |
 | `deno init --lib <dir>`   | Library laid out for JSR publishing |
-| `deno create <pkg> <dir>` | Scaffold from a package initializer |
+| `deno create npm:<pkg> -- <dir>` | Scaffold from a package initializer |
 
 `deno create` is the `npm create` / `yarn create` equivalent and covers that
-whole ecosystem: `deno create vite`, `deno create astro`, and so on. Unprefixed
-names are treated as npm packages; `--jsr` selects JSR, and `-y` bypasses the
-prompt and runs with full permissions.
+whole ecosystem: `deno create npm:vite`, `deno create npm:astro`, and so on.
+Use an `npm:` or `jsr:` prefix, or select unprefixed names with `--npm` or
+`--jsr`. Pass initializer arguments after `--`, for example
+`deno create npm:vite -- my-app`. `-y` bypasses the prompt and runs with full
+permissions.
 
 ## Publishing
 
@@ -154,17 +156,22 @@ Provenance is on by default in GitHub Actions, publicly linking the package to
 the build that produced it; `--no-provenance` disables it.
 
 `deno bump-version` takes `major`, `minor`, `patch`, `premajor`, `preminor`,
-`prepatch`, `prerelease`. At a workspace root it applies to every member and
-rewrites `jsr:` references in the root import map. With no increment it derives
-per-package bumps from conventional commits since the last tag and prepends a
-release note to `Releases.md`.
+`prepatch`, `prerelease`. Single-package mode with no increment prints the
+current version without changing files. Workspace mode is selected at the
+workspace root when more than one JSR package is present, or with `--workspace`;
+`--config` targets one manifest. Workspace mode updates versioned JSR packages
+and rewrites `jsr:` references in the root import map. Only workspace mode with
+no increment derives per-package bumps from conventional commits since the
+last tag and prepends a release note to `Releases.md`.
 
 `deno pack` flags: `--dry-run`, `--output`, `--set-version`, `--ignore`,
 `--no-source-maps`, `--allow-dirty`.
 
 ## Permissions
 
-Applies to `run`, `serve`, `test`, `bench`, `compile`, and `eval`.
+Applies to `run`, `serve`, `test`, `bench`, and `compile`. `deno eval` has all
+permissions implicitly and does not accept scoped `--allow-*` flags. Use
+`deno run` with explicit grants when access must be restricted.
 
 | Flag                         | Short | Grants                      |
 | ---------------------------- | ----- | --------------------------- |

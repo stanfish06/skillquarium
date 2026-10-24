@@ -101,16 +101,19 @@ by symlinks, so a package can't import what it never declared. For a tool that
 needs npm's flat hoisted tree:
 
 ```json
-{ "nodeModulesLinker": "hoisted" }
+{ "nodeModulesDir": "manual", "nodeModulesLinker": "hoisted" }
 ```
 
-`nodeModulesDir` applies only to projects without a `package.json`, so it is
-rarely the right knob.
+The hoisted linker requires `nodeModulesDir: "manual"`. `nodeModulesDir`
+controls whether Deno creates and manages a local `node_modules`, including
+projects with a `package.json`; run `deno install` to populate it in manual mode.
 
 ## Permissions
 
-Deno grants no filesystem, network, environment, or subprocess access unless
-asked.
+`deno run` grants no filesystem, network, environment, or subprocess access
+unless asked. `deno eval` has all permissions implicitly and does not accept
+scoped `--allow-*` flags. Use `deno run` with explicit grants when access must
+be restricted.
 
 ```bash
 deno run --allow-net=api.example.com --allow-read=./data main.ts
@@ -169,8 +172,10 @@ migrated into `deno.json` on first run, which must then be re-run.
 { "workspace": ["./packages/core", "./packages/cli"] }
 ```
 
-Members are explicit or single-level globs (`"packages/*"`); `**` and negation
-are unsupported. Run a task across members with `deno task --filter '*' build`.
+Members can be explicit paths or globs: `"packages/*"` matches one level,
+`"packages/*/*"` matches two, and `"packages/**"` recurses. Prefix a pattern
+with `!` to exclude matching members. Run a task across members with
+`deno task --filter '*' build`.
 
 ## Packages: npm and JSR
 
@@ -239,11 +244,12 @@ Scaffold rather than hand-writing the files:
 deno init my-project          # script + test + deno.json
 deno init --empty my-project  # just main.ts and deno.json
 deno init --lib my-lib        # library laid out for JSR
-deno create vite my-app       # scaffold from a package initializer
+deno create npm:vite -- my-app # scaffold from a package initializer
 ```
 
 `deno create` is `npm create` / `yarn create` and covers that ecosystem
-(`deno create astro`, etc). Unprefixed names are npm; `--jsr` selects JSR.
+(`deno create npm:astro`, etc). Use an `npm:` or `jsr:` prefix, or select
+unprefixed names with `--npm` or `--jsr`. Pass initializer arguments after `--`.
 
 ## Publishing
 
@@ -257,7 +263,7 @@ deno publish
 ```
 
 Provenance attestation is automatic on GitHub Actions. `deno bump-version patch`
-bumps the version, across every member at a workspace root.
+bumps a single package, or each versioned JSR package in workspace mode.
 
 Guide: <https://docs.deno.com/runtime/reference/cli/publish/>
 

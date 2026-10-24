@@ -142,7 +142,7 @@ Aliases work with any valid pnpm specifier:
 ```json
 {
   "dependencies": {
-    "my-fork": "npm:user/repo#commit",
+    "my-fork": "github:user/repo#commit",
     "local-pkg": "file:../local-package"
   }
 }

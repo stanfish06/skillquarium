@@ -1,6 +1,6 @@
 ---
 name: pnpm-configuration
-description: Configuring pnpm via pnpm-workspace.yaml (settings), the global config.yaml, and .npmrc (auth only)
+description: Configuring pnpm via pnpm-workspace.yaml, global config.yaml, and npm-compatible registry, auth, and certificate settings
 ---
 
 # pnpm Configuration
@@ -10,9 +10,9 @@ pnpm settings are split into **two** categories. Knowing where each goes is the 
 | Category | Stored in | Format |
 |----------|-----------|--------|
 | **All pnpm/install settings** (`nodeLinker`, `hoistPattern`, `autoInstallPeers`, `overrides`, `catalog`, …) | `pnpm-workspace.yaml` (project) and `config.yaml` (global) | YAML, **camelCase** keys |
-| **Auth & registry credentials** (`_authToken`, `cert`, `key`, …) | `.npmrc` (project, gitignored) and global `rc` | INI |
+| **Registry credentials and TLS** (`_authToken`, `cert`, `key`, …) | Project `.npmrc` for literal settings; user-level `auth.ini`/`~/.npmrc` for interpolated auth; global `config.yaml` for `_auth` | INI or structured YAML |
 
-> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`, and `.npmrc` is now used **only** for authentication/registry credentials. Everything else belongs in `pnpm-workspace.yaml`. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files.
+> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`. Put pnpm/install settings in `pnpm-workspace.yaml`; `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files.
 
 > The upstream settings reference is now split into pages by area — `settings/build`, `settings/cli`, `settings/dependency-resolution`, `settings/network`, `settings/node-modules`, `settings/store`, `settings/peer-dependencies`, `settings/versioning`, `settings/other` — but they are all the same camelCase keys in `pnpm-workspace.yaml`.
 
@@ -73,7 +73,7 @@ User-level non-auth settings live in a global YAML `config.yaml`:
 - macOS: `~/Library/Preferences/pnpm/config.yaml`
 - Windows: `~/AppData/Local/pnpm/config/config.yaml`
 
-The companion global `rc` file (same directory, named `rc`) holds only registry/auth settings.
+The companion `auth.ini` in the same directory holds user-level INI auth settings written by `pnpm config set`. Since pnpm v12.1, `pnpm login` saves tokens in the global `config.yaml` under `_auth`. The legacy global `rc` file remains readable for registry/auth compatibility.
 
 ## Per-project settings in a workspace (packageConfigs)
 
@@ -92,23 +92,32 @@ packageConfigs:
   #   saveExact: true
 ```
 
-## .npmrc — authentication only
+## .npmrc — registry, authentication, and certificates
 
-Keep auth tokens out of the repo (gitignore the project `.npmrc`). Auth files, highest priority first:
+Keep secret values out of git. Project `.npmrc` files can contain literal auth settings and non-secret registry URLs, but pnpm ignores interpolated credentials there. Auth files, highest priority first:
 
-1. `<workspace root>/.npmrc` (project, gitignored)
-2. `<pnpm config>/auth.ini` (written by `pnpm login`)
-3. `~/.npmrc` (fallback for npm compatibility)
+1. `<workspace root>/.npmrc` (project; gitignore files containing secrets)
+2. `<pnpm config>/auth.ini` (written by `pnpm config set` for auth keys)
+3. `~/.npmrc` (user-level fallback for npm compatibility)
 
-```ini title=".npmrc"
+Put environment-variable token references in a user-level auth file:
+
+```ini title="~/.npmrc (user-level auth)"
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
-@myorg:registry=https://npm.myorg.com/
 //npm.myorg.com/:_authToken=${MYORG_TOKEN}
 ```
 
+Non-secret static registry routing can remain in a project `.npmrc`:
+
+```ini title=".npmrc (project; no secrets)"
+@myorg:registry=https://npm.myorg.com/
+```
+
+In CI, use a user-level auth file or the structured authentication environment variable below. Do not move interpolated token lines into the project file.
+
 ### Structured `_auth` (v11.10+, for CI)
 
-An alternative to many `//host/:_authToken=…` lines, keyed by registry URL. Honored **only** from the global `config.yaml` and the `pnpm_config__auth` (or `PNPM_CONFIG__AUTH`) env var — **ignored** in a project `.npmrc`/`pnpm-workspace.yaml`, so a checked-out repo can never supply auth. `pnpm login` writes this shape since v12.1.
+An alternative to many `//host/:_authToken=…` lines, keyed by registry URL. Honored **only** from the global `config.yaml` and the `pnpm_config__auth` (or `PNPM_CONFIG__AUTH`) env var — **ignored** in a project `.npmrc`/`pnpm-workspace.yaml`, so a checked-out repo cannot define this structured credential map. `pnpm login` writes this shape since v12.1.
 
 ```yaml title="config.yaml (global only)"
 _auth:
@@ -137,7 +146,7 @@ namedRegistries:
 ## The `pnpm config` command
 
 ```bash
-# Writes to global config.yaml / rc by default
+# Writes settings to global config.yaml; INI auth keys go to auth.ini
 pnpm config set nodeVersion 22.0.0
 pnpm config set --location=project nodeVersion 22.0.0   # writes pnpm-workspace.yaml
 
@@ -173,9 +182,9 @@ pnpm_config_save_exact=true pnpm add foo
 
 ```json
 {
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@12.11.2",
   "devEngines": {
-    "packageManager": { "name": "pnpm", "version": ">=11.0.0 <12.0.0", "onFail": "download" },
+    "packageManager": { "name": "pnpm", "version": ">=12.0.0 <13.0.0", "onFail": "download" },
     "runtime": { "name": "node", "version": "22.x", "onFail": "download" }
   }
 }
@@ -185,7 +194,7 @@ pnpm_config_save_exact=true pnpm add foo
 
 ## Key Points
 
-- All pnpm settings go in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; `.npmrc` is auth/registry only.
+- Put pnpm settings in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; retain supported registry/auth, certificate, and legacy network settings in INI files when needed.
 - `package.json#pnpm` and `npm_config_*` env vars are no longer read.
 - Use `packageConfigs` for per-package settings inside a workspace.
 - Build-script approval is now one `allowBuilds` map; package-manager strictness is one `pmOnFail` setting.

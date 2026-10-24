@@ -19,7 +19,7 @@ pnpm 12 is a **Rust rewrite** and is stable. It keeps v11's commands, flags, set
 - **Cyclic dependency graphs** produce deterministic lockfiles; the first re-resolving install rewrites cyclic peer variants (one-time diff).
 - **`engineStrict`** now fails when a package depends through regular `dependencies` on an incompatible engine even under an `optionalDependencies` subtree.
 
-> `latest` on npm still points at the v11 line; install v12 from the `latest-12` tag until it graduates.
+> pnpm 12 is the current release line, and npm's `latest` tag points to it. Pin the exact version used to generate your project's lockfile.
 
 ## Upgrading pnpm v10 → v11
 
@@ -33,7 +33,7 @@ pnpx codemod run pnpm-v10-to-v11
 The codemod automatically:
 
 - **Moves `package.json#pnpm` settings into `pnpm-workspace.yaml`** (the `pnpm` field is no longer read).
-- **Splits `.npmrc`**: only auth/registry settings stay in `.npmrc`; every other key moves to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Per-subproject `.npmrc` files become `packageConfigs["<name>"]`.
+- **Splits `.npmrc`**: pnpm/install settings move to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Registry/authentication and certificate settings remain supported in INI files; check legacy network settings before migrating. Per-subproject pnpm settings become `packageConfigs["<name>"]`.
 - **Consolidates build settings** (`onlyBuiltDependencies`, `neverBuiltDependencies`, `ignoredBuiltDependencies`, `onlyBuiltDependenciesFile`) into one `allowBuilds: { name: true|false }` map.
 - **Replaces** `managePackageManagerVersions`/`packageManagerStrict`/`packageManagerStrictVersion` with `pmOnFail: download|ignore|warn|error`.
 - **Renames** `allowNonAppliedPatches` → `allowUnusedPatches`, `auditConfig.ignoreCves` → `auditConfig.ignoreGhsas`.
@@ -237,9 +237,9 @@ pnpm publish -r
 
 ## Configuration Migration
 
-Keep only **auth/registry** in `.npmrc`; put everything else in `pnpm-workspace.yaml` (camelCase).
+Put pnpm/install settings in `pnpm-workspace.yaml` (camelCase). Registry/authentication and certificate settings remain supported in INI files. Static non-secret registry URLs may stay in a project `.npmrc`; environment-variable credentials must use a user-level auth file or `pnpm_config__auth`. Keep secret values out of git.
 
-```ini title=".npmrc (auth only, gitignored)"
+```ini title="~/.npmrc (user-level auth)"
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 //npm.myorg.com/:_authToken=${MYORG_TOKEN}
 ```
@@ -256,17 +256,23 @@ strictPeerDependencies: false
 
 Most scripts work unchanged. Update pnpm-specific patterns:
 
+Before (npm):
+
 ```json
 {
   "scripts": {
-    // npm: recursive scripts
     "build:all": "npm run build --workspaces",
-    // pnpm: use -r flag
+    "dev:app": "npm run dev -w packages/app"
+  }
+}
+```
+
+After (pnpm):
+
+```json
+{
+  "scripts": {
     "build:all": "pnpm -r run build",
-    
-    // npm: run in specific workspace  
-    "dev:app": "npm run dev -w packages/app",
-    // pnpm: use --filter
     "dev:app": "pnpm --filter @myorg/app run dev"
   }
 }
@@ -285,10 +291,11 @@ Update CI configuration:
 - run: pnpm install --frozen-lockfile   # or: pnpm ci
 ```
 
-Add to `package.json` for Corepack:
+Pin the exact pnpm version used to generate the lockfile in `package.json` (12.11.2 is an example):
+
 ```json
 {
-  "packageManager": "pnpm@10.0.0"
+  "packageManager": "pnpm@12.11.2"
 }
 ```
 
