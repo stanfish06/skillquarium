@@ -201,3 +201,49 @@ The Superpowers suite. Use these proactively, not just on request.
   locally, `./skillquarium tokenizer` needs the `skill-tokenizer` binary. Queries need neither.
 - This `AGENTS.md` is the canonical guide; symlink or copy it to wherever each tool looks
   (e.g. a project root, or alongside your tool's global instructions).
+
+### Editing and verifying a skill
+
+Work in a clean checkout or isolated worktree so personal invocation toggles and unrelated
+changes do not enter the PR. Read the complete `skills/<name>/SKILL.md` and the references
+affected by the edit, then verify API and scientific claims against primary sources.
+
+Keep fixes across the next upstream sync:
+
+- For a skill in `.skill-lock.json`, record each local change as an exact `find`/`replace`
+  entry in `.skill-vault/data/local-overrides.json`. The `find` text must stop matching
+  after replacement so repeated applications remain unchanged.
+- For a profile with `metadata.scientific-agents-profile: true`, use
+  `.skill-vault/data/scientific-agent-patches.json` instead. Add its patch IDs under
+  `metadata.local-patches` and preserve the importer's local-overlay provenance note.
+- A locally authored skill without either source mechanism needs no import patch.
+
+Run from the repository root after the edit:
+
+```bash
+git diff --check
+./skillquarium overrides --check
+./skillquarium build
+./skillquarium validate
+```
+
+Commit any navigation changes produced by `build`; do not edit generated `vault/` files by
+hand. Validation must report zero violations. Its orphan-rate and stale-vector warnings
+are separate from violations; report them rather than treating them as test results.
+The CLI is Bun/TypeScript: `.skill-vault/build.py` is not a validation entry point.
+
+If `.skill-vault/` changes, including its patch data or categories, also run the CI checks:
+
+```bash
+bun install --frozen-lockfile --cwd .skill-vault
+bun run --cwd .skill-vault typecheck
+bun run --cwd .skill-vault lint
+bun test --cwd .skill-vault
+```
+
+The tests need case-sensitive temporary filenames. On a case-insensitive macOS volume,
+set `TMPDIR` to a writable case-sensitive volume and use its canonical absolute path.
+Exercise changed scripts and documented commands with representative local inputs; record
+the command, expected result, actual result, and any unavailable external service in the PR.
+When a new skill or description changes, run `./skillquarium embed` if the configured
+endpoint is reachable; otherwise disclose stale vectors and verify lexical discovery.
