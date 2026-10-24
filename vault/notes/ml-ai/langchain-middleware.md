@@ -20,7 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [zod](../../notes/software-dev/zod.md) — Define and validate runtime schemas with Zod in TypeScript or JavaScript
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

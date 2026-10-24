@@ -2062,7 +2062,11 @@
     "docker-sandboxes-env": "cloud-devops",
     "docker-sandboxes-kits": "cloud-devops",
     "docker-sandboxes-lifecycle": "cloud-devops",
-    "docker-sandboxes-network-credentials": "cloud-devops"
+    "docker-sandboxes-network-credentials": "cloud-devops",
+    "bun": "software-dev",
+    "zod": "software-dev",
+    "pnpm": "software-dev",
+    "deno": "software-dev"
   },
   "synonyms": {
     "pydeseq2": [

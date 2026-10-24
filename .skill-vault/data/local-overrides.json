@@ -2259,5 +2259,32 @@
       "find": "When creating new Rust projects or Cargo.toml files, ALWAYS use:\n\n```toml\n[package]\nedition = \"2024\"  # ALWAYS use latest stable edition\nrust-version = \"1.85\"",
       "replace": "When creating new Rust projects or Cargo.toml files, choose the edition and `rust-version`\nfrom the project's language features, dependencies, and user compatibility requirements.\n`rust-version` declares the minimum supported Rust version (MSRV), not the compiler to\ninstall. Use the latest stable toolchain for development unless the project specifies one.\n\nFor example, Rust 2024 requires at least Rust 1.85. Keep this MSRV only if the package\nand its dependencies support it, and test the declared MSRV:\n\n```toml\n[package]\nedition = \"2024\"\nrust-version = \"1.85\""
     }
+  ],
+  "pnpm": [
+    {
+      "id": "filter-dependency-direction-workspaces",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-workspaces.md",
+      "find": "# Package and all its dependencies\npnpm --filter \"...@myorg/app\" build\n\n# Package and all its dependents\npnpm --filter \"@myorg/core...\" test",
+      "replace": "# Package and all its dependencies\npnpm --filter \"@myorg/app...\" build\n\n# Package and all its dependents\npnpm --filter \"...@myorg/core\" test"
+    },
+    {
+      "id": "filter-dependency-direction-cli",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-cli.md",
+      "find": "pnpm --filter \"...@scope/app\" build   # package + its dependencies\npnpm --filter \"@scope/core...\" test   # package + its dependents",
+      "replace": "pnpm --filter \"@scope/app...\" build   # package + its dependencies\npnpm --filter \"...@scope/core\" test   # package + its dependents"
+    }
+  ],
+  "deno": [
+    {
+      "id": "standalone-node-migration-reference",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "To convert an existing project, see the `migrate-to-deno` skill.",
+      "replace": "To convert an existing project, consult the [Node/npm compatibility guidance](https://docs.deno.com/runtime/fundamentals/node/)."
+    }
   ]
 }

@@ -75,6 +75,7 @@ created: 2026-08-07
 - [twilio-webhook-architecture](../../notes/saas-platforms/twilio-webhook-architecture.md) — Design, secure, and operate Twilio webhook endpoints
 - [web-3d-asset-pipeline](../../notes/game-development/web-3d-asset-pipeline.md) — Prepare and optimize browser-game 3D assets
 - [xarray-pandera-duckdb](../../notes/data-science-compute/xarray-pandera-duckdb.md) — Labeled array, schema validation, and embedded SQL analytics workflows with xarray, pandera-validation, duckdb-docs, query, read-file, and polars
+- [zod](../../notes/software-dev/zod.md) — Define and validate runtime schemas with Zod in TypeScript or JavaScript
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

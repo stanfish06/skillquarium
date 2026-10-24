@@ -12082,6 +12082,24 @@
       "skillFolderHash": "97077df7ed67a94fb52a78157d665d4d74c9754d",
       "installedAt": "2026-09-25T17:57:41.770Z",
       "updatedAt": "2026-09-25T17:57:41.770Z"
+    },
+    "pnpm": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/antfu/skills.git",
+      "skillPath": "skills/pnpm/SKILL.md",
+      "skillFolderHash": "4a64febd85a1ae9ec85cd71e49bc309dfcaa51b9",
+      "installedAt": "2026-10-24T15:45:31.912Z",
+      "updatedAt": "2026-10-24T15:45:31.912Z"
+    },
+    "deno": {
+      "source": "denoland/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/denoland/skills.git",
+      "skillPath": "skills/deno/SKILL.md",
+      "skillFolderHash": "7eb98586c9bb0e3b58ba26cdea7e34750b153789",
+      "installedAt": "2026-10-24T15:45:31.912Z",
+      "updatedAt": "2026-10-24T15:45:31.912Z"
     }
   },
   "dismissed": {

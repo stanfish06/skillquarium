@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [bun](../../notes/software-dev/bun.md) — Develop, test, build, and troubleshoot JavaScript or TypeScript applications using the Bun runtime and package manager
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
