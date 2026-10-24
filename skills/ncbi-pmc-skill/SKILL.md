@@ -1,37 +1,41 @@
 ---
 name: ncbi-pmc-skill
-description: Submit compact NCBI PMC Open Access requests for article/file availability metadata. Use when a user wants concise PMC Open Access summaries; save raw XML only on request.
+description: Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi. The service is retired; route current PMC retrieval to paper-lookup or ncbi-entrez-skill.
 ---
 
-## Operating rules
-- Use `scripts/ncbi_pmc.py` for all PMC Open Access calls in this package.
-- This skill is intentionally narrow: it currently covers the PMC Open Access service rather than the full PMC API surface.
-- Pass endpoint-specific query parameters under `params`, typically `id` for a PMCID or DOI-style lookup supported by the OA service.
-- Re-run requests in long conversations instead of relying on older tool output.
-- Treat displayed `...` in tool previews as UI truncation, not literal request content.
+# Retired PMC OA Web Service
 
-## Execution behavior
-- Return concise markdown summaries from the script output by default.
-- Return raw XML only if the user explicitly asks for machine-readable output.
-- Prefer targeted endpoint calls instead of broad unfiltered dumps.
-- If the user needs the full raw response, set `save_raw=true` and report the saved file path.
+NCBI withdrew the PMC OA Web Service (`oa.fcgi`) on **2026-08-25**. Its old
+article-availability and FTP-file-link response has no compatible replacement.
+Do not retry the retired endpoint, treat its failure as zero matching articles,
+or use it to infer a paper's license or retraction status.
 
-## Input
-- Read one JSON object from stdin.
-- Optional fields: `params`, `record_path`, `max_items`, `max_depth`, `timeout_sec`, `save_raw`, `raw_output_path`
-- Common PMC Open Access patterns:
-  - `{"params":{"id":"PMC3257301"},"max_items":10}`
-  - `{"params":{"id":"10.1093/nar/gkr1184"},"max_items":10}`
+## Choose the supported workflow
 
-## Output
-- Success returns `ok`, `source`, and a compact `summary`.
-- Use `raw_output_path` when `save_raw=true`.
-- Failure returns `ok=false` with `error.code` and `error.message`.
+- For a specific paper's eligible full text, use `paper-lookup` and its
+  [PMC guide](../paper-lookup/references/pmc.md). It covers E-utilities, BioC,
+  Europe PMC, identifier conversion, and metadata-only responses. Confirm that
+  the response contains article text before claiming full-text retrieval.
+- For PMC search, identifiers, or metadata, use `ncbi-entrez-skill` with
+  `db=pmc`. Do not substitute metadata for unavailable article text.
+- For bulk access, consult [PMC Article Datasets](https://pmc.ncbi.nlm.nih.gov/tools/textmining/)
+  and the [PMC Cloud Service](https://pmc.ncbi.nlm.nih.gov/tools/cloud/).
 
-## Execution
+## Legacy script behavior
+
+`scripts/ncbi_pmc.py` remains for callers using the old package path. It needs
+only Python's standard library, makes no network requests, and never writes a
+raw response file. Any JSON object returns `ok=false`, `error.code=service_retired`,
+and the supported skill routes, with exit code **1**. Malformed JSON or a
+non-object input returns `invalid_json` or `invalid_input`, with exit code **2**.
+Legacy options such as `save_raw` do not reactivate the service.
+
 ```bash
-echo '{"params":{"id":"PMC3257301"},"max_items":10}' | python scripts/ncbi_pmc.py
+printf '%s\n' '{"params":{"id":"PMC3257301"}}' | python3 scripts/ncbi_pmc.py
+# Expected: structured service_retired error; exit status 1.
 ```
 
-## References
-- No additional runtime references are required; keep the import package limited to this file and `scripts/ncbi_pmc.py`.
+The folder and source provenance are retained so old references receive an
+actionable migration result. Current article lookups belong in the workflows above.
+
+Source: [NCBI service retirement notice](https://pmc.ncbi.nlm.nih.gov/tools/oa-service/).

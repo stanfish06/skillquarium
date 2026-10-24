@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (147)
+## Skills (151)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw design, creation, diagnosis, patching, active debugging, and upgrade requests to the right strategies
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -22,6 +22,7 @@ created: 2026-06-13
 - [ast-grep-outline](../notes/software-dev/ast-grep-outline.md) — Use when exploring or modifying a codebase and you need a cheap structural map of files, directories, imports, exports, or direct members before reading full source
 - [brainstorming](../notes/software-dev/brainstorming.md) — Use before creative work - creating features, building components, adding functionality, or modifying behavior
 - [build-run-debug](../notes/software-dev/build-run-debug.md) — Build, run, and debug macOS apps with shell-first Xcode and Swift workflows
+- [bun](../notes/software-dev/bun.md) — Develop, test, build, and troubleshoot JavaScript or TypeScript applications using the Bun runtime and package manager
 - [cavekit-design-system](../notes/software-dev/cavekit-design-system.md) — How to write and maintain DESIGN.md as the visual specification layer for Cavekit projects
 - [cavekit-methodology](../notes/software-dev/cavekit-methodology.md) — Cavekit specification-driven development methodology — the Hunt lifecycle (Draft → Architect → Build → Inspect → Monitor) and how to apply it
 - [cavekit-revision](../notes/software-dev/cavekit-revision.md) — Trace bugs and manual fixes back to kits and prompts
@@ -41,6 +42,7 @@ created: 2026-06-13
 - [cpp-pro](../notes/software-dev/cpp-pro.md) — Writes, optimizes, and debugs C++ applications using modern C++20/23 features, template metaprogramming, and high-performance systems techniques
 - [csharp-developer](../notes/software-dev/csharp-developer.md) — Use when building C# applications with .NET 8+, ASP.NET Core APIs, or Blazor web apps
 - [debugging-and-error-recovery](../notes/software-dev/debugging-and-error-recovery.md) — Guides systematic root-cause debugging. Use when tests fail, builds break, behavior doesn't match expectations, or you encounter any unexpected error
+- [deno](../notes/software-dev/deno.md) — Use when writing, running, configuring, reviewing, or debugging code in a Deno project, or when scaffolding a new one
 - [deprecation-and-migration](../notes/software-dev/deprecation-and-migration.md) — Manages deprecation and migration. Use when removing old systems, APIs, or features
 - [diagnosing-bugs](../notes/software-dev/diagnosing-bugs.md) — Diagnosis loop for hard bugs and performance regressions
 - [diagram-generator](../notes/software-dev/diagram-generator.md) — generate, refine, validate, and render diagrams from natural language, notes, code snippets, schemas, tables, or existing diagram source
@@ -101,6 +103,7 @@ created: 2026-06-13
 - [mutation-testing](../notes/software-dev/mutation-testing.md) — Configures mewt or muton campaigns, analyzes surviving mutants, and investigates bugs exposed by testing gaps
 - [opensrc](../notes/software-dev/opensrc.md) — Give coding agents the actual source code of any dependency
 - [planning-and-task-breakdown](../notes/software-dev/planning-and-task-breakdown.md) — Breaks work into ordered tasks. Use when you have a spec or clear requirements and need to break work into implementable tasks
+- [pnpm](../notes/software-dev/pnpm.md) — Node.js package manager with strict dependency resolution
 - [prisma-cli](../notes/software-dev/prisma-cli.md) — Prisma ORM 7 CLI reference for existing Prisma 7 applications or explicitly selected Prisma 7 workflows
 - [prisma-client-api](../notes/software-dev/prisma-client-api.md) — Prisma Client API reference covering model queries, filters, operators, and client methods
 - [prisma-compute](../notes/software-dev/prisma-compute.md) — Deploy and operate apps on Prisma Compute with the Prisma 8 CLI
@@ -163,3 +166,4 @@ created: 2026-06-13
 - [worktrunk](../notes/software-dev/worktrunk.md) — Guidance for Worktrunk (the `wt` CLI) — git worktree management, hooks, and config
 - [writing-plans](../notes/software-dev/writing-plans.md) — Use when you have a spec or requirements for a multi-step task, before touching code
 - [writing-skills](../notes/software-dev/writing-skills.md) — Use when creating new skills, editing existing skills, or verifying skills work before deployment
+- [zod](../notes/software-dev/zod.md) — Define and validate runtime schemas with Zod in TypeScript or JavaScript

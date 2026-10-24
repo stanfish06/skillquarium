@@ -2259,5 +2259,417 @@
       "find": "When creating new Rust projects or Cargo.toml files, ALWAYS use:\n\n```toml\n[package]\nedition = \"2024\"  # ALWAYS use latest stable edition\nrust-version = \"1.85\"",
       "replace": "When creating new Rust projects or Cargo.toml files, choose the edition and `rust-version`\nfrom the project's language features, dependencies, and user compatibility requirements.\n`rust-version` declares the minimum supported Rust version (MSRV), not the compiler to\ninstall. Use the latest stable toolchain for development unless the project specifies one.\n\nFor example, Rust 2024 requires at least Rust 1.85. Keep this MSRV only if the package\nand its dependencies support it, and test the declared MSRV:\n\n```toml\n[package]\nedition = \"2024\"\nrust-version = \"1.85\""
     }
+  ],
+  "ncbi-pmc-skill": [
+    {
+      "id": "retired-oa-service-routing",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "SKILL.md",
+      "find": "---\nname: ncbi-pmc-skill\ndescription: Submit compact NCBI PMC Open Access requests for article/file availability metadata. Use when a user wants concise PMC Open Access summaries; save raw XML only on request.\n---\n\n## Operating rules\n- Use `scripts/ncbi_pmc.py` for all PMC Open Access calls in this package.\n- This skill is intentionally narrow: it currently covers the PMC Open Access service rather than the full PMC API surface.\n- Pass endpoint-specific query parameters under `params`, typically `id` for a PMCID or DOI-style lookup supported by the OA service.\n- Re-run requests in long conversations instead of relying on older tool output.\n- Treat displayed `...` in tool previews as UI truncation, not literal request content.\n\n## Execution behavior\n- Return concise markdown summaries from the script output by default.\n- Return raw XML only if the user explicitly asks for machine-readable output.\n- Prefer targeted endpoint calls instead of broad unfiltered dumps.\n- If the user needs the full raw response, set `save_raw=true` and report the saved file path.\n\n## Input\n- Read one JSON object from stdin.\n- Optional fields: `params`, `record_path`, `max_items`, `max_depth`, `timeout_sec`, `save_raw`, `raw_output_path`\n- Common PMC Open Access patterns:\n  - `{\"params\":{\"id\":\"PMC3257301\"},\"max_items\":10}`\n  - `{\"params\":{\"id\":\"10.1093/nar/gkr1184\"},\"max_items\":10}`\n\n## Output\n- Success returns `ok`, `source`, and a compact `summary`.\n- Use `raw_output_path` when `save_raw=true`.\n- Failure returns `ok=false` with `error.code` and `error.message`.\n\n## Execution\n```bash\necho '{\"params\":{\"id\":\"PMC3257301\"},\"max_items\":10}' | python scripts/ncbi_pmc.py\n```\n\n## References\n- No additional runtime references are required; keep the import package limited to this file and `scripts/ncbi_pmc.py`.\n",
+      "replace": "---\nname: ncbi-pmc-skill\ndescription: Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi. The service is retired; route current PMC retrieval to paper-lookup or ncbi-entrez-skill.\n---\n\n# Retired PMC OA Web Service\n\nNCBI withdrew the PMC OA Web Service (`oa.fcgi`) on **2026-08-25**. Its old\narticle-availability and FTP-file-link response has no compatible replacement.\nDo not retry the retired endpoint, treat its failure as zero matching articles,\nor use it to infer a paper's license or retraction status.\n\n## Choose the supported workflow\n\n- For a specific paper's eligible full text, use `paper-lookup` and its\n  [PMC guide](../paper-lookup/references/pmc.md). It covers E-utilities, BioC,\n  Europe PMC, identifier conversion, and metadata-only responses. Confirm that\n  the response contains article text before claiming full-text retrieval.\n- For PMC search, identifiers, or metadata, use `ncbi-entrez-skill` with\n  `db=pmc`. Do not substitute metadata for unavailable article text.\n- For bulk access, consult [PMC Article Datasets](https://pmc.ncbi.nlm.nih.gov/tools/textmining/)\n  and the [PMC Cloud Service](https://pmc.ncbi.nlm.nih.gov/tools/cloud/).\n\n## Legacy script behavior\n\n`scripts/ncbi_pmc.py` remains for callers using the old package path. It needs\nonly Python's standard library, makes no network requests, and never writes a\nraw response file. Any JSON object returns `ok=false`, `error.code=service_retired`,\nand the supported skill routes, with exit code **1**. Malformed JSON or a\nnon-object input returns `invalid_json` or `invalid_input`, with exit code **2**.\nLegacy options such as `save_raw` do not reactivate the service.\n\n```bash\nprintf '%s\\n' '{\"params\":{\"id\":\"PMC3257301\"}}' | python3 scripts/ncbi_pmc.py\n# Expected: structured service_retired error; exit status 1.\n```\n\nThe folder and source provenance are retained so old references receive an\nactionable migration result. Current article lookups belong in the workflows above.\n\nSource: [NCBI service retirement notice](https://pmc.ncbi.nlm.nih.gov/tools/oa-service/).\n"
+    },
+    {
+      "id": "retired-oa-service-cli",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "scripts/ncbi_pmc.py",
+      "find": "#!/usr/bin/env python3\n\"\"\"Compact NCBI PMC Open Access helper for imported skills.\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport os\nimport sys\nimport xml.etree.ElementTree as ET\nfrom pathlib import Path\nfrom typing import Any\n\ntry:\n    import requests\nexcept ImportError as exc:  # pragma: no cover\n    requests = None\n    REQUESTS_IMPORT_ERROR = exc\nelse:\n    REQUESTS_IMPORT_ERROR = None\n\nPMC_OA_URL = \"https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi\"\n\n\ndef error(code: str, message: str, warnings: list[str] | None = None) -> dict[str, Any]:\n    return {\"ok\": False, \"error\": {\"code\": code, \"message\": message}, \"warnings\": warnings or []}\n\n\ndef _require_str(name: str, value: Any, required: bool = False) -> str | None:\n    if value is None:\n        if required:\n            raise ValueError(f\"`{name}` is required.\")\n        return None\n    if not isinstance(value, str) or not value.strip():\n        raise ValueError(f\"`{name}` must be a non-empty string.\")\n    return value.strip()\n\n\ndef _require_int(name: str, value: Any, default: int) -> int:\n    if value is None:\n        return default\n    if not isinstance(value, int) or value <= 0:\n        raise ValueError(f\"`{name}` must be a positive integer.\")\n    return value\n\n\ndef _require_bool(name: str, value: Any, default: bool) -> bool:\n    if value is None:\n        return default\n    if not isinstance(value, bool):\n        raise ValueError(f\"`{name}` must be a boolean.\")\n    return value\n\n\ndef _require_object(name: str, value: Any) -> dict[str, Any]:\n    if value is None:\n        return {}\n    if not isinstance(value, dict):\n        raise ValueError(f\"`{name}` must be an object.\")\n    return value\n\n\ndef _get_by_path(value: Any, path: str) -> Any:\n    current = value\n    for part in path.split(\".\"):\n        if isinstance(current, list):\n            if not part.isdigit():\n                raise ValueError(f\"`record_path` segment {part!r} must be a list index.\")\n            index = int(part)\n            if index >= len(current):\n                raise ValueError(f\"`record_path` index {index} is out of range.\")\n            current = current[index]\n        elif isinstance(current, dict):\n            if part not in current:\n                raise ValueError(f\"`record_path` key {part!r} was not present in the response.\")\n            current = current[part]\n        else:\n            raise ValueError(f\"`record_path` segment {part!r} could not be applied.\")\n    return current\n\n\ndef _infer_target(data: Any) -> tuple[str | None, Any]:\n    if isinstance(data, list):\n        return \"$\", data\n    if isinstance(data, dict):\n        for key in (\"records\", \"items\", \"documents\"):\n            value = data.get(key)\n            if isinstance(value, list):\n                return key, value\n    return None, data\n\n\ndef _compact(value: Any, max_items: int, max_depth: int) -> Any:\n    if isinstance(value, str):\n        return value if len(value) <= 240 else value[:240] + \"...\"\n    if max_depth <= 0:\n        if isinstance(value, (dict, list)):\n            return \"...\"\n        return value\n    if isinstance(value, list):\n        out = [_compact(item, max_items, max_depth - 1) for item in value[:max_items]]\n        if len(value) > max_items:\n            out.append(f\"... (+{len(value) - max_items} more)\")\n        return out\n    if isinstance(value, dict):\n        out: dict[str, Any] = {}\n        items = list(value.items())\n        for key, item in items[:max_items]:\n            out[str(key)] = _compact(item, max_items, max_depth - 1)\n        if len(items) > max_items:\n            out[\"_truncated_keys\"] = len(items) - max_items\n        return out\n    return value\n\n\ndef _xml_to_simple(elem: ET.Element, max_items: int, max_depth: int) -> Any:\n    children = list(elem)\n    text = (elem.text or \"\").strip()\n    if not children:\n        return text\n    if max_depth <= 0:\n        return \"...\"\n    grouped: dict[str, Any] = {}\n    for child in children[:max_items]:\n        tag = child.tag.split(\"}\", 1)[-1]\n        value = _xml_to_simple(child, max_items, max_depth - 1)\n        if tag in grouped:\n            current = grouped[tag]\n            if not isinstance(current, list):\n                grouped[tag] = [current]\n            grouped[tag].append(value)\n        else:\n            grouped[tag] = value\n    if len(children) > max_items:\n        grouped[\"_truncated_children\"] = len(children) - max_items\n    if text:\n        grouped[\"_text\"] = text\n    return grouped\n\n\ndef _save_raw_text(raw_text: str, raw_output_path: str | None, suffix: str) -> str:\n    path = Path(raw_output_path or f\"/tmp/ncbi-pmc.{suffix}\")\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(raw_text, encoding=\"utf-8\")\n    return str(path)\n\n\ndef parse_input(payload: Any) -> dict[str, Any]:\n    if not isinstance(payload, dict):\n        raise ValueError(\"Input must be one JSON object.\")\n    return {\n        \"params\": _require_object(\"params\", payload.get(\"params\")),\n        \"record_path\": _require_str(\"record_path\", payload.get(\"record_path\")),\n        \"max_items\": _require_int(\"max_items\", payload.get(\"max_items\"), 10),\n        \"max_depth\": _require_int(\"max_depth\", payload.get(\"max_depth\"), 3),\n        \"timeout_sec\": _require_int(\"timeout_sec\", payload.get(\"timeout_sec\"), 30),\n        \"save_raw\": _require_bool(\"save_raw\", payload.get(\"save_raw\"), False),\n        \"raw_output_path\": _require_str(\"raw_output_path\", payload.get(\"raw_output_path\")),\n    }\n\n\ndef _ncbi_common_params(params: dict[str, Any]) -> dict[str, Any]:\n    merged = dict(params)\n    api_key = os.environ.get(\"NCBI_API_KEY\") or os.environ.get(\"NCBI_EUTILS_API_KEY\")\n    tool = os.environ.get(\"NCBI_TOOL\")\n    email = os.environ.get(\"NCBI_EMAIL\")\n    if api_key and \"api_key\" not in merged:\n        merged[\"api_key\"] = api_key\n    if tool and \"tool\" not in merged:\n        merged[\"tool\"] = tool\n    if email and \"email\" not in merged:\n        merged[\"email\"] = email\n    return merged\n\n\ndef _summary_output(\n    data: Any, config: dict[str, Any], raw_output_path: str | None\n) -> dict[str, Any]:\n    record_path = config[\"record_path\"]\n    path_used, target = (\n        _infer_target(data)\n        if record_path is None\n        else (record_path, _get_by_path(data, record_path))\n    )\n    output = {\n        \"ok\": True,\n        \"source\": \"ncbi-pmc-oa\",\n        \"record_path\": path_used,\n        \"raw_output_path\": raw_output_path,\n        \"warnings\": [],\n    }\n    if isinstance(target, list):\n        output.update(\n            {\n                \"record_count_returned\": min(len(target), config[\"max_items\"]),\n                \"record_count_available\": len(target),\n                \"truncated\": len(target) > config[\"max_items\"],\n                \"records\": _compact(\n                    target[: config[\"max_items\"]], config[\"max_items\"], config[\"max_depth\"]\n                ),\n            }\n        )\n    else:\n        output[\"summary\"] = _compact(target, config[\"max_items\"], config[\"max_depth\"])\n        if isinstance(target, dict):\n            output[\"top_keys\"] = list(target)[: config[\"max_items\"]]\n    return output\n\n\ndef execute(payload: Any) -> dict[str, Any]:\n    if requests is None:\n        return error(\"missing_dependency\", f\"`requests` is required: {REQUESTS_IMPORT_ERROR}\")\n    config = parse_input(payload)\n    try:\n        response = requests.get(\n            PMC_OA_URL, params=_ncbi_common_params(config[\"params\"]), timeout=config[\"timeout_sec\"]\n        )\n        response.raise_for_status()\n        raw_output_path = (\n            _save_raw_text(response.text, config[\"raw_output_path\"], \"xml\")\n            if config[\"save_raw\"]\n            else None\n        )\n        root = ET.fromstring(response.text)\n        data = {\n            root.tag.split(\"}\", 1)[-1]: _xml_to_simple(\n                root, config[\"max_items\"], config[\"max_depth\"]\n            )\n        }\n        return _summary_output(data, config, raw_output_path)\n    except ValueError as exc:\n        return error(\"invalid_response\", str(exc))\n    except ET.ParseError as exc:\n        return error(\"invalid_response\", f\"Could not parse XML response: {exc}\")\n    except requests.RequestException as exc:\n        return error(\"network_error\", f\"Request failed: {exc}\")\n\n\ndef main() -> int:\n    try:\n        payload = json.load(sys.stdin)\n    except Exception as exc:  # noqa: BLE001\n        sys.stdout.write(json.dumps(error(\"invalid_json\", f\"Could not parse JSON input: {exc}\")))\n        return 2\n    try:\n        output = execute(payload)\n    except ValueError as exc:\n        output = error(\"invalid_input\", str(exc))\n        code = 2\n    else:\n        code = 0 if output.get(\"ok\") else 1\n    sys.stdout.write(json.dumps(output))\n    return code\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+      "replace": "#!/usr/bin/env python3\n\"\"\"Explain retirement of the legacy PMC Open Access service without network access.\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport sys\n\n\ndef error(code: str, message: str) -> dict[str, object]:\n    return {\"ok\": False, \"error\": {\"code\": code, \"message\": message}, \"warnings\": []}\n\n\ndef execute(payload: object) -> dict[str, object]:\n    if not isinstance(payload, dict):\n        raise ValueError(\"Input must be one JSON object.\")\n    # The old availability/file-link response has no compatible replacement endpoint.\n    return {\n        **error(\n            \"service_retired\",\n            \"The PMC OA Web Service was withdrawn on 2026-08-25. \"\n            \"Use paper-lookup for eligible full text or ncbi-entrez-skill for PMC metadata.\",\n        ),\n        \"source\": \"ncbi-pmc-oa\",\n        \"retired_on\": \"2026-08-25\",\n        \"documentation\": \"https://pmc.ncbi.nlm.nih.gov/tools/oa-service/\",\n        \"alternatives\": [\n            {\"skill\": \"paper-lookup\", \"use\": \"Eligible article text via E-utilities, BioC, or Europe PMC\"},\n            {\"skill\": \"ncbi-entrez-skill\", \"use\": \"PMC search, identifiers, and metadata\"},\n        ],\n    }\n\n\ndef main() -> int:\n    try:\n        payload = json.load(sys.stdin)\n    except (json.JSONDecodeError, UnicodeDecodeError) as exc:\n        output = error(\"invalid_json\", f\"Could not parse JSON input: {exc}\")\n        code = 2\n    else:\n        try:\n            output = execute(payload)\n        except ValueError as exc:\n            output = error(\"invalid_input\", str(exc))\n            code = 2\n        else:\n            code = 1\n    sys.stdout.write(json.dumps(output) + \"\\n\")\n    return code\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n"
+    },
+    {
+      "id": "retired-oa-service-ui",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "agents/openai.yaml",
+      "find": "interface:\n  display_name: \"NCBI PMC\"\n  short_description: \"Fetch PMC Open Access summaries\"\n",
+      "replace": "interface:\n  display_name: \"PMC OA Service Migration\"\n  short_description: \"Migrate calls to the retired PMC OA service\"\n"
+    }
+  ],
+  "ncbi-entrez-skill": [
+    {
+      "id": "route-pmc-fulltext-to-paper-lookup",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "SKILL.md",
+      "find": "- BLAST workflows belong in `ncbi-blast-skill`. PMC Open Access workflows belong in `ncbi-pmc-skill`. Datasets v2 workflows belong in `ncbi-datasets-skill`.",
+      "replace": "- BLAST workflows belong in `ncbi-blast-skill`. For eligible PMC full text, use `paper-lookup` and its PMC guide; the old `ncbi-pmc-skill` OA service is retired. Datasets v2 workflows belong in `ncbi-datasets-skill`."
+    }
+  ],
+  "research-router-skill": [
+    {
+      "id": "route-pmc-fulltext-to-paper-lookup",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "SKILL.md",
+      "find": "  `ncbi-entrez-skill`, `ncbi-pmc-skill`, `biorxiv-skill`, `biostudies-arrayexpress-skill`, `ncbi-datasets-skill`",
+      "replace": "  `ncbi-entrez-skill`, `paper-lookup` (eligible PMC full text), `biorxiv-skill`, `biostudies-arrayexpress-skill`, `ncbi-datasets-skill`"
+    }
+  ],
+  "pnpm": [
+    {
+      "id": "filter-dependency-direction-workspaces",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-workspaces.md",
+      "find": "# Package and all its dependencies\npnpm --filter \"...@myorg/app\" build\n\n# Package and all its dependents\npnpm --filter \"@myorg/core...\" test",
+      "replace": "# Package and all its dependencies\npnpm --filter \"@myorg/app...\" build\n\n# Package and all its dependents\npnpm --filter \"...@myorg/core\" test"
+    },
+    {
+      "id": "filter-dependency-direction-cli",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-cli.md",
+      "find": "pnpm --filter \"...@scope/app\" build   # package + its dependencies\npnpm --filter \"@scope/core...\" test   # package + its dependents",
+      "replace": "pnpm --filter \"@scope/app...\" build   # package + its dependencies\npnpm --filter \"...@scope/core\" test   # package + its dependents"
+    },
+    {
+      "id": "gitlab-install-in-each-job",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "install:\n  stage: install\n  script:\n    - pnpm config set store-dir .pnpm-store\n    - pnpm install --frozen-lockfile\n\ntest:\n  stage: test\n  script:\n    - pnpm test\n\nbuild:\n  stage: build\n  script:\n    - pnpm build",
+      "replace": "install:\n  stage: install\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n\ntest:\n  stage: test\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n    - pnpm test\n\nbuild:\n  stage: build\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n    - pnpm build"
+    },
+    {
+      "id": "script-watch-argument-forwarding",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-cli.md",
+      "find": "pnpm run build -- --watch",
+      "replace": "pnpm run build --watch"
+    },
+    {
+      "id": "git-fork-dependency-protocol",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-aliases.md",
+      "find": "\"my-fork\": \"npm:user/repo#commit\"",
+      "replace": "\"my-fork\": \"github:user/repo#commit\""
+    },
+    {
+      "id": "auth-config-locations",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "| **Auth & registry credentials** (`_authToken`, `cert`, `key`, …) | `.npmrc` (project, gitignored) and global `rc` | INI |",
+      "replace": "| **Registry credentials and TLS** (`_authToken`, `cert`, `key`, …) | Project `.npmrc` for literal settings; user-level `auth.ini`/`~/.npmrc` for interpolated auth; global `config.yaml` for `_auth` | INI or structured YAML |"
+    },
+    {
+      "id": "global-auth-file-location",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "The companion global `rc` file (same directory, named `rc`) holds only registry/auth settings.",
+      "replace": "The companion `auth.ini` in the same directory holds user-level INI auth settings written by `pnpm config set`. Since pnpm v12.1, `pnpm login` saves tokens in the global `config.yaml` under `_auth`. The legacy global `rc` file remains readable for registry/auth compatibility."
+    },
+    {
+      "id": "interpolated-auth-user-file",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "Keep auth tokens out of the repo (gitignore the project `.npmrc`). Auth files, highest priority first:\n\n1. `<workspace root>/.npmrc` (project, gitignored)\n2. `<pnpm config>/auth.ini` (written by `pnpm login`)\n3. `~/.npmrc` (fallback for npm compatibility)\n\n```ini title=\".npmrc\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n@myorg:registry=https://npm.myorg.com/\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```",
+      "replace": "Keep secret values out of git. Project `.npmrc` files can contain literal auth settings and non-secret registry URLs, but pnpm ignores interpolated credentials there. Auth files, highest priority first:\n\n1. `<workspace root>/.npmrc` (project; gitignore files containing secrets)\n2. `<pnpm config>/auth.ini` (written by `pnpm config set` for auth keys)\n3. `~/.npmrc` (user-level fallback for npm compatibility)\n\nPut environment-variable token references in a user-level auth file:\n\n```ini title=\"~/.npmrc (user-level auth)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```\n\nNon-secret static registry routing can remain in a project `.npmrc`:\n\n```ini title=\".npmrc (project; no secrets)\"\n@myorg:registry=https://npm.myorg.com/\n```\n\nIn CI, use a user-level auth file or the structured authentication environment variable below. Do not move interpolated token lines into the project file."
+    },
+    {
+      "id": "auth-config-command-comment",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "# Writes to global config.yaml / rc by default",
+      "replace": "# Writes settings to global config.yaml; INI auth keys go to auth.ini"
+    },
+    {
+      "id": "qualify-npmrc-configuration-model",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "SKILL.md",
+      "find": "**Configuration model (important):** pnpm settings live in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` is used **only** for authentication/registry credentials, and the `pnpm` field of `package.json` is no longer read. When working in a pnpm project, check `pnpm-workspace.yaml` for settings/workspace structure and `.npmrc` only for auth. Always use `--frozen-lockfile` (or `pnpm ci`) in CI.",
+      "replace": "**Configuration model:** put pnpm settings in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Check both files before migrating configuration; the `pnpm` field of `package.json` is no longer read. Always use `--frozen-lockfile` (or `pnpm ci`) in CI."
+    },
+    {
+      "id": "qualify-npmrc-description",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "description: Configuring pnpm via pnpm-workspace.yaml (settings), the global config.yaml, and .npmrc (auth only)",
+      "replace": "description: Configuring pnpm via pnpm-workspace.yaml, global config.yaml, and npm-compatible registry, auth, and certificate settings"
+    },
+    {
+      "id": "qualify-npmrc-settings",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`, and `.npmrc` is now used **only** for authentication/registry credentials. Everything else belongs in `pnpm-workspace.yaml`. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files.",
+      "replace": "> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`. Put pnpm/install settings in `pnpm-workspace.yaml`; `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files."
+    },
+    {
+      "id": "qualify-npmrc-heading",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "## .npmrc — authentication only",
+      "replace": "## .npmrc — registry, authentication, and certificates"
+    },
+    {
+      "id": "scope-structured-auth-trust-claim",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "so a checked-out repo can never supply auth.",
+      "replace": "so a checked-out repo cannot define this structured credential map."
+    },
+    {
+      "id": "compatible-package-manager-policies",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "  \"packageManager\": \"pnpm@10.0.0\",\n  \"devEngines\": {\n    \"packageManager\": { \"name\": \"pnpm\", \"version\": \">=11.0.0 <12.0.0\", \"onFail\": \"download\" },",
+      "replace": "  \"packageManager\": \"pnpm@12.11.2\",\n  \"devEngines\": {\n    \"packageManager\": { \"name\": \"pnpm\", \"version\": \">=12.0.0 <13.0.0\", \"onFail\": \"download\" },"
+    },
+    {
+      "id": "qualify-npmrc-key-point",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "- All pnpm settings go in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; `.npmrc` is auth/registry only.",
+      "replace": "- Put pnpm settings in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; retain supported registry/auth, certificate, and legacy network settings in INI files when needed."
+    },
+    {
+      "id": "current-pnpm-release-line",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "> `latest` on npm still points at the v11 line; install v12 from the `latest-12` tag until it graduates.",
+      "replace": "> pnpm 12 is the current release line, and npm's `latest` tag points to it. Pin the exact version used to generate your project's lockfile."
+    },
+    {
+      "id": "migration-preserves-npmrc-certificates",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "- **Splits `.npmrc`**: only auth/registry settings stay in `.npmrc`; every other key moves to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Per-subproject `.npmrc` files become `packageConfigs[\"<name>\"]`.",
+      "replace": "- **Splits `.npmrc`**: pnpm/install settings move to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Registry/authentication and certificate settings remain supported in INI files; check legacy network settings before migrating. Per-subproject pnpm settings become `packageConfigs[\"<name>\"]`."
+    },
+    {
+      "id": "migration-interpolated-auth-user-file",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "Keep only **auth/registry** in `.npmrc`; put everything else in `pnpm-workspace.yaml` (camelCase).\n\n```ini title=\".npmrc (auth only, gitignored)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```",
+      "replace": "Put pnpm/install settings in `pnpm-workspace.yaml` (camelCase). Registry/authentication and certificate settings remain supported in INI files. Static non-secret registry URLs may stay in a project `.npmrc`; environment-variable credentials must use a user-level auth file or `pnpm_config__auth`. Keep secret values out of git.\n\n```ini title=\"~/.npmrc (user-level auth)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```"
+    },
+    {
+      "id": "valid-before-after-script-json",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "```json\n{\n  \"scripts\": {\n    // npm: recursive scripts\n    \"build:all\": \"npm run build --workspaces\",\n    // pnpm: use -r flag\n    \"build:all\": \"pnpm -r run build\",\n    \n    // npm: run in specific workspace  \n    \"dev:app\": \"npm run dev -w packages/app\",\n    // pnpm: use --filter\n    \"dev:app\": \"pnpm --filter @myorg/app run dev\"\n  }\n}\n```",
+      "replace": "Before (npm):\n\n```json\n{\n  \"scripts\": {\n    \"build:all\": \"npm run build --workspaces\",\n    \"dev:app\": \"npm run dev -w packages/app\"\n  }\n}\n```\n\nAfter (pnpm):\n\n```json\n{\n  \"scripts\": {\n    \"build:all\": \"pnpm -r run build\",\n    \"dev:app\": \"pnpm --filter @myorg/app run dev\"\n  }\n}\n```"
+    },
+    {
+      "id": "migration-pin-current-major",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "Add to `package.json` for Corepack:\n```json\n{\n  \"packageManager\": \"pnpm@10.0.0\"\n}\n```",
+      "replace": "Pin the exact pnpm version used to generate the lockfile in `package.json` (12.11.2 is an example):\n\n```json\n{\n  \"packageManager\": \"pnpm@12.11.2\"\n}\n```"
+    },
+    {
+      "id": "cargo-generated-config-include",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-multi-ecosystem.md",
+      "find": "- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. It writes a source-replacement block into `.cargo/config.toml` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).\n- `cargo build` then compiles **offline** against vendored sources; pnpm compiles nothing.",
+      "replace": "- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. Source replacements go in `.pnpm/crates/config.toml`; `.cargo/config.toml` receives an optional `[[include]]` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).\n- Cargo 1.95+ reads that include, so `cargo build` compiles **offline** against vendored sources; pnpm compiles nothing."
+    },
+    {
+      "id": "cargo-custom-index-with-existing-lock",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-multi-ecosystem.md",
+      "find": "- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds; workspaces with overrides/git deps require the default crates.io index.",
+      "replace": "- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds. Resolving them through pnpm requires the default crates.io sparse index; with a custom index, generate and commit `Cargo.lock` using Cargo before installing with pnpm."
+    },
+    {
+      "id": "explicit-absolute-store-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-store.md",
+      "find": "storeDir: ~/.local/share/pnpm/store",
+      "replace": "storeDir: /absolute/path/to/pnpm/store"
+    },
+    {
+      "id": "explain-explicit-store-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-store.md",
+      "find": "The default store path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS). Find it with `pnpm store path`.",
+      "replace": "Replace the placeholder with an absolute path on the project's filesystem. The default path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS) and may move to the project's volume for hard links. Check the effective location with `pnpm store path`; an explicit store on another filesystem requires copies."
+    },
+    {
+      "id": "ci-project-version-prerequisite",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "---\nname: pnpm-ci-cd-setup\ndescription: Optimizing pnpm for continuous integration and deployment workflows\n---\n\n# pnpm CI/CD Setup\n\nBest practices for using pnpm in CI/CD environments for fast, reliable builds.\n\n> **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).\n\n## Installing pnpm in CI",
+      "replace": "---\nname: pnpm-ci-cd-setup\ndescription: Optimizing pnpm for continuous integration and deployment workflows\n---\n\n# pnpm CI/CD Setup\n\nBest practices for using pnpm in CI/CD environments for fast, reliable builds.\n\n> **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).\n\n## Pin the project version\n\nThe examples below require a committed `packageManager` field matching the pnpm version that generated `pnpm-lock.yaml`. For example:\n\n```json\n{ \"packageManager\": \"pnpm@12.11.2\" }\n```\n\nUse your project's tested exact version. GitHub Actions reads this pin, and GitLab prepares that same version instead of resolving `latest`.\n\n## Installing pnpm in CI"
+    },
+    {
+      "id": "github-use-project-pin-basic",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "      - uses: pnpm/action-setup@v4\n        with:\n          version: 10",
+      "replace": "      - uses: pnpm/action-setup@v4"
+    },
+    {
+      "id": "github-use-project-pin-cache",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "- uses: pnpm/action-setup@v4\n  with:\n    version: 10",
+      "replace": "- uses: pnpm/action-setup@v4"
+    },
+    {
+      "id": "gitlab-use-project-pin",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "image: node:20\n\nstages:",
+      "replace": "image: node:24\n\nstages:"
+    },
+    {
+      "id": "gitlab-pnpm-bin-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "  PATH: $PNPM_HOME:$PATH",
+      "replace": "  PATH: $PNPM_HOME/bin:$PATH"
+    },
+    {
+      "id": "gitlab-prepare-project-exact-version",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "  - corepack prepare pnpm@latest --activate",
+      "replace": "  - corepack prepare \"$(node -p 'require(\"./package.json\").packageManager')\" --activate"
+    },
+    {
+      "id": "docker-workspace-layout-prerequisite",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "### Multi-Stage Build\n\n```dockerfile",
+      "replace": "### Multi-Stage Build\n\nThis example assumes a root app at `dist/index.js` plus workspace packages `core` and `api`, each building its runtime files into `dist/`. Include every workspace manifest and runtime asset your app needs; the explicit copies preserve package paths. Exclude `node_modules` from the build context with `.dockerignore`.\n\n```dockerfile"
+    },
+    {
+      "id": "docker-preserve-workspace-manifest-paths",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "COPY packages/*/package.json ./packages/",
+      "replace": "COPY packages/core/package.json ./packages/core/\nCOPY packages/api/package.json ./packages/api/"
+    },
+    {
+      "id": "docker-runner-workspace-metadata",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "FROM node:20-slim AS runner\n\nRUN corepack enable\nWORKDIR /app\n\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/package.json ./\nCOPY --from=builder /app/pnpm-lock.yaml ./",
+      "replace": "FROM node:24-slim AS runner\n\nRUN corepack enable\nWORKDIR /app\n\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./\nCOPY --from=builder /app/packages/core/package.json ./packages/core/\nCOPY --from=builder /app/packages/core/dist ./packages/core/dist\nCOPY --from=builder /app/packages/api/package.json ./packages/api/\nCOPY --from=builder /app/packages/api/dist ./packages/api/dist"
+    },
+    {
+      "id": "docker-monorepo-root-manifest",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "FROM node:20-slim AS builder\nRUN corepack enable\nWORKDIR /app\n\n# Copy workspace config\nCOPY pnpm-lock.yaml pnpm-workspace.yaml ./",
+      "replace": "FROM node:24-slim AS builder\nRUN corepack enable\nWORKDIR /app\n\n# Copy root and workspace config\nCOPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./"
+    },
+    {
+      "id": "ci-pin-current-major",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "```json\n// package.json\n{ \"packageManager\": \"pnpm@10.0.0\" }\n```",
+      "replace": "```json\n{ \"packageManager\": \"pnpm@12.11.2\" }\n```"
+    }
+  ],
+  "deno": [
+    {
+      "id": "standalone-node-migration-reference",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "To convert an existing project, see the `migrate-to-deno` skill.",
+      "replace": "To convert an existing project, consult the [Node/npm compatibility guidance](https://docs.deno.com/runtime/fundamentals/node/)."
+    },
+    {
+      "id": "hoisted-linker-manual-mode",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "{ \"nodeModulesLinker\": \"hoisted\" }\n```\n\n`nodeModulesDir` applies only to projects without a `package.json`, so it is\nrarely the right knob.",
+      "replace": "{ \"nodeModulesDir\": \"manual\", \"nodeModulesLinker\": \"hoisted\" }\n```\n\nThe hoisted linker requires `nodeModulesDir: \"manual\"`. `nodeModulesDir`\ncontrols whether Deno creates and manages a local `node_modules`, including\nprojects with a `package.json`; run `deno install` to populate it in manual mode."
+    },
+    {
+      "id": "eval-permissions-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Deno grants no filesystem, network, environment, or subprocess access unless\nasked.",
+      "replace": "`deno run` grants no filesystem, network, environment, or subprocess access\nunless asked. `deno eval` has all permissions implicitly and does not accept\nscoped `--allow-*` flags. Use `deno run` with explicit grants when access must\nbe restricted."
+    },
+    {
+      "id": "workspace-glob-semantics",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Members are explicit or single-level globs (`\"packages/*\"`); `**` and negation\nare unsupported. Run a task across members with `deno task --filter '*' build`.",
+      "replace": "Members can be explicit paths or globs: `\"packages/*\"` matches one level,\n`\"packages/*/*\"` matches two, and `\"packages/**\"` recurses. Prefix a pattern\nwith `!` to exclude matching members. Run a task across members with\n`deno task --filter '*' build`."
+    },
+    {
+      "id": "create-prefixed-initializer-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "deno create vite my-app       # scaffold from a package initializer\n```\n\n`deno create` is `npm create` / `yarn create` and covers that ecosystem\n(`deno create astro`, etc). Unprefixed names are npm; `--jsr` selects JSR.",
+      "replace": "deno create npm:vite -- my-app # scaffold from a package initializer\n```\n\n`deno create` is `npm create` / `yarn create` and covers that ecosystem\n(`deno create npm:astro`, etc). Use an `npm:` or `jsr:` prefix, or select\nunprefixed names with `--npm` or `--jsr`. Pass initializer arguments after `--`."
+    },
+    {
+      "id": "bump-version-workspace-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Provenance attestation is automatic on GitHub Actions. `deno bump-version patch`\nbumps the version, across every member at a workspace root.",
+      "replace": "Provenance attestation is automatic on GitHub Actions. `deno bump-version patch`\nbumps a single package, or each versioned JSR package in workspace mode."
+    },
+    {
+      "id": "create-initializer-args-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "| `deno create <pkg> <dir>` | Scaffold from a package initializer |",
+      "replace": "| `deno create npm:<pkg> -- <dir>` | Scaffold from a package initializer |",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "create-prefixed-initializer-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "`deno create` is the `npm create` / `yarn create` equivalent and covers that\nwhole ecosystem: `deno create vite`, `deno create astro`, and so on. Unprefixed\nnames are treated as npm packages; `--jsr` selects JSR, and `-y` bypasses the\nprompt and runs with full permissions.",
+      "replace": "`deno create` is the `npm create` / `yarn create` equivalent and covers that\nwhole ecosystem: `deno create npm:vite`, `deno create npm:astro`, and so on.\nUse an `npm:` or `jsr:` prefix, or select unprefixed names with `--npm` or\n`--jsr`. Pass initializer arguments after `--`, for example\n`deno create npm:vite -- my-app`. `-y` bypasses the prompt and runs with full\npermissions.",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "bump-version-workspace-only-inference-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "`deno bump-version` takes `major`, `minor`, `patch`, `premajor`, `preminor`,\n`prepatch`, `prerelease`. At a workspace root it applies to every member and\nrewrites `jsr:` references in the root import map. With no increment it derives\nper-package bumps from conventional commits since the last tag and prepends a\nrelease note to `Releases.md`.",
+      "replace": "`deno bump-version` takes `major`, `minor`, `patch`, `premajor`, `preminor`,\n`prepatch`, `prerelease`. Single-package mode with no increment prints the\ncurrent version without changing files. Workspace mode is selected at the\nworkspace root when more than one JSR package is present, or with `--workspace`;\n`--config` targets one manifest. Workspace mode updates versioned JSR packages\nand rewrites `jsr:` references in the root import map. Only workspace mode with\nno increment derives per-package bumps from conventional commits since the\nlast tag and prepends a release note to `Releases.md`.",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "eval-permissions-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Applies to `run`, `serve`, `test`, `bench`, `compile`, and `eval`.",
+      "replace": "Applies to `run`, `serve`, `test`, `bench`, and `compile`. `deno eval` has all\npermissions implicitly and does not accept scoped `--allow-*` flags. Use\n`deno run` with explicit grants when access must be restricted.",
+      "file": "references/CLI.md"
+    }
   ]
 }

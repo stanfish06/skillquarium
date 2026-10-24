@@ -22,6 +22,7 @@ created: 2026-08-23
 
 - [check-npm](../../notes/security-auditing/check-npm.md) — Audit a JavaScript/TypeScript repo's npm, yarn, or pnpm configuration for supply-chain hardening: tool version, lifecycle scripts, unsafe dependency protocols, and minimum release age...
 - [github](../../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
+- [pnpm](../../notes/software-dev/pnpm.md) — Node.js package manager with strict dependency resolution
 - [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 
