@@ -586,7 +586,7 @@ await client.conversations.v1
 - **Cannot send WhatsApp messages outside the 24-hour window** — Subject to service window rules. See `twilio-whatsapp-send-message`
 - **Cannot use chat participants without Access Tokens** — Client-side SDK auth required. See `twilio-iam-auth-setup`
 - **Cannot use WhatsApp Groups API** — Deprecated April 2020. Use Conversations (classic) API instead.
-- **Conversations v1 (classic) is in maintenance mode** — Consider Conversations v2 API for new projects with enhanced features and scalability.
+- **Conversations (classic) is not being replaced for chat** — Twilio's newer conversation layer (Conversation Orchestrator, Conversation Memory, Conversation Intelligence, Agent Connect) adds automatic multi-channel capture and AI routing on top of this API; Chat traffic still runs through Conversations (classic) underneath via `conversationsV1Bridge`. For automatic capture/routing across channels, see `twilio-conversation-orchestrator`; for persistent cross-conversation context, see `twilio-customer-memory`. For manual conversation CRUD (this skill), Conversations (classic) remains the current, correct API — there is no separate "v2" CRUD API to migrate to.
 
 ---
 
