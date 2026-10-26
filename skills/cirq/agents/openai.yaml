@@ -1,4 +1,0 @@
-interface:
-  display_name: "Cirq"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $cirq for this task."

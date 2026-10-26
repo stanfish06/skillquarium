@@ -14,7 +14,7 @@ created: 2026-06-09
 # parallel-web
 
 > [!info] What it does
-> Search the web, extract URL content, enrich datasets, and run deep research using parallel-cli, prioritizing academic and scientific sources. Use for ANY web-related task: looking things up, fetching pages or academic PDFs, bulk data enrichment, and exhaustive multi-source research reports — even when the user doesn't mention 'parallel' or 'web' explicitly.
+> Uses Parallel CLI for web search, URL extraction, deep research, structured data enrichment, entity discovery, and recurring web monitoring. Best for requests that explicitly need current web evidence, academic-source discovery, repeated entity lookups, exhaustive reports, or ongoing change tracking.
 
 **Source:** [skills/parallel-web/SKILL.md](../../../skills/parallel-web/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](../../maps/literature-discovery.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

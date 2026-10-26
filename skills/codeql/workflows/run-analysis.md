@@ -105,18 +105,15 @@ For each pack available for the detected language (see [ruleset-catalog.md](../r
 
 | Language | Trail of Bits | Community Pack |
 |----------|---------------|----------------|
-| C/C++ | `trailofbits/cpp-queries` | `githubsecuritylab/codeql-cpp-queries` |
-| Go | `trailofbits/go-queries` | `githubsecuritylab/codeql-go-queries` |
-| Java | `trailofbits/java-queries` | `githubsecuritylab/codeql-java-queries` |
-| JavaScript | — | `githubsecuritylab/codeql-javascript-queries` |
-| Python | — | `githubsecuritylab/codeql-python-queries` |
-| C# | — | `githubsecuritylab/codeql-csharp-queries` |
-| Ruby | — | `githubsecuritylab/codeql-ruby-queries` |
+| C/C++ | `trailofbits/cpp-queries` | `GitHubSecurityLab/CodeQL-Community-Packs-CPP` |
+| Go | `trailofbits/go-queries` | `GitHubSecurityLab/CodeQL-Community-Packs-Go` |
+| Java | `trailofbits/java-queries` | `GitHubSecurityLab/CodeQL-Community-Packs-Java` |
+| JavaScript | — | `GitHubSecurityLab/CodeQL-Community-Packs-JavaScript` |
+| Python | — | `GitHubSecurityLab/CodeQL-Community-Packs-Python` |
+| C# | — | `GitHubSecurityLab/CodeQL-Community-Packs-CSharp` |
+| Ruby | — | `GitHubSecurityLab/CodeQL-Community-Packs-Ruby` |
 
-Check if installed (`codeql resolve qlpacks | grep -i "<PACK_NAME>"`). On a miss, report the exact
-pack name that did not resolve and the `codeql pack download <PACK_NAME>` command to install it, then
-ask the user to install or skip. Never drop a pack silently — record every skipped pack in the run
-output so the coverage gap is visible.
+Check if installed (`codeql resolve qlpacks | grep -i "<PACK_NAME>"`). If not, ask user to install or ignore.
 
 #### 2b: Detect Model Packs
 
@@ -309,12 +306,21 @@ Report to user:
 **Query packs:** <list of query packs used>
 **Model packs:** <list of model packs used, or "None">
 **Threat models:** <list of threat models, or "default (remote)">
+**Extraction:** <buildMode from $DB_NAME/codeql-database.yml: autobuild | manual | none>
 
 ### Results Summary:
 - Total findings: <N>
 - Error: <N>
 - Warning: <N>
 - Note: <N>
+
+### Coverage Note:
+[compiled languages only (cpp, csharp, go, java, kotlin, rust); omit for python, js/ts, ruby]
+- Coverage depends on the Extraction mode above. autobuild/manual captures only compiled code —
+  unbuilt files and disabled `#ifdef`/`cfg` branches are absent. `none` extracts source without a
+  build, so it reaches unbuilt files, but still drops disabled branches and gives weaker dataflow.
+  If the finding count is low or zero, suspect incomplete extraction rather than clean code:
+  broaden the build and rebuild; don't substitute another analyzer.
 
 ### Output Files:
 - SARIF (final): $OUTPUT_DIR/results/results.sarif

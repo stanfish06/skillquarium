@@ -12,7 +12,7 @@ created: 2026-06-09
 # pymc
 
 > [!info] What it does
-> Bayesian modeling with PyMC. Build hierarchical models, MCMC (NUTS), variational inference, LOO/WAIC comparison, posterior checks, for probabilistic programming and inference.
+> Builds and checks Bayesian models with PyMC, including hierarchical models, NUTS MCMC, variational inference, mutable-data predictions, posterior predictive checks, diagnostics, and PSIS-LOO model comparison. Use for probabilistic modeling and uncertainty inference in PyMC.
 
 **Source:** [skills/pymc/SKILL.md](../../../skills/pymc/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](../../maps/data-science-compute.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

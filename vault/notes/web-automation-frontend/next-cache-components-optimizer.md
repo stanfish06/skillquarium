@@ -14,7 +14,7 @@ created: 2026-08-23
 # next-cache-components-optimizer
 
 > [!info] What it does
-> Drive a Next.js route to instant navigation by setting up an agentic loop, under Cache Components / PPR, on initial load (hard navigation) and client-side navigation (soft navigation). Encode the goal as a failing @next/playwright instant() e2e and work it to green, one verified route at a time; the shipped test then guards against regression. Use when asked to make a route's navigation instant (its static shell commits immediately), fix a route whose static shell isn't prerendered/served/prefetched, grow a route's static shell or fix its slow first paint, diagnose which Suspense boundary keeps a route out of its static shell, or write the instant() e2e guard for one. Requires Next.js 16.3+ with cacheComponents; directs an upgrade if older.
+> Optimize the meaningful UI available immediately from a Next.js route on an initial load (hard navigation) or named client-side navigation (soft navigation). Encode the goal as a failing @next/playwright instant() e2e and work it to green, one verified route and entry point at a time; the shipped test then guards against regression. Use when asked to grow a static shell, fix a slow first paint or non-instant navigation, diagnose which Suspense boundary blocks useful UI, or add instant() regression coverage. Requires Next.js 16.3+ with Cache Components already adopted.
 
 **Source:** [skills/next-cache-components-optimizer/SKILL.md](../../../skills/next-cache-components-optimizer/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](../../maps/web-automation-frontend.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -1,6 +1,6 @@
 schema: v1
 id: docker-agent-config
-version: 0.1.0
+version: 0.1.2
 title: Docker Agent Configuration
 description: Reference and rules for authoring agent.yaml configs for Docker Agent (cagent) — agents, models, providers, toolsets, and multi-agent teams.
 owns:

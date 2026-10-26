@@ -54,7 +54,7 @@ description: Use for authorized reverse engineering of custom binary protocols, 
 ### Phase 3 — 序列化与加密
 
 ```text
-□ Protobuf：.proto 恢复（blackboxprotobuf / pbtk / protoc --decode_raw）
+□ Protobuf：.proto 恢复（bbpb / pbtk / protoc --decode_raw）
 □ gRPC：HTTP/2 headers + protobuf body
 □ 加密：找密钥派生（客户端 so/dll/JS）→ 联合 ida-reverse / js-reverse / apk-reverse
 □ 重放：仅在授权 scope 内；先无害字段再敏感操作
@@ -75,7 +75,7 @@ MUST 产出：
 |------|------|------|------|
 | tshark / Wireshark | 强烈建议 | PCAP 解析 | 手动 / winget |
 | Python3 | 是 | 解码脚本 | 系统 |
-| blackboxprotobuf | 可选 | 未知 protobuf | pip |
+| bbpb (原 blackboxprotobuf，已改名为官方包) | 可选 | 未知 protobuf | pip |
 | ImHex / 010 | 可选 | 结构模板 | 手动 |
 | IDA / r2 / Ghidra | 按需 | 客户端序列化函数 | 见对应 skill |
 

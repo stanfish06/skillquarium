@@ -301,24 +301,25 @@ Obstacle patching works well with:
 
 ### libFuzzer
 
-`FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` is a naming convention, not a compiler-defined
-macro. Neither libFuzzer nor clang defines it — pass `-D` yourself or every patch stays inert.
+libFuzzer automatically defines `FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` during compilation.
 
 ```bash
 # C++ compilation
 clang++ -g -fsanitize=fuzzer,address -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION \
     harness.cc target.cc -o fuzzer
+
+# The macro is usually defined automatically by -fsanitize=fuzzer
+clang++ -g -fsanitize=fuzzer,address harness.cc target.cc -o fuzzer
 ```
 
 **Integration tips:**
-- Define the macro explicitly on every compile; OSS-Fuzz's base image is the exception,
-  it appends `-DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` to `CFLAGS`/`CXXFLAGS` for you
+- The macro is defined automatically; manual definition is usually unnecessary
 - Use `#ifdef` to check for the macro
 - Combine with sanitizers to detect bugs in newly reachable code
 
 ### AFL++
 
-AFL++ does define `FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` when using its compiler wrappers.
+AFL++ also defines `FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` when using its compiler wrappers.
 
 ```bash
 # Compilation with AFL++ wrappers
@@ -334,18 +335,16 @@ afl-clang-fast++ -g -fsanitize=address target.cc harness.cc -o fuzzer
 
 ### honggfuzz
 
-honggfuzz does not define the macro — its wrappers inject other `-D` flags but not this one,
-so pass it explicitly.
+honggfuzz also supports the macro when building targets.
 
 ```bash
 # Compilation
-hfuzz-clang++ -g -fsanitize=address -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION \
-    target.cc harness.cc -o fuzzer
+hfuzz-clang++ -g -fsanitize=address target.cc harness.cc -o fuzzer
 ```
 
 **Integration tips:**
 - Use `hfuzz-clang` or `hfuzz-clang++` wrappers
-- Define the macro manually for conditional compilation
+- The macro is available for conditional compilation
 - Combine with honggfuzz's feedback-driven fuzzing
 
 ### cargo-fuzz (Rust)
@@ -385,7 +384,6 @@ clang++ -g -fsanitize=address -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION \
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| Patches have no effect | Macro not defined at compile time | Verify with `clang -dM -E`, or grep the build log for `-DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` |
 | Coverage doesn't improve after patching | Wrong obstacle identified | Profile execution to find actual bottleneck |
 | Many false positive crashes | Downstream code has assumptions | Add defensive defaults or partial validation |
 | Code compiles differently | Macro not defined in all build configs | Verify macro in all source files and dependencies |
@@ -398,9 +396,9 @@ clang++ -g -fsanitize=address -DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION \
 
 | Skill | How It Applies |
 |-------|----------------|
-| **libfuzzer** | Convention only — define `FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` via `-D` |
+| **libfuzzer** | Defines `FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION` automatically |
 | **aflpp** | Supports the macro via compiler wrappers |
-| **honggfuzz** | Uses the macro for conditional compilation; requires a manual `-D` |
+| **honggfuzz** | Uses the macro for conditional compilation |
 | **cargo-fuzz** | Sets `cfg!(fuzzing)` for Rust conditional compilation |
 
 ### Related Techniques

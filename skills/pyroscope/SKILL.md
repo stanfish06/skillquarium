@@ -27,7 +27,7 @@ Continuous profiling — flame graphs of CPU, memory, allocations, mutex content
 ### 1. Instrument an app with the SDK (representative: Python)
 
 ```bash
-pip install pyroscope-io==1.0.11
+pip install pyroscope-io==1.2.5
 ```
 
 ```python

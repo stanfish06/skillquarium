@@ -22,18 +22,20 @@ you a *binding-affinity estimate* (kcal/mol) — the piece that deep-learning po
 DiffDock deliberately do not provide. A common pattern is: generate poses with DiffDock, then
 **rescore them here** with GNINA or a Vina local-optimize.
 
-**Current baseline (checked 2026-07):**
+**Tool baselines (Vina/GNINA checked 2026-07; Meeko checked 2026-10):**
 - AutoDock Vina **1.2.7** (Feb 2025); 1.2.x line — Python bindings, Vinardo + AD4 scoring, multi-ligand docking.
 - GNINA **1.3.3** — PyTorch-backed CNN scoring, `--cnn=fast` distilled model for screening, covalent docking.
-- Meeko **0.6.x** — `mk_prepare_ligand.py` / `mk_prepare_receptor.py` for PDBQT prep.
+- Meeko **0.8.0** (Python >=3.10) — `mk_prepare_ligand.py` / `mk_prepare_receptor.py` for PDBQT prep.
 
 ## Installation
 
 ```bash
 # Vina: CLI binary + Python bindings
 conda install -c conda-forge vina          # or: pip install vina  (numpy required)
-# Ligand/receptor prep
-pip install meeko                           # 0.6.x; pulls RDKit, prody
+# Ligand/receptor prep: conda-forge installs dependencies, including ProDy
+conda install -c conda-forge meeko=0.8.0
+# Or pip: install the runtime dependencies explicitly
+uv pip install "meeko==0.8.0" scipy rdkit gemmi tqdm
 conda install -c conda-forge openbabel      # obabel: format conversion, protonation, 3D
 # smina (single static binary) and GNINA
 conda install -c conda-forge smina
@@ -41,6 +43,10 @@ conda install -c conda-forge smina
 docker pull gnina/gnina                     # or download the release binary and `chmod +x`
 gnina --version
 ```
+
+Meeko's [pip installation](https://github.com/forlilab/Meeko/blob/v0.8.0/docs/source/installation.rst)
+does not resolve its runtime dependencies. The PDB examples below use `--read_pdb` without ProDy.
+Install ProDy separately for `--read_with_prody`, mmCIF input, or tethered docking.
 
 GNINA and smina read plain PDB/SDF/MOL2 directly (they convert internally via OpenBabel), so
 **PDBQT is only strictly required for Vina itself.**
@@ -54,7 +60,7 @@ add hydrogens at the target pH, and assign charges. Two supported routes:
 
 ```bash
 # Meeko (recommended for Vina 1.2; also emits a Vina box config, see step 3)
-mk_prepare_receptor.py --read_with_prody receptor.pdb -o receptor -p   # -> receptor.pdbqt
+mk_prepare_receptor.py --read_pdb receptor.pdb -o receptor -p   # -> receptor.pdbqt
 # ADFR suite alternative
 prepare_receptor -r receptor.pdb -o receptor.pdbqt
 ```
@@ -96,7 +102,7 @@ box to the whole protein (accept lower accuracy). Helpers:
 
 ```bash
 # Meeko: derive a Vina box config that envelops a reference ligand + padding
-mk_prepare_receptor.py --read_with_prody receptor.pdb -o receptor -p \
+mk_prepare_receptor.py --read_pdb receptor.pdb -o receptor -p \
     -v --box_enveloping crystal_ligand.sdf --padding 5     # -> receptor.box.txt (Vina config)
 # smina/gnina: skip manual coords, auto-box from a reference ligand
 smina -r receptor.pdbqt -l ligand.pdbqt --autobox_ligand crystal_ligand.sdf --autobox_add 4 -o out.sdf

@@ -7,6 +7,7 @@ Reference for improving a Genie Agent iteratively through approved, benchmark-dr
 - Never mutate underlying tables, views, Metric Views, schemas, or source data.
 - Keep SQL inspection read-only and bounded.
 - Make one focused tuning pass at a time. Do not mix benchmark repair or pruning with Genie tuning in the same pass.
+- Do not tune against, or accept a fix based on, a benchmark that is too small or dominated by easy questions. Recommend benchmark repair that adds representative, non-trivial questions — including reworded variants of the target failure pattern — with validated ground truth.
 - Do not copy benchmark questions, answer SQL, or evaluation-note wording into sample questions, snippets, examples, or text instructions.
 - Benchmarks evaluate quality; they do not teach Genie by themselves.
 - Benchmark questions are shared definitions; Chat or Agent scoring is determined by benchmark execution mode.
@@ -30,13 +31,15 @@ Reference for improving a Genie Agent iteratively through approved, benchmark-dr
 
 If the Agent has no benchmarks, ask the user whether to bootstrap them before starting — do not begin a tuning pass without a baseline.
 
+If the user has already described the benchmark (size, difficulty, coverage), apply [Benchmark Integrity](#benchmark-integrity) in your first response and flag any gaps — do not wait for the Agent identifier to raise them. When answering with an advisory plan, order it: benchmark review → repair lever → staged evaluation gates.
+
 ### Step 2 — Determine the benchmark execution target
 
 Infer from the user's goal, existing SQL answers, evaluation notes, and latest eval output. If ambiguous or the Agent has no benchmarks, ask the user whether to optimize for Chat, Agent, or both.
 
 ### Step 3 — Review benchmark quality
 
-See [Benchmark Integrity](#benchmark-integrity). If the benchmark is too large, too easy, or has fewer than 30 valid items for the target mode, perform or recommend a dedicated [Benchmark Repair](#benchmark-repair) or [Benchmark Pruning](#benchmark-pruning) pass first. Never mix repair/pruning with Genie tuning in the same pass. After either, run benchmark evaluation and use the completed output as the new baseline.
+See [Benchmark Integrity](#benchmark-integrity). If the benchmark is too large, too easy, or has fewer than 30 valid items for the target mode, perform or recommend a dedicated [Benchmark Repair](#benchmark-repair) or [Benchmark Pruning](#benchmark-pruning) pass first. Never mix repair/pruning with Genie tuning in the same pass. After either, run benchmark evaluation and use the completed output as the new baseline. **If the Agent routes to a governed methodology function, clear the [Methodology parity gate](#methodology-parity-gate-upstream-of-benchmarking) first** — a function that computes the wrong numbers can still pass NL→SQL routing benchmarks.
 
 ### Step 4 — Establish baseline behavior
 
@@ -142,6 +145,18 @@ Translate failed benchmark evidence into structured Genie context. This mirrors 
 7. Short global text instructions.
 
 Benchmarks evaluate quality. They do not teach Genie by themselves.
+
+## Methodology parity gate (upstream of benchmarking)
+
+When a benchmarked Agent routes to a **registered SQL function** (Design Priorities surface #11 in [create-genie-agent.md](create-genie-agent.md#design-priorities)) that implements an external *methodology* — a customer's own measure, an industry-standard calculation, or a spec the business already computes another way — validate the function's **numeric outputs to N-decimal parity against that reference** *before* you benchmark Genie's routing to it. The benchmark loop below measures NL→SQL **routing accuracy** ("did Genie pick the right function/query?"); it does **not** check whether the function's math reproduces the methodology. A function Genie routes to perfectly but that computes the wrong numbers passes the benchmark and ships a wrong answer.
+
+The parity gate sits upstream of, and feeds, the benchmark loop:
+
+1. Pick the reference the function must reproduce — the source tool's output, a published spec, or an independently authored query.
+2. Run both on the same inputs and diff to an agreed tolerance — e.g. N-decimal parity on a ratio-style measure, exact / bit-for-bit on an integer matrix.
+3. Only once parity holds is it worth adding benchmark questions that route to the function and tuning it per the loop below.
+
+Author and register the function with the **`databricks-dbsql`** skill; the decision of *whether a measure needs a function at all* (vs a Metric View) lives in **`databricks-metric-views`** ([metric-view-advisor.md](../../databricks-metric-views/references/metric-view-advisor.md#when-a-metric-view-is-not-the-right-tool--governed-function)).
 
 ## Benchmark Integrity
 
@@ -419,12 +434,13 @@ After comparing reports, add an explicit keep/revise/rollback decision:
 - New syntax/access/eval issues:
 - Benchmark or infra exclusions:
 - Leakage review:
+- Generalization check (held-out variants):
 - Decision: KEEP / REVISE / ROLL BACK
 - Reason:
 - Rollback action, if needed:
 ```
 
-Keep the candidate only when it improves the valid benchmark score or fixes the target cluster without unacceptable regressions. Roll back or revise when the candidate only shifts failures, creates new syntax/infra issues, or depends on benchmark leakage.
+Keep the candidate only when it improves the valid benchmark score or fixes the target cluster without unacceptable regressions, and the fix also holds on reworded variants of the target pattern that were not used as tuning evidence. Roll back or revise when the candidate only shifts failures, creates new syntax/infra issues, or depends on benchmark leakage.
 
 ## Iteration Reflection
 

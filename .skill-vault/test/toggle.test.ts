@@ -240,7 +240,8 @@ describe("skill toggle", () => {
 /**
  * Regression fixtures, not a parity oracle. They were recorded from skill_toggle.py, the port was
  * verified against them byte for byte (f0522248, a2b7ba65, 05c65af4), and that Python is now
- * deleted; what is left is catching an unintended change to catalog/list output.
+ * deleted; what is left is catching an unintended change to catalog/list output. They carry skill
+ * descriptions, so the jobs that commit skill content regenerate them (test/regenerateGoldens.ts).
  *
  * Two things differ per checkout and are therefore not compared. Toggle state: it lives in
  * .skill-vault/data/skill-toggle-state.json and never in a committed skill (the pre-commit-reset

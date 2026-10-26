@@ -12,7 +12,7 @@ created: 2026-06-09
 # tiledbvcf
 
 > [!info] What it does
-> Efficient storage and retrieval of genomic variant data using TileDB. Scalable VCF/BCF ingestion, incremental sample addition, compressed storage, parallel queries, and export capabilities for population genomics.
+> Stores and retrieves genomic variant calls with TileDB-VCF. Use for indexed single-sample VCF/BCF ingestion, incremental cohorts, region and sample queries, streaming results, allele statistics, QC, and VCF/BCF export locally or through TileDB Cloud.
 
 **Source:** [skills/tiledbvcf/SKILL.md](../../../skills/tiledbvcf/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](../../maps/genomics-variants.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

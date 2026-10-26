@@ -46,7 +46,7 @@ For context when reading older configs or docs, here is how the retired Provisio
 - [computes-and-scaling.md](references/computes-and-scaling.md) — Sizing, endpoint management, scale-to-zero, HA
 - [connectivity.md](references/connectivity.md) — Connection patterns, token refresh, Data API
 - [synced-tables.md](references/synced-tables.md) — Lakebase synced tables, data type mapping, capacity planning
-- [lakehouse-sync.md](references/lakehouse-sync.md) — CDC from Lakebase Postgres to Unity Catalog Delta tables (**UI-only** — cannot be configured via CLI or API)
+- [lakehouse-sync.md](references/lakehouse-sync.md) — CDC from Lakebase Postgres to Unity Catalog Delta tables (programmable via `databricks postgres *-cdf-config` / `w.postgres.*_cdf_config`, Beta)
 - [pgvector.md](references/pgvector.md) — Vector similarity search with pgvector extension
 - [off-platform.md](references/off-platform.md) — Off-platform Lakebase (NOT Databricks Apps): external Node.js apps connecting via `@databricks/lakebase`, env management, token refresh, Drizzle ORM
 
@@ -339,7 +339,7 @@ For vector embeddings with pgvector, see [pgvector.md](references/pgvector.md).
 | Sync permissions error | Ensure `USE CATALOG`/`USE SCHEMA` on source table and `CREATE TABLE` in storage catalog |
 | Synced table null bytes | Null bytes (0x00) in STRING/ARRAY/MAP/STRUCT columns cause sync failures. Sanitize source data: `REPLACE(col, CAST(CHAR(0) AS STRING), '')` |
 | Synced table data modified | Only read queries, indexes, and DROP TABLE allowed on synced tables in Postgres. Modifications break sync pipeline. |
-| DABs `synced_database_tables` | Deprecated — maps to a legacy API and fails on current Lakebase. Use `databricks postgres create-synced-table` CLI instead. DAB support via `postgres_synced_tables` is not yet available. |
+| DABs `synced_database_tables` | Deprecated — maps to a legacy API and fails on current Lakebase. Use the `postgres_synced_tables` bundle resource (Beta, CLI v1.0.0+) or the `databricks postgres create-synced-table` CLI instead. |
 
 ## SDK and Version Requirements
 

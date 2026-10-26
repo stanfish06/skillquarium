@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [pufferlib](../../notes/ml-ai/pufferlib.md) — High-performance reinforcement learning framework optimized for speed and scale
+- [pufferlib](../../notes/ml-ai/pufferlib.md) — Version-aware guidance for PufferLib reinforcement-learning environments, vectorization, policies, PuffeRL training, evaluation, and safe checkpoint review
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

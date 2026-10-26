@@ -21,7 +21,7 @@ reverted on the next sync.
 ## Vendored bundles
 
 | Bundle | Upstream | Vendored |
-|--------|----------|----------|
+| --- | --- | --- |
 | MATLAB Agentic Toolkit, 6 base groups, 30 skills | [matlab/matlab-agentic-toolkit](https://github.com/matlab/matlab-agentic-toolkit) @ `9556aee` | 2026-07-26 |
 | 503 scientific expert profiles + `scientific-agents` | [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) @ `896ed6ed` | 2026-06 |
 

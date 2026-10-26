@@ -1,6 +1,12 @@
 import type { Command, Context } from "../cli";
 import { runDrift } from "./drift";
-import { applyOverrides, loadOverrides, overridesPath, reportOverrides } from "./overrides";
+import {
+  applyOrQuarantine,
+  applyOverrides,
+  loadOverrides,
+  overridesPath,
+  reportOverrides,
+} from "./overrides";
 import { update as runUpdate } from "./run";
 import { softenVault } from "./soften";
 
@@ -32,14 +38,24 @@ function flagged(
 }
 
 export const overrides = flagged(
-  `usage: skillquarium overrides [--check]
+  `usage: skillquarium overrides [--check | --quarantine]
 
 Re-apply the fixes recorded in .skill-vault/data/local-overrides.json to upstream-managed skills.
 
-  --check  report without writing; exit 1 when an override is not applied`,
-  ["--check"],
+  --check       report without writing; exit 1 when an override is not applied
+  --quarantine  also restore each skill left stale or missing, folder and .skill-lock.json entry,
+                from HEAD; exit 1 when one was quarantined, 2 when one could not be restored.
+                For update-skills.yml: it discards uncommitted edits in those skills`,
+  ["--check", "--quarantine"],
   (flags, ctx) => {
     const check = flags.has("--check");
+    if (flags.has("--quarantine")) {
+      if (check) {
+        ctx.err("skillquarium: --check and --quarantine cannot be combined");
+        return 2;
+      }
+      return applyOrQuarantine(ctx.root, ctx);
+    }
     const recorded = loadOverrides(overridesPath(ctx.root));
     return reportOverrides(applyOverrides(recorded, ctx.root, !check), check, ctx);
   },

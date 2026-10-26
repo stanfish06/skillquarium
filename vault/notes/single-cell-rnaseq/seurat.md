@@ -24,8 +24,8 @@ created: 2026-06-10
 
 ## Related skills
 
-- [anndata](../../notes/single-cell-rnaseq/anndata.md) — Data structure for annotated matrices in single-cell analysis
-- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Standard single-cell RNA-seq analysis pipeline
+- [anndata](../../notes/single-cell-rnaseq/anndata.md) — Handles annotated matrices in single-cell analysis, .h5ad and Zarr files, and integration with the scverse ecosystem
+- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Performs Scanpy single-cell RNA-seq QC, normalization, HVG selection, PCA/UMAP/t-SNE, clustering, exploratory marker ranking, pseudobulk preparation, visualization, and Seurat or...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

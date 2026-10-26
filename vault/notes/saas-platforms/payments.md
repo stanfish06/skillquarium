@@ -18,7 +18,7 @@ created: 2026-08-07
 
 ## Related skills
 
-- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
+- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and managing third-party integrations via the `vercel integration` CLI
 - [playwright-best-practices](../../notes/web-automation-frontend/playwright-best-practices.md) — Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling...
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
 - [shopify-payments-apps](../../notes/saas-platforms/shopify-payments-apps.md) — The Payments Apps API enables payment providers to integrate their payment solutions with Shopify's checkout

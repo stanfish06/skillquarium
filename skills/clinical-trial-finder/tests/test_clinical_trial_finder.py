@@ -1128,11 +1128,14 @@ def test_euctr_parse_garbage():
     assert trials == []
 
 
-def test_euctr_fetch_network_error():
-    """Network errors should return empty list, not raise."""
-    with patch("urllib.request.urlopen", side_effect=urllib.error.URLError("refused")):
-        result = eu.fetch_euctr("BRCA1")
-    assert result == []
+def test_euctr_fetch_reports_unavailable():
+    """Unavailable coverage must not be reported as an empty search."""
+    with (
+        patch("urllib.request.urlopen") as request,
+        pytest.raises(RuntimeError, match="No European registry search"),
+    ):
+        eu.fetch_euctr("BRCA1")
+    request.assert_not_called()
 
 
 def test_euctr_trial_has_source_field():

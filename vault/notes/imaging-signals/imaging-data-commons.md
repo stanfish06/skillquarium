@@ -14,13 +14,13 @@ created: 2026-06-09
 # imaging-data-commons
 
 > [!info] What it does
-> Query and download public cancer imaging data from NCI Imaging Data Commons using idc-index. Use for accessing large-scale radiology (CT, MR, PET) and pathology datasets for AI training or research. No authentication required. Query by metadata, visualize in browser, check licenses.
+> Queries and downloads public cancer imaging data from NCI Imaging Data Commons. Supports IDC collection discovery, DICOM access, radiology (CT, MR, PET) and pathology AI datasets, metadata SQL, visualization, licensing, and citations. Uses public metadata and download routes without authentication; optional BigQuery and Google Healthcare routes require Google credentials.
 
 **Source:** [skills/imaging-data-commons/SKILL.md](../../../skills/imaging-data-commons/SKILL.md)  ·  **Domain:** [Imaging, Microscopy & Biosignals](../../maps/imaging-signals.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
+- [citations](../../notes/literature-discovery/citations.md) — Canonical rules and HTML/CSS contract for inline `[n]` citation references, end-of-document Citations blocks, and optional per-section citation recaps used across Moody's Agentic...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

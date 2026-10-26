@@ -21,7 +21,6 @@ created: 2026-08-07
 - [agentic-actions-auditor](../../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
 - [audit-and-reduce-dependencies](../../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
 - [authoring-github-workflows](../../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
-- [autoskill](../../notes/vault-meta/autoskill.md) — Observe the user's screen via screenpipe, detect repeated research workflows, match them against existing scientific-agent-skills, and draft new skills (or composition recipes that...
 - [build-iterated-agentic-loop](../../notes/vault-meta/build-iterated-agentic-loop.md) — build a repo-local skill and install a matching iterated coding-agent GitHub Actions workflow, prompt, memory file, and reference templates
 - [chat-sdk](../../notes/saas-platforms/chat-sdk.md) — Vercel Chat SDK expert guidance. Use when building multi-platform chat bots — Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear — with a single codebase
 - [check-pr](../../notes/software-dev/check-pr.md) — Checks a GitHub, GitLab, or Perforce (p4) pull request (or merge request, or shelved changelist) for unresolved review comments, failing status checks, and incomplete PR descriptions
@@ -34,6 +33,7 @@ created: 2026-08-07
 - [github-actions-ci](../../notes/software-dev/github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
 - [greploop](../../notes/software-dev/greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
 - [huggingface-papers](../../notes/ml-ai/huggingface-papers.md) — Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page
+- [managed-deep-agents](../../notes/ml-ai/managed-deep-agents.md) — INVOKE THIS SKILL when building, testing, or deploying Managed Deep Agents in LangSmith
 - [mcp-csharp-debug](../../notes/dotnet-development/mcp-csharp-debug.md) — Run and debug C# MCP servers locally. Covers IDE configuration, MCP Inspector testing, GitHub Copilot Agent Mode integration, logging setup, and troubleshooting
 - [migrate-dotnetfx-to-net](../../notes/dotnet-development/migrate-dotnetfx-to-net.md) — Migrate a .NET Framework (4.x) project or solution to modern .NET (10), the large cross-runtime jump — not a version bump
 - [nuget-trusted-publishing](../../notes/dotnet-development/nuget-trusted-publishing.md) — Set up NuGet trusted publishing (OIDC) on a GitHub Actions repo — replaces long-lived API keys with short-lived tokens
@@ -44,7 +44,7 @@ created: 2026-08-07
 - [technology-selection](../../notes/dotnet-development/technology-selection.md) — Guides technology selection and implementation of AI and ML features in .NET 8+ applications using ML.NET, Microsoft.Extensions.AI (MEAI), Microsoft Agent Framework (MAF), GitHub...
 - [track-findings](../../notes/security-auditing/track-findings.md) — Track validated Codex Security findings in Linear, Jira, GitHub issues, or draft GitHub security advisories
 - [triage](../../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
-- [triage-finding](../../notes/security-auditing/triage-finding.md) — Use when the user supplies or imports existing security findings, vulnerability reports, or security/vulnerability Jira/Linear tickets from scanners, advisories, GitHub, Atlassian...
+- [triage-finding](../../notes/security-auditing/triage-finding.md) — Triage supplied or imported security findings against a repository using its security policy and static code evidence
 - [v0-dev](../../notes/web-automation-frontend/v0-dev.md) — v0 by Vercel expert guidance. Use when discussing AI code generation, generating UI components from prompts, v0 CLI usage, v0 SDK/API integration, or integrating v0 into development...
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 - [yeet](../../notes/vault-meta/yeet.md) — Publish local changes to GitHub by confirming scope, committing intentionally, pushing the branch, and opening a draft PR through the GitHub app from this plugin, with `gh` used only...

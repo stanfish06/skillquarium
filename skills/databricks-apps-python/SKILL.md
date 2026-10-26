@@ -57,7 +57,7 @@ Copy this checklist and verify each item:
 | **Auth (app)** | Service principal via `Config()` — auto-injected `DATABRICKS_CLIENT_ID`/`DATABRICKS_CLIENT_SECRET` |
 | **Auth (user)** | `x-forwarded-access-token` header — see [references/1-authorization.md](references/1-authorization.md) |
 | **Resources** | `valueFrom` in app.yaml — see [references/2-app-resources.md](references/2-app-resources.md) |
-| **SDK / Foundation Models / Vector Search / Model Serving** | Use the `databricks-python-sdk` skill — same `WorkspaceClient` and OpenAI-compatible foundation-model patterns work inside a Databricks App |
+| **SDK / Foundation Models / Vector Search / Model Serving** | Use the `databricks-python-sdk` skill — same `WorkspaceClient` and OpenAI-compatible foundation-model patterns work inside a Databricks App. For UC model services (`system.ai.*`), see the model-service note in [references/2-app-resources.md](references/2-app-resources.md) and the `databricks-unity-gateway` skill |
 | **Docs** | https://docs.databricks.com/dev-tools/databricks-apps/ |
 
 ---
@@ -70,13 +70,13 @@ Copy this checklist and verify each item:
 
 **Frameworks**: See [references/3-frameworks.md](references/3-frameworks.md) for Databricks-specific patterns per framework — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex — with auth integration and deployment commands. (Keywords: FastAPI, Flask, Dash, Streamlit, Gradio, Reflex, framework selection)
 
-**Deployment**: Use [references/4-deployment.md](references/4-deployment.md) when deploying your app — covers Databricks CLI, Asset Bundles (DABs), app.yaml configuration, and post-deployment verification. (Keywords: deploy, CLI, DABs, asset bundles, app.yaml, logs)
+**Deployment**: Use [references/4-deployment.md](references/4-deployment.md) when deploying your app — covers Databricks CLI, Declarative Automation Bundles (DABs), app.yaml configuration, and post-deployment verification. (Keywords: deploy, CLI, DABs, asset bundles, app.yaml, logs)
 
 **Lakebase**: Use [references/5-lakebase.md](references/5-lakebase.md) when using Lakebase (PostgreSQL) as your app's data layer — covers auto-injected env vars, psycopg2/asyncpg patterns, and when to choose Lakebase vs SQL warehouse. (Keywords: Lakebase, PostgreSQL, psycopg2, asyncpg, transactional, PGHOST)
 
 **CLI commands**: Use [references/6-cli-approach.md](references/6-cli-approach.md) for managing app lifecycle via CLI — covers creating, deploying, monitoring, and deleting apps. (Keywords: CLI, create app, deploy app, app logs)
 
-**Foundation Models / SDK / Vector Search / Model Serving**: Use the **[databricks-python-sdk](../databricks-python-sdk/SKILL.md)** skill for the OpenAI-compatible foundation-model client, `WorkspaceClient` calls, Vector Search, and model-serving invocation — the same patterns apply inside a Databricks App. The examples in this skill's `examples/` folder (`fm-minimal-chat.py`, `fm-parallel-calls.py`, `fm-structured-outputs.py`, `llm_config.py`) show the App-side wiring only.
+**Foundation Models / SDK / Vector Search / Model Serving**: Use the **[databricks-python-sdk](../databricks-python-sdk/SKILL.md)** skill for the OpenAI-compatible foundation-model client, `WorkspaceClient` calls, Vector Search, and model-serving invocation — the same patterns apply inside a Databricks App. The examples in this skill's `examples/` folder (`fm-minimal-chat.py`, `fm-parallel-calls.py`, `fm-structured-outputs.py`, `llm_config.py`) show the App-side wiring only. For **UC model services** (`system.ai.*`, called on `/ai-gateway/mlflow/v1`), see the model-service note in [references/2-app-resources.md](references/2-app-resources.md) and the **`databricks-unity-gateway`** skill.
 
 ---
 
@@ -191,7 +191,7 @@ class EntityIn(BaseModel):
 | **Pre-installed frameworks** | Dash, Streamlit, Gradio, Flask, FastAPI, Shiny |
 | **Custom packages** | Add to `requirements.txt` in app root |
 | **Network** | Apps can reach Databricks APIs; external access depends on workspace config |
-| **User auth** | Public Preview — workspace admin must enable before adding scopes |
+| **User auth** | GA, on by default — no admin enablement required; declare `user_api_scopes` to add scopes |
 
 ---
 

@@ -30,7 +30,8 @@ created: 2026-08-07
 - [domain-cloud-native](../../notes/software-dev/domain-cloud-native.md) — Use when building cloud-native apps. Keywords: kubernetes, k8s, docker, container, grpc, tonic, microservice, service mesh, observability, tracing, metrics, health check, cloud...
 - [langfuse](../../notes/analytics-engineering/langfuse.md) — Interact with Langfuse and access its documentation: tracing, monitoring, creating datasets, running experiments, and evaluating AI applications
 - [llm-observability-evals](../../notes/analytics-engineering/llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
-- [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to applications and send as much useful telemetry as possible
+- [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to application code — traces, logs, metrics, and AI/agent spans
+- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and managing third-party integrations via the `vercel integration` CLI
 - [matlab-instrument-opentelemetry-tracing](../../notes/matlab-development/matlab-instrument-opentelemetry-tracing.md) — Add OpenTelemetry tracing to MATLAB code
 - [mlflow-onboarding](../../notes/cloud-devops/mlflow-onboarding.md) — Onboards users to MLflow by determining their use case (GenAI agents/apps or traditional ML/deep learning) and guiding them through relevant quickstart tutorials and initial integration
 - [opentelemetry](../../notes/cloud-devops/opentelemetry.md) — Instrument any app with OpenTelemetry and ship metrics / logs / traces to Grafana Cloud or self-hosted Mimir / Loki / Tempo / Pyroscope

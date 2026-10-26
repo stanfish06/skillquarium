@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (80)
+## Skills (82)
 
 - [adaptive-metrics](../notes/cloud-devops/adaptive-metrics.md) — Cut Grafana Cloud Metrics cost by shrinking active-series count with Adaptive Metrics aggregation rules — auto-recommendations from query history, custom exact/regex rules, label-drop...
 - [airflow](../notes/cloud-devops/airflow.md) — Queries, manages, and troubleshoots Apache Airflow using the `af` CLI
@@ -22,6 +22,7 @@ created: 2026-06-13
 - [alloy](../notes/cloud-devops/alloy.md) — Build a unified telemetry pipeline with Grafana Alloy — one OpenTelemetry-compatible binary that collects metrics, logs, traces, and profiles and ships to Grafana Cloud / Prometheus /...
 - [app-observability](../notes/cloud-devops/app-observability.md) — Get RED metrics + service maps + frontend RUM + AI/LLM monitoring out of Grafana Cloud — Application Observability (`traces_spanmetrics_*` from OTel traces, p50/p95/p99 latency...
 - [assistant-mcp](../notes/cloud-devops/assistant-mcp.md) — Connect AI coding agents (Claude Code, Cursor, VS Code, OpenAI Codex) to Grafana Cloud via the `mcp-grafana` Model Context Protocol server
+- [aws-agent-toolkit](../notes/cloud-devops/aws-agent-toolkit.md) — Pull AWS's official agent skills (Agent Toolkit for AWS, ~115 skills) from the remote catalog on demand with the `aws agent-toolkit` CLI instead of keeping them installed
 - [aws-agentic-ai](../notes/cloud-devops/aws-agentic-ai.md) — AWS Bedrock AgentCore comprehensive expert for deploying and managing AI agents at scale
 - [aws-cdk-development](../notes/cloud-devops/aws-cdk-development.md) — AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python
 - [aws-cost-operations](../notes/cloud-devops/aws-cost-operations.md) — AWS cost optimization, monitoring, and operational excellence expert
@@ -89,10 +90,11 @@ created: 2026-06-13
 - [pyroscope](../notes/cloud-devops/pyroscope.md) — Continuously profile applications with Grafana Pyroscope and read the result as flame graphs
 - [ray](../notes/cloud-devops/ray.md) — Distributed Python compute with Ray — @ray.remote tasks/actors for cluster-scale parallelism, Ray Data for large-batch preprocessing, Ray Train for distributed model training...
 - [shipping-and-launch](../notes/cloud-devops/shipping-and-launch.md) — Prepares production launches. Use when preparing to deploy to production
+- [skypilot](../notes/cloud-devops/skypilot.md) — Use when launching cloud VMs, Kubernetes pods, or Slurm jobs for GPU/TPU/CPU workloads, training or fine-tuning models on cloud GPUs, deploying inference servers (vllm, TGI, etc.) with...
 - [snakemake-workflow-engine](../notes/cloud-devops/snakemake-workflow-engine.md) — Python-based workflow manager for reproducible, scalable pipelines
 - [synthetic-monitoring-checks](../notes/cloud-devops/synthetic-monitoring-checks.md) — Author Grafana Cloud Synthetic Monitoring checks, with deep coverage of k6 scripted and browser checks: SM's single-VU/single-iteration execution model, assertions that actually fail...
 - [tempo](../notes/cloud-devops/tempo.md) — Stand up Grafana Tempo as a cost-efficient distributed-tracing backend that only needs object storage, and write TraceQL queries against it
 - [terraform](../notes/cloud-devops/terraform.md) — Terraform and OpenTofu infrastructure-as-code (IaC) — declare cloud/SaaS resources in HCL, manage state with remote backends and locking, author and consume modules, and run the...
 - [vllm-deploy-simple](../notes/cloud-devops/vllm-deploy-simple.md) — Quick install and deploy vLLM, start serving with a simple LLM, and test OpenAI API
-- [wandb-primary](../notes/cloud-devops/wandb-primary.md) — Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, and Launch workflows
+- [wandb-primary](../notes/cloud-devops/wandb-primary.md) — Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, Workspaces, Automations, Sweeps, Launch...
 - [wizard](../notes/cloud-devops/wizard.md) — Generate an interactive bash wizard that walks a human through steps only they can perform

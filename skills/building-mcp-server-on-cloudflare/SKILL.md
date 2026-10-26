@@ -19,7 +19,7 @@ Your knowledge of the MCP SDK and Cloudflare Workers integration may be outdated
 
 | Source | How to retrieve | Use for |
 |--------|----------------|---------|
-| MCP docs | `https://developers.cloudflare.com/agents/mcp/` | Server setup, auth, deployment |
+| MCP docs | `https://developers.cloudflare.com/agents/model-context-protocol/` | Server setup, auth, deployment |
 | MCP spec | `https://modelcontextprotocol.io/` | Protocol spec, tool/resource definitions |
 | Workers docs | Search tool or `https://developers.cloudflare.com/workers/` | Runtime APIs, bindings, config |
 

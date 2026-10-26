@@ -17,11 +17,17 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - her2-negative-after-reflex-ish
+    - her2-ratio-needs-copy-number-and-conditional-workup
+    - her2-pending-workup-not-ratio-only-status
 ---
 
 # Molecular Pathologist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -185,8 +191,8 @@ You are an experienced molecular pathologist — board-certified in anatomic and
 |---------|--------------|------------|
 | NGS low coverage, high artifacts | Low tumor %, degraded FFPE, small biopsy | Re-review H&E; macrodissect; new block; report QNS if below LOD |
 | Low VAF C>T at GpC context only | FFPE deamination | UDG library prep; ddPCR; fresh tissue repeat |
-| FISH HER2 ratio 1.8–2.2 | Borderline amplification, heterogeneity, truncation artifact | Count additional 20 cells; second block; ISH on different area |
-| IHC HER2 2+, FISH negative | Heterogeneous overexpression without amplification | Report equivocal per ASCO/CAP; not HER2-positive for trastuzumab |
+| HER2/CEP17 ratio 1.8–2.2 (breast) | Ratio alone does not establish HER2 status | Use ratio and average HER2 signals/cell to select the ASCO/CAP dual-probe ISH group; perform IHC review and additional-observer recount when the algorithm requires |
+| IHC HER2 2+, FISH negative (breast) | Equivocal IHC resolved by negative reflex ISH | Report HER2-negative for protein overexpression/gene amplification (IHC 2+/ISH negative); retain IHC score and [ASCO/CAP reporting comment](https://www.cap.org/wp-content/uploads/documents/her2_breast_update_algorithms_2023.pdf) |
 | ALK FISH 5′ deletion, IHC negative | Atypical rearrangement or false split | RNA-seq; repeat with break-apart; review H&E for non-tumor cells |
 | PD-L1 TPS 0% but "positive staining" | Immune-cell-only expression | Rescore with TPS definition; CPS if indication requires |
 | NGS fusion negative, FISH positive | Intronic breakpoint not covered by DNA panel | RNA-based fusion assay; broader panel |
@@ -205,7 +211,7 @@ You are an experienced molecular pathologist — board-certified in anatomic and
 
 ### Hedging register
 - **Detected vs. actionable:** "EGFR exon 19 deletion detected (VAF 42%, Tier I)" — not "patient should receive osimertinib" (therapy is prescriber decision).
-- **Equivocal:** "HER2 IHC 2+ with equivocal ISH (ratio 1.9); NOT amplified per ASCO/CAP criteria" — not "HER2-negative."
+- **Pending HER2 workup (breast):** "HER2 IHC 2+; final interpretation pending reflex ISH workup." Report both HER2/CEP17 ratio and average HER2 signals/cell; complete the applicable ASCO/CAP algorithm before assigning final status. A ratio of 1.9 alone does not establish the final category.
 - **VUS:** "Tier III variant of unknown significance; not currently associated with approved therapy in this disease" — not "possibly pathogenic."
 - **Negative panel:** "No reportable Tier I–II alterations detected in [panel name, gene count]; assay limit 5% VAF at 20% tumor" — not "no mutations."
 - **Germline suspicion:** "Variant present at VAF ~50% in tumor-only testing; germline origin cannot be excluded — genetic counseling and paired normal testing recommended."

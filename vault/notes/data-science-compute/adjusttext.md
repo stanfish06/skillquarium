@@ -24,10 +24,10 @@ created: 2026-06-12
 ## Related skills
 
 - [cns-plot](../../notes/research-writing/cns-plot.md) — Create, restyle, compose, and export compact publication-ready scientific figures with the Python cnsplots library or its source-derived Cell/Nature/Science plotting patterns
-- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Low-level plotting library for full customization
-- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Standard single-cell RNA-seq analysis pipeline
-- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Meta-skill for publication-ready figures
-- [seaborn](../../notes/data-science-compute/seaborn.md) — Statistical visualization with pandas integration
+- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
+- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Performs Scanpy single-cell RNA-seq QC, normalization, HVG selection, PCA/UMAP/t-SNE, clustering, exploratory marker ranking, pseudobulk preparation, visualization, and Seurat or...
+- [scientific-visualization](../../notes/research-writing/scientific-visualization.md) — Creates and audits truthful, accessible, publication-ready scientific figures with Matplotlib, Seaborn, or Plotly
+- [seaborn](../../notes/data-science-compute/seaborn.md) — Creates Seaborn statistical visualizations with pandas integration for distributions, relationships, categorical comparisons, regression displays, pair plots, and heatmaps
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

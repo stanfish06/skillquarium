@@ -31,6 +31,16 @@ name: Update skills + rebuild
 # reports embedding staleness as a warning, never a failure, which is what makes
 # a daily skill update safe without re-embedding. Embeddings are refreshed
 # locally instead — do not "fix" CI by adding an embed step.
+#
+# Quarantine
+# ----------
+# One skill's upstream change must not hold back the other ~1,800. A skill
+# whose recorded local fix no longer applies is restored to its committed
+# version (folder and lock entry) and the rest of the sync is committed; the
+# last step turns the job red and lists it. Restoring the lock entry makes the
+# next run fetch that skill again, so it stays quarantined only until its
+# overrides are re-derived. Until this existed, three different steps in turn
+# (#827, #893, then the Test step) blocked every commit from 2026-08-30.
 
 on:
   schedule:
@@ -103,21 +113,20 @@ jobs:
         # `skills update` reinstalls any skill whose upstream folder changed,
         # which silently reverts merged in-vault fixes (#665). Every such fix is
         # recorded in .skill-vault/data/local-overrides.json; this puts it back.
-        # Exits non-zero when an override no longer matches, so a fix that
-        # upstream has rewritten gets re-derived instead of vanishing.
         #
-        # Same shape as the update step above: the CLI re-applies every override
-        # it can and *then* exits 1 for the stale ones. Under `set -e` that
-        # aborted the job before the commit step, so 4 stale entries discarded
-        # 46 re-applied overrides plus the entire upstream sync, every day from
-        # 2026-08-30 (#893). Record the code and carry on; the gate at the end
-        # turns the job red once the work is committed.
+        # A skill with an override upstream rewrote (STALE) or deleted (MISSING)
+        # is quarantined: restored from HEAD with its lock entry, so it ships
+        # with its fix at the old version instead of without it (see header).
+        # Exit 1 means something was quarantined; record it for the gate at the
+        # end. Exit 2 means a skill could not be restored and would ship without
+        # its fix, so stop before committing.
         run: |
           set +e
-          ./skillquarium overrides
+          ./skillquarium overrides --quarantine
           overrides_exit=$?
           set -e
           echo "exit_code=$overrides_exit" >> "$GITHUB_OUTPUT"
+          if [ "$overrides_exit" -ge 2 ]; then exit "$overrides_exit"; fi
 
       - name: Soften coercive skill descriptions
         # Upstream SKILL.md files ship MUST / ALWAYS catalog copy that hijacks
@@ -133,6 +142,17 @@ jobs:
         # Embedding staleness is a warning, not a failure — see the "Embeddings"
         # note in the header. Never add an `embed` step to this workflow.
         run: ./skillquarium validate
+
+      - name: Regenerate catalog/list golden fixtures
+        # The goldens pin `catalog`/`list` output, which carries every skill's
+        # description, so they follow upstream content. Without this, any
+        # upstream description change failed the Test step and blocked the commit.
+        # After the build: `catalog` reads a skill's category from its wrapper
+        # note, so a skill new upstream reads as uncategorized until build writes
+        # it. Refuses (exit 1) when any skill has a catalog error row. Code changes
+        # to catalog/list output are still checked against committed goldens by
+        # ci.yml, which does not regenerate them.
+        run: bun run --cwd .skill-vault fixtures
 
       - name: Test
         run: bun test --cwd .skill-vault
@@ -168,7 +188,8 @@ jobs:
         #    `name:` frontmatter can never match the CLI's --skill selector; 66 such
         #    entries have never updated once (#827).
         #  - overrides exit != 0: a recorded local fix no longer applies because
-        #    upstream rewrote the region, and has to be re-derived by hand (#893).
+        #    upstream rewrote the region; that skill was quarantined at its old
+        #    version and its overrides have to be re-derived by hand.
         # Both keep the problem visible instead of silent.
         if: steps.update.outputs.exit_code != '0' || steps.overrides.outputs.exit_code != '0'
         run: |
@@ -176,7 +197,7 @@ jobs:
             echo "::error::skills update exited ${{ steps.update.outputs.exit_code }}: at least one skill did not update."
           fi
           if [ "${{ steps.overrides.outputs.exit_code }}" != "0" ]; then
-            echo "::error::skillquarium overrides exited ${{ steps.overrides.outputs.exit_code }}: at least one local override is stale or missing and must be re-derived against current upstream."
+            echo "::error::skillquarium overrides exited ${{ steps.overrides.outputs.exit_code }}: the QUARANTINED skills in the 'Re-apply local fixes' step were held at their committed version; re-derive their overrides against current upstream."
           fi
           echo "Everything that did update or re-apply was committed."
           exit 1

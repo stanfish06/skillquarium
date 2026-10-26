@@ -176,16 +176,18 @@ Workflows do not have built-in scheduling. To trigger tasks on a schedule, use a
 
 ### Instance Types
 
-| Plan | Specs |
-|------|-------|
-| `starter` | 0.5 CPU / 512 MB |
-| `standard` (default) | 1 CPU / 2 GB |
-| `pro` | 2 CPU / 4 GB |
-| `pro_plus` | 4 CPU / 8 GB |
-| `pro_max` | 8 CPU / 16 GB |
-| `pro_ultra` | 16 CPU / 32 GB |
+| Plan ID | Legacy name | Specs |
+|---------|-------------|-------|
+| `flex` (default) | — | up to 1 CPU / up to 4 GB, billed on actual usage |
+| `2c-4g` | `pro` | 2 CPU / 4 GB |
+| `2c-8g` | — | 2 CPU / 8 GB |
+| `4c-8g` | `pro_plus` | 4 CPU / 8 GB |
+| `4c-16g` | `pro_max` | 4 CPU / 16 GB |
+| `8c-32g` | `pro_ultra` | 8 CPU / 32 GB |
 
 `pro_plus`, `pro_max`, and `pro_ultra` require requesting access. Set via the `plan` task option.
+
+The Workflows beta's `starter` and `standard` plans are discontinued. A task that still sets either one runs on `flex` instead, and `flex` is the default for any task that does not set `plan` at all.
 
 For current pricing, see [Limits and Pricing for Render Workflows](https://render.com/docs/workflows-limits).
 

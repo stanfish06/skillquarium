@@ -100,13 +100,19 @@ Keep specific modules out of the bundle (useful for native modules or optional d
 
 ```bash
 # Single external
-ncc build input.js -e aws-sdk
+ncc build input.js -e sharp
 
 # Multiple externals
-ncc build input.js -e aws-sdk -e sharp
+ncc build input.js -e sharp -e canvas
 ```
 
-For serverless environments where the runtime provides certain modules (like AWS Lambda's `aws-sdk`), mark them as external.
+For serverless environments where the runtime provides certain modules, mark them as
+external instead of bundling them. AWS Lambda's supported Node.js runtimes (18.x and
+later) bundle AWS SDK for JavaScript **v3** (`@aws-sdk/*` scoped packages), not the
+legacy `aws-sdk` v2 package — Node.js 16.x, the last runtime that provided `aws-sdk` v2,
+reached end of support on 2024-06-12. Mark the specific `@aws-sdk/client-*` packages your
+runtime provides as external (e.g. `-e @aws-sdk/client-s3`); do not rely on a bare
+`-e aws-sdk` unless you are deliberately targeting an EOL runtime.
 
 ## Static Assets
 

@@ -14,14 +14,13 @@ created: 2026-06-09
 # treatment-plans
 
 > [!info] What it does
-> Generate concise (3-4 page), focused medical treatment plans in LaTeX/PDF format for all clinical specialties. Supports general medical treatment, rehabilitation therapy, mental health care, chronic disease management, perioperative care, and pain management. Includes SMART goal frameworks, evidence-based interventions with minimal text citations, regulatory compliance (HIPAA), and professional formatting. Prioritizes brevity and clinical actionability.
+> Formats and structurally validates local treatment-plan documentation after clinical decisions have already been supplied and verified by authorized licensed professionals. Use for source traceability, clinician-authored intervention records, goals and checkpoints, shared-decision records, reconciliation handoffs, and release gates—not for clinical decision-making.
 
 **Source:** [skills/treatment-plans/SKILL.md](../../../skills/treatment-plans/SKILL.md)  ·  **Domain:** [Clinical, Medical & Pharmacogenomics](../../maps/clinical-medical.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [citations](../../notes/literature-discovery/citations.md) — Canonical rules and HTML/CSS contract for inline `[n]` citation references, end-of-document Citations blocks, and optional per-section citation recaps used across Moody's Agentic...
-- [pdf](../../notes/documents-office/pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

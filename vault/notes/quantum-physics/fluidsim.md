@@ -12,13 +12,13 @@ created: 2026-06-09
 # fluidsim
 
 > [!info] What it does
-> Framework for computational fluid dynamics simulations using Python. Use when running fluid dynamics simulations including Navier-Stokes equations (2D/3D), shallow water equations, stratified flows, or when analyzing turbulence, vortex dynamics, or geophysical flows. Provides pseudospectral methods with FFT, HPC support, and comprehensive output analysis.
+> Plans, configures, inspects, restarts, and analyzes bounded FluidSim computational-fluid-dynamics simulations with explicit numerical-validity and HPC safety checks. Use for FluidSim solver selection, parameter review, FFT/MPI setup, output diagnostics, or restart compatibility.
 
 **Source:** [skills/fluidsim/SKILL.md](../../../skills/fluidsim/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](../../maps/quantum-physics.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

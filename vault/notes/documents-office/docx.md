@@ -23,7 +23,6 @@ created: 2026-06-09
 - [draft-long-form-memo](../../notes/finance-investment/draft-long-form-memo.md) — Writes a formal objective legal research memo (Questions Presented, Brief Answers, Facts, IRAC Discussion, Conclusion) as a .docx
 - [firecrawl-parse](../../notes/web-automation-frontend/firecrawl-parse.md) — Convert a local file (PDF, DOCX, XLSX, HTML, …) to markdown, or answer questions about its content
 - [liteparse](../../notes/documents-office/liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
-- [markitdown](../../notes/documents-office/markitdown.md) — Convert files and office documents to Markdown
 - [officecli](../../notes/documents-office/officecli.md) — Create, analyze, proofread, and modify Office documents (.docx, .xlsx, .pptx) using the officecli CLI tool
 - [officecli-academic-paper](../../notes/documents-office/officecli-academic-paper.md) — Use this skill to build academic-style .docx output: journal / conference / thesis chapters carrying formal citation style (APA, Chicago, IEEE, MLA), numbered equations, figure & table...
 - [officecli-docx](../../notes/documents-office/officecli-docx.md) — Use this skill any time a .docx file is involved -- as input, output, or both

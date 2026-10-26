@@ -18,7 +18,7 @@ created: 2026-08-07
 
 ## Related skills
 
-- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
+- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and managing third-party integrations via the `vercel integration` CLI
 - [render-disks](../../notes/hosting-edge-platforms/render-disks.md) — Attaches and manages persistent disks on Render services—mount paths, sizing, snapshots, file transfers, and single-instance constraints
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
 - [wix-app](../../notes/saas-platforms/wix-app.md) — Build and review Wix CLI app extensions — dashboard pages, modals, plugins, menu plugins, custom element widgets, Editor React components, site plugins, embedded scripts, backend APIs...

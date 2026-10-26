@@ -171,7 +171,7 @@ Phone numbers remain provisioned throughout this process.
 
 **Alternative:** Create a new bundle → get it approved → remap numbers to the new bundle.
 
-**Docs:** [Bundle Copies](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-copies) | [Replace Items](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-replace-items)
+**Docs:** [Bundle Copies](https://www.twilio.com/docs/phone-numbers/regulatory/api/copies-resource) | [Replace Items](https://www.twilio.com/docs/phone-numbers/regulatory/api/replace-items-resource)
 
 ---
 
@@ -183,7 +183,7 @@ If managing Twilio subaccounts for multiple customers:
 - Use the **Bundle Clones** resource to duplicate bundle structures across subaccounts
 - End-User records must reflect the actual end-user (your customer), not you
 
-**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-clones)
+**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/clones-resource)
 
 ---
 

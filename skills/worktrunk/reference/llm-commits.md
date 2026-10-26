@@ -9,6 +9,7 @@ Any command that reads a prompt from stdin and outputs a commit message works. A
 ### Claude Code
 
 ```toml
+# ~/.config/worktrunk/config.toml
 [commit.generation]
 command = "MAX_THINKING_TOKENS=0 claude -p --no-session-persistence --model=haiku --tools='' --safe-mode --setting-sources='user' --system-prompt=''"
 ```
@@ -17,24 +18,29 @@ command = "MAX_THINKING_TOKENS=0 claude -p --no-session-persistence --model=haik
 
 ### Codex
 
+Create `~/.codex/worktrunk-commit-instructions.txt` containing just `.` (no newline). Accepting Worktrunk's first-run Codex setup creates the file for you.
+
 ```toml
+# ~/.config/worktrunk/config.toml
 [commit.generation]
-command = "codex exec -m gpt-5.6-luna -c model_reasoning_effort='low' -c system_prompt='' --sandbox=read-only --json - | jq -sr '[.[] | select(.item.type? == \"agent_message\")] | last.item.text'"
+command = "codex exec -m gpt-6-luna -c model_reasoning_effort='none' -c project_doc_max_bytes=0 -c skills.max_context_tokens=1 -c agents.enabled=false -c features.goals=false -c web_search=disabled -c 'model_instructions_file=\"~/.codex/worktrunk-commit-instructions.txt\"' -c features.shell_tool=false -c features.unified_exec=false -c features.apps=false -c features.plugins=false --ephemeral --sandbox=read-only --json - | jq -sr '[.[] | select(.item.type? == \"agent_message\")] | last.item.text'"
 ```
 
-Uses the fast, low-cost variant of the current Codex model family with low reasoning effort and an empty system prompt for faster output. Requires `jq` for JSON parsing. See [Codex CLI docs](https://developers.openai.com/codex/cli/).
+Requires `jq` for JSON parsing. See [Codex CLI docs](https://developers.openai.com/codex/cli/).
 
 ### Other tools
 
+Any of these replaces the `command` line above:
+
 ```toml
 # opencode — use a fast model variant
-command = "opencode run -m anthropic/claude-haiku-4.5 --variant fast"
+command = "opencode run -m anthropic/claude-haiku-5-5 --variant fast"
 
 # llm
 command = "llm -m claude-haiku-4.5"
 
 # aichat
-command = "aichat -m claude:claude-haiku-4.5"
+command = "aichat -m claude:claude-haiku-4.5 --code"
 ```
 
 ## Usage
@@ -101,12 +107,13 @@ With `summary = true` and a `[commit.generation] command` configured, Worktrunk 
 
 Summaries appear in:
 
-- **`wt switch`** [interactive picker](https://worktrunk.dev/switch/#interactive-picker) — preview tab 5
+- **`wt switch`** [interactive picker](https://worktrunk.dev/switch/#interactive-picker) — the `summary` preview tab
 - **`wt list --full`** — the Summary column (see [`wt list`](https://worktrunk.dev/list/#llm-summaries))
 
 Enable in user config:
 
 ```toml
+# ~/.config/worktrunk/config.toml
 [list]
 summary = true
 ```
@@ -122,6 +129,7 @@ Worktrunk uses [minijinja](https://docs.rs/minijinja/) templates (Jinja2-like sy
 Override the defaults with inline templates:
 
 ```toml
+# ~/.config/worktrunk/config.toml
 [commit.generation]
 command = "llm -m claude-haiku-4.5"
 
@@ -173,7 +181,7 @@ See `wt config create --help` for the full default templates.
 
 ## Appending to the prompt
 
-`template-append` adds to the commit and squash prompts instead of replacing them. It lives in both user config (personal preferences) and project config (`.config/wt.toml`, shared so every teammate's LLM sees the same style guide). Each fragment is itself a [minijinja](https://docs.rs/minijinja/) template — Worktrunk renders it with the same variables as the main template (`{{ branch }}`, `{{ git_diff }}`, …), then appends the result after `<style>`. The user fragment renders into a `<user-guidance>` block and the project fragment into a `<project-guidance>` block, so the LLM can tell personal preference from shared convention:
+`template-append` adds instructions to the default commit and squash prompts. Set it in user config for personal preferences or `.config/wt.toml` for shared project conventions. Fragments support the same template variables as the main prompt.
 
 ```toml
 # .config/wt.toml
@@ -184,7 +192,7 @@ template-append = """
 """
 ```
 
-When both the user and project set `template-append`, the `<user-guidance>` block comes first, then `<project-guidance>`.
+When both are configured, user instructions come before project instructions.
 
 The user fragment needs no approval — it's the developer's own config. For the project fragment, the first time the rendered text is sent to the LLM, Worktrunk shows the raw fragment in an approval prompt — the same one-shot gate as project-defined hooks. Subsequent commits don't re-prompt unless the fragment changes. Declining is non-fatal: the LLM runs with just the user fragment (if any).
 

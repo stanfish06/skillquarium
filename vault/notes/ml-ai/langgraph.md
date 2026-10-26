@@ -28,6 +28,7 @@ created: 2026-08-13
 - [langgraph-persistence](../../notes/ml-ai/langgraph-persistence.md) — INVOKE THIS SKILL when your LangGraph needs to persist state, remember conversations, travel through history, or configure subgraph checkpointer scoping
 - [langgraph-python-quickstart](../../notes/ml-ai/langgraph-python-quickstart.md) — Scaffold a minimal local LangGraph agent in Python by following the official quickstart
 - [langgraph-typescript-quickstart](../../notes/ml-ai/langgraph-typescript-quickstart.md) — Scaffold a minimal local LangGraph agent in TypeScript by following the official quickstart
+- [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to application code — traces, logs, metrics, and AI/agent spans
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

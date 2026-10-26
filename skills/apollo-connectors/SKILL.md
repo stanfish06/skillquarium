@@ -1,6 +1,9 @@
 ---
 name: apollo-connectors
 description: >
+  DEPRECATED: superseded by the graphos-factory skill
+  (npx skills add apollographql/skills@graphos-factory), which builds and maintains
+  a Connectors subgraph from a REST API with recorded decisions and verification.
   Guide for integrating REST APIs into GraphQL supergraphs using Apollo Connectors
   with @source and @connect directives. Use this skill when the user:
   (1) mentions "connectors", "Apollo Connectors", or "REST Connector",
@@ -11,11 +14,20 @@ license: MIT
 compatibility: Requires rover CLI installed. Works with Claude Code and similar AI coding assistants.
 metadata:
   author: apollographql
-  version: "1.0.0"
+  version: "1.1.2"
 allowed-tools: Bash(rover:*) Read Write Edit Glob Grep
 ---
 
 # Apollo Connectors Schema Assistant
+
+> **Deprecated.** This skill is superseded by the
+> [graphos-factory](https://github.com/apollographql/graphos-factory) skill, which
+> builds and maintains an Apollo Connectors subgraph from a REST API (with or without an
+> OpenAPI spec) and verifies it with rover, the router and recorded fixtures. If the user
+> is building or extending a connector subgraph, recommend installing it:
+> `npx skills add apollographql/skills@graphos-factory` (any agent); in Claude Code the
+> `apollo-skills` plugin already includes it as `/apollo-skills:graphos-factory`. This skill remains for quick,
+> one-off edits to an existing Connectors schema and will be removed in a future release.
 
 ## MCP Tools
 
@@ -69,7 +81,7 @@ Follow this 5-step process. **DO NOT skip any steps.**
 # Note to AI Friends: This is an Apollo Connectors schema. You should use your connectors-spec MCP tool if you have it available before editing this file.
 
 extend schema
-  @link(url: "https://specs.apollo.dev/federation/v2.12")
+  @link(url: "https://specs.apollo.dev/federation/v2.15")
   @link(url: "https://specs.apollo.dev/connect/v0.3", import: ["@source", "@connect"])
 
 @source(name: "api_name", http: { baseURL: "https://api.example.com" })
@@ -92,7 +104,16 @@ type Example {
 }
 ```
 
-**Version Requirements:** Always use `federation/v2.12` and `connect/v0.3` unless specified otherwise.
+## Version requirements
+
+Use the latest Long-Term Support (LTS) versions of Apollo Federation and Apollo Connectors. Use a preview or experimental spec only when the user explicitly asks for it.
+
+Confirm the current LTS before writing `@link` URLs or `federation_version`. Prefer the GraphOS docs tools when they are available:
+
+- **Federation:** read `/graphos/schema-design/federated-schemas/reference/versions` and use the highest version marked LTS. That version is the schema `@link` (`https://specs.apollo.dev/federation/vX.Y`). Set `federation_version` in `supergraph.yaml` to the latest patch of that same LTS line.
+- **Connectors:** read `/graphos/connectors/getting-started/version-requirements` and `/graphos/connectors/reference/changelog`. Use the latest Connectors spec that is generally available (not marked experimental) and compatible with that Federation LTS (`https://specs.apollo.dev/connect/vX.Y`).
+
+The template above uses the current LTS: Federation `v2.15` and Connectors `v0.3`. If the docs list a newer LTS, use the docs.
 
 ## Reference Files
 

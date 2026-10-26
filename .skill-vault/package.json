@@ -5,7 +5,8 @@
   "scripts": {
     "test": "bun test",
     "typecheck": "tsc --noEmit",
-    "lint": "biome check src test"
+    "lint": "biome check src test",
+    "fixtures": "bun test/regenerateGoldens.ts"
   },
   "dependencies": {
     "@ff-labs/fff-bun": "0.10.6",

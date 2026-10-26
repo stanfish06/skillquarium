@@ -6,7 +6,7 @@
   "references": [
     "https://react.dev/reference/react/ViewTransition",
     "https://react.dev/reference/react/addTransitionType",
-    "https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition",
+    "https://nextjs.org/docs/app/guides/view-transitions",
     "https://github.com/vercel/next-app-router-playground/tree/main/app/view-transitions"
   ]
 }

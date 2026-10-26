@@ -37,17 +37,17 @@ codeql pack download trailofbits/java-queries
 
 | Pack | Language |
 |------|----------|
-| `githubsecuritylab/codeql-javascript-queries` | JavaScript/TypeScript |
-| `githubsecuritylab/codeql-python-queries` | Python |
-| `githubsecuritylab/codeql-go-queries` | Go |
-| `githubsecuritylab/codeql-java-queries` | Java |
-| `githubsecuritylab/codeql-cpp-queries` | C/C++ |
-| `githubsecuritylab/codeql-csharp-queries` | C# |
-| `githubsecuritylab/codeql-ruby-queries` | Ruby |
+| `GitHubSecurityLab/CodeQL-Community-Packs-JavaScript` | JavaScript/TypeScript |
+| `GitHubSecurityLab/CodeQL-Community-Packs-Python` | Python |
+| `GitHubSecurityLab/CodeQL-Community-Packs-Go` | Go |
+| `GitHubSecurityLab/CodeQL-Community-Packs-Java` | Java |
+| `GitHubSecurityLab/CodeQL-Community-Packs-CPP` | C/C++ |
+| `GitHubSecurityLab/CodeQL-Community-Packs-CSharp` | C# |
+| `GitHubSecurityLab/CodeQL-Community-Packs-Ruby` | Ruby |
 
 **Install:**
 ```bash
-codeql pack download githubsecuritylab/codeql-<lang>-queries
+codeql pack download GitHubSecurityLab/CodeQL-Community-Packs-<Lang>
 ```
 
 **Source:** [github.com/GitHubSecurityLab/CodeQL-Community-Packs](https://github.com/GitHubSecurityLab/CodeQL-Community-Packs)
@@ -61,5 +61,5 @@ codeql pack download githubsecuritylab/codeql-<lang>-queries
 codeql resolve qlpacks
 
 # Check specific packs
-codeql resolve qlpacks | grep -E "(trailofbits|githubsecuritylab)"
+codeql resolve qlpacks | grep -E "(trailofbits|GitHubSecurityLab)"
 ```

@@ -1,11 +1,11 @@
 # AGENTS.md — operating guide for agents
 
-You have access to a curated library of **1,800+ agent skills** at `~/.agents/skills/`
+You have access to a curated library of **2,100+ agent skills** at `~/.agents/skills/`
 (the `skills/` subtree of this repo, which is rooted at `~/.agents`). A *skill* is a folder with a `SKILL.md` holding battle-tested instructions for
 a specific tool, library, or workflow. **Using a relevant skill is faster and more reliable
 than improvising.** This file tells you how to find and use them.
 
-### How skills reach you vs. what this vault is for
+## How skills reach you vs. what this vault is for
 
 - **Loading is your agent's job.** Most agents surface skills through their own native
   mechanism (e.g. Claude Code loads every skill's name + description into context and matches
@@ -49,11 +49,13 @@ Try these in order; stop when you have a match.
 
 2. **Query the vault** — when native matching isn't enough, when you need a *complete set* of
    skills rather than the single best match, or when you want everything related to a concept:
+
    ```bash
    cd ~/.agents
    ./skillquarium query "batch correct single cell data and find markers"
    ./skillquarium query "raw fastq to enriched pathways" --k 10 --json
    ```
+
    This is usually the right call for **multi-step work**. Native description matching ranks
    skills independently, so it reliably finds `scanpy` and just as reliably misses
    `harmonypy` and `pathway-enrichment` — high recall, incomplete answer. `query` fuses BM25
@@ -65,15 +67,18 @@ Try these in order; stop when you have a match.
 
    For literal text — a function name, a flag, an error string — search the skill bodies
    instead:
+
    ```bash
    ./skillquarium grep "AnnData"      # ripgrep over skills/, grouped by skill
    ```
 
    Other query paths, still available:
+
    ```bash
    obsidian-cli search query="single cell batch correction" limit=8
    rg -li "batch correction|integration|harmony" ~/.agents/vault/notes
    ```
+
    The `*.md` files under `vault/notes/<domain>/` are one-line "wrapper" notes (description + domain +
    aliases) — the fast index. Read the underlying `<name>/SKILL.md` once you've picked one.
 
@@ -96,10 +101,12 @@ capturing as a new skill (`skill-builder` / `writing-skills`).
 ## Establishing context
 
 - **Read a dependency's real code** instead of guessing its API or behavior:
+
   ```bash
   rg "createServer" $(opensrc path express)        # npm
   cat $(opensrc path pypi:fastapi)/fastapi/routing.py   # PyPI; also crates:, owner/repo
   ```
+
   Pin a version with `pkg@1.2.3` when it must match what's installed. See
   [`skills/opensrc/SKILL.md`](skills/opensrc/SKILL.md).
 - **Always read the chosen skill's full `SKILL.md`** before acting — the wrapper note is only
@@ -111,12 +118,16 @@ capturing as a new skill (`skill-builder` / `writing-skills`).
 
 Know these by name so you reach for them automatically.
 
-**Context & grounding**
+### Context & grounding
+
 - `opensrc` — read the actual source of any npm/PyPI/crate/GitHub dependency.
 - `gh-cli` — authenticated GitHub access (PRs, issues, raw files) over ad-hoc curl.
 - `find-skills` — discover & install skills you don't have yet.
 
-**Plan & methodology** (the Superpowers suite — use proactively, not just on request)
+### Plan & methodology
+
+The Superpowers suite. Use these proactively, not just on request.
+
 - `brainstorming` — before any feature/component/behavior change, to pin down intent.
 - `writing-plans` → `executing-plans` — turn a spec into a reviewed, checkpointed plan.
 - `test-driven-development` — write the failing test first; let it drive the code.
@@ -126,7 +137,8 @@ Know these by name so you reach for them automatically.
 - `requesting-code-review` / `receiving-code-review` — review discipline, both directions.
 - `subagent-driven-development` / `dispatching-parallel-agents` — split independent work.
 
-**Build, test & ship**
+### Build, test & ship
+
 - `modern-python` — project setup with uv/ruff/ty (pure-Python).
 - `conda-bioconda` — reproducible Conda/Bioconda environments (compiled / bio tools).
 - `pytest` — Python testing (fixtures, parametrize, coverage).
@@ -134,16 +146,19 @@ Know these by name so you reach for them automatically.
 - `fastapi` — Python HTTP/JSON APIs.
 - `github-actions-ci` — CI/CD workflows.
 
-**Review, PR & security**
+### Review, PR & security
+
 - `check-pr` — resolve unresolved comments / failing checks / weak descriptions on a PR.
 - `greploop` — iterate a PR through Greptile review until it's clean.
 - `semgrep`, `codeql` — static analysis for bugs and vulnerabilities.
 - `agentic-actions-auditor` — audit CI workflows that invoke AI agents for injection risks.
 
-**Authoring skills**
+### Authoring skills
+
 - `skill-builder` / `writing-skills` — when creating or editing a skill.
 
-**Office files**
+### Office files
+
 - For any Word (`.docx`), Excel (`.xlsx`/`.csv`), or PowerPoint (`.pptx`) task,
   invoke `officecli-docx`, `officecli-xlsx`, or `officecli-pptx` before acting;
   use `officecli` for general or cross-format work.
@@ -186,3 +201,49 @@ Know these by name so you reach for them automatically.
   locally, `./skillquarium tokenizer` needs the `skill-tokenizer` binary. Queries need neither.
 - This `AGENTS.md` is the canonical guide; symlink or copy it to wherever each tool looks
   (e.g. a project root, or alongside your tool's global instructions).
+
+### Editing and verifying a skill
+
+Work in a clean checkout or isolated worktree so personal invocation toggles and unrelated
+changes do not enter the PR. Read the complete `skills/<name>/SKILL.md` and the references
+affected by the edit, then verify API and scientific claims against primary sources.
+
+Keep fixes across the next upstream sync:
+
+- For a skill in `.skill-lock.json`, record each local change as an exact `find`/`replace`
+  entry in `.skill-vault/data/local-overrides.json`. The `find` text must stop matching
+  after replacement so repeated applications remain unchanged.
+- For a profile with `metadata.scientific-agents-profile: true`, use
+  `.skill-vault/data/scientific-agent-patches.json` instead. Add its patch IDs under
+  `metadata.local-patches` and preserve the importer's local-overlay provenance note.
+- A locally authored skill without either source mechanism needs no import patch.
+
+Run from the repository root after the edit:
+
+```bash
+git diff --check
+./skillquarium overrides --check
+./skillquarium build
+./skillquarium validate
+```
+
+Commit any navigation changes produced by `build`; do not edit generated `vault/` files by
+hand. Validation must report zero violations. Its orphan-rate and stale-vector warnings
+are separate from violations; report them rather than treating them as test results.
+The CLI is Bun/TypeScript: `.skill-vault/build.py` is not a validation entry point.
+
+If `.skill-vault/` changes, including its patch data or categories, also run the CI checks:
+
+```bash
+bun install --frozen-lockfile --cwd .skill-vault
+bun run --cwd .skill-vault typecheck
+bun run --cwd .skill-vault lint
+bun test --cwd .skill-vault
+```
+
+The tests need case-sensitive temporary filenames. On a case-insensitive macOS volume,
+set `TMPDIR` to a writable case-sensitive volume and use its canonical absolute path.
+Exercise changed scripts and documented commands with representative local inputs; record
+the command, expected result, actual result, and any unavailable external service in the PR.
+When a new skill or description changes, run `./skillquarium embed` if the configured
+endpoint is reachable; otherwise disclose stale vectors and verify lexical discovery.

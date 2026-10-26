@@ -14,7 +14,7 @@ created: 2026-08-23
 # browser-use
 
 > [!info] What it does
-> Direct browser control via CDP for web interaction: automation, scraping, testing, screenshots, and site/app work.
+> Direct browser control via CDP for web interaction: automation, scraping, testing, screenshots, and site/app work. Also covers hosted cloud browsers for AI agents: the browser-use Python library (Browser(use_cloud=True)), Playwright, Puppeteer or any CDP client.
 
 **Source:** [skills/browser-use/SKILL.md](../../../skills/browser-use/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](../../maps/web-automation-frontend.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

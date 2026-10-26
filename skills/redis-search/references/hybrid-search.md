@@ -114,5 +114,5 @@ RedisVL `VectorQuery` with filter expressions and the `HybridQuery` wrapper for 
 ## Upstream sources
 
 - redis-py: [`doctests/query_combined.py`](https://github.com/redis/redis-py/blob/master/doctests/query_combined.py)
-- Jedis: [`VectorSearchExample.java`](https://github.com/redis/jedis/blob/master/src/test/java/io/redis/examples/VectorSearchExample.java)
+- Jedis: [`SearchWithParamsCommandsTestBase.java`](https://github.com/redis/jedis/blob/master/src/test/java/redis/clients/jedis/commands/unified/search/SearchWithParamsCommandsTestBase.java)
 - Reference: [Hybrid Queries](https://redis.io/docs/latest/develop/interact/search-and-query/query/combined/), [FT.HYBRID](https://redis.io/docs/latest/commands/ft.hybrid/)

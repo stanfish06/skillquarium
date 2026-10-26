@@ -4,7 +4,7 @@ Use this contract for `$triage-finding` first-pass output. The skill performs st
 
 ## Schema Fit
 
-`schemas/findings.schema.json` is not the normalization shape for triage inputs.
+`../../../schemas/findings.schema.json` is not the normalization shape for triage inputs.
 
 That schema is for completed Codex Security scan artifacts. It requires scan metadata, generated finding ids, occurrence ids, fingerprints, severity,
 remediation, provenance, and locations. Triage inputs often arrive as incomplete claims from SARIF snippets, CVEs, advisories, scanner tickets, bug bounty reports, or pasted text. The normalization step should preserve those claims without inventing completed-scan fields.
@@ -65,7 +65,13 @@ Each entry in `findings` must use this shape:
     "rank_queue": "confirmed",
     "rank": 1,
     "rationale": "why this finding is more or less exploitable than other findings with the same verdict",
-    "drivers": ["attacker reachability", "privilege required", "preconditions", "source-to-sink control", "guard strength"]
+    "drivers": [
+      "attacker reachability",
+      "privilege required",
+      "preconditions",
+      "source-to-sink control",
+      "guard strength"
+    ]
   },
   "evidence": ["static evidence observed"],
   "counterevidence": ["static evidence that weakens or defeats the claim"],

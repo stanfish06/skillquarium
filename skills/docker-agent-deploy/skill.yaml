@@ -1,6 +1,6 @@
 schema: v1
 id: docker-agent-deploy
-version: 0.1.0
+version: 0.1.1
 title: 'Docker Agent: Serving, Sharing, and Evaluating'
 description: Rules for exposing Docker Agents as servers, distributing them via OCI registries, and evaluating them for regressions in CI.
 owns:

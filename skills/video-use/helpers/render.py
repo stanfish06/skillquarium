@@ -93,6 +93,20 @@ def resolve_path(maybe_path: str, base: Path) -> Path:
     return (base / p).resolve()
 
 
+def resolve_subtitles_path(maybe_path: str, edit_dir: Path) -> Path:
+    """Resolve the EDL's subtitles path: relative to the EDL's directory, else the
+    current directory (agents often write "edit/master.srt"). A missing file is an
+    error: rendering on without it silently ships a video with no captions."""
+    candidates = [resolve_path(maybe_path, edit_dir)]
+    if not Path(maybe_path).is_absolute():
+        candidates.append(Path(maybe_path).resolve())
+    for c in candidates:
+        if c.exists():
+            return c
+    tried = ", ".join(str(c) for c in candidates)
+    sys.exit(f"subtitles file in EDL not found (tried {tried}). Fix the path or pass --no-subtitles.")
+
+
 # -------- HDR → SDR tone mapping (HLG / PQ sources) --------------------------
 #
 # iPhone defaults to HLG HDR in Rec.2020 (and many mirrorless cameras ship PQ).
@@ -416,10 +430,45 @@ def _words_in_range(transcript: dict, t_start: float, t_end: float) -> list[dict
     return out
 
 
+CHUNK_WORDS = 2         # target words per cue
+CHUNK_MAX_WORDS = 3     # a too-short chunk may grow to this many words
+CHUNK_MIN_S = 0.35      # a cue shorter than this reads as a flash
+CHUNK_PAUSE_S = 0.3     # a gap this long between words ends the cue
+
+
+def chunk_words(words: list[dict]) -> list[list[dict]]:
+    """Group transcript words into caption cues.
+
+    A cue closes on trailing punctuation or on a pause before the next word.
+    Otherwise it closes at CHUNK_WORDS words, unless it would be on screen for
+    less than CHUNK_MIN_S; then it takes up to CHUNK_MAX_WORDS words. So
+    "does | is" across a pause stays split, and fast "what a" does not flash.
+    """
+    words = [w for w in words if (w.get("text") or "").strip()]
+    chunks: list[list[dict]] = []
+    current: list[dict] = []
+    for i, w in enumerate(words):
+        current.append(w)
+        text = w["text"].strip()
+        nxt = words[i + 1] if i + 1 < len(words) else None
+        gap = (nxt["start"] - w["end"]) if nxt else 0.0
+        dur = w["end"] - current[0]["start"]
+        if (
+            nxt is None
+            or text[-1] in PUNCT_BREAK
+            or gap >= CHUNK_PAUSE_S
+            or len(current) >= CHUNK_MAX_WORDS
+            or (len(current) >= CHUNK_WORDS and dur >= CHUNK_MIN_S)
+        ):
+            chunks.append(current)
+            current = []
+    return chunks
+
+
 def build_master_srt(edl: dict, edit_dir: Path, out_path: Path) -> None:
     """Build an output-timeline SRT from per-source transcripts.
 
-    - 2-word chunks (break on any punctuation in between)
+    - phrase-aware ~2-word chunks (see chunk_words)
     - UPPERCASE text
     - Output times computed as word.start - segment_start + segment_offset
     """
@@ -444,23 +493,7 @@ def build_master_srt(edl: dict, edit_dir: Path, out_path: Path) -> None:
         transcript = json.loads(tr_path.read_text())
         words_in_seg = _words_in_range(transcript, seg_start, seg_end)
 
-        # Group into 2-word chunks, break on punctuation
-        chunks: list[list[dict]] = []
-        current: list[dict] = []
-        for w in words_in_seg:
-            text = (w.get("text") or "").strip()
-            if not text:
-                continue
-            current.append(w)
-            # Break if the current text ends in punctuation or we hit 2 words
-            ends_in_punct = bool(text) and text[-1] in PUNCT_BREAK
-            if len(current) >= 2 or ends_in_punct:
-                chunks.append(current)
-                current = []
-        if current:
-            chunks.append(current)
-
-        for chunk in chunks:
+        for chunk in chunk_words(words_in_seg):
             local_start = max(seg_start, chunk[0].get("start", seg_start))
             local_end = min(seg_end, chunk[-1].get("end", seg_end))
             out_start = max(0.0, local_start - seg_start) + seg_offset
@@ -745,10 +778,7 @@ def main() -> None:
             subs_path = edit_dir / "master.srt"
             build_master_srt(edl, edit_dir, subs_path)
         elif edl.get("subtitles"):
-            subs_path = resolve_path(edl["subtitles"], edit_dir)
-            if not subs_path.exists():
-                print(f"warning: subtitles path in EDL does not exist: {subs_path}")
-                subs_path = None
+            subs_path = resolve_subtitles_path(edl["subtitles"], edit_dir)
 
     # 4. Composite (overlays + subtitles LAST) → intermediate (pre-loudnorm) path
     overlays = edl.get("overlays") or []

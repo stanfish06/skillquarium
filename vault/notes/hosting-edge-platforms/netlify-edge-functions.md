@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [deno](../../notes/software-dev/deno.md) — Use when writing, running, configuring, reviewing, or debugging code in a Deno project, or when scaffolding a new one
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

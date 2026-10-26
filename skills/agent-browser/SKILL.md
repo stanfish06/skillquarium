@@ -4,7 +4,7 @@ description: Browser automation CLI for AI agents. Use when the user needs to in
 metadata:
   priority: 3
   docs:
-    - "https://openai.com/index/introducing-codex/"
+    - "https://agent-browser.dev"
   pathPatterns:
     - 'agent-browser.json'
     - 'playwright.config.*'

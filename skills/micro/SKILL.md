@@ -30,33 +30,38 @@ npm install micro
 
 ## Basic Usage
 
-Create a module that exports a request handler:
+Use Node's `IncomingMessage` / `ServerResponse` handler contract. `serve(handler)`
+returns a request listener; attach it to an HTTP server and start listening:
 
-```ts
-// index.ts
-import { serve } from 'micro'
+```js
+// server.js
+const { createServer } = require('node:http')
+const { serve } = require('micro')
 
-const handler = (req: Request) => {
-  return new Response('Hello, World!')
-}
-
-serve(handler)
+const handler = (req, res) => 'Hello, World!'
+const server = createServer(serve(handler))
+server.listen(3000, '127.0.0.1')
 ```
 
-Or use the classic API:
+Run the programmatic server with:
 
-```ts
-import { IncomingMessage, ServerResponse } from 'http'
+```bash
+node server.js
+```
 
-export default (req: IncomingMessage, res: ServerResponse) => {
+Or export a Node handler for the Micro CLI:
+
+```js
+// index.js
+module.exports = (req, res) => {
   res.end('Hello, World!')
 }
 ```
 
-Run with:
+Run the exported handler with:
 
 ```bash
-npx micro
+npx micro index.js
 ```
 
 ## Core API

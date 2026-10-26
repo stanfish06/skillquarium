@@ -14,14 +14,14 @@ created: 2026-08-23
 # promptfoo-redteam-setup
 
 > [!info] What it does
-> Create or refine promptfoo redteam setup configs: purpose, targets, plugins, strategies, frameworks, multi-input target inputs, policy text, grader guidance, contexts, and static-code-derived target/threat mapping. Use when preparing a red team scan plan from live probes, code evidence, or provider configs, or when generating adversarial test cases for QA. Do not use for basic provider wiring alone or for running/evaluating an already-generated redteam scan.
+> Create or refine a Promptfoo redteam config and generate probes from target behavior, code, or OpenAPI evidence. Use for purpose, trust boundaries, plugins, strategies, and grading guidance. Use promptfoo-provider-setup for connection work and promptfoo-redteam-run for an existing scan.
 
 **Source:** [skills/promptfoo-redteam-setup/SKILL.md](../../../skills/promptfoo-redteam-setup/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [qa](../../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
-- [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
+- [promptfoo-provider-setup](../../notes/ml-ai/promptfoo-provider-setup.md) — Connect Promptfoo to a model, live HTTP API, local Python/JavaScript provider, or app code
+- [promptfoo-redteam-run](../../notes/ml-ai/promptfoo-redteam-run.md) — Execute, inspect, and rerun an existing Promptfoo redteam scan
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

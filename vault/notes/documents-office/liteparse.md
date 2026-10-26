@@ -19,7 +19,7 @@ created: 2026-06-09
 ## Related skills
 
 - [docx](../../notes/documents-office/docx.md) — Document toolkit (.docx). Create/edit documents, tracked changes, comments, formatting preservation, text extraction, for professional document processing
-- [markitdown](../../notes/documents-office/markitdown.md) — Convert files and office documents to Markdown
+- [markitdown](../../notes/documents-office/markitdown.md) — Converts heterogeneous documents and selected URIs to Markdown with Microsoft MarkItDown for text analysis, search, and LLM/RAG ingestion
 - [pdf](../../notes/documents-office/pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

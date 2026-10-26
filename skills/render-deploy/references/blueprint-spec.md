@@ -268,7 +268,7 @@ Available instance types:
 
 | Plan | RAM | CPU | Price |
 |------|-----|-----|-------|
-| `free` | 512 MB | 0.5 | Free (750 hrs/mo) |
+| `free` | 512 MB | 0.1 | Free (750 hrs/mo) |
 | `starter` | 512 MB | 0.5 | $7/month |
 | `standard` | 2 GB | 1 | $25/month |
 | `pro` | 4 GB | 2 | $85/month |

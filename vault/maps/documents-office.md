@@ -18,12 +18,12 @@ created: 2026-06-13
 
 - [doc-coauthoring](../notes/documents-office/doc-coauthoring.md) — Guide users through a structured workflow for co-authoring documentation
 - [docx](../notes/documents-office/docx.md) — Document toolkit (.docx). Create/edit documents, tracked changes, comments, formatting preservation, text extraction, for professional document processing
-- [generate-image](../notes/documents-office/generate-image.md) — Generate or edit images using AI models (FLUX, Gemini)
+- [generate-image](../notes/documents-office/generate-image.md) — Generates or edits images with AI models through the OpenRouter Image API (Gemini, Seedream, Recraft, GPT-Image, Riverflow)
 - [infographics](../notes/documents-office/infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
 - [internal-comms](../notes/documents-office/internal-comms.md) — A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use
 - [liteparse](../notes/documents-office/liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
-- [market-research-reports](../notes/documents-office/market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
-- [markitdown](../notes/documents-office/markitdown.md) — Convert files and office documents to Markdown
+- [market-research-reports](../notes/documents-office/market-research-reports.md) — Builds evidence-traceable market research reports and assumption-driven market sizing or forecast scenarios
+- [markitdown](../notes/documents-office/markitdown.md) — Converts heterogeneous documents and selected URIs to Markdown with Microsoft MarkItDown for text analysis, search, and LLM/RAG ingestion
 - [morph-ppt](../notes/documents-office/morph-ppt.md) — Use this skill when the user wants a .pptx with smooth cross-slide animation — PowerPoint Morph transitions, Keynote-style continuous motion, shapes that grow / move / rotate as the...
 - [morph-ppt-3d](../notes/documents-office/morph-ppt-3d.md) — 3D Morph PPT — extends morph-ppt with GLB model insertion, cinematographic camera, model-content layout, and enriched visual design system
 - [officecli](../notes/documents-office/officecli.md) — Create, analyze, proofread, and modify Office documents (.docx, .xlsx, .pptx) using the officecli CLI tool

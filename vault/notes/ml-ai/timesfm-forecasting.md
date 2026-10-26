@@ -14,7 +14,7 @@ created: 2026-06-09
 # timesfm-forecasting
 
 > [!info] What it does
-> Zero-shot time series forecasting with Google's TimesFM foundation model. Use for any univariate time series (sales, sensors, energy, vitals, weather) without training a custom model. Supports CSV/DataFrame/array inputs with point forecasts and prediction intervals. Includes a preflight system checker script to verify RAM/GPU before first use.
+> Performs zero-shot time-series forecasting with Google's TimesFM, including regular-grid CSV preparation, quantile forecasts, XReg covariates, and held-out evaluation. Uses the Apache-licensed TimesFM 2.5 checkpoint by default and documents the distinct TimesFM 3.0 multivariate API and weight-license requirements.
 
 **Source:** [skills/timesfm-forecasting/SKILL.md](../../../skills/timesfm-forecasting/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

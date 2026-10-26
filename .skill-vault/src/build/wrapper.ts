@@ -226,7 +226,8 @@ export function renderWrapper(skill: string, options: RenderWrapperOptions): str
     }
   }
   lines.push("");
-  if (personal) lines.push(personal);
+  // Trailing blank lines in an old note would otherwise survive every rebuild (MD012).
+  if (personal) lines.push(`${personal.trimEnd()}\n`);
   else lines.push(tables.personalMarker, "", "## Notes", "");
   return lines.join("\n");
 }

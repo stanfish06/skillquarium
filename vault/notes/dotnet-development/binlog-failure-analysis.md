@@ -14,7 +14,7 @@ created: 2026-07-21
 # binlog-failure-analysis
 
 > [!info] What it does
-> Analyze MSBuild binary logs to diagnose build failures. USE FOR: build errors that are unclear from console output, diagnosing cascading failures across multi-project builds, tracing MSBuild target execution order, and generally any MSBuild build issues. Requires an existing .binlog file. DO NOT USE FOR: generating binlogs (use binlog-generation), non-MSBuild build systems.
+> Analyze MSBuild binary logs to diagnose build failures. USE FOR: build errors that are unclear from console output, diagnosing cascading failures across multi-project builds, tracing MSBuild target execution order, and generally any MSBuild build issues. Requires an existing .binlog file. DO NOT USE FOR: generating binlogs (use binlog-generation), binlog MCP startup or connection failures (use troubleshoot-binlog-mcp), non-MSBuild build systems.
 
 **Source:** [skills/binlog-failure-analysis/SKILL.md](../../../skills/binlog-failure-analysis/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
@@ -25,4 +25,3 @@ created: 2026-07-21
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
-

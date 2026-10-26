@@ -1,5 +1,5 @@
 NCBI BLAST Common URL API (REST) notes
-Source docs: https://ncbi.github.io/blast-cloud/dev/api.html
+Source docs: https://blast.ncbi.nlm.nih.gov/doc/blast-help/developerinfo.html
 Primary endpoint: https://blast.ncbi.nlm.nih.gov/Blast.cgi
 
 Overview:

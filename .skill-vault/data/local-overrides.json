@@ -1,4 +1,30 @@
 {
+  "agent-browser": [
+    {
+      "id": "mismatched-docs-url",
+      "issue": 1101,
+      "source": "openai/plugins",
+      "find": "  docs:\n    - \"https://openai.com/index/introducing-codex/\"",
+      "replace": "  docs:\n    - \"https://agent-browser.dev\""
+    }
+  ],
+  "logfire-instrumentation": [
+    {
+      "id": "logfire-5-1-1-pin-skill",
+      "issue": 1057,
+      "source": "pydantic/skills",
+      "find": "logfire==4.41.0",
+      "replace": "logfire==5.1.1"
+    },
+    {
+      "id": "logfire-5-1-1-pin-auth-ref",
+      "issue": 1057,
+      "source": "pydantic/skills",
+      "file": "references/auth.md",
+      "find": "logfire==4.41.0",
+      "replace": "logfire==5.1.1"
+    }
+  ],
   "neo4j-document-import-skill": [
     {
       "id": "anthropic-retired-model",
@@ -45,6 +71,34 @@
       "source": "sickn33/antigravity-awesome-skills",
       "find": "```yaml\nversion: '3.8'\nservices:\n",
       "replace": "```yaml\nservices:\n"
+    },
+    {
+      "id": "node22-base-images-1",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine AS deps",
+      "replace": "FROM node:22-alpine AS deps"
+    },
+    {
+      "id": "node22-base-images-2",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine AS build",
+      "replace": "FROM node:22-alpine AS build"
+    },
+    {
+      "id": "node22-base-images-3",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine AS runtime",
+      "replace": "FROM node:22-alpine AS runtime"
+    },
+    {
+      "id": "node22-base-images-4",
+      "issue": 1026,
+      "source": "sickn33/antigravity-awesome-skills",
+      "find": "FROM node:18-alpine",
+      "replace": "FROM node:22-alpine"
     }
   ],
   "alphagenome-single-variant-analysis": [
@@ -79,6 +133,20 @@
       "source": "trailofbits/skills",
       "find": "ENV LD_PRELOAD \"$VIRTUAL_ENV/lib/python3.11/site-packages/asan_with_fuzzer.so\"",
       "replace": "# ENV cannot shell out, so resolve the path at build time and link it to a fixed one\nRUN ln -s \"$(python -c 'import atheris; print(atheris.path())')/asan_with_fuzzer.so\" \\\n    /usr/local/lib/asan_with_fuzzer.so\nENV LD_PRELOAD \"/usr/local/lib/asan_with_fuzzer.so\""
+    },
+    {
+      "id": "python-version-floor",
+      "issue": 37,
+      "source": "trailofbits/skills",
+      "find": "- Python 3.7 or later",
+      "replace": "- Python 3.12, 3.13, or 3.14 — atheris 3.1.0 publishes only `cp312`/`cp313`/`cp314` wheels and no sdist, so older interpreters silently resolve back to atheris 2.3.0"
+    },
+    {
+      "id": "dockerfile-python-version",
+      "issue": 37,
+      "source": "trailofbits/skills",
+      "find": "ARG PYTHON_VERSION=3.11",
+      "replace": "ARG PYTHON_VERSION=3.12"
     }
   ],
   "lamindb": [
@@ -209,6 +277,86 @@
       "file": "scripts/calculate_scores.py",
       "find": "    # Normalize if not all dimensions were scored\n    if total_weight > 0:\n        return total_score / total_weight * (sum(weights.values()) / total_weight)\n    return 0.0",
       "replace": "    # Divide by the weight actually scored; the extra sum(weights)/total_weight factor\n    # inflated any partial evaluation instead of normalizing it\n    if total_weight > 0:\n        return total_score / total_weight\n    return 0.0"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            return True\n\n    return False\n\n\nclass ScientificSchematicGenerator:\n",
+      "replace": "            return True\n\n    return False\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass ScientificSchematicGenerator:\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 8.0\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            # Don't fail the whole process if review fails - assume acceptable\n            return \"Image generated successfully (review skipped)\", 7.5, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Check if quality is acceptable - STOP EARLY if so\n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n",
+      "replace": "            # Check if quality is acceptable - STOP EARLY if so\n            if review_ok and score >= threshold and not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Quality below threshold - improve prompt for next iteration\n            print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            print(f\"Improving prompt based on feedback...\")\n",
+      "replace": "            # Quality below threshold - improve prompt for next iteration\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
     }
   ],
   "huggingface-llm-trainer": [
@@ -1057,6 +1205,1570 @@
       "source": "prisma/skills",
       "find": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.6.0 packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path.",
       "replace": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.x packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path."
+    }
+  ],
+  "building-mcp-server-on-cloudflare": [
+    {
+      "id": "mcp-docs-url-404",
+      "issue": 952,
+      "source": "openai/plugins",
+      "find": "| MCP docs | `https://developers.cloudflare.com/agents/mcp/` | Server setup, auth, deployment |",
+      "replace": "| MCP docs | `https://developers.cloudflare.com/agents/model-context-protocol/` | Server setup, auth, deployment |"
+    }
+  ],
+  "cloudflare": [
+    {
+      "id": "realtimekit-docs-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/realtime-sfu/README.md",
+      "find": "- [RealtimeKit Docs](https://developers.cloudflare.com/workers-ai/realtimekit/)",
+      "replace": "- [RealtimeKit Docs](https://developers.cloudflare.com/realtime/realtimekit/)"
+    },
+    {
+      "id": "workers-vpc-postgres-tutorial-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/workers-vpc/README.md",
+      "find": "- [Connect to databases guide](https://developers.cloudflare.com/workers/tutorials/connect-to-postgres/)",
+      "replace": "- [Connect to databases guide](https://developers.cloudflare.com/workers/tutorials/postgres/)"
+    },
+    {
+      "id": "cni-locations-pdf-404-readme",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/network-interconnect/README.md",
+      "find": "- See [locations PDF](https://developers.cloudflare.com/network-interconnect/static/cni-locations-2026-01.pdf)",
+      "replace": "- See [locations list](https://developers.cloudflare.com/network-interconnect/locations/)"
+    },
+    {
+      "id": "cni-locations-pdf-404-gotchas",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/network-interconnect/gotchas.md",
+      "find": "**Solution:** Check [locations PDF](https://developers.cloudflare.com/network-interconnect/static/cni-locations-2026-01.pdf) for valid codes",
+      "replace": "**Solution:** Check [locations list](https://developers.cloudflare.com/network-interconnect/locations/) for valid codes"
+    },
+    {
+      "id": "argo-docs-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/network-interconnect/patterns.md",
+      "find": "- [Argo Smart Routing](https://developers.cloudflare.com/argo/)",
+      "replace": "- [Argo Smart Routing](https://developers.cloudflare.com/argo-smart-routing/)"
+    },
+    {
+      "id": "workers-sdk-templates-404",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/wrangler/gotchas.md",
+      "find": "- Examples: https://github.com/cloudflare/workers-sdk/tree/main/templates",
+      "replace": "- Examples: https://github.com/cloudflare/templates"
+    },
+    {
+      "id": "vitest-pool-workers-examples-renamed",
+      "issue": 953,
+      "source": "openai/plugins",
+      "file": "references/cron-triggers/gotchas.md",
+      "find": "- [Vitest Pool Workers](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-pool-workers-examples)",
+      "replace": "- [Vitest plugin examples](https://github.com/cloudflare/workers-sdk/tree/main/fixtures/vitest-plugin-examples)"
+    }
+  ],
+  "supabase-postgres-best-practices": [
+    {
+      "id": "vacuum-docs-url-moved",
+      "issue": 954,
+      "source": "openai/plugins",
+      "file": "references/monitor-vacuum-analyze.md",
+      "find": "Reference: [VACUUM](https://supabase.com/docs/guides/database/database-size#vacuum-operations)",
+      "replace": "Reference: [VACUUM](https://supabase.com/docs/guides/platform/database-size#vacuum-operations)"
+    }
+  ],
+  "twilio-sendgrid-webhooks": [
+    {
+      "id": "event-webhook-security-doc-url",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "[Signed Event Webhook Requests](https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook-security)",
+      "replace": "[Signed Event Webhook Requests](https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features)"
+    }
+  ],
+  "twilio-regulatory-compliance-bundles": [
+    {
+      "id": "copies-and-replace-items-doc-urls",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "**Docs:** [Bundle Copies](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-copies) | [Replace Items](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-replace-items)",
+      "replace": "**Docs:** [Bundle Copies](https://www.twilio.com/docs/phone-numbers/regulatory/api/copies-resource) | [Replace Items](https://www.twilio.com/docs/phone-numbers/regulatory/api/replace-items-resource)"
+    },
+    {
+      "id": "clones-doc-url",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles-clones)",
+      "replace": "**Docs:** [Bundle Clones](https://www.twilio.com/docs/phone-numbers/regulatory/api/clones-resource)"
+    }
+  ],
+  "pyroscope": [
+    {
+      "id": "pyroscope-io-125-1",
+      "issue": 967,
+      "source": "grafana/skills",
+      "find": "pip install pyroscope-io==1.0.11",
+      "replace": "pip install pyroscope-io==1.2.5"
+    },
+    {
+      "id": "pyroscope-io-125-2",
+      "issue": 967,
+      "source": "grafana/skills",
+      "file": "references/sdks.md",
+      "find": "pip install pyroscope-io==1.0.11",
+      "replace": "pip install pyroscope-io==1.2.5"
+    }
+  ],
+  "app-observability": [
+    {
+      "id": "openlit-1450-1",
+      "issue": 968,
+      "source": "grafana/skills",
+      "find": "pip install openlit==1.42.0",
+      "replace": "pip install openlit==1.45.0"
+    },
+    {
+      "id": "openlit-1450-2",
+      "issue": 968,
+      "source": "grafana/skills",
+      "file": "references/ai-observability.md",
+      "find": "openlit==1.42.0",
+      "replace": "openlit==1.45.0"
+    }
+  ],
+  "nextjs": [
+    {
+      "id": "next-security-2026-09",
+      "issue": 975,
+      "source": "openai/plugins",
+      "find": "### Patched Versions\n\nMinimum safe version: **`next@15.5.21`** or **`next@16.2.11`** (both published 2026-07-21).\n\nThere is no per-release-line patch below that.",
+      "replace": "### CVE-2026-94545 — ImageResponse Remote Code Execution (CVSS 9.5, Critical)\n\nDisclosed 2026-09-22 as an out-of-band release. The Node.js runtime implementation of `ImageResponse` (`next/og`) is vulnerable to RCE when attacker-controlled input reaches SVG content, attributes, or styles during server-side image generation — specially crafted values can execute arbitrary code on the application server.\n\n- Affects: Next.js `>= 16.2.0, < 16.3.6` using `ImageResponse` on the Node.js runtime. Next.js 15.x is not affected by the RCE (15.5.26 ships related hardening only).\n- Fixed in: **`next@16.3.6`** (upgrades the upstream Satori dependency).\n\n**Mitigation**: Upgrade to `16.3.6`+ immediately if you call `ImageResponse` on the Node.js runtime. There is no workaround short of removing the affected code path.\n\n### Patched Versions\n\nMinimum safe version: **`next@15.5.27`** or **`next@16.3.8`** (both published 2026-09-30). 16.3.8 fixes the seven advisories published that day, the most severe being CVE-2026-94483 (High, CVSS 8.3): server-side request forgery in Image Optimization through an allow-listed `images.remotePatterns` host. Two of the seven, both SSG/ISR cache poisoning (CVE-2026-94543, CVE-2026-94484), also affect 15.x and are fixed in 15.5.27. On 16.x, anything below 16.3.6 is also exposed to CVE-2026-94545 above.\n\nThere is no per-release-line patch below `15.5.21` / `16.2.11`."
+    }
+  ],
+  "apollo-router": [
+    {
+      "id": "router-lifecycle-2026-10",
+      "issue": 976,
+      "source": "apollographql/skills",
+      "find": "    Note: Apollo ended active support for v1.x. The v2.10 LTS (Dec 2025)\n    is the current baseline. Migration is strongly recommended.",
+      "replace": "    Note: Router v1.x reached End of Support in March 2026, including the\n    v1.61 LTS, and gets no further patches, security fixes included. The\n    v2.10 LTS reached End of Support in September 2026. The current LTS is\n    v2.16 (supported until March 2027); the latest Active release is v2.18.\n    Check https://www.apollographql.com/docs/graphos/reference/router-release-lifecycle\n    before pinning. Migrate off v1.x."
+    }
+  ],
+  "databricks-core": [
+    {
+      "id": "cli-v1-compatibility-floor",
+      "issue": 1002,
+      "source": "databricks/databricks-agent-skills",
+      "find": "compatibility: Requires databricks CLI (>= v0.292.0)",
+      "replace": "compatibility: Requires databricks CLI (>= v1.0.0 recommended; auth guidance below also covers pre-v1.0 file-backed token storage)"
+    },
+    {
+      "id": "oauth-token-storage-keyring",
+      "issue": 1002,
+      "source": "databricks/databricks-agent-skills",
+      "file": "databricks-cli-auth.md",
+      "find": "5. The CLI saves the OAuth tokens to `~/.databrickscfg`",
+      "replace": "5. `~/.databrickscfg` gets a profile entry with the host and `auth_type = databricks-cli`. **The OAuth tokens themselves are not stored in this file** — on CLI v1.0+ (current stable), they go to the OS-native secure store (Keychain on macOS, Credential Manager on Windows, Secret Service on Linux). The CLI falls back to a file-backed token cache automatically when no OS keyring is reachable (e.g. headless Linux containers with no D-Bus session bus — see Containerized Environments below), or when `auth_storage = plaintext` is set under `[__settings__]` in `~/.databrickscfg` (or `DATABRICKS_AUTH_STORAGE=plaintext` is exported)."
+    },
+    {
+      "id": "post-upgrade-reauth-troubleshooting",
+      "issue": 1002,
+      "source": "databricks/databricks-agent-skills",
+      "file": "databricks-cli-auth.md",
+      "find": "# Example: databricks auth login --host https://company-workspace.cloud.databricks.com --profile staging\n```\n\n### Browser Doesn't Open Automatically",
+      "replace": "# Example: databricks auth login --host https://company-workspace.cloud.databricks.com --profile staging\n```\n\n### Just Upgraded the CLI (Profile Exists but Auth Fails)\n\n**Symptom**: `databricks auth profiles` still lists the profile, but commands fail with an auth error after upgrading the `databricks` CLI, even though nothing else changed.\n\n**Cause**: Upgrading across the v1.0 boundary moved OAuth token storage from the file-backed `token-cache.json` to the OS-native secure store. Tokens cached by a pre-v1.0 CLI are **not** automatically migrated into the keyring.\n\n**Solution**: Re-run `databricks auth login` once per affected profile:\n```bash\ndatabricks auth login --host <workspace-url> --profile <profile-name>\n```\n\n### Browser Doesn't Open Automatically"
+    }
+  ],
+  "circleci-config": [
+    {
+      "id": "caching-docs-page-rename",
+      "issue": 955,
+      "source": "openai/plugins",
+      "file": "references/cache-optimization.md",
+      "find": "Source: [CircleCI docs, \"Caching strategies\"](https://circleci.com/docs/guides/optimize/caching-strategy/)",
+      "replace": "Source: [CircleCI docs, \"Caching dependencies\"](https://circleci.com/docs/guides/optimize/caching/)"
+    }
+  ],
+  "maui-shell-navigation": [
+    {
+      "id": "deep-linking-docs-split-by-platform",
+      "issue": 1008,
+      "source": "dotnet/skills",
+      "find": "see [.NET MAUI deep linking docs](https://learn.microsoft.com/dotnet/maui/fundamentals/app-links)",
+      "replace": "see [Android app links](https://learn.microsoft.com/dotnet/maui/android/app-links) and [Apple universal links](https://learn.microsoft.com/dotnet/maui/macios/universal-links)"
+    }
+  ],
+  "maui-data-binding": [
+    {
+      "id": "multibinding-docs-path-singular",
+      "issue": 1008,
+      "source": "dotnet/skills",
+      "find": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibindings)",
+      "replace": "[Multi-bindings](https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/multibinding)"
+    }
+  ],
+  "render-scaling": [
+    {
+      "id": "compute-plans-2026-1",
+      "issue": 1043,
+      "source": "openai/plugins",
+      "file": "references/instance-types.md",
+      "find": "Approximate **plan** specs for Web Services, Private Services, and Background Workers. **Prices change**—verify at [Render pricing](https://render.com/pricing).",
+      "replace": "**Plan** specs for Web Services, Private Services, and Background Workers, from Render's\n[Compute Plans](https://render.com/docs/compute-plans) reference. Private Services and\nBackground Workers have the same ladder minus `free`, which is web-service only."
+    },
+    {
+      "id": "compute-plans-2026-2",
+      "issue": 1043,
+      "source": "openai/plugins",
+      "file": "references/instance-types.md",
+      "find": "| Plan | CPU | RAM | Monthly Base |\n|------|-----|-----|--------------|\n| free | Shared | 512 MB | $0 |\n| starter | Shared | 512 MB | $7 |\n| starter_plus | 1 | 1 GB | $13 |\n| standard | 1 | 2 GB | $25 |\n| standard_plus | 2 | 4 GB | $50 |\n| pro | 4 | 8 GB | $95 |\n| pro_plus | 8 | 16 GB | $175 |\n| pro_max | 16 | 32 GB | $350 |\n| pro_ultra | 32 | 64 GB | $700 |",
+      "replace": "| Plan ID | Legacy name | CPU | RAM |\n|---------|-------------|-----|-----|\n| `free` | — | 0.1 | 512 MB |\n| `0.5c-512mb` | `starter` | 0.5 | 512 MB |\n| `1c-2g` | `standard` | 1 | 2 GB |\n| `2c-4g` | `pro` | 2 | 4 GB |\n| `2c-8g` | — | 2 | 8 GB |\n| `2c-16g` | — | 2 | 16 GB |\n| `4c-8g` | `pro_plus` | 4 | 8 GB |\n| `4c-16g` | `pro_max` | 4 | 16 GB |\n| `4c-32g` | — | 4 | 32 GB |\n| `8c-16g` | — | 8 | 16 GB |\n| `8c-32g` | `pro_ultra` | 8 | 32 GB |\n| `8c-64g` | — | 8 | 64 GB |\n| `12c-24g` | — | 12 | 24 GB |\n| `12c-48g` | — | 12 | 48 GB |\n| `12c-96g` | — | 12 | 96 GB |"
+    },
+    {
+      "id": "compute-plans-2026-3",
+      "issue": 1043,
+      "source": "openai/plugins",
+      "file": "references/instance-types.md",
+      "find": "> **Note:** Monthly figures are **approximate** and may not match your invoice (usage, proration, and promotions differ). Always use [render.com/pricing](https://render.com/pricing) for authoritative rates.",
+      "replace": "Plan IDs are what the dashboard, API, and docs show; the six legacy names are still\naccepted in `render.yaml` and the API. `starter_plus` and `standard_plus` are not —\nthey were removed from the lineup and a blueprint that sets either is rejected.\nMonthly prices are per-plan on [Render pricing](https://render.com/pricing); read\nthem there rather than from a table that goes stale.\n\n> **Note:** CPU and RAM above are the documented plan specs. Billing depends on usage, proration, and promotions, so use [render.com/pricing](https://render.com/pricing) for rates."
+    }
+  ],
+  "render-workflows": [
+    {
+      "id": "workflow-plans-flex-1",
+      "issue": 1041,
+      "source": "openai/plugins",
+      "find": "| Plan | Specs |\n|------|-------|\n| `starter` | 0.5 CPU / 512 MB |\n| `standard` (default) | 1 CPU / 2 GB |\n| `pro` | 2 CPU / 4 GB |\n| `pro_plus` | 4 CPU / 8 GB |\n| `pro_max` | 8 CPU / 16 GB |\n| `pro_ultra` | 16 CPU / 32 GB |",
+      "replace": "| Plan ID | Legacy name | Specs |\n|---------|-------------|-------|\n| `flex` (default) | — | up to 1 CPU / up to 4 GB, billed on actual usage |\n| `2c-4g` | `pro` | 2 CPU / 4 GB |\n| `2c-8g` | — | 2 CPU / 8 GB |\n| `4c-8g` | `pro_plus` | 4 CPU / 8 GB |\n| `4c-16g` | `pro_max` | 4 CPU / 16 GB |\n| `8c-32g` | `pro_ultra` | 8 CPU / 32 GB |"
+    },
+    {
+      "id": "workflow-plans-flex-2",
+      "issue": 1041,
+      "source": "openai/plugins",
+      "find": "\n`pro_plus`, `pro_max`, and `pro_ultra` require requesting access. Set via the `plan` task option.\n\nFor current pricing, see [Limits and Pricing for Render Workflows](https://render.com/docs/workflows-limits).",
+      "replace": "\n`pro_plus`, `pro_max`, and `pro_ultra` require requesting access. Set via the `plan` task option.\n\nThe Workflows beta's `starter` and `standard` plans are discontinued. A task that still sets either one runs on `flex` instead, and `flex` is the default for any task that does not set `plan` at all.\n\nFor current pricing, see [Limits and Pricing for Render Workflows](https://render.com/docs/workflows-limits)."
+    },
+    {
+      "id": "workflow-plans-flex-3",
+      "issue": 1041,
+      "source": "openai/plugins",
+      "file": "references/quick-reference.md",
+      "find": "| Plan | Specs |\n|------|-------|\n| `starter` | 0.5 CPU / 512 MB |\n| `standard` (default) | 1 CPU / 2 GB |\n| `pro` | 2 CPU / 4 GB |\n| `pro_plus` | 4 CPU / 8 GB |\n| `pro_max` | 8 CPU / 16 GB |\n| `pro_ultra` | 16 CPU / 32 GB |",
+      "replace": "| Plan ID | Legacy name | Specs |\n|---------|-------------|-------|\n| `flex` (default) | — | up to 1 CPU / up to 4 GB, billed on actual usage |\n| `2c-4g` | `pro` | 2 CPU / 4 GB |\n| `2c-8g` | — | 2 CPU / 8 GB |\n| `4c-8g` | `pro_plus` | 4 CPU / 8 GB |\n| `4c-16g` | `pro_max` | 4 CPU / 16 GB |\n| `8c-32g` | `pro_ultra` | 8 CPU / 32 GB |"
+    }
+  ],
+  "protocol-reverse": [
+    {
+      "id": "bbpb-rename-1",
+      "issue": 1033,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "□ Protobuf：.proto 恢复（blackboxprotobuf / pbtk / protoc --decode_raw）",
+      "replace": "□ Protobuf：.proto 恢复（bbpb / pbtk / protoc --decode_raw）"
+    },
+    {
+      "id": "bbpb-rename-2",
+      "issue": 1033,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "| blackboxprotobuf | 可选 | 未知 protobuf | pip |",
+      "replace": "| bbpb (原 blackboxprotobuf，已改名为官方包) | 可选 | 未知 protobuf | pip |"
+    }
+  ],
+  "mcp-csharp-debug": [
+    {
+      "id": "inspector-unpin-v2-1",
+      "issue": 1032,
+      "source": "dotnet/skills",
+      "find": "- [MCP Inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector/v/0.21.1) — Interactive debugging tool for MCP servers",
+      "replace": "- [MCP Inspector](https://www.npmjs.com/package/@modelcontextprotocol/inspector) — Interactive debugging tool for MCP servers. Current major (v2) requires Node >=22.19 and changed CLI config (`--config`/`--catalog`) from v1; if you need v1 behavior, run `npx @modelcontextprotocol/inspector@v1-latest` instead."
+    }
+  ],
+  "kubernetes-specialist": [
+    {
+      "id": "eso-v1-apiversion-1",
+      "issue": 1025,
+      "source": "jeffallan/claude-skills",
+      "file": "references/configuration.md",
+      "find": "apiVersion: external-secrets.io/v1beta1",
+      "replace": "apiVersion: external-secrets.io/v1"
+    }
+  ],
+  "building-pydantic-ai-agents": [
+    {
+      "id": "claude-5-model-ids-1",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "    'anthropic:claude-sonnet-4-6',",
+      "replace": "    'anthropic:claude-sonnet-5',"
+    },
+    {
+      "id": "claude-5-model-ids-2",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "    'anthropic:claude-opus-4-6',",
+      "replace": "    'anthropic:claude-opus-5-5',"
+    },
+    {
+      "id": "claude-5-model-ids-3",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "# model: anthropic:claude-opus-4-6",
+      "replace": "# model: anthropic:claude-opus-5-5"
+    },
+    {
+      "id": "claude-5-model-ids-4",
+      "issue": 1024,
+      "source": "pydantic/skills",
+      "find": "**Quick reference — model string format:** `\"provider:model-name\"` (e.g., `\"openai:gpt-5.2\"`, `\"anthropic:claude-sonnet-4-6\"`, `\"google:gemini-3-pro-preview\"`)",
+      "replace": "**Quick reference — model string format:** `\"provider:model-name\"` (e.g., `\"openai:gpt-5.2\"`, `\"anthropic:claude-sonnet-5\"`, `\"google:gemini-3-pro-preview\"`)"
+    }
+  ],
+  "transformers": [
+    {
+      "id": "pillow-1230-1",
+      "issue": 1015,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install timm==1.0.27 pillow==12.2.0",
+      "replace": "uv pip install timm==1.0.27 pillow==12.3.0"
+    }
+  ],
+  "redis-search": [
+    {
+      "id": "json-indexing-docs-page-moved",
+      "issue": 1006,
+      "source": "redis/agent-skills",
+      "file": "references/json-indexing.md",
+      "find": "[Index JSON documents](https://redis.io/docs/latest/develop/interact/search-and-query/indexing/json/)",
+      "replace": "[Index JSON documents](https://redis.io/docs/latest/develop/ai/search-and-query/indexing/)"
+    },
+    {
+      "id": "index-creation-mirrors-comment",
+      "issue": 1006,
+      "source": "redis/agent-skills",
+      "file": "references/index-creation.md",
+      "find": "// Mirrors SearchQuickstartExample.java + VectorSearchExample.java",
+      "replace": "// Mirrors SearchQuickstartExample.java + SearchWithParamsCommandsTestBase.java (testHNSWVectorSimilarity)"
+    },
+    {
+      "id": "index-creation-fake-jedis-citation",
+      "issue": 1006,
+      "source": "redis/agent-skills",
+      "file": "references/index-creation.md",
+      "find": ", [`VectorSearchExample.java`](https://github.com/redis/jedis/blob/master/src/test/java/io/redis/examples/VectorSearchExample.java)\n",
+      "replace": ", [`SearchWithParamsCommandsTestBase.java`](https://github.com/redis/jedis/blob/master/src/test/java/redis/clients/jedis/commands/unified/search/SearchWithParamsCommandsTestBase.java)\n"
+    },
+    {
+      "id": "vector-query-mirrors-comment",
+      "issue": 1006,
+      "source": "redis/agent-skills",
+      "file": "references/vector-query.md",
+      "find": "// Mirrors VectorSearchExample.java",
+      "replace": "// Mirrors SearchWithParamsCommandsTestBase.java (vectorSearch tests)"
+    },
+    {
+      "id": "vector-query-jedis-citation",
+      "issue": 1006,
+      "source": "redis/agent-skills",
+      "file": "references/vector-query.md",
+      "find": "- Jedis: [`VectorSearchExample.java`](https://github.com/redis/jedis/blob/master/src/test/java/io/redis/examples/VectorSearchExample.java)",
+      "replace": "- Jedis: [`SearchWithParamsCommandsTestBase.java`](https://github.com/redis/jedis/blob/master/src/test/java/redis/clients/jedis/commands/unified/search/SearchWithParamsCommandsTestBase.java)"
+    },
+    {
+      "id": "hybrid-search-jedis-citation",
+      "issue": 1006,
+      "source": "redis/agent-skills",
+      "file": "references/hybrid-search.md",
+      "find": "- Jedis: [`VectorSearchExample.java`](https://github.com/redis/jedis/blob/master/src/test/java/io/redis/examples/VectorSearchExample.java)",
+      "replace": "- Jedis: [`SearchWithParamsCommandsTestBase.java`](https://github.com/redis/jedis/blob/master/src/test/java/redis/clients/jedis/commands/unified/search/SearchWithParamsCommandsTestBase.java)"
+    },
+    {
+      "id": "rag-pattern-jedis-citation",
+      "issue": 1006,
+      "source": "redis/agent-skills",
+      "file": "references/rag-pattern.md",
+      "find": "- Jedis: [`VectorSearchExample.java`](https://github.com/redis/jedis/blob/master/src/test/java/io/redis/examples/VectorSearchExample.java)",
+      "replace": "- Jedis: [`SearchWithParamsCommandsTestBase.java`](https://github.com/redis/jedis/blob/master/src/test/java/redis/clients/jedis/commands/unified/search/SearchWithParamsCommandsTestBase.java)"
+    }
+  ],
+  "scientific-slides": [
+    {
+      "id": "openrouter-key-via-env-generate-slide-image-1",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image.py",
+      "find": "    \n    if api_key:\n        cmd.extend([\"--api-key\", api_key])\n    \n    if args.verbose:\n",
+      "replace": "    \n    if args.verbose:\n"
+    },
+    {
+      "id": "openrouter-key-via-env-generate-slide-image-2",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image.py",
+      "find": "    \n    # Execute\n    try:\n        result = subprocess.run(cmd, check=False)\n        sys.exit(result.returncode)\n",
+      "replace": "    \n    # Execute — pass API key via environment to avoid exposure in process listings\n    try:\n        env = os.environ.copy()\n        if api_key:\n            env[\"OPENROUTER_API_KEY\"] = api_key\n        result = subprocess.run(cmd, check=False, env=env)\n        sys.exit(result.returncode)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "1. Generate initial image with Nano Banana Pro\n2. Quality review using Gemini 3 Pro\n3. Only regenerate if quality is below threshold\n",
+      "replace": "1. Generate initial image with Nano Banana Pro\n2. Quality review using Gemini 3.1 Pro\n3. Only regenerate if quality is below threshold\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            break\n            \n    return False\n\n\nclass SlideImageGenerator:\n",
+      "replace": "            break\n            \n    return False\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass SlideImageGenerator:\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3 Pro for quality review\n        self.review_model = \"google/gemini-3-pro\"\n        \n",
+      "replace": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3.1 Pro for quality review\n        self.review_model = \"google/gemini-3.1-pro-preview\"\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "                    max_iterations: int = 2) -> Tuple[str, float, bool]:\n        \"\"\"Review generated image using Gemini 3 Pro.\"\"\"\n        image_data_url = self._image_to_base64(image_path)\n",
+      "replace": "                    max_iterations: int = 2) -> Tuple[str, float, bool]:\n        \"\"\"Review generated image using Gemini 3.1 Pro.\"\"\"\n        image_data_url = self._image_to_base64(image_path)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 7.0, False\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            return \"Image generated successfully (review skipped)\", 7.0, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            \n            print(f\"Reviewing image with Gemini 3 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n",
+      "replace": "            \n            print(f\"Reviewing image with Gemini 3.1 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {self.QUALITY_THRESHOLD}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {self.QUALITY_THRESHOLD}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-11",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "            \n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {self.QUALITY_THRESHOLD})\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "            \n            if review_ok and score >= self.QUALITY_THRESHOLD and not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {self.QUALITY_THRESHOLD})\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-slide-image-ai-12",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_slide_image_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n            \n            print(f\"\\n⚠ Quality below threshold ({score} < {self.QUALITY_THRESHOLD})\")\n            print(f\"Improving prompt...\")\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                final_image_data = image_data\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n            \n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {self.QUALITY_THRESHOLD})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt...\")\n"
+    }
+  ],
+  "scientific-schematics": [
+    {
+      "id": "openrouter-key-via-env-generate-schematic-1",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic.py",
+      "find": "    \n    if api_key:\n        cmd.extend([\"--api-key\", api_key])\n    \n    if args.verbose:\n",
+      "replace": "    \n    if args.verbose:\n"
+    },
+    {
+      "id": "openrouter-key-via-env-generate-schematic-2",
+      "issue": 735,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic.py",
+      "find": "    \n    # Execute\n    try:\n        result = subprocess.run(cmd, check=False)\n        sys.exit(result.returncode)\n",
+      "replace": "    \n    # Execute — pass API key via environment to avoid exposure in process listings\n    try:\n        env = os.environ.copy()\n        if api_key:\n            env[\"OPENROUTER_API_KEY\"] = api_key\n        result = subprocess.run(cmd, check=False, env=env)\n        sys.exit(result.returncode)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "1. Generate initial image with Nano Banana Pro\n2. AI quality review using Gemini 3 Pro for scientific critique\n3. Only regenerate if quality is below threshold for document type\n",
+      "replace": "1. Generate initial image with Nano Banana Pro\n2. AI quality review using Gemini 3.1 Pro for scientific critique\n3. Only regenerate if quality is below threshold for document type\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "    return False\n\n\nclass ScientificSchematicGenerator:\n    \"\"\"Generate scientific schematics using AI with smart iterative refinement.\n    \n    Uses Gemini 3 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated schematic doesn't meet the\n",
+      "replace": "    return False\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass ScientificSchematicGenerator:\n    \"\"\"Generate scientific schematics using AI with smart iterative refinement.\n    \n    Uses Gemini 3.1 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated schematic doesn't meet the\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3 Pro for quality review - excellent vision and reasoning\n        self.review_model = \"google/gemini-3-pro\"\n        \n",
+      "replace": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3.1 Pro for quality review - excellent vision and reasoning\n        self.review_model = \"google/gemini-3.1-pro-preview\"\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        \"\"\"\n        Review generated image using Gemini 3 Pro for quality analysis.\n        \n        Uses Gemini 3 Pro's superior vision and reasoning capabilities to\n        evaluate the schematic quality and determine if regeneration is needed.\n",
+      "replace": "        \"\"\"\n        Review generated image using Gemini 3.1 Pro for quality analysis.\n        \n        Uses Gemini 3.1 Pro's superior vision and reasoning capabilities to\n        evaluate the schematic quality and determine if regeneration is needed.\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        \"\"\"\n        # Use Gemini 3 Pro for review - excellent vision and analysis\n        image_data_url = self._image_to_base64(image_path)\n",
+      "replace": "        \"\"\"\n        # Use Gemini 3.1 Pro for review - excellent vision and analysis\n        image_data_url = self._image_to_base64(image_path)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        try:\n            # Use Gemini 3 Pro for high-quality review\n            response = self._make_request(\n",
+      "replace": "        try:\n            # Use Gemini 3.1 Pro for high-quality review\n            response = self._make_request(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 8.0\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            # Don't fail the whole process if review fails - assume acceptable\n            return \"Image generated successfully (review skipped)\", 7.5, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            \n            # Review image using Gemini 3 Pro\n            print(f\"Reviewing image with Gemini 3 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n",
+      "replace": "            \n            # Review image using Gemini 3.1 Pro\n            print(f\"Reviewing image with Gemini 3.1 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-11",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-12",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-13",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Check if quality is acceptable - STOP EARLY if so\n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n",
+      "replace": "            # Check if quality is acceptable - STOP EARLY if so\n            if review_ok and score >= threshold and not needs_improvement:\n                print(f\"\\n✓ Quality meets {doc_type} threshold ({score} >= {threshold})\")\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-14",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-15",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-schematic-ai-16",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_schematic_ai.py",
+      "find": "            # Quality below threshold - improve prompt for next iteration\n            print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            print(f\"Improving prompt based on feedback...\")\n",
+      "replace": "            # Quality below threshold - improve prompt for next iteration\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
+    }
+  ],
+  "infographics": [
+    {
+      "id": "openrouter-key-via-env-generate-infographic-1",
+      "issue": 526,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic.py",
+      "find": "    \n    if api_key:\n        cmd.extend([\"--api-key\", api_key])\n    \n    if args.verbose:\n",
+      "replace": "    \n    if args.verbose:\n"
+    },
+    {
+      "id": "openrouter-key-via-env-generate-infographic-2",
+      "issue": 526,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic.py",
+      "find": "    \n    # Execute\n    try:\n        result = subprocess.run(cmd, check=False)\n        sys.exit(result.returncode)\n",
+      "replace": "    \n    # Execute — pass API key via environment to avoid exposure in process listings\n    try:\n        env = os.environ.copy()\n        if api_key:\n            env[\"OPENROUTER_API_KEY\"] = api_key\n        result = subprocess.run(cmd, check=False, env=env)\n        sys.exit(result.returncode)\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-1",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "2. Generate initial infographic with Nano Banana Pro\n3. AI quality review using Gemini 3 Pro for infographic critique\n4. Only regenerate if quality is below threshold for document type\n",
+      "replace": "2. Generate initial infographic with Nano Banana Pro\n3. AI quality review using Gemini 3.1 Pro for infographic critique\n4. Only regenerate if quality is below threshold for document type\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-2",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "}\n\n\nclass InfographicGenerator:\n    \"\"\"Generate infographics using AI with smart iterative refinement.\n    \n    Uses Gemini 3 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated infographic doesn't meet the\n",
+      "replace": "}\n\n\n# Sentinel score returned when the quality review could not be performed.\n# It is deliberately below every quality threshold so that a review which\n# never ran can never be reported as a passing quality verdict.\nREVIEW_FAILED_SCORE = -1.0\n\n\nclass InfographicGenerator:\n    \"\"\"Generate infographics using AI with smart iterative refinement.\n    \n    Uses Gemini 3.1 Pro for quality review to determine if regeneration is needed.\n    Multiple passes only occur if the generated infographic doesn't meet the\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-3",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3 Pro for quality review\n        self.review_model = \"google/gemini-3-pro\"\n        \n",
+      "replace": "        self.image_model = \"google/gemini-3-pro-image-preview\"\n        # Gemini 3.1 Pro for quality review\n        self.review_model = \"google/gemini-3.1-pro-preview\"\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-4",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "        \"\"\"\n        Review generated infographic using Gemini 3 Pro for quality analysis.\n        \n",
+      "replace": "        \"\"\"\n        Review generated infographic using Gemini 3.1 Pro for quality analysis.\n        \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-5",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            if not choices:\n                return \"Image generated successfully\", 7.5, False\n            \n",
+      "replace": "            if not choices:\n                # An empty response is a review that never ran, not a pass.\n                raise ValueError(\"review response contained no choices\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-6",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "        except Exception as e:\n            self._log(f\"Review skipped: {str(e)}\")\n            return \"Image generated successfully (review skipped)\", 7.5, False\n    \n",
+      "replace": "        except Exception as e:\n            # A failed review is not a passing grade. Surface the failure\n            # unconditionally (not only under --verbose) and report it as\n            # needing improvement, so a review that never ran can never be\n            # printed as a measured quality verdict.\n            print(\n                f\"⚠ Quality review FAILED \"\n                f\"({type(e).__name__}: {e}) - quality was NOT verified.\",\n                file=sys.stderr,\n            )\n            return (\n                f\"Quality review did not run: {e}\",\n                REVIEW_FAILED_SCORE,\n                True,\n            )\n    \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-7",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            \"final_score\": 0.0,\n            \"success\": False,\n",
+      "replace": "            \"final_score\": 0.0,\n            \"review_failed\": False,\n            \"success\": False,\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-8",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            \n            # Review image using Gemini 3 Pro\n            print(f\"Reviewing with Gemini 3 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n",
+      "replace": "            \n            # Review image using Gemini 3.1 Pro\n            print(f\"Reviewing with Gemini 3.1 Pro...\")\n            critique, score, needs_improvement = self.review_image(\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-9",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            )\n            print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n",
+      "replace": "            )\n            review_ok = score != REVIEW_FAILED_SCORE\n            if review_ok:\n                print(f\"✓ Score: {score}/10 (threshold: {threshold}/10)\")\n            \n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-10",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "                \"needs_improvement\": needs_improvement,\n                \"success\": True\n",
+      "replace": "                \"needs_improvement\": needs_improvement,\n                \"review_failed\": not review_ok,\n                \"success\": True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-11",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            # Check if quality is acceptable\n            if not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {threshold})\")\n",
+      "replace": "            # Check if quality is acceptable\n            if review_ok and score >= threshold and not needs_improvement:\n                print(f\"\\n✓ Quality meets threshold ({score} >= {threshold})\")\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-12",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n",
+      "replace": "                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                results[\"early_stop\"] = True\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-13",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "                print(f\"\\n⚠ Maximum iterations reached\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"success\"] = True\n                break\n",
+      "replace": "                print(f\"\\n⚠ Maximum iterations reached\")\n                if not review_ok:\n                    print(\"⚠ Quality was NOT verified; the review never ran.\")\n                results[\"final_image\"] = str(iter_path)\n                results[\"final_score\"] = score\n                results[\"review_failed\"] = not review_ok\n                results[\"success\"] = True\n                break\n"
+    },
+    {
+      "id": "failed-review-not-a-pass-generate-infographic-ai-14",
+      "issue": 829,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/generate_infographic_ai.py",
+      "find": "            # Quality below threshold - improve prompt\n            print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            print(f\"Improving prompt based on feedback...\")\n",
+      "replace": "            # Quality below threshold - improve prompt\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
+    }
+  ],
+  "k6": [
+    {
+      "id": "k6-drop-removed-externally-controlled-header",
+      "issue": 1058,
+      "source": "grafana/skills",
+      "file": "examples/executors.js",
+      "find": " * Covers all 7 executors with realistic configuration examples.\n * Pick the relevant scenario block and remove the others.\n *\n * Executors:\n *   constant-vus          — fixed VU count for a duration\n *   ramping-vus           — variable VU count (realistic traffic curves)\n *   constant-arrival-rate — fixed iteration rate (RPS), regardless of response time\n *   ramping-arrival-rate  — variable RPS over time\n *   per-vu-iterations     — each VU runs N iterations exactly\n *   shared-iterations     — total iteration budget shared across VUs\n *   externally-controlled — VU count controlled at runtime via k6 REST API\n */",
+      "replace": " * Covers all 6 executors with realistic configuration examples.\n * Pick the relevant scenario block and remove the others.\n *\n * Executors:\n *   constant-vus          — fixed VU count for a duration\n *   ramping-vus           — variable VU count (realistic traffic curves)\n *   constant-arrival-rate — fixed iteration rate (RPS), regardless of response time\n *   ramping-arrival-rate  — variable RPS over time\n *   per-vu-iterations     — each VU runs N iterations exactly\n *   shared-iterations     — total iteration budget shared across VUs\n */"
+    },
+    {
+      "id": "k6-drop-removed-externally-controlled-block",
+      "issue": 1058,
+      "source": "grafana/skills",
+      "file": "examples/executors.js",
+      "find": "  // },\n\n  // ── 7. externally-controlled: VU count set via k6 REST API ─────────────\n  // scenarios: {\n  //   dynamic: {\n  //     executor: 'externally-controlled',\n  //     vus: 10,\n  //     maxVUs: 100,\n  //     duration: '10m',\n  //   },\n  // },\n\n  thresholds: {",
+      "replace": "  // },\n\n  thresholds: {"
+    }
+  ],
+  "rdkit": [
+    {
+      "id": "ring-finding-version-pin-1",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "compatibility: Tested with RDKit 2026.03.6 on Python 3.13; bundled scripts require the rdkit package. No credentials or network are needed after installation. Use conda-forge for the broadest binary support or PyPI package `rdkit` for supported platform wheels; `rdkit-pypi` is the legacy PyPI name.",
+      "replace": "compatibility: Tested with RDKit 2026.9.1 on Python 3.13; bundled scripts require the rdkit package. No credentials or network are needed after installation. Use conda-forge for the broadest binary support or PyPI package `rdkit` for supported platform wheels; `rdkit-pypi` is the legacy PyPI name. RDKit 2026.9+ changed the default smallest-set-of-smallest-rings algorithm (see Core Capabilities), which can change ring counts for cage/macrocyclic structures versus 2026.03.6 and earlier."
+    },
+    {
+      "id": "ring-finding-version-pin-2",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "metadata:\n  version: \"1.5\"\n  last-reviewed: \"2026-10-01\"\n  tested-rdkit: \"2026.03.6\"",
+      "replace": "metadata:\n  version: \"1.6\"\n  last-reviewed: \"2026-10-11\"\n  tested-rdkit: \"2026.9.1\""
+    },
+    {
+      "id": "ring-finding-version-pin-3",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "**Tested stable baseline (reviewed 2026-10-01):** RDKit **2026.03.6**, distributed as `rdkit==2026.3.6` on PyPI; this is the current stable GitHub/PyPI release. Official installation docs continue to recommend conda-forge for most users, while cross-platform PyPI wheels are published under the `rdkit` package name. `rdkit-pypi` is the old PyPI package name and should only appear when maintaining legacy environments.",
+      "replace": "**Tested stable baseline (reviewed 2026-10-11):** RDKit **2026.9.1**, distributed as `rdkit==2026.9.1` on PyPI; this is the current stable GitHub/PyPI release. Official installation docs continue to recommend conda-forge for most users, while cross-platform PyPI wheels are published under the `rdkit` package name. `rdkit-pypi` is the old PyPI package name and should only appear when maintaining legacy environments."
+    },
+    {
+      "id": "ring-finding-version-pin-4",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"rdkit==2026.3.6\"\n```",
+      "replace": "uv pip install \"rdkit==2026.9.1\"\n```"
+    },
+    {
+      "id": "ring-finding-api-ref-header",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/api_reference.md",
+      "find": "Signatures below show selected keyword arguments, not complete overloads. Tested\non RDKit 2026.03.6; use keywords when omitted arguments precede them.",
+      "replace": "Signatures below show selected keyword arguments, not complete overloads. Tested\non RDKit 2026.9.1; use keywords when omitted arguments precede them."
+    },
+    {
+      "id": "ring-finding-api-ref-ring-info",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/api_reference.md",
+      "find": "- `Chem.GetSymmSSSR(mol)` - Symmetrized smallest-ring set (can exceed SSSR size)\n- `Chem.GetSSSR(mol)` - Smallest set of smallest rings; not an alias (cubane: 5 versus 6 symmetrized rings)\n- `ring_info.NumRings()` - Number of rings\n- `ring_info.AtomRings()` - Tuples of atom indices in rings\n- `ring_info.BondRings()` - Tuples of bond indices in rings",
+      "replace": "- `Chem.GetSymmSSSR(mol)` - Symmetrized smallest-ring set (can exceed SSSR size)\n- `Chem.GetSSSR(mol)` - Smallest set of smallest rings; not an alias of `GetSymmSSSR` (counts can differ on cage/fused systems, e.g. cubane)\n- `ring_info.NumRings()` - Number of rings\n- `ring_info.AtomRings()` - Tuples of atom indices in rings\n- `ring_info.BondRings()` - Tuples of bond indices in rings\n\n**Version note:** RDKit 2026.9.1 changed the default smallest-set-of-smallest-rings\nalgorithm to one based on RingDecomposerLib, which changes `GetSymmSSSR`/`ring_info.NumRings()`\nresults for cage and macrocyclic structures versus RDKit 2026.03.6 and earlier (e.g. cubane\nwent from 5 rings to 7 rings under the new default). Call `Chem.SetUseLegacyRingFinding(True)`\nto restore the pre-2026.9 algorithm when reproducing older results."
+    },
+    {
+      "id": "ring-finding-api-ref-install",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/api_reference.md",
+      "find": "uv pip install \"rdkit==2026.3.6\"",
+      "replace": "uv pip install \"rdkit==2026.9.1\""
+    },
+    {
+      "id": "ring-finding-core-capabilities-note",
+      "issue": 1069,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/core_capabilities.md",
+      "find": "rings = GetSymmSSSR(mol)\n```\n\n**Stereochemistry:**",
+      "replace": "rings = GetSymmSSSR(mol)\n```\n\nRDKit 2026.9.1 changed the default smallest-set-of-smallest-rings algorithm; ring\ncounts on cage/macrocyclic structures can differ from RDKit 2026.03.6 and earlier.\nSee the Ring Information section of\n[references/api_reference.md](api_reference.md) for the\n`Chem.SetUseLegacyRingFinding(True)` escape hatch.\n\n**Stereochemistry:**"
+    }
+  ],
+  "fluidsim": [
+    {
+      "id": "calver-version-pin-1",
+      "issue": 1070,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "compatibility: Bundled CLIs require Python 3.11+ and use the standard library; HDF5/netCDF4 metadata tools lazily use h5py when available. Simulation examples target fluidsim 0.9.0, fluidfft 0.4.5, and pyFFTW 0.15.1. MPI/native FFT use requires a site-compatible MPI implementation, development headers, FFTW/PFFT/P3DFFT libraries, compilers, and an approved scheduler workflow. No GPU backend is assumed.\nallowed-tools: Read Write Bash Glob Python\nmetadata:\n  version: \"1.4\"\n  skill-author: \"K-Dense Inc.\"\n  last-reviewed: \"2026-10-01\"",
+      "replace": "compatibility: Bundled CLIs require Python 3.11+ and use the standard library; HDF5/netCDF4 metadata tools lazily use h5py when available. Simulation examples target fluidsim 26.10.0, fluidfft 0.4.5, and pyFFTW 0.15.1. FluidSim moved from semantic versioning to calendar versioning (`YY.MM.MICRO`) starting with the 26.10.0 release. MPI/native FFT use requires a site-compatible MPI implementation, development headers, FFTW/PFFT/P3DFFT libraries, compilers, and an approved scheduler workflow. No GPU backend is assumed.\nallowed-tools: Read Write Bash Glob Python\nmetadata:\n  version: \"1.5\"\n  skill-author: \"K-Dense Inc.\"\n  last-reviewed: \"2026-10-11\""
+    },
+    {
+      "id": "calver-version-pin-2",
+      "issue": 1070,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "Use FluidSim 0.9.0 as a framework for Python-defined numerical solvers, especially",
+      "replace": "Use FluidSim 26.10.0 as a framework for Python-defined numerical solvers, especially"
+    },
+    {
+      "id": "calver-version-pin-3",
+      "issue": 1070,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "As verified on 2026-10-01:\n\n- Latest stable PyPI release: `fluidsim==0.9.0` (2025-12-04).",
+      "replace": "As verified on 2026-10-11:\n\n- Latest stable PyPI release: `fluidsim==26.10.0` (2026-10-09). FluidSim switched from\n  semantic versioning to calendar versioning (`YY.MM.MICRO`) at this release, so version\n  numbers no longer imply semver compatibility guarantees; see the upstream changelog's\n  \"Versioning scheme\" note under `[26.10.0]`."
+    },
+    {
+      "id": "calver-version-pin-4",
+      "issue": 1070,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv add \"fluidsim[fft]==0.9.0\" \"fluidfft==0.4.5\" \"pyFFTW==0.15.1\"\nuv lock",
+      "replace": "uv add \"fluidsim[fft]==26.10.0\" \"fluidfft==0.4.5\" \"pyFFTW==0.15.1\"\nuv lock"
+    },
+    {
+      "id": "calver-version-pin-5",
+      "issue": 1070,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"fluidsim[fft]==0.9.0\" \"fluidfft==0.4.5\" \"pyFFTW==0.15.1\"\n```\n\nThe project lock",
+      "replace": "uv pip install \"fluidsim[fft]==26.10.0\" \"fluidfft==0.4.5\" \"pyFFTW==0.15.1\"\n```\n\nThe project lock"
+    }
+  ],
+  "ncc": [
+    {
+      "id": "lambda-sdk-v3-externals",
+      "issue": 1071,
+      "source": "openai/plugins",
+      "find": "```bash\n# Single external\nncc build input.js -e aws-sdk\n\n# Multiple externals\nncc build input.js -e aws-sdk -e sharp\n```\n\nFor serverless environments where the runtime provides certain modules (like AWS Lambda's `aws-sdk`), mark them as external.",
+      "replace": "```bash\n# Single external\nncc build input.js -e sharp\n\n# Multiple externals\nncc build input.js -e sharp -e canvas\n```\n\nFor serverless environments where the runtime provides certain modules, mark them as\nexternal instead of bundling them. AWS Lambda's supported Node.js runtimes (18.x and\nlater) bundle AWS SDK for JavaScript **v3** (`@aws-sdk/*` scoped packages), not the\nlegacy `aws-sdk` v2 package — Node.js 16.x, the last runtime that provided `aws-sdk` v2,\nreached end of support on 2024-06-12. Mark the specific `@aws-sdk/client-*` packages your\nruntime provides as external (e.g. `-e @aws-sdk/client-s3`); do not rely on a bare\n`-e aws-sdk` unless you are deliberately targeting an EOL runtime."
+    }
+  ],
+  "vercel-react-view-transitions": [
+    {
+      "id": "nextjs-no-experimental-flag",
+      "issue": 1076,
+      "source": "vercel-labs/agent-skills",
+      "file": "references/nextjs.md",
+      "find": "`<ViewTransition>` works out of the box — the bundled React canary ships it, and every `<Link>` navigation runs inside `React.startTransition`, so react-dom starts a view transition whenever affected `<ViewTransition>` components exist. Set the documented flag:\n\n```js\n// next.config.js\nconst nextConfig = {\n  experimental: { viewTransition: true },\n};\nmodule.exports = nextConfig;\n```\n\n(Historically the flag switched React to the experimental channel — required before `ViewTransition` reached canary. It no longer does; the experimental channel is only needed for `useSwipeTransition` gestures and `parentEnter`/`parentExit`, selected by other flags like `gestureTransition`.)",
+      "replace": "`<ViewTransition>` works out of the box with **no `next.config` change** — the bundled React ships it, and every `<Link>` navigation runs inside `React.startTransition`, so react-dom starts a view transition whenever affected `<ViewTransition>` components exist.\n\nDo not set `experimental.viewTransition`. The key was removed in Next.js 16.3.0 (it exists up to 16.2.x) and is now an unrecognized `experimental` key, which Next.js reports as a config warning and ignores.\n\nThe experimental React channel is still needed for `useSwipeTransition` gestures and `parentEnter`/`parentExit`, selected by other flags such as `gestureTransition`."
+    },
+    {
+      "id": "nextjs-after-step-2",
+      "issue": 1076,
+      "source": "vercel-labs/agent-skills",
+      "file": "references/nextjs.md",
+      "find": "**After Step 2:** Enable the experimental flag above.",
+      "replace": "**After Step 2:** No Next.js configuration is required — skip straight to Step 3."
+    },
+    {
+      "id": "nextjs-no-canary",
+      "issue": 1076,
+      "source": "vercel-labs/agent-skills",
+      "file": "references/nextjs.md",
+      "find": "Do **not** install `react@canary` — see [Availability](../SKILL.md#availability) for details.",
+      "replace": "React 19.3.0 (current stable) ships `<ViewTransition>` and `addTransitionType`; no canary install — see [Availability](../SKILL.md#availability)."
+    },
+    {
+      "id": "skill-availability-stable-react",
+      "issue": 1076,
+      "source": "vercel-labs/agent-skills",
+      "find": "- **Next.js:** Do **not** install `react@canary` — the App Router already bundles React canary internally. `ViewTransition` works out of the box. `npm ls react` may show a stable-looking version; this is expected.\n- **Without Next.js:** Install `react@canary react-dom@canary` (`ViewTransition` is not in stable React).",
+      "replace": "- **Next.js:** nothing to install or configure — `ViewTransition` works out of the box. Do not set `experimental.viewTransition`; that key was removed in Next.js 16.3.0.\n- **Without Next.js:** `react@19.3.0`/`react-dom@19.3.0` or newer. `<ViewTransition>` and `addTransitionType` are in stable React as of 19.3.0; only `useSwipeTransition` and `parentEnter`/`parentExit` still need `react@experimental`."
+    },
+    {
+      "id": "readme-dead-config-link",
+      "issue": 1076,
+      "source": "vercel-labs/agent-skills",
+      "file": "README.md",
+      "find": "- [Next.js View Transitions guide](https://nextjs.org/docs/app/guides/view-transitions)\n- [Next.js `viewTransition` config](https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition)",
+      "replace": "- [Next.js View Transitions guide](https://nextjs.org/docs/app/guides/view-transitions)"
+    },
+    {
+      "id": "metadata-dead-config-link",
+      "issue": 1076,
+      "source": "vercel-labs/agent-skills",
+      "file": "metadata.json",
+      "find": "    \"https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition\",",
+      "replace": "    \"https://nextjs.org/docs/app/guides/view-transitions\","
+    }
+  ],
+  "vercel-functions": [
+    {
+      "id": "max-duration-hobby",
+      "issue": 1078,
+      "source": "openai/plugins",
+      "find": "- Max duration: 10s (Hobby), 300s (Pro default), 800s (Fluid Compute Pro/Enterprise)",
+      "replace": "- Max duration: 300s default on every plan; 300s maximum on Hobby, 800s on Pro/Enterprise (1800s extended maximum, Beta)"
+    },
+    {
+      "id": "timeout-table-header",
+      "issue": 1078,
+      "source": "openai/plugins",
+      "find": "| Plan | Default | Max |\n|------|---------|-----|",
+      "replace": "| Plan | Default | Max | Extended max |\n|------|---------|-----|--------------|"
+    },
+    {
+      "id": "timeout-table-rows",
+      "issue": 1078,
+      "source": "openai/plugins",
+      "find": "| Hobby | 300s | 300s |\n| Pro | 300s | 800s |\n| Enterprise | 300s | 800s |",
+      "replace": "| Hobby | 300s | 300s | - |\n| Pro | 300s | 800s | 1800s (Beta) |\n| Enterprise | 300s | 800s | 1800s (Beta) |"
+    },
+    {
+      "id": "memory-ceiling",
+      "issue": 1078,
+      "source": "openai/plugins",
+      "find": "├─ Memory exceeded? → Increase `memory` in vercel.json (up to 3008 MB on Pro)",
+      "replace": "├─ Memory exceeded? → Increase `memory` in vercel.json (up to 4 GB / 2 vCPU on Pro; Hobby is fixed at 2 GB)"
+    },
+    {
+      "id": "decision-tree-duration",
+      "issue": 1078,
+      "source": "openai/plugins",
+      "find": "│  ├─ Up to 15 min → Use Vercel Functions with `maxDuration` in vercel.json",
+      "replace": "│  ├─ Up to 800s (30 min with extended maximum, Beta) → Use Vercel Functions with `maxDuration` in vercel.json"
+    }
+  ],
+  "ai-sdk": [
+    {
+      "id": "v7-version-floor",
+      "issue": 1093,
+      "source": "openai/plugins",
+      "find": "### ai@6.0.34+\n\nSearch bundled docs and source in `node_modules/ai/`:\n\n- **Docs**: `grep \"query\" node_modules/ai/docs/`\n- **Source**: `grep \"query\" node_modules/ai/src/`\n\nProvider packages include docs at `node_modules/@ai-sdk/<provider>/docs/`.",
+      "replace": "### ai@7.0.0+\n\nSearch bundled docs and source in `node_modules/ai/`:\n\n- **Docs**: `grep \"query\" node_modules/ai/docs/`\n- **Source**: `grep \"query\" node_modules/ai/src/`\n\nProvider packages include docs at `node_modules/@ai-sdk/<provider>/docs/`.\n\nAI SDK 7 raised the minimum supported Node.js version to 22 and changed\n`prepareStep`-returned `instructions` to persist across later steps instead of\napplying only to the current step. If a project is still on `ai@6.x`, check\n[the v7 migration guide](https://ai-sdk.dev/docs/migration-guides/migration-guide-7-0)\n(or run `npx @ai-sdk/codemod v7`) before assuming current docs apply as-is."
+    }
+  ],
+  "xarray": [
+    {
+      "id": "stale-current-release-version-1",
+      "issue": 1095,
+      "source": "tondevrel/scientific-agent-skills",
+      "find": "metadata: {\"version\": \"1.1\", \"skill-author\": \"K-Dense Inc.\"}",
+      "replace": "metadata: {\"version\": \"1.2\", \"skill-author\": \"K-Dense Inc.\"}"
+    },
+    {
+      "id": "stale-current-release-version-2",
+      "issue": 1095,
+      "source": "tondevrel/scientific-agent-skills",
+      "find": "> [!WARNING]\n> **Breaking changes in xarray 2026.04.0** (the current release, up from 2024.01 when this skill was first written):\n> 1. **Zarr v3 required**: `xarray[io]` now installs `zarr>=3.0`; if your environment pins `zarr<3`, Zarr I/O will fail.\n> 2. **Timedelta decode default changed**: `open_dataset()` no longer decodes `np.timedelta64` from units-only attributes by default. Pass `decode_timedelta=True` to restore the previous behavior.\n> 3. **netCDF preferred engine**: The default backend order reverted to `netCDF4 > h5netcdf > scipy` in 2026.04.0 (after a temporary change in 2025.09.1). Explicitly specify `engine=` when reproducibility matters.",
+      "replace": "> [!WARNING]\n> **Breaking changes through xarray 2026.09.0** (the current release, up from 2024.01 when this skill was first written):\n> 1. **Zarr v3 required**: `xarray[io]` now installs `zarr>=3.0`; if your environment pins `zarr<3`, Zarr I/O will fail. As of 2026.09.0 the remaining zarr-python 2 compatibility code has been removed entirely.\n> 2. **Timedelta decode default changed**: `open_dataset()` no longer decodes `np.timedelta64` from units-only attributes by default. Pass `decode_timedelta=True` to restore the previous behavior.\n> 3. **netCDF preferred engine**: The default backend order reverted to `netCDF4 > h5netcdf > scipy` in 2026.04.0 (after a temporary change in 2025.09.1). Explicitly specify `engine=` when reproducibility matters.\n> 4. **Bottleneck disabled by default** (2026.09.0): accelerated rolling/reduction operations no longer use the optional `bottleneck` backend unless it is explicitly re-enabled; results are unaffected but performance characteristics may change.\n> 5. **Python 3.11 support ending**: 2026.09.0 is the last xarray release supporting Python 3.11 — the next release requires Python 3.12+."
+    }
+  ],
+  "render-deploy": [
+    {
+      "id": "free-plan-cpu-blueprint-spec",
+      "issue": 1045,
+      "source": "openai/plugins",
+      "file": "references/blueprint-spec.md",
+      "find": "| `free` | 512 MB | 0.5 | Free (750 hrs/mo) |",
+      "replace": "| `free` | 512 MB | 0.1 | Free (750 hrs/mo) |"
+    },
+    {
+      "id": "free-plan-cpu-configuration-guide",
+      "issue": 1045,
+      "source": "openai/plugins",
+      "file": "references/configuration-guide.md",
+      "find": "- 0.5 CPU per service",
+      "replace": "- 0.1 CPU per service"
+    }
+  ],
+  "ncbi-blast-skill": [
+    {
+      "id": "blast-cloud-docs-retired",
+      "issue": 1137,
+      "source": "openai/plugins",
+      "file": "references/blast-common-url-api.txt",
+      "find": "Source docs: https://ncbi.github.io/blast-cloud/dev/api.html",
+      "replace": "Source docs: https://blast.ncbi.nlm.nih.gov/doc/blast-help/developerinfo.html"
+    }
+  ],
+  "rust-router": [
+    {
+      "id": "rust-msrv-policy",
+      "issue": 1144,
+      "source": "actionbook/rust-skills",
+      "find": "When creating new Rust projects or Cargo.toml files, ALWAYS use:\n\n```toml\n[package]\nedition = \"2024\"  # ALWAYS use latest stable edition\nrust-version = \"1.85\"",
+      "replace": "When creating new Rust projects or Cargo.toml files, choose the edition and `rust-version`\nfrom the project's language features, dependencies, and user compatibility requirements.\n`rust-version` declares the minimum supported Rust version (MSRV), not the compiler to\ninstall. Use the latest stable toolchain for development unless the project specifies one.\n\nFor example, Rust 2024 requires at least Rust 1.85. Keep this MSRV only if the package\nand its dependencies support it, and test the declared MSRV:\n\n```toml\n[package]\nedition = \"2024\"\nrust-version = \"1.85\""
+    }
+  ],
+  "ncbi-pmc-skill": [
+    {
+      "id": "retired-oa-service-routing",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "SKILL.md",
+      "find": "---\nname: ncbi-pmc-skill\ndescription: Submit compact NCBI PMC Open Access requests for article/file availability metadata. Use when a user wants concise PMC Open Access summaries; save raw XML only on request.\n---\n\n## Operating rules\n- Use `scripts/ncbi_pmc.py` for all PMC Open Access calls in this package.\n- This skill is intentionally narrow: it currently covers the PMC Open Access service rather than the full PMC API surface.\n- Pass endpoint-specific query parameters under `params`, typically `id` for a PMCID or DOI-style lookup supported by the OA service.\n- Re-run requests in long conversations instead of relying on older tool output.\n- Treat displayed `...` in tool previews as UI truncation, not literal request content.\n\n## Execution behavior\n- Return concise markdown summaries from the script output by default.\n- Return raw XML only if the user explicitly asks for machine-readable output.\n- Prefer targeted endpoint calls instead of broad unfiltered dumps.\n- If the user needs the full raw response, set `save_raw=true` and report the saved file path.\n\n## Input\n- Read one JSON object from stdin.\n- Optional fields: `params`, `record_path`, `max_items`, `max_depth`, `timeout_sec`, `save_raw`, `raw_output_path`\n- Common PMC Open Access patterns:\n  - `{\"params\":{\"id\":\"PMC3257301\"},\"max_items\":10}`\n  - `{\"params\":{\"id\":\"10.1093/nar/gkr1184\"},\"max_items\":10}`\n\n## Output\n- Success returns `ok`, `source`, and a compact `summary`.\n- Use `raw_output_path` when `save_raw=true`.\n- Failure returns `ok=false` with `error.code` and `error.message`.\n\n## Execution\n```bash\necho '{\"params\":{\"id\":\"PMC3257301\"},\"max_items\":10}' | python scripts/ncbi_pmc.py\n```\n\n## References\n- No additional runtime references are required; keep the import package limited to this file and `scripts/ncbi_pmc.py`.\n",
+      "replace": "---\nname: ncbi-pmc-skill\ndescription: Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi. The service is retired; route current PMC retrieval to paper-lookup or ncbi-entrez-skill.\n---\n\n# Retired PMC OA Web Service\n\nNCBI withdrew the PMC OA Web Service (`oa.fcgi`) on **2026-08-25**. Its old\narticle-availability and FTP-file-link response has no compatible replacement.\nDo not retry the retired endpoint, treat its failure as zero matching articles,\nor use it to infer a paper's license or retraction status.\n\n## Choose the supported workflow\n\n- For a specific paper's eligible full text, use `paper-lookup` and its\n  [PMC guide](../paper-lookup/references/pmc.md). It covers E-utilities, BioC,\n  Europe PMC, identifier conversion, and metadata-only responses. Confirm that\n  the response contains article text before claiming full-text retrieval.\n- For PMC search, identifiers, or metadata, use `ncbi-entrez-skill` with\n  `db=pmc`. Do not substitute metadata for unavailable article text.\n- For bulk access, consult [PMC Article Datasets](https://pmc.ncbi.nlm.nih.gov/tools/textmining/)\n  and the [PMC Cloud Service](https://pmc.ncbi.nlm.nih.gov/tools/cloud/).\n\n## Legacy script behavior\n\n`scripts/ncbi_pmc.py` remains for callers using the old package path. It needs\nonly Python's standard library, makes no network requests, and never writes a\nraw response file. Any JSON object returns `ok=false`, `error.code=service_retired`,\nand the supported skill routes, with exit code **1**. Malformed JSON or a\nnon-object input returns `invalid_json` or `invalid_input`, with exit code **2**.\nLegacy options such as `save_raw` do not reactivate the service.\n\n```bash\nprintf '%s\\n' '{\"params\":{\"id\":\"PMC3257301\"}}' | python3 scripts/ncbi_pmc.py\n# Expected: structured service_retired error; exit status 1.\n```\n\nThe folder and source provenance are retained so old references receive an\nactionable migration result. Current article lookups belong in the workflows above.\n\nSource: [NCBI service retirement notice](https://pmc.ncbi.nlm.nih.gov/tools/oa-service/).\n"
+    },
+    {
+      "id": "retired-oa-service-cli",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "scripts/ncbi_pmc.py",
+      "find": "#!/usr/bin/env python3\n\"\"\"Compact NCBI PMC Open Access helper for imported skills.\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport os\nimport sys\nimport xml.etree.ElementTree as ET\nfrom pathlib import Path\nfrom typing import Any\n\ntry:\n    import requests\nexcept ImportError as exc:  # pragma: no cover\n    requests = None\n    REQUESTS_IMPORT_ERROR = exc\nelse:\n    REQUESTS_IMPORT_ERROR = None\n\nPMC_OA_URL = \"https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi\"\n\n\ndef error(code: str, message: str, warnings: list[str] | None = None) -> dict[str, Any]:\n    return {\"ok\": False, \"error\": {\"code\": code, \"message\": message}, \"warnings\": warnings or []}\n\n\ndef _require_str(name: str, value: Any, required: bool = False) -> str | None:\n    if value is None:\n        if required:\n            raise ValueError(f\"`{name}` is required.\")\n        return None\n    if not isinstance(value, str) or not value.strip():\n        raise ValueError(f\"`{name}` must be a non-empty string.\")\n    return value.strip()\n\n\ndef _require_int(name: str, value: Any, default: int) -> int:\n    if value is None:\n        return default\n    if not isinstance(value, int) or value <= 0:\n        raise ValueError(f\"`{name}` must be a positive integer.\")\n    return value\n\n\ndef _require_bool(name: str, value: Any, default: bool) -> bool:\n    if value is None:\n        return default\n    if not isinstance(value, bool):\n        raise ValueError(f\"`{name}` must be a boolean.\")\n    return value\n\n\ndef _require_object(name: str, value: Any) -> dict[str, Any]:\n    if value is None:\n        return {}\n    if not isinstance(value, dict):\n        raise ValueError(f\"`{name}` must be an object.\")\n    return value\n\n\ndef _get_by_path(value: Any, path: str) -> Any:\n    current = value\n    for part in path.split(\".\"):\n        if isinstance(current, list):\n            if not part.isdigit():\n                raise ValueError(f\"`record_path` segment {part!r} must be a list index.\")\n            index = int(part)\n            if index >= len(current):\n                raise ValueError(f\"`record_path` index {index} is out of range.\")\n            current = current[index]\n        elif isinstance(current, dict):\n            if part not in current:\n                raise ValueError(f\"`record_path` key {part!r} was not present in the response.\")\n            current = current[part]\n        else:\n            raise ValueError(f\"`record_path` segment {part!r} could not be applied.\")\n    return current\n\n\ndef _infer_target(data: Any) -> tuple[str | None, Any]:\n    if isinstance(data, list):\n        return \"$\", data\n    if isinstance(data, dict):\n        for key in (\"records\", \"items\", \"documents\"):\n            value = data.get(key)\n            if isinstance(value, list):\n                return key, value\n    return None, data\n\n\ndef _compact(value: Any, max_items: int, max_depth: int) -> Any:\n    if isinstance(value, str):\n        return value if len(value) <= 240 else value[:240] + \"...\"\n    if max_depth <= 0:\n        if isinstance(value, (dict, list)):\n            return \"...\"\n        return value\n    if isinstance(value, list):\n        out = [_compact(item, max_items, max_depth - 1) for item in value[:max_items]]\n        if len(value) > max_items:\n            out.append(f\"... (+{len(value) - max_items} more)\")\n        return out\n    if isinstance(value, dict):\n        out: dict[str, Any] = {}\n        items = list(value.items())\n        for key, item in items[:max_items]:\n            out[str(key)] = _compact(item, max_items, max_depth - 1)\n        if len(items) > max_items:\n            out[\"_truncated_keys\"] = len(items) - max_items\n        return out\n    return value\n\n\ndef _xml_to_simple(elem: ET.Element, max_items: int, max_depth: int) -> Any:\n    children = list(elem)\n    text = (elem.text or \"\").strip()\n    if not children:\n        return text\n    if max_depth <= 0:\n        return \"...\"\n    grouped: dict[str, Any] = {}\n    for child in children[:max_items]:\n        tag = child.tag.split(\"}\", 1)[-1]\n        value = _xml_to_simple(child, max_items, max_depth - 1)\n        if tag in grouped:\n            current = grouped[tag]\n            if not isinstance(current, list):\n                grouped[tag] = [current]\n            grouped[tag].append(value)\n        else:\n            grouped[tag] = value\n    if len(children) > max_items:\n        grouped[\"_truncated_children\"] = len(children) - max_items\n    if text:\n        grouped[\"_text\"] = text\n    return grouped\n\n\ndef _save_raw_text(raw_text: str, raw_output_path: str | None, suffix: str) -> str:\n    path = Path(raw_output_path or f\"/tmp/ncbi-pmc.{suffix}\")\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(raw_text, encoding=\"utf-8\")\n    return str(path)\n\n\ndef parse_input(payload: Any) -> dict[str, Any]:\n    if not isinstance(payload, dict):\n        raise ValueError(\"Input must be one JSON object.\")\n    return {\n        \"params\": _require_object(\"params\", payload.get(\"params\")),\n        \"record_path\": _require_str(\"record_path\", payload.get(\"record_path\")),\n        \"max_items\": _require_int(\"max_items\", payload.get(\"max_items\"), 10),\n        \"max_depth\": _require_int(\"max_depth\", payload.get(\"max_depth\"), 3),\n        \"timeout_sec\": _require_int(\"timeout_sec\", payload.get(\"timeout_sec\"), 30),\n        \"save_raw\": _require_bool(\"save_raw\", payload.get(\"save_raw\"), False),\n        \"raw_output_path\": _require_str(\"raw_output_path\", payload.get(\"raw_output_path\")),\n    }\n\n\ndef _ncbi_common_params(params: dict[str, Any]) -> dict[str, Any]:\n    merged = dict(params)\n    api_key = os.environ.get(\"NCBI_API_KEY\") or os.environ.get(\"NCBI_EUTILS_API_KEY\")\n    tool = os.environ.get(\"NCBI_TOOL\")\n    email = os.environ.get(\"NCBI_EMAIL\")\n    if api_key and \"api_key\" not in merged:\n        merged[\"api_key\"] = api_key\n    if tool and \"tool\" not in merged:\n        merged[\"tool\"] = tool\n    if email and \"email\" not in merged:\n        merged[\"email\"] = email\n    return merged\n\n\ndef _summary_output(\n    data: Any, config: dict[str, Any], raw_output_path: str | None\n) -> dict[str, Any]:\n    record_path = config[\"record_path\"]\n    path_used, target = (\n        _infer_target(data)\n        if record_path is None\n        else (record_path, _get_by_path(data, record_path))\n    )\n    output = {\n        \"ok\": True,\n        \"source\": \"ncbi-pmc-oa\",\n        \"record_path\": path_used,\n        \"raw_output_path\": raw_output_path,\n        \"warnings\": [],\n    }\n    if isinstance(target, list):\n        output.update(\n            {\n                \"record_count_returned\": min(len(target), config[\"max_items\"]),\n                \"record_count_available\": len(target),\n                \"truncated\": len(target) > config[\"max_items\"],\n                \"records\": _compact(\n                    target[: config[\"max_items\"]], config[\"max_items\"], config[\"max_depth\"]\n                ),\n            }\n        )\n    else:\n        output[\"summary\"] = _compact(target, config[\"max_items\"], config[\"max_depth\"])\n        if isinstance(target, dict):\n            output[\"top_keys\"] = list(target)[: config[\"max_items\"]]\n    return output\n\n\ndef execute(payload: Any) -> dict[str, Any]:\n    if requests is None:\n        return error(\"missing_dependency\", f\"`requests` is required: {REQUESTS_IMPORT_ERROR}\")\n    config = parse_input(payload)\n    try:\n        response = requests.get(\n            PMC_OA_URL, params=_ncbi_common_params(config[\"params\"]), timeout=config[\"timeout_sec\"]\n        )\n        response.raise_for_status()\n        raw_output_path = (\n            _save_raw_text(response.text, config[\"raw_output_path\"], \"xml\")\n            if config[\"save_raw\"]\n            else None\n        )\n        root = ET.fromstring(response.text)\n        data = {\n            root.tag.split(\"}\", 1)[-1]: _xml_to_simple(\n                root, config[\"max_items\"], config[\"max_depth\"]\n            )\n        }\n        return _summary_output(data, config, raw_output_path)\n    except ValueError as exc:\n        return error(\"invalid_response\", str(exc))\n    except ET.ParseError as exc:\n        return error(\"invalid_response\", f\"Could not parse XML response: {exc}\")\n    except requests.RequestException as exc:\n        return error(\"network_error\", f\"Request failed: {exc}\")\n\n\ndef main() -> int:\n    try:\n        payload = json.load(sys.stdin)\n    except Exception as exc:  # noqa: BLE001\n        sys.stdout.write(json.dumps(error(\"invalid_json\", f\"Could not parse JSON input: {exc}\")))\n        return 2\n    try:\n        output = execute(payload)\n    except ValueError as exc:\n        output = error(\"invalid_input\", str(exc))\n        code = 2\n    else:\n        code = 0 if output.get(\"ok\") else 1\n    sys.stdout.write(json.dumps(output))\n    return code\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+      "replace": "#!/usr/bin/env python3\n\"\"\"Explain retirement of the legacy PMC Open Access service without network access.\"\"\"\n\nfrom __future__ import annotations\n\nimport json\nimport sys\n\n\ndef error(code: str, message: str) -> dict[str, object]:\n    return {\"ok\": False, \"error\": {\"code\": code, \"message\": message}, \"warnings\": []}\n\n\ndef execute(payload: object) -> dict[str, object]:\n    if not isinstance(payload, dict):\n        raise ValueError(\"Input must be one JSON object.\")\n    # The old availability/file-link response has no compatible replacement endpoint.\n    return {\n        **error(\n            \"service_retired\",\n            \"The PMC OA Web Service was withdrawn on 2026-08-25. \"\n            \"Use paper-lookup for eligible full text or ncbi-entrez-skill for PMC metadata.\",\n        ),\n        \"source\": \"ncbi-pmc-oa\",\n        \"retired_on\": \"2026-08-25\",\n        \"documentation\": \"https://pmc.ncbi.nlm.nih.gov/tools/oa-service/\",\n        \"alternatives\": [\n            {\"skill\": \"paper-lookup\", \"use\": \"Eligible article text via E-utilities, BioC, or Europe PMC\"},\n            {\"skill\": \"ncbi-entrez-skill\", \"use\": \"PMC search, identifiers, and metadata\"},\n        ],\n    }\n\n\ndef main() -> int:\n    try:\n        payload = json.load(sys.stdin)\n    except (json.JSONDecodeError, UnicodeDecodeError) as exc:\n        output = error(\"invalid_json\", f\"Could not parse JSON input: {exc}\")\n        code = 2\n    else:\n        try:\n            output = execute(payload)\n        except ValueError as exc:\n            output = error(\"invalid_input\", str(exc))\n            code = 2\n        else:\n            code = 1\n    sys.stdout.write(json.dumps(output) + \"\\n\")\n    return code\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n"
+    },
+    {
+      "id": "retired-oa-service-ui",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "agents/openai.yaml",
+      "find": "interface:\n  display_name: \"NCBI PMC\"\n  short_description: \"Fetch PMC Open Access summaries\"\n",
+      "replace": "interface:\n  display_name: \"PMC OA Service Migration\"\n  short_description: \"Migrate calls to the retired PMC OA service\"\n"
+    }
+  ],
+  "ncbi-entrez-skill": [
+    {
+      "id": "route-pmc-fulltext-to-paper-lookup",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "SKILL.md",
+      "find": "- BLAST workflows belong in `ncbi-blast-skill`. PMC Open Access workflows belong in `ncbi-pmc-skill`. Datasets v2 workflows belong in `ncbi-datasets-skill`.",
+      "replace": "- BLAST workflows belong in `ncbi-blast-skill`. For eligible PMC full text, use `paper-lookup` and its PMC guide; the old `ncbi-pmc-skill` OA service is retired. Datasets v2 workflows belong in `ncbi-datasets-skill`."
+    }
+  ],
+  "research-router-skill": [
+    {
+      "id": "route-pmc-fulltext-to-paper-lookup",
+      "issue": 1136,
+      "source": "openai/plugins",
+      "file": "SKILL.md",
+      "find": "  `ncbi-entrez-skill`, `ncbi-pmc-skill`, `biorxiv-skill`, `biostudies-arrayexpress-skill`, `ncbi-datasets-skill`",
+      "replace": "  `ncbi-entrez-skill`, `paper-lookup` (eligible PMC full text), `biorxiv-skill`, `biostudies-arrayexpress-skill`, `ncbi-datasets-skill`"
+    }
+  ],
+  "pnpm": [
+    {
+      "id": "filter-dependency-direction-workspaces",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-workspaces.md",
+      "find": "# Package and all its dependencies\npnpm --filter \"...@myorg/app\" build\n\n# Package and all its dependents\npnpm --filter \"@myorg/core...\" test",
+      "replace": "# Package and all its dependencies\npnpm --filter \"@myorg/app...\" build\n\n# Package and all its dependents\npnpm --filter \"...@myorg/core\" test"
+    },
+    {
+      "id": "filter-dependency-direction-cli",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-cli.md",
+      "find": "pnpm --filter \"...@scope/app\" build   # package + its dependencies\npnpm --filter \"@scope/core...\" test   # package + its dependents",
+      "replace": "pnpm --filter \"@scope/app...\" build   # package + its dependencies\npnpm --filter \"...@scope/core\" test   # package + its dependents"
+    },
+    {
+      "id": "gitlab-install-in-each-job",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "install:\n  stage: install\n  script:\n    - pnpm config set store-dir .pnpm-store\n    - pnpm install --frozen-lockfile\n\ntest:\n  stage: test\n  script:\n    - pnpm test\n\nbuild:\n  stage: build\n  script:\n    - pnpm build",
+      "replace": "install:\n  stage: install\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n\ntest:\n  stage: test\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n    - pnpm test\n\nbuild:\n  stage: build\n  script:\n    - pnpm install --frozen-lockfile --store-dir .pnpm-store\n    - pnpm build"
+    },
+    {
+      "id": "script-watch-argument-forwarding",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-cli.md",
+      "find": "pnpm run build -- --watch",
+      "replace": "pnpm run build --watch"
+    },
+    {
+      "id": "git-fork-dependency-protocol",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-aliases.md",
+      "find": "\"my-fork\": \"npm:user/repo#commit\"",
+      "replace": "\"my-fork\": \"github:user/repo#commit\""
+    },
+    {
+      "id": "auth-config-locations",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "| **Auth & registry credentials** (`_authToken`, `cert`, `key`, …) | `.npmrc` (project, gitignored) and global `rc` | INI |",
+      "replace": "| **Registry credentials and TLS** (`_authToken`, `cert`, `key`, …) | Project `.npmrc` for literal settings; user-level `auth.ini`/`~/.npmrc` for interpolated auth; global `config.yaml` for `_auth` | INI or structured YAML |"
+    },
+    {
+      "id": "global-auth-file-location",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "The companion global `rc` file (same directory, named `rc`) holds only registry/auth settings.",
+      "replace": "The companion `auth.ini` in the same directory holds user-level INI auth settings written by `pnpm config set`. Since pnpm v12.1, `pnpm login` saves tokens in the global `config.yaml` under `_auth`. The legacy global `rc` file remains readable for registry/auth compatibility."
+    },
+    {
+      "id": "interpolated-auth-user-file",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "Keep auth tokens out of the repo (gitignore the project `.npmrc`). Auth files, highest priority first:\n\n1. `<workspace root>/.npmrc` (project, gitignored)\n2. `<pnpm config>/auth.ini` (written by `pnpm login`)\n3. `~/.npmrc` (fallback for npm compatibility)\n\n```ini title=\".npmrc\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n@myorg:registry=https://npm.myorg.com/\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```",
+      "replace": "Keep secret values out of git. Project `.npmrc` files can contain literal auth settings and non-secret registry URLs, but pnpm ignores interpolated credentials there. Auth files, highest priority first:\n\n1. `<workspace root>/.npmrc` (project; gitignore files containing secrets)\n2. `<pnpm config>/auth.ini` (written by `pnpm config set` for auth keys)\n3. `~/.npmrc` (user-level fallback for npm compatibility)\n\nPut environment-variable token references in a user-level auth file:\n\n```ini title=\"~/.npmrc (user-level auth)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```\n\nNon-secret static registry routing can remain in a project `.npmrc`:\n\n```ini title=\".npmrc (project; no secrets)\"\n@myorg:registry=https://npm.myorg.com/\n```\n\nIn CI, use a user-level auth file or the structured authentication environment variable below. Do not move interpolated token lines into the project file."
+    },
+    {
+      "id": "auth-config-command-comment",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "# Writes to global config.yaml / rc by default",
+      "replace": "# Writes settings to global config.yaml; INI auth keys go to auth.ini"
+    },
+    {
+      "id": "qualify-npmrc-configuration-model",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "SKILL.md",
+      "find": "**Configuration model (important):** pnpm settings live in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` is used **only** for authentication/registry credentials, and the `pnpm` field of `package.json` is no longer read. When working in a pnpm project, check `pnpm-workspace.yaml` for settings/workspace structure and `.npmrc` only for auth. Always use `--frozen-lockfile` (or `pnpm ci`) in CI.",
+      "replace": "**Configuration model:** put pnpm settings in `pnpm-workspace.yaml` (and the global `config.yaml`) using **camelCase** keys. `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Check both files before migrating configuration; the `pnpm` field of `package.json` is no longer read. Always use `--frozen-lockfile` (or `pnpm ci`) in CI."
+    },
+    {
+      "id": "qualify-npmrc-description",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "description: Configuring pnpm via pnpm-workspace.yaml (settings), the global config.yaml, and .npmrc (auth only)",
+      "replace": "description: Configuring pnpm via pnpm-workspace.yaml, global config.yaml, and npm-compatible registry, auth, and certificate settings"
+    },
+    {
+      "id": "qualify-npmrc-settings",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`, and `.npmrc` is now used **only** for authentication/registry credentials. Everything else belongs in `pnpm-workspace.yaml`. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files.",
+      "replace": "> **Important changes:** pnpm no longer reads settings from the `pnpm` field of `package.json`. Put pnpm/install settings in `pnpm-workspace.yaml`; `.npmrc` still supports registry/authentication and certificate settings, plus legacy network settings for compatibility. Keys in YAML are **camelCase** (e.g. `nodeLinker`), not the kebab-case used by old `.npmrc` files."
+    },
+    {
+      "id": "qualify-npmrc-heading",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "## .npmrc — authentication only",
+      "replace": "## .npmrc — registry, authentication, and certificates"
+    },
+    {
+      "id": "scope-structured-auth-trust-claim",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "so a checked-out repo can never supply auth.",
+      "replace": "so a checked-out repo cannot define this structured credential map."
+    },
+    {
+      "id": "compatible-package-manager-policies",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "  \"packageManager\": \"pnpm@10.0.0\",\n  \"devEngines\": {\n    \"packageManager\": { \"name\": \"pnpm\", \"version\": \">=11.0.0 <12.0.0\", \"onFail\": \"download\" },",
+      "replace": "  \"packageManager\": \"pnpm@12.11.2\",\n  \"devEngines\": {\n    \"packageManager\": { \"name\": \"pnpm\", \"version\": \">=12.0.0 <13.0.0\", \"onFail\": \"download\" },"
+    },
+    {
+      "id": "qualify-npmrc-key-point",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-config.md",
+      "find": "- All pnpm settings go in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; `.npmrc` is auth/registry only.",
+      "replace": "- Put pnpm settings in `pnpm-workspace.yaml` (camelCase) or global `config.yaml`; retain supported registry/auth, certificate, and legacy network settings in INI files when needed."
+    },
+    {
+      "id": "current-pnpm-release-line",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "> `latest` on npm still points at the v11 line; install v12 from the `latest-12` tag until it graduates.",
+      "replace": "> pnpm 12 is the current release line, and npm's `latest` tag points to it. Pin the exact version used to generate your project's lockfile."
+    },
+    {
+      "id": "migration-preserves-npmrc-certificates",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "- **Splits `.npmrc`**: only auth/registry settings stay in `.npmrc`; every other key moves to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Per-subproject `.npmrc` files become `packageConfigs[\"<name>\"]`.",
+      "replace": "- **Splits `.npmrc`**: pnpm/install settings move to `pnpm-workspace.yaml` as **camelCase** (e.g. `node-linker` → `nodeLinker`). Registry/authentication and certificate settings remain supported in INI files; check legacy network settings before migrating. Per-subproject pnpm settings become `packageConfigs[\"<name>\"]`."
+    },
+    {
+      "id": "migration-interpolated-auth-user-file",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "Keep only **auth/registry** in `.npmrc`; put everything else in `pnpm-workspace.yaml` (camelCase).\n\n```ini title=\".npmrc (auth only, gitignored)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```",
+      "replace": "Put pnpm/install settings in `pnpm-workspace.yaml` (camelCase). Registry/authentication and certificate settings remain supported in INI files. Static non-secret registry URLs may stay in a project `.npmrc`; environment-variable credentials must use a user-level auth file or `pnpm_config__auth`. Keep secret values out of git.\n\n```ini title=\"~/.npmrc (user-level auth)\"\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n//npm.myorg.com/:_authToken=${MYORG_TOKEN}\n```"
+    },
+    {
+      "id": "valid-before-after-script-json",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "```json\n{\n  \"scripts\": {\n    // npm: recursive scripts\n    \"build:all\": \"npm run build --workspaces\",\n    // pnpm: use -r flag\n    \"build:all\": \"pnpm -r run build\",\n    \n    // npm: run in specific workspace  \n    \"dev:app\": \"npm run dev -w packages/app\",\n    // pnpm: use --filter\n    \"dev:app\": \"pnpm --filter @myorg/app run dev\"\n  }\n}\n```",
+      "replace": "Before (npm):\n\n```json\n{\n  \"scripts\": {\n    \"build:all\": \"npm run build --workspaces\",\n    \"dev:app\": \"npm run dev -w packages/app\"\n  }\n}\n```\n\nAfter (pnpm):\n\n```json\n{\n  \"scripts\": {\n    \"build:all\": \"pnpm -r run build\",\n    \"dev:app\": \"pnpm --filter @myorg/app run dev\"\n  }\n}\n```"
+    },
+    {
+      "id": "migration-pin-current-major",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-migration.md",
+      "find": "Add to `package.json` for Corepack:\n```json\n{\n  \"packageManager\": \"pnpm@10.0.0\"\n}\n```",
+      "replace": "Pin the exact pnpm version used to generate the lockfile in `package.json` (12.11.2 is an example):\n\n```json\n{\n  \"packageManager\": \"pnpm@12.11.2\"\n}\n```"
+    },
+    {
+      "id": "cargo-generated-config-include",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-multi-ecosystem.md",
+      "find": "- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. It writes a source-replacement block into `.cargo/config.toml` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).\n- `cargo build` then compiles **offline** against vendored sources; pnpm compiles nothing.",
+      "replace": "- pnpm reads the workspace `Cargo.toml`, writes a deterministic `Cargo.lock`, verifies each `.crate` against its checksum, unpacks into the store, and links a Cargo [directory source] under `.pnpm/crates/crates-io`. Source replacements go in `.pnpm/crates/config.toml`; `.cargo/config.toml` receives an optional `[[include]]` between `# >>> pnpm-managed cargo sources >>>` markers (your content outside is untouched).\n- Cargo 1.95+ reads that include, so `cargo build` compiles **offline** against vendored sources; pnpm compiles nothing."
+    },
+    {
+      "id": "cargo-custom-index-with-existing-lock",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/features-multi-ecosystem.md",
+      "find": "- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds; workspaces with overrides/git deps require the default crates.io index.",
+      "replace": "- Git deps and `[patch]`/`[replace]` overrides are honored and vendored for offline builds. Resolving them through pnpm requires the default crates.io sparse index; with a custom index, generate and commit `Cargo.lock` using Cargo before installing with pnpm."
+    },
+    {
+      "id": "explicit-absolute-store-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-store.md",
+      "find": "storeDir: ~/.local/share/pnpm/store",
+      "replace": "storeDir: /absolute/path/to/pnpm/store"
+    },
+    {
+      "id": "explain-explicit-store-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/core-store.md",
+      "find": "The default store path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS). Find it with `pnpm store path`.",
+      "replace": "Replace the placeholder with an absolute path on the project's filesystem. The default path is OS-specific (e.g. `~/.local/share/pnpm/store` on Linux, `~/Library/pnpm/store` on macOS) and may move to the project's volume for hard links. Check the effective location with `pnpm store path`; an explicit store on another filesystem requires copies."
+    },
+    {
+      "id": "ci-project-version-prerequisite",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "---\nname: pnpm-ci-cd-setup\ndescription: Optimizing pnpm for continuous integration and deployment workflows\n---\n\n# pnpm CI/CD Setup\n\nBest practices for using pnpm in CI/CD environments for fast, reliable builds.\n\n> **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).\n\n## Installing pnpm in CI",
+      "replace": "---\nname: pnpm-ci-cd-setup\ndescription: Optimizing pnpm for continuous integration and deployment workflows\n---\n\n# pnpm CI/CD Setup\n\nBest practices for using pnpm in CI/CD environments for fast, reliable builds.\n\n> **CI auto-behaviors:** When pnpm detects a CI environment it switches to **frozen-lockfile** mode automatically and (since v11) **fails on an incompatible lockfile** written by a newer pnpm major instead of rewriting it — keep the CI pnpm version in sync with the one that generated the lockfile. The global virtual store is auto-disabled in CI (no warm cache).\n\n## Pin the project version\n\nThe examples below require a committed `packageManager` field matching the pnpm version that generated `pnpm-lock.yaml`. For example:\n\n```json\n{ \"packageManager\": \"pnpm@12.11.2\" }\n```\n\nUse your project's tested exact version. GitHub Actions reads this pin, and GitLab prepares that same version instead of resolving `latest`.\n\n## Installing pnpm in CI"
+    },
+    {
+      "id": "github-use-project-pin-basic",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "      - uses: pnpm/action-setup@v4\n        with:\n          version: 10",
+      "replace": "      - uses: pnpm/action-setup@v4"
+    },
+    {
+      "id": "github-use-project-pin-cache",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "- uses: pnpm/action-setup@v4\n  with:\n    version: 10",
+      "replace": "- uses: pnpm/action-setup@v4"
+    },
+    {
+      "id": "gitlab-use-project-pin",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "image: node:20\n\nstages:",
+      "replace": "image: node:24\n\nstages:"
+    },
+    {
+      "id": "gitlab-pnpm-bin-path",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "  PATH: $PNPM_HOME:$PATH",
+      "replace": "  PATH: $PNPM_HOME/bin:$PATH"
+    },
+    {
+      "id": "gitlab-prepare-project-exact-version",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "  - corepack prepare pnpm@latest --activate",
+      "replace": "  - corepack prepare \"$(node -p 'require(\"./package.json\").packageManager')\" --activate"
+    },
+    {
+      "id": "docker-workspace-layout-prerequisite",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "### Multi-Stage Build\n\n```dockerfile",
+      "replace": "### Multi-Stage Build\n\nThis example assumes a root app at `dist/index.js` plus workspace packages `core` and `api`, each building its runtime files into `dist/`. Include every workspace manifest and runtime asset your app needs; the explicit copies preserve package paths. Exclude `node_modules` from the build context with `.dockerignore`.\n\n```dockerfile"
+    },
+    {
+      "id": "docker-preserve-workspace-manifest-paths",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "COPY packages/*/package.json ./packages/",
+      "replace": "COPY packages/core/package.json ./packages/core/\nCOPY packages/api/package.json ./packages/api/"
+    },
+    {
+      "id": "docker-runner-workspace-metadata",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "FROM node:20-slim AS runner\n\nRUN corepack enable\nWORKDIR /app\n\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/package.json ./\nCOPY --from=builder /app/pnpm-lock.yaml ./",
+      "replace": "FROM node:24-slim AS runner\n\nRUN corepack enable\nWORKDIR /app\n\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/package.json /app/pnpm-lock.yaml /app/pnpm-workspace.yaml ./\nCOPY --from=builder /app/packages/core/package.json ./packages/core/\nCOPY --from=builder /app/packages/core/dist ./packages/core/dist\nCOPY --from=builder /app/packages/api/package.json ./packages/api/\nCOPY --from=builder /app/packages/api/dist ./packages/api/dist"
+    },
+    {
+      "id": "docker-monorepo-root-manifest",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "FROM node:20-slim AS builder\nRUN corepack enable\nWORKDIR /app\n\n# Copy workspace config\nCOPY pnpm-lock.yaml pnpm-workspace.yaml ./",
+      "replace": "FROM node:24-slim AS builder\nRUN corepack enable\nWORKDIR /app\n\n# Copy root and workspace config\nCOPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./"
+    },
+    {
+      "id": "ci-pin-current-major",
+      "issue": 1090,
+      "source": "antfu/skills",
+      "file": "references/best-practices-ci.md",
+      "find": "```json\n// package.json\n{ \"packageManager\": \"pnpm@10.0.0\" }\n```",
+      "replace": "```json\n{ \"packageManager\": \"pnpm@12.11.2\" }\n```"
+    }
+  ],
+  "deno": [
+    {
+      "id": "standalone-node-migration-reference",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "To convert an existing project, see the `migrate-to-deno` skill.",
+      "replace": "To convert an existing project, consult the [Node/npm compatibility guidance](https://docs.deno.com/runtime/fundamentals/node/)."
+    },
+    {
+      "id": "hoisted-linker-manual-mode",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "{ \"nodeModulesLinker\": \"hoisted\" }\n```\n\n`nodeModulesDir` applies only to projects without a `package.json`, so it is\nrarely the right knob.",
+      "replace": "{ \"nodeModulesDir\": \"manual\", \"nodeModulesLinker\": \"hoisted\" }\n```\n\nThe hoisted linker requires `nodeModulesDir: \"manual\"`. `nodeModulesDir`\ncontrols whether Deno creates and manages a local `node_modules`, including\nprojects with a `package.json`; run `deno install` to populate it in manual mode."
+    },
+    {
+      "id": "eval-permissions-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Deno grants no filesystem, network, environment, or subprocess access unless\nasked.",
+      "replace": "`deno run` grants no filesystem, network, environment, or subprocess access\nunless asked. `deno eval` has all permissions implicitly and does not accept\nscoped `--allow-*` flags. Use `deno run` with explicit grants when access must\nbe restricted."
+    },
+    {
+      "id": "workspace-glob-semantics",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Members are explicit or single-level globs (`\"packages/*\"`); `**` and negation\nare unsupported. Run a task across members with `deno task --filter '*' build`.",
+      "replace": "Members can be explicit paths or globs: `\"packages/*\"` matches one level,\n`\"packages/*/*\"` matches two, and `\"packages/**\"` recurses. Prefix a pattern\nwith `!` to exclude matching members. Run a task across members with\n`deno task --filter '*' build`."
+    },
+    {
+      "id": "create-prefixed-initializer-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "deno create vite my-app       # scaffold from a package initializer\n```\n\n`deno create` is `npm create` / `yarn create` and covers that ecosystem\n(`deno create astro`, etc). Unprefixed names are npm; `--jsr` selects JSR.",
+      "replace": "deno create npm:vite -- my-app # scaffold from a package initializer\n```\n\n`deno create` is `npm create` / `yarn create` and covers that ecosystem\n(`deno create npm:astro`, etc). Use an `npm:` or `jsr:` prefix, or select\nunprefixed names with `--npm` or `--jsr`. Pass initializer arguments after `--`."
+    },
+    {
+      "id": "bump-version-workspace-skill",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Provenance attestation is automatic on GitHub Actions. `deno bump-version patch`\nbumps the version, across every member at a workspace root.",
+      "replace": "Provenance attestation is automatic on GitHub Actions. `deno bump-version patch`\nbumps a single package, or each versioned JSR package in workspace mode."
+    },
+    {
+      "id": "create-initializer-args-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "| `deno create <pkg> <dir>` | Scaffold from a package initializer |",
+      "replace": "| `deno create npm:<pkg> -- <dir>` | Scaffold from a package initializer |",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "create-prefixed-initializer-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "`deno create` is the `npm create` / `yarn create` equivalent and covers that\nwhole ecosystem: `deno create vite`, `deno create astro`, and so on. Unprefixed\nnames are treated as npm packages; `--jsr` selects JSR, and `-y` bypasses the\nprompt and runs with full permissions.",
+      "replace": "`deno create` is the `npm create` / `yarn create` equivalent and covers that\nwhole ecosystem: `deno create npm:vite`, `deno create npm:astro`, and so on.\nUse an `npm:` or `jsr:` prefix, or select unprefixed names with `--npm` or\n`--jsr`. Pass initializer arguments after `--`, for example\n`deno create npm:vite -- my-app`. `-y` bypasses the prompt and runs with full\npermissions.",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "bump-version-workspace-only-inference-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "`deno bump-version` takes `major`, `minor`, `patch`, `premajor`, `preminor`,\n`prepatch`, `prerelease`. At a workspace root it applies to every member and\nrewrites `jsr:` references in the root import map. With no increment it derives\nper-package bumps from conventional commits since the last tag and prepends a\nrelease note to `Releases.md`.",
+      "replace": "`deno bump-version` takes `major`, `minor`, `patch`, `premajor`, `preminor`,\n`prepatch`, `prerelease`. Single-package mode with no increment prints the\ncurrent version without changing files. Workspace mode is selected at the\nworkspace root when more than one JSR package is present, or with `--workspace`;\n`--config` targets one manifest. Workspace mode updates versioned JSR packages\nand rewrites `jsr:` references in the root import map. Only workspace mode with\nno increment derives per-package bumps from conventional commits since the\nlast tag and prepends a release note to `Releases.md`.",
+      "file": "references/CLI.md"
+    },
+    {
+      "id": "eval-permissions-cli",
+      "issue": 1117,
+      "source": "denoland/skills",
+      "find": "Applies to `run`, `serve`, `test`, `bench`, `compile`, and `eval`.",
+      "replace": "Applies to `run`, `serve`, `test`, `bench`, and `compile`. `deno eval` has all\npermissions implicitly and does not accept scoped `--allow-*` flags. Use\n`deno run` with explicit grants when access must be restricted.",
+      "file": "references/CLI.md"
+    }
+  ],
+  "skypilot": [
+    {
+      "id": "logs-tail-snapshot",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "SKILL.md",
+      "find": "| `sky logs NAME --tail 50` | Print last 50 lines of logs and exit |",
+      "replace": "| `sky logs NAME --tail 50 --no-follow` | Print last 50 lines of logs and exit |"
+    },
+    {
+      "id": "parallel-experiment-status-snapshot",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "SKILL.md",
+      "find": "# Wait for a specific job and fetch last 50 lines\nsky logs exp-vm-01 $job_id --status && sky logs exp-vm-01 $job_id --tail 50",
+      "replace": "# Snapshot job states and existing output; repeat at the heartbeat interval.\nsky queue exp-vm-01 -o json\nsky logs exp-vm-01 \"$job_id\" --tail 50 --no-follow"
+    },
+    {
+      "id": "long-job-observation",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "SKILL.md",
+      "find": "## Agent Feedback Loop\n\nWhen using SkyPilot programmatically, follow this loop:\n\n1. **Validate**: `sky launch --dryrun task.yaml` (check resource availability/cost)\n2. **Launch**: `sky launch -c mycluster task.yaml`\n3. **Monitor**: `sky status -o json` and `sky queue mycluster -o json`\n4. **Wait for completion**: `sky logs mycluster <JOB_ID>` (streams logs so you can observe progress and react to stalls; blocks until job finishes; get JOB_ID from `sky queue mycluster -o json`). For long-running jobs where you don't need intermediate output, use `sky logs mycluster <JOB_ID> --status` instead (blocks silently, exits 0 on success).\n5. **Inspect output**: `sky logs mycluster <JOB_ID> --no-follow` or `sky logs mycluster <JOB_ID> --tail 100`\n6. **Debug**: `ssh mycluster` (interactive)\n7. **Iterate**: `sky exec mycluster updated_task.yaml` (run on existing cluster)\n8. **Cleanup**: `sky down mycluster`\n\n> **Never poll with `sleep` + `sky queue`** — use `sky logs CLUSTER JOB_ID` to stream logs and block until done. Use `--status` if you only need the exit code, or `--tail N` to fetch recent output after completion.",
+      "replace": "## Agent Feedback Loop\n\nWhen using SkyPilot programmatically, follow this loop:\n\n1. **Validate**: `sky launch --dryrun task.yaml` (check resource availability/cost)\n2. **Launch**: `sky launch -c mycluster task.yaml`\n3. **Create a heartbeat for long jobs**: record the cluster, job ID, log location and runner handle; choose a status-check interval appropriate to the expected runtime.\n4. **Check progress at that interval**: use `sky status -o json`, `sky queue mycluster -o json`, and bounded log snapshots. An observable `sky logs mycluster <JOB_ID>` stream can supplement these checks; keep the runner available for periodic status checks.\n5. **Inspect output**: `sky logs mycluster <JOB_ID> --tail 100 --no-follow`. `--tail` alone still follows logs.\n6. **Debug**: `ssh mycluster` (interactive)\n7. **Iterate**: `sky exec mycluster updated_task.yaml` (run on existing cluster)\n8. **Cleanup after confirming a terminal state and collecting output**: `sky down mycluster`\n\n> `sky logs CLUSTER JOB_ID --status` returns a single status snapshot: 0=succeeded, 100=failed, 101=not finished, 102=not found, 103=cancelled. It does not wait for completion. Continue heartbeat/status checks while the job is active; verify the final state rather than relying only on a log stream ending."
+    },
+    {
+      "id": "status-is-snapshot",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "SKILL.md",
+      "find": "| Polling job status with `sleep` + `sky queue` | Wastes tokens, introduces timing bugs, fragile | Use `sky logs CLUSTER JOB_ID --status` to block until done |",
+      "replace": "| Treating `--status` as a completion waiter | It returns immediately; 101 means not finished | Create a heartbeat and check status at a reasonable interval until terminal |"
+    },
+    {
+      "id": "tail-snapshot-no-follow",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "SKILL.md",
+      "find": "| Not using `--tail` when only last output matters | Streaming full logs wastes tokens for long jobs | Use `sky logs CLUSTER JOB_ID --tail 50` for last N lines |",
+      "replace": "| Omitting `--no-follow` from a bounded log snapshot | `--tail` alone continues following output | Use `sky logs CLUSTER JOB_ID --tail 50 --no-follow` for the last N lines |"
+    },
+    {
+      "id": "managed-job-heartbeat",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "references/job-investigation.md",
+      "find": "Do not poll with `sleep` + `sky jobs queue`. Stream logs to block, or\nfetch `--tail` once after the fact.",
+      "replace": "For ongoing long jobs, create a heartbeat and check `sky jobs queue -v -o json`\nat an interval appropriate to the expected runtime. Use bounded\n`sky jobs logs N --tail 100 --no-follow` snapshots or an observable log stream\nalongside those status checks. Avoid tight polling, and confirm a terminal\nstate rather than relying only on the log stream ending."
+    },
+    {
+      "id": "status-exit-codes-reference",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "references/cli-reference.md",
+      "find": "- `--status` — If specified, do not show logs but exit with a status code for the job's status: 0 for succeeded, or 1 for all other statuses.",
+      "replace": "- `--status` — Return one status snapshot without waiting: 0=succeeded, 100=failed, 101=not finished, 102=not found, 103=cancelled."
+    },
+    {
+      "id": "eval-long-job-observation",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "evals/evals.json",
+      "find": "Agent does NOT poll with `sleep` + `sky jobs queue`",
+      "replace": "Agent avoids tight polling; ongoing long jobs use a heartbeat and status checks at a reasonable interval, with bounded log snapshots or an observable stream"
+    },
+    {
+      "id": "ray-train-user-runtime",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "references/examples.md",
+      "find": "### Ray Train Multi-Node Example\n\nDistributed training using Ray Train across multiple nodes.\n\n```yaml\n# ray-train.yaml\nname: ray-train-distributed\n\nworkdir: .\n\nnum_nodes: 2\n\nresources:\n  accelerators: A100:4\n\nsetup: |\n  pip install \"ray[train]\" torch torchvision\n  pip install transformers datasets\n\nrun: |\n  # SkyPilot sets up a Ray cluster across all nodes automatically.\n  # The head node's Ray address is available at the standard port.\n  if [ \"$SKYPILOT_NODE_RANK\" == \"0\" ]; then\n    # Only run training script on the head node;\n    # Ray distributes the work to all nodes\n    python train_ray.py \\\n      --num-workers $((SKYPILOT_NUM_NODES * SKYPILOT_NUM_GPUS_PER_NODE)) \\\n      --gpus-per-worker 1\n  fi\n```\n\nThe `train_ray.py` script uses `ray.train`:\n\n```python\n# train_ray.py (referenced by the YAML above)\nimport ray\nfrom ray import train\nfrom ray.train.torch import TorchTrainer\nfrom ray.train import ScalingConfig\n\ndef train_func(config):\n    import torch\n    # Your PyTorch training code here\n    # ray.train handles distributed setup automatically\n    model = ...\n    optimizer = ...\n    for epoch in range(config[\"epochs\"]):\n        train_epoch(model, optimizer)\n        # Report metrics\n        train.report({\"loss\": loss, \"epoch\": epoch})\n\nscaling_config = ScalingConfig(\n    num_workers=args.num_workers,\n    use_gpu=True,\n    resources_per_worker={\"GPU\": args.gpus_per_worker},\n)\n\ntrainer = TorchTrainer(\n    train_func,\n    train_loop_config={\"epochs\": 10},\n    scaling_config=scaling_config,\n)\nresult = trainer.fit()\n```\n\n```bash\nsky launch -c ray-train ray-train.yaml\n```\n",
+      "replace": "### Ray Train Multi-Node Example\n\nStart a user Ray runtime on every node before running the training driver.\nThe training function below is an adaptation skeleton: supply the model, data,\noptimizer and loss computation for the actual workload.\n\n```yaml\n# ray-train.yaml\nname: ray-train-distributed\n\nworkdir: .\n\nnum_nodes: 2\n\nresources:\n  accelerators: A100:4\n\nsetup: |\n  pip install \"ray[default,train]\" torch torchvision\n  pip install transformers datasets\n\nrun: |\n  # Start the user runtime separately from SkyPilot's internal Ray runtime.\n  head_ip=$(echo \"$SKYPILOT_NODE_IPS\" | head -n1)\n  export RAY_HEAD_PORT=6385\n  export RAY_DASHBOARD_PORT=8280\n  export RAY_DASHBOARD_AGENT_LISTEN_PORT=52366\n  export RAY_HEAD_IP_ADDRESS=\"$head_ip\"\n  ~/sky_templates/ray/start_cluster\n\n  if [ \"$SKYPILOT_NODE_RANK\" == \"0\" ]; then\n    # Connect the driver to this user runtime, not address=\"auto\".\n    export RAY_ADDRESS=\"$head_ip:$RAY_HEAD_PORT\"\n    python train_ray.py \\\n      --num-workers $((SKYPILOT_NUM_NODES * SKYPILOT_NUM_GPUS_PER_NODE)) \\\n      --gpus-per-worker 1\n  fi\n```\n\nThe `train_ray.py` script uses `ray.train`:\n\n```python\n# train_ray.py (referenced by the YAML above)\nimport argparse\nimport os\n\nimport ray\nfrom ray import train\nfrom ray.train.torch import TorchTrainer\nfrom ray.train import ScalingConfig\n\nparser = argparse.ArgumentParser()\nparser.add_argument(\"--num-workers\", type=int, required=True)\nparser.add_argument(\"--gpus-per-worker\", type=int, default=1)\nargs = parser.parse_args()\nray.init(address=os.environ[\"RAY_ADDRESS\"])\n\ndef train_func(config):\n    import torch\n    # Your PyTorch training code here\n    # ray.train handles distributed setup automatically\n    model = ...\n    optimizer = ...\n    for epoch in range(config[\"epochs\"]):\n        train_epoch(model, optimizer)\n        # Report metrics\n        train.report({\"loss\": loss, \"epoch\": epoch})\n\nscaling_config = ScalingConfig(\n    num_workers=args.num_workers,\n    use_gpu=True,\n    resources_per_worker={\"GPU\": args.gpus_per_worker},\n)\n\ntrainer = TorchTrainer(\n    train_func,\n    train_loop_config={\"epochs\": 10},\n    scaling_config=scaling_config,\n)\nresult = trainer.fit()\n```\n\n```bash\nsky launch -c ray-train ray-train.yaml\n```\n"
+    },
+    {
+      "id": "managed-chain-persistent-data",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "references/examples.md",
+      "find": "### DAG Workflow (Task Dependencies)\n\n```python\nimport sky\n\n# Create a DAG with task dependencies\nwith sky.Dag() as dag:\n    # Step 1: Data preprocessing\n    preprocess = sky.Task(\n        name='preprocess',\n        setup='pip install pandas pyarrow',\n        run='python preprocess.py --output /tmp/data',\n    )\n    preprocess.set_resources(sky.Resources(cpus='8+', memory='32+'))\n\n    # Step 2: Training (depends on preprocessing)\n    train = sky.Task(\n        name='train',\n        setup='pip install torch transformers',\n        run='python train.py --data /tmp/data',\n    )\n    train.set_resources(sky.Resources(accelerators='A100:4'))\n\n    # Define dependency: preprocess must finish before train\n    preprocess >> train\n\n# Launch the DAG (experimental)\nrequest_id = sky.launch(dag, cluster_name='pipeline')\nsky.get(request_id)\n```\n",
+      "replace": "### Managed Pipeline (Task Dependencies)\n\n`sky.launch` accepts a single task. Use a managed-job chain for dependent stages\nthat can use different clusters. Both stages mount the same existing bucket so\npreprocessed data survives cluster teardown; replace the bucket URI and provide\n`preprocess.py` and `train.py` in the local workdir before launching.\n\n```python\nimport sky\n\nbucket = 's3://YOUR_EXISTING_PIPELINE_BUCKET'\nwith sky.Dag() as dag:\n    preprocess = sky.Task(\n        name='preprocess',\n        workdir='.',\n        setup='pip install pandas pyarrow',\n        run='python preprocess.py --output /pipeline-data',\n    )\n    preprocess.set_resources(sky.Resources(cpus='8+', memory='32+'))\n\n    train = sky.Task(\n        name='train',\n        workdir='.',\n        setup='pip install torch transformers',\n        run='python train.py --data /pipeline-data',\n    )\n    train.set_resources(sky.Resources(accelerators='A100:4'))\n\n    for task in (preprocess, train):\n        task.set_storage_mounts({\n            '/pipeline-data': sky.Storage(\n                source=bucket,\n                mode=sky.StorageMode.MOUNT,\n            ),\n        })\n    preprocess >> train\n\nrequest_id = sky.jobs.launch(dag, name='pipeline')\njob_ids, controller_handle = sky.get(request_id)\nprint(f'Managed pipeline job IDs: {job_ids}')\n```\n\nThe launch request completing does not mean training has finished. Monitor\n`sky jobs queue -o json` at the job's heartbeat interval and collect bounded\n`sky jobs logs JOB_ID --tail 100 --no-follow` snapshots until terminal. Keep the\nshared data bucket after the managed clusters are torn down.\n"
+    },
+    {
+      "id": "bootstrap-evals-api-info",
+      "issue": 1141,
+      "source": "skypilot-org/skypilot",
+      "file": "evals/evals.json",
+      "find": "    {\n      \"id\": 1,\n      \"name\": \"happy-path-server-running\",\n      \"prompt\": \"I want to launch an 8xH100 cluster for training a LLaMA model. My SkyPilot is already set up.\",\n      \"expected_output\": \"Agent runs `sky api status -l 1`, sees the server is running (table output with request data), skips rest of bootstrap (no `sky check`, no install, no `sky api start`), and proceeds directly to help write the task YAML or run `sky launch`.\",\n      \"assertions\": [\n        {\n          \"text\": \"Agent runs `sky api status` (or `sky api status -l 1`) as the first SkyPilot command\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent does NOT run `sky check` when the server is already running\",\n          \"type\": \"negative\"\n        },\n        {\n          \"text\": \"Agent does NOT run `sky api start` or `sky api login` when the server is already running\",\n          \"type\": \"negative\"\n        },\n        {\n          \"text\": \"Agent proceeds to help with the user's actual task (launching H100 cluster) without unnecessary bootstrap steps\",\n          \"type\": \"required_action\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"name\": \"server-not-running-local-setup\",\n      \"prompt\": \"I just installed SkyPilot and want to try launching a GPU instance on AWS. I don't have a remote API server.\",\n      \"expected_output\": \"Agent runs `sky api status -l 1`, detects 'SkyPilot API server is not running.', asks about local vs remote, user indicates local, agent runs `sky api start`, re-checks with `sky api status -l 1`, then runs `sky check` for credentials since this is a fresh setup.\",\n      \"assertions\": [\n        {\n          \"text\": \"Agent runs `sky api status` as the first SkyPilot command\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent asks the user whether they have a remote server or want to start locally\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent runs `sky api start` after user confirms local setup\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent re-runs `sky api status` after starting the server to confirm it's reachable\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent runs `sky check` since this is a fresh setup\",\n          \"type\": \"required_action\"\n        }\n      ]\n    },\n    {\n      \"id\": 3,\n      \"name\": \"server-not-running-remote-connect\",\n      \"prompt\": \"I need to connect to our team's SkyPilot API server at https://skypilot.internal.company.com and launch a fine-tuning job.\",\n      \"expected_output\": \"Agent runs `sky api status -l 1`, detects server not running, recognizes user already provided a remote URL, runs `sky api login -e https://skypilot.internal.company.com` without asking unnecessary questions, re-checks status, then proceeds to help with the fine-tuning job.\",\n      \"assertions\": [\n        {\n          \"text\": \"Agent runs `sky api status` as the first SkyPilot command\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent uses `sky api login -e https://skypilot.internal.company.com` (not `sky api start`) since the user provided a remote endpoint\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent does NOT ask the user for the server URL again since they already provided it\",\n          \"type\": \"negative\"\n        },\n        {\n          \"text\": \"Agent re-runs `sky api status` after connecting to confirm it's reachable\",\n          \"type\": \"required_action\"\n        }\n      ]\n    },\n",
+      "replace": "    {\n      \"id\": 1,\n      \"name\": \"happy-path-server-running\",\n      \"prompt\": \"I want to launch an 8xH100 cluster for training a LLaMA model. My SkyPilot is already set up.\",\n      \"expected_output\": \"Agent runs `sky api info`, sees the connected server version and status, skips rest of bootstrap (no `sky check`, no install, no `sky api start`), and proceeds directly to help write the task YAML or run `sky launch`.\",\n      \"assertions\": [\n        {\n          \"text\": \"Agent runs `sky api info` as the first SkyPilot command\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent does NOT run `sky check` when the server is already running\",\n          \"type\": \"negative\"\n        },\n        {\n          \"text\": \"Agent does NOT run `sky api start` or `sky api login` when the server is already running\",\n          \"type\": \"negative\"\n        },\n        {\n          \"text\": \"Agent proceeds to help with the user's actual task (launching H100 cluster) without unnecessary bootstrap steps\",\n          \"type\": \"required_action\"\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"name\": \"server-not-running-local-setup\",\n      \"prompt\": \"I just installed SkyPilot and want to try launching a GPU instance on AWS. I don't have a remote API server.\",\n      \"expected_output\": \"Agent runs `sky api info`, detects 'No SkyPilot API server is connected', asks about local vs remote, user indicates local, agent runs `sky api start`, re-checks with `sky api info`, then runs `sky check` for credentials since this is a fresh setup.\",\n      \"assertions\": [\n        {\n          \"text\": \"Agent runs `sky api info` as the first SkyPilot command\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent asks the user whether they have a remote server or want to start locally\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent runs `sky api start` after user confirms local setup\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent re-runs `sky api info` after starting the server to confirm it's reachable\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent runs `sky check` since this is a fresh setup\",\n          \"type\": \"required_action\"\n        }\n      ]\n    },\n    {\n      \"id\": 3,\n      \"name\": \"server-not-running-remote-connect\",\n      \"prompt\": \"I need to connect to our team's SkyPilot API server at https://skypilot.internal.company.com and launch a fine-tuning job.\",\n      \"expected_output\": \"Agent runs `sky api info`, detects no server connection, recognizes user already provided a remote URL, runs `sky api login -e https://skypilot.internal.company.com` without asking unnecessary questions, re-checks with `sky api info`, then proceeds to help with the fine-tuning job.\",\n      \"assertions\": [\n        {\n          \"text\": \"Agent runs `sky api info` as the first SkyPilot command\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent uses `sky api login -e https://skypilot.internal.company.com` (not `sky api start`) since the user provided a remote endpoint\",\n          \"type\": \"required_action\"\n        },\n        {\n          \"text\": \"Agent does NOT ask the user for the server URL again since they already provided it\",\n          \"type\": \"negative\"\n        },\n        {\n          \"text\": \"Agent re-runs `sky api info` after connecting to confirm it's reachable\",\n          \"type\": \"required_action\"\n        }\n      ]\n    },\n"
+    }
+  ],
+  "micro": [
+    {
+      "id": "node-http-handler-and-server-example",
+      "issue": 1112,
+      "source": "openai/plugins",
+      "find": "## Basic Usage\n\nCreate a module that exports a request handler:\n\n```ts\n// index.ts\nimport { serve } from 'micro'\n\nconst handler = (req: Request) => {\n  return new Response('Hello, World!')\n}\n\nserve(handler)\n```\n\nOr use the classic API:\n\n```ts\nimport { IncomingMessage, ServerResponse } from 'http'\n\nexport default (req: IncomingMessage, res: ServerResponse) => {\n  res.end('Hello, World!')\n}\n```\n\nRun with:\n\n```bash\nnpx micro\n```\n",
+      "replace": "## Basic Usage\n\nUse Node's `IncomingMessage` / `ServerResponse` handler contract. `serve(handler)`\nreturns a request listener; attach it to an HTTP server and start listening:\n\n```js\n// server.js\nconst { createServer } = require('node:http')\nconst { serve } = require('micro')\n\nconst handler = (req, res) => 'Hello, World!'\nconst server = createServer(serve(handler))\nserver.listen(3000, '127.0.0.1')\n```\n\nRun the programmatic server with:\n\n```bash\nnode server.js\n```\n\nOr export a Node handler for the Micro CLI:\n\n```js\n// index.js\nmodule.exports = (req, res) => {\n  res.end('Hello, World!')\n}\n```\n\nRun the exported handler with:\n\n```bash\nnpx micro index.js\n```\n"
     }
   ]
 }

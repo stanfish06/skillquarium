@@ -14,13 +14,13 @@ created: 2026-08-23
 # firecrawl-scrape
 
 > [!info] What it does
-> Extract a URL's content as clean markdown, including JS-rendered pages. Use whenever the user provides a URL and wants its content; prefer over WebFetch.
+> Read a known webpage or execute a discovered workflow or data-provider capability. Use for page content or structured results once the URL or tool is selected.
 
 **Source:** [skills/firecrawl-scrape/SKILL.md](../../../skills/firecrawl-scrape/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](../../maps/web-automation-frontend.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

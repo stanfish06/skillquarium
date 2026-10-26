@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clinical Decision Support"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $clinical-decision-support for this task."

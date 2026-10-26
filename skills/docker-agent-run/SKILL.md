@@ -29,7 +29,7 @@ Do not use this skill when:
   `docker-sandboxes-network-credentials`. Establish which CLI is in use
   before recommending commands when the request only says "my sandbox".
 - The task is writing or editing the `agent.yaml` itself (models, toolsets, sub_agents) — use `docker-agent-config`.
-- The task is exposing an agent as a server (`serve`), sharing it via a registry (`share`), or evaluating it (`eval`) — use `docker-agent-deploy`.
+- The task is exposing an agent as a server (`serve`), sharing it via a registry (`share`), or evaluating it (evaluation sessions, `--baseline` regression gates) — use `docker-agent-deploy`.
 
 ## Core guidance
 

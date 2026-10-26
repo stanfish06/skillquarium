@@ -18,7 +18,7 @@ created: 2026-06-10
 
 ## Related skills
 
-- [scientific-brainstorming](../../notes/reasoning-ideation/scientific-brainstorming.md) — Creative research ideation and exploration
+- [scientific-brainstorming](../../notes/reasoning-ideation/scientific-brainstorming.md) — Facilitates evidence-aware scientific ideation with independent generation, structured discussion, explicit assumptions, transparent evaluation, adversarial review, and decision logs
 - [tech-paper-template](../../notes/research-writing/tech-paper-template.md) — Structures a technical paper's full logical skeleton using a thinking-template table (research background, limitations, key idea or goal, challenges, methodology modules...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

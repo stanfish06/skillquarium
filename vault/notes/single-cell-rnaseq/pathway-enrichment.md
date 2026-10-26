@@ -22,8 +22,8 @@ created: 2026-06-09
 
 - [bulk-rnaseq](../../notes/single-cell-rnaseq/bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
 - [proteomics](../../notes/proteomics-metabolomics/proteomics.md) — Mass spectrometry proteomics QC, quantification, comparative analysis, and export for DDA, DIA, and protein-level result tables
-- [pydeseq2](../../notes/single-cell-rnaseq/pydeseq2.md) — Differential gene expression analysis for bulk RNA-seq with PyDESeq2, including formulaic designs, Wald tests, FDR correction, LFC shrinkage, and result visualization
-- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Standard single-cell RNA-seq analysis pipeline
+- [pydeseq2](../../notes/single-cell-rnaseq/pydeseq2.md) — Performs bulk RNA-seq differential expression analysis with PyDESeq2, including count validation, formula designs, explicit contrasts, Wald tests, FDR correction, coefficient-matched...
+- [scanpy](../../notes/single-cell-rnaseq/scanpy.md) — Performs Scanpy single-cell RNA-seq QC, normalization, HVG selection, PCA/UMAP/t-SNE, clustering, exploratory marker ranking, pseudobulk preparation, visualization, and Seurat or...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

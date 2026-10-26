@@ -63,7 +63,7 @@ Generate, structure, and run MATLAB unit tests using the `matlab.unittest` frame
 |-------|-----------|-------------|
 | `verify` | Continues test | Default — most assertions |
 | `assert` | Stops current test | Setup validation |
-| `fatal` | Stops entire suite | Environment preconditions |
+| `fatalAssert` | Stops entire suite | Environment preconditions |
 | `assume` | Skips test | Conditional execution (e.g., toolbox check) |
 
 ## Patterns

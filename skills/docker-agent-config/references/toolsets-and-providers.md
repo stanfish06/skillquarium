@@ -17,7 +17,7 @@ Add by `type:` under an agent's `toolsets:` list — no external dependency requ
 | `lsp` | Connect to Language Server Protocol servers for code intelligence |
 | `api` | Create custom tools that call HTTP APIs without writing code |
 
-Source: https://docs.docker.com/ai/docker-agent/tools/overview/ (linked from https://docs.docker.com/ai/docker-agent/concepts/tools/).
+Source: https://docs.docker.com/ai/docker-agent/configuration/tools/ (linked from https://docs.docker.com/ai/docker-agent/concepts/tools/).
 
 ## MCP toolsets — three connection modes
 1. **Docker MCP (recommended)** — runs the MCP server in a container via the

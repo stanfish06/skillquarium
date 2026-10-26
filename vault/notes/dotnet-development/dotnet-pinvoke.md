@@ -26,4 +26,3 @@ _None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
-

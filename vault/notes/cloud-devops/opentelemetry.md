@@ -22,8 +22,8 @@ created: 2026-08-23
 - [beyla](../../notes/cloud-devops/beyla.md) — Auto-instrument an application's HTTP / gRPC / DB traffic with Grafana Beyla eBPF — no code changes, no SDK, no restart
 - [clickstack-otel-collector](../../notes/analytics-engineering/clickstack-otel-collector.md) — Use when a user wants to wire an OpenTelemetry collector into a Managed ClickStack service on ClickHouse Cloud, either by deploying a new local collector (Docker run or Docker Compose)...
 - [configuring-opentelemetry-dotnet](../../notes/dotnet-development/configuring-opentelemetry-dotnet.md) — Configure OpenTelemetry distributed tracing, metrics, and logging in ASP.NET Core using the .NET OpenTelemetry SDK
+- [databricks-zerobus-ingest](../../notes/analytics-engineering/databricks-zerobus-ingest.md) — Push records from apps, services, devices, or scripts directly into Unity Catalog Delta tables with Zerobus Ingest: SDKs (Python, TypeScript, Go, Java, Rust, C++, .NET), REST, OTLP...
 - [llm-observability-evals](../../notes/analytics-engineering/llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
-- [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to applications and send as much useful telemetry as possible
 - [loki](../../notes/cloud-devops/loki.md) — Grafana Loki log aggregation and LogQL query language
 - [matlab-instrument-opentelemetry-tracing](../../notes/matlab-development/matlab-instrument-opentelemetry-tracing.md) — Add OpenTelemetry tracing to MATLAB code
 - [mimir](../../notes/cloud-devops/mimir.md) — Stand up Grafana Mimir for horizontally scalable, multi-tenant, long-term Prometheus + OTLP metrics storage

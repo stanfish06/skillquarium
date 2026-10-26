@@ -8,7 +8,7 @@ description: Submit compact NCBI Entrez E-Utilities requests for PubMed, Gene, P
 - Use explicit `endpoint` values such as `esearch`, `esummary`, `efetch`, `elink`, or `einfo`.
 - Search-style Entrez calls are better with `retmax=10` and `max_items=10`.
 - GEO is nested under this skill. Use `db=gds` or `db=geoprofiles` for GEO metadata and load `references/geo.md` only when the user is specifically asking about GEO.
-- BLAST workflows belong in `ncbi-blast-skill`. PMC Open Access workflows belong in `ncbi-pmc-skill`. Datasets v2 workflows belong in `ncbi-datasets-skill`.
+- BLAST workflows belong in `ncbi-blast-skill`. For eligible PMC full text, use `paper-lookup` and its PMC guide; the old `ncbi-pmc-skill` OA service is retired. Datasets v2 workflows belong in `ncbi-datasets-skill`.
 - Re-run requests in long conversations instead of relying on older tool output.
 - Treat displayed `...` in tool previews as UI truncation, not literal request content.
 

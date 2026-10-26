@@ -401,7 +401,7 @@ brew install kubeseal
 # Create sealed secret
 kubectl create secret generic db-credentials \
   --from-literal=username=admin \
-  --from-literal=password=secret123 \
+  --from-literal=password=<password> \
   --dry-run=client -o yaml | \
   kubeseal --format yaml > sealed-db-credentials.yaml
 
@@ -417,8 +417,8 @@ metadata:
   namespace: production
 spec:
   encryptedData:
-    username: AgBy8h...encrypted...
-    password: AgCtr2...encrypted...
+    username: <sealed-ciphertext>
+    password: <sealed-ciphertext>
   template:
     type: Opaque
     metadata:

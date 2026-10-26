@@ -12,7 +12,7 @@ created: 2026-06-09
 # pufferlib
 
 > [!info] What it does
-> High-performance reinforcement learning framework optimized for speed and scale. Use when you need fast parallel training, vectorized environments, multi-agent systems, or integration with game environments (Atari, Procgen, NetHack). Achieves 2-10x speedups over standard implementations. For quick prototyping or standard algorithm implementations with extensive documentation, use stable-baselines3 instead.
+> Version-aware guidance for PufferLib reinforcement-learning environments, vectorization, policies, PuffeRL training, evaluation, and safe checkpoint review. Covers the native 5.0 build and environment API, published 3.0.0 Gymnasium/PettingZoo adaptation, and a pinned historical 4.0 profile.
 
 **Source:** [skills/pufferlib/SKILL.md](../../../skills/pufferlib/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
@@ -20,7 +20,6 @@ created: 2026-06-09
 
 - [pufferlib-v2](../../notes/ml-ai/pufferlib-v2.md) — PufferLib 2.x reinforcement learning workflows for the Dec 2024 API generation
 - [pufferlib-v3](../../notes/ml-ai/pufferlib-v3.md) — PufferLib 3.x reinforcement learning workflows for the Jun 2025 API generation
-- [stable-baselines3](../../notes/ml-ai/stable-baselines3.md) — Production-ready reinforcement learning algorithms (PPO, SAC, DQN, TD3, DDPG, A2C) with scikit-learn-like API
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

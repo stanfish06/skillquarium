@@ -14,7 +14,7 @@ created: 2026-06-09
 # research-grants
 
 > [!info] What it does
-> Write competitive research proposals for NSF, NIH, DOE, and DARPA. Agency-specific formatting, review criteria, budget preparation, broader impacts, significance statements, innovation narratives, and compliance with submission requirements.
+> Supports research proposal preparation and review for NSF, NIH, DOE, DARPA, and Taiwan NSTC, including opportunity-specific requirements, aims, review criteria, budgets, broader impacts, forms, and resubmissions. Use for investigator-authored grant development, compliance matrices, and proposal critiques.
 
 **Source:** [skills/research-grants/SKILL.md](../../../skills/research-grants/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](../../maps/research-writing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

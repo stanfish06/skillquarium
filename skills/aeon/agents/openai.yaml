@@ -1,4 +1,0 @@
-interface:
-  display_name: "Aeon"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $aeon for this task."

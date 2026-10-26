@@ -14,16 +14,14 @@ created: 2026-06-09
 # research-lookup
 
 > [!info] What it does
-> Look up current research information using parallel-cli search (primary, fast web search) or the Parallel Chat API (deep research). Automatically routes queries to the best backend. Use for finding papers, gathering research data, and verifying scientific information.
+> Compiles current scholarly evidence for a scientific manuscript or research brief when the user explicitly asks to gather literature, references, background evidence, competing findings, or a manuscript research packet. Uses Parallel Search by default, Parallel Extract for source retrieval, Parallel Research for explicitly deep/exhaustive work, optional explicit Parallel Chat, and optional Perplexity only when requested or allowed as a failure fallback.
 
 **Source:** [skills/research-lookup/SKILL.md](../../../skills/research-lookup/SKILL.md)  ·  **Domain:** [Literature Search & Knowledge Discovery](../../maps/literature-discovery.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
 - [infographics](../../notes/documents-office/infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
-- [market-research-reports](../../notes/documents-office/market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
 - [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
-- [scientific-writing](../../notes/research-writing/scientific-writing.md) — Core skill for the deep research and writing tool
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

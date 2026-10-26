@@ -14,7 +14,7 @@ created: 2026-08-07
 # security-diff-scan
 
 > [!info] What it does
-> Use when the user asks for a security review of a pull request, commit, branch diff, working-tree patch, or other Git-backed change set.
+> Review a pull request, commit, branch diff, or working-tree patch for security vulnerabilities.
 
 **Source:** [skills/security-diff-scan/SKILL.md](../../../skills/security-diff-scan/SKILL.md)  ·  **Domain:** [Security & Auditing](../../maps/security-auditing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

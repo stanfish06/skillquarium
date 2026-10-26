@@ -14,7 +14,7 @@ created: 2026-06-13
 # caveman-stats
 
 > [!info] What it does
-> Show real token usage and estimated savings for the current session, read from the session log. Trigger: /caveman-stats.
+> Show recorded output and cache-read token usage and mode attribution for the current Claude Code session, or locate the host's native usage report. Trigger: /caveman-stats.
 
 **Source:** [skills/caveman-stats/SKILL.md](../../../skills/caveman-stats/SKILL.md)  ·  **Domain:** [Reasoning, Ideation & Decision](../../maps/reasoning-ideation.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

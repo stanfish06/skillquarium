@@ -1489,6 +1489,7 @@
     }
   ],
   "extraAssignments": {
+    "aws-agent-toolkit": "cloud-devops",
     "biostudies-arrayexpress-skill": "bio-databases-platforms",
     "cbioportal-skill": "bio-databases-platforms",
     "cellxgene-skill": "bio-databases-platforms",
@@ -2061,7 +2062,14 @@
     "docker-sandboxes-env": "cloud-devops",
     "docker-sandboxes-kits": "cloud-devops",
     "docker-sandboxes-lifecycle": "cloud-devops",
-    "docker-sandboxes-network-credentials": "cloud-devops"
+    "docker-sandboxes-network-credentials": "cloud-devops",
+    "bun": "software-dev",
+    "zod": "software-dev",
+    "pnpm": "software-dev",
+    "deno": "software-dev",
+    "llama-cpp": "ml-ai",
+    "inspect-ai": "ml-ai",
+    "skypilot": "cloud-devops"
   },
   "synonyms": {
     "pydeseq2": [

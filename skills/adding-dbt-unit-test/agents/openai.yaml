@@ -1,4 +1,0 @@
-interface:
-  display_name: "Adding Dbt Unit Test"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $adding-dbt-unit-test for this task."

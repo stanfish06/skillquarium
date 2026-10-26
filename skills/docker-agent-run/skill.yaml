@@ -1,6 +1,6 @@
 schema: v1
 id: docker-agent-run
-version: 0.1.0
+version: 0.1.2
 title: 'Docker Agent: Running and Operating Agents'
 description: 'Rules for running Docker Agent locally — safety/approval modes, sandbox isolation, aliases, worktrees, and troubleshooting a run.'
 owns:

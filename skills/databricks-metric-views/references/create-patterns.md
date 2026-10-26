@@ -2,6 +2,8 @@
 
 Patterns for **creating** metric views and the complete YAML field reference. For how to **query** them, see [query-patterns.md](query-patterns.md).
 
+> **Before authoring, confirm a metric view is the right tool.** If the measure is non-additive at the queried grain, computed per-entity then aggregated (with a non-sum/count/ratio step), selection-dependent, iterative, or returns a bundle of tables, it belongs in a **governed UC SQL function** (build with `databricks-dbsql`; expose to Genie as surface #11). Pre-aggregating a **fixed, enumerable** definition into a base view + metric view — including [Pattern 9 (SQL query as source)](#pattern-9-sql-query-as-source) — is a legitimate performance choice and stays supported. What you must **not** do is reach for a base view or Pattern 9 to force in a measure whose result is computed **on the fly** from the user's runtime selection (an arbitrary cross, a parameter, a shifting denominator): pre-computation can't answer a runtime slice, so that needs a *parameterized* function, not a pre-aggregated view. Full rule + worked examples: [metric-view-advisor.md §When a metric view is not the right tool](metric-view-advisor.md#when-a-metric-view-is-not-the-right-tool--governed-function).
+
 ## Creation Patterns
 
 ### Pattern 1: Simple Metrics from a Single Table
@@ -200,7 +202,9 @@ materialization:
 
 **Design heuristics:** include filter columns as dimensions so filtered queries hit the aggregated MV. `aggregated` requires at least one dimension or measure. A metric view sourced from another metric view cannot use `unaggregated`. Refreshes incur Lakeflow Spark Declarative Pipelines charges.
 
-### Pattern 8: Window Measures (Experimental, `version: 0.1`)
+### Pattern 8: Window Measures
+
+Generally available, with the same `version: 1.1` specification as the other patterns.
 
 | Range | Description |
 |-------|-------------|
@@ -213,7 +217,7 @@ materialization:
 **Trailing window and period-over-period:**
 
 ```yaml
-version: 0.1
+version: 1.1
 source: catalog.schema.orders
 filter: order_date > DATE'2024-01-01'
 dimensions:
@@ -242,7 +246,7 @@ measures:
     expr: (MEASURE(curr_day_sales) - MEASURE(prev_day_sales)) / MEASURE(prev_day_sales) * 100
 ```
 
-`day_over_day_growth` references other window measures via `MEASURE()` and needs no `window` block itself. For YTD and semiadditive patterns, see the [Window Measures docs](https://docs.databricks.com/metric-views/data-modeling/window-measures). Query syntax: [query-patterns.md §Querying window measures](query-patterns.md#querying-window-measures).
+`day_over_day_growth` references other window measures via `MEASURE()` and needs no `window` block itself. For YTD and semiadditive patterns, see the [Window Measures docs](https://docs.databricks.com/uc-semantics/metric-views/advanced-techniques#window-measures). Query syntax: [query-patterns.md §Querying window measures](query-patterns.md#querying-window-measures).
 
 ### Pattern 9: SQL Query as Source
 
@@ -289,7 +293,7 @@ measures:
 
 #### Coarser LOD — via window measures
 
-Filter-aware, adapts to query-time dimensions. See window measure `version`/DBR requirements in [Pattern 8](#pattern-8-window-measures-experimental-version-01).
+Filter-aware, adapts to query-time dimensions. Window syntax: [Pattern 8](#pattern-8-window-measures).
 
 ```yaml
 measures:
@@ -347,7 +351,7 @@ See Patterns 1–4 and 3B for code examples.
 | `synonyms` | No | Up to 10 alternate names for Genie (DBR 17.3+) |
 | `display_name` | No | Human-readable label in visualizations (DBR 17.3+) |
 | `format` | No | Display format hint — see [Format Specifications](#format-specifications) (DBR 17.3+) |
-| `window` | No | Window block for cumulative/trailing/semiadditive measures (v0.1, experimental) — see [Pattern 8](#pattern-8-window-measures-experimental-version-01) |
+| `window` | No | Window block for cumulative/trailing/semiadditive measures; see [Pattern 8](#pattern-8-window-measures) |
 
 `MEASURE()` cannot be used with the `OVER` clause.
 
@@ -454,6 +458,6 @@ See [Pattern 7](#pattern-7-materialized-metric-view) for a code example. **Requi
 | **DBR version error** | `version: 1.1` requires DBR 17.2+; `version: 0.1` requires DBR 16.4+. `synonyms`/`display_name`/`format` need DBR 17.3+ |
 | **Materialization not working** | Serverless compute must be enabled; check pipeline state in Workflows → Pipelines |
 | **`format:` block deploy error** | Every `format:` block requires a `type:` discriminator |
-| **No Delta Sharing** | Metric views cannot be shared via Delta Sharing |
+| **Sharing metric views** | Share them with OpenSharing (formerly Delta Sharing) to Databricks recipients only; recipients query them on serverless compute. See [Add metric views to a share](https://docs.databricks.com/opensharing/create-share#metric-views) |
 | **No data profiling** | Data profiling is not supported on metric views |
 | **`ALTER VIEW` removes UC comments** | Always include `comment` fields in the YAML to preserve them across replacements |

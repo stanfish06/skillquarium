@@ -42,8 +42,8 @@ Reserve directional slides for hierarchical navigation (list → detail) and ord
 
 ## Availability
 
-- **Next.js:** Do **not** install `react@canary` — the App Router already bundles React canary internally. `ViewTransition` works out of the box. `npm ls react` may show a stable-looking version; this is expected.
-- **Without Next.js:** Install `react@canary react-dom@canary` (`ViewTransition` is not in stable React).
+- **Next.js:** nothing to install or configure — `ViewTransition` works out of the box. Do not set `experimental.viewTransition`; that key was removed in Next.js 16.3.0.
+- **Without Next.js:** `react@19.3.0`/`react-dom@19.3.0` or newer. `<ViewTransition>` and `addTransitionType` are in stable React as of 19.3.0; only `useSwipeTransition` and `parentEnter`/`parentExit` still need `react@experimental`.
 - Browser support: Chromium 125+ (React needs the v2 object form of `startViewTransition`), Firefox 144+, Safari 18.2+. Graceful degradation on unsupported browsers.
 
 ---

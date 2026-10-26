@@ -14,7 +14,7 @@ created: 2026-06-09
 # phoenix-evals
 
 > [!info] What it does
-> Build and run evaluators for AI/LLM applications using Phoenix.
+> Build, run, and validate evaluators for AI/LLM applications with Phoenix, in Python or TypeScript (including Vercel AI SDK apps) — code-based checks and LLM-as-a-judge, run over exported traces or dataframes or as Phoenix experiments, gate them in CI, and validate judges against human-labeled data.
 
 **Source:** [skills/phoenix-evals/SKILL.md](../../../skills/phoenix-evals/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

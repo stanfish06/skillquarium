@@ -51,7 +51,7 @@ created: 2026-06-13
 - [entry-point-analyzer](../notes/security-auditing/entry-point-analyzer.md) — Analyzes smart contract codebases to identify state-changing entry points for security auditing
 - [finding-discovery](../notes/security-auditing/finding-discovery.md) — Use when Codex is already in the finding-discovery phase of a security scan or the user explicitly asks to discover candidate security findings in a repository or code change
 - [firmware-pentest](../notes/security-auditing/firmware-pentest.md) — 固件 / IoT 渗透链。从拿到一坨 .bin / .img 开始，闭环走完逆向 → 提取 → 模拟 → 利用。 方法论遵循 OWASP FSTM 九阶段；工具链以 binwalk v3、unblob、EMBA、Firmadyne、AFL++ 为主。 适用场景：路由器/摄像头/智能家居固件审计、固件升级包逆向、IoT CVE 复现、嵌入式 0day 挖掘。...
-- [fix-finding](../notes/security-auditing/fix-finding.md) — Use when the user explicitly asks to fix and verify a validated or plausible security finding
+- [fix-finding](../notes/security-auditing/fix-finding.md) — Use only when the user explicitly asks to fix and verify a validated or plausible security vulnerability
 - [fp-check](../notes/security-auditing/fp-check.md) — Systematically verifies suspected security bugs to eliminate false positives, producing a TRUE POSITIVE or FALSE POSITIVE verdict with documented evidence for each
 - [fuzzing-dictionary](../notes/security-auditing/fuzzing-dictionary.md) — Builds and applies fuzzing dictionaries so a fuzzer can produce the keywords, magic bytes, and tokens a target expects
 - [fuzzing-obstacles](../notes/security-auditing/fuzzing-obstacles.md) — Patches past the barriers that stop a fuzzer making progress — checksum and hash verification, magic-value validation, time-based seeds, and other non-deterministic global state
@@ -88,8 +88,8 @@ created: 2026-06-13
 - [security-and-hardening](../notes/security-auditing/security-and-hardening.md) — Hardens code against vulnerabilities. Use when handling user input, authentication, data storage, or external integrations
 - [security-audit](../notes/security-auditing/security-audit.md) — Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons
 - [security-best-practices](../notes/security-auditing/security-best-practices.md) — Perform language and framework specific security best-practice reviews and suggest improvements
-- [security-diff-scan](../notes/security-auditing/security-diff-scan.md) — Use when the user asks for a security review of a pull request, commit, branch diff, working-tree patch, or other Git-backed change set
-- [security-scan](../notes/security-auditing/security-scan.md) — Use for a standard, single-pass security audit of an entire repository or a scoped path, package folder, or submodule with no diff to review
+- [security-diff-scan](../notes/security-auditing/security-diff-scan.md) — Review a pull request, commit, branch diff, or working-tree patch for security vulnerabilities
+- [security-scan](../notes/security-auditing/security-scan.md) — Use for a standard, single-pass security audit of an entire repository or a scoped path, package, folder, or submodule with no diff to review
 - [semgrep](../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 - [semgrep-rule-creator](../notes/security-auditing/semgrep-rule-creator.md) — Creates custom Semgrep rules for detecting security vulnerabilities, bug patterns, and code patterns
 - [sharp-edges](../notes/security-auditing/sharp-edges.md) — Identifies error-prone APIs, dangerous configurations, and footgun designs that enable security mistakes
@@ -101,9 +101,9 @@ created: 2026-06-13
 - [threat-model](../notes/security-auditing/threat-model.md) — Use when Codex is already in the threat-modeling phase of a security scan, the user explicitly invokes $threat-model, or the user explicitly asks to create, update, or persist a...
 - [token-integration-analyzer](../notes/security-auditing/token-integration-analyzer.md) — Token integration and implementation analyzer based on Trail of Bits' token integration checklist
 - [track-findings](../notes/security-auditing/track-findings.md) — Track validated Codex Security findings in Linear, Jira, GitHub issues, or draft GitHub security advisories
-- [triage-finding](../notes/security-auditing/triage-finding.md) — Use when the user supplies or imports existing security findings, vulnerability reports, or security/vulnerability Jira/Linear tickets from scanners, advisories, GitHub, Atlassian...
+- [triage-finding](../notes/security-auditing/triage-finding.md) — Triage supplied or imported security findings against a repository using its security policy and static code evidence
 - [variant-analysis](../notes/security-auditing/variant-analysis.md) — Hunts for the other instances of a bug already found — the variants of one root cause across a codebase
-- [vulnerability-writeup](../notes/security-auditing/vulnerability-writeup.md) — Write up vulnerabilities from disclosure documents, rough notes, supplied findings, PoCs, source code, or Codex Security scan output into polished, self-contained, source-backed reports
+- [vulnerability-writeup](../notes/security-auditing/vulnerability-writeup.md) — Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained, sceptically validated, natural-sounding vulnerability reports
 - [wifi-wireless](../notes/security-auditing/wifi-wireless.md) — Use for authorized wireless security assessment including Wi-Fi capture, WPA handshake analysis, rogue AP detection research, and lab-only deauth testing
 - [windows-ad](../notes/security-auditing/windows-ad.md) — Use for authorized Active Directory and Windows identity attacks including Kerberos, AD CS, BloodHound paths, NTLM relay, and domain privilege escalation research
 - [zeroize-audit](../notes/security-auditing/zeroize-audit.md) — Detects missing zeroization of sensitive data in source code and identifies zeroization removed by compiler optimizations, with assembly-level analysis, and control-flow verification
