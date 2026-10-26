@@ -1,7 +1,6 @@
 ---
 name: figma-use
 description: "Load this skill before every `use_figma` tool call. Trigger whenever the user wants to perform a write action or a unique read action that requires JavaScript execution in the Figma file context — e.g. create/edit/delete nodes, set up variables or tokens, build components and variants, modify auto-layout or fills, bind variables to properties, or inspect file structure programmatically."
-disable-model-invocation: false
 ---
 
 # use_figma — Figma Plugin API Skill

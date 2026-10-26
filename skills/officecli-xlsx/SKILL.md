@@ -5,9 +5,6 @@ description: "Use this skill any time a .xlsx file is involved -- as input, outp
 
 # OfficeCLI XLSX Skill
 
-> [!note] Vault audit 2026-07-24 — USE-1
-> Use this as the canonical skill for creating and richly editing .xlsx/.csv workbooks; for raw OOXML inspection or plain data extraction use the native `xlsx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.
-
 ## Setup
 
 If `officecli` is missing:
@@ -363,6 +360,7 @@ Other common `type` values: `decimal`, `whole`, `date`, `textLength`, `custom`. 
 - **Tables** (ListObjects) — `add --type table` with a range; gives auto-filter + structured refs. `officecli help xlsx table`.
 - **Comments** — `add --type comment`; use for documenting hardcoded assumptions. `officecli help xlsx comment`.
 - **Sheet reordering** — `officecli move`, not `swap`. `swap` only works on row/cell paths.
+- **New row/column with the neighbours' formatting** — `add "$FILE" /Sheet1 --from "/Sheet1/row[5]" --index 5` clones fills, fonts and formulas (refs shift); `add --type row` inserts a bare row.
 
 ## Chart Axis-by-Role
 

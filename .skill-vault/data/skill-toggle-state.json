@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-09-21T01:34:10.868000+00:00",
-  "root": "/Users/stan/.agents",
+  "saved_at": "2026-10-26T01:47:32.615000+00:00",
+  "root": "/home/stan/.agents",
   "skills": {
     "academic-paper": {
       "claude_enabled": false,
@@ -483,6 +483,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "aws-agent-toolkit": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "aws-agentic-ai": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -506,10 +510,6 @@
     "bacteriologist": {
       "claude_enabled": false,
       "codex_enabled": false
-    },
-    "banner-design": {
-      "claude_enabled": true,
-      "codex_enabled": true
     },
     "base44-cli": {
       "claude_enabled": false,
@@ -787,10 +787,6 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
-    "brand": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "brand-guidelines": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -926,6 +922,10 @@
     "bull-bear": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "bun": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "busco-assessor": {
       "claude_enabled": true,
@@ -2027,6 +2027,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "deno": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "dentist-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -2047,10 +2051,6 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
-    "design": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "design-an-interface": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -2060,10 +2060,6 @@
       "codex_enabled": false
     },
     "design-md-library": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
-    "design-system": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -3731,6 +3727,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "inspect-ai": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "install-duckdb": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -4026,6 +4026,10 @@
     "litigation-update-post": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "llama-cpp": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "llamaindex-development": {
       "claude_enabled": true,
@@ -5863,6 +5867,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "pnpm": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "polars": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -7175,6 +7183,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "skypilot": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "slack": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -7202,10 +7214,6 @@
     "sleep-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
-    },
-    "slides": {
-      "claude_enabled": true,
-      "codex_enabled": true
     },
     "smart-file-renaming": {
       "claude_enabled": true,
@@ -8043,15 +8051,7 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
-    "ui-styling": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
     "ui-toolkit": {
-      "claude_enabled": true,
-      "codex_enabled": true
-    },
-    "ui-ux-pro-max": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -8500,6 +8500,10 @@
       "codex_enabled": true
     },
     "zeroize-audit": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "zod": {
       "claude_enabled": true,
       "codex_enabled": true
     },
