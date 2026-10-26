@@ -496,9 +496,23 @@ Disclosed 2026-09-22 as an out-of-band release. The Node.js runtime implementati
 
 **Mitigation**: Upgrade to `16.3.6`+ immediately if you call `ImageResponse` on the Node.js runtime. There is no workaround short of removing the affected code path.
 
+### 2026-10-14 advisory batch — two unauthenticated RCEs
+
+Three advisories published 2026-10-14. All of them reach releases that the previous floor (15.5.27 / 16.3.8) called safe:
+
+| Advisory | Severity | Vulnerable range |
+|---|---|---|
+| CVE-2026-96889 — unauthenticated RCE in the Image Optimization API when SVG files are used (memory bug in the upstream `sharp` dependency, glibc Linux) | Critical | `>= 10.0.0, <= 15.5.27` and `> 16.0.0, <= 16.4.0` |
+| GHSA-673q-mjm6-r5xr — unauthenticated RCE in `use cache` functions returning typed arrays | Critical | `>= 16.0.0, <= 16.4.0` |
+| GHSA-p3m5-59mp-jv5r — denial of service in App Router using Server Actions | High | `>= 13.0.0, <= 15.5.27` and `>= 16.0.0, <= 16.4.0` |
+
+**Mitigation**: upgrade to `15.5.28` or `16.4.1`+. For CVE-2026-96889 alone, forcing `sharp >= 0.35.5` in your lockfile also closes it — fresh installs already resolve a fixed `sharp`.
+
 ### Patched Versions
 
-Minimum safe version: **`next@15.5.27`** or **`next@16.3.8`** (both published 2026-09-30). 16.3.8 fixes the seven advisories published that day, the most severe being CVE-2026-94483 (High, CVSS 8.3): server-side request forgery in Image Optimization through an allow-listed `images.remotePatterns` host. Two of the seven, both SSG/ISR cache poisoning (CVE-2026-94543, CVE-2026-94484), also affect 15.x and are fixed in 15.5.27. On 16.x, anything below 16.3.6 is also exposed to CVE-2026-94545 above.
+Minimum safe version (checked 2026-10-26): **`next@15.5.28`** or **`next@16.4.1`** (both published 2026-10-14), which close the three advisories above. Current stable is `16.4.3`.
+
+The previous floor, `15.5.27` / `16.3.8` (both 2026-09-30), fixes the seven advisories published that day, the most severe being CVE-2026-94483 (High, CVSS 8.3): server-side request forgery in Image Optimization through an allow-listed `images.remotePatterns` host. Two of the seven, both SSG/ISR cache poisoning (CVE-2026-94543, CVE-2026-94484), also affect 15.x and are fixed in 15.5.27. On 16.x, anything below 16.3.6 is also exposed to CVE-2026-94545 above. Neither is safe on its own — both sit inside the 2026-10-14 ranges.
 
 There is no per-release-line patch below `15.5.21` / `16.2.11`. The nine advisories published 2026-07-22 (CVE-2026-64641 through CVE-2026-64649, four rated High) have vulnerable ranges `>= 12.0.0, < 15.5.21` and `>= 16.0.0, < 16.2.11`, so 14.x, 15.0.x–15.4.x, 16.0.x and 16.1.x have no fixed release at all — `14.2.35`, `16.0.11` and `16.1.7` are the last patches ever published on those lines and every one of them sits inside the vulnerable range. Remediating those lines requires a minor-version move, not a patch bump.
 
