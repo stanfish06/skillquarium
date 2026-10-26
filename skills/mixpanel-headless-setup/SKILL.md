@@ -141,8 +141,10 @@ token (no browser needed). If refresh fails:
 
 ## Verify Everything Works
 
+Pass the `account.name` the session check above returned — the script requires a name:
+
 ```bash
-python3 $SKILL_DIR/../mixpanelyst/scripts/auth_manager.py account test
+python3 $SKILL_DIR/../mixpanelyst/scripts/auth_manager.py account test <account.name>
 ```
 
 The subcommand never raises — read `result.ok` to determine outcome.
