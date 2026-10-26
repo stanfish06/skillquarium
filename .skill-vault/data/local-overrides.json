@@ -2770,5 +2770,21 @@
       "find": "## Basic Usage\n\nCreate a module that exports a request handler:\n\n```ts\n// index.ts\nimport { serve } from 'micro'\n\nconst handler = (req: Request) => {\n  return new Response('Hello, World!')\n}\n\nserve(handler)\n```\n\nOr use the classic API:\n\n```ts\nimport { IncomingMessage, ServerResponse } from 'http'\n\nexport default (req: IncomingMessage, res: ServerResponse) => {\n  res.end('Hello, World!')\n}\n```\n\nRun with:\n\n```bash\nnpx micro\n```\n",
       "replace": "## Basic Usage\n\nUse Node's `IncomingMessage` / `ServerResponse` handler contract. `serve(handler)`\nreturns a request listener; attach it to an HTTP server and start listening:\n\n```js\n// server.js\nconst { createServer } = require('node:http')\nconst { serve } = require('micro')\n\nconst handler = (req, res) => 'Hello, World!'\nconst server = createServer(serve(handler))\nserver.listen(3000, '127.0.0.1')\n```\n\nRun the programmatic server with:\n\n```bash\nnode server.js\n```\n\nOr export a Node handler for the Micro CLI:\n\n```js\n// index.js\nmodule.exports = (req, res) => {\n  res.end('Hello, World!')\n}\n```\n\nRun the exported handler with:\n\n```bash\nnpx micro index.js\n```\n"
     }
+  ],
+  "mixpanel-auth": [
+    {
+      "id": "account-test-requires-name-login",
+      "issue": 1122,
+      "source": "openai/plugins",
+      "find": "After the user confirms they ran it, verify with `account test`:\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test`\n",
+      "replace": "After the user confirms they ran it, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` to read\n`account.name`, then verify with\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <account.name>`.\n"
+    },
+    {
+      "id": "account-test-requires-name-routing",
+      "issue": 1122,
+      "source": "openai/plugins",
+      "find": "Run: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test [name]`\n",
+      "replace": "The script requires a name. If the user did not give one, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` and use\n`account.name`.\n\nRun: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <name>`\n"
+    }
   ]
 }
