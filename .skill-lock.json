@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "cdff207dd94b7a71afb90c24bc3d050adda67c1c",
+      "skillFolderHash": "618b0bf2ee06d3207a6e8019c7f91af8d3adbad6",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-10-24T10:55:20.807Z"
+      "updatedAt": "2026-10-27T12:07:48.960Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -2105,9 +2105,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/jeffallan/claude-skills.git",
       "skillPath": "skills/kubernetes-specialist/SKILL.md",
-      "skillFolderHash": "0d99170815c692783093764a9a75aa915e6d3794",
+      "skillFolderHash": "c987ec225fa1d4bac6d8ef6315a0a8fa026b33ed",
       "installedAt": "2026-06-13T23:43:02.709Z",
-      "updatedAt": "2026-10-16T11:21:34.717Z"
+      "updatedAt": "2026-10-26T12:57:00.514Z"
     },
     "pymol": {
       "source": "google-deepmind/science-skills",
@@ -2141,9 +2141,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mlflow/skills.git",
       "skillPath": "mlflow-onboarding/SKILL.md",
-      "skillFolderHash": "77f91075393730ef43ddd0c5c7d1e393712ec84e",
+      "skillFolderHash": "7de5efbe0bc8e64be43b21712cf34a63e0b14ca2",
       "installedAt": "2026-06-25T13:10:54.748Z",
-      "updatedAt": "2026-10-22T11:48:26.528Z"
+      "updatedAt": "2026-10-27T12:08:00.714Z"
     },
     "qdrant-clients-sdk": {
       "source": "qdrant/skills",
@@ -8802,9 +8802,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "9cf8a4c3282efad3b24c730f688ffb77e5dc8717",
+      "skillFolderHash": "38965ccda02675456e08d6415065b0f6cc2e3152",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-10-24T10:55:35.230Z"
+      "updatedAt": "2026-10-26T12:57:05.346Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8829,9 +8829,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "ff9c3dfe7e9b7213a2d506a2cbc4a89cd93708bb",
+      "skillFolderHash": "dab9ba13e67d1687d585699b6261286c07b60992",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-10-23T11:36:52.334Z"
+      "updatedAt": "2026-10-27T12:08:21.191Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9319,9 +9319,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
-      "skillFolderHash": "aafaabf96fa3945d8a4069317a7a6d36b7169670",
+      "skillFolderHash": "b644b684781fd5baae57f6be000a180a4d4448d7",
       "installedAt": "2026-08-20T03:52:19.225Z",
-      "updatedAt": "2026-10-10T12:50:00.298Z"
+      "updatedAt": "2026-10-27T12:08:22.370Z"
     },
     "tdd": {
       "source": "mattpocock/skills",
@@ -9557,9 +9557,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "a12c2be0fea9d5d3bc7e8ccb1ff315cc51b6cf68",
+      "skillFolderHash": "f92119afee36a34428151fe3e4282d0c072f0f56",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-10-25T11:22:49.006Z"
+      "updatedAt": "2026-10-27T12:08:25.279Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -9638,9 +9638,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/prisma/skills.git",
       "skillPath": "prisma-postgres-setup/SKILL.md",
-      "skillFolderHash": "97c447b244fec16d6de075f3be9ddc7c6376c538",
+      "skillFolderHash": "a7419c6dcdce197e9021b1985918c8b9a6ebbde9",
       "installedAt": "2026-08-23T17:16:28.788Z",
-      "updatedAt": "2026-10-17T10:40:35.861Z"
+      "updatedAt": "2026-10-27T12:08:27.141Z"
     },
     "prisma-upgrade-v7": {
       "source": "prisma/skills",
@@ -10441,9 +10441,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/apollographql/skills.git",
       "skillPath": "skills/rover/SKILL.md",
-      "skillFolderHash": "73129f44eb64bccb96210e093fcd5554313b1c71",
+      "skillFolderHash": "e40381e295dd8217dd24fd4ac1c81c69597b0776",
       "installedAt": "2026-08-23T17:17:21.687Z",
-      "updatedAt": "2026-08-23T17:17:21.687Z"
+      "updatedAt": "2026-10-27T12:08:28.663Z"
     },
     "databricks-agent-bricks": {
       "source": "databricks/databricks-agent-skills",
@@ -12109,6 +12109,15 @@
       "skillFolderHash": "6a85914c1c5ca3ade89c781e6dcc0ac5814afc13",
       "installedAt": "2026-10-24T15:58:04.348Z",
       "updatedAt": "2026-10-25T11:22:57.947Z"
+    },
+    "lean4": {
+      "source": "cameronfreer/lean4-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/cameronfreer/lean4-skills.git",
+      "skillPath": "plugins/lean4/skills/lean4/SKILL.md",
+      "skillFolderHash": "9aa05bebec6dadd6d5d592dd30541a1ab70c4cd4",
+      "installedAt": "2026-10-26T01:36:34.000Z",
+      "updatedAt": "2026-10-26T01:36:34.000Z"
     }
   },
   "dismissed": {

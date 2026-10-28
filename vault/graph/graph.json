@@ -1,14 +1,14 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2156,
+  "skills": 2157,
   "expert_profiles": 503,
-  "nodes": 2229,
-  "edges": 15978,
+  "nodes": 2230,
+  "edges": 15985,
   "generic_names_blocked": 31,
-  "tier1_edges": 4810,
-  "tier2_edges": 721,
-  "alias_edges": 4471,
+  "tier1_edges": 4812,
+  "tier2_edges": 722,
+  "alias_edges": 4474,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 520,
@@ -18,15 +18,15 @@
   "mean_skill_degree": 5.84,
   "median_skill_degree": 4,
   "orphan_count": 123,
-  "orphan_rate": 0.0571,
+  "orphan_rate": 0.057,
   "by_provenance": {
-   "EXTRACTED": 15192,
+   "EXTRACTED": 15199,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2156,
-   "references": 12516,
+   "in_domain": 2157,
+   "references": 12522,
    "in_discipline": 599,
    "touches": 520,
    "has_step": 69,
@@ -15302,6 +15302,19 @@
    "deprecated": false
   },
   {
+   "id": "lean4",
+   "type": "Skill",
+   "label": "lean4",
+   "description": "Use when editing .lean files, debugging Lean 4 builds (type mismatch, sorry, failed to synthesize instance, axiom warnings, lake build errors), searching mathlib for lemmas, formalizing mathematics in Lean, finding a counterexample to, refuting, or disproving a Lean statement, or learning Lean 4 concepts. Also trigger when the user asks for help with Lean 4, mathlib, or lakefile. Do NOT trigger for Coq/Rocq, Agda, Isabelle, HOL4, Mizar, Idris, Megalodon, or other non-Lean theorem provers.",
+   "source": "skills/lean4/SKILL.md",
+   "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "libfuzzer",
    "type": "Skill",
    "label": "libfuzzer",
@@ -25598,7 +25611,7 @@
    "id": "rover",
    "type": "Skill",
    "label": "rover",
-   "description": "> Guide for using Apollo Rover CLI to manage GraphQL schemas and federation. Use this skill when: (1) publishing or fetching subgraph/graph schemas, (2) composing supergraph schemas locally or via GraphOS, (3) running local supergraph development with rover dev, (4) validating schemas with check and lint commands, (5) configuring Rover authentication and environment, (6) exploring or searching a graph's schema for agent-driven discovery (rover schema describe / rover schema search).",
+   "description": "> Guide for using Apollo Rover CLI to manage GraphQL schemas and federation. Use this skill when: (1) publishing or fetching subgraph/graph schemas, (2) composing supergraph schemas locally or via GraphOS, (3) running local supergraph development with rover dev, (4) validating schemas with check and lint commands, (5) configuring Rover authentication and environment, (6) exploring or searching a graph's schema for agent-driven discovery (rover schema describe / rover schema search), (7) initializing a new graph project or MCP server with rover init, (8) working with Apollo Connectors, contracts, persisted queries, or client operations, (9) managing API keys, plugins, templates, or graph artifacts.",
    "source": "skills/rover/SKILL.md",
    "aliases": [],
    "uses": 0,
@@ -54444,6 +54457,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "code-review named in insecure-defaults/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "code-review",
+   "rel": "references",
+   "dst": "lean4",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "code-review named in lean4/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -93237,6 +93259,42 @@
    "status": "accepted"
   },
   {
+   "src": "lean4",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean4",
+   "rel": "references",
+   "dst": "code-review",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "code-review named in lean4/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean4",
+   "rel": "references",
+   "dst": "pure-mathematician",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of pure-mathematician appears in lean4/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "lean4",
+   "rel": "references",
+   "dst": "template",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "template referenced in code/link context in lean4/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "libfuzzer",
    "rel": "in_domain",
    "dst": "domain:security-auditing",
@@ -131300,6 +131358,15 @@
   {
    "src": "pure-mathematician",
    "rel": "references",
+   "dst": "lean4",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of pure-mathematician appears in lean4/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "pure-mathematician",
+   "rel": "references",
    "dst": "logician",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -159708,6 +159775,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "template referenced in code/link context in insecure-defaults/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "template",
+   "rel": "references",
+   "dst": "lean4",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "template referenced in code/link context in lean4/SKILL.md",
    "status": "accepted"
   },
   {

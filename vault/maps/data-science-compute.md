@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Quantum, Physics & Materials](quantum-physics.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (44)
+## Skills (45)
 
 - [adjusttext](../notes/data-science-compute/adjusttext.md) — Use the Python adjustText package to automatically move matplotlib text labels so they do not overlap each other, points, or other artists
 - [attach-db](../notes/data-science-compute/attach-db.md) — Attach a DuckDB database file for use with /duckdb-skills:query
@@ -31,6 +31,7 @@ created: 2026-06-13
 - [geopandas](../notes/data-science-compute/geopandas.md) — Guidance and local audit tools for Python workflows that directly use GeoPandas GeoSeries, GeoDataFrame, spatial operations, or vector-data I/O
 - [great-expectations](../notes/data-science-compute/great-expectations.md) — Data validation using Great Expectations
 - [install-duckdb](../notes/data-science-compute/install-duckdb.md) — Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g
+- [lean4](../notes/data-science-compute/lean4.md) — Use when editing .lean files, debugging Lean 4 builds (type mismatch, sorry, failed to synthesize instance, axiom warnings, lake build errors), searching mathlib for lemmas...
 - [lifelines](../notes/data-science-compute/lifelines.md) — Complete survival analysis library in Python
 - [marimo](../notes/data-science-compute/marimo.md) — Reactive Python notebooks stored as pure .py files — cells form a dependency DAG, so changing one cell automatically reruns its dependents (or marks them stale under the lazy runtime)...
 - [matplotlib](../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
