@@ -49,7 +49,7 @@ library. Optional inspectors were verified against these stable PyPI releases:
 | Pillow | `12.3.0` | 2026-07-01 | PNG/JPEG metadata |
 | tifffile | `2026.9.20` | 2026-09-21 | TIFF/OME-TIFF metadata |
 | pandas | `3.0.6` | 2026-09-17 | Documented alternate tabular I/O |
-| Polars | `1.44.2` | 2026-09-09 | Documented alternate tabular I/O |
+| Polars | `2.1.0` | 2026-10-25 | Documented alternate tabular I/O |
 
 NumPy 2.5.3 and tifffile
 2026.9.20 require Python 3.12+. These pins are a dated direct-dependency
@@ -72,7 +72,7 @@ uv pip install \
 Optional alternate table engines:
 
 ```bash
-uv pip install "pandas==3.0.6" "polars==1.44.2"
+uv pip install "pandas==3.0.6" "polars==2.1.0"
 ```
 
 ## Exact capability matrix
