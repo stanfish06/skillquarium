@@ -80,7 +80,7 @@ Build a Docker image for the LangGraph API server.
 langgraph build -t my-image                # required: tag the image
 langgraph build -t my-image --no-pull      # use locally-built base images
 langgraph build -t my-image -c langgraph.json  # explicit config
-langgraph build -t my-image --base-image langchain/langgraph-server:0.2.18  # pin base version
+langgraph build -t my-image --base-image langchain/langgraph-server:0.16-py3.12  # pin base version — see https://hub.docker.com/r/langchain/langgraph-server/tags for the current tags
 ```
 
 ### `langgraph up`
