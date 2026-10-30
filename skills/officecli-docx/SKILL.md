@@ -5,9 +5,6 @@ description: "Use this skill any time a .docx file is involved -- as input, outp
 
 # OfficeCLI DOCX Skill
 
-> [!note] Vault audit 2026-07-24 — USE-1
-> Use this as the canonical skill for creating and richly editing .docx files; for raw OOXML inspection or plain text extraction use the native `docx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.
-
 ## Setup
 
 If `officecli` is missing:
@@ -253,7 +250,7 @@ officecli add "$FILE" / --type footer --prop type=first --prop text=""
 officecli add "$FILE" / --type footer --prop type=default --prop align=center --prop size=9pt --prop text="Page " --prop field=page
 ```
 
-When both exist, the default footer is `/footer[2]`; alone it is `/footer[1]`. **Verify**: `get --depth 3` must show `fldChar` children, not just a run with literal `"Page"` (`view outline` prints "Footer: Page" for both live fields AND static text — don't rely on it). Do NOT `set --prop differentFirstPage=true` — that prop is unsupported (rejected with exit 2, not silently); adding a first-type footer flips the bit. For composite **Page X of Y**, see recipe (b).
+When both exist, the default footer is `/footer[2]`; alone it is `/footer[1]`. **Verify**: `get --depth 3` must show `fldChar` children, not just a run with literal `"Page"` (`view outline` prints "Footer: Page" for both live fields AND static text — don't rely on it). Do NOT `set --prop differentFirstPage=true` — that prop is unsupported (exit 2 with `WARNING: UNSUPPORTED`; the element itself is still created — check `success` in `--json`); adding a first-type footer flips the bit. For composite **Page X of Y**, see recipe (b).
 
 ### Table of Contents
 
@@ -463,15 +460,9 @@ LEAK=$(officecli view "$FILE" text | grep -cE '(\$[A-Za-z_]+\$|\{\{[^}]+\}\}|<TO
 [ "$LEAK" -eq 0 ] && echo "Gate 2 OK" || { echo "REJECT Gate 2: $LEAK leak line(s)"; officecli view "$FILE" text | grep -nE '(\$[A-Za-z_]+\$|\{\{[^}]+\}\}|<TODO>|xxxx|lorem|\\[\$tn])'; exit 1; }
 # A TOC placeholder is valid before a Word-compatible field engine updates it; confirm the TOC field and updateFields setting structurally instead.
 
-# Gate 3 — live PAGE field exists when the brief/template requires a page-number footer.
-# Set EXPECT_PAGE_FOOTER=1 for page-numbered deliverables; leave it 0 for footerless letters/memos.
-EXPECT_PAGE_FOOTER=${EXPECT_PAGE_FOOTER:-0}
-if [ "$EXPECT_PAGE_FOOTER" = "1" ]; then
-  FLD=$(officecli query "$FILE" 'field[fieldType=page]' --json | jq '.data.results | length')
-  [ "$FLD" -ge 1 ] && echo "Gate 3 OK" || { echo "REJECT Gate 3: no live PAGE field"; exit 1; }
-else
-  echo "Gate 3 N/A (page-number footer not required)"
-fi
+# Gate 3 — live PAGE field exists when a footer is expected.
+FLD=$(officecli query "$FILE" 'field[fieldType=page]' --json | jq '.data.results | length')
+[ "$FLD" -ge 1 ] && echo "Gate 3 OK" || { echo "REJECT Gate 3: no live PAGE field"; exit 1; }
 echo "Delivery Gate PASS"
 ```
 

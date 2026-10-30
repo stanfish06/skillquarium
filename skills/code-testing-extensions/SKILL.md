@@ -6,7 +6,6 @@ description: >-
   (e.g., dotnet.md for .NET, cpp.md for C++). Agents and skills read its bundled
   files directly; do not invoke this catalog through the model's skill tool.
 user-invocable: false
-disable-model-invocation: true
 license: MIT
 ---
 

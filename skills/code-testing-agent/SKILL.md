@@ -5,7 +5,6 @@ description: >-
   for user requests and do not treat this name as a custom agent. When invoked
   explicitly by older instructions, load code-testing and follow it instead.
 user-invocable: false
-disable-model-invocation: true
 license: MIT
 ---
 
