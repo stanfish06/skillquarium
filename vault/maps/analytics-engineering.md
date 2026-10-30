@@ -32,7 +32,7 @@ created: 2026-06-13
 - [creating-mermaid-dbt-dag](../notes/analytics-engineering/creating-mermaid-dbt-dag.md) — Generates a Mermaid flowchart diagram of dbt model lineage using MCP tools, manifest.json, or direct code parsing as fallbacks
 - [dagster-expert](../notes/analytics-engineering/dagster-expert.md) — Expert guidance for working with Dagster and the dg CLI
 - [databricks-agent-bricks](../notes/analytics-engineering/databricks-agent-bricks.md) — Create Agent Bricks: Knowledge Assistants (KA) for document Q&A and Supervisor Agents for multi-agent orchestration (MAS)
-- [databricks-ai-functions](../notes/analytics-engineering/databricks-ai-functions.md) — Use Databricks built-in AI Functions (ai_classify, ai_extract, ai_summarize, ai_mask, ai_translate, ai_fix_grammar, ai_gen, ai_analyze_sentiment, ai_similarity, ai_parse_document...
+- [databricks-ai-functions](../notes/analytics-engineering/databricks-ai-functions.md) — Use Databricks built-in AI Functions (ai_classify, ai_decide, ai_extract, ai_summarize, ai_mask, ai_translate, ai_fix_grammar, ai_gen, ai_analyze_sentiment, ai_similarity...
 - [databricks-aibi-dashboards](../notes/analytics-engineering/databricks-aibi-dashboards.md) — Create Databricks AI/BI dashboards. Must use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure
 - [databricks-app-design](../notes/analytics-engineering/databricks-app-design.md) — Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit...
 - [databricks-apps](../notes/analytics-engineering/databricks-apps.md) — Build apps on Databricks Apps platform. Use when asked to create data apps, analytics tools, or custom interactive visualizations
@@ -43,14 +43,14 @@ created: 2026-06-13
 - [databricks-dbsql](../notes/analytics-engineering/databricks-dbsql.md) — Databricks SQL (DBSQL) advanced features and SQL warehouse capabilities
 - [databricks-docs](../notes/analytics-engineering/databricks-docs.md) — Databricks documentation reference via llms.txt index
 - [databricks-execution-compute](../notes/analytics-engineering/databricks-execution-compute.md) — Execute code and manage compute on Databricks: run Python/Scala/SQL/R via serverless, classic, or interactive clusters, and create/resize/delete clusters and SQL warehouses
-- [databricks-genie-agents](../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents — curated, per-data natural-language agents (formerly Genie Spaces): build, export/import, migrate across workspaces, and ask...
+- [databricks-genie-agents](../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents (formerly Genie Spaces): curated agents over Unity Catalog tables, Metric Views, and documents in UC volumes
 - [databricks-iceberg](../notes/analytics-engineering/databricks-iceberg.md) — Apache Iceberg tables on Databricks — Managed Iceberg tables, External Iceberg Reads (fka Uniform), Compatibility Mode, Iceberg REST Catalog (IRC), Iceberg v3, Snowflake interop...
 - [databricks-jobs](../notes/analytics-engineering/databricks-jobs.md) — Develop and deploy Lakeflow Jobs on Databricks via DABs, Python SDK, or the CLI
 - [databricks-lakebase](../notes/analytics-engineering/databricks-lakebase.md) — Databricks Lakebase Postgres: projects, scaling, connectivity, Lakebase synced tables, and Data API
 - [databricks-lakeflow-connect](../notes/analytics-engineering/databricks-lakeflow-connect.md) — Build managed ingestion pipelines into Databricks using Lakeflow Connect
 - [databricks-metric-views](../notes/analytics-engineering/databricks-metric-views.md) — Unity Catalog metric views: define, create, query, and manage governed business metrics in YAML
 - [databricks-ml-training](../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
-- [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow 3 GenAI agent evaluation. Use when writing mlflow.genai.evaluate() code, creating @scorer functions, using built-in scorers (Guidelines, Correctness, Safety...
+- [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow GenAI evaluation and agent improvement on Databricks
 - [databricks-model-serving](../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
 - [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks
 - [databricks-python-sdk](../notes/analytics-engineering/databricks-python-sdk.md) — Databricks development guidance including Python SDK, Databricks Connect, CLI, and REST API

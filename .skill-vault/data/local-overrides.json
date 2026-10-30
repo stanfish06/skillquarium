@@ -1109,6 +1109,22 @@
       "replace": "**Halmos / Kontrol (formal verification)**:\n- Trail of Bits archived Manticore in June 2026 (\"no longer internally developed and maintained\"); symbolic execution for Foundry projects now goes through Halmos (a16z) or Kontrol (Runtime Verification)\n- Define properties as Foundry test invariants\n- Set up symbolic execution (`halmos --contract <Test>`, or `kontrol prove`)\n- Validate critical paths"
     }
   ],
+  "mixpanel-auth": [
+    {
+      "id": "account-test-requires-name-login",
+      "issue": 1122,
+      "source": "openai/plugins",
+      "find": "After the user confirms they ran it, verify with `account test`:\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test`\n",
+      "replace": "After the user confirms they ran it, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` to read\n`account.name`, then verify with\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <account.name>`.\n"
+    },
+    {
+      "id": "account-test-requires-name-routing",
+      "issue": 1122,
+      "source": "openai/plugins",
+      "find": "Run: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test [name]`\n",
+      "replace": "The script requires a name. If the user did not give one, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` and use\n`account.name`.\n\nRun: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <name>`\n"
+    }
+  ],
   "polars": [
     {
       "id": "compat-1442",
@@ -2771,20 +2787,24 @@
       "replace": "## Basic Usage\n\nUse Node's `IncomingMessage` / `ServerResponse` handler contract. `serve(handler)`\nreturns a request listener; attach it to an HTTP server and start listening:\n\n```js\n// server.js\nconst { createServer } = require('node:http')\nconst { serve } = require('micro')\n\nconst handler = (req, res) => 'Hello, World!'\nconst server = createServer(serve(handler))\nserver.listen(3000, '127.0.0.1')\n```\n\nRun the programmatic server with:\n\n```bash\nnode server.js\n```\n\nOr export a Node handler for the Micro CLI:\n\n```js\n// index.js\nmodule.exports = (req, res) => {\n  res.end('Hello, World!')\n}\n```\n\nRun the exported handler with:\n\n```bash\nnpx micro index.js\n```\n"
     }
   ],
-  "mixpanel-auth": [
+  "landing-page-design": [
     {
-      "id": "account-test-requires-name-login",
-      "issue": 1122,
-      "source": "openai/plugins",
-      "find": "After the user confirms they ran it, verify with `account test`:\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test`\n",
-      "replace": "After the user confirms they ran it, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` to read\n`account.name`, then verify with\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <account.name>`.\n"
+      "id": "narrow-description",
+      "source": "elayadesign/ai-design-skills",
+      "find": "description: \"Complete system for building high converting landing pages: intake questions, page structure, layout selection, conversion copywriting, SEO, plus strict visual rules for typography, spacing, corner radius, backgrounds, hero layout, icons, and motion. Use this skill whenever building, editing, styling, reviewing, or writing copy for ANY landing page, marketing site, web UI, page section, component, or prototype, even when the user does not mention design, conversion, tokens, or a design system. Always consult it before choosing page sections, headlines, CTAs, fonts, font sizes, spacing values, border radii, background colors, icons, or transitions.\"",
+      "replace": "description: \"Builds and reviews landing pages and single-offer marketing sites: intake questions, page structure, layout selection, conversion copywriting, SEO/AEO, and an opinionated visual system (Geist/Manrope type scale, spacing, radius, hero, motion, mandatory tagline section). Use when building, restyling, or writing copy for a landing page, a marketing or product-launch site, or a section of one. Not for dashboards, app UI, or projects with an existing design system; use frontend-design or design-taste-frontend there.\""
     },
     {
-      "id": "account-test-requires-name-routing",
-      "issue": 1122,
-      "source": "openai/plugins",
-      "find": "Run: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test [name]`\n",
-      "replace": "The script requires a name. If the user did not give one, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` and use\n`account.name`.\n\nRun: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <name>`\n"
+      "id": "narrow-scope",
+      "source": "elayadesign/ai-design-skills",
+      "find": "Apply to all web UI work: landing pages, marketing sites, components, dashboards, prototypes, and design reviews. When a rule here conflicts with a framework default, this file wins.",
+      "replace": "Apply to landing pages, single-offer marketing and product-launch sites, and their sections, including design reviews of them. For dashboards, app UI, or projects with an existing design system, use `frontend-design` or `design-taste-frontend` instead. Within that scope, when a rule here conflicts with a framework default, this file wins."
+    },
+    {
+      "id": "mark-invented-proof",
+      "source": "elayadesign/ai-design-skills",
+      "find": "- **Brands and logos.** Invent names that sound like they belong in the product's industry. A logistics tool's customers sound like logistics companies, not generic tech startups.\n- **Numbers.**",
+      "replace": "- **Brands and logos.** Invent names that sound like they belong in the product's industry. A logistics tool's customers sound like logistics companies, not generic tech startups.\n- **Mark invented proof.** Invented testimonials, people, customer names, logos, and metrics are placeholders. Say so when handing off the page, and replace them with real ones before it is published. Never present them as real endorsements or results.\n- **Numbers.**"
     }
   ]
 }

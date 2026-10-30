@@ -9,8 +9,6 @@ allowed-tools: Workflow AskUserQuestion Bash Read
 Resolve four parameters, make one `Workflow` call, return the report. The workflow owns
 concurrency, retries and result collection.
 
-> Prerequisite: this skill shells out to `${CLAUDE_PLUGIN_ROOT}/workflows/c-review.js` and `.../scripts/*.py`, which are not vendored in this flat vault — they live at the plugin root upstream. Install the `c-review` plugin from the `trailofbits/skills` marketplace so `CLAUDE_PLUGIN_ROOT` resolves (or the Phase 1 fallback finds it under `~/.claude`). Standalone the resolution step below correctly aborts and the skill does no review.
-
 **Use for:** native C/C++ userspace — memory safety, integer overflow, races, type
 confusion, Linux/macOS daemons, Windows services.
 
@@ -40,23 +38,11 @@ Two scopes stay separate for the whole run:
 
 ## Phase 1 — Resolve paths
 
-```bash
-root="${CLAUDE_PLUGIN_ROOT:-}"
-if [ -z "$root" ] || [ ! -f "$root/workflows/c-review.js" ]; then
-  # Fallback for a cache layout that does not set the variable. ~/.claude ONLY — never `.`:
-  # `.` is the AUDITED repository, and a tree that vendors or mirrors this marketplace would
-  # win the traversal and run its copy of the scripts, with a different question set and
-  # nothing saying which copy ran. Let find's stderr through; a missing ~/.claude is a real
-  # failure to report, not noise to hide.
-  hit="$(find "$HOME/.claude" -path '*/c-review/workflows/c-review.js' -print -quit)"
-  root="${hit%/workflows/c-review.js}"
-fi
-[ -n "$root" ] && [ -f "$root/workflows/c-review.js" ] && echo "PLUGIN ROOT: $root"
-```
-
-Stop if neither resolves, rather than running with an empty path — and say which path you
-resolved, so a copy other than the installed plugin is visible before eight agents run
-against it.
+Resolve this plugin's directory from this SKILL.md's installed location to an absolute
+`plugin_root`: it holds [`workflows/c-review.js`](../../workflows/c-review.js),
+[`agents/c-review-worker.md`](../../agents/c-review-worker.md), and
+[`scripts/assemble_findings.py`](../../scripts/assemble_findings.py). Print that path; stop if
+any is missing. Do not search caches or the audited repository for another plugin copy.
 
 ```bash
 # The workflow cannot call Date.now(), so the timestamp is made here.

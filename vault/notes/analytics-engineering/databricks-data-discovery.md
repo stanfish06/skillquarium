@@ -21,7 +21,7 @@ created: 2026-08-23
 ## Related skills
 
 - [databricks-core](../../notes/analytics-engineering/databricks-core.md) — Databricks CLI operations and the parent/entry-point skill for Databricks CLI use: authentication, profile selection, and bundles
-- [databricks-genie-agents](../../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents — curated, per-data natural-language agents (formerly Genie Spaces): build, export/import, migrate across workspaces, and ask...
+- [databricks-genie-agents](../../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents (formerly Genie Spaces): curated agents over Unity Catalog tables, Metric Views, and documents in UC volumes
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
