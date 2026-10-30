@@ -1132,6 +1132,15 @@
       "replace": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.44.2\""
     }
   ],
+  "mixpanelyst": [
+    {
+      "id": "frequency-filter-not-in-query-flow",
+      "issue": 1121,
+      "source": "openai/plugins",
+      "find": "# Filter to users who purchased 3+ times in 30 days, then analyze their flow\nresult = ws.query_flow(\"Login\", forward=3,\n    where=FrequencyFilter(\"Purchase\", value=3, date_range_value=30, date_range_unit=\"day\"),\n    last=30)\n# Reveals: what do repeat purchasers do after logging in?\n```\n",
+      "replace": "# Filter to users who purchased 3+ times in March, then measure their logins\nresult = ws.query(\"Login\", math='unique',\n    where=FrequencyFilter(\"Purchase\", value=3),\n    from_date=\"2026-03-01\", to_date=\"2026-03-31\", unit='month')\n# Reveals: how many repeat purchasers logged in\n```\n\n`FrequencyFilter` works in `ws.query()` and `ws.build_params()` only \u2014 `ws.query_flow()`\ndoes not accept it and fails with an unclear error. Its threshold counts inside each\n`unit` bucket, not across the date range: with the default `unit='day'`, `value=3` means\nthree events on the same day, which returns an empty series when nobody reaches it. Set\n`unit` to the period the threshold means and pin that period with `from_date` / `to_date`,\nsince `last=` is always a number of days. `date_range_value` / `date_range_unit` had no\nobservable effect on inline filters in upstream's 2026-09-11 probe, so do not use them to\nwiden the window.\n"
+    }
+  ],
   "esm": [
     {
       "id": "esm-3441post1-1",
