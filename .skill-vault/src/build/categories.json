@@ -1489,6 +1489,7 @@
     }
   ],
   "extraAssignments": {
+    "google-rust-style": "software-dev",
     "landing-page-design": "web-automation-frontend",
     "lean4": "data-science-compute",
     "aws-agent-toolkit": "cloud-devops",
