@@ -1148,6 +1148,16 @@
       "replace": "uv pip install \"esm==3.4.1.post1\""
     }
   ],
+  "opentelemetry": [
+    {
+      "id": "otelcol-contrib-versioned-asset-url",
+      "issue": 1214,
+      "source": "grafana/skills",
+      "file": "references/collector-config.md",
+      "find": "# Download otelcol-contrib (includes all components)\ncurl -L https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest/download/otelcol-contrib_linux_amd64.tar.gz | tar xz\n",
+      "replace": "# Download otelcol-contrib (includes all components). The release assets embed the\n# version, so there is no static name under releases/latest/download \u2014 pin the version\n# in both the tag and the filename.\nOTELCOL_VERSION=0.164.0\ncurl -fL \"https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v${OTELCOL_VERSION}/otelcol-contrib_${OTELCOL_VERSION}_linux_amd64.tar.gz\" | tar xz\n"
+    }
+  ],
   "tempo": [
     {
       "id": "tempo-helm-community-1",
