@@ -16,6 +16,8 @@ Copied from upstream commit `1837b95b3d5a9fd8d311367603902ad7fe261adf`:
 
 Changes made in this vault:
 
+- Redundant blank lines at the end of copied metadata files are removed; license text is retained.
+
 - `INDEX.md`: skill links changed from `skills/<name>/SKILL.md` to `../<name>/SKILL.md`, and the
   `README.md` link now points to the upstream README at the pinned commit.
 - Skill reference files linked `../../../SOURCES.md` and `../../../INDEX.md` (the upstream

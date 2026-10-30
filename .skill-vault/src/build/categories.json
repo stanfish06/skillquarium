@@ -2083,7 +2083,8 @@
     "deno": "software-dev",
     "llama-cpp": "ml-ai",
     "inspect-ai": "ml-ai",
-    "skypilot": "cloud-devops"
+    "skypilot": "cloud-devops",
+    "google-rust-style": "software-dev"
   },
   "synonyms": {
     "pydeseq2": [

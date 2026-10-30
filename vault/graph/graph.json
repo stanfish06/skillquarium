@@ -1,14 +1,14 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2170,
+  "skills": 2171,
   "expert_profiles": 503,
-  "nodes": 2243,
-  "edges": 16061,
+  "nodes": 2244,
+  "edges": 16072,
   "generic_names_blocked": 31,
-  "tier1_edges": 4845,
+  "tier1_edges": 4849,
   "tier2_edges": 721,
-  "alias_edges": 4507,
+  "alias_edges": 4509,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 523,
@@ -20,13 +20,13 @@
   "orphan_count": 123,
   "orphan_rate": 0.0567,
   "by_provenance": {
-   "EXTRACTED": 15275,
+   "EXTRACTED": 15286,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2170,
-   "references": 12582,
+   "in_domain": 2171,
+   "references": 12592,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -12635,6 +12635,21 @@
    "source": "skills/google-drive-comments/SKILL.md",
    "aliases": [
     "google drive comments"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "google-rust-style",
+   "type": "Skill",
+   "label": "google-rust-style",
+   "description": "Use when writing, reviewing, or refactoring Rust code — module layout and imports, function parameter and return types (&str vs &String, slice vs &Vec, iterators, bool flags), traits and derives, Option/Result/panic, naming, doc comments, unsafe, unwrap/expect, iterator chains — or when the user asks for Google's Rust style guide, or works in Chromium, Android, or Fuchsia Rust. For the rust-coding-guidelines rule IDs (P.NAM, G.FMT, ...) use coding-guidelines instead.",
+   "source": "skills/google-rust-style/SKILL.md",
+   "aliases": [
+    "google rust style"
    ],
    "uses": 0,
    "successes": 0,
@@ -55269,6 +55284,15 @@
   {
    "src": "coding-guidelines",
    "rel": "references",
+   "dst": "google-rust-style",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "coding-guidelines named in google-rust-style/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "coding-guidelines",
+   "rel": "references",
    "dst": "matlab-review-code",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -65137,6 +65161,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "geist named in design-md-library/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "design-md-library",
+   "rel": "references",
+   "dst": "google-rust-style",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of design-md-library appears in google-rust-style/SKILL.md",
    "status": "accepted"
   },
   {
@@ -83185,6 +83218,42 @@
    "status": "accepted"
   },
   {
+   "src": "google-rust-style",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "google-rust-style",
+   "rel": "references",
+   "dst": "coding-guidelines",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "coding-guidelines named in google-rust-style/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "google-rust-style",
+   "rel": "references",
+   "dst": "design-md-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of design-md-library appears in google-rust-style/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "google-rust-style",
+   "rel": "references",
+   "dst": "hex",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "hex named in google-rust-style/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "google-sheets",
    "rel": "in_domain",
    "dst": "domain:comms-productivity",
@@ -86089,6 +86158,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "hex named in geospatial-and-cartographic-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "hex",
+   "rel": "references",
+   "dst": "google-rust-style",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "hex named in google-rust-style/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -93679,6 +93757,15 @@
    "status": "accepted"
   },
   {
+   "src": "lean-elaboration",
+   "rel": "references",
+   "dst": "lean4",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean4 named in lean-elaboration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "lean-elaboration-test",
    "rel": "in_domain",
    "dst": "domain:data-science-compute",
@@ -93703,6 +93790,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "lean-elaboration-test named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-elaboration-test",
+   "rel": "references",
+   "dst": "lean4",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean4 named in lean-elaboration-test/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -94126,6 +94222,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "code-review named in lean4/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean4",
+   "rel": "references",
+   "dst": "lean-elaboration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean4 named in lean-elaboration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean4",
+   "rel": "references",
+   "dst": "lean-elaboration-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean4 named in lean-elaboration-test/SKILL.md body",
    "status": "accepted"
   },
   {

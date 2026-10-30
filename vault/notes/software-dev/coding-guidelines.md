@@ -20,7 +20,7 @@ created: 2026-09-13
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [google-rust-style](../../notes/software-dev/google-rust-style.md) — Use when writing, reviewing, or refactoring Rust code — module layout and imports, function parameter and return types (&str vs &String, slice vs &Vec, iterators, bool flags), traits...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
