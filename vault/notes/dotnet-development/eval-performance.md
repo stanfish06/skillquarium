@@ -20,10 +20,9 @@ created: 2026-07-21
 
 ## Related skills
 
-- [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild build performance bottlenecks using binary log analysis
+- [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild bottlenecks from binlog timelines and Target/Task Performance Summaries after build-perf-baseline establishes measurements
 - [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
-

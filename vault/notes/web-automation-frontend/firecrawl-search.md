@@ -14,14 +14,13 @@ created: 2026-08-23
 # firecrawl-search
 
 > [!info] What it does
-> Web search with full page content. Use when no URL is known: finding sources, articles, or news. For papers use firecrawl-research-index; for library, API, error, or bug questions use firecrawl-developer-index.
+> Find web sources with query-relevant page excerpts and optional full-page content, and discover workflows, data APIs, and indexes. Use for web research or finding structured records, listings, transcripts, and datasets. Supports semantic tool discovery, domain matching, and progressive catalogue browsing.
 
 **Source:** [skills/firecrawl-search/SKILL.md](../../../skills/firecrawl-search/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](../../maps/web-automation-frontend.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [firecrawl-developer-index](../../notes/web-automation-frontend/firecrawl-developer-index.md) — Search issues, merged pull requests, READMEs, and documentation
-- [firecrawl-research-index](../../notes/web-automation-frontend/firecrawl-research-index.md) — Find the papers that answer a research query in Firecrawl's research paper index — a corpus of paper abstracts whose largest share is biomedical and life-science literature (PubMed...
+- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

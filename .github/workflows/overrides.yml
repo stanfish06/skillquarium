@@ -1,0 +1,34 @@
+name: Local overrides
+
+# Checks that every entry in .skill-vault/data/local-overrides.json still
+# applies. Separate from ci.yml so it can also run on PRs that touch only
+# skills/**: those leave vault/ for rebuild-index.yml to regenerate after
+# merge, which ci.yml's build-churn step would reject. Read-only.
+
+on:
+  pull_request:
+    paths:
+      - "skills/**"
+      - ".skill-vault/**"
+      - "skillquarium"
+      - ".github/workflows/overrides.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+
+      - name: Local overrides still apply
+        # Hand-written `find` strings are not syntax-checked by anything else,
+        # so an entry that never matched, or a skill edit that undoes a recorded
+        # fix, lands green and only surfaces as a STALE line in the next
+        # scheduled update-skills.yml run.
+        run: ./skillquarium overrides --check

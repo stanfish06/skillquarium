@@ -1,6 +1,6 @@
 # Custom GenAI agents with MLflow ResponsesAgent
 
-Edge case. **For most demos, use [databricks-agent-bricks](../../databricks-agent-bricks/SKILL.md)** — pre-built Knowledge Assistants and Supervisor Agents wire up Genie + KAs + tools without any agent code. Hand-roll a `ResponsesAgent` only when you need a custom orchestration the supervisor can't express (custom routing logic, multi-step plans, agent that calls another agent over HTTP).
+Edge case. **For most demos, use [databricks-genie-agents](../../databricks-genie-agents/SKILL.md)**: one Genie Agent with tables + a documents volume answers SQL + document questions without any agent code (replaces the legacy Knowledge Assistant / Supervisor Agent). Hand-roll a `ResponsesAgent` only when you need a custom orchestration Genie can't express (custom routing logic, multi-step plans, agent that calls another agent over HTTP).
 
 ## What ResponsesAgent is
 
@@ -35,6 +35,8 @@ from langgraph.graph.message import add_messages
 from langgraph.prebuilt.tool_node import ToolNode
 from typing import Annotated, Generator, Sequence, TypedDict
 
+# databricks-* is the default and works today; in a workspace cut over to Unity Catalog
+# model services, use the UC name instead, e.g. "system.ai.claude-sonnet-4-6" (no alias).
 LLM_ENDPOINT = "databricks-claude-sonnet-4-6"   # resolve at runtime — see databricks-model-serving
 VS_INDEX     = "ai_demo_gen.wind_farm.docs_index"
 UC_FUNCTIONS = ["ai_demo_gen.wind_farm.lookup_turbine_history"]

@@ -16,8 +16,8 @@ created: 2026-06-13
 
 ## Skills (42)
 
-- [anndata](../notes/single-cell-rnaseq/anndata.md) — Data structure for annotated matrices in single-cell analysis
-- [arboreto](../notes/single-cell-rnaseq/arboreto.md) — Infer gene regulatory networks (GRNs) from gene expression data using scalable algorithms (GRNBoost2, GENIE3)
+- [anndata](../notes/single-cell-rnaseq/anndata.md) — Handles annotated matrices in single-cell analysis, .h5ad and Zarr files, and integration with the scverse ecosystem
+- [arboreto](../notes/single-cell-rnaseq/arboreto.md) — Infers candidate gene regulatory networks from bulk or single-cell expression data using AertsLab Arboreto GRNBoost2 and GENIE3
 - [atac-seq](../notes/single-cell-rnaseq/atac-seq.md) — ATAC-seq processing with assay QC, MACS3 peak calling, consensus peak matrices, differential accessibility, and motif or footprint follow-up
 - [bgee-skill](../notes/single-cell-rnaseq/bgee-skill.md) — Submit compact Bgee SPARQL requests for healthy wild-type expression metadata and ontology-aware lookup patterns
 - [bulk-rnaseq](../notes/single-cell-rnaseq/bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
@@ -45,16 +45,16 @@ created: 2026-06-13
 - [pathway-enricher](../notes/single-cell-rnaseq/pathway-enricher.md) — Gene-set pathway enrichment analysis using Enrichr — queries KEGG, GO (BP/MF/CC), Reactome, WikiPathways, MSigDB, and Disease Ontology
 - [pathway-enrichment](../notes/single-cell-rnaseq/pathway-enrichment.md) — Run pathway and gene-set enrichment analysis on gene lists or ranked gene data, then interpret the results
 - [pybigwig](../notes/single-cell-rnaseq/pybigwig.md) — Fast Python I/O for BigWig (continuous genome signal) and BigBed (interval annotation) files via libBigWig
-- [pydeseq2](../notes/single-cell-rnaseq/pydeseq2.md) — Differential gene expression analysis for bulk RNA-seq with PyDESeq2, including formulaic designs, Wald tests, FDR correction, LFC shrinkage, and result visualization
+- [pydeseq2](../notes/single-cell-rnaseq/pydeseq2.md) — Performs bulk RNA-seq differential expression analysis with PyDESeq2, including count validation, formula designs, explicit contrasts, Wald tests, FDR correction, coefficient-matched...
 - [rare-disease-rnaseq](../notes/single-cell-rnaseq/rare-disease-rnaseq.md) — Blood RNA-seq expression-outlier detection for rare-disease diagnostics
 - [rnaseq-de](../notes/single-cell-rnaseq/rnaseq-de.md) — Differential expression analysis for bulk RNA-seq and pseudo-bulk count matrices with QC, PCA, and contrast testing
-- [scanpy](../notes/single-cell-rnaseq/scanpy.md) — Standard single-cell RNA-seq analysis pipeline
+- [scanpy](../notes/single-cell-rnaseq/scanpy.md) — Performs Scanpy single-cell RNA-seq QC, normalization, HVG selection, PCA/UMAP/t-SNE, clustering, exploratory marker ranking, pseudobulk preparation, visualization, and Seurat or...
 - [scirpy-immune-repertoire](../notes/single-cell-rnaseq/scirpy-immune-repertoire.md) — Single-cell immune receptor analysis with Scirpy for scanpy, anndata, and scvi-tools projects
 - [scrna-embedding](../notes/single-cell-rnaseq/scrna-embedding.md) — Local scVI/scANVI-based single-cell latent embedding and batch-aware integration from raw-count .h5ad or 10x Matrix Market input, with stable integrated AnnData export for downstream...
 - [scrna-orchestrator](../notes/single-cell-rnaseq/scrna-orchestrator.md) — Local Scanpy pipeline for single-cell RNA-seq QC, optional doublet detection, clustering, marker discovery, optional CellTypist annotation, optional latent downstream mode from...
 - [scrna-preprocessing-clustering](../notes/single-cell-rnaseq/scrna-preprocessing-clustering.md) — Standard scRNA-seq preprocessing and clustering with Scanpy
 - [scrna-seq-qc](../notes/single-cell-rnaseq/scrna-seq-qc.md) — Process, quality-control, annotate, and visualize single-cell or single-nucleus RNA-seq datasets across tissues and species
-- [scvelo](../notes/single-cell-rnaseq/scvelo.md) — RNA velocity analysis with scVelo. Estimate cell state transitions from unspliced/spliced mRNA dynamics, infer trajectory directions, compute latent time, and identify driver genes in...
-- [scvi-tools](../notes/single-cell-rnaseq/scvi-tools.md) — Deep generative models for single-cell omics
+- [scvelo](../notes/single-cell-rnaseq/scvelo.md) — Performs RNA velocity analysis with scVelo from spliced and unspliced single-cell RNA counts
+- [scvi-tools](../notes/single-cell-rnaseq/scvi-tools.md) — Fits probabilistic models for single-cell omics, including scVI batch integration, scANVI annotation, totalVI CITE-seq, MultiVI RNA/ATAC integration, and posterior differential...
 - [seurat](../notes/single-cell-rnaseq/seurat.md) — Single-cell RNA-seq analysis in R with Seurat v5 — QC, normalization (LogNormalize or SCTransform), dimensionality reduction, clustering, marker detection, integration of multiple...
 - [spatialdata-squidpy](../notes/single-cell-rnaseq/spatialdata-squidpy.md) — Spatial omics workflows with SpatialData and Squidpy alongside scanpy, anndata, and napari-viz

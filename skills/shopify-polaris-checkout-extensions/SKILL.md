@@ -41,7 +41,7 @@ CLI Command to Scaffold a new Checkout UI Extension:
 shopify app generate extension --template checkout_ui --name my-checkout-ui-extension
 ```
 
-version: 2026-01
+version: 2026-07
 
 ## Extension Targets (use these in shopify.extension.toml)
 

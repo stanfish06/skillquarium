@@ -14,13 +14,14 @@ created: 2026-08-23
 # prisma-postgres-setup
 
 > [!info] What it does
-> Set up a new Prisma Postgres database and connect it to a local project using the Management API. Use when asked to "set up a database", "create a Prisma Postgres project", "get a connection string", "connect my app to Prisma Postgres", or "provision a database".
+> Obtain or reuse a Prisma Postgres database and connect an application. Use when the user needs a database and has none configured ("I need a database", "add a Postgres database", "set up a database for this app"), runs or mentions `create-db` or `npx create-db`, or asks to set up or connect Prisma Postgres, including in v0 and the Vercel Marketplace. Hands Prisma ORM configuration to prisma-orm-setup; reuses an existing connection first and honors an explicit provider, driver, alternative ORM, or database-only choice.
 
 **Source:** [skills/prisma-postgres-setup/SKILL.md](../../../skills/prisma-postgres-setup/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and managing third-party integrations via the `vercel integration` CLI
+- [prisma-postgres](../../notes/software-dev/prisma-postgres.md) — Deprecated compatibility name for prisma-postgres-setup
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

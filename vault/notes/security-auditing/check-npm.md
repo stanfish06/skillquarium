@@ -21,6 +21,7 @@ created: 2026-08-23
 ## Related skills
 
 - [audit-and-reduce-dependencies](../../notes/security-auditing/audit-and-reduce-dependencies.md) — Reduces JavaScript dependency footprint with pnpm while preserving lockfile, workspace layout, and dependency range style
+- [pnpm](../../notes/software-dev/pnpm.md) — Node.js package manager with strict dependency resolution
 - [supply-chain](../../notes/finance-investment/supply-chain.md) — Interactive supply chain dashboard mapping suppliers, customers, and financial interdependencies
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

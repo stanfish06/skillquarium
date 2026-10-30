@@ -20,9 +20,8 @@ created: 2026-07-21
 
 ## Related skills
 
-- [optimizing-ef-core-queries](../../notes/dotnet-development/optimizing-ef-core-queries.md) — Optimize Entity Framework Core queries by fixing N+1 problems, choosing correct tracking modes, using compiled queries, and avoiding common performance traps
+- [optimizing-ef-core-queries](../../notes/dotnet-development/optimizing-ef-core-queries.md) — Review and optimize application data access that uses Entity Framework Core (EF Core)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
-

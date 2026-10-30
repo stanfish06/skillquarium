@@ -23,7 +23,7 @@ describe('Feature Name', () => {
 - Use `describe` blocks to group related tests
 - Use `it` for individual test cases
 - Use `expect` for assertions
-- Tests run with `npm test` (runs `vitest run`)
+- Run `<pm> run test` (runs `vitest run`)
 
 ❌ **Do not write unit tests for:**
 - SQL files under `config/queries/` - little value in testing static SQL
@@ -95,5 +95,10 @@ await expect(page.getByText('Revenue').first()).toBeVisible();
 
 **For extended E2E tests:**
 - Create separate test files in `tests/` directory (e.g., `tests/user-flow.spec.ts`)
-- Use `npm run test:e2e` to run all Playwright tests
+- Run `<pm> run test:e2e` to run all Playwright tests
 - Keep complex user flows, interactions, and edge cases out of the smoke test
+
+## Common smoke-test failures
+
+- **Smoke test selectors**: use only Playwright locator APIs — `getByRole`, `getByText`, `getByPlaceholder`, `getByLabel`. `getByLabelText` does not exist in Playwright (it is a React Testing Library method) and throws `TypeError` at runtime. See `npx playwright codegen`.
+- **Smoke test data**: keep result sets under the 1 MB analytics-event payload cap. Queries returning thousands of rows cause `INVALID_REQUEST: Event exceeds max size of 1048576 bytes` and `net::ERR_ABORTED`, leaving every asserted UI element absent. Use `LIMIT` or an aggregated query (e.g. `COUNT(*) GROUP BY status`) — never raw row dumps.

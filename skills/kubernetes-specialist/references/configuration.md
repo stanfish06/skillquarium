@@ -71,13 +71,13 @@ metadata:
 type: Opaque
 stringData:
   # Plain text (will be base64 encoded)
-  db-password: "MySecurePassword123!"
-  api-key: "sk-1234567890abcdef"
-  jwt-secret: "super-secret-jwt-key"
+  db-password: "<db-password>"
+  api-key: "<api-key>"
+  jwt-secret: "<jwt-secret>"
 data:
   # Already base64 encoded
-  tls.crt: LS0tLS1CRUdJTi...
-  tls.key: LS0tLS1CRUdJTi...
+  tls.crt: <base64-encoded-certificate>
+  tls.key: <base64-encoded-private-key>
 ```
 
 ### TLS Secret
@@ -91,13 +91,9 @@ metadata:
 type: kubernetes.io/tls
 stringData:
   tls.crt: |
-    -----BEGIN CERTIFICATE-----
-    MIIDXTCCAkWgAwIBAgIJAKZ...
-    -----END CERTIFICATE-----
+    <PEM-encoded certificate>
   tls.key: |
-    -----BEGIN PRIVATE KEY-----
-    MIIEvQIBADANBgkqhkiG9w0B...
-    -----END PRIVATE KEY-----
+    <PEM-encoded private key>
 ```
 
 ### Docker Registry Secret
@@ -114,10 +110,10 @@ stringData:
     {
       "auths": {
         "myregistry.io": {
-          "username": "myuser",
-          "password": "mypassword",
+          "username": "<registry-username>",
+          "password": "<registry-password>",
           "email": "user@example.com",
-          "auth": "bXl1c2VyOm15cGFzc3dvcmQ="
+          "auth": "<base64 of username:password>"
         }
       }
     }
@@ -133,8 +129,8 @@ metadata:
   namespace: production
 type: kubernetes.io/basic-auth
 stringData:
-  username: admin
-  password: super-secret-password
+  username: <username>
+  password: <password>
 ```
 
 ### SSH Auth Secret
@@ -148,9 +144,7 @@ metadata:
 type: kubernetes.io/ssh-auth
 stringData:
   ssh-privatekey: |
-    -----BEGIN OPENSSH PRIVATE KEY-----
-    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUA...
-    -----END OPENSSH PRIVATE KEY-----
+    <OpenSSH private key>
 ```
 
 ## Using ConfigMaps and Secrets
@@ -268,13 +262,13 @@ metadata:
 type: Opaque
 immutable: true
 stringData:
-  password: "MyPassword123"
+  password: "<password>"
 ```
 
 ## External Secrets Operator
 
 ```yaml
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: app-secrets
@@ -295,7 +289,7 @@ spec:
     remoteRef:
       key: prod/api/key
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: SecretStore
 metadata:
   name: aws-secrets-manager
@@ -321,8 +315,8 @@ metadata:
   namespace: production
 spec:
   encryptedData:
-    db-password: AgBj8xK5...encrypted...base64
-    api-key: AgCY9mL2...encrypted...base64
+    db-password: <sealed-ciphertext>
+    api-key: <sealed-ciphertext>
   template:
     metadata:
       name: app-secrets

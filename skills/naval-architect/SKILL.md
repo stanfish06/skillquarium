@@ -17,11 +17,16 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 48
   scientific-agents-profile: true
+  local-patches:
+    - slamming-class-rule-local-impact-loads
+    - no-stawave2-for-slamming-damage
 ---
 
 # Naval Architect Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -66,7 +71,7 @@ ships, offshore units, yachts, or government vessels.
   air) — ITTC-57 friction line for R_F scaling; form factor (1+k), wake fraction w,
   thrust deduction t link self-propulsion model tests to full scale via ITTC 1978
   performance prediction method.
-- **Seakeeping is motion and load.** Heave, pitch, roll RAOs; slamming (Ochi, STAW-2);
+- **Seakeeping is motion and load.** Heave, pitch, roll RAOs; slamming (Ochi, class-rule local impact loads);
   parametric roll in following/quartering seas; green water on deck per IMO MSC criteria
   for passenger/RO-RO; mooring and DP are adjacent but distinct specialties.
 - **IMO and class rules are design constraints**, not footnotes: SOLAS subdivision and
@@ -210,7 +215,9 @@ ships, offshore units, yachts, or government vessels.
 - **GZ fails weather criterion:** shift liquid, reduce KG, widen, operational limitation on
   cargo, revise subdivision (late — costly).
 - **Slamming damage reports:** reduce speed in head seas; bulb immersion; flare redesign;
-  check STAW-2 or class slamming pressure on local structure (interface to structures).
+  check applicable class-rule slamming pressures on local structure with the structural engineer.
+  STAWAVE-2 corrects speed-trial added resistance in waves; it does not assess local slamming
+  pressure ([ITTC Appendix G.2](https://www.ittc.info/media/11972/75-04-01-011.pdf)).
 - **CFD vs tank mismatch >3%:** grid insufficient near stern; wrong trim; double model vs
   single; turbulence model; scale Re not matched for separation.
 - **CPP cavitation:** reduce RPM, adjust pitch, improve wake uniformity, increase σ by depth,

@@ -25,7 +25,7 @@ A working dashboard JSON that exercises the new feature set:
 | `bar`, `line`, `area`, `pie`, `pivot`, `histogram`, `heatmap` | **3** |
 | `combo`, `choropleth-map`, `forecast-line`, `sankey`, `funnel`, `box`, `waterfall` | **1** |
 
-See [SKILL.md](../SKILL.md#widget-index-version--where-documented) for the full version table.
+See [1-widget-specifications.md § Widget Index](1-widget-specifications.md#widget-index-version--where-documented) for the full version table.
 
 ### Layout (12-col grid)
 
@@ -259,6 +259,7 @@ This example's header carries a short narrative tying the widgets together, and 
               "encodings": {
                 "value": {
                   "fieldName": "measure(Avg Resolution Hours)",
+                  "format": {"type": "number-plain", "decimalPlaces": {"type": "max", "places": 1}},
                   "formatTemplate": "{{ @formatted }} hrs",
                   "displayName": "Avg Hours"
                 }

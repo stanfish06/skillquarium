@@ -18,7 +18,6 @@ created: 2026-09-04
 
 ## Related skills
 
-- [databricks-zerobus-ingest](../../notes/analytics-engineering/databricks-zerobus-ingest.md) — Build Zerobus Ingest clients for near real-time data ingestion into Databricks Delta tables via gRPC
 - [protocol-reverse](../../notes/security-auditing/protocol-reverse.md) — Use for authorized reverse engineering of custom binary protocols, Protobuf/gRPC, WebSocket frames, and PCAP-driven protocol recovery
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

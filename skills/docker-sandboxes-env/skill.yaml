@@ -1,0 +1,23 @@
+schema: v1
+id: docker-sandboxes-env
+version: 0.1.0
+title: 'Docker Sandboxes: Declarative sbxenv.yaml Environments'
+description: Author, plan, and run declarative sbxenv.yaml environments (workspace, kits, args, host lifecycle hooks, secrets/registries/bindings, ports) for Docker Sandboxes.
+owns:
+  - sbxenv.yaml
+  - sbx-env
+  - sandbox-environment-lifecycle-hooks
+  - sandbox-environment-plan-approval
+use_when:
+  - The user wants a checked-in, reproducible definition of a sandbox environment instead of a long sbx create/run command line.
+  - The user wants host-side setup or teardown commands tied to a sandbox's create, attach, or remove lifecycle.
+  - The user wants to parameterize a shared environment file with named arguments.
+  - The user is debugging why sbx env create/run is asking for approval, or why a declared resource was skipped or flagged.
+do_not_use_when:
+  - The task is the underlying sbx create/run/rm flag-based workflow with no sbxenv.yaml file involved.
+  - The task is choosing network policy or storing a secret/registry credential independent of any environment file.
+  - The task is authoring the kit spec.yaml a kits entry points at.
+delegates_to:
+  - docker-sandboxes-lifecycle
+  - docker-sandboxes-network-credentials
+  - docker-sandboxes-kits

@@ -20,7 +20,7 @@ created: 2026-06-13
 
 ## Related skills
 
-- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI
+- [marketplace](../../notes/saas-platforms/marketplace.md) — Vercel Marketplace expert guidance — discovering, installing, and managing third-party integrations via the `vercel integration` CLI
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

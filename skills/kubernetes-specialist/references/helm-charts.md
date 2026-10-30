@@ -616,10 +616,15 @@ helm unittest ./mychart
 suite: deployment tests
 templates:
   - templates/deployment.yaml
+  - templates/configmap.yaml # deployment.yaml includes it for the checksum annotation
+  - templates/hpa.yaml
 tests:
   - it: should create deployment with correct replicas
+    template: templates/deployment.yaml
     set:
       replicaCount: 5
+      autoscaling:
+        enabled: false # spec.replicas is omitted while the HPA manages scaling
     asserts:
       - isKind:
           of: Deployment
@@ -628,6 +633,7 @@ tests:
           value: 5
 
   - it: should set resource limits
+    template: templates/deployment.yaml
     set:
       resources:
         limits:
@@ -770,7 +776,7 @@ jobs:
 
 ```bash
 # Login to registry
-helm registry login myregistry.io -u user -p token
+helm registry login myregistry.io -u <username> -p <registry-token>
 
 # Push chart to OCI registry
 helm push mychart-1.2.0.tgz oci://myregistry.io/charts

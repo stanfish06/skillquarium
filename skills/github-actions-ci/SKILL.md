@@ -14,7 +14,8 @@ injection see [[agentic-actions-auditor]], and for `gh` CLI usage see [[gh-cli]]
 
 > Action versions below are current as of August 2026 (`@v7` for
 > `actions/checkout`/`setup-python`/`setup-node`). Note `astral-sh/setup-uv` publishes no
-> floating major tag past `v7` — pin it to an exact tag or SHA (latest release `v9.0.0`). These
+> floating major tag past `v7` — pin it to an exact tag or SHA (example pinned to `v10.3.2`,
+> checked 2026-10-24). These
 > actions bump majors frequently — always check the action's releases page and pin a major
 > (or a SHA for security-sensitive third-party actions) rather than trusting this doc to stay current.
 
@@ -44,8 +45,8 @@ jobs:
         python-version: ["3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
-        # ^ setup-uv has no floating `@v9` tag; pin the SHA (or `@v9.0.0`).
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        # ^ setup-uv has no floating `@v10` tag; pin the SHA (or `@v10.3.2`).
         #   Alternative: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}

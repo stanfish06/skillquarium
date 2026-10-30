@@ -18,9 +18,9 @@ created: 2026-06-09
 
 ## Related skills
 
-- [pennylane](../../notes/quantum-physics/pennylane.md) — Hardware-agnostic quantum ML framework with automatic differentiation
-- [qiskit](../../notes/quantum-physics/qiskit.md) — IBM quantum computing framework. Use when targeting IBM Quantum hardware, working with Qiskit Runtime for production workloads, or needing IBM optimization tools
-- [qutip](../../notes/quantum-physics/qutip.md) — Quantum physics simulation library for open quantum systems
+- [pennylane](../../notes/quantum-physics/pennylane.md) — Builds and differentiates PennyLane quantum circuits, hybrid PyTorch or JAX models, molecular VQE and QAOA workflows
+- [qiskit](../../notes/quantum-physics/qiskit.md) — Builds, simulates, transpiles, and executes quantum circuits with Qiskit and IBM Quantum Runtime
+- [qutip](../../notes/quantum-physics/qutip.md) — Simulate and audit closed and open quantum-system models with QuTiP 5, including deterministic, trajectory, steady-state, spectral, and phase-space workflows
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

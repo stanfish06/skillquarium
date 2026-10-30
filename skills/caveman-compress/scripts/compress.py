@@ -9,6 +9,7 @@ Usage:
 import contextlib
 import errno
 import hashlib
+import json
 import os
 import re
 import shutil
@@ -17,8 +18,10 @@ import subprocess
 import sys
 import tempfile
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 _IS_WINDOWS = os.name == "nt" or sys.platform == "win32"
 _O_NOFOLLOW = getattr(os, "O_NOFOLLOW", 0)  # unix-only; refuses to open through a pre-placed symlink at the lock path
@@ -69,6 +72,7 @@ SENSITIVE_BASENAME_REGEX = re.compile(
     r"(?ix)^("
     r"\.env(\..+)?"
     r"|\.netrc"
+    r"|\.(npmrc|pypirc|pgpass|s3cfg|boto)"
     r"|credentials(\..+)?"
     r"|secrets?(\..+)?"
     r"|passwords?(\..+)?"
@@ -102,8 +106,31 @@ def _state_base_dir(kind: str) -> Path:
 
 
 def backup_dir_for(filepath: Path) -> Path:
-    """Out-of-tree backup dir for filepath, keyed by its parent dir name — kept outside the source tree so skill auto-loaders don't re-ingest `.original.md` backups as live files."""
-    return _state_base_dir("backups") / filepath.parent.name
+    """Out-of-tree backup dir for filepath — kept outside the source tree so skill
+    auto-loaders don't re-ingest `.original.md` backups as live files.
+
+    Keyed on the file's RESOLVED PARENT PATH, not just the parent's name. Keying
+    on the name alone meant every project's `.claude/CLAUDE.md` shared one slot
+    (issue #1351): the second project aborted on the first project's backup, and
+    the abort's own advice — remove the backup and rerun — deleted another
+    project's only uncompressed original. The readable parent name is kept as a
+    prefix so the directory is still recognisable by eye; the digest is what
+    makes it unique. Resolving here (rather than trusting callers) keeps two
+    spellings of one file in a single slot.
+    """
+    parent = Path(filepath).resolve().parent
+    digest = hashlib.sha256(str(parent).encode("utf-8")).hexdigest()[:12]
+    # A file directly under the filesystem root has an empty parent name.
+    return _state_base_dir("backups") / f"{parent.name or 'root'}-{digest}"
+
+
+def legacy_backup_dir_for(filepath: Path) -> Path:
+    """The pre-#1351 backup dir (parent name only). Read-only: `_compress_file_locked`
+    still refuses to run when a backup sits here, so an install that compressed a
+    file before the key changed cannot silently re-backup its own compressed output
+    as the new "original". Never written to, and never deleted — the file it holds
+    may belong to a different project entirely, which is the bug that produced it."""
+    return _state_base_dir("backups") / Path(filepath).resolve().parent.name
 
 
 LOCK_WAIT_SECONDS = 900  # must outlast a legitimate holder's worst-case run (up to MAX_RETRIES+1 Claude calls against the 500KB size cap) or a healthy wait misreads as a stuck lock
@@ -361,6 +388,112 @@ from .detect import should_compress
 from .validate import validate
 
 MAX_RETRIES = 2
+MAX_FILE_SIZE_BYTES = 500_000
+MAX_FILE_SIZE_LABEL = "500KB"
+
+ENV_ANTHROPIC_API_KEY = "ANTHROPIC_API_KEY"
+ENV_COMPRESS_PROVIDER = "CAVEMAN_COMPRESS_PROVIDER"
+ENV_COMPRESS_MODEL = "CAVEMAN_COMPRESS_MODEL"
+ENV_FALLBACK_MODEL = "CAVEMAN_MODEL"
+ENV_COMPRESS_ENDPOINT = "CAVEMAN_COMPRESS_ENDPOINT"
+ENV_COMPRESS_API_KEY = "CAVEMAN_COMPRESS_API_KEY"
+
+PROVIDER_CLAUDE = "claude"
+PROVIDER_ANTHROPIC = "anthropic"
+PROVIDER_OPENCODE = "opencode"
+PROVIDER_OPENAI_COMPAT = "openai-compat"
+SUPPORTED_PROVIDERS = frozenset({
+    PROVIDER_CLAUDE,
+    PROVIDER_ANTHROPIC,
+    PROVIDER_OPENCODE,
+    PROVIDER_OPENAI_COMPAT,
+})
+DEFAULT_OPENAI_COMPAT_ENDPOINT = "http://localhost:11434/v1"  # Ollama
+
+DEFAULT_CLAUDE_MODEL = "claude-sonnet-4-5"
+CLAUDE_CLI = "claude"
+CLAUDE_PRINT_ARG = "--print"
+CLAUDE_SETTING_SOURCES_ARG = "--setting-sources"
+CLAUDE_STRICT_MCP_ARG = "--strict-mcp-config"
+OPENCODE_CLI = "opencode"
+OPENCODE_RUN_ARG = "run"
+OPENCODE_STANDALONE_ARG = "--standalone"
+OPENCODE_FILE_ARG = "--file"
+OPENCODE_AGENT_ARG = "--agent"
+OPENCODE_AGENT = "caveman-compress"
+MODEL_ARG = "--model"
+OPENCODE_PROMPT_PREFIX = ".caveman-compress-prompt-"
+OPENCODE_PROMPT_SUFFIX = ".md"
+OPENCODE_PROMPT_MESSAGE = "Follow the attached prompt exactly. Return only the final answer."
+# The compressed file is untrusted input sent as a prompt to opencode's agent.
+# opencode 2.x allows every action not explicitly denied (bash, edit,
+# websearch, MCP tools, subagents), so deny all of them: compression needs no
+# tools. Probed on 2.0.22 --standalone: no tools are offered to the model and
+# the --file attachment is still read. A per-agent rule is applied after the
+# global one and the last match wins, so the user's own
+# `agent.build.permission` could re-allow a tool for the default agent; the
+# deny is therefore also bound to OPENCODE_AGENT, an agent only we define.
+OPENCODE_PERMISSION_DENY = {"*": "deny"}
+
+# Output ceiling for one SDK call: the max output of the default model
+# (claude-sonnet-4-5). A body that needs more is refused in call_claude(),
+# never written back truncated.
+MAX_OUTPUT_TOKENS = 64000
+
+
+def resolve_max_output_tokens() -> int:
+    """Output ceiling for one SDK call, overridable per model.
+
+    The default tracks the max output of the default model. CAVEMAN_MODEL lets
+    a user pin a model whose ceiling is lower (claude-opus-4-0 tops out at
+    32K), and asking for more output than the model allows is a 400 from the
+    API — an opaque failure in place of the truncation this cap exists to
+    prevent. CAVEMAN_MAX_OUTPUT_TOKENS lets that user lower the ask to match.
+
+    A malformed value raises rather than silently falling back: an override
+    that is quietly ignored looks like the cap was raised when it was not, and
+    the symptom is the same truncation, one layer further from the cause.
+    """
+    raw = os.environ.get("CAVEMAN_MAX_OUTPUT_TOKENS", "").strip()
+    if not raw:
+        return MAX_OUTPUT_TOKENS
+    try:
+        value = int(raw)
+    except ValueError:
+        raise RuntimeError(
+            f"CAVEMAN_MAX_OUTPUT_TOKENS must be a positive integer, got {raw!r}."
+        ) from None
+    if value < 1:
+        raise RuntimeError(
+            f"CAVEMAN_MAX_OUTPUT_TOKENS must be a positive integer, got {raw!r}."
+        )
+    return value
+
+
+def _is_smaller_than_body(candidate_body: str, body: str) -> bool:
+    """True when `candidate_body` actually compresses `body`.
+
+    The non-expansion invariant for #776. It lives in a helper because it has
+    to hold for EVERY candidate, not just the first one: a candidate that fails
+    validation is sent back to the provider for repair, and the repaired text is what
+    gets written if it validates. Checking only the first candidate left the
+    retry path able to write a longer file and report it as a successful
+    compression — the original bug, one branch over.
+
+    Always compares bodies with frontmatter already removed. Frontmatter is
+    preserved verbatim, so counting it on one side and not the other would
+    measure the wrong thing.
+    """
+    candidate_len = len(candidate_body.strip())
+    body_len = len(body.strip())
+    if candidate_len >= body_len:
+        print(
+            "❌ Compression aborted: output is not smaller than input "
+            f"({candidate_len} >= {body_len} chars)."
+        )
+        return False
+    return True
+
 
 # Bounds each individual Claude call so a stalled CLI (dropped network, an
 # auth prompt with no TTY to answer it) can't hang past what LOCK_WAIT_SECONDS
@@ -368,14 +501,251 @@ MAX_RETRIES = 2
 CLAUDE_CALL_TIMEOUT_SECONDS = LOCK_WAIT_SECONDS // (MAX_RETRIES + 1)
 
 
-# ---------- Claude Calls ----------
+# ---------- LLM Calls ----------
+
+
+class AnthropicSdkUnavailable(RuntimeError):
+    """Raised when the explicitly selected Anthropic SDK is unavailable."""
+
+
+def configured_provider() -> str:
+    provider = (
+        os.environ.get(ENV_COMPRESS_PROVIDER) or PROVIDER_CLAUDE
+    ).strip().lower()
+    if provider not in SUPPORTED_PROVIDERS:
+        supported = ", ".join(sorted(SUPPORTED_PROVIDERS))
+        raise ValueError(
+            f"Unsupported caveman-compress provider: {provider}. "
+            f"Supported providers: {supported}"
+        )
+    return provider
+
+
+def configured_model(default_model: Optional[str] = None) -> Optional[str]:
+    model = (
+        os.environ.get(ENV_COMPRESS_MODEL)
+        or os.environ.get(ENV_FALLBACK_MODEL)
+        or default_model
+    )
+    if model is None:
+        return None
+    return model.strip() or None
+
+
+def run_cli(
+    binary_name: str,
+    args: List[str],
+    stdin_prompt: Optional[str] = None,
+    env: Optional[dict] = None,
+) -> str:
+    binary = shutil.which(binary_name) or binary_name
+    command = [binary, *args]
+    run_kwargs = {
+        "text": True,
+        "capture_output": True,
+        "check": True,
+        "encoding": "utf-8",
+        "errors": "replace",
+        "timeout": CLAUDE_CALL_TIMEOUT_SECONDS,
+    }
+    if stdin_prompt is not None:
+        run_kwargs["input"] = stdin_prompt
+    if env is not None:
+        run_kwargs["env"] = env
+    try:
+        result = subprocess.run(command, **run_kwargs)
+        return strip_llm_wrapper(result.stdout.strip())
+    except FileNotFoundError as error:
+        raise RuntimeError(f"{binary_name} CLI not found on PATH") from error
+    except subprocess.CalledProcessError as error:
+        stderr = error.stderr.strip() if error.stderr else "no stderr"
+        raise RuntimeError(f"{binary_name} call failed:\n{stderr}") from error
+    except subprocess.TimeoutExpired as error:
+        raise RuntimeError(
+            f"{binary_name} CLI call timed out after "
+            f"{CLAUDE_CALL_TIMEOUT_SECONDS}s "
+            "(stalled network, or an auth prompt with no TTY to answer it)"
+        ) from error
+
+
+def call_anthropic_sdk(prompt: str) -> str:
+    api_key = os.environ.get(ENV_ANTHROPIC_API_KEY)
+    if not api_key:
+        raise RuntimeError(
+            f"{ENV_ANTHROPIC_API_KEY} is required for provider "
+            f"'{PROVIDER_ANTHROPIC}'"
+        )
+    try:
+        import anthropic
+    except ImportError as error:
+        raise AnthropicSdkUnavailable(
+            f"anthropic package is required for provider '{PROVIDER_ANTHROPIC}'"
+        ) from error
+
+    max_output_tokens = resolve_max_output_tokens()
+    client = anthropic.Anthropic(
+        api_key=api_key,
+        timeout=CLAUDE_CALL_TIMEOUT_SECONDS,
+    )
+    # Streaming, not create(): a large compression needs far more than
+    # the old 8192-token cap, and tokens that arrive as they are
+    # generated keep a long call from tripping the request timeout.
+    with client.messages.stream(
+        model=configured_model(DEFAULT_CLAUDE_MODEL),
+        max_tokens=max_output_tokens,
+        messages=[{"role": "user", "content": prompt}],
+    ) as stream:
+        message = stream.get_final_message()
+    # At the cap the tail was never generated. validate() and the fix
+    # prompt cannot recover it, so fail now instead of paying for
+    # retries that end by restoring the original anyway.
+    if message.stop_reason == "max_tokens":
+        raise RuntimeError(
+            f"Claude output hit the {max_output_tokens}-token cap, so the result is incomplete. "
+            "Split the file into smaller parts and compress each one."
+        )
+    # Tool-heavy models can put a tool_use or thinking block first.
+    text = next(
+        (
+            block.text
+            for block in message.content
+            if getattr(block, "type", None) == "text"
+        ),
+        "",
+    )
+    return strip_llm_wrapper(text.strip())
+
+
+def call_claude_cli(prompt: str) -> str:
+    args = []
+    model = configured_model()
+    if model:
+        args.extend([MODEL_ARG, model])
+    args.extend([
+        CLAUDE_PRINT_ARG,
+        CLAUDE_SETTING_SOURCES_ARG,
+        "",
+        CLAUDE_STRICT_MCP_ARG,
+    ])
+    return run_cli(CLAUDE_CLI, args, prompt)
+
+
+def call_opencode_cli(prompt: str) -> str:
+    args = [OPENCODE_RUN_ARG]
+    model = configured_model()
+    if model:
+        args.extend([MODEL_ARG, model])
+    args.extend([OPENCODE_AGENT_ARG, OPENCODE_AGENT])
+    # --standalone: the shared background service ignores this process's env
+    # (verified on opencode 2.0.22), so the deny config only binds a private
+    # server. Never pass --auto. Any inline config the user set is kept.
+    args.append(OPENCODE_STANDALONE_ARG)
+    try:
+        config = json.loads(os.environ.get("OPENCODE_CONFIG_CONTENT") or "{}")
+    except ValueError:
+        config = None
+    if not isinstance(config, dict):
+        raise RuntimeError(
+            "OPENCODE_CONFIG_CONTENT must be a strict JSON object (no comments or "
+            "trailing commas) so compress can add its tool-deny rule; fix or unset it."
+        )
+    agents = config.get("agent") or {}
+    if not isinstance(agents, dict):
+        raise RuntimeError(
+            'OPENCODE_CONFIG_CONTENT "agent" must be a JSON object so compress '
+            "can add its tool-deny agent; fix or unset it."
+        )
+    config["permission"] = OPENCODE_PERMISSION_DENY
+    config["agent"] = {
+        **agents,
+        OPENCODE_AGENT: {"permission": OPENCODE_PERMISSION_DENY},
+    }
+    env = {**os.environ, "OPENCODE_CONFIG_CONTENT": json.dumps(config)}
+
+    prompt_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            "w",
+            encoding="utf-8",
+            prefix=OPENCODE_PROMPT_PREFIX,
+            suffix=OPENCODE_PROMPT_SUFFIX,
+            delete=False,
+        ) as prompt_file:
+            prompt_path = Path(prompt_file.name)
+            prompt_file.write(prompt)
+        args.extend(
+            [OPENCODE_FILE_ARG, str(prompt_path), OPENCODE_PROMPT_MESSAGE]
+        )
+        return run_cli(OPENCODE_CLI, args, env=env)
+    finally:
+        if prompt_path is not None:
+            # Warn, never raise: raising here would replace the real opencode
+            # error (or a good result) with a cleanup failure.
+            try:
+                prompt_path.unlink(missing_ok=True)
+            except OSError:
+                print(
+                    f"warning: could not delete temporary opencode prompt {prompt_path}",
+                    file=sys.stderr,
+                )
+
+
+def call_openai_compat(prompt: str) -> str:
+    """POST to any OpenAI-compatible /chat/completions (Ollama, llama.cpp,
+    vLLM, LM Studio). Standard library only, so no new dependency."""
+    model = configured_model()
+    if not model:
+        raise RuntimeError(
+            f"{ENV_COMPRESS_MODEL} is required for provider '{PROVIDER_OPENAI_COMPAT}'"
+        )
+    base = os.environ.get(ENV_COMPRESS_ENDPOINT, DEFAULT_OPENAI_COMPAT_ENDPOINT).rstrip("/")
+    body = {"model": model, "messages": [{"role": "user", "content": prompt}], "stream": False}
+    request = urllib.request.Request(
+        f"{base}/chat/completions",
+        data=json.dumps(body).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+    )
+    api_key = os.environ.get(ENV_COMPRESS_API_KEY)
+    if api_key:
+        # Unredirected: urllib copies ordinary headers onto a redirect, even
+        # one to another host.
+        request.add_unredirected_header("Authorization", f"Bearer {api_key}")
+    try:
+        with urllib.request.urlopen(request, timeout=CLAUDE_CALL_TIMEOUT_SECONDS) as response:
+            raw = response.read()
+    except urllib.error.HTTPError as error:
+        detail = error.read().decode("utf-8", "replace")[:500]
+        raise RuntimeError(
+            f"{PROVIDER_OPENAI_COMPAT} call failed: HTTP {error.code}: {detail}"
+        ) from error
+    except OSError as error:  # URLError, refused connection, timeout
+        reason = getattr(error, "reason", error)
+        raise RuntimeError(f"{PROVIDER_OPENAI_COMPAT} call to {base} failed: {reason}") from error
+    try:
+        choice = json.loads(raw)["choices"][0]
+        content = choice["message"].get("content")
+    except (ValueError, KeyError, IndexError, TypeError, AttributeError):
+        detail = raw.decode("utf-8", "replace")[:500]
+        raise RuntimeError(
+            f"{PROVIDER_OPENAI_COMPAT} call to {base} returned an unexpected response: {detail}"
+        ) from None
+    # Same rule as the SDK path: a truncated body is never returned.
+    if choice.get("finish_reason") == "length":
+        raise RuntimeError(
+            f"{PROVIDER_OPENAI_COMPAT} output hit the server's token cap, so the result is "
+            "incomplete. Split the file into smaller parts and compress each one."
+        )
+    return strip_llm_wrapper((content or "").strip())
 
 
 def call_claude(prompt: str) -> str:
-    """Send a prompt to Claude.
+    """Send a prompt to the configured compression provider.
 
     Prefers the Anthropic SDK when ANTHROPIC_API_KEY is set; otherwise falls
-    back to the ``claude --print`` CLI (which handles desktop auth).
+    back to the ``claude --print`` CLI (which handles desktop auth). Set
+    ``CAVEMAN_COMPRESS_PROVIDER=opencode`` and ``CAVEMAN_COMPRESS_MODEL`` (or
+    ``CAVEMAN_MODEL``) to route compression through opencode instead, or
+    ``openai-compat`` for an OpenAI-compatible server such as local Ollama.
 
     On Windows the CLI subprocess decoding defaults to the system codepage
     (cp1251 / cp1252) and crashes on UTF-8 output — see issue #152. Pinning
@@ -384,52 +754,19 @@ def call_claude(prompt: str) -> str:
     report. Windows users with non-ASCII content can also set
     ``ANTHROPIC_API_KEY`` to route through the SDK and skip the subprocess.
     """
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if api_key:
+    provider = configured_provider()
+    if provider == PROVIDER_OPENCODE:
+        return call_opencode_cli(prompt)
+    if provider == PROVIDER_OPENAI_COMPAT:
+        return call_openai_compat(prompt)
+    if provider == PROVIDER_ANTHROPIC:
+        return call_anthropic_sdk(prompt)
+    if os.environ.get(ENV_ANTHROPIC_API_KEY):
         try:
-            import anthropic
-
-            client = anthropic.Anthropic(api_key=api_key, timeout=CLAUDE_CALL_TIMEOUT_SECONDS)
-            msg = client.messages.create(
-                model=os.environ.get("CAVEMAN_MODEL", "claude-sonnet-4-5"),
-                max_tokens=8192,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            return strip_llm_wrapper(msg.content[0].text.strip())
-        except ImportError:
-            pass  # anthropic not installed, fall back to CLI
-    # Fallback: use claude CLI (handles desktop auth).
-    # Resolve binary via shutil.which so Windows .cmd/.bat shims (e.g.
-    # %APPDATA%\npm\claude.CMD) work without shell=True. On POSIX,
-    # shutil.which returns the same absolute path as the implicit lookup,
-    # so this is a no-op there. Falls back to bare "claude" if not found
-    # on PATH so subprocess raises a clear FileNotFoundError.
-    claude_bin = shutil.which("claude") or "claude"
-    try:
-        result = subprocess.run(
-            [
-                claude_bin,
-                "--print",
-                "--setting-sources",
-                "",
-                "--strict-mcp-config",
-            ],
-            input=prompt,
-            text=True,
-            capture_output=True,
-            check=True,
-            encoding="utf-8",
-            errors="replace",
-            timeout=CLAUDE_CALL_TIMEOUT_SECONDS,
-        )
-        return strip_llm_wrapper(result.stdout.strip())
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Claude call failed:\n{e.stderr}")
-    except subprocess.TimeoutExpired:
-        raise RuntimeError(
-            f"Claude CLI call timed out after {CLAUDE_CALL_TIMEOUT_SECONDS}s "
-            "(stalled network, or an auth prompt with no TTY to answer it)"
-        )
+            return call_anthropic_sdk(prompt)
+        except AnthropicSdkUnavailable:
+            pass
+    return call_claude_cli(prompt)
 
 
 def build_compress_prompt(original: str) -> str:
@@ -440,12 +777,15 @@ STRICT RULES:
 - Do NOT modify anything inside ``` code blocks
 - Do NOT modify anything inside a 4-space-indented code block either — those are code too, and they are validated
 - Do NOT modify anything inside inline backticks
+- Do NOT add new ``` fences around content that is not already fenced, even if it looks like code or JSON
+- Do NOT create, remove, reword or promote headings; keep existing # headings exactly
+- Do NOT convert XML-like tags (e.g. <example>, <section>) into headings or other markdown; leave them as plain text
 - Preserve ALL URLs exactly
 - Preserve ALL headings exactly
 - Preserve file paths and commands
-- Return ONLY the compressed markdown body — do NOT wrap the entire output in a ```markdown fence or any other fence. Inner code blocks from the original stay as-is; do not add a new outer fence around the whole file.
+- Return ONLY the compressed markdown body, with no preface, commentary, or YAML frontmatter — do NOT wrap the entire output in a ```markdown fence or any other fence. Inner code blocks from the original stay as-is; do not add a new outer fence around the whole file.
 
-Only compress natural language.
+Only compress natural language prose. Never restructure, add formatting, or improve organization.
 
 TEXT:
 {original}
@@ -477,16 +817,20 @@ ORIGINAL (reference only):
 COMPRESSED (fix this):
 {compressed}
 
-Return ONLY the fixed compressed file. No explanation.
+Return ONLY the fixed compressed markdown body. No preface, commentary, YAML frontmatter, or explanation.
 """
 
 
 CODE_MARKER_PREFIX = "@@CAVEMAN_PRESERVED_CODE_"
 FENCE_OPEN_RE = re.compile(r"^[ ]{0,3}(`{3,}|~{3,})(?:[^\r\n]*)$")
+# Whole-line tags only, at most 3 spaces in (4+ is an indented code block).
+NOCOMPRESS_OPEN_RE = re.compile(r"^[ ]{0,3}<!--\s*nocompress\s*-->\s*$", re.IGNORECASE)
+NOCOMPRESS_CLOSE_RE = re.compile(r"^[ ]{0,3}<!--\s*/nocompress\s*-->\s*$", re.IGNORECASE)
 
 
 def mask_code_blocks(text: str) -> Tuple[str, List[Tuple[str, str]]]:
-    """Replace fenced and four-space-indented code with opaque line markers."""
+    """Replace fenced and four-space-indented code, and <!-- nocompress -->
+    regions, with opaque line markers."""
     if CODE_MARKER_PREFIX in text:
         raise ValueError("Input contains reserved Caveman code-preservation marker")
     lines = text.splitlines(keepends=True)
@@ -495,17 +839,25 @@ def mask_code_blocks(text: str) -> Tuple[str, List[Tuple[str, str]]]:
     i = 0
     while i < len(lines):
         line_without_newline = lines[i].rstrip("\r\n")
-        fence = FENCE_OPEN_RE.match(line_without_newline)
+        nocompress = NOCOMPRESS_OPEN_RE.match(line_without_newline)
+        fence = not nocompress and FENCE_OPEN_RE.match(line_without_newline)
         indented = bool(line_without_newline) and (
             line_without_newline.startswith("    ") or line_without_newline.startswith("\t")
         )
-        if not fence and not indented:
+        if not nocompress and not fence and not indented:
             out.append(lines[i])
             i += 1
             continue
 
         start = i
-        if fence:
+        if nocompress:
+            i += 1
+            while i < len(lines) and not NOCOMPRESS_CLOSE_RE.match(lines[i].rstrip("\r\n")):
+                i += 1
+            if i == len(lines):
+                raise ValueError(f"unclosed <!-- nocompress --> region starting at line {start + 1}")
+            i += 1
+        elif fence:
             fence_run = fence.group(1)
             close_re = re.compile(
                 rf"^[ ]{{0,3}}{re.escape(fence_run[0])}{{{len(fence_run)},}}[ \t]*$"
@@ -539,7 +891,7 @@ def restore_code_blocks(text: str, blocks: List[Tuple[str, str]]) -> str:
     for marker, block in blocks:
         if restored.count(marker) != 1:
             raise ValueError(
-                f"Claude changed preserved code marker {marker}; refusing to write"
+                f"Provider changed preserved code marker {marker}; refusing to write"
             )
         # Masking gives marker its own transport newline. Consume that wrapper
         # when present so restoring a block that already ended in newline does
@@ -551,8 +903,34 @@ def restore_code_blocks(text: str, blocks: List[Tuple[str, str]]) -> str:
         else:
             restored = restored.replace(marker, block, 1)
     if CODE_MARKER_PREFIX in restored:
-        raise ValueError("Claude returned an unknown Caveman code-preservation marker")
+        raise ValueError("Provider returned an unknown Caveman code-preservation marker")
     return restored
+
+
+def _frontmatter_block_count(masked_body: str) -> int:
+    """Count mapping-shaped delimiter blocks outside preserved code."""
+    lines = masked_body.splitlines()
+    delimiters = [i for i, line in enumerate(lines) if line == "---"]
+    count = 0
+    for start, end in zip(delimiters, delimiters[1:]):
+        content = [line for line in lines[start + 1:end] if line.strip()]
+        key_value = re.compile(r"^[A-Za-z_][A-Za-z0-9_.-]*:(\s.*)?$")
+        if content and key_value.match(content[0]) and all(
+            key_value.match(line) or line[0].isspace() or line.startswith("- ")
+            for line in content[1:]
+        ):
+            count += 1
+    return count
+
+
+def _body_candidate_error(original_masked: str, candidate_masked: str) -> str:
+    """Use the same body-only structural guards for compression and repair."""
+    anchor = first_nonblank_line(original_masked)
+    if anchor.startswith(("#", CODE_MARKER_PREFIX)) and first_nonblank_line(candidate_masked) != anchor:
+        return "output does not start with the original body's first line (possible preamble leak)"
+    if _frontmatter_block_count(candidate_masked) > _frontmatter_block_count(original_masked):
+        return "output added YAML frontmatter to the markdown body"
+    return ""
 
 
 # ---------- Core Logic ----------
@@ -562,30 +940,46 @@ def compress_file(filepath: Path) -> bool:
     # Resolve first so the lock and every check below key off the same canonical path regardless of how the caller spelled it.
     filepath = filepath.resolve()
 
-    MAX_FILE_SIZE = 500_000  # 500KB
     # None of these three checks depends on mutual exclusion, so they run before the lock is taken — a rejected input (bad path, oversized, sensitive name) shouldn't leave a permanent lock file behind in shared state.
     if not filepath.exists():
         raise FileNotFoundError(f"File not found: {filepath}")
-    if filepath.stat().st_size > MAX_FILE_SIZE:
-        raise ValueError(f"File too large to compress safely (max 500KB): {filepath}")
+    if filepath.stat().st_size > MAX_FILE_SIZE_BYTES:
+        raise ValueError(
+            f"File too large to compress safely (max {MAX_FILE_SIZE_LABEL}): "
+            f"{filepath}"
+        )
 
     # Refuse files that look like they contain secrets or PII. Compressing ships
-    # the raw bytes to the Anthropic API — a third-party boundary — so we fail
+    # the raw bytes to the configured provider — a third-party boundary — so we fail
     # loudly rather than silently exfiltrate credentials or keys. Override is
     # intentional: the user must rename the file if the heuristic is wrong.
     if is_sensitive_path(filepath):
         raise ValueError(
             f"Refusing to compress {filepath}: filename looks sensitive "
             "(credentials, keys, secrets, or known private paths). "
-            "Compression sends file contents to the Anthropic API. "
+            "Compression sends file contents to the configured LLM provider. "
             "Rename the file if this is a false positive."
         )
 
     with file_lock(filepath):
-        return _compress_file_locked(filepath)
+        backup_path = backup_dir_for(filepath) / (filepath.stem + ".original.md")
+        had_backup = backup_path.exists()
+        run = {"live_write_started": False}
+        try:
+            return _compress_file_locked(filepath, run)
+        except BaseException:
+            # A provider error, timeout or Ctrl-C mid-run must not leave the
+            # staging file next to the source, or a backup that makes every
+            # later run abort with "Backup file already exists". The backup is
+            # removed only if this run created it and never started the live
+            # write; past that point it may be the only copy of the original.
+            filepath.with_name(filepath.name + ".caveman-staged").unlink(missing_ok=True)
+            if not had_backup and not run["live_write_started"]:
+                backup_path.unlink(missing_ok=True)
+            raise
 
 
-def _compress_file_locked(filepath: Path) -> bool:
+def _compress_file_locked(filepath: Path, run: dict) -> bool:
     """Body of compress_file; runs entirely under compress_file's file_lock for this resolved path."""
     print(f"Processing: {filepath}")
 
@@ -604,14 +998,38 @@ def _compress_file_locked(filepath: Path) -> bool:
         print("❌ Refusing to compress: file is empty or whitespace-only.")
         return False
 
-    # Check if backup already exists to prevent accidental overwriting
+    # Refuse when a backup already exists, so a rerun cannot capture this file's
+    # already-compressed text as the new "original".
     if backup_path.exists():
-        print(f"⚠️ Backup file already exists: {backup_path}")
-        print("The original backup may contain important content.")
-        print("Aborting to prevent data loss. Please remove or rename the backup file if you want to proceed.")
+        print(f"⚠️ Backup already exists: {backup_path}")
+        print(f"   It holds the uncompressed original of an earlier run on {filepath.name}.")
+        print("Aborting to prevent data loss.")
+        print(f"   To restore it:     cp '{backup_path}' '{filepath}'")
+        print(f"   To start over:     mv '{backup_path}' '{backup_path}.kept'")
+        print("   Do not just delete it — rerunning would then store the ALREADY")
+        print("   COMPRESSED text as the new original, losing the uncompressed version.")
         return False
 
-    # Split YAML frontmatter off before compression. Claude tends to strip or
+    # The pre-#1351 location is checked too: an install that compressed this file
+    # before the backup key changed still has its only original there. That path
+    # was keyed on the parent directory's NAME alone, so it was shared by every
+    # same-named file on the machine — this backup may well belong to a DIFFERENT
+    # project, which is exactly the bug that produced it. So: refuse, name the
+    # ambiguity, and never read, move or delete it on the user's behalf.
+    legacy_backup = legacy_backup_dir_for(filepath) / (filepath.stem + ".original.md")
+    if legacy_backup.exists():
+        print(f"⚠️ A backup from an older caveman-compress exists: {legacy_backup}")
+        print("   Older versions keyed backups on the parent directory's name only,")
+        print(f"   so that file is the original of SOME {filepath.parent.name}/{filepath.name}")
+        print("   on this machine — possibly this one, possibly another project's.")
+        print("Aborting to prevent data loss.")
+        print("   Check its contents, then move it out of the way to proceed:")
+        print(f"     mv '{legacy_backup}' '{legacy_backup}.kept'")
+        print("   Backups written from now on are keyed on the file's full path and")
+        print(f"   will land in {backup_path.parent}")
+        return False
+
+    # Split YAML frontmatter off before compression. LLMs tend to strip or
     # rewrite frontmatter despite preserve-structure rules; we keep it verbatim
     # by removing it from the input and re-prepending it to the output.
     frontmatter, body = split_frontmatter(original_text)
@@ -623,9 +1041,19 @@ def _compress_file_locked(filepath: Path) -> bool:
         return False
 
     # Step 1: Compress (body only, frontmatter excluded)
-    print("Compressing with Claude...")
+    provider = configured_provider()
+    print(f"Compressing with {provider}...")
     masked_body, code_blocks = mask_code_blocks(body)
     masked_compressed = call_claude(build_compress_prompt(masked_body))
+    if masked_compressed is None or not masked_compressed.strip():
+        print(f"❌ Compression aborted: {provider} returned an empty response.")
+        print("   Original file is untouched (no backup created).")
+        return False
+    body_error = _body_candidate_error(masked_body, masked_compressed)
+    if body_error:
+        print(f"❌ Compression aborted: {body_error}.")
+        print("   Original file is untouched (no backup created).")
+        return False
     try:
         compressed_body = restore_code_blocks(masked_compressed, code_blocks)
     except ValueError as error:
@@ -634,7 +1062,7 @@ def _compress_file_locked(filepath: Path) -> bool:
         return False
 
     if compressed_body is None or not compressed_body.strip():
-        print("❌ Compression aborted: Claude returned an empty response.")
+        print(f"❌ Compression aborted: {provider} returned an empty response.")
         print("   Original file is untouched (no backup created).")
         return False
 
@@ -642,8 +1070,18 @@ def _compress_file_locked(filepath: Path) -> bool:
     # and would never change, so identity must be judged on the compressible part.
     if compressed_body.strip() == body.strip():
         print("❌ Compression aborted: output is identical to input.")
-        print("   Likely causes: Claude refused, returned the prompt verbatim, or the file is")
+        print(f"   Likely causes: {provider} refused, returned the prompt verbatim, or the file is")
         print("   already in caveman form. Original file is untouched (no backup created).")
+        return False
+
+    # A rewrite that is structurally faithful but LONGER than the input passes
+    # every check below (validate() only checks structural invariants, not
+    # length) and would otherwise be written over the original and reported
+    # as a successful compression — the opposite of what this tool exists to
+    # do (issue #776). Same length is also a reject: a compression that saved
+    # nothing isn't a compression.
+    if not _is_smaller_than_body(compressed_body, body):
+        print("   Original file is untouched (no backup created).")
         return False
 
     # Reassemble: frontmatter (verbatim) + compressed body
@@ -663,50 +1101,67 @@ def _compress_file_locked(filepath: Path) -> bool:
         except OSError:
             pass
         return False
-    _write_target(filepath, compressed, backup_path, newline)
-
-    # Step 2: Validate + Retry
+    # Step 2: Validate + Retry. Each candidate is staged and validated next
+    # to the source; the live file is written only once one passes (#544).
+    staging_path = filepath.with_name(filepath.name + ".caveman-staged")
     for attempt in range(MAX_RETRIES):
         print(f"\nValidation attempt {attempt + 1}")
 
-        result = validate(backup_path, filepath)
+        _write_target(staging_path, compressed, backup_path, newline)
+        result = validate(backup_path, staging_path)
 
         if result.is_valid:
             print("Validation passed")
-            break
+            run["live_write_started"] = True
+            _write_target(filepath, compressed, backup_path, newline)
+            staging_path.unlink(missing_ok=True)
+            return True
 
         print("❌ Validation failed:")
         for err in result.errors:
             print(f"   - {err}")
 
         if attempt == MAX_RETRIES - 1:
-            # Restore original on failure
-            _write_target(filepath, original_raw, backup_path, newline)
+            staging_path.unlink(missing_ok=True)
             backup_path.unlink(missing_ok=True)
-            print("❌ Failed after retries — original restored")
+            print("Failed after retries: original left untouched")
             return False
 
-        print("Fixing with Claude...")
-        compressed = call_claude(
-            build_fix_prompt(original_text, compressed, result.errors)
+        print(f"Fixing with {provider}...")
+        fixed = call_claude(
+            build_fix_prompt(body, compressed_body, result.errors)
         )
 
-        if compressed is None or not compressed.strip():
-            print("❌ Fix attempt aborted: Claude returned an empty response.")
+        if fixed is None or not fixed.strip():
+            print(f"❌ Fix attempt aborted: {provider} returned an empty response.")
             print("   Skipping this attempt.")
             continue
 
-        # Guard against a prose preamble smuggled in ahead of the real fixed
-        # content (issue #588). Only enforced when the original starts with a
-        # structural anchor (frontmatter `---` or a heading) — plain-prose
-        # first lines get legitimately rewritten by compression, and requiring
-        # them verbatim would reject every valid fix.
-        anchor = first_nonblank_line(original_text)
-        if anchor.startswith(("---", "#")) and first_nonblank_line(compressed) != anchor:
-            print("❌ Fix attempt aborted: output does not start with the original's first line.")
-            print("   Possible preamble leak. Skipping this attempt.")
+        # Repairs use the same body-only contract as the initial compression.
+        # Mask code for structural checks so fenced YAML is never frontmatter.
+        try:
+            masked_fixed, _ = mask_code_blocks(fixed)
+        except ValueError as error:
+            print(f"❌ Fix attempt aborted: {error}")
+            continue
+        body_error = _body_candidate_error(masked_body, masked_fixed)
+        if body_error:
+            print(f"❌ Fix attempt aborted: {body_error}.")
+            print("   Skipping this attempt.")
+            continue
+        fixed_body = fixed
+        if not _is_smaller_than_body(fixed_body, body):
+            print("   Skipping this attempt.")
             continue
 
-        _write_target(filepath, compressed, backup_path, newline)
+        # The fix prompt carries the body unmasked; every protected block
+        # must still come back verbatim, including list-nested fences.
+        if any(block.rstrip("\n") not in fixed_body for _, block in code_blocks):
+            print("❌ Fix attempt aborted: output changed a preserved code or <!-- nocompress --> block.")
+            print("   Skipping this attempt.")
+            continue
 
-    return True
+        compressed_body = fixed_body
+        compressed = frontmatter + compressed_body
+
+    return False

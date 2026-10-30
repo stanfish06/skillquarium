@@ -14,7 +14,7 @@ created: 2026-06-10
 # using-superpowers
 
 > [!info] What it does
-> Use when discovering which skill applies — establishes how to find and use skills
+> Use when discovering which skill applies — establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
 
 **Source:** [skills/using-superpowers/SKILL.md](../../../skills/using-superpowers/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

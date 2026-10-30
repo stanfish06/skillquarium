@@ -16,7 +16,7 @@ Molfeat is a comprehensive Python library for molecular featurization that unifi
 > [!WARNING]
 > **Legacy GNN/Graphormer adapters removed:** molfeat **1.0.0** (Sep 2026) requires `requires-python = ">=3.11"` and narrows the project to small-molecule featurization, dropping the legacy DGL, DGLLife, Graphormer, and protein adapters. If your workflow depends on the `dgl`/`graphormer` extras or the `gin-supervised-*`/`Graphormer-*` pretrained models shown below, pin to molfeat 0.11.0 on Python 3.10, or use **[[torch-geometric]]** for custom GNN inputs.
 
-**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically.
+**Version note:** Examples target **molfeat 1.0.0** (PyPI stable, Sep 2026). Requires **Python 3.11+**. Depends on **datamol** and **PyTorch**. Since 0.8.7, prefer datamol `Mol` objects over raw `rdkit.Chem.Mol`. Since 0.10.1, fingerprint calculators use RDKit's `rdFingerprintGenerator` API internally. Since 0.11.0, pretrained models load in memory and base models are set to PyTorch evaluation mode automatically. molfeat 1.0.0 also removed the legacy DGL, DGLLife, Graphormer, and protein adapters — pin to 0.11.0 on Python 3.10 for GIN/Graphormer work, or use `torch-geometric` for custom GNN inputs on 1.0.0+.
 
 ## When to Use This Skill
 
@@ -507,6 +507,12 @@ Process in chunks or use streaming approaches for datasets > 100K molecules.
 Some models require additional packages. Install specific extras (pin version for reproducibility):
 ```bash
 uv pip install "molfeat[transformer]==1.0.0"   # For ChemBERTa/ChemGPT
+```
+
+The `dgl` and `graphormer` extras were removed in 1.0.0 (see the compatibility note above). Installing them needs a separate Python 3.10 environment — the 3.11+ environment from Installation will not accept them:
+
+```bash
+uv venv --python 3.10 .venv-molfeat-legacy && source .venv-molfeat-legacy/bin/activate
 uv pip install "molfeat[dgl]==0.11.0"          # For GIN models (0.11.0 only; removed in 1.0.0)
 uv pip install "molfeat[graphormer]==0.11.0"   # For Graphormer (0.11.0 only; removed in 1.0.0)
 ```

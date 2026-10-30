@@ -26,7 +26,7 @@ Trace spans capture `gen_ai.request.model`, temperature/top_p, prompts/completio
 ## Python install + init
 
 ```bash
-pip install openlit==1.42.0 openai==2.41.0 anthropic==0.105.2 cohere==7.0.3
+pip install openlit==1.45.0 openai==2.41.0 anthropic==0.105.2 cohere==7.0.3
 ```
 
 ```python
@@ -75,5 +75,5 @@ guard.detect(text=user_message)
 1. Cloud → **Connections** → "AI Observability"
 2. UI wizard → OTLP endpoint + API key
 3. Set env vars
-4. `pip install openlit==1.42.0` + `openlit.init()` at app startup
+4. `pip install openlit==1.45.0` + `openlit.init()` at app startup
 5. Deploy — dashboards populate within minutes

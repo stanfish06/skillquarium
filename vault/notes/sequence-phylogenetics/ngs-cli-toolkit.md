@@ -24,7 +24,7 @@ created: 2026-06-10
 
 ## Related skills
 
-- [pysam](../../notes/genomics-variants/pysam.md) — Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines
+- [pysam](../../notes/genomics-variants/pysam.md) — Provides Python/HTSlib workflows for genomic files
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

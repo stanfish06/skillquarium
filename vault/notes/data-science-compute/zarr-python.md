@@ -14,13 +14,13 @@ created: 2026-06-09
 # zarr-python
 
 > [!info] What it does
-> Chunked N-D arrays for cloud storage (Zarr-Python 3). Compressed arrays, parallel I/O, S3/GCS via fsspec, NumPy/Dask/Xarray compatible, for large-scale scientific computing pipelines.
+> Stores and queries chunked N-D scientific arrays with Zarr-Python 3, including codecs, sharding, S3/GCS storage, and NumPy/Dask/Xarray integration. Use for array layout, bounded I/O, format migration, or scientific metadata preservation.
 
 **Source:** [skills/zarr-python/SKILL.md](../../../skills/zarr-python/SKILL.md)  ·  **Domain:** [Data Science, Stats & Scientific Computing](../../maps/data-science-compute.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [dask](../../notes/data-science-compute/dask.md) — Distributed computing for larger-than-RAM pandas/NumPy workflows
+- [dask](../../notes/data-science-compute/dask.md) — Scales pandas, NumPy, and custom Python research workflows beyond memory or across clusters with Dask
 - [xarray](../../notes/data-science-compute/xarray.md) — N-dimensional labeled arrays and datasets in Python
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

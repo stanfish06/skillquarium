@@ -14,7 +14,7 @@ created: 2026-06-09
 # omero-integration
 
 > [!info] What it does
-> Microscopy data management platform. Access images via Python, retrieve datasets, analyze pixels, manage ROIs/annotations, batch processing, for high-content screening and microscopy workflows.
+> Inspects and automates microscopy data workflows against OMERO.server with omero-py, BlitzGateway, OMERO CLI, tables, annotations, ROIs, rendering, and documented OMERO.web APIs. Use this skill for scoped OMERO inventory, metadata export, import/export planning, or reviewed write workflows.
 
 **Source:** [skills/omero-integration/SKILL.md](../../../skills/omero-integration/SKILL.md)  ·  **Domain:** [Bio Databases, Lab & Cloud Platforms](../../maps/bio-databases-platforms.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

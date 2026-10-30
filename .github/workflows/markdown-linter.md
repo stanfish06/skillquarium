@@ -142,11 +142,12 @@ You are an expert documentation quality analyst. Your task is to analyze the Sup
 3. **Create a detailed issue** with the following structure:
 
 ### Issue Title
+
 Use format: "Markdown Quality Report - [Date] - [X] issues found"
 
 ### Issue Body Structure
 
-```markdown
+````markdown
 ## 🔍 Markdown Linter Summary
 
 **Date**: [Current date]
@@ -190,7 +191,7 @@ Use format: "Markdown Quality Report - [Date] - [X] issues found"
 
 - [Link to workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
 - [Super Linter Documentation](https://github.com/super-linter/super-linter)
-```
+````
 
 ## Important Guidelines
 

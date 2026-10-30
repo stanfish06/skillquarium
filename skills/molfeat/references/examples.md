@@ -4,20 +4,27 @@ This document provides practical examples for common molfeat use cases.
 
 ## Installation
 
-Requires Python 3.9 or 3.10 (molfeat 0.11.0 does not support 3.11+):
+Requires Python 3.11+ (molfeat 1.0.0 dropped 3.9/3.10 support):
 
 ```bash
-uv pip install "molfeat==0.11.0"
+uv pip install "molfeat==1.0.0"
 
-# With all pip-installable optional dependencies
-uv pip install "molfeat[all]==0.11.0"
+# With all pip-installable optional dependencies (excludes dgl/graphormer, removed in 1.0.0)
+uv pip install "molfeat[all]==1.0.0"
 
 # With specific dependencies
+uv pip install "molfeat[transformer]==1.0.0"   # For ChemBERTa, ChemGPT
+uv pip install "molfeat[pyg]==1.0.0"           # For PyTorch Geometric
+uv pip install "molfeat[viz]==1.0.0"           # For NGLView widgets
+```
+
+The `dgl` and `graphormer` extras were removed in 1.0.0. They still work on the last release
+that had them, in a separate Python 3.10 environment:
+
+```bash
+uv venv --python 3.10 .venv-molfeat-legacy && source .venv-molfeat-legacy/bin/activate
 uv pip install "molfeat[dgl]==0.11.0"          # For GNN models
 uv pip install "molfeat[graphormer]==0.11.0"   # For Graphormer
-uv pip install "molfeat[transformer]==0.11.0"  # For ChemBERTa, ChemGPT
-uv pip install "molfeat[pyg]==0.11.0"          # For PyTorch Geometric
-uv pip install "molfeat[viz]==0.11.0"          # For NGLView widgets
 ```
 
 ---

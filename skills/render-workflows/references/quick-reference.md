@@ -92,14 +92,14 @@ Import paths -- Python: `render_sdk.client.errors`, TypeScript: `@renderinc/sdk`
 
 ### Instance types
 
-| Plan | Specs |
-|------|-------|
-| `starter` | 0.5 CPU / 512 MB |
-| `standard` (default) | 1 CPU / 2 GB |
-| `pro` | 2 CPU / 4 GB |
-| `pro_plus` | 4 CPU / 8 GB |
-| `pro_max` | 8 CPU / 16 GB |
-| `pro_ultra` | 16 CPU / 32 GB |
+| Plan ID | Legacy name | Specs |
+|---------|-------------|-------|
+| `flex` (default) | — | up to 1 CPU / up to 4 GB, billed on actual usage |
+| `2c-4g` | `pro` | 2 CPU / 4 GB |
+| `2c-8g` | — | 2 CPU / 8 GB |
+| `4c-8g` | `pro_plus` | 4 CPU / 8 GB |
+| `4c-16g` | `pro_max` | 4 CPU / 16 GB |
+| `8c-32g` | `pro_ultra` | 8 CPU / 32 GB |
 
 `pro_plus`, `pro_max`, `pro_ultra` require requesting access.
 

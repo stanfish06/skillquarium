@@ -1,4 +1,0 @@
-interface:
-  display_name: "Academic Paper Reviewer"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $academic-paper-reviewer for this task."

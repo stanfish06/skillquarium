@@ -20,10 +20,10 @@ created: 2026-08-07
 
 ## Related skills
 
-- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Low-level plotting library for full customization
-- [networkx](../../notes/data-science-compute/networkx.md) — Create, analyze, and visualize complex networks and graphs in Python with NetworkX
+- [matplotlib](../../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
+- [networkx](../../notes/data-science-compute/networkx.md) — Creates, analyzes, and visualizes complex networks and graphs in Python with NetworkX
 - [pandas](../../notes/data-science-compute/pandas.md) — The workhorse library for in-memory tabular data in Python
-- [seaborn](../../notes/data-science-compute/seaborn.md) — Statistical visualization with pandas integration
+- [seaborn](../../notes/data-science-compute/seaborn.md) — Creates Seaborn statistical visualizations with pandas integration for distributions, relationships, categorical comparisons, regression displays, pair plots, and heatmaps
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

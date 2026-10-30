@@ -31,12 +31,12 @@ created: 2026-06-13
 - [fine-mapping](../notes/genomics-variants/fine-mapping.md) — Statistical fine-mapping of GWAS loci using SuSiE, SuSiE-inf, and Approximate Bayes Factors to identify credible sets and posterior inclusion probabilities (PIPs) for causal variant...
 - [finngen-phewas-skill](../notes/genomics-variants/finngen-phewas-skill.md) — Fetch compact FinnGen PheWAS summaries for single variants by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query
 - [genebass-gene-burden-skill](../notes/genomics-variants/genebass-gene-burden-skill.md) — Submit compact Genebass gene burden requests for one Ensembl gene ID and one burden set
-- [geniml](../notes/genomics-variants/geniml.md) — Use when working with genomic interval data (BED files) for machine learning tasks
+- [geniml](../notes/genomics-variants/geniml.md) — Supports audited local Geniml genomic-interval workflows: validate BED and universe contracts, plan Region2Vec or scEmbed runs, inspect model/tokenizer compatibility, and assess...
 - [genome-compare](../notes/genomics-variants/genome-compare.md) — Compare your genome to George Church (PGP-1) and estimate ancestry composition via IBS and EM admixture
 - [genome-match](../notes/genomics-variants/genome-match.md) — Score genetic compatibility across all male-female pairings in a Genomebook generation
 - [genomics-workflow-acceleration](../notes/genomics-variants/genomics-workflow-acceleration.md) — Use when accelerating existing genomics workflows with NVIDIA Parabricks, improving runtime or price/performance, converting pipeline steps to GPUs, or comparing CPU and GPU workflow...
 - [gnomad-graphql-skill](../notes/genomics-variants/gnomad-graphql-skill.md) — Submit compact gnomAD GraphQL requests for frequency, gene constraint, and variant context queries
-- [gtars](../notes/genomics-variants/gtars.md) — High-performance toolkit for genomic interval analysis in Rust with Python bindings
+- [gtars](../notes/genomics-variants/gtars.md) — Supports Gtars for local genomic interval models and set algebra, overlaps and counts, consensus and coverage, tokenization, fragment processing, and refget/BEDbase planning across...
 - [gtex-eqtl-skill](../notes/genomics-variants/gtex-eqtl-skill.md) — Fetch GTEx single-tissue eQTL associations from one variant input by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query for the GTEx v2 API
 - [gwas-catalog-region-fetch](../notes/genomics-variants/gwas-catalog-region-fetch.md) — Fetch a region of GWAS summary statistics from the NHGRI-EBI GWAS Catalog harmonised collection via tabix-on-FTP
 - [gwas-catalog-skill](../notes/genomics-variants/gwas-catalog-skill.md) — Submit compact GWAS Catalog REST API v2 requests for studies, associations, SNPs, EFO traits, genes, publications, loci, and metadata
@@ -58,13 +58,13 @@ created: 2026-06-13
 - [ngs-dna-variant-calling](../notes/genomics-variants/ngs-dna-variant-calling.md) — Dispatch WGS, WES, or targeted DNA variant requests to germline, somatic, or UMI-panel skills, then plan public nf-core/sarek, GATK4, DeepVariant, samtools, or bcftools workflows
 - [pacsomatic](../notes/genomics-variants/pacsomatic.md) — Operator toolkit for nf-core/pacsomatic matched tumor-normal workflows from BAM inputs
 - [parabricks](../notes/genomics-variants/parabricks.md) — Route NVIDIA Parabricks pbrun tools, assess GPU/runtime readiness, and provide version-aware command guidance for FASTQ/BAM processing, RNA-seq, variant calling, BAM QC, and GVCF...
-- [polars-bio](../notes/genomics-variants/polars-bio.md) — High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames
+- [polars-bio](../notes/genomics-variants/polars-bio.md) — Performs genomic interval overlap, nearest, merge, coverage, complement and subtraction on Polars DataFrames, and reads or writes BED, VCF, BCF, BAM, CRAM, GFF, GTF, FASTA and FASTQ...
 - [pybedtools](../notes/genomics-variants/pybedtools.md) — Python genomic interval arithmetic with BEDTools, complementing pysam, polars, and query for downstream tables
-- [pysam](../notes/genomics-variants/pysam.md) — Genomic file toolkit. Read/write SAM/BAM/CRAM alignments, VCF/BCF variants, FASTA/FASTQ sequences, extract regions, calculate coverage, for NGS data processing pipelines
+- [pysam](../notes/genomics-variants/pysam.md) — Provides Python/HTSlib workflows for genomic files
 - [recombinator](../notes/genomics-variants/recombinator.md) — Produce offspring genomes from parent pairs via meiotic recombination, mutation, and clinical evaluation
 - [sample-qc-triage](../notes/genomics-variants/sample-qc-triage.md) — Deterministic multi-sample QC triage for identity, sex, contamination, and batch-shift outliers
 - [soul2dna](../notes/genomics-variants/soul2dna.md) — Compile SOUL.md character profiles into synthetic diploid genomes (.genome.json) via trait-to-allele mapping
-- [tiledbvcf](../notes/genomics-variants/tiledbvcf.md) — Efficient storage and retrieval of genomic variant data using TileDB
+- [tiledbvcf](../notes/genomics-variants/tiledbvcf.md) — Stores and retrieves genomic variant calls with TileDB-VCF
 - [tpmi-phewas-skill](../notes/genomics-variants/tpmi-phewas-skill.md) — Fetch compact TPMI PheWAS summaries for single variants by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query
 - [ukb-ppp-region-fetch](../notes/genomics-variants/ukb-ppp-region-fetch.md) — Fetch a regional slice of plasma pQTL summary statistics from the UK Biobank Pharma Proteomics Project (UKB-PPP
 - [ukb-topmed-phewas-skill](../notes/genomics-variants/ukb-topmed-phewas-skill.md) — Fetch compact UKB-TOPMed PheWAS summaries for single variants by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query

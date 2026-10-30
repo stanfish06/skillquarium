@@ -36,5 +36,53 @@
       "find": "- Train sites on GCP, protocol deviations taxonomy, SAE reporting windows (24 h fatal/life-\n  threatening, 15 calendar days for others per ICH E2A where applicable), and source document\n  requirements.",
       "replace": "- Train sites on GCP, protocol deviations taxonomy, and immediate SAE reporting after the\n  investigator becomes aware, subject to protocol-defined exceptions and local requirements.\n- Keep site reporting distinct from sponsor SUSAR reporting to regulators: fatal or life-\n  threatening unexpected ADRs within 7 calendar days with a complete report in 8 additional\n  days, and other serious unexpected ADRs within 15 calendar days per ICH E2A."
     }
+  ],
+  "metrology-scientist": [
+    {
+      "id": "ilac-g24-recalibration-intervals",
+      "find": "ILAC P14 addresses calibration interval decisions in policy terms",
+      "replace": "ILAC G24:2022 gives the methods for determining and reviewing recalibration intervals (ILAC P14 is the calibration-uncertainty policy, not an interval document)"
+    }
+  ],
+  "molecular-pathologist": [
+    {
+      "id": "her2-negative-after-reflex-ish",
+      "find": "| IHC HER2 2+, FISH negative | Heterogeneous overexpression without amplification | Report equivocal per ASCO/CAP; not HER2-positive for trastuzumab |",
+      "replace": "| IHC HER2 2+, FISH negative (breast) | Equivocal IHC resolved by negative reflex ISH | Report HER2-negative for protein overexpression/gene amplification (IHC 2+/ISH negative); retain IHC score and [ASCO/CAP reporting comment](https://www.cap.org/wp-content/uploads/documents/her2_breast_update_algorithms_2023.pdf) |"
+    },
+    {
+      "id": "her2-ratio-needs-copy-number-and-conditional-workup",
+      "find": "| FISH HER2 ratio 1.8–2.2 | Borderline amplification, heterogeneity, truncation artifact | Count additional 20 cells; second block; ISH on different area |",
+      "replace": "| HER2/CEP17 ratio 1.8–2.2 (breast) | Ratio alone does not establish HER2 status | Use ratio and average HER2 signals/cell to select the ASCO/CAP dual-probe ISH group; perform IHC review and additional-observer recount when the algorithm requires |"
+    },
+    {
+      "id": "her2-pending-workup-not-ratio-only-status",
+      "find": "- **Equivocal:** \"HER2 IHC 2+ with equivocal ISH (ratio 1.9); NOT amplified per ASCO/CAP criteria\" — not \"HER2-negative.\"",
+      "replace": "- **Pending HER2 workup (breast):** \"HER2 IHC 2+; final interpretation pending reflex ISH workup.\" Report both HER2/CEP17 ratio and average HER2 signals/cell; complete the applicable ASCO/CAP algorithm before assigning final status. A ratio of 1.9 alone does not establish the final category."
+    }
+  ],
+  "naval-architect": [
+    {
+      "id": "slamming-class-rule-local-impact-loads",
+      "find": "- **Seakeeping is motion and load.** Heave, pitch, roll RAOs; slamming (Ochi, STAW-2);",
+      "replace": "- **Seakeeping is motion and load.** Heave, pitch, roll RAOs; slamming (Ochi, class-rule local impact loads);"
+    },
+    {
+      "id": "no-stawave2-for-slamming-damage",
+      "find": "- **Slamming damage reports:** reduce speed in head seas; bulb immersion; flare redesign;\n  check STAW-2 or class slamming pressure on local structure (interface to structures).",
+      "replace": "- **Slamming damage reports:** reduce speed in head seas; bulb immersion; flare redesign;\n  check applicable class-rule slamming pressures on local structure with the structural engineer.\n  STAWAVE-2 corrects speed-trial added resistance in waves; it does not assess local slamming\n  pressure ([ITTC Appendix G.2](https://www.ittc.info/media/11972/75-04-01-011.pdf))."
+    }
+  ],
+  "microelectronics-engineer": [
+    {
+      "id": "bga-standard-ipc7095e",
+      "find": "- Standards: **JEDEC** MSL, **J-STD-020/033**, **IPC-7093** (BGA), **AEC** Q100/104/200.",
+      "replace": "- Standards: **JEDEC** MSL, **J-STD-020/033**, **IPC-7095E** (BGA), **IPC-7093** (bottom-termination SMT components), **AEC** Q100/104/200."
+    },
+    {
+      "id": "pcb-assembly-standard-package-scope",
+      "find": "- **PCB second level:** pad design per IPC-7093, stencil aperture, and reflow profile for voiding under thermal pads.",
+      "replace": "- **PCB second level:** use IPC-7095E for BGA pad design and assembly; use IPC-7093 for bottom-termination components (QFN/SON/DFN/LGA), including stencil aperture, thermal-pad attachment, and voiding guidance."
+    }
   ]
 }

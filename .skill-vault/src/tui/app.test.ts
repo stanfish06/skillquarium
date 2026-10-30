@@ -493,6 +493,34 @@ describe("OpenTUI interaction", () => {
     expect(list.scrollTop).toBeGreaterThan(0)
   })
 
+  test("reused rows repaint after a toggle and drop marks a filter hid", async () => {
+    const catalog: Catalog = {
+      skills: [makeSkill("alpha"), makeSkill("beta", "software-dev", false, false)],
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 28 })
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog())
+    await setup.renderOnce()
+
+    const claudeLabel = () => detailText("claude-alpha-label")
+    expect(claudeLabel()).toBe("● on")
+    setup.mockInput.pressEnter()
+    setup.mockInput.pressKey("c")
+    await setup.waitFor(() => claudeLabel() === "○ off")
+
+    setup.mockInput.pressKey("m")
+    expect(detailText("mark-alpha-label")).toBe("[x]")
+    setup.mockInput.pressKey("/")
+    await setup.mockInput.typeText("beta")
+    setup.mockInput.pressBackspace()
+    setup.mockInput.pressBackspace()
+    setup.mockInput.pressBackspace()
+    setup.mockInput.pressBackspace()
+    await setup.renderOnce()
+    expect(detailText("mark-alpha-label")).toBe("[ ]")
+  })
+
   test("does not mark skills with catalog errors", async () => {
     const broken = makeSkill("broken")
     broken.claude_enabled = null

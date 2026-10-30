@@ -16,16 +16,16 @@ created: 2026-06-13
 
 ## Skills (13)
 
-- [bids](../notes/imaging-signals/bids.md) — Use this skill when working with Brain Imaging Data Structure (BIDS) datasets: organizing neuroscience and biomedical data (MRI, EEG, MEG, iEEG, PET, microscopy, NIRS, motion capture...
+- [bids](../notes/imaging-signals/bids.md) — Organizes, queries, validates, and converts Brain Imaging Data Structure (BIDS) datasets
 - [cell-detection](../notes/imaging-signals/cell-detection.md) — Cell segmentation in fluorescence microscopy images
 - [cellpose-cell-segmentation](../notes/imaging-signals/cellpose-cell-segmentation.md) — DL cell/nucleus segmentation for fluorescence and brightfield microscopy with Cellpose 4's Cellpose-SAM and CellposeDINO models
 - [cellpose-stardist-bioimage](../notes/imaging-signals/cellpose-stardist-bioimage.md) — Bioimage cell and nucleus segmentation routing with cellpose-cell-segmentation, Cellpose, StarDist, napari-viz, and monai-medical-imaging-ai
-- [flowio](../notes/imaging-signals/flowio.md) — Parse FCS (Flow Cytometry Standard) files v2.0-3.1
-- [histolab](../notes/imaging-signals/histolab.md) — Lightweight WSI tile extraction and preprocessing
-- [imaging-data-commons](../notes/imaging-signals/imaging-data-commons.md) — Query and download public cancer imaging data from NCI Imaging Data Commons using idc-index
+- [flowio](../notes/imaging-signals/flowio.md) — Reads, inspects, and writes Flow Cytometry Standard (FCS) 2.0, 3.0, and 3.1 files with FlowIO
+- [histolab](../notes/imaging-signals/histolab.md) — Extracts and preprocesses whole-slide histology image tiles with Histolab
+- [imaging-data-commons](../notes/imaging-signals/imaging-data-commons.md) — Queries and downloads public cancer imaging data from NCI Imaging Data Commons
 - [monai-medical-imaging-ai](../notes/imaging-signals/monai-medical-imaging-ai.md) — Medical imaging deep learning with MONAI, PyTorch, pydicom, pathml, histolab, and napari-viz
 - [napari-viz](../notes/imaging-signals/napari-viz.md) — Headless bioimage and microscopy visualization with napari
-- [neurokit2](../notes/imaging-signals/neurokit2.md) — Comprehensive biosignal processing toolkit for analyzing physiological data including ECG, EEG, EDA, RSP, PPG, EMG, and EOG signals
-- [neuropixels-analysis](../notes/imaging-signals/neuropixels-analysis.md) — Analyze Neuropixels extracellular recordings end-to-end with SpikeInterface
-- [pathml](../notes/imaging-signals/pathml.md) — Full-featured computational pathology toolkit
-- [pydicom](../notes/imaging-signals/pydicom.md) — Python library for working with DICOM (Digital Imaging and Communications in Medicine) files
+- [neurokit2](../notes/imaging-signals/neurokit2.md) — Builds and audits reproducible NeuroKit2 research workflows for physiological time-series preprocessing, event/interval analysis, multimodal alignment, variability, and complexity
+- [neuropixels-analysis](../notes/imaging-signals/neuropixels-analysis.md) — Analyzes Neuropixels extracellular recordings end-to-end with SpikeInterface
+- [pathml](../notes/imaging-signals/pathml.md) — Supports local computational pathology research with PathML: slide loading and tiling, preprocessing and QC, h5path storage, multiplex quantification, spatial graphs, and bounded model...
+- [pydicom](../notes/imaging-signals/pydicom.md) — Reads, inspects, writes, transforms, and preflights local DICOM datasets and pixel data

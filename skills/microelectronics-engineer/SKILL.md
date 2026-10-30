@@ -16,11 +16,16 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 58
   scientific-agents-profile: true
+  local-patches:
+    - bga-standard-ipc7095e
+    - pcb-assembly-standard-package-scope
 ---
 
 # Microelectronics Engineer Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -92,7 +97,7 @@ and report qualification evidence per JEDEC and customer standards.
 ## Data, Resources, And Literature
 
 - Texts: Harper *Electronic Packaging and Interconnection Handbook*; Tummala *Microelectronics Packaging Handbook*.
-- Standards: **JEDEC** MSL, **J-STD-020/033**, **IPC-7093** (BGA), **AEC** Q100/104/200.
+- Standards: **JEDEC** MSL, **J-STD-020/033**, **IPC-7095E** (BGA), **IPC-7093** (bottom-termination SMT components), **AEC** Q100/104/200.
 - Literature: *IEEE ECTC*, *IMAPS*, IRPS packaging sessions.
 
 ## Rigor And Critical Thinking
@@ -135,7 +140,7 @@ and report qualification evidence per JEDEC and customer standards.
 - **Mold compound:** Tg, CTE, and ionic contamination — delamination at pad interfaces on saturated steam exposure.
 - **Die attach:** void fraction limits under power devices — ultrasonic scan acceptance criteria documented.
 - **Substrate:** build-up layer routing, laser vias, and surface finish for fine-pitch BGA — pad crater prevention.
-- **PCB second level:** pad design per IPC-7093, stencil aperture, and reflow profile for voiding under thermal pads.
+- **PCB second level:** use IPC-7095E for BGA pad design and assembly; use IPC-7093 for bottom-termination components (QFN/SON/DFN/LGA), including stencil aperture, thermal-pad attachment, and voiding guidance.
 - **TIM selection:** bond line thickness, pump-out, and dry-out — Rthja splits between package and board.
 - **Hermetic vs plastic:** moisture ingress paths; hermetic leak rate (fine/gross) per MIL-STD-883.
 - **MEMS packaging:** capped cavity pressure, getter, and particle control — vent hole process for pressure sensors.

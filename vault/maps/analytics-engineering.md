@@ -32,7 +32,7 @@ created: 2026-06-13
 - [creating-mermaid-dbt-dag](../notes/analytics-engineering/creating-mermaid-dbt-dag.md) — Generates a Mermaid flowchart diagram of dbt model lineage using MCP tools, manifest.json, or direct code parsing as fallbacks
 - [dagster-expert](../notes/analytics-engineering/dagster-expert.md) — Expert guidance for working with Dagster and the dg CLI
 - [databricks-agent-bricks](../notes/analytics-engineering/databricks-agent-bricks.md) — Create Agent Bricks: Knowledge Assistants (KA) for document Q&A and Supervisor Agents for multi-agent orchestration (MAS)
-- [databricks-ai-functions](../notes/analytics-engineering/databricks-ai-functions.md) — Use Databricks built-in AI Functions (ai_classify, ai_extract, ai_summarize, ai_mask, ai_translate, ai_fix_grammar, ai_gen, ai_analyze_sentiment, ai_similarity, ai_parse_document...
+- [databricks-ai-functions](../notes/analytics-engineering/databricks-ai-functions.md) — Use Databricks built-in AI Functions (ai_classify, ai_decide, ai_extract, ai_summarize, ai_mask, ai_translate, ai_fix_grammar, ai_gen, ai_analyze_sentiment, ai_similarity...
 - [databricks-aibi-dashboards](../notes/analytics-engineering/databricks-aibi-dashboards.md) — Create Databricks AI/BI dashboards. Must use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure
 - [databricks-app-design](../notes/analytics-engineering/databricks-app-design.md) — Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit...
 - [databricks-apps](../notes/analytics-engineering/databricks-apps.md) — Build apps on Databricks Apps platform. Use when asked to create data apps, analytics tools, or custom interactive visualizations
@@ -43,14 +43,14 @@ created: 2026-06-13
 - [databricks-dbsql](../notes/analytics-engineering/databricks-dbsql.md) — Databricks SQL (DBSQL) advanced features and SQL warehouse capabilities
 - [databricks-docs](../notes/analytics-engineering/databricks-docs.md) — Databricks documentation reference via llms.txt index
 - [databricks-execution-compute](../notes/analytics-engineering/databricks-execution-compute.md) — Execute code and manage compute on Databricks: run Python/Scala/SQL/R via serverless, classic, or interactive clusters, and create/resize/delete clusters and SQL warehouses
-- [databricks-genie-agents](../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents — curated, per-data natural-language agents (formerly Genie Spaces): build, export/import, migrate across workspaces, and ask...
+- [databricks-genie-agents](../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents (formerly Genie Spaces): curated agents over Unity Catalog tables, Metric Views, and documents in UC volumes
 - [databricks-iceberg](../notes/analytics-engineering/databricks-iceberg.md) — Apache Iceberg tables on Databricks — Managed Iceberg tables, External Iceberg Reads (fka Uniform), Compatibility Mode, Iceberg REST Catalog (IRC), Iceberg v3, Snowflake interop...
 - [databricks-jobs](../notes/analytics-engineering/databricks-jobs.md) — Develop and deploy Lakeflow Jobs on Databricks via DABs, Python SDK, or the CLI
 - [databricks-lakebase](../notes/analytics-engineering/databricks-lakebase.md) — Databricks Lakebase Postgres: projects, scaling, connectivity, Lakebase synced tables, and Data API
 - [databricks-lakeflow-connect](../notes/analytics-engineering/databricks-lakeflow-connect.md) — Build managed ingestion pipelines into Databricks using Lakeflow Connect
 - [databricks-metric-views](../notes/analytics-engineering/databricks-metric-views.md) — Unity Catalog metric views: define, create, query, and manage governed business metrics in YAML
 - [databricks-ml-training](../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
-- [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow 3 GenAI agent evaluation. Use when writing mlflow.genai.evaluate() code, creating @scorer functions, using built-in scorers (Guidelines, Correctness, Safety...
+- [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow GenAI evaluation and agent improvement on Databricks
 - [databricks-model-serving](../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
 - [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks
 - [databricks-python-sdk](../notes/analytics-engineering/databricks-python-sdk.md) — Databricks development guidance including Python SDK, Databricks Connect, CLI, and REST API
@@ -60,14 +60,14 @@ created: 2026-06-13
 - [databricks-unity-catalog](../notes/analytics-engineering/databricks-unity-catalog.md) — Unity Catalog governance, access control, and observability
 - [databricks-unstructured-pdf-generation](../notes/analytics-engineering/databricks-unstructured-pdf-generation.md) — Build RAG / unstructured-document evaluation datasets and demo documents (e.g
 - [databricks-vector-search](../notes/analytics-engineering/databricks-vector-search.md) — Databricks Vector Search endpoints and indexes for RAG and semantic search
-- [databricks-zerobus-ingest](../notes/analytics-engineering/databricks-zerobus-ingest.md) — Build Zerobus Ingest clients for near real-time data ingestion into Databricks Delta tables via gRPC
+- [databricks-zerobus-ingest](../notes/analytics-engineering/databricks-zerobus-ingest.md) — Push records from apps, services, devices, or scripts directly into Unity Catalog Delta tables with Zerobus Ingest: SDKs (Python, TypeScript, Go, Java, Rust, C++, .NET), REST, OTLP...
 - [fetching-dbt-docs](../notes/analytics-engineering/fetching-dbt-docs.md) — Retrieves and searches dbt documentation pages in LLM-friendly markdown format
 - [infra-clickhouse](../notes/analytics-engineering/infra-clickhouse.md) — Sets up and manages ClickHouse using the clickhousectl CLI — installs and runs a local ClickHouse server for development, and creates managed ClickHouse Cloud services for production...
 - [infra-postgres](../notes/analytics-engineering/infra-postgres.md) — Sets up and manages Postgres using the clickhousectl CLI — runs a local Docker-backed Postgres for development, and creates and operates managed ClickHouse Cloud Postgres services...
 - [iris-development](../notes/analytics-engineering/iris-development.md) — Iris is Redis's umbrella for AI-focused products
 - [langfuse](../notes/analytics-engineering/langfuse.md) — Interact with Langfuse and access its documentation: tracing, monitoring, creating datasets, running experiments, and evaluating AI applications
 - [llm-observability-evals](../notes/analytics-engineering/llm-observability-evals.md) — LLM and agent observability, tracing, and evaluation workflows with langfuse, phoenix-cli, and phoenix-evals
-- [logfire-instrumentation](../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to applications and send as much useful telemetry as possible
+- [logfire-instrumentation](../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to application code — traces, logs, metrics, and AI/agent spans
 - [logfire-query](../notes/analytics-engineering/logfire-query.md) — Query and analyze Logfire telemetry data — traces, logs, spans, metrics, summaries, and SQL results
 - [logfire-ui](../notes/analytics-engineering/logfire-ui.md) — Open or return Logfire project pages, live views, trace links, and Explore pages in the Codex browser without querying telemetry first
 - [migrating-dbt-core-to-fusion](../notes/analytics-engineering/migrating-dbt-core-to-fusion.md) — Use when a user needs help triaging dbt-core to Fusion migration errors
@@ -84,7 +84,7 @@ created: 2026-06-13
 - [neo4j-driver-java-skill](../notes/analytics-engineering/neo4j-driver-java-skill.md) — Neo4j Java Driver v6 — driver lifecycle, Maven/Gradle setup, executableQuery, executeRead/Write managed transactions, explicit transactions, async/reactive patterns, error handling...
 - [neo4j-driver-javascript-skill](../notes/analytics-engineering/neo4j-driver-javascript-skill.md) — Neo4j JavaScript/TypeScript Driver v6 — driver lifecycle, executeQuery, managed transactions (executeRead/executeWrite), session.run, Integer handling, JSON serialization, record...
 - [neo4j-driver-python-skill](../notes/analytics-engineering/neo4j-driver-python-skill.md) — Neo4j Python Driver v6 — driver lifecycle, execute_query, managed and explicit transactions, async (AsyncGraphDatabase), result handling, data type mapping, error handling, UNWIND...
-- [neo4j-gds-skill](../notes/analytics-engineering/neo4j-gds-skill.md) — Neo4j Graph Data Science (GDS) embedded plugin via Python client or Cypher — covers GraphDataScience, gds.v2 plugin endpoints, gds.version, native projection, Cypher projection, graph...
+- [neo4j-gds-skill](../notes/analytics-engineering/neo4j-gds-skill.md) — Neo4j Graph Data Science (GDS) embedded plugin via Python client or Cypher — covers graphdatascience client 2.x, GraphDataScience, gds.graph.project.native, gds.graph.project.cypher...
 - [neo4j-genai-plugin-skill](../notes/analytics-engineering/neo4j-genai-plugin-skill.md) — Use Neo4j GenAI Plugin ai.text.* functions and procedures for in-Cypher embedding generation, text completion, structured output, chat, tokenization, and batch ingestion
 - [neo4j-getting-started-skill](../notes/analytics-engineering/neo4j-getting-started-skill.md) — Orchestrates zero-to-running-app in 8 stages — prerequisites → context → provision → model → load → explore → query → build
 - [neo4j-graphql-skill](../notes/analytics-engineering/neo4j-graphql-skill.md) — Build and configure a GraphQL API backed by Neo4j using @neo4j/graphql v7 (current) or v5 (LTS)
@@ -102,8 +102,8 @@ created: 2026-06-13
 - [neo4j-spring-data-skill](../notes/analytics-engineering/neo4j-spring-data-skill.md) — Use when building Spring Boot applications with Neo4j using Spring Data Neo4j (SDN 7.x/8.x) — @Node entity mapping, @Relationship, @RelationshipProperties, Neo4jRepository...
 - [neo4j-vector-index-skill](../notes/analytics-engineering/neo4j-vector-index-skill.md) — Create and manage Neo4j vector indexes, run vector similarity search (ANN/kNN), store embeddings on nodes or relationships, use SEARCH clause (Neo4j 2026.01+, preferred) or...
 - [observability-and-instrumentation](../notes/analytics-engineering/observability-and-instrumentation.md) — Instruments code so production behavior is visible and diagnosable
-- [phoenix-cli](../notes/analytics-engineering/phoenix-cli.md) — Debug LLM applications using the Phoenix CLI
-- [phoenix-evals](../notes/analytics-engineering/phoenix-evals.md) — Build and run evaluators for AI/LLM applications using Phoenix
+- [phoenix-cli](../notes/analytics-engineering/phoenix-cli.md) — Debug LLM applications using the Phoenix CLI (`px`, from @arizeai/phoenix-cli)
+- [phoenix-evals](../notes/analytics-engineering/phoenix-evals.md) — Build, run, and validate evaluators for AI/LLM applications with Phoenix, in Python or TypeScript (including Vercel AI SDK apps) — code-based checks and LLM-as-a-judge, run over...
 - [redis-clustering](../notes/analytics-engineering/redis-clustering.md) — Redis Cluster and replication guidance covering hash tags for multi-key operations, avoiding CROSSSLOT errors, and reading from replicas to scale read-heavy workloads
 - [redis-connections](../notes/analytics-engineering/redis-connections.md) — Redis client and connection guidance covering connection pooling, multiplexing, pipelining, client-side caching with RESP3, avoiding slow commands (KEYS, SMEMBERS, HGETALL), and tuning...
 - [redis-core](../notes/analytics-engineering/redis-core.md) — Core Redis modeling guidance — choose the right data structure (String, Hash, List, Set, Sorted Set, JSON, Stream, Vector Set) and use consistent colon-separated key names
@@ -114,4 +114,4 @@ created: 2026-06-13
 - [running-dbt-commands](../notes/analytics-engineering/running-dbt-commands.md) — Formats and executes dbt CLI commands, selects the correct dbt executable, and structures command parameters
 - [troubleshooting-dbt-job-errors](../notes/analytics-engineering/troubleshooting-dbt-job-errors.md) — Diagnoses dbt Cloud/platform job failures by analyzing run logs, querying the Admin API, reviewing git history, and investigating data issues
 - [using-dbt-for-analytics-engineering](../notes/analytics-engineering/using-dbt-for-analytics-engineering.md) — Builds and modifies dbt models, writes SQL transformations using ref() and source(), creates tests, and validates results with dbt show
-- [working-with-dbt-mesh](../notes/analytics-engineering/working-with-dbt-mesh.md) — Implements dbt Mesh governance features (model contracts, access modifiers, groups, versioning) and multi-project collaboration with cross-project refs
+- [working-with-dbt-mesh](../notes/analytics-engineering/working-with-dbt-mesh.md) — Use when changing a dbt model in a way that could break its consumers — renaming, removing, or retyping a column, or changing a model that downstream models, exposures, dashboards, or...

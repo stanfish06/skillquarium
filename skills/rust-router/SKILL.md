@@ -113,11 +113,17 @@ Layer 1: Language Mechanics (HOW)
 
 ### Default Project Settings
 
-When creating new Rust projects or Cargo.toml files, ALWAYS use:
+When creating new Rust projects or Cargo.toml files, choose the edition and `rust-version`
+from the project's language features, dependencies, and user compatibility requirements.
+`rust-version` declares the minimum supported Rust version (MSRV), not the compiler to
+install. Use the latest stable toolchain for development unless the project specifies one.
+
+For example, Rust 2024 requires at least Rust 1.85. Keep this MSRV only if the package
+and its dependencies support it, and test the declared MSRV:
 
 ```toml
 [package]
-edition = "2024"  # ALWAYS use latest stable edition
+edition = "2024"
 rust-version = "1.85"
 
 [lints.rust]

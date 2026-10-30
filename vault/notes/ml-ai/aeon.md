@@ -18,7 +18,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [scikit-learn](../../notes/ml-ai/scikit-learn.md) — Machine learning in Python with scikit-learn
+- [scikit-learn](../../notes/ml-ai/scikit-learn.md) — Supports machine learning in Python with scikit-learn
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

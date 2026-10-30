@@ -37,7 +37,7 @@ CLI Command to Scaffold a new Customer Account UI Extension:
 shopify app generate extension --template=customer_account_ui --name=my_customer_account_ui_extension
 ```
 
-version: 2026-01
+version: 2026-07
 
 ## Extension Targets (use these in shopify.extension.toml)
 

@@ -17,7 +17,7 @@ Use this skill when you need to tune any ML model's hyperparameters — it is fr
 
 ## Installation
 
-Tested against **optuna 4.x** (latest 4.9.0, June 2026). Requires **optuna 4.0+** and **Python 3.9+** (the skill uses 4.x APIs such as `PatientPruner` and `JournalStorage`).
+Tested against **optuna 5.x** (latest 5.0.0, September 2026). Requires **optuna 4.0+** and **Python 3.9+** (the skill uses 4.x/5.x APIs such as `PatientPruner` and `JournalStorage`).
 
 ```bash
 # Core install

@@ -20,6 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [inspect-ai](../../notes/ml-ai/inspect-ai.md) — Write, run and diagnose local LLM evaluations with Inspect AI using tasks, datasets, solvers, scorers and saved eval logs
 - [transformers](../../notes/ml-ai/transformers.md) — Hugging Face Transformers for loading Hub models, running pipeline inference, text generation, and Trainer fine-tuning on NLP, vision, audio, and multimodal tasks
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

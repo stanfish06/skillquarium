@@ -195,7 +195,7 @@ kubectl run test-pull --image=myregistry.io/myapp:v1.2.0 \
 kubectl create secret docker-registry registry-credentials \
   --docker-server=myregistry.io \
   --docker-username=myuser \
-  --docker-password=mypassword \
+  --docker-password=<registry-password> \
   --docker-email=user@example.com \
   -n production
 ```
@@ -250,18 +250,15 @@ kubectl run test-connectivity --image=nicolaka/netshoot:latest -it --rm -n produ
 curl -v http://web-app:80
 nc -zv web-app 80
 
-# Bisect one suspect policy (testing only) — back up first, nothing recreates a
-# deleted NetworkPolicy and the namespace falls back to allow-all while it is gone
-kubectl get networkpolicy -n production -o yaml > netpol-backup.yaml
-kubectl delete networkpolicy <suspect-policy> -n production
+# Find the policies that select the destination pod (compare podSelector with these labels)
+kubectl get pods -n production -l app=web-app --show-labels
+kubectl get networkpolicy -n production -o custom-columns=NAME:.metadata.name,SELECTOR:.spec.podSelector
 
-# Restore as soon as the test is done
-kubectl apply -f netpol-backup.yaml
+# Fix forward: add a narrow allow rule for the blocked path (see networking.md) instead of removing policies.
+# Never delete production policies to test; if you must bisect, reproduce in a staging
+# namespace and remove one named policy at a time there.
+kubectl delete networkpolicy default-deny-all -n staging
 ```
-
-Never use `kubectl delete networkpolicy --all`: it removes the `default-deny-all`
-baseline along with everything else. Confirm with the user before deleting any policy
-in a live namespace.
 
 ### Issue 7: High Resource Usage
 

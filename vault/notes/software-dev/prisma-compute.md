@@ -14,15 +14,13 @@ created: 2026-08-23
 # prisma-compute
 
 > [!info] What it does
-> Prisma Compute deployment and hosting guide. Use whenever the user mentions Prisma Compute, `prisma.compute.ts`, `defineComputeConfig`, deploying or hosting a Prisma app, `@prisma/cli app deploy`, `compute:deploy`, `create-prisma --deploy`, `PRISMA_SERVICE_TOKEN`, Compute auth/workspaces, apps/deployments/build logs/domains, localhost vs `0.0.0.0`, deploy port binding, or framework deploy readiness for Hono, Elysia, Next.js, TanStack Start, Astro, Nuxt, Svelte, Nest, Turborepo, or custom/prebuilt artifacts.
+> Deploy and operate apps on Prisma Compute with the Prisma 8 CLI. Use whenever the user mentions Prisma Compute, deploying or hosting a Prisma app, `prisma deploy`, `prisma dev module.ts`, Prisma Composer apps (`module.ts`, `compute()`, the `composer` section of `prisma.config.ts`), preview stages, deploy on push (`prisma git connect`, `prisma/cloud-deploy-action`), `prisma service` logs, versions, rollback, or custom domains, `project env`, `PRISMA_SERVICE_TOKEN`, regions, 504s, sleeping instances, or `waitUntil`; also when a project still uses the removed `@prisma/cli app deploy`, `prisma.compute.ts`, `defineComputeConfig`, `compute:deploy`, or `build logs` surface.
 
 **Source:** [skills/prisma-compute/SKILL.md](../../../skills/prisma-compute/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [auth](../../notes/security-auditing/auth.md) — Authentication integration guidance — Clerk (native Vercel Marketplace), Descope, and Auth0 setup for Next.js applications
-- [start](../../notes/vault-meta/start.md) — Use when starting Zoom work
-- [turborepo](../../notes/web-automation-frontend/turborepo.md) — Turborepo expert guidance. Use when setting up or optimizing monorepo builds, configuring task caching, remote caching, parallel execution, or the --affected flag for incremental CI
+_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

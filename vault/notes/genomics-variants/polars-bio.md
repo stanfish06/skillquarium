@@ -14,7 +14,7 @@ created: 2026-06-09
 # polars-bio
 
 > [!info] What it does
-> High-performance genomic interval operations and bioinformatics file I/O on Polars DataFrames. Overlap, nearest, merge, coverage, complement, subtract for BED/VCF/BAM/GFF intervals. Streaming, cloud-native, faster bioframe alternative.
+> Performs genomic interval overlap, nearest, merge, coverage, complement and subtraction on Polars DataFrames, and reads or writes BED, VCF, BCF, BAM, CRAM, GFF, GTF, FASTA and FASTQ data. Use for coordinate-aware genomic joins, read-depth analysis, lazy bioinformatics I/O, SQL queries or migration from bioframe.
 
 **Source:** [skills/polars-bio/SKILL.md](../../../skills/polars-bio/SKILL.md)  ·  **Domain:** [Genomics, Variants & Population Genetics](../../maps/genomics-variants.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

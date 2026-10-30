@@ -12,7 +12,7 @@ created: 2026-08-23
 # rover
 
 > [!info] What it does
-> Guide for using Apollo Rover CLI to manage GraphQL schemas and federation. Use this skill when: (1) publishing or fetching subgraph/graph schemas, (2) composing supergraph schemas locally or via GraphOS, (3) running local supergraph development with rover dev, (4) validating schemas with check and lint commands, (5) configuring Rover authentication and environment, (6) exploring or searching a graph's schema for agent-driven discovery (rover schema describe / rover schema search).
+> Guide for using Apollo Rover CLI to manage GraphQL schemas and federation. Use this skill when: (1) publishing or fetching subgraph/graph schemas, (2) composing supergraph schemas locally or via GraphOS, (3) running local supergraph development with rover dev, (4) validating schemas with check and lint commands, (5) configuring Rover authentication and environment, (6) exploring or searching a graph's schema for agent-driven discovery (rover schema describe / rover schema search), (7) initializing a new graph project or MCP server with rover init, (8) working with Apollo Connectors, contracts, persisted queries, or client operations, (9) managing API keys, plugins, templates, or graph artifacts.
 
 **Source:** [skills/rover/SKILL.md](../../../skills/rover/SKILL.md)  ·  **Domain:** [Web Automation, Frontend & Design](../../maps/web-automation-frontend.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

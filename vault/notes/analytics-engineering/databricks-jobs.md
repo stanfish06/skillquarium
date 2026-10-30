@@ -14,7 +14,7 @@ created: 2026-08-23
 # databricks-jobs
 
 > [!info] What it does
-> Develop and deploy Lakeflow Jobs on Databricks via DABs, Python SDK, or the CLI. Use when creating data engineering jobs with notebooks, Python wheels, SQL, dbt, or pipelines. Invoke BEFORE starting implementation.
+> Develop and deploy Lakeflow Jobs on Databricks via DABs, Python SDK, or the CLI. Use when creating data engineering jobs with notebooks, Python wheels, SQL, dbt, or pipelines. Invoke BEFORE starting implementation. For compute (serverless, performance mode, classic), also use databricks-serverless.
 
 **Source:** [skills/databricks-jobs/SKILL.md](../../../skills/databricks-jobs/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -3,7 +3,7 @@ name: xarray
 description: N-dimensional labeled arrays and datasets in Python. Built on top of NumPy and Dask. It introduces labels in the form of dimensions, coordinates, and attributes on top of raw NumPy-like arrays, making data analysis in physical sciences more intuitive and less error-prone. Use for working with multi-dimensional scientific data, NetCDF/GRIB/Zarr files, climate/weather/oceanographic datasets, remote sensing, geospatial imaging, large out-of-memory datasets with Dask, and labeled array operations.
 compatibility: Requires Python 3.11+ and xarray 2026.04.0+. Install with `uv pip install "xarray[io,parallel]"` for NetCDF/Zarr I/O and Dask support. Zarr I/O now requires zarr>=3.0 (included with `xarray[io]`). Cloud I/O (S3/GCS) additionally needs s3fs or gcsfs.
 license: Apache-2.0
-metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
+metadata: {"version": "1.2", "skill-author": "K-Dense Inc."}
 ---
 
 # Xarray - N-Dimensional Labeled Arrays
@@ -11,10 +11,12 @@ metadata: {"version": "1.1", "skill-author": "K-Dense Inc."}
 Xarray provides a pandas-like experience for multidimensional data. It is the core of the Pangeo ecosystem and is essential for working with NetCDF, GRIB, and Zarr formats.
 
 > [!WARNING]
-> **Breaking changes in xarray 2026.04.0** (the current release, up from 2024.01 when this skill was first written):
-> 1. **Zarr v3 required**: `xarray[io]` now installs `zarr>=3.0`; if your environment pins `zarr<3`, Zarr I/O will fail.
+> **Breaking changes through xarray 2026.09.0** (the current release, up from 2024.01 when this skill was first written):
+> 1. **Zarr v3 required**: `xarray[io]` now installs `zarr>=3.0`; if your environment pins `zarr<3`, Zarr I/O will fail. As of 2026.09.0 the remaining zarr-python 2 compatibility code has been removed entirely.
 > 2. **Timedelta decode default changed**: `open_dataset()` no longer decodes `np.timedelta64` from units-only attributes by default. Pass `decode_timedelta=True` to restore the previous behavior.
 > 3. **netCDF preferred engine**: The default backend order reverted to `netCDF4 > h5netcdf > scipy` in 2026.04.0 (after a temporary change in 2025.09.1). Explicitly specify `engine=` when reproducibility matters.
+> 4. **Bottleneck disabled by default** (2026.09.0): accelerated rolling/reduction operations no longer use the optional `bottleneck` backend unless it is explicitly re-enabled; results are unaffected but performance characteristics may change.
+> 5. **Python 3.11 support ending**: 2026.09.0 is the last xarray release supporting Python 3.11 — the next release requires Python 3.12+.
 
 ## When to Use
 

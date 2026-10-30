@@ -240,8 +240,8 @@ Pre-trained GNN models from DGL-Life:
 
 **For deep learning:**
 - Use **ChemBERTa** or **ChemGPT** for transformer embeddings
-- Use **gin-supervised-*** for graph neural network embeddings
-- Consider **Graphormer** for quantum property predictions
+- Use **gin-supervised-*** for graph neural network embeddings (0.11.0 only — removed in molfeat 1.0.0)
+- Consider **Graphormer** for quantum property predictions (0.11.0 only — removed in molfeat 1.0.0)
 
 **For similarity searching:**
 - **ecfp** - General purpose, most popular
@@ -261,16 +261,18 @@ Pre-trained GNN models from DGL-Life:
 
 ### Model Dependencies
 
-Some featurizers require optional dependencies (molfeat 0.11.0):
+Some featurizers require optional dependencies. Since molfeat 1.0.0, `dgl` and `graphormer`
+are removed — those two need a separate Python 3.10 environment pinned to 0.11.0; everything
+else installs into a normal 1.0.0 / Python 3.11+ environment:
 
-- **DGL models** (gin-*, jtvae): `uv pip install "molfeat[dgl]==0.11.0"` (upstream recommends `dgl<=2.0`)
-- **Graphormer**: `uv pip install "molfeat[graphormer]==0.11.0"`
-- **Transformers** (ChemBERTa, ChemGPT, MolT5): `uv pip install "molfeat[transformer]==0.11.0"`
-- **FCD**: `uv pip install "molfeat[fcd]==0.11.0"`
-- **PyTorch Geometric**: `uv pip install "molfeat[pyg]==0.11.0"`
-- **Visualization**: `uv pip install "molfeat[viz]==0.11.0"`
+- **DGL models** (gin-*, jtvae, Python 3.10 only): `uv pip install "molfeat[dgl]==0.11.0"` (upstream recommends `dgl<=2.0`)
+- **Graphormer** (Python 3.10 only): `uv pip install "molfeat[graphormer]==0.11.0"`
+- **Transformers** (ChemBERTa, ChemGPT, MolT5): `uv pip install "molfeat[transformer]==1.0.0"`
+- **FCD**: `uv pip install "molfeat[fcd]==1.0.0"`
+- **PyTorch Geometric**: `uv pip install "molfeat[pyg]==1.0.0"`
+- **Visualization**: `uv pip install "molfeat[viz]==1.0.0"`
 - **MAP4**: external package — see [reymond-group/map4](https://github.com/reymond-group/map4) (not a molfeat PyPI extra)
-- **All pip extras**: `uv pip install "molfeat[all]==0.11.0"`
+- **All pip extras** (excludes dgl/graphormer): `uv pip install "molfeat[all]==1.0.0"`
 
 ### Accessing All Available Models
 

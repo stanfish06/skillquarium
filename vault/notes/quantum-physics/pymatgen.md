@@ -12,7 +12,7 @@ created: 2026-06-09
 # pymatgen
 
 > [!info] What it does
-> Materials science toolkit. Crystal structures (CIF, POSCAR), phase diagrams, band structure, DOS, Materials Project integration, format conversion, for computational materials science.
+> Analyzes, validates, converts, and transforms materials structures and computed materials data with pymatgen. Use for local phase diagrams, symmetry sensitivity, electronic-structure I/O, and bounded Materials Project queries.
 
 **Source:** [skills/pymatgen/SKILL.md](../../../skills/pymatgen/SKILL.md)  ·  **Domain:** [Quantum, Physics & Materials](../../maps/quantum-physics.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -12,17 +12,14 @@ created: 2026-06-09
 # markitdown
 
 > [!info] What it does
-> Convert files and office documents to Markdown. Supports PDF, DOCX, PPTX, XLSX, images (with OCR), audio (with transcription), HTML, CSV, JSON, XML, ZIP, YouTube URLs, EPubs and more.
+> Converts heterogeneous documents and selected URIs to Markdown with Microsoft MarkItDown for text analysis, search, and LLM/RAG ingestion. Covers safe local conversion, streams, Office/PDF/data formats, batch workflows, plugins, vision OCR, Azure extraction, and the official MCP server.
 
 **Source:** [skills/markitdown/SKILL.md](../../../skills/markitdown/SKILL.md)  ·  **Domain:** [Documents, Office & Media](../../maps/documents-office.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [docx](../../notes/documents-office/docx.md) — Document toolkit (.docx). Create/edit documents, tracked changes, comments, formatting preservation, text extraction, for professional document processing
 - [liteparse](../../notes/documents-office/liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
 - [pdf](../../notes/documents-office/pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
-- [pptx](../../notes/documents-office/pptx.md) — Presentation toolkit (.pptx). Create/edit slides, layouts, content, speaker notes, comments, for programmatic presentation creation and modification
-- [xlsx](../../notes/documents-office/xlsx.md) — Spreadsheet toolkit (.xlsx/.csv). Create/edit with formulas/formatting, analyze data, visualization, recalculate formulas, for spreadsheet processing and analysis
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

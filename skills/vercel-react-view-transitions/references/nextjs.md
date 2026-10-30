@@ -2,21 +2,15 @@
 
 ## Setup
 
-`<ViewTransition>` works out of the box — the bundled React canary ships it, and every `<Link>` navigation runs inside `React.startTransition`, so react-dom starts a view transition whenever affected `<ViewTransition>` components exist. Set the documented flag:
+`<ViewTransition>` works out of the box with **no `next.config` change** — the bundled React ships it, and every `<Link>` navigation runs inside `React.startTransition`, so react-dom starts a view transition whenever affected `<ViewTransition>` components exist.
 
-```js
-// next.config.js
-const nextConfig = {
-  experimental: { viewTransition: true },
-};
-module.exports = nextConfig;
-```
+Do not set `experimental.viewTransition`. The key was removed in Next.js 16.3.0 (it exists up to 16.2.x) and is now an unrecognized `experimental` key, which Next.js reports as a config warning and ignores.
 
-(Historically the flag switched React to the experimental channel — required before `ViewTransition` reached canary. It no longer does; the experimental channel is only needed for `useSwipeTransition` gestures and `parentEnter`/`parentExit`, selected by other flags like `gestureTransition`.)
+The experimental React channel is still needed for `useSwipeTransition` gestures and `parentEnter`/`parentExit`, selected by other flags such as `gestureTransition`.
 
 Because every link click is a transition, any VT with `default="auto"` fires on **every** navigation — use `default="none"` to prevent competing animations.
 
-Do **not** install `react@canary` — see [Availability](../SKILL.md#availability) for details.
+React 19.3.0 (current stable) ships `<ViewTransition>` and `addTransitionType`; no canary install — see [Availability](../SKILL.md#availability).
 
 ---
 
@@ -24,7 +18,7 @@ Do **not** install `react@canary` — see [Availability](../SKILL.md#availabilit
 
 When following [implementation.md](implementation.md), apply these additions:
 
-**After Step 2:** Enable the experimental flag above.
+**After Step 2:** No Next.js configuration is required — skip straight to Step 3.
 
 **Step 4:** Use `transitionTypes` on `<Link>` — see [The `transitionTypes` Prop](#the-transitiontypes-prop-on-nextlink). If the animation depends on dynamic destination content, also see [When Content Must Be Ready](#when-content-must-be-ready).
 

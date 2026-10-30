@@ -56,7 +56,7 @@ Atheris supports 32-bit and 64-bit Linux, and macOS. We recommend fuzzing on Lin
 
 ### Prerequisites
 
-- Python 3.7 or later
+- Python 3.12, 3.13, or 3.14 — atheris 3.1.0 publishes only `cp312`/`cp313`/`cp314` wheels and no sdist, so older interpreters silently resolve back to atheris 2.3.0
 - Recent version of clang (preferably [latest release](https://github.com/llvm/llvm-project/releases))
 - For Docker users: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
@@ -73,7 +73,7 @@ For a fully operational Linux environment with all dependencies configured:
 
 ```dockerfile
 # https://hub.docker.com/_/python
-ARG PYTHON_VERSION=3.11
+ARG PYTHON_VERSION=3.12
 
 FROM python:$PYTHON_VERSION-slim-bookworm
 

@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-- [biopython](../../notes/sequence-phylogenetics/biopython.md) — Comprehensive molecular biology toolkit
+- [biopython](../../notes/sequence-phylogenetics/biopython.md) — Provides Biopython workflows for sequence manipulation, file parsing (FASTA/GenBank/PDB), phylogenetics, and programmatic NCBI/PubMed access (Bio.Entrez)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

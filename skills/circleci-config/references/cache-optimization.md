@@ -2,7 +2,7 @@
 
 Use this reference when improving CircleCI dependency caching, cache keys, or cache ROI.
 
-Source: [CircleCI docs, "Caching strategies"](https://circleci.com/docs/guides/optimize/caching-strategy/)
+Source: [CircleCI docs, "Caching dependencies"](https://circleci.com/docs/guides/optimize/caching/)
 
 ## Goals
 

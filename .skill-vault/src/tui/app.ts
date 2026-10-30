@@ -80,11 +80,21 @@ function fuzzyTokenScore(token: string, value: string): number | null {
   return 100 - first - gaps * 2
 }
 
+// lowercased search text per record; a catalog refresh yields new records
+const searchText = new WeakMap<SkillRecord, { identity: string; description: string }>()
+
 export function fuzzyScore(query: string, skill: SkillRecord): number | null {
   const tokens = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean)
   if (tokens.length === 0) return 0
-  const identity = `${skill.name} ${skill.key} ${skill.category}`.toLocaleLowerCase()
-  const description = skill.description.toLocaleLowerCase()
+  let text = searchText.get(skill)
+  if (!text) {
+    text = {
+      identity: `${skill.name} ${skill.key} ${skill.category}`.toLocaleLowerCase(),
+      description: skill.description.toLocaleLowerCase(),
+    }
+    searchText.set(skill, text)
+  }
+  const { identity, description } = text
   let score = 0
   for (const token of tokens) {
     const identityScore = fuzzyTokenScore(token, identity)
@@ -193,6 +203,17 @@ interface ButtonParts {
   label: TextRenderable
 }
 
+interface SkillRow {
+  skill: SkillRecord
+  marked: boolean
+  row: BoxRenderable
+  mark: TextRenderable
+  name: TextRenderable
+  category: TextRenderable
+  claude: TextRenderable
+  codex: TextRenderable
+}
+
 export class SkillquariumApp {
   private catalogData: Catalog
   private query = ""
@@ -218,8 +239,8 @@ export class SkillquariumApp {
   private readonly shortcuts: TextRenderable
   private readonly message: TextRenderable
   private rows: BoxRenderable[] = []
-  private rowByKey = new Map<string, BoxRenderable>()
-  private markCellByKey = new Map<string, TextRenderable>()
+  // one row per skill, built once and re-parented when the filter changes
+  private readonly skillRows = new Map<string, SkillRow>()
 
   private readonly benchView: BoxRenderable
   private readonly benchRunButton: ButtonParts
@@ -874,42 +895,74 @@ export class SkillquariumApp {
 
   private rebuildRows(preserveScroll = false): void {
     const previousScrollTop = this.list.scrollTop
-    for (const row of this.rows) row.destroyRecursively()
+    for (const row of this.rows) this.list.remove(row)
     this.rows = []
-    this.rowByKey.clear()
-    this.markCellByKey.clear()
 
     for (const skill of this.filtered) {
-      const row = this.listRow(
-        `skill-${skill.key}`,
-        () => skill.key === this.selectedKey,
-        () => this.selectKey(skill.key),
-        (amount) => this.moveSelection(amount),
-      )
-      const markCell = this.tableCell(
-        `mark-${skill.key}`,
-        this.markedKeys.has(skill.key) ? "[x]" : "[ ]",
-        this.markedKeys.has(skill.key) ? COLORS.accent : COLORS.muted,
-        undefined,
-        undefined,
-        MARK_COLUMN_WIDTH,
-      )
-      row.add(markCell)
-      const markLabel = markCell.findDescendantById(`mark-${skill.key}-label`)
-      if (markLabel) this.markCellByKey.set(skill.key, markLabel as TextRenderable)
-      row.add(
-        this.tableCell(`name-${skill.key}`, skill.name, stateColor(skill), NAME_COLUMN_GROW, NAME_COLUMN_MIN_WIDTH, undefined, 2),
-      )
-      row.add(
-        this.tableCell(`category-${skill.key}`, skill.category, COLORS.muted, CATEGORY_COLUMN_GROW, CATEGORY_COLUMN_MIN_WIDTH),
-      )
-      row.add(this.productCell(skill, "claude", PRODUCT_COLUMN_WIDTH))
-      row.add(this.productCell(skill, "codex", PRODUCT_COLUMN_WIDTH))
-      this.list.add(row)
-      this.rows.push(row)
-      this.rowByKey.set(skill.key, row)
+      const entry = this.skillRow(skill)
+      this.setMarkCell(entry, this.markedKeys.has(skill.key))
+      entry.row.backgroundColor = skill.key === this.selectedKey ? COLORS.selected : COLORS.panel
+      this.list.add(entry.row)
+      this.rows.push(entry.row)
     }
     this.list.scrollTo(preserveScroll ? previousScrollTop : 0)
+  }
+
+  private skillRow(skill: SkillRecord): SkillRow {
+    const cached = this.skillRows.get(skill.key)
+    if (cached) {
+      // a catalog refresh replaces the records; repaint the cells from the new one
+      if (cached.skill !== skill) {
+        cached.skill = skill
+        cached.name.content = skill.name
+        cached.name.fg = stateColor(skill)
+        cached.category.content = skill.category
+        this.setProductCell(cached.claude, skill.claude_enabled)
+        this.setProductCell(cached.codex, skill.codex_enabled)
+      }
+      return cached
+    }
+
+    const key = skill.key
+    const row = this.listRow(
+      `skill-${key}`,
+      () => key === this.selectedKey,
+      () => this.selectKey(key),
+      (amount) => this.moveSelection(amount),
+    )
+    const cells = [
+      this.tableCell(`mark-${key}`, "[ ]", COLORS.muted, undefined, undefined, MARK_COLUMN_WIDTH),
+      this.tableCell(`name-${key}`, skill.name, stateColor(skill), NAME_COLUMN_GROW, NAME_COLUMN_MIN_WIDTH, undefined, 2),
+      this.tableCell(`category-${key}`, skill.category, COLORS.muted, CATEGORY_COLUMN_GROW, CATEGORY_COLUMN_MIN_WIDTH),
+      this.productCell(skill, "claude", PRODUCT_COLUMN_WIDTH),
+      this.productCell(skill, "codex", PRODUCT_COLUMN_WIDTH),
+    ]
+    for (const cell of cells) row.add(cell)
+    const label = (cell: BoxRenderable) => cell.getChildren()[0] as TextRenderable
+    const entry: SkillRow = {
+      skill,
+      marked: false,
+      row,
+      mark: label(cells[0]!),
+      name: label(cells[1]!),
+      category: label(cells[2]!),
+      claude: label(cells[3]!),
+      codex: label(cells[4]!),
+    }
+    this.skillRows.set(key, entry)
+    return entry
+  }
+
+  private setMarkCell(entry: SkillRow, marked: boolean): void {
+    if (entry.marked === marked) return
+    entry.marked = marked
+    entry.mark.content = marked ? "[x]" : "[ ]"
+    entry.mark.fg = marked ? COLORS.accent : COLORS.muted
+  }
+
+  private setProductCell(label: TextRenderable, enabled: boolean | null): void {
+    label.content = productLabel(enabled)
+    label.fg = productColor(enabled)
   }
 
   private productCell(skill: SkillRecord, product: Exclude<Product, "both">, width: number): BoxRenderable {
@@ -942,10 +995,10 @@ export class SkillquariumApp {
     const previous = this.selectedKey
     this.selectedKey = key
     if (previous) {
-      const previousRow = this.rowByKey.get(previous)
+      const previousRow = this.skillRows.get(previous)?.row
       if (previousRow) previousRow.backgroundColor = COLORS.panel
     }
-    const row = this.rowByKey.get(key)
+    const row = this.skillRows.get(key)?.row
     if (row) row.backgroundColor = COLORS.selected
     this.updateDetail()
   }
@@ -1036,12 +1089,8 @@ export class SkillquariumApp {
     if (this.markedKeys.has(skill.key)) this.markedKeys.delete(skill.key)
     else this.markedKeys.add(skill.key)
     // update the cell in place; a rebuild would reset the scroll position
-    const markLabel = this.markCellByKey.get(skill.key)
-    if (markLabel) {
-      const marked = this.markedKeys.has(skill.key)
-      markLabel.content = marked ? "[x]" : "[ ]"
-      markLabel.fg = marked ? COLORS.accent : COLORS.muted
-    }
+    const entry = this.skillRows.get(skill.key)
+    if (entry) this.setMarkCell(entry, this.markedKeys.has(skill.key))
     this.updateSummary()
   }
 
@@ -1093,6 +1142,13 @@ export class SkillquariumApp {
     this.categories = ["all", ...this.catalogData.categories]
     if (!this.categories.includes(this.categoryFilter)) this.categoryFilter = "all"
     this.applyFilters(true)
+    // drop cached rows for skills the new catalog no longer has
+    const keys = new Set(this.catalogData.skills.map((skill) => skill.key))
+    for (const [key, entry] of this.skillRows) {
+      if (keys.has(key)) continue
+      entry.row.destroyRecursively()
+      this.skillRows.delete(key)
+    }
   }
 
   private async saveSnapshot(): Promise<void> {
@@ -1422,6 +1478,8 @@ export class SkillquariumApp {
 
     switch (key.name) {
       case "/":
+        // keep the focusing keystroke out of the input
+        key.preventDefault()
         this.search.focus()
         return
       case "up":

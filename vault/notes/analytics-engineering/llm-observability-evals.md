@@ -25,8 +25,8 @@ created: 2026-06-09
 - [langfuse](../../notes/analytics-engineering/langfuse.md) — Interact with Langfuse and access its documentation: tracing, monitoring, creating datasets, running experiments, and evaluating AI applications
 - [observability](../../notes/hosting-edge-platforms/observability.md) — Vercel Observability expert guidance — Drains (logs, traces, speed insights, web analytics), Web Analytics, Speed Insights, runtime logs, custom events, OpenTelemetry integration, and...
 - [opentelemetry](../../notes/cloud-devops/opentelemetry.md) — Instrument any app with OpenTelemetry and ship metrics / logs / traces to Grafana Cloud or self-hosted Mimir / Loki / Tempo / Pyroscope
-- [phoenix-cli](../../notes/analytics-engineering/phoenix-cli.md) — Debug LLM applications using the Phoenix CLI
-- [phoenix-evals](../../notes/analytics-engineering/phoenix-evals.md) — Build and run evaluators for AI/LLM applications using Phoenix
+- [phoenix-cli](../../notes/analytics-engineering/phoenix-cli.md) — Debug LLM applications using the Phoenix CLI (`px`, from @arizeai/phoenix-cli)
+- [phoenix-evals](../../notes/analytics-engineering/phoenix-evals.md) — Build, run, and validate evaluators for AI/LLM applications with Phoenix, in Python or TypeScript (including Vercel AI SDK apps) — code-based checks and LLM-as-a-judge, run over...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

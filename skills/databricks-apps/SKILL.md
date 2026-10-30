@@ -3,13 +3,26 @@ name: databricks-apps
 description: "Build apps on Databricks Apps platform. Use when asked to create data apps, analytics tools, or custom interactive visualizations. A plain \"create a dashboard\" request means a managed AI/BI (Lakeview) dashboard → use databricks-aibi-dashboards, not this skill. Evaluates data access patterns (analytics vs Lakebase synced tables) before scaffolding. Invoke BEFORE starting implementation."
 compatibility: Requires databricks CLI (>= v0.294.0)
 metadata:
-  version: "0.1.3"
+  version: "0.1.4"
 parent: databricks-core
 ---
 
 # Databricks Apps Development
 
 **FIRST**: Use the parent `databricks-core` skill for CLI basics, authentication, and profile selection.
+
+**Package manager — resolve this before any install or command below:**
+
+Databricks Apps officially supports **npm** and **pnpm** only.
+
+1. Detect the project's manager, in priority order: project instructions → `package.json`'s `packageManager` field → lockfile (`pnpm-lock.yaml` → pnpm, `package-lock.json` → npm).
+2. If signals conflict, or if an unsupported manager (yarn, bun, etc.) is detected, stop and ask the user which manager to use before proceeding.
+3. Only if none is established, default to **pnpm**.
+
+Throughout this skill and its guides, substitute what you resolved:
+- `<pm>` → that manager, for installs and package scripts (`<pm> install`, `<pm> run typegen`).
+
+`<pm>` is a documentation placeholder, not a shell variable — expand it, don't type it.
 
 **Is this even a Databricks App?** Don't assume an app is the only way to show data. For a simple "dashboard with a few charts" and no app-specific need, the managed **AI/BI (Lakeview) dashboard** is the simpler path → use the `databricks-aibi-dashboards` skill, not this one. Reach for a custom Databricks App only when the user needs something AI/BI can't give them — bespoke interactivity/components, write-back, embedded or auth-gated workflows, a Genie/chat surface inside the app — or explicitly asks for an app. If it's genuinely ambiguous, surface both options (managed AI/BI dashboard vs custom app) and let the user choose instead of defaulting to an app. Once an app is the right call, it's fine for this skill to favor an app-based dashboard, and `databricks-app-design` covers building it well.
 
@@ -30,6 +43,8 @@ Build apps that deploy to Databricks Apps platform.
 | Using Lakebase (OLTP database) | [Lakebase Guide](references/appkit/lakebase.md) |
 | Adding Genie chat / Genie-powered apps | [Genie Guide](references/appkit/genie.md) — follow the Genie agent workflow below |
 | Using Model Serving (ML inference) | [Model Serving Guide](references/appkit/model-serving.md) |
+| Generating or editing images (text-to-image, image-to-image) | [Image Generation Guide](references/appkit/image-generation.md) |
+| Hosting an AI agent (tool-using chatbot, **beta**) | [Agents Guide](references/appkit/agents.md) — import from `@databricks/appkit/beta` |
 | Typed data contracts (proto-first design) | [Proto-First Guide](references/appkit/proto-first.md) and [Plugin Contracts](references/appkit/proto-contracts.md) |
 | Managing files in UC Volumes | [Files Guide](references/appkit/files.md) |
 | Triggering / monitoring Lakeflow Jobs from the app | [Jobs Guide](references/appkit/jobs.md) |
@@ -38,12 +53,10 @@ Build apps that deploy to Databricks Apps platform.
 
 ## Generic Guidelines
 
-- **App name**: ≤26 characters, lowercase letters/numbers/hyphens only (no underscores). dev- prefix adds 4 chars, max 30 total.
+- **App name**: Platform App resource names allow up to 30 lowercase letters, numbers, and hyphens (no underscores). For AppKit projects created with `databricks apps init`, keep the base name to 26 characters because its development workflow adds a `dev-` prefix. DABs does not add that prefix.
 - **Validation**: `databricks apps validate --profile <PROFILE>` before deploying.
-- **Smoke tests** (AppKit only): ALWAYS update `tests/smoke.spec.ts` selectors BEFORE running validation. Default template checks for "Minimal Databricks App" heading and "hello world" text — these WILL fail in your custom app. See [testing guide](references/testing.md).
-- **Smoke test selectors**: use only Playwright locator APIs — `getByRole`, `getByText`, `getByPlaceholder`, `getByLabel`. `getByLabelText` does not exist in Playwright (it is a React Testing Library method) and throws `TypeError` at runtime. See [testing guide](references/testing.md) or `npx playwright codegen`.
-- **Smoke test data**: keep result sets under the 1 MB analytics-event payload cap. Queries returning thousands of rows cause `INVALID_REQUEST: Event exceeds max size of 1048576 bytes` and `net::ERR_ABORTED`, leaving every asserted UI element absent. Use `LIMIT` or an aggregated query (e.g. `COUNT(*) GROUP BY status`) — never raw row dumps.
-- **AppKit version**: never override the `@databricks/appkit` or `@databricks/appkit-ui` version in `package.json` — `databricks apps init` sets the correct version. Do not run `npm install @databricks/appkit@<version>` unless explicitly asked by the user. If you need a different version, re-scaffold with `databricks apps init --version <version>`.
+- **Smoke tests** (AppKit only): ALWAYS update `tests/smoke.spec.ts` selectors BEFORE running validation. Default template checks for "Minimal Databricks App" heading and "hello world" text — these WILL fail in your custom app. See [testing guide](references/testing.md) (selector APIs, the 1 MB result-size cap).
+- **AppKit version**: never override the `@databricks/appkit` or `@databricks/appkit-ui` version in `package.json` — `databricks apps init` sets the correct version. Do not install a different version of either package unless explicitly asked by the user. If you need a different version, re-scaffold with `databricks apps init --version <version>`.
 - **Authentication**: covered by parent `databricks-core` skill.
 - **AppKit API surface**: before writing code that calls AppKit APIs (`createApp`, plugin shapes, `useAnalyticsQuery`, `useMetricView`, etc.), run `npx @databricks/appkit docs <section>` and use the actual signature. Training data has stale shapes; a single invented signature fails `tsc --noEmit` during validate. The docs ship with the installed AppKit and are the authoritative source.
 - **TypeScript casts**: never use `as unknown as <T>` double-assertions — `appkit lint` enforces `no-double-type-assertion` and one violation fails the entire validate step. Instead: narrow with Zod (`z.infer<typeof schema>`), use a runtime type guard, or write a typed mapper function. If a query result needs reshaping, type the row schema via queryKey types rather than casting.
@@ -54,7 +67,7 @@ Build apps that deploy to Databricks Apps platform.
 - `config/metric-views/definitions.json` — governed UC Metric View bindings (optional; see [Metric Views](references/appkit/metric-views.md))
 - `server/server.ts` — backend entry (`onPluginsReady` + Express routes)
 - `tests/smoke.spec.ts` — smoke test (⚠️ MUST UPDATE selectors for your app)
-- `client/src/appKitTypes.d.ts` — auto-generated types (`npm run typegen`)
+- `client/src/appKitTypes.d.ts` — auto-generated types (`<pm> run typegen`)
 
 ## Project Structure (after `databricks apps init --features lakebase`)
 - `server/server.ts` — backend with Lakebase pool + Express routes
@@ -103,7 +116,7 @@ After the user chooses:
 **Analytics apps** (`--features analytics`):
 
 1. Create SQL files in `config/queries/`
-2. Run `npm run typegen` — verify all queries show ✓
+2. Run `<pm> run typegen` — verify all queries show ✓
 3. Read `client/src/appKitTypes.d.ts` to see generated types
 4. **THEN** write `App.tsx` using the generated types
 5. Update `tests/smoke.spec.ts` selectors
@@ -125,6 +138,9 @@ After completing the decision gate above, use this routing table:
 - **Read/write persistent data (users, orders, CRUD state)**: Use Lakebase via Express routes in `onPluginsReady` — see [Lakebase Guide](references/appkit/lakebase.md)
 - **Natural language query interface over tables (Genie)**: Use `genie()` plugin — see [Genie Guide](references/appkit/genie.md)
 - **Call ML model endpoint**: Use `serving()` plugin — see [Model Serving Guide](references/appkit/model-serving.md)
+- **Call a foundation model / UC model service (`system.ai.*`)**: Declare a `uc_securable` (`MODEL_SERVICE`) resource and call the service name on `/ai-gateway/mlflow/v1` — see [Unity Catalog model services](references/appkit/model-serving.md#unity-catalog-model-services) and the `databricks-unity-gateway` skill (not `serving()`, which takes serving-endpoint names)
+- **Generate or edit images from a prompt**: streaming Express route (or an `agents` tool for chat UIs) + native `fetch` to an image-capable Foundation Model — see [Image Generation Guide](references/appkit/image-generation.md)
+- **AI agent that *calls tools* (SQL, files, Genie, MCP), delegates to sub-agents, or streams a multi-turn chat with human-in-the-loop approval**: Use the `agents()` plugin (import from `@databricks/appkit/beta`, **beta**) — see [Agents Guide](references/appkit/agents.md)
 - **Trigger or monitor a Lakeflow Job from the app**: Use the `jobs()` plugin — see [Jobs Guide](references/appkit/jobs.md)
 - **⚠️ NEVER add custom endpoints to run SELECT queries against the warehouse** — always use SQL files in `config/queries/`
 - **⚠️ NEVER use `useAnalyticsQuery` for Lakebase data** — it queries the SQL warehouse only
@@ -135,13 +151,13 @@ After completing the decision gate above, use this routing table:
 
 TypeScript/React framework with type-safe SQL queries and built-in components.
 
-**Official Documentation** — the source of truth for all API details:
+**Official Documentation** — the source of truth for all API details. Use the project-local `appkit` CLI from the installed `@databricks/appkit` package:
 
 ```bash
-npx @databricks/appkit docs                              # ← ALWAYS start here to see available pages
-npx @databricks/appkit docs <query>                      # view a section by name or doc path
-npx @databricks/appkit docs --full                       # full index with all API entries
-npx @databricks/appkit docs "appkit-ui API reference"    # example: section by name
+npx @databricks/appkit docs                            # ← ALWAYS start here to see available pages
+npx @databricks/appkit docs <query>                    # view a section by name or doc path
+npx @databricks/appkit docs --full                     # full index with all API entries
+npx @databricks/appkit docs "appkit-ui API reference"   # example: section by name
 npx @databricks/appkit docs ./docs/plugins/analytics.md  # example: specific doc file
 ```
 
@@ -164,7 +180,7 @@ npx @databricks/appkit docs ./docs/plugins/analytics.md  # example: specific doc
    - **requiredByTemplate**: If **true**, that plugin is **mandatory** for this template — do **not** add it to `--features` (it is included automatically); you must still supply all of its required resources via `--set`. If **false** or absent, the plugin is **optional** — add it to `--features` only when the user's prompt indicates they want that capability (e.g. analytics/SQL), and then supply its required resources via `--set`.
    - **Resources**: Each plugin has `resources.required` and `resources.optional` (arrays). Each item has `resourceKey` and `fields` (object: field name → description/env). Use `--set <plugin>.<resourceKey>.<field>=<value>` for each required resource field of every plugin you include.
 
-2. **Scaffold** (DO NOT use `npx`; use the CLI only):
+2. **Scaffold** (use the Databricks CLI only):
    ```bash
    databricks apps init --name <NAME> --features <plugin1>,<plugin2> \
      --set <plugin1>.<resourceKey>.<field>=<value> \
@@ -181,23 +197,13 @@ npx @databricks/appkit docs ./docs/plugins/analytics.md  # example: specific doc
 
 **DO NOT guess** plugin names, resource keys, or property names — always derive them from `databricks apps manifest` output. Example: if the manifest shows plugin `analytics` with a required resource `resourceKey: "sql-warehouse"` and `fields: { "id": ... }`, include `--set analytics.sql-warehouse.id=<ID>`.
 
-**Scaffolding Rules Protocol** — `databricks apps manifest` may emit `scaffolding.rules` at the template level (top-level `scaffolding.rules`) and on individual plugins (`plugins[].scaffolding.rules`). Each block has `must` / `should` / `never` arrays of short directive strings. Consume them as follows:
+**Execution identity (auth mode)**: `--auth-mode obo|sp` (app default) and per-resource `--set <plugin>.<resourceKey>.authMode=obo|sp|both` need **databricks CLI `>= v1.20.0`**; omit them on older CLIs (everything binds to the service principal). **Default to SP; choose OBO only when the app must enforce the viewing user's own permissions** (row-level or per-user data access). Flag rules, errors, and what each mode emits: [Platform Guide](references/platform-guide.md#execution-identity-per-resource).
 
-1. **Gather** — for every plugin in your final `--features` list AND every plugin with `requiredByTemplate: true`, read `plugins[].scaffolding.rules`. Union those with the top-level template `scaffolding.rules` into one working set, tagged by source (template vs `<plugin>`).
-2. **Precedence** — manifest rules override the directives baked into this skill. Where the manifest is silent on a topic, this skill's content is the floor.
-3. **Phase ordering** — rules whose text begins with `Before init` MUST be executed before `databricks apps init`. Rules beginning with `After init` MUST be executed after init completes (e.g. migrations, typegen, connectivity checks). Rules without a phase prefix apply throughout the scaffold/develop loop.
-4. **Conflict detection** — if a plugin `must` rule contradicts a template `never` rule on the same target (or vice versa), STOP and ask the user which to follow before proceeding. Do not silently pick one. Treat `must` vs `never` on the same action as a conflict; `should` is advisory and does not block.
-5. **Reporting** — before running `databricks apps init`, surface the merged working set to the user grouped by phase (Before init / After init / Always) and by severity (must / should / never), so the active guardrails are explicit.
+**Scaffolding Rules Protocol**: if `databricks apps manifest` emits `scaffolding.rules` (template-level and per plugin, as `must` / `should` / `never`), they override this skill. Run `Before init` rules before `databricks apps init` and `After init` rules after it; if a plugin `must` contradicts a template `never` on the same target, STOP and ask the user. Gather, precedence, and reporting steps: [AppKit Overview § Scaffolding Rules Protocol](references/appkit/overview.md#scaffolding-rules-protocol).
 
 **READ [AppKit Overview](references/appkit/overview.md)** for project structure, workflow, and pre-implementation checklist.
 
-**Genie Agent Workflow** — when the user wants a Genie-powered app, do **not** start by asking for a Genie Space ID. Instead:
-
-1. Ask which Unity Catalog tables the app should query (fully qualified: `catalog.schema.table`).
-2. Ask whether to reuse an existing Genie space or create a new one.
-3. If creating: discover the warehouse, then create the space with `databricks genie create-space` (see [Genie Guide](references/appkit/genie.md) for syntax and serialized space format).
-4. If reusing: discover existing spaces with `databricks genie list-spaces --profile <PROFILE>` and let the user pick.
-5. Scaffold or wire the space ID into the app — derive `--set` keys from `databricks apps manifest`.
+**Genie Agent Workflow**: for a Genie-powered app, ask which UC tables to query and whether to reuse or create a space; don't start by asking for a Genie Space ID. Steps: [Genie Guide § Agent workflow](references/appkit/genie.md#agent-workflow-tables-first).
 
 Read the [Genie Guide](references/appkit/genie.md) for configuration, SSE endpoints, and frontend integration.
 

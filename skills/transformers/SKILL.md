@@ -26,7 +26,7 @@ uv pip install "transformers[torch]==5.14.1" huggingface_hub==1.24.0 datasets==5
 For vision tasks, add:
 
 ```bash
-uv pip install timm==1.0.27 pillow==12.2.0
+uv pip install timm==1.0.27 pillow==12.3.0
 ```
 
 For audio tasks, add:

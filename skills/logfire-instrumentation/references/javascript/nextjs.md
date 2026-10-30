@@ -66,92 +66,13 @@ export async function POST(request: Request) {
 
 ## Client-Side Browser Tracing
 
-Add browser tracing only when the app has or can safely add a same-origin proxy. Install:
-
-```bash
-npm install @pydantic/logfire-browser @opentelemetry/auto-instrumentations-web
-```
-
-Create a proxy file in the project root or `src` directory. For Next.js 16 and later use `proxy.ts`. For older apps that already use `middleware.ts`, follow the existing file convention unless the app has migrated to `proxy.ts`.
-
-```ts
-// proxy.ts
-import { NextRequest, NextResponse } from 'next/server'
-
-export default function proxy(request: NextRequest) {
-  const url = request.nextUrl.clone()
-
-  if (url.pathname === '/logfire-proxy/v1/traces') {
-    const token = process.env.LOGFIRE_TOKEN
-    if (!token) {
-      return new NextResponse('Logfire token is not configured', { status: 500 })
-    }
-
-    // the relay signs requests with a write token, so gate it the way the rest of
-    // the app is gated: same-origin POST, authenticated caller, rate limited
-    if (request.method !== 'POST' || request.headers.get('origin') !== process.env.APP_ORIGIN) {
-      return new NextResponse('Forbidden', { status: 403 })
-    }
-    if (!isAuthenticated(request) || !withinRateLimit(request)) {
-      return new NextResponse('Forbidden', { status: 403 })
-    }
-
-    // copy only the OTLP body headers; forwarding every inbound header sends the
-    // visitor's Cookie upstream
-    const requestHeaders = new Headers()
-    for (const name of ['content-type', 'content-encoding', 'content-length']) {
-      const value = request.headers.get(name)
-      if (value) requestHeaders.set(name, value)
-    }
-    requestHeaders.set('Authorization', token)
-
-    return NextResponse.rewrite(new URL('https://logfire-api.pydantic.dev/v1/traces'), {
-      request: {
-        headers: requestHeaders,
-      },
-    })
-  }
-
-  return NextResponse.next()
-}
-
-export const config = {
-  matcher: '/logfire-proxy/:path*',
-}
-```
-
-Set `LOGFIRE_TOKEN` server-side to a Logfire write token. It can be the same write token value used in `OTEL_EXPORTER_OTLP_HEADERS`, but it must not use a `NEXT_PUBLIC_` prefix. Set `APP_ORIGIN` to the frontend origin, and wire `isAuthenticated` and `withinRateLimit` to the app's own session and rate-limit code. Without those checks the path is an open write relay: any anonymous client can POST OTLP payloads that Logfire ingests under the project's write token.
-
-Create a client-only component:
-
-```tsx
-'use client'
-
-import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web'
-import * as logfire from '@pydantic/logfire-browser'
-import { useEffect } from 'react'
-
-export function ClientInstrumentation() {
-  useEffect(() => {
-    const shutdown = logfire.configure({
-      traceUrl: '/logfire-proxy/v1/traces',
-      serviceName: 'nextjs-browser',
-      instrumentations: [getWebAutoInstrumentations()],
-    })
-
-    return () => {
-      void shutdown()
-    }
-  }, [])
-
-  return null
-}
-```
-
-If importing the component from server-rendered code, use `next/dynamic` with `ssr: false`.
+Use the [frontend specialist](https://pydantic.dev/.well-known/agent-skills/logfire-frontend/SKILL.md)
+for client initialization, route grouping, capture policy, and replay. Browser
+setup needs its restricted frontend application token, not this server's write
+token. Keep browser and server telemetry separate.
 
 ## Vercel Deployment Notes
 
-- Add OTLP and Logfire token values to the Vercel project environment.
+- Add server OTLP and ordinary Logfire token values to the Vercel project environment. Supply the separate frontend application configuration through the app's existing public runtime-config mechanism.
 - If spans do not appear after changing tracing env vars, clear the Vercel data cache for the project and redeploy.
-- Keep server and browser service names distinct when both are enabled.
+- Confirm server and browser data appear as distinct services; the frontend application's identity owns the browser service name.

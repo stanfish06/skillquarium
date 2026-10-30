@@ -14,16 +14,16 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Literature Search & Knowledge Discovery](literature-discovery.md)
 
-## Skills (25)
+## Skills (26)
 
 - [doc-coauthoring](../notes/documents-office/doc-coauthoring.md) — Guide users through a structured workflow for co-authoring documentation
 - [docx](../notes/documents-office/docx.md) — Document toolkit (.docx). Create/edit documents, tracked changes, comments, formatting preservation, text extraction, for professional document processing
-- [generate-image](../notes/documents-office/generate-image.md) — Generate or edit images using AI models (FLUX, Gemini)
+- [generate-image](../notes/documents-office/generate-image.md) — Generates or edits images with AI models through the OpenRouter Image API (Gemini, Seedream, Recraft, GPT-Image, Riverflow)
 - [infographics](../notes/documents-office/infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
 - [internal-comms](../notes/documents-office/internal-comms.md) — A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use
 - [liteparse](../notes/documents-office/liteparse.md) — Local document and PDF parsing with spatial text and bounding boxes
-- [market-research-reports](../notes/documents-office/market-research-reports.md) — Generate comprehensive market research reports (50+ pages) in the style of top consulting firms (McKinsey, BCG, Gartner)
-- [markitdown](../notes/documents-office/markitdown.md) — Convert files and office documents to Markdown
+- [market-research-reports](../notes/documents-office/market-research-reports.md) — Builds evidence-traceable market research reports and assumption-driven market sizing or forecast scenarios
+- [markitdown](../notes/documents-office/markitdown.md) — Converts heterogeneous documents and selected URIs to Markdown with Microsoft MarkItDown for text analysis, search, and LLM/RAG ingestion
 - [morph-ppt](../notes/documents-office/morph-ppt.md) — Use this skill when the user wants a .pptx with smooth cross-slide animation — PowerPoint Morph transitions, Keynote-style continuous motion, shapes that grow / move / rotate as the...
 - [morph-ppt-3d](../notes/documents-office/morph-ppt-3d.md) — 3D Morph PPT — extends morph-ppt with GLB model insertion, cinematographic camera, model-content layout, and enriched visual design system
 - [officecli](../notes/documents-office/officecli.md) — Create, analyze, proofread, and modify Office documents (.docx, .xlsx, .pptx) using the officecli CLI tool
@@ -40,4 +40,5 @@ created: 2026-06-13
 - [quarto-authoring](../notes/documents-office/quarto-authoring.md) — Use when the user is explicitly working with Quarto, .qmd files, _quarto.yml, Quarto projects, or Quarto features such as callouts, cross-references, citations, Mermaid diagrams...
 - [report-template](../notes/documents-office/report-template.md) — Publication-quality PDF report generation using Typst templates
 - [reports-pdfs-and-slide-automation](../notes/documents-office/reports-pdfs-and-slide-automation.md) — Lay out and export data-rich reports and documents
+- [video-use](../notes/documents-office/video-use.md) — Edit any video by conversation. Transcribe, cut, color grade, generate overlay animations, burn subtitles — for talking heads, montages, tutorials, travel, interviews
 - [xlsx](../notes/documents-office/xlsx.md) — Spreadsheet toolkit (.xlsx/.csv). Create/edit with formulas/formatting, analyze data, visualization, recalculate formulas, for spreadsheet processing and analysis

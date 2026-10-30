@@ -1,10 +1,6 @@
 ---
 name: langfuse-observability
 description: Instrument LLM applications with Langfuse tracing. Use when setting up Langfuse, adding observability to LLM calls, or auditing existing instrumentation.
-metadata:
-  required_access:
-    - CODEBASE
-    - LANGFUSE_PROJECT_SCRIPT
 ---
 
 # Langfuse Observability
@@ -52,6 +48,7 @@ Docs: https://langfuse.com/docs/tracing
 | Multiple distinct endpoints/features                 | `feature` tag       | Per-feature analytics — [docs](https://langfuse.com/docs/tracing-features/tags) |
 | Customer/tenant identifiers                          | `customer_tier` tag | Cost/quality breakdown by segment — [docs](https://langfuse.com/docs/tracing-features/tags) |
 | Feedback collection, ratings                         | Feedback score      | Quality filtering and trends — [docs](https://langfuse.com/docs/scores/overview) |
+| Image/audio/file input or output (e.g. image generation, vision) | Media in observation input/output | Renders media in the UI; base64 data URIs and external URLs are handled automatically, wrap raw bytes/files in `LangfuseMedia`. Follow the [multi-modality docs](https://langfuse.com/docs/observability/features/multi-modality) to implement |
 
 ### 3. Run and Self-Audit the Traces (required)
 

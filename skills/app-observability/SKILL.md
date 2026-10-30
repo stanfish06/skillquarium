@@ -86,7 +86,7 @@ Full React example, CDN setup, session config: [`references/faro.md`](references
 ### 3. Add AI / LLM observability
 
 ```bash
-pip install openlit==1.42.0
+pip install openlit==1.45.0
 ```
 
 ```python

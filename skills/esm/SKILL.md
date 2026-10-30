@@ -238,18 +238,18 @@ Local `ESMC.from_pretrained()` examples use underscore aliases (`esmc_300m`, `es
 
 ## Installation
 
-Install from PyPI ([`esm` on PyPI](https://pypi.org/project/esm/) by EvolutionaryScale). Current PyPI release: **3.2.3** (Oct 14, 2025). Requires **Python >=3.12,<3.13**.
+Install from PyPI ([`esm` on PyPI](https://pypi.org/project/esm/) by EvolutionaryScale). Current PyPI release: **3.4.1.post1** (Sep 16, 2026), which adds full ESMC/ESMFold2 support and a HuggingFace compatibility layer over the 3.2.x line. (3.4.1 was yanked for a bug — install `3.4.1.post1`, not `3.4.1`.) Requires **Python >=3.12,<3.13**.
 
 **Basic installation:**
 
 ```bash
-uv pip install "esm==3.2.3"
+uv pip install "esm==3.4.1.post1"
 ```
 
 **With Flash Attention (recommended for faster inference on NVIDIA GPUs):**
 
 ```bash
-uv pip install "esm==3.2.3"
+uv pip install "esm==3.4.1.post1"
 uv pip install flash-attn --no-build-isolation
 ```
 

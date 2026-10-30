@@ -12,6 +12,16 @@ Use Genie when your app needs a **natural language query interface** over Unity 
 | Genie | Natural language queries over tables | Genie Space → SQL Warehouse |
 | Multiple | Combine plugins as needed | Mix of the above |
 
+## Agent workflow (tables first)
+
+When the user wants a Genie-powered app, do **not** start by asking for a Genie Space ID. Instead:
+
+1. Ask which Unity Catalog tables the app should query (fully qualified: `catalog.schema.table`).
+2. Ask whether to reuse an existing Genie space or create a new one.
+3. If creating: discover the warehouse, then create the space with `databricks genie create-space` (see [Genie Space Creation](#genie-space-creation) for syntax and serialized space format).
+4. If reusing: discover existing spaces with `databricks genie list-spaces --profile <PROFILE>` and let the user pick.
+5. Scaffold or wire the space ID into the app — derive `--set` keys from `databricks apps manifest`.
+
 ## Architecture
 
 ```text
@@ -68,7 +78,7 @@ databricks apps init --name <APP_NAME> --features genie \
 # 5. Set local env + develop
 cd <APP_NAME>
 echo "DATABRICKS_GENIE_SPACE_ID=<SPACE_ID>" >> server/.env
-npm install && npm run dev
+<pm> install && <pm> run dev
 ```
 
 **Do not guess** `--set` flags — always derive from `databricks apps manifest`.
@@ -170,7 +180,7 @@ resources:
   apps:
     app:
       user_api_scopes:
-        - dashboards.genie
+        - genie
       resources:
         - name: genie-space
           genie_space:
@@ -298,6 +308,6 @@ The plugin mounts SSE endpoints under `/api/genie`:
 | `plugin "genie" has no resource with key "..."` | Wrong `--set` flags during scaffold | Always derive resource keys from `databricks apps manifest` |
 | Chat collapses or renders poorly | No explicit height on container | Give the parent a fixed height |
 | Duplicate routes or import confusion | Old local Genie proxy file | Remove it — use `genie` from `@databricks/appkit` |
-| `does not have required scopes: genie` | Missing API scope | Confirm `user_api_scopes` includes `dashboards.genie` in `databricks.yml` and redeploy |
+| `does not have required scopes: genie` | Missing API scope | Confirm `user_api_scopes` includes `genie` in `databricks.yml` and redeploy |
 | Genie space not found | Wrong space ID | Verify space ID matches the value on the Genie space **About** tab |
 | `valueFrom` mismatch | `app.yaml` value doesn't match `databricks.yml` | `valueFrom` in `app.yaml` must exactly match the resource `name` in `databricks.yml` |

@@ -3,12 +3,12 @@ name: neo4j-aura-provisioning-skill
 description: Provisions and manages Neo4j Aura instances via CLI (aura-cli v1.7+) or REST API.
   Use when creating, pausing, resuming, resizing, or deleting AuraDB Free/Professional/Business Critical/VDC
   instances; downloading credentials; scripting CI/CD pipelines; polling async status; or using the
-  Terraform neo4j/neo4j-aura provider. Covers auth setup (client credentials OAuth2), credential
+  Terraform neo4j-labs/neo4jaura provider. Covers auth setup (client credentials OAuth2), credential
   lifecycle (download once — never recoverable), instance type selection, region codes, and Python
   provisioning scripts. Does NOT handle Cypher queries — use neo4j-cypher-skill.
   Does NOT cover Graph Data Science algorithms — use neo4j-gds-skill or neo4j-aura-graph-analytics-skill.
   Does NOT cover neo4j-admin/cypher-shell — use neo4j-cli-tools-skill.
-version: 1.0.4
+version: 1.0.5
 allowed-tools: Bash WebFetch
 ---
 
@@ -381,32 +381,32 @@ Free tier: GCP only; limited subset of regions.
 ```hcl
 terraform {
   required_providers {
-    aura = {
-      source  = "neo4j/neo4j-aura"
+    neo4jaura = {
+      source  = "neo4j-labs/neo4jaura"
     }
   }
 }
 
-provider "aura" {
+provider "neo4jaura" {
   client_id     = var.aura_client_id       # or AURA_CLIENT_ID env var
   client_secret = var.aura_client_secret   # or AURA_CLIENT_SECRET env var
 }
 
-resource "aura_instance" "db" {
+resource "neo4jaura_instance" "db" {
   name           = "prod-db"
   type           = "professional-db"
   cloud_provider = "gcp"
   region         = "europe-west1"
   memory         = "4GB"
-  tenant_id      = var.aura_tenant_id
+  project_id     = var.aura_project_id   # Terraform uses project_id (REST API: tenant_id)
 }
 
 output "neo4j_uri" {
-  value     = "neo4j+s://${aura_instance.db.id}.databases.neo4j.io"
+  value     = neo4jaura_instance.db.connection_url
   sensitive = false
 }
 output "neo4j_password" {
-  value     = aura_instance.db.password
+  value     = neo4jaura_instance.db.password
   sensitive = true
 }
 ```

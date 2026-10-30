@@ -2,7 +2,7 @@
 /**
  * k6 executors and load patterns example
  *
- * Covers all 7 executors with realistic configuration examples.
+ * Covers all 6 executors with realistic configuration examples.
  * Pick the relevant scenario block and remove the others.
  *
  * Executors:
@@ -12,7 +12,6 @@
  *   ramping-arrival-rate  — variable RPS over time
  *   per-vu-iterations     — each VU runs N iterations exactly
  *   shared-iterations     — total iteration budget shared across VUs
- *   externally-controlled — VU count controlled at runtime via k6 REST API
  */
 import http from 'k6/http';
 import { check, sleep } from 'k6';
@@ -89,16 +88,6 @@ export const options = {
   //     vus: 5,
   //     iterations: 50,
   //     maxDuration: '2m',
-  //   },
-  // },
-
-  // ── 7. externally-controlled: VU count set via k6 REST API ─────────────
-  // scenarios: {
-  //   dynamic: {
-  //     executor: 'externally-controlled',
-  //     vus: 10,
-  //     maxVUs: 100,
-  //     duration: '10m',
   //   },
   // },
 

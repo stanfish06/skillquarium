@@ -51,6 +51,11 @@ jobs:
         # is unreachable from GitHub-hosted runners.
         run: ./skillquarium validate
 
+      - name: Regenerate catalog/list golden fixtures
+        # The goldens carry skill descriptions, so a merged skill PR that edits
+        # one would otherwise fail the Test step below.
+        run: bun run --cwd .skill-vault fixtures
+
       - name: Test
         run: bun test --cwd .skill-vault
 

@@ -1,7 +1,7 @@
 ---
 name: "databricks-core"
 description: "Databricks CLI operations and the parent/entry-point skill for Databricks CLI use: authentication, profile selection, and bundles. Load this first for CLI, auth, profile, and bundle tasks, then load the matching product skill. For finding or exploring data, answering questions about the data, or generating SQL, load the databricks-data-discovery skill (it routes to Genie One). Contains up-to-date guidelines for Databricks-related CLI tasks."
-compatibility: Requires databricks CLI (>= v0.292.0)
+compatibility: Requires databricks CLI (>= v1.0.0 recommended; auth guidance below also covers pre-v1.0 file-backed token storage)
 metadata:
   version: "0.1.0"
 ---

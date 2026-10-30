@@ -24,7 +24,6 @@ created: 2026-08-23
 ## Related skills
 
 - [firecrawl](../../notes/web-automation-frontend/firecrawl.md) — Any live-web task via the Firecrawl CLI — including ordinary web research: searching the web, reading or extracting pages, gathering sources, discovering site URLs, bulk extraction...
-- [firecrawl-search](../../notes/web-automation-frontend/firecrawl-search.md) — Web search with full page content. Use when no URL is known: finding sources, articles, or news
 - [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
 - [verification](../../notes/software-dev/verification.md) — Full-story verification — infers what the user is building, then verifies the complete flow end-to-end: browser → API → data → response
 

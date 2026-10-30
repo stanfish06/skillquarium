@@ -1,0 +1,26 @@
+{
+  "source": "scottnarmstrong/LeanAutoformalizationSkills",
+  "revision": "1837b95b3d5a9fd8d311367603902ad7fe261adf",
+  "skills": {
+    "build-proof-dependency-graph": "657d770132a88be77b3bf126b27bafe0f026860d",
+    "lean-elaboration": "97f00ca9ae6285bc7c2e2a035f28d837595893b8",
+    "lean-elaboration-test": "b10a94d28a9b72a7da7fabe9d03c2e10e2dbd19a",
+    "lean-learnings": "f0b1c9b398bb8b47cec6e37817985095bc9020e7",
+    "lean-naming-style": "7c8dbe01ec7c40ec3178ffb49b7c6cd8377b172d",
+    "lean-orchestrator": "ecad6135d178d5ce95d61dcfa46caf89cc4d240e",
+    "lean-project-architecture": "cd6916e5e66e0976c8b3bad60163e685a445ae88",
+    "lean-proof-patterns": "075c1df2e9db8226e37d2bb6aa2c0751d003fee8",
+    "lean-public-release": "3c65a6f678fcb30e24c20275906515f1d804820a",
+    "lean-search-discovery": "18bb026619a761b064bf1526275824d0233534d9",
+    "lean-statement-audit": "70114410cdae5bf3db8b7b923477ee2cfdab9150",
+    "lean-workflow": "60798a3ec690ab3904ba765453ae58a948b3e259"
+  },
+  "files": {
+    "LICENSE": "9e5f1b3c610b9c2da5c313bf81d577a7d1acec686bdb0384edefa6df0f90cd94",
+    "THIRD_PARTY_NOTICES.md": "21b5374bf1a828a08a936509783eae2c36e72b19c7dbd5d5604740c1a22d9ed1",
+    "LICENSES/Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "SOURCES.md": "e3690bfe5f151bab5081e09584107ddce63ba1a11eacd64c0c1bc8a8181abfdf",
+    "PROVENANCE.md": "bc1131474871cf79d7cc0abfff5942b7d6368002425ff7cdccb1d7f3c6101c17",
+    "INDEX.md": "c5e5699196513401d875c85553a62ba4a2c7f8042f5629c10829cbded434b3d4"
+  }
+}

@@ -39,5 +39,4 @@ npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-
 - [React `<ViewTransition>` docs](https://react.dev/reference/react/ViewTransition)
 - [React `addTransitionType` docs](https://react.dev/reference/react/addTransitionType)
 - [Next.js View Transitions guide](https://nextjs.org/docs/app/guides/view-transitions)
-- [Next.js `viewTransition` config](https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition)
 - [Next.js App Router Playground (view transitions)](https://github.com/vercel/next-app-router-playground/tree/main/app/view-transitions) — Vercel's reference implementation

@@ -14,13 +14,13 @@ created: 2026-06-09
 # scientific-critical-thinking
 
 > [!info] What it does
-> Evaluate research rigor. Assess methodology, experimental design, statistical validity, biases, confounding, evidence quality (GRADE, Cochrane ROB), for critical analysis of scientific claims.
+> Evaluates scientific claims and evidence quality. Applies to experimental design validity, biases and confounders, statistical interpretation, evidence grading frameworks (GRADE, Cochrane Risk of Bias), and teaching critical analysis. Supports evidence appraisal and identifying flaws; formal peer review writing belongs to peer-review.
 
 **Source:** [skills/scientific-critical-thinking/SKILL.md](../../../skills/scientific-critical-thinking/SKILL.md)  ·  **Domain:** [Scientific Writing, Figures & Publishing](../../maps/research-writing.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [research](../../notes/software-dev/research.md) — Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo
+- [peer-review](../../notes/research-writing/peer-review.md) — Prepares evidence-bounded, constructive peer-review drafts and structured manuscript assessments
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

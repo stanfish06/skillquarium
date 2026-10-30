@@ -20,7 +20,7 @@ created: 2026-06-09
 
 - [industry](../../notes/finance-investment/industry.md) — Cross-company industry comparison across multiple tickers
 - [nature-figure](../../notes/academic-pipelines/nature-figure.md) — Create, revise, audit, and export submission-grade scientific figures for Nature-family and other high-impact venues in Python (matplotlib/seaborn) or R...
-- [research-lookup](../../notes/literature-discovery/research-lookup.md) — Look up current research information using parallel-cli search (primary, fast web search) or the Parallel Chat API (deep research)
+- [research-lookup](../../notes/literature-discovery/research-lookup.md) — Compiles current scholarly evidence for a scientific manuscript or research brief when the user explicitly asks to gather literature, references, background evidence, competing...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
