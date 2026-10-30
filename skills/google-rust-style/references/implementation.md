@@ -39,9 +39,14 @@ let first = words.first().expect("split_whitespace on a non-blank line yields a 
 
 ## Matching `#[non_exhaustive]` enums `#non-exhaustive-enum-matching`
 
+The rule is about matching an enum defined in another crate. Inside the defining crate,
+`#[non_exhaustive]` has no effect, so the `_` arm below would be unreachable there.
+
 ```rust
-#[non_exhaustive]
-pub enum Shape { Circle, Square, Triangle }
+// Defined in another crate as:
+//     #[non_exhaustive]
+//     pub enum Shape { Circle, Square, Triangle }
+use shapes::Shape;
 
 // Good: known variants listed, so adding one upstream shows up here.
 match shape {
@@ -111,19 +116,33 @@ let greeting = format!("Hello, {name}!");
 ## Unsafe `#unsafe`
 
 ```rust
-/// Reads the header at the start of `buf`.
+/// Fixed-size record header. Every bit pattern is a valid `Header`, and it owns nothing.
+#[derive(Clone, Copy)]
+#[repr(C)]
+pub struct Header {
+    pub magic: u32,
+    pub len: u32,
+}
+
+/// Reads the header that `buf` points to.
 ///
 /// # Safety
 ///
-/// `buf` must point to at least `size_of::<Header>()` initialized, aligned bytes.
+/// `buf` must be non-null, aligned for `Header`, and valid for reads of
+/// `size_of::<Header>()` initialized bytes.
 pub unsafe fn read_header(buf: *const Header) -> Header {
-    // SAFETY: the caller guarantees `buf` is valid and aligned (see # Safety).
+    // SAFETY: the caller guarantees `buf` is non-null, aligned, and points to initialized bytes.
+    // Any bit pattern is a valid `Header` (two `u32`s), and `Header: Copy`, so the copy
+    // creates no second owner.
     unsafe { ptr::read(buf) }
 }
 ```
 
 The `# Safety` doc section states the contract for callers. The `// SAFETY:` comment explains why
-this block meets it. Every unsafe block needs one.
+this block meets it. Every unsafe block needs one. The contract has to cover everything the unsafe
+operation requires. For `ptr::read`, that is a properly initialized, valid value of the type, plus
+ownership: reading a non-`Copy` value makes a second owner, so the caller must give up the source.
+"Initialized bytes" is enough only when every bit pattern is a valid value, as it is here.
 
 ## Poisoned mutexes `#poison`
 
