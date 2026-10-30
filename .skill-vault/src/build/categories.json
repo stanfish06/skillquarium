@@ -1489,6 +1489,18 @@
     }
   ],
   "extraAssignments": {
+    "build-proof-dependency-graph": "data-science-compute",
+    "lean-elaboration": "data-science-compute",
+    "lean-elaboration-test": "data-science-compute",
+    "lean-learnings": "data-science-compute",
+    "lean-naming-style": "data-science-compute",
+    "lean-orchestrator": "data-science-compute",
+    "lean-project-architecture": "data-science-compute",
+    "lean-proof-patterns": "data-science-compute",
+    "lean-public-release": "data-science-compute",
+    "lean-search-discovery": "data-science-compute",
+    "lean-statement-audit": "data-science-compute",
+    "lean-workflow": "data-science-compute",
     "landing-page-design": "web-automation-frontend",
     "lean4": "data-science-compute",
     "aws-agent-toolkit": "cloud-devops",

@@ -12124,6 +12124,114 @@
       "skillFolderHash": "0027117848901a6d9a9bdeac5acb93f41773c2d3",
       "installedAt": "2026-10-28T10:38:39.000Z",
       "updatedAt": "2026-10-28T10:38:39.000Z"
+    },
+    "build-proof-dependency-graph": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/build-proof-dependency-graph/SKILL.md",
+      "skillFolderHash": "657d770132a88be77b3bf126b27bafe0f026860d",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-elaboration": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-elaboration/SKILL.md",
+      "skillFolderHash": "97f00ca9ae6285bc7c2e2a035f28d837595893b8",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-elaboration-test": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-elaboration-test/SKILL.md",
+      "skillFolderHash": "b10a94d28a9b72a7da7fabe9d03c2e10e2dbd19a",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-learnings": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-learnings/SKILL.md",
+      "skillFolderHash": "f0b1c9b398bb8b47cec6e37817985095bc9020e7",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-naming-style": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-naming-style/SKILL.md",
+      "skillFolderHash": "7c8dbe01ec7c40ec3178ffb49b7c6cd8377b172d",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-orchestrator": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-orchestrator/SKILL.md",
+      "skillFolderHash": "ecad6135d178d5ce95d61dcfa46caf89cc4d240e",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-project-architecture": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-project-architecture/SKILL.md",
+      "skillFolderHash": "cd6916e5e66e0976c8b3bad60163e685a445ae88",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-proof-patterns": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-proof-patterns/SKILL.md",
+      "skillFolderHash": "075c1df2e9db8226e37d2bb6aa2c0751d003fee8",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-public-release": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-public-release/SKILL.md",
+      "skillFolderHash": "3c65a6f678fcb30e24c20275906515f1d804820a",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-search-discovery": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-search-discovery/SKILL.md",
+      "skillFolderHash": "18bb026619a761b064bf1526275824d0233534d9",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-statement-audit": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-statement-audit/SKILL.md",
+      "skillFolderHash": "70114410cdae5bf3db8b7b923477ee2cfdab9150",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
+    },
+    "lean-workflow": {
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/scottnarmstrong/LeanAutoformalizationSkills.git",
+      "skillPath": "skills/lean-workflow/SKILL.md",
+      "skillFolderHash": "60798a3ec690ab3904ba765453ae58a948b3e259",
+      "installedAt": "2026-10-30T16:37:06.000Z",
+      "updatedAt": "2026-10-30T16:37:06.000Z"
     }
   },
   "dismissed": {

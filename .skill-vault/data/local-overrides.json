@@ -2790,5 +2790,53 @@
       "find": "- **Brands and logos.** Invent names that sound like they belong in the product's industry. A logistics tool's customers sound like logistics companies, not generic tech startups.\n- **Numbers.**",
       "replace": "- **Brands and logos.** Invent names that sound like they belong in the product's industry. A logistics tool's customers sound like logistics companies, not generic tech startups.\n- **Mark invented proof.** Invented testimonials, people, customer names, logos, and metrics are placeholders. Say so when handing off the page, and replace them with real ones before it is published. Never present them as real endorsements or results.\n- **Numbers.**"
     }
+  ],
+  "lean-naming-style": [
+    {
+      "id": "common-sources-link-naming-and-style",
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "file": "references/naming-and-style.md",
+      "find": "../../../SOURCES.md",
+      "replace": "../../lean-autoformalization-common/SOURCES.md"
+    }
+  ],
+  "lean-proof-patterns": [
+    {
+      "id": "common-sources-link-tactics-and-automation",
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "file": "references/tactics-and-automation.md",
+      "find": "../../../SOURCES.md",
+      "replace": "../../lean-autoformalization-common/SOURCES.md"
+    },
+    {
+      "id": "common-sources-link-math-to-lean",
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "file": "references/math-to-lean.md",
+      "find": "../../../SOURCES.md",
+      "replace": "../../lean-autoformalization-common/SOURCES.md"
+    }
+  ],
+  "lean-search-discovery": [
+    {
+      "id": "common-sources-link-search-and-discovery",
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "file": "references/search-and-discovery.md",
+      "find": "../../../SOURCES.md",
+      "replace": "../../lean-autoformalization-common/SOURCES.md"
+    },
+    {
+      "id": "common-sources-link-tools",
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "file": "references/tools.md",
+      "find": "../../../SOURCES.md",
+      "replace": "../../lean-autoformalization-common/SOURCES.md"
+    },
+    {
+      "id": "common-index-link-tools",
+      "source": "scottnarmstrong/LeanAutoformalizationSkills",
+      "file": "references/tools.md",
+      "find": "../../../INDEX.md",
+      "replace": "../../lean-autoformalization-common/INDEX.md"
+    }
   ]
 }

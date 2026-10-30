@@ -1,34 +1,34 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2158,
+  "skills": 2170,
   "expert_profiles": 503,
-  "nodes": 2231,
-  "edges": 16003,
+  "nodes": 2243,
+  "edges": 16061,
   "generic_names_blocked": 31,
-  "tier1_edges": 4821,
+  "tier1_edges": 4845,
   "tier2_edges": 721,
-  "alias_edges": 4485,
+  "alias_edges": 4507,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
-  "artifact_edges": 521,
+  "artifact_edges": 523,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.84,
+  "mean_skill_degree": 5.83,
   "median_skill_degree": 4,
   "orphan_count": 123,
-  "orphan_rate": 0.057,
+  "orphan_rate": 0.0567,
   "by_provenance": {
-   "EXTRACTED": 15217,
+   "EXTRACTED": 15275,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2158,
-   "references": 12538,
+   "in_domain": 2170,
+   "references": 12582,
    "in_discipline": 599,
-   "touches": 521,
+   "touches": 523,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -3316,6 +3316,21 @@
    "source": "skills/build-perf-diagnostics/SKILL.md",
    "aliases": [
     "build perf diagnostics"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "build-proof-dependency-graph",
+   "type": "Skill",
+   "label": "build-proof-dependency-graph",
+   "description": "Build an independently reviewed, source-level dependency database anchored to exact author-frozen Lean declarations. Use after source-first approval of one-declaration anchor files, when an orchestrator must trace roots through LaTeX, Markdown, or other line-addressable proof sources, expose substantive proof steps and external inputs, and produce a structurally checked graph for later Lean orchestration. Do not use this skill to inspect implementation Lean code or decide whether any theorem is proved.",
+   "source": "skills/build-proof-dependency-graph/SKILL.md",
+   "aliases": [
+    "build proof dependency graph"
    ],
    "uses": 0,
    "successes": 0,
@@ -15309,6 +15324,171 @@
    "source": "skills/ld-1000g-region-compute/SKILL.md",
    "aliases": [
     "ld 1000g region compute"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-elaboration",
+   "type": "Skill",
+   "label": "lean-elaboration",
+   "description": "Diagnose and improve Lean 4 elaboration performance in a repo — locate genuine hot spots, route by profile phase, apply the proven levers (consumer import narrowing, nlinarith elimination, targeted simp-only, head-class caches, leaf splits, folding hypothesis types to the abbrev their consumer expects, naming the function in congr), and A/B every change. Use when a repo builds slowly, a file blows past heartbeats, before landing perf edits, or when planning an elaboration campaign.",
+   "source": "skills/lean-elaboration/SKILL.md",
+   "aliases": [
+    "lean elaboration"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-elaboration-test",
+   "type": "Skill",
+   "label": "lean-elaboration-test",
+   "description": "Run a repeatable elaboration test of ONE Lean 4 repo and write a dated report — snapshot size (date, commit, lines excluding comment-only files), clean project-only rebuild with wall/CPU/parallelism/RSS, heavy-tail and per-namespace breakdown, warm own-file profiles of the worst files with likely causes, and improvement suggestions. Use when asked to run an elaboration test, profile a repo build, or track elaboration health over time.",
+   "source": "skills/lean-elaboration-test/SKILL.md",
+   "aliases": [
+    "lean elaboration test"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-learnings",
+   "type": "Skill",
+   "label": "lean-learnings",
+   "description": "Reusable Lean 4 and Mathlib lessons for analysis formalizations. Use when choosing an ambient carrier or repository layout, debugging elaboration and typeclass costs, preserving constant dependencies, or looking for recurring proof and API patterns.",
+   "source": "skills/lean-learnings/SKILL.md",
+   "aliases": [
+    "lean learnings"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-naming-style",
+   "type": "Skill",
+   "label": "lean-naming-style",
+   "description": "Use when naming Lean declarations, organizing files, adding docstrings, or cleaning code so it matches Mathlib conventions and review expectations.",
+   "source": "skills/lean-naming-style/SKILL.md",
+   "aliases": [
+    "lean naming style"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-orchestrator",
+   "type": "Skill",
+   "label": "lean-orchestrator",
+   "description": "Coordinate a large multi-agent Lean 4 formalization around exact author-approved declarations, source-level dependency graphs, independent statement audits, bounded proof tasks, and safe landings. Use when planning or running parallel Lean work, reviewing proof status, landing integrated results, keeping concurrent builds from overloading the machine, or repairing a campaign affected by statement drift or hypothesis smuggling.",
+   "source": "skills/lean-orchestrator/SKILL.md",
+   "aliases": [
+    "lean orchestrator"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-project-architecture",
+   "type": "Skill",
+   "label": "lean-project-architecture",
+   "description": "Use when planning a Lean formalization, selecting and freezing author-approved declarations, choosing module boundaries, designing reusable APIs, or staging a large proof project into stable phases.",
+   "source": "skills/lean-project-architecture/SKILL.md",
+   "aliases": [
+    "lean project architecture"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-proof-patterns",
+   "type": "Skill",
+   "label": "lean-proof-patterns",
+   "description": "Use when writing, refactoring, or debugging Lean proofs and you need a stable translation from mathematical reasoning into explicit tactics, controlled rewriting, or maintainable proof structure.",
+   "source": "skills/lean-proof-patterns/SKILL.md",
+   "aliases": [
+    "lean proof patterns"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-public-release",
+   "type": "Skill",
+   "label": "lean-public-release",
+   "description": "Prepare and verify a private Lean repository for public release. Use for source scrubbing, selective syncs, clean history, proof-status and license review, fresh-checkout builds, optional registry or comparator intake, independent review, and an explicit publication gate.",
+   "source": "skills/lean-public-release/SKILL.md",
+   "aliases": [
+    "lean public release"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-search-discovery",
+   "type": "Skill",
+   "label": "lean-search-discovery",
+   "description": "Use when searching Mathlib for existing declarations, likely theorem names, relevant files, or proof ingredients before attempting a new Lean proof.",
+   "source": "skills/lean-search-discovery/SKILL.md",
+   "aliases": [
+    "lean search discovery"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-statement-audit",
+   "type": "Skill",
+   "label": "lean-statement-audit",
+   "description": "Audit an exact manifest-bound Lean theorem or definition against its pinned mathematical source, with fail-closed binder, carrier, definition-body, characterization, consumption, and axiom checks. Use before approving a frozen declaration, after any frozen version change, before marking a source node proved, and before a theorem or section closure claim.",
+   "source": "skills/lean-statement-audit/SKILL.md",
+   "aliases": [
+    "lean statement audit"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lean-workflow",
+   "type": "Skill",
+   "label": "lean-workflow",
+   "description": "Route Lean 4 work through a repository's Mathlib/Lake conventions. Use when editing Lean files, checking source fidelity or axioms, searching dependencies, validating focused targets, or protecting dependency build artifacts.",
+   "source": "skills/lean-workflow/SKILL.md",
+   "aliases": [
+    "lean workflow"
    ],
    "uses": 0,
    "successes": 0,
@@ -46654,6 +46834,42 @@
    "status": "accepted"
   },
   {
+   "src": "build-proof-dependency-graph",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "build-proof-dependency-graph",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "build-proof-dependency-graph named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "build-proof-dependency-graph",
+   "rel": "references",
+   "dst": "lean-orchestrator",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-orchestrator named in build-proof-dependency-graph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "build-proof-dependency-graph",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "build-proof-dependency-graph named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "build-run-debug",
    "rel": "in_domain",
    "dst": "domain:software-dev",
@@ -54913,6 +55129,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "codeql named in code-audit/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "codeql",
+   "rel": "references",
+   "dst": "lean-public-release",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "codeql named in lean-public-release/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -93418,6 +93643,474 @@
    "status": "accepted"
   },
   {
+   "src": "lean-elaboration",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-elaboration",
+   "rel": "references",
+   "dst": "lean-elaboration-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-elaboration-test named in lean-elaboration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-elaboration",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-learnings named in lean-elaboration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-elaboration",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-elaboration named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-elaboration-test",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-elaboration-test",
+   "rel": "references",
+   "dst": "lean-elaboration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-elaboration-test named in lean-elaboration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-elaboration-test",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-elaboration-test named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "build-proof-dependency-graph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "build-proof-dependency-graph named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "lean-elaboration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-learnings named in lean-elaboration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "lean-project-architecture",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "lean-proof-patterns",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-proof-patterns named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "lean-search-discovery",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-search-discovery named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "lean-statement-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-statement-audit named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-workflow named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-learnings",
+   "rel": "references",
+   "dst": "lean4",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean4 named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-naming-style",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-naming-style",
+   "rel": "references",
+   "dst": "lean-project-architecture",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-naming-style/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-naming-style",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-naming-style named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-orchestrator",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-orchestrator",
+   "rel": "references",
+   "dst": "build-proof-dependency-graph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-orchestrator named in build-proof-dependency-graph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-orchestrator",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-orchestrator named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-project-architecture",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-project-architecture",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-project-architecture",
+   "rel": "references",
+   "dst": "lean-naming-style",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-naming-style/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-project-architecture",
+   "rel": "references",
+   "dst": "lean-proof-patterns",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-proof-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-project-architecture",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-project-architecture",
+   "rel": "touches",
+   "dst": "artifact:manuscript",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "Manuscript named in lean-project-architecture/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-proof-patterns",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-proof-patterns",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-proof-patterns named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-proof-patterns",
+   "rel": "references",
+   "dst": "lean-project-architecture",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-proof-patterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-proof-patterns",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-proof-patterns named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-public-release",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-public-release",
+   "rel": "references",
+   "dst": "codeql",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "codeql named in lean-public-release/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-search-discovery",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-search-discovery",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-search-discovery named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-search-discovery",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-search-discovery named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-statement-audit",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-statement-audit",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-statement-audit named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-statement-audit",
+   "rel": "references",
+   "dst": "lean-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-statement-audit named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-statement-audit",
+   "rel": "touches",
+   "dst": "artifact:manuscript",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "Manuscript named in lean-statement-audit/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "build-proof-dependency-graph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "build-proof-dependency-graph named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-elaboration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-elaboration named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-elaboration-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-elaboration-test named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-workflow named in lean-learnings/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-naming-style",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-naming-style named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-orchestrator",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-orchestrator named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-project-architecture",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-project-architecture named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-proof-patterns",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-proof-patterns named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-search-discovery",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-search-discovery named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean-workflow",
+   "rel": "references",
+   "dst": "lean-statement-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean-statement-audit named in lean-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "lean4",
    "rel": "in_domain",
    "dst": "domain:data-science-compute",
@@ -93433,6 +94126,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "code-review named in lean4/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "lean4",
+   "rel": "references",
+   "dst": "lean-learnings",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "lean4 named in lean-learnings/SKILL.md body",
    "status": "accepted"
   },
   {
