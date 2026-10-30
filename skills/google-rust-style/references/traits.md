@@ -43,8 +43,11 @@ pub fn log_to(logger: &mut impl Logger, event: &Event)
 pub fn log_to(logger: &mut dyn Logger, event: &Event)
 ```
 
-A `dyn` parameter costs a vtable call per method, blocks inlining, and doesn't work with traits that
-have generic methods, `self`-less associated functions, or `-> Self`.
+A `dyn` parameter uses vtable dispatch and can limit inlining. Methods with type parameters,
+`self`-less associated functions, and methods returning `Self` prevent dyn compatibility unless each
+has `where Self: Sized`. That bound excludes those methods from trait-object calls; other
+dyn-compatibility requirements still apply. See the
+[Rust Reference](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility).
 
 ## Trait vs inherent impl `#trait-vs-inherent-impl`
 
@@ -94,7 +97,7 @@ generic function can accept any of them.
 
 | Situation | Implement |
 | --- | --- |
-| Type has public fields | Whatever all the fields implement |
+| Type has public fields | Consider traits implemented by all the fields |
 | Error type | `Copy` when possible (not when it holds a `String`) |
 | Will clearly stay `Copy` | `Copy` |
 | Almost every type | `Clone`, unless it represents an external resource |

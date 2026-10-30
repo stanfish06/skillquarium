@@ -48,7 +48,7 @@ The rule is about matching an enum defined in another crate. Inside the defining
 //     pub enum Shape { Circle, Square, Triangle }
 use shapes::Shape;
 
-// Good: known variants listed, so adding one upstream shows up here.
+// Good: explicitly documents which known variants need no action.
 match shape {
     Shape::Circle => draw_circle(),
     Shape::Square => draw_square(),
@@ -65,6 +65,9 @@ match shape {
     _ => {}
 }
 ```
+
+Listing known variants documents intent for reviewers. The wildcard still accepts future variants;
+this does not make upstream additions produce a compiler diagnostic.
 
 ## Assertion messages `#assertion-context`
 

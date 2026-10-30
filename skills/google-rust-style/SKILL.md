@@ -58,8 +58,9 @@ flag a rule in review.
 ## Formatting
 
 - Format with the codebase's tool (`rustfmt`; `git cl format` in Chromium). Recommended rustfmt
-  options: `max_width = 100`, `hex_literal_case = Lower`, `format_macro_matchers = true`. Escape
-  invisible characters in literals (`\u{200D}`). `#formatting-other`
+  options: `max_width = 100`, `hex_literal_case = Lower`, `format_macro_matchers = true`.
+  A codebase may omit options unavailable on its stable Rust toolchain. Escape invisible characters
+  in literals (`\u{200D}`). `#formatting-other`
 - `#[rustfmt::skip]` only for deliberate manual alignment (e.g. matrices) or generated code, never
   for personal taste. `#formatting-optout`
 
@@ -116,7 +117,8 @@ flag a rule in review.
   `FooExt`, and the team that owns `Foo` should own the trait. Exception: foundational extension
   methods expected to become well known. Input traits implemented on many foreign types
   (`DateLike`) are not extension traits. `#extension-traits`, `#naming-extension-traits`
-- Standard trait expectations: types with public fields implement what all their fields implement.
+- Standard trait expectations: for types with public fields, consider implementing traits shared
+  by all their fields.
   Error types should be `Copy` when they can be (not if they hold a `String`). Use `Copy` when it
   will clearly stay `Copy`. Most types implement `Clone` unless they own an external resource.
   `Default` goes with `new()` or any default state (Clippy: `new_without_default`). For `==`/`<`
@@ -207,9 +209,10 @@ flag a rule in review.
   about in the wildcard arm (`Shape::Triangle | _ => {}`). If you only care about some, use
   `if let` or `let ... else`. A bare `_` that hides known variants is wrong, unless `match` is
   clearly cleaner than `if let`. `#non-exhaustive-enum-matching`
-- Give `assert!` a message that says why the condition should hold, logs the offending value, or
-  says whether failure means API misuse or a bug. A message that restates the condition is worse
-  than none. Prefer a message to a comment, because the message shows up in logs.
+- Consider an `assert!` message when it adds context: why the condition should hold, the offending
+  value, or whether failure means API misuse or a bug. Self-explanatory assertions need no message.
+  A message that restates the condition is worse than none. Prefer a message to a comment, because
+  the message shows up in logs.
   `#assertion-context`
 - Combinator chains: keep them short. Never build one in a `for` header; bind it to a named
   variable first. Avoid `Iterator::for_each` and use a `for` loop. Do use combinators when they
