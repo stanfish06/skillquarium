@@ -8,6 +8,15 @@
       "replace": "  docs:\n    - \"https://agent-browser.dev\""
     }
   ],
+  "mixpanel-headless-setup": [
+    {
+      "id": "account-test-requires-name-verify",
+      "issue": 1122,
+      "source": "openai/plugins",
+      "find": "## Verify Everything Works\n\n```bash\npython3 $SKILL_DIR/../mixpanelyst/scripts/auth_manager.py account test\n```\n",
+      "replace": "## Verify Everything Works\n\nPass the `account.name` the session check above returned \u2014 the script requires a name:\n\n```bash\npython3 $SKILL_DIR/../mixpanelyst/scripts/auth_manager.py account test <account.name>\n```\n"
+    }
+  ],
   "logfire-instrumentation": [
     {
       "id": "logfire-5-1-1-pin-skill",
