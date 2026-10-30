@@ -4,7 +4,7 @@
 > [lean-phrasebook.md](https://github.com/cameronfreer/lean4-skills/blob/main/plugins/lean4/skills/lean4/references/lean-phrasebook.md), which is
 > itself inspired by [Terence Tao's Lean Phrasebook](https://docs.google.com/spreadsheets/d/1Gsn5al4hlpNc_xKoXdU6XGmMyLiX4q-LFesFVsMlANo/).
 > For the full version with more examples, see cameronfreer's original.
-> See [Sources and References](../../lean-autoformalization-common/SOURCES.md) for full citations.
+> See [Sources and References](../SOURCES.md) for full citations.
 
 This reference translates mathematical proof language into Lean 4 tactic proofs.
 Organized by the kind of reasoning step you want to express.
@@ -78,7 +78,12 @@ itself.
 | "Take x = a [to prove ∃ x, P x]" | `use a` |
 | "By h, ∃ x with P(x); call it x₀" | `obtain ⟨x₀, hx₀⟩ := h` |
 | "Since h : ∀ x ∈ X, P x, apply to a" | `have := h a ha` or `specialize h a ha` |
-| "Select a canonical element" | `let x := h.some` |
+| "Select a witness from h : ∃ x, P x by classical choice" | `let x := h.choose` |
+
+`h.choose_spec` proves `P h.choose`. This choice is not generally canonical;
+a definition returning the chosen value must be `noncomputable`. For local
+reasoning in a proof, prefer `obtain ⟨x, hx⟩ := h` when no chosen value needs
+to escape. See Lean's [existential quantifier reference](https://lean-lang.org/doc/reference/latest/Basic-Propositions/Quantifiers/).
 
 ## Conjunction, Disjunction, Iff
 

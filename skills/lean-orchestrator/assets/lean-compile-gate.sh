@@ -42,16 +42,42 @@ for a in "$@"; do case "$a" in *.lean) haslean=1; break ;; esac; done
 [ -z "$haslean" ] && exec "$real" "$@"
 if [ -n "$prefixes" ] && ! in_prefix "$prefixes:$reserved"; then exec "$real" "$@"; fi
 
-mkdir -p "$dir" 2>/dev/null
-slots=$(seq 0 $((slots_shared - 1)))
+if ! [[ "$slots_shared" =~ ^[1-9][0-9]*$ ]] || ! [ "$slots_shared" -gt 0 ] 2>/dev/null; then
+  echo "[lean-compile-gate] LEAN_GATE_SLOTS must be a positive integer" >&2
+  exit 2
+fi
+if ! mkdir -p "$dir"; then
+  echo "[lean-compile-gate] cannot create lock directory '$dir'; set LEAN_GATE_DIR to a writable shared directory" >&2
+  exit 2
+fi
+if ! command -v flock >/dev/null; then
+  echo "[lean-compile-gate] flock is required for gated compiles" >&2
+  exit 2
+fi
+if ! slots=$(seq 0 $((slots_shared - 1))); then
+  echo "[lean-compile-gate] cannot enumerate compile slots" >&2
+  exit 2
+fi
 if [ -n "$reserved" ] && in_prefix "$reserved"; then slots="$slots_shared $slots"; fi
 
 waited=""
 while :; do
   for i in $slots; do
-    exec {fd}>"$dir/slot$i"
-    if flock -n "$fd"; then export LEAN_GATE_SLOT=$i; exec "$real" "$@"; fi
+    if ! exec {fd}>"$dir/slot$i"; then
+      echo "[lean-compile-gate] cannot open lock file '$dir/slot$i'; check LEAN_GATE_DIR permissions" >&2
+      exit 2
+    fi
+    if flock -n -E 75 "$fd"; then
+      export LEAN_GATE_SLOT=$i
+      exec "$real" "$@"
+    else
+      status=$?
+    fi
     exec {fd}>&-
+    if [ "$status" -ne 75 ]; then
+      echo "[lean-compile-gate] cannot lock '$dir/slot$i' (flock exit $status)" >&2
+      exit 2
+    fi
   done
   if [ -z "$waited" ]; then
     echo "[lean-compile-gate] waiting for a compile slot ($slots_shared busy machine-wide)" >&2

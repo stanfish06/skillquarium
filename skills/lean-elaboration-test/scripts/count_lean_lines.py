@@ -9,12 +9,17 @@ and string literals. Files that are not Lean modules (no `module` header;
 
 Usage:  python3 count_lean_lines.py [REF] [PATH_PREFIX ...]
         REF defaults to HEAD. Optional prefixes restrict to e.g. 'Project'.
+        --files-from PATH selects an exact JSON array of tracked .lean paths
+        instead of prefixes, for the measured target's project-module closure.
 
 Run from the repo root.
 """
+import argparse
+import json
+import os
 import re
 import subprocess
-import sys
+from pathlib import Path
 
 MODULE_KEYWORD = re.compile(r"module(?![\w'.!?])")
 
@@ -115,15 +120,38 @@ def code_line_flags(text):
 
 
 def main():
-    ref = sys.argv[1] if len(sys.argv) > 1 else "HEAD"
-    prefixes = tuple(sys.argv[2:])
-    names = subprocess.run(
-        ["git", "ls-tree", "-r", "--name-only", ref],
-        capture_output=True, text=True, check=True,
-    ).stdout.splitlines()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("ref", nargs="?", default="HEAD")
+    parser.add_argument("prefixes", nargs="*", metavar="PATH_PREFIX")
+    parser.add_argument("--files-from", type=Path, help="JSON array of exact tracked project .lean paths")
+    args = parser.parse_args()
+    ref = args.ref
+    prefixes = tuple(args.prefixes)
+    if args.files_from is not None and prefixes:
+        parser.error("--files-from cannot be combined with PATH_PREFIX filters")
+    tree = subprocess.run(
+        ["git", "ls-tree", "-r", "-z", "--name-only", ref],
+        capture_output=True, check=True,
+    ).stdout
+    names = [os.fsdecode(path) for path in tree.split(b"\0") if path]
     files = [f for f in names
              if f.endswith(".lean") and not f.startswith(".lake")
              and (not prefixes or f.startswith(prefixes))]
+    if args.files_from is not None:
+        try:
+            selected = json.loads(args.files_from.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as error:
+            parser.error(f"cannot read --files-from {args.files_from}: {error}")
+        if not isinstance(selected, list) or not selected or any(not isinstance(path, str) for path in selected):
+            parser.error("--files-from must contain a nonempty JSON array of project .lean paths")
+        if len(selected) != len(set(selected)):
+            parser.error("--files-from contains duplicate paths")
+        available = set(files)
+        missing = [path for path in selected if path not in available]
+        if missing:
+            parser.error(f"--files-from paths are not tracked project .lean files at {ref}: {missing!r}")
+        requested = set(selected)
+        files = [path for path in files if path in requested]
 
     total_lines = 0
     code_lines = 0
@@ -151,6 +179,8 @@ def main():
     print(f"ref:                            {ref}")
     if prefixes:
         print(f"prefixes:                       {' '.join(prefixes)}")
+    if args.files_from is not None:
+        print(f"files manifest:                 {args.files_from}")
     print(f".lean files in tree:            {len(files)}")
     print(f"comment-only files (excluded):  {len(comment_only)}")
     print(f"counted files:                  {counted}")

@@ -4,7 +4,7 @@
 > [mathlib-guide.md](https://github.com/cameronfreer/lean4-skills/blob/main/plugins/lean4/skills/lean4/references/mathlib-guide.md);
 > Mathlib naming conventions
 > (leanprover-community.github.io/contribute/naming.html); Terence Tao's Lean 4 proof
-> tours. See [Sources and References](../../lean-autoformalization-common/SOURCES.md) for full citations.
+> tours. See [Sources and References](../SOURCES.md) for full citations.
 
 ## Table of Contents
 
@@ -101,7 +101,7 @@ ls .lake/packages/mathlib/Mathlib/Topology/
 grep -n "lemma.*compact.*preimage" .lake/packages/mathlib/Mathlib/Topology/Compactness/*.lean
 
 # Case-insensitive search
-grep -in "harnack" .lake/packages/mathlib/Mathlib/Analysis/**/*.lean
+rg -n -i --glob '*.lean' 'harnack' .lake/packages/mathlib/Mathlib/Analysis/
 
 # Search for theorem/lemma definitions matching a keyword
 grep -rn "theorem\|lemma" .lake/packages/mathlib/Mathlib/MeasureTheory/ | grep "condExp"

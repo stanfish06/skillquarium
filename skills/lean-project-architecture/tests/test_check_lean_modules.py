@@ -123,6 +123,22 @@ class CheckLeanModulesTest(unittest.TestCase):
             ("theorem", "A.B.p", False), ("theorem", "Other.r", True), ("lemma", "A.inner", True),
             ("theorem", "A.after", False)])
 
+    def test_declaration_names_on_next_code_line(self):
+        text = ("module\npublic section\nnamespace Demo\npublic theorem\n  -- signature\n"
+                "  main : True := trivial\nprivate lemma\n  hidden : True := trivial\nend Demo\nend\n")
+        self.assertEqual(checker.declarations(text), [("theorem", "Demo.main", True),
+                                                    ("lemma", "Demo.hidden", False)])
+        self.write("comparators/Challenge.lean", CHALLENGE.replace("theorem main", "theorem\n  main"))
+        self.write("comparators/Solution.lean", SOLUTION.replace("theorem main", "theorem\n  main"))
+        status, output = self.run_checker()
+        self.assertEqual(status, 0, output)
+
+    def test_scoped_declarations_with_in_on_next_line(self):
+        text = ("module\npublic section\nnamespace Demo\nopen Nat\nin theorem t : True := trivial\n"
+                "set_option autoImplicit false\nin theorem u : True := trivial\nend Demo\nend\n")
+        self.assertEqual(checker.declarations(text), [("theorem", "Demo.t", True),
+                                                    ("theorem", "Demo.u", True)])
+
     def test_reviewed_lexer_edge_cases(self):
         text = ("module\n\n@[expose] public section\n\nnamespace X\n\nsection A.B\n\ndef c : Char := '\"'\n\n"
                 "end A.B\n\nopen Nat in theorem b : True := trivial\n\n"
@@ -147,6 +163,30 @@ class CheckLeanModulesTest(unittest.TestCase):
         self.config["permitted_axioms"].append("sorryAx")
         self.write("comparator.json", json.dumps(self.config))
         self.assert_fails("permitted_axioms must name only")
+
+    def test_comparator_non_string_axioms_fail_without_traceback(self):
+        for value in ({}, [], 3, None):
+            with self.subTest(value=value):
+                self.config["permitted_axioms"] = [value]
+                self.write("comparator.json", json.dumps(self.config))
+                self.assert_fails("permitted_axioms must name only")
+
+    def test_comparator_module_paths_cannot_escape_root(self):
+        for module in ("../Missing", "/tmp/Missing"):
+            with self.subTest(module=module):
+                self.config["solution_module"] = module
+                self.write("comparator.json", json.dumps(self.config))
+                self.assert_fails("solution_module")
+
+    def test_comparator_module_symlink_cannot_escape_root(self):
+        outside = tempfile.TemporaryDirectory()
+        self.addCleanup(outside.cleanup)
+        stray = Path(outside.name) / "Outside.lean"
+        stray.write_text(SOLUTION)
+        os.symlink(stray, self.root / "comparators/Outside.lean")
+        self.config["solution_module"] = "comparators.Outside"
+        self.write("comparator.json", json.dumps(self.config))
+        self.assert_fails("solution_module comparators.Outside")
 
     def test_comparator_requires_nanoda(self):
         self.config["enable_nanoda"] = False
@@ -181,6 +221,11 @@ class CheckLeanModulesTest(unittest.TestCase):
         status, output = self.run_checker("--files", "Demo/Basic.lean")
         self.assertEqual(status, 0, output)
         self.assertIn("1 Lean files, 0 comparator configurations", output)
+
+    def test_files_mode_reports_missing_paths_and_directories(self):
+        for name in ("Missing.lean", "Demo"):
+            with self.subTest(name=name):
+                self.assert_fails("not a regular file", "--files", name)
 
 
 if __name__ == "__main__":

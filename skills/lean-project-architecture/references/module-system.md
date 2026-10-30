@@ -160,7 +160,7 @@ a release often ships its own copies of the checkers.
 the header rule and the intake checks below. For the other rules it provides
 tested helpers to reuse in a project's checkers (`has_module_header`,
 `code_mask`, `IMPORT`, `is_import_only`, `declarations`). The
-[`check_frozen_anchors.py`](../../lean-orchestrator/scripts/check_frozen_anchors.py)
+[`check_frozen_anchors.py`](https://github.com/scottnarmstrong/LeanAutoformalizationSkills/blob/1837b95b3d5a9fd8d311367603902ad7fe261adf/skills/lean-orchestrator/scripts/check_frozen_anchors.py)
 applies the same header,
 visibility and `_root_` rules to frozen files.
 

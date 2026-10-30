@@ -57,10 +57,10 @@ SECTION = re.compile(
     rf"^[ \t]*(?:@\[[^\]\n]*\][ \t]*)*((?:(?:public|private|noncomputable)[ \t]+)*)section(?:[ \t]+{NAME})?[ \t]*$")
 END = re.compile(rf"^[ \t]*end(?:[ \t]+{NAME})?[ \t]*$")
 DECL = re.compile(
-    r"^[ \t]*(?:(?:open|set_option)\b[^\n]*?\bin[ \t]+)*(?:@\[[^\]\n]*\][ \t]*)*"
+    r"(?m)^[ \t]*(?:in[ \t]+)?(?:(?:open|set_option)\b[^\n]*?\bin[ \t]+)*(?:@\[[^\]\n]*\][ \t]*)*"
     r"((?:(?:private|protected|public|meta|noncomputable|unsafe|partial|nonrec|scoped|local)[ \t]+)*)"
     r"(theorem|lemma|def|abbrev|opaque|structure|class|inductive|instance|axiom)\b"
-    rf"(?:[ \t]+({NAME}))?")
+    rf"(?:\s+({NAME}))?")
 
 
 def header_token_offset(text: str) -> int:
@@ -160,7 +160,10 @@ def declarations(text: str) -> list[tuple[str, str, bool]]:
     namespaces: list[str] = []
     scopes: list[tuple[int, str | None]] = []  # (namespace parts, section visibility)
     found: list[tuple[str, str, bool]] = []
-    for line in code_mask(text).splitlines():
+    code, offset = code_mask(text), 0
+    for raw_line in code.splitlines(keepends=True):
+        line, start = raw_line.rstrip("\r\n"), offset
+        offset += len(raw_line)
         if match := NAMESPACE.match(line):
             parts = match.group(1).split(".")
             namespaces.extend(parts)
@@ -173,7 +176,7 @@ def declarations(text: str) -> list[tuple[str, str, bool]]:
                 count, _visibility = scopes.pop()
                 if count:
                     del namespaces[-count:]
-        elif match := DECL.match(line):
+        elif match := DECL.match(code, start):
             modifiers, kind, name = match.group(1).split(), match.group(2), match.group(3)
             if name is None:
                 continue
@@ -216,6 +219,7 @@ def check_file(root: Path, path: Path, max_lines: int, errors: list[str]) -> Non
         errors.append(f"{rel}: symlinked .lean file")
         return
     if not path.is_file():
+        errors.append(f"{rel}: not a regular file")
         return
     try:
         text = path.read_text(encoding="utf-8")
@@ -244,7 +248,7 @@ def check_comparator(root: Path, config: Path, errors: list[str], warnings: list
         errors.append(f"{rel}: theorem_names must be a nonempty list of names")
         names = []
     axioms = data.get("permitted_axioms")
-    if not isinstance(axioms, list) or not set(axioms) <= STANDARD_AXIOMS:
+    if not isinstance(axioms, list) or not all(isinstance(a, str) and a in STANDARD_AXIOMS for a in axioms):
         errors.append(f"{rel}: permitted_axioms must name only {sorted(STANDARD_AXIOMS)}")
     if data.get("enable_nanoda") is not True:
         errors.append(f"{rel}: enable_nanoda must be true")
@@ -253,7 +257,10 @@ def check_comparator(root: Path, config: Path, errors: list[str], warnings: list
         if not isinstance(module, str) or not module:
             errors.append(f"{rel}: {key} missing")
             continue
-        path = root / (module.replace(".", "/") + ".lean")
+        path = (root / (module.replace(".", "/") + ".lean")).resolve()
+        if not path.is_relative_to(root):
+            errors.append(f"{rel}: {key} {module} escapes repository root")
+            continue
         if not path.is_file():
             errors.append(f"{rel}: {key} {module} has no file {path.relative_to(root).as_posix()}")
             continue

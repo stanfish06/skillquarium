@@ -1,6 +1,7 @@
 import { readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { universalNewlines } from "../catalog";
+import { applyLeanAttribution } from "./leanAttribution";
 
 /**
  * One recorded local fix: `find` is the upstream defect, `replace` the vault's version.
@@ -92,7 +93,7 @@ export function overrideState(text: string, entry: OverrideEntry): OverrideState
  * Skills are visited in sorted order, entries in the order they are recorded.
  */
 export function applyOverrides(overrides: Overrides, root: string, write = true): OverrideResult {
-  const result: OverrideResult = { pending: [], applied: [], stale: [], missing: [] };
+  const result = applyLeanAttribution(root, write);
   for (const skill of [...overrides.keys()].sort()) {
     for (const entry of overrides.get(skill) ?? []) {
       const relative = `skills/${skill}/${entry.file ?? "SKILL.md"}`;
@@ -133,7 +134,10 @@ export function reportOverrides(result: OverrideResult, check: boolean, io: Over
   // reads oddly (these are not the stale ones) but the wording is kept for parity.
   for (const label of result.pending) io.out(`  ${check ? "stale in tree" : "re-applied"}: ${label}`);
   for (const label of result.stale) {
-    io.err(`  STALE: ${label} — upstream rewrote this region; re-derive the fix`);
+    const action = label.endsWith("/attribution-pin")
+      ? "refresh the reviewed lean-autoformalization-common resources and manifest.json together"
+      : "upstream rewrote this region; re-derive the fix";
+    io.err(`  STALE: ${label} — ${action}`);
   }
   for (const label of result.missing) io.err(`  MISSING: ${label}`);
 
@@ -235,7 +239,14 @@ export function quarantineSkills(root: string, skills: string[]): QuarantineFail
  * Exit 0 when everything applied, 1 when a skill was quarantined, 2 when one could not be restored.
  */
 export function applyOrQuarantine(root: string, io: OverridesIo): number {
-  const result = applyOverrides(loadOverrides(overridesPath(root)), root, true);
+  let result: OverrideResult;
+  try {
+    result = applyOverrides(loadOverrides(overridesPath(root)), root, true);
+  } catch (error) {
+    // Exit 2 stops update-skills.yml before it can commit an unquarantined update.
+    io.err(`local overrides: verification failed: ${error instanceof Error ? error.message : String(error)}`);
+    return 2;
+  }
   const code = reportOverrides(result, false, io);
   const skills = unappliedSkills(result);
   const failed = quarantineSkills(root, skills);

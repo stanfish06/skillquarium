@@ -4,13 +4,13 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
 import shutil
 import stat
 import subprocess
 import tempfile
 import time
 import unittest
+from pathlib import Path
 
 GATE = Path(__file__).resolve().parent.parent / "assets" / "lean-compile-gate.sh"
 STUB = """#!/bin/bash
@@ -23,7 +23,7 @@ echo "end $(date +%s.%N) $(basename "$PWD") ${LEAN_GATE_SLOT:-none}" >> "$GATE_T
 @unittest.skipUnless(shutil.which("flock"), "flock not available")
 class CompileGateTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.tmp = Path(tempfile.mkdtemp())
+        self.tmp = Path(tempfile.mkdtemp()).resolve()
         bin_dir = self.tmp / "bin"
         bin_dir.mkdir()
         self.lean = bin_dir / "lean"
@@ -93,6 +93,47 @@ class CompileGateTest(unittest.TestCase):
         self.log.unlink()
         self.run_in(["proj"] * 3, arg="--version")
         self.assertEqual(self.max_concurrent("proj"), 3)
+
+    def test_unavailable_lock_directory_exits_without_compiling(self) -> None:
+        blocked = self.tmp / "not-a-directory"
+        blocked.write_text("occupied")
+        self.env["LEAN_GATE_DIR"] = str(blocked / "locks")
+        result = subprocess.run([str(self.lean), "X.lean"], cwd=self.tmp / "proj",
+                                env=self.env, capture_output=True, text=True, timeout=3, check=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("cannot create lock directory", result.stderr)
+        self.assertFalse(self.log.exists())
+
+    def test_unopenable_lock_file_exits_without_compiling(self) -> None:
+        locks = Path(self.env["LEAN_GATE_DIR"])
+        (locks / "slot0").mkdir(parents=True)
+        result = subprocess.run([str(self.lean), "X.lean"], cwd=self.tmp / "proj",
+                                env=self.env, capture_output=True, text=True, timeout=3, check=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("cannot open lock file", result.stderr)
+        self.assertFalse(self.log.exists())
+
+    def test_invalid_slot_counts_exit_without_compiling(self) -> None:
+        for slots in ("0", "-1", "not-a-number", "1.5", "18446744073709551616"):
+            for checkout in ("proj", "main"):
+                with self.subTest(slots=slots, checkout=checkout):
+                    env = dict(self.env, LEAN_GATE_SLOTS=slots)
+                    result = subprocess.run([str(self.lean), "X.lean"], cwd=self.tmp / checkout,
+                                            env=env, capture_output=True, text=True, timeout=3, check=False)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("LEAN_GATE_SLOTS must be a positive integer", result.stderr)
+                    self.assertFalse(self.log.exists())
+
+    def test_flock_errors_are_not_treated_as_contention(self) -> None:
+        flock = self.tmp / "bin" / "flock"
+        flock.write_text("#!/bin/bash\nexit 2\n")
+        flock.chmod(0o755)
+        self.env["PATH"] = str(flock.parent) + os.pathsep + self.env["PATH"]
+        result = subprocess.run([str(self.lean), "X.lean"], cwd=self.tmp / "proj",
+                                env=self.env, capture_output=True, text=True, timeout=3, check=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("cannot lock", result.stderr)
+        self.assertFalse(self.log.exists())
 
 
 if __name__ == "__main__":

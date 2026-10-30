@@ -9,15 +9,16 @@ and cannot establish mathematical truth or extraction completeness.
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass, field
-from functools import lru_cache
 import hashlib
 import json
-from pathlib import Path
+import os
 import re
 import sys
-from typing import Iterable, Sequence
-
+import tempfile
+from collections.abc import Iterable, Iterator, Sequence
+from dataclasses import dataclass, field
+from functools import lru_cache
+from pathlib import Path
 
 BEGIN = "<!-- BEGIN PROOF DEPGRAPH GENERATED -->"
 END = "<!-- END PROOF DEPGRAPH GENERATED -->"
@@ -753,26 +754,35 @@ def _validate_topology(graph: Graph, nodes: dict[str, Node], roots: list[str], s
     stack: list[str] = []
     positions: dict[str, int] = {}
     reported: set[tuple[str, ...]] = set()
-    def visit(identifier: str) -> None:
-        state[identifier] = 1
-        positions[identifier] = len(stack)
-        stack.append(identifier)
-        for child in nodes[identifier].deps + nodes[identifier].routes:
+    for start in sorted(nodes):
+        if state.get(start, 0) != 0:
+            continue
+        state[start] = 1
+        positions[start] = len(stack)
+        stack.append(start)
+        # Keep each node's child iterator on the stack instead of recursing.
+        pending: list[tuple[str, Iterator[str]]] = [(start, iter(nodes[start].deps + nodes[start].routes))]
+        while pending:
+            identifier, children = pending[-1]
+            child = next(children, None)
+            if child is None:
+                pending.pop()
+                stack.pop()
+                positions.pop(identifier, None)
+                state[identifier] = 2
+                continue
             if child not in nodes:
                 continue
             if state.get(child, 0) == 0:
-                visit(child)
+                state[child] = 1
+                positions[child] = len(stack)
+                stack.append(child)
+                pending.append((child, iter(nodes[child].deps + nodes[child].routes)))
             elif state[child] == 1:
                 cycle = tuple(stack[positions[child]:] + [child])
                 if cycle not in reported:
                     reported.add(cycle)
                     errors.add(path, nodes[identifier].line, "dependency cycle: " + " -> ".join(cycle))
-        stack.pop()
-        positions.pop(identifier, None)
-        state[identifier] = 2
-    for identifier in sorted(nodes):
-        if state.get(identifier, 0) == 0:
-            visit(identifier)
 
 
 def _parse_disposition(value: str, manifest: Manifest, item: Item) -> tuple[str, list[str]]:
@@ -782,7 +792,10 @@ def _parse_disposition(value: str, manifest: Manifest, item: Item) -> tuple[str,
     if not value.startswith(prefix):
         manifest.diagnostics.add(manifest.path, item.line_of("DISPOSITION"), "DISPOSITION must be EXCLUDED or NODE <comma-separated node IDs>")
         return "INVALID", []
-    return "NODE", _split_ids(value.removeprefix(prefix), path=manifest.path, line=item.line_of("DISPOSITION"), description=f"item {item.item_id!r} DISPOSITION", errors=manifest.diagnostics)
+    ids = _split_ids(value.removeprefix(prefix), path=manifest.path, line=item.line_of("DISPOSITION"), description=f"item {item.item_id!r} DISPOSITION", errors=manifest.diagnostics)
+    if not ids:
+        manifest.diagnostics.add(manifest.path, item.line_of("DISPOSITION"), f"item {item.item_id!r} NODE disposition needs at least one node ID")
+    return "NODE", ids
 
 
 def _validate_manifest(manifest: Manifest, nodes: dict[str, Node], source_root: Path | None, require_complete: bool) -> set[str]:
@@ -834,7 +847,7 @@ def _closure(nodes: dict[str, Node], roots: Sequence[str]) -> set[str]:
         if identifier in seen:
             continue
         seen.add(identifier)
-        todo.extend(nodes[identifier].deps + nodes[identifier].routes)
+        todo.extend(child for child in nodes[identifier].deps + nodes[identifier].routes if child in nodes)
     return seen
 
 
@@ -1034,7 +1047,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         assert region is not None
         begin, end, newline = region
         updated = db_text[:begin] + _expected_body(body, newline) + db_text[end:]
-        args.db.write_bytes(updated.encode("utf-8"))
+        temporary: Path | None = None
+        try:
+            with tempfile.NamedTemporaryFile(dir=args.db.parent, prefix=f".{args.db.name}.", delete=False) as output:
+                temporary = Path(output.name)
+                output.write(updated.encode("utf-8"))
+                output.flush()
+                os.fsync(output.fileno())
+            temporary.chmod(args.db.stat().st_mode)
+            os.replace(temporary, args.db)
+        except OSError as error:
+            print(f"{args.db}: cannot write dashboard: {error}", file=sys.stderr)
+            return 1
+        finally:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
         print("dashboard: updated" if updated != db_text else "dashboard: current")
     return 0
 

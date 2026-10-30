@@ -31,12 +31,11 @@ commit.
    log.
 2. **Confirm each candidate with a warm own-file profile** — build wall-clock
    includes upstream rebuilds, olean writes, and contention; it overstates
-   own-file cost by ~2.5× routinely. The ground truth is:
-   ```bash
-   <repo-approved-lean-command> --profile <Root>/<Path>/File.lean 2>&1 | tail -25
-   ```
-   Read the `cumulative profiling times` block. A "50s file" usually has 1–3s
-   of fixable cost. If `import` dominates, **the file is not fixable locally**
+   own-file cost by ~2.5× in the recorded measurements.
+   Use the full-log and exit-status-preserving command in Phase 4 of
+   **lean-elaboration-test**. Classify only a successful run and retain its
+   complete output. Read the `cumulative profiling times` block. A "50s file"
+   may have only 1–3s of fixable cost. If `import` dominates, **the file is not fixable locally**
    — the lever is upstream, or in what this file imports; do not touch its proofs.
 3. **Route by dominant phase** (dominant = >5s AND >25% of total):
 
@@ -67,9 +66,15 @@ commit.
 
 4. **Apply ONE intervention** — never stack changes before measuring.
 5. **A/B and keep-or-revert** — compare a baseline and one edited variant of
-   the same file; use at least three runs if relying on wall-clock. Profile deltas are
-   wall-clock-noise-immune and win when they disagree. Keep the edit only if
-   the relevant phase drops ≥2s (or ≥10%) without moving cost somewhere worse.
+   the same file under matched machine load, toolchain, imports, and cache state;
+   run each variant at least three times, alternating their order when practical.
+   Default profile phase times are elapsed times and are affected by contention,
+   just like wall-clock measurements (Lean uses a [steady-clock timer](https://github.com/leanprover/lean4/blob/master/src/util/timeit.h)).
+   If the profile and repeated wall-clock
+   results disagree or their variation obscures the change, report the result as
+   inconclusive and remeasure under comparable load. Keep the edit only if
+   the relevant phase repeatedly drops ≥2s (or ≥10%) without moving cost
+   somewhere worse.
    Three consecutive failures of one technique on a file family = stop
    applying that technique to the family.
 

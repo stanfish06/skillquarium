@@ -2,7 +2,7 @@
 
 > **Sources:** Lean 4 Tactic Reference (lean-lang.org); Mathlib tactic list; Kevin Buzzard
 > et al. "Simp" guide; Terence Tao's proof tours; Mathematics in Lean (Avigad & Massot).
-> See [Sources and References](../../lean-autoformalization-common/SOURCES.md) for full citations.
+> See [Sources and References](../SOURCES.md) for full citations.
 
 ## Table of Contents
 
@@ -124,7 +124,10 @@ calc a
 
 ## Decision Procedures and Closers
 
-These tactics solve goals completely or fail:
+These tactics include both closers and normalizers. `field_simp` and
+`push_cast` can leave the goal open; follow normalization with a closer such
+as `ring` when appropriate. `norm_num` and `norm_cast` can also leave residual
+goals, so inspect the remaining goals rather than assuming success closes them.
 
 | Tactic | Domain | Import |
 |--------|--------|--------|
@@ -434,18 +437,19 @@ set_option maxHeartbeats 400000
 
 ### 1. "unknown identifier" for a tactic
 **Cause:** Missing import. When the project uses the module system, imports follow `module`.
-Choose import visibility according to the public interface and toolchain:
+Use plain imports for these proof-only tactics. Use `public import` only when
+the module deliberately re-exports their API or its public interface needs it:
 ```lean
 module
 
-public import Mathlib.Tactic.Ring          -- ring, ring_nf
-public import Mathlib.Tactic.Linarith      -- linarith, nlinarith
-public import Mathlib.Tactic.FieldSimp     -- field_simp
-public import Mathlib.Tactic.Positivity    -- positivity
-public import Mathlib.Tactic.FunProp       -- fun_prop
-public import Mathlib.Tactic.Measurability -- measurability
-public import Mathlib.Tactic.GCongr        -- gcongr
-public import Mathlib.Tactic.NormNum       -- norm_num extensions
+import Mathlib.Tactic.Ring          -- ring, ring_nf
+import Mathlib.Tactic.Linarith      -- linarith, nlinarith
+import Mathlib.Tactic.FieldSimp     -- field_simp
+import Mathlib.Tactic.Positivity    -- positivity
+import Mathlib.Tactic.FunProp       -- fun_prop
+import Mathlib.Tactic.Measurability -- measurability
+import Mathlib.Tactic.GCongr        -- gcongr
+import Mathlib.Tactic.NormNum       -- norm_num extensions
 ```
 
 ### 2. "typeclass instance not found"

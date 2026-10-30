@@ -3,7 +3,7 @@
 > **Sources:** Mathlib naming conventions (leanprover-community.github.io/contribute/naming.html);
 > Lean 4 naming conventions (lean4/doc/std/naming.md); Library style guidelines
 > (leanprover-community.github.io/contribute/style.html); Mathlib style linters documentation.
-> See [Sources and References](../../lean-autoformalization-common/SOURCES.md) for full citations.
+> See [Sources and References](../SOURCES.md) for full citations.
 
 ## Table of Contents
 

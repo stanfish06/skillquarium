@@ -10,30 +10,51 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
 
 HEX = re.compile(r"^[0-9a-f]{64}$")
-FQ = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)+$")
+FQ = re.compile(r"^[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)+$")
 MARKERS = ("FROZEN_ANCHOR_PREFIX_BEGIN", "FROZEN_ANCHOR_PROOF_BEGIN",
            "FROZEN_ANCHOR_PROOF_END", "FROZEN_ANCHOR_SUFFIX_BEGIN",
            "FROZEN_ANCHOR_SUFFIX_END")
 # Module-system imports: `public`, `meta` and `all` qualifiers are accepted.
-IMPORT = re.compile(r"(?m)^\s*(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([A-Za-z_][A-Za-z0-9_.]*)\s*$")
+IDENT = r"(?:[A-Za-z_][A-Za-z0-9_'!?]*|«[^»\n]+»)"
+NAME = rf"{IDENT}(?:\.{IDENT})*"
+IMPORT = re.compile(rf"(?m)^\s*(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?({NAME})\s*$")
 DECL = re.compile(
-    r"(?m)^[ \t]*(?:@\[[^\]\n]*\][ \t]*)*"
+    r"(?m)^[ \t]*(?:in[ \t]+)?(?:(?:open|set_option)\b[^\n]*?\bin[ \t]+)*(?:@\[[^\]\n]*\][ \t]*)*"
     r"((?:(?:private|protected|public|noncomputable|unsafe|partial|nonrec|meta)\s+)*)"
     r"(theorem|lemma|def|abbrev|opaque|structure|class|inductive|axiom|constant|instance|example)\b"
     r"(?:\s+([A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*))?"
 )
-NAMESPACE = re.compile(r"^[ \t]*namespace\s+([A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*)\b")
+NAMESPACE = re.compile(r"^[ \t]*namespace\s+([A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*)")
 SECTION = re.compile(
     r"^[ \t]*(?:@\[[^\]\n]*\][ \t]*)*((?:(?:public|private|noncomputable)\s+)*)"
     r"section(?:\s+[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*)?[ \t]*$")
 END = re.compile(r"^[ \t]*end(?:\s+[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)*)?[ \t]*$")
 PLACEHOLDER = re.compile(r"\b(?:sorry|admit)\b")
 MODULE_KEYWORD = re.compile(r"module(?![\w'.!?])")
+
+
+def module_parts(name: str) -> list[str]:
+    """Decode quoted identifier components without splitting dots inside guillemets."""
+    return [part[1:-1] if part.startswith("«") else part for part in re.findall(IDENT, name)]
+
+
+def module_name(parts: list[str] | tuple[str, ...]) -> str:
+    """Use the same key for ordinary identifiers and equivalent quoted identifiers."""
+    return ".".join(part if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_'!?]*", part) else f"«{part}»"
+                    for part in parts)
+
+
+def valid_module_name(value: object) -> bool:
+    """Require filename components rather than filesystem path aliases."""
+    return (isinstance(value, str) and re.fullmatch(NAME, value) is not None
+            and all(part not in {".", ".."} and "/" not in part and "\\" not in part
+                    for part in module_parts(value)))
 
 
 def has_module_header(text: str) -> bool:
@@ -101,7 +122,10 @@ class Guard:
 
         index, size = 0, len(text)
         while index < size:
-            if text.startswith("--", index):
+            if text[index] == "«":
+                end = text.find("»", index + 1)
+                index = size if end == -1 else end + 1
+            elif text.startswith("--", index):
                 end = text.find("\n", index)
                 end = size if end == -1 else end
                 blank(index, end)
@@ -486,13 +510,17 @@ class Guard:
         return path
 
     def module_name(self, path: Path) -> str:
-        return ".".join(path.relative_to(self.root).with_suffix("").parts)
+        return module_name(path.relative_to(self.root).with_suffix("").parts)
 
     def imports_text(self, text: str) -> set[str]:
-        return set(IMPORT.findall(self.code_mask(text)))
+        return {module_name(module_parts(name)) for name in IMPORT.findall(self.code_mask(text))}
 
     def imports(self, path: Path) -> set[str]:
-        return self.imports_text(self.read_utf8(path))
+        found: set[str] = set()
+        for name in self.imports_text(self.read_utf8(path)):
+            target = (self.root / ("/".join(module_parts(name)) + ".lean")).resolve()
+            found.add(self.module_name(target) if target.is_relative_to(self.root) and target.is_file() else name)
+        return found
 
     def project_module_graph(self) -> tuple[dict[str, Path], dict[str, set[str]]]:
         modules = {self.module_name(path): path for path in self.project_files()}
@@ -506,7 +534,7 @@ class Guard:
                             if anchor.get("kind") == "definition"}
         for anchor, frozen, implementation in parsed:
             if anchor.get("kind") == "theorem" and implementation is not None:
-                target, start = self.module_name(frozen), anchor["implementation"]["module"]
+                target, start = self.module_name(frozen), self.module_name(implementation)
                 todo, seen = [start], set()
                 while todo:
                     current = todo.pop()
@@ -533,12 +561,13 @@ class Guard:
                     if isinstance(values, list):
                         approved.update((self.root / value).resolve() for value in values if isinstance(value, str))
             module, export = self.module_name(frozen), anchor.get("export", "")
-            token = re.compile(r"(?<![A-Za-z0-9_.])" + re.escape(export) + r"(?![A-Za-z0-9_.])")
+            token = re.compile(r"(?<![A-Za-z0-9_'.!?])" + re.escape(export) + r"(?![A-Za-z0-9_'.!?])")
             implementation_data = anchor.get("implementation", {})
-            provider_module = implementation_data.get("module", "")
+            provider_module = (self.module_name(implementation) if implementation is not None
+                               else implementation_data.get("module", ""))
             provider_export = implementation_data.get("export", "")
             provider_token = re.compile(
-                r"(?<![A-Za-z0-9_.])" + re.escape(provider_export) + r"(?![A-Za-z0-9_.])")
+                r"(?<![A-Za-z0-9_'.!?])" + re.escape(provider_export) + r"(?![A-Za-z0-9_'.!?])")
             provider_approved = {frozen.resolve()}
             if implementation is not None:
                 provider_approved.add(implementation.resolve())
@@ -572,11 +601,16 @@ class Guard:
         may import it, so its placeholders cannot flow into any proof.
         """
         found: set[Path] = set()
-        configs = sorted(path for path in self.root.rglob("comparator.json")
-                         if ".lake" not in path.parts and ".git" not in path.parts)
+        try:
+            listed = subprocess.run(["git", "ls-files", "-z", "--", "*comparator.json"],
+                                    cwd=self.root, capture_output=True, check=True).stdout.decode().split("\0")
+        except (OSError, subprocess.CalledProcessError):
+            return found  # A placeholder exception requires a Git-tracked configuration.
+        configs = sorted(self.root / name for name in listed if name and Path(name).name == "comparator.json"
+                         and ".lake" not in Path(name).parts and ".git" not in Path(name).parts)
         if not configs:
             return found
-        modules, graph = self.project_module_graph()
+        _modules, graph = self.project_module_graph()
         for config in configs:
             label = str(config.relative_to(self.root))
             try:
@@ -585,12 +619,25 @@ class Guard:
                 self.fail(f"{label}: cannot read: {exc}")
                 continue
             module = data.get("challenge_module") if isinstance(data, dict) else None
-            if not isinstance(module, str) or not module or module == data.get("solution_module"):
+            solution = data.get("solution_module") if isinstance(data, dict) else None
+            if not valid_module_name(module):
+                self.fail(f"{label}: challenge_module must be a valid module name")
+                continue
+            if not valid_module_name(solution):
+                self.fail(f"{label}: solution_module must be a nonempty valid module name")
+                continue
+            module, solution = module_name(module_parts(module)), module_name(module_parts(solution))
+            if module == solution:
                 self.fail(f"{label}: challenge_module must be a module name other than solution_module")
                 continue
-            path = self.path(module.replace(".", "/") + ".lean", f"{label}: challenge_module")
-            if path is None:
+            path = self.path("/".join(module_parts(module)) + ".lean", f"{label}: challenge_module")
+            solution_path = self.path("/".join(module_parts(solution)) + ".lean", f"{label}: solution_module")
+            if path is None or solution_path is None:
                 continue
+            if path == solution_path:
+                self.fail(f"{label}: challenge_module must have a different file from solution_module")
+                continue
+            module = self.module_name(path)  # Match importers against the file receiving the exception.
             importers = sorted(name for name, imports in graph.items() if module in imports)
             if importers:
                 self.fail(f"{label}: Challenge module {module} is imported by {', '.join(importers)}")

@@ -19,9 +19,22 @@ Changes made in this vault:
 - `INDEX.md`: skill links changed from `skills/<name>/SKILL.md` to `../<name>/SKILL.md`, and the
   `README.md` link now points to the upstream README at the pinned commit.
 - Skill reference files linked `../../../SOURCES.md` and `../../../INDEX.md` (the upstream
-  repository root). Local overrides in `.skill-vault/data/local-overrides.json`
-  (`*/common-sources-link-*`, `lean-search-discovery/common-index-link-tools`) point them into
-  this folder.
+  repository root). Local overrides now point them to copies inside each installed skill.
+  Cross-skill reference links point to the pinned upstream revision so single-skill installs
+  do not depend on sibling folders.
+- Every imported skill includes `LICENSE`, `THIRD_PARTY_NOTICES.md`, `LICENSES/Apache-2.0.txt`,
+  `SOURCES.md`, `PROVENANCE.md`, and `INDEX.md`. Each index links its own entry locally and other
+  entries to the pinned upstream revision. Each provenance file records the local adaptation.
+- Reviewed script and documentation corrections are recorded as exact replacements in
+  `.skill-vault/data/local-overrides.json`.
 
-This folder has no `.skill-lock.json` entry, so `./skillquarium update` does not refresh it. When
-`drift` shows the 12 skills behind upstream, re-copy these files from the new commit.
+`manifest.json` pins the shared resource hashes, upstream revision, and all 12 upstream skill
+folder hashes. `./skillquarium overrides` checks those pins and restores the per-skill copies after
+an upstream reinstall. `--check` reports missing or changed copies without writing.
+
+When a skill's upstream folder hash changes, the attribution pin becomes stale. The update CLI
+stops at overrides; the update workflow quarantines the affected skill at its previous folder and
+lock entry before committing other updates. Refresh the shared files and manifest from the same
+reviewed upstream revision before accepting that collection update. Recompute the shared SHA-256
+hashes and copy the new skill-folder hashes from the matching lock entries, then run
+`./skillquarium overrides` and `./skillquarium overrides --check`.

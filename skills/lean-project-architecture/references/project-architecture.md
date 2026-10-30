@@ -85,13 +85,19 @@ See Tao's PFR project for the model workflow.
 
 ## Mathlib Type Hierarchies
 
+Arrows mean adding structure or strengthening a property, not an implication
+from the weaker class to the stronger one.
+
 ```
 Algebra:     Monoid → Group → CommGroup
              Semiring → Ring → CommRing → Field
 Topology:    TopologicalSpace → UniformSpace → MetricSpace
-             T1Space → T2Space → CompactSpace
-Analysis:    NormedAddCommGroup → NormedSpace → CompleteSpace (Banach)
-             InnerProductSpace → CompleteSpace (Hilbert)
+             T1Space → T2Space
+             CompactSpace is an independent property
+Analysis:    NormedAddCommGroup → NormedSpace → InnerProductSpace
+             CompleteSpace is an additional property:
+             normed space + completeness = Banach space
+             inner product space + completeness = Hilbert space
 Morphisms:   OneHom → MonoidHom (→*) → RingHom (→+*) → AlgHom (→ₐ)
 ```
 

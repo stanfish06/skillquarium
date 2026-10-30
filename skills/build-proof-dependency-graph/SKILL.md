@@ -56,9 +56,10 @@ Copy these assets into the target project and replace their placeholders:
 - [assets/DEPGRAPH_COVERAGE.template.md](assets/DEPGRAPH_COVERAGE.template.md)
   as the exhaustive source inventory.
 
-Run `scripts/proof_depgraph.py --help` for linter options. Keep the script in
-the skill or copy it into the target project if the graph will be maintained
-there.
+Copy [scripts/proof_depgraph.py](scripts/proof_depgraph.py) into the target
+project's `scripts/` directory as well. From that project's root, run
+`python3 scripts/proof_depgraph.py --help` for linter options. The Phase 7
+commands assume this project-local copy.
 
 ## Phase 0: author-freeze anchors before graph extraction
 

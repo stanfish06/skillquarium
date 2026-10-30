@@ -41,6 +41,14 @@ object. Keep draft theorems quarantined and honestly labeled.
   inspect the complete resulting tree and diff.
 - If a fresh public history is desired, create it only after approval. A
   one-commit history is an option, not a universal requirement.
+- Before a history-preserving export or visibility change, enumerate every
+  branch and tag that will become public. Run a history-aware secret scan over
+  their reachable commits, and review historical files for forbidden references,
+  unpublished material, and files excluded by the release allowlist. A secret
+  scanner alone does not identify all unpublished material. Include the scanned
+  refs, findings, and resolutions in the release approval request. Resolve
+  excluded history with a clean export or a separately approved history rewrite
+  before publication; revoke or rotate any discovered credentials as needed.
 - Define how later public changes are synchronized. Do not assume rewriting
   published history is acceptable.
 
@@ -113,12 +121,14 @@ rules.
 
 If the release ships continuous integration:
 
-- Use two workflows, each with a README badge under the title: one builds the
-  project and runs the axiom audit for every advertised theorem plus the module
-  and metadata checks; the other runs the comparator checks with the independent
-  kernel replay. Keep them manual-dispatch drafts until release, then trigger on
-  pushes and pull requests to the default branch. Give each workflow its own
-  build-cache key; restores may fall back to the other's prefix.
+- Provide a workflow that builds the project and runs the axiom audit for every
+  advertised theorem plus the applicable module and metadata checks. Add a second
+  workflow for comparator checks and independent kernel replay only when the
+  release ships a comparator challenge and target. Give each shipped workflow a
+  README badge under the title and its own build-cache key; where both workflows
+  exist, restores may fall back to the other's prefix. Keep the workflows as
+  manual-dispatch drafts until release, then trigger on pushes and pull requests
+  to the default branch.
 - Free disk space first in every workflow that builds the project or runs
   comparators. A hosted runner starts with roughly 14 GB free, and replaying an
   exported solution over the full Mathlib closure in an independent kernel
@@ -202,6 +212,8 @@ Have a reviewer who did not perform the scrub inspect the exact proposed tree:
 - proof status, axiom output, draft quarantine, and absence of proof smuggling;
 - dependency isolation and fresh-checkout reproducibility;
 - forbidden references, secrets, and private artifacts;
+- historical content and secret-scan findings for every ref that will become
+  public when history is preserved;
 - README accuracy, licenses, attribution, and optional registry compliance.
 
 Resolve each finding or record a justified disposition. Present the complete

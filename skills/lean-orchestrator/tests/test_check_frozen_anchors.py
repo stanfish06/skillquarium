@@ -1,5 +1,7 @@
 import hashlib
 import importlib.util
+import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -144,6 +146,31 @@ class FrozenAnchorGuardTest(unittest.TestCase):
         self.manifest["anchors"][0]["export"] = "Other.target"
         self.assertEqual(self.check_manifest(), [])
 
+    def test_primed_anchor_and_provider_exports_pass(self):
+        self.write("Project/Internal/Target.lean", self.internal_target().replace("internalTarget", "internalTarget'"))
+        self.write("Project/Frozen/Target.lean", self.anchor("by exact Project.Internal.internalTarget'",
+                   declaration="theorem target'"))
+        self.manifest = self.valid_manifest()
+        self.manifest["anchors"][0].update({"state": "SEALED", "export": "Project.target'"})
+        self.manifest["anchors"][0]["implementation"]["export"] = "Project.Internal.internalTarget'"
+        self.assertEqual(self.check_manifest(), [])
+
+    def test_draft_export_token_checks_respect_identifier_suffixes(self):
+        self.write("Project/Consumer.lean", "#check Project.target'\n#check Project.Internal.internalTarget'\n")
+        self.assertEqual(self.check_manifest(), [])
+
+    def test_primed_namespaces_in_anchor_and_provider_exports_pass(self):
+        self.write("Project/Internal/Target.lean", self.internal_target()
+                   .replace("Project.Internal", "Project'.Internal'")
+                   .replace("internalTarget", "internalTarget'"))
+        text = self.anchor("by exact Project'.Internal'.internalTarget'", declaration="theorem target'")
+        self.write("Project/Frozen/Target.lean", text.replace("namespace Project\n", "namespace Project'\n")
+                   .replace("end Project\n", "end Project'\n"))
+        self.manifest = self.valid_manifest()
+        self.manifest["anchors"][0].update({"state": "SEALED", "export": "Project'.target'"})
+        self.manifest["anchors"][0]["implementation"]["export"] = "Project'.Internal'.internalTarget'"
+        self.assertEqual(self.check_manifest(), [])
+
     def test_sealed_module_private_implementation_rejected(self):
         self.write("Project/Internal/Target.lean", self.internal_target(section=""))
         self.write("Project/Frozen/Target.lean", self.anchor("by exact Project.Internal.internalTarget"))
@@ -206,15 +233,65 @@ class FrozenAnchorGuardTest(unittest.TestCase):
         self.write("Project/Prose.lean", "-- sorry is prose\n#check \"sorry\"\ntheorem prose : True := True.intro\n")
         self.assertEqual(self.check_manifest(), [])
 
-    def comparator(self, challenge="Comparator.Challenge", solution="Comparator.Solution"):
+    def comparator(self, challenge="Comparator.Challenge", solution="Comparator.Solution", tracked=True):
         self.write("comparators/Example/comparator.json",
-                   '{"challenge_module": "%s", "solution_module": "%s"}' % (challenge, solution))
+                   json.dumps({"challenge_module": challenge, "solution_module": solution}))
         self.write("Comparator/Challenge.lean", "module\n\npublic section\ntheorem stated : True := by sorry\nend\n")
         self.write("Comparator/Solution.lean", "module\n\npublic section\ntheorem stated : True := True.intro\nend\n")
+        subprocess.run(["git", "init", "-q", str(self.root)], check=True)
+        if tracked:
+            subprocess.run(["git", "add", "comparators/Example/comparator.json"], cwd=self.root, check=True)
 
     def test_comparator_challenge_sorry_passes(self):
         self.comparator()
         self.assertEqual(self.check_manifest(), [])
+
+    def test_untracked_comparator_cannot_authorize_sorry(self):
+        self.comparator(tracked=False)
+        self.assert_error("unauthorized `sorry`")
+
+    def test_comparator_requires_existing_valid_solution(self):
+        self.comparator()
+        for solution in (None, "", [], "../Outside", "Comparator.Missing"):
+            with self.subTest(solution=solution):
+                data = {"challenge_module": "Comparator.Challenge"}
+                if solution is not None:
+                    data["solution_module"] = solution
+                self.write("comparators/Example/comparator.json", json.dumps(data))
+                self.assert_error("solution_module")
+                self.assert_error("unauthorized `sorry`")
+
+    def test_comparator_path_aliases_cannot_authorize_imported_challenge(self):
+        for module in ("«Comparator/Challenge»", "Comparator.«..».Comparator.Challenge",
+                       "Comparator.«.».Challenge", "«Comparator\\Challenge»"):
+            with self.subTest(module=module):
+                self.comparator(challenge=module)
+                self.write("Project/Consumer.lean", "module\nimport Comparator.Challenge\n"
+                           "public section\nexample : True := stated\n")
+                self.assert_error("challenge_module must be a valid module name")
+                self.assert_error("unauthorized `sorry`")
+
+    def test_comparator_solution_path_alias_is_invalid(self):
+        self.comparator(solution="«Comparator/Solution»")
+        self.assert_error("solution_module must be a nonempty valid module name")
+        self.assert_error("unauthorized `sorry`")
+
+    def test_comparator_symlink_aliases_cannot_hide_challenge_importers(self):
+        self.comparator()
+        (self.root / "Alias").symlink_to(self.root / "Comparator", target_is_directory=True)
+        for challenge, imported in (("Alias.Challenge", "Comparator.Challenge"),
+                                    ("Comparator.Challenge", "Alias.Challenge")):
+            with self.subTest(challenge=challenge, imported=imported):
+                self.write("comparators/Example/comparator.json", json.dumps({
+                    "challenge_module": challenge, "solution_module": "Comparator.Solution"}))
+                self.write("Project/Consumer.lean", "module\nimport " + imported + "\n")
+                self.assert_error("Challenge module Comparator.Challenge is imported by Project.Consumer")
+                self.assert_error("unauthorized `sorry`")
+
+    def test_draft_symlink_import_cannot_bypass_quarantine(self):
+        (self.root / "Alias").symlink_to(self.root / "Project/Frozen", target_is_directory=True)
+        self.write("Project/Consumer.lean", "module\nimport Alias.Target\n")
+        self.assert_error("DRAFT_SORRY imported directly or transitively")
 
     def test_comparator_challenge_admit_fails(self):
         self.comparator()
@@ -243,6 +320,31 @@ class FrozenAnchorGuardTest(unittest.TestCase):
     def test_draft_use_outside_allowlist_fails(self):
         self.write("Project/Consumer.lean", "import Project.Frozen.Target\n#check Project.target\n")
         self.assert_error("DRAFT_SORRY imported directly or transitively")
+
+    def test_quoted_draft_imports_cannot_bypass_quarantine(self):
+        for module in ("«Project».Frozen.Target", "Project.«Frozen».Target", "«Project».«Frozen».«Target»"):
+            with self.subTest(module=module):
+                self.write("Project/Consumer.lean", "module\n\nimport " + module +
+                           "\nopen Project\nexample : True := target\n")
+                self.assert_error("DRAFT_SORRY imported directly or transitively")
+                self.assert_error("DRAFT provider imported directly or transitively")
+
+    def test_quoted_provider_import_cannot_bypass_quarantine(self):
+        for command in ("public meta import all «Project».Internal.«Target»",
+                        "public\nmeta\nimport\nall\n«Project».Internal.«Target»"):
+            with self.subTest(command=command):
+                self.write("Project/Consumer.lean", "module\n\n" + command + "\n")
+                self.assert_error("DRAFT provider imported directly or transitively")
+
+    def test_quoted_module_components_preserve_literal_dots(self):
+        self.write("Project/Bridge.with.dot.lean", "import «Project».Frozen.Target\n")
+        self.write("Project/Consumer.lean", "import Project.«Bridge.with.dot»\n")
+        self.assert_error("DRAFT_SORRY imported directly or transitively outside explicit frozen/audit allowlist: Project/Consumer.lean")
+
+    def test_quoted_module_components_preserve_comment_and_quote_characters(self):
+        self.write("Project/Bridge--'.lean", "import «Project».Frozen.Target\n")
+        self.write("Project/Consumer.lean", "import Project.«Bridge--'»\n")
+        self.assert_error("DRAFT_SORRY imported directly or transitively outside explicit frozen/audit allowlist: Project/Consumer.lean")
 
     def test_audit_draft_import_cannot_flow_to_ordinary_module(self):
         self.write("Project/Audit/DraftInspection.lean", "import Project.Frozen.Target\n#check Project.target\n")
@@ -322,6 +424,16 @@ class FrozenAnchorGuardTest(unittest.TestCase):
             with self.subTest(command=command):
                 self.write("Project/Ordinary.lean", command + "\n")
                 self.assert_error(needle + " command is forbidden")
+
+    def test_scoped_axioms_and_constants_fail(self):
+        for prefix in ("open Nat in ", "set_option autoImplicit false in ",
+                       "open Nat in set_option autoImplicit false in ",
+                       "open Nat\nin ", "set_option autoImplicit false\nin ",
+                       "open Nat\nin set_option autoImplicit false\nin "):
+            for command, kind in (("axiom bad : False", "axiom"), ("constant bad : Prop", "constant")):
+                with self.subTest(prefix=prefix, command=command):
+                    self.write("Project/Ordinary.lean", prefix + command + "\n")
+                    self.assert_error("`" + kind + "` command is forbidden")
 
     def test_legitimate_seal_changes_body_only(self):
         self.write("Project/Frozen/Target.lean", self.anchor("by exact Project.Internal.internalTarget"))

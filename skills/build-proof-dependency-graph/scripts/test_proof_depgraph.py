@@ -7,15 +7,15 @@ import contextlib
 import hashlib
 import io
 import json
-from pathlib import Path
+import os
 import sys
 import tempfile
 import unittest
-
+from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import proof_depgraph as graph  # noqa: E402
-
 
 LOC = "paper.tex#sec@L1-L2"
 SHA = "a" * 64
@@ -189,6 +189,37 @@ class GraphTests(unittest.TestCase):
         bad = self.analyse(text, bad_manifest, require_reviewed=True)
         self.assertIn("coverage item 'm.root' is not REVIEWED", self.messages(bad))
 
+    def test_node_coverage_requires_a_target_even_when_nodes_are_covered(self) -> None:
+        text = "\n\n".join((header(), node("root")))
+        coverage = manifest(
+            manifest_item("m.root", "NODE root"),
+            manifest_item("m.unmapped", "NODE -"),
+        )
+        analysis = self.analyse(text, coverage, require_reviewed=True, require_complete_coverage=True)
+        errors = [item for item in analysis.diagnostics if "needs at least one node ID" in item.message]
+        self.assertEqual(len(errors), 1, self.messages(analysis))
+        self.assertEqual(errors[0].path, "coverage.md")
+        self.assertEqual(errors[0].line, coverage[:coverage.index("DISPOSITION: NODE -")].count("\n") + 1)
+
+    def test_dangling_dependencies_and_routes_keep_line_addressable_errors(self) -> None:
+        for field, kind in (("deps", "dependency"), ("routes", "route")):
+            with self.subTest(field=field):
+                text = "\n\n".join((header(), node("input", **{field: "missing"}), node("root", deps="input")))
+                analysis = self.analyse(text)
+                errors = [item for item in analysis.diagnostics if f"dangling {kind} 'missing'" in item.message]
+                self.assertEqual(len(errors), 1, self.messages(analysis))
+                self.assertEqual(errors[0].line, text[:text.index(f"{field.upper()}: missing")].count("\n") + 1)
+                self.assertEqual(analysis.root_closure, {"root", "input"})
+
+    def test_long_acyclic_dependency_chain_does_not_recurse(self) -> None:
+        identifiers = [f"n{index:04d}" for index in range(1500)]
+        records = [node(identifier, deps=identifiers[index + 1] if index + 1 < len(identifiers) else "-")
+                   for index, identifier in enumerate(identifiers)]
+        text = "\n\n".join((header(), *records, node("root", deps=identifiers[0])))
+        analysis = self.analyse(text, require_all_reachable=True)
+        self.assertFalse(analysis.diagnostics, self.messages(analysis))
+        self.assertEqual(len(analysis.root_closure), len(identifiers) + 1)
+
     def test_amendment_changes_effective_dependencies(self) -> None:
         text = "\n\n".join((
             header(),
@@ -211,6 +242,14 @@ class GraphTests(unittest.TestCase):
         message = self.messages(analysis)
         self.assertIn("needs exactly one EDGE for 'a'", message)
         self.assertIn("dependency cycle", message)
+
+    def test_iterative_cycle_report_preserves_cycle_path_and_line(self) -> None:
+        text = "\n\n".join((header(), node("a", deps="b"), node("b", deps="a"), node("root", deps="a")))
+        analysis = self.analyse(text)
+        errors = [item for item in analysis.diagnostics if item.message.startswith("dependency cycle:")]
+        self.assertEqual(len(errors), 1, self.messages(analysis))
+        self.assertEqual(errors[0].message, "dependency cycle: a -> b -> a")
+        self.assertEqual(errors[0].line, text[:text.index("NODE: b")].count("\n") + 1)
 
     def test_fenced_schema_example_is_ignored(self) -> None:
         text = "\n\n".join((
@@ -501,6 +540,55 @@ class CliTests(unittest.TestCase):
             with contextlib.redirect_stderr(output):
                 self.assertEqual(graph.main(["--db", str(db_path), "--check"]), 1)
             self.assertIn("generated dashboard is stale", output.getvalue())
+
+    def test_cli_reports_dangling_targets_without_a_traceback(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            db_path = Path(directory) / "DEPGRAPH.md"
+            db_path.write_text("\n\n".join((header(), node("root", deps="missing", routes="missing-route"))), encoding="utf-8")
+            output = io.StringIO()
+            with contextlib.redirect_stderr(output):
+                self.assertEqual(graph.main(["--db", str(db_path), "--report"]), 1)
+            self.assertIn("dangling dependency 'missing'", output.getvalue())
+            self.assertIn("dangling route 'missing-route'", output.getvalue())
+            self.assertNotIn("Traceback", output.getvalue())
+
+    def test_failed_dashboard_replace_preserves_database_and_cleans_temporary(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            db_path = Path(directory) / "DEPGRAPH.md"
+            original = self._db().encode("utf-8")
+            db_path.write_bytes(original)
+            output = io.StringIO()
+            with mock.patch("os.replace", side_effect=OSError("simulated replacement failure")), \
+                    contextlib.redirect_stderr(output), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(graph.main(["--db", str(db_path), "--write-dashboard"]), 1)
+            self.assertEqual(db_path.read_bytes(), original)
+            self.assertEqual(list(Path(directory).iterdir()), [db_path])
+            self.assertIn("cannot write dashboard", output.getvalue())
+
+    def test_failed_dashboard_flush_preserves_database_and_cleans_temporary(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            db_path = Path(directory) / "DEPGRAPH.md"
+            original = self._db().encode("utf-8")
+            db_path.write_bytes(original)
+            with mock.patch("os.fsync", side_effect=OSError("simulated disk full")), \
+                    contextlib.redirect_stderr(io.StringIO()), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(graph.main(["--db", str(db_path), "--write-dashboard"]), 1)
+            self.assertEqual(db_path.read_bytes(), original)
+            self.assertEqual(list(Path(directory).iterdir()), [db_path])
+
+    def test_dashboard_replace_preserves_mode_and_uses_same_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            db_path = Path(directory) / "DEPGRAPH.md"
+            db_path.write_text(self._db(), encoding="utf-8")
+            db_path.chmod(0o640)
+            replace = os.replace
+            with mock.patch("os.replace", wraps=replace) as replaced, contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(graph.main(["--db", str(db_path), "--write-dashboard"]), 0)
+            replaced.assert_called_once()
+            temporary, target = replaced.call_args.args
+            self.assertEqual(Path(temporary).parent, db_path.parent)
+            self.assertEqual(Path(target), db_path)
+            self.assertEqual(db_path.stat().st_mode & 0o777, 0o640)
 
 
 if __name__ == "__main__":
