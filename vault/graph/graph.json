@@ -4,11 +4,11 @@
   "skills": 2159,
   "expert_profiles": 503,
   "nodes": 2232,
-  "edges": 16008,
+  "edges": 16010,
   "generic_names_blocked": 31,
-  "tier1_edges": 4822,
+  "tier1_edges": 4823,
   "tier2_edges": 721,
-  "alias_edges": 4485,
+  "alias_edges": 4487,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 521,
@@ -20,13 +20,13 @@
   "orphan_count": 123,
   "orphan_rate": 0.057,
   "by_provenance": {
-   "EXTRACTED": 15222,
+   "EXTRACTED": 15224,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2159,
-   "references": 12542,
+   "references": 12544,
    "in_discipline": 599,
    "touches": 521,
    "has_step": 69,
@@ -7216,7 +7216,7 @@
    "id": "databricks-mlflow-evaluation",
    "type": "Skill",
    "label": "databricks-mlflow-evaluation",
-   "description": "MLflow 3 GenAI agent evaluation. Use when writing mlflow.genai.evaluate() code, creating @scorer functions, using built-in scorers (Guidelines, Correctness, Safety, RetrievalGroundedness), building eval datasets from traces, setting up trace ingestion and production monitoring, aligning judges with MemAlign from domain expert feedback, or running optimize_prompts() with GEPA for automated prompt improvement.",
+   "description": "MLflow GenAI evaluation and agent improvement on Databricks. Use when running mlflow.genai.evaluate(), building scorers or datasets, aligning judges with MemAlign, optimizing prompts, or monitoring production quality.",
    "source": "skills/databricks-mlflow-evaluation/SKILL.md",
    "aliases": [
     "databricks mlflow evaluation"
@@ -58531,6 +58531,15 @@
    "status": "accepted"
   },
   {
+   "src": "core",
+   "rel": "references",
+   "dst": "vercel-sandbox",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "vercel-sandbox named in core/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "core-actionbook",
    "rel": "in_domain",
    "dst": "domain:software-dev",
@@ -62349,10 +62358,10 @@
   {
    "src": "databricks-mlflow-evaluation",
    "rel": "references",
-   "dst": "performance-optimization",
+   "dst": "design-md-library",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "performance-optimization named in databricks-mlflow-evaluation/SKILL.md body",
+   "justification": "curated alias of design-md-library appears in databricks-mlflow-evaluation/SKILL.md",
    "status": "accepted"
   },
   {
@@ -64837,6 +64846,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of design-md-library appears in citations/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "design-md-library",
+   "rel": "references",
+   "dst": "databricks-mlflow-evaluation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of design-md-library appears in databricks-mlflow-evaluation/SKILL.md",
    "status": "accepted"
   },
   {
@@ -123153,15 +123171,6 @@
   {
    "src": "performance-optimization",
    "rel": "references",
-   "dst": "databricks-mlflow-evaluation",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "performance-optimization named in databricks-mlflow-evaluation/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "performance-optimization",
-   "rel": "references",
    "dst": "docker-expert",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -170920,6 +170929,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "browser-automation named in vercel-sandbox/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "vercel-sandbox",
+   "rel": "references",
+   "dst": "core",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "vercel-sandbox named in core/SKILL.md body",
    "status": "accepted"
   },
   {

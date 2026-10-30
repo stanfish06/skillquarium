@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "a384a8634134b6df1727941c370763a63e398e77",
+      "skillFolderHash": "1441d3f6bdb1b71e7692fd2115d43b68e470e411",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-10-29T12:58:10.671Z"
+      "updatedAt": "2026-10-30T12:50:50.058Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -9636,9 +9636,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/prisma/skills.git",
       "skillPath": "prisma-postgres-setup/SKILL.md",
-      "skillFolderHash": "a7419c6dcdce197e9021b1985918c8b9a6ebbde9",
+      "skillFolderHash": "82345cbaffbd0a08a5ad4413de480c3b1ac0d6b1",
       "installedAt": "2026-08-23T17:16:28.788Z",
-      "updatedAt": "2026-10-27T12:08:27.141Z"
+      "updatedAt": "2026-10-30T12:51:04.650Z"
     },
     "prisma-upgrade-v7": {
       "source": "prisma/skills",
@@ -10537,18 +10537,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-docs/SKILL.md",
-      "skillFolderHash": "9ebe3cd3636644d56ebbfa3558fbc6b29b51e506",
+      "skillFolderHash": "1e84967223fc9b27219dd66e1e60ee20bbe09fb8",
       "installedAt": "2026-08-23T17:20:36.145Z",
-      "updatedAt": "2026-08-23T17:20:36.145Z"
+      "updatedAt": "2026-10-30T12:51:07.977Z"
     },
     "databricks-execution-compute": {
       "source": "databricks/databricks-agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-execution-compute/SKILL.md",
-      "skillFolderHash": "c3d4922bbfaf66e466da8626df9f1dd0feb22d9b",
+      "skillFolderHash": "e7cc4d1f8e65e048baab19ca40d3ae3365ae4366",
       "installedAt": "2026-08-23T17:20:36.149Z",
-      "updatedAt": "2026-08-23T17:20:36.149Z"
+      "updatedAt": "2026-10-30T12:51:09.955Z"
     },
     "databricks-genie-agents": {
       "source": "databricks/databricks-agent-skills",
@@ -10618,9 +10618,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-mlflow-evaluation/SKILL.md",
-      "skillFolderHash": "a1c1dabff4b49961117f8beff9cf5b9e1a9172be",
+      "skillFolderHash": "2f77c4ee9fd80c48731bc9054f1dbb7b84435577",
       "installedAt": "2026-08-23T17:20:36.180Z",
-      "updatedAt": "2026-10-28T12:49:16.884Z"
+      "updatedAt": "2026-10-30T12:51:12.200Z"
     },
     "databricks-model-serving": {
       "source": "databricks/databricks-agent-skills",
