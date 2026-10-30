@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-10-26T01:47:32.615000+00:00",
-  "root": "/home/stan/.agents",
+  "saved_at": "2026-10-30T18:52:00.037000+00:00",
+  "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
       "claude_enabled": false,
@@ -511,6 +511,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "banner-design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "base44-cli": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -787,6 +791,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "brand": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "brand-guidelines": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -846,6 +854,10 @@
     "build-perf-diagnostics": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "build-proof-dependency-graph": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "build-run-debug": {
       "claude_enabled": true,
@@ -2051,6 +2063,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "design-an-interface": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -2060,6 +2076,10 @@
       "codex_enabled": false
     },
     "design-md-library": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "design-system": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -3263,6 +3283,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "google-rust-style": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "google-sheets": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -3903,6 +3927,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "landing-page-design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "landscape-ecologist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -3986,6 +4014,54 @@
     "ld-1000g-region-compute": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "lean-elaboration": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-elaboration-test": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-learnings": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-naming-style": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-orchestrator": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-project-architecture": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-proof-patterns": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-public-release": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-search-discovery": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-statement-audit": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean-workflow": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "lean4": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "libfuzzer": {
       "claude_enabled": true,
@@ -6671,6 +6747,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "reverse-engineer-anything": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "reverse-engineering": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -7214,6 +7294,10 @@
     "sleep-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "slides": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "smart-file-renaming": {
       "claude_enabled": true,
@@ -8051,7 +8135,15 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "ui-styling": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "ui-toolkit": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "ui-ux-pro-max": {
       "claude_enabled": true,
       "codex_enabled": true
     },
