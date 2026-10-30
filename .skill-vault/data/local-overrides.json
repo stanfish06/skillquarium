@@ -1216,6 +1216,16 @@
       "replace": "| MCP docs | `https://developers.cloudflare.com/agents/model-context-protocol/` | Server setup, auth, deployment |"
     }
   ],
+  "omniverse-usd-performance-tuning": [
+    {
+      "id": "usd-optimize-run-validators-rename",
+      "issue": 1216,
+      "source": "openai/plugins",
+      "file": "references/usd-validation-runner/references/so-run-validators/references/infrastructure.md",
+      "find": ".agents/skills/validators/SKILL.md",
+      "replace": ".agents/skills/run-validators/SKILL.md"
+    }
+  ],
   "cloudflare": [
     {
       "id": "realtimekit-docs-404",
