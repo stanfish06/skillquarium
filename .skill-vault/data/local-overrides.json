@@ -1109,6 +1109,22 @@
       "replace": "**Halmos / Kontrol (formal verification)**:\n- Trail of Bits archived Manticore in June 2026 (\"no longer internally developed and maintained\"); symbolic execution for Foundry projects now goes through Halmos (a16z) or Kontrol (Runtime Verification)\n- Define properties as Foundry test invariants\n- Set up symbolic execution (`halmos --contract <Test>`, or `kontrol prove`)\n- Validate critical paths"
     }
   ],
+  "mixpanel-auth": [
+    {
+      "id": "account-test-requires-name-login",
+      "issue": 1122,
+      "source": "openai/plugins",
+      "find": "After the user confirms they ran it, verify with `account test`:\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test`\n",
+      "replace": "After the user confirms they ran it, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` to read\n`account.name`, then verify with\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <account.name>`.\n"
+    },
+    {
+      "id": "account-test-requires-name-routing",
+      "issue": 1122,
+      "source": "openai/plugins",
+      "find": "Run: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test [name]`\n",
+      "replace": "The script requires a name. If the user did not give one, run\n`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` and use\n`account.name`.\n\nRun: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <name>`\n"
+    }
+  ],
   "polars": [
     {
       "id": "compat-1442",
