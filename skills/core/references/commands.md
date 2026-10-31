@@ -2,6 +2,10 @@
 
 Complete reference for all agent-browser commands. For quick start and common patterns, see SKILL.md.
 
+## Linux dependencies
+
+On Linux, `agent-browser install --with-deps` installs system dependencies with the detected package manager. It runs that package manager directly as root and uses `sudo` for non-root users. If you are not root and `sudo` is unavailable, it reports that root privileges or `sudo` are required.
+
 ## Navigation
 
 ```bash
@@ -37,10 +41,10 @@ If the debugging port is not open yet, `connect` and `--cdp` wait up to 2 second
 
 ```bash
 agent-browser batch \
-  '["open"]' \
-  '["network","route","*","--abort","--resource-type","script"]' \
-  '["cookies","set","--curl","cookies.curl","--domain","localhost"]' \
-  '["navigate","http://localhost:3000/target"]'
+  "open" \
+  "network route * --abort --resource-type script" \
+  "cookies set --curl cookies.curl --domain localhost" \
+  "navigate http://localhost:3000/target"
 ```
 
 `open` with no URL gives you a clean launch so any interception, cookies, or init scripts you register take effect on the *first* real navigation. Use for SSR-only debug (`--resource-type script`), protected-origin auth, or capturing fresh `react suspense`/`vitals` state without noise from a prior page.
@@ -98,11 +102,13 @@ agent-browser get value @e1       # Get input value
 agent-browser get attr @e1 href   # Get attribute
 agent-browser get title           # Get page title
 agent-browser get url             # Get current URL
-agent-browser get cdp-url         # Get CDP WebSocket URL
+agent-browser get cdp-url         # CDP WebSocket URL of a running browser (never launches)
 agent-browser get count ".item"   # Count matching elements
 agent-browser get box @e1         # Get bounding box
 agent-browser get styles @e1      # Get computed styles (font, color, bg, etc.)
 ```
+
+A batch containing only `get cdp-url` commands also skips browser launch. A mixed batch can launch a browser for its other commands.
 
 ## Check State
 
@@ -158,7 +164,11 @@ agent-browser wait --load networkidle      # Wait for network idle on known-quie
 agent-browser wait --fn "window.ready"     # Wait for JS condition (or -f)
 ```
 
+For selector waits, `--state` accepts `visible`, `hidden`, `attached`, or `detached` and cannot be combined with URL, load, function, text, download, or millisecond wait modes. The global auth-state `--state <path>` remains available before `wait`, as it does before other commands.
+
 After a page-changing action, prefer the selector, text, URL, or JavaScript condition that represents the result you need. Use a lifecycle wait when the lifecycle event is the milestone. `networkidle` is also supported, but use it only for pages known to become quiet because SSE, WebSockets, polling, and long-polling can keep it from resolving.
+
+A load-state wait runs for its whole timeout budget, taken from `--timeout` or `AGENT_BROWSER_DEFAULT_TIMEOUT`, and returns an error when it expires.
 
 ## Mouse Control
 
@@ -168,10 +178,13 @@ agent-browser mouse move 600 400 --duration 250 --steps 24
 agent-browser mouse move 600 400 --human --seed 42
 agent-browser mouse down left         # Press button
 agent-browser mouse up left           # Release button
-agent-browser mouse wheel 100         # Scroll wheel
+agent-browser mouse move 100 200      # Move over the target
+agent-browser mouse wheel 100         # Scroll at the current tracked pointer
 ```
 
 Use `--human` with `click` or `drag` when pointer-path events matter. Movement starts at the current cursor position and ends at the target; `mouse move --seed` makes the path reproducible. `--duration` is the target total duration, including browser response time; a slow browser can still extend it.
+
+The wheel starts at `0,0`; move the pointer first to scroll elsewhere. Failed wheel dispatches leave the tracked pointer unchanged.
 
 ## Semantic Locators (alternative to refs)
 
@@ -204,6 +217,8 @@ agent-browser set media dark                  # Emulate color scheme
 agent-browser set media light reduced-motion  # Light mode + reduced motion
 ```
 
+Viewport scales and geolocation coordinates must be finite numbers.
+
 ## Cookies and Storage
 
 ```bash
@@ -215,6 +230,8 @@ agent-browser storage local key           # Get specific key
 agent-browser storage local set k v       # Set value
 agent-browser storage local clear         # Clear all
 ```
+
+Reads accept at most one key, sets require one key and one value, and clears take no operands. A bare key is shorthand for a one-key read.
 
 Cookie attributes use kebab-case flags such as `--http-only` and `--same-site`. The legacy `--httpOnly` and `--sameSite` spellings remain accepted. When setting one cookie, unknown flags and extra arguments return an error.
 
@@ -238,6 +255,8 @@ agent-browser network har start --content all  # Embed all bodies (binary as bas
 agent-browser network har start --content none # Sizes and headers only
 agent-browser network har stop [output.har]    # Stop and save HAR
 ```
+
+If HAR export fails, recording and captured requests remain available. Fix the destination and retry `network har stop`.
 
 ## Tabs and Windows
 
@@ -267,7 +286,7 @@ agent-browser tab app                    # switch to app
 agent-browser tab close docs             # close by label
 ```
 
-Labels are never auto-generated, never rewritten on navigation, and must be unique within a session. To interact with another tab, switch to it first: the daemon maintains a single active tab, so refs (`@eN`) belong to the tab that was active when the snapshot ran.
+Labels are never auto-generated, never rewritten on navigation, and must be unique within a session. A label starts with a letter and contains only letters, digits, `-`, or `_`, and cannot use the reserved `t<N>` or `T<N>` tab-id form. Rejected labels preserve the current tab's refs and selected frame. To interact with another tab, switch to it first: the daemon maintains a single active tab, so refs (`@eN`) belong to the tab that was active when the snapshot ran.
 
 Tabs opened through `tab new` or `click --new-tab` inherit the session's setup before their first document loads: user agent, `set headers`, `set credentials`, origin-scoped `--headers`, init scripts, `route` rules, and emulation overrides (color scheme, timezone, locale, geolocation, offline). Turning offline mode off or setting headers to `{}` restores the default setup for future tabs.
 
@@ -326,6 +345,8 @@ agent-browser eval -b "<base64>"             # Any JavaScript (base64 encoded)
 agent-browser eval --stdin                   # Read script from stdin
 ```
 
+When the top-level Chrome/CDP `eval` result is a value JSON cannot represent, plain output prints its exact JavaScript token, including `NaN`, `Infinity`, `-Infinity`, `-0`, BigInt literals, and `undefined`. With `--json`, `data.result` stays `null` and sibling `data.unserializable` contains the token. MCP text prints the token, and structured responses expose it at `structuredContent.response.data.unserializable`.
+
 Use `-b`/`--base64` or `--stdin` for reliable execution. Shell escaping with nested quotes and special characters is error-prone.
 
 ```bash
@@ -351,7 +372,7 @@ agent-browser auth login <name> --username-selector <s> --password-selector <s> 
 agent-browser auth list                  # List saved auth profiles
 agent-browser auth show <name>           # Show profile metadata, no passwords
 agent-browser auth delete <name>         # Delete a saved profile
-agent-browser plugin add <ref>           # Add a plugin from npm or GitHub (writes ~/.agent-browser/config.json; --project writes ./agent-browser.json)
+agent-browser plugin add <ref>           # Add a plugin from npm or GitHub (writes ~/.agent-browser/config.json; --project writes ./agent-browser.json for use with --config)
 agent-browser plugin list                # List configured plugins
 agent-browser plugin show <name>         # Show one configured plugin
 agent-browser plugin run <name> <type> --payload <json>
@@ -410,6 +431,10 @@ agent-browser dashboard stop
 
 Loopback origins are allowed by default over IPv4 and IPv6 without an access token. Set `--allowed-origins` or `AGENT_BROWSER_DASHBOARD_ALLOWED_ORIGINS` to a comma-separated list of exact HTTPS reverse-proxied origins. Every origin must be valid, and custom ports must be integers from 1 to 65535. Unknown options, missing values, invalid ports, and malformed origins fail without starting the server. The command prints private tokenized access URLs only for external origins; open the matching URL once to establish the browser session and do not share it. Open `http://localhost:<port>` directly for local access. Repeated starts reuse the running dashboard only when the port and allowed origins match; stop it before changing either setting.
 
+## Browser installation
+
+`agent-browser install` downloads Chrome for Testing. On macOS versions below 13, the command stops before the download and prints instructions to update macOS or install Chrome manually. If `sw_vers -productVersion` is unavailable, exits with an error, returns no version, or returns a malformed version, the command reports a detection error and stops before making a network request. On Linux, `--with-deps` also installs system dependencies and exits nonzero if the package manager cannot install every required browser library.
+
 ## MCP Server
 
 ```bash
@@ -452,7 +477,9 @@ Common tools include:
 - `agent_browser_eval`
 - `agent_browser_close`
 
-Tool calls use the same config files and environment variables as the CLI. Each tool accepts typed arguments plus `extraArgs` for per-command options and display or emulation flags such as `--engine`; global flags that change network, file, policy, or host access (such as `--allowed-domains`, `--action-policy`, `--executable-path`, `--args`, and `--config`) are rejected and must be set in the MCP server's environment or config. The typed `allowedDomains` argument is also rejected when the server's environment or config already sets allowed domains. The common `allowedDomains` array maps to `--allowed-domains` and activates the same WebRTC containment and launch-mode restrictions. Tool discovery is paginated and includes read-only/open-world annotations so modern MCP clients can load the large typed surface incrementally. Use the `session` tool argument or `AGENT_BROWSER_SESSION` to isolate browser state.
+Tool calls use the same config files and environment variables as the CLI by default. Each tool accepts typed arguments plus `extraArgs` for per-command options and display or emulation flags such as `--engine`; `extraArgs` cannot set `--config` or global flags that change network, file, policy, or host access. Set host-wide options in the MCP server's environment or selected config. The typed `allowedDomains` argument is rejected when the server's environment or selected config already sets allowed domains. The common `allowedDomains` array maps to `--allowed-domains` and activates the same WebRTC containment and launch-mode restrictions. Tool discovery is paginated and includes read-only/open-world annotations so modern MCP clients can load the large typed surface incrementally. Use the `session` tool argument or `AGENT_BROWSER_SESSION` to isolate browser state.
+
+Pass `--config <trusted-path>` to `agent-browser mcp` or `agent-browser mcp call` to select one trusted config file. MCP tool child processes load only that file, replacing default user/project discovery. Put any required safety policy in it. Environment variables and accepted per-tool CLI arguments keep their normal precedence.
 
 ## Global Options
 
@@ -463,6 +490,7 @@ agent-browser --headed ...            # Show browser window (not headless; on di
 agent-browser --webgpu ...            # Enable WebGPU (SwiftShader software Vulkan on Linux, no GPU needed)
 agent-browser --no-webmcp ...         # Disable default experimental WebMCP Chrome features (or AGENT_BROWSER_NO_WEBMCP env)
 agent-browser --cdp <port|url> ...    # Connect via CDP; root query slash is optional
+agent-browser --cdp <url> --cdp-headers '{"Authorization":"Bearer <token>"}' ...  # Auth headers for discovery and handshake
 agent-browser --pin-tab ...           # Pin the session to its bound tab (strict tab binding)
 agent-browser --no-pin-tab ...        # Disable a sticky pin previously enabled with --pin-tab
 agent-browser -p <provider> ...       # Browser provider or configured provider plugin
@@ -508,7 +536,7 @@ Requires `--enable react-devtools` at launch for the `react ...` commands. `vita
 
 ```bash
 agent-browser open --enable react-devtools <url>    # Launch with React hook installed
-agent-browser react tree                            # Full component tree
+agent-browser react tree                            # Print the component tree
 agent-browser react inspect <fiberId>               # Props, hooks, state, source
 agent-browser react renders start                   # Begin re-render recording
 agent-browser react renders stop [--json]           # Stop and print render profile
@@ -517,6 +545,8 @@ agent-browser react suspense [--only-dynamic] [--json]  # Suspense boundaries + 
 agent-browser vitals [url] [--json]                 # LCP/CLS/TTFB/FCP/INP + hydration
 agent-browser pushstate <url>                       # SPA client-side nav (auto-detects Next router)
 ```
+
+`react tree` prints the component tree when one is available. If the response contains only a header, no tree was collected. Confirm the page uses React and that a React root has mounted.
 
 `vitals` prints a summary by default and uses the same fields as the structured `--json` response.
 

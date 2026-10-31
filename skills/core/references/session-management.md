@@ -26,6 +26,8 @@ agent-browser --session "$SESSION" --restore open https://app.example.com/login
 
 `--scope worktree` uses the Git worktree root when available, then the Git root, then the canonical current directory. This is the recommended default for agents because worktrees are commonly used for parallel agent runs.
 
+Session names accept Unicode letters and numbers, hyphens, and underscores only. For example, `café-東京_7` is valid, while `my session` is rejected because it contains a space.
+
 ```bash
 # Session 1: Authentication flow
 agent-browser --session auth open https://app.example.com/login

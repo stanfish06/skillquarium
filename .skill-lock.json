@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "1441d3f6bdb1b71e7692fd2115d43b68e470e411",
+      "skillFolderHash": "577fa0c2cdf528d2bb9f186382f002c7310cc66d",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-10-30T12:50:50.058Z"
+      "updatedAt": "2026-10-31T12:21:47.444Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -1320,9 +1320,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "skillFolderHash": "6b746b43751be277378e0ee04fe0db69f24da045",
+      "skillFolderHash": "003ec8747c78ceb8e9da5d83f12523a06830093c",
       "installedAt": "2026-06-09T19:25:48.883Z",
-      "updatedAt": "2026-10-10T12:46:22.274Z"
+      "updatedAt": "2026-10-31T12:21:48.727Z"
     },
     "playwright-best-practices": {
       "source": "currents-dev/playwright-best-practices-skill",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "ba52ed7c9e9a32bfad20301911143bf2517eeccb",
+      "skillFolderHash": "1dbcd1b7251eecdad7ec9085252bc4576242bae0",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-10-28T12:48:52.858Z"
+      "updatedAt": "2026-10-31T12:22:07.010Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "dab9ba13e67d1687d585699b6261286c07b60992",
+      "skillFolderHash": "3d5f70a091a5098d9092af31639be65c81f73e0d",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-10-27T12:08:21.191Z"
+      "updatedAt": "2026-10-31T12:22:20.280Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -10474,9 +10474,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-app-design/SKILL.md",
-      "skillFolderHash": "a637459360fa3aa6404262ba3019a35059518caa",
+      "skillFolderHash": "17b30f07f586b888b12b8d3f7f0537516af2e413",
       "installedAt": "2026-08-23T17:20:36.109Z",
-      "updatedAt": "2026-10-10T12:50:41.614Z"
+      "updatedAt": "2026-10-31T12:22:22.604Z"
     },
     "databricks-apps": {
       "source": "databricks/databricks-agent-skills",
