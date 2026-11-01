@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "1dbcd1b7251eecdad7ec9085252bc4576242bae0",
+      "skillFolderHash": "57a3d9bcb3fa922bc76183125aa5210e3064b53b",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-10-31T12:22:07.010Z"
+      "updatedAt": "2026-11-01T13:18:20.688Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "3d5f70a091a5098d9092af31639be65c81f73e0d",
+      "skillFolderHash": "13fb3a02eb93993c5f7387a7c8ceb0bf24e07e19",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-10-31T12:22:20.280Z"
+      "updatedAt": "2026-11-01T13:18:34.236Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -10699,9 +10699,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-vector-search/SKILL.md",
-      "skillFolderHash": "d1be8ca7367e9489828c17e8c6e334bb3edf2280",
+      "skillFolderHash": "7e06d9675fbcb63619ded2d6c41259f7e48b558c",
       "installedAt": "2026-08-23T17:20:36.217Z",
-      "updatedAt": "2026-10-28T12:49:28.852Z"
+      "updatedAt": "2026-11-01T13:18:38.550Z"
     },
     "databricks-zerobus-ingest": {
       "source": "databricks/databricks-agent-skills",
