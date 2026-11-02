@@ -1942,9 +1942,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/zeroize-audit/skills/zeroize-audit/SKILL.md",
-      "skillFolderHash": "90b608234cddba3d5ee99acadbe7609ade57d578",
+      "skillFolderHash": "c383c2deac4ca0459a643a71b0ed818884de4b61",
       "installedAt": "2026-06-09T19:28:14.034Z",
-      "updatedAt": "2026-10-15T11:26:17.446Z"
+      "updatedAt": "2026-11-02T15:45:26.485Z"
     },
     "agentic-actions-auditor": {
       "source": "trailofbits/skills",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "13fb3a02eb93993c5f7387a7c8ceb0bf24e07e19",
+      "skillFolderHash": "2e5df2a443d02b871b84bb5add68c2ce0535a875",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-01T13:18:34.236Z"
+      "updatedAt": "2026-11-02T15:45:57.815Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9555,18 +9555,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "cbfc51a3c2bf0d9f2d8228122c7d0d592e323e67",
+      "skillFolderHash": "03209208d38702359b22c95d521b1cb68d7999a8",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-10-28T12:48:58.488Z"
+      "updatedAt": "2026-11-02T15:46:03.173Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "0343562423dfb009355c98cdb644b50952ec7fb4",
+      "skillFolderHash": "3b684abe690f118631916b161f68041c2dbbe271",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-10-21T11:45:42.322Z"
+      "updatedAt": "2026-11-02T15:46:07.356Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",
@@ -9813,19 +9813,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-clickhouse/SKILL.md",
-      "skillFolderHash": "1196896c2acec5a2fbc4af022daf3a702545ec3d",
-      "pluginName": "clickhouse-best-practices",
+      "skillFolderHash": "0a7d064aff4374410373295be714d4d5cfbf2780",
       "installedAt": "2026-08-23T17:16:56.407Z",
-      "updatedAt": "2026-08-23T17:16:56.407Z"
+      "updatedAt": "2026-11-02T15:46:08.846Z"
     },
     "infra-postgres": {
       "source": "clickhouse/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-postgres/SKILL.md",
-      "skillFolderHash": "4d203c8d502c26ad2f00d08507100340ce61ee23",
+      "skillFolderHash": "cbb3b15ef4ed20b689daa43958aa899e171eba7b",
       "installedAt": "2026-08-23T17:16:56.410Z",
-      "updatedAt": "2026-10-10T12:50:33.503Z"
+      "updatedAt": "2026-11-02T15:46:10.475Z"
     },
     "cloudformation-to-pulumi": {
       "source": "pulumi/agent-skills",
@@ -12103,9 +12102,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/skypilot-org/skypilot.git",
       "skillPath": "agent/skills/skypilot/SKILL.md",
-      "skillFolderHash": "6a85914c1c5ca3ade89c781e6dcc0ac5814afc13",
+      "skillFolderHash": "345333625a05bf65b67ff3eabf9ab35f56df1753",
       "installedAt": "2026-10-24T15:58:04.348Z",
-      "updatedAt": "2026-10-25T11:22:57.947Z"
+      "updatedAt": "2026-11-02T15:46:20.183Z"
     },
     "lean4": {
       "source": "cameronfreer/lean4-skills",
