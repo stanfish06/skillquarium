@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "577fa0c2cdf528d2bb9f186382f002c7310cc66d",
+      "skillFolderHash": "6ffadd4524cd1dcdbcb564089eb9006e676fe44f",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-10-31T12:21:47.444Z"
+      "updatedAt": "2026-11-03T14:08:36.342Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -1942,9 +1942,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/trailofbits/skills.git",
       "skillPath": "plugins/zeroize-audit/skills/zeroize-audit/SKILL.md",
-      "skillFolderHash": "c383c2deac4ca0459a643a71b0ed818884de4b61",
+      "skillFolderHash": "2078d0b239b20dd83e48d5cf0477a7cc2a2a98d4",
       "installedAt": "2026-06-09T19:28:14.034Z",
-      "updatedAt": "2026-11-02T15:45:26.485Z"
+      "updatedAt": "2026-11-03T14:08:41.838Z"
     },
     "agentic-actions-auditor": {
       "source": "trailofbits/skills",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "57a3d9bcb3fa922bc76183125aa5210e3064b53b",
+      "skillFolderHash": "f6995c4d147c6d108f944322b43dc8c1ba2d8d1a",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-01T13:18:20.688Z"
+      "updatedAt": "2026-11-03T14:09:03.852Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -10698,9 +10698,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-vector-search/SKILL.md",
-      "skillFolderHash": "7e06d9675fbcb63619ded2d6c41259f7e48b558c",
+      "skillFolderHash": "97aa0a6223783596df7936bf1a171ad8117ce39b",
       "installedAt": "2026-08-23T17:20:36.217Z",
-      "updatedAt": "2026-11-01T13:18:38.550Z"
+      "updatedAt": "2026-11-03T14:09:08.750Z"
     },
     "databricks-zerobus-ingest": {
       "source": "databricks/databricks-agent-skills",
@@ -10716,9 +10716,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-agent-memory-skill/SKILL.md",
-      "skillFolderHash": "1563545cbc190c092dcde2c64d4994bceb0cbae5",
+      "skillFolderHash": "098c331fe745c78b2a611148de8af82dfea94345",
       "installedAt": "2026-08-23T17:20:44.676Z",
-      "updatedAt": "2026-10-14T11:51:52.449Z"
+      "updatedAt": "2026-11-03T14:09:10.606Z"
     },
     "neo4j-aura-agent-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10734,9 +10734,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-aura-graph-analytics-skill/SKILL.md",
-      "skillFolderHash": "910c9705a9f7201ac57ce37766be7d8eaafc8a63",
+      "skillFolderHash": "61e0c65122837b10caa77668797236996b0ed36d",
       "installedAt": "2026-08-23T17:20:44.702Z",
-      "updatedAt": "2026-10-19T13:08:45.566Z"
+      "updatedAt": "2026-11-03T14:09:12.527Z"
     },
     "neo4j-aura-provisioning-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10761,36 +10761,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-cypher-skill/SKILL.md",
-      "skillFolderHash": "f0c3873c5aedeedfa8f977effc5d8c0331a65aab",
+      "skillFolderHash": "463e7920cdda69458838962bb6d71d20a73466ba",
       "installedAt": "2026-08-23T17:20:44.721Z",
-      "updatedAt": "2026-10-19T13:08:46.875Z"
+      "updatedAt": "2026-11-03T14:09:14.279Z"
     },
     "neo4j-document-import-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-document-import-skill/SKILL.md",
-      "skillFolderHash": "afb56370db318b461f69036229c85c74929cf592",
+      "skillFolderHash": "f803b869edafe519dce0980cd1bf0a97553165ed",
       "installedAt": "2026-08-23T17:20:44.727Z",
-      "updatedAt": "2026-10-10T12:51:05.221Z"
+      "updatedAt": "2026-11-03T14:09:15.929Z"
     },
     "neo4j-driver-dotnet-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-dotnet-skill/SKILL.md",
-      "skillFolderHash": "358ec1a3fd085c771316dd75ef3de092febe934f",
+      "skillFolderHash": "cf9d2da8b623f4ab4cf70aad2e48d71d7424ec3e",
       "installedAt": "2026-08-23T17:20:44.732Z",
-      "updatedAt": "2026-10-10T12:51:06.009Z"
+      "updatedAt": "2026-11-03T14:09:17.753Z"
     },
     "neo4j-driver-go-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-go-skill/SKILL.md",
-      "skillFolderHash": "60631d8ed8b44da249e8f12a5f273eb8ac3e1b3f",
+      "skillFolderHash": "0e8fd3898d058261f188ae592e5074b965c8ac04",
       "installedAt": "2026-08-23T17:20:44.737Z",
-      "updatedAt": "2026-10-10T12:51:06.807Z"
+      "updatedAt": "2026-11-03T14:09:19.512Z"
     },
     "neo4j-driver-java-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10806,9 +10806,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-javascript-skill/SKILL.md",
-      "skillFolderHash": "dd6ee21e459a22a330fe557184fca8e264c2789b",
+      "skillFolderHash": "5b9c57d10725ecd7e2f022f65e6caca04b618fa1",
       "installedAt": "2026-08-23T17:20:44.748Z",
-      "updatedAt": "2026-10-10T12:51:08.550Z"
+      "updatedAt": "2026-11-03T14:09:21.521Z"
     },
     "neo4j-driver-python-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10824,9 +10824,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-gds-skill/SKILL.md",
-      "skillFolderHash": "f09e2fe0dcacac024ac20cee8b7b5cb0c81d3afe",
+      "skillFolderHash": "078ffda70d2be79ca534f78aa8e42e6dc57f1d92",
       "installedAt": "2026-08-23T17:20:44.755Z",
-      "updatedAt": "2026-10-19T13:08:49.563Z"
+      "updatedAt": "2026-11-03T14:09:24.803Z"
     },
     "neo4j-genai-plugin-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10900,18 +10900,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-migration-skill/SKILL.md",
-      "skillFolderHash": "7613d3e5824578aecff0b207e9ddefe36fe17096",
+      "skillFolderHash": "f5b23b6350f5018e2d3dda300e7cea1ba716d332",
       "installedAt": "2026-08-23T17:20:44.785Z",
-      "updatedAt": "2026-10-19T13:08:52.116Z"
+      "updatedAt": "2026-11-03T14:09:28.523Z"
     },
     "neo4j-modeling-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-modeling-skill/SKILL.md",
-      "skillFolderHash": "536b780ff6501e535490eb18ffe2776730a2a744",
+      "skillFolderHash": "af040b21a7625f584f19f893f246fa6a06128a79",
       "installedAt": "2026-08-23T17:20:44.789Z",
-      "updatedAt": "2026-10-10T12:51:14.976Z"
+      "updatedAt": "2026-11-03T14:09:30.056Z"
     },
     "neo4j-nvl-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10927,18 +10927,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-query-tuning-skill/SKILL.md",
-      "skillFolderHash": "8895888e3a77f629e7bc5a2987c1b73a95543ca4",
+      "skillFolderHash": "9f14470e5816bacc0f1939fc3e8a1cf919dcb181",
       "installedAt": "2026-08-23T17:20:44.797Z",
-      "updatedAt": "2026-10-19T13:08:53.348Z"
+      "updatedAt": "2026-11-03T14:09:31.693Z"
     },
     "neo4j-security-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-security-skill/SKILL.md",
-      "skillFolderHash": "625f332673deea662a15252a1e828782ebe272bf",
+      "skillFolderHash": "dfff6638e55848e0a332a7e84a90ef1a4c6345d2",
       "installedAt": "2026-08-23T17:20:44.802Z",
-      "updatedAt": "2026-10-19T13:08:54.629Z"
+      "updatedAt": "2026-11-03T14:09:33.258Z"
     },
     "neo4j-snowflake-graph-analytics-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -12057,9 +12057,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-sandboxes-kits/SKILL.md",
-      "skillFolderHash": "1a00cc0a54690764122347cebd6e6886360c3cd3",
+      "skillFolderHash": "d060b0fea18ea7ae6c5fdf29b5183ff63436afd0",
       "installedAt": "2026-09-25T17:57:41.755Z",
-      "updatedAt": "2026-09-25T17:57:41.755Z"
+      "updatedAt": "2026-11-03T14:09:36.748Z"
     },
     "docker-sandboxes-lifecycle": {
       "source": "docker/skills",

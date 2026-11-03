@@ -4,29 +4,29 @@
   "skills": 2171,
   "expert_profiles": 503,
   "nodes": 2244,
-  "edges": 16070,
-  "generic_names_blocked": 31,
-  "tier1_edges": 4848,
-  "tier2_edges": 721,
-  "alias_edges": 4508,
+  "edges": 16152,
+  "generic_names_blocked": 30,
+  "tier1_edges": 4893,
+  "tier2_edges": 716,
+  "alias_edges": 4511,
   "discipline_edges": 599,
   "ambiguous_aliases": 34,
   "artifact_edges": 523,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.83,
+  "mean_skill_degree": 5.87,
   "median_skill_degree": 4,
-  "orphan_count": 123,
-  "orphan_rate": 0.0567,
+  "orphan_count": 122,
+  "orphan_rate": 0.0562,
   "by_provenance": {
-   "EXTRACTED": 15284,
+   "EXTRACTED": 15366,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2171,
-   "references": 12590,
+   "references": 12672,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -7366,7 +7366,7 @@
    "id": "databricks-vector-search",
    "type": "Skill",
    "label": "databricks-vector-search",
-   "description": "Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search; covers index types, search modes, filtering, end-to-end RAG patterns",
+   "description": "Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search. Use when asked to: create Standard or Storage-Optimized endpoints and Delta Sync or Direct Access indexes with AISearchClient; query with ANN, hybrid, or full-text search and filters; sync, monitor, or migrate indexes; set a target QPS, triage 429s, or load-test an endpoint; wire an index into an agent as a retriever tool. NOT for: no-code document Q&A (databricks-genie-agents); serving-endpoint CRUD (databricks-model-serving); custom ResponsesAgent authoring and deployment (databricks-ml-training).",
    "source": "skills/databricks-vector-search/SKILL.md",
    "aliases": [
     "databricks vector search"
@@ -8456,7 +8456,7 @@
    "id": "docker-sandboxes-kits",
    "type": "Skill",
    "label": "docker-sandboxes-kits",
-   "description": ">- Use this skill when authoring, validating, packaging, signing, or composing a Docker Sandboxes kit `spec.yaml` (`sbx kit add/inspect/pack/pull/push/sign/validate/verify`), even if the user just says they want to \"add a tool to a sandbox agent\", \"build a reusable sandbox extension\", \"publish a kit to a registry\", or \"give a mixin its own credentials and network access\". Covers the kit-spec v2 grammar (`kind: sandbox` vs `kind: mixin`, the `sandbox:` block, `permissions.network`, `ports`, `credentials` apiKey/oauth, `environment`, `setup` install/startup/files, `volumes`, `args`, `extends`, `mixins`, `requires.agent`), composition via `--kit`/`sbx kit add`, and distribution (pack/push/pull/sign/verify/provenance).",
+   "description": ">- Use this skill when authoring, verifying, publishing, or composing a Docker Sandboxes kit, even if the user just says they want to \"add a tool to a sandbox agent\", \"package a CLI or agent as a kit\", \"publish a kit to a registry\", or \"give a mixin its own credentials and network access\". Covers the v3 kit descriptor (`# syntax=docker/sandbox-kit:3`, `kind: workload` or `mixin`, typed capabilities, provides/requires, content recipes), building with docker buildx, checking with kit-tck and `sbx kit inspect`, composing onto a workload, and publishing and signing. Legacy v2 `spec.yaml` kits are not covered; `sbx kit validate` is not a substitute for kit-tck conformance and runtime checks.",
    "source": "skills/docker-sandboxes-kits/SKILL.md",
    "aliases": [
     "docker sandboxes kits"
@@ -18994,7 +18994,7 @@
    "id": "neo4j-agent-memory-skill",
    "type": "Skill",
    "label": "neo4j-agent-memory-skill",
-   "description": "Authoritative reference for the neo4j-agent-memory Python package — a graph-native memory system for AI agents built on Neo4j — and for the hosted service (NAMS) at memory.neo4jlabs.com. Use this skill whenever the user mentions neo4j-agent-memory, agent memory with Neo4j, context graphs, the POLE+O model, MemoryClient/MemorySettings, the memory MCP server, or any of the framework integrations (LangChain, PydanticAI, CrewAI, AWS Strands, Google ADK, Microsoft Agent Framework, OpenAI Agents, LlamaIndex). Also use when the user mentions the hosted service at memory.neo4jlabs.com, NAMS, the Neo4j Agent Memory Service, the `nams_` API key prefix, or the hosted MCP endpoint. Also use when writing documentation, blog posts, tutorials, PRDs, or code samples for the project, when comparing agent memory approaches, or when positioning graph-native memory against vector-only approaches — even if the user doesn't explicitly name the package.",
+   "description": "Authoritative reference for the neo4j-agent-memory Python package — a graph-native memory system for AI agents built on Neo4j — and for the hosted service (NAMS) at memory.neo4jlabs.com. Use this skill whenever the user mentions neo4j-agent-memory, agent memory with Neo4j, context graphs, the POLE+O model, MemoryClient/MemorySettings, the memory MCP server, or any of the framework integrations (LangChain, PydanticAI, CrewAI, AWS Strands, Google ADK, Microsoft Agent Framework, OpenAI Agents, LlamaIndex). Also use when the user mentions the hosted service at memory.neo4jlabs.com, NAMS, the Neo4j Agent Memory Service, the `nams_` API key prefix, or the hosted MCP endpoint. Also use when writing documentation, blog posts, tutorials, PRDs, or code samples for the project, when comparing agent memory approaches, or when positioning graph-native memory against vector-only approaches — even if the user doesn't explicitly name the package. Does NOT handle GraphRAG pipelines — use neo4j-graphrag-skill.",
    "source": "skills/neo4j-agent-memory-skill/SKILL.md",
    "aliases": [
     "nams",
@@ -34042,6 +34042,15 @@
    "status": "accepted"
   },
   {
+   "src": "aerospace-engineer",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in aerospace-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "affinity-proteomics",
    "rel": "in_domain",
    "dst": "domain:proteomics-metabolomics",
@@ -36168,6 +36177,15 @@
   {
    "src": "alloy",
    "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in alloy/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "alloy",
+   "rel": "references",
    "dst": "tempo",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -37773,7 +37791,7 @@
    "dst": "telemetry",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry referenced in code/link context in apollo-mcp-server/SKILL.md",
+   "justification": "telemetry named in apollo-mcp-server/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -37854,7 +37872,7 @@
    "dst": "telemetry",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry referenced in code/link context in apollo-router/SKILL.md",
+   "justification": "telemetry named in apollo-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -39241,6 +39259,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in astronautical-engineer/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "astronautical-engineer",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in astronautical-engineer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -41743,6 +41770,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prometheus named in beyla/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "beyla",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in beyla/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -46212,15 +46248,6 @@
   {
    "src": "browser-automation",
    "rel": "references",
-   "dst": "core",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-automation named in core/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "browser-automation",
-   "rel": "references",
    "dst": "core-actionbook",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -46935,7 +46962,7 @@
    "dst": "telemetry",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry referenced in code/link context in build-run-debug/SKILL.md",
+   "justification": "telemetry named in build-run-debug/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -48475,6 +48502,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in cardiologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "cardiologist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in cardiologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -52348,6 +52384,15 @@
    "status": "accepted"
   },
   {
+   "src": "clickhouse-architecture-advisor",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in clickhouse-architecture-advisor/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "clickhouse-best-practices",
    "rel": "in_domain",
    "dst": "domain:analytics-engineering",
@@ -52534,6 +52579,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "opentelemetry named in clickstack-otel-collector/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "clickstack-otel-collector",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in clickstack-otel-collector/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -53155,6 +53209,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "statistician named in clinical-reports/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "clinical-reports",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in clinical-reports/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -56364,6 +56427,15 @@
   {
    "src": "comparative-medicine-researcher",
    "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in comparative-medicine-researcher/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "comparative-medicine-researcher",
+   "rel": "references",
    "dst": "veterinary-microbiologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -58299,6 +58371,15 @@
   {
    "src": "conservation-scientist",
    "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in conservation-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "conservation-scientist",
+   "rel": "references",
    "dst": "wind-engineering-specialist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -58695,15 +58776,6 @@
   {
    "src": "core",
    "rel": "references",
-   "dst": "browser-automation",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-automation named in core/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "core",
-   "rel": "references",
    "dst": "construction-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -59095,6 +59167,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "promql named in cost-management/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "cost-management",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in cost-management/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -62187,6 +62268,15 @@
   {
    "src": "databricks-genie-agents",
    "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-genie-agents named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-genie-agents",
+   "rel": "references",
    "dst": "google-drive",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -62502,6 +62592,15 @@
   {
    "src": "databricks-ml-training",
    "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-ml-training named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-ml-training",
+   "rel": "references",
    "dst": "langgraph",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -62524,6 +62623,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scikit-learn named in databricks-ml-training/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-ml-training",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in databricks-ml-training/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -62659,6 +62767,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "databricks-mlflow-evaluation named in databricks-model-serving/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-model-serving",
+   "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-model-serving named in databricks-vector-search/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -62925,10 +63042,46 @@
   {
    "src": "databricks-vector-search",
    "rel": "references",
-   "dst": "filter-syntax",
+   "dst": "databricks-genie-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "filter-syntax named in databricks-vector-search/SKILL.md body",
+   "justification": "databricks-genie-agents named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-vector-search",
+   "rel": "references",
+   "dst": "databricks-ml-training",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-ml-training named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-vector-search",
+   "rel": "references",
+   "dst": "databricks-model-serving",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-model-serving named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-vector-search",
+   "rel": "references",
+   "dst": "datasources-provisioning",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of datasources-provisioning appears in databricks-vector-search/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-vector-search",
+   "rel": "references",
+   "dst": "terraform",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "terraform named in databricks-vector-search/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -63010,6 +63163,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "opentelemetry named in databricks-zerobus-ingest/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-zerobus-ingest",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in databricks-zerobus-ingest/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -63127,6 +63289,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of datasources-provisioning appears in databricks-docs/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "datasources-provisioning",
+   "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of datasources-provisioning appears in databricks-vector-search/SKILL.md",
    "status": "accepted"
   },
   {
@@ -65008,6 +65179,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pnpm named in design-control-loop/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "design-control-loop",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in design-control-loop/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -67504,6 +67684,15 @@
    "status": "accepted"
   },
   {
+   "src": "docker-build-strategies",
+   "rel": "references",
+   "dst": "docker-sandboxes-kits",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-sandboxes-kits/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "docker-compose-patterns",
    "rel": "in_domain",
    "dst": "domain:cloud-devops",
@@ -67722,6 +67911,15 @@
   {
    "src": "docker-sandboxes-kits",
    "rel": "references",
+   "dst": "docker-build-strategies",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker-build-strategies named in docker-sandboxes-kits/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-kits",
+   "rel": "references",
    "dst": "docker-sandboxes-env",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -67744,24 +67942,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docker-sandboxes-network-credentials named in docker-sandboxes-kits/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "docker-sandboxes-kits",
-   "rel": "references",
-   "dst": "github",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "github referenced in code/link context in docker-sandboxes-kits/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "docker-sandboxes-kits",
-   "rel": "references",
-   "dst": "setup",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "setup referenced in code/link context in docker-sandboxes-kits/SKILL.md",
    "status": "accepted"
   },
   {
@@ -68725,6 +68905,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain-iot named in rust-router/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "domain-iot",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in domain-iot/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70465,6 +70654,15 @@
    "status": "accepted"
   },
   {
+   "src": "edge-embedded-ai-engineer",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in edge-embedded-ai-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "edit-article",
    "rel": "in_domain",
    "dst": "domain:research-writing",
@@ -70525,6 +70723,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "reverse-skill-router named in edr-bypass-re/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "edr-bypass-re",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in edr-bypass-re/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -75111,15 +75318,6 @@
   {
    "src": "filter-syntax",
    "rel": "references",
-   "dst": "databricks-vector-search",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "filter-syntax named in databricks-vector-search/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "filter-syntax",
-   "rel": "references",
    "dst": "migrate-xunit-to-xunit-v3",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -77095,6 +77293,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prometheus named in fleet-management/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "fleet-management",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in fleet-management/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -82315,15 +82522,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "github referenced in code/link context in docker-agent-run/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "github",
-   "rel": "references",
-   "dst": "docker-sandboxes-kits",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "github referenced in code/link context in docker-sandboxes-kits/SKILL.md",
    "status": "accepted"
   },
   {
@@ -89448,6 +89646,15 @@
   {
    "src": "industrial-brutalist-ui",
    "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in industrial-brutalist-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "industrial-brutalist-ui",
+   "rel": "references",
    "dst": "veterinarian",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -92767,6 +92974,15 @@
    "status": "accepted"
   },
   {
+   "src": "landscape-ecologist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in landscape-ecologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "langchain-dependencies",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -95737,6 +95953,15 @@
    "status": "accepted"
   },
   {
+   "src": "logfire-instrumentation",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in logfire-instrumentation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "logfire-query",
    "rel": "in_domain",
    "dst": "domain:analytics-engineering",
@@ -95791,6 +96016,15 @@
    "status": "accepted"
   },
   {
+   "src": "logfire-query",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "logfire-ui",
    "rel": "in_domain",
    "dst": "domain:analytics-engineering",
@@ -95833,6 +96067,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "query referenced in code/link context in logfire-ui/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-ui",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in logfire-ui/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -97924,6 +98167,15 @@
    "status": "accepted"
   },
   {
+   "src": "mammalogist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in mammalogist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "managed-deep-agents",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -98191,6 +98443,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in marine-biologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "marine-biologist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in marine-biologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -103618,6 +103879,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "k6 named in microbenchmarking/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "microbenchmarking",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in microbenchmarking/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -112234,6 +112504,15 @@
    "status": "accepted"
   },
   {
+   "src": "network-engineer",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in network-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "network-scientist",
    "rel": "in_discipline",
    "dst": "discipline:computing-data-science",
@@ -112816,6 +113095,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in neurologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neurologist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in neurologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -117528,6 +117816,15 @@
   {
    "src": "observability",
    "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in observability/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "observability",
+   "rel": "references",
    "dst": "verification",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -117631,6 +117928,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "shipping-and-launch named in observability-and-instrumentation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "observability-and-instrumentation",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in observability-and-instrumentation/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -129129,6 +129435,15 @@
   {
    "src": "private-connectivity",
    "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in private-connectivity/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "private-connectivity",
+   "rel": "references",
    "dst": "terraform",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -129187,6 +129502,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "probe-sdk",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in probe-sdk/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -129718,6 +130042,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "slack named in prometheus/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prometheus",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in prometheus/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -151224,6 +151557,15 @@
   {
    "src": "semgrep",
    "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in semgrep/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "semgrep",
+   "rel": "references",
    "dst": "variant-analysis",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -151957,15 +152299,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "dcf named in setup/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "setup",
-   "rel": "references",
-   "dst": "docker-sandboxes-kits",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "setup referenced in code/link context in docker-sandboxes-kits/SKILL.md",
    "status": "accepted"
   },
   {
@@ -160674,10 +161007,28 @@
   {
    "src": "telemetry",
    "rel": "references",
+   "dst": "aerospace-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in aerospace-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "alloy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in alloy/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
    "dst": "apollo-mcp-server",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry referenced in code/link context in apollo-mcp-server/SKILL.md",
+   "justification": "telemetry named in apollo-mcp-server/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -160686,7 +161037,25 @@
    "dst": "apollo-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry referenced in code/link context in apollo-router/SKILL.md",
+   "justification": "telemetry named in apollo-router/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "astronautical-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in astronautical-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "beyla",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in beyla/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -160695,7 +161064,322 @@
    "dst": "build-run-debug",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "telemetry referenced in code/link context in build-run-debug/SKILL.md",
+   "justification": "telemetry named in build-run-debug/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "cardiologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in cardiologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "clickhouse-architecture-advisor",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in clickhouse-architecture-advisor/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "clickstack-otel-collector",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in clickstack-otel-collector/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "clinical-reports",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in clinical-reports/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "comparative-medicine-researcher",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in comparative-medicine-researcher/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "conservation-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in conservation-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "cost-management",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in cost-management/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "databricks-ml-training",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in databricks-ml-training/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "databricks-zerobus-ingest",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in databricks-zerobus-ingest/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "design-control-loop",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in design-control-loop/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "domain-iot",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in domain-iot/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "edge-embedded-ai-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in edge-embedded-ai-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "edr-bypass-re",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in edr-bypass-re/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "fleet-management",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in fleet-management/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "industrial-brutalist-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in industrial-brutalist-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "landscape-ecologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in landscape-ecologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "logfire-instrumentation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in logfire-instrumentation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "logfire-query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "logfire-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in logfire-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "mammalogist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in mammalogist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "marine-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in marine-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "microbenchmarking",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in microbenchmarking/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "network-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in network-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "neurologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in neurologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "observability",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in observability/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "observability-and-instrumentation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in observability-and-instrumentation/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "private-connectivity",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in private-connectivity/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "probe-sdk",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in probe-sdk/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "prometheus",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in prometheus/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "semgrep",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in semgrep/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "treatment-plans",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in treatment-plans/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "turbomachinery-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in turbomachinery-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "water-resources-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in water-resources-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "wildlife-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in wildlife-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
+   "dst": "zoologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in zoologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -161344,6 +162028,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "terraform named in databricks-docs/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "terraform",
+   "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "terraform named in databricks-vector-search/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -163867,6 +164560,15 @@
    "status": "accepted"
   },
   {
+   "src": "treatment-plans",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in treatment-plans/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "triage",
    "rel": "in_domain",
    "dst": "domain:software-dev",
@@ -164224,6 +164926,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in turbomachinery-engineer/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "turbomachinery-engineer",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in turbomachinery-engineer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -173488,6 +174199,15 @@
    "status": "accepted"
   },
   {
+   "src": "water-resources-scientist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in water-resources-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "wayfinder",
    "rel": "in_domain",
    "dst": "domain:reasoning-ideation",
@@ -174340,6 +175060,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in wildlife-biologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "wildlife-biologist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in wildlife-biologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -176476,6 +177205,15 @@
    "status": "accepted"
   },
   {
+   "src": "zoologist",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in zoologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "zoom-apps-sdk",
    "rel": "in_domain",
    "dst": "domain:saas-platforms",
@@ -177825,7 +178563,6 @@
   "thread-abort-migration",
   "to-questionnaire",
   "tpmi-phewas-skill",
-  "treatment-plans",
   "ukb-topmed-phewas-skill",
   "upgrading-expo",
   "use-modern-go",
