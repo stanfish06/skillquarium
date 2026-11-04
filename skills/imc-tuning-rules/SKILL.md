@@ -157,22 +157,23 @@ class PIController:
         self.integral = 0.0
 
     def compute(self, measurement, dt):
-        """Parallel-form PI with clamping anti-windup (conditional integration)."""
+        """Parallel-form PI with anti-windup (integral clamped to actuator headroom)."""
         error = self.setpoint - measurement
 
-        # Tentative integral update and unsaturated output
-        integral_new = self.integral + error * dt
-        unsat = self.Kp * error + self.Ki * integral_new
-
-        # Anti-windup: skip the update when the output is saturated and the
-        # integral would push it further past the limit (Ki * error sign handles reverse action)
-        winding_high = unsat > self.output_max and self.Ki * error > 0
-        winding_low = unsat < self.output_min and self.Ki * error < 0
-        if not (winding_high or winding_low):
-            self.integral = integral_new
+        # Anti-windup: the integral term grows only up to the actuator headroom left
+        # by the P term, so the output still reaches its limit but never winds past it
+        p_term = self.Kp * error
+        i_old = self.Ki * self.integral
+        i_term = self.Ki * (self.integral + error * dt)
+        if p_term + i_term > self.output_max and i_term > i_old:
+            i_term = min(i_term, max(i_old, self.output_max - p_term))
+        elif p_term + i_term < self.output_min and i_term < i_old:
+            i_term = max(i_term, min(i_old, self.output_min - p_term))
+        if self.Ki:
+            self.integral = i_term / self.Ki
 
         # PI control law, clamped to the actuator range
-        output = self.Kp * error + self.Ki * self.integral
+        output = p_term + i_term
         return max(self.output_min, min(self.output_max, output))
 ```
 

@@ -255,7 +255,7 @@ indexed = list(enumerate(items))
 ```scala
 // Scala
 val pairs = list1.zip(list2)
-val indexed = items.zipWithIndex
+val indexed = items.zipWithIndex.map(_.swap)  // (index, item), same order as enumerate
 ```
 
 ## Dictionary/Map Operations

@@ -129,6 +129,7 @@ for x0 in initializations:
 
 if best_sol is None:
     raise RuntimeError("Solver failed from all initializations")
+sol = best_sol  # extract from the selected candidate, not the last solve
 ```
 
 Inspect `stats["return_status"]` (e.g. `Solve_Succeeded` vs `Solved_To_Acceptable_Level`) if you need to treat acceptable-level termination differently.

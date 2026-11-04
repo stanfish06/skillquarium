@@ -60,17 +60,20 @@ class PIDController:
         self.prev_measurement = measurement
         d_term = -self.kd * self.d_filtered
 
-        # Integral term with conditional-integration anti-windup
-        integral_new = self.integral + error * dt
-        unsat = p_term + self.ki * integral_new + d_term
-        winding_high = unsat > self.output_max and self.ki * error > 0
-        winding_low = unsat < self.output_min and self.ki * error < 0
-        if not (winding_high or winding_low):
-            self.integral = integral_new
-        i_term = self.ki * self.integral
+        # Integral term with anti-windup: the integral grows only up to the actuator
+        # headroom left by P + D, so the output still reaches its limit but never winds past it
+        base = p_term + d_term
+        i_old = self.ki * self.integral
+        i_term = self.ki * (self.integral + error * dt)
+        if base + i_term > self.output_max and i_term > i_old:
+            i_term = min(i_term, max(i_old, self.output_max - base))
+        elif base + i_term < self.output_min and i_term < i_old:
+            i_term = max(i_term, min(i_old, self.output_min - base))
+        if self.ki:
+            self.integral = i_term / self.ki
 
         # Total output, clamped to the actuator range
-        output = p_term + i_term + d_term
+        output = base + i_term
         return min(max(output, self.output_min), self.output_max)
 ```
 
@@ -78,7 +81,7 @@ class PIDController:
 
 Integral windup occurs when the output saturates but the integral keeps accumulating. Solutions:
 
-1. **Conditional integration** (used above): skip the integral update when the output is saturated and the error would push it further into saturation
+1. **Integral clamping to headroom** (used above): when the output would saturate, let the integral grow only until P + I + D reaches the limit. Rejecting the whole update instead can leave the output short of the limit indefinitely
 2. **Back-calculation**: integrate `error + (u_clamped - u_unsat) / (ki * Tt)` instead of `error`, with tracking time Tt between Ti and Td (often sqrt(Ti * Td)); the integral bleeds off while the output is clamped
 3. **Integral clamping**: limit the integral term to the output range; simplest, but slower to recover
 
