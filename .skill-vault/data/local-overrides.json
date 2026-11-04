@@ -3266,5 +3266,1112 @@
   ],
   "lean-statement-audit": [],
   "lean-learnings": [],
-  "lean-workflow": []
+  "lean-workflow": [],
+  "milp-solver-workflow": [
+    {
+      "id": "alloc-without-global",
+      "source": "benchflow-ai/skillsbench",
+      "find": "offset = {}\nn = 0\n\ndef alloc(name, shape, lb=0.0, ub=float(\"inf\"), integer=False):\n    global n\n    size = int(np.prod(shape))\n    idx = np.arange(n, n + size).reshape(shape)\n    offset[name] = idx\n    n += size\n    return idx\n",
+      "replace": "var_index = {}\nvar_lb, var_ub, var_int = [], [], []\n\ndef alloc(name, shape, lb=0.0, ub=float(\"inf\"), integer=False):\n    # next free column = number of variables allocated so far; no global counter needed\n    start = len(var_lb)\n    size = int(np.prod(shape))\n    idx = np.arange(start, start + size).reshape(shape)\n    var_index[name] = idx\n    var_lb.extend([lb] * size)\n    var_ub.extend([ub] * size)\n    var_int.extend([int(integer)] * size)\n    return idx\n"
+    },
+    {
+      "id": "add-row-without-global",
+      "source": "benchflow-ai/skillsbench",
+      "find": "rows, cols, vals = [], [], []\nlb, ub = [], []\nrow = 0\n\ndef add_row(terms, lo, hi):\n    global row\n    for j, a in terms:\n        if abs(a) > 0:\n            rows.append(row)\n            cols.append(j)\n            vals.append(float(a))\n    lb.append(float(lo))\n    ub.append(float(hi))\n    row += 1\n",
+      "replace": "rows, cols, vals = [], [], []\nrow_lb, row_ub = [], []\n\ndef add_row(terms, lo, hi):\n    r = len(row_lb)  # next row id = rows added so far\n    for j, a in terms:\n        if abs(a) > 0:\n            rows.append(r)\n            cols.append(int(j))\n            vals.append(float(a))\n    row_lb.append(float(lo))\n    row_ub.append(float(hi))\n"
+    },
+    {
+      "id": "milp-call-uses-builders",
+      "source": "benchflow-ai/skillsbench",
+      "find": "from scipy.optimize import milp, LinearConstraint, Bounds\n\nresult = milp(\n    c=c,\n    integrality=integrality,\n    bounds=Bounds(lb, ub),\n",
+      "replace": "from scipy.optimize import milp, LinearConstraint, Bounds\nfrom scipy.sparse import coo_array\n\nA = coo_array((vals, (rows, cols)), shape=(len(row_lb), len(var_lb))).tocsr()\nconstraints = LinearConstraint(A, row_lb, row_ub)\n\nresult = milp(\n    c=c,\n    integrality=var_int,\n    bounds=Bounds(var_lb, var_ub),\n"
+    },
+    {
+      "id": "report-mip-gap-bound",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Capture status, objective, incumbent values, and any reliable gap/bound. A time-limit status can be useful if a feasible incumbent exists; a failure with no incumbent is not a solution.",
+      "replace": "Capture status, objective, incumbent values, and any reliable gap/bound. The `milp` result exposes `result.status`, `result.fun`, `result.x`, `result.mip_gap`, and `result.mip_dual_bound`; check the last two for `None`/NaN before reporting them. A time-limit status (`result.status == 1`) can be useful if a feasible incumbent exists; a failure with no incumbent is not a solution."
+    },
+    {
+      "id": "generic-self-checks",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- write `\"pass\"` self-checks only after validation passes.",
+      "replace": "- write any self-reported check or status fields only after validation passes."
+    }
+  ],
+  "mip-solver-and-solution-audit": [
+    {
+      "id": "description-no-benchmark",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: \"Operational workflow for hard integer-programming optimization tasks: selecting an installed solver, preserving solver/incumbent certificates, extracting feasible schedules, recomputing metrics from final outputs, and writing consistent reports. Use when a task requires a MIP, solver status, objective value, bound, gap, formulation write-up, or benchmark output files.\"",
+      "replace": "description: \"Operational workflow for hard integer-programming optimization tasks: selecting an installed solver, preserving solver/incumbent certificates, extracting feasible schedules, recomputing metrics from final outputs, and writing consistent reports. Use when a task requires a MIP, solver status, objective value, bound, gap, formulation write-up, or audited solution output files.\""
+    },
+    {
+      "id": "see-also-scip-opt",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Minimal PySCIPOpt pattern\n\n```python\nfrom pyscipopt import Model, quicksum\n\nmodel = Model(\"mip_model\")",
+      "replace": "## Minimal PySCIPOpt pattern\n\nFor PySCIPOpt modeling patterns (variables, linking, linearized penalties, reproducibility parameters), see the `scip-opt` skill; this section covers only the status and certificate calls.\n\n```python\nfrom pyscipopt import Model, quicksum\n\nmodel = Model(\"mip_model\")"
+    },
+    {
+      "id": "generic-evaluator-semantics",
+      "source": "benchflow-ai/skillsbench",
+      "find": "For sequence, route, timetable, or assignment tasks, make the evaluator mirror\nthe official objective semantics, not a simplified human interpretation:\n\n- preserve ordered tuple keys unless unordered keys are explicitly specified;\n- use the declared start-position masks for each component;\n- follow the declared successor/order relation instead of assuming zero-based\n  contiguous positions;\n- implement overlap terms exactly as defined, not as a broader span count or all\n  combinations in a window unless that is the stated rule;",
+      "replace": "For sequence, route, timetable, or assignment tasks, make the evaluator mirror\nthe stated objective semantics, not a simplified human interpretation:\n\n- preserve ordered tuple keys unless unordered keys are explicitly specified;\n- apply each objective component only at the positions, periods, or index\n  ranges its definition allows;\n- follow the declared successor/order relation instead of assuming zero-based\n  contiguous positions;\n- implement window or overlap terms exactly as defined, not as a broader span\n  count or all combinations in a window unless that is the stated rule;"
+    },
+    {
+      "id": "generic-metrics-file",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Never write `metrics.json` before reloading and evaluating the exact artifact that will\nbe submitted.",
+      "replace": "Never write the metrics file before reloading and evaluating the exact artifact that will\nbe delivered."
+    },
+    {
+      "id": "drop-keyword-gaming",
+      "source": "benchflow-ai/skillsbench",
+      "find": "A short statement such as “I solved a MIP” is usually not enough for a benchmark\nthat checks method quality.\n\nClearly specify minimization/maximization in formulation files, and avoid only saying \"best\",\n\"optimal\", or \"lower score\" without the word \"minimize\" or \"minimization\".\n\nFor permutation or assignment schedules, include these exact concepts in plain\nlanguage:\n\n- each block/item/job is assigned exactly once;\n- each slot/position/resource receives exactly one item, when applicable;\n- no duplicates or missing assignments are allowed;\n- adjacent-pair burden terms;\n- three-position or n-gram burden terms;\n- overlap or short-horizon pressure terms;\n- optional eligibility/front-loading/pinning constraints, even when inactive;\n- the solution approach and whether it is exact, time-limited, or heuristic.\n\nThis wording is not task-specific; it makes the mathematical contract auditable\nby both humans and simple benchmark checks.\n\n",
+      "replace": "State the objective sense (minimize or maximize) and each constraint family\nexplicitly so a reader can check the write-up against the code.\n\n"
+    },
+    {
+      "id": "drop-keyword-mistake",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- Forgetting to include explicit \"minimize\" and \"each item exactly once\" wording\n  in a formulation file.\n",
+      "replace": ""
+    }
+  ],
+  "scip-opt": [
+    {
+      "id": "narrow-description",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: SCIP optimization with PySCIPOpt. Use when facing an optimization problem with an objective, hard constraints, soft penalties, integer decisions, routing, assignment, scheduling, allocation, packing, capacity, inventory, or service-level rules. Prefer modeling and solving the problem with PySCIPOpt when it is available.",
+      "replace": "description: Build and solve mixed-integer and linear programs in Python with PySCIPOpt (SCIP) - binary/integer/continuous variables, linking and capacity constraints, slack-based soft penalties, linearized absolute deviation, time and gap limits, reproducibility parameters, and solution extraction. Use when PySCIPOpt is installed or requested for a MIP model."
+    },
+    {
+      "id": "drop-benchmark-phrasing",
+      "source": "benchflow-ai/skillsbench",
+      "find": "SCIP is a strong open-source optimization solver with a Python API. It is well suited for mixed-integer optimization, routing-style models, assignment models, capacity planning, inventory movement, scheduling, and problems with soft penalties. For benchmark tasks, a SCIP-backed model plus an independent validator is usually safer than a greedy construction.",
+      "replace": "SCIP is an open-source mixed-integer programming solver with a Python API. It handles routing-style models, assignment models, capacity planning, inventory movement, scheduling, and problems with soft penalties. Pair the SCIP model with an independent validator of the extracted solution."
+    },
+    {
+      "id": "subtour-see-also",
+      "source": "benchflow-ai/skillsbench",
+      "find": "### MTZ Subtour Elimination\n\n```python\norder = {\n    (k, i): model.addVar(lb=1, ub=max(1, len(locations)), name=f\"order_{k}_{i}\")\n    for k in vehicles\n    for i in locations\n}\n\nn = len(locations)\nfor k in vehicles:\n    for i in locations:\n        for j in locations:\n            if i != j:\n                model.addCons(order[k, i] - order[k, j] + n * x[k, i, j] <= n - 1)\n```\n\n",
+      "replace": "### Subtour Elimination\n\nSee also: `routing-subtour-elimination` for MTZ, single-commodity flow, and static or iterative DFJ formulations with PySCIPOpt code.\n\n"
+    }
+  ],
+  "ortools-routing-modeling": [
+    {
+      "id": "transit-matrix-node-indexed-note",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- For static integer data, prefer precomputed `RegisterTransitMatrix` and `RegisterUnaryTransitVector` calls over Python callbacks. Routing callbacks are called very often during local search and can consume solve time on large instances.\n\nWhen an input matrix has one shared start depot and one shared end depot, but the routing model needs one start and end node per vehicle, build an internal matrix with cloned depots:",
+      "replace": "- For static integer data, prefer precomputed `RegisterTransitMatrix` and `RegisterUnaryTransitVector` calls over Python callbacks. Routing callbacks are called very often during local search and can consume solve time on large instances. Both take node-indexed data (`values[from_node][to_node]`, `values[node]`) and apply `IndexToNode` internally, so do not re-index the data by routing index.\n\nWhen an input matrix has one shared start depot and one shared end depot, but the routing model needs one start and end node per vehicle, build an internal matrix with cloned depots:"
+    },
+    {
+      "id": "skeleton-node-indexed",
+      "source": "benchflow-ai/skillsbench",
+      "find": "nodes_from_indices = [manager.IndexToNode(index) for index in range(manager.GetNumberOfIndices())]\ntime_matrix = [\n    [int(travel_times[i][j] + service_times[i]) for j in nodes_from_indices]\n    for i in nodes_from_indices\n]\ncost_matrix = [\n    [int(arc_costs[i][j]) for j in nodes_from_indices]\n    for i in nodes_from_indices\n]",
+      "replace": "# RegisterTransitMatrix/RegisterUnaryTransitVector index by node; OR-Tools maps routing indices itself.\nnum_nodes = manager.GetNumberOfNodes()\ntime_matrix = [\n    [int(travel_times[i][j] + service_times[i]) for j in range(num_nodes)]\n    for i in range(num_nodes)\n]\ncost_matrix = [\n    [int(arc_costs[i][j]) for j in range(num_nodes)]\n    for i in range(num_nodes)\n]"
+    },
+    {
+      "id": "skeleton-demand-node-indexed",
+      "source": "benchflow-ai/skillsbench",
+      "find": "demand_cb = routing.RegisterUnaryTransitVector([int(demands[node]) for node in nodes_from_indices])",
+      "replace": "demand_cb = routing.RegisterUnaryTransitVector([int(demands[node]) for node in range(num_nodes)])"
+    },
+    {
+      "id": "generic-time-budget",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- If no task-specific search limit is given but the benchmark has an outer wall-clock timeout, set an internal OR-Tools search limit well below that timeout and reserve time for data loading, extraction, independent auditing, and report writing. A common pattern is to spend about one third of the available agent time on search.",
+      "replace": "- If no search limit is given but the overall run has a wall-clock budget, set an internal OR-Tools search limit well below it and reserve time for data loading, extraction, independent auditing, and report writing."
+    },
+    {
+      "id": "generic-progress-output",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- Long OR-Tools searches can look idle to command runners. If a solve may run near a per-command idle timeout, enable lightweight progress output such as `search_parameters.log_search = True`, run Python unbuffered, or print flushed progress before and after the solve.",
+      "replace": "- For long OR-Tools searches, enable lightweight progress output such as `search_parameters.log_search = True`, run Python unbuffered, or print flushed progress before and after the solve, so a running search can be told apart from a hung process."
+    }
+  ],
+  "ortools-pickup-delivery-routing": [
+    {
+      "id": "link-base-model",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Use this skill when each job has related pickup and dropoff or delivery events that must be served together. Apply it after the base routing model has a time dimension and before solving.",
+      "replace": "Use this skill when each job has related pickup and dropoff or delivery events that must be served together. Apply it after the base routing model (see `ortools-routing-modeling`) has a time dimension and before solving."
+    },
+    {
+      "id": "pickup-delivery-redundancy-note",
+      "source": "benchflow-ai/skillsbench",
+      "find": "  - pickup before dropoff: `time_dimension.CumulVar(pickup_index) <= time_dimension.CumulVar(dropoff_index)`\n\n## Time Windows And Service Times",
+      "replace": "  - pickup before dropoff: `time_dimension.CumulVar(pickup_index) <= time_dimension.CumulVar(dropoff_index)`\n- `AddPickupAndDelivery` already keeps a served pair on one route with the pickup first; the explicit `VehicleVar` and cumul constraints are redundant safeguards that follow the official OR-Tools examples.\n\n## Time Windows And Service Times"
+    },
+    {
+      "id": "consumer-fields-only",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- When the requested output is route-only, write only the requested route fields; leave derived timing, load, violation counts, and objective summaries out if the verifier will recompute them.",
+      "replace": "- Write only the fields the consumer asks for; when the requested output is route-only, leave derived timing, load, violation counts, and objective summaries out."
+    }
+  ],
+  "logistics-rules-to-optimization": [
+    {
+      "id": "membership-not-isinstance",
+      "source": "benchflow-ai/skillsbench",
+      "find": "        change_at_j = service[v, j] if isinstance(j, int) else 0",
+      "replace": "        change_at_j = service[v, j] if j in locations else 0  # depots carry no service change"
+    },
+    {
+      "id": "inventory-pattern-assumptions",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```\n\nIf the target is a desired net pickup/dropoff:",
+      "replace": "```\n\nThis pattern assumes each vehicle visits a location at most once (one `service[v, i]` per vehicle-location pair) and bounds only the net change across all vehicles against initial stock and free space. It ignores visit order: a pickup larger than the initial stock passes the net bounds whenever another vehicle's dropoff offsets it, even if that dropoff happens later. If inventory must stay within `[0, storage_capacity[i]]` after every stop, add a per-stop inventory state ordered by visit time and bound it at each visit.\n\nIf the target is a desired net pickup/dropoff:"
+    }
+  ],
+  "suricata-offline-evejson": [
+    {
+      "id": "version-pin-see-also",
+      "source": "benchflow-ai/skillsbench",
+      "find": "This skill covers running Suricata against PCAPs offline and validating results via `eve.json`.\n",
+      "replace": "This skill covers running Suricata 7.x (checked against 7.0.11) against PCAPs offline and validating results via `eve.json`.\nSee also: `pcap-triage-tshark` for inspecting the PCAP itself.\n"
+    },
+    {
+      "id": "placeholder-run-cmd",
+      "source": "benchflow-ai/skillsbench",
+      "find": "suricata -c /root/suricata.yaml -S /root/local.rules -k none -r /root/sample.pcap -l /tmp/suri\n",
+      "replace": "suricata -c <suricata.yaml> -S <rules> -k none -r <pcap> -l /tmp/suri\n"
+    },
+    {
+      "id": "extra-flags",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- `-k none`: ignore checksum issues\n",
+      "replace": "- `-k none`: do not drop packets with bad checksums (common in captured/offloaded traffic)\n- `-T`: test config and rules, then exit (non-zero if a rule fails to parse)\n- `--runmode single`: one worker thread; deterministic ordering, easier debugging\n- `-v`: more verbose console output\n"
+    },
+    {
+      "id": "suricata-log-tip",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- Always check Suricata exits cleanly (no rule parse errors).\n",
+      "replace": "- Check for rule parse errors: a normal run logs them and skips the bad rule (exit status stays 0), so read `<log-dir>/suricata.log` (look for `Error` lines and the `rules successfully loaded, N rules failed` summary) or run `-T` first.\n"
+    },
+    {
+      "id": "placeholder-loop-intro",
+      "source": "benchflow-ai/skillsbench",
+      "find": "When iterating on `/root/local.rules`, use this loop:\n",
+      "replace": "When iterating on a rules file, use this loop (`<pos.pcap>` should alert, `<neg.pcap>` should not):\n"
+    },
+    {
+      "id": "placeholder-loop-test",
+      "source": "benchflow-ai/skillsbench",
+      "find": "suricata -T -c /root/suricata.yaml -S /root/local.rules\n",
+      "replace": "suricata -T -c <suricata.yaml> -S <rules>\n"
+    },
+    {
+      "id": "placeholder-loop-pos",
+      "source": "benchflow-ai/skillsbench",
+      "find": "suricata -c /root/suricata.yaml -S /root/local.rules -k none -r /root/pcaps/train_pos.pcap -l /tmp/suri-pos\njq -r 'select(.event_type==\"alert\") | .alert.signature_id' /tmp/suri-pos/eve.json | sort -n | uniq -c\n",
+      "replace": "pos_dir=$(mktemp -d)   # fresh dir per run: Suricata appends to an existing eve.json\nsuricata -c <suricata.yaml> -S <rules> -k none -r <pos.pcap> -l \"$pos_dir\"\njq -r 'select(.event_type==\"alert\") | .alert.signature_id' \"$pos_dir/eve.json\" | sort -n | uniq -c\n"
+    },
+    {
+      "id": "placeholder-loop-neg",
+      "source": "benchflow-ai/skillsbench",
+      "find": "suricata -c /root/suricata.yaml -S /root/local.rules -k none -r /root/pcaps/train_neg.pcap -l /tmp/suri-neg\njq -r 'select(.event_type==\"alert\") | .alert.signature_id' /tmp/suri-neg/eve.json | sort -n | uniq -c\n",
+      "replace": "neg_dir=$(mktemp -d)\nsuricata -c <suricata.yaml> -S <rules> -k none -r <neg.pcap> -l \"$neg_dir\"\njq -r 'select(.event_type==\"alert\") | .alert.signature_id' \"$neg_dir/eve.json\" | sort -n | uniq -c\n"
+    },
+    {
+      "id": "script-usage-doc",
+      "source": "benchflow-ai/skillsbench",
+      "find": "If you prefer a one-command summary, see `scripts/run_suricata_offline.sh` in this skill folder.\n",
+      "replace": "For a one-command summary, run `bash scripts/run_suricata_offline.sh <pcap> <rules> [log-dir]` from this skill folder. It reads the config from `SURICATA_CONFIG` (default `/etc/suricata/suricata.yaml`), uses a new temp dir unless you pass a new or empty `log-dir`, and prints Suricata's output and `suricata.log` tail on failure.\n"
+    },
+    {
+      "id": "script-args-and-run",
+      "source": "benchflow-ai/skillsbench",
+      "file": "scripts/run_suricata_offline.sh",
+      "find": "pcap=\"${1:-}\"\nif [[ -z \"$pcap\" ]]; then\n  echo \"Usage: $0 <pcap_path> [rules_path] [log_dir]\" >&2\n  exit 2\nfi\n\nrules=\"${2:-/root/local.rules}\"\nlog_dir=\"${3:-/tmp/suri}\"\n\nrm -rf \"$log_dir\"\nmkdir -p \"$log_dir\"\n\nsuricata -c /root/suricata.yaml -S \"$rules\" -k none -r \"$pcap\" -l \"$log_dir\" >/dev/null 2>&1 || true\n",
+      "replace": "pcap=\"${1:-}\"\nrules=\"${2:-}\"\nif [[ -z \"$pcap\" || -z \"$rules\" ]]; then\n  echo \"Usage: $0 <pcap_path> <rules_path> [log_dir]\" >&2\n  echo \"  log_dir must be new or empty (default: a fresh mktemp dir).\" >&2\n  echo \"  SURICATA_CONFIG sets the config file (default: /etc/suricata/suricata.yaml).\" >&2\n  exit 2\nfi\nfor f in \"$pcap\" \"$rules\"; do\n  if [[ ! -f \"$f\" ]]; then\n    echo \"Not a file: $f\" >&2\n    exit 2\n  fi\ndone\n\nconfig=\"${SURICATA_CONFIG:-/etc/suricata/suricata.yaml}\"\n\n# Never delete a caller-supplied dir: accept only a new or empty one\nif [[ -z \"${3:-}\" ]]; then\n  log_dir=\"$(mktemp -d \"${TMPDIR:-/tmp}/suri.XXXXXX\")\"\nelse\n  log_dir=\"$3\"\n  if [[ \"$log_dir\" == \"/\" ]]; then\n    echo \"Refusing log_dir '/'.\" >&2\n    exit 2\n  fi\n  if [[ -e \"$log_dir\" && ! -d \"$log_dir\" ]]; then\n    echo \"log_dir exists and is not a directory: $log_dir\" >&2\n    exit 2\n  fi\n  if [[ -d \"$log_dir\" && -n \"$(ls -A \"$log_dir\")\" ]]; then\n    echo \"log_dir is not empty: $log_dir (Suricata appends to existing logs; pass a new or empty dir).\" >&2\n    exit 2\n  fi\n  mkdir -p \"$log_dir\"\nfi\necho \"Log dir: $log_dir\" >&2\n\nrc=0\nsuricata -c \"$config\" -S \"$rules\" -k none -r \"$pcap\" -l \"$log_dir\" >\"$log_dir/suricata.out\" 2>&1 || rc=$?\nif [[ $rc -ne 0 ]]; then\n  echo \"suricata exited with status $rc. Console output:\" >&2\n  tail -n 30 \"$log_dir/suricata.out\" >&2\n  if [[ -f \"$log_dir/suricata.log\" ]]; then\n    echo \"--- suricata.log (tail) ---\" >&2\n    tail -n 30 \"$log_dir/suricata.log\" >&2\n  fi\n  exit \"$rc\"\nfi\n\n# Rule parse errors do not change the exit status; show them and the load summary\nif [[ -f \"$log_dir/suricata.log\" ]]; then\n  grep -E \"Error|rules successfully loaded\" \"$log_dir/suricata.log\" >&2 || true\nfi\n"
+    },
+    {
+      "id": "script-no-eve-msg",
+      "source": "benchflow-ai/skillsbench",
+      "file": "scripts/run_suricata_offline.sh",
+      "find": "  echo \"No eve.json produced (check Suricata output / rule syntax).\" >&2\n",
+      "replace": "  echo \"No eve.json produced; see $log_dir/suricata.out and $log_dir/suricata.log.\" >&2\n"
+    }
+  ],
+  "pcap-triage-tshark": [
+    {
+      "id": "see-also",
+      "source": "benchflow-ai/skillsbench",
+      "find": "This skill shows a fast workflow to inspect PCAPs and extract protocol-level details.\n",
+      "replace": "This skill shows a fast workflow to inspect PCAPs with tshark and extract protocol-level details.\nSee also: `suricata-offline-evejson` for testing IDS rules against the same PCAPs.\n"
+    },
+    {
+      "id": "host-filter",
+      "source": "benchflow-ai/skillsbench",
+      "find": "tshark -r file.pcap -Y 'http.request.method == \"POST\"'\n```\n",
+      "replace": "tshark -r file.pcap -Y 'http.request.method == \"POST\"'\ntshark -r file.pcap -Y 'http.host == \"example.com\"'\ntshark -r file.pcap -Y 'http.host contains \"example\"'\n```\n"
+    },
+    {
+      "id": "follow-quiet",
+      "source": "benchflow-ai/skillsbench",
+      "find": "tshark -r file.pcap -z follow,tcp,ascii,0\n",
+      "replace": "tshark -q -r file.pcap -z follow,tcp,ascii,0\n"
+    },
+    {
+      "id": "helper-doc",
+      "source": "benchflow-ai/skillsbench",
+      "find": "If you want a quick summary across a PCAP (method, uri, and whether the exfil header appears), use:\n\n```bash\nbash scripts/summarize_http_requests.sh /root/pcaps/train_pos.pcap\n```\n",
+      "replace": "For a quick summary across a PCAP (first 50 requests: time, source, method, URI), and optionally a count of requests carrying a given header line, use:\n\n```bash\nbash scripts/summarize_http_requests.sh <file.pcap> ['X-Header: value']\n```\n"
+    },
+    {
+      "id": "script-usage",
+      "source": "benchflow-ai/skillsbench",
+      "file": "scripts/summarize_http_requests.sh",
+      "find": "pcap=\"${1:-}\"\nif [[ -z \"$pcap\" ]]; then\n  echo \"Usage: $0 <pcap_path>\" >&2\n",
+      "replace": "pcap=\"${1:-}\"\nheader=\"${2:-}\"\nif [[ -z \"$pcap\" ]]; then\n  echo \"Usage: $0 <pcap_path> [header_substring]\" >&2\n"
+    },
+    {
+      "id": "script-head-sigpipe",
+      "source": "benchflow-ai/skillsbench",
+      "file": "scripts/summarize_http_requests.sh",
+      "find": "  -e http.request.uri \\\n  | head -n 50\n",
+      "replace": "  -e http.request.uri \\\n  | sed -n '1,50p'\n"
+    },
+    {
+      "id": "script-header-count",
+      "source": "benchflow-ai/skillsbench",
+      "file": "scripts/summarize_http_requests.sh",
+      "find": "echo \"Count of requests with X-TLM-Mode: exfil header (best-effort):\"\n# tshark exposes headers in http.header, but it may include multiple headers; this is a heuristic.\ntshark -r \"$pcap\" -Y 'http.request && http.header contains \"X-TLM-Mode: exfil\"' \\\n  -T fields -e frame.number \\\n  | wc -l\n",
+      "replace": "# Optional: count requests with a header line containing the given (case-sensitive) substring\nif [[ -n \"$header\" ]]; then\n  echo \"Count of requests with a header line containing '$header':\"\n  tshark -r \"$pcap\" -Y \"http.request && http.request.line contains \\\"$header\\\"\" \\\n    -T fields -e frame.number \\\n    | wc -l\nfi\n"
+    }
+  ],
+  "trivy-offline-vulnerability-scanning": [
+    {
+      "id": "trim-why-offline",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Why Offline Mode?\n\n### Challenges with Online Scanning\n- Network dependency introduces failure points\n- Database updates can cause inconsistent results across runs\n- Slower execution due to download times\n- Security policies may restrict external connections\n\n### Benefits of Offline Scanning\n- **Reproducibility**: Same database = same results\n- **Speed**: No network overhead\n- **Reliability**: No external dependencies\n- **Compliance**: Works in restricted environments\n\n## Trivy Database Structure\n",
+      "replace": "## Trivy Database Structure\n"
+    },
+    {
+      "id": "boltdb",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- **trivy.db**: SQLite database containing CVE information\n- **metadata.json**: Database version and update timestamp\n\nDatabase location: `<cache-dir>/db/trivy.db`\n",
+      "replace": "- **trivy.db**: BoltDB (bbolt key-value) file containing vulnerability advisories\n- **metadata.json**: Database version and update timestamp\n\nDatabase location: `<cache-dir>/db/trivy.db`\n\nScanning JAR/WAR files uses a separate Java index DB at `<cache-dir>/java-db/trivy-java.db`. Pre-download both while online:\n\n```bash\ntrivy image --download-db-only --cache-dir ./trivy-cache\ntrivy image --download-java-db-only --cache-dir ./trivy-cache\n```\n"
+    },
+    {
+      "id": "flags-table",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| `--skip-db-update` | **Critical**: Do not update database |\n| `--offline-scan` | Enable offline mode |\n| `--cache-dir <path>` | Path to pre-downloaded database |\n",
+      "replace": "| `--skip-db-update` | **Critical**: do not download/update the vulnerability DB |\n| `--skip-java-db-update` | Do not download/update the Java DB (needed offline when JARs are scanned) |\n| `--offline-scan` | Make no network requests during analysis (e.g. no Maven Central lookups for JARs) |\n| `--cache-dir <path>` | Path to pre-downloaded database |\n| `--severity HIGH,CRITICAL` | Report only these severities |\n| `--ignore-unfixed` | Skip vulnerabilities that have no fixed version yet |\n"
+    },
+    {
+      "id": "install-url-step3",
+      "source": "benchflow-ai/skillsbench",
+      "find": "    print(\"    Install Trivy: https://aquasecurity.github.io/trivy/latest/getting-started/installation/\")\n",
+      "replace": "    print(\"    Install Trivy: https://trivy.dev/latest/getting-started/installation/\")\n"
+    },
+    {
+      "id": "trim-complete-example",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Complete Example\n\n```python\nimport os\nimport sys\nimport subprocess\n\ndef run_trivy_offline_scan(target_file, output_file, cache_dir='./trivy-cache'):\n    \"\"\"\n    Execute Trivy vulnerability scan in offline mode.\n    \n    Args:\n        target_file: Path to file to scan (e.g., package-lock.json)\n        output_file: Path to save JSON results\n        cache_dir: Path to Trivy offline database\n    \"\"\"\n    print(f\"[*] Starting Trivy offline scan...\")\n    print(f\"    Target: {target_file}\")\n    print(f\"    Database: {cache_dir}\")\n    \n    # Verify database exists\n    db_path = os.path.join(cache_dir, \"db\", \"trivy.db\")\n    if not os.path.exists(db_path):\n        print(f\"[!] Error: Database not found at {db_path}\")\n        sys.exit(1)\n    \n    # Build command\n    command = [\n        \"trivy\", \"fs\", target_file,\n        \"--format\", \"json\",\n        \"--output\", output_file,\n        \"--scanners\", \"vuln\",\n        \"--skip-db-update\",\n        \"--offline-scan\",\n        \"--cache-dir\", cache_dir\n    ]\n    \n    # Execute\n    try:\n        result = subprocess.run(command, capture_output=True, text=True)\n        \n        if result.returncode != 0:\n            print(\"[!] Scan failed:\")\n            print(result.stderr)\n            sys.exit(1)\n        \n        print(\"[*] Scan completed successfully\")\n        return output_file\n        \n    except FileNotFoundError:\n        print(\"[!] Trivy not found. Install from:\")\n        print(\"    https://aquasecurity.github.io/trivy/\")\n        sys.exit(1)\n\n# Usage\nif __name__ == \"__main__\":\n    run_trivy_offline_scan(\n        target_file='package-lock.json',\n        output_file='trivy_report.json'\n    )\n```\n\n## JSON Output Structure\n",
+      "replace": "## JSON Output Structure\n"
+    },
+    {
+      "id": "install-signed-by-pinned",
+      "source": "benchflow-ai/skillsbench",
+      "find": "  ```bash\n  # Installation (example for Debian/Ubuntu)\n  wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add -\n  echo \"deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main\" | tee -a /etc/apt/sources.list.d/trivy.list\n  apt-get update\n  apt-get install trivy\n  ```\n",
+      "replace": "  ```bash\n  # Option A (Debian/Ubuntu): APT repo with a dedicated keyring (apt-key is deprecated)\n  wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \\\n    | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg >/dev/null\n  echo \"deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main\" \\\n    | sudo tee /etc/apt/sources.list.d/trivy.list\n  sudo apt-get update\n  apt-cache madison trivy                 # list available versions\n  sudo apt-get install trivy=<x.y.z>      # pin the version\n  sudo apt-mark hold trivy\n\n  # Option B: pinned release binary with checksum verification\n  V=<x.y.z>   # check the aquasecurity/trivy release notes and security advisories before choosing\n  base=https://github.com/aquasecurity/trivy/releases/download/v$V\n  curl -fsSLO \"$base/trivy_${V}_Linux-64bit.tar.gz\"\n  curl -fsSLO \"$base/trivy_${V}_checksums.txt\"\n  sha256sum --ignore-missing -c \"trivy_${V}_checksums.txt\"\n  tar -xzf \"trivy_${V}_Linux-64bit.tar.gz\" trivy\n  ```\n  A checksum file from the same release only detects corruption; to verify authenticity, check the release's cosign signature as described in the signature-verification section of the trivy.dev docs.\n"
+    },
+    {
+      "id": "links-trivy-dev",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- [Trivy Documentation](https://aquasecurity.github.io/trivy/)\n- [Trivy Offline Mode Guide](https://aquasecurity.github.io/trivy/latest/docs/advanced/air-gap/)\n",
+      "replace": "- [Trivy Documentation](https://trivy.dev/latest/)\n- [Trivy Air-Gapped Environment Guide](https://trivy.dev/latest/docs/advanced/air-gap/)\n"
+    }
+  ],
+  "syz-extract-constants": [
+    {
+      "id": "pin-and-see-also",
+      "source": "benchflow-ai/skillsbench",
+      "find": "# Defining Constants in Syzlang\n\n## Overview\n",
+      "replace": "# Defining Constants in Syzlang\n\nWritten against syzkaller commit `c1f5c7d0` (guidance reviewed 2026-11); if the tooling behaves differently, check `docs/syscall_descriptions.md` in your checkout. See also: `syzlang-ioctl-basics` for the description syntax.\n\n## Overview\n"
+    },
+    {
+      "id": "prefer-extract-overview",
+      "source": "benchflow-ai/skillsbench",
+      "find": "1. **Manual `.const` file** - Define constants directly in a companion file\n2. **`syz-extract` tool** - Extract values from kernel source headers (requires kernel source)\n",
+      "replace": "1. **Manual `.const` file** - Define constants directly in a companion file (fallback only)\n2. **`syz-extract` tool** - Extract values from kernel source headers for every arch (preferred; requires a kernel checkout)\n\nPrefer `make extract` (Method 2): it computes per-arch values, which hand-written files often get wrong.\n"
+    },
+    {
+      "id": "method1-fallback-heading",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Method 1: Manual Constants File (Recommended when no kernel source)\n",
+      "replace": "## Method 1: Manual Constants File (fallback when no kernel source)\n"
+    },
+    {
+      "id": "neutral-file-naming",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- Syzlang description: `sys/linux/dev_ppdev.txt`\n- Constants file: `sys/linux/dev_ppdev.txt.const`\n",
+      "replace": "- Syzlang description: `sys/linux/dev_mydev.txt`\n- Constants file: `sys/linux/dev_mydev.txt.const`\n"
+    },
+    {
+      "id": "neutral-const-example",
+      "source": "benchflow-ai/skillsbench",
+      "find": "# Constants for your syzlang descriptions\narches = 386, amd64, arm, arm64, mips64le, ppc64le, riscv64, s390x\nPPCLAIM = 28811\nPPRELEASE = 28812\nIEEE1284_MODE_NIBBLE = 0\nIEEE1284_MODE_BYTE = 1\n",
+      "replace": "# Constants for your syzlang descriptions (example values from <linux/random.h>)\narches = 386, amd64, arm, arm64, mips64le, ppc64le, riscv64, s390x\nRNDZAPENTCNT = 20996, mips64le:536891908, ppc64le:536891908\nRNDGETENTCNT = 2147766784, mips64le:1074024960, ppc64le:1074024960\n"
+    },
+    {
+      "id": "arch-claim",
+      "source": "benchflow-ai/skillsbench",
+      "find": "The `arches` line declares which architectures these constants are valid for. For architecture-independent constants (like ioctls), list all architectures.\n",
+      "replace": "The `arches` line declares which architectures these constants are valid for. A line is `NAME = default, arch:value, ...`: the first value applies to every listed arch without an override (e.g. `NAME = v, 386:w` uses `w` on 386 and `v` elsewhere). Ioctl numbers are **not** architecture-independent: mips64le and ppc64le use a different direction encoding (so even `_IO` values change), and any ioctl whose argument size depends on `long`/pointer width differs between 32-bit (386, arm) and 64-bit arches.\n"
+    },
+    {
+      "id": "ioc-encoding-heading",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Linux ioctl numbers are encoded as:\n",
+      "replace": "With the asm-generic encoding (x86, arm, arm64, riscv, s390), Linux ioctl numbers are:\n"
+    },
+    {
+      "id": "ioc-mips-ppc-and-example",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- `_IOWR(type, nr, size)` = `(3 << 30) | (size << 16) | (type << 8) | nr`\n\nFor ppdev (type='p'=0x70):\n- `PPCLAIM = _IO('p', 0x8b)` = `0x708b` = `28811`\n",
+      "replace": "- `_IOWR(type, nr, size)` = `(3 << 30) | (size << 16) | (type << 8) | nr`\n\nOn mips, powerpc (and alpha, sparc) the direction field is 3 bits at bit 29 and size is 13 bits: `_IOC_NONE = 1`, `_IOC_READ = 2`, `_IOC_WRITE = 4`, so `_IO(type, nr)` = `(1 << 29) | (type << 8) | nr` and `_IOR(type, nr, size)` = `(2 << 29) | (size << 16) | (type << 8) | nr`.\n\nExample for `<linux/random.h>` (type='R'=0x52):\n- `RNDZAPENTCNT = _IO('R', 0x04)` = `0x5204` = `20996` (mips64le/ppc64le: `0x20005204` = `536891908`)\n- `RNDGETENTCNT = _IOR('R', 0x00, int)` = `0x80045200` = `2147766784` (mips64le/ppc64le: `0x40045200` = `1074024960`)\n"
+    },
+    {
+      "id": "method2-preferred-heading",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Method 2: Using syz-extract (Requires kernel source)\n",
+      "replace": "## Method 2: Using syz-extract (preferred; requires kernel source)\n"
+    },
+    {
+      "id": "extract-cmd-paths",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```bash\ncd /opt/syzkaller\n\n# Extract constants for a specific file\nmake extract TARGETOS=linux SOURCEDIR=/path/to/linux FILES=sys/linux/dev_ppdev.txt\n```\n\n**Note:** This environment does not include kernel source. Use Method 1 (manual constants file) instead.\n",
+      "replace": "```bash\ncd <syzkaller-checkout>\n\n# Extract constants for a specific file (writes sys/linux/dev_mydev.txt.const)\nmake extract TARGETOS=linux SOURCEDIR=<linux-checkout> FILES=sys/linux/dev_mydev.txt\n```\n\nWithout a kernel checkout, fall back to Method 1 and compute each value per arch as shown above.\n"
+    },
+    {
+      "id": "build-cmd-path",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```bash\ncd /opt/syzkaller\nmake descriptions",
+      "replace": "```bash\ncd <syzkaller-checkout>\nmake descriptions"
+    },
+    {
+      "id": "fix-broken-fence",
+      "source": "benchflow-ai/skillsbench",
+      "find": "### \"is defined for none of the arches\"\nThis means the constant is used in the `.txt` file but not defined in the `.const` file.\n- Add the missing constant to your `.const` file\n- Ensure `arches` line lists the target architectures\nPPCLAIM is defined for none of the arches\n```\n\nSolution: Run `make extract` with the correct kernel source path and FILES parameter.\n",
+      "replace": "### \"is defined for none of the arches\"\n```\nRNDZAPENTCNT is defined for none of the arches\n```\n\nThe constant is used in the `.txt` file but has no value in the `.const` file.\n\nSolution: Run `make extract` with the correct kernel source path and FILES parameter. With a hand-written `.const`, add the missing constant and make sure the `arches` line lists the target architectures.\n"
+    },
+    {
+      "id": "neutral-missing-header",
+      "source": "benchflow-ai/skillsbench",
+      "find": "cannot find include file: uapi/linux/ppdev.h\n",
+      "replace": "cannot find include file: uapi/linux/<header>.h\n"
+    },
+    {
+      "id": "neutral-unknown-file",
+      "source": "benchflow-ai/skillsbench",
+      "find": "unknown file: sys/linux/dev_ppdev.txt\n",
+      "replace": "unknown file: sys/linux/dev_mydev.txt\n"
+    },
+    {
+      "id": "neutral-workflow",
+      "source": "benchflow-ai/skillsbench",
+      "find": "1. Write the syzlang description file (`sys/linux/dev_ppdev.txt`)\n2. Run `make extract TARGETOS=linux SOURCEDIR=/opt/linux/source FILES=sys/linux/dev_ppdev.txt`\n",
+      "replace": "1. Write the syzlang description file (`sys/linux/dev_mydev.txt`)\n2. Run `make extract TARGETOS=linux SOURCEDIR=<linux-checkout> FILES=sys/linux/dev_mydev.txt`\n"
+    }
+  ],
+  "syzlang-ioctl-basics": [
+    {
+      "id": "checkout-path-docs-link",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Description files are located at `/opt/syzkaller/sys/linux/*.txt`.\n",
+      "replace": "Description files are located at `<syzkaller-checkout>/sys/linux/*.txt`.\nFull reference: [docs/syscall_descriptions_syntax.md](https://github.com/google/syzkaller/blob/master/docs/syscall_descriptions_syntax.md). See also: `syz-extract-constants` for the `.const` values these descriptions need.\n"
+    },
+    {
+      "id": "ptr-intptr-rows",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| `ptr[direction, type]` | Pointer (in, out, inout) |\n| `intptr[min:max]` | Integer pointer with range |\n",
+      "replace": "| `ptr[direction, type]` | Pointer to `type`; direction `in` (user to kernel), `out` (kernel to user) or `inout` (both) |\n| `intptr[min:max]` | Pointer-sized integer (32-bit on 386/arm, 64-bit elsewhere) limited to a range; not a pointer |\n"
+    },
+    {
+      "id": "len-bytesize-rows",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| `array[type, count]` | Fixed-length array |\n\n## Ioctl Patterns\n",
+      "replace": "| `array[type, count]` | Fixed-length array |\n| `len[field, type]` | Number of elements in `field` (bytes for a byte buffer) |\n| `bytesize[field, type]` | Size of `field` in bytes |\n| `string[\"literal\"]` | Fixed string, e.g. a device path |\n\n## Ioctl Patterns\n"
+    },
+    {
+      "id": "inout-ioctl",
+      "source": "benchflow-ai/skillsbench",
+      "find": "ioctl$CMD(fd fd_type, cmd const[CMD], arg ptr[in, struct_type])\n```\n\nFor simple value ioctls:\n",
+      "replace": "ioctl$CMD(fd fd_type, cmd const[CMD], arg ptr[in, struct_type])\n```\n\nFor ioctls that read and write the argument (`_IOWR`):\n```\nioctl$CMD(fd fd_type, cmd const[CMD], arg ptr[inout, struct_type])\n```\n\nFor simple value ioctls:\n"
+    },
+    {
+      "id": "resource-openers",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```\nresource resource_name[fd]\n```\n",
+      "replace": "```\nresource fd_mydev[fd]\n```\n\nCreate the resource with an opener. Fixed device path:\n```\nopenat$mydev(fd const[AT_FDCWD], file ptr[in, string[\"/dev/mydev\"]], flags flags[open_flags], mode const[0]) fd_mydev\n```\n\nNumbered device nodes (`#` is replaced by the `id` argument):\n```\nsyz_open_dev$mydev(dev ptr[in, string[\"/dev/mydev#\"]], id intptr, flags flags[open_flags]) fd_mydev\n```\n"
+    }
+  ],
+  "spring-boot-migration": [
+    {
+      "id": "boot-version-example-note",
+      "source": "benchflow-ai/skillsbench",
+      "find": "</parent>\n```\n\n### 2. Update Java Version",
+      "replace": "</parent>\n```\n\n`3.2.0` is only an example target. Use the latest 3.x patch release and check the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support), since older 3.x lines no longer get OSS fixes. While migrating, add `spring-boot-properties-migrator`: it reports renamed or removed configuration properties at startup (and maps them temporarily). Remove it once the warnings are fixed:\n\n```xml\n<dependency>\n    <groupId>org.springframework.boot</groupId>\n    <artifactId>spring-boot-properties-migrator</artifactId>\n    <scope>runtime</scope>\n</dependency>\n```\n\n### 2. Update Java Version"
+    },
+    {
+      "id": "checklist-boot-version",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- [ ] Update `spring-boot-starter-parent` version to 3.2.x",
+      "replace": "- [ ] Update `spring-boot-starter-parent` to the latest 3.x patch release (3.2.x is only an example)\n- [ ] Add `spring-boot-properties-migrator` temporarily and fix the property renames it reports"
+    },
+    {
+      "id": "order-boot-version",
+      "source": "benchflow-ai/skillsbench",
+      "find": "4. **Fourth**: Update Spring Boot parent to 3.2.x",
+      "replace": "4. **Fourth**: Update Spring Boot parent to the latest 3.x patch release"
+    },
+    {
+      "id": "jaxb-soften-heading",
+      "source": "benchflow-ai/skillsbench",
+      "find": "### 3. Remove Deprecated Dependencies (CRITICAL: JAXB API)\n\n**You MUST remove the old `javax.xml.bind:jaxb-api` dependency.** This is a Java EE dependency that was commonly added for Java 9+ compatibility in Spring Boot 2.x projects, but it conflicts with Jakarta EE in Spring Boot 3.",
+      "replace": "### 3. Replace Java EE JAXB Dependencies\n\nRemove the old `javax.xml.bind:jaxb-api` dependency and the related artifacts listed below. They are Java EE artifacts that Spring Boot 2.x projects often added for Java 9+ compatibility, and Spring Boot 3 libraries expect `jakarta.xml.bind` instead. If the code actually uses JAXB, replace them with the Jakarta artifacts shown under \"If You Need XML Binding in Spring Boot 3\" and change the imports to `jakarta.xml.bind`. If nothing uses JAXB (it was often added only because jjwt 0.9.x needed `javax.xml.bind.DatatypeConverter` on Java 9+), delete them."
+    },
+    {
+      "id": "jaxb-remove-comment",
+      "source": "benchflow-ai/skillsbench",
+      "find": "<!-- REMOVE ALL OF THESE - they are incompatible with Spring Boot 3 -->",
+      "replace": "<!-- Java EE artifacts: remove, or replace with the Jakarta artifacts below if JAXB is used -->"
+    },
+    {
+      "id": "jaxb-comment-api",
+      "source": "benchflow-ai/skillsbench",
+      "find": "<!-- Old JAXB API - MUST BE REMOVED -->",
+      "replace": "<!-- Old JAXB API -->"
+    },
+    {
+      "id": "jaxb-comment-impl",
+      "source": "benchflow-ai/skillsbench",
+      "find": "<!-- Old JAXB Implementation - MUST BE REMOVED -->",
+      "replace": "<!-- Old JAXB Implementation -->"
+    },
+    {
+      "id": "jaxb-comment-activation",
+      "source": "benchflow-ai/skillsbench",
+      "find": "<!-- Old Java Activation - MUST BE REMOVED -->",
+      "replace": "<!-- Old Java Activation -->"
+    },
+    {
+      "id": "jaxb-managed-not-transitive",
+      "source": "benchflow-ai/skillsbench",
+      "find": "2. **Spring Boot 3 Includes Jakarta XML Bind**: If you need XML binding, Spring Boot 3 transitively includes the Jakarta versions",
+      "replace": "2. **Spring Boot 3 Manages Jakarta XML Bind Versions**: If you need XML binding, add the Jakarta artifacts below without `<version>` tags; Spring Boot's dependency management supplies the versions"
+    },
+    {
+      "id": "jjwt-012-api-note",
+      "source": "benchflow-ai/skillsbench",
+      "find": "    <scope>runtime</scope>\n</dependency>\n```\n\n## Common Issues",
+      "replace": "    <scope>runtime</scope>\n</dependency>\n```\n\nCode written for jjwt 0.9.x usually stops compiling after the artifact swap, because 0.12 changed the Java API (`Jwts.parser()` now returns a builder):\n\n```java\n// Before (jjwt 0.9.x)\nString token = Jwts.builder()\n    .setSubject(username)\n    .setIssuedAt(now)\n    .setExpiration(expiry)\n    .signWith(SignatureAlgorithm.HS512, secret)\n    .compact();\nClaims claims = Jwts.parser()\n    .setSigningKey(secret)\n    .parseClaimsJws(token)\n    .getBody();\n\n// After (jjwt 0.12.x)\nSecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));\nString token = Jwts.builder()\n    .subject(username)\n    .issuedAt(now)\n    .expiration(expiry)\n    .signWith(key)\n    .compact();\nClaims claims = Jwts.parser()\n    .verifyWith(key)\n    .build()\n    .parseSignedClaims(token)\n    .getPayload();\n```\n\nIn 0.9.x, `signWith(alg, String)` and `setSigningKey(String)` Base64-decode the string, so build the new key with `Decoders.BASE64.decode(secret)` to keep existing tokens valid. `Keys.hmacShaKeyFor` throws `WeakKeyException` for keys shorter than 256 bits, and `signWith(key)` picks HS256/384/512 from the key length. `Jwts.parserBuilder()`, `setSigningKey` and the `set*` builder methods still exist in 0.12 but are deprecated.\n\n## Common Issues"
+    },
+    {
+      "id": "replace-h2-dialect-issue",
+      "source": "benchflow-ai/skillsbench",
+      "find": "### Issue 2: H2 Database Dialect\n\nThe H2 dialect class name changed:\n\n```properties\n# Before\nspring.jpa.database-platform=org.hibernate.dialect.H2Dialect\n\n# After\nspring.jpa.database-platform=org.hibernate.dialect.H2Dialect\n# Note: In Hibernate 6, this is often auto-detected and may not need explicit configuration\n```",
+      "replace": "### Issue 2: Hibernate 6 Dialect Names\n\nHibernate 6 detects the dialect and database version from the JDBC connection, so `spring.jpa.database-platform` can usually be removed. Version-specific dialect classes are deprecated or moved in favour of one class per database:\n\n```properties\n# Before (Hibernate 5)\nspring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect\n\n# After (Hibernate 6), or remove the property\nspring.jpa.database-platform=org.hibernate.dialect.MySQLDialect\n```\n\nOther common renames: `PostgreSQL95Dialect`/`PostgreSQL10Dialect` -> `PostgreSQLDialect`, `Oracle12cDialect` -> `OracleDialect`, `SQLServer2012Dialect` -> `SQLServerDialect`, `MariaDB103Dialect` -> `MariaDBDialect`. `org.hibernate.dialect.H2Dialect` keeps its name. Dialects for older or less common databases live in the `org.hibernate.orm:hibernate-community-dialects` artifact."
+    }
+  ],
+  "hibernate-upgrade": [
+    {
+      "id": "id-generation-defaults",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Hibernate 6 changed the default ID generation strategy:",
+      "replace": "Hibernate 6 changed the implicit sequence used by `@GeneratedValue` with `AUTO` or `SEQUENCE` and no explicit generator. Hibernate 5 used one shared `hibernate_sequence`; Hibernate 6 uses one sequence per entity named `<entity>_SEQ` (e.g. `User_SEQ`) with the JPA default `allocationSize` of 50 (pooled optimizer). A schema created under Hibernate 5 then breaks: the per-entity sequences do not exist, or their increment does not match the mapping. Setting `spring.jpa.properties.hibernate.id.db_structure_naming_strategy=legacy` restores the shared `hibernate_sequence` name (check its increment against the allocation size Hibernate expects). Otherwise map IDs explicitly, with `IDENTITY` or a `@SequenceGenerator` whose `allocationSize` matches the database sequence increment. `hibernate.id.new_generator_mappings` (Spring Boot 2's `spring.jpa.hibernate.use-new-id-generator-mappings`) no longer exists; delete it from configuration.\n\nExplicit mappings:"
+    },
+    {
+      "id": "type-signature-changed",
+      "source": "benchflow-ai/skillsbench",
+      "find": "### Removed in Hibernate 6\n\n1. **`@Type` annotation** - replaced with `@JdbcTypeCode` or custom type definitions",
+      "replace": "### Removed or Changed in Hibernate 6\n\n1. **`@Type(type = \"...\")`** - `@Type` still exists, but it now takes a `UserType` class instead of a type name: `@Type(type = \"json\")` becomes `@Type(JsonType.class)`. For built-in mappings, use `@JdbcTypeCode(SqlTypes.JSON)` (or `@JavaType` / `@JdbcType`) instead"
+    },
+    {
+      "id": "type-example-class-form",
+      "source": "benchflow-ai/skillsbench",
+      "find": "// After (Hibernate 6)\n@JdbcTypeCode(SqlTypes.JSON)\nprivate JsonNode metadata;\n```",
+      "replace": "// After (Hibernate 6), built-in JSON mapping\n@JdbcTypeCode(SqlTypes.JSON)\nprivate JsonNode metadata;\n\n// Or keep a custom UserType class (e.g. Hypersistence Utils io.hypersistence.utils.hibernate.type.json.JsonType)\n@Type(JsonType.class)\nprivate JsonNode metadata;\n```"
+    },
+    {
+      "id": "slow-query-property",
+      "source": "benchflow-ai/skillsbench",
+      "find": "spring.jpa.properties.hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS=100",
+      "replace": "spring.jpa.properties.hibernate.log_slow_query=100"
+    },
+    {
+      "id": "n-plus-one-fence",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```java\n// Add this to application.properties to monitor queries",
+      "replace": "```properties\n# Add this to application.properties to monitor queries"
+    }
+  ],
+  "jakarta-namespace": [
+    {
+      "id": "jdk-packages-note",
+      "source": "benchflow-ai/skillsbench",
+      "find": "**Important:** Packages such as `javax.sql.*` and `javax.crypto.*` will NOT change to `jakarta.*` as they are part of the Java 17+ JDK itself, not part of Java EE.",
+      "replace": "**Important:** JDK packages do NOT change to `jakarta.*`: `javax.sql.*`, `javax.crypto.*`, `javax.net.*`, `javax.naming.*`, `javax.transaction.xa.*`, `javax.annotation.processing.*` and others ship with the Java 17+ JDK itself, not with Java EE. JSR-305 annotations such as `javax.annotation.Nullable`, `javax.annotation.Nonnull` and `javax.annotation.CheckForNull` (from `com.google.code.findbugs:jsr305`) are not Java EE either, so a blanket `javax.annotation` rewrite breaks them; leave them unless you deliberately switch nullness libraries."
+    },
+    {
+      "id": "find-step-excludes",
+      "source": "benchflow-ai/skillsbench",
+      "find": "grep -r \"import javax\\.\" --include=\"*.java\" . | grep -v \"javax.sql\" | grep -v \"javax.crypto\" | grep -v \"javax.net\"",
+      "replace": "grep -r \"import javax\\.\" --include=\"*.java\" . | grep -vE \"javax\\.(sql|crypto|net|naming|transaction\\.xa|annotation\\.(processing|Nullable|Nonnull|CheckForNull))\""
+    },
+    {
+      "id": "transaction-sed-skip-xa",
+      "source": "benchflow-ai/skillsbench",
+      "find": "# Replace javax.transaction with jakarta.transaction\nfind . -name \"*.java\" -type f -exec sed -i 's/import javax\\.transaction/import jakarta.transaction/g' {} +",
+      "replace": "# Replace javax.transaction with jakarta.transaction, keeping the JDK's javax.transaction.xa\nfind . -name \"*.java\" -type f -exec sed -i '/import javax\\.transaction\\.xa/!s/import javax\\.transaction/import jakarta.transaction/g' {} +"
+    },
+    {
+      "id": "verify-grep-skip-xa",
+      "source": "benchflow-ai/skillsbench",
+      "find": "grep -r \"import javax\\.\" --include=\"*.java\" . | grep -E \"(persistence|validation|servlet|transaction|annotation\\.(PostConstruct|PreDestroy|Resource))\"",
+      "replace": "grep -r \"import javax\\.\" --include=\"*.java\" . | grep -v \"javax\\.transaction\\.xa\" | grep -E \"(persistence|validation|servlet|transaction|annotation\\.(PostConstruct|PreDestroy|Resource))\""
+    },
+    {
+      "id": "pitfall-jdk-packages",
+      "source": "benchflow-ai/skillsbench",
+      "find": "1. **Don't change javax.sql or javax.crypto** - These are JDK packages, not Java EE",
+      "replace": "1. **Don't change JDK packages** - `javax.sql`, `javax.crypto`, `javax.net`, `javax.naming` and `javax.transaction.xa` are JDK packages, not Java EE; JSR-305 `javax.annotation.Nullable`/`Nonnull` are not Java EE either"
+    }
+  ],
+  "gnucobol-mainframe-batch": [
+    {
+      "id": "free-format-comments",
+      "source": "benchflow-ai/skillsbench",
+      "find": "`-free` allows `*>` comments and free-form source. File names in `SELECT`\nare resolved relative to the program's run directory.",
+      "replace": "`-free` selects free-form source (no sequence area in columns 1-6 and no\nindicator column 7). `*>` inline comments work in both formats; in fixed\nformat they can start anywhere from column 7 on. File names in `SELECT`\nare resolved relative to the program's run directory. When porting z/OS\nsources, `-std=ibm` enables IBM dialect syntax and `-fsign=EBCDIC` makes\nsigned `DISPLAY` fields use EBCDIC sign encoding."
+    },
+    {
+      "id": "neutral-select-filename",
+      "source": "benchflow-ai/skillsbench",
+      "find": "SELECT DETAIL-FILE ASSIGN TO \"TRAN.DAT\"",
+      "replace": "SELECT DETAIL-FILE ASSIGN TO \"INPUT.DAT\""
+    },
+    {
+      "id": "line-vs-record-sequential",
+      "source": "benchflow-ai/skillsbench",
+      "find": "required length (e.g. `MOVE SPACES TO BAL-REC` before populating fields).",
+      "replace": "required length (e.g. `MOVE SPACES TO OUT-REC` before populating fields).\n\n`ORGANIZATION IS LINE SEQUENTIAL` reads and writes newline-terminated text\nlines. On `READ`, a short line is padded with spaces to the record length;\non `WRITE`, trailing spaces are dropped by default (set `COB_LS_FIXED=TRUE`\nat runtime to keep full-length lines). Use it for text files written by\neditors or scripts. `ORGANIZATION IS SEQUENTIAL` (record sequential) stores\nfixed-length records back to back with no delimiter, so a file with\nnewlines between records reads out of alignment unless the record length\ncounts the newline byte. Use record sequential for records holding binary\nor `COMP-3` fields, which can contain newline bytes."
+    },
+    {
+      "id": "spec-not-task",
+      "source": "benchflow-ai/skillsbench",
+      "find": "3. Reconcile against a short script that applies the task's posting rules\n   to the same tape layout.",
+      "replace": "3. Reconcile against a short script that applies the program's specification\n   to the same record layout."
+    }
+  ],
+  "transaction-concurrency-control-foundations": [
+    {
+      "id": "basic-to-thomas-write-rule",
+      "source": "benchflow-ai/skillsbench",
+      "file": "references/representative-protocols.md",
+      "find": "  - set `WTS(x) = TS(T)`\n\n### Common false-abort source",
+      "replace": "  - set `WTS(x) = TS(T)`\n\n**Thomas write rule** (common variant): if the `RTS(x)` check passes but `TS(T) < WTS(x)`, skip the obsolete write instead of aborting, since a later-timestamped writer already overwrote x. Histories it admits are view-serializable but not always conflict-serializable.\n\n### Common false-abort source"
+    },
+    {
+      "id": "tictoc-commit-ts-constraints",
+      "source": "benchflow-ai/skillsbench",
+      "file": "references/representative-protocols.md",
+      "find": "- compute a candidate serialization timestamp from constraints across:\n  - reads (must be within validity of read versions)\n  - writes (must be after required dependencies for written keys)\n- the trace/spec usually provides the final candidate `commit_ts(T)` rather than the full constraint derivation",
+      "replace": "- lock every key in WS(T) (in a global key order, to avoid deadlock)\n- compute the smallest serialization timestamp satisfying:\n  - reads: `commit_ts(T) >= local_wts(x)` for every x in RS(T) (T serializes no earlier than the version it read)\n  - writes: `commit_ts(T) > rts(x)` for every x in WS(T), using the current `rts(x)` after locking (T serializes after every read of the version it overwrites)\n  - i.e. `commit_ts(T) = max( max over RS of local_wts(x), max over WS of rts(x) + 1 )`\n- a trace or spec often provides the final `commit_ts(T)` rather than this derivation"
+    },
+    {
+      "id": "tictoc-extension-lock-check",
+      "source": "benchflow-ai/skillsbench",
+      "file": "references/representative-protocols.md",
+      "find": "  - if `current_wts(x) == local_wts(x)`:\n    - the version T read is still current → extend `rts(x)` to at least `commit_ts(T)` → OK\n  - else:\n    - the version changed → abort (cannot prove that the *old* version remains valid through commit_ts(T))",
+      "replace": "  - if `current_wts(x) != local_wts(x)`:\n    - the version changed → abort (cannot prove that the *old* version remains valid through commit_ts(T))\n  - else if x is locked by another transaction (x not in WS(T)) and `rts(x) <= commit_ts(T)`:\n    - a concurrent writer may install a new version at or before commit_ts(T) → abort\n  - else:\n    - the version T read is still current and either unlocked or already valid past commit_ts(T) → set `rts(x) = max(rts(x), commit_ts(T))` → OK\n  - the check and the extension run atomically per key"
+    }
+  ],
+  "transaction-trace-analysis": [
+    {
+      "id": "neutral-data-dictionary",
+      "source": "benchflow-ai/skillsbench",
+      "file": "references/trace-schema-normalization.md",
+      "find": "file: writes.tsv\n  col1 txn_seq -> txn_id (scope: per-attempt) (join key)\n  col2 key_hash -> key_id (scope: object) (join key)\n  col3 new_wts -> write_ts (scope: per-key logical time) (orders versions for key)\n  col4 ats_at_write -> access_ctr (scope: per-key) (orders accesses for key)",
+      "replace": "file: log.csv\n  col1 tid -> txn_id (scope: per-attempt) (join key)\n  col2 obj -> key_id (scope: object) (join key)\n  col3 ver -> version_id (scope: per-object) (orders versions of one object)\n  col4 seq -> log_seq (scope: global) (orders log events, not commits)"
+    },
+    {
+      "id": "neutral-commit-ts-check",
+      "source": "benchflow-ai/skillsbench",
+      "file": "references/trace-schema-normalization.md",
+      "find": "- **commit-ts equality**: if a write record’s `new_wts` is the committing txn’s `commit_ts`, verify they match whenever both exist",
+      "replace": "- **commit-ts equality**: if a write record’s version timestamp is supposed to equal the committing txn’s commit timestamp, verify they match whenever both exist"
+    },
+    {
+      "id": "neutral-failed-predicate",
+      "source": "benchflow-ai/skillsbench",
+      "file": "references/validation-and-abort-records.md",
+      "find": "- “T aborted because current_wts(key) != local_wts(key) and commit_ts > local_rts(key)”",
+      "replace": "- “T aborted because latest_version(x) != observed_version(x) and serialization_ts(T) > read_valid_until(x)”"
+    }
+  ],
+  "python-scala-collections": [
+    {
+      "id": "see-also-siblings",
+      "source": "benchflow-ai/skillsbench",
+      "find": "# Python to Scala Collections Translation\n\n## Collection Creation",
+      "replace": "# Python to Scala Collections Translation\n\nSee also: python-scala-syntax-mapping, python-scala-idioms, python-scala-functional, python-scala-oop, python-scala-libraries.\n\n## Collection Creation"
+    },
+    {
+      "id": "neutral-enum-section",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## enum type\n\nUse UPPERCASE for enum and constant names in Scala (same as in Python) E.g.\n\n```python\nclass TokenType(Enum):\n    STRING = \"string\"\n    NUMERIC = \"numeric\"\n    TEMPORAL = \"temporal\"\n    STRUCTURED = \"structured\"\n    BINARY = \"binary\"\n    NULL = \"null\"\n```\n\n```scala\nobject BaseType {\n  case object STRING extends BaseType { val value = \"string\" }\n  case object NUMERIC extends BaseType { val value = \"numeric\" }\n  case object TEMPORAL extends BaseType { val value = \"temporal\" }\n  case object STRUCTURED extends BaseType { val value = \"structured\" }\n  case object BINARY extends BaseType { val value = \"binary\" }\n}\n```\n\nDo not use PascalCase. E.g. the following is against the principle:\n\n```scala\nobject BaseType {\n  case object String extends BaseType { val value = \"string\" }\n}\n```",
+      "replace": "## Enums\n\nPython `Enum` members are usually `SCREAMING_SNAKE`; Scala enum cases and case objects use UpperCamelCase, like other Scala constants (Scala style guide).\n\n```python\nfrom enum import Enum\n\nclass Color(Enum):\n    RED = \"red\"\n    GREEN = \"green\"\n```\n\n```scala\n// Scala 3 enum\nenum Color(val value: String):\n  case Red extends Color(\"red\")\n  case Green extends Color(\"green\")\n\nColor.valueOf(\"Red\")                 // Color.Red\nColor.values.find(_.value == \"red\")  // Option[Color], like Color(\"red\") in Python\n```\n\n```scala\n// Scala 2: sealed class + case objects\nsealed abstract class Color(val value: String)\nobject Color {\n  case object Red extends Color(\"red\")\n  case object Green extends Color(\"green\")\n  val values: List[Color] = List(Red, Green)\n}\n```"
+    }
+  ],
+  "python-scala-functional": [
+    {
+      "id": "map-pattern-unchecked",
+      "source": "benchflow-ai/skillsbench",
+      "find": "  case m: Map[_, _] if m.contains(\"name\") =>",
+      "replace": "  case m: Map[String, Any] @unchecked if m.contains(\"name\") && m.contains(\"age\") =>"
+    },
+    {
+      "id": "rename-result-adt",
+      "source": "benchflow-ai/skillsbench",
+      "find": "sealed trait Result\ncase class Success(value: Int) extends Result\ncase class Error(message: String) extends Result\n\ndef handle(result: Result): String = result match {\n  case Success(v) if v > 100 => s\"Big success: $v\"\n  case Success(v) => s\"Success: $v\"\n  case Error(msg) => s\"Failed: $msg\"\n}",
+      "replace": "sealed trait Result\ncase class Ok(value: Int) extends Result     // not Success/Error: avoids shadowing scala.util.Success and java.lang.Error\ncase class Err(message: String) extends Result\n\ndef handle(result: Result): String = result match {\n  case Ok(v) if v > 100 => s\"Big success: $v\"\n  case Ok(v) => s\"Success: $v\"\n  case Err(msg) => s\"Failed: $msg\"\n}"
+    },
+    {
+      "id": "curried-no-eta",
+      "source": "benchflow-ai/skillsbench",
+      "find": "val curried = (uncurried _).curried",
+      "replace": "val curried = uncurried.curried  // uncurried is already a Function3"
+    }
+  ],
+  "python-scala-idioms": [
+    {
+      "id": "constant-naming",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| `SCREAMING_SNAKE` (constants) | `CamelCase` or `PascalCase` |",
+      "replace": "| `SCREAMING_SNAKE` (constants, enum members) | `UpperCamelCase` (e.g. `MaxRetryCount`, enum case `Red`) |"
+    },
+    {
+      "id": "constant-example",
+      "source": "benchflow-ai/skillsbench",
+      "find": "val MaxRetryCount = 3  // or final val MAX_RETRY_COUNT",
+      "replace": "val MaxRetryCount = 3  // UpperCamelCase constant, not MAX_RETRY_COUNT"
+    },
+    {
+      "id": "private-this-scala3",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| `__very_private` | `private[this]` |",
+      "replace": "| `__very_private` (name mangling) | `private`; Scala 2 also has object-private `private[this]`, deprecated in Scala 3 (which infers it for `private`) |"
+    }
+  ],
+  "python-scala-libraries": [
+    {
+      "id": "using-close-source",
+      "source": "benchflow-ai/skillsbench",
+      "find": "val content = Source.fromFile(\"file.txt\").mkString\nUsing(Source.fromFile(\"file.txt\")) { source =>",
+      "replace": "val content = Using(Source.fromFile(\"file.txt\"))(_.mkString)  // Try[String]; Using closes the Source\nval lines = Using(Source.fromFile(\"file.txt\")) { source =>  // Try[List[String]]"
+    },
+    {
+      "id": "writestring-jdk11",
+      "source": "benchflow-ai/skillsbench",
+      "find": "// Writing\nFiles.writeString(",
+      "replace": "// Writing (Files.writeString needs JDK 11+; on JDK 8 use Files.write(path, bytes))\nFiles.writeString("
+    },
+    {
+      "id": "sttp-client4-note",
+      "source": "benchflow-ai/skillsbench",
+      "find": "// Scala - sttp (recommended)",
+      "replace": "// Scala - sttp client3 (client4 is the current major version: import sttp.client4._ and DefaultSyncBackend())"
+    },
+    {
+      "id": "logger-define-exception",
+      "source": "benchflow-ai/skillsbench",
+      "find": "  logger.error(\"Error message\", exception)",
+      "replace": "  try \"abc\".toInt\n  catch { case e: NumberFormatException => logger.error(\"Error message\", e) }  // logs the stack trace, like exc_info=True"
+    },
+    {
+      "id": "duration-import",
+      "source": "benchflow-ai/skillsbench",
+      "find": "import cats.syntax.parallel._\n\ndef fetchData(url: String): IO[String]",
+      "replace": "import cats.syntax.parallel._\nimport scala.concurrent.duration._  // for 1.second\n\ndef fetchData(url: String): IO[String]"
+    }
+  ],
+  "python-scala-syntax-mapping": [
+    {
+      "id": "floor-div",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| `//` (floor div) | `x / y` (for Int) or `math.floor(x / y)` |",
+      "replace": "| `//` (floor div) | `Math.floorDiv(x, y)` for Int/Long (`x / y` truncates toward zero: `-7 / 2 == -3`, Python `-7 // 2 == -4`); `math.floor(x / y)` for Double |"
+    },
+    {
+      "id": "floor-mod",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| `%` (modulo) | `%` |",
+      "replace": "| `%` (modulo) | `Math.floorMod(x, y)` for Python semantics; Scala `%` takes the dividend's sign (`-7 % 3 == -1`, Python `-7 % 3 == 2`) |"
+    }
+  ],
+  "scipy-curve-fit": [
+    {
+      "id": "positive-tau-clip-p0",
+      "source": "benchflow-ai/skillsbench",
+      "find": "bounds = (\n    [lower_K, lower_tau],    # Lower bounds\n    [upper_K, upper_tau]     # Upper bounds\n)",
+      "replace": "tau_min = 1e-6  # small positive floor: tau = 0 makes exp(-t / tau) divide by zero\nbounds = (\n    [lower_K, tau_min],      # Lower bounds\n    [upper_K, upper_tau]     # Upper bounds\n)\n\n# curve_fit raises ValueError if p0 lies outside the bounds; clip it in\np0 = np.clip(p0, bounds[0], bounds[1])"
+    },
+    {
+      "id": "parameter-uncertainty",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```\n\n## Calculating Fit Quality",
+      "replace": "```\n\n## Parameter Uncertainty\n\n`pcov` is the estimated covariance matrix of `popt`; the square roots of its diagonal are the 1-sigma parameter errors.\n\n```python\npopt, pcov = curve_fit(model, x_data, y_data, p0=p0, sigma=y_err, absolute_sigma=True)\nperr = np.sqrt(np.diag(pcov))          # 1-sigma errors, same order as popt\ncorr = pcov / np.outer(perr, perr)     # parameter correlation matrix\n\nif not np.all(np.isfinite(pcov)):\n    raise RuntimeError(\"covariance not estimated; parameters are not identifiable from these data\")\n```\n\n- `sigma`: per-point standard deviations of `y_data` (residuals are divided by `sigma`, so points are weighted by `1/sigma**2`), or a 2-D covariance matrix of `y_data`.\n- `absolute_sigma=True`: `sigma` are true measurement errors and `pcov` is used as computed.\n- `absolute_sigma=False` (default): only relative `sigma` matter; `pcov` is rescaled by the reduced chi-square `sum(r**2) / (N - n_params)`, so errors follow the observed scatter.\n- `pcov` filled with `inf` (with `OptimizeWarning: Covariance of the parameters could not be estimated`) means a rank-deficient Jacobian or `N <= n_params`. With bounds, curve_fit uses `trf`, which returns a pseudoinverse instead of `inf`, so also check `np.linalg.cond(pcov)` and correlations near +/-1.\n\n## Calculating Fit Quality"
+    },
+    {
+      "id": "r2-nonlinear-note",
+      "source": "benchflow-ai/skillsbench",
+      "find": "r_squared = 1 - (ss_residuals / ss_total)\n```\n\n### Root Mean Square Error (RMSE)",
+      "replace": "r_squared = 1 - (ss_residuals / ss_total)\n```\n\nFor nonlinear models R² is descriptive only: it can be negative when the fit is worse than the mean, it does not equal the squared correlation, and it is a poor basis for comparing models. Use residual plots, RMSE, reduced chi-square (with known `sigma`), or AIC/BIC for that.\n\n### Root Mean Square Error (RMSE)"
+    },
+    {
+      "id": "generic-complete-example",
+      "source": "benchflow-ai/skillsbench",
+      "find": "def fit_first_order_model(data, y_initial, input_value):\n    \"\"\"\n    Fit first-order model to step response data.\n\n    Returns dict with K, tau, r_squared, fitting_error\n    \"\"\"\n    t_data = np.array([d[\"time\"] for d in data])\n    y_data = np.array([d[\"output\"] for d in data])\n\n    def model(t, K, tau):\n        return y_initial + K * input_value * (1 - np.exp(-t / tau))\n\n    # Initial guesses\n    K_guess = (y_data[-1] - y_initial) / input_value\n    tau_guess = t_data[len(t_data)//3]  # Rough guess\n\n    # Fit with bounds\n    popt, _ = curve_fit(\n        model, t_data, y_data,\n        p0=[K_guess, tau_guess],\n        bounds=([0, 0], [np.inf, np.inf])\n    )\n\n    K, tau = popt\n\n    # Calculate quality metrics\n    y_pred = model(t_data, K, tau)\n    ss_res = np.sum((y_data - y_pred) ** 2)\n    ss_tot = np.sum((y_data - np.mean(y_data)) ** 2)\n    r_squared = 1 - (ss_res / ss_tot)\n    fitting_error = np.sqrt(np.mean((y_data - y_pred) ** 2))\n\n    return {\n        \"K\": float(K),\n        \"tau\": float(tau),\n        \"r_squared\": float(r_squared),\n        \"fitting_error\": float(fitting_error)\n    }",
+      "replace": "def fit_first_order(t, y, y0, u, y_err=None):\n    \"\"\"Fit y(t) = y0 + K*u*(1 - exp(-(t - t[0]) / tau)) to step-response arrays.\n\n    Returns (popt, perr, r_squared, rmse) with popt = [K, tau].\n    \"\"\"\n    t = np.asarray(t, dtype=np.float64)\n    y = np.asarray(y, dtype=np.float64)\n    t_rel = t - t[0]  # step applied at the first sample\n\n    def model(t_rel, K, tau):\n        return y0 + K * u * (1 - np.exp(-t_rel / tau))\n\n    lower, upper = [-np.inf, 1e-6], [np.inf, np.inf]\n    K_guess = (y[-1] - y0) / u\n    idx_63 = np.argmin(np.abs(y - (y0 + 0.632 * (y[-1] - y0))))\n    p0 = np.clip([K_guess, t_rel[idx_63]], lower, upper)\n\n    popt, pcov = curve_fit(model, t_rel, y, p0=p0, bounds=(lower, upper),\n                           sigma=y_err, absolute_sigma=y_err is not None)\n    perr = np.sqrt(np.diag(pcov))\n\n    residuals = y - model(t_rel, *popt)\n    r_squared = 1 - np.sum(residuals ** 2) / np.sum((y - y.mean()) ** 2)\n    rmse = np.sqrt(np.mean(residuals ** 2))\n    return popt, perr, r_squared, rmse"
+    }
+  ],
+  "trend-analysis": [
+    {
+      "id": "pvalue-format-linregress",
+      "source": "benchflow-ai/skillsbench",
+      "find": "print(f\"p-value: {p_value:.2f}\")",
+      "replace": "print(f\"p-value: {p_value:.3g}\")"
+    },
+    {
+      "id": "pvalue-format-mk",
+      "source": "benchflow-ai/skillsbench",
+      "find": "print(f\"p-value: {result.p:.2f}\")",
+      "replace": "print(f\"p-value: {result.p:.3g}\")"
+    },
+    {
+      "id": "autocorrelation-section",
+      "source": "benchflow-ai/skillsbench",
+      "find": "print(result.trend)  # 'increasing', 'decreasing', or 'no trend'\n```\n\n### Comparison",
+      "replace": "print(result.trend)  # 'increasing', 'decreasing', or 'no trend'\n```\n\n### Serial Autocorrelation\n\n`original_test` assumes independent observations. Positive serial autocorrelation, common in annual climate, hydrology, and lake records, makes it report significant trends too often. Check the lag-1 autocorrelation and use a modified test when it is non-negligible:\n\n```python\nimport numpy as np\nimport pymannkendall as mk\n\nx = np.asarray(values, dtype=np.float64)\nd = x - x.mean()\nr1 = np.sum(d[:-1] * d[1:]) / np.sum(d ** 2)   # lag-1 autocorrelation\n\nmk.hamed_rao_modification_test(x)                 # variance correction (Hamed & Rao 1998)\nmk.yue_wang_modification_test(x)                  # variance correction (Yue & Wang 2004)\nmk.pre_whitening_modification_test(x)             # removes lag-1 AR before testing\nmk.trend_free_pre_whitening_modification_test(x)  # TFPW: detrends before pre-whitening\nmk.seasonal_test(x, period=12)                    # monthly data with seasonality\nmk.correlated_seasonal_test(x, period=12)         # seasonality plus serial correlation\n```\n\nAll return the same result fields (`trend`, `p`, `slope`). Report which test you used.\n\n### Comparison"
+    },
+    {
+      "id": "nan-row",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| p-value = NaN | Too few data points | Need at least 8-10 years |",
+      "replace": "| p-value = NaN | NaN in the input (`linregress` propagates it; pymannkendall drops missing values) | Drop NaNs with an `np.isfinite` mask before `linregress` |\n| Never significant | Very short series: Mann-Kendall cannot reach p < 0.05 (two-sided) with n <= 4, and its normal approximation is rough below n ~ 10 | Collect more data or report the test as underpowered |"
+    },
+    {
+      "id": "conflict-row",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| Conflicting results | Methods have different assumptions | Trust Sen's slope for environmental data |",
+      "replace": "| Conflicting results | Linear regression assumes normal, independent residuals; Mann-Kendall is rank-based | Check outliers and autocorrelation, and report both. Sen's slope estimates the magnitude; the Mann-Kendall p-value tests significance |"
+    },
+    {
+      "id": "drop-rounding-rule",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- Round results to 2 decimal places",
+      "replace": "- State which test variant was used (original or autocorrelation-corrected)"
+    }
+  ],
+  "timeseries-detrending": [
+    {
+      "id": "lambda-table",
+      "source": "benchflow-ai/skillsbench",
+      "find": "| Data Frequency | Recommended λ | Rationale |\n|----------------|---------------|-----------|\n| Annual         | **100**       | Standard for yearly data |\n| Quarterly      | **1600**      | Hodrick-Prescott (1997) recommendation |\n| Monthly        | **14400**     | Ravn-Uhlig (2002) adjustment |",
+      "replace": "| Data Frequency | λ | Source |\n|----------------|---|--------|\n| Annual         | **100** or **6.25** | 100: older convention (e.g. Backus-Kehoe 1992); 6.25: Ravn-Uhlig (2002) |\n| Quarterly      | **1600** | Hodrick-Prescott (1997) |\n| Monthly        | **14400** or **129600** | 14400: common convention; 129600: Ravn-Uhlig (2002) |\n\nRavn-Uhlig scale λ by the 4th power of the sampling-frequency ratio: 1600 × (1/4)⁴ = 6.25 for annual, 1600 × 3⁴ = 129600 for monthly data. When replicating a study, use the λ it used."
+    },
+    {
+      "id": "common-mistake-sentence",
+      "source": "benchflow-ai/skillsbench",
+      "find": "**Common mistake**: Using λ=1600 (quarterly default) for annual data produces an overly smooth trend that misses important cyclical dynamics.",
+      "replace": "**Common mistake**: Using λ=1600 (the quarterly value) on annual data makes the trend too smooth, so the cyclical component absorbs low-frequency movements longer than business cycles and its volatility is overstated."
+    },
+    {
+      "id": "caveats-alternatives",
+      "source": "benchflow-ai/skillsbench",
+      "find": "**Important**: The function parameter is `lamb` (not `lambda`, which is a Python keyword).\n\n## Log Transformation for Growth Series",
+      "replace": "**Important**: The function parameter is `lamb` (not `lambda`, which is a Python keyword).\n\n### Caveats and Alternatives\n\n- **End-point bias**: the HP filter is two-sided, so trend and cycle estimates for the last few observations are unreliable and change as new data arrive.\n- **Spurious cycles**: Hamilton (2018, \"Why You Should Never Use the Hodrick-Prescott Filter\") shows HP can induce spurious dynamics; he proposes taking the cycle as the residual from regressing y(t+h) on y(t), ..., y(t-3).\n\n```python\nimport numpy as np\nimport statsmodels.api as sm\nfrom scipy.signal import detrend\nfrom statsmodels.tsa.filters.bk_filter import bkfilter\nfrom statsmodels.tsa.filters.cf_filter import cffilter\n\ny = np.asarray(log_series, dtype=np.float64)\n\nlinear_cycle = detrend(y, type='linear')           # residual from a linear trend\nbk_cycle = bkfilter(y, low=6, high=32, K=12)       # Baxter-King band-pass, quarterly; drops K obs per end (annual: low=2, high=8, K=3)\ncf_cycle, cf_trend = cffilter(y, low=6, high=32, drift=True)  # Christiano-Fitzgerald\n\n# Hamilton regression filter (quarterly: h=8, p=4); loses the first h + p - 1 observations\nh, p = 8, 4\nX = sm.add_constant(np.column_stack([y[p - 1 - j : len(y) - h - j] for j in range(p)]))\nhamilton_cycle = sm.OLS(y[p - 1 + h :], X).fit().resid\n```\n\nReport which filter and λ you used; cycle statistics differ across filters.\n\n## Log Transformation for Growth Series"
+    }
+  ],
+  "lomb-scargle-periodogram": [
+    {
+      "id": "lightkurve-normalization",
+      "source": "benchflow-ai/skillsbench",
+      "find": "print(f\"Power: {max_power:.5f}\")\n```\n\n## Plotting Periodograms",
+      "replace": "print(f\"Power: {max_power:.5f}\")\n```\n\n`to_periodogram` defaults to `normalization='amplitude'`: power is the amplitude of the best-fit sinusoid in flux units. Pass `normalization='psd'` for power spectral density, e.g. `lc.to_periodogram(normalization='psd', maximum_period=15)`. Neither is a significance measure; see *False-Alarm Probability with astropy* below.\n\n## Plotting Periodograms"
+    },
+    {
+      "id": "transits-not-ls",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- **Exoplanet transits**: 0.5 - 50 days (most common)",
+      "replace": "- **Exoplanet transits**: use BLS or TLS instead (see the end of this guide); short box-shaped dips spread Lomb-Scargle power over many harmonics"
+    },
+    {
+      "id": "high-power-not-significance",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- **High power**: Likely real periodic signal",
+      "replace": "- **High power**: not significance by itself; compute a false-alarm probability (below)"
+    },
+    {
+      "id": "astropy-fap-section",
+      "source": "benchflow-ai/skillsbench",
+      "find": "3. **Aliases**: Check if period*2 or period/2 also show signals\n\n## Model Fitting",
+      "replace": "3. **Aliases**: Check if period*2 or period/2 also show signals\n\n## False-Alarm Probability with astropy\n\nlightkurve wraps `astropy.timeseries.LombScargle`; use it directly for normalization control and false-alarm probabilities (FAP).\n\n```python\nimport numpy as np\nfrom astropy.timeseries import LombScargle\n\nfmin, fmax = 1 / 15, 1 / 0.1   # 1/day: periods 0.1-15 days\nls = LombScargle(t, y, dy, normalization='standard')\nfrequency, power = ls.autopower(minimum_frequency=fmin, maximum_frequency=fmax,\n                                samples_per_peak=10)\nbest = np.argmax(power)\nbest_period = 1 / frequency[best]\n\ngrid = dict(minimum_frequency=fmin, maximum_frequency=fmax, samples_per_peak=10)\nfap = ls.false_alarm_probability(power[best], method='baluev', **grid)\npower_1pct = ls.false_alarm_level(0.01, method='baluev', **grid)   # power needed for FAP = 1%\n```\n\n- `normalization`: `'standard'` (default; 0-1, fraction of chi-square reduced by the sinusoid), `'model'`, `'log'`, or `'psd'` (unnormalized). Compare powers only under the same normalization.\n- `method`: `'baluev'` (default, fast analytic upper bound, accurate for small FAP), `'bootstrap'` (resamples the data, slow but makes no analytic approximation), plus `'davies'` and `'naive'`. FAP is implemented for `nterms=1` only.\n- Frequency grid: `autopower` spaces frequencies by `1 / (samples_per_peak * baseline)`; use 5-10 samples per peak and set `maximum_frequency` explicitly, since the default upper limit comes from `nyquist_factor` times the mean sampling rate.\n- FAP assumes white noise; red noise from stellar variability makes it optimistic.\n\n## Model Fitting"
+    },
+    {
+      "id": "transit-pointer",
+      "source": "benchflow-ai/skillsbench",
+      "find": "For exoplanet detection, consider using TLS after Lomb-Scargle for initial period search.",
+      "replace": "For exoplanet transits, search with BLS (`lc.to_periodogram(method='bls')` or `astropy.timeseries.BoxLeastSquares`) or TLS; use Lomb-Scargle to find and remove stellar variability first."
+    }
+  ],
+  "finite-horizon-lqr": [
+    {
+      "id": "description-unconstrained",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: Solving finite-horizon LQR via dynamic programming for MPC.",
+      "replace": "description: Solve unconstrained finite-horizon discrete-time LQR by backward Riccati recursion - time-varying gain sequence, DARE terminal cost, and receding-horizon use. Problems with input or state constraints need a QP-based MPC instead."
+    },
+    {
+      "id": "title-unconstrained",
+      "source": "benchflow-ai/skillsbench",
+      "find": "# Finite-Horizon LQR for MPC",
+      "replace": "# Finite-Horizon LQR (Unconstrained)"
+    },
+    {
+      "id": "problem-dynamics",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Minimize cost over horizon N:\n```\nJ = Σ(k=0 to N-1) [x'Qx + u'Ru] + x_N' P x_N\n```",
+      "replace": "Minimize cost over horizon N:\n```\nJ = Σ(k=0 to N-1) [x_k'Q x_k + u_k'R u_k] + x_N' P_N x_N\nsubject to x_{k+1} = A x_k + B u_k   (no input or state constraints)\n```"
+    },
+    {
+      "id": "terminal-cost-dare",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Initialize: P_N = Q (or LQR solution for stability)",
+      "replace": "Initialize the terminal cost P_N. A common choice is the infinite-horizon solution of the discrete algebraic Riccati equation:\n\n```python\nfrom scipy.linalg import solve_discrete_are\n\nP_N = solve_discrete_are(A, B, Q, R)\n```\n\nWith this P_N the recursion is already at its fixed point, so every K_k equals the infinite-horizon LQR gain. A different terminal weight (e.g. P_N = Q) gives gains that vary along the horizon."
+    },
+    {
+      "id": "recursion-valid-python",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```python\nK_k = inv(R + B'P_{k+1}B) @ B'P_{k+1}A\nP_k = Q + A'P_{k+1}(A - B @ K_k)\n```",
+      "replace": "```python\nK[k] = np.linalg.solve(R + B.T @ P[k + 1] @ B, B.T @ P[k + 1] @ A)\nP[k] = Q + A.T @ P[k + 1] @ (A - B @ K[k])\n```"
+    },
+    {
+      "id": "forward-valid-python",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```python\nu_k = -K_k @ x_k\nx_{k+1} = A @ x_k + B @ u_k\n```",
+      "replace": "```python\nu[k] = -K[k] @ x[k]\nx[k + 1] = A @ x[k] + B @ u[k]\n```"
+    },
+    {
+      "id": "implementation-gain-sequence",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```python\ndef finite_horizon_lqr(A, B, Q, R, N, x0):\n    nx, nu = A.shape[0], B.shape[1]\n    K = np.zeros((nu, nx, N))\n    P = Q.copy()\n\n    # Backward pass\n    for k in range(N-1, -1, -1):\n        K[:,:,k] = np.linalg.solve(R + B.T @ P @ B, B.T @ P @ A)\n        P = Q + A.T @ P @ (A - B @ K[:,:,k])\n\n    # Return first control\n    return -K[:,:,0] @ x0\n```",
+      "replace": "```python\nimport numpy as np\nfrom scipy.linalg import solve_discrete_are\n\n\ndef finite_horizon_lqr_gains(A, B, Q, R, N, P_N=None):\n    \"\"\"Backward Riccati recursion.\n\n    Returns K with shape (N, nu, nx), where u_k = -K[k] @ x_k, and the cost-to-go\n    matrices P with shape (N + 1, nx, nx). P_N defaults to the DARE solution.\n    \"\"\"\n    nx, nu = A.shape[0], B.shape[1]\n    if P_N is None:\n        P_N = solve_discrete_are(A, B, Q, R)\n    K = np.zeros((N, nu, nx))\n    P = np.zeros((N + 1, nx, nx))\n    P[N] = P_N\n\n    # Backward pass: gains depend only on (A, B, Q, R, P_N), not on the state\n    for k in range(N - 1, -1, -1):\n        K[k] = np.linalg.solve(R + B.T @ P[k + 1] @ B, B.T @ P[k + 1] @ A)\n        P[k] = Q + A.T @ P[k + 1] @ (A - B @ K[k])\n    return K, P\n\n\ndef rollout(A, B, K, x0):\n    \"\"\"Apply the time-varying gains over the horizon from x0.\"\"\"\n    x = [np.asarray(x0, dtype=float)]\n    u = []\n    for k in range(K.shape[0]):\n        u.append(-K[k] @ x[-1])\n        x.append(A @ x[-1] + B @ u[-1])\n    return np.array(x), np.array(u)\n```"
+    },
+    {
+      "id": "receding-horizon-section",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## MPC Application\n\nAt each timestep:\n1. Measure current state x\n2. Solve finite-horizon LQR from x\n3. Apply first control u_0\n4. Repeat next timestep",
+      "replace": "## Receding-Horizon Use\n\nThe gains depend on (A, B, Q, R, N, P_N), not on the measured state. For a fixed LTI model, compute the gain sequence once:\n\n- Finite task of N steps: apply u_k = -K[k] @ x_k for k = 0..N-1 using the stored sequence.\n- Receding horizon with a fixed LTI model and no constraints: re-solving at every step returns the same K[0], so the loop is the constant state feedback u = -K[0] @ x. Compute K[0] once and reuse it.\n- Re-run the recursion only when the model, weights, or horizon change, for example after re-linearizing a nonlinear plant around a new operating point.\n\nThis is unconstrained LQR. With input, rate, or state limits, receding-horizon control means solving a constrained QP at every step (e.g. OSQP, cvxpy, or CasADi with a QP solver). Clipping the LQR output to the limits does not give the constrained optimum."
+    }
+  ],
+  "casadi-ipopt-nlp": [
+    {
+      "id": "description-narrow",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: \"Nonlinear optimization with CasADi and IPOPT solver. Use when building and solving NLP problems: defining symbolic variables, adding nonlinear constraints, setting solver options, handling multiple initializations, and extracting solutions. Covers power systems optimization patterns including per-unit scaling and complex number formulations.\"",
+      "replace": "description: \"Nonlinear optimization with CasADi and IPOPT. Use when building and solving NLP problems: SX/MX symbolic variables, nonlinear constraints, the nlpsol and Opti interfaces, IPOPT options, multi-start initialization with solver-status checks, and extracting solutions. An appendix covers power-systems modeling patterns (per-unit scaling, bus ID mapping).\""
+    },
+    {
+      "id": "install-unpinned",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Quick start (Linux)\n\n```bash\napt-get update -qq && apt-get install -y -qq libgfortran5\npip install numpy==1.26.4 casadi==3.6.7\n```",
+      "replace": "## Installation\n\n```bash\npip install casadi   # the PyPI wheels include IPOPT; pin versions in your own lockfile\n```\n\nIf importing the IPOPT plugin fails on a minimal Linux image with a missing `libgfortran` error, install the Fortran runtime (e.g. `apt-get install libgfortran5` on Debian/Ubuntu)."
+    },
+    {
+      "id": "sx-vs-mx",
+      "source": "benchflow-ai/skillsbench",
+      "find": "# Stack into single vector for solver\nx = ca.vertcat(Vm, Va, Pg, Qg)\n```",
+      "replace": "# Stack into a single vector for the solver\nx = ca.vertcat(Vm, Va, Pg, Qg)\n```\n\n**SX vs MX.** `ca.SX` expands every operation into scalar nodes and evaluates fastest; prefer it for models built from many scalar expressions and loops, like the per-element objective and constraint loops below. `ca.MX` keeps matrix-valued operations as single nodes; use it for large matrix-valued graphs or when the model calls other `Function` objects that cannot be expanded to SX. Do not mix SX and MX symbols in one expression. An MX problem can be converted with the solver option `\"expand\": True`."
+    },
+    {
+      "id": "multistart-status-check",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Nonlinear solvers are sensitive to starting points. Use multiple initializations:\n\n```python\ninitializations = [x0_from_data, x0_flat_start]\nbest_sol = None\n\nfor x0 in initializations:\n    try:\n        sol = solver(x0=x0, lbx=lbx, ubx=ubx, lbg=lbg, ubg=ubg)\n        if best_sol is None or float(sol[\"f\"]) < float(best_sol[\"f\"]):\n            best_sol = sol\n    except Exception:\n        continue\n\nif best_sol is None:\n    raise RuntimeError(\"Solver failed from all initializations\")\n```",
+      "replace": "Nonlinear solvers are sensitive to starting points. Use multiple initializations, and only compare candidates that actually converged. `nlpsol`'s `error_on_fail` option defaults to `False`, so an infeasible or iteration-limited solve returns normally with a meaningless objective. Check `solver.stats()` after every call, or create the solver with `\"error_on_fail\": True` in `opts` and catch the `RuntimeError`:\n\n```python\ninitializations = [x0_from_data, x0_flat_start]\nbest_sol = None\n\nfor x0 in initializations:\n    sol = solver(x0=x0, lbx=lbx, ubx=ubx, lbg=lbg, ubg=ubg)\n    stats = solver.stats()\n    # error_on_fail defaults to False: failed solves do not raise\n    if not stats[\"success\"]:\n        print(f\"rejected start: {stats['return_status']}\")\n        continue\n    if best_sol is None or float(sol[\"f\"]) < float(best_sol[\"f\"]):\n        best_sol = sol\n\nif best_sol is None:\n    raise RuntimeError(\"Solver failed from all initializations\")\n```\n\nInspect `stats[\"return_status\"]` (e.g. `Solve_Succeeded` vs `Solved_To_Acceptable_Level`) if you need to treat acceptable-level termination differently."
+    },
+    {
+      "id": "opti-example-and-appendix",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Power systems patterns\n\n### Per-unit scaling",
+      "replace": "## Opti interface\n\n`ca.Opti()` builds the same NLP with less bookkeeping: it stacks variables and constraints for you and raises if IPOPT does not succeed.\n\n```python\nimport casadi as ca\n\nopti = ca.Opti()\nx = opti.variable(2)\nopti.minimize((1 - x[0]) ** 2 + 100 * (x[1] - x[0] ** 2) ** 2)\nopti.subject_to(x[0] ** 2 + x[1] ** 2 <= 2)\nopti.subject_to(opti.bounded(-1.5, x, 1.5))\nopti.set_initial(x, [0.5, 0.5])\n\n# Plugin options first, then IPOPT options (no \"ipopt.\" prefix)\nopti.solver(\"ipopt\", {\"print_time\": False, \"expand\": True}, {\"print_level\": 0, \"tol\": 1e-8})\n\ntry:\n    sol = opti.solve()\n    x_opt = sol.value(x)\n    print(sol.stats()[\"return_status\"])\nexcept RuntimeError:\n    # Inspect the last iterate and the violated constraints\n    print(opti.debug.value(x))\n    opti.debug.show_infeasibilities()\n    raise\n```\n\n## Appendix: power systems patterns\n\n### Per-unit scaling"
+    }
+  ],
+  "first-order-model-fitting": [
+    {
+      "id": "description-fopdt",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: Fit first-order dynamic models to experimental step response data and extract K (gain) and tau (time constant) parameters.",
+      "replace": "description: Fit first-order and first-order-plus-dead-time (FOPDT) models to experimental step response data and extract K (gain), tau (time constant), and theta (dead time), using a measured pre-step baseline, two-point estimates, and scipy curve_fit with bounds."
+    },
+    {
+      "id": "model-deviation-form",
+      "source": "benchflow-ai/skillsbench",
+      "find": "The dynamics are described by:\n\n```\ntau * dy/dt + y = y_ambient + K * u\n```",
+      "replace": "The dynamics, written relative to the steady operating point (y0, u0) before the step, are:\n\n```\ntau * dy/dt + (y - y0) = K * (u(t - theta) - u0)\n```"
+    },
+    {
+      "id": "model-symbols",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- `y_ambient` = baseline/ambient value",
+      "replace": "- `y0`, `u0` = measured output and input at steady state before the step (not necessarily ambient)\n- `theta` = dead time between the input change and the first output response; `theta = 0` gives a pure first-order lag"
+    },
+    {
+      "id": "step-response-fopdt",
+      "source": "benchflow-ai/skillsbench",
+      "find": "When you apply a step input from 0 to u, the output follows:\n\n```\ny(t) = y_ambient + K * u * (1 - exp(-t/tau))\n```\n\nThis is the key equation for fitting.",
+      "replace": "When the input steps by du = u1 - u0 at time t0, the output follows the FOPDT response:\n\n```\ny(t) = y0                                                for t < t0 + theta\ny(t) = y0 + K * du * (1 - exp(-(t - t0 - theta) / tau))  for t >= t0 + theta\n```\n\nTake `y0` as the mean of the measured output over a steady pre-step window and `t0` as the logged time of the input change. Do not assume the output starts at ambient or that the step happens at t = 0. This is the key equation for fitting."
+    },
+    {
+      "id": "gain-steady-state",
+      "source": "benchflow-ai/skillsbench",
+      "find": "y_steady = y_ambient + K * u",
+      "replace": "y_steady = y0 + K * du"
+    },
+    {
+      "id": "gain-formula",
+      "source": "benchflow-ai/skillsbench",
+      "find": "K = (y_steady - y_ambient) / u",
+      "replace": "K = (y_steady - y0) / du"
+    },
+    {
+      "id": "tau-theta-two-point",
+      "source": "benchflow-ai/skillsbench",
+      "find": "### Time Constant (tau)\n\nThe time constant can be found from the 63.2% rise point:\n\nAt t = tau:\n```\ny(tau) = y_ambient + K*u*(1 - exp(-1))\n       = y_ambient + 0.632 * (y_steady - y_ambient)\n```\n\nSo tau is the time to reach 63.2% of the final output change.",
+      "replace": "### Time Constant (tau) and Dead Time (theta)\n\nWithout dead time, tau is the time after the step at which the output has covered 63.2% of its total change:\n\n```\ny(t0 + tau) = y0 + K*du*(1 - exp(-1))\n            = y0 + 0.632 * (y_steady - y0)\n```\n\nWith dead time, use the two-point method: let t28 and t63 be the times after t0 at which the output reaches 28.3% and 63.2% of (y_steady - y0). Then\n\n```\ntau   = 1.5 * (t63 - t28)\ntheta = t63 - tau\n```\n\nClip theta at 0 if noise makes it slightly negative. Use these estimates as the initial guess for curve fitting."
+    },
+    {
+      "id": "curve-fit-fopdt",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```python\ndef step_response(t, K, tau, y_ambient, u):\n    \"\"\"First-order step response model.\"\"\"\n    return y_ambient + K * u * (1 - np.exp(-t / tau))\n```\n\nWhen fitting, you typically fix `y_ambient` (from initial reading) and `u` (known input), leaving only `K` and `tau` as unknowns:\n\n```python\ndef model(t, K, tau):\n    return y_ambient + K * u * (1 - np.exp(-t / tau))\n```",
+      "replace": "```python\nimport numpy as np\nfrom scipy.optimize import curve_fit\n\n\ndef fopdt_step(t, K, tau, theta, y0, t0, du):\n    \"\"\"FOPDT step response; the output stays at y0 until t0 + theta.\"\"\"\n    s = np.clip(t - t0 - theta, 0.0, None)\n    return y0 + K * du * (1.0 - np.exp(-s / tau))\n```\n\nFix the measured baseline `y0`, step time `t0`, and input change `du`, and fit `K`, `tau`, `theta` with bounds `tau > 0`, `theta >= 0`. K is left unbounded because reverse-acting processes have K < 0:\n\n```python\ndef fit_fopdt(t, y, t0, du):\n    t = np.asarray(t, dtype=float)\n    y = np.asarray(y, dtype=float)\n    y0 = float(np.mean(y[t < t0]))  # measured pre-step baseline\n\n    post = t >= t0\n    tp, yp = t[post], y[post]\n\n    # Initial guess from the two-point method\n    y_ss = float(np.mean(yp[-max(1, len(yp) // 10):]))\n    frac = (yp - y0) / (y_ss - y0)\n    t28 = tp[np.argmax(frac >= 0.283)] - t0\n    t63 = tp[np.argmax(frac >= 0.632)] - t0\n    tau0 = max(1.5 * (t63 - t28), 1e-6)\n    theta0 = max(t63 - tau0, 0.0)\n    K0 = (y_ss - y0) / du\n\n    def model(tt, K, tau, theta):\n        return fopdt_step(tt, K, tau, theta, y0, t0, du)\n\n    popt, pcov = curve_fit(\n        model, tp, yp,\n        p0=[K0, tau0, theta0],\n        bounds=([-np.inf, 1e-9, 0.0], [np.inf, np.inf, tp[-1] - t0]),\n    )\n    K, tau, theta = popt\n    return {\"K\": K, \"tau\": tau, \"theta\": theta, \"y0\": y0, \"stderr\": np.sqrt(np.diag(pcov))}\n```\n\nThe record needs a steady pre-step window (`t < t0`) and must reach steady state after the step. If the process has no measurable delay, drop `theta` from the fitted parameters and pass `theta=0`."
+    },
+    {
+      "id": "tips-step-time",
+      "source": "benchflow-ai/skillsbench",
+      "find": "1. **Use rising portion data**: The step response formula applies during the transient phase\n2. **Exclude initial flat region**: Start your fit from when the input changes",
+      "replace": "1. **Fit from the step time**: Use samples from t0 onward; the flat stretch between t0 and t0 + theta identifies the dead time, so keep it\n2. **Measure the baseline**: Average a steady pre-step window for y0; a drifting baseline biases K and tau"
+    },
+    {
+      "id": "tips-test-duration",
+      "source": "benchflow-ai/skillsbench",
+      "find": "4. **Check units**: Ensure K has correct units (output units / input units)",
+      "replace": "4. **Check units**: K has units of output units / input units\n5. **Test duration and sampling**: Record a steady pre-step window, then at least theta + 3-5 tau after the step so the new steady state is visible, and sample at least 10 points per tau"
+    }
+  ],
+  "imc-tuning-rules": [
+    {
+      "id": "description-simc",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: Calculate PI/PID controller gains using Internal Model Control (IMC) tuning rules for first-order systems.",
+      "replace": "description: Calculate PI controller gains using Internal Model Control (IMC) and Skogestad SIMC tuning rules for first-order and first-order-plus-dead-time (FOPDT) process models, with a PI implementation that has output limits and anti-windup."
+    },
+    {
+      "id": "gain-form-and-simc",
+      "source": "benchflow-ai/skillsbench",
+      "find": "## Choosing Lambda (λ)",
+      "replace": "**Gain form.** These gains are for the parallel (independent-gain) PI form used in the code below:\n\n```\nu = Kp * e + Ki * ∫e dt,   Ki = Kp / tau_I\n```\n\nThe ideal (ISA standard) form `u = Kc * (e + (1/tau_I) * ∫e dt)` has Kc = Kp and takes the integral time tau_I instead of Ki (here tau_I = tau). For PI the series form is the same as the ideal form. Convert before entering gains into a controller that expects another form, and check whether it wants tau_I in seconds, minutes, or repeats per minute (1/tau_I).\n\n## SIMC Rules for Processes with Dead Time\n\nMost real processes have a dead time theta:\n\n```\nProcess: G(s) = K * exp(-theta*s) / (tau*s + 1)\n```\n\nSkogestad's SIMC rules give PI gains for a desired closed-loop time constant tau_c:\n\n```\nKc    = tau / (K * (tau_c + theta))\ntau_I = min(tau, 4 * (tau_c + theta))\nKi    = Kc / tau_I          (parallel form)\n```\n\n- Default `tau_c = theta`: a good trade-off between speed and robustness (gain margin about 3). Larger tau_c is slower and more robust.\n- The `4 * (tau_c + theta)` term takes over for lag-dominant processes (tau much larger than theta) and speeds up rejection of input disturbances.\n- With theta = 0 the default does not apply; choose tau_c = lambda from the table below. For lambda >= tau/4 the rule reduces to the IMC gains above.\n\n## Choosing Lambda Without Dead Time"
+    },
+    {
+      "id": "simc-function",
+      "source": "benchflow-ai/skillsbench",
+      "find": "    return {\n        \"Kp\": Kp,\n        \"Ki\": Ki,\n        \"Kd\": Kd,\n        \"lambda\": lambda_cl\n    }\n```",
+      "replace": "    return {\n        \"Kp\": Kp,\n        \"Ki\": Ki,\n        \"Kd\": Kd,\n        \"lambda\": lambda_cl,\n    }\n\n\ndef calculate_simc_gains(K, tau, theta, tau_c=None):\n    \"\"\"\n    SIMC PI gains for an FOPDT process K * exp(-theta*s) / (tau*s + 1).\n\n    Args:\n        K: Process gain\n        tau: Time constant\n        theta: Dead time (>= 0)\n        tau_c: Desired closed-loop time constant (default: theta)\n\n    Returns:\n        dict with Kp (= Kc), Ki (parallel form), Kd, tau_I, tau_c\n    \"\"\"\n    if tau_c is None:\n        if theta <= 0:\n            raise ValueError(\"theta = 0: choose tau_c explicitly (e.g. tau_c = tau)\")\n        tau_c = theta\n\n    Kc = tau / (K * (tau_c + theta))\n    tau_I = min(tau, 4.0 * (tau_c + theta))\n\n    return {\n        \"Kp\": Kc,\n        \"Ki\": Kc / tau_I,\n        \"Kd\": 0.0,\n        \"tau_I\": tau_I,\n        \"tau_c\": tau_c,\n    }\n```"
+    },
+    {
+      "id": "pi-controller-antiwindup",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```python\nclass PIController:\n    def __init__(self, Kp, Ki, setpoint):\n        self.Kp = Kp\n        self.Ki = Ki\n        self.setpoint = setpoint\n        self.integral = 0.0\n\n    def compute(self, measurement, dt):\n        \"\"\"Compute control output.\"\"\"\n        error = self.setpoint - measurement\n\n        # Integral term\n        self.integral += error * dt\n\n        # PI control law\n        output = self.Kp * error + self.Ki * self.integral\n\n        # Clamp to valid range\n        output = max(output_min, min(output_max, output))\n\n        return output\n```",
+      "replace": "```python\nclass PIController:\n    def __init__(self, Kp, Ki, setpoint, output_min=float(\"-inf\"), output_max=float(\"inf\")):\n        self.Kp = Kp\n        self.Ki = Ki\n        self.setpoint = setpoint\n        self.output_min = output_min\n        self.output_max = output_max\n        self.integral = 0.0\n\n    def reset(self):\n        self.integral = 0.0\n\n    def compute(self, measurement, dt):\n        \"\"\"Parallel-form PI with clamping anti-windup (conditional integration).\"\"\"\n        error = self.setpoint - measurement\n\n        # Tentative integral update and unsaturated output\n        integral_new = self.integral + error * dt\n        unsat = self.Kp * error + self.Ki * integral_new\n\n        # Anti-windup: skip the update when the output is saturated and the\n        # integral would push it further past the limit (Ki * error sign handles reverse action)\n        winding_high = unsat > self.output_max and self.Ki * error > 0\n        winding_low = unsat < self.output_min and self.Ki * error < 0\n        if not (winding_high or winding_low):\n            self.integral = integral_new\n\n        # PI control law, clamped to the actuator range\n        output = self.Kp * error + self.Ki * self.integral\n        return max(self.output_min, min(self.output_max, output))\n```"
+    },
+    {
+      "id": "rise-time-correction",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- **Rise time**: ~2.2 * lambda to reach 90% of setpoint",
+      "replace": "- **Rise time**: ~2.2 * lambda from 10% to 90% of the step; ~2.3 * lambda from 0% to 90% (with dead time, add theta when measuring from the setpoint change)"
+    },
+    {
+      "id": "tip-antiwindup",
+      "source": "benchflow-ai/skillsbench",
+      "find": "4. **Anti-windup**: Prevent integral wind-up when output saturates",
+      "replace": "4. **Anti-windup**: Set output_min/output_max to the actuator limits so the controller stops integrating while the output is saturated in the direction of the error"
+    }
+  ],
+  "pid-controller": [
+    {
+      "id": "description-generic",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: Use this skill when implementing PID control loops for adaptive cruise control, vehicle speed regulation, throttle/brake management, or any feedback control system requiring proportional-integral-derivative control.",
+      "replace": "description: Use this skill when implementing discrete-time PID control loops for any feedback control system (speed, temperature, position, pressure, flow), including output limits, anti-windup, filtered derivative on measurement, setpoint weighting, bumpless transfer, and manual tuning."
+    },
+    {
+      "id": "control-law-derivative-on-measurement",
+      "source": "benchflow-ai/skillsbench",
+      "find": "- `Kd` = derivative gain (reacts to rate of change)",
+      "replace": "- `Kd` = derivative gain (reacts to the rate of change)\n\nThe implementation below takes the derivative of the filtered measurement instead of the error: `-Kd * d(y_f)/dt`. For a constant setpoint this equals the error derivative, but a setpoint step no longer produces a derivative kick."
+    },
+    {
+      "id": "pid-class-antiwindup-filter",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```python\nclass PIDController:\n    def __init__(self, kp, ki, kd, output_min=None, output_max=None):\n        self.kp = kp\n        self.ki = ki\n        self.kd = kd\n        self.output_min = output_min\n        self.output_max = output_max\n        self.integral = 0.0\n        self.prev_error = 0.0\n\n    def reset(self):\n        \"\"\"Clear controller state.\"\"\"\n        self.integral = 0.0\n        self.prev_error = 0.0\n\n    def compute(self, error, dt):\n        \"\"\"Compute control output given error and timestep.\"\"\"\n        # Proportional term\n        p_term = self.kp * error\n\n        # Integral term\n        self.integral += error * dt\n        i_term = self.ki * self.integral\n\n        # Derivative term\n        derivative = (error - self.prev_error) / dt if dt > 0 else 0.0\n        d_term = self.kd * derivative\n        self.prev_error = error\n\n        # Total output\n        output = p_term + i_term + d_term\n\n        # Output clamping (optional)\n        if self.output_min is not None:\n            output = max(output, self.output_min)\n        if self.output_max is not None:\n            output = min(output, self.output_max)\n\n        return output\n```",
+      "replace": "```python\nimport math\n\n\nclass PIDController:\n    def __init__(self, kp, ki, kd, output_min=None, output_max=None, n_filter=10.0):\n        self.kp = kp\n        self.ki = ki\n        self.kd = kd\n        self.output_min = -math.inf if output_min is None else output_min\n        self.output_max = math.inf if output_max is None else output_max\n        self.n_filter = n_filter  # derivative filter time constant Tf = Td / N, Td = kd / kp\n        self.reset()\n\n    def reset(self):\n        \"\"\"Clear controller state.\"\"\"\n        self.integral = 0.0\n        self.d_filtered = 0.0\n        self.prev_measurement = None  # None until the first sample: no startup derivative spike\n\n    def compute(self, setpoint, measurement, dt):\n        \"\"\"Compute control output from setpoint, measurement, and timestep.\"\"\"\n        error = setpoint - measurement\n\n        # Proportional term\n        p_term = self.kp * error\n\n        # Derivative on measurement with a first-order low-pass filter\n        if self.prev_measurement is not None and dt > 0:\n            raw = (measurement - self.prev_measurement) / dt\n            tf = (self.kd / self.kp) / self.n_filter if self.kp else 0.0\n            self.d_filtered += dt / (tf + dt) * (raw - self.d_filtered)\n        self.prev_measurement = measurement\n        d_term = -self.kd * self.d_filtered\n\n        # Integral term with conditional-integration anti-windup\n        integral_new = self.integral + error * dt\n        unsat = p_term + self.ki * integral_new + d_term\n        winding_high = unsat > self.output_max and self.ki * error > 0\n        winding_low = unsat < self.output_min and self.ki * error < 0\n        if not (winding_high or winding_low):\n            self.integral = integral_new\n        i_term = self.ki * self.integral\n\n        # Total output, clamped to the actuator range\n        output = p_term + i_term + d_term\n        return min(max(output, self.output_min), self.output_max)\n```"
+    },
+    {
+      "id": "antiwindup-section",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Integral windup occurs when output saturates but integral keeps accumulating. Solutions:\n\n1. **Clamping**: Limit integral term magnitude\n2. **Conditional Integration**: Only integrate when not saturated\n3. **Back-calculation**: Reduce integral when output is clamped",
+      "replace": "Integral windup occurs when the output saturates but the integral keeps accumulating. Solutions:\n\n1. **Conditional integration** (used above): skip the integral update when the output is saturated and the error would push it further into saturation\n2. **Back-calculation**: integrate `error + (u_clamped - u_unsat) / (ki * Tt)` instead of `error`, with tracking time Tt between Ti and Td (often sqrt(Ti * Td)); the integral bleeds off while the output is clamped\n3. **Integral clamping**: limit the integral term to the output range; simplest, but slower to recover\n\n## Setpoint Weighting and Bumpless Transfer\n\n- **Setpoint weighting**: use `kp * (b * setpoint - measurement)` for the proportional term with `0 <= b <= 1` to reduce overshoot after setpoint steps without slowing disturbance rejection. The derivative above already uses weight 0 on the setpoint; the integral must keep the full error for zero offset.\n- **Bumpless transfer**: when switching from manual to automatic, or changing gains online, set the integral so the controller output equals the current actuator value: `integral = (u_current - p_term - d_term) / ki`. Also set `prev_measurement` to the current measurement so the derivative starts from zero."
+    }
+  ],
+  "simulation-metrics": [
+    {
+      "id": "description-step-relative",
+      "source": "benchflow-ai/skillsbench",
+      "find": "description: Use this skill when calculating control system performance metrics such as rise time, overshoot percentage, steady-state error, or settling time for evaluating simulation results.",
+      "replace": "description: Use this skill when calculating step-response performance metrics such as rise time, overshoot percentage, steady-state error, or settling time for evaluating simulation results, including steps from a nonzero initial value and downward steps."
+    },
+    {
+      "id": "conventions",
+      "source": "benchflow-ai/skillsbench",
+      "find": "# Control System Performance Metrics",
+      "replace": "# Step-Response Performance Metrics\n\nAll metrics are relative to the step itself, not to zero:\n\n- `y0`: output value just before the step; `t0`: time of the step\n- `y_final`: reference final value (the setpoint, or the measured steady state if the loop has offset)\n- Thresholds are `y0 + p * (y_final - y0)`, so downward steps work unchanged\n- Only samples with `t >= t0` are used, and times are reported relative to t0 where noted\n- Functions return `None` when a metric is undefined (zero step size, a threshold never reached, or the response not settled at the last sample); `overshoot_percent` returns 0.0 when the response never passes `y_final`\n- Values are taken at sample times without interpolation, so resolution is one sample period"
+    },
+    {
+      "id": "rise-time-step-relative",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Time for system to go from 10% to 90% of target value.\n\n```python\ndef rise_time(times, values, target):\n    \"\"\"Calculate rise time (10% to 90% of target).\"\"\"\n    t10 = t90 = None\n\n    for t, v in zip(times, values):\n        if t10 is None and v >= 0.1 * target:\n            t10 = t\n        if t90 is None and v >= 0.9 * target:\n            t90 = t\n            break\n\n    if t10 is not None and t90 is not None:\n        return t90 - t10\n    return None\n```",
+      "replace": "Time for the response to go from 10% to 90% of the step (y_final - y0), using samples after t0.\n\n```python\ndef rise_time(times, values, y0, y_final, t0=0.0, low=0.1, high=0.9):\n    \"\"\"Rise time from low to high fraction of the step; None if undefined.\"\"\"\n    step = y_final - y0\n    if step == 0:\n        return None\n    t_low = t_high = None\n\n    for t, v in zip(times, values):\n        if t < t0:\n            continue\n        frac = (v - y0) / step  # progress toward y_final; sign-correct for downward steps\n        if t_low is None and frac >= low:\n            t_low = t\n        if frac >= high:\n            t_high = t\n            break\n\n    if t_low is None or t_high is None:\n        return None\n    return t_high - t_low\n```"
+    },
+    {
+      "id": "overshoot-step-relative",
+      "source": "benchflow-ai/skillsbench",
+      "find": "How much response exceeds target, as percentage.\n\n```python\ndef overshoot_percent(values, target):\n    \"\"\"Calculate overshoot percentage.\"\"\"\n    max_val = max(values)\n    if max_val <= target:\n        return 0.0\n    return ((max_val - target) / target) * 100\n```",
+      "replace": "Peak excursion beyond y_final, as a percentage of the step size |y_final - y0|.\n\n```python\ndef overshoot_percent(times, values, y0, y_final, t0=0.0):\n    \"\"\"Overshoot in percent of |y_final - y0|; 0.0 if none, None if undefined.\"\"\"\n    step = y_final - y0\n    post = [v for t, v in zip(times, values) if t >= t0]\n    if step == 0 or not post:\n        return None\n    # Largest progress fraction; > 1 means the response went past y_final\n    peak_frac = max((v - y0) / step for v in post)\n    return max(0.0, (peak_frac - 1.0) * 100.0)\n```"
+    },
+    {
+      "id": "settling-time-step-relative",
+      "source": "benchflow-ai/skillsbench",
+      "find": "Time to stay within tolerance band of target.\n\n```python\ndef settling_time(times, values, target, tolerance=0.02):\n    \"\"\"Time to settle within tolerance of target.\"\"\"\n    band = target * tolerance\n    lower, upper = target - band, target + band\n\n    settled_at = None\n    for t, v in zip(times, values):\n        if v < lower or v > upper:\n            settled_at = None\n        elif settled_at is None:\n            settled_at = t\n\n    return settled_at\n```",
+      "replace": "Time after t0 at which the response enters and stays within ±tolerance·|y_final - y0| of y_final (default 2%; 5% is the other common convention).\n\n```python\ndef settling_time(times, values, y0, y_final, t0=0.0, tolerance=0.02):\n    \"\"\"Settling time relative to t0; None if the step is zero or the last sample is outside the band.\"\"\"\n    step = y_final - y0\n    if step == 0:\n        return None\n    band = tolerance * abs(step)\n\n    settled_at = None\n    for t, v in zip(times, values):\n        if t < t0:\n            continue\n        if abs(v - y_final) > band:\n            settled_at = None\n        elif settled_at is None:\n            settled_at = t\n\n    return None if settled_at is None else settled_at - t0\n```\n\nA record that ends shortly after entering the band can report a settling time that later samples would contradict; simulate long enough to see the response stay settled."
+    },
+    {
+      "id": "usage-generic",
+      "source": "benchflow-ai/skillsbench",
+      "find": "```python\ntimes = [row['time'] for row in results]\nvalues = [row['value'] for row in results]\ntarget = 30.0\n\nprint(f\"Rise time: {rise_time(times, values, target)}\")\nprint(f\"Overshoot: {overshoot_percent(values, target)}%\")\nprint(f\"SS Error: {steady_state_error(values, target)}\")\n```",
+      "replace": "```python\ntimes = [row[\"time\"] for row in results]\nvalues = [row[\"value\"] for row in results]\nt0 = 0.0          # time of the setpoint step\ny0 = values[0]    # value just before the step\ny_final = setpoint\n\nprint(f\"Rise time: {rise_time(times, values, y0, y_final, t0)}\")\nprint(f\"Overshoot: {overshoot_percent(times, values, y0, y_final, t0)}%\")\nprint(f\"Settling time: {settling_time(times, values, y0, y_final, t0)}\")\nprint(f\"SS Error: {steady_state_error(values, y_final)}\")\n```\n\nFor a cross-check, python-control's `control.step_info(y - y0, t - t0)` on numpy arrays of the post-step samples reports rise time, settling time, overshoot, and peak with the same 10-90% and 2% defaults; it assumes the response starts at 0, hence the shift."
+    }
+  ]
 }

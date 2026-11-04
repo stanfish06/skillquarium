@@ -42,6 +42,7 @@ created: 2026-08-07
 - [great-expectations](../../notes/data-science-compute/great-expectations.md) — Data validation using Great Expectations
 - [huggingface-llm-trainer](../../notes/ml-ai/huggingface-llm-trainer.md) — Use when users want to train or fine-tune language models using TRL (Transformer Reinforcement Learning) on Hugging Face Jobs infrastructure
 - [hypogenic](../../notes/reasoning-ideation/hypogenic.md) — Plans and audits use of ChicagoHAI HypoGeniC/HypoRefine for LLM-assisted hypothesis generation from labeled text datasets
+- [jakarta-namespace](../../notes/software-dev/jakarta-namespace.md) — Migrate Java EE javax.* imports to Jakarta EE jakarta.* namespace
 - [labarchive-integration](../../notes/bio-databases-platforms/labarchive-integration.md) — Integrates with the official LabArchives ELN REST-like API and Inventory API v1
 - [lamindb](../../notes/bio-databases-platforms/lamindb.md) — Use when working with LaminDB, the open-source lineage-native lakehouse for biological datasets and models
 - [langgraph-human-in-the-loop](../../notes/ml-ai/langgraph-human-in-the-loop.md) — INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph
@@ -70,6 +71,7 @@ created: 2026-08-07
 - [target-validation-scorer](../../notes/drug-discovery-chem/target-validation-scorer.md) — Evidence-grounded target validation scoring with GO/NO-GO decisions for drug discovery campaigns
 - [template-authoring](../../notes/dotnet-development/template-authoring.md) — Guides creation and validation of custom dotnet new templates from existing projects
 - [threat-hunting](../../notes/security-auditing/threat-hunting.md) — Use for blue-team threat hunting, detection engineering with Sigma/YARA, SIEM query design, and incident detection validation
+- [transaction-trace-analysis](../../notes/software-dev/transaction-trace-analysis.md) — Teaches evidence-based analysis of transaction logs and traces
 - [triage-finding](../../notes/security-auditing/triage-finding.md) — Triage supplied or imported security findings against a repository using its security policy and static code evidence
 - [twilio-lookup-phone-intelligence](../../notes/saas-platforms/twilio-lookup-phone-intelligence.md) — Look up phone number intelligence via Twilio Lookup v2 API
 - [twilio-security-hardening](../../notes/saas-platforms/twilio-security-hardening.md) — Secure Twilio applications against common attacks
