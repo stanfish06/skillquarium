@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "6ffadd4524cd1dcdbcb564089eb9006e676fe44f",
+      "skillFolderHash": "091eb79b02cec42fe0969d9b792db67250aeedb2",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-03T14:08:36.342Z"
+      "updatedAt": "2026-11-04T14:29:18.439Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -6425,9 +6425,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/openai-developers/skills/openai-platform-api-key/SKILL.md",
-      "skillFolderHash": "111b49700b1fef8f29cf8d52e09fce04477d1f04",
+      "skillFolderHash": "581cb468cc256eada5177ad04eb2cd02560c9e2b",
       "installedAt": "2026-08-07T16:12:47.757Z",
-      "updatedAt": "2026-08-07T16:12:47.757Z"
+      "updatedAt": "2026-11-04T14:29:10.773Z"
     },
     "outlook-calendar": {
       "source": "openai/plugins",
@@ -8801,36 +8801,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "f6995c4d147c6d108f944322b43dc8c1ba2d8d1a",
+      "skillFolderHash": "46cb1a33ce599b2285fb5ee0adabc203de163192",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-03T14:09:03.852Z"
+      "updatedAt": "2026-11-04T14:29:39.972Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ast-grep/agent-skill.git",
       "skillPath": "ast-grep/skills/ast-grep/SKILL.md",
-      "skillFolderHash": "1f1877bfb051fff6e6de5ebe529fb47758a03367",
+      "skillFolderHash": "6348724abcf567de5944e0ed0dfd7ec280ffced2",
       "installedAt": "2026-08-14T05:36:42.460Z",
-      "updatedAt": "2026-10-10T12:49:22.106Z"
+      "updatedAt": "2026-11-04T14:29:45.736Z"
     },
     "ast-grep-outline": {
       "source": "ast-grep/agent-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/ast-grep/agent-skill.git",
       "skillPath": "ast-grep/skills/outline/SKILL.md",
-      "skillFolderHash": "7ee23d31b0578aa6702d8bbafa15749fc499a8c0",
+      "skillFolderHash": "674e18dc4236cf9ce407c908c11b8b9bf1c94d79",
       "installedAt": "2026-08-14T05:36:42.463Z",
-      "updatedAt": "2026-08-22T06:58:31.718Z"
+      "updatedAt": "2026-11-04T14:29:47.833Z"
     },
     "agentic-workflows": {
       "source": "github/gh-aw",
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "2e5df2a443d02b871b84bb5add68c2ce0535a875",
+      "skillFolderHash": "29a3996597ea8f7a953fe8177d0e9684cbd355be",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-02T15:45:57.815Z"
+      "updatedAt": "2026-11-04T14:30:05.008Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9555,9 +9555,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "03209208d38702359b22c95d521b1cb68d7999a8",
+      "skillFolderHash": "8cc892dd96224d92a9468795476bfcd329b9bf14",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-02T15:46:03.173Z"
+      "updatedAt": "2026-11-04T14:30:08.892Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -10662,9 +10662,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-spark-structured-streaming/SKILL.md",
-      "skillFolderHash": "bcb2019931868cdd95010e78c2baa77defc10ac1",
+      "skillFolderHash": "d3f0756b0c02bb555b7281a174699b55d8d0de31",
       "installedAt": "2026-08-23T17:20:36.202Z",
-      "updatedAt": "2026-10-28T12:49:23.838Z"
+      "updatedAt": "2026-11-04T14:30:14.167Z"
     },
     "databricks-synthetic-data-gen": {
       "source": "databricks/databricks-agent-skills",
@@ -11064,9 +11064,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl-research-index/SKILL.md",
-      "skillFolderHash": "e254309417908e89f25f895f1bc77f525acb094e",
+      "skillFolderHash": "86c0757f938cb58aa8a2029aba9193a8ad826fab",
       "installedAt": "2026-08-23T17:20:50.843Z",
-      "updatedAt": "2026-08-27T17:38:13.454Z"
+      "updatedAt": "2026-11-04T14:30:17.539Z"
     },
     "firecrawl-scrape": {
       "source": "firecrawl/cli",
@@ -12102,9 +12102,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/skypilot-org/skypilot.git",
       "skillPath": "agent/skills/skypilot/SKILL.md",
-      "skillFolderHash": "345333625a05bf65b67ff3eabf9ab35f56df1753",
+      "skillFolderHash": "91679eb0d527e4bc66d5a6b0f740335ffb314508",
       "installedAt": "2026-10-24T15:58:04.348Z",
-      "updatedAt": "2026-11-02T15:46:20.183Z"
+      "updatedAt": "2026-11-04T14:30:23.585Z"
     },
     "lean4": {
       "source": "cameronfreer/lean4-skills",

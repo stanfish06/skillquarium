@@ -52,6 +52,7 @@ created: 2026-08-07
 - [neurokit2](../../notes/imaging-signals/neurokit2.md) — Builds and audits reproducible NeuroKit2 research workflows for physiological time-series preprocessing, event/interval analysis, multimodal alignment, variability, and complexity
 - [next-cache-components-adoption](../../notes/web-automation-frontend/next-cache-components-adoption.md) — Turn on Cache Components in a Next.js app and resolve the blocking routes it surfaces
 - [omniverse-cad-to-simready](../../notes/game-development/omniverse-cad-to-simready.md) — Coordinate the end-to-end CAD/source-asset to SimReady workflow
+- [openai-platform-api-key](../../notes/ml-ai/openai-platform-api-key.md) — Use when Codex is asked to build, run, test, debug, or configure an OpenAI-backed or provider-unspecified AI app, UI, script, CLI, generator, or tool, especially requests phrased only...
 - [outlook-calendar](../../notes/comms-productivity/outlook-calendar.md) — Handle Outlook Calendar workflows, including delegated/shared calendar writes
 - [pandera-validation](../../notes/data-science-compute/pandera-validation.md) — DataFrame schema validation using pandera
 - [pennylane](../../notes/quantum-physics/pennylane.md) — Builds and differentiates PennyLane quantum circuits, hybrid PyTorch or JAX models, molecular VQE and QAOA workflows
