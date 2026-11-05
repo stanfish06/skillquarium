@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "091eb79b02cec42fe0969d9b792db67250aeedb2",
+      "skillFolderHash": "4bc3510cfe750768c8dc716cd89c66166272990c",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-04T14:29:18.439Z"
+      "updatedAt": "2026-11-05T14:36:40.955Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "46cb1a33ce599b2285fb5ee0adabc203de163192",
+      "skillFolderHash": "9c42ce87f0ac99b7f15f1d0fefda870eebf38d4b",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-04T14:29:39.972Z"
+      "updatedAt": "2026-11-05T14:37:02.234Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -11064,18 +11064,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl-research-index/SKILL.md",
-      "skillFolderHash": "86c0757f938cb58aa8a2029aba9193a8ad826fab",
+      "skillFolderHash": "f5c13d9eb60172157ec901988bcd48e719831669",
       "installedAt": "2026-08-23T17:20:50.843Z",
-      "updatedAt": "2026-11-04T14:30:17.539Z"
+      "updatedAt": "2026-11-05T14:37:06.419Z"
     },
     "firecrawl-scrape": {
       "source": "firecrawl/cli",
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl-scrape/SKILL.md",
-      "skillFolderHash": "27287053ce4356de8ffe45d2d2f4047eb6439726",
+      "skillFolderHash": "b98d97a3aa30370e530563883024291580e0c373",
       "installedAt": "2026-08-23T17:20:50.848Z",
-      "updatedAt": "2026-10-21T11:45:47.681Z"
+      "updatedAt": "2026-11-05T14:37:07.482Z"
     },
     "firecrawl-search": {
       "source": "firecrawl/cli",
@@ -11398,9 +11398,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-dev-loop/SKILL.md",
-      "skillFolderHash": "60d23e960e791d8ca6cbad3710abfb5bfe836ab9",
+      "skillFolderHash": "070ac9750bf5d8aa2a3051ac2c73ae57c807245e",
       "installedAt": "2026-08-23T17:24:04.384Z",
-      "updatedAt": "2026-10-10T12:52:02.043Z"
+      "updatedAt": "2026-11-05T14:37:09.789Z"
     },
     "next-cache-components-adoption": {
       "source": "vercel/next.js",
@@ -11416,18 +11416,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-optimizer/SKILL.md",
-      "skillFolderHash": "fc83db8fdd31079d7d5e97683705b0c98ddded6d",
+      "skillFolderHash": "0e3c10cb22aab25eff9023ea10312a2dcf7ef87b",
       "installedAt": "2026-08-23T17:24:26.730Z",
-      "updatedAt": "2026-10-10T12:52:05.249Z"
+      "updatedAt": "2026-11-05T14:37:12.139Z"
     },
     "next-partial-prefetching-adoption": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-partial-prefetching-adoption/SKILL.md",
-      "skillFolderHash": "ae20d672e38bcd4ab6c5e9b348e98e6872a9231d",
+      "skillFolderHash": "60f8e3bf05706a1382f0fd9455d258a7403533af",
       "installedAt": "2026-08-23T17:24:38.535Z",
-      "updatedAt": "2026-10-10T12:52:07.035Z"
+      "updatedAt": "2026-11-05T14:37:14.350Z"
     },
     "incident-response": {
       "source": "anthropics/knowledge-work-plugins",
@@ -12066,9 +12066,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-sandboxes-lifecycle/SKILL.md",
-      "skillFolderHash": "3ea28bfb1aabaf8cb456880b03a505214be60805",
+      "skillFolderHash": "ac168557da15533afd26044e215d8473a821b3c0",
       "installedAt": "2026-09-25T17:57:41.762Z",
-      "updatedAt": "2026-09-25T17:57:41.762Z"
+      "updatedAt": "2026-11-05T14:37:18.326Z"
     },
     "docker-sandboxes-network-credentials": {
       "source": "docker/skills",
