@@ -2173,6 +2173,29 @@
       "replace": "uv pip install \"fluidsim[fft]==26.10.0\" \"fluidfft==0.4.5\" \"pyFFTW==0.15.1\"\n```\n\nThe project lock"
     }
   ],
+  "numba": [
+    {
+      "id": "dead-numba-doc-links",
+      "issue": 1239,
+      "source": "tondevrel/scientific-agent-skills",
+      "find": "**Official docs**: https://numba.pydata.org/numba-doc/latest/index.html  \n**User Guide**: https://numba.pydata.org/numba-doc/latest/user/index.html  \n",
+      "replace": "- **Official docs**: https://numba.readthedocs.io/en/stable/index.html\n- **User Guide**: https://numba.readthedocs.io/en/stable/user/index.html\n- **CUDA target**: https://nvidia.github.io/numba-cuda/ (the maintained `numba.cuda` implementation)\n"
+    },
+    {
+      "id": "cuda-target-needs-numba-cuda-install",
+      "issue": 1239,
+      "source": "tondevrel/scientific-agent-skills",
+      "find": "```bash\npip install numba\n```",
+      "replace": "```bash\npip install numba\n\n# For the CUDA target (@cuda.jit), also install NVIDIA's numba-cuda package.\n# Since Numba 0.63, using numba.cuda without it emits a deprecation warning.\npip install numba-cuda\n```"
+    },
+    {
+      "id": "cuda-target-deprecation-note",
+      "issue": 1239,
+      "source": "tondevrel/scientific-agent-skills",
+      "find": "## GPU Acceleration (numba.cuda)\n\n### Writing CUDA Kernels",
+      "replace": "## GPU Acceleration (numba.cuda)\n\nNumba's built-in CUDA target is deprecated; NVIDIA's `numba-cuda` package is where the target\nis now developed. It keeps the same `numba.cuda` namespace, so the code below is unchanged \u2014\ninstall `numba-cuda` alongside `numba` and the examples keep working past the removal.\nSee [the deprecation notice](https://numba.readthedocs.io/en/stable/cuda/overview.html).\n\n### Writing CUDA Kernels"
+    }
+  ],
   "ncc": [
     {
       "id": "lambda-sdk-v3-externals",
