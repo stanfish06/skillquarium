@@ -20,7 +20,7 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [landing-page-design](../../notes/web-automation-frontend/landing-page-design.md) — Builds and reviews landing pages and single-offer marketing sites: intake questions, page structure, layout selection, conversion copywriting, SEO/AEO, and an opinionated visual system...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

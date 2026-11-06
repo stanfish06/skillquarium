@@ -1,0 +1,27 @@
+# Skill index
+
+All editable skill sources live under `skills/`. Each directory is a complete
+shared skill for Codex and Claude Code; `agents/openai.yaml` supplies Codex UI
+metadata. Supporting Python files, tests, references, and assets are retained.
+
+| Skill | Entry point |
+| --- | --- |
+| `lean-workflow` | [Workflow router](../lean-workflow/SKILL.md) |
+| `lean-project-architecture` | [Project architecture](../lean-project-architecture/SKILL.md) |
+| `build-proof-dependency-graph` | [Source dependency graph](../build-proof-dependency-graph/SKILL.md) |
+| `lean-orchestrator` | [Proof orchestration](../lean-orchestrator/SKILL.md) |
+| `lean-statement-audit` | [Statement and proof audit](../lean-statement-audit/SKILL.md) |
+| `lean-search-discovery` | [Mathlib discovery](../lean-search-discovery/SKILL.md) |
+| `lean-proof-patterns` | [Proof patterns](../lean-proof-patterns/SKILL.md) |
+| `lean-naming-style` | [Naming and style](../lean-naming-style/SKILL.md) |
+| `lean-learnings` | [Analysis and elaboration lessons](../lean-learnings/SKILL.md) |
+| `lean-elaboration` | [Elaboration repair](../lean-elaboration/SKILL.md) |
+| `lean-elaboration-test` | [Performance reporting](../lean-elaboration-test/SKILL.md) |
+| `lean-public-release` | [Formalization release](../lean-public-release/SKILL.md) |
+
+Begin with `lean-workflow` when you need routing. Use narrow proof/search/style
+skills directly for local tasks. The graph and audit workflow is appropriate
+for source-facing formalizations that need exact mathematical correspondence.
+
+See [README.md](https://github.com/scottnarmstrong/LeanAutoformalizationSkills/blob/1837b95b3d5a9fd8d311367603902ad7fe261adf/README.md) for installation and examples, and
+[SOURCES.md](SOURCES.md) for public-source attribution.
