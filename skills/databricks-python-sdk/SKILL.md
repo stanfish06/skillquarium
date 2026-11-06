@@ -21,7 +21,7 @@ This skill provides guidance for Databricks SDK, Databricks Connect, CLI, and RE
 - Use existing virtual environment at `.venv` or use `uv` to create one
 - For Spark operations: `uv pip install databricks-connect`
 - For SDK operations: `uv pip install databricks-sdk`
-- Databricks CLI version should be 0.278.0 or higher
+- Databricks CLI version should be v1.0.0 or higher
 
 ## Configuration
 
@@ -86,7 +86,7 @@ response = w.api_client.do(
 ## Databricks CLI
 
 ```bash
-# Check version (should be >= 0.278.0)
+# Check version (should be >= v1.0.0)
 databricks --version
 
 # Use specific profile
