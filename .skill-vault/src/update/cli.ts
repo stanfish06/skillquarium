@@ -41,6 +41,7 @@ export const overrides = flagged(
   `usage: skillquarium overrides [--check | --quarantine]
 
 Re-apply the fixes recorded in .skill-vault/data/local-overrides.json to upstream-managed skills.
+Also verify the pinned Lean attribution bundle and restore its per-skill notices after reinstalling.
 
   --check       report without writing; exit 1 when an override is not applied
   --quarantine  also restore each skill left stale or missing, folder and .skill-lock.json entry,

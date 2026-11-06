@@ -50,7 +50,7 @@ created: 2026-06-13
 - [databricks-lakeflow-connect](../notes/analytics-engineering/databricks-lakeflow-connect.md) — Build managed ingestion pipelines into Databricks using Lakeflow Connect
 - [databricks-metric-views](../notes/analytics-engineering/databricks-metric-views.md) — Unity Catalog metric views: define, create, query, and manage governed business metrics in YAML
 - [databricks-ml-training](../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
-- [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow 3 GenAI agent evaluation. Use when writing mlflow.genai.evaluate() code, creating @scorer functions, using built-in scorers (Guidelines, Correctness, Safety...
+- [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow GenAI evaluation and agent improvement on Databricks
 - [databricks-model-serving](../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
 - [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks
 - [databricks-python-sdk](../notes/analytics-engineering/databricks-python-sdk.md) — Databricks development guidance including Python SDK, Databricks Connect, CLI, and REST API
@@ -59,7 +59,7 @@ created: 2026-06-13
 - [databricks-synthetic-data-gen](../notes/analytics-engineering/databricks-synthetic-data-gen.md) — Generate realistic synthetic data using Spark + Faker (strongly recommended)
 - [databricks-unity-catalog](../notes/analytics-engineering/databricks-unity-catalog.md) — Unity Catalog governance, access control, and observability
 - [databricks-unstructured-pdf-generation](../notes/analytics-engineering/databricks-unstructured-pdf-generation.md) — Build RAG / unstructured-document evaluation datasets and demo documents (e.g
-- [databricks-vector-search](../notes/analytics-engineering/databricks-vector-search.md) — Databricks Vector Search endpoints and indexes for RAG and semantic search
+- [databricks-vector-search](../notes/analytics-engineering/databricks-vector-search.md) — Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search
 - [databricks-zerobus-ingest](../notes/analytics-engineering/databricks-zerobus-ingest.md) — Push records from apps, services, devices, or scripts directly into Unity Catalog Delta tables with Zerobus Ingest: SDKs (Python, TypeScript, Go, Java, Rust, C++, .NET), REST, OTLP...
 - [fetching-dbt-docs](../notes/analytics-engineering/fetching-dbt-docs.md) — Retrieves and searches dbt documentation pages in LLM-friendly markdown format
 - [infra-clickhouse](../notes/analytics-engineering/infra-clickhouse.md) — Sets up and manages ClickHouse using the clickhousectl CLI — installs and runs a local ClickHouse server for development, and creates managed ClickHouse Cloud services for production...

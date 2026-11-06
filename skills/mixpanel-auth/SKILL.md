@@ -53,8 +53,10 @@ Optional flags they may want:
 - `--token-env VAR` — force the static-bearer path (reads token from `$VAR`)
 - `--no-browser` — print the authorization URL instead of launching a browser
 
-After the user confirms they ran it, verify with `account test`:
-`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test`
+After the user confirms they ran it, run
+`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` to read
+`account.name`, then verify with
+`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <account.name>`.
 
 ### No arguments or "session"
 
@@ -151,7 +153,11 @@ On `state: error`: Show `error.message` and suggest retrying.
 
 ### "account test" or "account test <name>"
 
-Run: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test [name]`
+The script requires a name. If the user did not give one, run
+`python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py session` and use
+`account.name`.
+
+Run: `python3 $PLUGIN_ROOT/skills/mixpanelyst/scripts/auth_manager.py account test <name>`
 
 The subcommand never raises — `state` is always `ok`. Read `result.ok` to
 determine whether the credentials worked:
