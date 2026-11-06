@@ -4559,5 +4559,14 @@
       "find": "[released source](https://github.com/zarr-developers/zarr-python/tree/v3.4.0).\n",
       "replace": "[released source](https://github.com/zarr-developers/zarr-python/tree/v3.4.2).\n"
     }
+  ],
+  "vercel-flags": [
+    {
+      "id": "skill-health-1259",
+      "issue": 1259,
+      "source": "openai/plugins",
+      "find": "Vercel Flags is in **public beta** (February 2026), available to teams on all plans. Pricing: **$30 per 1 million flag requests** ($0.00003 per event).\n",
+      "replace": "Vercel Flags reached **general availability** in April 2026 (after an initial public beta starting February 2026), available to teams on all plans. Pricing may have changed at GA; verify current rates at [Vercel's feature-flags limits and pricing docs](https://vercel.com/docs/workflow-collaboration/feature-flags/limits-and-pricing) before citing a number.\n"
+    }
   ]
 }
