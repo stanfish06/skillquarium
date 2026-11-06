@@ -23,6 +23,7 @@ created: 2026-08-23
 - [databricks-genie-agents](../../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents (formerly Genie Spaces): curated agents over Unity Catalog tables, Metric Views, and documents in UC volumes
 - [databricks-ml-training](../../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
 - [databricks-mlflow-evaluation](../../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow GenAI evaluation and agent improvement on Databricks
+- [databricks-vector-search](../../notes/analytics-engineering/databricks-vector-search.md) — Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
