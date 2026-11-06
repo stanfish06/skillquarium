@@ -1,22 +1,28 @@
 schema: v1
 id: docker-sandboxes-kits
-version: 0.1.0
-title: 'Docker Sandboxes: Kits (spec.yaml)'
-description: Author, validate, package, sign, and compose reusable sandbox/mixin kits (spec.yaml, schema v2).
+version: 1.0.3
+title: 'Docker Sandboxes: Kits (v3 descriptors)'
+description: Author, verify, publish, and compose sandbox kits with the v3 descriptor (workload/mixin, capabilities, buildx, kit-tck).
 owns:
-  - spec.yaml
   - sbx-kit
-  - kit-spec-v2
+  - kit-spec-v3
+  - sandbox-kit-v3-descriptor
+  - kit-tck
 use_when:
-  - The user wants to write, validate, or pack a spec.yaml for a kind sandbox or kind mixin kit.
-  - The user wants a mixin to add a tool, credential, network allowance, or files to an existing built-in agent.
-  - The user wants to publish a kit to or pull one from an OCI registry, sign it, or verify a signature or provenance attestation.
-  - The user is debugging a kit-validation error, an argument-substitution error, or sbx kit add's recreate-aware requirement.
+  - The user wants to create a new kit, such as packaging a CLI or agent, adding a tool, credential, or policy to an existing agent, or adding a mixin variant, using the v3 descriptor.
+  - The user asks whether a kit should be a workload or a mixin, what a kit descriptor should contain, or which capabilities, provides, and requires it needs.
+  - The user wants to write a kit's content recipe, build it with docker buildx, check it with kit-tck and sbx kit inspect, compose it onto a workload, publish it, or sign it.
+  - The user has an existing v2 spec.yaml kit and wants it converted to a new v3 descriptor.
 do_not_use_when:
   - The task is creating, running, or removing the sandbox a kit is composed into, independent of the kit's own content.
-  - The task is what a credential or network rule a kit declares actually does at runtime, or secrets/policy unrelated to any kit.
+  - The task is what a credential or network rule a kit declares actually does at runtime, where a secret value is stored, or secrets and policy unrelated to any kit.
   - The task is the sbxenv.yaml file format that references kits via its own kits block.
+  - The task is general Dockerfile or image-build optimization unrelated to a kit's recipe.
+  - The task is to author, validate, or debug a legacy v2 spec.yaml, which this skill no longer covers.
+  - The task is a bulk v2-to-v3 migration that needs the migrate-kit-to-v3 skill, which is not part of this catalog.
 delegates_to:
   - docker-sandboxes-lifecycle
   - docker-sandboxes-network-credentials
   - docker-sandboxes-env
+  - docker-build-strategies
+  - docker-destructive-guardrails
