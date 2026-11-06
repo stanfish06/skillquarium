@@ -4447,5 +4447,21 @@
       "find": "langgraph build -t my-image --base-image langchain/langgraph-server:0.2.18  # pin base version\n",
       "replace": "langgraph build -t my-image --base-image langchain/langgraph-server:0.16-py3.12  # pin base version — see https://hub.docker.com/r/langchain/langgraph-server/tags for the current tags\n"
     }
+  ],
+  "exploratory-data-analysis": [
+    {
+      "id": "skill-health-1204-1",
+      "issue": 1204,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "| Polars | `1.44.2` | 2026-09-09 | Documented alternate tabular I/O |\n",
+      "replace": "| Polars | `2.1.0` | 2026-10-25 | Documented alternate tabular I/O |\n"
+    },
+    {
+      "id": "skill-health-1204-2",
+      "issue": 1204,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"pandas==3.0.6\" \"polars==1.44.2\"\n",
+      "replace": "uv pip install \"pandas==3.0.6\" \"polars==2.1.0\"\n"
+    }
   ]
 }
