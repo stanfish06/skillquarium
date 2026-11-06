@@ -7,7 +7,7 @@ allowed-tools:
   - Write
   - Edit
   - Bash
-compatibility: Requires Python 3.10+ (Ray's PyPI metadata requires >=3.10; older 3.9 wheels exist only for Ray <2.10) and ray 2.x (current 2.56.1). Install the extra matching your workload — ray[default] (dashboard+autoscaler), ray[data], ray[train], ray[tune], ray[serve], ray[rllib] — rather than ray[all]. Every node in a cluster must run the same Ray version and a compatible Python minor version; mismatches fail silently or crash workers.
+compatibility: Requires Python 3.10+ (Ray's PyPI metadata requires >=3.10; older 3.9 wheels exist only for Ray <2.10) and ray 2.x (current 2.59.0). Install the extra matching your workload — ray[default] (dashboard+autoscaler), ray[data], ray[train], ray[tune], ray[serve], ray[rllib] — rather than ray[all]. Every node in a cluster must run the same Ray version and a compatible Python minor version; mismatches fail silently or crash workers.
 metadata: {"version": "1.0", "skill-author": "community"}
 ---
 
