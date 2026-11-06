@@ -1,32 +1,32 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2171,
+  "skills": 2206,
   "expert_profiles": 503,
-  "nodes": 2244,
-  "edges": 16086,
-  "generic_names_blocked": 31,
-  "tier1_edges": 4855,
-  "tier2_edges": 720,
-  "alias_edges": 4513,
+  "nodes": 2279,
+  "edges": 16357,
+  "generic_names_blocked": 30,
+  "tier1_edges": 4926,
+  "tier2_edges": 718,
+  "alias_edges": 4587,
   "discipline_edges": 599,
-  "ambiguous_aliases": 34,
+  "ambiguous_aliases": 35,
   "artifact_edges": 523,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.84,
+  "mean_skill_degree": 5.85,
   "median_skill_degree": 4,
-  "orphan_count": 122,
-  "orphan_rate": 0.0562,
+  "orphan_count": 130,
+  "orphan_rate": 0.0589,
   "by_provenance": {
-   "EXTRACTED": 15300,
+   "EXTRACTED": 15571,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2171,
-   "references": 12606,
+   "in_domain": 2206,
+   "references": 12842,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -3814,6 +3814,21 @@
    "source": "skills/cargo-fuzz/SKILL.md",
    "aliases": [
     "cargo fuzz"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "casadi-ipopt-nlp",
+   "type": "Skill",
+   "label": "casadi-ipopt-nlp",
+   "description": "Nonlinear optimization with CasADi and IPOPT. Use when building and solving NLP problems: SX/MX symbolic variables, nonlinear constraints, the nlpsol and Opti interfaces, IPOPT options, multi-start initialization with solver-status checks, and extracting solutions. An appendix covers power-systems modeling patterns (per-unit scaling, bus ID mapping).",
+   "source": "skills/casadi-ipopt-nlp/SKILL.md",
+   "aliases": [
+    "casadi ipopt nlp"
    ],
    "uses": 0,
    "successes": 0,
@@ -10761,6 +10776,21 @@
    "deprecated": false
   },
   {
+   "id": "finite-horizon-lqr",
+   "type": "Skill",
+   "label": "finite-horizon-lqr",
+   "description": "Solve unconstrained finite-horizon discrete-time LQR by backward Riccati recursion - time-varying gain sequence, DARE terminal cost, and receding-horizon use. Problems with input or state constraints need a QP-based MPC instead.",
+   "source": "skills/finite-horizon-lqr/SKILL.md",
+   "aliases": [
+    "finite horizon lqr"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "finngen-phewas-skill",
    "type": "Skill",
    "label": "finngen-phewas-skill",
@@ -10982,6 +11012,21 @@
    "source": "skills/firmware-pentest/SKILL.md",
    "aliases": [
     "firmware pentest"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "first-order-model-fitting",
+   "type": "Skill",
+   "label": "first-order-model-fitting",
+   "description": "Fit first-order and first-order-plus-dead-time (FOPDT) models to experimental step response data and extract K (gain), tau (time constant), and theta (dead time), using a measured pre-step baseline, two-point estimates, and scipy curve_fit with bounds.",
+   "source": "skills/first-order-model-fitting/SKILL.md",
+   "aliases": [
+    "first order model fitting"
    ],
    "uses": 0,
    "successes": 0,
@@ -12508,6 +12553,21 @@
    "deprecated": false
   },
   {
+   "id": "gnucobol-mainframe-batch",
+   "type": "Skill",
+   "label": "gnucobol-mainframe-batch",
+   "description": ">- GnuCOBOL toolchain pointers for mainframe-style batch programs (LINE/RECORD SEQUENTIAL files, PIC clauses, cobc build flags).",
+   "source": "skills/gnucobol-mainframe-batch/SKILL.md",
+   "aliases": [
+    "gnucobol mainframe batch"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "go-rust-reverse",
    "type": "Skill",
    "label": "go-rust-reverse",
@@ -13301,6 +13361,21 @@
    "deprecated": false
   },
   {
+   "id": "hibernate-upgrade",
+   "type": "Skill",
+   "label": "hibernate-upgrade",
+   "description": "Migrate Hibernate 5 to Hibernate 6 with Spring Boot 3. Use when fixing HQL/JPQL query parsing issues, removing deprecated Criteria API, updating ID generation strategies, or diagnosing N+1 query behavior changes. Covers breaking changes, type mappings, and performance monitoring.",
+   "source": "skills/hibernate-upgrade/SKILL.md",
+   "aliases": [
+    "hibernate upgrade"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "high-end-visual-design",
    "type": "Skill",
    "label": "high-end-visual-design",
@@ -13978,6 +14053,21 @@
    "deprecated": false
   },
   {
+   "id": "imc-tuning-rules",
+   "type": "Skill",
+   "label": "imc-tuning-rules",
+   "description": "Calculate PI controller gains using Internal Model Control (IMC) and Skogestad SIMC tuning rules for first-order and first-order-plus-dead-time (FOPDT) process models, with a PI implementation that has output limits and anti-windup.",
+   "source": "skills/imc-tuning-rules/SKILL.md",
+   "aliases": [
+    "imc tuning rules"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "immunogeneticist",
    "type": "ExpertProfile",
    "label": "immunogeneticist",
@@ -14638,6 +14728,21 @@
    "aliases": [
     "item management",
     "metadata"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "jakarta-namespace",
+   "type": "Skill",
+   "label": "jakarta-namespace",
+   "description": "Migrate Java EE javax.* imports to Jakarta EE jakarta.* namespace. Use when upgrading to Spring Boot 3.x, migrating javax.persistence, javax.validation, javax.servlet imports, or fixing compilation errors after Jakarta EE transition. Covers package mappings, batch sed commands, and verification steps.",
+   "source": "skills/jakarta-namespace/SKILL.md",
+   "aliases": [
+    "jakarta namespace"
    ],
    "uses": 0,
    "successes": 0,
@@ -15837,6 +15942,21 @@
    "deprecated": false
   },
   {
+   "id": "logistics-rules-to-optimization",
+   "type": "Skill",
+   "label": "logistics-rules-to-optimization",
+   "description": "Translate logistics and operations rules into optimization variables and constraints. Use when an operations problem describes vehicles, routes, depots, pickups, dropoffs, inventory, capacity, assignments, time windows, service targets, penalties, resource limits, or other business rules that need to become an optimization model.",
+   "source": "skills/logistics-rules-to-optimization/SKILL.md",
+   "aliases": [
+    "logistics rules to optimization"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "loki",
    "type": "Skill",
    "label": "loki",
@@ -15857,6 +15977,21 @@
    "source": "skills/loki-label-analyzer/SKILL.md",
    "aliases": [
     "loki label analyzer"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "lomb-scargle-periodogram",
+   "type": "Skill",
+   "label": "lomb-scargle-periodogram",
+   "description": "Lomb-Scargle periodogram for finding periodic signals in unevenly sampled time series data. Use when analyzing light curves, radial velocity data, or any astronomical time series to detect periodic variations. Works for stellar rotation, pulsation, eclipsing binaries, and general periodic phenomena. Based on lightkurve library.",
+   "source": "skills/lomb-scargle-periodogram/SKILL.md",
+   "aliases": [
+    "lomb scargle periodogram"
    ],
    "uses": 0,
    "successes": 0,
@@ -17863,6 +17998,21 @@
    "deprecated": false
   },
   {
+   "id": "milp-solver-workflow",
+   "type": "Skill",
+   "label": "milp-solver-workflow",
+   "description": "Use for formulating, solving, debugging, and validating mixed-integer linear optimization models with open-source solvers, including variable indexing, sparse constraints, linearized costs, solver limits, MIP gaps, incumbent extraction, numerical tolerances, and deterministic output reporting.",
+   "source": "skills/milp-solver-workflow/SKILL.md",
+   "aliases": [
+    "milp solver workflow"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "mimir",
    "type": "Skill",
    "label": "mimir",
@@ -17941,6 +18091,21 @@
    "source": "skills/mining-geologist/SKILL.md",
    "aliases": [
     "mining geologist"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "mip-solver-and-solution-audit",
+   "type": "Skill",
+   "label": "mip-solver-and-solution-audit",
+   "description": "Operational workflow for hard integer-programming optimization tasks: selecting an installed solver, preserving solver/incumbent certificates, extracting feasible schedules, recomputing metrics from final outputs, and writing consistent reports. Use when a task requires a MIP, solver status, objective value, bound, gap, formulation write-up, or audited solution output files.",
+   "source": "skills/mip-solver-and-solution-audit/SKILL.md",
+   "aliases": [
+    "mip solver and solution audit"
    ],
    "uses": 0,
    "successes": 0,
@@ -21274,6 +21439,36 @@
    "deprecated": false
   },
   {
+   "id": "ortools-pickup-delivery-routing",
+   "type": "Skill",
+   "label": "ortools-pickup-delivery-routing",
+   "description": "Model OR-Tools paired pickup-and-delivery routing problems, including PDPTW, dial-a-ride, paratransit, patient transport, and courier jobs with same-vehicle pairing, precedence, capacity, optional connected service, rider time windows, and vehicle shifts.",
+   "source": "skills/ortools-pickup-delivery-routing/SKILL.md",
+   "aliases": [
+    "ortools pickup delivery routing"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "ortools-routing-modeling",
+   "type": "Skill",
+   "label": "ortools-routing-modeling",
+   "description": "Build OR-Tools RoutingModel vehicle-routing models with transit matrices, dimensions, capacity constraints, time windows, optional visits, invalid-arc handling, search parameters, and route extraction.",
+   "source": "skills/ortools-routing-modeling/SKILL.md",
+   "aliases": [
+    "ortools routing modeling"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "ossfuzz",
    "type": "Skill",
    "label": "ossfuzz",
@@ -21831,6 +22026,21 @@
    "deprecated": false
   },
   {
+   "id": "pcap-triage-tshark",
+   "type": "Skill",
+   "label": "pcap-triage-tshark",
+   "description": "Fast workflow to inspect PCAPs and extract protocol-level details using tshark",
+   "source": "skills/pcap-triage-tshark/SKILL.md",
+   "aliases": [
+    "pcap triage tshark"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "pdf",
    "type": "Skill",
    "label": "pdf",
@@ -22295,6 +22505,21 @@
    "source": "skills/physician-scientist/SKILL.md",
    "aliases": [
     "physician scientist"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "pid-controller",
+   "type": "Skill",
+   "label": "pid-controller",
+   "description": "Use this skill when implementing discrete-time PID control loops for any feedback control system (speed, temperature, position, pressure, flow), including output limits, anti-windup, filtered derivative on measurement, setpoint weighting, bumpless transfer, and manual tuning.",
+   "source": "skills/pid-controller/SKILL.md",
+   "aliases": [
+    "pid controller"
    ],
    "uses": 0,
    "successes": 0,
@@ -23989,6 +24214,96 @@
    "description": "Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration. Use when writing or running Python tests, setting up a test suite, debugging failing tests, adding fixtures or parametrized cases, measuring coverage, or configuring pytest in pyproject.toml. Pairs with test-driven-development for the workflow/methodology.",
    "source": "skills/pytest/SKILL.md",
    "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "python-scala-collections",
+   "type": "Skill",
+   "label": "python-scala-collections",
+   "description": "Guide for translating Python collection operations to idiomatic Scala. Use when converting Python code that uses lists, dictionaries, sets, or involves collection transformations like map, filter, reduce, sorting, and aggregations.",
+   "source": "skills/python-scala-collections/SKILL.md",
+   "aliases": [
+    "python scala collections"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "python-scala-functional",
+   "type": "Skill",
+   "label": "python-scala-functional",
+   "description": "Guide for translating Python code to functional Scala style. Use when converting Python code involving higher-order functions, decorators, closures, generators, or when aiming for idiomatic functional Scala with pattern matching, Option handling, and monadic operations.",
+   "source": "skills/python-scala-functional/SKILL.md",
+   "aliases": [
+    "python scala functional"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "python-scala-idioms",
+   "type": "Skill",
+   "label": "python-scala-idioms",
+   "description": "Guide for writing idiomatic Scala when translating from Python. Use when the goal is not just syntactic translation but producing clean, idiomatic Scala code. Covers immutability, expression-based style, sealed hierarchies, and common Scala conventions.",
+   "source": "skills/python-scala-idioms/SKILL.md",
+   "aliases": [
+    "python scala idioms"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "python-scala-libraries",
+   "type": "Skill",
+   "label": "python-scala-libraries",
+   "description": "Guide for mapping common Python libraries and idioms to Scala equivalents. Use when converting Python code that uses standard library modules (json, datetime, os, re, logging) or needs equivalent Scala libraries for HTTP, testing, or async operations.",
+   "source": "skills/python-scala-libraries/SKILL.md",
+   "aliases": [
+    "python scala libraries"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "python-scala-oop",
+   "type": "Skill",
+   "label": "python-scala-oop",
+   "description": "Guide for translating Python classes, inheritance, and object-oriented patterns to Scala. Use when converting Python code with classes, dataclasses, abstract classes, inheritance, properties, static methods, class methods, or design patterns.",
+   "source": "skills/python-scala-oop/SKILL.md",
+   "aliases": [
+    "python scala oop"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "python-scala-syntax-mapping",
+   "type": "Skill",
+   "label": "python-scala-syntax-mapping",
+   "description": "Reference guide for translating Python syntax constructs to Scala equivalents. Use when converting Python code to Scala and need mappings for basic syntax elements like variable declarations, control flow, comprehensions, string formatting, and common operators.",
+   "source": "skills/python-scala-syntax-mapping/SKILL.md",
+   "aliases": [
+    "python scala syntax mapping"
+   ],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -25818,6 +26133,21 @@
    "deprecated": false
   },
   {
+   "id": "routing-subtour-elimination",
+   "type": "Skill",
+   "label": "routing-subtour-elimination",
+   "description": "Subtour-elimination methods for TSP, VRP, pickup/dropoff routing, and routing MIPs with binary arc variables. Use when route-continuity constraints may permit disconnected cycles and the model needs MTZ constraints, flow-based connectivity constraints, DFJ subset cuts, or lazy/iterative subtour cuts.",
+   "source": "skills/routing-subtour-elimination/SKILL.md",
+   "aliases": [
+    "routing subtour elimination"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "rover",
    "type": "Skill",
    "label": "rover",
@@ -26297,6 +26627,37 @@
    "source": "skills/scikit-survival/SKILL.md",
    "aliases": [
     "scikit survival"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "scip-opt",
+   "type": "Skill",
+   "label": "scip-opt",
+   "description": "Build and solve mixed-integer and linear programs in Python with PySCIPOpt (SCIP) - binary/integer/continuous variables, linking and capacity constraints, slack-based soft penalties, linearized absolute deviation, time and gap limits, reproducibility parameters, and solution extraction. Use when PySCIPOpt is installed or requested for a MIP model.",
+   "source": "skills/scip-opt/SKILL.md",
+   "aliases": [
+    "scip",
+    "scip opt"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "scipy-curve-fit",
+   "type": "Skill",
+   "label": "scipy-curve-fit",
+   "description": "Use scipy.optimize.curve_fit for nonlinear least squares parameter estimation from experimental data.",
+   "source": "skills/scipy-curve-fit/SKILL.md",
+   "aliases": [
+    "scipy curve fit"
    ],
    "uses": 0,
    "successes": 0,
@@ -27450,6 +27811,21 @@
    "deprecated": false
   },
   {
+   "id": "simulation-metrics",
+   "type": "Skill",
+   "label": "simulation-metrics",
+   "description": "Use this skill when calculating step-response performance metrics such as rise time, overshoot percentage, steady-state error, or settling time for evaluating simulation results, including steps from a nonzero initial value and downward steps.",
+   "source": "skills/simulation-metrics/SKILL.md",
+   "aliases": [
+    "simulation metrics"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "single-cell-biologist",
    "type": "ExpertProfile",
    "label": "single-cell-biologist",
@@ -27917,6 +28293,21 @@
    "source": "skills/sports-scientist/SKILL.md",
    "aliases": [
     "sports scientist"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "spring-boot-migration",
+   "type": "Skill",
+   "label": "spring-boot-migration",
+   "description": "Migrate Spring Boot 2.x applications to Spring Boot 3.x. Use when updating pom.xml versions, removing deprecated JAXB dependencies, upgrading Java to 17/21, or using OpenRewrite for automated migration. Covers dependency updates, version changes, and migration checklist.",
+   "source": "skills/spring-boot-migration/SKILL.md",
+   "aliases": [
+    "spring boot migration"
    ],
    "uses": 0,
    "successes": 0,
@@ -28475,6 +28866,21 @@
    "deprecated": false
   },
   {
+   "id": "suricata-offline-evejson",
+   "type": "Skill",
+   "label": "suricata-offline-evejson",
+   "description": "Running Suricata against PCAPs offline and validating results via eve.json",
+   "source": "skills/suricata-offline-evejson/SKILL.md",
+   "aliases": [
+    "suricata offline evejson"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "surveyor-geomatics-engineer",
    "type": "ExpertProfile",
    "label": "surveyor-geomatics-engineer",
@@ -28726,6 +29132,36 @@
    "source": "skills/systems-neuroscientist/SKILL.md",
    "aliases": [
     "systems neuroscientist"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "syz-extract-constants",
+   "type": "Skill",
+   "label": "syz-extract-constants",
+   "description": "Defining and extracting kernel constants for syzkaller syzlang descriptions",
+   "source": "skills/syz-extract-constants/SKILL.md",
+   "aliases": [
+    "syz extract constants"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "syzlang-ioctl-basics",
+   "type": "Skill",
+   "label": "syzlang-ioctl-basics",
+   "description": "Syzkaller syzlang syntax basics for describing ioctl syscalls",
+   "source": "skills/syzlang-ioctl-basics/SKILL.md",
+   "aliases": [
+    "syzlang ioctl basics"
    ],
    "uses": 0,
    "successes": 0,
@@ -29447,6 +29883,21 @@
    "deprecated": false
   },
   {
+   "id": "timeseries-detrending",
+   "type": "Skill",
+   "label": "timeseries-detrending",
+   "description": "Tools and techniques for detrending time series data in macroeconomic analysis. Use when working with economic time series that need to be decomposed into trend and cyclical components. Covers HP filter, log transformations for growth series, and correlation analysis of business cycles.",
+   "source": "skills/timeseries-detrending/SKILL.md",
+   "aliases": [
+    "timeseries detrending"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "timesfm-forecasting",
    "type": "Skill",
    "label": "timesfm-forecasting",
@@ -29652,6 +30103,51 @@
    "deprecated": false
   },
   {
+   "id": "transaction-concurrency-control-foundations",
+   "type": "Skill",
+   "label": "transaction-concurrency-control-foundations",
+   "description": "Provides database transaction concurrency-control background. Use when reasoning about transactions, commits and aborts, serializability, isolation anomalies, conflicts, dependencies, and protocol families such as locking, timestamp ordering, OCC, MVCC, SSI, TicToc, hybrid protocols.",
+   "source": "skills/transaction-concurrency-control-foundations/SKILL.md",
+   "aliases": [
+    "transaction concurrency control foundations"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "transaction-protocol-reasoning",
+   "type": "Skill",
+   "label": "transaction-protocol-reasoning",
+   "description": "Teaches how to reason from a transaction protocol’s rules to a working model. Use when analyzing a concurrency-control paper, spec, or algorithm to identify state, metadata, invariants, operation rules, examples, counterexamples, guarantees, false aborts, unsafe commits, or tradeoffs before inspecting concrete traces.",
+   "source": "skills/transaction-protocol-reasoning/SKILL.md",
+   "aliases": [
+    "transaction protocol reasoning"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "transaction-trace-analysis",
+   "type": "Skill",
+   "label": "transaction-trace-analysis",
+   "description": "Teaches evidence-based analysis of transaction logs and traces. Use when reconstructing transaction behavior from tables, TSV/CSV files, timestamps, counters, object histories, validation records, abort records, retries, partial logs, or when producing classified transaction outputs from trace evidence.",
+   "source": "skills/transaction-trace-analysis/SKILL.md",
+   "aliases": [
+    "transaction trace analysis"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "transformers",
    "type": "Skill",
    "label": "transformers",
@@ -29728,6 +30224,21 @@
    "deprecated": false
   },
   {
+   "id": "trend-analysis",
+   "type": "Skill",
+   "label": "trend-analysis",
+   "description": "Detect long-term trends in time series data using parametric and non-parametric methods. Use when determining if a variable shows statistically significant increase or decrease over time.",
+   "source": "skills/trend-analysis/SKILL.md",
+   "aliases": [
+    "trend analysis"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "triage",
    "type": "Skill",
    "label": "triage",
@@ -29777,6 +30288,21 @@
    "description": "> Expert-thinking profile for Tribologist (tribometry / contact mechanics & EHL / lubricant & coating selection / wear failure analysis / condition monitoring (ASTM G99, ISO 281/4406)): Reasons from contact mechanics, lubricant rheology, Stribeck- regime and λ ratio through Hamrock-Dowson EHL film estimates, pin-on-disk/four- ball/SRV/FZG bench tests and SEM-EDS/ferrography scar analysis while treating scuffing, rolling-contact pitting, three-body abrasion and DLC adhesive transfer as first-class...",
    "source": "skills/tribologist/SKILL.md",
    "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "trivy-offline-vulnerability-scanning",
+   "type": "Skill",
+   "label": "trivy-offline-vulnerability-scanning",
+   "description": "Use Trivy vulnerability scanner in offline mode to discover security vulnerabilities in dependency files. This skill covers setting up offline scanning, executing Trivy against package lock files, and generating JSON vulnerability reports without requiring internet access.",
+   "source": "skills/trivy-offline-vulnerability-scanning/SKILL.md",
+   "aliases": [
+    "trivy offline vulnerability scanning"
+   ],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -33036,6 +33562,15 @@
   {
    "src": "academic-paper",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in academic-paper/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "academic-paper",
+   "rel": "references",
    "dst": "literature-review",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -33319,6 +33854,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "accelerator-physicist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in accelerator-physicist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -33624,7 +34168,7 @@
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in additive-manufacturing-engineer/SKILL.md",
+   "justification": "electron named in additive-manufacturing-engineer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -33949,6 +34493,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "atmospheric-scientist named in aeronomy-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "aeronomy-scientist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in aeronomy-scientist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -35673,6 +36226,15 @@
   {
    "src": "alerting-irm",
    "rel": "references",
+   "dst": "logistics-rules-to-optimization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in logistics-rules-to-optimization/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "alerting-irm",
+   "rel": "references",
    "dst": "loki",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -35686,6 +36248,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of alerting-irm appears in managed-deep-agents/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "alerting-irm",
+   "rel": "references",
+   "dst": "milp-solver-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in milp-solver-workflow/SKILL.md",
    "status": "accepted"
   },
   {
@@ -35736,6 +36307,15 @@
   {
    "src": "alerting-irm",
    "rel": "references",
+   "dst": "ortools-routing-modeling",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in ortools-routing-modeling/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "alerting-irm",
+   "rel": "references",
    "dst": "power-grid-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -35758,6 +36338,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of alerting-irm appears in pydantic-ai-harness/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "alerting-irm",
+   "rel": "references",
+   "dst": "scip-opt",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in scip-opt/SKILL.md",
    "status": "accepted"
   },
   {
@@ -39570,6 +40159,15 @@
   {
    "src": "astropy",
    "rel": "references",
+   "dst": "lomb-scargle-periodogram",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "astropy named in lomb-scargle-periodogram/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "astropy",
+   "rel": "references",
    "dst": "performance-optimization",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -40645,6 +41243,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in auth/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "auth",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in auth/SKILL.md",
    "status": "accepted"
   },
   {
@@ -43606,6 +44213,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "biogeochemist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in biogeochemist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -46653,6 +47269,15 @@
   {
    "src": "build-model",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in build-model/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "build-model",
+   "rel": "references",
    "dst": "initiate",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -47188,6 +47813,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "build-zoom-meeting-sdk-app named in debug-zoom-integration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "build-zoom-meeting-sdk-app",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in build-zoom-meeting-sdk-app/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -48556,6 +49190,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "libfuzzer named in cargo-fuzz/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "casadi-ipopt-nlp",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "casadi-ipopt-nlp",
+   "rel": "references",
+   "dst": "optimization-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of optimization-scientist appears in casadi-ipopt-nlp/SKILL.md",
    "status": "accepted"
   },
   {
@@ -50676,6 +51328,15 @@
   {
    "src": "chemical-oceanographer",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in chemical-oceanographer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "chemical-oceanographer",
+   "rel": "references",
    "dst": "environmental-chemist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -51220,6 +51881,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "chronograph-portfolio-company-one-pager",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in chronograph-portfolio-company-one-pager/SKILL.md",
    "status": "accepted"
   },
   {
@@ -51985,6 +52655,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in cite-check/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "cite-check",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in cite-check/SKILL.md",
    "status": "accepted"
   },
   {
@@ -56256,6 +56935,15 @@
   {
    "src": "comp-sheet",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in comp-sheet/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "comp-sheet",
+   "rel": "references",
    "dst": "marketplace",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -56269,6 +56957,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "comp-sheet named in setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "comp-sheet",
+   "rel": "references",
+   "dst": "trend-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in comp-sheet/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -56926,6 +57623,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of computational-physicist appears in computational-chemist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "computational-chemist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in computational-chemist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -57948,6 +58654,15 @@
   {
    "src": "condensed-matter-physicist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in condensed-matter-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "condensed-matter-physicist",
+   "rel": "references",
    "dst": "materials-physicist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -58087,6 +58802,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "connectomics-scientist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in connectomics-scientist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -58770,7 +59494,7 @@
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in core/SKILL.md",
+   "justification": "electron named in core/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -58996,6 +59720,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "cosmochemist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in cosmochemist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -59847,6 +60580,15 @@
   {
    "src": "cryo-em-structural-biologist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in cryo-em-structural-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "cryo-em-structural-biologist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -60193,6 +60935,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of cuopt-user-rules appears in conservation-biologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "cuopt-user-rules",
+   "rel": "references",
+   "dst": "milp-solver-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of cuopt-user-rules appears in milp-solver-workflow/SKILL.md",
    "status": "accepted"
   },
   {
@@ -63172,6 +63923,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "datamol",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in datamol/SKILL.md",
    "status": "accepted"
   },
   {
@@ -68145,6 +68905,15 @@
   {
    "src": "document-quality-check",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in document-quality-check/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "document-quality-check",
+   "rel": "references",
    "dst": "gap-analysis",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -69045,6 +69814,15 @@
   {
    "src": "domain-modeling",
    "rel": "references",
+   "dst": "python-scala-idioms",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain-modeling named in python-scala-idioms/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "domain-modeling",
+   "rel": "references",
    "dst": "triage",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -69466,6 +70244,15 @@
    "status": "accepted"
   },
   {
+   "src": "draft-brief",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in draft-brief/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "draft-long-form-memo",
    "rel": "in_domain",
    "dst": "domain:finance-investment",
@@ -69490,6 +70277,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "draft-brief named in draft-long-form-memo/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "draft-long-form-memo",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in draft-long-form-memo/SKILL.md",
    "status": "accepted"
   },
   {
@@ -70057,6 +70853,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "earnings-review named in earnings-flash/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "earnings-flash",
+   "rel": "references",
+   "dst": "trend-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in earnings-flash/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70854,6 +71659,15 @@
   {
    "src": "electrochemist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in electrochemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electrochemist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -70908,10 +71722,28 @@
   {
    "src": "electron",
    "rel": "references",
+   "dst": "accelerator-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in accelerator-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
    "dst": "additive-manufacturing-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in additive-manufacturing-engineer/SKILL.md",
+   "justification": "electron named in additive-manufacturing-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "aeronomy-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in aeronomy-scientist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70935,10 +71767,91 @@
   {
    "src": "electron",
    "rel": "references",
+   "dst": "biogeochemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in biogeochemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "build-zoom-meeting-sdk-app",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in build-zoom-meeting-sdk-app/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "chemical-oceanographer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in chemical-oceanographer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "computational-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in computational-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "condensed-matter-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in condensed-matter-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "connectomics-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in connectomics-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
    "dst": "core",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in core/SKILL.md",
+   "justification": "electron named in core/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "cosmochemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in cosmochemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "cryo-em-structural-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in cryo-em-structural-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "electrochemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in electrochemist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70947,7 +71860,187 @@
    "dst": "energy-storage-battery-scientist",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in energy-storage-battery-scientist/SKILL.md",
+   "justification": "electron named in energy-storage-battery-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "industrial-brutalist-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in industrial-brutalist-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "industrial-microbiologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in industrial-microbiologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "inorganic-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in inorganic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "low-temperature-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in low-temperature-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "mass-spectrometrist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in mass-spectrometrist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "medical-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in medical-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "nanophysicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in nanophysicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "nanotechnologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in nanotechnologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "omniverse-realtime-viewer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in omniverse-realtime-viewer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "optoelectronics-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in optoelectronics-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "organic-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in organic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "organometallic-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in organometallic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "particle-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in particle-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "pennylane",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in pennylane/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "photochemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in photochemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "plant-physiologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in plant-physiologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "plasma-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in plasma-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "playwright-best-practices",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in playwright-best-practices/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "quantum-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in quantum-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "query-pdb",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in query-pdb/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70956,7 +72049,16 @@
    "dst": "radiation-oncology-physicist",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in radiation-oncology-physicist/SKILL.md",
+   "justification": "electron named in radiation-oncology-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "reverse-engineering",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in reverse-engineering/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70966,6 +72068,69 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "slack named in electron/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "spintronics-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in spintronics-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "structural-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in structural-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "superconductivity-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in superconductivity-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "surface-physicist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in surface-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "thick-client",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in thick-client/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "x-ray-synchrotron-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in x-ray-synchrotron-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "electron",
+   "rel": "references",
+   "dst": "zoom-meeting-sdk-electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in zoom-meeting-sdk-electron/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -71505,7 +72670,7 @@
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in energy-storage-battery-scientist/SKILL.md",
+   "justification": "electron named in energy-storage-battery-scientist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -75469,6 +76634,15 @@
    "status": "accepted"
   },
   {
+   "src": "finite-horizon-lqr",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
    "src": "finngen-phewas-skill",
    "rel": "in_domain",
    "dst": "domain:genomics-variants",
@@ -76074,10 +77248,100 @@
   {
    "src": "firecrawl-parse",
    "rel": "references",
+   "dst": "academic-paper",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in academic-paper/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "auth",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in auth/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "build-model",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in build-model/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "chronograph-portfolio-company-one-pager",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in chronograph-portfolio-company-one-pager/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "cite-check",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in cite-check/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "comp-sheet",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in comp-sheet/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "datamol",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in datamol/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "document-quality-check",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in document-quality-check/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
    "dst": "docx",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in firecrawl-parse/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "draft-brief",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in draft-brief/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "draft-long-form-memo",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in draft-long-form-memo/SKILL.md",
    "status": "accepted"
   },
   {
@@ -76096,6 +77360,285 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "firecrawl-scrape named in firecrawl-parse/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "gantt-chart-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in gantt-chart-visualization/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "google-docs",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in google-docs/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "google-drive",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in google-drive/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "google-sheets",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in google-sheets/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "initiate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in initiate/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "irl-tracker",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in irl-tracker/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "iso-13485-certification",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in iso-13485-certification/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "liteparse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in liteparse/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "litigation-update-post",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in litigation-update-post/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "markitdown",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in markitdown/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "matlab-choose-bigdata-solution",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in matlab-choose-bigdata-solution/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "matlab-define-toolbox-api",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in matlab-define-toolbox-api/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "matlab-modernize-code",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in matlab-modernize-code/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli-academic-paper",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-academic-paper/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli-data-dashboard",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-data-dashboard/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli-docx",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-docx/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli-financial-model",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-financial-model/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli-pptx",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-pptx/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli-word-form",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-word-form/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "officecli-xlsx",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-xlsx/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "pdf",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in pdf/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "read-file",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in read-file/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "reports-pdfs-and-slide-automation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in reports-pdfs-and-slide-automation/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "sec-report",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sec-report/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "sharepoint",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "sharepoint-spreadsheet-formula-builder",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint-spreadsheet-formula-builder/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "sharepoint-spreadsheets",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint-spreadsheets/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "sharepoint-word-docs",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint-word-docs/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "smart-file-renaming",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in smart-file-renaming/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "firecrawl-parse",
+   "rel": "references",
+   "dst": "visualization-strategy-and-critique",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in visualization-strategy-and-critique/SKILL.md",
    "status": "accepted"
   },
   {
@@ -76744,6 +78287,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "reverse-skill-router named in firmware-pentest/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "first-order-model-fitting",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "first-order-model-fitting",
+   "rel": "references",
+   "dst": "scipy-curve-fit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scipy-curve-fit named in first-order-model-fitting/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -78850,6 +80411,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "gantt-chart-visualization",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in gantt-chart-visualization/SKILL.md",
    "status": "accepted"
   },
   {
@@ -82651,6 +84221,15 @@
    "status": "accepted"
   },
   {
+   "src": "gnucobol-mainframe-batch",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
    "src": "go-rust-reverse",
    "rel": "in_domain",
    "dst": "domain:security-auditing",
@@ -82878,6 +84457,15 @@
   {
    "src": "google-docs",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in google-docs/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "google-docs",
+   "rel": "references",
    "dst": "google-drive",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -82945,6 +84533,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in google-drive/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "google-drive",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in google-drive/SKILL.md",
    "status": "accepted"
   },
   {
@@ -83089,6 +84686,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "google-sheets",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in google-sheets/SKILL.md",
    "status": "accepted"
   },
   {
@@ -85774,6 +87380,15 @@
    "status": "accepted"
   },
   {
+   "src": "hepatologist",
+   "rel": "references",
+   "dst": "trend-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of hepatologist appears in trend-analysis/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "herpetologist",
    "rel": "in_discipline",
    "dst": "discipline:biology-life-sciences",
@@ -86437,6 +88052,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "Columnar table named in hf-cli/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "hibernate-upgrade",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
    "status": "accepted"
   },
   {
@@ -88717,6 +90341,15 @@
    "status": "accepted"
   },
   {
+   "src": "imc-tuning-rules",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
    "src": "immunogeneticist",
    "rel": "in_discipline",
    "dst": "discipline:biology-life-sciences",
@@ -89268,6 +90901,15 @@
   {
    "src": "industrial-brutalist-ui",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in industrial-brutalist-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "industrial-brutalist-ui",
+   "rel": "references",
    "dst": "micro",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -89416,6 +91058,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "industrial-microbiologist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in industrial-microbiologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -89763,6 +91414,15 @@
   {
    "src": "initiate",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in initiate/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "initiate",
+   "rel": "references",
    "dst": "neo4j-query-tuning-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -89857,6 +91517,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of crystallographer appears in inorganic-chemist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "inorganic-chemist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in inorganic-chemist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -90402,6 +92071,15 @@
   {
    "src": "irl-tracker",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in irl-tracker/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "irl-tracker",
+   "rel": "references",
    "dst": "gap-analysis",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -90442,6 +92120,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in iso-13485-certification/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "iso-13485-certification",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in iso-13485-certification/SKILL.md",
    "status": "accepted"
   },
   {
@@ -90676,6 +92363,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "item-management named in msbuild-antipatterns/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "jakarta-namespace",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "jakarta-namespace",
+   "rel": "references",
+   "dst": "spring-boot-migration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "jakarta-namespace named in spring-boot-migration/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -91507,6 +93212,15 @@
    "status": "accepted"
   },
   {
+   "src": "k6-test-maintenance",
+   "rel": "references",
+   "dst": "trend-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in k6-test-maintenance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "k6-trend-analysis",
    "rel": "in_domain",
    "dst": "domain:cloud-devops",
@@ -91558,6 +93272,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "show-me named in k6-trend-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-trend-analysis",
+   "rel": "references",
+   "dst": "trend-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in k6-trend-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -94641,6 +96364,15 @@
   {
    "src": "liteparse",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in liteparse/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "liteparse",
+   "rel": "references",
    "dst": "markitdown",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -94870,6 +96602,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in litigation-update-post/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "litigation-update-post",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in litigation-update-post/SKILL.md",
    "status": "accepted"
   },
   {
@@ -95737,6 +97478,33 @@
    "status": "accepted"
   },
   {
+   "src": "logistics-rules-to-optimization",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "logistics-rules-to-optimization",
+   "rel": "references",
+   "dst": "alerting-irm",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in logistics-rules-to-optimization/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "logistics-rules-to-optimization",
+   "rel": "references",
+   "dst": "slack",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in logistics-rules-to-optimization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "loki",
    "rel": "in_domain",
    "dst": "domain:cloud-devops",
@@ -95899,6 +97667,24 @@
    "status": "accepted"
   },
   {
+   "src": "lomb-scargle-periodogram",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "lomb-scargle-periodogram",
+   "rel": "references",
+   "dst": "astropy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "astropy named in lomb-scargle-periodogram/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "loop-me",
    "rel": "in_domain",
    "dst": "domain:reasoning-ideation",
@@ -95950,6 +97736,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of conservation-scientist appears in low-temperature-physicist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "low-temperature-physicist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in low-temperature-physicist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98610,6 +100405,15 @@
   {
    "src": "markitdown",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in markitdown/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "markitdown",
+   "rel": "references",
    "dst": "liteparse",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98677,6 +100481,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "mass-spectrometrist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in mass-spectrometrist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -99951,6 +101764,15 @@
   {
    "src": "matlab-choose-bigdata-solution",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in matlab-choose-bigdata-solution/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "matlab-choose-bigdata-solution",
+   "rel": "references",
    "dst": "matlab",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -100171,6 +101993,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "matlab-define-toolbox-api",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in matlab-define-toolbox-api/SKILL.md",
    "status": "accepted"
   },
   {
@@ -100441,6 +102272,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "matlab-modernize-code",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in matlab-modernize-code/SKILL.md",
    "status": "accepted"
   },
   {
@@ -102025,6 +103865,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "medical-physicist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in medical-physicist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -104413,6 +106262,42 @@
    "status": "accepted"
   },
   {
+   "src": "milp-solver-workflow",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "milp-solver-workflow",
+   "rel": "references",
+   "dst": "alerting-irm",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in milp-solver-workflow/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "milp-solver-workflow",
+   "rel": "references",
+   "dst": "cuopt-user-rules",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of cuopt-user-rules appears in milp-solver-workflow/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "milp-solver-workflow",
+   "rel": "references",
+   "dst": "slack",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in milp-solver-workflow/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "mimir",
    "rel": "in_domain",
    "dst": "domain:cloud-devops",
@@ -104689,6 +106574,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in mining-geologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "mip-solver-and-solution-audit",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "mip-solver-and-solution-audit",
+   "rel": "references",
+   "dst": "scip-opt",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scip-opt named in mip-solver-and-solution-audit/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -107133,6 +109036,15 @@
   {
    "src": "nanophysicist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in nanophysicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "nanophysicist",
+   "rel": "references",
    "dst": "nanotechnologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -107191,6 +109103,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of cloudflare appears in nanotechnologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "nanotechnologist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in nanotechnologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -113199,6 +115120,15 @@
   {
    "src": "neuroscientist",
    "rel": "references",
+   "dst": "timeseries-detrending",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in timeseries-detrending/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
    "dst": "tissue-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -117843,6 +119773,15 @@
   {
    "src": "officecli",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli",
+   "rel": "references",
    "dst": "morph-ppt",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -117996,6 +119935,15 @@
   {
    "src": "officecli-academic-paper",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-academic-paper/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-academic-paper",
+   "rel": "references",
    "dst": "officecli",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -118059,6 +120007,15 @@
   {
    "src": "officecli-data-dashboard",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-data-dashboard/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-data-dashboard",
+   "rel": "references",
    "dst": "officecli",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -118117,6 +120074,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in officecli-docx/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-docx",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-docx/SKILL.md",
    "status": "accepted"
   },
   {
@@ -118189,6 +120155,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "dcf named in officecli-financial-model/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-financial-model",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-financial-model/SKILL.md",
    "status": "accepted"
   },
   {
@@ -118320,6 +120295,15 @@
   {
    "src": "officecli-pptx",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-pptx/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-pptx",
+   "rel": "references",
    "dst": "morph-ppt",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -118392,6 +120376,15 @@
   {
    "src": "officecli-word-form",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-word-form/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-word-form",
+   "rel": "references",
    "dst": "micro",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -118432,6 +120425,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in officecli-xlsx/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-xlsx",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in officecli-xlsx/SKILL.md",
    "status": "accepted"
   },
   {
@@ -118567,6 +120569,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "omniverse-realtime-viewer",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in omniverse-realtime-viewer/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -119436,6 +121447,15 @@
   {
    "src": "operations-researcher",
    "rel": "references",
+   "dst": "scip-opt",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of scip-opt appears in operations-researcher/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "operations-researcher",
+   "rel": "references",
    "dst": "simpy",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -119562,6 +121582,15 @@
   {
    "src": "optimization-scientist",
    "rel": "references",
+   "dst": "casadi-ipopt-nlp",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of optimization-scientist appears in casadi-ipopt-nlp/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "optimization-scientist",
+   "rel": "references",
    "dst": "cuopt-user-rules",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -119580,10 +121609,28 @@
   {
    "src": "optimization-scientist",
    "rel": "references",
+   "dst": "routing-subtour-elimination",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "routing-subtour-elimination named in optimization-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "optimization-scientist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in optimization-scientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "optimization-scientist",
+   "rel": "references",
+   "dst": "scip-opt",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of scip-opt appears in optimization-scientist/SKILL.md",
    "status": "accepted"
   },
   {
@@ -120066,6 +122113,15 @@
   {
    "src": "optoelectronics-engineer",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in optoelectronics-engineer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "optoelectronics-engineer",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -120336,6 +122392,15 @@
   {
    "src": "organic-chemist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in organic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "organic-chemist",
+   "rel": "references",
    "dst": "environmental-chemist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -120412,6 +122477,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of crystallographer appears in organometallic-chemist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "organometallic-chemist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in organometallic-chemist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -120511,6 +122585,60 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in orthopedic-biomechanist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "ortools-pickup-delivery-routing",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "ortools-pickup-delivery-routing",
+   "rel": "references",
+   "dst": "ortools-routing-modeling",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ortools-routing-modeling named in ortools-pickup-delivery-routing/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ortools-routing-modeling",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "ortools-routing-modeling",
+   "rel": "references",
+   "dst": "alerting-irm",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in ortools-routing-modeling/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "ortools-routing-modeling",
+   "rel": "references",
+   "dst": "ortools-pickup-delivery-routing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ortools-routing-modeling named in ortools-pickup-delivery-routing/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ortools-routing-modeling",
+   "rel": "references",
+   "dst": "slack",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in ortools-routing-modeling/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -122253,6 +124381,15 @@
   {
    "src": "particle-physicist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in particle-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "particle-physicist",
+   "rel": "references",
    "dst": "nuclear-physicist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -123061,6 +125198,24 @@
    "status": "accepted"
   },
   {
+   "src": "pcap-triage-tshark",
+   "rel": "in_domain",
+   "dst": "domain:security-auditing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "pcap-triage-tshark",
+   "rel": "references",
+   "dst": "suricata-offline-evejson",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "suricata-offline-evejson named in pcap-triage-tshark/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "pdf",
    "rel": "in_domain",
    "dst": "domain:documents-office",
@@ -123094,6 +125249,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pdf referenced in code/link context in diagram-generator/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "pdf",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in pdf/SKILL.md",
    "status": "accepted"
   },
   {
@@ -123436,6 +125600,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pennylane named in cirq/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "pennylane",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in pennylane/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -124683,6 +126856,15 @@
   {
    "src": "photochemist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in photochemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "photochemist",
+   "rel": "references",
    "dst": "quantum-chemist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -125698,6 +127880,15 @@
    "status": "accepted"
   },
   {
+   "src": "pid-controller",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
    "src": "plan-ui-change",
    "rel": "in_domain",
    "dst": "domain:dotnet-development",
@@ -126267,6 +128458,15 @@
   {
    "src": "plant-physiologist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in plant-physiologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "plant-physiologist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -126289,6 +128489,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "plasma-physicist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in plasma-physicist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -126559,6 +128768,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of playwright-best-practices appears in api-security/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "playwright-best-practices",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in playwright-best-practices/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -131415,6 +133633,15 @@
   {
    "src": "prototype",
    "rel": "references",
+   "dst": "trivy-offline-vulnerability-scanning",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in trivy-offline-vulnerability-scanning/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prototype",
+   "rel": "references",
    "dst": "twilio-security-api-auth",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -133557,6 +135784,15 @@
   {
    "src": "pytest",
    "rel": "references",
+   "dst": "python-scala-libraries",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pytest named in python-scala-libraries/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "pytest",
+   "rel": "references",
    "dst": "research-software-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -133642,6 +135878,168 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pytest named in writing-plans/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-collections",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-collections",
+   "rel": "references",
+   "dst": "python-scala-functional",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-functional named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-collections",
+   "rel": "references",
+   "dst": "python-scala-idioms",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-idioms named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-collections",
+   "rel": "references",
+   "dst": "python-scala-libraries",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-libraries named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-collections",
+   "rel": "references",
+   "dst": "python-scala-oop",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-oop named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-collections",
+   "rel": "references",
+   "dst": "python-scala-syntax-mapping",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-syntax-mapping named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-functional",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-functional",
+   "rel": "references",
+   "dst": "python-scala-collections",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-functional named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-idioms",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-idioms",
+   "rel": "references",
+   "dst": "domain-modeling",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain-modeling named in python-scala-idioms/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-idioms",
+   "rel": "references",
+   "dst": "python-scala-collections",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-idioms named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-libraries",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-libraries",
+   "rel": "references",
+   "dst": "pytest",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pytest named in python-scala-libraries/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-libraries",
+   "rel": "references",
+   "dst": "python-scala-collections",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-libraries named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-oop",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-oop",
+   "rel": "references",
+   "dst": "python-scala-collections",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-oop named in python-scala-collections/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-syntax-mapping",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "python-scala-syntax-mapping",
+   "rel": "references",
+   "dst": "python-scala-collections",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "python-scala-syntax-mapping named in python-scala-collections/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -134092,6 +136490,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of quantum-chemist appears in computational-chemist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "quantum-chemist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in quantum-chemist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -134934,6 +137341,15 @@
   {
    "src": "query-pdb",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in query-pdb/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "query-pdb",
+   "rel": "references",
    "dst": "ncbi-datasets",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -135288,7 +137704,7 @@
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "electron referenced in code/link context in radiation-oncology-physicist/SKILL.md",
+   "justification": "electron named in radiation-oncology-physicist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -136153,6 +138569,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "read-file named in deep-agents-orchestration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "read-file",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in read-file/SKILL.md",
    "status": "accepted"
   },
   {
@@ -139344,6 +141769,15 @@
   {
    "src": "reports-pdfs-and-slide-automation",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in reports-pdfs-and-slide-automation/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "reports-pdfs-and-slide-automation",
+   "rel": "references",
    "dst": "google-slides",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -140392,6 +142826,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "reverse-engineering named in edr-bypass-re/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "reverse-engineering",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in reverse-engineering/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -141463,6 +143906,42 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "vercel-functions named in routing-middleware/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "routing-subtour-elimination",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "routing-subtour-elimination",
+   "rel": "references",
+   "dst": "optimization-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "routing-subtour-elimination named in optimization-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "routing-subtour-elimination",
+   "rel": "references",
+   "dst": "scip-opt",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "routing-subtour-elimination named in scip-opt/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "routing-subtour-elimination",
+   "rel": "references",
+   "dst": "start",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "start referenced in code/link context in routing-subtour-elimination/SKILL.md",
    "status": "accepted"
   },
   {
@@ -148747,6 +151226,87 @@
    "status": "accepted"
   },
   {
+   "src": "scip-opt",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "scip-opt",
+   "rel": "references",
+   "dst": "alerting-irm",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of alerting-irm appears in scip-opt/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "scip-opt",
+   "rel": "references",
+   "dst": "mip-solver-and-solution-audit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scip-opt named in mip-solver-and-solution-audit/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scip-opt",
+   "rel": "references",
+   "dst": "operations-researcher",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of scip-opt appears in operations-researcher/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "scip-opt",
+   "rel": "references",
+   "dst": "optimization-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of scip-opt appears in optimization-scientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "scip-opt",
+   "rel": "references",
+   "dst": "routing-subtour-elimination",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "routing-subtour-elimination named in scip-opt/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scip-opt",
+   "rel": "references",
+   "dst": "slack",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in scip-opt/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scipy-curve-fit",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "scipy-curve-fit",
+   "rel": "references",
+   "dst": "first-order-model-fitting",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scipy-curve-fit named in first-order-model-fitting/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "scirpy-immune-repertoire",
    "rel": "in_domain",
    "dst": "domain:single-cell-rnaseq",
@@ -150301,6 +152861,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "sec-report",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sec-report/SKILL.md",
    "status": "accepted"
   },
   {
@@ -152583,6 +155152,15 @@
   {
    "src": "sharepoint",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "sharepoint",
+   "rel": "references",
    "dst": "outlook-calendar",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -152763,6 +155341,15 @@
   {
    "src": "sharepoint-spreadsheet-formula-builder",
    "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint-spreadsheet-formula-builder/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "sharepoint-spreadsheet-formula-builder",
+   "rel": "references",
    "dst": "sharepoint",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -152794,6 +155381,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "sharepoint-spreadsheets",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint-spreadsheets/SKILL.md",
    "status": "accepted"
   },
   {
@@ -152848,6 +155444,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in sharepoint-word-docs/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "sharepoint-word-docs",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in sharepoint-word-docs/SKILL.md",
    "status": "accepted"
   },
   {
@@ -153913,6 +156518,15 @@
    "status": "accepted"
   },
   {
+   "src": "simulation-metrics",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
    "src": "single-cell-biologist",
    "rel": "in_discipline",
    "dst": "discipline:biology-life-sciences",
@@ -154455,10 +157069,28 @@
   {
    "src": "slack",
    "rel": "references",
+   "dst": "logistics-rules-to-optimization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in logistics-rules-to-optimization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "slack",
+   "rel": "references",
    "dst": "managed-deep-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "slack named in managed-deep-agents/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "slack",
+   "rel": "references",
+   "dst": "milp-solver-workflow",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in milp-solver-workflow/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -154500,6 +157132,15 @@
   {
    "src": "slack",
    "rel": "references",
+   "dst": "ortools-routing-modeling",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in ortools-routing-modeling/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "slack",
+   "rel": "references",
    "dst": "power-grid-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -154522,6 +157163,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "slack named in pydantic-ai-harness/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "slack",
+   "rel": "references",
+   "dst": "scip-opt",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "slack named in scip-opt/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -154909,6 +157559,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "docx named in smart-file-renaming/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "smart-file-renaming",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in smart-file-renaming/SKILL.md",
    "status": "accepted"
   },
   {
@@ -155787,6 +158446,15 @@
   {
    "src": "spintronics-physicist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in spintronics-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "spintronics-physicist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -155836,6 +158504,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in sports-scientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "spring-boot-migration",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "spring-boot-migration",
+   "rel": "references",
+   "dst": "jakarta-namespace",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "jakarta-namespace named in spring-boot-migration/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -156133,6 +158819,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "start referenced in code/link context in render-cron-jobs/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "start",
+   "rel": "references",
+   "dst": "routing-subtour-elimination",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "start referenced in code/link context in routing-subtour-elimination/SKILL.md",
    "status": "accepted"
   },
   {
@@ -156628,6 +159323,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "statsmodels named in statistician/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "statsmodels",
+   "rel": "references",
+   "dst": "timeseries-detrending",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "statsmodels named in timeseries-detrending/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -157353,6 +160057,15 @@
   {
    "src": "structural-biologist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in structural-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "structural-biologist",
+   "rel": "references",
    "dst": "esm",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -157897,6 +160610,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of conservation-scientist appears in superconductivity-scientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "superconductivity-scientist",
+   "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in superconductivity-scientist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -158559,6 +161281,15 @@
   {
    "src": "surface-physicist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in surface-physicist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "surface-physicist",
+   "rel": "references",
    "dst": "isotope-geochemist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -158617,6 +161348,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in surgeon-scientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "suricata-offline-evejson",
+   "rel": "in_domain",
+   "dst": "domain:security-auditing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "suricata-offline-evejson",
+   "rel": "references",
+   "dst": "pcap-triage-tshark",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "suricata-offline-evejson named in pcap-triage-tshark/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -159526,6 +162275,42 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in systems-neuroscientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "syz-extract-constants",
+   "rel": "in_domain",
+   "dst": "domain:security-auditing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "syz-extract-constants",
+   "rel": "references",
+   "dst": "syzlang-ioctl-basics",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "syzlang-ioctl-basics named in syz-extract-constants/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "syzlang-ioctl-basics",
+   "rel": "in_domain",
+   "dst": "domain:security-auditing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "syzlang-ioctl-basics",
+   "rel": "references",
+   "dst": "syz-extract-constants",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "syzlang-ioctl-basics named in syz-extract-constants/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -162528,6 +165313,15 @@
   {
    "src": "thick-client",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in thick-client/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "thick-client",
+   "rel": "references",
    "dst": "ida-reverse",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -162982,6 +165776,33 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "VCF variants named in tiledbvcf/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "timeseries-detrending",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "timeseries-detrending",
+   "rel": "references",
+   "dst": "neuroscientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in timeseries-detrending/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "timeseries-detrending",
+   "rel": "references",
+   "dst": "statsmodels",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "statsmodels named in timeseries-detrending/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -163588,6 +166409,42 @@
    "status": "accepted"
   },
   {
+   "src": "transaction-concurrency-control-foundations",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "transaction-protocol-reasoning",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "transaction-trace-analysis",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "transaction-trace-analysis",
+   "rel": "references",
+   "dst": "validation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "validation referenced in code/link context in transaction-trace-analysis/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "transformers",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -163984,6 +166841,60 @@
    "status": "accepted"
   },
   {
+   "src": "trend-analysis",
+   "rel": "in_domain",
+   "dst": "domain:data-science-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "trend-analysis",
+   "rel": "references",
+   "dst": "comp-sheet",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in comp-sheet/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "trend-analysis",
+   "rel": "references",
+   "dst": "earnings-flash",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in earnings-flash/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "trend-analysis",
+   "rel": "references",
+   "dst": "hepatologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of hepatologist appears in trend-analysis/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "trend-analysis",
+   "rel": "references",
+   "dst": "k6-test-maintenance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in k6-test-maintenance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "trend-analysis",
+   "rel": "references",
+   "dst": "k6-trend-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "trend-analysis named in k6-trend-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "triage",
    "rel": "in_domain",
    "dst": "domain:software-dev",
@@ -164161,6 +167072,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "tribologist named in surface-engineering-specialist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "trivy-offline-vulnerability-scanning",
+   "rel": "in_domain",
+   "dst": "domain:security-auditing",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "trivy-offline-vulnerability-scanning",
+   "rel": "references",
+   "dst": "prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in trivy-offline-vulnerability-scanning/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -170826,6 +173755,15 @@
   {
    "src": "validation",
    "rel": "references",
+   "dst": "transaction-trace-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "validation referenced in code/link context in transaction-trace-analysis/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "validation",
+   "rel": "references",
    "dst": "wix-app",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -172720,6 +175658,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "visualization-strategy-and-critique",
+   "rel": "references",
+   "dst": "firecrawl-parse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of firecrawl-parse appears in visualization-strategy-and-critique/SKILL.md",
    "status": "accepted"
   },
   {
@@ -175632,6 +178579,15 @@
   {
    "src": "x-ray-synchrotron-scientist",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in x-ray-synchrotron-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "x-ray-synchrotron-scientist",
+   "rel": "references",
    "dst": "nanomaterials-scientist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -177027,6 +179983,15 @@
   {
    "src": "zoom-meeting-sdk-electron",
    "rel": "references",
+   "dst": "electron",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "electron named in zoom-meeting-sdk-electron/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "zoom-meeting-sdk-electron",
+   "rel": "references",
    "dst": "start",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -177905,6 +180870,7 @@
   "expo-tailwind-setup",
   "expo-ui-jetpack-compose",
   "fetching-dbt-docs",
+  "finite-horizon-lqr",
   "fitness-nutrition",
   "fix-finding",
   "flowio",
@@ -177914,8 +180880,11 @@
   "fund-summarizer",
   "genome-match",
   "git-guardrails-claude-code",
+  "gnucobol-mainframe-batch",
   "grammar-of-graphics-and-declarative-visualization",
   "handoff",
+  "hibernate-upgrade",
+  "imc-tuning-rules",
   "internal-comms",
   "ios-app-intents",
   "ios-simulator-browser",
@@ -177930,6 +180899,7 @@
   "msbuild-server",
   "omero-integration",
   "packaging-notarization",
+  "pid-controller",
   "prisma-client-api",
   "prisma-database-setup",
   "prisma-driver-adapter-implementation",
@@ -177958,6 +180928,7 @@
   "shopify-polaris-customer-account-extensions",
   "sign-in-with-vercel",
   "signing-entitlements",
+  "simulation-metrics",
   "skill-doctor",
   "soul2dna",
   "sqlite-expert",
@@ -177969,6 +180940,8 @@
   "thread-abort-migration",
   "to-questionnaire",
   "tpmi-phewas-skill",
+  "transaction-concurrency-control-foundations",
+  "transaction-protocol-reasoning",
   "ukb-topmed-phewas-skill",
   "upgrading-expo",
   "use-modern-go",
@@ -178033,6 +181006,10 @@
   "fenics": [
    "applied-mathematician",
    "mathematical-analyst"
+  ],
+  "fopdt": [
+   "first-order-model-fitting",
+   "imc-tuning-rules"
   ],
   "git worktree": [
    "using-git-worktrees",
