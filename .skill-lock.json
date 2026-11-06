@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "4bc3510cfe750768c8dc716cd89c66166272990c",
+      "skillFolderHash": "4fcb0130875f82f486ce08757c41397c570c8015",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-05T14:36:40.955Z"
+      "updatedAt": "2026-11-06T14:14:33.251Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -1320,9 +1320,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "skillFolderHash": "003ec8747c78ceb8e9da5d83f12523a06830093c",
+      "skillFolderHash": "cc70f6e5f0cf42b82d3f72f6f1c3a4134694d518",
       "installedAt": "2026-06-09T19:25:48.883Z",
-      "updatedAt": "2026-10-31T12:21:48.727Z"
+      "updatedAt": "2026-11-06T14:14:34.235Z"
     },
     "playwright-best-practices": {
       "source": "currents-dev/playwright-best-practices-skill",
@@ -1519,9 +1519,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "e328647f773572c449699be03e719e95ab151a6f",
+      "skillFolderHash": "e05f51bd7fb1c5db4d87e3a1c167a4b9ea441bb3",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-10-17T10:40:05.617Z"
+      "updatedAt": "2026-11-06T14:14:36.121Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
@@ -2041,18 +2041,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "e1cfe848bfbd120ceb42b2253542fce34a3e5a77",
+      "skillFolderHash": "4c13c5ede55ea8acefa5aba0ec0c9ae7e99dcc7e",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-10-25T11:22:31.300Z"
+      "updatedAt": "2026-11-06T14:14:37.450Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "94c53a8c99ee75ca94245b60c6a4e97f79c02987",
+      "skillFolderHash": "e85bda8b46812f2f2030a79d5f825ef0add7fc72",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-10-10T12:47:27.132Z"
+      "updatedAt": "2026-11-06T14:14:38.529Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "9c42ce87f0ac99b7f15f1d0fefda870eebf38d4b",
+      "skillFolderHash": "b552ed968843cd3c23e5b0e4ad2895161c5caa27",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-05T14:37:02.234Z"
+      "updatedAt": "2026-11-06T14:14:55.827Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -9555,9 +9555,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "8cc892dd96224d92a9468795476bfcd329b9bf14",
+      "skillFolderHash": "9f811d834dffeecf58d7b7f08121925bd0226b49",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-04T14:30:08.892Z"
+      "updatedAt": "2026-11-06T14:14:58.750Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -10635,9 +10635,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-pipelines/SKILL.md",
-      "skillFolderHash": "822902cb650887df497fc96118bb511feb7ff872",
+      "skillFolderHash": "ddd80842d15e19c4714f89acd88fe64c76f923bf",
       "installedAt": "2026-08-23T17:20:36.191Z",
-      "updatedAt": "2026-10-28T12:49:20.439Z"
+      "updatedAt": "2026-11-06T14:15:02.281Z"
     },
     "databricks-python-sdk": {
       "source": "databricks/databricks-agent-skills",
@@ -10662,9 +10662,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-spark-structured-streaming/SKILL.md",
-      "skillFolderHash": "d3f0756b0c02bb555b7281a174699b55d8d0de31",
+      "skillFolderHash": "fbc77822caaa75a19138e7a7741ddf698872448d",
       "installedAt": "2026-08-23T17:20:36.202Z",
-      "updatedAt": "2026-11-04T14:30:14.167Z"
+      "updatedAt": "2026-11-06T14:15:03.945Z"
     },
     "databricks-synthetic-data-gen": {
       "source": "databricks/databricks-agent-skills",
