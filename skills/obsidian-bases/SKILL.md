@@ -47,12 +47,15 @@ summaries:
 
 # Define one or more views
 views:
-  - type: table | cards | list | map
+  - type: table | cards | list | map | kanban
     name: "View Name"
     limit: 10                    # Optional: limit results
     groupBy:                     # Optional: group results
       property: property_name
       direction: ASC | DESC
+    groupOrder:                  # Optional: order and visibility of groups
+      - Planned                  # only listed groups are shown, in this order
+      - null                     # include files with no value for the grouped property
     filters:                     # View-specific filters follow the same rules
       and:
         - 'status == "active"'
@@ -267,6 +270,28 @@ views:
     name: "Locations"
     # Map-specific settings for lat/lng properties
 ```
+
+### Kanban View
+
+Core layout, Obsidian 1.14+. Requires `groupBy` — each group becomes a column, and files with
+no value for that property land in a **None** column. Use `groupOrder` to set column order and
+hide columns; without it, columns follow `groupBy`'s sort direction.
+
+```yaml
+views:
+  - type: kanban
+    name: "Projects"
+    groupBy:
+      property: note.status
+      direction: ASC
+    groupOrder:
+      - Planned
+      - In progress
+      - Done
+```
+
+Cards can only be dragged between columns when grouping by a note property or `file.folder`;
+grouping by a formula or any other file property makes the board read-only.
 
 ## Default Summary Formulas
 
