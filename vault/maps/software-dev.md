@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (151)
+## Skills (165)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw design, creation, diagnosis, patching, active debugging, and upgrade requests to the right strategies
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -72,13 +72,17 @@ created: 2026-06-13
 - [git-workflow-and-versioning](../notes/software-dev/git-workflow-and-versioning.md) — Structures git workflow practices. Use when making any code change
 - [github](../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
 - [github-actions-ci](../notes/software-dev/github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
+- [gnucobol-mainframe-batch](../notes/software-dev/gnucobol-mainframe-batch.md) — GnuCOBOL toolchain pointers for mainframe-style batch programs (LINE/RECORD SEQUENTIAL files, PIC clauses, cobc build flags)
+- [google-rust-style](../notes/software-dev/google-rust-style.md) — Use when writing, reviewing, or refactoring Rust code — module layout and imports, function parameter and return types (&str vs &String, slice vs &Vec, iterators, bool flags), traits...
 - [greploop](../notes/software-dev/greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
 - [handoff](../notes/software-dev/handoff.md) — Compact the current conversation into a handoff document for another agent to pick up
+- [hibernate-upgrade](../notes/software-dev/hibernate-upgrade.md) — Migrate Hibernate 5 to Hibernate 6 with Spring Boot 3
 - [hunk-review](../notes/software-dev/hunk-review.md) — Interacts with live Hunk diff review sessions via CLI
 - [implement](../notes/software-dev/implement.md) — Implement a piece of work based on a spec or set of tickets
 - [improve-codebase-architecture](../notes/software-dev/improve-codebase-architecture.md) — Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick
 - [incremental-implementation](../notes/software-dev/incremental-implementation.md) — Delivers changes incrementally. Use when implementing any feature or change that touches more than one file
 - [investigation-mode](../notes/software-dev/investigation-mode.md) — Orchestrated debugging coordinator. Triggers on frustration signals (stuck, hung, broken, waiting) and systematically triages: runtime logs → workflow status → browser verify →...
+- [jakarta-namespace](../notes/software-dev/jakarta-namespace.md) — Migrate Java EE javax.* imports to Jakarta EE jakarta.* namespace
 - [jest](../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [launch-readiness-orchestrator](../notes/software-dev/launch-readiness-orchestrator.md) — Launch Readiness Orchestrator skill for Datasite deal rooms
 - [linear](../notes/software-dev/linear.md) — Manage issues, projects & team workflows in Linear
@@ -116,6 +120,12 @@ created: 2026-06-13
 - [protobuf](../notes/software-dev/protobuf.md) — Use when working with Protocol Buffer (.proto) files, buf.yaml, buf.gen.yaml, or buf.lock
 - [prototype](../notes/software-dev/prototype.md) — Build a throwaway prototype to answer a design question
 - [pytest](../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
+- [python-scala-collections](../notes/software-dev/python-scala-collections.md) — Guide for translating Python collection operations to idiomatic Scala
+- [python-scala-functional](../notes/software-dev/python-scala-functional.md) — Guide for translating Python code to functional Scala style
+- [python-scala-idioms](../notes/software-dev/python-scala-idioms.md) — Guide for writing idiomatic Scala when translating from Python
+- [python-scala-libraries](../notes/software-dev/python-scala-libraries.md) — Guide for mapping common Python libraries and idioms to Scala equivalents
+- [python-scala-oop](../notes/software-dev/python-scala-oop.md) — Guide for translating Python classes, inheritance, and object-oriented patterns to Scala
+- [python-scala-syntax-mapping](../notes/software-dev/python-scala-syntax-mapping.md) — Reference guide for translating Python syntax constructs to Scala equivalents
 - [qa](../notes/software-dev/qa.md) — Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues
 - [receiving-code-review](../notes/software-dev/receiving-code-review.md) — Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification...
 - [request-refactor-plan](../notes/software-dev/request-refactor-plan.md) — Create a detailed refactor plan with tiny commits via user interview, then file it as a GitHub issue
@@ -139,6 +149,7 @@ created: 2026-06-13
 - [spec-driven-development](../notes/software-dev/spec-driven-development.md) — Creates specs before coding. Use when starting a new project, feature, or significant change and no specification exists yet
 - [spec-kit](../notes/software-dev/spec-kit.md) — Runs the Spec-Kit (GitHub SDD) artifact pipeline — constitution, spec, clarify, plan, tasks, analyze, implement — using its templates
 - [spec-to-backlog](../notes/software-dev/spec-to-backlog.md) — Automatically convert Confluence specification documents into structured Jira backlogs with Epics and implementation tickets
+- [spring-boot-migration](../notes/software-dev/spring-boot-migration.md) — Migrate Spring Boot 2.x applications to Spring Boot 3.x
 - [sqlalchemy](../notes/software-dev/sqlalchemy.md) — The standard Python SQL toolkit and ORM — 2.x style only
 - [sqlite-expert](../notes/software-dev/sqlite-expert.md) — SQLite expert for WAL mode, query optimization, embedded patterns, and advanced features
 - [subagent-driven-development](../notes/software-dev/subagent-driven-development.md) — Use when executing implementation plans with independent tasks in the current session
@@ -149,6 +160,9 @@ created: 2026-06-13
 - [test-triage](../notes/software-dev/test-triage.md) — Triage macOS tests across Xcode and SwiftPM
 - [to-spec](../notes/software-dev/to-spec.md) — Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed
 - [to-tickets](../notes/software-dev/to-tickets.md) — Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file...
+- [transaction-concurrency-control-foundations](../notes/software-dev/transaction-concurrency-control-foundations.md) — Provides database transaction concurrency-control background
+- [transaction-protocol-reasoning](../notes/software-dev/transaction-protocol-reasoning.md) — Teaches how to reason from a transaction protocol’s rules to a working model
+- [transaction-trace-analysis](../notes/software-dev/transaction-trace-analysis.md) — Teaches evidence-based analysis of transaction logs and traces
 - [triage](../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 - [triage-issue](../notes/software-dev/triage-issue.md) — Intelligently triage bug reports and error messages by searching for duplicates in Jira and offering to create new issues or add comments to existing ones
 - [ubiquitous-language](../notes/software-dev/ubiquitous-language.md) — Extract a DDD-style ubiquitous language glossary from the current conversation, flagging ambiguities and proposing canonical terms
