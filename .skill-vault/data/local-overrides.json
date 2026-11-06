@@ -1,4 +1,20 @@
 {
+  "databricks-python-sdk": [
+    {
+      "id": "cli-v1-0-0-pin-setup",
+      "issue": 1166,
+      "source": "databricks/databricks-agent-skills",
+      "find": "- Databricks CLI version should be 0.278.0 or higher",
+      "replace": "- Databricks CLI version should be v1.0.0 or higher"
+    },
+    {
+      "id": "cli-v1-0-0-pin-check",
+      "issue": 1166,
+      "source": "databricks/databricks-agent-skills",
+      "find": "# Check version (should be >= 0.278.0)",
+      "replace": "# Check version (should be >= v1.0.0)"
+    }
+  ],
   "agent-browser": [
     {
       "id": "mismatched-docs-url",
