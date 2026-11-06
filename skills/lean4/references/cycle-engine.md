@@ -1,0 +1,712 @@
+# Cycle Engine Reference
+
+> Shared logic for `/lean4:prove`, `/lean4:autoprove`, `/lean4:formalize`, `/lean4:autoformalize`, and `/lean4:disprove`.
+
+These commands share a six-phase cycle engine. This reference documents the shared mechanics; command-specific behavior is noted inline.
+
+## Six-Phase Cycle
+
+```
+Plan → Work → Checkpoint → Review → Replan → Continue/Stop
+```
+
+1. **Plan** — Discover state via LSP, identify sorries, set order
+2. **Work** — Fill sorries using search + tactics (see [sorry-filling.md](sorry-filling.md))
+3. **Checkpoint** — Stage and commit progress
+4. **Review** — Quality check at configured intervals
+5. **Replan** — Enter planner mode, produce/update action plan
+6. **Continue/Stop** — prove: prompt user; autoprove: auto-continue or stop
+
+## LSP-First Protocol
+
+LSP tools are the normative first-pass for all discovery, search, and validation. Script fallback is permitted only when LSP is unavailable or its budget is exhausted.
+
+**Planning phase (per target sorry):**
+1. `lean_goal(file, line)` — understand goal before ordering
+2. Up to 3 LSP search tools (time-boxed ~30s total): `lean_local_search`, preferably `lean_leanfinder` for semantic/goal-aware search (`lean_leansearch` for natural-language fallback, `lean_hammer_premise` for premise suggestions), and `lean_loogle` for type-pattern gaps
+3. Record top candidate lemmas and intended next attempts in the plan
+4. **Trivial-goal shortcut:** If the goal is obviously solvable (`rfl`, `simp`, `exact` with a known lemma), skip extended search — proceed directly to work phase
+
+**Work phase (per sorry):**
+1. Refresh `lean_goal(file, line)` at start
+2. Run up to 2 LSP search tools before any script fallback (skip if trivial goal or prior planning search was conclusive)
+3. Generate 2-3 candidate proof snippets from search results. When `lean_hammer_premise` returns premises, generate `simp only [p1, p2]` and `grind [p1, p2]` candidates.
+4. Test with `lean_multi_attempt(file, line, snippets=[...])`
+5. `lean_diagnostic_messages(file)` — verify; if "Try this" → `lean_code_actions(file, line)` → apply → `lean_diagnostic_messages(file)` to re-verify
+6. Prefer shortest passing candidate; only then edit/commit
+
+**Fallback gate:** Script fallback (`lean4-skills-smart-search`, `lean4-skills-search-mathlib`) and repair agents are permitted when:
+- LSP search budget is exhausted (at least 2 searches returning empty/inconclusive), OR
+- LSP server is confirmed unavailable, timing out, or rate-limited
+
+For sorry discovery fallback, prefer one-pass structured output:
+`lean4-skills-sorry-analyzer <target> --format=json --report-only`.
+Use default `text` for quick human review and `summary` only for counts.
+Do not suppress script stderr via `/dev/null`; surfaced errors are part of the fallback signal.
+
+**Validation:** Use `lean_diagnostic_messages(file)` for per-edit checks. Reserve `lake build` for checkpoint verification or explicit `/lean4:checkpoint`. See [Build Target Policy](#build-target-policy) for the full ladder.
+
+## Build Target Policy
+
+For fresh clones/worktrees or after `lake clean`, hydrate cache first and do an initial `lake build` only if needed to bootstrap LSP; the ladder below is the normal steady-state workflow after startup.
+
+Three-tier verification ladder — use the lightest tool that answers the question:
+
+| Tier | Tool | When | Speed |
+|------|------|------|-------|
+| Per-edit | `lean_diagnostic_messages(file)` | After every edit | Sub-second |
+| File compile | `lake env lean <path/to/File.lean>` | File-level gate, import checks | Seconds |
+| Project gate | `lake build` | Checkpoint, final gate, `/lean4:checkpoint` | Minutes |
+
+Run `lake env lean` from the Lean project root; pass repo-relative file paths.
+
+**Target spellings.** `lake lean <path/to/File.lean>` (from the project root) builds the file's imports and then runs Lean on that exact file; it accepts any `.lean` file in the workspace, module or not. `lake build <path/to/File.lean>` (a source path under a `lean_lib` `srcDir`) builds that one module and its changed dependencies under Lake's build graph — current Lake resolves the module through the workspace configuration (verified with Lean 4.33.1; older Lake releases that also print `5.0.0`, e.g. Lean 4.19's, did not accept source paths, so the displayed version cannot tell you). `lake build +Pkg.Module` does the same when the module name is known from Lake config; **never derive a module name by textually turning `/` into `.`** — that breaks on any custom `srcDir` (`src/Foo/Bar.lean` is `Foo.Bar`, not `src.Foo.Bar`). `lake build` rejects a path that does not resolve to a workspace module — a scratch file outside every `lean_lib`, or the bare basename of a nested file (`lake build B.lean` for `Pkg/B.lean` → `unknown target`) — and a path without `.lean` (parsed as `package/module`); `lake lean` accepts those files. `lake env lean <path/to/File.lean>` compiles the single file against already-built imports only.
+
+### File Gate Scope
+
+`lake env lean File.lean` (run from the project root) elaborates that source file against the currently built import environment; it does not rebuild imported modules. If an imported source differs from its `.olean`, the file gate can produce either a **false pass** (the import's old `.olean` still satisfies the file) or a **false failure** (the import was fixed in source but its `.olean` is stale). This is Lake behaving as designed, not a defect — the file gate is a fast file-local check, valid while the imports it reads are up to date.
+
+After editing any imported module, take one of two recovery paths before trusting the file gate:
+
+1. Rebuild every changed imported module (`lake build <path/to/ChangedImport.lean>`, or plain `lake build`), then rerun the file gate on the importing file.
+2. Run `lake lean <path/to/File.lean>` for the importing target directly. `lake lean` builds the file's imports and then runs Lean on that exact file: it is dependency-aware, it works for any `.lean` file in the workspace (including a scratch file outside every `lean_lib`), and it does not write the target's own `.olean`. `lake build <path/to/File.lean>` is the optional actual module build — use it when the path is a recognized workspace module and the installed Lake accepts source-path targets; it also writes the target's artifacts, so a later source rollback without a rebuild leaves them stale.
+
+Neither replaces the project gate: final verification may still require the appropriate project or checkpoint target (`lake build`, `/lean4:checkpoint`). Workflows that edit across files — deep mode, refactoring, axiom elimination — are exactly where an import goes stale mid-session, so they should prefer path 2 at each file gate that follows a cross-file edit.
+
+The resulting hierarchy, lightest first (all run from the project root):
+
+```
+lake env lean path/to/File.lean   # fast pre-screen; uses already-built imports only
+lake lean     path/to/File.lean   # dependency-aware file gate: builds imports, then elaborates this exact file
+lake build    path/to/File.lean   # optional module build (recognized workspace module; writes its artifacts)
+lake build                        # project / checkpoint / final integration gate
+```
+
+**`lake build` progress counter:** Lake's `[N/M]` denominator grows as dependencies are discovered mid-build (e.g., 129 → 7808 in one observed run). The `[N/M]` counter and fraction are not reliable progress estimates. Set timeouts based on wall-clock experience for the current project, not step counts.
+
+## Review Phase
+
+At configured intervals (`--review-every`), run review matching current scope:
+- Working on single sorry → `--scope=sorry --line=N`
+- Working on file → `--scope=file`
+- Never trigger `--scope=project` automatically
+
+Reviews act as gates: review → replan → continue. In prove, replan requires user approval; in autoprove, replan auto-continues.
+
+## Replan Phase
+
+After review → enter planner mode → produce/update action plan. Work phase follows that plan next cycle. With `--persist`, the Replan summary is written to the run store at this boundary ([Run Persistence](#run-persistence)).
+
+## Run Persistence
+
+`prove` and `autoprove` can write the run to the [run store](run-store.md) (`--persist`; default **off** — existing invocations are unchanged). Everything below goes through `lean4-skills-run-persist`, which drives `lean4-skills-run-store` and encodes the failure policy; the command follows the helper's `action` field. Refs #82: command integration and explicit prior-run reuse are implemented; inspect/resume remain separately scoped.
+
+**Activation and startup.** Storage root precedence: `--run-store` → `$LEAN4_RUN_STORE` → `<project-root>/.lean4-skills`. With persistence off, neither configuration source triggers any storage activity. Platform support is a **startup capability check**, not a parser rule: `run-persist start` runs after inputs are validated, after the tracker is initialized (autoprove) and **after a valid first dispatch record with its `file_baseline` exists, but before any proof edit**; a `startup-error` result (e.g. `unsupported_platform` on Windows) is a startup validation error — requested persistence never silently disappears. `tracker_session_id` is nullable (guided `prove` has no tracker). The `run_id` is session state and appears in the Resolved Inputs block.
+
+**Invocation state.** Before `start`, set `LEAN4_RUN_PERSIST_STATE` to a fresh, invocation-private path — create a private temporary directory (`mktemp -d`; do not assume `TMPDIR` is set) and name a not-yet-existing file inside it — and pass the same environment to every later `run-persist` call. The helper creates that file exclusively (`state_exists` otherwise), binds the storage root and `run_id` to it (later calls need no `--root`; a different one is refused), records each mutation as in-flight before invoking the store and resolves it afterwards, and treats `finish` and any policy stop as terminal. If the resolution of a mutation cannot be recorded, the current call returns `stop` (keeping a committed outcome and its citation under `committed`, never pretending the event failed), and if the process dies in between, the next call finds the unresolved operation and stops — bookkeeping failure never suppresses the store's outcome and never lets the run continue, not even for one more step. The state also carries the current parent context (latest persisted dispatch, accumulated `files_changed`, baseline and evidence from persisted worker handoffs and notes), so the operational-error handoff the helper emits on a stop describes the work as it stands — never the first dispatch with "no changes". Parent *knowledge* is distinguished from committed *history*: a validated dispatch, worker handoff, or note whose own journal write fails or is unresolved still informs that handoff (changed files, baseline, evidence, artifacts) exactly once and is reported under `unpersisted` with no citation — as `not-stored` only when the store refused before writing or was never called, and as `unconfirmed` (persistence unconfirmed; no citation available from this state) for an indeterminate or unresolved write; if the pending knowledge itself could not be saved, the result says it will not survive another invocation. Invalid submissions are still rejected.
+
+Executable sequence (the acceptance test runs exactly this):
+
+```bash
+export LEAN4_RUN_PERSIST_STATE="$(mktemp -d)/lean4-run-persist.json"   # a private dir; the file itself is created by `start`
+lean4-skills-run-persist --root "$STORE" start --dispatch dispatch.json --tracker-session-id "$SID"   # before any proof edit
+lean4-skills-run-persist note --kind failed-avenue --text "exact foo: type mismatch"
+lean4-skills-run-persist review --payload review.json      # every review: completed | skipped | failed
+lean4-skills-run-persist replan --payload replan.json      # every cycle boundary, before tick
+lean4-skills-cycle-tracker tick --stuck=no
+lean4-skills-run-persist dispatch --payload dispatch2.json # a redispatch
+lean4-skills-run-persist handoff --payload worker.json     # the worker's handoff
+lean4-skills-run-persist finish --payload final.json       # terminal; read `stored`
+```
+
+**One run per invocation; the parent/controller is the sole journal writer.** Workers (subagents or inline passes) return evidence in their handoff record; the parent records it. Events, in the order they occur:
+
+| When | `run-persist` call | Stored as |
+|---|---|---|
+| a redispatch (deep worker, retry with new evidence) | `dispatch --payload` | `dispatch` event (the `run-contract/v1` record) |
+| a worker stops or gets stuck | `handoff --payload` | `handoff` event |
+| an approach is ruled out / a blocker classified / a search hit relied on / a snippet tried / a gap found | `note --kind failed-avenue\|blocker-diagnosis\|search-result\|candidate\|definition-gap\|source-note` | `note` event (`lean` only when a snippet is carried — historical, never certified) |
+| **every review the command runs, skips, or fails** | `review --payload` | `review` event: `review-record/v1` with `status: completed\|skipped\|failed` — a completed batch review carries the shipped `lean4-review-output/v2` verbatim; a completed stuck review carries the triage (`blocker_class`, `next_action`, evidence, falsification flag) and the parent's mapped handoff; a skipped review (`--review-source=none`, `--review-every=never`, not due) records why — **never a fabricated empty success** — with the source that was actually selected (`source: none` is valid only for a skipped review; a review skipped because it is not due keeps the configured source); `completed` never implies suggested edits were applied |
+| **every cycle boundary, before `cycle-tracker tick`** (stuck-triggered replans included) | `replan --payload` | `replan` event: `replan-summary/v1` — `cycle`, `plan`, `failed_approaches`, `blockers`, `next_steps`, `cites` |
+| the run stops, for any reason | `finish --payload` | the run's final `run-contract/v1` handoff (`set-handoff`) |
+
+**Citations.** Stored items are referenced only as **`<run_id>#<seq>`** (the helper returns `cite` for every committed event). The final handoff's `failed_avenues` / `evidence.top_candidates` / `evidence.attempts` and the Markdown stop summary use that form; a `replan` may only cite earlier events of the same run (the store refuses otherwise). Never cite an event the helper did not confirm.
+
+**Failure policy** (the helper's `action`; the command must obey it):
+
+| Store outcome | Helper result | Command behaviour |
+|---|---|---|
+| `committed` | `continue` | go on |
+| `journal_only` (finish only) | `done`, `stored: true`, `warning` | go on; the journal is authoritative; **never re-append**; the stop summary says "handoff cache not confirmed" |
+| `busy` | one bounded retry after 1 s, then as below | never break the lock |
+| any other refusal (`journal_damaged`, `publish_unsynced`, `invalid_payload`, `kind_unsupported`, …) | `stop` + an operational-error handoff | **stop further proof work**; emit that handoff (`status: stopped`, `stop_reason: operational-error`, `stop_detail: run-store <code>`) to the user; no next cycle, no `tick` |
+| `indeterminate`, or no / malformed / contradictory result from the store (wrong schema, exit status disagreeing with the outcome, a foreign `run_id`, a bad `seq`) | `stop` + operational-error handoff | **stop**; report the uncertainty. An event visible to `load` is **not** evidence of a durable commit — no retry, no inferred success, no automatic reconciliation in this version. A citation is issued only for an acknowledgment that passed those checks |
+| `finish` could not be stored | `done`, `stored: false`, `persistence: not-stored \| unconfirmed`, `fallback_handoff` | emit `fallback_handoff` **in the stop summary, in full**, with **no citation**, and state its persistence honestly: `not-stored` (a refusal before writing, an invalid submission, a terminal call — the handoff was never written) → "not saved"; `unconfirmed` (an indeterminate, malformed or unresolved write) → "persistence is unconfirmed" — never "not saved", and never claim it was stored. The broken store is never asked to persist its own failure report. A submission that is not a complete `run-contract/v1` handoff is refused before anything is sent (`invalid_submission`), and the fallback is then the helper's validated operational-error handoff, never the invalid submission |
+| `finish` stored | `done`, `stored: true`, `cite` (+ `warning` for `journal_only`) | report it as stored with the confirmed citation and any cache warning |
+
+**Inline passes.** A controller that edits owned files itself (`worker: null`) has no worker handoff to record, so it reports its progress to the helper: **for each inline edit: `check` → edit → `advance` (changed entries only) → `run-persist progress --payload`** with that advanced baseline (a tool-only attempt reports its evidence with no `files_changed`). `progress` (`run-persist-progress/v1`: `files_changed`, `file_baseline` — required when files changed — `attempted_tools`, `best_candidates` `{candidate, outcome}`, `artifacts` `{kind, content}`, `evidence`) is **parent knowledge, not journal history**: it writes no journal event and yields no citation, by design — evidence is journaled through notes, reviews, Replans and the final handoff. **Updating only at `finish` is insufficient**: the operational-error fallback is needed precisely when `finish` is never reached, and it reflects **reported knowledge only** — an inline pass that skipped `progress` is reported as it was reported, nothing more. The helper validates the whole submission before changing anything (`invalid_progress`) — every field it will absorb, string-or-null deltas included, and **no unsupported field**; `_absorb` receives only the validated fields, and a submission that would make the fallback handoff invalid is refused; a different `--root` is refused before any change — paths must be owned (`progress_outside_ownership`), and the baseline must cover exactly the owned files with **no entry advanced outside the reported changed set** (`baseline_outside_reported_changes`) — the shipped custody chain, so an externally drifted file is never blessed while another is edited; **never `record` over all owned files**. The success result's `progress_recorded: true` means only that *this update's control-state save was acknowledged*, never that the helper knows every change. Its bookkeeping follows the in-flight discipline with the two save stages reported distinctly: if the in-flight record holding the submission cannot be saved, the call stops (`progress_unsaved`) with the submission folded into the fallback and the note that it **will not survive another invocation**; if that record was saved but its resolution cannot be, the call stops (`state_unwritable`) and the note says the record **was saved — a later helper process finds it unresolved, stops, and reports it**.
+
+**`finish` and terminal `status`.** A stored final handoff (committed or `journal_only`) is exposed by `status` exactly as stored under `final_handoff` (with its cite), and the accumulated context is reconciled from it **by set semantics per list** (strings by value; candidates, attempts and artifacts by exact typed-item equality), so a cumulative final handoff repeating items already reported through `progress` is not double-counted. A failed state save **never downgrades a confirmed journal commit**: `finish` still reports `done`, `stored: true`, the confirmed cite and a bookkeeping warning, and the on-disk `status` may remain stale or unresolved; a refusal before writing is `stored: false`, `persistence: not-stored`; an uncertain outcome is `stored: false`, `persistence: unconfirmed` — nothing is absorbed in either case.
+
+Once the helper has stopped a run **and could record that stop**, every later `run-persist` call returns `stop` without touching the store. If **no** control-state write succeeded (the in-flight record and the stop both failed to save), the current result still orders the controller to retire the invocation — it carries `terminal_enforced: false` and a warning — but the helper cannot guarantee that a later helper process remembers the stop; the controller must not call it again.
+
+The same reporting applies to an early `finish` state-save failure or an invalid finish submission whose stop cannot be saved: the current call remains `done`, `stored: false`, `persistence: not-stored`, with the full fallback and no citation. A successfully recorded stop sets `terminal_enforced: true`; if an earlier terminal condition was already recorded, a failed update warns but does not withdraw that enforcement.
+
+## Prior-Run Reuse
+
+A **new** invocation of `prove`/`autoprove` may name a selected prior run (`--prior-run <id>`; requires `--persist`; resolved within the selected store; **never "latest"**). It receives that run's historical evidence, reconciles source drift before taking fresh custody, and applies the rerun guard before repeating blocked work. This is not resume: no cycle history is continued, nothing is repaired, no lock is recovered, no drift is accepted automatically. Refs #82 (#82C).
+
+**Startup order** (all before any proof edit): inputs → capability checks → `lean4-skills-run-persist reuse --prior-run <id> --target … --scope … --mode … --owned-file …` (read-only preview; `reuse` and `custody` need no invocation state — `LEAN4_RUN_PERSIST_STATE` is required from `start` on) → compatibility (the preview refuses an incompatible target, mode, or owned file outside the project) → drift reconciliation → `run-persist custody` (re-derives the report; returns the fresh baseline to use in the first dispatch) → the first dispatch, carrying the prior blocker → `run-persist start --prior-run <id> --reuse-report <preview> [--approve <token>]` (revalidates the observed prefix, **re-derives custody at the final boundary** — the same drift check over the dispatch's owned files, approval bound to the token, autonomous startup refusing drift — and requires the first dispatch's `file_baseline` to be the fresh baseline custody returned — the full recorded identity per path (realpath as recorded, existence, hash, size), so a stale entry naming another resolved file with identical bytes is refused (`baseline_mismatch`); then applies the guard, creates the run naming `prior_run`, records the local source-note) → work.
+
+**Selection, with finality unknown.** The preview selects the last `dispatch` event (else the manifest's dispatch, cited `<run_id>#manifest`), the **latest recorded handoff** in the validated prefix (or none), and a **per-file merged baseline** built in **actual journal order** (the manifest's dispatch, then every dispatch and handoff event by `seq`): the newest entry for a path wins and older records fill the paths it does not cover — a redispatch may be newer than the last handoff (the process stopped before its worker returned), and a worker handoff may cover fewer files than its dispatch; neither may ever be an implicit match and the merge must never read as a match for a path no record covers — each path with its origin citation (`baseline_origins`). Invocation finality is **unknown**: the handoff cache is disposable and never affects selection, eligibility, or the rerun decision. The selected handoff's blocker and stop fields (`blocker_signature`, kind/class, `stop_reason`, `stop_detail`, `new_evidence_required_for_rerun`) are preserved as historical evidence and drive the guard; the last Replan's blockers **supplement** them and never replace them. With no usable handoff the preview reports `guard_evaluable: false` (`carry.prior_blocker: null`) and the command must say the handoff-based guard cannot be evaluated — it never manufactures a clean result from a Replan; the first dispatch then carries `prior_blocker: null` (a Replan's blocker signature is not a handoff blocker). A proof edit may move the target line (an added import shifts it); the new run's records echo the dispatch target as the contract requires — the target names the proof as dispatched, not its final line.
+
+**Unusable prior runs** (startup validation errors; nothing created): unknown or malformed id; a run in another store; `incomplete_run` / `integrity_failure`; a damaged journal (reuse never reads past the valid prefix and never repairs); no baseline in either the selected handoff or the dispatch; a present `.lock` (`prior_run_active` — a mutation may be in progress; never broken); an incompatible target (path semantics: for `file` scope the same file — a prior `Foo.lean:42` task widens to all of `Foo.lean`, a neighbouring name never matches; for `project`/`changed` scope the prior file inside the current directory by whole path components; otherwise the identical target — only a trailing `:<line>` is a location suffix, never a drive prefix), mode family (`golf` vs proving), or owned file outside the current project root. **Absence of a lock proves nothing** about liveness — locks cover single mutations — so the preview describes a **particular observed journal prefix** (`observed_seq`, `prefix_digest` over the run id, the manifest and the validated events) and `start` and `custody` revalidate it (`prior_run_changed` otherwise). The preview is also **bound to the invocation** it was made for (`invocation`: real project root, target, scope, mode, normalized intended owned files): `custody` must cover exactly that ownership set and `start` compares the actual dispatch's target, **scope**, mode and owned files against it (`reuse_report_mismatch` — the guard's same-task predicate depends on scope too), then repeats the compatibility check against that dispatch's own values — a journal digest alone does not establish that a report belongs to this invocation. A report that fails shape validation is `bad_reuse_report` (a structured refusal), and the historical material is rebuilt from the prior run's validated records at use, never copied from the report. The preview never claims to have frozen the prior run or taken ownership of it.
+
+**Historical evidence, presented honestly.** The preview (and the source-note) carries the prior plan and next steps, failed approaches from notes, handoffs **and every Replan's `failed_approaches`** (each with its original citation) as *known dead ends under the prior assumptions — evidence, not prohibitions*, the prior handoffs' **`best_candidates` as historical, unverified candidates**, completed reviews **with their recommendations** (the `suggestions` and triage themselves, not just that a review happened) with **disposition unknown** (recorded as completed; not known to have been applied — reassess), every stored note with its text (search results, blocker diagnoses, definition gaps, candidates) and stored Lean snippets **with their source**, as **unverified**. The substantive content reaches the restarted invocation in the preview and in the source-note; the original citations remain for resolution.
+
+**Cross-run citations.** Replan `cites` stay same-run only (the store enforces it). `start --prior-run` records **one local `source-note`** as the new run's first event, listing the selected material with its original `<prior_run_id>#<seq>` citations; later Replans and the final handoff cite that local event. **Chained reuse stays flat:** when the prior run was itself a reuse, its helper-generated source-note (`schema: run-persist-source-note/v1`, validated in shape — a JSON-shaped user note without that discriminator, or a malformed record, stays ordinary text) is recognized and its evidence is **inherited as structured data** (`historical.inherited` link records — prior run, cites, plan, next steps and the ancestor's carried blocker/stop fields, historical only, never promoted into the current guard — plus the flattened items, each keeping its original citation and marked `inherited_via`), never nested as serialized text — the note grows with unique evidence plus linear provenance links, without recursively nesting serialized history; nothing inherited is current certification. A user-written source-note stays ordinary text.
+
+**Drift and custody.** The preview's drift report is content-bound: per intended owned file it carries existence, resolved path, and the current content hash, plus the prior baseline's check statuses; its `approval_token` is the digest of that exact report. An intended owned file with **no entry in the merged prior baseline is an explicit `uncovered` outcome** (its current content is recorded and needs the same content-bound approval) — never an implicit match; the prior owned files, every selected baseline path and every current intended owned file must lie inside the current project root (`incompatible_owned_files`). `custody` re-derives the report over **all** intended owned files (exactly the report's set) and requires the fresh token to equal the approved one — a file that changed again after approval (same list, different bytes) aborts with `custody_mismatch`; only then is the fresh baseline handed back for the first dispatch. `start` enforces this rather than trusting the caller: it re-runs the custody check itself (`drift_unapproved` / `approval_mismatch` / `custody_mismatch`; `drift_unreconciled` for autonomous mode) and refuses a dispatch whose baseline is not that fresh baseline — skipping `custody` and dispatching on a re-recorded baseline of a changed file is not possible. **Content-bound approval covers the intended ownership set**; other paths shown in the drift report remain contextual observations, not approved content or acquired custody — if ownership later expands, that needs a fresh check — and neither outcome certifies the proof or freezes its dependencies. Guided `prove` shows the particular changes and asks the user to approve **that report** (the token); autonomous `autoprove` **stops before any edit and before custody** on drift or an uncovered file, emitting an operational-error handoff naming what needs reconciliation — it never prompts and never accepts drift automatically. Missing files are drift (`deleted`).
+
+**The rerun guard is preserved.** The first dispatch must carry the prior blocker (`prior_blocker` equal to the selected handoff's signature; `blocker_cleared` otherwise). `start` evaluates the shipped predicate against the selected handoff: same task, same blocker, empty delta → `rerun_forbidden` with the prior `new_evidence_required_for_rerun` echoed, nothing created. **A new run id, approved drift, or a freshly recorded baseline is not evidence.** For an operational prior stop, `--evidence-justification` must state specifically how the delta addresses the recorded `stop_detail` (a generic phrase is refused). The source-note append is an ordinary helper mutation: its outcome is reported as such — a committed note with failed bookkeeping returns its citation and stops the invocation now (`run_created: true`), a refusal or an indeterminate write returns the operational-error handoff with the note `unpersisted` — never a silent exception.
+
+## Stuck Definition
+
+A sorry or repair target is **stuck** when any of these hold:
+
+1. Same sorry failed 2-3 times with no new approach
+2. Same build error repeats after 2 repair attempts
+3. No sorry count decrease for 10+ minutes
+4. LSP search returns empty twice for same goal
+
+**Same blocker** is computed as `(file, line, primary_error_code_or_text_hash)`. Two consecutive iterations producing the same blocker signature = same blocker.
+
+**When stuck detected:**
+
+| Step | prove | autoprove |
+|------|-------|-----------|
+| 1. Review | `/lean4:review <file> --scope=sorry --line=N --mode=stuck` | Same |
+| 2. Replan | Summarize findings, create fresh plan (3-6 steps) | Enter planner mode → revised plan |
+| 3. Approval | Present for user approval: `[yes / no / skip]` | Auto-approve, next cycle executes plan |
+| 4. On decline | Offer counterexample/salvage pass | N/A (autonomous) |
+
+**Stuck handoff evidence:** When declaring a sorry stuck, include:
+- LSP queries attempted (tool name + query text)
+- Top candidate lemmas returned (if any)
+- `lean_multi_attempt` outcomes (snippets tested, pass/fail for each)
+
+**Important:** Stuck-triggered replan is mandatory even if `--planning=off`. It is a safety mechanism, not optional planning.
+
+### Stuck → Counterexample / Salvage
+
+When stuck and user declines the plan (prove) or review flags falsification (autoprove):
+
+1. Explicit witness search (small domain or concrete instantiation)
+2. If found → create `T_counterexample` lemma (see [Falsification Artifacts](#falsification-artifacts))
+3. Create `T_salvaged` (weaker version that is provable)
+4. **prove:** Follow user's falsification policy for original statement
+5. **autoprove:** Follow default falsification policy (counterexample + salvage only)
+
+## Deep Mode
+
+Bounded subroutine for stubborn sorries. Allows multi-file refactoring and helper extraction.
+
+**Budget enforcement:**
+- `--deep-sorry-budget` — max sorries per deep invocation (structural — subagent receives this as scope)
+- `--deep-time-budget` — advisory: scopes deep-mode subagent work, not wall-clock enforced
+- `--max-deep-per-cycle` — max deep invocations per cycle (session-enforced via `cycle_tracker.sh` in autoprove/autoformalize)
+
+If deep budget is exhausted with no progress → stuck.
+
+| Feature | prove | autoprove |
+|---------|-------|-----------|
+| `--deep=ask` | Prompt before each deep invocation | Not supported (coerced to `stuck`) |
+| `--deep=stuck` | Auto-escalate when stuck | Auto-escalate when stuck (default) |
+| `--deep=always` | Auto-escalate on any failure | Auto-escalate on any failure |
+| `--deep=never` | No deep (default) | No deep |
+| `--deep-sorry-budget` | 1 (default) | 2 (default) |
+| `--deep-time-budget` | 10m (default) | 20m (default) |
+| `--max-deep-per-cycle` | 1 | 1 |
+| `--max-consecutive-deep-cycles` | N/A | 2 (autoprove-only) |
+| `--deep-snapshot` | `stash` | `stash` | Pre-deep recovery (V1: `stash` only) |
+| `--deep-rollback` | `on-regression` | `on-regression` | When to revert: `on-regression` / `on-no-improvement` / `always` / `never` |
+| `--deep-scope` | `target` | `target` | Scope fence: `target` (sorry's file only) / `cross-file` |
+| `--deep-max-files` | 1 | 2 | Max files deep may edit per invocation |
+| `--deep-max-lines` | 120 | 200 | Max added+deleted lines per deep invocation |
+| `--deep-regression-gate` | `strict` | `strict` | `strict`: auto-abort on regression; `off`: log only |
+| Statement changes | Not permitted — rollback + stuck; hand off to `/lean4:formalize` | Not permitted — rollback + stuck; emit `next_action = redraft` when synthesis outer loop is active |
+| `--commit=ask` | Per-commit prompt (yes/yes-all/no/never) | Coerced to `auto` at startup |
+
+### Deep Safety Definitions
+
+- **Regression**: sorry count increases, new diagnostic errors appear, or new blocker signatures introduced compared to pre-deep snapshot
+- **No improvement**: sorry count unchanged AND no diagnostic improvement after deep completes
+- **Rollback**: restore working tree to pre-deep snapshot via saved snapshot id/ref; mark sorry as stuck with reason (e.g., `"deep: regression — sorry count increased from 3 to 5"`)
+
+### Deep Snapshot and Rollback
+
+Before entering deep mode, the engine captures a **path-scoped** snapshot of all files in the deep scope (target file when `--deep-scope=target`; declared files when `--deep-scope=cross-file`). Only deep-managed paths are snapshotted — unrelated working-tree edits are not swept in.
+
+The snapshot mechanism is implementation-defined; the contract is that rollback restores the snapshotted files to their exact pre-deep state without affecting other files.
+
+Example (illustrative, not contractual):
+```text
+# Snapshot: <snapshot-create-command>(deep-managed-files, label="deep-snapshot: <sorry-id>") → <snapshot-id>
+# Rollback: <snapshot-restore-command>(<snapshot-id>) → files restored, snapshot discarded
+```
+
+**Rollback triggers** (per `--deep-rollback`):
+
+| `--deep-rollback` | Trigger |
+|---|---|
+| `on-regression` (default) | Regression detected |
+| `on-no-improvement` | Regression OR no improvement |
+| `always` | After every deep invocation (test-only) |
+| `never` | Never rollback (prove only — coerced in autoprove) |
+
+**On rollback:** restore snapshotted files to pre-deep state, mark sorry as stuck with reason `"deep: <trigger> — <detail>"`. If rollback itself fails (e.g., conflict), stop the current cycle immediately, mark sorry as stuck with `"deep: rollback failed"`, and skip checkpoint for this cycle. Stuck handoff must include the abort reason.
+
+### Deep Scope Fence
+
+`--deep-scope` controls which files deep may touch:
+
+| `--deep-scope` | Behavior |
+|---|---|
+| `target` (default) | Only the file containing the target sorry |
+| `cross-file` | Multi-file refactoring, helper extraction |
+
+If deep edits exceed `--deep-max-files` or `--deep-max-lines`, the engine triggers immediate rollback and marks stuck with reason `"deep: scope exceeded — N files / M lines"`.
+
+### Header Fence
+
+Declaration headers (everything from `theorem`/`def`/`lemma` through `:= by`) are immutable during proof engine execution. The engine snapshots headers at deep entry and compares at each checkpoint.
+
+| Context | On header change |
+|---------|-----------------|
+| `prove` (deep) | Immediate rollback, mark stuck: `"deep: header fence — declaration header modified"`. Suggest `/lean4:formalize`. |
+| `autoprove` (deep) | Immediate rollback, mark stuck. When synthesis outer loop is active, emit `next_action = redraft`. |
+| `formalize` / `autoformalize` | Statement changes are owned by the synthesis wrapper, not the proof engine. The wrapper invokes redraft when needed. |
+
+The header fence resolves an earlier inconsistency where the inner cycle said "NO statement changes" but deep mode allowed statement generalization.
+
+### Deep Regression Gate
+
+When `--deep-regression-gate=strict` (default): after each deep phase, the engine compares diagnostics against the pre-deep baseline.
+
+**File set (identical for baseline and comparison):** the target file when `--deep-scope=target`; all files declared in the deep plan when `--deep-scope=cross-file`. This is the same set used for the path-scoped snapshot.
+
+**Baseline:** `lean_diagnostic_messages` output for all files in the set, captured immediately before the first deep edit.
+
+**Comparison:** re-run `lean_diagnostic_messages` on the same file set and compare:
+
+1. Sorry count increased → rollback + stuck (`"deep: regression — sorry count +N"`)
+2. New diagnostic errors appeared (error not present in baseline) → rollback + stuck (`"deep: regression — new errors"`)
+3. New blocker signatures introduced (see [Stuck Definition](#stuck-definition)) → rollback + stuck (`"deep: regression — new blockers"`)
+
+When `off`: regressions are logged but do not trigger rollback. Only available in prove (coerced to `strict` in autoprove).
+
+### Deep Safety Coercions (autoprove)
+
+| Flag | Coerced from | Coerced to | Warning |
+|---|---|---|---|
+| `--deep-rollback` | `never` | `on-regression` | "deep-rollback=never disables safety rollback. Using on-regression for unattended operation." |
+| `--deep-regression-gate` | `off` | `strict` | "deep-regression-gate=off allows regressions. Using strict for unattended operation." |
+
+## Checkpoint Logic
+
+If `--commit=never`, skip the checkpoint commit entirely — changes remain in the working tree.
+
+Otherwise, if `--checkpoint` is enabled and there is a non-empty diff:
+- **prove:** Stage only files from **accepted** fills (exclude declined fills)
+- **autoprove:** Stage only files from successful, non-rolled-back work
+- **Both:** Exclude files from rolled-back deep invocations — those files are restored to pre-deep state and must not be staged
+- Commit: `git commit -m "checkpoint(lean4): [summary]"`
+
+If no files changed during this cycle, emit:
+> No changes this cycle — skipping checkpoint
+
+Do NOT create an empty commit. Checkpoint requires a non-empty diff.
+
+## Session Tracking
+
+> This section describes the concrete Claude Code implementation of the enforcement classes defined in [command-invocation.md](command-invocation.md). The invocation contract is host-agnostic; `cycle_tracker.sh` is one implementation that fulfills it. Other hosts may provide equivalent enforcement through different mechanisms, or may rely on model-mediated tracking alone.
+
+Autonomous commands (`autoprove`, `autoformalize`) use `lean4-skills-cycle-tracker` for deterministic session counter tracking. Guided commands (`prove`, `formalize`) do not — user presence provides the control loop.
+
+### Initialization
+
+After emitting the Resolved Inputs block, call:
+
+```bash
+lean4-skills-cycle-tracker init \
+  --max-cycles=<resolved> \
+  --max-stuck=<resolved> \
+  --max-runtime=<resolved> \
+  --max-deep-per-cycle=<resolved> \
+  --max-consecutive-deep=<resolved>
+```
+
+A failed init (exit 2) is a startup validation error — do not proceed. On success, the session ID is printed to stdout. If a writable env file is available (`LEAN4_ENV_FILE` or `CLAUDE_ENV_FILE`), init also persists `LEAN4_SESSION_ID` there for subsequent calls; otherwise, pass it as an env prefix (`LEAN4_SESSION_ID=<id> bash ...`).
+
+### Cycle Boundary Protocol (Phase 6)
+
+At the end of every cycle, call:
+
+```bash
+lean4-skills-cycle-tracker tick --stuck=yes|no
+```
+
+This is one atomic operation that:
+1. Increments the cycle counter
+2. Updates the consecutive-stuck counter (increment if `--stuck=yes`, reset to 0 if `--stuck=no`)
+3. Updates the consecutive-deep-cycles counter (increment if deep was used this cycle, reset to 0 otherwise)
+4. Resets the per-cycle deep counter
+5. Checks all limits (max-cycles, max-stuck, max-runtime)
+
+If exit code is 1 (`LIMIT_REACHED`), stop immediately and emit the structured summary.
+
+### Deep Mode Preflight
+
+Before dispatching a deep-mode subagent:
+
+1. Call `lean4-skills-cycle-tracker can-deep`
+2. If exit 1 (`denied`), handle based on the `reason` field:
+   - `reason=max-deep-per-cycle` or `reason=max-consecutive-deep`: deep denied by policy — skip deep for this sorry without marking it stuck
+   - `reason=max-runtime`: session budget exhausted — let the next `tick` trigger session stop
+3. If exit 0: call `lean4-skills-cycle-tracker deep` to record the invocation, then dispatch
+
+### Claim Boundary Protocol (autoformalize)
+
+Autoformalize processes claims sequentially. `--max-cycles` and `--max-stuck-cycles` are per-claim; `--max-total-runtime` is per-session.
+
+**Lifecycle:** `init` → (`start-claim` → inner cycle ticks → `reset-claim`) × N-1 → `start-claim` → inner cycle ticks → `status`/`stop`
+
+- Call `lean4-skills-cycle-tracker start-claim` when dequeuing each claim
+- Call `lean4-skills-cycle-tracker reset-claim` when a claim completes or stops (before the next `start-claim`)
+- The final claim does not need `reset-claim` — session totals (`cycles_total`, `stuck_cycles_total`, `deep_total`) are accumulated live by `tick`/`deep`
+
+`status` always reflects the full session: `claims_attempted` includes the in-progress claim. Summary metrics (`Cycles run`, `Stuck cycles`, `Deep invocations`) come from session-total accumulators.
+
+### On Stop
+
+Call `lean4-skills-cycle-tracker status` for the structured summary counters, then `lean4-skills-cycle-tracker stop` for cleanup.
+
+### Enforcement Levels
+
+| Level | Mechanism | Reliability | Parameters |
+|-------|-----------|-------------|------------|
+| **Startup-validated** | Fail before work starts | Guaranteed when command follows invocation contract | enum/path/companion/numeric checks |
+| **Session-enforced** | `cycle_tracker.sh` at cycle boundaries | Protocol-dependent — reliable when command follows documented cycle boundary protocol | `--max-cycles`, `--max-stuck-cycles`, `--max-deep-per-cycle`, `--max-consecutive-deep-cycles` |
+| **Best-effort** | `cycle_tracker.sh tick` + `can-deep` | Checked at cycle boundaries and deep preflight — not a kill switch, cannot preempt mid-step | `--max-total-runtime` |
+| **Advisory** | Instruction to LLM/subagent | Model-mediated, not validated or tracked | `--deep-time-budget`, `--batch-size` |
+
+## Falsification Artifacts
+
+**Counterexample lemma (preferred):**
+```lean
+/-- Counterexample to the naive statement `T`. -/
+theorem T_counterexample : ∃ w : α, ¬ P w := by
+  refine ⟨w0, ?_⟩
+  -- proof
+```
+
+**Salvage lemma:**
+```lean
+/-- Salvage: a weaker version of `T` that is true. -/
+theorem T_salvaged (extra_assumptions...) : Q := by
+  -- proof
+```
+
+**Safety:** Avoid proving `¬ P` if a `theorem T : P := by sorry` exists — unless user explicitly chose negation policy.
+
+For a dedicated counterexample-search pipeline (target resolution, method
+registry, per-shape certification recipes, append-only artifact emission),
+see [disprove-engine.md](disprove-engine.md) — the canonical reference for
+`/lean4:disprove`.
+
+## Repair Mode
+
+Compiler-guided repair is an **escalation-only** workflow — not the default response to a first failure. Invoke only when compiler errors are the active blocker and LSP-first tactics cannot resolve them.
+
+**Trigger conditions** (any one sufficient):
+- Same blocker signature repeats 2 consecutive iterations
+- Same build error repeats after 2 repair attempts
+- 3 or more distinct compiler errors active in scope simultaneously
+
+**Direct-fix-first rule:** For straightforward single errors (missing import, obvious coercion, local instance, simple typo), apply the fix directly. Escalate to the repair agent only if the direct fix fails or the error recurs.
+
+**Budgets:**
+
+| Parameter | prove | autoprove |
+|-----------|-------|-----------|
+| Max repair attempts per error signature per cycle | 2 | 2 |
+| Max total repair attempts per cycle | 6 | 8 |
+
+**Improvement definition:** Error count in scope decreases OR the current blocker signature disappears. A repair attempt that changes errors without reducing count is neutral (counts toward budget but does not reset it).
+
+**No-improvement rule:** If 2 consecutive repair attempts on the same signature produce no improvement → target is **stuck**. Force review + replan (see [Stuck Definition](#stuck-definition)).
+
+| Behavior | prove | autoprove |
+|----------|-------|-----------|
+| Interactive repair prompts | Ask user for guidance | Coerced to autonomous: auto-select next strategy |
+| On stuck after repair | Present plan for approval | Auto-replan, next cycle executes |
+
+**Error quick-reference:**
+
+| Error | Typical Fix |
+|-------|-------------|
+| `type mismatch` | Add coercion, `convert`, fix argument |
+| `unknown identifier` | Search mathlib, add import |
+| `failed to synthesize` | Import/`open scoped` the declaring module, or supply the instance with evidence via plain `have`/`let` (`haveI`/`letI` only inline; `:= inferInstance` only freezes one that already synthesizes) |
+| `timeout` | Narrow `simp`, add explicit types |
+
+For detailed fixes, see [compilation-errors.md](compilation-errors.md). For persistent issues, [capture a build log](compilation-errors.md#build-log-capture) for inspection.
+
+## Safety
+
+Blocked git commands (both prove and autoprove):
+- `git push` (review first)
+- `git commit --amend` (preserve history)
+- `gh pr create` (review first)
+- `git checkout --`/`git restore`/`git reset --hard`/`git clean` (commit or checkpoint first)
+
+## Synthesis Outer Loop
+
+Optional wrapper around the inner 6-phase cycle. Activated by `/lean4:formalize` (interactive), `/lean4:autoformalize` (autonomous), or deprecated `autoprove --formalize=restage|auto` flags.
+
+### Algorithm
+
+Two entry shapes depending on whether `--source` is provided:
+
+```
+# Source-backed (--formalize=auto with --source):
+extract claim queue from --source (filtered by --claim-select) at startup
+while queue non-empty AND no stop rule:
+  1. Statement Acquisition:
+       pop next claim → invoke draft → validate (lean_diagnostic_messages)
+       if --commit != never: stage target, commit "draft: <summary>"
+       add emitted declarations to provenance set
+  2. Inner Cycle — run standard 6-phase cycle (unchanged)
+  3. If inner cycle exited via stuck:
+       Review Router — read next_action from stuck review
+       3a. redraft → re-draft (check provenance + statement-policy); commit if allowed
+       3b. Other next_action values → dispatch accordingly
+     Else (sorry-free or stop rule):
+       Advance to next claim
+
+# Scope-backed (--formalize=restage, no --source):
+  1. Inner Cycle — run standard 6-phase cycle on existing scope (unchanged)
+  2. If inner cycle exited via stuck:
+       Review Router — read next_action
+       2a. redraft → re-draft stuck declaration (check provenance + statement-policy)
+       2b. Other next_action values → dispatch accordingly
+     Else: normal exit
+```
+
+### Draft Commit Boundary
+
+Draft writes skeleton to a temp file (see [File Assembly Contract](#file-assembly-contract)); the outer loop appends to the target, validates with `lean_diagnostic_messages`, stages only target file, and commits with `draft:` prefix. Clean rollback boundary between statement-shaping and proof-filling.
+
+If `--commit=never`, the outer loop skips staging and committing — the skeleton is still written to the target file (working tree only), but no `draft:` commit is created. Provenance tracking still works because it is in-memory, not git-based.
+
+### Session-Generated Provenance
+
+Tracks which statements were introduced by draft within the current synthesis session:
+
+- **Representation**: in-memory set of `(file, declaration_name)` pairs, built during the session.
+- **Population**: each draft call appends its emitted declarations to the set.
+- **Scope**: lives for the duration of one synthesis session (`/lean4:formalize`, `/lean4:autoformalize`, or `/lean4:autoprove --formalize=*`). Not persisted to disk.
+- **On restart/resume**: provenance is empty. All existing statements are treated as user-authored (`preserve`). Conservative by design.
+- **On replan within same invocation**: provenance persists (in-memory state is not cleared).
+- **Usage**: `--statement-policy=rewrite-generated-only` checks this set before allowing restage rewrites.
+
+### Statement Safety
+
+| `--statement-policy` | User-authored | Session-generated | On restage |
+|---------------------|---------------|-------------------|------------|
+| `preserve` | Never rewrite | Never rewrite | Error: manual intervention needed |
+| `rewrite-generated-only` | Never rewrite | May rewrite | Rewrite if in provenance set; else create `T_salvaged` sibling |
+| `adjacent-drafts` | Never rewrite | Never rewrite | Create `T_salvaged` sibling |
+
+When `--formalize=restage|auto`, the effective default changes from `preserve` to `rewrite-generated-only` (with startup warning). This allows autonomous restage of session-generated statements. Explicit `--statement-policy=preserve` is respected but causes stuck restage to halt with an error rather than rewrite automatically.
+
+### Claim Queue
+
+- **Source**: single extraction pass from `--source` at synthesis-wrapper startup, filtered by `--claim-select`. Uses draft's ingestion logic (PDF → Read, URL → fetch, `.lean` → Read).
+- **Order**: document order (position in source). Deterministic across re-runs of the same source.
+- **Storage**: in-memory ordered list. Not persisted to disk.
+- **On restart**: re-extraction from `--source` produces same queue; cursor resets to beginning. Already-formalized claims detected via declaration-head matching in the target file.
+- **Iteration**: outer loop processes one claim at a time — pop next claim, pass it directly to draft as the topic, run inner cycle to completion, then advance. The `--claim-select` flag filters claims at queue-extraction time only; individual draft calls receive a single pre-selected claim. Queue management is outer-loop-internal — draft never sees `queue` as a selection policy.
+
+### File Assembly Contract
+
+- Draft emits declaration-only blocks (no imports/opens/section wrappers) to temp path when `--caller=autoformalize|formalize`. Declarations use fully-qualified names — no `open`/`open scoped` needed.
+- Import dependencies expressed as `-- needs-import: <module>` comments at top of temp output. This is the only structured signal.
+- Outer loop maintains target file preamble: deduplicates `-- needs-import:` lines, prepends new imports, appends declarations with `-- draft: <claim> (<timestamp>)` boundary markers.
+- Declaration-name collision check before each append: match `theorem <name>`, `def <name>`, `lemma <name>`, etc. at line start in target file. If found, skip (already formalized in a prior run).
+
+### Review Router
+
+Stuck-mode review emits a `next_action` field. The outer loop dispatches:
+
+| `next_action` | Outer loop response |
+|---------------|---------------------|
+| `continue` | Resume inner cycle with revised plan |
+| `deep` | Escalate to deep mode |
+| `repair` | Enter repair mode for compiler blockers |
+| `redraft` | Re-draft the stuck declaration (check provenance + statement-policy) |
+| `golf` | Run golf pass on sorry-free file |
+| `stop` | Halt current claim, advance to next (or stop if queue empty) |
+
+`next_action` is informational when the outer loop is inactive (`--formalize=never`). When active, it is the routing gate.
+
+## Run Contract (`run-contract/v1`)
+
+The parent/worker/human roles exchange two versioned records — a **dispatch**
+record (parent → worker) and a **handoff** record (worker → parent/human) — plus
+a **rerun guard**. The canonical field shapes, nullability, and the rerun
+predicate live in [handoff-contract.md](handoff-contract.md); this section
+defines the roles and expectations that produce them. It is a documentation
+contract, not runtime enforcement.
+
+**Delegation expectations.** When dispatching a proof worker, the parent
+provides a complete **dispatch record** (target, scope, mode, capabilities,
+`owned_files` + a single `file_baseline`, `prior_blocker`, `evidence_delta`,
+`budget`, and the typed `context` envelope); its concrete instantiation is the
+[Pre-flight Context block](#pre-flight-context-for-subagent-dispatch) below. When
+the worker stops or gets stuck, it returns a complete **handoff record**
+(`status`, `stop_reason`/`stop_detail`, the blocker fields when blocker-driven,
+`evidence`, `files_owned` vs `files_changed` + the final `file_baseline`,
+`next_action`, `new_evidence_required_for_rerun`). The canonical field lists,
+enums, and nullability — for both records — live in
+[handoff-contract.md](handoff-contract.md); these bind whether the worker is a
+subagent, an inline pass, or a human.
+
+**No-subagent fallback.** Hosts without subagent support stay sequential in the
+main thread: the parent and worker roles run inline, and the same dispatch and
+handoff records still apply — the contract governs the logical roles, not
+whether they run in separate processes. Collect the pre-flight context as your
+own starting state; produce the handoff record at each stop boundary as you
+would return it from a delegate.
+
+**Rerun guard.** Do not relaunch the same `(target, scope, mode)` on the same
+`blocker_signature` without an auditable evidence delta; the single definition
+of the rule is in [handoff-contract.md § Rerun guard](handoff-contract.md#rerun-guard).
+
+**Human-in-the-loop.** After a clear blocker in an interactive session, present
+options (continue with new evidence / switch to `formalize` / `review
+--mode=stuck` / stop and hand off) and never assume autonomous continuation. The
+handoff record is what the human reads to choose.
+
+### Delegation Execution Policy
+
+Shared rules for dispatching proof-editing agents (`prove`/`autoprove` deep
+workers, `golf` golfers) — the concrete discipline behind the expectations above:
+
+1. **Preflight** — run one worker task on a small target first.
+2. **Permission gate** — if preflight hits an Edit/Bash permission prompt, stop delegation immediately and switch to direct mode in the main agent; never launch additional agents after a permission denial.
+3. **Bounded concurrency** — at most the mode's delegate cap (e.g. golf's `--max-delegates`, default 2), and only after preflight succeeds.
+4. **Exclusive ownership** — never dispatch concurrent workers with overlapping `owned_files`; serialize or keep one in-thread.
+5. **Report each boundary** — after each batch/worker, a diagnostics summary, changed files, and a single plan message (no repeated "launching more agents" narration).
+6. **Fallback contract** — if any worker cannot obtain Edit/Bash permission, abort all delegation and continue direct; do not queue new delegates after a permission error.
+7. **Pre-collected context** — include the [Pre-flight Context block](#pre-flight-context-for-subagent-dispatch) in each dispatch prompt.
+
+## Pre-flight Context for Subagent Dispatch
+
+MCP tools may not be available in subagents (anthropics/claude-code#39962). Before dispatching any proof-editing agent, collect relevant MCP results and pass them (summarized, not raw dumps) as the worker's starting state. This block is the concrete **dispatch record** of [run-contract/v1](#run-contract-run-contractv1): every field is present, and unavailable context uses `null` / `[]` rather than being omitted.
+
+### Canonical dispatch envelope
+
+Emit this complete `run-contract/v1` dispatch record in the agent dispatch prompt. This is a **valid first-dispatch instance** — real enum members, actual `null`s, an empty `evidence_delta`, and a structurally valid `file-baseline/v1`:
+
+```json
+{
+  "schema": "run-contract/v1",
+  "record": "dispatch",
+  "target": "Mathlib/Foo.lean:42",
+  "scope": "sorry",
+  "mode": "prove",
+  "worker": "sorry-filler-deep",
+  "parameters": {
+    "fast_pass_error": "unsolved goals: ⊢ Continuous f",
+    "permission_level": "edit",
+    "deep_budget": {"scope": "file", "max_files": 1, "max_lines": 40}
+  },
+  "capabilities": ["lean-lsp", "search"],
+  "owned_files": ["/repo/Mathlib/Foo.lean"],
+  "file_baseline": {
+    "schema": "file-baseline/v1",
+    "files": [
+      {"path": "/repo/Mathlib/Foo.lean", "realpath": "/repo/Mathlib/Foo.lean", "exists": true, "sha256": "0000000000000000000000000000000000000000000000000000000000000000", "size": 1234}
+    ]
+  },
+  "prior_blocker": null,
+  "evidence_delta": [],
+  "budget": {"max_cycles": 20, "max_stuck_cycles": 3, "runtime": "120m"},
+  "context": {
+    "prior_failure": null,
+    "goal_state": "⊢ Continuous f",
+    "diagnostics": [],
+    "search_results": [{"tool": "lean_leansearch", "query": "continuous composition", "top": ["Continuous.comp"]}],
+    "candidates_tested": [],
+    "code_actions": [],
+    "scratch_location": "/tmp"
+  }
+}
+```
+
+Alternative enum values (not shown in the instance): `scope` ∈ `sorry`/`deps`/`file`/`changed`/`project`; `mode` ∈ `prove`/`autoprove`/`golf`. A **rerun** sets `prior_blocker` to the prior handoff's `blocker_signature` and `evidence_delta` to a nonempty list. No field is omitted; empty `context` members are `null` or `[]` (never dropped). The per-agent subsections below note which `context` members matter most for each agent.
+
+**Exclusive file ownership:** If two candidate dispatches would edit any of the same files, serialize them or keep one in-thread. Never dispatch concurrent agents with overlapping owned-file sets.
+
+### File baselines and drift (issue #102)
+
+The `### File baseline` field carries a versioned record (`file-baseline/v1`, from `lean4-skills-file-baseline record -- "$owned_file" ...`) of each owned file's normalized path, existence state, and exact content hash — never mtime. The parent computes it immediately before dispatch. **Shell-quote every path operand individually and place `--` before positional paths** (for `record`, `advance`, and `--only` values alike): quoting the heredoc protects only the baseline JSON, not `record`/`advance` arguments, and repository-controlled filenames may contain spaces, `$`, or `$(...)`. A dirty working file is a valid baseline: the record captures bytes as they are, and only **post-dispatch** drift matters.
+
+**Custody rule:** a baseline is the last *accepted* content revision in a single-writer chain — not merely whatever the file contains when someone next records it. Baseline authority follows the current writer:
+
+- A direct-editing agent runs `lean4-skills-file-baseline check --baseline - <<'EOF' ... EOF` (the baseline JSON over stdin; the heredoc delimiter MUST be quoted — an unquoted heredoc performs `$`/backtick/`$(...)` expansion on the payload, corrupting repository-controlled filenames and potentially executing embedded commands — with the quoted form the transport is byte-exact and identical on both hosts) immediately before **every mutating tool operation**; for a multi-file operation, every intended target is checked first.
+- After a successful mutation, the writer advances **only the entries it intentionally changed** (`advance --baseline - -- "$changed_file" ... <<'EOF' ... EOF`); untouched-file entries are carried forward unchanged, so external drift on them is never blessed. **The JSON emitted by `advance` replaces the previous current baseline** and must be used for the next `check` or `advance` — checking against a superseded baseline mistakes your own accepted edit for external drift.
+- A parent applying a returned patch (e.g. a proof-repair diff, which is line-number-anchored) owns the same check-and-advance responsibility on the apply side.
+- **Fail closed.** Whenever a dispatch carries `owned_files`, it must also carry a valid, nonempty `file_baseline` — if the baseline is absent, malformed, or the checker is unavailable, the agent returns a handoff with `stop_reason: protocol-error` (or `operational-error`) and performs no mutation. **Any nonzero check exit prevents mutation; only exit 0 authorizes the next mutating operation.** Standalone work outside a structured dispatch remains governed by the direct caller. (The primitive enforces its side: empty records and malformed entries are rejected as input errors, never treated as a match.)
+- On drift (`modified` / `deleted` / `created` / `retargeted` — exit 3): **no mutation occurs after detected pre-application drift**. Emit the structured stale-baseline result (affected paths + classification) and recommend `rerun`, `serialize`, or `isolation: "worktree"`. Neither parent nor agent recomputes the baseline and retries — that would legitimize the external change. Operational failures (unreadable target, exit 4) abort the same way but are reported as errors, not drift. If `advance` itself fails after a successful write, stop before any further mutation — the chain is no longer trustworthy.
+
+This is prompt-contract orchestration with a tested runtime primitive: the check→edit window is check-to-write, not compare-and-swap — it narrows the race from "since dispatch" to "since last check" but cannot close it. Exclusive file ownership and `isolation: "worktree"` remain the primary concurrency defenses; the baseline check is the tripwire for when they are violated.
+
+Each worker's inputs map onto the dispatch record: the LSP-state items below populate `context`; the worker-specific items (proof-repair's structured error, proof-golfer's search mode + patterns, axiom-eliminator's axiom list, deep-mode safety budgets) populate `parameters`, with `worker` naming the agent. Every worker returns a complete `run-contract/v1` [handoff record](handoff-contract.md#handoff-record-worker--parenthuman) at its stop boundary — a patch-only worker (proof-repair) carries its diff in `artifacts`.
+
+### sorry-filler-deep
+
+`context` populated with, alongside file:line and failure reason:
+- Goal state: `lean_goal(file, line)` output
+- Diagnostics: `lean_diagnostic_messages(file)` summary
+- Search results: tool + query + top results from prior planning phase
+- Candidates tested: `lean_multi_attempt` snippets and outcomes
+
+### proof-repair
+
+Extend the existing structured error JSON with:
+- `searchResults`: top results from any LSP searches already performed
+- `multiAttemptResults`: snippets tested and their outcomes
+
+proof-repair returns a line-number-anchored diff **in the handoff's `artifacts`** (`kind: "unified-diff"`) with `files_changed: []`, and does not edit; the **parent** runs the file-baseline check immediately before applying the diff and advances the applied file's entry after success (§ File baselines and drift).
+
+### proof-golfer
+
+Include alongside file path and search mode:
+- Baseline diagnostics: `lean_diagnostic_messages(file)` summary
+- Golfable patterns: `find_golfable.py` output if already run
+- Candidate collapse targets: `find_exact_candidates.py` output if already run
+- Pre-tested candidates: `lean_multi_attempt` results if any candidates were tested in the parent thread
+
+### axiom-eliminator
+
+Include alongside scope and axiom list:
+- Diagnostics: `lean_diagnostic_messages(file)` on target files
+- Axiom audit: `check_axioms_inline.sh` output
+
+## See Also
+
+- [sorry-filling.md](sorry-filling.md) — Sorry elimination tactics
+- [compilation-errors.md](compilation-errors.md) — Error-by-error repair guidance
+- [command-examples.md](command-examples.md) — Usage examples

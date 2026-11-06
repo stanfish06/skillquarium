@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (117)
+## Skills (118)
 
 - [accessibility-and-inclusive-visualization](../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [admission-control](../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
@@ -92,6 +92,7 @@ created: 2026-06-13
 - [imagegen-frontend-web](../notes/web-automation-frontend/imagegen-frontend-web.md) — Elite frontend image-direction skill for generating premium, conversion-aware website design references
 - [improve-ui](../notes/web-automation-frontend/improve-ui.md) — Audit an existing product surface against its own design evidence, identify verified UI problems, and write self-contained implementation plans for another agent
 - [industrial-brutalist-ui](../notes/web-automation-frontend/industrial-brutalist-ui.md) — Raw mechanical interfaces fusing Swiss typographic print with military terminal aesthetics
+- [landing-page-design](../notes/web-automation-frontend/landing-page-design.md) — Builds and reviews landing pages and single-offer marketing sites: intake questions, page structure, layout selection, conversion copywriting, SEO/AEO, and an opinionated visual system...
 - [micro](../notes/web-automation-frontend/micro.md) — Expert guidance for micro — asynchronous HTTP microservices framework by Vercel
 - [minimalist-ui](../notes/web-automation-frontend/minimalist-ui.md) — Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels
 - [narrow-react-prop-types](../notes/web-automation-frontend/narrow-react-prop-types.md) — narrow React component prop types to match live code paths

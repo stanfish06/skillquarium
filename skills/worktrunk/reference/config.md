@@ -910,9 +910,7 @@ $ wt config shell uninstall --yes
 
 ### Version tolerance
 
-Uninstall removes every worktrunk-managed integration it finds, regardless of:
-- Binary name it was installed under (`wt`, `git-wt`, …)
-- Minor syntax variations between versions
+Uninstall recognizes the standalone setup lines written by Worktrunk or shown in `wt config shell init --help`, including older generated forms and custom binary names. Customized initialization lines must be removed manually.
 
 ### Command reference
 
@@ -1457,6 +1455,8 @@ Stored in git config as `worktrunk.state.<branch>.marker`. Set directly with:
 ```console
 $ git config worktrunk.state.feature.marker '{"marker":"🚧","set_at":0}'
 ```
+
+When `wt` deletes a branch or `wt switch --create` creates one, it clears that branch's marker. A branch deleted and recreated with plain `git` keeps its marker until `wt config state marker clear`.
 
 Without a subcommand, runs `get` for the current branch. For `--branch`, use `get --branch=NAME`.
 

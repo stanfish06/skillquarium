@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Web Automation, Frontend & Design](web-automation-frontend.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (91)
+## Skills (96)
 
 - [aflpp](../notes/security-auditing/aflpp.md) — Sets up and runs AFL++ for multi-core fuzzing of C/C++ projects built with afl-clang-fast or afl-gcc-fast
 - [agentic-actions-auditor](../notes/security-auditing/agentic-actions-auditor.md) — Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI Inference
@@ -74,6 +74,7 @@ created: 2026-06-13
 - [ossfuzz](../notes/security-auditing/ossfuzz.md) — Enrolls a project in OSS-Fuzz, Google's free continuous fuzzing service for open source, and drives it locally
 - [ot-ics](../notes/security-auditing/ot-ics.md) — Use for authorized OT/ICS security assessment covering Purdue model zoning, PLC/SCADA exposure, industrial protocol discovery, and safe passive-first evaluation
 - [patch-diff-exploit](../notes/security-auditing/patch-diff-exploit.md) — N-day 补丁差分到利用。从厂商发布的补丁里反推漏洞点、写 PoC、做成可用的攻击模块。 适用场景：已知 CVE 编号但只有补丁没有 PoC、SRC/红队需要打击未及时更新的资产、N-day 武器化、Patch Tuesday 跟进。 核心方法：拿 before/after 二进制 → 对齐符号 → 二进制 diff → 看新增的安全检查反推 bug class...
+- [pcap-triage-tshark](../notes/security-auditing/pcap-triage-tshark.md) — Fast workflow to inspect PCAPs and extract protocol-level details using tshark
 - [pentest-tools](../notes/security-auditing/pentest-tools.md) — 主动渗透测试工具链。覆盖信息收集、端口扫描、漏洞扫描、Web 渗透、SQL 注入、目录爆破、密码破解等场景。 通过 MCP server（pentestMCP / mcp-security-hub）将 20+ 安全工具暴露给 AI agent。 触发关键词：渗透测试、端口扫描、Nmap、漏洞扫描、Nuclei、SQL...
 - [property-based-testing](../notes/security-auditing/property-based-testing.md) — Writes, reviews, and debugs property-based tests — Hypothesis, fast-check, proptest, jqwik, rapid, and Echidna or Medusa for Solidity invariants
 - [propose-security-hardening](../notes/security-auditing/propose-security-hardening.md) — Develop evidence-backed structural and architectural security hardening proposals from vulnerability disclosures, supplied findings, incident or assessment documents, source code, or a...
@@ -96,12 +97,16 @@ created: 2026-06-13
 - [spec-to-code-compliance](../notes/security-auditing/spec-to-code-compliance.md) — Check code against the documentation that specifies it - which requirements hold, which the code contradicts, which are absent, and what the code does that no document mentions
 - [supply-chain-risk-auditor](../notes/security-auditing/supply-chain-risk-auditor.md) — Audits a project's dependencies for supply-chain risk: version-matched advisories for direct dependencies and the full lockfile tree, abandoned or archived upstreams, npm publisher...
 - [supply-chain-security](../notes/security-auditing/supply-chain-security.md) — Use for software supply-chain security assessment covering SBOM, SCA, CI/CD pipelines, container images, build integrity, dependency provenance, and vulnerability reachability
+- [suricata-offline-evejson](../notes/security-auditing/suricata-offline-evejson.md) — Running Suricata against PCAPs offline and validating results via eve.json
+- [syz-extract-constants](../notes/security-auditing/syz-extract-constants.md) — Defining and extracting kernel constants for syzkaller syzlang descriptions
+- [syzlang-ioctl-basics](../notes/security-auditing/syzlang-ioctl-basics.md) — Syzkaller syzlang syntax basics for describing ioctl syscalls
 - [thick-client](../notes/security-auditing/thick-client.md) — Use for authorized security testing of desktop thick clients including local storage, update channels, IPC, traffic, and client-side trust boundaries
 - [threat-hunting](../notes/security-auditing/threat-hunting.md) — Use for blue-team threat hunting, detection engineering with Sigma/YARA, SIEM query design, and incident detection validation
 - [threat-model](../notes/security-auditing/threat-model.md) — Use when Codex is already in the threat-modeling phase of a security scan, the user explicitly invokes $threat-model, or the user explicitly asks to create, update, or persist a...
 - [token-integration-analyzer](../notes/security-auditing/token-integration-analyzer.md) — Token integration and implementation analyzer based on Trail of Bits' token integration checklist
 - [track-findings](../notes/security-auditing/track-findings.md) — Track validated Codex Security findings in Linear, Jira, GitHub issues, or draft GitHub security advisories
 - [triage-finding](../notes/security-auditing/triage-finding.md) — Triage supplied or imported security findings against a repository using its security policy and static code evidence
+- [trivy-offline-vulnerability-scanning](../notes/security-auditing/trivy-offline-vulnerability-scanning.md) — Use Trivy vulnerability scanner in offline mode to discover security vulnerabilities in dependency files
 - [variant-analysis](../notes/security-auditing/variant-analysis.md) — Hunts for the other instances of a bug already found — the variants of one root cause across a codebase
 - [vulnerability-writeup](../notes/security-auditing/vulnerability-writeup.md) — Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained, sceptically validated, natural-sounding vulnerability reports
 - [wifi-wireless](../notes/security-auditing/wifi-wireless.md) — Use for authorized wireless security assessment including Wi-Fi capture, WPA handshake analysis, rogue AP detection research, and lab-only deauth testing
