@@ -4429,5 +4429,14 @@
       "find": "- **Conversations v1 (classic) is in maintenance mode** — Consider Conversations v2 API for new projects with enhanced features and scalability.\n",
       "replace": "- **Conversations (classic) is not being replaced for chat** — Twilio's newer conversation layer (Conversation Orchestrator, Conversation Memory, Conversation Intelligence, Agent Connect) adds automatic multi-channel capture and AI routing on top of this API; Chat traffic still runs through Conversations (classic) underneath via `conversationsV1Bridge`. For automatic capture/routing across channels, see `twilio-conversation-orchestrator`; for persistent cross-conversation context, see `twilio-customer-memory`. For manual CRUD on classic Conversation Services (this skill), Conversations (classic) remains the current API. Conversation Orchestrator (Conversations v2) has its own endpoints under `/v2/Conversations` for orchestrated conversations; it is a separate product, not a migration target for classic Services — see `twilio-conversation-orchestrator`.\n"
     }
+  ],
+  "create-blazor-project": [
+    {
+      "id": "skill-health-1200",
+      "issue": 1200,
+      "source": "dotnet/skills",
+      "find": "The `blazor` template only supports `-au Individual`. For organizational auth (Microsoft Entra ID, Azure AD B2C), scaffold with `-au Individual` first, then replace the Identity provider with `Microsoft.Identity.Web` / OIDC middleware and configure the tenant in `appsettings.json`.\n",
+      "replace": "The `blazor` template only supports `-au Individual`. For organizational auth (Microsoft Entra ID; for customer-facing/CIAM scenarios use **Microsoft Entra External ID** — Azure AD B2C has been closed to new customers since May 1, 2025), scaffold with `-au Individual` first, then replace the Identity provider with `Microsoft.Identity.Web` / OIDC middleware and configure the tenant in `appsettings.json`.\n"
+    }
   ]
 }

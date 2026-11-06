@@ -121,7 +121,7 @@ dotnet new blazor -o {AppName} -int Server -au Individual
 
 `-au Individual` scaffolds ASP.NET Core Identity with SQLite (CLI) or SQL Server (Visual Studio). Identity pages are always static SSR — they do not use interactive render modes.
 
-The `blazor` template only supports `-au Individual`. For organizational auth (Microsoft Entra ID, Azure AD B2C), scaffold with `-au Individual` first, then replace the Identity provider with `Microsoft.Identity.Web` / OIDC middleware and configure the tenant in `appsettings.json`.
+The `blazor` template only supports `-au Individual`. For organizational auth (Microsoft Entra ID; for customer-facing/CIAM scenarios use **Microsoft Entra External ID** — Azure AD B2C has been closed to new customers since May 1, 2025), scaffold with `-au Individual` first, then replace the Identity provider with `Microsoft.Identity.Web` / OIDC middleware and configure the tenant in `appsettings.json`.
 
 ## What the Template Creates
 
