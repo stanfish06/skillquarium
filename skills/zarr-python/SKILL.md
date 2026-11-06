@@ -3,12 +3,12 @@ name: zarr-python
 description: Stores and queries chunked N-D scientific arrays with Zarr-Python 3, including codecs, sharding, S3/GCS storage, and NumPy/Dask/Xarray integration. Use for array layout, bounded I/O, format migration, or scientific metadata preservation.
 allowed-tools: Read Write Edit Bash
 license: MIT license
-compatibility: Requires Python 3.12+ and zarr 3.4.0 with NumPy 2+. Remote I/O needs network access, zarr[remote] and the protocol backend; private stores need provider credentials. CLI migration needs zarr[cli].
+compatibility: Requires Python 3.12+ and zarr 3.4.2 with NumPy 2+. Remote I/O needs network access, zarr[remote] and the protocol backend; private stores need provider credentials. CLI migration needs zarr[cli].
 metadata:
   version: "1.5"
   skill-author: K-Dense Inc.
   last-reviewed: "2026-10-01"
-  upstream-version: "3.4.0"
+  upstream-version: "3.4.2"
 ---
 
 # Zarr Python
@@ -17,16 +17,16 @@ metadata:
 
 Use for chunked scientific arrays, hierarchical stores, codecs, sharding, partial reads,
 cloud object storage, and NumPy/Dask/Xarray interoperability. This community guide targets
-**Zarr-Python 3.4.0**, released **2026-09-15**, with Python 3.12+. The package version and
+**Zarr-Python 3.4.2** (a patch release on top of 3.4.0, released **2026-09-15**), with Python 3.12+. The package version and
 on-disk format are separate: this release reads/writes formats 2 and 3; new arrays default
 to format 3. Keep downstream packages that require `zarr<3` in their own environments.
 
 ## Install
 
 ```bash
-uv pip install "zarr==3.4.0" "numpy==2.5.3"
+uv pip install "zarr==3.4.2" "numpy==2.5.3"
 # Optional remote backends and migration CLI:
-uv pip install "zarr[remote,cli]==3.4.0" "fsspec==2026.9.0" "s3fs==2026.9.0" "gcsfs==2026.8.1"
+uv pip install "zarr[remote,cli]==3.4.2" "fsspec==2026.9.0" "s3fs==2026.9.0" "gcsfs==2026.8.1"
 ```
 
 Commit the project's resolved lockfile. Optional integration versions exercised here:
@@ -168,7 +168,7 @@ Names/units are declarations, not unit conversion or scientific validation.
 Official sources: [release notes](https://zarr.readthedocs.io/en/stable/release-notes/),
 [documentation](https://zarr.readthedocs.io/en/stable/),
 [format specification](https://zarr-specs.readthedocs.io/),
-[released source](https://github.com/zarr-developers/zarr-python/tree/v3.4.0).
+[released source](https://github.com/zarr-developers/zarr-python/tree/v3.4.2).
 
 ## Citing Scientific Agent Skills
 

@@ -1179,7 +1179,7 @@
       "issue": 1121,
       "source": "openai/plugins",
       "find": "# Filter to users who purchased 3+ times in 30 days, then analyze their flow\nresult = ws.query_flow(\"Login\", forward=3,\n    where=FrequencyFilter(\"Purchase\", value=3, date_range_value=30, date_range_unit=\"day\"),\n    last=30)\n# Reveals: what do repeat purchasers do after logging in?\n```\n",
-      "replace": "# Filter to users who purchased 3+ times in March, then measure their logins\nresult = ws.query(\"Login\", math='unique',\n    where=FrequencyFilter(\"Purchase\", value=3),\n    from_date=\"2026-03-01\", to_date=\"2026-03-31\", unit='month')\n# Reveals: how many repeat purchasers logged in\n```\n\n`FrequencyFilter` works in `ws.query()` and `ws.build_params()` only \u2014 `ws.query_flow()`\ndoes not accept it and fails with an unclear error. Its threshold counts inside each\n`unit` bucket, not across the date range: with the default `unit='day'`, `value=3` means\nthree events on the same day, which returns an empty series when nobody reaches it. Set\n`unit` to the period the threshold means and pin that period with `from_date` / `to_date`,\nsince `last=` is always a number of days. `date_range_value` / `date_range_unit` had no\nobservable effect on inline filters in upstream's 2026-09-11 probe, so do not use them to\nwiden the window.\n"
+      "replace": "# Filter to users who purchased 3+ times in March, then measure their logins\nresult = ws.query(\"Login\", math='unique',\n    where=FrequencyFilter(\"Purchase\", value=3),\n    from_date=\"2026-03-01\", to_date=\"2026-03-31\", unit='month')\n# Reveals: how many repeat purchasers logged in\n```\n\n`FrequencyFilter` works in `ws.query()` and `ws.build_params()` only — `ws.query_flow()`\ndoes not accept it and fails with an unclear error. Its threshold counts inside each\n`unit` bucket, not across the date range: with the default `unit='day'`, `value=3` means\nthree events on the same day, which returns an empty series when nobody reaches it. Set\n`unit` to the period the threshold means and pin that period with `from_date` / `to_date`,\nsince `last=` is always a number of days. `date_range_value` / `date_range_unit` had no\nobservable effect on inline filters in upstream's 2026-09-11 probe, so do not use them to\nwiden the window.\n"
     }
   ],
   "esm": [
@@ -1205,7 +1205,7 @@
       "source": "grafana/skills",
       "file": "references/collector-config.md",
       "find": "# Download otelcol-contrib (includes all components)\ncurl -L https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest/download/otelcol-contrib_linux_amd64.tar.gz | tar xz\n",
-      "replace": "# Download otelcol-contrib (includes all components). The release assets embed the\n# version, so there is no static name under releases/latest/download \u2014 pin the version\n# in both the tag and the filename.\nOTELCOL_VERSION=0.164.0\ncurl -fL \"https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v${OTELCOL_VERSION}/otelcol-contrib_${OTELCOL_VERSION}_linux_amd64.tar.gz\" | tar xz\n"
+      "replace": "# Download otelcol-contrib (includes all components). The release assets embed the\n# version, so there is no static name under releases/latest/download — pin the version\n# in both the tag and the filename.\nOTELCOL_VERSION=0.164.0\ncurl -fL \"https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v${OTELCOL_VERSION}/otelcol-contrib_${OTELCOL_VERSION}_linux_amd64.tar.gz\" | tar xz\n"
     }
   ],
   "tempo": [
@@ -2193,7 +2193,7 @@
       "issue": 1239,
       "source": "tondevrel/scientific-agent-skills",
       "find": "## GPU Acceleration (numba.cuda)\n\n### Writing CUDA Kernels",
-      "replace": "## GPU Acceleration (numba.cuda)\n\nNumba's built-in CUDA target is deprecated; NVIDIA's `numba-cuda` package is where the target\nis now developed. It keeps the same `numba.cuda` namespace, so the code below is unchanged \u2014\ninstall `numba-cuda` alongside `numba` and the examples keep working past the removal.\nSee [the deprecation notice](https://numba.readthedocs.io/en/stable/cuda/overview.html).\n\n### Writing CUDA Kernels"
+      "replace": "## GPU Acceleration (numba.cuda)\n\nNumba's built-in CUDA target is deprecated; NVIDIA's `numba-cuda` package is where the target\nis now developed. It keeps the same `numba.cuda` namespace, so the code below is unchanged —\ninstall `numba-cuda` alongside `numba` and the examples keep working past the removal.\nSee [the deprecation notice](https://numba.readthedocs.io/en/stable/cuda/overview.html).\n\n### Writing CUDA Kernels"
     }
   ],
   "ncc": [
@@ -4514,6 +4514,50 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "uv pip install \"pandas==3.0.6\" \"polars==1.44.2\"\n",
       "replace": "uv pip install \"pandas==3.0.6\" \"polars==2.1.0\"\n"
+    }
+  ],
+  "zarr-python": [
+    {
+      "id": "skill-health-1258-1",
+      "issue": 1258,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "compatibility: Requires Python 3.12+ and zarr 3.4.0 with NumPy 2+. Remote I/O needs network access, zarr[remote] and the protocol backend; private stores need provider credentials. CLI migration needs zarr[cli].\n",
+      "replace": "compatibility: Requires Python 3.12+ and zarr 3.4.2 with NumPy 2+. Remote I/O needs network access, zarr[remote] and the protocol backend; private stores need provider credentials. CLI migration needs zarr[cli].\n"
+    },
+    {
+      "id": "skill-health-1258-2",
+      "issue": 1258,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "  upstream-version: \"3.4.0\"\n",
+      "replace": "  upstream-version: \"3.4.2\"\n"
+    },
+    {
+      "id": "skill-health-1258-3",
+      "issue": 1258,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "**Zarr-Python 3.4.0**, released **2026-09-15**, with Python 3.12+. The package version and\n",
+      "replace": "**Zarr-Python 3.4.2** (a patch release on top of 3.4.0, released **2026-09-15**), with Python 3.12+. The package version and\n"
+    },
+    {
+      "id": "skill-health-1258-4",
+      "issue": 1258,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"zarr==3.4.0\" \"numpy==2.5.3\"\n",
+      "replace": "uv pip install \"zarr==3.4.2\" \"numpy==2.5.3\"\n"
+    },
+    {
+      "id": "skill-health-1258-5",
+      "issue": 1258,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv pip install \"zarr[remote,cli]==3.4.0\" \"fsspec==2026.9.0\" \"s3fs==2026.9.0\" \"gcsfs==2026.8.1\"\n",
+      "replace": "uv pip install \"zarr[remote,cli]==3.4.2\" \"fsspec==2026.9.0\" \"s3fs==2026.9.0\" \"gcsfs==2026.8.1\"\n"
+    },
+    {
+      "id": "skill-health-1258-6",
+      "issue": 1258,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "[released source](https://github.com/zarr-developers/zarr-python/tree/v3.4.0).\n",
+      "replace": "[released source](https://github.com/zarr-developers/zarr-python/tree/v3.4.2).\n"
     }
   ]
 }
