@@ -335,8 +335,11 @@ For environments where Grafana Alloy cannot be used.
 ### Installation
 
 ```bash
-# Download otelcol-contrib (includes all components)
-curl -L https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest/download/otelcol-contrib_linux_amd64.tar.gz | tar xz
+# Download otelcol-contrib (includes all components). The release assets embed the
+# version, so there is no static name under releases/latest/download — pin the version
+# in both the tag and the filename.
+OTELCOL_VERSION=0.164.0
+curl -fL "https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v${OTELCOL_VERSION}/otelcol-contrib_${OTELCOL_VERSION}_linux_amd64.tar.gz" | tar xz
 
 # Docker
 docker run -v /path/to/config.yaml:/etc/otelcol-contrib/config.yaml \

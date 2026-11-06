@@ -14,13 +14,13 @@ pandas is Python's standard library for labeled, in-memory tabular data. The two
 
 ## Installation
 
-As of 2026 the current stable major is **pandas 3.0.x** (latest 3.0.5); **2.3.x** is the final 2.x maintenance line. Pin explicitly:
+As of 2026 the current stable major is **pandas 3.x** (latest 3.1.0); **2.3.x** is the final 2.x maintenance line. Pin explicitly:
 
 ```bash
-uv pip install "pandas==3.0.5"
+uv pip install "pandas==3.1.0"
 # PyArrow is an optional (not required) dependency; install it for faster
 # string/columnar backends and Parquet/Feather IO:
-uv pip install "pandas[pyarrow]==3.0.5"
+uv pip install "pandas[pyarrow]==3.1.0"
 ```
 
 ```python

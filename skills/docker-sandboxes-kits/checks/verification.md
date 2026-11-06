@@ -1,148 +1,193 @@
-# Verification Runbook for kit spec.yaml commands
+# Verification runbook for v3 kits
 
-`sbx kit` is EXPERIMENTAL. The local validation and inspection steps below
-do not create sandboxes; composing/creating does. This runbook does not
-publish artifacts or use a signing identity. This runbook is unexecuted; use an isolated, unique
-`--app-name` (≤20 characters) on every `sbx` invocation, a scratch registry
-namespace, and never a production signing key. Edits to a copied spec.yaml
-below use a small portable Python one-liner rather than `sed -i` (whose
-in-place syntax differs between BSD/macOS and GNU/Linux) so the runbook
-works on POSIX shells with Python 3. Docker login and a supported local
-runtime are prerequisites; login changes shared authentication, not just
-the test app. Run from the skill directory in one shell.
+A manual runbook for v3 kit descriptors. A1-A8 were exercised on 2026-11-02.
+The corrected asset passed build/conformance and runtime composition on
+sbx v0.50.1. See [initial results](runtime-results.md) and
+[authenticated results](authenticated-results.md) for commands, failures,
+corrections, versions and limits. A2/A6 expectations below incorporate the
+observed CLI behavior; A7 verifies connectivity, not a policy security boundary.
 
-`sbx kit validate` accepts a local **directory**, ZIP file, or git repository,
-not an OCI reference or a bare spec.yaml file. Other kit subcommands accept
-different reference types; consult their help. Copy each asset to a file
-named `spec.yaml` in its own directory before running these checks.
+Prerequisites: Docker with Buildx, a pinned `kit-tck` release or commit that
+you have recorded, and an `sbx` release you have confirmed supports Kits v3.
+Normal source inspection/validation and composition require sign-in to the
+isolated app. `--app-name` isolates credentials too; arrange an interactive
+`sbx --app-name "$APP" login` with the operator, never copy credentials.
+This runbook publishes nothing and signs nothing. Builds may pull the builder
+and frontend from registries; the exported layout is validated locally. It
+creates one uniquely named builder and one scratch directory, and the cleanup
+step removes only test resources, including app-scoped daemon state. Use an
+isolated, unique `--app-name` (at most 20
+characters) on every `sbx` invocation. Run from the skill directory in one
+shell. If inherited `DOCKER_CLI_PLUGIN_ORIGINAL_CLI_COMMAND` and
+`DOCKER_CLI_PLUGIN_SOCKET` make standalone `sbx` act as a Docker plugin,
+unset them in this test shell first. Record `sbx version`, `docker buildx
+version`, `kit-tck version`, and (for a Go-installed TCK) `go version -m`
+on the binary. `kit-tck version` alone may print only `dev`.
+
+## A1. Set up scratch resources
 
 ```bash
-APP="k-$(date +%s)-$$"  # fresh suffix, at most 20 characters
-WORK=$(mktemp -d)
-mkdir "$WORK/kit-sandbox-example" "$WORK/kit-mixin-example" "$WORK/workspace"
-cp assets/spec-sandbox.yaml "$WORK/kit-sandbox-example/spec.yaml"
-cp assets/spec-mixin.yaml "$WORK/kit-mixin-example/spec.yaml"
+RUN_ID=$(python3 -c 'import uuid; print(uuid.uuid4().hex)')
+APP="k-${RUN_ID:0:18}"        # fresh suffix, at most 20 characters
+BUILDER="kit-eval-$RUN_ID"
+BUILDER_CREATED=false
+WORK=$(mktemp -d /tmp/kit-v3.XXXXXX)
+WORK=$(cd "$WORK" && pwd -P)  # short canonical path for macOS runtime sockets
+mkdir "$WORK/extra-egress" "$WORK/workspace"
+cp assets/v3-mixin-egress.yaml "$WORK/extra-egress/extra-egress.yaml"
+if docker buildx create --name "$BUILDER" --driver docker-container; then
+  BUILDER_CREATED=true
+  export BUILDX_BUILDER="$BUILDER"  # also select it for sbx source builds
+  docker buildx inspect --builder "$BUILDER" --bootstrap
+else
+  printf '%s\n' 'Builder creation failed; stop here and perform A8 without removing that name.' >&2
+fi
+```
+Continue only if create and bootstrap both succeeded. Creation and bootstrap
+are separate so a bootstrap failure still leaves ownership recorded for A8.
+A failed create never grants permission to remove that name, even if a builder
+with it exists. Keep `BUILDER_CREATED` in this shell; do not recreate it by
+checking whether the builder exists.
+
+The v3 asset is a companion-pair kit by stem: `extra-egress/extra-egress.yaml`
+with no `.dockerfile`, because it is declaration-only. Before A2, have the
+operator sign in with this same `$APP` and initialize only its network policy:
+
+```bash
+sbx --app-name "$APP" login
+sbx --app-name "$APP" daemon start --detach --policy balanced
 ```
 
-## 1. Validate both example kits (schema-only checks)
+Do not generate a new app name after signing in. Always perform A8, including
+after a failed build or composition.
+
+## A2. Inspect the declarations
 
 ```bash
-sbx --app-name "$APP" kit validate "$WORK/kit-sandbox-example/"
-sbx --app-name "$APP" kit validate "$WORK/kit-mixin-example/"
+sbx --app-name "$APP" kit inspect "$WORK/extra-egress"
+sbx --app-name "$APP" kit inspect "$WORK/extra-egress" --format json
 ```
-Pass: both report valid with no errors. This proves only schema
-well-formedness — it does NOT compose either kit against a base agent and
-does NOT check any network reachability; see steps 3–4 for the difference.
+Pass on v0.50.1: both succeed, report schema v3/kind mixin, and JSON includes
+`registry.npmjs.org` in the projected network allow list. This CLI uses a
+legacy-shaped view (`sandbox`, `permissions`), not the raw v3 descriptor;
+it does **not** print both typed capability names. Do not copy its output as
+authoring YAML or treat inspection as capability selection/conformance proof.
 
-## 2. Confirm strict decoding rejects an unknown field
+The initial v0.50.1 run stopped at sign-in. Its `--offline` retry deliberately
+omits the builder and cannot load v3 sources; that is not a substitute for
+A2. Source inspection is daemon-backed and may build/import an image. After
+operator sign-in, use this normal command. Do not classify an authentication
+failure as an unsupported-v3 error.
+
+## A3. Check the descriptor through the frontend
 
 ```bash
-cp -r "$WORK/kit-mixin-example" "$WORK/kit-typo-mixin"
-python3 - "$WORK/kit-typo-mixin/spec.yaml" <<'PYCODE'
+(cd "$WORK/extra-egress" && docker buildx build --builder "$BUILDER" . \
+  -f extra-egress.yaml --output type=cacheonly)
+```
+Pass: the build succeeds. The descriptor is checked before any content is
+built, so a bad field fails here quickly.
+
+## A4. Export a layout and judge it with `kit-tck`
+
+```bash
+(cd "$WORK/extra-egress" && docker buildx build --builder "$BUILDER" . \
+  -f extra-egress.yaml -t extra-egress:0.0.0 \
+  --output type=oci,dest="$WORK/layout",tar=false)
+kit-tck validate --layout "$WORK/layout" 0.0.0
+kit-tck inspect --descriptor --layout "$WORK/layout" 0.0.0
+```
+Pass: `kit-tck` reports no failures. Pass the tag alone (`0.0.0`), not
+`extra-egress:0.0.0`. Descriptor inspection prints both typed capabilities,
+with only the explanatory `agent-context@2` request marked optional. The
+required network policy must not be made optional. A build alone is not
+proof the kit works.
+
+## A5. Confirm strict decoding rejects a misspelled key
+
+```bash
+mkdir "$WORK/typo"
+python3 - "$WORK/extra-egress/extra-egress.yaml" "$WORK/typo/typo.yaml" <<'PYCODE'
 import pathlib, sys
-p = pathlib.Path(sys.argv[1])
-p.write_text(p.read_text().replace('permissions:', 'permisions:', 1))
+src = pathlib.Path(sys.argv[1]).read_text()
+pathlib.Path(sys.argv[2]).write_text(src.replace('capabilities:', 'capabilites:', 1))
 PYCODE
-sbx --app-name "$APP" kit validate "$WORK/kit-typo-mixin/"
+(cd "$WORK/typo" && docker buildx build --builder "$BUILDER" . \
+  -f typo.yaml --output type=cacheonly)
 ```
-Pass: fails with an unrecognized-field error naming `permisions`, not a
-silent no-op.
+Pass: the build fails with an unrecognized-key error naming `capabilites`, not
+a silent no-op.
 
-## 3. Establish a truthful policy baseline before testing egress (isolated test app only)
-
-The genuine minimal mixin's `permissions.network.allow` (`registry.npmjs.org`)
-does not by itself prove anything is blocked: the default `balanced` global
-policy already allows many common hosts, and `allow-all` allows everything.
-To observe an actual denial, initialize a `deny-all` baseline — do this ONLY
-under this runbook's own isolated `--app-name`, never on a daemon you use
-for real work:
+## A6. Compare daemon-backed validation with offline rejection
 
 ```bash
-sbx --app-name "$APP" policy init deny-all
+sbx --app-name "$APP" kit validate "$WORK/extra-egress"
+sbx --app-name "$APP" kit validate "$WORK/extra-egress" --offline
 ```
-Pass: `sbx --app-name "$APP" policy ls` shows the deny-all preset active for
-this isolated app only.
+Pass on v0.50.1: the normal command accepts this valid source through its
+configured builder; the offline command rejects it with "no kit builder
+configured". Authentication/daemon failures are blockers, not evidence that
+the descriptor is invalid. Record both exit codes and messages. Other releases
+must be checked rather than assumed to have the same behavior.
 
-## 4. Confirm the all-egress-declared rule against the truthful baseline
+This corrects the original A6 expectation that normal validation must fail:
+the exact v0.50.1 implementation wires a builder into both normal inspect and
+validate. Neither command replaces the layout conformance check or A7.
+Authenticated v0.50.1 validation subsequently succeeded; offline validation
+failed as expected. Both outcomes are recorded in the results.
+
+## A7. Optional: compose onto a v3 workload (manual)
+
+Only if you have a v3 workload kit you trust at `./<workload>`; this skill
+does not supply one. Use a short, canonical scratch workspace on macOS to
+avoid Unix socket path limits (for example, `mktemp -d /tmp/kit-v3.XXXXXX`,
+then resolve it with `pwd -P`). Initialize network policy only for the isolated
+app, for example with `sbx --app-name "$APP" daemon start --detach --policy balanced`.
 
 ```bash
-sbx --app-name "$APP" create --kit "$WORK/kit-mixin-example/" --name kit-egress-check shell "$WORK/workspace"
-sbx --app-name "$APP" policy check network --sandbox kit-egress-check registry.npmjs.org   # allowed: this kit's own allow entry
-sbx --app-name "$APP" policy check network --sandbox kit-egress-check example.com           # NOT allowed: deny-all baseline, no kit grants it
+sbx --app-name "$APP" run ./<workload> --kit "$WORK/extra-egress" \
+  --detach --name kit-v3-check "$WORK/workspace"
+sbx --app-name "$APP" policy check network --sandbox kit-v3-check registry.npmjs.org
 ```
-Pass: `registry.npmjs.org` is allowed (the mixin's own declared entry, on
-top of the deny-all baseline); an unrelated host (`example.com`) is not —
-this is what actually demonstrates the all-egress-declared/additive model,
-not merely removing an entry from one kit's `allow` list (which proves
-nothing about the effective policy on its own).
+Use a workload stem that does not collide with an installed built-in agent:
+v0.50.1 rejects a local workload named `shell`; a disposable copy named
+`kit-probe/kit-probe.yaml` plus `kit-probe.dockerfile` avoids that collision.
+The supplied mixin keeps its explanatory `agent-context@2` optional because
+v0.50.1 does not support that capability at composition time. Hosts may omit
+the note; the network request remains required.
 
-## 5. Confirm a mixin cannot declare a sandbox: block
+Observe and record the decision. Do not assume the egress request was granted
+just because it is declared; the host decides. For a mixin that ships a tool,
+run the tool with `sbx exec` (not as an argument after `--` on `sbx run`).
+
+## A8. Clean up (consented removal of only what this runbook created)
 
 ```bash
-cp -r "$WORK/kit-mixin-example" "$WORK/kit-bad-mixin"
-printf '\nsandbox:\n  image: docker/sandbox-templates:shell-docker\n' >> "$WORK/kit-bad-mixin/spec.yaml"
-sbx --app-name "$APP" kit validate "$WORK/kit-bad-mixin/"
-```
-Pass: fails — a `sandbox:` block is forbidden for `kind: mixin`.
-
-## 6. Confirm a duplicate-service credential fails composition, not `kit validate`
-
-```bash
-cp -r "$WORK/kit-mixin-example" "$WORK/kit-github-mixin"
-python3 - "$WORK/kit-github-mixin/spec.yaml" <<'PYCODE'
-import pathlib, sys
-p = pathlib.Path(sys.argv[1])
-p.write_text(p.read_text() + '''
-credentials:
-  - service: github
-    apiKey:
-      name: GITHUB_TOKEN
-      inject:
-        - domain: api.github.com
-          scheme: bearer
-''')
-PYCODE
-sbx --app-name "$APP" kit validate "$WORK/kit-github-mixin/"   # passes: schema-only
-sbx --app-name "$APP" create --kit "$WORK/kit-github-mixin/" --name kit-dup-check shell "$WORK/workspace"   # expect: fails, shell already declares github
-```
-Pass: `kit validate` reports the kit as schema-valid on its own; only the
-actual `sbx create --kit` composition against `shell` (which already
-declares a `github` credential) fails with a duplicate-service error —
-confirming `kit validate` proves schema, not composability.
-
-## 7. Confirm `sbx kit add` recreate-aware requirement
-
-```bash
-sbx --app-name "$APP" run --name kit-add-check -d shell "$WORK/workspace"
-sbx --app-name "$APP" kit add kit-add-check "$WORK/kit-mixin-example/"
-sbx --app-name "$APP" kit inspect "$WORK/kit-mixin-example/"
-```
-Then check the actual sandbox, not just the artifact:
-```bash
-sbx --app-name "$APP" exec kit-add-check printenv MY_MIXIN
-sbx --app-name "$APP" policy check network --sandbox kit-add-check registry.npmjs.org
-```
-Pass: `kit add` succeeds, the variable is `1`, and the host is allowed.
-`kit inspect` alone only shows the input artifact, not applied state.
-
-## 8. Inspect the sandbox kit declaration without assuming inheritance was resolved
-
-```bash
-sbx --app-name "$APP" kit inspect "$WORK/kit-sandbox-example/" --json | grep -E '"extends"[[:space:]]*:[[:space:]]*"shell"'
-```
-Pass: inspect reports `"extends": "shell"`. Local artifact inspection
-prints the declaration; it does not resolve the parent or print an inherited
-image. Parent resolution occurs during create/run. Source-level loader and
-composition checks confirm that this asset inherits the embedded shell
-image; this inspect command alone does not prove image availability.
-
-## 9. Clean up (consented removal of this runbook's own isolated app and sandboxes)
-
-```bash
-sbx --app-name "$APP" rm --force kit-add-check kit-egress-check
-sbx --app-name "$APP" daemon stop
+sbx --app-name "$APP" rm --force kit-v3-check   # only if A7 was run
+sbx --app-name "$APP" daemon stop               # if any daemon-backed step ran
+if [ "${BUILDER_CREATED:-false}" = true ]; then
+  if docker buildx rm "$BUILDER"; then
+    BUILDER_CREATED=false
+  fi
+fi
 rm -rf "$WORK"
 ```
-`--app-name "$APP"` isolates every command in this runbook to its own
-daemon; the `deny-all` baseline set in step 3 applies only to that isolated
-app and never touches the default daemon's policy.
+Normal A2/A6 may start a daemon even without A7. After confirming it stopped,
+remove only this session's app-scoped runtime state. On the tested macOS host:
+
+```bash
+STATE_DIR="$HOME/Library/Application Support/com.docker.sandboxes/sandboxes-$APP"
+RUN_DIR="$HOME/.sbx/run_$APP"
+FALLBACK_ALIAS="/tmp/sboxd-$(id -u)-sandboxes-$APP"
+# Verify these paths name only this session before removing them.
+rm -rf "$STATE_DIR" "$RUN_DIR" "$FALLBACK_ALIAS"
+```
+
+Verify these paths are absent and no process for `sandboxes-$APP` remains.
+Resolve platform-specific paths before using this on another OS. Never remove
+the default app's state. This does not remove the isolated keychain sign-in;
+coordinate logout separately with the operator.
+
+The builder name is unique to this run. Do not remove a builder you did not
+create, and do not substitute `docker buildx prune`, `docker system prune`,
+or any unscoped removal.
