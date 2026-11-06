@@ -22,6 +22,7 @@ created: 2026-08-23
 
 - [databricks-data-discovery](../../notes/analytics-engineering/databricks-data-discovery.md) — Discover, explore, and query Databricks data via Genie — the CLI equivalent of the Genie One MCP
 - [databricks-model-serving](../../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
+- [databricks-vector-search](../../notes/analytics-engineering/databricks-vector-search.md) — Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

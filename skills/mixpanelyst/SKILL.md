@@ -827,12 +827,21 @@ result = ws.query("Login", math='unique',
     last=30, mode='total')
 # Reveals: do frequent purchasers also log in more?
 
-# Filter to users who purchased 3+ times in 30 days, then analyze their flow
-result = ws.query_flow("Login", forward=3,
-    where=FrequencyFilter("Purchase", value=3, date_range_value=30, date_range_unit="day"),
-    last=30)
-# Reveals: what do repeat purchasers do after logging in?
+# Filter to users who purchased 3+ times in March, then measure their logins
+result = ws.query("Login", math='unique',
+    where=FrequencyFilter("Purchase", value=3),
+    from_date="2026-03-01", to_date="2026-03-31", unit='month')
+# Reveals: how many repeat purchasers logged in
 ```
+
+`FrequencyFilter` works in `ws.query()` and `ws.build_params()` only — `ws.query_flow()`
+does not accept it and fails with an unclear error. Its threshold counts inside each
+`unit` bucket, not across the date range: with the default `unit='day'`, `value=3` means
+three events on the same day, which returns an empty series when nobody reaches it. Set
+`unit` to the period the threshold means and pin that period with `from_date` / `to_date`,
+since `last=` is always a number of days. `date_range_value` / `date_range_unit` had no
+observable effect on inline filters in upstream's 2026-09-11 probe, so do not use them to
+widen the window.
 
 **When to reach for each:**
 - Property values are messy or need derivation → **Custom Property**
