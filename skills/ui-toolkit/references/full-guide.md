@@ -4,7 +4,7 @@ Background reference for the prebuilt Zoom Video SDK UI Toolkit on web. Prefer `
 
 **Official Documentation**: https://developers.zoom.us/docs/video-sdk/web/ui-toolkit/
 **API Reference**: https://marketplacefront.zoom.us/sdk/uitoolkit/web/
-**NPM Package**: https://www.npmjs.com/package/@zoom/videosdk-zoom-ui-toolkit
+**NPM Package**: https://www.npmjs.com/package/@zoom/videosdk-ui-toolkit
 **Live Demo**: https://sdk.zoom.com/videosdk-uitoolkit
 
 ## Quick Links
@@ -49,7 +49,7 @@ The Zoom Video SDK UI Toolkit is a **pre-built video UI library** that renders c
 ## Installation
 
 ```bash
-npm install @zoom/videosdk-zoom-ui-toolkit jsrsasign
+npm install @zoom/videosdk-ui-toolkit jsrsasign
 npm install -D @types/jsrsasign
 ```
 
@@ -60,8 +60,8 @@ npm install -D @types/jsrsasign
 ### Basic Usage (Vanilla JS)
 
 ```javascript
-import uitoolkit from "@zoom/videosdk-zoom-ui-toolkit";
-import "@zoom/videosdk-ui-toolkit/dist/videosdk-zoom-ui-toolkit.css";
+import uitoolkit from "@zoom/videosdk-ui-toolkit";
+import "@zoom/videosdk-ui-toolkit/dist/videosdk-ui-toolkit.css";
 
 const container = document.getElementById("sessionContainer");
 
@@ -99,14 +99,14 @@ export default function VideoSession({ jwt, sessionName, userName }) {
     let isMounted = true;
 
     const init = async () => {
-      const uitoolkitModule = await import('@zoom/videosdk-zoom-ui-toolkit');
+      const uitoolkitModule = await import('@zoom/videosdk-ui-toolkit');
       const uitoolkit = uitoolkitModule.default;
       uitoolkitRef.current = uitoolkit;
 
       // If TypeScript complains about CSS imports, configure your app to allow them
       // (for example via a global `declare module \"*.css\";`), or import the CSS from
       // a global entrypoint (Next.js layout/_app) instead of inlining here.
-      await import('@zoom/videosdk-ui-toolkit/dist/videosdk-zoom-ui-toolkit.css');
+      await import('@zoom/videosdk-ui-toolkit/dist/videosdk-ui-toolkit.css');
 
       if (!isMounted || !containerRef.current) return;
 
@@ -249,8 +249,8 @@ uitoolkit.hideAllComponents();
 ## CDN Usage (No Build Step)
 
 ```html
-<link rel="stylesheet" href="https://source.zoom.us/uitoolkit/2.3.5-1/videosdk-zoom-ui-toolkit.css" />
-<script src="https://source.zoom.us/uitoolkit/2.3.5-1/videosdk-zoom-ui-toolkit.min.umd.js"></script>
+<link rel="stylesheet" href="https://source.zoom.us/uitoolkit/2.3.5-1/videosdk-ui-toolkit.css" />
+<script src="https://source.zoom.us/uitoolkit/2.3.5-1/videosdk-ui-toolkit.min.umd.js"></script>
 
 <div id="sessionContainer"></div>
 
@@ -310,7 +310,7 @@ fetch('/your-app-path/api/token', { ... })
 
 ## Resources
 
-- **GitHub**: https://github.com/zoom/videosdk-zoom-ui-toolkit-web
+- **GitHub**: https://github.com/zoom/videosdk-ui-toolkit-web
 - **UI Toolkit Docs**: https://developers.zoom.us/docs/video-sdk/web/ui-toolkit/
 - **Auth Endpoint Sample**: https://github.com/zoom/videosdk-auth-endpoint-sample
 - **Marketplace**: https://marketplace.zoom.us/
@@ -454,17 +454,17 @@ See: **[troubleshooting/common-issues.md](../troubleshooting/common-issues.md)**
 
 | Framework | Repository | Key Features |
 |-----------|------------|--------------|
-| React | [videosdk-zoom-ui-toolkit-react-sample](https://github.com/zoom/videosdk-zoom-ui-toolkit-react-sample) | Hooks, TypeScript |
-| Vue.js | [videosdk-zoom-ui-toolkit-vuejs-sample](https://github.com/zoom/videosdk-zoom-ui-toolkit-vuejs-sample) | Composition API |
-| Angular | [videosdk-zoom-ui-toolkit-angular-sample](https://github.com/zoom/videosdk-zoom-ui-toolkit-angular-sample) | Services, Guards |
-| JavaScript | [videosdk-zoom-ui-toolkit-javascript-sample](https://github.com/zoom/videosdk-zoom-ui-toolkit-javascript-sample) | Vanilla JS |
+| React | [videosdk-ui-toolkit-react-sample](https://github.com/zoom/videosdk-ui-toolkit-react-sample) | Hooks, TypeScript |
+| Vue.js | [videosdk-ui-toolkit-vuejs-sample](https://github.com/zoom/videosdk-ui-toolkit-vuejs-sample) | Composition API |
+| Angular | [videosdk-ui-toolkit-angular-sample](https://github.com/zoom/videosdk-ui-toolkit-angular-sample) | Services, Guards |
+| JavaScript | [videosdk-ui-toolkit-javascript-sample](https://github.com/zoom/videosdk-ui-toolkit-javascript-sample) | Vanilla JS |
 | Auth Endpoint | [videosdk-auth-endpoint-sample](https://github.com/zoom/videosdk-auth-endpoint-sample) | Node.js JWT |
 
 ## 🌐 External Resources
 
 - **Official Documentation**: https://developers.zoom.us/docs/video-sdk/web/ui-toolkit/
 - **API Reference**: https://marketplacefront.zoom.us/sdk/uitoolkit/web/
-- **NPM Package**: https://www.npmjs.com/package/@zoom/videosdk-zoom-ui-toolkit
+- **NPM Package**: https://www.npmjs.com/package/@zoom/videosdk-ui-toolkit
 - **Marketplace**: https://marketplace.zoom.us/
 - **Developer Forum**: https://devforum.zoom.us/
 - **Live Demo**: https://sdk.zoom.com/videosdk-uitoolkit
@@ -498,8 +498,8 @@ See: **[troubleshooting/common-issues.md](../troubleshooting/common-issues.md)**
 ### Minimal Working Example
 
 ```javascript
-import uitoolkit from "@zoom/videosdk-zoom-ui-toolkit";
-import "@zoom/videosdk-ui-toolkit/dist/videosdk-zoom-ui-toolkit.css";
+import uitoolkit from "@zoom/videosdk-ui-toolkit";
+import "@zoom/videosdk-ui-toolkit/dist/videosdk-ui-toolkit.css";
 
 const config = {
   videoSDKJWT: "YOUR_JWT",
