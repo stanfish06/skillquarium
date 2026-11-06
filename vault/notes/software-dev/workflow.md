@@ -63,12 +63,14 @@ created: 2026-08-07
 - [matlab-optimize-performance](../../notes/matlab-development/matlab-optimize-performance.md) — Read BEFORE optimizing any MATLAB code for speed
 - [matlab-read-doc](../../notes/matlab-development/matlab-read-doc.md) — Guides the agent to reference official MathWorks Documentation and Help
 - [metagenomics](../../notes/sequence-phylogenetics/metagenomics.md) — Shotgun metagenomics workflow with host-depletion-aware QC, taxonomic profiling, functional profiling, AMR follow-up, and reproducible community output tables
+- [mip-solver-and-solution-audit](../../notes/data-science-compute/mip-solver-and-solution-audit.md) — Operational workflow for hard integer-programming optimization tasks: selecting an installed solver, preserving solver/incumbent certificates, extracting feasible schedules...
 - [ncbi-pmc-skill](../../notes/literature-discovery/ncbi-pmc-skill.md) — Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi
 - [nextflow](../../notes/cloud-devops/nextflow.md) — Build, run, and debug Nextflow data pipelines and nf-core workflows end to end
 - [nvmolkit-usage](../../notes/drug-discovery-chem/nvmolkit-usage.md) — Write code that calls the installed nvMolKit Python API for GPU-accelerated, batched RDKit-style operations - Morgan fingerprints, Tanimoto/cosine similarity, ETKDG conformer...
 - [omniverse-cad-to-simready](../../notes/game-development/omniverse-cad-to-simready.md) — Coordinate the end-to-end CAD/source-asset to SimReady workflow
 - [omniverse-usd-performance-tuning](../../notes/game-development/omniverse-usd-performance-tuning.md) — Top-level workflow skill for USD performance diagnosis and optimization
 - [opentrons-integration](../../notes/bio-databases-platforms/opentrons-integration.md) — Authors, reviews, migrates, simulates, and troubleshoots official Opentrons Python Protocol API v2 protocols for Flex and OT-2 robots
+- [pcap-triage-tshark](../../notes/security-auditing/pcap-triage-tshark.md) — Fast workflow to inspect PCAPs and extract protocol-level details using tshark
 - [physical-ai-infrastructure-setup-and-resilient-scaling](../../notes/game-development/physical-ai-infrastructure-setup-and-resilient-scaling.md) — Use when the user wants to set up, scale, validate, or harden NVIDIA physical AI infrastructure for synthetic data generation workflows across local MicroK8s or Azure AKS, including...
 - [propose-security-hardening](../../notes/security-auditing/propose-security-hardening.md) — Develop evidence-backed structural and architectural security hardening proposals from vulnerability disclosures, supplied findings, incident or assessment documents, source code, or a...
 - [proteomics-de](../../notes/proteomics-metabolomics/proteomics-de.md) — Differential expression analysis for label-free quantitative (LFQ) intensity data with standard MaxQuant and DIA-NN output
