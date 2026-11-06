@@ -82,6 +82,24 @@
       "replace": "llm = BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")  # use the inference-profile ID; region prefix (us./eu./global.) must match your Bedrock deployment"
     }
   ],
+  "ui-toolkit": [
+    {
+      "id": "videosdk-ui-toolkit-rename-guide",
+      "issue": 1191,
+      "source": "openai/plugins",
+      "file": "references/full-guide.md",
+      "find": "videosdk-zoom-ui-toolkit",
+      "replace": "videosdk-ui-toolkit"
+    },
+    {
+      "id": "videosdk-ui-toolkit-rename-troubleshooting",
+      "issue": 1191,
+      "source": "openai/plugins",
+      "file": "troubleshooting/common-issues.md",
+      "find": "videosdk-zoom-ui-toolkit",
+      "replace": "videosdk-ui-toolkit"
+    }
+  ],
   "docker-expert": [
     {
       "id": "compose-v2-cli",
