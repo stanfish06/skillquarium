@@ -4568,5 +4568,14 @@
       "find": "Vercel Flags is in **public beta** (February 2026), available to teams on all plans. Pricing: **$30 per 1 million flag requests** ($0.00003 per event).\n",
       "replace": "Vercel Flags reached **general availability** in April 2026 (after an initial public beta starting February 2026), available to teams on all plans. Pricing may have changed at GA; verify current rates at [Vercel's feature-flags limits and pricing docs](https://vercel.com/docs/workflow-collaboration/feature-flags/limits-and-pricing) before citing a number.\n"
     }
+  ],
+  "render-cli": [
+    {
+      "id": "ci-example-version-pin-v2.36.0",
+      "issue": 1282,
+      "source": "openai/plugins",
+      "find": "          curl -L https://github.com/render-oss/cli/releases/download/v2.22.0/cli_2.22.0_linux_amd64.zip -o render.zip\n          unzip render.zip\n          sudo mv cli_v2.22.0 /usr/local/bin/render",
+      "replace": "          curl -L https://github.com/render-oss/cli/releases/download/v2.36.0/cli_2.36.0_linux_amd64.zip -o render.zip\n          unzip render.zip\n          sudo mv cli_v2.36.0 /usr/local/bin/render"
+    }
   ]
 }
