@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "4fcb0130875f82f486ce08757c41397c570c8015",
+      "skillFolderHash": "fd73104d7002c0301c0b6d650b31d248d215ebf1",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-06T14:14:33.251Z"
+      "updatedAt": "2026-11-07T12:57:13.601Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -1519,9 +1519,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langfuse/skills.git",
       "skillPath": "skills/langfuse/SKILL.md",
-      "skillFolderHash": "e05f51bd7fb1c5db4d87e3a1c167a4b9ea441bb3",
+      "skillFolderHash": "42996c667c57b5762367c9e41c033e6039549765",
       "installedAt": "2026-06-09T19:26:38.181Z",
-      "updatedAt": "2026-11-06T14:14:36.121Z"
+      "updatedAt": "2026-11-07T12:57:16.633Z"
     },
     "phoenix-cli": {
       "source": "arize-ai/phoenix",
@@ -2618,36 +2618,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-msbuild/skills/build-parallelism/SKILL.md",
-      "skillFolderHash": "877d386da836499144f6e9097c0d72240eb35434",
+      "skillFolderHash": "203992914d4d919666399efabe51915b2b1a6c91",
       "installedAt": "2026-07-21T05:30:50.013Z",
-      "updatedAt": "2026-10-10T12:47:50.934Z"
+      "updatedAt": "2026-11-07T12:57:31.104Z"
     },
     "build-perf-baseline": {
       "source": "dotnet/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-msbuild/skills/build-perf-baseline/SKILL.md",
-      "skillFolderHash": "723b589b5a13364737ece99b0e8bd11f87a2af3b",
+      "skillFolderHash": "e7cb391fe219a800af7c5fd3389de45699942e0b",
       "installedAt": "2026-07-21T05:30:50.014Z",
-      "updatedAt": "2026-10-17T10:40:17.076Z"
+      "updatedAt": "2026-11-07T12:57:33.087Z"
     },
     "build-perf-diagnostics": {
       "source": "dotnet/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-msbuild/skills/build-perf-diagnostics/SKILL.md",
-      "skillFolderHash": "1e1c1562293975177a5f485819e6023d31e7a555",
+      "skillFolderHash": "7a941934ccec10a90070727fe134200070e474c3",
       "installedAt": "2026-07-21T05:30:50.016Z",
-      "updatedAt": "2026-10-21T11:45:31.493Z"
+      "updatedAt": "2026-11-07T12:57:35.012Z"
     },
     "check-bin-obj-clash": {
       "source": "dotnet/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-msbuild/skills/check-bin-obj-clash/SKILL.md",
-      "skillFolderHash": "6ba131bb43550b963a19ab1009820d3b2ee5450f",
+      "skillFolderHash": "be2760c75ea5558d87f7bdffbda7373ff4cd6788",
       "installedAt": "2026-07-21T05:30:50.016Z",
-      "updatedAt": "2026-10-10T12:47:55.115Z"
+      "updatedAt": "2026-11-07T12:57:36.854Z"
     },
     "assertion-quality": {
       "source": "dotnet/skills",
@@ -2834,9 +2834,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-msbuild/skills/eval-performance/SKILL.md",
-      "skillFolderHash": "0f8c0adf5c27bc819c2d720a0052ec227b9c1d07",
+      "skillFolderHash": "5abc3cf017061528d28af63e30824579a7c32a29",
       "installedAt": "2026-07-21T05:32:32.214Z",
-      "updatedAt": "2026-10-10T12:48:08.804Z"
+      "updatedAt": "2026-11-07T12:57:38.886Z"
     },
     "extension-points": {
       "source": "dotnet/skills",
@@ -2861,9 +2861,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-msbuild/skills/incremental-build/SKILL.md",
-      "skillFolderHash": "7b50ed44acc86ef7a4e013cda3c0adba72767b41",
+      "skillFolderHash": "f91270d3fb93b99608b10606cef5e4bda146e94e",
       "installedAt": "2026-07-21T05:32:32.218Z",
-      "updatedAt": "2026-10-10T12:48:13.329Z"
+      "updatedAt": "2026-11-07T12:57:40.865Z"
     },
     "item-management": {
       "source": "dotnet/skills",
