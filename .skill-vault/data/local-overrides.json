@@ -4863,22 +4863,68 @@
   ],
   "morph-ppt": [
     {
-      "id": "load-skill-wording-1",
+      "id": "style-count-51-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**This skill is a scene layer on top of `officecli-pptx`.** Every pptx hard rule — visual delivery floor (title ≥ 36pt / body ≥ 18pt / title ≥ 2× body), 12-column grid on 33.87×19.05cm, canonical palettes, chart-choice decision table, connector canon, shell escape, resident + batch, Delivery Gate 1–5a — is inherited, not re-taught. This file adds only what **Morph** needs on top: cross-slide shape-name binding, Scene Actors vs content prefixing, ghost discipline, `transition=morph` CLI quirks, 52-style visual library lookup, and a morph-specific fresh-eyes Gate 5b extension.\n",
+      "replace": "**This skill is a scene layer on top of `officecli-pptx`.** Every pptx hard rule — visual delivery floor (title ≥ 36pt / body ≥ 18pt / title ≥ 2× body), 12-column grid on 33.87×19.05cm, canonical palettes, chart-choice decision table, connector canon, shell escape, resident + batch, Delivery Gate 1–5a — is inherited, not re-taught. This file adds only what **Morph** needs on top: cross-slide shape-name binding, Scene Actors vs content prefixing, ghost discipline, `transition=morph` CLI quirks, 51-style visual library lookup, and a morph-specific fresh-eyes Gate 5b extension.\n"
+    },
+    {
+      "id": "load-skill-wording-2",
       "source": "iOfficeAI/OfficeCLI",
       "find": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Read `skills/officecli-pptx/SKILL.md` first if you have not.\n",
       "replace": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Load the `officecli-pptx` skill first if you have not.\n"
     },
     {
-      "id": "load-skill-wording-2",
+      "id": "load-skill-wording-3",
       "source": "iOfficeAI/OfficeCLI",
       "find": "**Inherits pptx v2.** You should have read `skills/officecli-pptx/SKILL.md` first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; use `tailEnd=triangle` on flow connectors; run the Delivery Gate 1–5a; attribute `[AGENT-ERROR]` vs `[RENDERER-BUG]` vs `[SKILL gap]`. If any of those are unfamiliar, read pptx v2 first.\n",
       "replace": "**Inherits pptx v2.** You should have loaded the `officecli-pptx` skill first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; use `tailEnd=triangle` on flow connectors; run the Delivery Gate 1–5a; attribute `[AGENT-ERROR]` vs `[RENDERER-BUG]` vs `[SKILL gap]`. If any of those are unfamiliar, read pptx v2 first.\n"
     },
     {
-      "id": "load-skill-wording-3",
+      "id": "style-count-51-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "1. **Browse INDEX.** `reference/styles/INDEX.md` groups all 52 styles by palette category and mood (e.g. `dark--premium-navy` = authoritative / refined; `warm--earth-organic` = organic / grounded). The Quick Lookup table also shows each style's **primary hex trio** (bg / fg / accent) — if the user specified a brand color, scan the hex column to find the nearest match without opening every `style.md`. Pick 1 style that matches the topic mood OR aligns with the user-specified hex.\n",
+      "replace": "1. **Browse INDEX.** `reference/styles/INDEX.md` groups all 51 styles by palette category and mood (e.g. `dark--premium-navy` = authoritative / refined; `warm--earth-organic` = organic / grounded). The Quick Lookup table also shows each style's **primary hex trio** (bg / fg / accent) — if the user specified a brand color, scan the hex column to find the nearest match without opening every `style.md`. Pick 1 style that matches the topic mood OR aligns with the user-specified hex.\n"
+    },
+    {
+      "id": "style-count-51-5",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "- `reference/styles/INDEX.md` — 52-style visual library, grouped by palette (dark / light / warm / vivid / bw / mixed) and mood. Lookup workflow in §Style library lookup workflow above.\n",
+      "replace": "- `reference/styles/INDEX.md` — 51-style visual library, grouped by palette (dark / light / warm / vivid / bw / mixed) and mood. Lookup workflow in §Style library lookup workflow above.\n"
+    },
+    {
+      "id": "load-skill-wording-6",
       "source": "iOfficeAI/OfficeCLI",
       "find": "- `skills/officecli-pptx/SKILL.md` — base pptx v2 rules (visual floor, grid, canonical palettes, chart-choice, connector canon, Delivery Gate 1–5a, Known Issues C-P-1..7, Shell escape 3-layer).\n",
       "replace": "- `officecli-pptx` skill — base pptx v2 rules (visual floor, grid, canonical palettes, chart-choice, connector canon, Delivery Gate 1–5a, Known Issues C-P-1..7, Shell escape 3-layer).\n"
+    },
+    {
+      "id": "result-node-extraction-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            _collect_shapes(child[\"children\"], callback)\n\n\n# ---------------------------------------------------------------------------\n# morph_clone_slide\n# ---------------------------------------------------------------------------\n\n",
+      "replace": "            _collect_shapes(child[\"children\"], callback)\n\n\ndef _first_result(response):\n    \"\"\"Return the first OfficeCLI result node from a JSON response.\"\"\"\n    results = response.get(\"data\", {}).get(\"results\", [])\n    if not results or not isinstance(results[0], dict):\n        raise ValueError(\"OfficeCLI response did not contain data.results[0]\")\n    return results[0]\n\n\n# ---------------------------------------------------------------------------\n# morph_clone_slide\n# ---------------------------------------------------------------------------\n\n"
+    },
+    {
+      "id": "result-node-extraction-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            curr_data = json.loads(curr_json_str).get(\"data\", {})\n\n            # Method 1: name-based unghosted detection\n",
+      "replace": "            curr_data = _first_result(json.loads(curr_json_str))\n\n            # Method 1: name-based unghosted detection\n"
+    },
+    {
+      "id": "result-node-extraction-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            prev_data = json.loads(out2).get(\"data\", {})\n",
+      "replace": "            prev_data = _first_result(json.loads(out2))\n"
+    },
+    {
+      "id": "result-node-extraction-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            curr_data = json.loads(curr_json_str).get(\"data\", {})\n\n            duplicates = _check_duplicates(prev_data, curr_data)\n",
+      "replace": "            curr_data = _first_result(json.loads(curr_json_str))\n\n            duplicates = _check_duplicates(prev_data, curr_data)\n"
     },
     {
       "id": "load-skill-wording-1",
@@ -4886,6 +4932,69 @@
       "file": "reference/pptx-design.md",
       "find": "`skills/officecli-pptx/SKILL.md` §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where pptx SKILL.md already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.\n",
       "replace": "The `officecli-pptx` skill's §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where the base pptx skill already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.\n"
+    },
+    {
+      "id": "style-count-51-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/pptx-design.md",
+      "find": "There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 52-style library because cross-slide motion amplifies color mood.\n",
+      "replace": "There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 51-style library because cross-slide motion amplifies color mood.\n"
+    },
+    {
+      "id": "drop-styles-without-reference-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| dark--editorial-story    | Editorial Magazine Story | `#FFFFFF / #2C3E50 / #E74C3C`  | Brand storytelling, editorial magazines, content releases       | Narrative, artistic, premium            |\n| dark--tech-cosmos        | Tech Cosmos              | `-`                            | Tech talks, architecture reviews, scientific presentations      | Futuristic, scientific, cosmic          |\n| dark--blueprint-grid     | Blueprint Grid           | `#1B3A5C / #4A90D9 / #FFFFFF`  | Technical planning, engineering blueprints, system architecture | Precise, professional, engineered       |\n",
+      "replace": "| dark--editorial-story    | Editorial Magazine Story | `#FFFFFF / #2C3E50 / #E74C3C`  | Brand storytelling, editorial magazines, content releases       | Narrative, artistic, premium            |\n| dark--blueprint-grid     | Blueprint Grid           | `#1B3A5C / #4A90D9 / #FFFFFF`  | Technical planning, engineering blueprints, system architecture | Precise, professional, engineered       |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| warm--earth-organic      | Earth & Sage       | `#F5F0E8 / #8B6F47 / #A8C686`  | Eco-friendly, sustainability, organic brands                      | Warm, sincere, natural           |\n| warm--minimal-brand      | Minimal Brand      | `-`                            | Brand introductions, product launches, premium brand showcases    | Warm, refined, minimalist        |\n| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n",
+      "replace": "| warm--earth-organic      | Earth & Sage       | `#F5F0E8 / #8B6F47 / #A8C686`  | Eco-friendly, sustainability, organic brands                      | Warm, sincere, natural           |\n| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n| warm--creative-marketing | Creative Marketing | `-`                            | Marketing campaigns, ad creatives, poster-style PPTs              | Bold, impactful, expressive      |\n| warm--playful-organic    | Playful Organic    | `#FFF8E7 / #3D3B3C / #FFFFFF`  | Lifestyle, pet/animal topics, children's education, storytelling  | Warm, playful, friendly          |\n",
+      "replace": "| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n| warm--playful-organic    | Playful Organic    | `#FFF8E7 / #3D3B3C / #FFFFFF`  | Lifestyle, pet/animal topics, children's education, storytelling  | Warm, playful, friendly          |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Tech / AI / SaaS**                     | dark--tech-cosmos, dark--cyber-future, light--isometric-clean, mixed--chromatic-aberration, light--firmwise-saas, light--fluid-gradient                                                |\n",
+      "replace": "| **Tech / AI / SaaS**                     | dark--cyber-future, dark--blueprint-grid, light--isometric-clean, mixed--chromatic-aberration, light--firmwise-saas, light--fluid-gradient                                           |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-5",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Brand / Launch / Marketing**           | warm--brand-refresh, warm--creative-marketing, vivid--playful-marketing, warm--minimal-brand, vivid--bauhaus-electric                                                                  |\n",
+      "replace": "| **Brand / Launch / Marketing**           | warm--brand-refresh, vivid--playful-marketing, vivid--bauhaus-electric, vivid--pink-editorial                                                                                          |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-6",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Developer / Technical**                | dark--cyber-future, dark--blueprint-grid, dark--tech-cosmos                                                                                                                            |\n",
+      "replace": "| **Developer / Technical**                | dark--cyber-future, dark--blueprint-grid, light--isometric-clean                                                                                                                       |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-7",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Eco / Nature / Organic**               | warm--earth-organic, warm--minimal-brand, light--spring-launch                                                                                                                         |\n",
+      "replace": "| **Eco / Nature / Organic**               | warm--earth-organic, light--spring-launch, warm--vital-bloom                                                                                                                           |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-8",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Luxury / Premium**                     | dark--luxury-minimal, dark--premium-navy, warm--minimal-brand, dark--velvet-rose                                                                                                       |\n",
+      "replace": "| **Luxury / Premium**                     | dark--luxury-minimal, dark--premium-navy, dark--velvet-rose                                                                                                                            |\n"
     }
   ],
   "morph-ppt-3d": [

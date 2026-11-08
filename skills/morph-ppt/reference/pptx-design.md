@@ -55,7 +55,7 @@ A scene actor that lands on `opacity=0.7` in the content core is usually a mis-c
 
 ### Palette Selection — pick for mood, not for habit
 
-There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 52-style library because cross-slide motion amplifies color mood.
+There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 51-style library because cross-slide motion amplifies color mood.
 
 Decision path:
 

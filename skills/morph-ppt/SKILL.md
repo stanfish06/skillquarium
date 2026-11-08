@@ -5,7 +5,7 @@ description: "Use this skill when the user wants a .pptx with smooth cross-slide
 
 # OfficeCLI Morph-PPT Skill
 
-**This skill is a scene layer on top of `officecli-pptx`.** Every pptx hard rule — visual delivery floor (title ≥ 36pt / body ≥ 18pt / title ≥ 2× body), 12-column grid on 33.87×19.05cm, canonical palettes, chart-choice decision table, connector canon, shell escape, resident + batch, Delivery Gate 1–5a — is inherited, not re-taught. This file adds only what **Morph** needs on top: cross-slide shape-name binding, Scene Actors vs content prefixing, ghost discipline, `transition=morph` CLI quirks, 52-style visual library lookup, and a morph-specific fresh-eyes Gate 5b extension.
+**This skill is a scene layer on top of `officecli-pptx`.** Every pptx hard rule — visual delivery floor (title ≥ 36pt / body ≥ 18pt / title ≥ 2× body), 12-column grid on 33.87×19.05cm, canonical palettes, chart-choice decision table, connector canon, shell escape, resident + batch, Delivery Gate 1–5a — is inherited, not re-taught. This file adds only what **Morph** needs on top: cross-slide shape-name binding, Scene Actors vs content prefixing, ghost discipline, `transition=morph` CLI quirks, 51-style visual library lookup, and a morph-specific fresh-eyes Gate 5b extension.
 
 When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Load the `officecli-pptx` skill first if you have not.
 
@@ -322,7 +322,7 @@ Confirm the actor's target position does not overlap any `#sN-*` content shape's
 
 **Four-step lookup:**
 
-1. **Browse INDEX.** `reference/styles/INDEX.md` groups all 52 styles by palette category and mood (e.g. `dark--premium-navy` = authoritative / refined; `warm--earth-organic` = organic / grounded). The Quick Lookup table also shows each style's **primary hex trio** (bg / fg / accent) — if the user specified a brand color, scan the hex column to find the nearest match without opening every `style.md`. Pick 1 style that matches the topic mood OR aligns with the user-specified hex.
+1. **Browse INDEX.** `reference/styles/INDEX.md` groups all 51 styles by palette category and mood (e.g. `dark--premium-navy` = authoritative / refined; `warm--earth-organic` = organic / grounded). The Quick Lookup table also shows each style's **primary hex trio** (bg / fg / accent) — if the user specified a brand color, scan the hex column to find the nearest match without opening every `style.md`. Pick 1 style that matches the topic mood OR aligns with the user-specified hex.
 2. **Read philosophy.** Open `reference/styles/<style-id>/style.md` for design intent — type pairing, color logic, signature elements.
 3. **Glance technique.** Open `reference/styles/<style-id>/build.sh` ONLY for technique reference (signature shapes, palette hex codes, choreography ideas) — **coordinates are known-buggy per `INDEX.md` L5-11**; do not copy them.
 4. **Apply on your own canvas.** Build your deck using pptx v2 grid math + visual floor; borrow only the palette and the signature gesture.
@@ -535,5 +535,5 @@ Standard adjustments table → see pptx v2 §Common Pitfalls / `swap` / `move` /
 - `reference/pptx-design.md` — residual design notes (Scene Actors mechanics, page-type table, choreography patterns). Canvas / fonts / colors live in pptx v2 — this file covers only the morph-unique material.
 - `reference/morph-helpers.py` — Cross-platform (Mac / Windows / Linux) Python helpers for clone + ghost + verify + final-check. Import as a library or call via CLI args. Preferred for 5+ slide arcs.
 - `reference/morph-helpers.sh` — Bash equivalent. Pick one per project; do not mix.
-- `reference/styles/INDEX.md` — 52-style visual library, grouped by palette (dark / light / warm / vivid / bw / mixed) and mood. Lookup workflow in §Style library lookup workflow above.
+- `reference/styles/INDEX.md` — 51-style visual library, grouped by palette (dark / light / warm / vivid / bw / mixed) and mood. Lookup workflow in §Style library lookup workflow above.
 - `officecli-pptx` skill — base pptx v2 rules (visual floor, grid, canonical palettes, chart-choice, connector canon, Delivery Gate 1–5a, Known Issues C-P-1..7, Shell escape 3-layer).
