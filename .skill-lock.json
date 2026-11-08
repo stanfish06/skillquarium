@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "fd73104d7002c0301c0b6d650b31d248d215ebf1",
+      "skillFolderHash": "7a31a8f9f8a84f0410519e8e56ae856282ec233c",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-07T12:57:13.601Z"
+      "updatedAt": "2026-11-08T13:19:49.106Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "b552ed968843cd3c23e5b0e4ad2895161c5caa27",
+      "skillFolderHash": "60b858e7de1485e5cbd37b5b776f2db933f3c8f1",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-06T14:14:55.827Z"
+      "updatedAt": "2026-11-08T13:20:07.400Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "29a3996597ea8f7a953fe8177d0e9684cbd355be",
+      "skillFolderHash": "42decaaf601c4db8d105896a71f5e595fa7147ed",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-04T14:30:05.008Z"
+      "updatedAt": "2026-11-08T13:20:19.856Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -12111,9 +12111,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/cameronfreer/lean4-skills.git",
       "skillPath": "plugins/lean4/skills/lean4/SKILL.md",
-      "skillFolderHash": "9aa05bebec6dadd6d5d592dd30541a1ab70c4cd4",
+      "skillFolderHash": "39838f8e0d01e6a87bc973f686eef4b6e92e8f35",
       "installedAt": "2026-10-26T01:36:34.000Z",
-      "updatedAt": "2026-10-26T01:36:34.000Z"
+      "updatedAt": "2026-11-08T13:20:27.424Z"
     },
     "landing-page-design": {
       "source": "elayadesign/ai-design-skills",
