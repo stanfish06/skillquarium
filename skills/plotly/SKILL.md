@@ -12,7 +12,7 @@ allowed-tools:
   - Read
   - Write
   - Bash
-compatibility: Requires Python 3.9+ and Plotly 5.24+ (examples target 6.x, current as of 2026). Install with `uv add plotly` or `pip install plotly`. Static image export needs Kaleido; on Plotly 6.1.1+ use Kaleido v1 (`pip install kaleido`) plus a locally installed Chrome (`plotly_get_chrome`). Interactive charts render in browsers, Jupyter, and VS Code with no extra JS.
+compatibility: Requires Python 3.9+; current stable is Plotly 7.x (7.1.0) as of 2026-11, up from the 6.x this skill's examples were written against — see the gotcha below for what 7.0 removed. Install with `uv add plotly` or `pip install plotly`. Static image export needs Kaleido; on Plotly 6.1.1+ use Kaleido v1 (`pip install kaleido`) plus a locally installed Chrome (`plotly_get_chrome`). Interactive charts render in browsers, Jupyter, and VS Code with no extra JS.
 metadata: {"version": "1.0", "skill-author": "vault-audit"}
 ---
 
@@ -161,8 +161,14 @@ html_str = fig.to_html(full_html=False)      # snippet to embed in a larger page
 - **Static export needs Kaleido + Chrome.** `write_image` / `to_image` require Kaleido.
   On Plotly 6.1.1+ (Kaleido v1) Chrome is *not* bundled — run `plotly_get_chrome` (or
   `plotly.io.get_chrome()`) once, or you get a "Chrome not found" error. Do **not** pass
-  the `engine=` argument: it is deprecated in Plotly 6.2. For interactive output prefer
-  `write_html`, which needs neither Kaleido nor Chrome.
+  the `engine=` argument: it was deprecated in Plotly 6.2 and removed in 7.0. For
+  interactive output prefer `write_html`, which needs neither Kaleido nor Chrome.
+- **Plotly 7.0 breaking changes** (2026-08): the deprecated Figure Factory helpers
+  (`create_violin`, `create_candlestick`, `create_gantt`, etc.) were removed — use the
+  `go`/`px` equivalents instead; `scattermapbox`/`choroplethmapbox`/`densitymapbox` and
+  the `mapbox` subplot were removed in favor of the `*map` traces; and the color parser
+  switched from TinyColor to culori, so `rgb()`/`rgba()` strings with 0–1 fractions and
+  `hsv()` strings are no longer accepted.
 - **px vs go — pick by shape of the work.** Reach for px first: it wires up color/size
   legends, faceting, and hover from a tidy DataFrame in one line. Drop to go only for
   mixed trace types, secondary axes, or per-trace control. Never rebuild a px chart by

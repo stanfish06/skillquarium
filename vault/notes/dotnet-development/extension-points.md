@@ -21,7 +21,7 @@ created: 2026-07-21
 
 ## Related skills
 
-- [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
+- [incremental-build](../../notes/dotnet-development/incremental-build.md) — Fix MSBuild incremental/no-op builds: 'nothing changed but it rebuilds anyway'
 - [msbuild-antipatterns](../../notes/dotnet-development/msbuild-antipatterns.md) — DO NOT INVOKE when the primary request explicitly asks to convert, migrate, modernize, or rewrite a legacy/old-style project to SDK style
 - [target-authoring](../../notes/dotnet-development/target-authoring.md) — Canonical patterns for writing custom MSBuild targets
 

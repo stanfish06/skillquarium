@@ -52,7 +52,7 @@ You are an expert in Vercel Flags — the feature flags platform for the Vercel 
 
 Vercel Flags provides a **unified feature flags platform** with a dashboard, developer tools (Flags Explorer), and analytics integration. Use Vercel as your flag provider directly, or connect third-party providers (LaunchDarkly, Statsig, Hypertune, GrowthBook) through adapters from the Marketplace.
 
-Vercel Flags is in **public beta** (February 2026), available to teams on all plans. Pricing: **$30 per 1 million flag requests** ($0.00003 per event).
+Vercel Flags reached **general availability** in April 2026 (after an initial public beta starting February 2026), available to teams on all plans. Pricing may have changed at GA; verify current rates at [Vercel's feature-flags limits and pricing docs](https://vercel.com/docs/workflow-collaboration/feature-flags/limits-and-pricing) before citing a number.
 
 Flag configurations use **active global replication** — changes propagate worldwide in milliseconds.
 

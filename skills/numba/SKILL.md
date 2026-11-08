@@ -20,9 +20,10 @@ Numba makes Python code go fast. It works by decorating your functions with deco
 
 ## Reference Documentation
 
-**Official docs**: https://numba.pydata.org/numba-doc/latest/index.html  
-**User Guide**: https://numba.pydata.org/numba-doc/latest/user/index.html  
-**Search patterns**: `@njit`, `@vectorize`, `prange`, `cuda.jit`, `numba.typed`
+- **Official docs**: https://numba.readthedocs.io/en/stable/index.html
+- **User Guide**: https://numba.readthedocs.io/en/stable/user/index.html
+- **CUDA target**: https://nvidia.github.io/numba-cuda/ (the maintained `numba.cuda` implementation)
+- **Search patterns**: `@njit`, `@vectorize`, `prange`, `cuda.jit`, `numba.typed`
 
 ## Core Principles
 
@@ -44,6 +45,10 @@ Numba is designed to work with NumPy arrays. It understands their memory layout 
 
 ```bash
 pip install numba
+
+# For the CUDA target (@cuda.jit), also install NVIDIA's numba-cuda package.
+# Since Numba 0.63, using numba.cuda without it emits a deprecation warning.
+pip install numba-cuda
 ```
 
 ### Standard Imports
@@ -175,6 +180,11 @@ def use_typed_list():
 ```
 
 ## GPU Acceleration (numba.cuda)
+
+Numba's built-in CUDA target is deprecated; NVIDIA's `numba-cuda` package is where the target
+is now developed. It keeps the same `numba.cuda` namespace, so the code below is unchanged —
+install `numba-cuda` alongside `numba` and the examples keep working past the removal.
+See [the deprecation notice](https://numba.readthedocs.io/en/stable/cuda/overview.html).
 
 ### Writing CUDA Kernels
 

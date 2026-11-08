@@ -20,7 +20,7 @@ created: 2026-07-21
 
 ## Related skills
 
-- [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
+- [incremental-build](../../notes/dotnet-development/incremental-build.md) — Fix MSBuild incremental/no-op builds: 'nothing changed but it rebuilds anyway'
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -24,10 +24,10 @@ created: 2026-07-21
 - [authoring-github-workflows](../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [binlog-failure-analysis](../notes/dotnet-development/binlog-failure-analysis.md) — Analyze MSBuild binary logs to diagnose build failures
 - [binlog-generation](../notes/dotnet-development/binlog-generation.md) — Generate MSBuild binary logs (binlogs) for build diagnostics and analysis
-- [build-parallelism](../notes/dotnet-development/build-parallelism.md) — Analyze an MSBuild solution, solution filter, or Build.proj that schedules multiple project files
-- [build-perf-baseline](../notes/dotnet-development/build-perf-baseline.md) — Establish MSBuild/.NET build performance baselines before optimizing
-- [build-perf-diagnostics](../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild bottlenecks from binlog timelines and Target/Task Performance Summaries after build-perf-baseline establishes measurements
-- [check-bin-obj-clash](../notes/dotnet-development/check-bin-obj-clash.md) — Detects MSBuild projects with conflicting OutputPath or IntermediateOutputPath
+- [build-parallelism](../notes/dotnet-development/build-parallelism.md) — Analyze MSBuild scheduling across at least two distinct projects in a solution/filter/Build.proj
+- [build-perf-baseline](../notes/dotnet-development/build-perf-baseline.md) — Establish MSBuild/.NET baselines before optimizing
+- [build-perf-diagnostics](../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild bottlenecks from binlog timelines and Target/Task Performance Summaries after baseline measurements
+- [check-bin-obj-clash](../notes/dotnet-development/check-bin-obj-clash.md) — Find OutputPath/IntermediateOutputPath collisions between distinct projects or required property/TFM variants
 - [clr-activation-debugging](../notes/dotnet-development/clr-activation-debugging.md) — Diagnoses .NET Framework CLR activation issues using CLR activation logs (CLRLoad logs) produced by mscoree.dll
 - [code-testing-agent](../notes/dotnet-development/code-testing-agent.md) — Legacy compatibility alias for the code-testing skill
 - [code-testing-extensions](../notes/dotnet-development/code-testing-extensions.md) — Provides file paths to language-specific extension files for the code-testing pipeline
@@ -50,7 +50,7 @@ created: 2026-07-21
 - [dotnet-trace-collect](../notes/dotnet-development/dotnet-trace-collect.md) — Guide developers through capturing diagnostic artifacts to diagnose production .NET performance issues
 - [dotnet-webapi](../notes/dotnet-development/dotnet-webapi.md) — Guides creation and modification of ASP.NET Core Web API endpoints with correct HTTP semantics, OpenAPI metadata, and error handling
 - [dump-collect](../notes/dotnet-development/dump-collect.md) — Configure and collect crash dumps for modern .NET applications
-- [eval-performance](../notes/dotnet-development/eval-performance.md) — Guide for diagnosing and improving MSBuild project evaluation performance
+- [eval-performance](../notes/dotnet-development/eval-performance.md) — Diagnose measured MSBuild evaluation cost before targets run
 - [exp-mock-usage-analysis](../notes/dotnet-development/exp-mock-usage-analysis.md) — Audits .NET test mock usage by tracing each mock setup through the production code's execution path to find dead, unreachable, redundant, or replaceable mocks
 - [exp-simd-vectorization](../notes/dotnet-development/exp-simd-vectorization.md) — Optimizes hot-path scalar loops in .NET 8+ with cross-platform Vector128/Vector256/Vector512 SIMD intrinsics, or replaces manual math loops with single TensorPrimitives API calls
 - [exp-test-maintainability](../notes/dotnet-development/exp-test-maintainability.md) — Detects duplicate boilerplate, copy-paste tests, and structural maintainability issues across .NET test suites
@@ -61,7 +61,7 @@ created: 2026-07-21
 - [generate-testability-wrappers](../notes/dotnet-development/generate-testability-wrappers.md) — DO NOT USE when the target already consumes an injected interface or built-in abstraction such as IFileSystem or TimeProvider, even if the request says "generate a wrapper"
 - [grade-tests](../notes/dotnet-development/grade-tests.md) — Grade curated individual tests for readiness, A-F quality and improvements
 - [including-generated-files](../notes/dotnet-development/including-generated-files.md) — Own MSBuild generated-artifact integration
-- [incremental-build](../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
+- [incremental-build](../notes/dotnet-development/incremental-build.md) — Fix MSBuild incremental/no-op builds: 'nothing changed but it rebuilds anyway'
 - [item-management](../notes/dotnet-development/item-management.md) — Own concrete MSBuild ItemGroup and item-expression questions
 - [maui-app-lifecycle](../notes/dotnet-development/maui-app-lifecycle.md) — .NET MAUI app lifecycle guidance — the four app states, cross-platform Window lifecycle events (Created, Activated, Deactivated, Stopped, Resumed, Destroying), platform-specific...
 - [maui-collectionview](../notes/dotnet-development/maui-collectionview.md) — Guidance for implementing CollectionView in .NET MAUI apps — data display, layouts (list & grid), selection, grouping, scrolling, empty views, templates, incremental loading, swipe...

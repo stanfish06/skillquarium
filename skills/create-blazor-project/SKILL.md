@@ -121,7 +121,10 @@ dotnet new blazor -o {AppName} -int Server -au Individual
 
 `-au Individual` scaffolds ASP.NET Core Identity with SQLite (CLI) or SQL Server (Visual Studio). Identity pages are always static SSR — they do not use interactive render modes.
 
-The `blazor` template only supports `-au Individual`. For organizational auth (Microsoft Entra ID, Azure AD B2C), scaffold with `-au Individual` first, then replace the Identity provider with `Microsoft.Identity.Web` / OIDC middleware and configure the tenant in `appsettings.json`.
+The `blazor` template only supports `-au Individual`. For organizational auth (Microsoft Entra ID; for customer-facing/CIAM scenarios use **Microsoft Entra External ID** — Azure AD B2C has been closed to new customers since May 1, 2025), scaffold with `-au Individual` first, then replace ASP.NET Core Identity with `Microsoft.Identity.Web` / OIDC middleware. Replacing only the service registrations is not enough:
+  - **Authority:** for Entra ID use `"Instance": "https://login.microsoftonline.com/"`; for External ID use the tenant's `"Instance": "https://<tenant-subdomain>.ciamlogin.com/"` (changing only `TenantId` leaves sign-in pointed at the workforce endpoint).
+  - **Account UI:** delete the scaffolded `Components/Account` Identity pages and point the login/logout links at the OIDC challenge (e.g. `MicrosoftIdentity/Account/SignIn` and `SignOut` from `Microsoft.Identity.Web.UI`); the Identity pages cannot resolve their services once Identity is removed.
+  - **Circuit revalidation:** remove the scaffolded Identity revalidating `AuthenticationStateProvider` registration. It checks the local Identity store and would sign OIDC users out of an Interactive Server circuit after its revalidation interval.
 
 ## What the Template Creates
 

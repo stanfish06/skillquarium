@@ -21,7 +21,7 @@ created: 2026-07-21
 ## Related skills
 
 - [binlog-failure-analysis](../../notes/dotnet-development/binlog-failure-analysis.md) — Analyze MSBuild binary logs to diagnose build failures
-- [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild bottlenecks from binlog timelines and Target/Task Performance Summaries after build-perf-baseline establishes measurements
+- [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild bottlenecks from binlog timelines and Target/Task Performance Summaries after baseline measurements
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
