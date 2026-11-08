@@ -1489,6 +1489,7 @@
     }
   ],
   "extraAssignments": {
+    "socratic-tutor": "reasoning-ideation",
     "finite-horizon-lqr": "data-science-compute",
     "casadi-ipopt-nlp": "data-science-compute",
     "first-order-model-fitting": "data-science-compute",
