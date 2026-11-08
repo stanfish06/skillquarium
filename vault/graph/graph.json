@@ -4,11 +4,11 @@
   "skills": 2206,
   "expert_profiles": 503,
   "nodes": 2279,
-  "edges": 16357,
+  "edges": 16353,
   "generic_names_blocked": 30,
-  "tier1_edges": 4926,
+  "tier1_edges": 4924,
   "tier2_edges": 718,
-  "alias_edges": 4587,
+  "alias_edges": 4586,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 523,
@@ -20,13 +20,13 @@
   "orphan_count": 130,
   "orphan_rate": 0.0589,
   "by_provenance": {
-   "EXTRACTED": 15571,
+   "EXTRACTED": 15567,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2206,
-   "references": 12842,
+   "references": 12838,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -20850,7 +20850,7 @@
    "id": "officecli-data-dashboard",
    "type": "Skill",
    "label": "officecli-data-dashboard",
-   "description": "Use this skill to build a multi-element Excel dashboard — Dashboard sheet on open, multiple formula-driven KPI cards, multiple charts, sparklines, and conditional formatting — from CSV or tabular input. Trigger on: 'dashboard', 'KPI dashboard', 'analytics dashboard', 'executive dashboard', 'metrics dashboard', 'CSV to dashboard', 'data visualization'. Output is a single .xlsx. Scene-layer on officecli-xlsx: inherits every xlsx hard rule. DO NOT invoke for: a single budget tracker / one-sheet CSV-with-formatting (use xlsx), a 3-statement / DCF / LBO financial model (use financial-model), a weekly report with ≤ 1 chart and < 10 rows (use xlsx).",
+   "description": "Use this skill to build a multi-element Excel dashboard — Dashboard sheet on open, multiple formula-driven KPI cards, multiple charts, sparklines, and conditional formatting — from CSV or tabular input. Trigger on: 'dashboard', 'KPI dashboard', 'analytics dashboard', 'executive dashboard', 'metrics dashboard', 'CSV to dashboard', 'data visualization'. Output is a single .xlsx. Scene-layer on officecli-xlsx: inherits every xlsx hard rule. DO NOT invoke for: a single budget tracker / one-sheet CSV-with-formatting (use xlsx), a 3-statement / DCF / LBO financial model (use financial-model), a weekly report with at most 1 chart and fewer than 10 rows (use xlsx).",
    "source": "skills/officecli-data-dashboard/SKILL.md",
    "aliases": [
     "officecli data dashboard"
@@ -20925,7 +20925,7 @@
    "id": "officecli-word-form",
    "type": "Skill",
    "label": "officecli-word-form",
-   "description": "Use this skill to create fillable Word forms (.docx) with real Content Controls (SDT) + legacy FormField checkboxes + MERGEFIELD mail-merge placeholders + document protection. Trigger on: 'fillable form', 'form fields', 'content controls', 'SDT', 'word form', 'fill in', 'only editable fields', 'protect document', 'onboarding form', 'HR intake', 'survey template', 'contract / SOW template', 'mail-merge template', 'compliance checklist', 'medical intake questionnaire'. Output is a single .docx where specific fields are editable and the rest is locked. This skill is INDEPENDENT, not a scene layer on docx — payload is `<w:sdt>` + `<w:ffData>` + `<w:fldChar>` + `documentProtection`, none of which docx base skill covers. Do NOT trigger for regular reports, letters, memos, academic papers, pitch decks, or any document with no user-fillable fields — route those to officecli-docx or its scene layers.",
+   "description": "Use this skill to create fillable Word forms (.docx) with real Content Controls (SDT) + legacy FormField checkboxes + MERGEFIELD mail-merge placeholders + document protection. Trigger on: 'fillable form', 'form fields', 'content controls', 'SDT', 'word form', 'fill in', 'only editable fields', 'protect document', 'onboarding form', 'HR intake', 'survey template', 'contract / SOW template', 'mail-merge template', 'compliance checklist', 'medical intake questionnaire'. Output is a single .docx where specific fields are editable and the rest is locked. This skill is INDEPENDENT, not a scene layer on docx — payload is `w:sdt` + `w:ffData` + `w:fldChar` + `documentProtection`, none of which docx base skill covers. Do NOT trigger for regular reports, letters, memos, academic papers, pitch decks, or any document with no user-fillable fields — route those to officecli-docx or its scene layers.",
    "source": "skills/officecli-word-form/SKILL.md",
    "aliases": [
     "officecli word form"
@@ -120122,24 +120122,6 @@
    "status": "accepted"
   },
   {
-   "src": "officecli-docx",
-   "rel": "references",
-   "dst": "to-spec",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "to-spec named in officecli-docx/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "officecli-docx",
-   "rel": "references",
-   "dst": "xlsx",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "xlsx named in officecli-docx/SKILL.md body",
-   "status": "accepted"
-  },
-  {
    "src": "officecli-financial-model",
    "rel": "in_domain",
    "dst": "domain:documents-office",
@@ -165997,15 +165979,6 @@
   {
    "src": "to-spec",
    "rel": "references",
-   "dst": "officecli-docx",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "to-spec named in officecli-docx/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "to-spec",
-   "rel": "references",
    "dst": "prototype",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -179168,15 +179141,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "xlsx named in officecli-data-dashboard/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "xlsx",
-   "rel": "references",
-   "dst": "officecli-docx",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "xlsx named in officecli-docx/SKILL.md body",
    "status": "accepted"
   },
   {

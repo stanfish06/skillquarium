@@ -4568,5 +4568,332 @@
       "find": "Vercel Flags is in **public beta** (February 2026), available to teams on all plans. Pricing: **$30 per 1 million flag requests** ($0.00003 per event).\n",
       "replace": "Vercel Flags reached **general availability** in April 2026 (after an initial public beta starting February 2026), available to teams on all plans. Pricing may have changed at GA; verify current rates at [Vercel's feature-flags limits and pricing docs](https://vercel.com/docs/workflow-collaboration/feature-flags/limits-and-pricing) before citing a number.\n"
     }
+  ],
+  "officecli": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# officecli\n\nAI-friendly CLI for .docx, .xlsx, .pptx. Single binary, no dependencies, no Office installation needed.\n\n",
+      "replace": "# officecli\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this family (`officecli` + per-format `officecli-docx`/`-pptx`/`-xlsx` and its scene layers) as the canonical route for creating and richly editing Office documents; for raw OOXML inspection or plain text/table extraction use the native `docx`/`pptx`/`xlsx` skills. Distinguishing axis: officecli document generation vs raw OOXML processing.\n\nAI-friendly CLI for .docx, .xlsx, .pptx. Single binary, no dependencies, no Office installation needed.\n\n"
+    }
+  ],
+  "officecli-docx": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI DOCX Skill\n\n## Setup\n\n",
+      "replace": "# OfficeCLI DOCX Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this as the canonical skill for creating and richly editing .docx files; for raw OOXML inspection or plain text extraction use the native `docx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.\n\n## Setup\n\n"
+    },
+    {
+      "id": "page-footer-gate-opt-in-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# Gate 3 — live PAGE field exists when a footer is expected.\nFLD=$(officecli query \"$FILE\" 'field[fieldType=page]' --json | jq '.data.results | length')\n[ \"$FLD\" -ge 1 ] && echo \"Gate 3 OK\" || { echo \"REJECT Gate 3: no live PAGE field\"; exit 1; }\n",
+      "replace": "# Gate 3 — live PAGE field exists when the brief/template requires a page-number footer.\n# Set EXPECT_PAGE_FOOTER=1 for page-numbered deliverables; leave it 0 for footerless letters/memos.\nEXPECT_PAGE_FOOTER=${EXPECT_PAGE_FOOTER:-0}\nif [ \"$EXPECT_PAGE_FOOTER\" = \"1\" ]; then\n  FLD=$(officecli query \"$FILE\" 'field[fieldType=page]' --json | jq '.data.results | length')\n  [ \"$FLD\" -ge 1 ] && echo \"Gate 3 OK\" || { echo \"REJECT Gate 3: no live PAGE field\"; exit 1; }\nelse\n  echo \"Gate 3 N/A (page-number footer not required)\"\nfi\n"
+    }
+  ],
+  "officecli-pptx": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI PPTX Skill\n\n## Setup\n\n",
+      "replace": "# OfficeCLI PPTX Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this as the canonical skill for creating and richly editing .pptx files; for raw OOXML inspection or plain text extraction use the native `pptx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.\n\n## Setup\n\n"
+    }
+  ],
+  "officecli-xlsx": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI XLSX Skill\n\n## Setup\n\n",
+      "replace": "# OfficeCLI XLSX Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this as the canonical skill for creating and richly editing .xlsx/.csv workbooks; for raw OOXML inspection or plain data extraction use the native `xlsx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.\n\n## Setup\n\n"
+    }
+  ],
+  "officecli-academic-paper": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI Academic Paper Skill\n\n**This skill is a scene layer on top of `officecli-docx`.** Every docx hard rule — style architecture, heading hierarchy, shell quoting, page-break rules, live PAGE field, Delivery Gate, renderer quirks — is inherited, not re-taught. This file adds only what academic papers need on top: citation styles, equations, SEQ / PAGEREF cross-refs, multi-column journal layout, bibliography hanging indent, abstract/keywords/affiliation block.\n\n",
+      "replace": "# OfficeCLI Academic Paper Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this to produce a formatted academic .docx (citation styles, numbered equations, SEQ/PAGEREF cross-refs, bibliography layout) via officecli; for writing, planning, or revising the paper's content use the multi-agent `academic-paper` pipeline. Distinguishing axis: officecli .docx formatting vs content authoring.\n\n**This skill is a scene layer on top of `officecli-docx`.** Every docx hard rule — style architecture, heading hierarchy, shell quoting, page-break rules, live PAGE field, Delivery Gate, renderer quirks — is inherited, not re-taught. This file adds only what academic papers need on top: citation styles, equations, SEQ / PAGEREF cross-refs, multi-column journal layout, bibliography hanging indent, abstract/keywords/affiliation block.\n\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits docx v2.** You should have read `skills/officecli-docx/SKILL.md` first. This skill assumes you know how to add paragraphs, set styles, build tables, insert images, manage TOC/footer/headers, force page breaks, and run the Delivery Gate. If any of those are unfamiliar, open a second session on docx v2 before continuing.\n",
+      "replace": "**Inherits docx v2.** You should have loaded the `officecli-docx` skill first. This skill assumes you know how to add paragraphs, set styles, build tables, insert images, manage TOC/footer/headers, force page breaks, and run the Delivery Gate. If any of those are unfamiliar, open a second session on docx v2 before continuing.\n"
+    }
+  ],
+  "officecli-data-dashboard": [
+    {
+      "id": "print-scope-explicit-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "Then run the dashboard-specific Delivery Gates. Each gate uses **COUNT-then-if** pattern with a `.data.*` wrapper — never chain `&& echo OK || echo FAIL`.\n\n**Gate 1 — KPI formula coverage.** Every planned KPI cell must carry a formula. Adjust `-lt 2` to your plan (4 KPIs → `-lt 4`).\n\n",
+      "replace": "Then run the dashboard-specific Delivery Gates. Each gate uses **COUNT-then-if** pattern with a `.data.*` wrapper — never chain `&& echo OK || echo FAIL`.\n\nBefore running the gates, classify the original request explicitly. Set `PRINT_SCOPE_REQUIRED=1` when it asks for print, one-page, board, investor, `一页`, `投资人`, or `董事会` output; otherwise set it to `0`. The gates fail closed when this decision is missing.\n\n```bash\n: \"${PRINT_SCOPE_REQUIRED:?Set PRINT_SCOPE_REQUIRED to 1 for print/board/investor output, otherwise 0}\"\ncase \"$PRINT_SCOPE_REQUIRED\" in\n  0|1) ;;\n  *) echo \"REJECT setup: PRINT_SCOPE_REQUIRED must be 0 or 1\"; exit 1 ;;\nesac\n```\n\n**Gate 1 — KPI formula coverage.** Every planned KPI cell must carry a formula. Adjust `-lt 2` to your plan (4 KPIs → `-lt 4`).\n\n"
+    },
+    {
+      "id": "print-scope-explicit-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "if echo \"$USER_REQ\" | grep -qiE 'print|一页|投资人|董事会|board'; then\n",
+      "replace": "if [ \"$PRINT_SCOPE_REQUIRED\" = \"1\" ]; then\n"
+    }
+  ],
+  "officecli-financial-model": [
+    {
+      "id": "load-skill-wording-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "When the xlsx base rules cover it, the text here says `→ see xlsx v2 §X`. Read `skills/officecli-xlsx/SKILL.md` first if you have not.\n",
+      "replace": "When the xlsx base rules cover it, the text here says `→ see xlsx v2 §X`. Load the `officecli-xlsx` skill first if you have not.\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits xlsx v2.** Read `skills/officecli-xlsx/SKILL.md` first. This skill assumes you know `create` / `open` / `close`, `set` values/formulas, `batch` heredocs for cross-sheet formulas, `/SheetName/A1` paths, named ranges, the 5-gate Delivery cycle, the cross-sheet `!` trap, and that **cross-sheet formulas go non-resident (single batch OR individual `set`), never batch-while-resident**.\n",
+      "replace": "**Inherits xlsx v2.** Load the `officecli-xlsx` skill first. This skill assumes you know `create` / `open` / `close`, `set` values/formulas, `batch` heredocs for cross-sheet formulas, `/SheetName/A1` paths, named ranges, the 5-gate Delivery cycle, the cross-sheet `!` trap, and that **cross-sheet formulas go non-resident (single batch OR individual `set`), never batch-while-resident**.\n"
+    }
+  ],
+  "officecli-pitch-deck": [
+    {
+      "id": "load-skill-wording-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Read `skills/officecli-pptx/SKILL.md` first if you have not.\n",
+      "replace": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Load the `officecli-pptx` skill first if you have not.\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits pptx v2.** You should have read `skills/officecli-pptx/SKILL.md` first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; write `--prop tailEnd=triangle` on every flow connector; and run the 5-gate Delivery Gate. If any of those are unfamiliar, open a pptx v2 session before continuing.\n",
+      "replace": "**Inherits pptx v2.** You should have loaded the `officecli-pptx` skill first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; write `--prop tailEnd=triangle` on every flow connector; and run the 5-gate Delivery Gate. If any of those are unfamiliar, open a pptx v2 session before continuing.\n"
+    }
+  ],
+  "officecli-word-form": [
+    {
+      "id": "sdt-checkbox-365-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "A Word form is a `.docx` plus four OpenXML payload layers plain-docx skills do not touch: **`<w:sdt>`** content controls (types: text / richtext / dropdown / combobox / date / picture / group), **`<w:ffData>`** legacy FormField (still the only way to get a real checkbox — SDT `type=checkbox` is not implemented), **`<w:fldChar>`** complex fields (MERGEFIELD, REF, PAGEREF, SEQ, IF — template-time, not user-fill), and **`documentProtection`** (the lock that makes non-field text read-only in Word — and, on the CLI, `protection=forms` locks non-field content edits (those need `--force` or `raw-set`) but still allows form-field (SDT) edits, which is the point of forms protection).\n",
+      "replace": "A Word form is a `.docx` plus four OpenXML payload layers plain-docx skills do not touch: **`<w:sdt>`** content controls (types: text / richtext / dropdown / combobox / date / picture / group / checkbox), **`<w:ffData>`** legacy FormField (a compatibility path; SDT `type=checkbox` is a real Word check-box content control and is the default choice), **`<w:fldChar>`** complex fields (MERGEFIELD, REF, PAGEREF, SEQ, IF — template-time, not user-fill), and **`documentProtection`** (the lock that makes non-field text read-only in Word — and, on the CLI, `protection=forms` locks non-field content edits (those need `--force` or `raw-set`) but still allows form-field (SDT) edits, which is the point of forms protection).\n"
+    },
+    {
+      "id": "sdt-checkbox-365-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| SDT controls + `protection=forms` | Gray-bordered fields; rest locked | `query sdt` / `view forms` | **YES** |\n",
+      "replace": "| SDT controls + `protection=forms` | Gray-bordered fields, ☒/☐ check boxes; rest locked | `query sdt` / `view forms` | **YES** |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| FormField checkbox + `protection=forms` | Real clickable checkbox; rest locked | `query formfield` / `view forms` | **YES** (checkbox only) |\n",
+      "replace": "| FormField + `protection=forms` | Legacy clickable checkbox; rest locked | `query formfield` / `view forms` | **YES** (compatibility path) |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Checkbox is formfield, NOT SDT.** `--type sdt --prop type=checkbox` exits 1 (`SDT type 'checkbox' is not implemented`). Every checkbox in every recipe uses `--type formfield --prop type=checkbox`.\n",
+      "replace": "**Checkbox is an SDT.** `--type sdt --prop type=checkbox --prop checked=true` creates a real Word check-box content control (a `<w14:checkbox>` marker in `sdtPr`; `checked=true` renders ☒, `false` renders ☐) and `get` reads back `type=checkbox checked=…`. Use it by default. `--type formfield --prop type=checkbox` remains valid for documents that must open in legacy FormField-only consumers.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-5",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "7. Zero `type=checkbox` on any SDT.\n",
+      "replace": "7. Every checkbox SDT reads back `type=checkbox` with the intended `checked=`.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-6",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "SDT props are **first-class on `add`** — confirm the current set with `officecli help docx sdt`. Today that includes `type, tag, alias, text, items, format, lock, placeholder/placeholderText, date.*` and the SDT types `text / richtext / dropdown / combobox / date / group / picture`. So most forms are pure `add` — no raw-set, no Word template. Two paths remain only for the genuinely-unreachable cases. **Pick the path before writing a single command.**\n",
+      "replace": "SDT props are **first-class on `add`** — confirm the current set with `officecli help docx sdt`. Today that includes `type, tag, alias, text, items, format, lock, checked, placeholder/placeholderText, date.*` and the SDT types `text / richtext / dropdown / combobox / date / group / picture / checkbox`. So most forms are pure `add` — no raw-set, no Word template. Two paths remain only for the genuinely-unreachable cases. **Pick the path before writing a single command.**\n"
+    },
+    {
+      "id": "sdt-checkbox-365-7",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Use when**: you need an SDT attribute that `help docx sdt` does not list (e.g. a `<w:listItem>` whose `w:value` must differ from its display text, or a sdtPr child with no `--prop`). `raw-set` is OfficeCLI's universal OpenXML fallback — `officecli --help` lists it as a top-level command. For ordinary dropdowns use `--prop items=` (Path A); raw-set here is the exception, not the rule.\n",
+      "replace": "**Use when**: you need a sdtPr child that `help docx sdt` exposes no `--prop` for. `raw-set` is OfficeCLI's universal OpenXML fallback — `officecli --help` lists it as a top-level command. Display-text-≠-stored-value dropdowns are NO LONGER here: `items=` takes `Display|VALUE` pairs directly (Path A). raw-set is the exception, not the rule.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-8",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# Display text ≠ stored value — not expressible via items=, so inject the listItems directly:\nofficecli add \"$FILE\" /body --type sdt --prop type=dropdown --prop alias=\"Department\" --prop tag=dept\nofficecli raw-set \"$FILE\" /document \\\n  --xpath \"//w:sdt[w:sdtPr/w:tag/@w:val='dept']/w:sdtPr/w:dropDownList\" \\\n  --action append \\\n  --xml '<w:listItem xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" w:displayText=\"Engineering\" w:value=\"ENG\"/><w:listItem xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" w:displayText=\"Finance\" w:value=\"FIN\"/>'\n",
+      "replace": "# Display text ≠ stored value — one add, no raw-set:\nofficecli add \"$FILE\" /body --type sdt --prop type=dropdown --prop alias=\"Department\" --prop tag=dept \\\n  --prop items=\"Engineering|ENG,Finance|FIN,Human Resources|HR\"\nofficecli get \"$FILE\" '/body/sdt[1]'   # expect: type=dropdown items=Engineering|ENG,Finance|FIN,...\n"
+    },
+    {
+      "id": "sdt-checkbox-365-9",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Use when**: a **real SDT checkbox** (`type=checkbox` still exits 1 — use a legacy FormField instead, see §Legacy FormField), a `placeholderDocPart` prompt-text part, or custom richtext appearance / cross-part nesting beyond `--prop` reach. Picture and grouped SDTs are NO LONGER here — they add fine via Path A.\n",
+      "replace": "**Use when**: a `placeholderDocPart` prompt-text part, a `buildingBlockGallery` / `repeatingSection` control, or custom richtext appearance / cross-part nesting beyond `--prop` reach. Picture, grouped, and checkbox SDTs are NO LONGER here — all three add fine via Path A.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-10",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| dropdown whose stored value ≠ display text | **B** | raw-set append `<w:listItem w:value=…>` |\n| real checkbox | **FormField** | `--type formfield --prop type=checkbox` (see §Legacy FormField) |\n",
+      "replace": "| dropdown whose stored value ≠ display text | **A** | `--prop items=\"Engineering|ENG,Finance|FIN\"` |\n| real checkbox | **A** | `--prop type=checkbox --prop checked=false` |\n| checkbox for a legacy FormField-only consumer | **FormField** | `--type formfield --prop type=checkbox` (see §Legacy FormField) |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-11",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| real SDT checkbox / placeholder part / custom appearance | **C** | build skeleton in Word, fill via CLI |\n",
+      "replace": "| placeholder part / buildingBlockGallery / custom appearance | **C** | build skeleton in Word, fill via CLI |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-12",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "## Quick Start — Path A + FormField (minimal intake form)\n",
+      "replace": "## Quick Start — Path A (minimal intake form)\n"
+    },
+    {
+      "id": "sdt-checkbox-365-13",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "Two SDT text fields, one checkbox, protection. Paste and adapt; this is the smallest form worth shipping.\n",
+      "replace": "A text SDT, a date SDT, a checkbox SDT, protection. Paste and adapt; this is the smallest form worth shipping.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-14",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "officecli add \"$FILE\" /body --type formfield \\\n",
+      "replace": "officecli add \"$FILE\" /body --type sdt --prop type=checkbox \\\n"
+    },
+    {
+      "id": "sdt-checkbox-365-15",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "  --prop type=checkbox --prop name=agree_handbook --prop checked=false\n",
+      "replace": "  --prop alias=\"Handbook Agreement\" --prop tag=agree_handbook --prop checked=false\n"
+    },
+    {
+      "id": "sdt-checkbox-365-16",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "For fields CLI cannot express (signature `picture` SDT, real SDT checkbox, `placeholderDocPart` prompt text, grouped SDTs, custom richtext styling), build the skeleton once in Word, then fill via CLI.\n",
+      "replace": "For fields CLI cannot express (`placeholderDocPart` prompt text, `buildingBlockGallery` / `repeatingSection` controls, custom richtext styling), build the skeleton once in Word, then fill via CLI.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-17",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "Use FormField **when you need a real checkbox**. For text/dropdown, prefer SDT.\n",
+      "replace": "Use FormField **only for legacy compatibility** — a consumer that reads `<w:ffData>` but not content controls. Checkboxes, text, and dropdowns are all better served by SDT (§Path A).\n"
+    },
+    {
+      "id": "sdt-checkbox-365-18",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# CHECKBOX — the only real checkbox (SDT type=checkbox is not implemented)\n",
+      "replace": "# CHECKBOX — legacy form of an SDT checkbox\n"
+    },
+    {
+      "id": "sdt-checkbox-365-19",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# DROPDOWN formfield — items NOT settable via CLI; use Word template or SDT Path B\n",
+      "replace": "# DROPDOWN formfield — items NOT settable via CLI; use an SDT dropdown with --prop items=\n"
+    },
+    {
+      "id": "sdt-checkbox-365-20",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "Short text → type=text | Long text → type=richtext | Boolean → formfield checkbox\n",
+      "replace": "Short text → type=text | Long text → type=richtext | Boolean → type=checkbox\n"
+    },
+    {
+      "id": "sdt-checkbox-365-21",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Yes/No + conditional follow-up** (common in compliance / medical intake): formfield checkbox followed by a richtext SDT whose `alias` carries the cue — e.g. `--type formfield --prop type=checkbox --prop name=has_cond` then `--type sdt --prop type=richtext --prop alias=\"If yes, explain\" --prop tag=cond_detail --prop text=\"If yes, explain here\"`.\n",
+      "replace": "**Yes/No + conditional follow-up** (common in compliance / medical intake): a checkbox SDT followed by a richtext SDT whose `alias` carries the cue — e.g. `--type sdt --prop type=checkbox --prop alias=\"Has condition\" --prop tag=has_cond --prop checked=false` then `--type sdt --prop type=richtext --prop alias=\"If yes, explain\" --prop tag=cond_detail --prop text=\"If yes, explain here\"`.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-22",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# Gate 6 — No type=checkbox leaked onto any SDT\n",
+      "replace": "# Gate 6 — Every checkbox SDT carries an explicit checked= state\n"
+    },
+    {
+      "id": "sdt-checkbox-365-23",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "BAD_CB=$(officecli query \"$FILE\" sdt --json | jq '[.data.results[] | select(.format.type == \"checkbox\")] | length')\n",
+      "replace": "CB_BAD=$(officecli query \"$FILE\" sdt --json | jq '[.data.results[] | select(.format.type == \"checkbox\") | select(.format.checked == null or .format.checked == \"\")] | length')\n"
+    },
+    {
+      "id": "sdt-checkbox-365-24",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "[ \"$BAD_CB\" -eq 0 ] && echo \"Gate 6 OK (no SDT checkbox — formfield only)\" || { echo \"REJECT Gate 6: $BAD_CB SDT with type=checkbox\"; exit 1; }\n",
+      "replace": "[ \"$CB_BAD\" -eq 0 ] && echo \"Gate 6 OK (every checkbox SDT reads back checked=)\" || { echo \"REJECT Gate 6: $CB_BAD checkbox SDT(s) with no checked= readback\"; exit 1; }\n"
+    },
+    {
+      "id": "sdt-checkbox-365-25",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "|---|---|---|---|\n| K1 | SDT `type=checkbox` not implemented | `add ... --type sdt --prop type=checkbox` → `Error: SDT type 'checkbox' is not implemented`, exit 1 (error now lists the supported types incl. group/picture) | Use `--type formfield --prop type=checkbox` |\n| K3 | SDT `maxlength` UNSUPPORTED on `add` | `WARNING: UNSUPPORTED: maxlength`, exit 2; element still created. (`items` / `format` / `lock` / `placeholderText` are NOW supported on `add` — only `maxlength` is rejected; `name` is accepted but a no-op on SDT — use `alias`/`tag`) | Enforce length downstream; use `text` for initial content |\n",
+      "replace": "|---|---|---|---|\n| K3 | SDT `maxlength` UNSUPPORTED on `add` | `WARNING: UNSUPPORTED: maxlength`, exit 2; element still created. (`items` / `format` / `lock` / `placeholderText` are NOW supported on `add` — only `maxlength` is rejected; `name` is accepted but a no-op on SDT — use `alias`/`tag`) | Enforce length downstream; use `text` for initial content |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-26",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "|---|---|\n| Real SDT checkbox with specific locking | `type=checkbox` exits 1; use Developer → Check Box Content Control (or a legacy FormField checkbox via CLI) |\n| Prompt text (\"Click here to enter a date\") | Needs `placeholderDocPart` in `/word/glossary/document.xml` |\n",
+      "replace": "|---|---|\n| Prompt text (\"Click here to enter a date\") | Needs `placeholderDocPart` in `/word/glossary/document.xml` |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-27",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "(`picture` and `group` SDTs add directly via `--type sdt --prop type=picture` / `type=group` — no longer Phase-2 items.)\n",
+      "replace": "(`picture`, `group`, and `checkbox` SDTs add directly via `--type sdt --prop type=picture` / `type=group` / `type=checkbox` — no longer Phase-2 items.)\n"
+    },
+    {
+      "id": "sdt-checkbox-365-28",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "For the first four, build the skeleton once (Path C) and reuse.\n",
+      "replace": "For the first three, build the skeleton once (Path C) and reuse.\n"
+    }
+  ],
+  "morph-ppt": [
+    {
+      "id": "load-skill-wording-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Read `skills/officecli-pptx/SKILL.md` first if you have not.\n",
+      "replace": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Load the `officecli-pptx` skill first if you have not.\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits pptx v2.** You should have read `skills/officecli-pptx/SKILL.md` first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; use `tailEnd=triangle` on flow connectors; run the Delivery Gate 1–5a; attribute `[AGENT-ERROR]` vs `[RENDERER-BUG]` vs `[SKILL gap]`. If any of those are unfamiliar, read pptx v2 first.\n",
+      "replace": "**Inherits pptx v2.** You should have loaded the `officecli-pptx` skill first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; use `tailEnd=triangle` on flow connectors; run the Delivery Gate 1–5a; attribute `[AGENT-ERROR]` vs `[RENDERER-BUG]` vs `[SKILL gap]`. If any of those are unfamiliar, read pptx v2 first.\n"
+    },
+    {
+      "id": "load-skill-wording-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "- `skills/officecli-pptx/SKILL.md` — base pptx v2 rules (visual floor, grid, canonical palettes, chart-choice, connector canon, Delivery Gate 1–5a, Known Issues C-P-1..7, Shell escape 3-layer).\n",
+      "replace": "- `officecli-pptx` skill — base pptx v2 rules (visual floor, grid, canonical palettes, chart-choice, connector canon, Delivery Gate 1–5a, Known Issues C-P-1..7, Shell escape 3-layer).\n"
+    },
+    {
+      "id": "load-skill-wording-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/pptx-design.md",
+      "find": "`skills/officecli-pptx/SKILL.md` §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where pptx SKILL.md already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.\n",
+      "replace": "The `officecli-pptx` skill's §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where the base pptx skill already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.\n"
+    }
+  ],
+  "morph-ppt-3d": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# Morph PPT — 3D Extension\n\nThis skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.\nThis file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.\n",
+      "replace": "# Morph PPT — 3D Extension\n\n> [!note] Vault audit 2026-07-24 — USE-19\n> Use this only for a .pptx embedding a `.glb` 3D model with cinematographic camera plus Morph transitions (triggers: '3D model', 'GLB', '3D morph', 'camera move', 'model-content layout'). DO NOT invoke for 2D Morph decks with no 3D model — use `morph-ppt`; and for a generic or pitch deck with no cross-slide motion route to `officecli-pptx` or `officecli-pitch-deck`. Distinguishing axis: 3D GLB scene vs 2D morph vs static deck.\n\nThis skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.\nThis file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.\n"
+    }
   ]
 }
