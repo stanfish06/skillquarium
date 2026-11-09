@@ -4,11 +4,11 @@
   "skills": 2207,
   "expert_profiles": 503,
   "nodes": 2280,
-  "edges": 16360,
+  "edges": 16358,
   "generic_names_blocked": 30,
-  "tier1_edges": 4927,
+  "tier1_edges": 4926,
   "tier2_edges": 718,
-  "alias_edges": 4587,
+  "alias_edges": 4586,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 523,
@@ -20,13 +20,13 @@
   "orphan_count": 130,
   "orphan_rate": 0.0589,
   "by_provenance": {
-   "EXTRACTED": 15574,
+   "EXTRACTED": 15572,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2207,
-   "references": 12844,
+   "references": 12842,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -35197,15 +35197,6 @@
   {
    "src": "agentic-workflows",
    "rel": "references",
-   "dst": "cost-management",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "cost-management named in agentic-workflows/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "agentic-workflows",
-   "rel": "references",
    "dst": "github-actions-ci",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -59834,15 +59825,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "cost-management named in adaptive-metrics/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "cost-management",
-   "rel": "references",
-   "dst": "agentic-workflows",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "cost-management named in agentic-workflows/SKILL.md body",
    "status": "accepted"
   },
   {
