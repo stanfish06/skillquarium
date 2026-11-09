@@ -1265,6 +1265,13 @@
       "source": "prisma/skills",
       "find": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.6.0 packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path.",
       "replace": "MongoDB does not have a SQL `@prisma/adapter-*` package in the published Prisma 7.x packages. If you're upgrading a MongoDB project, stop and keep that project on the latest Prisma 6.x release instead of following the standard Prisma 7 migration path."
+    },
+    {
+      "id": "prisma-v7-guide-link",
+      "issue": 1305,
+      "source": "prisma/skills",
+      "find": "- [Official v7 Upgrade Guide](https://www.prisma.io/docs/orm/more/upgrades/to-v7)",
+      "replace": "- [Official v7 Upgrade Guide](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)"
     }
   ],
   "building-mcp-server-on-cloudflare": [
