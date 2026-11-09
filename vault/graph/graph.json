@@ -1,12 +1,12 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2206,
+  "skills": 2207,
   "expert_profiles": 503,
-  "nodes": 2279,
-  "edges": 16353,
+  "nodes": 2280,
+  "edges": 16356,
   "generic_names_blocked": 30,
-  "tier1_edges": 4924,
+  "tier1_edges": 4925,
   "tier2_edges": 718,
   "alias_edges": 4586,
   "discipline_edges": 599,
@@ -20,13 +20,13 @@
   "orphan_count": 130,
   "orphan_rate": 0.0589,
   "by_provenance": {
-   "EXTRACTED": 15567,
+   "EXTRACTED": 15570,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2206,
-   "references": 12838,
+   "in_domain": 2207,
+   "references": 12840,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -28037,6 +28037,21 @@
    "source": "skills/snakemake-workflow-engine/SKILL.md",
    "aliases": [
     "snakemake workflow engine"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "socratic-tutor",
+   "type": "Skill",
+   "label": "socratic-tutor",
+   "description": "Structured Socratic tutoring when the user explicitly asks to be taught, quizzed, or drilled to mastery on a topic: diagnostic placement, a skill map with levels 0-5, spaced review, and a final assessment. Trigger phrases: 'teach me', 'tutor me', 'quiz me', 'drill me', 'help me master'. Not for one-off 'explain X' or 'what is X' questions.",
+   "source": "skills/socratic-tutor/SKILL.md",
+   "aliases": [
+    "socratic tutor"
    ],
    "uses": 0,
    "successes": 0,
@@ -157643,6 +157658,24 @@
    "status": "accepted"
   },
   {
+   "src": "socratic-tutor",
+   "rel": "in_domain",
+   "dst": "domain:reasoning-ideation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "socratic-tutor",
+   "rel": "references",
+   "dst": "teach",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "teach named in socratic-tutor/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "soft-matter-physicist",
    "rel": "in_discipline",
    "dst": "discipline:physics-astronomy",
@@ -162653,6 +162686,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "teach named in sharepoint-spreadsheets/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "teach",
+   "rel": "references",
+   "dst": "socratic-tutor",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "teach named in socratic-tutor/SKILL.md body",
    "status": "accepted"
   },
   {

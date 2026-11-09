@@ -12645,6 +12645,15 @@
       "skillFolderHash": "4411a170cce777b800361ad59a4fdec9f208a969",
       "installedAt": "2026-11-08T17:39:04.000Z",
       "updatedAt": "2026-11-08T17:39:04.000Z"
+    },
+    "socratic-tutor": {
+      "source": "janestreet/agent_skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/janestreet/agent_skills.git",
+      "skillPath": "socratic-tutor/SKILL.md",
+      "skillFolderHash": "13f2666c7b404ce5a0a4b93a3613b99e415a48bc",
+      "installedAt": "2026-11-08T20:18:38.000Z",
+      "updatedAt": "2026-11-08T20:18:38.000Z"
     }
   },
   "dismissed": {
