@@ -47,7 +47,7 @@ created: 2026-06-13
 - [databricks-iceberg](../notes/analytics-engineering/databricks-iceberg.md) — Apache Iceberg tables on Databricks — Managed Iceberg tables, External Iceberg Reads (fka Uniform), Compatibility Mode, Iceberg REST Catalog (IRC), Iceberg v3, Snowflake interop...
 - [databricks-jobs](../notes/analytics-engineering/databricks-jobs.md) — Develop and deploy Lakeflow Jobs on Databricks via DABs, Python SDK, or the CLI
 - [databricks-lakebase](../notes/analytics-engineering/databricks-lakebase.md) — Databricks Lakebase Postgres: projects, scaling, connectivity, Lakebase synced tables, and Data API
-- [databricks-lakeflow-connect](../notes/analytics-engineering/databricks-lakeflow-connect.md) — Build managed ingestion pipelines into Databricks using Lakeflow Connect
+- [databricks-lakeflow-connect](../notes/analytics-engineering/databricks-lakeflow-connect.md) — Lakeflow Connect managed ingestion into Unity Catalog from databases (SQL Server, PostgreSQL, MySQL, Oracle) by CDC or query-based
 - [databricks-metric-views](../notes/analytics-engineering/databricks-metric-views.md) — Unity Catalog metric views: define, create, query, and manage governed business metrics in YAML
 - [databricks-ml-training](../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
 - [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow GenAI evaluation and agent improvement on Databricks
