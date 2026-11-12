@@ -2159,6 +2159,15 @@
       "replace": "            # Quality below threshold - improve prompt\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
     }
   ],
+  "neo4j-aura-provisioning-skill": [
+    {
+      "id": "aura-cli-install-url",
+      "issue": 1177,
+      "source": "neo4j-contrib/neo4j-skills",
+      "find": "```bash\n# macOS\ncurl -L https://github.com/neo4j/aura-cli/releases/latest/download/aura-cli-darwin-amd64.tar.gz | tar xz\nsudo mv aura-cli /usr/local/bin/\naura-cli -v          # verify\n```",
+      "replace": "```bash\n# Release assets are goreleaser-named and carry the version, so resolve it first.\n# Swap the asset for your platform: Darwin_arm64 | Darwin_x86_64 | Linux_x86_64 | Linux_arm64\nVERSION=$(curl -fsSL https://api.github.com/repos/neo4j/aura-cli/releases/latest \\\n  | sed -n 's/.*\"tag_name\": *\"v\\([^\"]*\\)\".*/\\1/p')\ncurl -fsSL \"https://github.com/neo4j/aura-cli/releases/download/v${VERSION}/aura-cli_${VERSION}_Darwin_arm64.tar.gz\" | tar xz\nsudo mv aura-cli /usr/local/bin/\naura-cli -v          # verify -> aura-cli version vX.Y.Z\n```"
+    }
+  ],
   "k6": [
     {
       "id": "k6-drop-removed-externally-controlled-header",
