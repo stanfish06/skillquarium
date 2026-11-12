@@ -170,8 +170,9 @@ wrangler dev --env staging
 wrangler dev --local
 
 # Remote mode - runs on Cloudflare edge (legacy)
-# Removed for KV-backed Durable Objects as of 2026-05-18 (errors instead) — use
-# `wrangler dev` plus per-binding `remote: true` (see "Remote Bindings for Local Dev" below)
+# Legacy: uploads the Worker to a remote preview. Durable Objects cannot use per-binding
+# `remote: true` (they always run locally); to reach remote DO instances, deploy a Worker that
+# defines them and bind to it with a remote service binding (Cloudflare local-development docs)
 wrangler dev --remote
 
 # Custom port
