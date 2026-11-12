@@ -24,7 +24,7 @@ this reference are illustrative, not authenticated end-to-end tests.
 Pin the tested client and materials stack:
 
 ```bash
-uv add "pymatgen==2026.9.24" "pymatgen-core==2026.9.23" "mp-api==0.46.5"
+uv add "pymatgen==2026.10.24" "pymatgen-core==2026.10.31" "mp-api==0.46.5"
 uv lock
 uv sync --frozen
 ```
@@ -446,8 +446,8 @@ Therefore:
   "limit": 1,
   "client": {
     "mp-api": "0.46.5",
-    "pymatgen": "2026.9.24",
-    "pymatgen-core": "2026.9.23"
+    "pymatgen": "2026.10.24",
+    "pymatgen-core": "2026.10.31"
   },
   "database_version": "record from current MP release metadata",
   "license": "CC BY 4.0",

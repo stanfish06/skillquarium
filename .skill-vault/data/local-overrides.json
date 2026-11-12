@@ -1,4 +1,72 @@
 {
+  "pymatgen": [
+    {
+      "id": "stale-latest-compat-line",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "compatibility: Python 3.11+ with uv. The verified snapshot uses pymatgen 2026.9.24, pymatgen-core 2026.9.23, and mp-api 0.46.5. Bundled help and planning CLIs use only the standard library; local scientific execution lazily requires the pinned pymatgen packages. Materials Project access additionally requires explicit network approval and the single named secret MP_API_KEY.",
+      "replace": "compatibility: Python 3.11+ with uv. The verified snapshot uses pymatgen 2026.10.24, pymatgen-core 2026.10.31, and mp-api 0.46.5 (held below the Python-3.12-only 0.47.0 to keep this skill's Python 3.11+ floor). Bundled help and planning CLIs use only the standard library; local scientific execution lazily requires the pinned pymatgen packages. Materials Project access additionally requires explicit network approval and the single named secret MP_API_KEY."
+    },
+    {
+      "id": "stale-latest-metadata-version",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "  version: \"1.5\"\n  skill-author: \"K-Dense Inc.\"\n  last-reviewed: \"2026-09-30\"",
+      "replace": "  version: \"1.6\"\n  skill-author: \"K-Dense Inc.\"\n  last-reviewed: \"2026-11-08\""
+    },
+    {
+      "id": "stale-latest-snapshot-section",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "## Verified snapshot (2026-09-30)\n\n- `pymatgen==2026.9.24` is the latest stable wrapper release (uploaded 2026-09-23).\n  Package metadata requires Python 3.11+ and directly requires\n  `pymatgen-core>=2026.9.23`.\n- `pymatgen-core==2026.9.23` is the latest stable core release (2026-09-23).\n  It now contains core objects, symmetry/lattice operations, and the I/O layer,\n  all under the existing `pymatgen.*` namespace.\n- `mp-api==0.46.5` is the latest stable Materials Project client\n  (2026-08-18), requires Python 3.11+, and depends on\n  `pymatgen>2024.2.20`.\n- The current API site is built from 2026.9.23 core documentation. Pinning both\n  distributions prevents `pymatgen==2026.9.24` from silently resolving to a\n  different future core.",
+      "replace": "## Verified snapshot (2026-11-08)\n\n- `pymatgen==2026.10.24` is the latest stable wrapper release (uploaded 2026-10-23).\n  Package metadata requires Python 3.11+ and directly requires\n  `pymatgen-core>=2026.9.23`.\n- `pymatgen-core==2026.10.31` is the latest stable core release (2026-10-31).\n  It now contains core objects, symmetry/lattice operations, and the I/O layer,\n  all under the existing `pymatgen.*` namespace.\n- `mp-api==0.46.5` is pinned deliberately, not just stale: it is the newest\n  Materials Project client that still supports Python 3.11+. The actual\n  latest release, `mp-api==0.47.0` (2026-10-19), raises its floor to\n  Python 3.12+, so bumping it would break this skill's Python 3.11+\n  compatibility line. `mp-api==0.46.5` requires Python 3.11+ and depends on\n  `pymatgen>2024.2.20`.\n- The current API site is built from 2026.10.31 core documentation. Pinning both\n  distributions prevents `pymatgen==2026.10.24` from silently resolving to a\n  different future core."
+    },
+    {
+      "id": "stale-latest-uv-add",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "uv add \"pymatgen==2026.9.24\" \"pymatgen-core==2026.9.23\" \"mp-api==0.46.5\"",
+      "replace": "uv add \"pymatgen==2026.10.24\" \"pymatgen-core==2026.10.31\" \"mp-api==0.46.5\""
+    },
+    {
+      "id": "stale-latest-uv-pip-install",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "  \"pymatgen==2026.9.24\" \"pymatgen-core==2026.9.23\" \"mp-api==0.46.5\"",
+      "replace": "  \"pymatgen==2026.10.24\" \"pymatgen-core==2026.10.31\" \"mp-api==0.46.5\""
+    },
+    {
+      "id": "stale-latest-sources",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "find": "## Sources (verified 2026-09-30)\n\n- [pymatgen 2026.9.24 on PyPI](https://pypi.org/project/pymatgen/)\n- [pymatgen-core 2026.9.23 on PyPI](https://pypi.org/project/pymatgen-core/)",
+      "replace": "## Sources (verified 2026-11-08)\n\n- [pymatgen 2026.10.24 on PyPI](https://pypi.org/project/pymatgen/)\n- [pymatgen-core 2026.10.31 on PyPI](https://pypi.org/project/pymatgen-core/)"
+    },
+    {
+      "id": "stale-latest-guard-constants",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/_common.py",
+      "find": "PYMATGEN_VERSION = \"2026.9.24\"\nPYMATGEN_CORE_VERSION = \"2026.9.23\"\n",
+      "replace": "PYMATGEN_VERSION = \"2026.10.24\"\nPYMATGEN_CORE_VERSION = \"2026.10.31\"\n"
+    },
+    {
+      "id": "stale-latest-mp-install-line",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/materials_project_api.md",
+      "find": "uv add \"pymatgen==2026.9.24\" \"pymatgen-core==2026.9.23\" \"mp-api==0.46.5\"",
+      "replace": "uv add \"pymatgen==2026.10.24\" \"pymatgen-core==2026.10.31\" \"mp-api==0.46.5\""
+    },
+    {
+      "id": "stale-latest-mp-manifest-example",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/materials_project_api.md",
+      "find": "    \"pymatgen\": \"2026.9.24\",\n    \"pymatgen-core\": \"2026.9.23\"",
+      "replace": "    \"pymatgen\": \"2026.10.24\",\n    \"pymatgen-core\": \"2026.10.31\""
+    }
+  ],
   "databricks-python-sdk": [
     {
       "id": "cli-v1-0-0-pin-setup",
