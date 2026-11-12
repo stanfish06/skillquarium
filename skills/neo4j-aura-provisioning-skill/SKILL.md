@@ -49,10 +49,13 @@ allowed-tools: Bash WebFetch
 
 Install (binary, not pip):
 ```bash
-# macOS
-curl -L https://github.com/neo4j/aura-cli/releases/latest/download/aura-cli-darwin-amd64.tar.gz | tar xz
+# Release assets are goreleaser-named and carry the version, so resolve it first.
+# Swap the asset for your platform: Darwin_arm64 | Darwin_x86_64 | Linux_x86_64 | Linux_arm64
+VERSION=$(curl -fsSL https://api.github.com/repos/neo4j/aura-cli/releases/latest \
+  | sed -n 's/.*"tag_name": *"v\([^"]*\)".*/\1/p')
+curl -fsSL "https://github.com/neo4j/aura-cli/releases/download/v${VERSION}/aura-cli_${VERSION}_Darwin_arm64.tar.gz" | tar xz
 sudo mv aura-cli /usr/local/bin/
-aura-cli -v          # verify
+aura-cli -v          # verify -> aura-cli version vX.Y.Z
 ```
 
 Add credentials (from console.neo4j.io → Account Settings → API Credentials):

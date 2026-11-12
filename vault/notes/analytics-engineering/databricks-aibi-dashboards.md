@@ -14,7 +14,7 @@ created: 2026-08-23
 # databricks-aibi-dashboards
 
 > [!info] What it does
-> Create Databricks AI/BI dashboards. Must use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure. CRITICAL: You MUST test ALL SQL queries via CLI BEFORE deploying. Follow guidelines strictly.
+> Create Databricks AI/BI dashboards. Use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure. CRITICAL: You MUST test ALL SQL queries via CLI BEFORE deploying. Follow guidelines strictly.
 
 **Source:** [skills/databricks-aibi-dashboards/SKILL.md](../../../skills/databricks-aibi-dashboards/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
