@@ -5203,7 +5203,7 @@
       "issue": 1302,
       "source": "openai/plugins",
       "find": "# Remote mode - runs on Cloudflare edge (legacy)\nwrangler dev --remote\n",
-      "replace": "# Remote mode - runs on Cloudflare edge (legacy)\n# Removed for KV-backed Durable Objects as of 2026-05-18 (errors instead) — use\n# `wrangler dev` plus per-binding `remote: true` (see \"Remote Bindings for Local Dev\" below)\nwrangler dev --remote\n"
+      "replace": "# Remote mode - runs on Cloudflare edge (legacy)\n# Legacy: uploads the Worker to a remote preview. Durable Objects cannot use per-binding\n# `remote: true` (they always run locally); to reach remote DO instances, deploy a Worker that\n# defines them and bind to it with a remote service binding (Cloudflare local-development docs)\nwrangler dev --remote\n"
     }
   ]
 }
