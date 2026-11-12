@@ -5094,5 +5094,14 @@
       "find": "# Morph PPT — 3D Extension\n\nThis skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.\nThis file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.\n",
       "replace": "# Morph PPT — 3D Extension\n\n> [!note] Vault audit 2026-07-24 — USE-19\n> Use this only for a .pptx embedding a `.glb` 3D model with cinematographic camera plus Morph transitions (triggers: '3D model', 'GLB', '3D morph', 'camera move', 'model-content layout'). DO NOT invoke for 2D Morph decks with no 3D model — use `morph-ppt`; and for a generic or pitch deck with no cross-slide motion route to `officecli-pptx` or `officecli-pitch-deck`. Distinguishing axis: 3D GLB scene vs 2D morph vs static deck.\n\nThis skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.\nThis file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.\n"
     }
+  ],
+  "render-cli": [
+    {
+      "id": "ci-example-version-pin-v2.36.0",
+      "issue": 1282,
+      "source": "openai/plugins",
+      "find": "          curl -L https://github.com/render-oss/cli/releases/download/v2.22.0/cli_2.22.0_linux_amd64.zip -o render.zip\n          unzip render.zip\n          sudo mv cli_v2.22.0 /usr/local/bin/render",
+      "replace": "          curl -L https://github.com/render-oss/cli/releases/download/v2.36.0/cli_2.36.0_linux_amd64.zip -o render.zip\n          unzip render.zip\n          sudo mv cli_v2.36.0 /usr/local/bin/render"
+    }
   ]
 }
