@@ -66,6 +66,16 @@
       "replace": "- `BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")` — Amazon Bedrock (v1.15.0+); use the inference-profile ID, region prefix must match your deployment"
     }
   ],
+  "neo4j-getting-started-skill": [
+    {
+      "id": "movies-demo-cypher-path",
+      "issue": 1179,
+      "source": "neo4j-contrib/neo4j-skills",
+      "file": "references/4-load.md",
+      "find": "curl -s https://raw.githubusercontent.com/neo4j-graph-examples/movies/main/data/movies.cypher",
+      "replace": "curl -sf https://raw.githubusercontent.com/neo4j-graph-examples/movies/main/scripts/movies.cypher"
+    }
+  ],
   "neo4j-graphrag-skill": [
     {
       "id": "anthropic-retired-model",
@@ -4585,6 +4595,504 @@
       "source": "openai/plugins",
       "find": "Vercel Flags is in **public beta** (February 2026), available to teams on all plans. Pricing: **$30 per 1 million flag requests** ($0.00003 per event).\n",
       "replace": "Vercel Flags reached **general availability** in April 2026 (after an initial public beta starting February 2026), available to teams on all plans. Pricing may have changed at GA; verify current rates at [Vercel's feature-flags limits and pricing docs](https://vercel.com/docs/workflow-collaboration/feature-flags/limits-and-pricing) before citing a number.\n"
+    }
+  ],
+  "chrome-extensions": [
+    {
+      "id": "recording-busy-guard",
+      "source": "GoogleChrome/modern-web-guidance",
+      "find": "chrome.action.onClicked.addListener(async (tab) => {\n  const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n  if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n  if (recordingState === 'idle') {\n    await chrome.storage.session.set({ recordingState: 'starting' });\n    try {\n      await startRecording(tab);\n      await chrome.storage.session.set({ recordingState: 'recording' });\n      await chrome.action.setBadgeText({ text: 'REC' });\n      await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n    } catch (err) {\n      console.error('Failed to start recording:', err);\n      await chrome.storage.session.set({ recordingState: 'idle' });\n    }\n  } else if (recordingState === 'recording') {\n    await chrome.storage.session.set({ recordingState: 'stopping' });\n    try { await stopRecording(); }\n    finally {\n      await chrome.storage.session.set({ recordingState: 'idle' });\n      await chrome.action.setBadgeText({ text: '' });\n    }\n  }\n});",
+      "replace": "// A synchronous flag set before the first await: two fast clicks cannot both read\n// 'idle' from storage and start twice. Storage still carries the state across SW restarts.\nlet busy = false;\nchrome.action.onClicked.addListener(async (tab) => {\n  if (busy) return;\n  busy = true;\n  try {\n    const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n    if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n    if (recordingState === 'idle') {\n      await chrome.storage.session.set({ recordingState: 'starting' });\n      try {\n        await startRecording(tab);\n        await chrome.storage.session.set({ recordingState: 'recording' });\n        await chrome.action.setBadgeText({ text: 'REC' });\n        await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n      } catch (err) {\n        console.error('Failed to start recording:', err);\n        await chrome.storage.session.set({ recordingState: 'idle' });\n      }\n    } else if (recordingState === 'recording') {\n      await chrome.storage.session.set({ recordingState: 'stopping' });\n      try { await stopRecording(); }\n      finally {\n        await chrome.storage.session.set({ recordingState: 'idle' });\n        await chrome.action.setBadgeText({ text: '' });\n      }\n    }\n  } finally {\n    busy = false;\n  }\n});"
+    },
+    {
+      "id": "recording-busy-guard-2",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/media-capture.md",
+      "find": "chrome.action.onClicked.addListener(async (tab) => {\n  const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n  // Ignore clicks during transitions\n  if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n  if (recordingState === 'idle') {\n    await chrome.storage.session.set({ recordingState: 'starting' });\n    try {\n      await startRecording(tab);\n      await chrome.storage.session.set({ recordingState: 'recording' });\n      await chrome.action.setBadgeText({ text: 'REC' });\n      await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n    } catch (err) {\n      console.error('Failed to start recording:', err);\n      await chrome.storage.session.set({ recordingState: 'idle' });\n    }\n  } else if (recordingState === 'recording') {\n    await chrome.storage.session.set({ recordingState: 'stopping' });\n    try { await stopRecording(); }\n    finally {\n      await chrome.storage.session.set({ recordingState: 'idle' });\n      await chrome.action.setBadgeText({ text: '' });\n    }\n  }\n});",
+      "replace": "// A synchronous flag set before the first await: two fast clicks cannot both read\n// 'idle' from storage and start twice. Storage still carries the state across SW restarts.\nlet busy = false;\nchrome.action.onClicked.addListener(async (tab) => {\n  if (busy) return;\n  busy = true;\n  try {\n    const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n    // Ignore clicks during transitions\n    if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n    if (recordingState === 'idle') {\n      await chrome.storage.session.set({ recordingState: 'starting' });\n      try {\n        await startRecording(tab);\n        await chrome.storage.session.set({ recordingState: 'recording' });\n        await chrome.action.setBadgeText({ text: 'REC' });\n        await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n      } catch (err) {\n        console.error('Failed to start recording:', err);\n        await chrome.storage.session.set({ recordingState: 'idle' });\n      }\n    } else if (recordingState === 'recording') {\n      await chrome.storage.session.set({ recordingState: 'stopping' });\n      try { await stopRecording(); }\n      finally {\n        await chrome.storage.session.set({ recordingState: 'idle' });\n        await chrome.action.setBadgeText({ text: '' });\n      }\n    }\n  } finally {\n    busy = false;\n  }\n});"
+    },
+    {
+      "id": "promise-response-chrome-148",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/message-passing.md",
+      "find": "### Request/response — return a Promise (Chrome 99+)",
+      "replace": "### Request/response — return a Promise (Chrome 148+)"
+    },
+    {
+      "id": "promise-response-compat-note",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/message-passing.md",
+      "find": "**Note:** Requires Chrome 99+, only use when minimum Chrome version is set to 99.",
+      "replace": "**Note:** Returning a Promise from `onMessage` needs Chrome 148+, is rolling out gradually, and is disabled in extensions that declare a DevTools page (`devtools_page`). Promise-returning extension API calls (Chrome 99+) are a different feature. Unless you target only Chrome 148+ with no DevTools page, use the `sendResponse` + `return true` pattern above, which works in every version."
+    },
+    {
+      "id": "no-blob-srcdoc-bypass",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/csp-sandbox.md",
+      "find": "### Option 2: Blob URL in iframe\n\nCreate a self-contained HTML document via blob URL:\n\n```js\nfunction updatePreview(htmlCode, cssCode, jsCode) {\n  const html = `\n<!DOCTYPE html>\n<html>\n<head><style>${cssCode}</style></head>\n<body>\n  ${htmlCode}\n  <script>${jsCode}<\\/script>\n</body>\n</html>\n`;\n  const blob = new Blob([html], { type: 'text/html' });\n  const url = URL.createObjectURL(blob);\n  const iframe = document.getElementById('preview');\n  // Revoke previous URL\n  if (iframe.dataset.blobUrl) URL.revokeObjectURL(iframe.dataset.blobUrl);\n  iframe.dataset.blobUrl = url;\n  iframe.src = url;\n}\n```\n\n### Option 3: srcdoc Attribute\n\n```js\nconst iframe = document.getElementById('preview');\niframe.srcdoc = `\n  <!DOCTYPE html>\n  <style>${cssCode}</style>\n  ${htmlCode}\n  <script>${jsCode}<\\/script>\n`;\n```\n\nBoth blob URLs and srcdoc create a separate origin, so they bypass the extension's CSP.\nHowever, they also cannot access chrome.* APIs, and you cannot access their DOM directly\nfrom the extension page (same cross-origin restriction as sandbox).\n",
+      "replace": "### Not an option: blob URLs and srcdoc\n\nA `blob:` URL document and an `iframe.srcdoc` document both inherit the extension page's CSP (the CSP\nspec's policy inheritance exists to stop exactly this bypass), so inline user scripts in them stay\nblocked, and neither gets an isolated origin. To run user code, use the manifest-declared sandbox\npage (Option 1).\n"
+    },
+    {
+      "id": "no-blob-srcdoc-bypass-2",
+      "source": "GoogleChrome/modern-web-guidance",
+      "find": "// ✅ OPTION B: Blob URL (creates separate origin, bypasses extension CSP)\niframe.src = URL.createObjectURL(new Blob([doc], { type: 'text/html' }));\n\n// ✅ OPTION C: srcdoc\n",
+      "replace": "// ❌ BROKEN — blob: and srcdoc documents inherit the extension page's CSP, so inline\n// user scripts in them are still blocked. Use OPTION A.\niframe.src = URL.createObjectURL(new Blob([doc], { type: 'text/html' }));\n"
+    },
+    {
+      "id": "checklist-sandbox-only",
+      "source": "GoogleChrome/modern-web-guidance",
+      "find": "- [ ] Code execution uses sandbox/blob/srcdoc — no `eval()` in extension pages",
+      "replace": "- [ ] Code execution uses a manifest-declared sandbox page — no `eval()` in extension pages"
+    },
+    {
+      "id": "port-keepalive-needs-messages",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/service-worker.md",
+      "find": "3. **Active port connections** — an open port keeps the SW alive",
+      "replace": "3. **Messages over a port** — since Chrome 114, opening a port no longer resets the idle timer; messages sent over it do"
+    },
+    {
+      "id": "port-keepalive-example",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/service-worker.md",
+      "find": "// Port-based keepalive from popup/side panel\nconst port = chrome.runtime.connect({ name: 'keepalive' });\n// The SW stays alive as long as this port is open\n",
+      "replace": "// Port-based keepalive from popup/side panel: message well inside the 30 s idle timeout\nconst port = chrome.runtime.connect({ name: 'keepalive' });\nconst ping = setInterval(() => port.postMessage({ type: 'ping' }), 20_000);\n// Clear the interval (or disconnect) as soon as the long-running work is done\nport.onDisconnect.addListener(() => clearInterval(ping));\n"
+    }
+  ],
+  "officecli": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# officecli\n\nAI-friendly CLI for .docx, .xlsx, .pptx. Single binary, no dependencies, no Office installation needed.\n\n",
+      "replace": "# officecli\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this family (`officecli` + per-format `officecli-docx`/`-pptx`/`-xlsx` and its scene layers) as the canonical route for creating and richly editing Office documents; for raw OOXML inspection or plain text/table extraction use the native `docx`/`pptx`/`xlsx` skills. Distinguishing axis: officecli document generation vs raw OOXML processing.\n\nAI-friendly CLI for .docx, .xlsx, .pptx. Single binary, no dependencies, no Office installation needed.\n\n"
+    }
+  ],
+  "officecli-docx": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI DOCX Skill\n\n## Setup\n\n",
+      "replace": "# OfficeCLI DOCX Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this as the canonical skill for creating and richly editing .docx files; for raw OOXML inspection or plain text extraction use the native `docx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.\n\n## Setup\n\n"
+    },
+    {
+      "id": "page-footer-gate-opt-in-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# Gate 3 — live PAGE field exists when a footer is expected.\nFLD=$(officecli query \"$FILE\" 'field[fieldType=page]' --json | jq '.data.results | length')\n[ \"$FLD\" -ge 1 ] && echo \"Gate 3 OK\" || { echo \"REJECT Gate 3: no live PAGE field\"; exit 1; }\n",
+      "replace": "# Gate 3 — live PAGE field exists when the brief/template requires a page-number footer.\n# Decide explicitly: EXPECT_PAGE_FOOTER=1 for page-numbered deliverables, 0 for footerless letters/memos.\n# Unset fails instead of skipping, so a forgotten decision cannot pass the gate.\n: \"${EXPECT_PAGE_FOOTER:?Set EXPECT_PAGE_FOOTER to 1 for page-numbered deliverables, otherwise 0}\"\ncase \"$EXPECT_PAGE_FOOTER\" in\n  0|1) ;;\n  *) echo \"REJECT setup: EXPECT_PAGE_FOOTER must be 0 or 1\"; exit 1 ;;\nesac\nif [ \"$EXPECT_PAGE_FOOTER\" = \"1\" ]; then\n  FLD=$(officecli query \"$FILE\" 'field[fieldType=page]' --json | jq '.data.results | length')\n  [ \"$FLD\" -ge 1 ] && echo \"Gate 3 OK\" || { echo \"REJECT Gate 3: no live PAGE field\"; exit 1; }\nelse\n  echo \"Gate 3 N/A (page-number footer not required)\"\nfi\n"
+    }
+  ],
+  "officecli-pptx": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI PPTX Skill\n\n## Setup\n\n",
+      "replace": "# OfficeCLI PPTX Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this as the canonical skill for creating and richly editing .pptx files; for raw OOXML inspection or plain text extraction use the native `pptx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.\n\n## Setup\n\n"
+    }
+  ],
+  "officecli-xlsx": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI XLSX Skill\n\n## Setup\n\n",
+      "replace": "# OfficeCLI XLSX Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this as the canonical skill for creating and richly editing .xlsx/.csv workbooks; for raw OOXML inspection or plain data extraction use the native `xlsx` skill. Distinguishing axis: officecli generation vs raw OOXML processing.\n\n## Setup\n\n"
+    }
+  ],
+  "officecli-academic-paper": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# OfficeCLI Academic Paper Skill\n\n**This skill is a scene layer on top of `officecli-docx`.** Every docx hard rule — style architecture, heading hierarchy, shell quoting, page-break rules, live PAGE field, Delivery Gate, renderer quirks — is inherited, not re-taught. This file adds only what academic papers need on top: citation styles, equations, SEQ / PAGEREF cross-refs, multi-column journal layout, bibliography hanging indent, abstract/keywords/affiliation block.\n\n",
+      "replace": "# OfficeCLI Academic Paper Skill\n\n> [!note] Vault audit 2026-07-24 — USE-1\n> Use this to produce a formatted academic .docx (citation styles, numbered equations, SEQ/PAGEREF cross-refs, bibliography layout) via officecli; for writing, planning, or revising the paper's content use the multi-agent `academic-paper` pipeline. Distinguishing axis: officecli .docx formatting vs content authoring.\n\n**This skill is a scene layer on top of `officecli-docx`.** Every docx hard rule — style architecture, heading hierarchy, shell quoting, page-break rules, live PAGE field, Delivery Gate, renderer quirks — is inherited, not re-taught. This file adds only what academic papers need on top: citation styles, equations, SEQ / PAGEREF cross-refs, multi-column journal layout, bibliography hanging indent, abstract/keywords/affiliation block.\n\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits docx v2.** You should have read `skills/officecli-docx/SKILL.md` first. This skill assumes you know how to add paragraphs, set styles, build tables, insert images, manage TOC/footer/headers, force page breaks, and run the Delivery Gate. If any of those are unfamiliar, open a second session on docx v2 before continuing.\n",
+      "replace": "**Inherits docx v2.** You should have loaded the `officecli-docx` skill first. This skill assumes you know how to add paragraphs, set styles, build tables, insert images, manage TOC/footer/headers, force page breaks, and run the Delivery Gate. If any of those are unfamiliar, open a second session on docx v2 before continuing.\n"
+    }
+  ],
+  "officecli-data-dashboard": [
+    {
+      "id": "print-scope-explicit-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "Then run the dashboard-specific Delivery Gates. Each gate uses **COUNT-then-if** pattern with a `.data.*` wrapper — never chain `&& echo OK || echo FAIL`.\n\n**Gate 1 — KPI formula coverage.** Every planned KPI cell must carry a formula. Adjust `-lt 2` to your plan (4 KPIs → `-lt 4`).\n\n",
+      "replace": "Then run the dashboard-specific Delivery Gates. Each gate uses **COUNT-then-if** pattern with a `.data.*` wrapper — never chain `&& echo OK || echo FAIL`.\n\nBefore running the gates, classify the original request explicitly. Set `PRINT_SCOPE_REQUIRED=1` when it asks for print, one-page, board, investor, `一页`, `投资人`, or `董事会` output; otherwise set it to `0`. The gates fail closed when this decision is missing.\n\n```bash\n: \"${PRINT_SCOPE_REQUIRED:?Set PRINT_SCOPE_REQUIRED to 1 for print/board/investor output, otherwise 0}\"\ncase \"$PRINT_SCOPE_REQUIRED\" in\n  0|1) ;;\n  *) echo \"REJECT setup: PRINT_SCOPE_REQUIRED must be 0 or 1\"; exit 1 ;;\nesac\n```\n\n**Gate 1 — KPI formula coverage.** Every planned KPI cell must carry a formula. Adjust `-lt 2` to your plan (4 KPIs → `-lt 4`).\n\n"
+    },
+    {
+      "id": "print-scope-explicit-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "if echo \"$USER_REQ\" | grep -qiE 'print|一页|投资人|董事会|board'; then\n",
+      "replace": "if [ \"$PRINT_SCOPE_REQUIRED\" = \"1\" ]; then\n"
+    }
+  ],
+  "officecli-financial-model": [
+    {
+      "id": "load-skill-wording-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "When the xlsx base rules cover it, the text here says `→ see xlsx v2 §X`. Read `skills/officecli-xlsx/SKILL.md` first if you have not.\n",
+      "replace": "When the xlsx base rules cover it, the text here says `→ see xlsx v2 §X`. Load the `officecli-xlsx` skill first if you have not.\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits xlsx v2.** Read `skills/officecli-xlsx/SKILL.md` first. This skill assumes you know `create` / `open` / `close`, `set` values/formulas, `batch` heredocs for cross-sheet formulas, `/SheetName/A1` paths, named ranges, the 5-gate Delivery cycle, the cross-sheet `!` trap, and that **cross-sheet formulas go non-resident (single batch OR individual `set`), never batch-while-resident**.\n",
+      "replace": "**Inherits xlsx v2.** Load the `officecli-xlsx` skill first. This skill assumes you know `create` / `open` / `close`, `set` values/formulas, `batch` heredocs for cross-sheet formulas, `/SheetName/A1` paths, named ranges, the 5-gate Delivery cycle, the cross-sheet `!` trap, and that **cross-sheet formulas go non-resident (single batch OR individual `set`), never batch-while-resident**.\n"
+    }
+  ],
+  "officecli-pitch-deck": [
+    {
+      "id": "load-skill-wording-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Read `skills/officecli-pptx/SKILL.md` first if you have not.\n",
+      "replace": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Load the `officecli-pptx` skill first if you have not.\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits pptx v2.** You should have read `skills/officecli-pptx/SKILL.md` first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; write `--prop tailEnd=triangle` on every flow connector; and run the 5-gate Delivery Gate. If any of those are unfamiliar, open a pptx v2 session before continuing.\n",
+      "replace": "**Inherits pptx v2.** You should have loaded the `officecli-pptx` skill first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; write `--prop tailEnd=triangle` on every flow connector; and run the 5-gate Delivery Gate. If any of those are unfamiliar, open a pptx v2 session before continuing.\n"
+    }
+  ],
+  "officecli-word-form": [
+    {
+      "id": "sdt-checkbox-365-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "A Word form is a `.docx` plus four OpenXML payload layers plain-docx skills do not touch: **`<w:sdt>`** content controls (types: text / richtext / dropdown / combobox / date / picture / group), **`<w:ffData>`** legacy FormField (still the only way to get a real checkbox — SDT `type=checkbox` is not implemented), **`<w:fldChar>`** complex fields (MERGEFIELD, REF, PAGEREF, SEQ, IF — template-time, not user-fill), and **`documentProtection`** (the lock that makes non-field text read-only in Word — and, on the CLI, `protection=forms` locks non-field content edits (those need `--force` or `raw-set`) but still allows form-field (SDT) edits, which is the point of forms protection).\n",
+      "replace": "A Word form is a `.docx` plus four OpenXML payload layers plain-docx skills do not touch: **`<w:sdt>`** content controls (types: text / richtext / dropdown / combobox / date / picture / group / checkbox), **`<w:ffData>`** legacy FormField (a compatibility path; SDT `type=checkbox` is a real Word check-box content control and is the default choice), **`<w:fldChar>`** complex fields (MERGEFIELD, REF, PAGEREF, SEQ, IF — template-time, not user-fill), and **`documentProtection`** (the lock that makes non-field text read-only in Word — and, on the CLI, `protection=forms` locks non-field content edits (those need `--force` or `raw-set`) but still allows form-field (SDT) edits, which is the point of forms protection).\n"
+    },
+    {
+      "id": "sdt-checkbox-365-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| SDT controls + `protection=forms` | Gray-bordered fields; rest locked | `query sdt` / `view forms` | **YES** |\n",
+      "replace": "| SDT controls + `protection=forms` | Gray-bordered fields, ☒/☐ check boxes; rest locked | `query sdt` / `view forms` | **YES** |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| FormField checkbox + `protection=forms` | Real clickable checkbox; rest locked | `query formfield` / `view forms` | **YES** (checkbox only) |\n",
+      "replace": "| FormField + `protection=forms` | Legacy clickable checkbox; rest locked | `query formfield` / `view forms` | **YES** (compatibility path) |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Checkbox is formfield, NOT SDT.** `--type sdt --prop type=checkbox` exits 1 (`SDT type 'checkbox' is not implemented`). Every checkbox in every recipe uses `--type formfield --prop type=checkbox`.\n",
+      "replace": "**Checkbox is an SDT.** `--type sdt --prop type=checkbox --prop checked=true` creates a real Word check-box content control (a `<w14:checkbox>` marker in `sdtPr`; `checked=true` renders ☒, `false` renders ☐) and `get` reads back `type=checkbox checked=…`. Use it by default. `--type formfield --prop type=checkbox` remains valid for documents that must open in legacy FormField-only consumers.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-5",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "7. Zero `type=checkbox` on any SDT.\n",
+      "replace": "7. Every checkbox SDT reads back `type=checkbox` with the intended `checked=`.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-6",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "SDT props are **first-class on `add`** — confirm the current set with `officecli help docx sdt`. Today that includes `type, tag, alias, text, items, format, lock, placeholder/placeholderText, date.*` and the SDT types `text / richtext / dropdown / combobox / date / group / picture`. So most forms are pure `add` — no raw-set, no Word template. Two paths remain only for the genuinely-unreachable cases. **Pick the path before writing a single command.**\n",
+      "replace": "SDT props are **first-class on `add`** — confirm the current set with `officecli help docx sdt`. Today that includes `type, tag, alias, text, items, format, lock, checked, placeholder/placeholderText, date.*` and the SDT types `text / richtext / dropdown / combobox / date / group / picture / checkbox`. So most forms are pure `add` — no raw-set, no Word template. Two paths remain only for the genuinely-unreachable cases. **Pick the path before writing a single command.**\n"
+    },
+    {
+      "id": "sdt-checkbox-365-7",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Use when**: you need an SDT attribute that `help docx sdt` does not list (e.g. a `<w:listItem>` whose `w:value` must differ from its display text, or a sdtPr child with no `--prop`). `raw-set` is OfficeCLI's universal OpenXML fallback — `officecli --help` lists it as a top-level command. For ordinary dropdowns use `--prop items=` (Path A); raw-set here is the exception, not the rule.\n",
+      "replace": "**Use when**: you need a sdtPr child that `help docx sdt` exposes no `--prop` for. `raw-set` is OfficeCLI's universal OpenXML fallback — `officecli --help` lists it as a top-level command. Display-text-≠-stored-value dropdowns are NO LONGER here: `items=` takes `Display|VALUE` pairs directly (Path A). raw-set is the exception, not the rule.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-8",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# Display text ≠ stored value — not expressible via items=, so inject the listItems directly:\nofficecli add \"$FILE\" /body --type sdt --prop type=dropdown --prop alias=\"Department\" --prop tag=dept\nofficecli raw-set \"$FILE\" /document \\\n  --xpath \"//w:sdt[w:sdtPr/w:tag/@w:val='dept']/w:sdtPr/w:dropDownList\" \\\n  --action append \\\n  --xml '<w:listItem xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" w:displayText=\"Engineering\" w:value=\"ENG\"/><w:listItem xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" w:displayText=\"Finance\" w:value=\"FIN\"/>'\n",
+      "replace": "# Display text ≠ stored value — one add, no raw-set:\nofficecli add \"$FILE\" /body --type sdt --prop type=dropdown --prop alias=\"Department\" --prop tag=dept \\\n  --prop items=\"Engineering|ENG,Finance|FIN,Human Resources|HR\"\nofficecli get \"$FILE\" '/body/sdt[1]'   # expect: type=dropdown items=Engineering|ENG,Finance|FIN,...\n"
+    },
+    {
+      "id": "sdt-checkbox-365-9",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Use when**: a **real SDT checkbox** (`type=checkbox` still exits 1 — use a legacy FormField instead, see §Legacy FormField), a `placeholderDocPart` prompt-text part, or custom richtext appearance / cross-part nesting beyond `--prop` reach. Picture and grouped SDTs are NO LONGER here — they add fine via Path A.\n",
+      "replace": "**Use when**: a `placeholderDocPart` prompt-text part, a `buildingBlockGallery` / `repeatingSection` control, or custom richtext appearance / cross-part nesting beyond `--prop` reach. Picture, grouped, and checkbox SDTs are NO LONGER here — all three add fine via Path A.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-10",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| dropdown whose stored value ≠ display text | **B** | raw-set append `<w:listItem w:value=…>` |\n| real checkbox | **FormField** | `--type formfield --prop type=checkbox` (see §Legacy FormField) |\n",
+      "replace": "| dropdown whose stored value ≠ display text | **A** | `--prop items=\"Engineering|ENG,Finance|FIN\"` |\n| real checkbox | **A** | `--prop type=checkbox --prop checked=false` |\n| checkbox for a legacy FormField-only consumer | **FormField** | `--type formfield --prop type=checkbox` (see §Legacy FormField) |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-11",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "| real SDT checkbox / placeholder part / custom appearance | **C** | build skeleton in Word, fill via CLI |\n",
+      "replace": "| placeholder part / buildingBlockGallery / custom appearance | **C** | build skeleton in Word, fill via CLI |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-12",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "## Quick Start — Path A + FormField (minimal intake form)\n",
+      "replace": "## Quick Start — Path A (minimal intake form)\n"
+    },
+    {
+      "id": "sdt-checkbox-365-13",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "Two SDT text fields, one checkbox, protection. Paste and adapt; this is the smallest form worth shipping.\n",
+      "replace": "A text SDT, a date SDT, a checkbox SDT, protection. Paste and adapt; this is the smallest form worth shipping.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-14",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "officecli add \"$FILE\" /body --type formfield \\\n",
+      "replace": "officecli add \"$FILE\" /body --type sdt --prop type=checkbox \\\n"
+    },
+    {
+      "id": "sdt-checkbox-365-15",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "  --prop type=checkbox --prop name=agree_handbook --prop checked=false\n",
+      "replace": "  --prop alias=\"Handbook Agreement\" --prop tag=agree_handbook --prop checked=false\n"
+    },
+    {
+      "id": "sdt-checkbox-365-16",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "For fields CLI cannot express (signature `picture` SDT, real SDT checkbox, `placeholderDocPart` prompt text, grouped SDTs, custom richtext styling), build the skeleton once in Word, then fill via CLI.\n",
+      "replace": "For fields CLI cannot express (`placeholderDocPart` prompt text, `buildingBlockGallery` / `repeatingSection` controls, custom richtext styling), build the skeleton once in Word, then fill via CLI.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-17",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "Use FormField **when you need a real checkbox**. For text/dropdown, prefer SDT.\n",
+      "replace": "Use FormField **only for legacy compatibility** — a consumer that reads `<w:ffData>` but not content controls. Checkboxes, text, and dropdowns are all better served by SDT (§Path A).\n"
+    },
+    {
+      "id": "sdt-checkbox-365-18",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# CHECKBOX — the only real checkbox (SDT type=checkbox is not implemented)\n",
+      "replace": "# CHECKBOX — legacy form of an SDT checkbox\n"
+    },
+    {
+      "id": "sdt-checkbox-365-19",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# DROPDOWN formfield — items NOT settable via CLI; use Word template or SDT Path B\n",
+      "replace": "# DROPDOWN formfield — items NOT settable via CLI; use an SDT dropdown with --prop items=\n"
+    },
+    {
+      "id": "sdt-checkbox-365-20",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "Short text → type=text | Long text → type=richtext | Boolean → formfield checkbox\n",
+      "replace": "Short text → type=text | Long text → type=richtext | Boolean → type=checkbox\n"
+    },
+    {
+      "id": "sdt-checkbox-365-21",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "**Yes/No + conditional follow-up** (common in compliance / medical intake): formfield checkbox followed by a richtext SDT whose `alias` carries the cue — e.g. `--type formfield --prop type=checkbox --prop name=has_cond` then `--type sdt --prop type=richtext --prop alias=\"If yes, explain\" --prop tag=cond_detail --prop text=\"If yes, explain here\"`.\n",
+      "replace": "**Yes/No + conditional follow-up** (common in compliance / medical intake): a checkbox SDT followed by a richtext SDT whose `alias` carries the cue — e.g. `--type sdt --prop type=checkbox --prop alias=\"Has condition\" --prop tag=has_cond --prop checked=false` then `--type sdt --prop type=richtext --prop alias=\"If yes, explain\" --prop tag=cond_detail --prop text=\"If yes, explain here\"`.\n"
+    },
+    {
+      "id": "sdt-checkbox-365-22",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "# Gate 6 — No type=checkbox leaked onto any SDT\n",
+      "replace": "# Gate 6 — Every checkbox SDT carries an explicit checked= state\n"
+    },
+    {
+      "id": "sdt-checkbox-365-23",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "BAD_CB=$(officecli query \"$FILE\" sdt --json | jq '[.data.results[] | select(.format.type == \"checkbox\")] | length')\n",
+      "replace": "CB_BAD=$(officecli query \"$FILE\" sdt --json | jq '[.data.results[] | select(.format.type == \"checkbox\") | select(.format.checked == null or .format.checked == \"\")] | length')\n"
+    },
+    {
+      "id": "sdt-checkbox-365-24",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "[ \"$BAD_CB\" -eq 0 ] && echo \"Gate 6 OK (no SDT checkbox — formfield only)\" || { echo \"REJECT Gate 6: $BAD_CB SDT with type=checkbox\"; exit 1; }\n",
+      "replace": "[ \"$CB_BAD\" -eq 0 ] && echo \"Gate 6 OK (every checkbox SDT reads back checked=)\" || { echo \"REJECT Gate 6: $CB_BAD checkbox SDT(s) with no checked= readback\"; exit 1; }\n"
+    },
+    {
+      "id": "sdt-checkbox-365-25",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "|---|---|---|---|\n| K1 | SDT `type=checkbox` not implemented | `add ... --type sdt --prop type=checkbox` → `Error: SDT type 'checkbox' is not implemented`, exit 1 (error now lists the supported types incl. group/picture) | Use `--type formfield --prop type=checkbox` |\n| K3 | SDT `maxlength` UNSUPPORTED on `add` | `WARNING: UNSUPPORTED: maxlength`, exit 2; element still created. (`items` / `format` / `lock` / `placeholderText` are NOW supported on `add` — only `maxlength` is rejected; `name` is accepted but a no-op on SDT — use `alias`/`tag`) | Enforce length downstream; use `text` for initial content |\n",
+      "replace": "|---|---|---|---|\n| K3 | SDT `maxlength` UNSUPPORTED on `add` | `WARNING: UNSUPPORTED: maxlength`, exit 2; element still created. (`items` / `format` / `lock` / `placeholderText` are NOW supported on `add` — only `maxlength` is rejected; `name` is accepted but a no-op on SDT — use `alias`/`tag`) | Enforce length downstream; use `text` for initial content |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-26",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "|---|---|\n| Real SDT checkbox with specific locking | `type=checkbox` exits 1; use Developer → Check Box Content Control (or a legacy FormField checkbox via CLI) |\n| Prompt text (\"Click here to enter a date\") | Needs `placeholderDocPart` in `/word/glossary/document.xml` |\n",
+      "replace": "|---|---|\n| Prompt text (\"Click here to enter a date\") | Needs `placeholderDocPart` in `/word/glossary/document.xml` |\n"
+    },
+    {
+      "id": "sdt-checkbox-365-27",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "(`picture` and `group` SDTs add directly via `--type sdt --prop type=picture` / `type=group` — no longer Phase-2 items.)\n",
+      "replace": "(`picture`, `group`, and `checkbox` SDTs add directly via `--type sdt --prop type=picture` / `type=group` / `type=checkbox` — no longer Phase-2 items.)\n"
+    },
+    {
+      "id": "sdt-checkbox-365-28",
+      "source": "iOfficeAI/OfficeCLI",
+      "issue": 365,
+      "find": "For the first four, build the skeleton once (Path C) and reuse.\n",
+      "replace": "For the first three, build the skeleton once (Path C) and reuse.\n"
+    }
+  ],
+  "morph-ppt": [
+    {
+      "id": "style-count-51-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**This skill is a scene layer on top of `officecli-pptx`.** Every pptx hard rule — visual delivery floor (title ≥ 36pt / body ≥ 18pt / title ≥ 2× body), 12-column grid on 33.87×19.05cm, canonical palettes, chart-choice decision table, connector canon, shell escape, resident + batch, Delivery Gate 1–5a — is inherited, not re-taught. This file adds only what **Morph** needs on top: cross-slide shape-name binding, Scene Actors vs content prefixing, ghost discipline, `transition=morph` CLI quirks, 52-style visual library lookup, and a morph-specific fresh-eyes Gate 5b extension.\n",
+      "replace": "**This skill is a scene layer on top of `officecli-pptx`.** Every pptx hard rule — visual delivery floor (title ≥ 36pt / body ≥ 18pt / title ≥ 2× body), 12-column grid on 33.87×19.05cm, canonical palettes, chart-choice decision table, connector canon, shell escape, resident + batch, Delivery Gate 1–5a — is inherited, not re-taught. This file adds only what **Morph** needs on top: cross-slide shape-name binding, Scene Actors vs content prefixing, ghost discipline, `transition=morph` CLI quirks, 51-style visual library lookup, and a morph-specific fresh-eyes Gate 5b extension.\n"
+    },
+    {
+      "id": "load-skill-wording-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Read `skills/officecli-pptx/SKILL.md` first if you have not.\n",
+      "replace": "When the pptx base rules cover it, the text here says `→ see pptx v2 §X`. Load the `officecli-pptx` skill first if you have not.\n"
+    },
+    {
+      "id": "load-skill-wording-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "**Inherits pptx v2.** You should have read `skills/officecli-pptx/SKILL.md` first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; use `tailEnd=triangle` on flow connectors; run the Delivery Gate 1–5a; attribute `[AGENT-ERROR]` vs `[RENDERER-BUG]` vs `[SKILL gap]`. If any of those are unfamiliar, read pptx v2 first.\n",
+      "replace": "**Inherits pptx v2.** You should have loaded the `officecli-pptx` skill first. This skill assumes you know how to: add slides + shapes + charts + connectors; address by `@name=` / `@id=`; quote paths; use `batch` heredocs; use `tailEnd=triangle` on flow connectors; run the Delivery Gate 1–5a; attribute `[AGENT-ERROR]` vs `[RENDERER-BUG]` vs `[SKILL gap]`. If any of those are unfamiliar, read pptx v2 first.\n"
+    },
+    {
+      "id": "style-count-51-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "1. **Browse INDEX.** `reference/styles/INDEX.md` groups all 52 styles by palette category and mood (e.g. `dark--premium-navy` = authoritative / refined; `warm--earth-organic` = organic / grounded). The Quick Lookup table also shows each style's **primary hex trio** (bg / fg / accent) — if the user specified a brand color, scan the hex column to find the nearest match without opening every `style.md`. Pick 1 style that matches the topic mood OR aligns with the user-specified hex.\n",
+      "replace": "1. **Browse INDEX.** `reference/styles/INDEX.md` groups all 51 styles by palette category and mood (e.g. `dark--premium-navy` = authoritative / refined; `warm--earth-organic` = organic / grounded). The Quick Lookup table also shows each style's **primary hex trio** (bg / fg / accent) — if the user specified a brand color, scan the hex column to find the nearest match without opening every `style.md`. Pick 1 style that matches the topic mood OR aligns with the user-specified hex.\n"
+    },
+    {
+      "id": "style-count-51-5",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "- `reference/styles/INDEX.md` — 52-style visual library, grouped by palette (dark / light / warm / vivid / bw / mixed) and mood. Lookup workflow in §Style library lookup workflow above.\n",
+      "replace": "- `reference/styles/INDEX.md` — 51-style visual library, grouped by palette (dark / light / warm / vivid / bw / mixed) and mood. Lookup workflow in §Style library lookup workflow above.\n"
+    },
+    {
+      "id": "load-skill-wording-6",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "- `skills/officecli-pptx/SKILL.md` — base pptx v2 rules (visual floor, grid, canonical palettes, chart-choice, connector canon, Delivery Gate 1–5a, Known Issues C-P-1..7, Shell escape 3-layer).\n",
+      "replace": "- `officecli-pptx` skill — base pptx v2 rules (visual floor, grid, canonical palettes, chart-choice, connector canon, Delivery Gate 1–5a, Known Issues C-P-1..7, Shell escape 3-layer).\n"
+    },
+    {
+      "id": "result-node-extraction-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            _collect_shapes(child[\"children\"], callback)\n\n\n# ---------------------------------------------------------------------------\n# morph_clone_slide\n# ---------------------------------------------------------------------------\n\n",
+      "replace": "            _collect_shapes(child[\"children\"], callback)\n\n\ndef _first_result(response):\n    \"\"\"Return the first OfficeCLI result node from a JSON response.\"\"\"\n    results = response.get(\"data\", {}).get(\"results\", [])\n    if not results or not isinstance(results[0], dict):\n        raise ValueError(\"OfficeCLI response did not contain data.results[0]\")\n    return results[0]\n\n\n# ---------------------------------------------------------------------------\n# morph_clone_slide\n# ---------------------------------------------------------------------------\n\n"
+    },
+    {
+      "id": "result-node-extraction-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            curr_data = json.loads(curr_json_str).get(\"data\", {})\n\n            # Method 1: name-based unghosted detection\n",
+      "replace": "            curr_data = _first_result(json.loads(curr_json_str))\n\n            # Method 1: name-based unghosted detection\n"
+    },
+    {
+      "id": "result-node-extraction-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            prev_data = json.loads(out2).get(\"data\", {})\n",
+      "replace": "            prev_data = _first_result(json.loads(out2))\n"
+    },
+    {
+      "id": "result-node-extraction-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/morph-helpers.py",
+      "find": "            curr_data = json.loads(curr_json_str).get(\"data\", {})\n\n            duplicates = _check_duplicates(prev_data, curr_data)\n",
+      "replace": "            curr_data = _first_result(json.loads(curr_json_str))\n\n            duplicates = _check_duplicates(prev_data, curr_data)\n"
+    },
+    {
+      "id": "load-skill-wording-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/pptx-design.md",
+      "find": "`skills/officecli-pptx/SKILL.md` §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where pptx SKILL.md already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.\n",
+      "replace": "The `officecli-pptx` skill's §Requirements / §Design Principles / §Visual delivery floor is the **source of truth for type hierarchy, contrast, and palette picking** in every pptx, morph or not. This file narrows that floor to the **stage-feel register** a morph deck typically shoots for: darker backgrounds, larger hero type, deeper opacity range for scene actors, and per-slide text-width generosity that survives `#sN-*` ghost churn. Where the base pptx skill already states a rule, the guidance here is an additive override **only if the slide is actively in a morph pair** — otherwise defer upward.\n"
+    },
+    {
+      "id": "style-count-51-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/pptx-design.md",
+      "find": "There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 52-style library because cross-slide motion amplifies color mood.\n",
+      "replace": "There are no universal palette formulas for morph decks. The four pptx canonical palettes (Executive navy / Forest & moss / Warm terracotta / Charcoal minimal) still apply, but morph decks pick more freely from the 51-style library because cross-slide motion amplifies color mood.\n"
+    },
+    {
+      "id": "drop-styles-without-reference-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| dark--editorial-story    | Editorial Magazine Story | `#FFFFFF / #2C3E50 / #E74C3C`  | Brand storytelling, editorial magazines, content releases       | Narrative, artistic, premium            |\n| dark--tech-cosmos        | Tech Cosmos              | `-`                            | Tech talks, architecture reviews, scientific presentations      | Futuristic, scientific, cosmic          |\n| dark--blueprint-grid     | Blueprint Grid           | `#1B3A5C / #4A90D9 / #FFFFFF`  | Technical planning, engineering blueprints, system architecture | Precise, professional, engineered       |\n",
+      "replace": "| dark--editorial-story    | Editorial Magazine Story | `#FFFFFF / #2C3E50 / #E74C3C`  | Brand storytelling, editorial magazines, content releases       | Narrative, artistic, premium            |\n| dark--blueprint-grid     | Blueprint Grid           | `#1B3A5C / #4A90D9 / #FFFFFF`  | Technical planning, engineering blueprints, system architecture | Precise, professional, engineered       |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-2",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| warm--earth-organic      | Earth & Sage       | `#F5F0E8 / #8B6F47 / #A8C686`  | Eco-friendly, sustainability, organic brands                      | Warm, sincere, natural           |\n| warm--minimal-brand      | Minimal Brand      | `-`                            | Brand introductions, product launches, premium brand showcases    | Warm, refined, minimalist        |\n| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n",
+      "replace": "| warm--earth-organic      | Earth & Sage       | `#F5F0E8 / #8B6F47 / #A8C686`  | Eco-friendly, sustainability, organic brands                      | Warm, sincere, natural           |\n| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-3",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n| warm--creative-marketing | Creative Marketing | `-`                            | Marketing campaigns, ad creatives, poster-style PPTs              | Bold, impactful, expressive      |\n| warm--playful-organic    | Playful Organic    | `#FFF8E7 / #3D3B3C / #FFFFFF`  | Lifestyle, pet/animal topics, children's education, storytelling  | Warm, playful, friendly          |\n",
+      "replace": "| warm--brand-refresh      | Brand Refresh      | `#F5F0E8 / #162040 / #1A6BFF`  | Brand launches, corporate image updates, creative proposals       | Fashionable, colorful, modern    |\n| warm--playful-organic    | Playful Organic    | `#FFF8E7 / #3D3B3C / #FFFFFF`  | Lifestyle, pet/animal topics, children's education, storytelling  | Warm, playful, friendly          |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-4",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Tech / AI / SaaS**                     | dark--tech-cosmos, dark--cyber-future, light--isometric-clean, mixed--chromatic-aberration, light--firmwise-saas, light--fluid-gradient                                                |\n",
+      "replace": "| **Tech / AI / SaaS**                     | dark--cyber-future, dark--blueprint-grid, light--isometric-clean, mixed--chromatic-aberration, light--firmwise-saas, light--fluid-gradient                                           |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-5",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Brand / Launch / Marketing**           | warm--brand-refresh, warm--creative-marketing, vivid--playful-marketing, warm--minimal-brand, vivid--bauhaus-electric                                                                  |\n",
+      "replace": "| **Brand / Launch / Marketing**           | warm--brand-refresh, vivid--playful-marketing, vivid--bauhaus-electric, vivid--pink-editorial                                                                                          |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-6",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Developer / Technical**                | dark--cyber-future, dark--blueprint-grid, dark--tech-cosmos                                                                                                                            |\n",
+      "replace": "| **Developer / Technical**                | dark--cyber-future, dark--blueprint-grid, light--isometric-clean                                                                                                                       |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-7",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Eco / Nature / Organic**               | warm--earth-organic, warm--minimal-brand, light--spring-launch                                                                                                                         |\n",
+      "replace": "| **Eco / Nature / Organic**               | warm--earth-organic, light--spring-launch, warm--vital-bloom                                                                                                                           |\n"
+    },
+    {
+      "id": "drop-styles-without-reference-8",
+      "source": "iOfficeAI/OfficeCLI",
+      "file": "reference/styles/INDEX.md",
+      "find": "| **Luxury / Premium**                     | dark--luxury-minimal, dark--premium-navy, warm--minimal-brand, dark--velvet-rose                                                                                                       |\n",
+      "replace": "| **Luxury / Premium**                     | dark--luxury-minimal, dark--premium-navy, dark--velvet-rose                                                                                                                            |\n"
+    }
+  ],
+  "morph-ppt-3d": [
+    {
+      "id": "vault-audit-note-1",
+      "source": "iOfficeAI/OfficeCLI",
+      "find": "# Morph PPT — 3D Extension\n\nThis skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.\nThis file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.\n",
+      "replace": "# Morph PPT — 3D Extension\n\n> [!note] Vault audit 2026-07-24 — USE-19\n> Use this only for a .pptx embedding a `.glb` 3D model with cinematographic camera plus Morph transitions (triggers: '3D model', 'GLB', '3D morph', 'camera move', 'model-content layout'). DO NOT invoke for 2D Morph decks with no 3D model — use `morph-ppt`; and for a generic or pitch deck with no cross-slide motion route to `officecli-pptx` or `officecli-pitch-deck`. Distinguishing axis: 3D GLB scene vs 2D morph vs static deck.\n\nThis skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.\nThis file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.\n"
     }
   ]
 }

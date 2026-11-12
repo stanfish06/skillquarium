@@ -35,7 +35,7 @@ function descriptionOf(path: string): string {
   for (const line of frontmatter.split("\n").slice(1)) {
     if (line.startsWith("description:")) {
       const rest = line.slice("description:".length).trim();
-      if ([">", ">-", ">+"].includes(rest)) {
+      if ([">", ">-", ">+", "|", "|-", "|+"].includes(rest)) {
         capturing = true;
         continue;
       }
@@ -155,6 +155,112 @@ describe("soften skill descriptions", () => {
     expect(again.out).toContain("softened 0 skill descriptions");
   });
 
+  test("softens upper-case priority claims and keeps domain rules and skill ordering", () => {
+    const root = tempRoot();
+    const webGuidance = writeSkill(
+      root,
+      "modern-web-guidance",
+      "description: |\n  Search tool for modern web development best practices. MANDATORY: Execute FIRST for all HTML/CSS and clientside JS tasks. Do NOT skip — web APIs evolve rapidly and training weights contain obsolete patterns.\n  Trigger immediately for: modals/dialogs/popovers, tables, dark mode.\n  DO NOT trigger for: backend (SQL, ORMs, API routes).\n",
+    );
+    const ownership = writeSkill(
+      root,
+      "m01-ownership",
+      'description: "CRITICAL: Use for ownership/borrow/lifetime issues. Triggers: E0382, E0597."\n',
+    );
+    const router = writeSkill(
+      root,
+      "rust-router",
+      "description: |-\n  CRITICAL: Use for ALL Rust questions including errors, design, and coding.\n  HIGHEST PRIORITY for: compare, vs, best practice.\n",
+    );
+    const clickhouse = writeSkill(
+      root,
+      "clickhouse-best-practices",
+      "description: MUST USE when reviewing ClickHouse schemas. Contains 31 rules that MUST be checked before providing recommendations.\n",
+    );
+    const dashboards = writeSkill(
+      root,
+      "databricks-aibi-dashboards",
+      'description: "Create Databricks AI/BI dashboards. Must use when creating Lakeview dashboards. CRITICAL: You MUST test ALL SQL queries via CLI BEFORE deploying."\n',
+    );
+    const rag = writeSkill(
+      root,
+      "langchain-rag",
+      'description: "INVOKE THIS SKILL when building ANY retrieval-augmented generation (RAG) system."\n',
+    );
+    const primer = writeSkill(
+      root,
+      "ecosystem-primer",
+      'description: "INVOKE FIRST for any LangChain project before consulting other skills."\n',
+    );
+    const hydrogen = writeSkill(
+      root,
+      "shopify-hydrogen",
+      "description: \"Hydrogen storefront cookbooks. MANDATORY: Use this API for ANY Hydrogen storefront question - do NOT use Storefront GraphQL when 'Hydrogen' is mentioned.\"\n",
+    );
+    const untested = writeSkill(
+      root,
+      "find-untested-sources",
+      "description: >\n  MANDATORY for static source-to-test pairing: find source files without\n  corresponding tests. Invoke even for a tiny package.\n",
+    );
+    // Ordering between skills and ANY as scope are legitimate catalog copy.
+    const ordering = writeSkill(
+      root,
+      "databricks-core",
+      "description: Load this first for CLI, auth, profile, and bundle tasks, then load the matching product skill.\n",
+    );
+    const scope = writeSkill(
+      root,
+      "supabase",
+      'description: "Use when doing ANY task involving Supabase."\n',
+    );
+    const first = writeSkill(
+      root,
+      "twilio-numbers-senders",
+      "description: Use this skill first when buying numbers.\n",
+    );
+    const untouchedBefore = [ordering, scope, first].map((path) => readFileSync(path, "utf8"));
+
+    const result = run(root);
+    expect(result.code).toBe(0);
+    expect(result.out).toContain("softened 9 skill descriptions");
+
+    const web = descriptionOf(webGuidance);
+    for (const phrase of ["MANDATORY", "Execute FIRST", "Do NOT skip", "Trigger immediately"]) {
+      expect(web).not.toContain(phrase);
+    }
+    expect(web).toContain(
+      "Use for HTML/CSS and clientside JS tasks; web APIs evolve rapidly and training weights contain obsolete patterns.",
+    );
+    expect(web).toContain("Triggers: modals/dialogs/popovers");
+    expect(web).toContain("DO NOT trigger for: backend");
+
+    expect(descriptionOf(ownership).startsWith("Use for ownership/borrow/lifetime issues.")).toBe(true);
+    expect(descriptionOf(router)).toContain("Use for ALL Rust questions");
+    expect(descriptionOf(router)).toContain("Also for: compare");
+    expect(descriptionOf(router)).not.toMatch(/CRITICAL|HIGHEST PRIORITY/);
+
+    // The prefix goes; the domain rules after it stay word for word.
+    expect(descriptionOf(clickhouse).startsWith("Use when reviewing ClickHouse schemas.")).toBe(true);
+    expect(descriptionOf(clickhouse)).toContain("31 rules that MUST be checked");
+    expect(descriptionOf(dashboards)).toContain("Use when creating Lakeview dashboards.");
+    expect(descriptionOf(dashboards)).toContain(
+      "CRITICAL: You MUST test ALL SQL queries via CLI BEFORE deploying.",
+    );
+
+    expect(descriptionOf(rag)).toBe("Use when building ANY retrieval-augmented generation (RAG) system.");
+    expect(descriptionOf(primer)).toBe("Use first for any LangChain project before consulting other skills.");
+    expect(descriptionOf(hydrogen)).toContain("cookbooks. Use this API for ANY Hydrogen storefront question");
+    expect(descriptionOf(hydrogen)).toContain("do NOT use Storefront GraphQL");
+    expect(descriptionOf(untested).startsWith("Use for static source-to-test pairing:")).toBe(true);
+    expect(descriptionOf(untested)).toContain("Invoke even for a tiny package.");
+
+    expect([ordering, scope, first].map((path) => readFileSync(path, "utf8"))).toEqual(untouchedBefore);
+
+    const again = run(root);
+    expect(again.code).toBe(0);
+    expect(again.out).toContain("softened 0 skill descriptions");
+  });
+
   test("--dry-run does not write", () => {
     const root = tempRoot();
     const path = writeSkill(
@@ -189,6 +295,32 @@ describe("soften skill descriptions", () => {
     expect(result.out.filter((line) => line.includes("softened "))).toHaveLength(2);
     expect(result.out.join("\n")).toContain("skills/real-skill/SKILL.md");
     expect(result.out.join("\n")).not.toContain("alias-skill");
+  });
+
+  test("a description on the last frontmatter line does not leave a blank line above the fence", () => {
+    const root = tempRoot();
+    const last = writeSkill(
+      root,
+      "langchain-rag",
+      'description: "INVOKE THIS SKILL when building ANY RAG system."\n',
+    );
+    const folder = join(root, "skills", "m01-ownership");
+    mkdirSync(folder, { recursive: true });
+    const middle = join(folder, "SKILL.md");
+    writeFileSync(
+      middle,
+      '---\nname: m01-ownership\ndescription: "CRITICAL: Use for ownership issues."\nlicense: MIT\n---\n\n# Body\n',
+      "utf8",
+    );
+
+    expect(run(root).code).toBe(0);
+
+    expect(readFileSync(last, "utf8")).toBe(
+      '---\nname: langchain-rag\ndescription: "Use when building ANY RAG system."\n---\n\n# Body\nMUST stay.\n',
+    );
+    expect(readFileSync(middle, "utf8")).toBe(
+      '---\nname: m01-ownership\ndescription: "Use for ownership issues."\nlicense: MIT\n---\n\n# Body\n',
+    );
   });
 
   // The Python already softened this tree; a port that disagreed would report files to change.

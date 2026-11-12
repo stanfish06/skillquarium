@@ -1,8 +1,8 @@
 ---
 name: rust-router
-description: |-
-  CRITICAL: Use for ALL Rust questions including errors, design, and coding.
-  HIGHEST PRIORITY for: 比较, 对比, compare, vs, versus, 区别, difference, 最佳实践, best practice,
+description: |
+  Use for ALL Rust questions including errors, design, and coding.
+  Also for: 比较, 对比, compare, vs, versus, 区别, difference, 最佳实践, best practice,
   tokio vs, async-std vs, 比较 tokio, 比较 async,
   Triggers on: Rust, cargo, rustc, crate, Cargo.toml,
   意图分析, 问题分析, 语义分析, analyze intent, question analysis,

@@ -14,16 +14,14 @@ created: 2026-07-21
 # build-perf-baseline
 
 > [!info] What it does
-> Establish MSBuild/.NET build performance baselines before optimizing. USE FOR: unranked slow builds; cold, warm, incremental or no-op measurements; before/after comparisons; CI output caching; static graph, artifacts output and dependency graph trimming. Start here before build-perf-diagnostics, incremental-build or build-parallelism. DO NOT USE FOR: known repeated-restore fixes (use eliminate-redundant-restores), non-MSBuild builds. For measured target/task/analyzer bottlenecks, use build-perf-diagnostics.
+> Establish MSBuild/.NET baselines before optimizing. USE FOR: unranked slow builds; cold/warm/incremental/no-op measurements; before/after comparisons; CI caching; static graph, artifacts output, dependency graph trimming. DO NOT USE FOR: measured bottlenecks (build-perf-diagnostics), known repeated restores (eliminate-redundant-restores), within-build duplicate calls (find-repeated-work-within-one-build), non-MSBuild builds.
 
 **Source:** [skills/build-perf-baseline/SKILL.md](../../../skills/build-perf-baseline/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
 ## Related skills
 
-- [build-parallelism](../../notes/dotnet-development/build-parallelism.md) — Analyze an MSBuild solution, solution filter, or Build.proj that schedules multiple project files
-- [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild bottlenecks from binlog timelines and Target/Task Performance Summaries after build-perf-baseline establishes measurements
-- [incremental-build](../../notes/dotnet-development/incremental-build.md) — Guide for optimizing MSBuild incremental builds
-- [start](../../notes/vault-meta/start.md) — Use when starting Zoom work
+- [build-perf-diagnostics](../../notes/dotnet-development/build-perf-diagnostics.md) — Diagnose MSBuild bottlenecks from binlog timelines and Target/Task Performance Summaries after baseline measurements
+- [incremental-build](../../notes/dotnet-development/incremental-build.md) — Fix MSBuild incremental/no-op builds: 'nothing changed but it rebuilds anyway'
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Vault, Skills & Workflow Meta](vault-meta.md)
 
-## Skills (23)
+## Skills (24)
 
 - [cavecrew](../notes/reasoning-ideation/cavecrew.md) — When to delegate to `cavecrew-investigator` (locate code), `cavecrew-builder` (1-2 file edit) or `cavecrew-reviewer` (diff review) instead of working inline or using `Explore`
 - [caveman](../notes/reasoning-ideation/caveman.md) — Terse caveman voice: answer first, fluff gone, every technical fact kept
@@ -36,6 +36,7 @@ created: 2026-06-13
 - [interview-me](../notes/reasoning-ideation/interview-me.md) — Extracts what the user actually wants instead of what they think they should want
 - [loop-me](../notes/reasoning-ideation/loop-me.md) — Grill me about specs for the workflows I want to build, within this workspace
 - [scientific-brainstorming](../notes/reasoning-ideation/scientific-brainstorming.md) — Facilitates evidence-aware scientific ideation with independent generation, structured discussion, explicit assumptions, transparent evaluation, adversarial review, and decision logs
+- [socratic-tutor](../notes/reasoning-ideation/socratic-tutor.md) — Structured Socratic tutoring when the user explicitly asks to be taught, quizzed, or drilled to mastery on a topic: diagnostic placement, a skill map with levels 0-5, spaced review...
 - [vibe-research-workflow](../notes/reasoning-ideation/vibe-research-workflow.md) — Guides AI-assisted research across three sub-flows, Vibe Coding, Vibe Figure, and Vibe Writing, with behavioural rules that keep the user in charge of academic judgment while...
 - [wayfinder](../notes/reasoning-ideation/wayfinder.md) — Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the...
 - [what-if-oracle](../notes/reasoning-ideation/what-if-oracle.md) — Supports structured what-if scenario analysis for research planning, experimental contingencies, and scientific project decisions

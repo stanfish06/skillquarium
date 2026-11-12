@@ -14,7 +14,7 @@ created: 2026-08-23
 # langgraph-fundamentals
 
 > [!info] What it does
-> INVOKE THIS SKILL when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling.
+> Use when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling.
 
 **Source:** [skills/langgraph-fundamentals/SKILL.md](../../../skills/langgraph-fundamentals/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

@@ -33,13 +33,13 @@ created: 2026-06-13
 - [cuequivariance](../notes/ml-ai/cuequivariance.md) — Define custom groups (Irrep subclasses), build segmented tensor products with CG coefficients, create equivariant polynomials and IrDictPolynomials, and use built-in descriptors...
 - [cuopt-user-rules](../notes/ml-ai/cuopt-user-rules.md) — Base rules for end users calling NVIDIA cuOpt (routing/LP/MILP/QP/install/server)
 - [debug-distributed-hang](../notes/ml-ai/debug-distributed-hang.md) — Debug hanging issues in SGLang distributed inference (TP/PP/DP/EP)
-- [deep-agents-core](../notes/ml-ai/deep-agents-core.md) — INVOKE THIS SKILL when building ANY Deep Agents application
-- [deep-agents-memory](../notes/ml-ai/deep-agents-memory.md) — INVOKE THIS SKILL when your Deep Agent needs memory, persistence, or filesystem access
-- [deep-agents-orchestration](../notes/ml-ai/deep-agents-orchestration.md) — INVOKE THIS SKILL when using subagents, task planning, or human approval in Deep Agents
+- [deep-agents-core](../notes/ml-ai/deep-agents-core.md) — Use when building ANY Deep Agents application
+- [deep-agents-memory](../notes/ml-ai/deep-agents-memory.md) — Use when your Deep Agent needs memory, persistence, or filesystem access
+- [deep-agents-orchestration](../notes/ml-ai/deep-agents-orchestration.md) — Use when using subagents, task planning, or human approval in Deep Agents
 - [deepagents-python-quickstart](../notes/ml-ai/deepagents-python-quickstart.md) — Scaffold a minimal local Deep Agent in Python by following the official quickstart, using provider-native web search instead of Tavily
 - [deepagents-typescript-quickstart](../notes/ml-ai/deepagents-typescript-quickstart.md) — Scaffold a minimal local Deep Agent in TypeScript by following the official quickstart, using provider-native web search instead of Tavily
 - [dspy](../notes/ml-ai/dspy.md) — DSPy declarative framework for automatic prompt optimization treating prompts as code with systematic evaluation and compilers
-- [ecosystem-primer](../notes/ml-ai/ecosystem-primer.md) — INVOKE FIRST for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code
+- [ecosystem-primer](../notes/ml-ai/ecosystem-primer.md) — Use first for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code
 - [eval-engineering](../notes/ml-ai/eval-engineering.md) — Inspect an agent repository and optional traces, interview the user, write reviewed Task Specs, build and audit Harbor tasks, and bootstrap reusable project World Knowledge Skills
 - [gradio](../notes/ml-ai/gradio.md) — Building ML demos and web UIs in Python with Gradio 6 — gr.Interface for wrapping a function, gr.Blocks for custom layouts with event listeners, gr.ChatInterface for LLM chat...
 - [hugging-science](../notes/ml-ai/hugging-science.md) — Discovers and evaluates scientific datasets, models, methodology posts, and Spaces through the Hugging Science catalog
@@ -54,23 +54,23 @@ created: 2026-06-13
 - [huggingface-vision-trainer](../notes/ml-ai/huggingface-vision-trainer.md) — Trains and fine-tunes vision models for object detection (D-FINE, RT-DETR v2, DETR, YOLOS), image classification (timm models — MobileNetV3, MobileViT, ResNet, ViT/DINOv3 — plus any...
 - [inspect-ai](../notes/ml-ai/inspect-ai.md) — Write, run and diagnose local LLM evaluations with Inspect AI using tasks, datasets, solvers, scorers and saved eval logs
 - [jax-best-practices](../notes/ml-ai/jax-best-practices.md) — Expert in JAX for high-performance numerical computing and machine learning
-- [langchain-dependencies](../notes/ml-ai/langchain-dependencies.md) — INVOKE THIS SKILL when setting up a new project or when asked about package versions, installation, or dependency management for LangChain, LangGraph, LangSmith, or Deep Agents
+- [langchain-dependencies](../notes/ml-ai/langchain-dependencies.md) — Use when setting up a new project or when asked about package versions, installation, or dependency management for LangChain, LangGraph, LangSmith, or Deep Agents
 - [langchain-fundamentals](../notes/ml-ai/langchain-fundamentals.md) — Create LangChain agents with create_agent, define tools, and use middleware for human-in-the-loop and error handling
-- [langchain-middleware](../notes/ml-ai/langchain-middleware.md) — INVOKE THIS SKILL when you need human-in-the-loop approval, custom middleware, or structured output
+- [langchain-middleware](../notes/ml-ai/langchain-middleware.md) — Use when you need human-in-the-loop approval, custom middleware, or structured output
 - [langchain-python-quickstart](../notes/ml-ai/langchain-python-quickstart.md) — Scaffold a minimal local LangChain agent in Python by following the official quickstart
-- [langchain-rag](../notes/ml-ai/langchain-rag.md) — INVOKE THIS SKILL when building ANY retrieval-augmented generation (RAG) system
+- [langchain-rag](../notes/ml-ai/langchain-rag.md) — Use when building ANY retrieval-augmented generation (RAG) system
 - [langchain-typescript-quickstart](../notes/ml-ai/langchain-typescript-quickstart.md) — Scaffold a minimal local LangChain agent in TypeScript by following the official quickstart
 - [langgraph](../notes/ml-ai/langgraph.md) — LangGraph is a low-level orchestration framework for building stateful LLM agents and workflows as explicit graphs — typed state with reducers, nodes/edges/conditional routing...
-- [langgraph-cli](../notes/ml-ai/langgraph-cli.md) — INVOKE THIS SKILL when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications
-- [langgraph-fundamentals](../notes/ml-ai/langgraph-fundamentals.md) — INVOKE THIS SKILL when writing ANY LangGraph code
-- [langgraph-human-in-the-loop](../notes/ml-ai/langgraph-human-in-the-loop.md) — INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph
-- [langgraph-persistence](../notes/ml-ai/langgraph-persistence.md) — INVOKE THIS SKILL when your LangGraph needs to persist state, remember conversations, travel through history, or configure subgraph checkpointer scoping
+- [langgraph-cli](../notes/ml-ai/langgraph-cli.md) — Use when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications
+- [langgraph-fundamentals](../notes/ml-ai/langgraph-fundamentals.md) — Use when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling
+- [langgraph-human-in-the-loop](../notes/ml-ai/langgraph-human-in-the-loop.md) — Use when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph
+- [langgraph-persistence](../notes/ml-ai/langgraph-persistence.md) — Use when your LangGraph needs to persist state, remember conversations, travel through history, or configure subgraph checkpointer scoping
 - [langgraph-python-quickstart](../notes/ml-ai/langgraph-python-quickstart.md) — Scaffold a minimal local LangGraph agent in Python by following the official quickstart
 - [langgraph-typescript-quickstart](../notes/ml-ai/langgraph-typescript-quickstart.md) — Scaffold a minimal local LangGraph agent in TypeScript by following the official quickstart
 - [langsmith-online-eval-engineering](../notes/ml-ai/langsmith-online-eval-engineering.md) — Iteratively inspect traces, interview the user, and create LangSmith online evaluators one at a time
 - [llama-cpp](../notes/ml-ai/llama-cpp.md) — Run GGUF language and embedding models locally with llama.cpp
 - [llamaindex-development](../notes/ml-ai/llamaindex-development.md) — Expert guidance for LlamaIndex development including RAG applications, vector stores, document processing, query engines, and building production AI applications
-- [managed-deep-agents](../notes/ml-ai/managed-deep-agents.md) — INVOKE THIS SKILL when building, testing, or deploying Managed Deep Agents in LangSmith
+- [managed-deep-agents](../notes/ml-ai/managed-deep-agents.md) — Use when building, testing, or deploying Managed Deep Agents in LangSmith
 - [nemoclaw-user-get-started](../notes/ml-ai/nemoclaw-user-get-started.md) — Installs NemoClaw, launches a sandbox, and runs the first agent prompt
 - [openai-ads-conversions-setup](../notes/ml-ai/openai-ads-conversions-setup.md) — Guide Codex through instrumenting or extending repositories with OpenAI Ads Measurement Pixel and optional Conversions API (CAPI)
 - [openai-api-troubleshooting](../notes/ml-ai/openai-api-troubleshooting.md) — Use when an OpenAI API request fails and Codex needs to classify the likely cause, explain the next step, and route to the right follow-up
