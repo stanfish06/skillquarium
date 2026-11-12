@@ -41,6 +41,30 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "## Sources (verified 2026-09-30)\n\n- [pymatgen 2026.9.24 on PyPI](https://pypi.org/project/pymatgen/)\n- [pymatgen-core 2026.9.23 on PyPI](https://pypi.org/project/pymatgen-core/)",
       "replace": "## Sources (verified 2026-11-08)\n\n- [pymatgen 2026.10.24 on PyPI](https://pypi.org/project/pymatgen/)\n- [pymatgen-core 2026.10.31 on PyPI](https://pypi.org/project/pymatgen-core/)"
+    },
+    {
+      "id": "stale-latest-guard-constants",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "scripts/_common.py",
+      "find": "PYMATGEN_VERSION = \"2026.9.24\"\nPYMATGEN_CORE_VERSION = \"2026.9.23\"\n",
+      "replace": "PYMATGEN_VERSION = \"2026.10.24\"\nPYMATGEN_CORE_VERSION = \"2026.10.31\"\n"
+    },
+    {
+      "id": "stale-latest-mp-install-line",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/materials_project_api.md",
+      "find": "uv add \"pymatgen==2026.9.24\" \"pymatgen-core==2026.9.23\" \"mp-api==0.46.5\"",
+      "replace": "uv add \"pymatgen==2026.10.24\" \"pymatgen-core==2026.10.31\" \"mp-api==0.46.5\""
+    },
+    {
+      "id": "stale-latest-mp-manifest-example",
+      "issue": 1286,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/materials_project_api.md",
+      "find": "    \"pymatgen\": \"2026.9.24\",\n    \"pymatgen-core\": \"2026.9.23\"",
+      "replace": "    \"pymatgen\": \"2026.10.24\",\n    \"pymatgen-core\": \"2026.10.31\""
     }
   ],
   "databricks-python-sdk": [
