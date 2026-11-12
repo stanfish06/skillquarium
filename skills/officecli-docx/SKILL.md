@@ -464,8 +464,13 @@ LEAK=$(officecli view "$FILE" text | grep -cE '(\$[A-Za-z_]+\$|\{\{[^}]+\}\}|<TO
 # A TOC placeholder is valid before a Word-compatible field engine updates it; confirm the TOC field and updateFields setting structurally instead.
 
 # Gate 3 — live PAGE field exists when the brief/template requires a page-number footer.
-# Set EXPECT_PAGE_FOOTER=1 for page-numbered deliverables; leave it 0 for footerless letters/memos.
-EXPECT_PAGE_FOOTER=${EXPECT_PAGE_FOOTER:-0}
+# Decide explicitly: EXPECT_PAGE_FOOTER=1 for page-numbered deliverables, 0 for footerless letters/memos.
+# Unset fails instead of skipping, so a forgotten decision cannot pass the gate.
+: "${EXPECT_PAGE_FOOTER:?Set EXPECT_PAGE_FOOTER to 1 for page-numbered deliverables, otherwise 0}"
+case "$EXPECT_PAGE_FOOTER" in
+  0|1) ;;
+  *) echo "REJECT setup: EXPECT_PAGE_FOOTER must be 0 or 1"; exit 1 ;;
+esac
 if [ "$EXPECT_PAGE_FOOTER" = "1" ]; then
   FLD=$(officecli query "$FILE" 'field[fieldType=page]' --json | jq '.data.results | length')
   [ "$FLD" -ge 1 ] && echo "Gate 3 OK" || { echo "REJECT Gate 3: no live PAGE field"; exit 1; }
