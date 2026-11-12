@@ -5180,5 +5180,14 @@
       "find": "    - \"https://turbo.build/pack/docs\"\n    - \"https://nextjs.org/docs/architecture/turbopack\"\n  sitemap: \"https://turbo.build/sitemap.xml\"\n",
       "replace": "    - \"https://nextjs.org/docs/app/api-reference/turbopack\"\n  sitemap: \"https://nextjs.org/sitemap.xml\"\n"
     }
+  ],
+  "wrangler": [
+    {
+      "id": "skill-health-1302",
+      "issue": 1302,
+      "source": "openai/plugins",
+      "find": "# Remote mode - runs on Cloudflare edge (legacy)\nwrangler dev --remote\n",
+      "replace": "# Remote mode - runs on Cloudflare edge (legacy)\n# Removed for KV-backed Durable Objects as of 2026-05-18 (errors instead) — use\n# `wrangler dev` plus per-binding `remote: true` (see \"Remote Bindings for Local Dev\" below)\nwrangler dev --remote\n"
+    }
   ]
 }
