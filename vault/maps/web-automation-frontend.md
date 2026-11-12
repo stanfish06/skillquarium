@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (118)
+## Skills (120)
 
 - [accessibility-and-inclusive-visualization](../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [admission-control](../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
@@ -36,6 +36,7 @@ created: 2026-06-13
 - [brandkit](../notes/web-automation-frontend/brandkit.md) — Premium brand-kit image generation skill for creating high-end brand-guidelines boards, logo systems, identity decks, and visual-world presentations
 - [browser-testing-with-devtools](../notes/web-automation-frontend/browser-testing-with-devtools.md) — Tests in real browsers via Chrome DevTools MCP
 - [browser-use](../notes/web-automation-frontend/browser-use.md) — Direct browser control via CDP for web interaction: automation, scraping, testing, screenshots, and site/app work
+- [chrome-extensions](../notes/web-automation-frontend/chrome-extensions.md) — Build and publish Chrome Extensions using Manifest V3 best practices
 - [cms](../notes/web-automation-frontend/cms.md) — Headless CMS integration guidance — Sanity (native Vercel Marketplace), Contentful, DatoCMS, Storyblok, and Builder.io
 - [core](../notes/web-automation-frontend/core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands
 - [cue-kind-definition](../notes/web-automation-frontend/cue-kind-definition.md) — Author CUE kind definitions for grafana-app-sdk apps - schemas, versioning, field constraints, named type definitions, custom routes, and codegen configuration
@@ -95,6 +96,7 @@ created: 2026-06-13
 - [landing-page-design](../notes/web-automation-frontend/landing-page-design.md) — Builds and reviews landing pages and single-offer marketing sites: intake questions, page structure, layout selection, conversion copywriting, SEO/AEO, and an opinionated visual system...
 - [micro](../notes/web-automation-frontend/micro.md) — Expert guidance for micro — asynchronous HTTP microservices framework by Vercel
 - [minimalist-ui](../notes/web-automation-frontend/minimalist-ui.md) — Clean editorial-style interfaces. Warm monochrome palette, typographic contrast, flat bento grids, muted pastels
+- [modern-web-guidance](../notes/web-automation-frontend/modern-web-guidance.md) — Search tool for modern web development best practices
 - [narrow-react-prop-types](../notes/web-automation-frontend/narrow-react-prop-types.md) — narrow React component prop types to match live code paths
 - [next-cache-components-adoption](../notes/web-automation-frontend/next-cache-components-adoption.md) — Turn on Cache Components in a Next.js app and resolve the blocking routes it surfaces
 - [next-cache-components-optimizer](../notes/web-automation-frontend/next-cache-components-optimizer.md) — Optimize the meaningful UI available immediately from a Next.js route on an initial load (hard navigation) or named client-side navigation (soft navigation)

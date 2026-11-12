@@ -39,8 +39,8 @@ A `.docx` is a ZIP of XML parts (`document.xml`, `styles.xml`, `numbering.xml`, 
 docx paths contain `[]`; some prop values contain `$`. Both are shell metacharacters. Escaping happens at three layers — keep them separate.
 
 1. **Shell.** ALWAYS quote element paths: `"/body/p[1]"`, not `/body/p[1]` (zsh/bash glob `[N]`). Single-quote any value containing `$`: `--prop text='$50M'` — at any length, the whole value inside one pair of single quotes. Unquoted `$50M` is stripped to `M`; mixing `'…$var…'` and `"…$50…"` on one long string is where the `$50` silently vanishes.
-2. **CLI (`text=`).** The two-char escapes `\n` and `\t` ARE interpreted in `--prop text=` — `\n` becomes a `<w:br/>` soft line break, `\t` a `<w:tab/>` — consistently across docx / pptx / xlsx. Double them (`\\n`) for a literal backslash-n (rarely wanted). This applies to row-level table `c1…cN` shortcuts too (`\n` → `<w:br/>` within the cell).
-3. **JSON (batch).** A real newline can also be passed as `"\n"` in the JSON string of a `batch` heredoc; same result.
+2. **CLI (`text=`).** The two-char escapes `\n`, `\v` and `\t` ARE interpreted in `--prop text=` (same rule as pptx): `\n` starts a **new paragraph** (each new `<w:p>` inherits the source paragraph's style), `\v` is a **soft line break** within one paragraph (`<w:br/>`), `\t` a `<w:tab/>`. Double the backslash (`\\n`) for a literal backslash-n (rarely wanted). Row-level table shortcuts `c1…cN` are the exception: there `\n` is a `<w:br/>` line break inside the cell (see recipe (e)).
+3. **JSON (batch).** Batch does NOT interpret the two-char escapes — a JSON `"\\n"` or `"\\v"` lands as literal text. Use JSON escapes for the real characters: `"\n"` (a newline) starts a new paragraph, `"\u000b"` is a soft line break.
 
 If in doubt, `view text` after writing and compare character-for-character.
 
@@ -253,7 +253,7 @@ officecli add "$FILE" / --type footer --prop type=first --prop text=""
 officecli add "$FILE" / --type footer --prop type=default --prop align=center --prop size=9pt --prop text="Page " --prop field=page
 ```
 
-When both exist, the default footer is `/footer[2]`; alone it is `/footer[1]`. **Verify**: `get --depth 3` must show `fldChar` children, not just a run with literal `"Page"` (`view outline` prints "Footer: Page" for both live fields AND static text — don't rely on it). Do NOT `set --prop differentFirstPage=true` — that prop is unsupported (rejected with exit 2, not silently); adding a first-type footer flips the bit. For composite **Page X of Y**, see recipe (b).
+When both exist, the default footer is `/footer[2]`; alone it is `/footer[1]`. **Verify**: `get --depth 3` must show `fldChar` children, not just a run with literal `"Page"` (`view outline` prints "Footer: Page" for both live fields AND static text — don't rely on it). Do NOT `set --prop differentFirstPage=true` — that prop is unsupported (exit 2 with `WARNING: UNSUPPORTED`; the element itself is still created — check `success` in `--json`); adding a first-type footer flips the bit. For composite **Page X of Y**, see recipe (b).
 
 ### Table of Contents
 
@@ -464,8 +464,13 @@ LEAK=$(officecli view "$FILE" text | grep -cE '(\$[A-Za-z_]+\$|\{\{[^}]+\}\}|<TO
 # A TOC placeholder is valid before a Word-compatible field engine updates it; confirm the TOC field and updateFields setting structurally instead.
 
 # Gate 3 — live PAGE field exists when the brief/template requires a page-number footer.
-# Set EXPECT_PAGE_FOOTER=1 for page-numbered deliverables; leave it 0 for footerless letters/memos.
-EXPECT_PAGE_FOOTER=${EXPECT_PAGE_FOOTER:-0}
+# Decide explicitly: EXPECT_PAGE_FOOTER=1 for page-numbered deliverables, 0 for footerless letters/memos.
+# Unset fails instead of skipping, so a forgotten decision cannot pass the gate.
+: "${EXPECT_PAGE_FOOTER:?Set EXPECT_PAGE_FOOTER to 1 for page-numbered deliverables, otherwise 0}"
+case "$EXPECT_PAGE_FOOTER" in
+  0|1) ;;
+  *) echo "REJECT setup: EXPECT_PAGE_FOOTER must be 0 or 1"; exit 1 ;;
+esac
 if [ "$EXPECT_PAGE_FOOTER" = "1" ]; then
   FLD=$(officecli query "$FILE" 'field[fieldType=page]' --json | jq '.data.results | length')
   [ "$FLD" -ge 1 ] && echo "Gate 3 OK" || { echo "REJECT Gate 3: no live PAGE field"; exit 1; }
