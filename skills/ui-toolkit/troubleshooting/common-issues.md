@@ -6,7 +6,7 @@ Quick diagnostics for Zoom Video SDK UI Toolkit (Web).
 
 **Fix**:
 - Ensure you import the toolkit CSS:
-  - `@zoom/videosdk-ui-toolkit/dist/videosdk-zoom-ui-toolkit.css`
+  - `@zoom/videosdk-ui-toolkit/dist/videosdk-ui-toolkit.css`
 - For bundlers, verify CSS handling is enabled (Vite/Next.js).
 
 ## SSR / Next.js Errors ("window is not defined")

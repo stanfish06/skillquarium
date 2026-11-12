@@ -46,6 +46,7 @@ created: 2026-06-10
 - [logfire-instrumentation](../../notes/analytics-engineering/logfire-instrumentation.md) — Add Pydantic Logfire observability to application code — traces, logs, metrics, and AI/agent spans
 - [mcp-csharp-publish](../../notes/dotnet-development/mcp-csharp-publish.md) — Publish and deploy C# MCP servers. Covers NuGet packaging for stdio servers, Docker containerization for HTTP servers, Azure Container Apps and App Service deployment, and publishing...
 - [modal](../../notes/cloud-devops/modal.md) — Modal is a serverless cloud platform for running Python on demand, including on-demand GPUs
+- [modern-web-guidance](../../notes/web-automation-frontend/modern-web-guidance.md) — Search tool for modern web development best practices
 - [molmim-nim](../../notes/drug-discovery-chem/molmim-nim.md) — Use this skill for MolMIM, NVIDIA's BioNeMo NIM microservice for small-molecule latent-space generation and optimization
 - [msa-search-nim](../../notes/sequence-phylogenetics/msa-search-nim.md) — Generate multiple sequence alignments (MSAs) for protein sequences using the ColabFold MSA-Search NIM
 - [nemoclaw-user-get-started](../../notes/ml-ai/nemoclaw-user-get-started.md) — Installs NemoClaw, launches a sandbox, and runs the first agent prompt

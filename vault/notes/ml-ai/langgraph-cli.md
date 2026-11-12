@@ -14,7 +14,7 @@ created: 2026-08-23
 # langgraph-cli
 
 > [!info] What it does
-> INVOKE THIS SKILL when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications. Covers langgraph new, dev, build, up, deploy, and langgraph.json configuration.
+> Use when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications. Covers langgraph new, dev, build, up, deploy, and langgraph.json configuration.
 
 **Source:** [skills/langgraph-cli/SKILL.md](../../../skills/langgraph-cli/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

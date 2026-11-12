@@ -1489,6 +1489,8 @@
     }
   ],
   "extraAssignments": {
+    "modern-web-guidance": "web-automation-frontend",
+    "chrome-extensions": "web-automation-frontend",
     "socratic-tutor": "reasoning-ideation",
     "finite-horizon-lqr": "data-science-compute",
     "casadi-ipopt-nlp": "data-science-compute",

@@ -23,7 +23,7 @@ created: 2026-08-23
 ## Related skills
 
 - [auth](../../notes/security-auditing/auth.md) — Authentication integration guidance — Clerk (native Vercel Marketplace), Descope, and Auth0 setup for Next.js applications
-- [databricks-aibi-dashboards](../../notes/analytics-engineering/databricks-aibi-dashboards.md) — Create Databricks AI/BI dashboards. Must use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure
+- [databricks-aibi-dashboards](../../notes/analytics-engineering/databricks-aibi-dashboards.md) — Create Databricks AI/BI dashboards. Use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure
 - [databricks-apps](../../notes/analytics-engineering/databricks-apps.md) — Build apps on Databricks Apps platform. Use when asked to create data apps, analytics tools, or custom interactive visualizations
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
