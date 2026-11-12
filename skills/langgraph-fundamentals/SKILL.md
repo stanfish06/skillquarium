@@ -1,6 +1,6 @@
 ---
 name: langgraph-fundamentals
-description: "INVOKE THIS SKILL when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling."
+description: "Use when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling."
 ---
 
 <overview>
