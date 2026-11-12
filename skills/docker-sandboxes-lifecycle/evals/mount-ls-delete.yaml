@@ -12,14 +12,15 @@ fixtures:
   notes/hello.txt: "hello from the host\n"
   notes/todo.md: "- write live skill evals\n"
 
-# The simulated user never names the skill or the exact commands.
+# The prompt uses "Docker Sandbox" to trigger skill lookup without being prescriptive.
+# Same prompt works for both Claude and Codex when using gateway default model.
 prompt: |
-  I keep some notes in the ./notes folder of this directory. Using Docker
-  Sandboxes, spin up a sandbox with just the shell agent (no AI agent inside)
-  that has that folder mounted. After creating it, list all sandboxes to
-  confirm it exists. Then show me which files the sandbox can see in the
-  mounted folder, and also show me the content of hello.txt from inside the
-  sandbox. When that's done, tear the sandbox down and double-check it's
+  I want to isolate a shell agent in a Docker Sandbox with my ./notes folder
+  mounted as the workspace. Spin up a sandbox with just the shell agent (no AI
+  agent inside) that has that folder mounted. After creating it, list all
+  sandboxes to confirm it exists. Then show me which files the sandbox can see
+  in the mounted folder, and also show me the content of hello.txt from inside
+  the sandbox. When that's done, tear the sandbox down and double-check it's
   really gone by listing sandboxes again. Don't ask me questions, just do it.
 
 limits:
