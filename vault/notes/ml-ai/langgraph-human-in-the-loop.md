@@ -14,7 +14,7 @@ created: 2026-08-23
 # langgraph-human-in-the-loop
 
 > [!info] What it does
-> INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph. Covers interrupt(), Command(resume=...), approval/validation workflows, and the 4-tier error handling strategy.
+> Use when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph. Covers interrupt(), Command(resume=...), approval/validation workflows, and the 4-tier error handling strategy.
 
 **Source:** [skills/langgraph-human-in-the-loop/SKILL.md](../../../skills/langgraph-human-in-the-loop/SKILL.md)  ·  **Domain:** [Machine Learning & AI](../../maps/ml-ai.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
