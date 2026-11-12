@@ -1,6 +1,6 @@
 interface:
   display_name: 'Docker Sandboxes: Declarative sbxenv.yaml Environments'
-  short_description: Author, plan, and run declarative sbxenv.yaml environments for Docker Sandboxes. Experimental.
-  default_prompt: Use this skill when authoring or running an sbxenv.yaml file for Docker Sandboxes (`sbx env create/run/plan/exec/rm`), including its lifecycle hooks and approval plan.
+  short_description: Create, update, and run sbxenv.yaml environments with live kit selection for Docker Sandboxes. Experimental.
+  default_prompt: Use this skill when creating, updating, or running an sbxenv.yaml file for Docker Sandboxes (`sbx env plan/create/run/exec/rm`), including choosing and pinning kits, its lifecycle hooks, and its approval plan.
 policy:
   allow_implicit_invocation: true

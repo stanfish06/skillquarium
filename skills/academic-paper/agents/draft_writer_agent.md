@@ -345,6 +345,7 @@ Quality gate not passed ->
 | `structure_architect_agent` | Paper Outline + Word Count Allocation | Detailed Outline + Evidence Map |
 | `argument_builder_agent` | Argument Blueprint + CER Chains | Claim-Evidence-Reasoning list organized by section |
 | `peer_reviewer_agent` (revision rounds) | Review Report + Revision Instructions | Issues table (Critical/Major/Minor) |
+| `citation_compliance_agent` (`full` mode, first Phase 6 revision round) | Corrected Draft: the Complete Draft with the Phase 5a citation fixes applied; the first Phase 6 revision round edits this version, not the pre-5a draft, and a second revision round edits your Round 1 Revised Draft | Markdown full text |
 
 ### Output Destinations
 
@@ -352,7 +353,7 @@ Quality gate not passed ->
 |-----------|---------|---------|
 | `citation_compliance_agent` | Complete Draft (with all in-text citations) | This agent's Output Format |
 | `abstract_bilingual_agent` | Complete Draft (for abstract writing) | Full text Markdown |
-| `peer_reviewer_agent` | Complete Draft + Draft Metadata | Full text + Word Count table |
+| `peer_reviewer_agent` | Complete Draft + Draft Metadata (in `full` mode the first review reads the Corrected Draft from `citation_compliance_agent`; later rounds read your Revised Draft + Revision Log) | Full text + Word Count table |
 | `formatter_agent` | Final Revised Draft (after passing peer review) | Markdown with citations |
 
 ### Handoff Format Requirements
@@ -366,7 +367,7 @@ Quality gate not passed ->
 Schema 4 (`## Schema 4: Paper Draft` in `shared/handoff_schemas.md`) is this agent's handoff surface. Its `output_language_pair` field — defined there as Optional — carries the abstract carrier onward:
 
 - **When the PCR (or the dispatch context) carries `output_language_pair`**: serialize it into the Schema 4 handoff under that exact key, with the token as its string value. Take the token **verbatim** — it is an opaque registry token from `shared/output_language_pair.md`. Never normalize it to a locale code, never wrap it in an array, never substitute a derived language label, and never rewrite it.
-- **When the field is absent from the PCR/dispatch context**: **omit the serialized key entirely**. Do not emit it as `null`, as `""`, or as the default token. Absence is the legacy state, and what stays put is exact: the omitted key, the legacy object keys, and the heading literals — so a pre-#862 handoff keeps the same keys, headings, and serialized shape, and every downstream step then omits the value too.
+- **When the field is absent from the PCR/dispatch context**: **omit the serialized key entirely**. Do not emit it as `null`, as `""`, or as the default token. Absence is the legacy state: the key stays omitted, and the legacy object keys and heading literals stay as they are, so every downstream step omits the value too.
 - **Legacy keys are untouched**: `abstract: {english, chinese}` and `keywords: {en, zh_tw}` keep their current names and shapes. The pair does not rename them; under the default pair the rendered headings remain `### English Abstract` and `### Chinese Abstract`.
 - **Invalid values fail visibly**: an unsupported token, a non-string value, `null`, or an empty string stops the handoff and names the registry. Never fall back to the default silently.
 

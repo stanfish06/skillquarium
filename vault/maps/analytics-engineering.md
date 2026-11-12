@@ -54,7 +54,7 @@ created: 2026-06-13
 - [databricks-model-serving](../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
 - [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks
 - [databricks-python-sdk](../notes/analytics-engineering/databricks-python-sdk.md) — Databricks development guidance including Python SDK, Databricks Connect, CLI, and REST API
-- [databricks-serverless-migration](../notes/analytics-engineering/databricks-serverless-migration.md) — Migrate Databricks workloads from classic compute to serverless compute
+- [databricks-serverless-migration](../notes/analytics-engineering/databricks-serverless-migration.md) — Make direct code and configuration changes to migrate Databricks workloads from classic compute to serverless
 - [databricks-spark-structured-streaming](../notes/analytics-engineering/databricks-spark-structured-streaming.md) — Comprehensive guide to Spark Structured Streaming for production workloads
 - [databricks-synthetic-data-gen](../notes/analytics-engineering/databricks-synthetic-data-gen.md) — Generate realistic synthetic data using Spark + Faker (strongly recommended)
 - [databricks-unity-catalog](../notes/analytics-engineering/databricks-unity-catalog.md) — Unity Catalog governance, access control, and observability

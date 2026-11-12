@@ -43,6 +43,73 @@ def checklist(text):
 
 
 class GuidanceTests(unittest.TestCase):
+    def test_connector_creation_routes_to_spec_and_skill(self):
+        skill = ROOT / ".github/skills/create-connector/SKILL.md"
+        spec = ROOT / "docs/src/content/docs/specs/connector-specification.md"
+        guide = ROOT / ".github/aw/connectors.md"
+        self.assertTrue(spec.is_file())
+        text = skill.read_text()
+        self.assertIn("name: create-connector", text)
+        for boundary in (
+            "Importing alone must select nothing",
+            "secret NAMES",
+            "An agent-phase test DOES contact the provider",
+            "explicit effect scope",
+        ):
+            with self.subTest(boundary=boundary):
+                self.assertIn(boundary.lower(), text.lower())
+        self.assertIn("../skills/create-connector/SKILL.md", guide.read_text())
+        for router in (SKILL / "SKILL.md", ROOT / "pkg/cli/data/agentic_workflows_skill.md"):
+            with self.subTest(router=router):
+                self.assertIn("Create a new connector:", router.read_text())
+                self.assertIn(".github/skills/create-connector/SKILL.md", router.read_text())
+        for link in re.findall(r"\]\(([^)]+)\)", text):
+            with self.subTest(link=link):
+                path, _, anchor = link.partition("#")
+                target = skill.parent / path
+                self.assertTrue(target.is_file())
+                if anchor:
+                    headings = re.findall(r"^#{1,6} (.+)$", target.read_text(), re.MULTILINE)
+                    self.assertIn(anchor, [heading_anchor(heading) for heading in headings])
+        spec_text = spec.read_text()
+        for contract in (
+            "There is no public connector `context`",
+            "github.com/gh-aw/connectors/v1",
+            "Importing a declaration selects nothing",
+            "experimental",
+            "responseResourceInputs",
+            "operational: false",
+            "synthetic contract",
+        ):
+            with self.subTest(contract=contract):
+                self.assertIn(contract, spec_text)
+
+    def test_ad_hoc_recommendations_name_defaults_and_bound_targets(self):
+        creator = normalized((ROOT / ".github/aw/create-agentic-workflow.md").read_text())
+        self.assertIn("For each material undefined term, propose and clearly label a reasonable `Default:`", creator)
+
+        safe_outputs = normalized((ROOT / ".github/aw/safe-outputs-content.md").read_text())
+        self.assertIn('Avoid `target: "*"` when a workflow needs to act on the triggering issue/PR and one known tracker', safe_outputs)
+        self.assertIn('`target: "triggering"`', safe_outputs)
+        self.assertIn("tracker's explicit issue/PR number", safe_outputs)
+
+        triggers = normalized((ROOT / ".github/aw/create-agentic-workflow-trigger-details.md").read_text())
+        self.assertIn("`opened` and process that event only when `github.event.issue.milestone != null`", triggers)
+        self.assertIn("events-that-trigger-workflows#issues", triggers)
+
+    def test_workflow_guidance_covers_deterministic_checks_outputs_and_pr_diffs(self):
+        patterns = normalized((ROOT / ".github/aw/workflow-patterns.md").read_text())
+        self.assertIn("Prefer `steps:` for fixed checks such as status probes, deterministic diffs, or policy tests", patterns)
+
+        safe_outputs = normalized((ROOT / ".github/aw/safe-outputs.md").read_text())
+        self.assertIn("Set `max` explicitly for `create-issue` and `add-comment`", safe_outputs)
+        self.assertIn("state the reason in the workflow instructions", safe_outputs)
+
+        triggers = normalized((ROOT / ".github/aw/triggers.md").read_text())
+        for contract in ("`previous_filename`", "`fetch-depth: 0`", "three-dot diff"):
+            with self.subTest(contract=contract):
+                self.assertIn(contract, triggers)
+
     def test_local_sdlc_routes_to_squad_alongside_workflow_creation(self):
         for path, workflow_route in (
             (".github/skills/agentic-workflows/SKILL.md", "- Design workflows from scratch"),

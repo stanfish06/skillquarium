@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "410ff3e757f492080a3436d65b7632224f7d898d",
+      "skillFolderHash": "72b1d77f46dd8350d6d0d27cb365ee612016eb9a",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-10T14:51:08.393Z"
+      "updatedAt": "2026-11-12T15:10:25.840Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -2113,9 +2113,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/pymol/SKILL.md",
-      "skillFolderHash": "3e9b232d8f251f49fd51ffb37c29f4788709b242",
+      "skillFolderHash": "ee50a46a15a2b36e1639f05bbba5c345bccaed51",
       "installedAt": "2026-06-25T13:10:41.281Z",
-      "updatedAt": "2026-10-10T12:47:33.184Z"
+      "updatedAt": "2026-11-12T15:10:36.349Z"
     },
     "wandb-primary": {
       "source": "wandb/skills",
@@ -2149,9 +2149,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/qdrant/skills.git",
       "skillPath": "skills/qdrant-clients-sdk/SKILL.md",
-      "skillFolderHash": "004256bb28372c6b67d2c650dc7bf3977294fba8",
+      "skillFolderHash": "c6a1c77596d0ee197770f7288e8c608de5e2e09f",
       "installedAt": "2026-06-25T13:10:59.995Z",
-      "updatedAt": "2026-06-25T13:10:59.995Z"
+      "updatedAt": "2026-11-12T15:10:41.577Z"
     },
     "vllm-deploy-simple": {
       "source": "vllm-project/vllm-skills",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "60b858e7de1485e5cbd37b5b776f2db933f3c8f1",
+      "skillFolderHash": "c0435444e5ceefedcbbd8d177c9d798dab484b19",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-08T13:20:07.400Z"
+      "updatedAt": "2026-11-12T15:10:47.955Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "2f1d4222b3bf94f92612690a8b77fbfeb7c8bb17",
+      "skillFolderHash": "9d814aabc6719af94efb5f33d0993cde166edd2b",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-10T14:51:41.279Z"
+      "updatedAt": "2026-11-12T15:11:06.427Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9537,9 +9537,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "bb7482340804ae632bde3967f90a9179e894c509",
+      "skillFolderHash": "9c7db4a99571fece641daaf2147d6e8f994f484b",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-10-14T11:51:21.974Z"
+      "updatedAt": "2026-11-12T15:11:11.629Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -10635,9 +10635,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-pipelines/SKILL.md",
-      "skillFolderHash": "ddd80842d15e19c4714f89acd88fe64c76f923bf",
+      "skillFolderHash": "e1f9843eb2ba7c936572a86493b83cc4037695c8",
       "installedAt": "2026-08-23T17:20:36.191Z",
-      "updatedAt": "2026-11-06T14:15:02.281Z"
+      "updatedAt": "2026-11-12T15:11:16.147Z"
     },
     "databricks-python-sdk": {
       "source": "databricks/databricks-agent-skills",
@@ -10653,18 +10653,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-serverless-migration/SKILL.md",
-      "skillFolderHash": "8a682756765bd018d1e465b78e72710c84672d2b",
+      "skillFolderHash": "0be6f60a301697a950361f44fe7f98fb23520d5e",
       "installedAt": "2026-08-23T17:20:36.198Z",
-      "updatedAt": "2026-10-28T12:49:22.187Z"
+      "updatedAt": "2026-11-12T15:11:18.922Z"
     },
     "databricks-spark-structured-streaming": {
       "source": "databricks/databricks-agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-spark-structured-streaming/SKILL.md",
-      "skillFolderHash": "fbc77822caaa75a19138e7a7741ddf698872448d",
+      "skillFolderHash": "155c0b5a184fae5fac91e25ba75908c1219e0706",
       "installedAt": "2026-08-23T17:20:36.202Z",
-      "updatedAt": "2026-11-06T14:15:03.945Z"
+      "updatedAt": "2026-11-12T15:11:21.640Z"
     },
     "databricks-synthetic-data-gen": {
       "source": "databricks/databricks-agent-skills",
@@ -10983,9 +10983,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl/SKILL.md",
-      "skillFolderHash": "9bc947edc44567f0a17a4e8143ad6e0e2b606af8",
+      "skillFolderHash": "ac34de54447f1caca723f0a6376380b7d2db424c",
       "installedAt": "2026-08-23T17:20:50.775Z",
-      "updatedAt": "2026-10-23T11:36:57.953Z"
+      "updatedAt": "2026-11-12T15:11:24.627Z"
     },
     "firecrawl-agent": {
       "source": "firecrawl/cli",
@@ -11326,9 +11326,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-use.git",
       "skillPath": "skills/browser-use/SKILL.md",
-      "skillFolderHash": "2e53b6a78483c77913443c70962bd821e7c86062",
+      "skillFolderHash": "09dfc3fe42cf475e60dd749b36dc5c365eeef4fa",
       "installedAt": "2026-08-23T17:22:58.895Z",
-      "updatedAt": "2026-11-10T14:52:00.477Z"
+      "updatedAt": "2026-11-12T15:11:26.006Z"
     },
     "remote-browser": {
       "source": "browser-use/browser-use",
@@ -11380,18 +11380,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/alphagenome_single_variant_analysis/SKILL.md",
-      "skillFolderHash": "e6da933553593fb9f46ee88bad5814a49d6fd5fe",
+      "skillFolderHash": "bc2adeff5f640dfbbfa78755458fe4c556036de2",
       "installedAt": "2026-08-23T17:23:44.555Z",
-      "updatedAt": "2026-10-24T10:55:31.015Z"
+      "updatedAt": "2026-11-12T15:10:38.982Z"
     },
     "foldseek-structural-search": {
       "source": "google-deepmind/science-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/foldseek_structural_search/SKILL.md",
-      "skillFolderHash": "e7f88ced6421376680950e415b8c574af402dd21",
+      "skillFolderHash": "84a81a5813dfbb0dd6c22a101dcecfacae57e8c7",
       "installedAt": "2026-08-23T17:23:46.743Z",
-      "updatedAt": "2026-08-23T17:23:46.743Z"
+      "updatedAt": "2026-11-12T15:10:40.353Z"
     },
     "next-dev-loop": {
       "source": "vercel/next.js",
@@ -12048,9 +12048,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-sandboxes-env/SKILL.md",
-      "skillFolderHash": "758b5b341ac32eca8d87d84c891607a8c17a6d2f",
+      "skillFolderHash": "62ef8ec0b701718fa3acde56f2aa062851235200",
       "installedAt": "2026-09-25T17:57:41.750Z",
-      "updatedAt": "2026-09-25T17:57:41.750Z"
+      "updatedAt": "2026-11-12T15:11:30.851Z"
     },
     "docker-sandboxes-kits": {
       "source": "docker/skills",
@@ -12102,9 +12102,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/skypilot-org/skypilot.git",
       "skillPath": "agent/skills/skypilot/SKILL.md",
-      "skillFolderHash": "91679eb0d527e4bc66d5a6b0f740335ffb314508",
+      "skillFolderHash": "7c8dcf6ec803f4822d50952ce2af547a5422fcec",
       "installedAt": "2026-10-24T15:58:04.348Z",
-      "updatedAt": "2026-11-04T14:30:23.585Z"
+      "updatedAt": "2026-11-12T15:11:35.717Z"
     },
     "lean4": {
       "source": "cameronfreer/lean4-skills",

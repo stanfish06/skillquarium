@@ -4,29 +4,29 @@
   "skills": 2209,
   "expert_profiles": 503,
   "nodes": 2282,
-  "edges": 16362,
+  "edges": 16368,
   "generic_names_blocked": 30,
-  "tier1_edges": 4927,
-  "tier2_edges": 719,
-  "alias_edges": 4586,
+  "tier1_edges": 4928,
+  "tier2_edges": 721,
+  "alias_edges": 4587,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 523,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.84,
+  "mean_skill_degree": 5.85,
   "median_skill_degree": 4,
   "orphan_count": 130,
   "orphan_rate": 0.0589,
   "by_provenance": {
-   "EXTRACTED": 15576,
+   "EXTRACTED": 15582,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2209,
-   "references": 12844,
+   "references": 12850,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -7321,7 +7321,7 @@
    "id": "databricks-serverless-migration",
    "type": "Skill",
    "label": "databricks-serverless-migration",
-   "description": "Migrate Databricks workloads from classic compute to serverless compute. Use when migrating notebooks, jobs, pipelines, or Scala JARs (`spark_jar_task`) from classic clusters to serverless, checking if existing code is serverless-compatible, or writing new serverless-compatible code. Provides concrete fixes for the serverless Spark Connect architecture and guides the full migration. Not for classic DBR version upgrades or cluster configuration changes within classic compute.",
+   "description": "Make direct code and configuration changes to migrate Databricks workloads from classic compute to serverless. Use for editing notebooks, jobs, pipelines, or Scala JARs (`spark_jar_task`), analyzing serverless compatibility, or writing serverless-compatible code. Provides concrete fixes for the serverless Spark Connect architecture and guides the full migration. For automated job migrations managed through the Compute Migrations API and CLI, use databricks-serverless-migration-api. Not for classic DBR version upgrades or cluster configuration changes within classic compute.",
    "source": "skills/databricks-serverless-migration/SKILL.md",
    "aliases": [
     "databricks serverless migration"
@@ -8471,7 +8471,7 @@
    "id": "docker-sandboxes-env",
    "type": "Skill",
    "label": "docker-sandboxes-env",
-   "description": "Use this skill when authoring, planning, or running a declarative `sbxenv.yaml` file for Docker Sandboxes (`sbx env create/run/plan/exec/rm`), even if the user just says they want to \"check in a sandbox config\", \"make onboarding reproducible for a sandbox\", \"run a setup script before the agent starts\", or \"define arguments for a shared sandbox environment\". Covers the sbxenv.yaml schema (schemaVersion, agent, kits, workspace/additionalWorkspaces, args, env, secrets, registries, bindings, mcp, ports, sandboxOptions), host `lifecycle:` commands (initialize/postCreate/preRemove) and their approval-plan model, multi-file merge (`-f`-style deep merge and the user-level `.sbxenv.yaml` base layer), and file-write-protection (`sandboxOptions.writableEnvFiles`).",
+   "description": "Use this skill when creating, updating, reviewing, planning, or running a declarative `sbxenv.yaml` file for Docker Sandboxes (`sbx env plan/create/run/exec/rm`), even if the user just says \"check in a sandbox config\", \"set up this project for sbx env\", \"which kits should this project's sbxenv use\", \"bump or pin the kits in my sbxenv\", or \"run a setup script before the agent starts\". Covers composing an agent workload and v3 mixin kits chosen from the live Docker Hub catalog with the bundled `scripts/kits.py` helper, kit and environment `args`, secrets/registries/bindings, workspace and mounts, `entrypoint`/`cmd`, ports, MCP servers, `sandboxOptions` (including `writableEnvFiles`), host `lifecycle` commands and the approval plan, multi-file merge, and the `~/.sbxenv.yaml` user defaults.",
    "source": "skills/docker-sandboxes-env/SKILL.md",
    "aliases": [
     "docker sandboxes env"
@@ -41275,6 +41275,15 @@
   {
    "src": "auth",
    "rel": "references",
+   "dst": "docker-sandboxes-env",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "auth referenced in code/link context in docker-sandboxes-env/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "auth",
+   "rel": "references",
    "dst": "docx",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -59581,6 +59590,15 @@
   {
    "src": "core",
    "rel": "references",
+   "dst": "modern-web-guidance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "modern-web-guidance named in core/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "core",
+   "rel": "references",
    "dst": "pavement-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -68248,6 +68266,15 @@
   {
    "src": "docker",
    "rel": "references",
+   "dst": "docker-sandboxes-env",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker referenced in code/link context in docker-sandboxes-env/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker",
+   "rel": "references",
    "dst": "e2b-sandbox",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -68666,6 +68693,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-env",
+   "rel": "references",
+   "dst": "auth",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "auth referenced in code/link context in docker-sandboxes-env/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "docker-sandboxes-env",
+   "rel": "references",
+   "dst": "docker",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "docker referenced in code/link context in docker-sandboxes-env/SKILL.md",
    "status": "accepted"
   },
   {
@@ -107150,6 +107195,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "modern-web-guidance named in chrome-extensions/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-web-guidance",
+   "rel": "references",
+   "dst": "core",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "modern-web-guidance named in core/SKILL.md body",
    "status": "accepted"
   },
   {

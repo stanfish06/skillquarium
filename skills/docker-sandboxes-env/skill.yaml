@@ -1,23 +1,32 @@
 schema: v1
 id: docker-sandboxes-env
-version: 0.1.0
+version: 0.2.1
 title: 'Docker Sandboxes: Declarative sbxenv.yaml Environments'
-description: Author, plan, and run declarative sbxenv.yaml environments (workspace, kits, args, host lifecycle hooks, secrets/registries/bindings, ports) for Docker Sandboxes.
+description: Create, update, plan, and run declarative sbxenv.yaml environments for Docker Sandboxes, including live v3 kit selection and pinning, args, secrets/registries/bindings, host lifecycle hooks, and the approval plan.
 owns:
   - sbxenv.yaml
   - sbx-env
+  - sbxenv-kit-selection-and-pinning
   - sandbox-environment-lifecycle-hooks
   - sandbox-environment-plan-approval
 use_when:
   - The user wants a checked-in, reproducible definition of a sandbox environment instead of a long sbx create/run command line.
+  - The user wants to create, scaffold, review, or update an sbxenv.yaml or ~/.sbxenv.yaml for a project.
+  - The user wants kits suggested for a project's sbxenv.yaml, or the kit references in an sbxenv.yaml upgraded or pinned to digests.
   - The user wants host-side setup or teardown commands tied to a sandbox's create, attach, or remove lifecycle.
   - The user wants to parameterize a shared environment file with named arguments.
-  - The user is debugging why sbx env create/run is asking for approval, or why a declared resource was skipped or flagged.
+  - The user is debugging why sbx env create/run is asking for approval, or why a declared change did not reach an existing sandbox.
 do_not_use_when:
   - The task is the underlying sbx create/run/rm flag-based workflow with no sbxenv.yaml file involved.
   - The task is choosing network policy or storing a secret/registry credential independent of any environment file.
-  - The task is authoring the kit spec.yaml a kits entry points at.
+  - The task is authoring, building, publishing, or signing the kit descriptor a kits entry points at.
 delegates_to:
   - docker-sandboxes-lifecycle
   - docker-sandboxes-network-credentials
   - docker-sandboxes-kits
+interface:
+  display_name: 'Docker Sandboxes: Declarative sbxenv.yaml Environments'
+  short_description: Create, update, and run sbxenv.yaml environments with live kit selection for Docker Sandboxes. Experimental.
+  default_prompt: Use this skill when creating, updating, or running an sbxenv.yaml file for Docker Sandboxes (`sbx env plan/create/run/exec/rm`), including choosing and pinning kits, its lifecycle hooks, and its approval plan.
+policy:
+  allow_implicit_invocation: true
