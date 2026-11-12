@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["inspect-ai==0.3.283"]
+# dependencies = ["inspect-ai==0.3.288"]
 # ///
 """Run an offline two-sample Inspect eval and verify persisted passing/failing scores."""
 

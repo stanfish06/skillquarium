@@ -20,7 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
-- [databricks-aibi-dashboards](../../notes/analytics-engineering/databricks-aibi-dashboards.md) — Create Databricks AI/BI dashboards. Must use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure
+- [databricks-aibi-dashboards](../../notes/analytics-engineering/databricks-aibi-dashboards.md) — Create Databricks AI/BI dashboards. Use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure
 - [databricks-app-design](../../notes/analytics-engineering/databricks-app-design.md) — Design the UX of custom-code Databricks Apps (AppKit/React) data screens — KPI/overview pages, reports, charts, tables, and Genie/chat data assistants — mapped to concrete AppKit...
 - [databricks-apps-python](../../notes/analytics-engineering/databricks-apps-python.md) — Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex
 

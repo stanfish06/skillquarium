@@ -3,12 +3,12 @@ name: inspect-ai
 description: Write, run and diagnose local LLM evaluations with Inspect AI using tasks, datasets, solvers, scorers and saved eval logs. Use for custom eval harnesses, deterministic mock checks, bounded model runs and comparing sample-level failures.
 metadata:
   version: "1.0"
-  last-reviewed: "2026-10-24"
+  last-reviewed: "2026-11-10"
 ---
 
 # Inspect AI
 
-Requires Python 3.11+. Examples target inspect-ai 0.3.283.
+Requires Python 3.11+. Examples target inspect-ai 0.3.288.
 
 Use Inspect for executable evaluations expressed as datasets, solver behavior and
 scoring rules. Start with the behavior and failure cases to measure. A successful
@@ -21,7 +21,7 @@ Commands referencing `scripts/` are relative to this skill's folder.
 
 ```bash
 uv venv .venv
-uv pip install --python .venv/bin/python 'inspect-ai==0.3.283'
+uv pip install --python .venv/bin/python 'inspect-ai==0.3.288'
 .venv/bin/python scripts/smoke_eval.py --log-dir ./inspect-smoke-logs
 ```
 

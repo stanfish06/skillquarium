@@ -5,6 +5,9 @@ description: Create, analyze, proofread, and modify Office documents (.docx, .xl
 
 # officecli
 
+> [!note] Vault audit 2026-07-24 — USE-1
+> Use this family (`officecli` + per-format `officecli-docx`/`-pptx`/`-xlsx` and its scene layers) as the canonical route for creating and richly editing Office documents; for raw OOXML inspection or plain text/table extraction use the native `docx`/`pptx`/`xlsx` skills. Distinguishing axis: officecli document generation vs raw OOXML processing.
+
 AI-friendly CLI for .docx, .xlsx, .pptx. Single binary, no dependencies, no Office installation needed.
 
 ## Install

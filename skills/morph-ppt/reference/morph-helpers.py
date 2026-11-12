@@ -73,6 +73,14 @@ def _collect_shapes(children, callback):
             _collect_shapes(child["children"], callback)
 
 
+def _first_result(response):
+    """Return the first OfficeCLI result node from a JSON response."""
+    results = response.get("data", {}).get("results", [])
+    if not results or not isinstance(results[0], dict):
+        raise ValueError("OfficeCLI response did not contain data.results[0]")
+    return results[0]
+
+
 # ---------------------------------------------------------------------------
 # morph_clone_slide
 # ---------------------------------------------------------------------------
@@ -241,7 +249,7 @@ def morph_verify_slide(deck, slide):
     prev_slide = slide - 1
     if prev_slide >= 1:
         try:
-            curr_data = json.loads(curr_json_str).get("data", {})
+            curr_data = _first_result(json.loads(curr_json_str))
 
             # Method 1: name-based unghosted detection
             unghosted = _check_unghosted(curr_data, prev_slide)
@@ -260,8 +268,8 @@ def morph_verify_slide(deck, slide):
         # Method 2: duplicate text/position detection (backup for missing # prefix)
         try:
             rc2, out2, _ = _run("officecli", "get", deck, f"/slide[{prev_slide}]", "--json")
-            prev_data = json.loads(out2).get("data", {})
-            curr_data = json.loads(curr_json_str).get("data", {})
+            prev_data = _first_result(json.loads(out2))
+            curr_data = _first_result(json.loads(curr_json_str))
 
             duplicates = _check_duplicates(prev_data, curr_data)
             if duplicates:

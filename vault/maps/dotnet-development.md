@@ -57,7 +57,7 @@ created: 2026-07-21
 - [extension-points](../notes/dotnet-development/extension-points.md) — Own MSBuild import and hook discovery. USE FOR: CustomBefore/CustomAfter hooks, ordered wildcard and NuGet auto-imports, control properties, build/buildTransitive packed layout...
 - [fetch-and-send-data](../notes/dotnet-development/fetch-and-send-data.md) — Call APIs, load data into components, and handle the async lifecycle in Blazor
 - [filter-syntax](../notes/dotnet-development/filter-syntax.md) — Reference-only filter syntax for VSTest and MTP with MSTest, NUnit, xUnit v3, and TUnit
-- [find-untested-sources](../notes/dotnet-development/find-untested-sources.md) — MANDATORY for static source-to-test pairing: find or list source files/modules without corresponding tests, or suggest test locations from repository structure
+- [find-untested-sources](../notes/dotnet-development/find-untested-sources.md) — Use for static source-to-test pairing: find or list source files/modules without corresponding tests, or suggest test locations from repository structure
 - [generate-testability-wrappers](../notes/dotnet-development/generate-testability-wrappers.md) — DO NOT USE when the target already consumes an injected interface or built-in abstraction such as IFileSystem or TimeProvider, even if the request says "generate a wrapper"
 - [grade-tests](../notes/dotnet-development/grade-tests.md) — Grade curated individual tests for readiness, A-F quality and improvements
 - [including-generated-files](../notes/dotnet-development/including-generated-files.md) — Own MSBuild generated-artifact integration
