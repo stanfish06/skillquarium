@@ -34,7 +34,7 @@ created: 2026-08-07
 - [docker-sandboxes-env](../../notes/cloud-devops/docker-sandboxes-env.md) — Use this skill when authoring, planning, or running a declarative `sbxenv.yaml` file for Docker Sandboxes (`sbx env create/run/plan/exec/rm`), even if the user just says they want to...
 - [dotnet-maui-doctor](../../notes/dotnet-development/dotnet-maui-doctor.md) — Diagnoses and fixes .NET MAUI development environment issues
 - [dynamo-router-starter](../../notes/software-dev/dynamo-router-starter.md) — Start or patch Dynamo router modes and run router endpoint smoke checks
-- [ecosystem-primer](../../notes/ml-ai/ecosystem-primer.md) — INVOKE FIRST for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code
+- [ecosystem-primer](../../notes/ml-ai/ecosystem-primer.md) — Use first for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code
 - [email](../../notes/comms-productivity/email.md) — Email sending integration guidance — Resend (native Vercel Marketplace) with React Email templates
 - [exp-mock-usage-analysis](../../notes/dotnet-development/exp-mock-usage-analysis.md) — Audits .NET test mock usage by tracing each mock setup through the production code's execution path to find dead, unreachable, redundant, or replaceable mocks
 - [exp-test-maintainability](../../notes/dotnet-development/exp-test-maintainability.md) — Detects duplicate boilerplate, copy-paste tests, and structural maintainability issues across .NET test suites

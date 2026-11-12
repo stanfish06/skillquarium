@@ -33,7 +33,7 @@ created: 2026-08-07
 - [build-iterated-agentic-loop](../../notes/vault-meta/build-iterated-agentic-loop.md) — build a repo-local skill and install a matching iterated coding-agent GitHub Actions workflow, prompt, memory file, and reference templates
 - [bulk-rnaseq](../../notes/single-cell-rnaseq/bulk-rnaseq.md) — End-to-end bulk RNA-seq orchestrator — takes raw FASTQ reads through QC and trimming (FastQC, fastp/Trim Galore), alignment and quantification (STAR, Salmon, featureCounts), assembles...
 - [circleci-cli](../../notes/hosting-edge-platforms/circleci-cli.md) — Operate and troubleshoot CircleCI using the CircleCI CLI
-- [clickhouse-managed-postgres-rca](../../notes/analytics-engineering/clickhouse-managed-postgres-rca.md) — MUST USE when investigating performance issues on a ClickHouse-managed Postgres instance
+- [clickhouse-managed-postgres-rca](../../notes/analytics-engineering/clickhouse-managed-postgres-rca.md) — Use when investigating performance issues on a ClickHouse-managed Postgres instance
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [complexa-sweep](../../notes/drug-discovery-chem/complexa-sweep.md) — Use this skill whenever the user wants to run a parameter sweep over a Proteina-Complexa design pipeline — cartesian-product hyperparameter scans, Pareto search over...
 - [core](../../notes/web-automation-frontend/core.md) — Core agent-browser usage guide. Read this before running any agent-browser commands

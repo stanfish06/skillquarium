@@ -86,15 +86,15 @@ created: 2026-06-13
 - [jest](../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [launch-readiness-orchestrator](../notes/software-dev/launch-readiness-orchestrator.md) — Launch Readiness Orchestrator skill for Datasite deal rooms
 - [linear](../notes/software-dev/linear.md) — Manage issues, projects & team workflows in Linear
-- [m01-ownership](../notes/software-dev/m01-ownership.md) — CRITICAL: Use for ownership/borrow/lifetime issues
-- [m02-resource](../notes/software-dev/m02-resource.md) — CRITICAL: Use for smart pointers and resource management
-- [m03-mutability](../notes/software-dev/m03-mutability.md) — CRITICAL: Use for mutability issues. Triggers: E0596, E0499, E0502, cannot borrow as mutable, already borrowed as immutable, mut, &mut, interior mutability, Cell, RefCell, Mutex...
-- [m04-zero-cost](../notes/software-dev/m04-zero-cost.md) — CRITICAL: Use for generics, traits, zero-cost abstraction
-- [m05-type-driven](../notes/software-dev/m05-type-driven.md) — CRITICAL: Use for type-driven design. Triggers: type state, PhantomData, newtype, marker trait, builder pattern, make invalid states unrepresentable, compile-time validation, sealed...
-- [m06-error-handling](../notes/software-dev/m06-error-handling.md) — CRITICAL: Use for error handling. Triggers: Result, Option, Error, ?, unwrap, expect, panic, anyhow, thiserror, when to panic vs return Result, custom error, error propagation, 错误处理...
-- [m07-concurrency](../notes/software-dev/m07-concurrency.md) — CRITICAL: Use for concurrency/async. Triggers: E0277 Send Sync, cannot be sent between threads, thread, spawn, channel, mpsc, Mutex, RwLock, Atomic, async, await, Future, tokio...
-- [m09-domain](../notes/software-dev/m09-domain.md) — CRITICAL: Use for domain modeling. Triggers: domain model, DDD, domain-driven design, entity, value object, aggregate, repository pattern, business rules, validation, invariant, 领域模型...
-- [m10-performance](../notes/software-dev/m10-performance.md) — CRITICAL: Use for performance optimization
+- [m01-ownership](../notes/software-dev/m01-ownership.md) — Use for ownership/borrow/lifetime issues
+- [m02-resource](../notes/software-dev/m02-resource.md) — Use for smart pointers and resource management
+- [m03-mutability](../notes/software-dev/m03-mutability.md) — Use for mutability issues. Triggers: E0596, E0499, E0502, cannot borrow as mutable, already borrowed as immutable, mut, &mut, interior mutability, Cell, RefCell, Mutex, RwLock, 可变性...
+- [m04-zero-cost](../notes/software-dev/m04-zero-cost.md) — Use for generics, traits, zero-cost abstraction
+- [m05-type-driven](../notes/software-dev/m05-type-driven.md) — Use for type-driven design. Triggers: type state, PhantomData, newtype, marker trait, builder pattern, make invalid states unrepresentable, compile-time validation, sealed trait, ZST...
+- [m06-error-handling](../notes/software-dev/m06-error-handling.md) — Use for error handling. Triggers: Result, Option, Error, ?, unwrap, expect, panic, anyhow, thiserror, when to panic vs return Result, custom error, error propagation, 错误处理, Result 用法...
+- [m07-concurrency](../notes/software-dev/m07-concurrency.md) — Use for concurrency/async. Triggers: E0277 Send Sync, cannot be sent between threads, thread, spawn, channel, mpsc, Mutex, RwLock, Atomic, async, await, Future, tokio, deadlock, race...
+- [m09-domain](../notes/software-dev/m09-domain.md) — Use for domain modeling. Triggers: domain model, DDD, domain-driven design, entity, value object, aggregate, repository pattern, business rules, validation, invariant, 领域模型, 领域驱动设计...
+- [m10-performance](../notes/software-dev/m10-performance.md) — Use for performance optimization. Triggers: performance, optimization, benchmark, profiling, flamegraph, criterion, slow, fast, allocation, cache, SIMD, make it faster, 性能优化, 基准测试
 - [m11-ecosystem](../notes/software-dev/m11-ecosystem.md) — Use when integrating crates or ecosystem questions
 - [m12-lifecycle](../notes/software-dev/m12-lifecycle.md) — Use when designing resource lifecycles. Keywords: RAII, Drop, resource lifecycle, connection pool, lazy initialization, connection pool design, resource cleanup patterns, cleanup...
 - [m13-domain-error](../notes/software-dev/m13-domain-error.md) — Use when designing domain error handling
@@ -134,11 +134,11 @@ created: 2026-06-13
 - [resolving-merge-conflicts](../notes/software-dev/resolving-merge-conflicts.md) — Use when you need to resolve an in-progress git merge/rebase conflict
 - [rust-call-graph](../notes/software-dev/rust-call-graph.md) — Visualize Rust function call graphs using LSP
 - [rust-code-navigator](../notes/software-dev/rust-code-navigator.md) — Navigate Rust code using LSP. Triggers on: /navigate, go to definition, find references, where is defined, 跳转定义, 查找引用, 定义在哪, 谁用了这个
-- [rust-daily](../notes/software-dev/rust-daily.md) — CRITICAL: Use for Rust news and daily/weekly/monthly reports
+- [rust-daily](../notes/software-dev/rust-daily.md) — Use for Rust news and daily/weekly/monthly reports
 - [rust-deps-visualizer](../notes/software-dev/rust-deps-visualizer.md) — Visualize Rust project dependencies as ASCII art
 - [rust-learner](../notes/software-dev/rust-learner.md) — Use when asking about Rust versions or crate info
 - [rust-refactor-helper](../notes/software-dev/rust-refactor-helper.md) — Safe Rust refactoring with LSP analysis
-- [rust-router](../notes/software-dev/rust-router.md) — CRITICAL: Use for ALL Rust questions including errors, design, and coding
+- [rust-router](../notes/software-dev/rust-router.md) — Use for ALL Rust questions including errors, design, and coding
 - [rust-skill-creator](../notes/software-dev/rust-skill-creator.md) — Use when creating skills for Rust crates or std library documentation
 - [rust-symbol-analyzer](../notes/software-dev/rust-symbol-analyzer.md) — Analyze Rust project structure using LSP symbols
 - [rust-trait-explorer](../notes/software-dev/rust-trait-explorer.md) — Explore Rust trait implementations using LSP
@@ -166,7 +166,7 @@ created: 2026-06-13
 - [triage](../notes/software-dev/triage.md) — Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs
 - [triage-issue](../notes/software-dev/triage-issue.md) — Intelligently triage bug reports and error messages by searching for duplicates in Jira and offering to create new issues or add comments to existing ones
 - [ubiquitous-language](../notes/software-dev/ubiquitous-language.md) — Extract a DDD-style ubiquitous language glossary from the current conversation, flagging ambiguities and proposing canonical terms
-- [unsafe-checker](../notes/software-dev/unsafe-checker.md) — CRITICAL: Use for unsafe Rust code review and FFI
+- [unsafe-checker](../notes/software-dev/unsafe-checker.md) — Use for unsafe Rust code review and FFI
 - [use-modern-go](../notes/software-dev/use-modern-go.md) — Use the Modern Go Guidelines CLI whenever writing, modifying, fixing, or refactoring Go code
 - [using-agent-skills](../notes/software-dev/using-agent-skills.md) — Discovers and invokes agent skills. Use when starting a session or when you need to discover which skill applies to the current task
 - [using-git-worktrees](../notes/software-dev/using-git-worktrees.md) — Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git...
