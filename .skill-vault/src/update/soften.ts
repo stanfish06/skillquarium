@@ -27,6 +27,16 @@ export const COERCION_NEEDLES: readonly string[] = [
   "don't ignore",
   "do not ignore",
   "rules you must follow",
+  "mandatory:",
+  "mandatory for",
+  "execute first",
+  "do not skip",
+  "trigger immediately",
+  "critical: use for",
+  "highest priority for",
+  "must use when",
+  "invoke this skill",
+  "invoke first",
 ];
 
 /**
@@ -72,6 +82,18 @@ const REPLACEMENTS: readonly [RegExp, string][] = [
   [/Rules you must follow for/gi, "Rules for"],
   [/don't ignore/gi, "consider"],
   [/do not ignore/gi, "consider"],
+  // Upper-case priority claims. Domain rules that merely use MUST/CRITICAL ("CRITICAL: You MUST
+  // test ALL SQL queries") and ordering between skills ("Load this first for CLI tasks") stay.
+  [/MANDATORY:\s*Execute FIRST for all\s+/gi, "Use for "],
+  [/\.\s*Do NOT skip\s*[—–-]\s*/gi, "; "],
+  [/Trigger immediately for:/gi, "Triggers:"],
+  [/\bCRITICAL:\s*Use for\b/g, "Use for"],
+  [/\bHIGHEST PRIORITY for:/g, "Also for:"],
+  [/\bMUST USE when\b/gi, "Use when"],
+  [/\bINVOKE THIS SKILL when\b/gi, "Use when"],
+  [/\bINVOKE FIRST for\b/gi, "Use first for"],
+  [/\bMANDATORY for\b/g, "Use for"],
+  [/\bMANDATORY:\s*/g, ""],
 ];
 
 /** Vault root that holds no skills/ directory: the script's SystemExit. */
@@ -279,10 +301,14 @@ export function processFile(path: string, root: string, dryRun: boolean, io: Sof
   if (!needsSoften(parsed.value)) return false;
   const softened = soften(parsed.value);
   if (softened === parsed.value) return false;
+  const after = document.frontmatter.slice(parsed.end);
+  const rendered = renderDescription(softened, parsed.style);
+  // The frontmatter stops before the closing fence's newline, so a description on the last
+  // line must not bring its own, or a blank line appears above the fence.
   const newFrontmatter =
     document.frontmatter.slice(0, parsed.start) +
-    renderDescription(softened, parsed.style) +
-    document.frontmatter.slice(parsed.end);
+    (after === "" ? rendered.replace(/\n$/, "") : rendered) +
+    after;
   if (newFrontmatter === document.frontmatter) return false;
 
   io.out(`${dryRun ? "would soften" : "softened"} ${displayPath(path, root)}`);

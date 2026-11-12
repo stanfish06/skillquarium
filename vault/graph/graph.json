@@ -1,14 +1,14 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2207,
+  "skills": 2209,
   "expert_profiles": 503,
-  "nodes": 2280,
-  "edges": 16356,
+  "nodes": 2282,
+  "edges": 16366,
   "generic_names_blocked": 30,
-  "tier1_edges": 4925,
-  "tier2_edges": 718,
-  "alias_edges": 4586,
+  "tier1_edges": 4929,
+  "tier2_edges": 719,
+  "alias_edges": 4587,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 523,
@@ -20,13 +20,13 @@
   "orphan_count": 130,
   "orphan_rate": 0.0589,
   "by_provenance": {
-   "EXTRACTED": 15570,
+   "EXTRACTED": 15580,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2207,
-   "references": 12840,
+   "in_domain": 2209,
+   "references": 12848,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -418,7 +418,7 @@
    "id": "agentic-workflows",
    "type": "Skill",
    "label": "agentic-workflows",
-   "description": "Route gh-aw design, creation, diagnosis, patching, active debugging, and upgrade requests to the right strategies.",
+   "description": "Route gh-aw design, creation, diagnosis, patching, active debugging, upgrades, and local SDLC issue requests to the right strategies.",
    "source": "skills/agentic-workflows/SKILL.md",
    "aliases": [
     "agentic actions",
@@ -3207,7 +3207,7 @@
    "id": "browser-use",
    "type": "Skill",
    "label": "browser-use",
-   "description": "Direct browser control via CDP for web interaction: automation, scraping, testing, screenshots, and site/app work. Also covers hosted cloud browsers for AI agents: the browser-use Python library (Browser(use_cloud=True)), Playwright, Puppeteer or any CDP client.",
+   "description": "Direct browser control via CDP for web interaction: automation, scraping, testing, screenshots, and site/app work. Also covers hosted cloud browsers for AI agents: the browser-use Python library (Browser()), Playwright, Puppeteer or any CDP client.",
    "source": "skills/browser-use/SKILL.md",
    "aliases": [
     "browser use"
@@ -4526,6 +4526,21 @@
    "deprecated": false
   },
   {
+   "id": "chrome-extensions",
+   "type": "Skill",
+   "label": "chrome-extensions",
+   "description": "> Build and publish Chrome Extensions using Manifest V3 best practices. Use this skill whenever the user asks to create, modify, debug, or understand Chrome browser extensions, add-ons, or anything involving the Chrome Extensions API. Trigger on mentions of: 'Chrome extension', 'browser extension', 'manifest.json', 'content script', 'service worker' (in browser context), 'popup' (in browser extension context), 'side panel', 'chrome.* API', 'declarativeNetRequest', 'omnibox', 'context menu' (in extension context), 'userScripts', 'user script', 'script manager', or any request to build functionality that integrates with the Chrome browser UI. Also trigger for publishing to the Chrome Web Store: 'publish extension', preparing an extension for publishing, responding to a review rejection, writing permission justifications, or drafting a privacy policy.",
+   "source": "skills/chrome-extensions/SKILL.md",
+   "aliases": [
+    "chrome extensions"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "chronobiologist",
    "type": "ExpertProfile",
    "label": "chronobiologist",
@@ -4822,7 +4837,7 @@
    "id": "clickhouse-architecture-advisor",
    "type": "Skill",
    "label": "clickhouse-architecture-advisor",
-   "description": "MUST USE when designing ClickHouse architectures, selecting between ingestion or modeling patterns, or translating best practices into workload-specific system designs. Complements clickhouse-best-practices with decision frameworks and explicit provenance labels.",
+   "description": "Use when designing ClickHouse architectures, selecting between ingestion or modeling patterns, or translating best practices into workload-specific system designs. Complements clickhouse-best-practices with decision frameworks and explicit provenance labels.",
    "source": "skills/clickhouse-architecture-advisor/SKILL.md",
    "aliases": [
     "clickhouse architecture advisor"
@@ -4837,7 +4852,7 @@
    "id": "clickhouse-best-practices",
    "type": "Skill",
    "label": "clickhouse-best-practices",
-   "description": "MUST USE when reviewing ClickHouse schemas, queries, or configurations. Contains 31 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.",
+   "description": "Use when reviewing ClickHouse schemas, queries, or configurations. Contains 31 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.",
    "source": "skills/clickhouse-best-practices/SKILL.md",
    "aliases": [
     "clickhouse best practices"
@@ -4897,7 +4912,7 @@
    "id": "clickhouse-managed-postgres-rca",
    "type": "Skill",
    "label": "clickhouse-managed-postgres-rca",
-   "description": "MUST USE when investigating performance issues on a ClickHouse-managed Postgres instance. Provides an evidence-based RCA workflow that scrapes the Prometheus endpoint for system signal, pulls per-digest evidence from the Slow Query Patterns API, and recommends (does not apply) a fix.",
+   "description": "Use when investigating performance issues on a ClickHouse-managed Postgres instance. Provides an evidence-based RCA workflow that scrapes the Prometheus endpoint for system signal, pulls per-digest evidence from the Slow Query Patterns API, and recommends (does not apply) a fix.",
    "source": "skills/clickhouse-managed-postgres-rca/SKILL.md",
    "aliases": [
     "clickhouse managed postgres rca"
@@ -6988,7 +7003,7 @@
    "id": "databricks-aibi-dashboards",
    "type": "Skill",
    "label": "databricks-aibi-dashboards",
-   "description": "Create Databricks AI/BI dashboards. Must use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure. CRITICAL: You MUST test ALL SQL queries via CLI BEFORE deploying. Follow guidelines strictly.",
+   "description": "Create Databricks AI/BI dashboards. Use when creating, updating, or deploying Lakeview dashboards as Databricks Dashboard have a unique json structure. CRITICAL: You MUST test ALL SQL queries via CLI BEFORE deploying. Follow guidelines strictly.",
    "source": "skills/databricks-aibi-dashboards/SKILL.md",
    "aliases": [
     "databricks aibi dashboards"
@@ -7034,7 +7049,7 @@
    "id": "databricks-apps-python",
    "type": "Skill",
    "label": "databricks-apps-python",
-   "description": "Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex. **Default for a new Databricks App is `databricks-apps` (AppKit — Node/TypeScript/React) — reach for it first.** Use this skill only when the user asks for a Python backend, extends an existing Python app, or the team is Python-only. Covers OAuth auth, app resources, SQL warehouse and Lakebase connectivity, foundation-model / Vector Search / model-serving APIs (via `databricks-python-sdk`), and deployment via CLI or DABs.",
+   "description": "Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex. **Default for a new Databricks App is `databricks-apps` (AppKit — Node/TypeScript/React) — reach for it first.** Use this skill only when the user asks for a Python backend, extends an existing Python app, or the team is Python-only. Covers OAuth auth, app resources, SQL warehouse and Lakebase connectivity, foundation-model / model-serving APIs (via `databricks-python-sdk`), AI Search (Vector Search) queries (via `databricks-vector-search`), and deployment via CLI or DABs.",
    "source": "skills/databricks-apps-python/SKILL.md",
    "aliases": [
     "databricks apps python"
@@ -7201,7 +7216,7 @@
    "id": "databricks-lakeflow-connect",
    "type": "Skill",
    "label": "databricks-lakeflow-connect",
-   "description": "Build managed ingestion pipelines into Databricks using Lakeflow Connect. Use when ingesting from SaaS apps (Salesforce, Workday Reports, ServiceNow, Google Analytics 4, HubSpot, Confluence) or databases (SQL Server cloud and on-prem; PostgreSQL/MySQL CDC in PuPr) into Unity Catalog with serverless pipelines.",
+   "description": "Lakeflow Connect managed ingestion into Unity Catalog from databases (SQL Server, PostgreSQL, MySQL, Oracle) by CDC or query-based. Use when creating, running or debugging these pipelines.",
    "source": "skills/databricks-lakeflow-connect/SKILL.md",
    "aliases": [
     "databricks lakeflow connect"
@@ -7351,7 +7366,7 @@
    "id": "databricks-unity-catalog",
    "type": "Skill",
    "label": "databricks-unity-catalog",
-   "description": "Unity Catalog governance, access control, and observability. Use to grant or revoke access (GRANT/REVOKE), reason about the privilege model and ownership, set up row-level security and column masks, create external locations and storage credentials, define catalogs/schemas/tables/volumes, answer \\\"who can read this table\\\", and query system tables (audit, lineage, billing) or work with volume files in /Volumes/.",
+   "description": "Unity Catalog governance, access control, and observability. Use to grant or revoke access (GRANT/REVOKE), reason about the privilege model and ownership, set up row-level security and column masks, create external locations and storage credentials, define catalogs/schemas/tables/volumes, answer \\\"who can read this table\\\", query system tables (audit, lineage, billing), work with volume files in /Volumes/, and set up connection passwords (secret scopes, Azure Key Vault, AWS Secrets Manager).",
    "source": "skills/databricks-unity-catalog/SKILL.md",
    "aliases": [
     "databricks unity catalog"
@@ -7558,7 +7573,7 @@
    "id": "deep-agents-core",
    "type": "Skill",
    "label": "deep-agents-core",
-   "description": "INVOKE THIS SKILL when building ANY Deep Agents application. Covers create_deep_agent(), harness architecture, SKILL.md format, and configuration options.",
+   "description": "Use when building ANY Deep Agents application. Covers create_deep_agent(), harness architecture, SKILL.md format, and configuration options.",
    "source": "skills/deep-agents-core/SKILL.md",
    "aliases": [
     "deep agents core"
@@ -7573,7 +7588,7 @@
    "id": "deep-agents-memory",
    "type": "Skill",
    "label": "deep-agents-memory",
-   "description": "INVOKE THIS SKILL when your Deep Agent needs memory, persistence, or filesystem access. Covers StateBackend (ephemeral), StoreBackend (persistent), FilesystemMiddleware, and CompositeBackend for routing.",
+   "description": "Use when your Deep Agent needs memory, persistence, or filesystem access. Covers StateBackend (ephemeral), StoreBackend (persistent), FilesystemMiddleware, and CompositeBackend for routing.",
    "source": "skills/deep-agents-memory/SKILL.md",
    "aliases": [
     "deep agents memory"
@@ -7588,7 +7603,7 @@
    "id": "deep-agents-orchestration",
    "type": "Skill",
    "label": "deep-agents-orchestration",
-   "description": "INVOKE THIS SKILL when using subagents, task planning, or human approval in Deep Agents. Covers SubAgentMiddleware, TodoList for planning, and HITL interrupts.",
+   "description": "Use when using subagents, task planning, or human approval in Deep Agents. Covers SubAgentMiddleware, TodoList for planning, and HITL interrupts.",
    "source": "skills/deep-agents-orchestration/SKILL.md",
    "aliases": [
     "deep agents orchestration"
@@ -9315,7 +9330,7 @@
    "id": "ecosystem-primer",
    "type": "Skill",
    "label": "ecosystem-primer",
-   "description": "INVOKE FIRST for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code. Required starting point for up to date info on framework selection (LangChain vs LangGraph vs Deep Agents vs hybrid composition), agent patterns, install, environment setup, and which skill to load next.",
+   "description": "Use first for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code. Required starting point for up to date info on framework selection (LangChain vs LangGraph vs Deep Agents vs hybrid composition), agent patterns, install, environment setup, and which skill to load next.",
    "source": "skills/ecosystem-primer/SKILL.md",
    "aliases": [
     "ecosystem primer"
@@ -10703,7 +10718,7 @@
    "id": "find-untested-sources",
    "type": "Skill",
    "label": "find-untested-sources",
-   "description": "> MANDATORY for static source-to-test pairing: find or list source files/modules without corresponding tests, or suggest test locations from repository structure. Invoke even for a tiny package; do not substitute manual globbing. Uses Roslyn for C#/.NET and tree-sitter for Python, TS/JS, Go, Java, Rust, Ruby, Kotlin, Swift, PowerShell, and C++. DO NOT USE FOR: real line/branch/Cobertura data, coverage-backed test priorities, CRAP risk, or grading existing tests.",
+   "description": "> Use for static source-to-test pairing: find or list source files/modules without corresponding tests, or suggest test locations from repository structure. Invoke even for a tiny package; do not substitute manual globbing. Uses Roslyn for C#/.NET and tree-sitter for Python, TS/JS, Go, Java, Rust, Ruby, Kotlin, Swift, PowerShell, and C++. DO NOT USE FOR: real line/branch/Cobertura data, coverage-backed test priorities, CRAP risk, or grading existing tests.",
    "source": "skills/find-untested-sources/SKILL.md",
    "aliases": [
     "find untested sources"
@@ -15159,7 +15174,7 @@
    "id": "langchain-dependencies",
    "type": "Skill",
    "label": "langchain-dependencies",
-   "description": "INVOKE THIS SKILL when setting up a new project or when asked about package versions, installation, or dependency management for LangChain, LangGraph, LangSmith, or Deep Agents. Covers required packages, minimum versions, environment requirements, versioning best practices, and common community tool packages for both Python and TypeScript.",
+   "description": "Use when setting up a new project or when asked about package versions, installation, or dependency management for LangChain, LangGraph, LangSmith, or Deep Agents. Covers required packages, minimum versions, environment requirements, versioning best practices, and common community tool packages for both Python and TypeScript.",
    "source": "skills/langchain-dependencies/SKILL.md",
    "aliases": [
     "langchain dependencies"
@@ -15189,7 +15204,7 @@
    "id": "langchain-middleware",
    "type": "Skill",
    "label": "langchain-middleware",
-   "description": "INVOKE THIS SKILL when you need human-in-the-loop approval, custom middleware, or structured output. Covers HumanInTheLoopMiddleware for human approval of dangerous tool calls, creating custom middleware with hooks, Command resume patterns, and structured output with Pydantic/Zod.",
+   "description": "Use when you need human-in-the-loop approval, custom middleware, or structured output. Covers HumanInTheLoopMiddleware for human approval of dangerous tool calls, creating custom middleware with hooks, Command resume patterns, and structured output with Pydantic/Zod.",
    "source": "skills/langchain-middleware/SKILL.md",
    "aliases": [
     "langchain middleware"
@@ -15219,7 +15234,7 @@
    "id": "langchain-rag",
    "type": "Skill",
    "label": "langchain-rag",
-   "description": "INVOKE THIS SKILL when building ANY retrieval-augmented generation (RAG) system. Covers document loaders, RecursiveCharacterTextSplitter, embeddings (OpenAI), and vector stores (Chroma, FAISS, Pinecone).",
+   "description": "Use when building ANY retrieval-augmented generation (RAG) system. Covers document loaders, RecursiveCharacterTextSplitter, embeddings (OpenAI), and vector stores (Chroma, FAISS, Pinecone).",
    "source": "skills/langchain-rag/SKILL.md",
    "aliases": [
     "langchain rag"
@@ -15275,7 +15290,7 @@
    "id": "langgraph-cli",
    "type": "Skill",
    "label": "langgraph-cli",
-   "description": "INVOKE THIS SKILL when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications. Covers langgraph new, dev, build, up, deploy, and langgraph.json configuration.",
+   "description": "Use when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications. Covers langgraph new, dev, build, up, deploy, and langgraph.json configuration.",
    "source": "skills/langgraph-cli/SKILL.md",
    "aliases": [
     "langgraph cli"
@@ -15290,7 +15305,7 @@
    "id": "langgraph-fundamentals",
    "type": "Skill",
    "label": "langgraph-fundamentals",
-   "description": "INVOKE THIS SKILL when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling.",
+   "description": "Use when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling.",
    "source": "skills/langgraph-fundamentals/SKILL.md",
    "aliases": [
     "langgraph fundamentals"
@@ -15305,7 +15320,7 @@
    "id": "langgraph-human-in-the-loop",
    "type": "Skill",
    "label": "langgraph-human-in-the-loop",
-   "description": "INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph. Covers interrupt(), Command(resume=...), approval/validation workflows, and the 4-tier error handling strategy.",
+   "description": "Use when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph. Covers interrupt(), Command(resume=...), approval/validation workflows, and the 4-tier error handling strategy.",
    "source": "skills/langgraph-human-in-the-loop/SKILL.md",
    "aliases": [
     "langgraph human in the loop"
@@ -15320,7 +15335,7 @@
    "id": "langgraph-persistence",
    "type": "Skill",
    "label": "langgraph-persistence",
-   "description": "INVOKE THIS SKILL when your LangGraph needs to persist state, remember conversations, travel through history, or configure subgraph checkpointer scoping. Covers checkpointers, thread_id, time travel, Store, and subgraph persistence modes.",
+   "description": "Use when your LangGraph needs to persist state, remember conversations, travel through history, or configure subgraph checkpointer scoping. Covers checkpointers, thread_id, time travel, Store, and subgraph persistence modes.",
    "source": "skills/langgraph-persistence/SKILL.md",
    "aliases": [
     "langgraph persistence"
@@ -16033,7 +16048,7 @@
    "id": "m01-ownership",
    "type": "Skill",
    "label": "m01-ownership",
-   "description": "CRITICAL: Use for ownership/borrow/lifetime issues. Triggers: E0382, E0597, E0506, E0507, E0515, E0716, E0106, value moved, borrowed value does not live long enough, cannot move out of, use of moved value, ownership, borrow, lifetime, 'a, 'static, move, clone, Copy, 所有权, 借用, 生命周期",
+   "description": "Use for ownership/borrow/lifetime issues. Triggers: E0382, E0597, E0506, E0507, E0515, E0716, E0106, value moved, borrowed value does not live long enough, cannot move out of, use of moved value, ownership, borrow, lifetime, 'a, 'static, move, clone, Copy, 所有权, 借用, 生命周期",
    "source": "skills/m01-ownership/SKILL.md",
    "aliases": [
     "m01 ownership"
@@ -16048,7 +16063,7 @@
    "id": "m02-resource",
    "type": "Skill",
    "label": "m02-resource",
-   "description": "CRITICAL: Use for smart pointers and resource management. Triggers: Box, Rc, Arc, Weak, RefCell, Cell, smart pointer, heap allocation, reference counting, RAII, Drop, should I use Box or Rc, when to use Arc vs Rc, 智能指针, 引用计数, 堆分配",
+   "description": "Use for smart pointers and resource management. Triggers: Box, Rc, Arc, Weak, RefCell, Cell, smart pointer, heap allocation, reference counting, RAII, Drop, should I use Box or Rc, when to use Arc vs Rc, 智能指针, 引用计数, 堆分配",
    "source": "skills/m02-resource/SKILL.md",
    "aliases": [
     "m02 resource"
@@ -16063,7 +16078,7 @@
    "id": "m03-mutability",
    "type": "Skill",
    "label": "m03-mutability",
-   "description": "CRITICAL: Use for mutability issues. Triggers: E0596, E0499, E0502, cannot borrow as mutable, already borrowed as immutable, mut, &mut, interior mutability, Cell, RefCell, Mutex, RwLock, 可变性, 内部可变性, 借用冲突",
+   "description": "Use for mutability issues. Triggers: E0596, E0499, E0502, cannot borrow as mutable, already borrowed as immutable, mut, &mut, interior mutability, Cell, RefCell, Mutex, RwLock, 可变性, 内部可变性, 借用冲突",
    "source": "skills/m03-mutability/SKILL.md",
    "aliases": [
     "m03 mutability"
@@ -16078,7 +16093,7 @@
    "id": "m04-zero-cost",
    "type": "Skill",
    "label": "m04-zero-cost",
-   "description": "CRITICAL: Use for generics, traits, zero-cost abstraction. Triggers: E0277, E0308, E0599, generic, trait, impl, dyn, where, monomorphization, static dispatch, dynamic dispatch, impl Trait, trait bound not satisfied, 泛型, 特征, 零成本抽象, 单态化",
+   "description": "Use for generics, traits, zero-cost abstraction. Triggers: E0277, E0308, E0599, generic, trait, impl, dyn, where, monomorphization, static dispatch, dynamic dispatch, impl Trait, trait bound not satisfied, 泛型, 特征, 零成本抽象, 单态化",
    "source": "skills/m04-zero-cost/SKILL.md",
    "aliases": [
     "m04 zero cost"
@@ -16093,7 +16108,7 @@
    "id": "m05-type-driven",
    "type": "Skill",
    "label": "m05-type-driven",
-   "description": "CRITICAL: Use for type-driven design. Triggers: type state, PhantomData, newtype, marker trait, builder pattern, make invalid states unrepresentable, compile-time validation, sealed trait, ZST, 类型状态, 新类型模式, 类型驱动设计",
+   "description": "Use for type-driven design. Triggers: type state, PhantomData, newtype, marker trait, builder pattern, make invalid states unrepresentable, compile-time validation, sealed trait, ZST, 类型状态, 新类型模式, 类型驱动设计",
    "source": "skills/m05-type-driven/SKILL.md",
    "aliases": [
     "m05 type driven"
@@ -16108,7 +16123,7 @@
    "id": "m06-error-handling",
    "type": "Skill",
    "label": "m06-error-handling",
-   "description": "CRITICAL: Use for error handling. Triggers: Result, Option, Error, ?, unwrap, expect, panic, anyhow, thiserror, when to panic vs return Result, custom error, error propagation, 错误处理, Result 用法, 什么时候用 panic",
+   "description": "Use for error handling. Triggers: Result, Option, Error, ?, unwrap, expect, panic, anyhow, thiserror, when to panic vs return Result, custom error, error propagation, 错误处理, Result 用法, 什么时候用 panic",
    "source": "skills/m06-error-handling/SKILL.md",
    "aliases": [
     "m06 error handling"
@@ -16123,7 +16138,7 @@
    "id": "m07-concurrency",
    "type": "Skill",
    "label": "m07-concurrency",
-   "description": "CRITICAL: Use for concurrency/async. Triggers: E0277 Send Sync, cannot be sent between threads, thread, spawn, channel, mpsc, Mutex, RwLock, Atomic, async, await, Future, tokio, deadlock, race condition, 并发, 线程, 异步, 死锁",
+   "description": "Use for concurrency/async. Triggers: E0277 Send Sync, cannot be sent between threads, thread, spawn, channel, mpsc, Mutex, RwLock, Atomic, async, await, Future, tokio, deadlock, race condition, 并发, 线程, 异步, 死锁",
    "source": "skills/m07-concurrency/SKILL.md",
    "aliases": [
     "m07 concurrency"
@@ -16138,7 +16153,7 @@
    "id": "m09-domain",
    "type": "Skill",
    "label": "m09-domain",
-   "description": "CRITICAL: Use for domain modeling. Triggers: domain model, DDD, domain-driven design, entity, value object, aggregate, repository pattern, business rules, validation, invariant, 领域模型, 领域驱动设计, 业务规则",
+   "description": "Use for domain modeling. Triggers: domain model, DDD, domain-driven design, entity, value object, aggregate, repository pattern, business rules, validation, invariant, 领域模型, 领域驱动设计, 业务规则",
    "source": "skills/m09-domain/SKILL.md",
    "aliases": [
     "m09 domain"
@@ -16153,7 +16168,7 @@
    "id": "m10-performance",
    "type": "Skill",
    "label": "m10-performance",
-   "description": "CRITICAL: Use for performance optimization. Triggers: performance, optimization, benchmark, profiling, flamegraph, criterion, slow, fast, allocation, cache, SIMD, make it faster, 性能优化, 基准测试",
+   "description": "Use for performance optimization. Triggers: performance, optimization, benchmark, profiling, flamegraph, criterion, slow, fast, allocation, cache, SIMD, make it faster, 性能优化, 基准测试",
    "source": "skills/m10-performance/SKILL.md",
    "aliases": [
     "m10 performance"
@@ -16331,7 +16346,7 @@
    "id": "managed-deep-agents",
    "type": "Skill",
    "label": "managed-deep-agents",
-   "description": "INVOKE THIS SKILL when building, testing, or deploying Managed Deep Agents in LangSmith. Walks a user through their first agent end to end — interviewing them about what they want to build, mapping it onto what MDA can actually do, then scaffolding and deploying it. Covers the file-based project layout; define_deep_agent / defineDeepAgent; instructions, skills, memory, identity, tools, MCP servers, connections, middleware, sandboxes, schedules, channels, and evals; the mda CLI; GitHub deployments; and Context Hub.",
+   "description": "Use when building, testing, or deploying Managed Deep Agents in LangSmith. Walks a user through their first agent end to end — interviewing them about what they want to build, mapping it onto what MDA can actually do, then scaffolding and deploying it. Covers the file-based project layout; define_deep_agent / defineDeepAgent; instructions, skills, memory, identity, tools, MCP servers, connections, middleware, sandboxes, schedules, channels, and evals; the mda CLI; GitHub deployments; and Context Hub.",
    "source": "skills/managed-deep-agents/SKILL.md",
    "aliases": [
     "managed deep agents"
@@ -18237,6 +18252,21 @@
    "source": "skills/modern-typescript/SKILL.md",
    "aliases": [
     "modern typescript"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "modern-web-guidance",
+   "type": "Skill",
+   "label": "modern-web-guidance",
+   "description": "| Search tool for modern web development best practices. Use for HTML/CSS and clientside JS tasks; web APIs evolve rapidly and training weights contain obsolete patterns. Triggers: modals/dialogs/popovers, tables, dark mode, anchor positioning, container queries, view transitions, scroll-driven animations, parallax/reveals, forms, validation, autofill, accessibility, custom selects, scrollbars, CWV (LCP, INP, CLS), content-visibility, fetch priority, image optimization, security, passkeys, HTML sanitization, web components, dates/timezones, built-in AI, WebAssembly, standard HTML/CSS/DOM in frameworks, etc. DO NOT trigger for: backend (SQL, ORMs, API routes), infra/scripts (CI/CD, Docker, Actions, Python/Go, Git), or tooling/trivial (Vite, tsconfig, ESLint, tests, copy/renames, 3P docs), etc.",
+   "source": "skills/modern-web-guidance/SKILL.md",
+   "aliases": [
+    "modern web guidance"
    ],
    "uses": 0,
    "successes": 0,
@@ -20850,7 +20880,7 @@
    "id": "officecli-data-dashboard",
    "type": "Skill",
    "label": "officecli-data-dashboard",
-   "description": "Use this skill to build a multi-element Excel dashboard — Dashboard sheet on open, multiple formula-driven KPI cards, multiple charts, sparklines, and conditional formatting — from CSV or tabular input. Trigger on: 'dashboard', 'KPI dashboard', 'analytics dashboard', 'executive dashboard', 'metrics dashboard', 'CSV to dashboard', 'data visualization'. Output is a single .xlsx. Scene-layer on officecli-xlsx: inherits every xlsx hard rule. DO NOT invoke for: a single budget tracker / one-sheet CSV-with-formatting (use xlsx), a 3-statement / DCF / LBO financial model (use financial-model), a weekly report with at most 1 chart and fewer than 10 rows (use xlsx).",
+   "description": "Use this skill to build a multi-element Excel dashboard — Dashboard sheet on open, multiple formula-driven KPI cards, multiple charts, sparklines, and conditional formatting — from CSV or tabular input. Trigger on: 'dashboard', 'KPI dashboard', 'analytics dashboard', 'executive dashboard', 'metrics dashboard', 'CSV to dashboard', 'data visualization'. Output is a single .xlsx. Scene-layer on officecli-xlsx: inherits every xlsx hard rule. DO NOT invoke for: a single budget tracker / one-sheet CSV-with-formatting (use xlsx), a 3-statement / DCF / LBO financial model (use financial-model), a weekly report with ≤ 1 chart and < 10 rows (use xlsx).",
    "source": "skills/officecli-data-dashboard/SKILL.md",
    "aliases": [
     "officecli data dashboard"
@@ -20925,7 +20955,7 @@
    "id": "officecli-word-form",
    "type": "Skill",
    "label": "officecli-word-form",
-   "description": "Use this skill to create fillable Word forms (.docx) with real Content Controls (SDT) + legacy FormField checkboxes + MERGEFIELD mail-merge placeholders + document protection. Trigger on: 'fillable form', 'form fields', 'content controls', 'SDT', 'word form', 'fill in', 'only editable fields', 'protect document', 'onboarding form', 'HR intake', 'survey template', 'contract / SOW template', 'mail-merge template', 'compliance checklist', 'medical intake questionnaire'. Output is a single .docx where specific fields are editable and the rest is locked. This skill is INDEPENDENT, not a scene layer on docx — payload is `w:sdt` + `w:ffData` + `w:fldChar` + `documentProtection`, none of which docx base skill covers. Do NOT trigger for regular reports, letters, memos, academic papers, pitch decks, or any document with no user-fillable fields — route those to officecli-docx or its scene layers.",
+   "description": "Use this skill to create fillable Word forms (.docx) with real Content Controls (SDT) + legacy FormField checkboxes + MERGEFIELD mail-merge placeholders + document protection. Trigger on: 'fillable form', 'form fields', 'content controls', 'SDT', 'word form', 'fill in', 'only editable fields', 'protect document', 'onboarding form', 'HR intake', 'survey template', 'contract / SOW template', 'mail-merge template', 'compliance checklist', 'medical intake questionnaire'. Output is a single .docx where specific fields are editable and the rest is locked. This skill is INDEPENDENT, not a scene layer on docx — payload is `<w:sdt>` + `<w:ffData>` + `<w:fldChar>` + `documentProtection`, none of which docx base skill covers. Do NOT trigger for regular reports, letters, memos, academic papers, pitch decks, or any document with no user-fillable fields — route those to officecli-docx or its scene layers.",
    "source": "skills/officecli-word-form/SKILL.md",
    "aliases": [
     "officecli word form"
@@ -26252,7 +26282,7 @@
    "id": "rust-daily",
    "type": "Skill",
    "label": "rust-daily",
-   "description": "| CRITICAL: Use for Rust news and daily/weekly/monthly reports. Triggers on: rust news, rust daily, rust weekly, TWIR, rust blog, Rust 日报, Rust 周报, Rust 新闻, Rust 动态",
+   "description": "| Use for Rust news and daily/weekly/monthly reports. Triggers on: rust news, rust daily, rust weekly, TWIR, rust blog, Rust 日报, Rust 周报, Rust 新闻, Rust 动态",
    "source": "skills/rust-daily/SKILL.md",
    "aliases": [
     "rust daily"
@@ -26312,7 +26342,7 @@
    "id": "rust-router",
    "type": "Skill",
    "label": "rust-router",
-   "description": "|- CRITICAL: Use for ALL Rust questions including errors, design, and coding. HIGHEST PRIORITY for: 比较, 对比, compare, vs, versus, 区别, difference, 最佳实践, best practice, tokio vs, async-std vs, 比较 tokio, 比较 async, Triggers on: Rust, cargo, rustc, crate, Cargo.toml, 意图分析, 问题分析, 语义分析, analyze intent, question analysis, compile error, borrow error, lifetime error, ownership error, type error, trait error, value moved, cannot borrow, does not live long enough, mismatched types, not satisfied, E0382, E0597, E0277, E0308, E0499, E0502, E0596, async, await, Send, Sync, tokio, concurrency, error handling, 编译错误, compile error, 所有权, ownership, 借用, borrow, 生命周期, lifetime, 类型错误, type error, 异步, async, 并发, concurrency, 错误处理, error handling, 问题, problem, question, 怎么用, how to use, 如何, how to, 为什么, why, 什么是, what is, 帮我写, help me write, 实现, implement, 解释, explain",
+   "description": "| Use for ALL Rust questions including errors, design, and coding. Also for: 比较, 对比, compare, vs, versus, 区别, difference, 最佳实践, best practice, tokio vs, async-std vs, 比较 tokio, 比较 async, Triggers on: Rust, cargo, rustc, crate, Cargo.toml, 意图分析, 问题分析, 语义分析, analyze intent, question analysis, compile error, borrow error, lifetime error, ownership error, type error, trait error, value moved, cannot borrow, does not live long enough, mismatched types, not satisfied, E0382, E0597, E0277, E0308, E0499, E0502, E0596, async, await, Send, Sync, tokio, concurrency, error handling, 编译错误, compile error, 所有权, ownership, 借用, borrow, 生命周期, lifetime, 类型错误, type error, 异步, async, 并发, concurrency, 错误处理, error handling, 问题, problem, question, 怎么用, how to use, 如何, how to, 为什么, why, 什么是, what is, 帮我写, help me write, 实现, implement, 解释, explain",
    "source": "skills/rust-router/SKILL.md",
    "aliases": [
     "rust router"
@@ -27546,7 +27576,7 @@
    "id": "shopify-hydrogen",
    "type": "Skill",
    "label": "shopify-hydrogen",
-   "description": "Hydrogen storefront implementation cookbooks. Some of the available recipes are: B2B Commerce, Bundles, Combined Listings, Custom Cart Method, Dynamic Content with Metaobjects, Express Server, Google Tag Manager Integration, Infinite Scroll, Legacy Customer Account Flow, Markets, Partytown + Google Tag Manager, Subscriptions, Third-party API Queries and Caching. MANDATORY: Use this API for ANY Hydrogen storefront question - do NOT use Storefront GraphQL when 'Hydrogen' is mentioned.",
+   "description": "Hydrogen storefront implementation cookbooks. Some of the available recipes are: B2B Commerce, Bundles, Combined Listings, Custom Cart Method, Dynamic Content with Metaobjects, Express Server, Google Tag Manager Integration, Infinite Scroll, Legacy Customer Account Flow, Markets, Partytown + Google Tag Manager, Subscriptions, Third-party API Queries and Caching. Use this API for ANY Hydrogen storefront question - do NOT use Storefront GraphQL when 'Hydrogen' is mentioned.",
    "source": "skills/shopify-hydrogen/SKILL.md",
    "aliases": [
     "shopify hydrogen"
@@ -31425,7 +31455,7 @@
    "id": "unsafe-checker",
    "type": "Skill",
    "label": "unsafe-checker",
-   "description": "CRITICAL: Use for unsafe Rust code review and FFI. Triggers on: unsafe, raw pointer, FFI, extern, transmute, *mut, *const, union, #[repr(C)], libc, std::ffi, MaybeUninit, NonNull, SAFETY comment, soundness, undefined behavior, UB, safe wrapper, memory layout, bindgen, cbindgen, CString, CStr, 安全抽象, 裸指针, 外部函数接口, 内存布局, 不安全代码, FFI 绑定, 未定义行为",
+   "description": "Use for unsafe Rust code review and FFI. Triggers on: unsafe, raw pointer, FFI, extern, transmute, *mut, *const, union, #[repr(C)], libc, std::ffi, MaybeUninit, NonNull, SAFETY comment, soundness, undefined behavior, UB, safe wrapper, memory layout, bindgen, cbindgen, CString, CStr, 安全抽象, 裸指针, 外部函数接口, 内存布局, 不安全代码, FFI 绑定, 未定义行为",
    "source": "skills/unsafe-checker/SKILL.md",
    "aliases": [
     "unsafe checker"
@@ -35192,15 +35222,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "agentic-workflows named in authoring-github-workflows/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "agentic-workflows",
-   "rel": "references",
-   "dst": "cost-management",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "cost-management named in agentic-workflows/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -47023,6 +47044,15 @@
   {
    "src": "browser-extension-reverse",
    "rel": "references",
+   "dst": "chrome-extensions",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "chrome-extensions named in browser-extension-reverse/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "browser-extension-reverse",
+   "rel": "references",
    "dst": "js-reverse",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -51824,6 +51854,33 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "scientific-agents referenced in code/link context in chromatin-biologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "chrome-extensions",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "chrome-extensions",
+   "rel": "references",
+   "dst": "browser-extension-reverse",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "chrome-extensions named in browser-extension-reverse/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "chrome-extensions",
+   "rel": "references",
+   "dst": "modern-web-guidance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "modern-web-guidance named in chrome-extensions/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -59839,15 +59896,6 @@
   {
    "src": "cost-management",
    "rel": "references",
-   "dst": "agentic-workflows",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "cost-management named in agentic-workflows/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "cost-management",
-   "rel": "references",
    "dst": "alloy",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -62359,6 +62407,15 @@
   {
    "src": "databricks-apps-python",
    "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-vector-search named in databricks-apps-python/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-apps-python",
+   "rel": "references",
    "dst": "fastapi",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -63187,33 +63244,6 @@
   {
    "src": "databricks-lakeflow-connect",
    "rel": "references",
-   "dst": "google-drive",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "google-drive named in databricks-lakeflow-connect/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "databricks-lakeflow-connect",
-   "rel": "references",
-   "dst": "hubspot",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "hubspot named in databricks-lakeflow-connect/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "databricks-lakeflow-connect",
-   "rel": "references",
-   "dst": "search-company-knowledge",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of search-company-knowledge appears in databricks-lakeflow-connect/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "databricks-lakeflow-connect",
-   "rel": "references",
    "dst": "sharepoint",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -63776,6 +63806,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-vector-search",
+   "rel": "references",
+   "dst": "databricks-apps-python",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-vector-search named in databricks-apps-python/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -84526,15 +84565,6 @@
   {
    "src": "google-drive",
    "rel": "references",
-   "dst": "databricks-lakeflow-connect",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "google-drive named in databricks-lakeflow-connect/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "google-drive",
-   "rel": "references",
    "dst": "doc-coauthoring",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -88589,15 +88619,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "hubspot",
-   "rel": "references",
-   "dst": "databricks-lakeflow-connect",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "hubspot named in databricks-lakeflow-connect/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -106945,6 +106966,15 @@
   {
    "src": "modal",
    "rel": "references",
+   "dst": "modern-web-guidance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "modal referenced in code/link context in modern-web-guidance/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "modal",
+   "rel": "references",
    "dst": "optimize-for-gpu",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -107102,6 +107132,51 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "zod named in modern-typescript/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-web-guidance",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-web-guidance",
+   "rel": "references",
+   "dst": "chrome-extensions",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "modern-web-guidance named in chrome-extensions/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-web-guidance",
+   "rel": "references",
+   "dst": "modal",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "modal referenced in code/link context in modern-web-guidance/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-web-guidance",
+   "rel": "references",
+   "dst": "pnpm",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pnpm named in modern-web-guidance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "modern-web-guidance",
+   "rel": "references",
+   "dst": "vite",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "vite named in modern-web-guidance/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -120137,6 +120212,24 @@
    "status": "accepted"
   },
   {
+   "src": "officecli-docx",
+   "rel": "references",
+   "dst": "to-spec",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "to-spec named in officecli-docx/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "officecli-docx",
+   "rel": "references",
+   "dst": "xlsx",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "xlsx named in officecli-docx/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "officecli-financial-model",
    "rel": "in_domain",
    "dst": "domain:documents-office",
@@ -129314,6 +129407,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "pnpm named in modern-typescript/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "pnpm",
+   "rel": "references",
+   "dst": "modern-web-guidance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "pnpm named in modern-web-guidance/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -152710,15 +152812,6 @@
   {
    "src": "search-company-knowledge",
    "rel": "references",
-   "dst": "databricks-lakeflow-connect",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of search-company-knowledge appears in databricks-lakeflow-connect/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "search-company-knowledge",
-   "rel": "references",
    "dst": "deal-tracker",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -166021,6 +166114,15 @@
   {
    "src": "to-spec",
    "rel": "references",
+   "dst": "officecli-docx",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "to-spec named in officecli-docx/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "to-spec",
+   "rel": "references",
    "dst": "prototype",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -175858,6 +175960,15 @@
   {
    "src": "vite",
    "rel": "references",
+   "dst": "modern-web-guidance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "vite named in modern-web-guidance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "vite",
+   "rel": "references",
    "dst": "neo4j-driver-javascript-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -179183,6 +179294,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "xlsx named in officecli-data-dashboard/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "xlsx",
+   "rel": "references",
+   "dst": "officecli-docx",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "xlsx named in officecli-docx/SKILL.md body",
    "status": "accepted"
   },
   {

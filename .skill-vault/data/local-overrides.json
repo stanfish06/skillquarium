@@ -4569,6 +4569,68 @@
       "replace": "Vercel Flags reached **general availability** in April 2026 (after an initial public beta starting February 2026), available to teams on all plans. Pricing may have changed at GA; verify current rates at [Vercel's feature-flags limits and pricing docs](https://vercel.com/docs/workflow-collaboration/feature-flags/limits-and-pricing) before citing a number.\n"
     }
   ],
+  "chrome-extensions": [
+    {
+      "id": "recording-busy-guard",
+      "source": "GoogleChrome/modern-web-guidance",
+      "find": "chrome.action.onClicked.addListener(async (tab) => {\n  const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n  if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n  if (recordingState === 'idle') {\n    await chrome.storage.session.set({ recordingState: 'starting' });\n    try {\n      await startRecording(tab);\n      await chrome.storage.session.set({ recordingState: 'recording' });\n      await chrome.action.setBadgeText({ text: 'REC' });\n      await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n    } catch (err) {\n      console.error('Failed to start recording:', err);\n      await chrome.storage.session.set({ recordingState: 'idle' });\n    }\n  } else if (recordingState === 'recording') {\n    await chrome.storage.session.set({ recordingState: 'stopping' });\n    try { await stopRecording(); }\n    finally {\n      await chrome.storage.session.set({ recordingState: 'idle' });\n      await chrome.action.setBadgeText({ text: '' });\n    }\n  }\n});",
+      "replace": "// A synchronous flag set before the first await: two fast clicks cannot both read\n// 'idle' from storage and start twice. Storage still carries the state across SW restarts.\nlet busy = false;\nchrome.action.onClicked.addListener(async (tab) => {\n  if (busy) return;\n  busy = true;\n  try {\n    const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n    if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n    if (recordingState === 'idle') {\n      await chrome.storage.session.set({ recordingState: 'starting' });\n      try {\n        await startRecording(tab);\n        await chrome.storage.session.set({ recordingState: 'recording' });\n        await chrome.action.setBadgeText({ text: 'REC' });\n        await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n      } catch (err) {\n        console.error('Failed to start recording:', err);\n        await chrome.storage.session.set({ recordingState: 'idle' });\n      }\n    } else if (recordingState === 'recording') {\n      await chrome.storage.session.set({ recordingState: 'stopping' });\n      try { await stopRecording(); }\n      finally {\n        await chrome.storage.session.set({ recordingState: 'idle' });\n        await chrome.action.setBadgeText({ text: '' });\n      }\n    }\n  } finally {\n    busy = false;\n  }\n});"
+    },
+    {
+      "id": "recording-busy-guard-2",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/media-capture.md",
+      "find": "chrome.action.onClicked.addListener(async (tab) => {\n  const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n  // Ignore clicks during transitions\n  if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n  if (recordingState === 'idle') {\n    await chrome.storage.session.set({ recordingState: 'starting' });\n    try {\n      await startRecording(tab);\n      await chrome.storage.session.set({ recordingState: 'recording' });\n      await chrome.action.setBadgeText({ text: 'REC' });\n      await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n    } catch (err) {\n      console.error('Failed to start recording:', err);\n      await chrome.storage.session.set({ recordingState: 'idle' });\n    }\n  } else if (recordingState === 'recording') {\n    await chrome.storage.session.set({ recordingState: 'stopping' });\n    try { await stopRecording(); }\n    finally {\n      await chrome.storage.session.set({ recordingState: 'idle' });\n      await chrome.action.setBadgeText({ text: '' });\n    }\n  }\n});",
+      "replace": "// A synchronous flag set before the first await: two fast clicks cannot both read\n// 'idle' from storage and start twice. Storage still carries the state across SW restarts.\nlet busy = false;\nchrome.action.onClicked.addListener(async (tab) => {\n  if (busy) return;\n  busy = true;\n  try {\n    const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');\n\n    // Ignore clicks during transitions\n    if (recordingState === 'starting' || recordingState === 'stopping') return;\n\n    if (recordingState === 'idle') {\n      await chrome.storage.session.set({ recordingState: 'starting' });\n      try {\n        await startRecording(tab);\n        await chrome.storage.session.set({ recordingState: 'recording' });\n        await chrome.action.setBadgeText({ text: 'REC' });\n        await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });\n      } catch (err) {\n        console.error('Failed to start recording:', err);\n        await chrome.storage.session.set({ recordingState: 'idle' });\n      }\n    } else if (recordingState === 'recording') {\n      await chrome.storage.session.set({ recordingState: 'stopping' });\n      try { await stopRecording(); }\n      finally {\n        await chrome.storage.session.set({ recordingState: 'idle' });\n        await chrome.action.setBadgeText({ text: '' });\n      }\n    }\n  } finally {\n    busy = false;\n  }\n});"
+    },
+    {
+      "id": "promise-response-chrome-148",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/message-passing.md",
+      "find": "### Request/response — return a Promise (Chrome 99+)",
+      "replace": "### Request/response — return a Promise (Chrome 148+)"
+    },
+    {
+      "id": "promise-response-compat-note",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/message-passing.md",
+      "find": "**Note:** Requires Chrome 99+, only use when minimum Chrome version is set to 99.",
+      "replace": "**Note:** Returning a Promise from `onMessage` needs Chrome 148+, is rolling out gradually, and is disabled in extensions that declare a DevTools page (`devtools_page`). Promise-returning extension API calls (Chrome 99+) are a different feature. Unless you target only Chrome 148+ with no DevTools page, use the `sendResponse` + `return true` pattern above, which works in every version."
+    },
+    {
+      "id": "no-blob-srcdoc-bypass",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/csp-sandbox.md",
+      "find": "### Option 2: Blob URL in iframe\n\nCreate a self-contained HTML document via blob URL:\n\n```js\nfunction updatePreview(htmlCode, cssCode, jsCode) {\n  const html = `\n<!DOCTYPE html>\n<html>\n<head><style>${cssCode}</style></head>\n<body>\n  ${htmlCode}\n  <script>${jsCode}<\\/script>\n</body>\n</html>\n`;\n  const blob = new Blob([html], { type: 'text/html' });\n  const url = URL.createObjectURL(blob);\n  const iframe = document.getElementById('preview');\n  // Revoke previous URL\n  if (iframe.dataset.blobUrl) URL.revokeObjectURL(iframe.dataset.blobUrl);\n  iframe.dataset.blobUrl = url;\n  iframe.src = url;\n}\n```\n\n### Option 3: srcdoc Attribute\n\n```js\nconst iframe = document.getElementById('preview');\niframe.srcdoc = `\n  <!DOCTYPE html>\n  <style>${cssCode}</style>\n  ${htmlCode}\n  <script>${jsCode}<\\/script>\n`;\n```\n\nBoth blob URLs and srcdoc create a separate origin, so they bypass the extension's CSP.\nHowever, they also cannot access chrome.* APIs, and you cannot access their DOM directly\nfrom the extension page (same cross-origin restriction as sandbox).\n",
+      "replace": "### Not an option: blob URLs and srcdoc\n\nA `blob:` URL document and an `iframe.srcdoc` document both inherit the extension page's CSP (the CSP\nspec's policy inheritance exists to stop exactly this bypass), so inline user scripts in them stay\nblocked, and neither gets an isolated origin. To run user code, use the manifest-declared sandbox\npage (Option 1).\n"
+    },
+    {
+      "id": "no-blob-srcdoc-bypass-2",
+      "source": "GoogleChrome/modern-web-guidance",
+      "find": "// ✅ OPTION B: Blob URL (creates separate origin, bypasses extension CSP)\niframe.src = URL.createObjectURL(new Blob([doc], { type: 'text/html' }));\n\n// ✅ OPTION C: srcdoc\n",
+      "replace": "// ❌ BROKEN — blob: and srcdoc documents inherit the extension page's CSP, so inline\n// user scripts in them are still blocked. Use OPTION A.\niframe.src = URL.createObjectURL(new Blob([doc], { type: 'text/html' }));\n"
+    },
+    {
+      "id": "checklist-sandbox-only",
+      "source": "GoogleChrome/modern-web-guidance",
+      "find": "- [ ] Code execution uses sandbox/blob/srcdoc — no `eval()` in extension pages",
+      "replace": "- [ ] Code execution uses a manifest-declared sandbox page — no `eval()` in extension pages"
+    },
+    {
+      "id": "port-keepalive-needs-messages",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/service-worker.md",
+      "find": "3. **Active port connections** — an open port keeps the SW alive",
+      "replace": "3. **Messages over a port** — since Chrome 114, opening a port no longer resets the idle timer; messages sent over it do"
+    },
+    {
+      "id": "port-keepalive-example",
+      "source": "GoogleChrome/modern-web-guidance",
+      "file": "references/extensions/service-worker.md",
+      "find": "// Port-based keepalive from popup/side panel\nconst port = chrome.runtime.connect({ name: 'keepalive' });\n// The SW stays alive as long as this port is open\n",
+      "replace": "// Port-based keepalive from popup/side panel: message well inside the 30 s idle timeout\nconst port = chrome.runtime.connect({ name: 'keepalive' });\nconst ping = setInterval(() => port.postMessage({ type: 'ping' }), 20_000);\n// Clear the interval (or disconnect) as soon as the long-running work is done\nport.onDisconnect.addListener(() => clearInterval(ping));\n"
+    }
+  ],
   "officecli": [
     {
       "id": "vault-audit-note-1",
