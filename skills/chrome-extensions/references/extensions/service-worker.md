@@ -81,12 +81,14 @@ Occasionally you need the SW alive for a long-running operation. Use one of:
 
 1. **chrome.offscreen** — create an offscreen document for long tasks
 2. **Periodic storage writes** — each chrome.storage call resets the idle timer
-3. **Active port connections** — an open port keeps the SW alive
+3. **Messages over a port** — since Chrome 114, opening a port no longer resets the idle timer; messages sent over it do
 
 ```js
-// Port-based keepalive from popup/side panel
+// Port-based keepalive from popup/side panel: message well inside the 30 s idle timeout
 const port = chrome.runtime.connect({ name: 'keepalive' });
-// The SW stays alive as long as this port is open
+const ping = setInterval(() => port.postMessage({ type: 'ping' }), 20_000);
+// Clear the interval (or disconnect) as soon as the long-running work is done
+port.onDisconnect.addListener(() => clearInterval(ping));
 ```
 
 ⚠️ Do NOT abuse keepalive patterns. Chrome may enforce stricter limits in future versions.

@@ -108,47 +108,12 @@ window.addEventListener('message', (event) => {
 });
 ```
 
-### Option 2: Blob URL in iframe
+### Not an option: blob URLs and srcdoc
 
-Create a self-contained HTML document via blob URL:
-
-```js
-function updatePreview(htmlCode, cssCode, jsCode) {
-  const html = `
-<!DOCTYPE html>
-<html>
-<head><style>${cssCode}</style></head>
-<body>
-  ${htmlCode}
-  <script>${jsCode}<\/script>
-</body>
-</html>
-`;
-  const blob = new Blob([html], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const iframe = document.getElementById('preview');
-  // Revoke previous URL
-  if (iframe.dataset.blobUrl) URL.revokeObjectURL(iframe.dataset.blobUrl);
-  iframe.dataset.blobUrl = url;
-  iframe.src = url;
-}
-```
-
-### Option 3: srcdoc Attribute
-
-```js
-const iframe = document.getElementById('preview');
-iframe.srcdoc = `
-  <!DOCTYPE html>
-  <style>${cssCode}</style>
-  ${htmlCode}
-  <script>${jsCode}<\/script>
-`;
-```
-
-Both blob URLs and srcdoc create a separate origin, so they bypass the extension's CSP.
-However, they also cannot access chrome.* APIs, and you cannot access their DOM directly
-from the extension page (same cross-origin restriction as sandbox).
+A `blob:` URL document and an `iframe.srcdoc` document both inherit the extension page's CSP (the CSP
+spec's policy inheritance exists to stop exactly this bypass), so inline user scripts in them stay
+blocked, and neither gets an isolated origin. To run user code, use the manifest-declared sandbox
+page (Option 1).
 
 ### What NOT to Do
 

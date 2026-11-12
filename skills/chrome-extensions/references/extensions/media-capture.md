@@ -85,30 +85,39 @@ cleared on browser close):
 
 ```js
 // State: 'idle' → 'starting' → 'recording' → 'stopping' → 'idle'
+// A synchronous flag set before the first await: two fast clicks cannot both read
+// 'idle' from storage and start twice. Storage still carries the state across SW restarts.
+let busy = false;
 chrome.action.onClicked.addListener(async (tab) => {
-  const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');
+  if (busy) return;
+  busy = true;
+  try {
+    const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');
 
-  // Ignore clicks during transitions
-  if (recordingState === 'starting' || recordingState === 'stopping') return;
+    // Ignore clicks during transitions
+    if (recordingState === 'starting' || recordingState === 'stopping') return;
 
-  if (recordingState === 'idle') {
-    await chrome.storage.session.set({ recordingState: 'starting' });
-    try {
-      await startRecording(tab);
-      await chrome.storage.session.set({ recordingState: 'recording' });
-      await chrome.action.setBadgeText({ text: 'REC' });
-      await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });
-    } catch (err) {
-      console.error('Failed to start recording:', err);
-      await chrome.storage.session.set({ recordingState: 'idle' });
+    if (recordingState === 'idle') {
+      await chrome.storage.session.set({ recordingState: 'starting' });
+      try {
+        await startRecording(tab);
+        await chrome.storage.session.set({ recordingState: 'recording' });
+        await chrome.action.setBadgeText({ text: 'REC' });
+        await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });
+      } catch (err) {
+        console.error('Failed to start recording:', err);
+        await chrome.storage.session.set({ recordingState: 'idle' });
+      }
+    } else if (recordingState === 'recording') {
+      await chrome.storage.session.set({ recordingState: 'stopping' });
+      try { await stopRecording(); }
+      finally {
+        await chrome.storage.session.set({ recordingState: 'idle' });
+        await chrome.action.setBadgeText({ text: '' });
+      }
     }
-  } else if (recordingState === 'recording') {
-    await chrome.storage.session.set({ recordingState: 'stopping' });
-    try { await stopRecording(); }
-    finally {
-      await chrome.storage.session.set({ recordingState: 'idle' });
-      await chrome.action.setBadgeText({ text: '' });
-    }
+  } finally {
+    busy = false;
   }
 });
 ```

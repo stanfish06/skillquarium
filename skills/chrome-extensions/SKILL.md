@@ -70,10 +70,9 @@ iframe.contentWindow.postMessage({ html, css, js }, '*');
 // sandbox.html receives and runs:
 window.addEventListener('message', (e) => { eval(e.data.js); /* allowed in sandbox */ });
 
-// ✅ OPTION B: Blob URL (creates separate origin, bypasses extension CSP)
+// ❌ BROKEN — blob: and srcdoc documents inherit the extension page's CSP, so inline
+// user scripts in them are still blocked. Use OPTION A.
 iframe.src = URL.createObjectURL(new Blob([doc], { type: 'text/html' }));
-
-// ✅ OPTION C: srcdoc
 iframe.srcdoc = `<style>${css}</style>${html}<script>${js}<\/script>`;
 ```
 
@@ -270,29 +269,38 @@ chrome.action.onClicked.addListener(async (tab) => {
 // ✅ CORRECT — use transitional states to lock out concurrent operations
 // State machine: 'idle' → 'starting' → 'recording' → 'stopping' → 'idle'
 // Store state in chrome.storage.session (survives SW restart, cleared on browser close)
+// A synchronous flag set before the first await: two fast clicks cannot both read
+// 'idle' from storage and start twice. Storage still carries the state across SW restarts.
+let busy = false;
 chrome.action.onClicked.addListener(async (tab) => {
-  const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');
+  if (busy) return;
+  busy = true;
+  try {
+    const { recordingState = 'idle' } = await chrome.storage.session.get('recordingState');
 
-  if (recordingState === 'starting' || recordingState === 'stopping') return;
+    if (recordingState === 'starting' || recordingState === 'stopping') return;
 
-  if (recordingState === 'idle') {
-    await chrome.storage.session.set({ recordingState: 'starting' });
-    try {
-      await startRecording(tab);
-      await chrome.storage.session.set({ recordingState: 'recording' });
-      await chrome.action.setBadgeText({ text: 'REC' });
-      await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });
-    } catch (err) {
-      console.error('Failed to start recording:', err);
-      await chrome.storage.session.set({ recordingState: 'idle' });
+    if (recordingState === 'idle') {
+      await chrome.storage.session.set({ recordingState: 'starting' });
+      try {
+        await startRecording(tab);
+        await chrome.storage.session.set({ recordingState: 'recording' });
+        await chrome.action.setBadgeText({ text: 'REC' });
+        await chrome.action.setBadgeBackgroundColor({ color: '#FF0000' });
+      } catch (err) {
+        console.error('Failed to start recording:', err);
+        await chrome.storage.session.set({ recordingState: 'idle' });
+      }
+    } else if (recordingState === 'recording') {
+      await chrome.storage.session.set({ recordingState: 'stopping' });
+      try { await stopRecording(); }
+      finally {
+        await chrome.storage.session.set({ recordingState: 'idle' });
+        await chrome.action.setBadgeText({ text: '' });
+      }
     }
-  } else if (recordingState === 'recording') {
-    await chrome.storage.session.set({ recordingState: 'stopping' });
-    try { await stopRecording(); }
-    finally {
-      await chrome.storage.session.set({ recordingState: 'idle' });
-      await chrome.action.setBadgeText({ text: '' });
-    }
+  } finally {
+    busy = false;
   }
 });
 ```
@@ -502,7 +510,7 @@ Verify EVERY item before delivering:
 - [ ] `manifest_version: 3` — no V2 APIs anywhere
 - [ ] All icon files referenced in manifest exist as real files with correct dimensions — or icons are omitted
 - [ ] Side panel has an explicit open trigger (not just a manifest declaration)
-- [ ] Code execution uses sandbox/blob/srcdoc — no `eval()` in extension pages
+- [ ] Code execution uses a manifest-declared sandbox page — no `eval()` in extension pages
 - [ ] `tabs` permission declared if `tab.url` or `tab.title` is accessed
 - [ ] All code uses `async`/`await` — no `.then()` chains
 - [ ] Content scripts batch DOM updates with `requestAnimationFrame`

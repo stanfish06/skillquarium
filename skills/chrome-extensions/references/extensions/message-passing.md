@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 ```
 
-### Request/response — return a Promise (Chrome 99+)
+### Request/response — return a Promise (Chrome 148+)
 
 Returning a Promise directly from the listener is now supported and cleaner than the IIFE pattern:
 
@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener((message, sender) => {
 });
 ```
 
-**Note:** Requires Chrome 99+, only use when minimum Chrome version is set to 99.
+**Note:** Returning a Promise from `onMessage` needs Chrome 148+, is rolling out gradually, and is disabled in extensions that declare a DevTools page (`devtools_page`). Promise-returning extension API calls (Chrome 99+) are a different feature. Unless you target only Chrome 148+ with no DevTools page, use the `sendResponse` + `return true` pattern above, which works in every version.
 **Note:** Do NOT mix the two styles. If you return a Promise, do NOT also call `sendResponse` or `return true`.
 
 ## Content script ↔ service worker

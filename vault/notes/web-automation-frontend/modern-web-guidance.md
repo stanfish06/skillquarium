@@ -27,3 +27,11 @@ created: 2026-11-10
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
 ## Notes
+
+**Supply-chain risk, accepted (2026-11-12, #1320).** The skill runs `npx -y modern-web-guidance@latest search|retrieve`
+(168 occurrences across 66 files) and is designed to: `@latest` is mutable and `-y` skips the install
+prompt, so each lookup downloads and runs the newest npm release with the agent's permissions, and the
+guidance it returns (including security topics such as passkeys and sanitization) is not reviewed here.
+Not pinned via overrides: ~66 overrides on a repo that releases daily would quarantine the skill whenever
+upstream renames a guide, and a pinned CLI would drift from the `--skill-version` the sync updates.
+Mitigation: run agents with permission prompts on, or allowlist only `npx -y modern-web-guidance@<version>`.
