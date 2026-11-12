@@ -20,6 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
+- [databricks-apps-python](../../notes/analytics-engineering/databricks-apps-python.md) — Python backend for Databricks Apps — FastAPI (default), Flask, Dash, Streamlit, Gradio, Reflex
 - [databricks-genie-agents](../../notes/analytics-engineering/databricks-genie-agents.md) — Create, manage, and query Databricks Genie Agents (formerly Genie Spaces): curated agents over Unity Catalog tables, Metric Views, and documents in UC volumes
 - [databricks-ml-training](../../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
 - [databricks-model-serving](../../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops

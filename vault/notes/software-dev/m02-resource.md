@@ -14,7 +14,7 @@ created: 2026-09-13
 # m02-resource
 
 > [!info] What it does
-> CRITICAL: Use for smart pointers and resource management. Triggers: Box, Rc, Arc, Weak, RefCell, Cell, smart pointer, heap allocation, reference counting, RAII, Drop, should I use Box or Rc, when to use Arc vs Rc, 智能指针, 引用计数, 堆分配
+> Use for smart pointers and resource management. Triggers: Box, Rc, Arc, Weak, RefCell, Cell, smart pointer, heap allocation, reference counting, RAII, Drop, should I use Box or Rc, when to use Arc vs Rc, 智能指针, 引用计数, 堆分配
 
 **Source:** [skills/m02-resource/SKILL.md](../../../skills/m02-resource/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
