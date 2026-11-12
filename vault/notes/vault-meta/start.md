@@ -19,7 +19,6 @@ created: 2026-08-07
 ## Related skills
 
 - [audit-prep-assistant](../../notes/security-auditing/audit-prep-assistant.md) — Prepares codebases for security review using Trail of Bits' checklist
-- [build-perf-baseline](../../notes/dotnet-development/build-perf-baseline.md) — Establish MSBuild/.NET build performance baselines before optimizing
 - [codex-expo-run-actions](../../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
 - [design-md-library](../../notes/web-automation-frontend/design-md-library.md) — Library of 74 ready-to-use DESIGN.md files — complete design systems (color tokens, type scale, components, layout, motion, do's/don'ts) reverse-engineered from real product and brand...
 - [docker-destructive-guardrails](../../notes/cloud-devops/docker-destructive-guardrails.md) — Use this skill before running, or recommending, any Docker command that deletes, wipes, resets, or otherwise irreversibly changes state — even if the user just says to "clean up"...

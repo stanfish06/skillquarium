@@ -18,6 +18,7 @@ created: 2026-09-04
 
 ## Related skills
 
+- [modern-web-guidance](../../notes/web-automation-frontend/modern-web-guidance.md) — Search tool for modern web development best practices
 - [neo4j-nvl-skill](../../notes/analytics-engineering/neo4j-nvl-skill.md) — Neo4j Visualization Library (NVL) — framework-agnostic graph rendering for the browser
 - [netlify-frameworks](../../notes/hosting-edge-platforms/netlify-frameworks.md) — Guide for deploying web frameworks on Netlify
 - [phaser-2d-game](../../notes/game-development/phaser-2d-game.md) — Implement 2D browser games with Phaser. Use when the user wants a Phaser, TypeScript, and Vite stack for scenes, gameplay systems, cameras, sprite animation, and DOM-overlay HUD...
