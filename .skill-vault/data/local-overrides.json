@@ -5178,7 +5178,7 @@
       "issue": 1301,
       "source": "openai/plugins",
       "find": "    - \"https://turbo.build/pack/docs\"\n    - \"https://nextjs.org/docs/architecture/turbopack\"\n  sitemap: \"https://turbo.build/sitemap.xml\"\n",
-      "replace": "    - \"https://turborepo.dev/docs\"\n    - \"https://nextjs.org/docs/app/api-reference/turbopack\"\n  sitemap: \"https://turborepo.dev/sitemap.xml\"\n"
+      "replace": "    - \"https://nextjs.org/docs/app/api-reference/turbopack\"\n  sitemap: \"https://nextjs.org/sitemap.xml\"\n"
     }
   ]
 }

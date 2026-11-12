@@ -4,9 +4,8 @@ description: Turbopack expert guidance. Use when configuring the Next.js bundler
 metadata:
   priority: 4
   docs:
-    - "https://turborepo.dev/docs"
     - "https://nextjs.org/docs/app/api-reference/turbopack"
-  sitemap: "https://turborepo.dev/sitemap.xml"
+  sitemap: "https://nextjs.org/sitemap.xml"
   pathPatterns: 
     - 'next.config.*'
   bashPatterns: 
