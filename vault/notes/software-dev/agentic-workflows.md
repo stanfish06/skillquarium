@@ -17,7 +17,7 @@ created: 2026-08-16
 # agentic-workflows
 
 > [!info] What it does
-> Route gh-aw design, creation, diagnosis, patching, active debugging, and upgrade requests to the right strategies.
+> Route gh-aw design, creation, diagnosis, patching, active debugging, upgrades, and local SDLC issue requests to the right strategies.
 
 **Source:** [skills/agentic-workflows/SKILL.md](../../../skills/agentic-workflows/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

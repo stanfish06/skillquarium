@@ -2,12 +2,12 @@
 name: pymatgen
 description: Analyzes, validates, converts, and transforms materials structures and computed materials data with pymatgen. Use for local phase diagrams, symmetry sensitivity, electronic-structure I/O, and bounded Materials Project queries.
 license: MIT
-compatibility: Python 3.11+ with uv. The verified snapshot uses pymatgen 2026.9.24, pymatgen-core 2026.9.23, and mp-api 0.46.5. Bundled help and planning CLIs use only the standard library; local scientific execution lazily requires the pinned pymatgen packages. Materials Project access additionally requires explicit network approval and the single named secret MP_API_KEY.
+compatibility: Python 3.11+ with uv. The verified snapshot uses pymatgen 2026.10.24, pymatgen-core 2026.10.31, and mp-api 0.46.5 (held below the Python-3.12-only 0.47.0 to keep this skill's Python 3.11+ floor). Bundled help and planning CLIs use only the standard library; local scientific execution lazily requires the pinned pymatgen packages. Materials Project access additionally requires explicit network approval and the single named secret MP_API_KEY.
 allowed-tools: Read Write Bash Glob Python
 metadata:
-  version: "1.5"
+  version: "1.6"
   skill-author: "K-Dense Inc."
-  last-reviewed: "2026-09-30"
+  last-reviewed: "2026-11-08"
 ---
 
 # pymatgen
@@ -23,19 +23,22 @@ The MIT frontmatter license covers this skill. `pymatgen` and
 data is generally CC BY 4.0, while contributed data remains owned by its
 contributors. Check the exact artifact and data terms before redistribution.
 
-## Verified snapshot (2026-09-30)
+## Verified snapshot (2026-11-08)
 
-- `pymatgen==2026.9.24` is the latest stable wrapper release (uploaded 2026-09-23).
+- `pymatgen==2026.10.24` is the latest stable wrapper release (uploaded 2026-10-23).
   Package metadata requires Python 3.11+ and directly requires
   `pymatgen-core>=2026.9.23`.
-- `pymatgen-core==2026.9.23` is the latest stable core release (2026-09-23).
+- `pymatgen-core==2026.10.31` is the latest stable core release (2026-10-31).
   It now contains core objects, symmetry/lattice operations, and the I/O layer,
   all under the existing `pymatgen.*` namespace.
-- `mp-api==0.46.5` is the latest stable Materials Project client
-  (2026-08-18), requires Python 3.11+, and depends on
+- `mp-api==0.46.5` is pinned deliberately, not just stale: it is the newest
+  Materials Project client that still supports Python 3.11+. The actual
+  latest release, `mp-api==0.47.0` (2026-10-19), raises its floor to
+  Python 3.12+, so bumping it would break this skill's Python 3.11+
+  compatibility line. `mp-api==0.46.5` requires Python 3.11+ and depends on
   `pymatgen>2024.2.20`.
-- The current API site is built from 2026.9.23 core documentation. Pinning both
-  distributions prevents `pymatgen==2026.9.24` from silently resolving to a
+- The current API site is built from 2026.10.31 core documentation. Pinning both
+  distributions prevents `pymatgen==2026.10.24` from silently resolving to a
   different future core.
 - Pymatgen uses date-based versions. PyPI renders the date with dots; do not
   infer semantic-version compatibility from the numbers.
@@ -49,7 +52,7 @@ Create a project lock for reproducibility:
 
 ```bash
 uv init --python 3.11
-uv add "pymatgen==2026.9.24" "pymatgen-core==2026.9.23" "mp-api==0.46.5"
+uv add "pymatgen==2026.10.24" "pymatgen-core==2026.10.31" "mp-api==0.46.5"
 uv lock
 uv sync --frozen
 ```
@@ -59,7 +62,7 @@ For a disposable reviewed environment:
 ```bash
 uv venv --python 3.11 .venv-pymatgen
 uv pip install --python .venv-pymatgen/bin/python \
-  "pymatgen==2026.9.24" "pymatgen-core==2026.9.23" "mp-api==0.46.5"
+  "pymatgen==2026.10.24" "pymatgen-core==2026.10.31" "mp-api==0.46.5"
 ```
 
 Direct pins do not freeze all transitive wheels. Preserve `uv.lock`, platform,
@@ -423,10 +426,10 @@ python scripts/artifact_manifest.py \
 - [Transformations and workflows](references/transformations_workflows.md)
 - [Materials Project API, provenance, license, and limits](references/materials_project_api.md)
 
-## Sources (verified 2026-09-30)
+## Sources (verified 2026-11-08)
 
-- [pymatgen 2026.9.24 on PyPI](https://pypi.org/project/pymatgen/)
-- [pymatgen-core 2026.9.23 on PyPI](https://pypi.org/project/pymatgen-core/)
+- [pymatgen 2026.10.24 on PyPI](https://pypi.org/project/pymatgen/)
+- [pymatgen-core 2026.10.31 on PyPI](https://pypi.org/project/pymatgen-core/)
 - [pymatgen API documentation](https://pymatgen.org/)
 - [pymatgen changelog](https://pymatgen.org/CHANGES.html)
 - [mp-api 0.46.5 on PyPI](https://pypi.org/project/mp-api/)

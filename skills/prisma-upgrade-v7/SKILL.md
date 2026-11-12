@@ -250,7 +250,7 @@ npx prisma migrate dev  # if needed
 
 ## Resources
 
-- [Official v7 Upgrade Guide](https://www.prisma.io/docs/orm/more/upgrades/to-v7)
+- [Official v7 Upgrade Guide](https://www.prisma.io/docs/orm/more/upgrade-guides/upgrading-versions/upgrading-to-prisma-7)
 - [Driver Adapters Documentation](https://www.prisma.io/docs/orm/core-concepts/supported-databases/database-drivers)
 - [Prisma Config Reference](https://www.prisma.io/docs/orm/reference/prisma-config-reference)
 

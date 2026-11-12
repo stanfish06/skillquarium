@@ -121,7 +121,7 @@ Then use `row.unitPrice` directly in Cypher without wrapping functions.
 ```bash
 source .env
 # Movies
-curl -s https://raw.githubusercontent.com/neo4j-graph-examples/movies/main/data/movies.cypher \
+curl -sf https://raw.githubusercontent.com/neo4j-graph-examples/movies/main/scripts/movies.cypher \
   | cypher-shell -a "$NEO4J_URI" -u "$NEO4J_USERNAME" -p "$NEO4J_PASSWORD"
 ```
 
