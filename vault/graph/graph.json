@@ -4,11 +4,11 @@
   "skills": 2209,
   "expert_profiles": 503,
   "nodes": 2282,
-  "edges": 16368,
+  "edges": 16370,
   "generic_names_blocked": 30,
-  "tier1_edges": 4928,
+  "tier1_edges": 4926,
   "tier2_edges": 721,
-  "alias_edges": 4587,
+  "alias_edges": 4585,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 523,
@@ -20,13 +20,13 @@
   "orphan_count": 130,
   "orphan_rate": 0.0589,
   "by_provenance": {
-   "EXTRACTED": 15582,
+   "EXTRACTED": 15584,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2209,
-   "references": 12850,
+   "references": 12852,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -8486,7 +8486,7 @@
    "id": "docker-sandboxes-kits",
    "type": "Skill",
    "label": "docker-sandboxes-kits",
-   "description": ">- Use this skill when authoring, verifying, publishing, or composing a Docker Sandboxes kit, even if the user just says they want to \"add a tool to a sandbox agent\", \"package a CLI or agent as a kit\", \"publish a kit to a registry\", or \"give a mixin its own credentials and network access\". Covers the v3 kit descriptor (`# syntax=docker/sandbox-kit:3`, `kind: workload` or `mixin`, typed capabilities, provides/requires, content recipes), building with docker buildx, checking with kit-tck and `sbx kit inspect`, composing onto a workload, and publishing and signing. Legacy v2 `spec.yaml` kits are not covered; `sbx kit validate` is not a substitute for kit-tck conformance and runtime checks.",
+   "description": ">- Use this skill when authoring, verifying, publishing, or composing a Docker Sandboxes kit, even if the user just says they want to \"add a tool to a sandbox agent\", \"package a CLI or agent as a kit\", \"publish a kit to a registry\", or \"give a mixin its own credentials and network access\". Covers the v3 kit descriptor (`# syntax=docker/sandbox-kit:3`, `kind: workload` or `mixin`, typed capabilities, provides/requires, content recipes), building with docker buildx, checking with kit-tck and `sbx kit inspect`, composing onto a workload, referencing and pinning a kit from an `sbxenv.yaml` `agent:`/`kits:` entry, and publishing and signing. Legacy v2 `spec.yaml` kits are not covered; `sbx kit validate` is not a substitute for kit-tck conformance and runtime checks.",
    "source": "skills/docker-sandboxes-kits/SKILL.md",
    "aliases": [
     "docker sandboxes kits"
@@ -16346,7 +16346,7 @@
    "id": "managed-deep-agents",
    "type": "Skill",
    "label": "managed-deep-agents",
-   "description": "Use when building, testing, or deploying Managed Deep Agents in LangSmith. Walks a user through their first agent end to end — interviewing them about what they want to build, mapping it onto what MDA can actually do, then scaffolding and deploying it. Covers the file-based project layout; define_deep_agent / defineDeepAgent; instructions, skills, memory, identity, tools, MCP servers, connections, middleware, sandboxes, schedules, channels, and evals; the mda CLI; GitHub deployments; and Context Hub.",
+   "description": "Use when building, testing, or deploying Managed Deep Agents in LangSmith. Walks a user through their first agent end to end — interviewing them about what they want to build, mapping it onto what MDA can actually do, then scaffolding and deploying it with the mda CLI. Routes to the official docs page for each capability: instructions, skills, tools, MCP, connections, middleware, sandboxes, browser use, memory, identity, subagents, schedules, channels, runtime, Context Hub, deploy, and evals.",
    "source": "skills/managed-deep-agents/SKILL.md",
    "aliases": [
     "managed deep agents"
@@ -47174,6 +47174,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "browser-use named in logfire-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "browser-use",
+   "rel": "references",
+   "dst": "managed-deep-agents",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-use named in managed-deep-agents/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -99671,6 +99680,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of alerting-irm appears in managed-deep-agents/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "managed-deep-agents",
+   "rel": "references",
+   "dst": "browser-use",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-use named in managed-deep-agents/SKILL.md body",
    "status": "accepted"
   },
   {

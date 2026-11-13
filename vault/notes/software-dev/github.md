@@ -33,7 +33,6 @@ created: 2026-08-07
 - [github-actions-ci](../../notes/software-dev/github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
 - [greploop](../../notes/software-dev/greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
 - [huggingface-papers](../../notes/ml-ai/huggingface-papers.md) — Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page
-- [managed-deep-agents](../../notes/ml-ai/managed-deep-agents.md) — Use when building, testing, or deploying Managed Deep Agents in LangSmith
 - [mcp-csharp-debug](../../notes/dotnet-development/mcp-csharp-debug.md) — Run and debug C# MCP servers locally. Covers IDE configuration, MCP Inspector testing, GitHub Copilot Agent Mode integration, logging setup, and troubleshooting
 - [migrate-dotnetfx-to-net](../../notes/dotnet-development/migrate-dotnetfx-to-net.md) — Migrate a .NET Framework (4.x) project or solution to modern .NET (10), the large cross-runtime jump — not a version bump
 - [nuget-trusted-publishing](../../notes/dotnet-development/nuget-trusted-publishing.md) — Set up NuGet trusted publishing (OIDC) on a GitHub Actions repo — replaces long-lived API keys with short-lived tokens

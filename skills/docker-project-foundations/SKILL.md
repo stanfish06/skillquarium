@@ -36,7 +36,11 @@ Do not use this skill when:
 When Dockerizing a project, always produce all three:
 
 1. **`.dockerignore`** — Create this first so the initial build context is small and safe. See `assets/dockerignore-example` for a reference.
-2. **`Dockerfile`** — Create a working starter image definition that the project can build and run with. See `assets/Dockerfile.simple`.
+2. **`Dockerfile`** — Create a working starter image definition that the project can build and run with. Start from `assets/Dockerfile.simple` and keep its baseline, even for a first scaffold:
+   - multi-stage build (dependencies, build, and a separate runtime stage) whenever the project has a build or dependency-install step;
+   - base image pinned to a specific version (e.g. `node:22-slim`), never `latest`;
+   - dependency manifests (`package.json` + lockfile) copied before the source for layer caching;
+   - a non-root `USER` set in the final stage before `CMD`/`ENTRYPOINT`.
 3. **`compose.yaml`** — Create a local development stack that includes the application service and any required dependencies. See `assets/compose-dev.yaml`.
 
 ### npm registry credentials
@@ -78,7 +82,7 @@ When a project needs a database (Postgres, MySQL, MongoDB), cache (Redis, Memcac
 - Keep unauthenticated datastores on the Compose network instead of publishing their ports. If local host tools require database access, publish only to loopback.
 - If a development-only credential fallback enables one-command startup, label it clearly and document a `.env` override.
 - Use Compose services for local databases, caches, and queues instead of host installs.
-- Keep the first scaffold simple; defer detailed image optimization and advanced Compose tuning to the owning skills.
+- Keep the first scaffold simple; defer detailed image optimization and advanced Compose tuning to the owning skills. "Simple" never means dropping the Dockerfile baseline above (multi-stage, pinned base, non-root `USER`).
 
 ### Development vs production
 
@@ -94,7 +98,7 @@ When a project needs a database (Postgres, MySQL, MongoDB), cache (Redis, Memcac
 
 ## Related skills
 
-- For Dockerfile optimization, cache strategy, non-root execution, and image hardening, use `docker-build-strategies`.
+- For Dockerfile optimization, cache strategy, advanced non-root hardening, and image hardening, use `docker-build-strategies`. The starter baseline above (including a non-root `USER`) still applies here.
 - For service dependencies, health checks, overrides, volumes, networks, and Compose debugging, use `docker-compose-patterns`.
 - For destructive Docker CLI commands (`docker system prune`, `docker rm -f`, image/network/builder pruning) and a cross-product index of destructive-command guardrails, use `docker-destructive-guardrails`.
 

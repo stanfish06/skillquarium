@@ -113,6 +113,44 @@ The tested example is not a certification of the whole skill:
 7. No public v2 retirement policy was established. Excluding v2 is a routing
    decision for this skill, not a product deprecation/removal announcement.
 
+## sbxenv.yaml kit references
+
+`sbxenv-kit-references.md` carries over the kit-related rules from the
+retired `docker-sandboxes-env` skill (removed from this catalog on
+2026-11-12; last version 0.2.1 at commit
+`188afba` of this repository). Its provenance was:
+
+- [Docker Docs: Sandbox environment files](https://docs.docker.com/ai/sandboxes/configuration/environment-files/),
+  retrieved 2026-11-10: `agent:`/`kits:` shapes, relative-source resolution,
+  create-phase args, `kit.allowedSources`, `--kit-arg`/`--kit-args-file`,
+  `mounts:`, `ports:`, `bindings:`, `registries:`, and the
+  recreate-on-change rule.
+- Installed `sbx env` help, sbx v0.51.0
+  (`7d55286de0c775148b985ed349f760f1eba06203`): flag availability.
+- docker/sandboxes `sandboxlib/sbxenv/types.go` and `sandboxlib/kit/git.go`
+  at the same commit (internal, not publicly verifiable): the
+  `git+…#ref=…&dir=…` source shape.
+- [docker/sandbox-kit-spec `skills/sbxenv`](https://github.com/docker/sandbox-kit-spec/tree/75b2696a80163497b0d0d1cd73d3fb7ccaa050fe/skills/sbxenv)
+  at `75b2696a80163497b0d0d1cd73d3fb7ccaa050fe`: handle rules and the
+  capability-to-field handling.
+- Runtime observations recorded by that skill on sbx v0.51.0, macOS arm64,
+  2026-11-10 and 2026-11-12, and not re-run for this skill: `sbx env plan`
+  accepted a nonexistent tag and a nonexistent kit; the nonexistent tag failed
+  only at create; `sbx/playwright:1.61.1` (`requires: []`) failed at create on
+  the `shell` agent with `env: 'node': No such file or directory`;
+  `sbx/task:3.50.0` composed and ran; the `sbx/playwright` tag was republished
+  with a new digest; and `shell` resolved as `docker.io/sbx/shell`.
+- The local-workload `shell` name collision comes from this skill's own
+  v0.50.1 runtime results, not from the environment-file sources. The
+  `docker buildx imagetools inspect` pinning example and the upgrade
+  checklist's descriptor-comparison step are this adaptation's
+  substitutes for the retired helper and have not been exercised against an
+  `sbxenv.yaml`.
+
+`sbx env` and environment-file `schemaVersion: "1"` are experimental. The
+retired skill's live Docker Hub helper (`scripts/kits.py`) was not carried
+over; this skill does not search or rank the public kit catalog.
+
 ## Conflicts and gaps
 
 - `docker-sandboxes-lifecycle` states that `sbx --cloud` is out of scope for
@@ -121,10 +159,12 @@ The tested example is not a certification of the whole skill:
 - The v2-to-v3 field mapping (`FIELD-MAPPING.md` in the source's
   `migrate-kit-to-v3` skill) was not supplied. No mapping is given here, and
   `migrate-kit-to-v3` is not a skill in this catalog.
-- The source does not say how v3 credential values are provided to a sandbox
-  (for example whether `sbx secret set` applies), or how `args` are supplied
-  at create time. This skill leaves those open.
-- The sibling skills `docker-sandboxes-lifecycle`, `docker-sandboxes-env`, and
+- The kit-spec source does not say how v3 credential values are provided to
+  a sandbox (for example whether `sbx secret set` applies), or how `args` are
+  supplied at create time. The `sbxenv.yaml` and `--kit-arg` rules in
+  `sbxenv-kit-references.md` come from the separate sources listed under
+  "sbxenv.yaml kit references" above, not from the kit spec.
+- The sibling skills `docker-sandboxes-lifecycle` and
   `docker-sandboxes-network-credentials` still describe kits in v2-era
   vocabulary (`spec.yaml`, `credentials:`, `permissions.network:`). Their
   routing to this skill remains correct, but their wording has not been
