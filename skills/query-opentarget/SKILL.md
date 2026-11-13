@@ -47,7 +47,7 @@ def target_diseases(ensembl_id, size=10):
         associatedDiseases(page: {index: 0, size: $size}) {
           count
           rows { disease { id name } score
-            datasourceScores { componentId score } }
+            datasourceScores { id score } }
         }
       }
     }'''
@@ -67,20 +67,27 @@ def disease_targets(disease_id, size=10):
     }'''
     return query_opentargets(query, {"diseaseId": disease_id, "size": size})
 
-# 4. Get drugs for a target
-def target_drugs(ensembl_id):
+# 4. Get drugs and clinical candidates for a target.
+# The field takes no arguments, so slice `rows` client-side instead of passing size.
+def target_drugs(ensembl_id, limit=10):
     query = '''
     query targetDrugs($ensemblId: String!) {
       target(ensemblId: $ensemblId) {
         id approvedSymbol
-        knownDrugs(size: 10) {
+        drugAndClinicalCandidates {
           count
-          rows { drug { id name } mechanismOfAction phase status
-            disease { id name } }
+          rows {
+            maxClinicalStage
+            drug { id name mechanismsOfAction { rows { mechanismOfAction } } }
+            diseases { disease { id name } }
+          }
         }
       }
     }'''
-    return query_opentargets(query, {"ensemblId": ensembl_id})
+    result = query_opentargets(query, {"ensemblId": ensembl_id})
+    candidates = result.get("data", {}).get("target", {}).get("drugAndClinicalCandidates", {})
+    candidates["rows"] = candidates.get("rows", [])[:limit]
+    return result
 
 # 5. Search diseases
 def search_disease(disease_name):
@@ -105,12 +112,18 @@ if hits:
         print(f"  {t['approvedSymbol']} ({t['approvedName']}) — score: {row['score']:.3f}")
 ```
 
-## Common Disease IDs (EFO)
+## Common Disease IDs
 
-- Alzheimer's: `EFO_0000249`
-- Breast cancer: `EFO_0000305`
-- Type 2 diabetes: `EFO_0001360`
-- Parkinson's: `EFO_0002508`
+The `disease(efoId:)` argument keeps its name but resolves MONDO identifiers; the
+platform's old `EFO_*` identifiers for these diseases now return `null`.
+
+- Alzheimer's: `MONDO_0004975`
+- Breast cancer: `MONDO_0007254`
+- Type 2 diabetes: `MONDO_0005148`
+- Parkinson's: `MONDO_0005180`
+
+Resolve any other disease with `search_disease()` and read the `id` off the hit
+rather than guessing the prefix.
 
 ## Follow-up Suggestions
 
