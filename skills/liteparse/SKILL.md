@@ -13,7 +13,7 @@ metadata: {"version": "1.0", "skill-author": "K-Dense Inc."}
 
 LiteParse is a fast, open-source document parser (Rust core, Python/Node bindings) focused on **local, layout-aware text extraction** with bounding boxes. It does not call cloud LLMs. Outputs are **plain text** (layout-preserved), **structured JSON** with per-page `text_items` (position, font metadata, optional confidence), or **Markdown** (`output_format="markdown"`) reconstructed from the spatial layout, with `image_mode`/`extract_links` options.
 
-**Version note:** Examples target **liteparse 2.10.1** (PyPI, July 2026), including the Markdown output added after 2.0.0. The upstream V1 branch is legacy; this skill documents **V2 / main** only.
+**Version note:** Examples target **liteparse 2.18.0** (PyPI, November 2026), including the Markdown output added after 2.0.0. The upstream V1 branch is legacy; this skill documents **V2 / main** only.
 
 For parser selection vs MarkItDown, the `pdf` skill, or LlamaParse, see `references/choosing_a_parser.md`.
 
@@ -39,7 +39,7 @@ Use LiteParse when you need:
 ## Installation
 
 ```bash
-uv pip install "liteparse==2.10.1"
+uv pip install "liteparse==2.18.0"
 ```
 
 This installs the Python bindings and the **`lit`** CLI. Verify:
@@ -302,6 +302,6 @@ Files are converted to PDF internally, then parsed. If conversion tools are miss
 
 - **GitHub**: https://github.com/run-llama/liteparse
 - **Docs**: https://developers.llamaindex.ai/liteparse/
-- **PyPI**: https://pypi.org/project/liteparse/2.10.1/
+- **PyPI**: https://pypi.org/project/liteparse/2.18.0/
 - **npm**: https://www.npmjs.com/package/@llamaindex/liteparse
 - **OCR API spec**: https://github.com/run-llama/liteparse/blob/main/OCR_API_SPEC.md
