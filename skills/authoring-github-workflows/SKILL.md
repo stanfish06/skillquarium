@@ -73,8 +73,8 @@ Wrap the full value in double quotes when the value embeds an expression and con
 `actionlint` understands the GitHub Actions schema *and* the expression grammar, so it catches exactly this class of bug that plain YAML linters miss. Download a pinned release and run it:
 
 ```bash
-ACTIONLINT_VERSION=1.7.7
-ACTIONLINT_SHA256=023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757
+ACTIONLINT_VERSION=1.7.12
+ACTIONLINT_SHA256=8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
 curl -fsSLo actionlint.tar.gz \
   "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
 # Verify the download against the pinned checksum before extracting/executing it:
