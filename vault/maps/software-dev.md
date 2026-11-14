@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (165)
+## Skills (166)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw design, creation, diagnosis, patching, active debugging, upgrades, and local SDLC issue requests to the right strategies
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -73,6 +73,7 @@ created: 2026-06-13
 - [github](../notes/software-dev/github.md) — Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app
 - [github-actions-ci](../notes/software-dev/github-actions-ci.md) — Authoring GitHub Actions CI/CD workflows — workflow/job/step structure, triggers, build-test matrices, dependency caching, secrets and least-privilege permissions, reusable workflows...
 - [gnucobol-mainframe-batch](../notes/software-dev/gnucobol-mainframe-batch.md) — GnuCOBOL toolchain pointers for mainframe-style batch programs (LINE/RECORD SEQUENTIAL files, PIC clauses, cobc build flags)
+- [google-elephant-goldfish-model](../notes/software-dev/google-elephant-goldfish-model.md) — Pointer to Google's Elephant-Goldfish Model (EGM) plugin, installed as a Claude Code or Codex plugin rather than copied into this vault
 - [google-rust-style](../notes/software-dev/google-rust-style.md) — Use when writing, reviewing, or refactoring Rust code — module layout and imports, function parameter and return types (&str vs &String, slice vs &Vec, iterators, bool flags), traits...
 - [greploop](../notes/software-dev/greploop.md) — Iteratively improves a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives it a 5/5 confidence score with zero unresolved comments
 - [handoff](../notes/software-dev/handoff.md) — Compact the current conversation into a handoff document for another agent to pick up

@@ -1,12 +1,12 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2209,
+  "skills": 2210,
   "expert_profiles": 503,
-  "nodes": 2282,
-  "edges": 16370,
+  "nodes": 2283,
+  "edges": 16373,
   "generic_names_blocked": 30,
-  "tier1_edges": 4926,
+  "tier1_edges": 4927,
   "tier2_edges": 721,
   "alias_edges": 4585,
   "discipline_edges": 599,
@@ -18,15 +18,15 @@
   "mean_skill_degree": 5.85,
   "median_skill_degree": 4,
   "orphan_count": 130,
-  "orphan_rate": 0.0589,
+  "orphan_rate": 0.0588,
   "by_provenance": {
-   "EXTRACTED": 15584,
+   "EXTRACTED": 15587,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2209,
-   "references": 12852,
+   "in_domain": 2210,
+   "references": 12854,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -12710,6 +12710,21 @@
    "source": "skills/google-drive-comments/SKILL.md",
    "aliases": [
     "google drive comments"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "google-elephant-goldfish-model",
+   "type": "Skill",
+   "label": "google-elephant-goldfish-model",
+   "description": "Pointer to Google's Elephant-Goldfish Model (EGM) plugin, installed as a Claude Code or Codex plugin rather than copied into this vault. EGM drafts software design specs with full project context (Elephant) and reviews them with fresh-context subagents that never saw the conversation (Goldfish). Use when the user wants to brainstorm a feature into a design doc, draft a spec section by section, run a fresh-eyes review of a design doc, README, or PR plan against the code, check docs for drift from the code, bootstrap directory READMEs, or mentions EGM, egm-review, or elephant-goldfish.",
+   "source": "skills/google-elephant-goldfish-model/SKILL.md",
+   "aliases": [
+    "google elephant goldfish model"
    ],
    "uses": 0,
    "successes": 0,
@@ -84743,6 +84758,24 @@
    "status": "accepted"
   },
   {
+   "src": "google-elephant-goldfish-model",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "google-elephant-goldfish-model",
+   "rel": "references",
+   "dst": "marketplace",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "marketplace named in google-elephant-goldfish-model/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "google-rust-style",
    "rel": "in_domain",
    "dst": "domain:software-dev",
@@ -100274,6 +100307,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "marketplace named in firecrawl-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "marketplace",
+   "rel": "references",
+   "dst": "google-elephant-goldfish-model",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "marketplace named in google-elephant-goldfish-model/SKILL.md body",
    "status": "accepted"
   },
   {
