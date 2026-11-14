@@ -43,6 +43,54 @@ def checklist(text):
 
 
 class GuidanceTests(unittest.TestCase):
+    def test_split_creator_routes_resolve_without_hidden_tail_reads(self):
+        creator = ROOT / ".github/aw/create-agentic-workflow.md"
+        topics = (
+            "create-agentic-workflow-design.md",
+            "create-agentic-workflow-validation.md",
+            "create-agentic-workflow-evaluation.md",
+        )
+        prefix = creator.read_bytes()[:8000].decode("utf-8")
+        for topic in topics:
+            with self.subTest(topic=topic):
+                self.assertIn(f"]({topic})", prefix)
+                self.assertLessEqual(len((creator.parent / topic).read_bytes()), 7500)
+        for source in (creator, *(creator.parent / topic for topic in topics)):
+            for link in re.findall(r"\]\(([^)]+)\)", source.read_text()):
+                if link.startswith("https://"):
+                    continue
+                path, _, anchor = link.partition("#")
+                target = source.parent / path if path else source
+                with self.subTest(source=source.name, link=link):
+                    self.assertTrue(target.is_file())
+                    if anchor:
+                        headings = re.findall(r"^#{1,6} (.+)$", target.read_text(), re.MULTILINE)
+                        self.assertIn(anchor, [heading_anchor(heading) for heading in headings])
+
+    def test_execution_routes_and_completion_survive_prefix_only_reads(self):
+        contracts = {
+            "AGENTS.md": ("make agent-report-progress", "make recompile", "pkg/logger", "prompt-token-efficiency"),
+            ".github/aw/github-agentic-workflows.md": ("syntax.md", "safe-outputs.md", "gh aw compile", "squad.md"),
+            ".github/aw/create-agentic-workflow.md": (
+                "read-only", "create-agentic-workflow-design.md", "create-agentic-workflow-validation.md",
+                "gh aw compile <workflow-id>", "noop", "Default:",
+            ),
+            ".github/aw/debug-agentic-workflow.md": (
+                "Non-dry-run dispatch remains prohibited", "before execution or upload",
+                "debug-security-review.md", "Report mode", "#collect-existing-evidence",
+            ),
+            ".github/skills/agentic-workflows/SKILL.md": (
+                "Create a new connector:", ".github/aw/squad.md",
+                "tools.work-queue", "Token acquisition/refresh",
+            ),
+        }
+        for name, required in contracts.items():
+            data = (ROOT / name).read_bytes()
+            prefix = data[:7500].decode("utf-8", errors="ignore")
+            for rule in required:
+                with self.subTest(path=name, rule=rule):
+                    self.assertIn(rule, prefix)
+
     def test_connector_creation_routes_to_spec_and_skill(self):
         skill = ROOT / ".github/skills/create-connector/SKILL.md"
         spec = ROOT / "docs/src/content/docs/specs/connector-specification.md"
@@ -87,6 +135,16 @@ class GuidanceTests(unittest.TestCase):
     def test_ad_hoc_recommendations_name_defaults_and_bound_targets(self):
         creator = normalized((ROOT / ".github/aw/create-agentic-workflow.md").read_text())
         self.assertIn("For each material undefined term, propose and clearly label a reasonable `Default:`", creator)
+        for contract in (
+            "Verify config files named in the request",
+            "require `noop` and report, never guess",
+            "what “adds” covers",
+            "lockfile scope",
+            "zero-item behavior",
+            "in the proposed prompt, not only notes",
+        ):
+            with self.subTest(contract=contract):
+                self.assertIn(contract, creator)
 
         safe_outputs = normalized((ROOT / ".github/aw/safe-outputs-content.md").read_text())
         self.assertIn('Avoid `target: "*"` when a workflow needs to act on the triggering issue/PR and one known tracker', safe_outputs)
@@ -96,6 +154,13 @@ class GuidanceTests(unittest.TestCase):
         triggers = normalized((ROOT / ".github/aw/create-agentic-workflow-trigger-details.md").read_text())
         self.assertIn("`opened` and process that event only when `github.event.issue.milestone != null`", triggers)
         self.assertIn("events-that-trigger-workflows#issues", triggers)
+
+    def test_pr_policy_checks_use_trusted_policy_sources(self):
+        triggers = normalized((ROOT / ".github/aw/triggers.md").read_text())
+        self.assertIn(
+            "read the policy from the default branch or a CODEOWNERS-protected path, never the PR head",
+            triggers,
+        )
 
     def test_workflow_guidance_covers_deterministic_checks_outputs_and_pr_diffs(self):
         patterns = normalized((ROOT / ".github/aw/workflow-patterns.md").read_text())
@@ -176,6 +241,7 @@ class GuidanceTests(unittest.TestCase):
         phase = designer.split("### Phase 4: Data Strategy\n", 1)[1].split("\n### Phase 5:", 1)[0]
         phase = normalized(phase)
         creator = (ROOT / ".github/aw/create-agentic-workflow.md").read_text()
+        design = (ROOT / ".github/aw/create-agentic-workflow-design.md").read_text()
         self.assertLess(phase.index("#### Memory reuse checkpoint"), phase.index("Ask:"))
         self.assertIn("](memory.md#scheduled-dreaming)", phase)
         for required in (
@@ -192,7 +258,7 @@ class GuidanceTests(unittest.TestCase):
                 self.assertIn(required, phase)
         route = "](designer.md#memory-reuse-checkpoint)"
         self.assertIn(route, creator)
-        self.assertLess(creator.index(route), creator.index("### 4. Select tools"))
+        self.assertLess(design.index(route), design.index("### 4. Select tools"))
         self.assertIn("even without an explicit memory or dreaming request", creator)
         memory = (ROOT / ".github/aw/memory.md").read_text()
         self.assertIn("A recurring schedule or a growing note count alone is not enough", normalized(memory))
@@ -448,6 +514,25 @@ class GuidanceTests(unittest.TestCase):
         ):
             self.assertIn(required, guide)
         self.assertNotIn("Dispatch timeout/no run ID |", DEBUG_GUIDE.read_text())
+
+    def test_unmodified_default_branch_runs_do_not_require_dry_run(self):
+        guide = normalized(LIVE_TESTING.read_text().split(
+            "## Run an Unmodified Default-Branch Workflow\n", 1
+        )[1].split("\n## ", 1)[0])
+        for required in (
+            "user explicitly requests",
+            "**dry-run is not required** if the workflow is unmodified",
+            "Do not recompile",
+            "actual default branch",
+            "Review the published source, generated lock, imports and pins",
+            "[Live Debug Loop](#live-debug-loop)",
+            "gh aw run WORKFLOW --ref DEFAULT_BRANCH",
+            "verifying the resulting run SHA",
+            "does not override stricter host or repository restrictions",
+            "Any workflow change returns to the branch preparation and review gates",
+        ):
+            with self.subTest(required=required):
+                self.assertIn(required, guide)
 
     def test_cli_mapping_uses_capabilities_not_client_assumptions(self):
         commands = (ROOT / ".github/aw/cli-commands.md").read_text()

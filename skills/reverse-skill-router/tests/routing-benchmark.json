@@ -1,6 +1,6 @@
 {
   "meta": {
-    "description": "reverse-skill 路由回归基准。每条用例 = (hint, expect)。修改路由规则后必须保持此基准全绿；新增路由场景请同步添加用例。",
+    "description": "reverse-skill 路由回归基准。每条用例 = (hint, expect)。修改路由规则后必须保持此基准全绿；新增路由场景请同步添加用例。 【20261016 补充】新增 15 条「中文紧贴 ASCII 关键词、无空格分隔」的用例：原基准的中文用例全部用空格隔开（如「安卓 APK 加固」），从未覆盖「分析这个APK」这种真实写法，而 .NET regex 把汉字视作 \\w，导致 \\bapk\\b 这类规则在此写法下静默失效；这批用例用于锁定该回归。",
     "runner": "skills/scripts/test-routing.ps1",
     "generated": "2026-08-02",
     "quickNote": "quick=true 的用例是每个路由的最小回归集（smoke 快速模式使用）"
@@ -138,6 +138,21 @@
     },
     {
       "hint": "r2mcp analyze binary",
+      "expect": "R7",
+      "quick": false
+    },
+    {
+      "hint": "用 radare2 分析这个二进制文件",
+      "expect": "R7",
+      "quick": false
+    },
+    {
+      "hint": "rabin2 查看导入表和节区",
+      "expect": "R7",
+      "quick": false
+    },
+    {
+      "hint": "radiff2 对两个固件做二进制差分",
       "expect": "R7",
       "quick": false
     },
@@ -627,6 +642,41 @@
       "quick": false
     },
     {
+      "hint": "reverse a stripped go binary",
+      "expect": "R33",
+      "quick": false
+    },
+    {
+      "hint": "recover types with goresym",
+      "expect": "R33",
+      "quick": false
+    },
+    {
+      "hint": "rustc compiled binary reverse",
+      "expect": "R33",
+      "quick": false
+    },
+    {
+      "hint": "analyze this go 程序 的符号",
+      "expect": "R33",
+      "quick": false
+    },
+    {
+      "hint": "go 语言 符号恢复",
+      "expect": "R33",
+      "quick": false
+    },
+    {
+      "hint": "go 逆向 恢复符号表",
+      "expect": "R33",
+      "quick": false
+    },
+    {
+      "hint": "rust 逆向 这个二进制",
+      "expect": "R33",
+      "quick": false
+    },
+    {
       "hint": "Windows AD 域渗透 kerberos",
       "expect": "R24",
       "quick": false
@@ -692,6 +742,26 @@
       "quick": true
     },
     {
+      "hint": "ctf reverse challenge",
+      "expect": "R41",
+      "quick": false
+    },
+    {
+      "hint": "awd competition sandbox",
+      "expect": "R41",
+      "quick": false
+    },
+    {
+      "hint": "比赛题",
+      "expect": "R41",
+      "quick": false
+    },
+    {
+      "hint": "ctf pwn rop chain",
+      "expect": "R17",
+      "quick": false
+    },
+    {
       "hint": "CTF pwn 栈溢出",
       "expect": "R17",
       "quick": false
@@ -708,6 +778,46 @@
     },
     {
       "hint": "攻击路径图",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "render this with graphviz",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "generate a plantuml diagram",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "draw a flowchart of the control flow",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "画一个 状态图",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "生成 数据流图",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "画 er图 描述表关系",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "帮我 画图 表示架构",
+      "expect": "R39",
+      "quick": false
+    },
+    {
+      "hint": "输出一个 图表 展示流程",
       "expect": "R39",
       "quick": false
     },
@@ -894,6 +1004,101 @@
     {
       "hint": "Twitter marketing sentiment for our product",
       "expect": "R0",
+      "quick": false
+    },
+    {
+      "hint": "分析这个APK，看看有没有加固",
+      "expect": "R1",
+      "quick": false
+    },
+    {
+      "hint": "看看这个apk",
+      "expect": "R1",
+      "quick": false
+    },
+    {
+      "hint": "这个apk有加固",
+      "expect": "R1",
+      "quick": false
+    },
+    {
+      "hint": "这个radare2怎么用",
+      "expect": "R7",
+      "quick": false
+    },
+    {
+      "hint": "用r2分析",
+      "expect": "R7",
+      "quick": false
+    },
+    {
+      "hint": "pwn一下这个二进制",
+      "expect": "R17",
+      "quick": false
+    },
+    {
+      "hint": "做个pwn题",
+      "expect": "R17",
+      "quick": false
+    },
+    {
+      "hint": "查一下osint",
+      "expect": "R44",
+      "quick": false
+    },
+    {
+      "hint": "看看这个ctf题目",
+      "expect": "R41",
+      "quick": false
+    },
+    {
+      "hint": "逆向这个so文件中的算法",
+      "expect": "R6",
+      "quick": false
+    },
+    {
+      "hint": "用ida看看这个dll",
+      "expect": "R6",
+      "quick": false
+    },
+    {
+      "hint": "分析这个.elf文件中的符号",
+      "expect": "R6",
+      "quick": false
+    },
+    {
+      "hint": "看看这个k8s集群",
+      "expect": "R23",
+      "quick": false
+    },
+    {
+      "hint": "查一下这个oauth接口",
+      "expect": "R12",
+      "quick": false
+    },
+    {
+      "hint": "分析这个mysql数据库",
+      "expect": "R35",
+      "quick": false
+    },
+    {
+      "hint": "看看这个网站的sign参数",
+      "expect": "R3",
+      "quick": false
+    },
+    {
+      "hint": "分析这个sign参数是怎么生成的",
+      "expect": "R3",
+      "quick": false
+    },
+    {
+      "hint": "接口signature怎么算的",
+      "expect": "R3",
+      "quick": false
+    },
+    {
+      "hint": "请求签名算法还原",
+      "expect": "R3",
       "quick": false
     }
   ]

@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "688e66c404b019f2a1de29d8a764c26802753db1",
+      "skillFolderHash": "16071b5f5f132934ae18ec7eba477db65b52e8b1",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-13T14:32:24.594Z"
+      "updatedAt": "2026-11-14T13:29:32.581Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "c0435444e5ceefedcbbd8d177c9d798dab484b19",
+      "skillFolderHash": "70a655617ceb1691f6e5ad5081b57e6b7704c7c5",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-12T15:10:47.955Z"
+      "updatedAt": "2026-11-14T13:29:52.600Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,18 +8828,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "9d814aabc6719af94efb5f33d0993cde166edd2b",
+      "skillFolderHash": "1dd6896f6b9cbe15fb89be4c47e6674dec026f54",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-12T15:11:06.427Z"
+      "updatedAt": "2026-11-14T13:30:28.845Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/SKILL.md",
-      "skillFolderHash": "c26cde5a6e890c32bf0e9169c4e64716dfd474d8",
+      "skillFolderHash": "fae01bac647459f5830fd19ae524a36e4a71c90a",
       "installedAt": "2026-08-20T02:13:18.927Z",
-      "updatedAt": "2026-10-10T12:49:44.697Z"
+      "updatedAt": "2026-11-14T13:30:39.969Z"
     },
     "api-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -8855,9 +8855,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/apk-reverse/SKILL.md",
-      "skillFolderHash": "66b1c7ad94730144fb8b04fb844bf269e759c472",
+      "skillFolderHash": "60554126d7b0f8c8632984cd3f4be2c84eef58e3",
       "installedAt": "2026-08-20T02:13:18.950Z",
-      "updatedAt": "2026-08-20T02:19:55.494Z"
+      "updatedAt": "2026-11-14T13:30:41.804Z"
     },
     "attack-chain": {
       "source": "zhaoxuya520/reverse-skill",
@@ -8900,9 +8900,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/case-review/SKILL.md",
-      "skillFolderHash": "d002eec42876e05183bb6d27c798dda31541f61b",
+      "skillFolderHash": "5339ca6a32b0e79813e0ae598a1853c979140832",
       "installedAt": "2026-08-20T02:13:19.004Z",
-      "updatedAt": "2026-08-24T07:19:08.659Z"
+      "updatedAt": "2026-11-14T13:30:43.395Z"
     },
     "cloud-k8s": {
       "source": "zhaoxuya520/reverse-skill",
@@ -8954,9 +8954,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/docs-generator/SKILL.md",
-      "skillFolderHash": "9e0c8b411d03b6c7b4bf965c8c6bb8b1c3cd2f22",
+      "skillFolderHash": "8bd2c2e04992133395198257690735a2f95c4682",
       "installedAt": "2026-08-20T02:13:19.507Z",
-      "updatedAt": "2026-08-20T02:19:55.528Z"
+      "updatedAt": "2026-11-14T13:30:44.930Z"
     },
     "dotnet-reverse": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9008,9 +9008,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/go-rust-reverse/SKILL.md",
-      "skillFolderHash": "9982f05d383e388c769597e3abd874575a42f725",
+      "skillFolderHash": "d7ab4d950db5d163753c3e16c542456f537c81ab",
       "installedAt": "2026-08-20T02:13:19.619Z",
-      "updatedAt": "2026-08-20T02:19:55.544Z"
+      "updatedAt": "2026-11-14T13:30:46.563Z"
     },
     "hardware-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9026,9 +9026,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/ida-reverse/SKILL.md",
-      "skillFolderHash": "d55b8e80f159025e8b3ffb076e1b30b47f2c5563",
+      "skillFolderHash": "043e18fe105616dabe9be4ab78af55730a8bfa35",
       "installedAt": "2026-08-20T02:13:19.667Z",
-      "updatedAt": "2026-10-10T12:49:46.665Z"
+      "updatedAt": "2026-11-14T13:30:48.291Z"
     },
     "identity-federation": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9080,9 +9080,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/mobile-reverse/SKILL.md",
-      "skillFolderHash": "20cfcd98640acf7aeea60d0d4f1531a32223e568",
+      "skillFolderHash": "c5d335a50c752586f1ea8f2fa1c8abb3d6f2b189",
       "installedAt": "2026-08-20T02:13:19.701Z",
-      "updatedAt": "2026-08-20T02:19:55.570Z"
+      "updatedAt": "2026-11-14T13:30:50.022Z"
     },
     "ot-ics": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9546,18 +9546,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "97b7b4172010602aa303b48b70967e25699cba7d",
+      "skillFolderHash": "8f666d2b6fb7c0b32048c1fa262a850d6944cdfc",
       "installedAt": "2026-08-21T01:50:31.549Z",
-      "updatedAt": "2026-10-28T12:48:55.770Z"
+      "updatedAt": "2026-11-14T13:30:53.002Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "9f811d834dffeecf58d7b7f08121925bd0226b49",
+      "skillFolderHash": "fa73d004e0f1075abb300a0e77113dc585ede113",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-06T14:14:58.750Z"
+      "updatedAt": "2026-11-14T13:30:56.350Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -10626,9 +10626,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-model-serving/SKILL.md",
-      "skillFolderHash": "a0d5dd96c26dc7c3e2887eb92c6332181c036c63",
+      "skillFolderHash": "8021bbaaafebc83e24f309eade6a567bacd1d272",
       "installedAt": "2026-08-23T17:20:36.186Z",
-      "updatedAt": "2026-10-28T12:49:18.271Z"
+      "updatedAt": "2026-11-14T13:30:59.913Z"
     },
     "databricks-pipelines": {
       "source": "databricks/databricks-agent-skills",

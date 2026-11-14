@@ -6,9 +6,9 @@ description: Use for authorized Android or iOS application reverse engineering a
 
 ## ACTION REQUIRED（读完后立刻执行）
 
-1. `NOW`: 读取 `../reverse-skill-router/field-journal/precedent-reverse.md` — 确认本 skill 的操作是已授权的常规操作
+1. `NOW`: 读取 `../field-journal/precedent-reverse.md` — 确认本 skill 的操作是已授权的常规操作
 2. `NOW`: 确认当前任务是否命中本 skill 的适用范围
-3. `NEXT`: 读取 `../reverse-skill-router/tool-index.md`，校验工具可用性和实际路径
+3. `NEXT`: 读取 `../tool-index.md`，校验工具可用性和实际路径
 4. `NEXT`: 缺工具时调用 bootstrap，不要猜路径
 5. `ACT`: 进入"工作流"第一步并执行，不要停在确认状态
 
@@ -39,7 +39,7 @@ Android：
 
 iOS：
 □ IPA 获取（App Store / ipatool / Apple Configurator）
-□ 解密 App Store 二进制: frida-ios-dump / Clutch
+□ 解密 App Store 二进制: frida-ios-dump / Clutch（设备在线）；fairplay-decrypt（离线，需账号凭据）
 □ Info.plist 分析: ATS 配置、URL Scheme、Queries Schemes
 □ class-dump: 导出 ObjC 类结构
 □ 加固检测: 是否使用 Swift/ObjC 混淆
@@ -178,7 +178,8 @@ Interceptor.attach(Module.findExportByName("libcommonCrypto.dylib", "CCCrypt"), 
 | Objection | A+I | Frida REPL 增强 |
 | MobSF | A+I | 自动化 SAST+DAST |
 | class-dump | I | ObjC 类导出 |
-| frida-ios-dump | I | IPA 解密 |
+| frida-ios-dump | I | IPA 解密（设备在线） |
+| fairplay-decrypt | I | IPA 离线解密（16B 账号凭据，见 references/ios-reverse-guide.md） |
 | jtool2 | I | Mach-O 分析 |
 | Burp Suite | A+I | HTTP 拦截 |
 | mitmproxy | A+I | 脚本化代理 |
