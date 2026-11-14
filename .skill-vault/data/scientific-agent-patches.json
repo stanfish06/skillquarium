@@ -84,5 +84,12 @@
       "find": "- **PCB second level:** pad design per IPC-7093, stencil aperture, and reflow profile for voiding under thermal pads.",
       "replace": "- **PCB second level:** use IPC-7095E for BGA pad design and assembly; use IPC-7093 for bottom-termination components (QFN/SON/DFN/LGA), including stencil aperture, thermal-pad attachment, and voiding guidance."
     }
+  ],
+  "laser-physicist": [
+    {
+      "id": "sech2-time-bandwidth-product",
+      "find": "- Ultrafast: group velocity dispersion (GVD) and third-order dispersion (TOD) chirp pulses; mode-locking\n  (Kerr lens, SESAM, NPR) produces pulse train with repetition rate f_rep = c/(2L). Time-bandwidth product\n  ΔtΔν ≈ 0.44 for transform-limited sech²; chirped pulses exceed this until compressed.",
+      "replace": "- Ultrafast: group velocity dispersion (GVD) and third-order dispersion (TOD) chirp pulses; mode-locking\n  (Kerr lens, SESAM, NPR) produces pulse train with repetition rate f_rep = c/(2L). Time-bandwidth product\n  ΔtΔν ≈ 0.315 for transform-limited sech² intensity pulses (≈ 0.441 for Gaussian); chirped\n  pulses exceed the applicable transform limit until compressed."
+    }
   ]
 }
