@@ -160,6 +160,16 @@
       "replace": "llm = BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")  # use the inference-profile ID; region prefix (us./eu./global.) must match your Bedrock deployment"
     }
   ],
+  "neo4j-kafka-skill": [
+    {
+      "id": "kafka-connector-asset-name",
+      "issue": 1178,
+      "source": "neo4j-contrib/neo4j-skills",
+      "file": "README.md",
+      "find": "# Or download directly\ncurl -L https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connector.zip \\\n     -o neo4j-kafka-connector.zip\n",
+      "replace": "# Or download directly. The release asset is named neo4j-kafka-connect-neo4j-<version>\n# and carries the version, so there is no static latest/download name \u2014 resolve it first.\nVERSION=$(curl -fsSL https://api.github.com/repos/neo4j/neo4j-kafka-connector/releases/latest \\\n  | sed -n 's/.*\"tag_name\": *\"\\([^\"]*\\)\".*/\\1/p')\ncurl -fL \"https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connect-neo4j-${VERSION}.zip\" \\\n     -o \"neo4j-kafka-connect-neo4j-${VERSION}.zip\"\n"
+    }
+  ],
   "ui-toolkit": [
     {
       "id": "videosdk-ui-toolkit-rename-guide",
