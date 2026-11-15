@@ -557,8 +557,8 @@
       "quick": false
     },
     {
-      "hint": "iOS 越狱 检测绕过",
-      "expect": "R2",
+      "hint": "ai 红队 模型安全测试",
+      "expect": "R14",
       "quick": false
     },
     {
@@ -1004,6 +1004,16 @@
     {
       "hint": "Twitter marketing sentiment for our product",
       "expect": "R0",
+      "quick": false
+    },
+    {
+      "hint": "wireshark 分析 example.net 的 pcap 流量",
+      "expect": "R21",
+      "quick": false
+    },
+    {
+      "hint": "api.example.net graphql bola",
+      "expect": "R12",
       "quick": false
     },
     {

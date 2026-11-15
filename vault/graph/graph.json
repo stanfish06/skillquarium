@@ -6,9 +6,9 @@
   "nodes": 2283,
   "edges": 16377,
   "generic_names_blocked": 30,
-  "tier1_edges": 4924,
+  "tier1_edges": 4923,
   "tier2_edges": 721,
-  "alias_edges": 4581,
+  "alias_edges": 4580,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 523,
@@ -137890,7 +137890,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in radare2/SKILL.md body",
+   "justification": "radare2 named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143515,7 +143515,7 @@
    "dst": "radare2",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in radare2/SKILL.md body",
+   "justification": "radare2 named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {

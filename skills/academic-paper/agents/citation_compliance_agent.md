@@ -61,6 +61,10 @@ Reference: `references/citation_format_switcher.md`
 | **IEEE** | Numbered brackets [1], in order of appearance |
 | **Vancouver** | Numbered superscript, in order of appearance |
 
+### Other Citation Styles: Report Only
+
+When the selected style is Chicago 17th, MLA 9th, IEEE, or Vancouver, change nothing, in any mode, except for a corrected version that the user asks for in `citation-check` mode (below). This rule comes before every correction, conversion, sorting, or rebuilding step in this file, including the Common Auto-Corrections, the Citation Auto-Correction Decision Tree, the Annotated Bibliography corrections in Step 1.3 and in the Handoff Format Requirements, the Failure Handling Strategies (format conversion, unifying formats, adding DOIs or entries), the Edge Case Handling (rebuilding a reference list, adding years), and the sorting rule in the handoff to `formatter_agent`. In `revision` mode, propose no corrections. In `citation-check` mode, produce a corrected version of the user's text only when the user asks for one, and begin it with a note that several checks in this file were written for APA 7th, so a correction for another style may be wrong and needs the author's check against the style's own manual. Report each finding under Items Flagged for Review, and count none as auto-corrected or proposed. Pass the draft, the in-text citations, and the reference list on as the author wrote them: in `full` mode the Corrected Draft is the draft unchanged, and in every mode the reference list is titled `### Reference List (unchanged; see Items Flagged for Review)`. Leave the Corrections Made (or Proposed Corrections) table out. In Items Flagged for Review, list each quality gate the paper does not meet, with its Failure Handling as a suggestion for the author, and say once that several checks in this file were written for APA 7th, so a finding for another style may be wrong and needs the author's check against the style's own manual.
+
 ## Verification Checklist
 
 ### 1. In-Text <-> Reference List Cross-Check
@@ -175,6 +179,8 @@ When errors are found:
 
 ### Common Auto-Corrections
 
+These rows are APA 7th rules. The rows of Common Citation Error Patterns below apply only when the selected style has that rule (see the note above that table). For another style, apply that style's rule from Core Verification Rules by Format below (for example, its et al. threshold, its reference list ordering, and its title case). If Core Verification Rules by Format does not settle a case for that style, flag it for review; do not apply the APA correction.
+
 | Error | Correction |
 |-------|-----------|
 | Missing "et al." for 3+ authors | Add "et al." |
@@ -229,6 +235,8 @@ In `revision` mode nothing above is applied to the draft (Auto-Correction Protoc
 
 ```
 INPUT: Complete Draft (from draft_writer_agent) + Paper Configuration Record (citation format)
+       + Annotated Bibliography (from literature_strategist_agent), when present:
+         the ground truth for citation details (Handoff Format Requirements)
 OUTPUT: Citation Audit Report; plus the Corrected Draft in `full` mode only,
         or, in `citation-check` mode, a corrected version of the user's text
         when the user asks for it
@@ -238,6 +246,18 @@ Step 1: Build Citation Index
       - Per entry: {author, year, page?, location (section+paragraph), type (narrative/parenthetical)}
   1.2 Scan Reference List, extract all entries -> Build RefList[]
       - Per entry: {authors[], year, title, source, doi?, url?, entry_type}
+  1.3 IF the Annotated Bibliography is present:
+        FOR each item in RefList:
+          FIND its Annotated Bibliography entry
+          IF found and details differ -> correct the entry from the Bibliography,
+                                         as the Auto-Correction Protocol allows in this mode,
+                                         and do the same to its in-text citations
+          IF not found -> flag for review ("not in Annotated Bibliography")
+        When the corrections are applied (`full` mode, or a corrected version of the
+        user's text that the user asked for in `citation-check` mode), run Step 2 on
+        the corrected entries. When they stay proposals (`revision` mode, or a
+        report-only `citation-check`), run Step 2 on the entries as they are, and
+        note each orphan result that a proposed correction would change
 
 Step 2: Cross-Check (Zero Orphan Check)
   FOR each item in InTextList:
@@ -254,12 +274,13 @@ Step 3: Format Compliance Check
     IF violation found -> auto-correct if rule is deterministic
                        -> flag for review if ambiguous
 
-Step 4: DOI/URL Check
+Step 4: DOI/URL Check (by selected_style; see DOI format in Core Verification Rules by Format)
   FOR each item in RefList:
     IF doi exists -> verify format (https://doi.org/xxxxx)
-    IF doi missing -> flag "missing DOI"
+    IF doi missing -> flag "missing DOI" only when selected_style requires a DOI
+                      or expects one when available
     IF url exists -> check completeness
-    CHECK no trailing period after DOI/URL
+    IF selected_style is APA 7th -> CHECK no trailing period after DOI/URL
 
 Step 5: Additional Checks
   5.1 Self-citation ratio
@@ -300,6 +321,8 @@ If the format cannot be determined, ask the user; if the user does not respond, 
 | Title case | Sentence case (articles) | Title Case (book titles) | Title Case | Sentence case | Sentence case |
 
 ### Common Citation Error Patterns
+
+Apply a row only when the selected style has that rule. Rows 5, 6, 7, 9, and 10 are APA 7th rules. Row 1 applies only to author-date styles (APA, Chicago author-date); MLA, IEEE, and Vancouver in-text citations carry no year. For another style, follow the guard under Common Auto-Corrections above.
 
 | # | Error Pattern | Detection Rule | Auto-correctable? |
 |---|---------|---------|----------|
@@ -446,7 +469,7 @@ Quality gate not passed ->
 |-----------|---------|---------|
 | `peer_reviewer_agent` | `full` mode: Corrected Draft (the draft the first Phase 6 review reads; later rounds review the writer's revised draft) + Citation Audit Report; otherwise: Citation Audit Report (for review reference) | Markdown with all citations fixed; this agent's Output Format |
 | `draft_writer_agent` | `full` mode: Corrected Draft (the base that the first Phase 6 revision round edits) | Markdown with all citations fixed |
-| `formatter_agent` | Corrected Reference List + Citation Audit Report; in `full` mode, also the Corrected Draft when Phase 6 accepts it without a revision round | Markdown Reference List + Audit table; Markdown full text |
+| `formatter_agent` | Corrected Reference List + Citation Audit Report; in `full` mode, also the Corrected Draft when it goes to Phase 7 without a revision round: Phase 6 accepts it, or the user confirms early formatting before any revision round (`formatter_agent` § Review Status) | Markdown Reference List + Audit table; Markdown full text |
 | User | `full` mode: flagged items for review; `revision` mode: the whole Citation Audit Report, with its corrections and Corrected Reference List as proposals; `citation-check` mode: the deliverable that the Citation-Check Mode section of `SKILL.md` defines, plus a corrected version of the user's text only when the user asks | `full` mode: Items Flagged for Review table; `revision` mode: this agent's Output Format, with the revision-mode headings; `citation-check` mode: this agent's Output Format |
 
 ### Handoff Format Requirements

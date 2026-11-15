@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "16071b5f5f132934ae18ec7eba477db65b52e8b1",
+      "skillFolderHash": "94f170bea383aa1ec93790871f7f748c317e572f",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-14T13:29:32.581Z"
+      "updatedAt": "2026-11-15T13:55:30.424Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "70a655617ceb1691f6e5ad5081b57e6b7704c7c5",
+      "skillFolderHash": "cb737f8a5162bff1e82eaa55313bb57da6490bcd",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-14T13:29:52.600Z"
+      "updatedAt": "2026-11-15T13:55:47.966Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8837,9 +8837,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/SKILL.md",
-      "skillFolderHash": "fae01bac647459f5830fd19ae524a36e4a71c90a",
+      "skillFolderHash": "2f461cd00e4059127c38806ce599a89cff21bc3a",
       "installedAt": "2026-08-20T02:13:18.927Z",
-      "updatedAt": "2026-11-14T13:30:39.969Z"
+      "updatedAt": "2026-11-15T13:55:57.312Z"
     },
     "api-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9134,9 +9134,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/radare2/SKILL.md",
-      "skillFolderHash": "aa7a391f9e49759b32ec5a67d2ff2c08e8674531",
+      "skillFolderHash": "7df919615c16c8f853383658c0006d51ba3bd037",
       "installedAt": "2026-08-20T02:13:19.737Z",
-      "updatedAt": "2026-08-20T02:19:55.589Z"
+      "updatedAt": "2026-11-15T13:56:00.799Z"
     },
     "radio-sdr": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9537,9 +9537,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "9c7db4a99571fece641daaf2147d6e8f994f484b",
+      "skillFolderHash": "006a115598f653ca591a157ea8867ee57568361d",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-12T15:11:11.629Z"
+      "updatedAt": "2026-11-15T13:56:04.436Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
