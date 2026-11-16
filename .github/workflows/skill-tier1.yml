@@ -119,7 +119,11 @@ jobs:
       group: vault-write
       cancel-in-progress: false
     steps:
+      # the branch tip, not the dispatch commit: an earlier record job or a skill
+      # update may have landed during the sweep
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - uses: oven-sh/setup-bun@v2
         with:

@@ -1,4 +1,4 @@
-import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { availableParallelism } from "node:os";
 import { join, relative, resolve } from "node:path";
 import { discoverSkills } from "../catalog/discover";
@@ -108,9 +108,11 @@ export function parseTier1Args(args: string[]): Tier1Options {
 
 /** Skill names touched between the merge base with `ref` and the working tree. */
 export function changedSkills(root: string, ref: string): string[] {
-  const proc = Bun.spawnSync(["git", "diff", "--name-only", "--merge-base", ref, "--", "skills"], {
-    cwd: root,
-  });
+  // --no-renames lists both ends of a move, so a file moved between skills selects both
+  const proc = Bun.spawnSync(
+    ["git", "diff", "--name-only", "--no-renames", "--merge-base", ref, "--", "skills"],
+    { cwd: root },
+  );
   if (proc.exitCode !== 0)
     throw new Error(`git diff against ${ref} failed: ${proc.stderr.toString().trim()}`);
   const names = new Set<string>();
@@ -172,6 +174,8 @@ export async function runSkills(
     while (next < skills.length) {
       const skill = skills[next++] as string;
       const dir = join(outRoot, skill);
+      // a report left in a reused --out would pass for this run's when the evaluator fails
+      rmSync(dir, { recursive: true, force: true });
       mkdirSync(dir, { recursive: true });
       const tree = trees.get(skill) ?? null;
       const proc = Bun.spawn(evaluator(skill, dir), {

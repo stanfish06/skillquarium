@@ -173,20 +173,39 @@ export function skillTrees(root: string): Map<string, string> {
   }
 }
 
+/** Git tree hash of every skills/<name> folder at HEAD; empty when git fails. */
+export function committedSkillTrees(root: string): Map<string, string> {
+  const proc = Bun.spawnSync(["git", "ls-tree", "HEAD", "skills/"], { cwd: root, stderr: "ignore" });
+  const trees = new Map<string, string>();
+  if (proc.exitCode !== 0) return trees;
+  for (const line of proc.stdout.toString().split("\n")) {
+    // "<mode> tree <sha>\tskills/<name>"
+    const m = /^\d+ tree ([0-9a-f]+)\tskills\/(.+)$/.exec(line);
+    if (m) trees.set(m[2] as string, m[1] as string);
+  }
+  return trees;
+}
+
 export interface Tier1View extends Tier1Entry {
-  /** The skill folder changed since the scan. */
+  /** The scanned content is neither the committed nor the working-tree skill folder. */
   stale: boolean;
 }
 
-/** Results joined with current tree hashes, keyed by skill; the TUI's source. */
+/**
+ * Results joined with current tree hashes, keyed by skill; the TUI's source. Matching HEAD
+ * keeps uncommitted invocation toggles from marking CI results stale; matching the working
+ * tree covers local scans of uncommitted edits.
+ */
 export function loadTier1Views(root: string): Map<string, Tier1View> {
   const entries = readResults(join(root, RESULTS_PATH));
-  const trees = entries.size > 0 ? skillTrees(root) : new Map<string, string>();
+  const working = entries.size > 0 ? skillTrees(root) : new Map<string, string>();
+  const committed = entries.size > 0 ? committedSkillTrees(root) : new Map<string, string>();
   const views = new Map<string, Tier1View>();
   for (const [skill, e] of entries) {
-    const current = trees.get(skill);
+    const current = working.get(skill);
     // unknown current tree (git unavailable) is not reported as stale
-    views.set(skill, { ...e, stale: current !== undefined && current !== e.tree });
+    const stale = current !== undefined && current !== e.tree && committed.get(skill) !== e.tree;
+    views.set(skill, { ...e, stale });
   }
   return views;
 }

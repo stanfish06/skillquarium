@@ -27,8 +27,9 @@ and Gitleaks on first use.
 
 Each run writes full JSON/HTML reports to `eval/tier1/reports/<timestamp>/` (gitignored) and
 merges one line per skill into `eval/tier1/results.jsonl`, which the TUI's Tier 1 column reads.
-A line records the skill's git tree hash, so the TUI marks a result stale once the skill
-changes. Pass `--no-record` to leave the results file alone.
+A line records the skill's git tree hash. The TUI marks a result stale when that hash matches
+neither the committed skill folder nor the working tree, so uncommitted invocation toggles do
+not mark CI results stale. Pass `--no-record` to leave the results file alone.
 
 The checks are advisory. A failing skill exits 0, and only an evaluator that writes no
 report exits 1. `.github/workflows/skill-tier1.yml` runs the same command:

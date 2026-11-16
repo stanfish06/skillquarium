@@ -3,12 +3,14 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { makeContext } from "../../src/cli";
-import { parseTier1Args, runTier1, summarize } from "../../src/eval/tier1";
+import { changedSkills, parseTier1Args, runTier1, summarize } from "../../src/eval/tier1";
 import {
+  committedSkillTrees,
   entryFromReport,
   formatResults,
   loadTier1Views,
   parseResults,
+  RESULTS_PATH,
   readResults,
   skillTrees,
   type Tier1Entry,
@@ -231,6 +233,42 @@ describe("runTier1", () => {
       "beta",
       "broken",
     ]);
+  });
+
+  test("a report left in a reused --out does not stand in for a failed run", async () => {
+    const root = vault();
+    const out = join(tempDir(), "out");
+    mkdirSync(join(out, "broken"), { recursive: true });
+    writeFileSync(join(out, "broken", "skillevaluator-tier1.json"), readFileSync(FIXTURE));
+    const { ctx } = capture(root);
+    const { entries } = await runTier1(
+      parseTier1Args(["broken", "--no-record", "--out", out]),
+      ctx,
+      fakeEvaluator(tempDir()),
+    );
+    expect(entries.map((e) => e.status)).toEqual(["error"]);
+  });
+
+  test("a file moved between skills selects both", () => {
+    const root = vault();
+    writeFileSync(join(root, "skills", "alpha", "helper.py"), "print('a')\n");
+    git(root, "-c", "user.email=t@t", "-c", "user.name=t", "add", "-A");
+    git(root, "-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "helper");
+    git(root, "branch", "base");
+    git(root, "mv", "skills/alpha/helper.py", "skills/beta/helper.py");
+    expect(changedSkills(root, "base")).toEqual(["alpha", "beta"]);
+  });
+
+  test("an uncommitted toggle leaves a scan of the committed skill current", () => {
+    const root = vault();
+    const tree = committedSkillTrees(root).get("alpha") as string;
+    mkdirSync(join(root, "eval/tier1"), { recursive: true });
+    writeResults(join(root, RESULTS_PATH), [entryFromReport("alpha", tree, report())], new Set(["alpha"]));
+    writeFileSync(
+      join(root, "skills", "alpha", "SKILL.md"),
+      "---\nname: alpha\ndescription: d\ndisable-model-invocation: true\n---\nbody\n",
+    );
+    expect(loadTier1Views(root).get("alpha")?.stale).toBe(false);
   });
 
   test("an unknown skill name is rejected before any scan", async () => {
