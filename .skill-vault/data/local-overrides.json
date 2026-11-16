@@ -480,6 +480,15 @@
       "replace": "            # Quality below threshold - improve prompt for next iteration\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
     }
   ],
+  "huggingface-datasets": [
+    {
+      "id": "croissant-hub-api-route",
+      "issue": 1367,
+      "source": "openai/plugins",
+      "find": "- `Get Croissant metadata (if available)`: `/croissant?dataset=<namespace/repo>`",
+      "replace": "- `Get Croissant metadata (if available)`: `https://huggingface.co/api/datasets/<namespace>/<repo>/croissant` (Hub API, not the Dataset Viewer base URL)"
+    }
+  ],
   "huggingface-llm-trainer": [
     {
       "id": "unsloth-in-description",
