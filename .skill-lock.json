@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "cb737f8a5162bff1e82eaa55313bb57da6490bcd",
+      "skillFolderHash": "d2c9edbf54b8898bc0266f2a490f1e52795baff1",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-15T13:55:47.966Z"
+      "updatedAt": "2026-11-16T15:40:07.610Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "1dd6896f6b9cbe15fb89be4c47e6674dec026f54",
+      "skillFolderHash": "24aac1e88b590007d4cb86cee839ebf47ab2b11d",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-14T13:30:28.845Z"
+      "updatedAt": "2026-11-16T15:40:22.732Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -12660,9 +12660,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance.git",
       "skillPath": "skills/modern-web-guidance/SKILL.md",
-      "skillFolderHash": "2bafd62db079eae1a4b6c34d0af4f9c3490266a2",
+      "skillFolderHash": "7c7d6612af788857352d452ebe263ad462351658",
       "installedAt": "2026-11-10T21:09:24.000Z",
-      "updatedAt": "2026-11-10T21:09:24.000Z"
+      "updatedAt": "2026-11-16T15:40:29.593Z"
     },
     "chrome-extensions": {
       "source": "GoogleChrome/modern-web-guidance",
