@@ -1,0 +1,150 @@
+name: Skill Tier 1
+
+# SkillEvaluator Tier 1 static checks (--no-llm: no model key, no secrets) run
+# through `./skillquarium eval tier1`, the same command used locally.
+#
+# Advisory: a skill that fails its checks leaves the job green; the job summary
+# and the report artifact carry the verdicts. Most skills here are synced from
+# upstream and miss SkillEvaluator's conventions (metadata.author, strict
+# semver), so gating on findings would block PRs on code nobody here owns. The
+# job fails only when the evaluator produces no report for a skill.
+#
+# pull_request       scans the skills the PR changes. Read-only.
+# workflow_dispatch  sweeps every skill in 16 shards, merges the shards, and on
+#                    master commits eval/tier1/results.jsonl, which the TUI's
+#                    Tier 1 column reads. Shares vault-write with the other
+#                    committing workflows.
+
+on:
+  pull_request:
+    paths:
+      - "skills/**"
+      - ".skill-vault/src/eval/**"
+      - ".github/workflows/skill-tier1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  changed:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          # the evaluator and bandit pins live in tier1.ts
+          cache-dependency-glob: .skill-vault/src/eval/tier1.ts
+
+      # SkillSpector and Gitleaks, fetched by the evaluator on first use
+      - uses: actions/cache@v4
+        with:
+          path: ~/.local/share/skillevaluator/runtimes
+          key: skillevaluator-runtimes-${{ runner.os }}-${{ hashFiles('.skill-vault/src/eval/tier1.ts') }}
+
+      - run: bun install --frozen-lockfile --cwd .skill-vault
+
+      - name: Tier 1 on changed skills
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: ./skillquarium eval tier1 --changed "origin/$BASE_REF" --no-record --out tier1-reports
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tier1-reports
+          path: tier1-reports
+          if-no-files-found: ignore
+          retention-days: 14
+
+  sweep:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: .skill-vault/src/eval/tier1.ts
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.local/share/skillevaluator/runtimes
+          key: skillevaluator-runtimes-${{ runner.os }}-${{ hashFiles('.skill-vault/src/eval/tier1.ts') }}
+
+      - run: bun install --frozen-lockfile --cwd .skill-vault
+
+      - name: Tier 1 on shard ${{ matrix.shard }}/16
+        run: ./skillquarium eval tier1 --all --shard ${{ matrix.shard }}/16 --no-record --out tier1-reports
+
+      # JSON reports and logs only: the HTML copies add ~400 KB per skill
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tier1-shard-${{ matrix.shard }}
+          path: |
+            tier1-reports
+            !tier1-reports/**/*.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  record:
+    needs: sweep
+    # merge whatever shards produced; a shard with evaluator errors still uploads its results
+    if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: vault-write
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.2"
+
+      - run: bun install --frozen-lockfile --cwd .skill-vault
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: tier1-shard-*
+          path: shards
+
+      - name: Merge shards into eval/tier1/results.jsonl
+        run: ./skillquarium eval tier1 --merge shards/*/results.jsonl
+
+      - name: Commit results
+        if: github.ref == 'refs/heads/master'
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eval/tier1/results.jsonl
+          if git diff --cached --quiet; then
+            echo "Tier 1 results already up to date — nothing to commit."
+          else
+            git commit -m "chore(eval): record Tier 1 results [skip ci]"
+            git push || { git pull --rebase origin master && git push; }
+          fi
