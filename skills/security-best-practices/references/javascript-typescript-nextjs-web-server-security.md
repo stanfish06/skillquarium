@@ -1112,13 +1112,13 @@ Primary framework documentation (Next.js):
 - Next.js Docs: `cookies()` — `https://nextjs.org/docs/app/api-reference/functions/cookies`
 - Next.js Docs: `headers()` — `https://nextjs.org/docs/app/api-reference/functions/headers`
 - Next.js Docs: Self-hosting (reverse proxy guidance) — `https://nextjs.org/docs/pages/guides/self-hosting`
-- Next.js Docs: Support policy (supported versions/LTS) — `https://nextjs.org/docs/support-policy`
+- Next.js Docs: Support policy (supported versions/LTS) — `https://nextjs.org/support-policy`
 
 Next.js security guidance & advisories:
 
 - Next.js Blog: How to think about security in Next.js — `https://nextjs.org/blog/security-nextjs-server-components-actions`
-- GitHub Security Advisory: Next.js DoS via Server Components / Server Actions (CVE-2026-23864) — `https://github.com/advisories/GHSA-fq29-rrrv-cq2m`
-- Next.js Blog: Security update (example security advisory context) — `https://nextjs.org/blog/security-update`
+- GitHub Security Advisory: React Server Components multiple denial-of-service vulnerabilities (CVE-2026-23864) — `https://github.com/advisories/GHSA-83fc-fqcc-2hmg`
+- Next.js published security advisories (per-release affected ranges and fixed versions) — `https://github.com/vercel/next.js/security/advisories`
 
 General web security references (recommended baseline):
 
