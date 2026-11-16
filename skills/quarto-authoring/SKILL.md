@@ -311,7 +311,7 @@ format:
 
 ## Resources
 
-- [Quarto Documentation](https://quarto.org/docs/)
+- [Quarto Documentation](https://quarto.org/docs/guide/)
 - [Quarto Guide](https://quarto.org/docs/guide/)
 - [Quarto Extensions](https://quarto.org/docs/extensions/)
 - [Community Extensions List](https://m.canouil.dev/quarto-extensions/)

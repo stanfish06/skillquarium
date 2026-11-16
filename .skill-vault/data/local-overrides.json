@@ -67,6 +67,23 @@
       "replace": "    \"pymatgen\": \"2026.10.24\",\n    \"pymatgen-core\": \"2026.10.31\""
     }
   ],
+  "quarto-authoring": [
+    {
+      "id": "quarto-docs-root-link",
+      "issue": 963,
+      "source": "posit-dev/skills",
+      "find": "- [Quarto Documentation](https://quarto.org/docs/)",
+      "replace": "- [Quarto Documentation](https://quarto.org/docs/guide/)"
+    },
+    {
+      "id": "quarto-jupyter-execution-link",
+      "issue": 963,
+      "source": "posit-dev/skills",
+      "file": "references/conversion-jupyter.md",
+      "find": "- [Jupyter Kernel Execution](https://quarto.org/docs/computations/jupyter.html)",
+      "replace": "- [Jupyter Kernel Execution](https://quarto.org/docs/computations/python.html)"
+    }
+  ],
   "databricks-python-sdk": [
     {
       "id": "cli-v1-0-0-pin-setup",
