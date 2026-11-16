@@ -250,9 +250,13 @@ grep -r "update from" --include="*.java" .
 
 ### Fix Common Issues
 
+The "update from " pattern only needs fixing inside `@Query`/HQL strings. Review each
+match manually instead of blanket-replacing — `sed -i 's/update from /update /g'` across
+every `.java` file also rewrites comments, log messages, and string literals that happen
+to contain that phrase outside HQL:
+
 ```bash
-# Remove "from" keyword in update queries
-find . -name "*.java" -type f -exec sed -i 's/update from /update /g' {} +
+grep -rn "update from " --include="*.java" .
 ```
 
 ## Performance Monitoring
