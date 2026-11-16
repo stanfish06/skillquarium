@@ -46,6 +46,7 @@ created: 2026-08-07
 - [figma-generate-design](../../notes/web-automation-frontend/figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
 - [firecrawl-agent](../../notes/web-automation-frontend/firecrawl-agent.md) — Autonomously navigate websites and extract structured data across pages
 - [firecrawl-scrape](../../notes/web-automation-frontend/firecrawl-scrape.md) — Read a known webpage or execute a discovered workflow or data-provider capability
+- [galaxy-bridge](../../notes/bio-databases-platforms/galaxy-bridge.md) — Galaxy tool discovery, intelligent recommendation, and execution — 8,000+ bioinformatics tools from usegalaxy.org with multi-signal scoring and workflow suggestions
 - [game-studio](../../notes/game-development/game-studio.md) — Route early browser-game work. Use when the user needs stack selection and workflow planning across design, implementation, assets, and playtesting before moving to a specialist skill
 - [genomics-workflow-acceleration](../../notes/genomics-variants/genomics-workflow-acceleration.md) — Use when accelerating existing genomics workflows with NVIDIA Parabricks, improving runtime or price/performance, converting pipeline steps to GPUs, or comparing CPU and GPU workflow...
 - [git-workflow-and-versioning](../../notes/software-dev/git-workflow-and-versioning.md) — Structures git workflow practices. Use when making any code change

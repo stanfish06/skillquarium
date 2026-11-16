@@ -15,7 +15,9 @@ Generates code with and without a skill in the system prompt, gates it, scores t
 ## Tier 1 static checks
 
 `./skillquarium eval tier1` runs [SkillEvaluator](https://github.com/NVIDIA/SkillEvaluator)
-Tier 1 (`skillevaluator==0.9.0 tier1 --no-llm`) on skills under `skills/`. It needs uv, but
+Tier 1 (`skillevaluator tier1 --no-llm`) on skills under `skills/`, pinned in
+`.skill-vault/src/eval/tier1.ts` to NVIDIA main at `c6e2d020` until the PII-scan hang fix
+from NVIDIA/SkillEvaluator#684 ships in a release after 0.9.0. It needs uv and git, but
 not this suite's mise toolchain or an API key. The evaluator fetches its pinned SkillSpector
 and Gitleaks on first use.
 

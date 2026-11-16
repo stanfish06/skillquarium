@@ -1,34 +1,34 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2209,
+  "skills": 2210,
   "expert_profiles": 503,
-  "nodes": 2282,
-  "edges": 16336,
+  "nodes": 2283,
+  "edges": 16377,
   "generic_names_blocked": 30,
-  "tier1_edges": 4911,
+  "tier1_edges": 4923,
   "tier2_edges": 721,
-  "alias_edges": 4568,
+  "alias_edges": 4580,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
-  "artifact_edges": 517,
+  "artifact_edges": 523,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.84,
+  "mean_skill_degree": 5.85,
   "median_skill_degree": 4,
   "orphan_count": 130,
-  "orphan_rate": 0.0589,
+  "orphan_rate": 0.0588,
   "by_provenance": {
-   "EXTRACTED": 15550,
+   "EXTRACTED": 15591,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2209,
-   "references": 12824,
+   "in_domain": 2210,
+   "references": 12858,
    "in_discipline": 599,
-   "touches": 517,
+   "touches": 523,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -11631,6 +11631,21 @@
     "mist",
     "parsec",
     "starfish"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "galaxy-bridge",
+   "type": "Skill",
+   "label": "galaxy-bridge",
+   "description": "Galaxy tool discovery, intelligent recommendation, and execution — 8,000+ bioinformatics tools from usegalaxy.org with multi-signal scoring and workflow suggestions",
+   "source": "skills/galaxy-bridge/SKILL.md",
+   "aliases": [
+    "galaxy bridge"
    ],
    "uses": 0,
    "successes": 0,
@@ -51616,6 +51631,15 @@
   {
    "src": "chip-seq",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "chip-seq named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "chip-seq",
+   "rel": "references",
    "dst": "molecular-biologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -61120,6 +61144,15 @@
   {
    "src": "cutadapt",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "cutadapt named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "cutadapt",
+   "rel": "references",
    "dst": "ngs-amplicon-microbiome",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -65593,6 +65626,15 @@
   {
    "src": "deeptools",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "deeptools named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "deeptools",
+   "rel": "references",
    "dst": "pybigwig",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -67442,6 +67484,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "differential-expression named in diff-visualizer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "differential-expression",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "differential-expression named in galaxy-bridge/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -80045,6 +80096,222 @@
    "status": "accepted"
   },
   {
+   "src": "galaxy-bridge",
+   "rel": "in_domain",
+   "dst": "domain:bio-databases-platforms",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "chip-seq",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "chip-seq named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "cutadapt",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "cutadapt named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "deeptools",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "deeptools named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "differential-expression",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "differential-expression named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "gwas-pipeline",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of gwas-pipeline appears in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "metagenomics",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "metagenomics named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "microbiologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of microbiologist appears in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "ngs-cli-toolkit",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of ngs-cli-toolkit appears in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "oral-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of oral-biologist appears in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "phylogenetics",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "phylogenetics named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "proteomics",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "proteomics named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "proteomics-de",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of proteomics-de appears in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "scanpy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "sequence-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sequence-analysis named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "seurat",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "seurat named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "variant-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "variant-analysis named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "references",
+   "dst": "variant-annotation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "variant-annotation named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "touches",
+   "dst": "artifact:bam",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "BAM/SAM alignments named in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "touches",
+   "dst": "artifact:fasta",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "FASTA sequences named in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "touches",
+   "dst": "artifact:fastq",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "FASTQ reads named in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "touches",
+   "dst": "artifact:genotypes",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "Genotype calls named in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "touches",
+   "dst": "artifact:pdb-structure",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "Protein structure named in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "galaxy-bridge",
+   "rel": "touches",
+   "dst": "artifact:vcf",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "VCF variants named in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "game-playtest",
    "rel": "in_domain",
    "dst": "domain:game-development",
@@ -86396,6 +86663,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of firecrawl-research-index appears in gwas-pipeline/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "gwas-pipeline",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of gwas-pipeline appears in galaxy-bridge/SKILL.md",
    "status": "accepted"
   },
   {
@@ -104419,6 +104695,15 @@
   {
    "src": "metagenomics",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "metagenomics named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "metagenomics",
+   "rel": "references",
    "dst": "mgnify-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -105476,6 +105761,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "microbiologist named in food-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "microbiologist",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of microbiologist appears in galaxy-bridge/SKILL.md",
    "status": "accepted"
   },
   {
@@ -117478,6 +117772,15 @@
   {
    "src": "ngs-cli-toolkit",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of ngs-cli-toolkit appears in galaxy-bridge/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "ngs-cli-toolkit",
+   "rel": "references",
    "dst": "geneticist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -122198,6 +122501,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of oral-biologist appears in environmental-microbiologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "oral-biologist",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of oral-biologist appears in galaxy-bridge/SKILL.md",
    "status": "accepted"
   },
   {
@@ -127094,6 +127406,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "phylogenetics named in fastreer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "phylogenetics",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "phylogenetics named in galaxy-bridge/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -132409,6 +132730,15 @@
   {
    "src": "proteomics",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "proteomics named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "proteomics",
+   "rel": "references",
    "dst": "mass-spectrometrist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -132665,6 +132995,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of proteomics-de appears in fragpipe-pyteomics-proteomics/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "proteomics-de",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of proteomics-de appears in galaxy-bridge/SKILL.md",
    "status": "accepted"
   },
   {
@@ -145270,6 +145609,15 @@
   {
    "src": "scanpy",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "scanpy named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scanpy",
+   "rel": "references",
    "dst": "geniml",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -154072,6 +154420,15 @@
   {
    "src": "sequence-analysis",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sequence-analysis named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "sequence-analysis",
+   "rel": "references",
    "dst": "gget",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -154661,6 +155018,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "differential-expression named in seurat/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "seurat",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "seurat named in galaxy-bridge/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -173692,6 +174058,15 @@
   {
    "src": "variant-analysis",
    "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "variant-analysis named in galaxy-bridge/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "variant-analysis",
+   "rel": "references",
    "dst": "report-template",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -173768,6 +174143,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "variant-annotation named in fastreer/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "variant-annotation",
+   "rel": "references",
+   "dst": "galaxy-bridge",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "variant-annotation named in galaxy-bridge/SKILL.md body",
    "status": "accepted"
   },
   {

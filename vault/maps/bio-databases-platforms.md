@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Clinical, Medical & Pharmacogenomics](clinical-medical.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (56)
+## Skills (57)
 
 - [article-data-fetcher](../notes/bio-databases-platforms/article-data-fetcher.md) — Given an article DOI or PubMed ID, discover and download the genomics data files deposited by the authors (VCF, FASTA, H5AD, CSV, JSON, BAM, etc.) from public repositories such as GEO...
 - [benchling-integration](../notes/bio-databases-platforms/benchling-integration.md) — Benchling Python SDK and REST API integration for registry entities, inventory, ELN entries, workflows, Benchling Apps, and Data Warehouse queries
@@ -32,6 +32,7 @@ created: 2026-06-13
 - [epigraphdb-skill](../notes/bio-databases-platforms/epigraphdb-skill.md) — Submit compact EpiGraphDB API requests for ontology, literature, MR, gene-drug, and support-path evidence
 - [eva-skill](../notes/bio-databases-platforms/eva-skill.md) — Submit compact EVA REST requests for species metadata and archived variant lookups
 - [flow-bio](../notes/bio-databases-platforms/flow-bio.md) — Flow.bio API bridge — authenticate, browse pipelines/samples/projects, search, upload data, launch pipeline executions, and check run status on any Flow instance
+- [galaxy-bridge](../notes/bio-databases-platforms/galaxy-bridge.md) — Galaxy tool discovery, intelligent recommendation, and execution — 8,000+ bioinformatics tools from usegalaxy.org with multi-signal scoring and workflow suggestions
 - [ginkgo-cloud-lab](../notes/bio-databases-platforms/ginkgo-cloud-lab.md) — Guides protocol selection, input preparation, pricing checks, and browser ordering on Ginkgo Bioworks Cloud Lab (cloud.ginkgo.bio)
 - [human-protein-atlas-skill](../notes/bio-databases-platforms/human-protein-atlas-skill.md) — Submit compact Human Protein Atlas requests for gene JSON, search downloads, and page-level tissue or cell-line lookups
 - [illumina-bridge](../notes/bio-databases-platforms/illumina-bridge.md) — Import DRAGEN-exported Illumina result bundles into ClawBio for local tertiary analysis and downstream routing

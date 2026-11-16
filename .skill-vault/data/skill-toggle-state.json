@@ -2923,6 +2923,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "galaxy-bridge": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "game-playtest": {
       "claude_enabled": false,
       "codex_enabled": false

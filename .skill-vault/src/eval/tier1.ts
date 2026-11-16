@@ -15,7 +15,11 @@ import {
 } from "./tier1Results";
 
 // Pinned so local and CI runs score the same; bump both together after reviewing the changelog.
-export const EVALUATOR = "skillevaluator==0.9.0";
+// main past 0.9.0 for the PII-scan hang fix (NVIDIA/SkillEvaluator#684); move back to a PyPI pin once released
+const EVALUATOR_COMMIT = "c6e2d02062044133705a5edcb810438434366337";
+export const EVALUATOR = `git+https://github.com/NVIDIA/SkillEvaluator@${EVALUATOR_COMMIT}`;
+// the commit still reports 0.9.0, so results record the commit too
+export const EVALUATOR_VERSION = `0.9.0+${EVALUATOR_COMMIT.slice(0, 8)}`;
 const BANDIT = "bandit==1.9.4";
 const REPORT_FILE = "skillevaluator-tier1.json";
 /** Rows in the summary table; the rest stay in results.jsonl. */
@@ -24,7 +28,7 @@ const SUMMARY_ROWS = 200;
 export const help = `usage: skillquarium eval tier1 [SKILL...] [--changed REF | --all] [options]
        skillquarium eval tier1 --merge FILE...
 
-Run SkillEvaluator Tier 1 static checks (${EVALUATOR} tier1 --no-llm) on skills.
+Run SkillEvaluator Tier 1 static checks (skillevaluator ${EVALUATOR_VERSION} tier1 --no-llm) on skills.
 Advisory: failing skills exit 0; only an evaluator that produces no report exits 1.
 
   SKILL           skill folder name or skills/<name> path
@@ -167,7 +171,7 @@ export async function runSkills(
 ): Promise<Tier1Entry[]> {
   const evaluator = opts.evaluator ?? defaultEvaluator;
   const trees = skillTrees(root);
-  const version = EVALUATOR.split("==")[1] as string;
+  const version = EVALUATOR_VERSION;
   const entries: Tier1Entry[] = [];
   let next = 0;
   const worker = async () => {
@@ -195,7 +199,10 @@ export async function runSkills(
       const report = join(dir, REPORT_FILE);
       if (existsSync(report)) {
         try {
-          entry = entryFromReport(skill, tree, JSON.parse(readFileSync(report, "utf8")));
+          entry = {
+            ...entryFromReport(skill, tree, JSON.parse(readFileSync(report, "utf8"))),
+            evaluator: version,
+          };
         } catch (e) {
           entry = errorEntry(
             skill,
@@ -283,7 +290,7 @@ export async function runTier1(
 ): Promise<{ code: number; entries: Tier1Entry[] }> {
   const known = knownSkills(ctx.root);
   const resultsFile = join(ctx.root, RESULTS_PATH);
-  const title = `Tier 1 (${EVALUATOR.replace("==", " ")})`;
+  const title = `Tier 1 (skillevaluator ${EVALUATOR_VERSION})`;
 
   if (opts.merge !== null) {
     const parts = opts.merge.flatMap((f) => [...parseResults(readFileSync(resolve(f), "utf8")).values()]);

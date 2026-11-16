@@ -3386,6 +3386,11 @@
       "truncated": true,
       "updated": "2026-09-14"
     },
+    "galaxy-bridge": {
+      "sha256": "58b5a5b1c2d5ec73a84eb0dc00f4192400c76e8722a543dd932b4f65e94d52ca",
+      "truncated": true,
+      "updated": "2026-09-14"
+    },
     "game-playtest": {
       "sha256": "807bc977aa509401d0c869b6f80b2e1ead50289537201fc96dedd7a9055ce17d",
       "updated": "2026-09-14"
