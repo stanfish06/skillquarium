@@ -71,12 +71,17 @@ Run the [OpenTUI](https://github.com/anomalyco/opentui) interface from the vault
 The launcher requires [Bun](https://bun.sh) and installs the pinned OpenTUI dependency on
 first use. It has two tabs, switched with Tab, `1`/`2`, or a click:
 
-- **Skills** toggles model invocation.
+- **Skills** toggles model invocation. Its Tier 1 column shows each skill's
+  [SkillEvaluator](https://github.com/NVIDIA/SkillEvaluator) static-check score and grade
+  from `eval/tier1/results.jsonl` (green passed, red failed, yellow incomplete; `*` means the
+  skill changed since the scan, `-` means never scanned). The detail pane lists the failed
+  checks and top findings.
 - **Benchmarks** lists the skills under evaluation in `eval/skills/`
 
 Keyboard controls (Skills tab):
 
 - `/` focuses search; arrows or `J`/`K` move through results; `M` marks or unmarks the current row.
+- Enter opens the current skill's details, Tier 1 findings included, in a scrollable overlay; `Q`, Esc, or Enter closes it.
 - `C` toggles Claude Code, `X` toggles Codex, and Space toggles both for all marked rows. With no marks, they affect only the current row. A mixed batch is normalized on; a fully enabled batch is normalized off.
 - `F` cycles status filters; `G` cycles categories. Shift reverses either cycle.
 - Ctrl-S saves all states; Ctrl-R reloads them; Ctrl-P performs the guarded pre-commit reset.
