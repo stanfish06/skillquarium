@@ -1600,9 +1600,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/duckdb/duckdb-skills.git",
       "skillPath": "skills/install-duckdb/SKILL.md",
-      "skillFolderHash": "89eefcf9b31120ca49bce56b1be47ab6988ed765",
+      "skillFolderHash": "9dd12f1567fb520923a4d80de46905ab7fa431db",
       "installedAt": "2026-06-09T19:27:23.743Z",
-      "updatedAt": "2026-06-09T19:27:23.743Z"
+      "updatedAt": "2026-11-17T15:58:05.526Z"
     },
     "query": {
       "source": "duckdb/duckdb-skills",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "d2c9edbf54b8898bc0266f2a490f1e52795baff1",
+      "skillFolderHash": "38627770e5e8d639231fb738549c420fdb1c9902",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-16T15:40:07.610Z"
+      "updatedAt": "2026-11-17T15:58:23.493Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -9537,27 +9537,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "006a115598f653ca591a157ea8867ee57568361d",
+      "skillFolderHash": "4edb76490e4ad5da4f0f721cbf6ff06b843f5b1f",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-15T13:56:04.436Z"
+      "updatedAt": "2026-11-17T15:58:29.091Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "8f666d2b6fb7c0b32048c1fa262a850d6944cdfc",
+      "skillFolderHash": "179665387e6f12f7e7105acc94312bc7fc2786c5",
       "installedAt": "2026-08-21T01:50:31.549Z",
-      "updatedAt": "2026-11-14T13:30:53.002Z"
+      "updatedAt": "2026-11-17T15:58:32.004Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "fa73d004e0f1075abb300a0e77113dc585ede113",
+      "skillFolderHash": "7ffa2b465689a7c40e83a7fcf3eecbe737f22600",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-14T13:30:56.350Z"
+      "updatedAt": "2026-11-17T15:58:35.299Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -10635,9 +10635,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-pipelines/SKILL.md",
-      "skillFolderHash": "e1f9843eb2ba7c936572a86493b83cc4037695c8",
+      "skillFolderHash": "cb41bed4bf3beb0dfebaee6c4c86402684350324",
       "installedAt": "2026-08-23T17:20:36.191Z",
-      "updatedAt": "2026-11-12T15:11:16.147Z"
+      "updatedAt": "2026-11-17T15:58:39.096Z"
     },
     "databricks-python-sdk": {
       "source": "databricks/databricks-agent-skills",
@@ -10662,9 +10662,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-spark-structured-streaming/SKILL.md",
-      "skillFolderHash": "155c0b5a184fae5fac91e25ba75908c1219e0706",
+      "skillFolderHash": "52ffa0c630641b8621340610de8cb85417eeb039",
       "installedAt": "2026-08-23T17:20:36.202Z",
-      "updatedAt": "2026-11-12T15:11:21.640Z"
+      "updatedAt": "2026-11-17T15:58:40.912Z"
     },
     "databricks-synthetic-data-gen": {
       "source": "databricks/databricks-agent-skills",
@@ -10698,9 +10698,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-vector-search/SKILL.md",
-      "skillFolderHash": "d0d9e7f0e060d1165d3c2cffb2d3b6df3995b663",
+      "skillFolderHash": "872f97bfeff41fb059c9e7791d1e4ff94f4eef44",
       "installedAt": "2026-08-23T17:20:36.217Z",
-      "updatedAt": "2026-11-10T14:51:54.146Z"
+      "updatedAt": "2026-11-17T15:58:42.453Z"
     },
     "databricks-zerobus-ingest": {
       "source": "databricks/databricks-agent-skills",

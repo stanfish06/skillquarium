@@ -4,11 +4,11 @@
   "skills": 2210,
   "expert_profiles": 503,
   "nodes": 2283,
-  "edges": 16377,
+  "edges": 16379,
   "generic_names_blocked": 30,
-  "tier1_edges": 4923,
+  "tier1_edges": 4924,
   "tier2_edges": 721,
-  "alias_edges": 4580,
+  "alias_edges": 4581,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 523,
@@ -20,13 +20,13 @@
   "orphan_count": 130,
   "orphan_rate": 0.0588,
   "by_provenance": {
-   "EXTRACTED": 15591,
+   "EXTRACTED": 15593,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2210,
-   "references": 12858,
+   "references": 12860,
    "in_discipline": 599,
    "touches": 523,
    "has_step": 69,
@@ -7396,7 +7396,7 @@
    "id": "databricks-vector-search",
    "type": "Skill",
    "label": "databricks-vector-search",
-   "description": "Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search. Use when asked to: create Standard or Storage-Optimized endpoints and Delta Sync or Direct Access indexes with AISearchClient; query with ANN, hybrid, or full-text search and filters; sync, monitor, or migrate indexes; set a target QPS, triage 429s, or load-test an endpoint; wire an index into an agent as a retriever tool. NOT for: no-code document Q&A (databricks-genie-agents); serving-endpoint CRUD (databricks-model-serving); custom ResponsesAgent authoring and deployment (databricks-ml-training).",
+   "description": "Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search. Use when asked to: create Standard or Storage-Optimized endpoints and Delta Sync or Direct Access indexes with AISearchClient; query with ANN, hybrid, or full-text search and filters; sync, monitor, or migrate indexes; run the built-in index search quality evaluation; set a target QPS, triage 429s, or load-test an endpoint; wire an index into an agent as a retriever tool. NOT for: MLflow evaluation of RAG apps/agents (databricks-mlflow-evaluation); no-code document Q&A (databricks-genie-agents); serving-endpoint CRUD (databricks-model-serving); custom ResponsesAgent authoring and deployment (databricks-ml-training).",
    "source": "skills/databricks-vector-search/SKILL.md",
    "aliases": [
     "databricks vector search"
@@ -14494,7 +14494,7 @@
    "id": "install-duckdb",
    "type": "Skill",
    "label": "install-duckdb",
-   "description": "> Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g. magic@community). Pass --update to update extensions instead of installing.",
+   "description": "> Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g. magic@community). Pass --update to update extensions instead of installing. Also checks that the DuckDB CLI is present and, if it is not, suggests how to install it, system-wide or in a Python virtual environment.",
    "source": "skills/install-duckdb/SKILL.md",
    "aliases": [
     "install duckdb"
@@ -63529,6 +63529,15 @@
   {
    "src": "databricks-mlflow-evaluation",
    "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-mlflow-evaluation named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-mlflow-evaluation",
+   "rel": "references",
    "dst": "design-md-library",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -63911,6 +63920,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "databricks-ml-training named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-vector-search",
+   "rel": "references",
+   "dst": "databricks-mlflow-evaluation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-mlflow-evaluation named in databricks-vector-search/SKILL.md body",
    "status": "accepted"
   },
   {
