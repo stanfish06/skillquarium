@@ -6,7 +6,7 @@
   "nodes": 2283,
   "edges": 16379,
   "generic_names_blocked": 30,
-  "tier1_edges": 4924,
+  "tier1_edges": 4925,
   "tier2_edges": 721,
   "alias_edges": 4581,
   "discipline_edges": 599,
@@ -17,8 +17,8 @@
   "observations": 0,
   "mean_skill_degree": 5.85,
   "median_skill_degree": 4,
-  "orphan_count": 130,
-  "orphan_rate": 0.0588,
+  "orphan_count": 129,
+  "orphan_rate": 0.0584,
   "by_provenance": {
    "EXTRACTED": 15593,
    "ASSERTED": 668,
@@ -4852,7 +4852,7 @@
    "id": "clickhouse-best-practices",
    "type": "Skill",
    "label": "clickhouse-best-practices",
-   "description": "Use when reviewing ClickHouse schemas, queries, or configurations. Contains 31 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.",
+   "description": "Use when reviewing ClickHouse schemas, queries, native full-text search, or configurations. Contains 36 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.",
    "source": "skills/clickhouse-best-practices/SKILL.md",
    "aliases": [
     "clickhouse best practices"
@@ -7648,7 +7648,7 @@
    "id": "deep-security-scan",
    "type": "Skill",
    "label": "deep-security-scan",
-   "description": "Use when the user asks for a deep, exhaustive, multi-pass, or variance-reducing repository-wide or scoped-path Codex Security scan. Run repeated complete independent Standard scans with the Codex Security deep-scan tool, which aggregates their validated findings and prepares the canonical artifacts; then complete the same scan once. Do not use for PRs, commits, branch diffs, or working-tree diffs.",
+   "description": "Run repeated Standard security scans of a repository or scoped path when the user requests a deep, exhaustive, or multi-pass audit. For changes to a PR, commit, branch or working tree, use security-diff-scan.",
    "source": "skills/deep-security-scan/SKILL.md",
    "aliases": [
     "deep security scan"
@@ -23570,7 +23570,7 @@
    "id": "propose-security-hardening",
    "type": "Skill",
    "label": "propose-security-hardening",
-   "description": "Develop evidence-backed structural and architectural security hardening proposals from vulnerability disclosures, supplied findings, incident or assessment documents, source code, or a completed Codex Security scan. Use when a user asks for systemic improvements, alternatives beyond per-finding patches, before-and-after security architecture views, engineering tradeoff analysis, or an implementation-ready plan for a selected hardening option. Also use automatically after a Codex Security scan with reportable findings when the top-level scan workflow requests final-report hardening guidance.",
+   "description": "Develop evidence-backed structural security hardening proposals from disclosures, findings, source code, or Codex Security scans. Use for systemic improvements, alternatives beyond individual patches, architectural tradeoffs, or implementation planning. Also use when a top-level scan requests final-report hardening guidance.",
    "source": "skills/propose-security-hardening/SKILL.md",
    "aliases": [
     "propose security hardening"
@@ -26998,7 +26998,7 @@
    "id": "security-scan",
    "type": "Skill",
    "label": "security-scan",
-   "description": "Use for a standard, single-pass security audit of an entire repository or a scoped path, package, folder, or submodule with no diff to review. This is the default repository scan. Do not use for PR, commit, branch, or working-tree diffs, or for deep, multi-pass scans.",
+   "description": "Find vulnerabilities in the current source of a whole repository or selected paths. This is the default single-pass audit. Use the diff skill for PR, commit, branch, or working-tree changes and the deep skill for an explicitly requested deep scan.",
    "source": "skills/security-scan/SKILL.md",
    "aliases": [
     "security scan"
@@ -32274,7 +32274,7 @@
    "id": "vulnerability-writeup",
    "type": "Skill",
    "label": "vulnerability-writeup",
-   "description": "Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained, sceptically validated, natural-sounding vulnerability reports. Use for one vulnerability or a disclosure campaign; a Codex Security scan is optional.",
+   "description": "Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained vulnerability reports with clearly supported claims. Use for one vulnerability or a disclosure campaign; a Codex Security scan is optional.",
    "source": "skills/vulnerability-writeup/SKILL.md",
    "aliases": [
     "vulnerability writeup"
@@ -40979,15 +40979,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "attack-path-analysis",
-   "rel": "references",
-   "dst": "finding-discovery",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "attack-path-analysis named in finding-discovery/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -49754,15 +49745,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of caveman appears in databricks-zerobus-ingest/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "caveman",
-   "rel": "references",
-   "dst": "deep-security-scan",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of caveman appears in deep-security-scan/SKILL.md",
    "status": "accepted"
   },
   {
@@ -65239,19 +65221,10 @@
   {
    "src": "deep-security-scan",
    "rel": "references",
-   "dst": "caveman",
+   "dst": "security-diff-scan",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "curated alias of caveman appears in deep-security-scan/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "deep-security-scan",
-   "rel": "references",
-   "dst": "neuroscientist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of neuroscientist appears in deep-security-scan/SKILL.md",
+   "justification": "security-diff-scan named in deep-security-scan/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -76489,15 +76462,6 @@
   {
    "src": "finding-discovery",
    "rel": "references",
-   "dst": "attack-path-analysis",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "attack-path-analysis named in finding-discovery/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "finding-discovery",
-   "rel": "references",
    "dst": "security-diff-scan",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -78527,6 +78491,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "fix-finding",
+   "rel": "references",
+   "dst": "security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-scan named in fix-finding/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -115153,15 +115126,6 @@
   {
    "src": "neuroscientist",
    "rel": "references",
-   "dst": "deep-security-scan",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of neuroscientist appears in deep-security-scan/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "neuroscientist",
-   "rel": "references",
    "dst": "developmental-biologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -115319,6 +115283,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of neuroscientist appears in security-diff-scan/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
+   "dst": "security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in security-scan/SKILL.md",
    "status": "accepted"
   },
   {
@@ -144628,6 +144601,15 @@
   {
    "src": "run-tests",
    "rel": "references",
+   "dst": "vulnerability-writeup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "run-tests named in vulnerability-writeup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "run-tests",
+   "rel": "references",
    "dst": "writing-mstest-tests",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -153313,15 +153295,6 @@
   {
    "src": "security-audit",
    "rel": "references",
-   "dst": "security-scan",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "security-audit named in security-scan/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "security-audit",
-   "rel": "references",
    "dst": "semgrep",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -153439,6 +153412,15 @@
   {
    "src": "security-diff-scan",
    "rel": "references",
+   "dst": "deep-security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-diff-scan named in deep-security-scan/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-diff-scan",
+   "rel": "references",
    "dst": "finding-discovery",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -153520,6 +153502,24 @@
   {
    "src": "security-scan",
    "rel": "references",
+   "dst": "fix-finding",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-scan named in fix-finding/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-scan",
+   "rel": "references",
+   "dst": "neuroscientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in security-scan/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "security-scan",
+   "rel": "references",
    "dst": "propose-security-hardening",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -153533,15 +153533,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "security-scan named in secure-workflow-guide/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "security-scan",
-   "rel": "references",
-   "dst": "security-audit",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "security-audit named in security-scan/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -176641,6 +176632,15 @@
   {
    "src": "vulnerability-writeup",
    "rel": "references",
+   "dst": "run-tests",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "run-tests named in vulnerability-writeup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "vulnerability-writeup",
+   "rel": "references",
    "dst": "security-scan",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -181130,7 +181130,6 @@
   "fetching-dbt-docs",
   "finite-horizon-lqr",
   "fitness-nutrition",
-  "fix-finding",
   "flowio",
   "full-output-enforcement",
   "fund-comparison",

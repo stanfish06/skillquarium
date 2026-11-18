@@ -22,7 +22,7 @@ created: 2026-06-13
 - [chdb-datastore](../notes/analytics-engineering/chdb-datastore.md) — Use when the user has tabular data (pandas DataFrame, parquet, csv, Arrow, json) and wants to filter, group, aggregate, join, or speed up slow pandas
 - [chdb-sql](../notes/analytics-engineering/chdb-sql.md) — Use when the user wants to run SQL — especially analytical SQL — on local files (parquet/csv/json), URLs, S3 paths, or remote databases (Postgres, MySQL, MongoDB, ClickHouse Cloud...
 - [clickhouse-architecture-advisor](../notes/analytics-engineering/clickhouse-architecture-advisor.md) — Use when designing ClickHouse architectures, selecting between ingestion or modeling patterns, or translating best practices into workload-specific system designs
-- [clickhouse-best-practices](../notes/analytics-engineering/clickhouse-best-practices.md) — Use when reviewing ClickHouse schemas, queries, or configurations
+- [clickhouse-best-practices](../notes/analytics-engineering/clickhouse-best-practices.md) — Use when reviewing ClickHouse schemas, queries, native full-text search, or configurations
 - [clickhouse-js-node-coding](../notes/analytics-engineering/clickhouse-js-node-coding.md) — Write idiomatic application code with the ClickHouse Node.js client (`@clickhouse/client`)
 - [clickhouse-js-node-rowbinary](../notes/analytics-engineering/clickhouse-js-node-rowbinary.md) — Generate TypeScript/JavaScript code that reads/decodes AND writes/encodes ClickHouse RowBinary streams for the ClickHouse HTTP server
 - [clickhouse-js-node-troubleshooting](../notes/analytics-engineering/clickhouse-js-node-troubleshooting.md) — Troubleshoot and resolve common issues with the ClickHouse Node.js client (@clickhouse/client)

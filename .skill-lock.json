@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "94f170bea383aa1ec93790871f7f748c317e572f",
+      "skillFolderHash": "68aff5205c043db8f186a701c104690ff0e348eb",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-15T13:55:30.424Z"
+      "updatedAt": "2026-11-18T15:37:16.833Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -4256,108 +4256,108 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/attack-path-analysis/SKILL.md",
-      "skillFolderHash": "386280aeaefd4d0dbe0c21183d9f579517987965",
+      "skillFolderHash": "57b8c03f11aaf5c2faa549b7058e647b44427de3",
       "installedAt": "2026-08-07T16:12:47.220Z",
-      "updatedAt": "2026-10-10T12:44:39.577Z"
+      "updatedAt": "2026-11-18T15:36:48.145Z"
     },
     "deep-security-scan": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/deep-security-scan/SKILL.md",
-      "skillFolderHash": "e3fd138ed3a68c2a02bc76aa6a52c48b02216015",
+      "skillFolderHash": "1e9a3337ae0ab36b7c1468e7f90cef8e0b433d82",
       "installedAt": "2026-08-07T16:12:47.221Z",
-      "updatedAt": "2026-10-10T12:44:41.312Z"
+      "updatedAt": "2026-11-18T15:36:49.916Z"
     },
     "finding-discovery": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/finding-discovery/SKILL.md",
-      "skillFolderHash": "eacb17da5de41a3fd9baffb327fe8f35e543f21f",
+      "skillFolderHash": "871c1c64fd09586e6649df5e4e5255f630585bfc",
       "installedAt": "2026-08-07T16:12:47.223Z",
-      "updatedAt": "2026-10-10T12:44:43.025Z"
+      "updatedAt": "2026-11-18T15:36:51.845Z"
     },
     "fix-finding": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/fix-finding/SKILL.md",
-      "skillFolderHash": "5746d5845daae7a4c2c0e31a70a57cab8a060bda",
+      "skillFolderHash": "5e4a0dff8a5b7ce9b7e773c0e8b4c690ce71a205",
       "installedAt": "2026-08-07T16:12:47.225Z",
-      "updatedAt": "2026-10-10T12:44:44.688Z"
+      "updatedAt": "2026-11-18T15:36:53.623Z"
     },
     "propose-security-hardening": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/propose-security-hardening/SKILL.md",
-      "skillFolderHash": "6c17d4536b14653614df235c7ceeaa61e4a71a24",
+      "skillFolderHash": "2cd3b36a35c823a245396e104996209044c10f40",
       "installedAt": "2026-08-07T16:12:47.227Z",
-      "updatedAt": "2026-10-10T12:44:46.360Z"
+      "updatedAt": "2026-11-18T15:36:55.541Z"
     },
     "security-diff-scan": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/security-diff-scan/SKILL.md",
-      "skillFolderHash": "fc9dcde175d57ff908a43670aad3f90e44463f55",
+      "skillFolderHash": "d8f6ddebd2a3bb6c365a3ca58a4fae2a3a47ec67",
       "installedAt": "2026-08-07T16:12:47.229Z",
-      "updatedAt": "2026-10-10T12:44:48.136Z"
+      "updatedAt": "2026-11-18T15:36:57.570Z"
     },
     "security-scan": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/security-scan/SKILL.md",
-      "skillFolderHash": "943f0bb5ccde07ede9714b86b2e124e0731efc54",
+      "skillFolderHash": "ea710ed803f8132c346e032834d4518699897372",
       "installedAt": "2026-08-07T16:12:47.230Z",
-      "updatedAt": "2026-10-10T12:44:49.975Z"
+      "updatedAt": "2026-11-18T15:36:59.796Z"
     },
     "threat-model": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/threat-model/SKILL.md",
-      "skillFolderHash": "6f479659d642ce9576a9a9bd530158e9c9f40938",
+      "skillFolderHash": "184e4cb3e80b2bffb1ffea1508fa00fab2793228",
       "installedAt": "2026-08-07T16:12:47.232Z",
-      "updatedAt": "2026-10-10T12:44:51.679Z"
+      "updatedAt": "2026-11-18T15:37:03.106Z"
     },
     "track-findings": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/track-findings/SKILL.md",
-      "skillFolderHash": "e6d146b1e829f0610ed1aa5d05e2f0718137f356",
+      "skillFolderHash": "edc80f593e80f8bd7feb68c7658d183623af4175",
       "installedAt": "2026-08-07T16:12:47.233Z",
-      "updatedAt": "2026-10-10T12:44:53.747Z"
+      "updatedAt": "2026-11-18T15:37:04.993Z"
     },
     "triage-finding": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/triage-finding/SKILL.md",
-      "skillFolderHash": "33da6cd1ba364a50a48c003517c787377fc49929",
+      "skillFolderHash": "da452d40351e6ee5003dd5f832cee037612f6132",
       "installedAt": "2026-08-07T16:12:47.237Z",
-      "updatedAt": "2026-10-10T12:44:55.914Z"
+      "updatedAt": "2026-11-18T15:37:07.282Z"
     },
     "validation": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/validation/SKILL.md",
-      "skillFolderHash": "d27afa5e412fce7e72e3b709c37d000187506435",
+      "skillFolderHash": "27702bde99260f814eb21657f4292582af3e5458",
       "installedAt": "2026-08-07T16:12:47.238Z",
-      "updatedAt": "2026-10-10T12:44:57.685Z"
+      "updatedAt": "2026-11-18T15:37:09.670Z"
     },
     "vulnerability-writeup": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/vulnerability-writeup/SKILL.md",
-      "skillFolderHash": "17a225f2d47749d84b10985c6d899926a70c518b",
+      "skillFolderHash": "cce1a0c0b7356f9eabc69e28262494374953171d",
       "installedAt": "2026-08-07T16:12:47.240Z",
-      "updatedAt": "2026-10-10T12:44:59.838Z"
+      "updatedAt": "2026-11-18T15:37:11.512Z"
     },
     "build-model": {
       "source": "openai/plugins",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "24aac1e88b590007d4cb86cee839ebf47ab2b11d",
+      "skillFolderHash": "837f3c6b48f64a05dcd536c94017abd3ab4a3f6b",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-16T15:40:22.732Z"
+      "updatedAt": "2026-11-18T15:37:49.327Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9546,9 +9546,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "179665387e6f12f7e7105acc94312bc7fc2786c5",
+      "skillFolderHash": "0d1db3ad4053441e2486871449c988251ff9bb07",
       "installedAt": "2026-08-21T01:50:31.549Z",
-      "updatedAt": "2026-11-17T15:58:32.004Z"
+      "updatedAt": "2026-11-18T15:37:52.992Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
@@ -9756,10 +9756,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/clickhouse-best-practices/SKILL.md",
-      "skillFolderHash": "2a8db28b640349bec00c258b77840928ced7f187",
-      "pluginName": "clickhouse-best-practices",
+      "skillFolderHash": "0dd0af522c5ce2fd56af99b8b6ecbf1d56d1e099",
       "installedAt": "2026-08-23T17:16:56.375Z",
-      "updatedAt": "2026-08-23T17:16:56.375Z"
+      "updatedAt": "2026-11-18T15:37:55.701Z"
     },
     "clickhouse-js-node-coding": {
       "source": "clickhouse/agent-skills",
@@ -11326,18 +11325,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-use.git",
       "skillPath": "skills/browser-use/SKILL.md",
-      "skillFolderHash": "09dfc3fe42cf475e60dd749b36dc5c365eeef4fa",
+      "skillFolderHash": "b770dd69eada81958fe5d6671739908533de02ed",
       "installedAt": "2026-08-23T17:22:58.895Z",
-      "updatedAt": "2026-11-12T15:11:26.006Z"
+      "updatedAt": "2026-11-18T15:37:59.416Z"
     },
     "remote-browser": {
       "source": "browser-use/browser-use",
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-use.git",
       "skillPath": "skills/remote-browser/SKILL.md",
-      "skillFolderHash": "6d5752f2f948cb00d9af068e38f536f52ce7c3ee",
+      "skillFolderHash": "6f30b0b312a60f8cf5c06a0d399cd5c560acbf55",
       "installedAt": "2026-08-23T17:23:01.265Z",
-      "updatedAt": "2026-08-30T11:52:28.797Z"
+      "updatedAt": "2026-11-18T15:38:01.924Z"
     },
     "sglang-prod-incident-triage": {
       "source": "sgl-project/sglang",
@@ -11407,27 +11406,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-adoption/SKILL.md",
-      "skillFolderHash": "cb42f2d0789f24b1eee203d88d8353d779e64bef",
+      "skillFolderHash": "bf1e62f0e297f4992727fc546d3327b866f13472",
       "installedAt": "2026-08-23T17:24:15.296Z",
-      "updatedAt": "2026-10-10T12:52:03.605Z"
+      "updatedAt": "2026-11-18T15:38:03.753Z"
     },
     "next-cache-components-optimizer": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-optimizer/SKILL.md",
-      "skillFolderHash": "faad4b57c94f652be24ad5606f3a854879c19a4c",
+      "skillFolderHash": "b0293b9d52f225e64fba4b314e0b8eb5ec89a613",
       "installedAt": "2026-08-23T17:24:26.730Z",
-      "updatedAt": "2026-11-09T16:13:05.754Z"
+      "updatedAt": "2026-11-18T15:38:04.981Z"
     },
     "next-partial-prefetching-adoption": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-partial-prefetching-adoption/SKILL.md",
-      "skillFolderHash": "b88c39b9633f6aac247ff2ca095ea9e95e626137",
+      "skillFolderHash": "7a2941666b296fa2a407b5ed038ec74ab4431f55",
       "installedAt": "2026-08-23T17:24:38.535Z",
-      "updatedAt": "2026-11-09T16:13:08.000Z"
+      "updatedAt": "2026-11-18T15:38:06.119Z"
     },
     "incident-response": {
       "source": "anthropics/knowledge-work-plugins",
@@ -12102,9 +12101,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/skypilot-org/skypilot.git",
       "skillPath": "agent/skills/skypilot/SKILL.md",
-      "skillFolderHash": "7c8dcf6ec803f4822d50952ce2af547a5422fcec",
+      "skillFolderHash": "55a4c67cd41b00fae667426761647ccdef3e906a",
       "installedAt": "2026-10-24T15:58:04.348Z",
-      "updatedAt": "2026-11-12T15:11:35.717Z"
+      "updatedAt": "2026-11-18T15:38:14.861Z"
     },
     "lean4": {
       "source": "cameronfreer/lean4-skills",
