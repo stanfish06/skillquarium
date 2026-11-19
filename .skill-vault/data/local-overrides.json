@@ -5197,6 +5197,15 @@
       "replace": "    - \"https://nextjs.org/docs/app/api-reference/turbopack\"\n  sitemap: \"https://nextjs.org/sitemap.xml\"\n"
     }
   ],
+  "improve-skill": [
+    {
+      "id": "portable-skill-creator-invocation",
+      "issue": 1405,
+      "source": "openai/plugins",
+      "find": "3. Apply the `skill-creator` guidance from `/Users/benlesh/.codex/skills/skill-creator/SKILL.md`.",
+      "replace": "3. Apply Codex's built-in `skill-creator` skill (invoke it as `$skill-creator`)."
+    }
+  ],
   "wrangler": [
     {
       "id": "skill-health-1302",
