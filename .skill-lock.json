@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "41e991004d855c39ea0b72d9b47a4aa89802c934",
+      "skillFolderHash": "166655a9039320a8460c0d46994a2187e353caa1",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-19T15:42:41.870Z"
+      "updatedAt": "2026-11-20T15:25:19.542Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -9564,9 +9564,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "3b684abe690f118631916b161f68041c2dbbe271",
+      "skillFolderHash": "f260f3a562c07eb9b07db505c1a10ec3290c9ed4",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-11-02T15:46:07.356Z"
+      "updatedAt": "2026-11-20T15:25:37.351Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",
@@ -9812,18 +9812,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-clickhouse/SKILL.md",
-      "skillFolderHash": "0a7d064aff4374410373295be714d4d5cfbf2780",
+      "skillFolderHash": "f277ab3fe43e209bcdc042f591a726f7a499e166",
       "installedAt": "2026-08-23T17:16:56.407Z",
-      "updatedAt": "2026-11-02T15:46:08.846Z"
+      "updatedAt": "2026-11-20T15:25:38.372Z"
     },
     "infra-postgres": {
       "source": "clickhouse/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-postgres/SKILL.md",
-      "skillFolderHash": "cbb3b15ef4ed20b689daa43958aa899e171eba7b",
+      "skillFolderHash": "ed2a4429c404c8e36268997a7a7b7710c0914796",
       "installedAt": "2026-08-23T17:16:56.410Z",
-      "updatedAt": "2026-11-02T15:46:10.475Z"
+      "updatedAt": "2026-11-20T15:25:39.403Z"
     },
     "cloudformation-to-pulumi": {
       "source": "pulumi/agent-skills",
@@ -10634,9 +10634,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-pipelines/SKILL.md",
-      "skillFolderHash": "cb41bed4bf3beb0dfebaee6c4c86402684350324",
+      "skillFolderHash": "4b06eb457cc5beb78aef99f4622b39a3b0f28131",
       "installedAt": "2026-08-23T17:20:36.191Z",
-      "updatedAt": "2026-11-17T15:58:39.096Z"
+      "updatedAt": "2026-11-20T15:25:43.060Z"
     },
     "databricks-python-sdk": {
       "source": "databricks/databricks-agent-skills",
@@ -10661,9 +10661,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-spark-structured-streaming/SKILL.md",
-      "skillFolderHash": "52ffa0c630641b8621340610de8cb85417eeb039",
+      "skillFolderHash": "4aeb77cd947ccfa142cac6a001141d25cc39cf85",
       "installedAt": "2026-08-23T17:20:36.202Z",
-      "updatedAt": "2026-11-17T15:58:40.912Z"
+      "updatedAt": "2026-11-20T15:25:44.717Z"
     },
     "databricks-synthetic-data-gen": {
       "source": "databricks/databricks-agent-skills",
@@ -11397,27 +11397,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-dev-loop/SKILL.md",
-      "skillFolderHash": "070ac9750bf5d8aa2a3051ac2c73ae57c807245e",
+      "skillFolderHash": "454001f64c363b12e5abd187e1b99d52fccaafd0",
       "installedAt": "2026-08-23T17:24:04.384Z",
-      "updatedAt": "2026-11-05T14:37:09.789Z"
+      "updatedAt": "2026-11-20T15:25:48.727Z"
     },
     "next-cache-components-adoption": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-adoption/SKILL.md",
-      "skillFolderHash": "bf1e62f0e297f4992727fc546d3327b866f13472",
+      "skillFolderHash": "f05bccf023c7da2d074a11ff4923e2a0fa7d245a",
       "installedAt": "2026-08-23T17:24:15.296Z",
-      "updatedAt": "2026-11-18T15:38:03.753Z"
+      "updatedAt": "2026-11-20T15:25:50.852Z"
     },
     "next-cache-components-optimizer": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-optimizer/SKILL.md",
-      "skillFolderHash": "b0293b9d52f225e64fba4b314e0b8eb5ec89a613",
+      "skillFolderHash": "d1a1da28fdbc1f6242167463439ce9e4c2e68665",
       "installedAt": "2026-08-23T17:24:26.730Z",
-      "updatedAt": "2026-11-18T15:38:04.981Z"
+      "updatedAt": "2026-11-20T15:25:53.273Z"
     },
     "next-partial-prefetching-adoption": {
       "source": "vercel/next.js",

@@ -4,14 +4,14 @@
   "skills": 2210,
   "expert_profiles": 503,
   "nodes": 2283,
-  "edges": 16379,
+  "edges": 16386,
   "generic_names_blocked": 30,
-  "tier1_edges": 4925,
+  "tier1_edges": 4929,
   "tier2_edges": 721,
-  "alias_edges": 4581,
+  "alias_edges": 4583,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
-  "artifact_edges": 523,
+  "artifact_edges": 522,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
@@ -20,15 +20,15 @@
   "orphan_count": 129,
   "orphan_rate": 0.0584,
   "by_provenance": {
-   "EXTRACTED": 15593,
+   "EXTRACTED": 15600,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2210,
-   "references": 12860,
+   "references": 12868,
    "in_discipline": 599,
-   "touches": 523,
+   "touches": 522,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -7291,7 +7291,7 @@
    "id": "databricks-pipelines",
    "type": "Skill",
    "label": "databricks-pipelines",
-   "description": "Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks. Use when building batch or streaming data pipelines with Python or SQL, including Auto CDC from event streams or periodic complete snapshots. Invoke BEFORE starting implementation.",
+   "description": "Spark Declarative Pipelines (formerly DLT) in Python or SQL: streaming tables, materialized views, expectations, Auto CDC, Auto Loader, and pipeline settings. Also covers continuous mode, run-as, parameters, rewind, views, sinks and ForEachBatch, append flows, pipeline setup, migrating from legacy DLT, cluster keys, streaming state, and dedup or windowed aggregations. Also file ingestion from volumes, cloud storage, SFTP, Google Drive, SharePoint or OneDrive and document parsing; debugging failed, slow, or flaky updates from the update history; and migrating dbt or Informatica projects to SDP.",
    "source": "skills/databricks-pipelines/SKILL.md",
    "aliases": [
     "databricks pipelines"
@@ -46996,6 +46996,15 @@
   {
    "src": "browser-automation",
    "rel": "references",
+   "dst": "next-dev-loop",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-automation named in next-dev-loop/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "browser-automation",
+   "rel": "references",
    "dst": "next-partial-prefetching-adoption",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -63654,11 +63663,29 @@
   },
   {
    "src": "databricks-pipelines",
-   "rel": "touches",
-   "dst": "artifact:parquet",
+   "rel": "references",
+   "dst": "google-drive",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "Columnar table named in databricks-pipelines/SKILL.md",
+   "justification": "google-drive named in databricks-pipelines/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-pipelines",
+   "rel": "references",
+   "dst": "read-file",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "read-file named in databricks-pipelines/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-pipelines",
+   "rel": "references",
+   "dst": "sharepoint",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sharepoint named in databricks-pipelines/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -84647,6 +84674,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "google-drive named in databricks-genie-agents/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "google-drive",
+   "rel": "references",
+   "dst": "databricks-pipelines",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "google-drive named in databricks-pipelines/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -115450,6 +115486,15 @@
   {
    "src": "next-dev-loop",
    "rel": "references",
+   "dst": "browser-automation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-automation named in next-dev-loop/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "next-dev-loop",
+   "rel": "references",
    "dst": "next-partial-prefetching-adoption",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -138760,6 +138805,15 @@
   {
    "src": "read-file",
    "rel": "references",
+   "dst": "databricks-pipelines",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "read-file named in databricks-pipelines/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "read-file",
+   "rel": "references",
    "dst": "deep-agents-core",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -155351,6 +155405,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "sharepoint named in databricks-lakeflow-connect/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "sharepoint",
+   "rel": "references",
+   "dst": "databricks-pipelines",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sharepoint named in databricks-pipelines/SKILL.md body",
    "status": "accepted"
   },
   {
