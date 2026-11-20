@@ -103,7 +103,10 @@ prometheus.remote_write "mimir" {
 ```bash
 # 1. Install
 helm repo add grafana https://grafana.github.io/helm-charts
-helm install mimir grafana/mimir-distributed --version 6.0.6 -f values.yaml
+helm install mimir grafana/mimir-distributed --version 6.2.1 -f values.yaml
+# Note: grafana/mimir is deprecating this chart — 6.3.0 (Q4 2026) will be its last
+# release before it moves to a community-maintained repo under grafana-community.
+# See https://github.com/grafana/mimir/issues/17112 for migration instructions once published.
 
 # 2. Verify every pod is Running / Ready
 kubectl get pods -n mimir
@@ -133,5 +136,5 @@ For storage backends (S3 / GCS / Azure / filesystem) see [`references/storage.md
 ## Resources
 
 - [Mimir docs](https://grafana.com/docs/mimir/latest/)
-- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed)
+- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed) (deprecation notice: [grafana/mimir#17112](https://github.com/grafana/mimir/issues/17112))
 - [Architecture reference](https://grafana.com/docs/mimir/latest/references/architecture/)
