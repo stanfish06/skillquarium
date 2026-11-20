@@ -52,16 +52,16 @@ Install providers as project dependencies using the language-specific package ma
 which only downloads plugins without adding dependencies):
 
     # TypeScript/JavaScript
-    npm install @pulumi/aws@7.12.0
+    npm install @pulumi/aws@7.55.0
 
     # Python
-    pip install pulumi_aws==7.12.0
+    pip install pulumi_aws==7.55.0
 
     # Go
-    go get github.com/pulumi/pulumi-aws/sdk/v7@v7.12.0
+    go get github.com/pulumi/pulumi-aws/sdk/v7@v7.55.0
 
     # C#
-    dotnet add package Pulumi.Aws --version 7.12.0
+    dotnet add package Pulumi.Aws --version 7.55.0
 
 Import the translated state draft (`/tmp/pulumi-state.json`) into the Pulumi stack:
 
