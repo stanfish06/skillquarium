@@ -38779,6 +38779,15 @@
   {
    "src": "applied-mathematician",
    "rel": "references",
+   "dst": "harmonypy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of applied-mathematician appears in harmonypy/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "applied-mathematician",
+   "rel": "references",
    "dst": "heat-transfer-engineer",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -87032,6 +87041,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "harmonypy",
+   "rel": "references",
+   "dst": "applied-mathematician",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of applied-mathematician appears in harmonypy/SKILL.md",
    "status": "accepted"
   },
   {
