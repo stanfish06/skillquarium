@@ -533,8 +533,8 @@ hf_jobs("inspect", {"job_id": "your-job-id"})   # Job details
 from huggingface_hub import HfApi
 api = HfApi()
 api.list_jobs()                                  # List all jobs
-api.get_job_logs(job_id="your-job-id")           # View logs
-api.get_job(job_id="your-job-id")                # Job details
+api.fetch_job_logs(job_id="your-job-id")         # View logs
+api.inspect_job(job_id="your-job-id")            # Job details
 ```
 
 ## Common failure modes
