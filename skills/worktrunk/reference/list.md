@@ -171,7 +171,7 @@ The single highest-priority state describing the branch's relation to the defaul
 
 | Symbol | display.state | Meaning |
 |--------|---------------|---------|
-| `^` | `"is_main"` | The main worktree (the repo's home worktree) |
+| `^` | `"is_main"` | The primary worktree (the repo's home worktree) |
 | `∅` | `"orphan"` | No common ancestor with the default branch |
 | `_` | `"empty"` | Same commit as the default branch, working tree clean — safe to remove; row dimmed |
 | `⊂` | `"integrated"` | Content [integrated](https://worktrunk.dev/remove/#branch-cleanup) into the default branch or merge target via different history; the matching check is in `default_branch.integration.reason`; row dimmed |
@@ -235,9 +235,9 @@ One envelope object. Items carry independent facts; rendered strings
       "branch": "feature",
       "head": {"sha": "05a4a45d…", "short_sha": "05a4a45", "subject": "Add login page",
                "committed_at": "2025-01-01T08:00:00Z"},
-      "worktree": {"path": "/home/user/repo.feature", "main": false, "current": true,
-                   "previous": false, "detached": false, "branch_mismatch": false,
-                   "duplicate_branch": false,
+      "worktree": {"path": "/home/user/repo.feature", "modified_at": "2025-01-01T09:30:00Z",
+                   "main": false, "current": true, "previous": false, "detached": false,
+                   "branch_mismatch": false, "duplicate_branch": false,
                    "changes": {"staged": false, "modified": true, "untracked": false,
                                "renamed": false, "deleted": false, "conflicted": false,
                                "diff": {"added": 10, "deleted": 2}}},
@@ -294,7 +294,7 @@ Item fields:
 | Field | Type | Description |
 |-------|------|-------------|
 | `sha` | string | Full commit SHA (40 chars) |
-| `short_sha` | string | Short commit SHA, abbreviated per `core.abbrev` (auto-extends for ambiguous prefixes) |
+| `short_sha` | string/null | Short commit SHA, abbreviated per `core.abbrev` (auto-extends for ambiguous prefixes); null when the commit can't be read |
 | `subject` | string/null | Commit subject (first line); null when not loaded, as for a prunable worktree |
 | `committed_at` | string/null | Committer time, RFC 3339 UTC; null when not loaded |
 
@@ -305,7 +305,8 @@ Present only on worktree rows. The location attributes are independent, so they 
 | Field | Type | Description |
 |-------|------|-------------|
 | `path` | string | Worktree path |
-| `main` | boolean | Is the main worktree |
+| `modified_at` | string/null | Later of HEAD committer time and the newest changed or untracked file mtime, RFC 3339 UTC; null when unresolved |
+| `main` | boolean | Is the primary worktree: the main worktree, or in a bare repo the one on the default branch |
 | `current` | boolean | Is the worktree the command ran from |
 | `previous` | boolean | Is the previous worktree (`wt switch -`) |
 | `detached` | boolean | HEAD is detached |
@@ -401,6 +402,7 @@ Presentation only — every value here renders facts that appear elsewhere in th
 | `url` | string | Repository web URL |
 | `provider` | string | `"github"`, `"gitlab"`, `"gitea"`, `"azure-devops"`, or `"unknown"` |
 | `host` | string | Repository web host |
+| `api_host` | string | API host from `forge.hostname`, only on `repo.forge` when set |
 | `owner` | string | Owner, organization, or namespace path |
 | `name` | string | Repository name |
 | `project` | string | Azure DevOps project name; absent for other providers |
