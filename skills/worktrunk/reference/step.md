@@ -77,9 +77,7 @@ Global Options:
           Override config with inline TOML, e.g. --config-set list.full=true (repeatable)
 
   -v, --verbose...
-          Verbose output (-v: info logs + hook/alias template variables on stderr; -vv: also debug
-          logs and raw subprocess output written to .git/wt/logs/). Set WORKTRUNK_VERBOSE=0|1|2 to
-          apply the same level everywhere — including shell completion, which no flag can reach
+          Verbose output (-v: template variables; -vv: debug logs)
 
   -y, --yes
           Skip approval prompts
@@ -532,6 +530,8 @@ The `target/` directory is huge (often 1-10GB). Copying with reflink cuts first 
 [pre-start]
 deps = "ln -sf {{ primary_worktree_path }}/node_modules ."
 ```
+
+Git sees the symlink as a file, so `.gitignore` needs `node_modules` without a trailing slash. `node_modules/` matches only directories: the link stays untracked, a commit can pick it up, and merging that commit replaces the primary worktree's `node_modules` with a link to itself.
 
 #### Python
 
