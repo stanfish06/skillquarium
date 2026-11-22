@@ -49,7 +49,7 @@ Follow these principles for ALL Langfuse work:
 
 ## 1. Langfuse API via CLI
 
-Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required):
+Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required). Note: Langfuse's CLI v1 changelog (2026-08-21) introduces `@langfuse/cli` as the forward-looking package name; the `langfuse-cli` package shown below still works and will be maintained until the next major version, but new setups may prefer `npx @langfuse/cli`.
 
 Start by discovering the schema and available arguments:
 
