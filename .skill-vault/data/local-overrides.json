@@ -5205,5 +5205,35 @@
       "find": "# Remote mode - runs on Cloudflare edge (legacy)\nwrangler dev --remote\n",
       "replace": "# Remote mode - runs on Cloudflare edge (legacy)\n# Legacy: uploads the Worker to a remote preview. Durable Objects cannot use per-binding\n# `remote: true` (they always run locally); to reach remote DO instances, deploy a Worker that\n# defines them and bind to it with a remote service binding (Cloudflare local-development docs)\nwrangler dev --remote\n"
     }
+  ],
+  "zoom-meeting-sdk-web": [
+    {
+      "id": "stale-npm-version-example",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `6.2.0`).",
+      "replace": "Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `6.10.0`)."
+    },
+    {
+      "id": "stale-zfg-pin",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "    \"@zoom/meetingsdk\": \"3.11.2-zfg\"",
+      "replace": "    \"@zoom/meetingsdk\": \"6.0.2-zfg\""
+    },
+    {
+      "id": "stale-doc-version-footer",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "**Documentation Version**: Based on Zoom Web Meeting SDK v6.2+ (check https://www.npmjs.com/package/@zoom/meetingsdk for the current version)",
+      "replace": "**Documentation Version**: Based on Zoom Web Meeting SDK v6.10+ (check https://www.npmjs.com/package/@zoom/meetingsdk for the current version)"
+    },
+    {
+      "id": "future-authorization-framing",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "> **IMPORTANT**: Beginning **March 2, 2026**, apps joining meetings outside their account must be authorized.",
+      "replace": "> **IMPORTANT**: Since **March 2, 2026**, apps joining meetings outside their account must be authorized. This requirement is already in effect."
+    }
   ]
 }
