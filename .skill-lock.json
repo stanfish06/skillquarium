@@ -2041,18 +2041,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "ee63a7e76a7f26a3f47b929568035283d89c8964",
+      "skillFolderHash": "daa240a23dd90b80552f231061d497a885699da3",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-11-13T14:32:28.303Z"
+      "updatedAt": "2026-11-23T18:01:58.449Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "e85bda8b46812f2f2030a79d5f825ef0add7fc72",
+      "skillFolderHash": "e2165028c108d999938a3419ab471e07b47ed381",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-11-06T14:14:38.529Z"
+      "updatedAt": "2026-11-23T18:01:59.738Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -2086,9 +2086,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-stats/SKILL.md",
-      "skillFolderHash": "c7b80bfb2ad324f99f87e0f16a81aca38c5d7257",
+      "skillFolderHash": "95e2371a57cda91058f4a611b8082ea0d0e16683",
       "installedAt": "2026-06-13T13:42:44.381Z",
-      "updatedAt": "2026-10-10T12:47:30.051Z"
+      "updatedAt": "2026-11-23T18:02:00.983Z"
     },
     "docker-expert": {
       "source": "sickn33/agentic-awesome-skills",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "ffb4e62daba3f1d43556123a5691632de5d25a22",
+      "skillFolderHash": "5481fc8c4cb5675a04d8a0032ac3e0c32bc84c14",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-22T14:31:56.273Z"
+      "updatedAt": "2026-11-23T18:02:20.014Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "c29b0d16b4531374652186b4732aae57a5efc3ce",
+      "skillFolderHash": "3abb5e87d93e5cfaa0b758a4b07926f619cb7a33",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-22T14:32:10.100Z"
+      "updatedAt": "2026-11-23T18:02:33.963Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9537,9 +9537,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "eaf4e64a81eda10ae2a5a882bf150771482cfd9f",
+      "skillFolderHash": "051041d06d835b75e3359eb18e74f16642f4c46d",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-22T14:32:13.869Z"
+      "updatedAt": "2026-11-23T18:02:37.983Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -9564,9 +9564,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "ef5b067b143385004753dc754720eb1dcecd2dc7",
+      "skillFolderHash": "ac2b324253d65190ae29baf0078da14c60f534af",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-11-21T14:37:41.081Z"
+      "updatedAt": "2026-11-23T18:02:41.503Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",
@@ -12659,9 +12659,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance.git",
       "skillPath": "skills/modern-web-guidance/SKILL.md",
-      "skillFolderHash": "7c7d6612af788857352d452ebe263ad462351658",
+      "skillFolderHash": "94cd548883b7cd735ee0d2bdd723c68a212a0933",
       "installedAt": "2026-11-10T21:09:24.000Z",
-      "updatedAt": "2026-11-16T15:40:29.593Z"
+      "updatedAt": "2026-11-23T18:02:58.891Z"
     },
     "chrome-extensions": {
       "source": "GoogleChrome/modern-web-guidance",
