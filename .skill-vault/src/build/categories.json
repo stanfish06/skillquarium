@@ -1542,6 +1542,7 @@
     "landing-page-design": "web-automation-frontend",
     "lean4": "data-science-compute",
     "aws-agent-toolkit": "cloud-devops",
+    "google-elephant-goldfish-model": "software-dev",
     "biostudies-arrayexpress-skill": "bio-databases-platforms",
     "cbioportal-skill": "bio-databases-platforms",
     "cellxgene-skill": "bio-databases-platforms",
@@ -2122,7 +2123,12 @@
     "llama-cpp": "ml-ai",
     "inspect-ai": "ml-ai",
     "skypilot": "cloud-devops",
-    "google-rust-style": "software-dev"
+    "google-rust-style": "software-dev",
+    "roast-my-chart": "data-visualization",
+    "inspiration": "data-visualization",
+    "ggplot2": "data-visualization",
+    "d3": "data-visualization",
+    "matplotlib-design": "data-visualization"
   },
   "synonyms": {
     "pydeseq2": [

@@ -72,7 +72,6 @@ created: 2026-08-07
 - [opentrons-integration](../../notes/bio-databases-platforms/opentrons-integration.md) — Authors, reviews, migrates, simulates, and troubleshoots official Opentrons Python Protocol API v2 protocols for Flex and OT-2 robots
 - [pcap-triage-tshark](../../notes/security-auditing/pcap-triage-tshark.md) — Fast workflow to inspect PCAPs and extract protocol-level details using tshark
 - [physical-ai-infrastructure-setup-and-resilient-scaling](../../notes/game-development/physical-ai-infrastructure-setup-and-resilient-scaling.md) — Use when the user wants to set up, scale, validate, or harden NVIDIA physical AI infrastructure for synthetic data generation workflows across local MicroK8s or Azure AKS, including...
-- [propose-security-hardening](../../notes/security-auditing/propose-security-hardening.md) — Develop evidence-backed structural and architectural security hardening proposals from vulnerability disclosures, supplied findings, incident or assessment documents, source code, or a...
 - [proteomics-de](../../notes/proteomics-metabolomics/proteomics-de.md) — Differential expression analysis for label-free quantitative (LFQ) intensity data with standard MaxQuant and DIA-NN output
 - [pytest](../../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
 - [render-workflows](../../notes/hosting-edge-platforms/render-workflows.md) — Sets up, develops, tests, and deploys Render Workflows

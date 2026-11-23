@@ -11,6 +11,7 @@ import {
   type MouseEvent,
 } from "@opentui/core"
 
+import type { Tier1View } from "../eval/tier1Results"
 import type { Catalog, Product, SkillBackend, SkillRecord } from "./backend"
 import type { ArmStats, BenchRow, EvalRun, EvalSource } from "./evalruns"
 
@@ -35,6 +36,7 @@ const NAME_COLUMN_MIN_WIDTH = 14
 const CATEGORY_COLUMN_MIN_WIDTH = 12
 const MARK_COLUMN_WIDTH = 5
 const PRODUCT_COLUMN_WIDTH = 9
+const TIER1_COLUMN_WIDTH = 9
 
 const BENCH_SKILL_GROW = 4
 const BENCH_TEXT_GROW = 3
@@ -60,6 +62,55 @@ export const STATUS_FILTERS = [
 export type StatusFilter = (typeof STATUS_FILTERS)[number]
 
 export type Tab = "skills" | "bench"
+
+export interface Tier1State {
+  views: ReadonlyMap<string, Tier1View>
+  /** Why eval/tier1/results.jsonl could not be read, shown in the detail pane. */
+  error: string | null
+}
+
+// "77 C", "*" when the skill changed since the scan, "-" when never scanned
+export function tier1Label(view: Tier1View | undefined): string {
+  if (!view) return "-"
+  const base = view.status === "error" ? "err" : `${view.score === null ? "?" : Math.round(view.score)} ${view.grade ?? ""}`.trim()
+  return view.stale ? `${base}*` : base
+}
+
+function tier1Color(view: Tier1View | undefined): string {
+  if (!view || view.stale) return COLORS.muted
+  switch (view.status) {
+    case "passed":
+      return COLORS.enabled
+    case "failed":
+      return COLORS.disabled
+    case "incomplete":
+      return COLORS.mixed
+    case "error":
+      return COLORS.error
+  }
+}
+
+export function tier1Detail(key: string, tier1: Tier1State): string[] {
+  const pad = "          "
+  const rerun = `./skillquarium eval tier1 ${key}`
+  const view = tier1.views.get(key)
+  if (!view) return [`Tier 1    ${tier1.error ? `unreadable: ${tier1.error}` : `not scanned   ${rerun}`}`]
+  const score = view.score === null ? "" : `  ${view.score.toFixed(1)}/${view.grade ?? "?"}`
+  const counts = Object.entries(view.severity)
+    .filter(([, n]) => n > 0)
+    .map(([severity, n]) => `${severity} ${n}`)
+    .join(" · ")
+  return [
+    `Tier 1    ${view.status}${score}`,
+    `${pad}skillevaluator ${view.evaluator}, ${view.scannedAt.slice(0, 10)}`,
+    view.stale ? `${pad}stale: skill changed since the scan; ${rerun}` : null,
+    view.failedChecks.length ? `${pad}failed: ${view.failedChecks.join(", ")}` : null,
+    view.incompleteChecks.length ? `${pad}incomplete: ${view.incompleteChecks.join(", ")}` : null,
+    counts ? `${pad}${counts}` : null,
+    view.error ? `${pad}${view.error}` : null,
+    ...view.issues.map((issue) => `  ${issue.severity.toUpperCase()} ${issue.category}: ${issue.message}`),
+  ].filter((line): line is string => line !== null)
+}
 
 function fuzzyTokenScore(token: string, value: string): number | null {
   const direct = value.indexOf(token)
@@ -212,6 +263,7 @@ interface SkillRow {
   category: TextRenderable
   claude: TextRenderable
   codex: TextRenderable
+  tier1: TextRenderable
 }
 
 export class SkillquariumApp {
@@ -256,6 +308,9 @@ export class SkillquariumApp {
   private run: EvalRun | null = null
   private benchError: string | null = null
   private readonly help: BoxRenderable
+  private readonly overlay: BoxRenderable
+  private readonly overlayScroll: ScrollBoxRenderable
+  private readonly overlayText: TextRenderable
 
   constructor(
     private readonly renderer: CliRenderer,
@@ -263,6 +318,7 @@ export class SkillquariumApp {
     catalog: Catalog,
     initialQuery = "",
     private readonly evalSource?: EvalSource,
+    private readonly tier1: Tier1State = { views: new Map(), error: null },
   ) {
     this.catalogData = catalog
     this.categories = ["all", ...catalog.categories]
@@ -432,7 +488,7 @@ export class SkillquariumApp {
       flexGrow: 2,
       flexBasis: 0,
       // minimums in the same 2:1 ratio as flex growth keeps the pane ratio stable
-      minWidth: 48,
+      minWidth: 56,
       flexShrink: 1,
       height: "100%",
       borderStyle: "rounded",
@@ -462,6 +518,7 @@ export class SkillquariumApp {
     )
     columns.add(this.tableCell("column-claude", "Claude", COLORS.muted, undefined, undefined, PRODUCT_COLUMN_WIDTH))
     columns.add(this.tableCell("column-codex", "Codex", COLORS.muted, undefined, undefined, PRODUCT_COLUMN_WIDTH))
+    columns.add(this.tableCell("column-tier1", "Tier 1", COLORS.muted, undefined, undefined, TIER1_COLUMN_WIDTH))
     listPanel.add(columns)
     this.list = this.createScrollList("skill-list")
     this.installScrollbarDrag(this.list)
@@ -526,7 +583,7 @@ export class SkillquariumApp {
       id: "bench-panel",
       flexGrow: 2,
       flexBasis: 0,
-      minWidth: 48,
+      minWidth: 56,
       flexShrink: 1,
       height: "100%",
       borderStyle: "rounded",
@@ -610,6 +667,38 @@ export class SkillquariumApp {
       }),
     )
     this.root.add(this.help)
+
+    // Enter on the Skills tab: the selected skill's full detail, scrollable, above both panes
+    this.overlay = new BoxRenderable(renderer, {
+      id: "skill-overlay",
+      position: "absolute",
+      left: "5%",
+      width: "90%",
+      top: 2,
+      bottom: 3,
+      zIndex: 20,
+      visible: false,
+      borderStyle: "rounded",
+      borderColor: COLORS.accent,
+      titleColor: COLORS.accent,
+      bottomTitle: " ↑↓ scroll   Q/Esc close ",
+      bottomTitleAlignment: "right",
+      backgroundColor: COLORS.panelAlt,
+      flexDirection: "column",
+      paddingLeft: 1,
+      // keep clicks off the rows underneath
+      onMouseDown: (event) => event.stopPropagation(),
+    })
+    this.overlayScroll = this.createScrollList("skill-overlay-scroll")
+    this.overlayText = new TextRenderable(renderer, {
+      id: "skill-overlay-text",
+      fg: COLORS.text,
+      width: "100%",
+      content: "",
+    })
+    this.overlayScroll.add(this.overlayText)
+    this.overlay.add(this.overlayScroll)
+    this.root.add(this.overlay)
 
     const footer = new BoxRenderable(renderer, {
       id: "footer",
@@ -748,7 +837,7 @@ export class SkillquariumApp {
       flexGrow: 1,
       flexBasis: 0,
       flexShrink: 1,
-      minWidth: 24,
+      minWidth: 28,
       height: "100%",
       borderStyle: "rounded",
       borderColor: COLORS.border,
@@ -847,11 +936,27 @@ export class SkillquariumApp {
     this.skillsView.visible = tab === "skills"
     this.benchView.visible = tab === "bench"
     if (tab !== "bench") this.toggleHelp(false)
+    this.overlay.visible = false
     this.updateTabChrome()
   }
 
   private toggleHelp(force?: boolean): void {
     this.help.visible = force ?? !this.help.visible
+  }
+
+  private showOverlay(open: boolean): void {
+    this.overlay.visible = open && this.updateOverlay()
+    this.overlayScroll.scrollTo(0)
+    this.updateTabChrome()
+  }
+
+  /** Refresh the overlay from the selected skill; false when nothing is selected. */
+  private updateOverlay(): boolean {
+    const skill = this.selectedSkill()
+    if (!skill) return false
+    this.overlay.title = ` ${skill.name} `
+    this.overlayText.content = this.detailLines(skill).slice(2).join("\n")
+    return true
   }
 
   private updateTabChrome(): void {
@@ -860,9 +965,10 @@ export class SkillquariumApp {
       parts.box.backgroundColor = active ? COLORS.selected : COLORS.panelAlt
       parts.label.fg = active ? COLORS.accent : COLORS.text
     }
-    this.shortcuts.content =
-      this.activeTab === "skills"
-        ? "/ search   ↑↓ move   M mark   C Claude   X Codex   Space both   F status   G category   Ctrl-S/R/P   Tab benchmarks   Q quit"
+    this.shortcuts.content = this.overlay.visible
+      ? "↑↓ PgUp PgDn Home End scroll   Q/Esc/Enter close"
+      : this.activeTab === "skills"
+        ? "/ search   ↑↓ move   Enter details   M mark   C Claude   X Codex   Space both   F status   G category   Ctrl-S/R/P   Tab benchmarks   Q quit"
         : "↑↓ move   [ ] switch run   ? columns   Tab skills   Q quit"
     this.updateSummary()
   }
@@ -936,6 +1042,14 @@ export class SkillquariumApp {
       this.tableCell(`category-${key}`, skill.category, COLORS.muted, CATEGORY_COLUMN_GROW, CATEGORY_COLUMN_MIN_WIDTH),
       this.productCell(skill, "claude", PRODUCT_COLUMN_WIDTH),
       this.productCell(skill, "codex", PRODUCT_COLUMN_WIDTH),
+      this.tableCell(
+        `tier1-${key}`,
+        tier1Label(this.tier1.views.get(key)),
+        tier1Color(this.tier1.views.get(key)),
+        undefined,
+        undefined,
+        TIER1_COLUMN_WIDTH,
+      ),
     ]
     for (const cell of cells) row.add(cell)
     const label = (cell: BoxRenderable) => cell.getChildren()[0] as TextRenderable
@@ -948,6 +1062,7 @@ export class SkillquariumApp {
       category: label(cells[2]!),
       claude: label(cells[3]!),
       codex: label(cells[4]!),
+      tier1: label(cells[5]!),
     }
     this.skillRows.set(key, entry)
     return entry
@@ -1004,24 +1119,32 @@ export class SkillquariumApp {
   }
 
   private updateDetail(): void {
-    const skill = this.catalogData.skills.find((candidate) => candidate.key === this.selectedKey)
+    const skill = this.selectedSkill()
+    if (this.overlay.visible && !this.updateOverlay()) this.showOverlay(false)
     if (!skill) {
       this.detail.content = "No skills match the active filters."
       return
     }
-    this.detail.content = [
+    this.detail.content = this.detailLines(skill).join("\n")
+  }
+
+  // first two lines are the name and a blank; the overlay shows the name in its title
+  private detailLines(skill: SkillRecord): string[] {
+    return [
       skill.name,
       "",
       `Category  ${skill.category}`,
       `State     ${skill.state}`,
       `Claude    ${productLabel(skill.claude_enabled)}`,
       `Codex     ${productLabel(skill.codex_enabled)}`,
+      // above the description, which can run past the bottom of the pane
+      ...tier1Detail(skill.key, this.tier1),
       "",
       skill.description,
       "",
       skill.directory,
       skill.error ? `\nError: ${skill.error}` : "",
-    ].join("\n")
+    ]
   }
 
   private updateSummary(): void {
@@ -1415,6 +1538,38 @@ export class SkillquariumApp {
       return
     }
 
+    if (this.overlay.visible) {
+      const scroll = this.overlayScroll
+      switch (key.name) {
+        case "q":
+        case "escape":
+        case "return":
+          this.showOverlay(false)
+          return
+        case "up":
+        case "k":
+          scroll.scrollBy(-1)
+          return
+        case "down":
+        case "j":
+          scroll.scrollBy(1)
+          return
+        case "pageup":
+          scroll.scrollBy(-10)
+          return
+        case "pagedown":
+          scroll.scrollBy(10)
+          return
+        case "home":
+          scroll.scrollTo(0)
+          return
+        case "end":
+          scroll.scrollTo(scroll.scrollHeight)
+          return
+      }
+      return
+    }
+
     const searchFocused = this.renderer.currentFocusedRenderable === this.search
     if (key.name === "tab") {
       this.showTab(this.activeTab === "skills" ? "bench" : "skills")
@@ -1481,6 +1636,9 @@ export class SkillquariumApp {
         // keep the focusing keystroke out of the input
         key.preventDefault()
         this.search.focus()
+        return
+      case "return":
+        this.showOverlay(true)
         return
       case "up":
       case "k":

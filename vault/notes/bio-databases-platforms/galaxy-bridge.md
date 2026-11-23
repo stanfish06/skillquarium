@@ -8,7 +8,7 @@ tags:
 domain: bio-databases-platforms
 status: untried
 source: skills/galaxy-bridge/SKILL.md
-created: 2026-06-09
+created: 2026-11-16
 ---
 
 # galaxy-bridge
