@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [cns-plot](../../notes/research-writing/cns-plot.md) — Create, restyle, compose, and export compact publication-ready scientific figures with the Python cnsplots library or its source-derived Cell/Nature/Science plotting patterns
+- [ggplot2](../../notes/data-visualization/ggplot2.md) — Generate, review, or refactor ggplot2 code in R following an opinionated set of best practices
 - [infographics](../../notes/documents-office/infographics.md) — Create professional infographics using Nano Banana Pro AI with smart iterative refinement
 - [matplotlib](../../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
 - [pdf](../../notes/documents-office/pdf.md) — PDF manipulation toolkit. Extract text/tables, create PDFs, merge/split, fill forms, for programmatic document processing and analysis
