@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "35af6ee99af70c113c75be054f82237698e5492f",
+      "skillFolderHash": "ffb4e62daba3f1d43556123a5691632de5d25a22",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-21T14:37:34.389Z"
+      "updatedAt": "2026-11-22T14:31:56.273Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8828,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "837f3c6b48f64a05dcd536c94017abd3ab4a3f6b",
+      "skillFolderHash": "c29b0d16b4531374652186b4732aae57a5efc3ce",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-18T15:37:49.327Z"
+      "updatedAt": "2026-11-22T14:32:10.100Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9537,9 +9537,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "5b92724f800bb6c6ef0e0f2125b39e7c1fe37f64",
+      "skillFolderHash": "eaf4e64a81eda10ae2a5a882bf150771482cfd9f",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-21T14:37:37.817Z"
+      "updatedAt": "2026-11-22T14:32:13.869Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -10697,9 +10697,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-vector-search/SKILL.md",
-      "skillFolderHash": "872f97bfeff41fb059c9e7791d1e4ff94f4eef44",
+      "skillFolderHash": "98b83eb7329c0dbdcd31f7be5c0971dde355ef70",
       "installedAt": "2026-08-23T17:20:36.217Z",
-      "updatedAt": "2026-11-17T15:58:42.453Z"
+      "updatedAt": "2026-11-22T14:32:17.095Z"
     },
     "databricks-zerobus-ingest": {
       "source": "databricks/databricks-agent-skills",
@@ -12671,6 +12671,42 @@
       "skillFolderHash": "70ae21f9bbccb4d97c2748dffcc227f9ed07c6cf",
       "installedAt": "2026-11-10T21:09:24.000Z",
       "updatedAt": "2026-11-10T21:09:24.000Z"
+    },
+    "roast-my-chart": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "roast-my-chart/SKILL.md",
+      "skillFolderHash": "e4d7109be58e6f74b5b054c16d8d6028532f2a0d",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
+    },
+    "inspiration": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "inspiration/SKILL.md",
+      "skillFolderHash": "f3835f02fd19d03ceb8ed2e4204128db84b22819",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
+    },
+    "ggplot2": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "ggplot2/SKILL.md",
+      "skillFolderHash": "fbcbc6309338ef2a501eefc3cb01e07df9ebf17f",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
+    },
+    "d3": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "d3/SKILL.md",
+      "skillFolderHash": "0f69beac13120e3c05fd7c976842e9a8a5068ceb",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
     }
   },
   "dismissed": {
