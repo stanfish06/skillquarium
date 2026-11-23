@@ -176,7 +176,7 @@ python skills/busco-assessor/busco_assessor.py \
 
 # Agentic: infer lineage from organism hint
 python skills/busco-assessor/busco_assessor.py \
-  --input assembly.fna --organism "fruit fly"--output /tmp/busco_out
+  --input assembly.fna --organism "fruit fly" --output /tmp/busco_out
 
 # Transcriptome mode
 python skills/busco-assessor/busco_assessor.py \
