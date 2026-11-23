@@ -1059,6 +1059,30 @@
       "source": "tech-leads-club/agent-skills",
       "find": "threat modeling (use security-threat-model)",
       "replace": "threat modeling (use threat-model)"
+    },
+    {
+      "id": "nextjs-support-policy-url",
+      "issue": 1384,
+      "source": "tech-leads-club/agent-skills",
+      "file": "references/javascript-typescript-nextjs-web-server-security.md",
+      "find": "- Next.js Docs: Support policy (supported versions/LTS) — `https://nextjs.org/docs/support-policy`\n",
+      "replace": "- Next.js Docs: Support policy (supported versions/LTS) — `https://nextjs.org/support-policy`\n"
+    },
+    {
+      "id": "ghsa-id-for-cve-2026-23864",
+      "issue": 1384,
+      "source": "tech-leads-club/agent-skills",
+      "file": "references/javascript-typescript-nextjs-web-server-security.md",
+      "find": "- GitHub Security Advisory: Next.js DoS via Server Components / Server Actions (CVE-2026-23864) — `https://github.com/advisories/GHSA-fq29-rrrv-cq2m`\n",
+      "replace": "- GitHub Security Advisory: Next.js DoS with Server Components (CVE-2026-23864) — `https://github.com/vercel/next.js/security/advisories/GHSA-h25m-26qc-wcjf`; upstream React Server Components advisory — `https://github.com/advisories/GHSA-83fc-fqcc-2hmg`\n"
+    },
+    {
+      "id": "nextjs-security-advisories-list",
+      "issue": 1384,
+      "source": "tech-leads-club/agent-skills",
+      "file": "references/javascript-typescript-nextjs-web-server-security.md",
+      "find": "- Next.js Blog: Security update (example security advisory context) — `https://nextjs.org/blog/security-update`\n",
+      "replace": "- Next.js published security advisories (per-release affected ranges and fixed versions) — `https://github.com/vercel/next.js/security/advisories`\n"
     }
   ],
   "tlc-generative-engine-optimization": [
