@@ -5213,5 +5213,21 @@
       "find": "Use BEFORE writing any code that draws a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…), even for a one-line request like \"make a map of X\", \"fais-moi une carte de X\", \"visualise Z\", and even when the work starts with fetching data. Searches",
       "replace": "Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout. Searches"
     }
+  ],
+  "mimir": [
+    {
+      "id": "stale-helm-chart-pin-and-deprecation",
+      "issue": 1411,
+      "source": "grafana/skills",
+      "find": "helm install mimir grafana/mimir-distributed --version 6.0.6 -f values.yaml\n",
+      "replace": "helm install mimir grafana/mimir-distributed --version 6.2.2 -f values.yaml\n# Note: grafana/mimir is deprecating this chart — 6.3.0 (Q4 2026) will be its last\n# release before it moves to a community-maintained repo under grafana-community.\n# See https://github.com/grafana/mimir/issues/17112 for migration instructions once published.\n"
+    },
+    {
+      "id": "helm-chart-deprecation-resource-link",
+      "issue": 1411,
+      "source": "grafana/skills",
+      "find": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed)\n",
+      "replace": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed) (deprecation notice: [grafana/mimir#17112](https://github.com/grafana/mimir/issues/17112))\n"
+    }
   ]
 }

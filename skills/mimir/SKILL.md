@@ -103,7 +103,7 @@ prometheus.remote_write "mimir" {
 ```bash
 # 1. Install
 helm repo add grafana https://grafana.github.io/helm-charts
-helm install mimir grafana/mimir-distributed --version 6.2.1 -f values.yaml
+helm install mimir grafana/mimir-distributed --version 6.2.2 -f values.yaml
 # Note: grafana/mimir is deprecating this chart — 6.3.0 (Q4 2026) will be its last
 # release before it moves to a community-maintained repo under grafana-community.
 # See https://github.com/grafana/mimir/issues/17112 for migration instructions once published.
