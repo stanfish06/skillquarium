@@ -1,12 +1,12 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2210,
+  "skills": 2215,
   "expert_profiles": 503,
-  "nodes": 2283,
-  "edges": 16386,
+  "nodes": 2288,
+  "edges": 16459,
   "generic_names_blocked": 30,
-  "tier1_edges": 4929,
+  "tier1_edges": 4963,
   "tier2_edges": 721,
   "alias_edges": 4583,
   "discipline_edges": 599,
@@ -15,18 +15,18 @@
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.85,
+  "mean_skill_degree": 5.87,
   "median_skill_degree": 4,
-  "orphan_count": 129,
-  "orphan_rate": 0.0584,
+  "orphan_count": 126,
+  "orphan_rate": 0.0569,
   "by_provenance": {
-   "EXTRACTED": 15600,
+   "EXTRACTED": 15673,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2210,
-   "references": 12868,
+   "in_domain": 2215,
+   "references": 12936,
    "in_discipline": 599,
    "touches": 522,
    "has_step": 69,
@@ -6748,6 +6748,19 @@
    "deprecated": false
   },
   {
+   "id": "d3",
+   "type": "Skill",
+   "label": "d3",
+   "description": "Use when building, fixing or animating a chart with D3.js inside a React or Next.js app (barplot, scatterplot, line chart, treemap, map…). Covers the D3-for-math / React-for-rendering split, margins and axes, responsiveness with a useDimensions hook, animation with Motion, and switching from SVG to canvas for large datasets. Not for vanilla D3 projects without React.",
+   "source": "skills/d3/SKILL.md",
+   "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "d3-data-visualization",
    "type": "Skill",
    "label": "d3-data-visualization",
@@ -12243,6 +12256,19 @@
    "deprecated": false
   },
   {
+   "id": "ggplot2",
+   "type": "Skill",
+   "label": "ggplot2",
+   "description": "Generate, review, or refactor ggplot2 code in R following an opinionated set of best practices. Use whenever the user writes ggplot2 code, asks for ggplot2 help, picks a theme, tweaks scales, sets up faceting, or exports a plot. R-specific.",
+   "source": "skills/ggplot2/SKILL.md",
+   "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "gh-address-comments",
    "type": "Skill",
    "label": "gh-address-comments",
@@ -14484,6 +14510,19 @@
    "aliases": [
     "inspect ai"
    ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "inspiration",
+   "type": "Skill",
+   "label": "inspiration",
+   "description": "Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout. Searches curated galleries of published dataviz as one catalog (dataviz-inspiration.com, Dataviz Index) for 3–5 real references to borrow ideas from — form, annotation, palette, layout — with links back to each source. Also use when asked for chart ideas, examples or references, or to improve a chart that looks generic. Triggers: carte, graphique, visualisation, dataviz, infographie, tableau de bord, chart, map, plot, graph, figure, dashboard, choropleth.",
+   "source": "skills/inspiration/SKILL.md",
+   "aliases": [],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -17127,6 +17166,21 @@
    "description": "Creates and customizes scientific plots with Matplotlib. Used for fine-grained control over plot elements, novel plot types, and scientific workflows. Export to PNG/PDF/SVG for publication. For quick statistical plots use seaborn; for interactive plots use plotly; for publication-ready multi-panel figures with journal styling, use scientific-visualization.",
    "source": "skills/matplotlib/SKILL.md",
    "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "matplotlib-design",
+   "type": "Skill",
+   "label": "matplotlib-design",
+   "description": "Create, improve, or reproduce Matplotlib charts with deliberate styling, typography, annotations, custom layouts, and maps. Use when producing Python visualizations or refining existing Matplotlib, Seaborn, or GeoPandas figures. Covers chart design choices; for Matplotlib API reference, plot types, and 3D plots, use matplotlib.",
+   "source": "skills/matplotlib-design/SKILL.md",
+   "aliases": [
+    "matplotlib design"
+   ],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -26132,6 +26186,21 @@
    "deprecated": false
   },
   {
+   "id": "roast-my-chart",
+   "type": "Skill",
+   "label": "roast-my-chart",
+   "description": "Review a finished chart, plot, map or dashboard against the 61 Data to Viz caveat flashcards, and report what to fix. Use when the user asks to roast, review, critique, audit or give feedback on a chart, asks \"what's wrong with my chart\" or \"is this chart misleading\", or wants a check before publishing. Works on an image, on plotting code (ggplot2, Matplotlib, D3, Plotly, Vega…), or both.",
+   "source": "skills/roast-my-chart/SKILL.md",
+   "aliases": [
+    "roast my chart"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "robotics-engineer",
    "type": "ExpertProfile",
    "label": "robotics-engineer",
@@ -34301,6 +34370,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of adjusttext appears in diagram-generator/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "adjusttext",
+   "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in adjusttext/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -57742,6 +57820,15 @@
   {
    "src": "computational-chemist",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in computational-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "computational-chemist",
+   "rel": "references",
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -61043,6 +61130,15 @@
    "status": "accepted"
   },
   {
+   "src": "cuequivariance",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in cuequivariance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "cuopt-user-rules",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -61214,12 +61310,192 @@
    "status": "accepted"
   },
   {
+   "src": "d3",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "computational-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in computational-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "cuequivariance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in cuequivariance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "d3-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in d3-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "gantt-chart-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in gantt-chart-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "geospatial-and-cartographic-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in geospatial-and-cartographic-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "grammar-of-graphics-and-declarative-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in grammar-of-graphics-and-declarative-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "inorganic-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inorganic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "network-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in network-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "plugin-bundle-size",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in plugin-bundle-size/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "react-and-nextjs-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in react-and-nextjs-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "roast-my-chart",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "scrollytelling-and-parallax-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in scrollytelling-and-parallax-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "string-theorist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in string-theorist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "threejs-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in threejs-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "typescript-data-visualization-engineering",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in typescript-data-visualization-engineering/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "uml-and-software-architecture-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in uml-and-software-architecture-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "d3-data-visualization",
    "rel": "in_domain",
    "dst": "domain:data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "d3-data-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in d3-data-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -61787,6 +62063,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "data-visualization named in canvas2d-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "data-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in data-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -66029,6 +66314,15 @@
    "status": "accepted"
   },
   {
+   "src": "design-an-interface",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-an-interface/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "design-control-loop",
    "rel": "in_domain",
    "dst": "domain:vault-meta",
@@ -66512,6 +66806,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "high-end-visual-design named in design-taste-frontend/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "design-taste-frontend",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-taste-frontend/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -76226,6 +76529,15 @@
    "status": "accepted"
   },
   {
+   "src": "figma-use-slides",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in figma-use-slides/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "figure-designer",
    "rel": "in_domain",
    "dst": "domain:research-writing",
@@ -78496,6 +78808,15 @@
   {
    "src": "fisheries-scientist",
    "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in fisheries-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "fisheries-scientist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -80584,6 +80905,15 @@
   {
    "src": "gantt-chart-visualization",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in gantt-chart-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "gantt-chart-visualization",
+   "rel": "references",
    "dst": "firecrawl-parse",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -82483,6 +82813,24 @@
   {
    "src": "geopandas",
    "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "geopandas",
+   "rel": "references",
+   "dst": "matplotlib-design",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "geopandas",
+   "rel": "references",
    "dst": "optimize-for-gpu",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -82541,6 +82889,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "geospatial-and-cartographic-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in geospatial-and-cartographic-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -83171,6 +83528,78 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "Protein structure named in gget/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "adjusttext",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in adjusttext/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "fisheries-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in fisheries-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "marine-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in marine-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "nature-figure",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in nature-figure/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "roast-my-chart",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "seaborn",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in seaborn/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -85601,6 +86030,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "grammar-of-graphics-and-declarative-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in grammar-of-graphics-and-declarative-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -91699,6 +92137,15 @@
   {
    "src": "inorganic-chemist",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inorganic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inorganic-chemist",
+   "rel": "references",
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -91802,6 +92249,87 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "inspect-ai named in huggingface-community-evals/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "design-an-interface",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-an-interface/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "design-taste-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-taste-frontend/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "figma-use-slides",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in figma-use-slides/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "geopandas",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "matplotlib-design",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "plotly",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in inspiration/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -100015,6 +100543,15 @@
   {
    "src": "marine-biologist",
    "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in marine-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "marine-biologist",
+   "rel": "references",
    "dst": "parasitologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -103205,6 +103742,42 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "matplotlib referenced in code/link context in viennarna-structure-prediction/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "references",
+   "dst": "geopandas",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "references",
+   "dst": "seaborn",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "seaborn named in matplotlib-design/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -110113,6 +110686,15 @@
   {
    "src": "nature-figure",
    "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in nature-figure/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "nature-figure",
+   "rel": "references",
    "dst": "infographics",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -114311,6 +114893,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of network-scientist appears in computational-social-scientist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "network-scientist",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in network-scientist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -129184,6 +129775,15 @@
   {
    "src": "plotly",
    "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "plotly",
+   "rel": "references",
    "dst": "matplotlib",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -129206,6 +129806,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "plotly named in optuna/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "plotly",
+   "rel": "references",
+   "dst": "roast-my-chart",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in roast-my-chart/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -129278,6 +129887,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "chunk named in plugin-bundle-size/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "plugin-bundle-size",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in plugin-bundle-size/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -138571,6 +139189,15 @@
   {
    "src": "react-and-nextjs-data-visualization",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in react-and-nextjs-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "react-and-nextjs-data-visualization",
+   "rel": "references",
    "dst": "data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -144038,6 +144665,42 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "Count matrix named in rnaseq-de/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "references",
+   "dst": "plotly",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in roast-my-chart/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -152278,6 +152941,15 @@
   {
    "src": "scrollytelling-and-parallax-data-visualization",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in scrollytelling-and-parallax-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scrollytelling-and-parallax-data-visualization",
+   "rel": "references",
    "dst": "d3-data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -152800,6 +153472,15 @@
   {
    "src": "seaborn",
    "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in seaborn/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "seaborn",
+   "rel": "references",
    "dst": "locus-to-gene-mapper-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -152813,6 +153494,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "seaborn named in matplotlib/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "seaborn",
+   "rel": "references",
+   "dst": "matplotlib-design",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "seaborn named in matplotlib-design/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -160018,6 +160708,15 @@
   {
    "src": "string-theorist",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in string-theorist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "string-theorist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -166025,6 +166724,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "threejs-data-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in threejs-data-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -172159,6 +172867,15 @@
   {
    "src": "typescript-data-visualization-engineering",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in typescript-data-visualization-engineering/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "typescript-data-visualization-engineering",
+   "rel": "references",
    "dst": "data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -172784,6 +173501,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "uml-and-software-architecture-visualization named in accessibility-and-inclusive-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "uml-and-software-architecture-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in uml-and-software-architecture-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -181170,11 +181896,9 @@
   "convert-blazor-server-to-webapp",
   "creating-mermaid-dbt-dag",
   "csharp-scripts",
-  "cuequivariance",
   "dagster-expert",
   "dashboard-expert",
   "defuddle",
-  "design-an-interface",
   "dhdna-profiler",
   "dotnet-maui-doctor",
   "dotnet-pinvoke",
@@ -181201,7 +181925,6 @@
   "genome-match",
   "git-guardrails-claude-code",
   "gnucobol-mainframe-batch",
-  "grammar-of-graphics-and-declarative-visualization",
   "handoff",
   "hibernate-upgrade",
   "imc-tuning-rules",
