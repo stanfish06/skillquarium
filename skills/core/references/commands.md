@@ -2,6 +2,8 @@
 
 Complete reference for all agent-browser commands. For quick start and common patterns, see SKILL.md. Unknown commands exit with status 1, including when you request command help.
 
+These commands reject unknown flags and use the same `--` boundary. Navigation: `open`, `goto`, `navigate`, `back`, `forward`, `reload`, `pushstate`. Interaction: `click`, `dblclick`, `hover`, `focus`, `check`, `uncheck`, `drag`, `scroll`, `scrollintoview`, `tap`. Capture and files: `screenshot`, `pdf`, `download`, `record start|restart`. Inspection and state: `snapshot`, `frame`, `highlight`, `console`, `errors`, `trace start|stop`, `profiler start|stop`, `state save|load|list|clear|show|clean`, `network`, `flow steps|list`, `react`, `vitals`, `close`, `inspect`. Operands of `select`, `upload`, `press`, `keydown`, `keyup`, `keyboard`, `set`, `clipboard`, `auth`, `webmcp`, `dialog`, `tab`, `skills` and `plugin` also follow a leading `--`; a lone `--` stays an operand. Put flags before `--`; values after `--` are positional. Commands that accept negative numbers take them directly. Other commands may validate options differently.
+
 ## Linux dependencies
 
 On Linux, `agent-browser install --with-deps` installs system dependencies with the detected package manager. It runs that package manager directly as root and uses `sudo` for non-root users. If you are not root and `sudo` is unavailable, it reports that root privileges or `sudo` are required.
@@ -47,10 +49,13 @@ agent-browser batch \
   "navigate http://localhost:3000/target"
 ```
 
-Put global flags such as `--init-script` and `--enable` on the outer batch invocation. Keep command-specific options and literal command arguments inside each item:
+Put global flags such as `--init-script` and `--enable` only on the outer batch invocation, never inside an item. Inside an item, `--` separates command flags from literal values only for commands that support `--` as an end-of-options marker. For those commands, put command flags before `--`; a path or selector after `--` is literal. Other commands may treat `--` as data. For example, the item `screenshot body -- --draft.png` passes `--draft.png` as the path.
+
+Batch items cannot run `close --all`, `quit --all`, or `exit --all`; run the command outside the batch instead.
 
 ```bash
 agent-browser --enable react-devtools batch "open" "navigate data:text/html,<h1>hi</h1>"
+agent-browser batch "open https://example.com" "screenshot body -- --draft.png"
 ```
 
 `open` with no URL gives you a clean launch so interception rules and cookies can take effect on the *first* real navigation. Pass `--init-script <path>` at launch to install a script before navigation. Use this flow for SSR-only debug (`--resource-type script`), protected-origin auth, or capturing fresh `react suspense`/`vitals` state without noise from a prior page.
@@ -64,12 +69,14 @@ agent-browser snapshot            # Full accessibility tree
 agent-browser snapshot -i         # Interactive elements only (recommended)
 agent-browser snapshot -c         # Compact output
 agent-browser snapshot -d 3       # Limit depth to 3
-agent-browser snapshot -s "#main" # Scope to CSS selector
+agent-browser snapshot -s "#main" # Scope to every match of a CSS selector
 agent-browser snapshot --delta     # Full state once, then bounded structural deltas
 agent-browser snapshot --delta --full # Force full state and refresh baseline
 ```
 
 Delta history is per tab and option set. Responses are `full`, `unchanged`, or `delta`; URL changes or large deltas return full state. For a delta, apply `changes` (`add`, `remove`, `replace`) to ref metadata. Split the previous tree on newlines, splice `treeChange.lines` at zero-based `startLine`, replacing `deleteCount` lines, then join with newlines. Apply both parts to `baseRevision` before advancing to `revision`; use `--full` if the baseline is unavailable.
+
+A ref is tied to the document it was issued in. After a page load or an iframe navigation or removal (a click, script or redirect), using that ref fails with `Ref @eN is from a document that is no longer loaded`; snapshot again. A snapshot taken while the document is being replaced fails with `The document changed while the snapshot was being captured`; run it again. Refs survive same-document changes such as `pushState` and DOM updates.
 
 ## Interactions (use @refs from snapshot)
 
@@ -99,10 +106,14 @@ agent-browser select @e1 "a" "b"  # Select multiple options
 agent-browser scroll down 500     # Scroll page (default: down 300px)
 agent-browser scrollintoview @e1  # Scroll element into view (alias: scrollinto)
 agent-browser drag @e1 @e2        # Drag and drop
-agent-browser upload @e1 file.pdf # Upload files
+agent-browser upload @e1 file.pdf # Upload files (relative to cwd; errors: file_not_found, not_file_input)
 ```
 
+`upload` fails with `file_not_found` when a path does not exist and with `not_file_input` when the target is not a file input; relative paths resolve against the current directory. `diff snapshot` compares against the last snapshot taken on the tab with that snapshot's options, failing with `no_baseline` when there is none and `baseline_mismatch` when a named option differs.
+
 For `fill` and `type`, put options before the optional `--` marker. Text after the marker is literal, including values that look like flags. For example, `agent-browser fill @e2 -- --json` fills with `--json`, and `agent-browser type @e2 --clear --delay 10 -- --clear` clears the field, then types `--clear`. MCP `agent_browser_fill` and `agent_browser_type` pass typed `text` values literally, so they do not need the marker.
+
+MCP tools pass typed values literally where they are emitted as positionals (`fill` and `type` text, `select` values, `press` and `keyboard` text, `auth save` and `auth login` names and credential values, `webmcp invoke` tool names, `webmcp result` invocation ids, `plugin run` names and request types, and the other covered commands; `frameId` for `webmcp invoke` is still refused when it starts with `-`). In every other free-form field (for example storage, cookie, credential and wait values, and option values), MCP refuses a value that equals a global CLI token or has the form `--<global>=...`, such as `-v`, `-q`, `-p`, `--help`, `--session` or `--json=1`, because the CLI could read it as a global flag. Examples: `wait_for_text "--help"`, `storage_set` with value `-v`, `cookies_set` with value `-q`, `set_credentials` with password `-p`, `find` with `action: "fill"` and text `--json`, and `chat "--help"`. There is no workaround for those fields yet; use `agent_browser_fill` for flag-shaped text input. Carrying such values as data in every field is a planned follow-up.
 
 Visible-label matching treats non-breaking and ordinary spaces equivalently.
 
@@ -143,6 +154,7 @@ agent-browser screenshot path.png # Save to specific path
 agent-browser screenshot --full   # Full page
 agent-browser screenshot --if-changed # Recommended: skip unchanged images to save tokens
 agent-browser screenshot --threshold 0.01 # Ignore changes affecting at most 1% of pixels
+agent-browser screenshot body -- --draft.png # Literal path starting with -
 agent-browser pdf output.pdf      # Save as PDF
 ```
 
@@ -225,9 +237,9 @@ agent-browser find nth 2 "a" hover
 ## Browser Settings
 
 ```bash
-agent-browser set viewport 1920 1080          # Set viewport size
+agent-browser set viewport 1920 1080          # Set viewport size (kept across relaunches and new tabs)
 agent-browser set viewport 1920 1080 2        # 2x retina (same CSS size, higher res screenshots)
-agent-browser set device "iPhone 14"          # Emulate device
+agent-browser set device "iPhone 14"          # Emulate a device: viewport, user agent and touch input (touch events exist after the next navigation)
 agent-browser set geo 37.7749 -122.4194       # Set geolocation (alias: geolocation)
 agent-browser set offline on                  # Toggle offline mode
 agent-browser set headers '{"X-Key":"v"}'     # Extra HTTP headers
@@ -277,6 +289,8 @@ agent-browser network har stop [output.har]    # Stop and save HAR
 
 If HAR export fails, recording and captured requests remain available. Fix the destination and retry `network har stop`.
 
+`har stop` fails with `no_har_recording` when no recording is active, for example after a daemon restart (`close` or idle shutdown).
+
 ## Saved flows
 
 Experimental. A run can fail on a page that changed or answers differently each time; when it does, the flow is marked unverified and you continue with the UI.
@@ -310,6 +324,9 @@ agent-browser tab docs                         # Switch to tab by label
 agent-browser tab close                        # Close current tab
 agent-browser tab close t2                     # Close tab by id
 agent-browser tab close docs                   # Close tab by label
+agent-browser tab keep live [t<N>|label]       # Keep a tab at full speed in the background
+agent-browser tab keep throttled [t<N>|label]  # Return a tab to the default throttling
+agent-browser tab keep frozen <t<N>|label>     # Pause a background tab until you switch to it
 agent-browser window new                       # New window
 ```
 
@@ -334,6 +351,8 @@ Tabs opened through `tab new` or `click --new-tab` inherit the session's setup b
 `tab list --json` also reports each tab's CDP `targetId`, accepted anywhere a tab ref is accepted (`tab <targetId>`, `tab close <targetId>`). Target ids stay stable across daemon restarts, unlike `t<N>` ids, which are per-daemon counters. With `--pin-tab` the session is pinned to its bound tab: if that tab is closed, commands fail with a `tab_gone` error instead of falling back to another tab, and `tab new` or `tab list` recover. JSON errors include `code: "tab_gone"` and a recovery object with `data.targetId` plus optional sanitized `data.lastUrl`; batch uses `result` for the same object.
 
 Switching to a tab that the browser discarded to save memory reactivates it, since a discarded tab has no renderer to drive. Reactivation reloads the page and resets its unsaved state, and the switch result adds `"revived": true` so the reload is not silent. A tab whose page is paused by a JavaScript dialog is alive rather than discarded: the switch leaves it untouched and adds `"dialogBlocked": true`. Resolve the dialog with `dialog accept`/`dialog dismiss` and its state is preserved. Closing the active tab onto a discarded successor revives it the same way and reports `"activeTabRevived": true`.
+
+Chrome slows every tab that is not in front: timers fire about once per second and animation frames stop, so a page you leave in the background falls behind and you read stale state when you switch back. `tab keep live` keeps one tab running at full speed in the background, and `tab keep throttled` returns it to the default. Without a tab ref both apply to the active tab. The daemon holds focus emulation on a live tab, so the page reports `document.visibilityState === "visible"` and `document.hasFocus() === true` while another tab is in front, and the setting survives reloads and navigation. A live tab uses as much CPU as a front tab (five busy background tabs: 0.05 CPU cores throttled, 0.73 live), so set it only on tabs that have to keep running. `tab keep frozen <tab>` pauses a background tab completely until you switch back to it, which returns it to `throttled`. The active tab can't be frozen, and neither can a tab that is still visible: switch to another tab first, then freeze it by ref. Closing the session unfreezes the tabs it froze. A tab pinned by another session with `--pin-tab` is refused with `tab_locked`. `tab list` shows `(live)` or `(frozen)` in text and `"keep"` in JSON. Chrome only. In a browser attached with `--cdp` or `--auto-connect`, a live tab's timers reach the full rate only if that browser was started with `--disable-renderer-backgrounding`; without it a 100 ms timer fired 6 to 8 times per second instead of 10.
 
 ## Frames
 
@@ -455,7 +474,7 @@ Clients connect to `ws://127.0.0.1:<port>` and receive `frame`, `status`, `tabs`
 
 ## WebMCP page tools
 
-Experimental. Browser responses announce brief tool summaries (names, short descriptions, origins, and frame IDs) on first discovery and when the catalog changes. Choose a relevant tool, fetch its schema, then invoke it within the user's task. Schemas and annotations are never included proactively. Omission means no update; an empty or unavailable update invalidates earlier tools. Support is enabled by default in managed Chrome; `--no-webmcp` or `AGENT_BROWSER_NO_WEBMCP` opts out. See [trust-boundaries.md](trust-boundaries.md#webmcp-tools-are-page-content) for how to treat tool metadata and results.
+Experimental. Browser responses announce a tool list (names, frame IDs, and descriptions) on first discovery and when the catalog changes. Catalogs of up to four tools show full descriptions; larger ones show up to 16 tools with descriptions shortened to 160 bytes, and the announcement says how many are listed. Choose a relevant tool, fetch its schema when the description does not show the arguments, then invoke it within the user's task. Schemas and annotations are never included proactively. Omission means no update; an empty or unavailable update invalidates earlier tools. Support is enabled by default in managed Chrome; `--no-webmcp` or `AGENT_BROWSER_NO_WEBMCP` opts out. See [trust-boundaries.md](trust-boundaries.md#webmcp-tools-are-page-content) for how to treat tool metadata and results.
 
 ```bash
 agent-browser webmcp list <tool> --frame <frame-id> --json   # One tool's schema

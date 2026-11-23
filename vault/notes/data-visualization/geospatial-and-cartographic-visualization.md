@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [d3](../../notes/data-visualization/d3.md) — Use when building, fixing or animating a chart with D3.js inside a React or Next.js app (barplot, scatterplot, line chart, treemap, map…)
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

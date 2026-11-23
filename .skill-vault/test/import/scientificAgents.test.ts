@@ -402,6 +402,6 @@ describe("evalPlan", () => {
     const ctx = makeContext("/vault", false, { err: (line) => err.push(line) });
     expect(await evalRun(["bogus"], ctx)).toBe(2);
     expect(err[0]).toBe("skillquarium eval: unknown subcommand 'bogus'");
-    expect(err[1]).toBe("usage: skillquarium eval [run|replay|report|runs|selftest] [runId]");
+    expect(err[1]).toBe("usage: skillquarium eval [run|replay|report|runs|selftest|tier1] [runId]");
   });
 });
