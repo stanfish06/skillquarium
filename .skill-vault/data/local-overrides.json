@@ -525,6 +525,15 @@
       "replace": "Also covers Unsloth for SFT and vision-language training at roughly 2x speed and 60% less VRAM than standard TRL. Use for tasks involving cloud GPU training, GGUF conversion, Unsloth or FastVisionModel, or when users mention training on Hugging Face Jobs without local GPU setup."
     }
   ],
+  "huggingface-vision-trainer": [
+    {
+      "id": "jobs-status-api-methods",
+      "issue": 1394,
+      "source": "openai/plugins",
+      "find": "api.get_job_logs(job_id=\"your-job-id\")           # View logs\napi.get_job(job_id=\"your-job-id\")                # Job details",
+      "replace": "for log in api.fetch_job_logs(job_id=\"your-job-id\"):  # View logs\n    print(log)\napi.inspect_job(job_id=\"your-job-id\")            # Job details"
+    }
+  ],
   "vite": [
     {
       "id": "ssr-outdir-project-relative",
