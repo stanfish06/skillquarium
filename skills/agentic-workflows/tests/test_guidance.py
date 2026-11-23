@@ -605,11 +605,16 @@ class GuidanceTests(unittest.TestCase):
         commands = (ROOT / ".github/aw/cli-commands.md").read_text()
         compile_section = commands.split("### `gh aw compile`\n", 1)[1].split("\n---", 1)[0]
         run_section = commands.split("### `gh aw run`\n", 1)[1].split("\n---", 1)[0]
-        self.assertIn("](debug-compilation.md)", compile_section)
-        self.assertNotIn("warnings are errors", compile_section)
-        self.assertIn("Low-severity/informational notices are not blanket failures", compile_section)
-        self.assertIn("debug-security-review.md#session-authorization", run_section)
-        self.assertIn("without repeated human approval", run_section)
+        contract = commands.split("<!-- instruction-prefix-end -->", 1)[0]
+        compile_rules = contract.split("### `gh aw compile` rules\n", 1)[1]
+        run_rules = contract.split("### `gh aw run` rules\n", 1)[1].split("\n### ", 1)[0]
+        self.assertIn("](#gh-aw-compile-rules)", compile_section)
+        self.assertIn("](#gh-aw-run-rules)", run_section)
+        self.assertIn("](debug-compilation.md)", compile_rules)
+        self.assertNotIn("warnings are errors", compile_rules)
+        self.assertIn("Low-severity/informational notices are not blanket failures", compile_rules)
+        self.assertIn("debug-security-review.md#session-authorization", run_rules)
+        self.assertIn("without repeated human approval", run_rules)
         self.assertIn("--ref REVIEWED_REF", run_section)
         self.assertNotIn("--ref main", run_section)
         evidence_section = EVIDENCE_GUIDE.read_text().split("### Diagnostic and Development Compilation\n", 1)[1].split("\n## ", 1)[0]
@@ -1403,7 +1408,9 @@ class GuidanceTests(unittest.TestCase):
         explorer = (ROOT / ".github/workflows/agent-persona-explorer.md").read_text()
         self.assertIn("If 1 or 2 remain, select those before resetting", explorer)
         self.assertIn("If the updated list now contains all 9 personas, reset to an empty list", explorer)
-        self.assertIn('labels: ["agent-research", "cookie"]', explorer)
+        labels = re.search(r"^    labels: (\[.*\])$", explorer.split("\n---", 1)[0], re.MULTILINE)
+        self.assertIsNotNone(labels)
+        self.assertTrue({"agent-research", "cookie"}.issubset(json.loads(labels.group(1))))
         self.assertNotIn("If fewer than 3 remain, reset", explorer)
 
     def test_security_reporting_omits_empty_findings_tables(self):

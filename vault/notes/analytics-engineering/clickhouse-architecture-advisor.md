@@ -20,7 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
-- [clickhouse-best-practices](../../notes/analytics-engineering/clickhouse-best-practices.md) — Use when reviewing ClickHouse schemas, queries, or configurations
+- [clickhouse-best-practices](../../notes/analytics-engineering/clickhouse-best-practices.md) — Use when reviewing ClickHouse schemas, queries, native full-text search, or configurations
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

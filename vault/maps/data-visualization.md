@@ -14,20 +14,25 @@ created: 2026-08-09
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Web Automation, Frontend & Design](web-automation-frontend.md) | [Scientific Writing, Figures & Publishing](research-writing.md)
 
-## Skills (20)
+## Skills (25)
 
 - [canvas2d-data-visualization](../notes/data-visualization/canvas2d-data-visualization.md) — Render data visualizations with Canvas2D
+- [d3](../notes/data-visualization/d3.md) — Use when building, fixing or animating a chart with D3.js inside a React or Next.js app (barplot, scatterplot, line chart, treemap, map…)
 - [d3-data-visualization](../notes/data-visualization/d3-data-visualization.md) — Build custom data visualizations with D3
 - [dashboard-expert](../notes/data-visualization/dashboard-expert.md) — Full CRUD and analysis for Mixpanel dashboards
 - [dashboards-and-real-time-visualization](../notes/data-visualization/dashboards-and-real-time-visualization.md) — Design dashboards and live visualization systems
 - [data-visualization](../notes/data-visualization/data-visualization.md) — Route web data visualization work. Use when the user needs chart choice, visual critique, dashboards, maps or geospatial views, Gantt timelines, UML/software diagrams, scrollytelling...
 - [gantt-chart-visualization](../notes/data-visualization/gantt-chart-visualization.md) — Design, critique, route, and implement Gantt charts and schedule visualizations
 - [geospatial-and-cartographic-visualization](../notes/data-visualization/geospatial-and-cartographic-visualization.md) — Design geospatial and cartographic visualizations
+- [ggplot2](../notes/data-visualization/ggplot2.md) — Generate, review, or refactor ggplot2 code in R following an opinionated set of best practices
 - [grammar-of-graphics-and-declarative-visualization](../notes/data-visualization/grammar-of-graphics-and-declarative-visualization.md) — Build data visualizations with declarative grammars
+- [inspiration](../notes/data-visualization/inspiration.md) — Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout
 - [json-render](../notes/data-visualization/json-render.md) — AI chat response rendering guidance — handling UIMessage parts, tool call displays, streaming states, and structured data presentation
+- [matplotlib-design](../notes/data-visualization/matplotlib-design.md) — Create, improve, or reproduce Matplotlib charts with deliberate styling, typography, annotations, custom layouts, and maps
 - [mermaid-terminal](../notes/data-visualization/mermaid-terminal.md) — Render Mermaid source locally and preview it in Ghostty, Kitty, or another Kitty-graphics-compatible terminal
 - [node-link-and-diagram-layout](../notes/data-visualization/node-link-and-diagram-layout.md) — Choose and apply automatic layout strategies for node-link diagrams and connected-node visuals
 - [react-and-nextjs-data-visualization](../notes/data-visualization/react-and-nextjs-data-visualization.md) — Integrate data visualizations into React and Next.js applications
+- [roast-my-chart](../notes/data-visualization/roast-my-chart.md) — Review a finished chart, plot, map or dashboard against the 61 Data to Viz caveat flashcards, and report what to fix
 - [satori](../notes/data-visualization/satori.md) — Expert guidance for Satori — Vercel's library that converts HTML and CSS to SVG, commonly used to generate dynamic OG images for Next.js and other frameworks
 - [scrollytelling-and-parallax-data-visualization](../notes/data-visualization/scrollytelling-and-parallax-data-visualization.md) — Design and implement parallax scrolling and scrollytelling data visualizations
 - [statistical-and-uncertainty-visualization](../notes/data-visualization/statistical-and-uncertainty-visualization.md) — Design statistically honest and uncertainty-aware visualizations
