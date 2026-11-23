@@ -85,7 +85,9 @@ Do not use this skill when:
   environment variables (`token_key` for custom providers) or from
   `~/.config/cagent/.env` written by `docker agent setup`.
 - Prefer `dmr/<model>` for agents that must run offline or must not send data
-  to a third party; it costs nothing and needs no credential. Use a paid
+  to a third party; it costs nothing and needs no credential. The model must
+  be pulled locally first with `docker model pull <model>` — run
+  `docker agent doctor` to diagnose missing or unavailable models. Use a paid
   cloud provider only when the task needs it.
 - Give resilience-critical agents a `fallback` so a provider outage or rate
   limit does not stop the run:

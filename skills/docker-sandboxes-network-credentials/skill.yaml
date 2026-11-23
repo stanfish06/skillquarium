@@ -1,6 +1,6 @@
 schema: v1
 id: docker-sandboxes-network-credentials
-version: 0.1.0
+version: 0.1.1
 title: 'Docker Sandboxes: Network Policy & Credentials'
 description: Configure sandbox network egress policy and provision service/registry credentials safely through the proxy-injection model.
 owns:
@@ -21,5 +21,5 @@ do_not_use_when:
 delegates_to:
   - docker-agent-run
   - docker-sandboxes-lifecycle
-  - docker-sandboxes-env
+  - docker-docs
   - docker-sandboxes-kits

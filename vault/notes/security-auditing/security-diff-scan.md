@@ -20,7 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [deep-security-scan](../../notes/security-auditing/deep-security-scan.md) — Run repeated Standard security scans of a repository or scoped path when the user requests a deep, exhaustive, or multi-pass audit
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
