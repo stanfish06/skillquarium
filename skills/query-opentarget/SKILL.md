@@ -85,8 +85,10 @@ def target_drugs(ensembl_id, limit=10):
       }
     }'''
     result = query_opentargets(query, {"ensemblId": ensembl_id})
-    candidates = result.get("data", {}).get("target", {}).get("drugAndClinicalCandidates", {})
-    candidates["rows"] = candidates.get("rows", [])[:limit]
+    # `target` is null for an unknown Ensembl ID
+    target = (result.get("data") or {}).get("target") or {}
+    candidates = target.get("drugAndClinicalCandidates") or {}
+    candidates["rows"] = (candidates.get("rows") or [])[:limit]
     return result
 
 # 5. Search diseases
@@ -114,8 +116,9 @@ if hits:
 
 ## Common Disease IDs
 
-The `disease(efoId:)` argument keeps its name but resolves MONDO identifiers; the
-platform's old `EFO_*` identifiers for these diseases now return `null`.
+The `disease(efoId:)` argument keeps its name but takes the platform's current disease
+ID: MONDO for most diseases, `EFO_*` only for some traits and measurements (e.g.
+`EFO_0004340`, body mass index). The old `EFO_*` IDs for the diseases below return `null`.
 
 - Alzheimer's: `MONDO_0004975`
 - Breast cancer: `MONDO_0007254`
