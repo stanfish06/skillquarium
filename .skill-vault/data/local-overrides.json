@@ -1038,7 +1038,7 @@
       "source": "tech-leads-club/agent-skills",
       "file": "references/javascript-typescript-nextjs-web-server-security.md",
       "find": "- GitHub Security Advisory: Next.js DoS via Server Components / Server Actions (CVE-2026-23864) — `https://github.com/advisories/GHSA-fq29-rrrv-cq2m`\n",
-      "replace": "- GitHub Security Advisory: React Server Components multiple denial-of-service vulnerabilities (CVE-2026-23864) — `https://github.com/advisories/GHSA-83fc-fqcc-2hmg`\n"
+      "replace": "- GitHub Security Advisory: Next.js DoS with Server Components (CVE-2026-23864) — `https://github.com/vercel/next.js/security/advisories/GHSA-h25m-26qc-wcjf`; upstream React Server Components advisory — `https://github.com/advisories/GHSA-83fc-fqcc-2hmg`\n"
     },
     {
       "id": "nextjs-security-advisories-list",

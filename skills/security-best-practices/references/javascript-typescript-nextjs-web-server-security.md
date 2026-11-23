@@ -1117,7 +1117,7 @@ Primary framework documentation (Next.js):
 Next.js security guidance & advisories:
 
 - Next.js Blog: How to think about security in Next.js — `https://nextjs.org/blog/security-nextjs-server-components-actions`
-- GitHub Security Advisory: React Server Components multiple denial-of-service vulnerabilities (CVE-2026-23864) — `https://github.com/advisories/GHSA-83fc-fqcc-2hmg`
+- GitHub Security Advisory: Next.js DoS with Server Components (CVE-2026-23864) — `https://github.com/vercel/next.js/security/advisories/GHSA-h25m-26qc-wcjf`; upstream React Server Components advisory — `https://github.com/advisories/GHSA-83fc-fqcc-2hmg`
 - Next.js published security advisories (per-release affected ranges and fixed versions) — `https://github.com/vercel/next.js/security/advisories`
 
 General web security references (recommended baseline):
