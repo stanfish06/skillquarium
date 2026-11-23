@@ -67,6 +67,23 @@
       "replace": "    \"pymatgen\": \"2026.10.24\",\n    \"pymatgen-core\": \"2026.10.31\""
     }
   ],
+  "quarto-authoring": [
+    {
+      "id": "quarto-docs-root-link",
+      "issue": 963,
+      "source": "posit-dev/skills",
+      "find": "- [Quarto Documentation](https://quarto.org/docs/)",
+      "replace": "- [Quarto Documentation](https://quarto.org/)"
+    },
+    {
+      "id": "quarto-jupyter-execution-link",
+      "issue": 963,
+      "source": "posit-dev/skills",
+      "file": "references/conversion-jupyter.md",
+      "find": "- [Jupyter Kernel Execution](https://quarto.org/docs/computations/jupyter.html)",
+      "replace": "- [Jupyter Kernel Execution](https://quarto.org/docs/computations/python.html)"
+    }
+  ],
   "databricks-python-sdk": [
     {
       "id": "cli-v1-0-0-pin-setup",
@@ -158,6 +175,16 @@
       "source": "neo4j-contrib/neo4j-skills",
       "find": "llm = BedrockLLM(model_id=\"anthropic.claude-3-5-sonnet-20241022-v2:0\")",
       "replace": "llm = BedrockLLM(model_id=\"us.anthropic.claude-sonnet-4-6\")  # use the inference-profile ID; region prefix (us./eu./global.) must match your Bedrock deployment"
+    }
+  ],
+  "neo4j-kafka-skill": [
+    {
+      "id": "kafka-connector-asset-name",
+      "issue": 1178,
+      "source": "neo4j-contrib/neo4j-skills",
+      "file": "README.md",
+      "find": "# Or download directly\ncurl -L https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connector.zip \\\n     -o neo4j-kafka-connector.zip\n",
+      "replace": "# Or download directly. The release asset is named neo4j-kafka-connect-neo4j-<version>\n# and carries the version, so there is no static latest/download name \u2014 resolve it first.\nVERSION=$(curl -fsSL https://api.github.com/repos/neo4j/neo4j-kafka-connector/releases/latest \\\n  | sed -n 's/.*\"tag_name\": *\"\\([^\"]*\\)\".*/\\1/p')\ncurl -fL \"https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connect-neo4j-${VERSION}.zip\" \\\n     -o \"neo4j-kafka-connect-neo4j-${VERSION}.zip\"\n"
     }
   ],
   "ui-toolkit": [
@@ -480,6 +507,15 @@
       "replace": "            # Quality below threshold - improve prompt for next iteration\n            if review_ok:\n                print(f\"\\n⚠ Quality below threshold ({score} < {threshold})\")\n            else:\n                print(\"\\n⚠ Quality could not be verified; regenerating.\")\n            print(f\"Improving prompt based on feedback...\")\n"
     }
   ],
+  "huggingface-datasets": [
+    {
+      "id": "croissant-hub-api-route",
+      "issue": 1367,
+      "source": "openai/plugins",
+      "find": "- `Get Croissant metadata (if available)`: `/croissant?dataset=<namespace/repo>`",
+      "replace": "- `Get Croissant metadata (if available)`: `https://huggingface.co/api/datasets/<namespace>/<repo>/croissant` (Hub API, not the Dataset Viewer base URL)"
+    }
+  ],
   "huggingface-llm-trainer": [
     {
       "id": "unsloth-in-description",
@@ -487,6 +523,15 @@
       "source": "openai/plugins",
       "find": "Use for tasks involving cloud GPU training, GGUF conversion, or when users mention training on Hugging Face Jobs without local GPU setup.",
       "replace": "Also covers Unsloth for SFT and vision-language training at roughly 2x speed and 60% less VRAM than standard TRL. Use for tasks involving cloud GPU training, GGUF conversion, Unsloth or FastVisionModel, or when users mention training on Hugging Face Jobs without local GPU setup."
+    }
+  ],
+  "huggingface-vision-trainer": [
+    {
+      "id": "jobs-status-api-methods",
+      "issue": 1394,
+      "source": "openai/plugins",
+      "find": "api.get_job_logs(job_id=\"your-job-id\")           # View logs\napi.get_job(job_id=\"your-job-id\")                # Job details",
+      "replace": "for log in api.fetch_job_logs(job_id=\"your-job-id\"):  # View logs\n    print(log)\napi.inspect_job(job_id=\"your-job-id\")            # Job details"
     }
   ],
   "vite": [
@@ -1023,6 +1068,30 @@
       "source": "tech-leads-club/agent-skills",
       "find": "threat modeling (use security-threat-model)",
       "replace": "threat modeling (use threat-model)"
+    },
+    {
+      "id": "nextjs-support-policy-url",
+      "issue": 1384,
+      "source": "tech-leads-club/agent-skills",
+      "file": "references/javascript-typescript-nextjs-web-server-security.md",
+      "find": "- Next.js Docs: Support policy (supported versions/LTS) — `https://nextjs.org/docs/support-policy`\n",
+      "replace": "- Next.js Docs: Support policy (supported versions/LTS) — `https://nextjs.org/support-policy`\n"
+    },
+    {
+      "id": "ghsa-id-for-cve-2026-23864",
+      "issue": 1384,
+      "source": "tech-leads-club/agent-skills",
+      "file": "references/javascript-typescript-nextjs-web-server-security.md",
+      "find": "- GitHub Security Advisory: Next.js DoS via Server Components / Server Actions (CVE-2026-23864) — `https://github.com/advisories/GHSA-fq29-rrrv-cq2m`\n",
+      "replace": "- GitHub Security Advisory: Next.js DoS with Server Components (CVE-2026-23864) — `https://github.com/vercel/next.js/security/advisories/GHSA-h25m-26qc-wcjf`; upstream React Server Components advisory — `https://github.com/advisories/GHSA-83fc-fqcc-2hmg`\n"
+    },
+    {
+      "id": "nextjs-security-advisories-list",
+      "issue": 1384,
+      "source": "tech-leads-club/agent-skills",
+      "file": "references/javascript-typescript-nextjs-web-server-security.md",
+      "find": "- Next.js Blog: Security update (example security advisory context) — `https://nextjs.org/blog/security-update`\n",
+      "replace": "- Next.js published security advisories (per-release affected ranges and fixed versions) — `https://github.com/vercel/next.js/security/advisories`\n"
     }
   ],
   "tlc-generative-engine-optimization": [
@@ -1267,6 +1336,120 @@
       "source": "K-Dense-AI/scientific-agent-skills",
       "find": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.41.2\"",
       "replace": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.44.2\""
+    }
+  ],
+  "scanpy": [
+    {
+      "id": "docs-1-13-restructure-pin-links-1",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [Release notes](https://scanpy.readthedocs.io/en/stable/release-notes/index.html):\n",
+      "replace": "- [Release notes](https://scanpy.readthedocs.io/en/1.12.x/release-notes/index.html):\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-2",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [HVG](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.highly_variable_genes.html),\n",
+      "replace": "- [HVG](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.pp.highly_variable_genes.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-3",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [PCA](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.pca.html),\n",
+      "replace": "  [PCA](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.pp.pca.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-4",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [neighbors](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.neighbors.html),\n",
+      "replace": "  [neighbors](https://scanpy.readthedocs.io/en/1.12.x/api/generated/scanpy.pp.neighbors.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-5",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [Leiden](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.leiden.html).\n",
+      "replace": "  [Leiden](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.leiden.html).\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-6",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [Marker ranking](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.rank_genes_groups.html),\n",
+      "replace": "- [Marker ranking](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.rank_genes_groups.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-7",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [aggregation](https://scanpy.readthedocs.io/en/stable/generated/scanpy.get.aggregate.html),\n",
+      "replace": "  [aggregation](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.get.aggregate.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-8",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [gene scoring](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.score_genes.html).\n",
+      "replace": "  [gene scoring](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.score_genes.html).\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-9",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [Harmony](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.harmony_integrate.html)\n",
+      "replace": "- [Harmony](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.external.pp.harmony_integrate.html)\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-10",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [BBKNN](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.bbknn.html)\n",
+      "replace": "  [BBKNN](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.external.pp.bbknn.html)\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-11",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [DPT](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.dpt.html) requires\n",
+      "replace": "- [DPT](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.dpt.html) requires\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-12",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [ingest](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.ingest.html)\n",
+      "replace": "- [ingest](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.ingest.html)\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-13",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [AnnData raw](https://anndata.readthedocs.io/en/stable/generated/anndata.AnnData.raw.html),\n",
+      "replace": "- [AnnData raw](https://anndata.scverse.org/en/stable/generated/anndata.AnnData.raw.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-14",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [backed I/O](https://anndata.readthedocs.io/en/stable/generated/anndata.io.read_h5ad.html),\n",
+      "replace": "  [backed I/O](https://anndata.scverse.org/en/stable/generated/anndata.io.read_h5ad.html),\n"
     }
   ],
   "mixpanelyst": [
@@ -2364,6 +2547,15 @@
       "file": "metadata.json",
       "find": "    \"https://nextjs.org/docs/app/api-reference/config/next-config-js/viewTransition\",",
       "replace": "    \"https://nextjs.org/docs/app/guides/view-transitions\","
+    }
+  ],
+  "semgrep-rule-creator": [
+    {
+      "id": "semgrep-docs-repo-deleted-use-semgrep-dev",
+      "issue": 1382,
+      "source": "trailofbits/skills",
+      "find": "1. [Rule Syntax](https://raw.githubusercontent.com/semgrep/semgrep-docs/refs/heads/main/docs/writing-rules/rule-syntax.mdx)\n2. [Pattern Syntax](https://raw.githubusercontent.com/semgrep/semgrep-docs/refs/heads/main/docs/writing-rules/pattern-syntax.mdx)\n3. [Testing Rules](https://raw.githubusercontent.com/semgrep/semgrep-docs/refs/heads/main/docs/writing-rules/testing-rules.mdx)\n4. [Taint analysis](https://raw.githubusercontent.com/semgrep/semgrep-docs/refs/heads/main/docs/writing-rules/data-flow/taint-mode/overview.mdx)\n5. [Advanced techniques for taint analysis](https://raw.githubusercontent.com/semgrep/semgrep-docs/refs/heads/main/docs/writing-rules/data-flow/taint-mode/advanced.mdx)\n6. [Constant propagation](https://raw.githubusercontent.com/semgrep/semgrep-docs/refs/heads/main/docs/writing-rules/data-flow/constant-propagation.mdx)",
+      "replace": "1. [Rule Syntax](https://docs.semgrep.dev/writing-rules/rule-syntax.md)\n2. [Pattern Syntax](https://docs.semgrep.dev/writing-rules/pattern-syntax.md)\n3. [Testing Rules](https://docs.semgrep.dev/writing-rules/testing-rules.md)\n4. [Taint analysis](https://docs.semgrep.dev/writing-rules/data-flow/taint-mode/overview.md)\n5. [Advanced techniques for taint analysis](https://docs.semgrep.dev/writing-rules/data-flow/taint-mode/advanced.md)\n6. [Constant propagation](https://docs.semgrep.dev/writing-rules/data-flow/constant-propagation.md)"
     }
   ],
   "vercel-functions": [
@@ -4011,6 +4203,13 @@
       "source": "benchflow-ai/skillsbench",
       "find": "```java\n// Add this to application.properties to monitor queries",
       "replace": "```properties\n# Add this to application.properties to monitor queries"
+    },
+    {
+      "id": "scope-update-from-fix",
+      "issue": 1358,
+      "source": "benchflow-ai/skillsbench",
+      "find": "### Fix Common Issues\n\n```bash\n# Remove \"from\" keyword in update queries\nfind . -name \"*.java\" -type f -exec sed -i 's/update from /update /g' {} +\n```\n",
+      "replace": "### Fix Common Issues\n\nThe \"update from \" pattern only needs fixing inside `@Query`/HQL strings. Review each\nmatch manually instead of blanket-replacing — `sed -i 's/update from /update /g'` across\nevery `.java` file also rewrites comments, log messages, and string literals that happen\nto contain that phrase outside HQL:\n\n```bash\ngrep -rni \"update from \" --include=\"*.java\" .\n```\n"
     }
   ],
   "jakarta-namespace": [
@@ -5179,6 +5378,36 @@
       "replace": "# Morph PPT — 3D Extension\n\n> [!note] Vault audit 2026-07-24 — USE-19\n> Use this only for a .pptx embedding a `.glb` 3D model with cinematographic camera plus Morph transitions (triggers: '3D model', 'GLB', '3D morph', 'camera move', 'model-content layout'). DO NOT invoke for 2D Morph decks with no 3D model — use `morph-ppt`; and for a generic or pitch deck with no cross-slide motion route to `officecli-pptx` or `officecli-pitch-deck`. Distinguishing axis: 3D GLB scene vs 2D morph vs static deck.\n\nThis skill **extends** `morph-ppt`. All morph-ppt rules (naming, ghosting, design, verification) apply in full.\nThis file covers **3D-specific additions** and an **enriched design system** combining morph-ppt aesthetics with concrete color palettes, font pairings, and layout quality guardrails.\n"
     }
   ],
+  "json-render": [
+    {
+      "id": "ai-sdk-v6-tool-state-union",
+      "issue": 1330,
+      "source": "openai/plugins",
+      "find": "//     state values: 'partial-call' | 'call' | 'output-available' | 'approval-requested' | 'approval-responded' | 'output-denied'",
+      "replace": "//     state values: 'input-streaming' | 'input-available' | 'approval-requested' | 'approval-responded' | 'output-available' | 'output-error' | 'output-denied'"
+    },
+    {
+      "id": "ai-sdk-v6-tool-error-text",
+      "issue": 1330,
+      "source": "openai/plugins",
+      "find": "                state: string\n                input?: unknown\n                output?: unknown\n              }",
+      "replace": "                state: string\n                input?: unknown\n                output?: unknown\n                errorText?: string\n              }"
+    },
+    {
+      "id": "ai-sdk-v6-output-error-rendering",
+      "issue": 1330,
+      "source": "openai/plugins",
+      "find": "              if (toolPart.state === 'output-denied') {\n                return (\n                  <div key={i} className=\"text-sm text-muted-foreground\">\n                    {toolName} was denied\n                  </div>\n                )\n              }\n\n              if (toolPart.state === 'approval-requested') {",
+      "replace": "              if (toolPart.state === 'output-denied') {\n                return (\n                  <div key={i} className=\"text-sm text-muted-foreground\">\n                    {toolName} was denied\n                  </div>\n                )\n              }\n\n              if (toolPart.state === 'output-error') {\n                return (\n                  <div key={i} className=\"text-sm text-destructive\">\n                    {toolName} failed: {toolPart.errorText}\n                  </div>\n                )\n              }\n\n              if (toolPart.state === 'approval-requested') {"
+    },
+    {
+      "id": "ai-sdk-v6-await-validate-ui-messages",
+      "issue": 1330,
+      "source": "openai/plugins",
+      "find": "  const validatedMessages = validateUIMessages(messages)\n  const modelMessages = await convertToModelMessages(validatedMessages)",
+      "replace": "  const validatedMessages = await validateUIMessages({ messages })\n  const modelMessages = await convertToModelMessages(validatedMessages)"
+    }
+  ],
   "render-cli": [
     {
       "id": "ci-example-version-pin-v2.36.0",
@@ -5197,6 +5426,15 @@
       "replace": "    - \"https://nextjs.org/docs/app/api-reference/turbopack\"\n  sitemap: \"https://nextjs.org/sitemap.xml\"\n"
     }
   ],
+  "improve-skill": [
+    {
+      "id": "portable-skill-creator-invocation",
+      "issue": 1405,
+      "source": "openai/plugins",
+      "find": "3. Apply the `skill-creator` guidance from `/Users/benlesh/.codex/skills/skill-creator/SKILL.md`.",
+      "replace": "3. Apply Codex's built-in `skill-creator` skill (invoke it as `$skill-creator`)."
+    }
+  ],
   "wrangler": [
     {
       "id": "skill-health-1302",
@@ -5204,6 +5442,15 @@
       "source": "openai/plugins",
       "find": "# Remote mode - runs on Cloudflare edge (legacy)\nwrangler dev --remote\n",
       "replace": "# Remote mode - runs on Cloudflare edge (legacy)\n# Legacy: uploads the Worker to a remote preview. Durable Objects cannot use per-binding\n# `remote: true` (they always run locally); to reach remote DO instances, deploy a Worker that\n# defines them and bind to it with a remote service binding (Cloudflare local-development docs)\nwrangler dev --remote\n"
+    }
+  ],
+  "authoring-github-workflows": [
+    {
+      "id": "stale-actionlint-pin",
+      "issue": 1352,
+      "source": "dotnet/skills",
+      "find": "ACTIONLINT_VERSION=1.7.7\nACTIONLINT_SHA256=023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757",
+      "replace": "ACTIONLINT_VERSION=1.7.12\nACTIONLINT_SHA256=8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8"
     }
   ],
   "inspiration": [
@@ -5221,6 +5468,22 @@
       "source": "langfuse/skills",
       "find": "Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required):",
       "replace": "Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required). Note: Langfuse now publishes the CLI as `@langfuse/cli` and recommends it over `langfuse-cli` ([CLI docs](https://langfuse.com/docs/api-and-data-platform/features/cli)); the old package is identical and will be updated alongside it until the next major version, so the `npx langfuse-cli` commands below still work, and `npx @langfuse/cli` takes the same arguments."
+    }
+  ],
+  "mimir": [
+    {
+      "id": "stale-helm-chart-pin-and-deprecation",
+      "issue": 1411,
+      "source": "grafana/skills",
+      "find": "helm install mimir grafana/mimir-distributed --version 6.0.6 -f values.yaml\n",
+      "replace": "helm install mimir grafana/mimir-distributed --version 6.2.2 -f values.yaml\n# Note: grafana/mimir is deprecating this chart — 6.3.0 (Q4 2026) will be its last\n# release before it moves to a community-maintained repo under grafana-community.\n# See https://github.com/grafana/mimir/issues/17112 for migration instructions once published.\n"
+    },
+    {
+      "id": "helm-chart-deprecation-resource-link",
+      "issue": 1411,
+      "source": "grafana/skills",
+      "find": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed)\n",
+      "replace": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed) (deprecation notice: [grafana/mimir#17112](https://github.com/grafana/mimir/issues/17112))\n"
     }
   ]
 }

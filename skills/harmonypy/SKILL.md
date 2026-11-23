@@ -39,7 +39,7 @@ sc.tl.leiden(adata)
 
 ## Direct harmonypy Pattern
 
-Current version: **harmonypy 2.0.0** (April 2026, C++ backend rewrite matching R harmony2). Pre-built wheels for Linux and macOS (Python 3.9–3.13); Windows is not supported.
+Current version: **harmonypy 2.1.0** (October 2026). Built on the 2.0.0 C++ backend rewrite matching R harmony2 (April 2026), with a 20-50x speedup on large datasets and no BLAS/LAPACK runtime dependency. Pre-built wheels for Linux and macOS (Python 3.9–3.14); Windows is not supported.
 
 This no-transpose pattern requires **harmonypy >=0.1.0**. In reproducible environments pinned to harmonypy 0.0.x, `Z_corr` is PCs × cells and the old `ho.Z_corr.T` orientation is still required.
 

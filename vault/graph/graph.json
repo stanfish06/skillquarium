@@ -4,11 +4,11 @@
   "skills": 2215,
   "expert_profiles": 503,
   "nodes": 2288,
-  "edges": 16459,
+  "edges": 16461,
   "generic_names_blocked": 30,
   "tier1_edges": 4963,
   "tier2_edges": 721,
-  "alias_edges": 4583,
+  "alias_edges": 4584,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 522,
@@ -20,13 +20,13 @@
   "orphan_count": 126,
   "orphan_rate": 0.0569,
   "by_provenance": {
-   "EXTRACTED": 15673,
+   "EXTRACTED": 15675,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2215,
-   "references": 12936,
+   "references": 12938,
    "in_discipline": 599,
    "touches": 522,
    "has_step": 69,
@@ -38852,6 +38852,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "applied-mathematician named in dynamical-systems-theorist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "applied-mathematician",
+   "rel": "references",
+   "dst": "harmonypy",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of applied-mathematician appears in harmonypy/SKILL.md",
    "status": "accepted"
   },
   {
@@ -87506,6 +87515,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "harmonypy",
+   "rel": "references",
+   "dst": "applied-mathematician",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of applied-mathematician appears in harmonypy/SKILL.md",
    "status": "accepted"
   },
   {
