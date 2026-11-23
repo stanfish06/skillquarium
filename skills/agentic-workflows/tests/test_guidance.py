@@ -43,6 +43,62 @@ def checklist(text):
 
 
 class GuidanceTests(unittest.TestCase):
+    def test_browser_decision_routes_survive_prefix_reads(self):
+        route = "playwright.md#browser-decision-and-readiness"
+        for name in (
+            "github-agentic-workflows.md", "create-agentic-workflow.md",
+            "designer.md", "update-agentic-workflow.md",
+            "create-agentic-workflow-validation.md", "debug-agentic-workflow.md",
+            "designer-mappings.md", "syntax-tools-imports.md", "visual-regression.md",
+        ):
+            guide = ROOT / ".github/aw" / name
+            data = guide.read_bytes()
+            contract = data.split(b"<!-- instruction-prefix-end -->", 1)[0]
+            with self.subTest(guide=name):
+                self.assertLessEqual(len(contract), 7500)
+                self.assertIn(route, data[:7500].decode("utf-8"))
+                for link in re.findall(r"\]\(([^)]+)\)", contract.decode("utf-8")):
+                    if link.startswith("https://"):
+                        continue
+                    path, _, anchor = link.partition("#")
+                    target = guide.parent / path if path else guide
+                    self.assertTrue(target.is_file(), link)
+                    if anchor:
+                        headings = re.findall(r"^#{1,6} (.+)$", target.read_text(), re.MULTILINE)
+                        self.assertIn(anchor, [heading_anchor(heading) for heading in headings], link)
+
+    def test_browser_decision_covers_rendered_and_static_only_work(self):
+        guide = ROOT / ".github/aw/playwright.md"
+        contract = normalized(guide.read_text().split("<!-- instruction-prefix-end -->", 1)[0])
+        for required in (
+            "Rendered pages", "JavaScript interactions", "UI/navigation flows",
+            "screenshots", "browser-based accessibility/E2E checks",
+            "Source-only edits/reviews", "API checks", "plain-text documentation retrieval",
+            "Do not add a browser", 'not just the word "browser"',
+            "compiler provisions CLI, skills, and Chromium",
+            "never install during agent execution", "Same-sandbox loopback needs no `local`",
+            "startup, directory creation, bounded `curl` readiness, and PID cleanup",
+            "trailing", "normalized away", "exact full-command",
+            "Never use unrestricted Bash", "asynchronous shell mode",
+            "artifact publication", "required browser checks failed",
+            "mounted upload staging directory", "staging-relative `allowed-paths`",
+            "No-dispatch requests prohibit hosted execution, not explicitly authorized local work",
+            "grants no execution or live-test authorization",
+        ):
+            with self.subTest(required=required):
+                self.assertIn(required, contract)
+
+    def test_browser_network_mappings_do_not_require_local_ecosystem(self):
+        mappings = (ROOT / ".github/aw/designer-mappings.md").read_text()
+        syntax = (ROOT / ".github/aw/syntax-tools-imports.md").read_text()
+        visual = (ROOT / ".github/aw/visual-regression.md").read_text()
+        self.assertIn("loopback is available by default; do not add `local`", mappings)
+        self.assertIn("retrieve plain-text web pages/docs", mappings)
+        self.assertIn("inspect rendered pages, test UI flows, or capture screenshots", mappings)
+        self.assertNotIn("restrict network to `local` + `playwright`", syntax)
+        self.assertNotIn("    - local\n", visual)
+        self.assertIn("does not supply that application lifecycle", normalized(visual))
+
     def test_split_creator_routes_resolve_without_hidden_tail_reads(self):
         creator = ROOT / ".github/aw/create-agentic-workflow.md"
         topics = (
@@ -549,11 +605,16 @@ class GuidanceTests(unittest.TestCase):
         commands = (ROOT / ".github/aw/cli-commands.md").read_text()
         compile_section = commands.split("### `gh aw compile`\n", 1)[1].split("\n---", 1)[0]
         run_section = commands.split("### `gh aw run`\n", 1)[1].split("\n---", 1)[0]
-        self.assertIn("](debug-compilation.md)", compile_section)
-        self.assertNotIn("warnings are errors", compile_section)
-        self.assertIn("Low-severity/informational notices are not blanket failures", compile_section)
-        self.assertIn("debug-security-review.md#session-authorization", run_section)
-        self.assertIn("without repeated human approval", run_section)
+        contract = commands.split("<!-- instruction-prefix-end -->", 1)[0]
+        compile_rules = contract.split("### `gh aw compile` rules\n", 1)[1]
+        run_rules = contract.split("### `gh aw run` rules\n", 1)[1].split("\n### ", 1)[0]
+        self.assertIn("](#gh-aw-compile-rules)", compile_section)
+        self.assertIn("](#gh-aw-run-rules)", run_section)
+        self.assertIn("](debug-compilation.md)", compile_rules)
+        self.assertNotIn("warnings are errors", compile_rules)
+        self.assertIn("Low-severity/informational notices are not blanket failures", compile_rules)
+        self.assertIn("debug-security-review.md#session-authorization", run_rules)
+        self.assertIn("without repeated human approval", run_rules)
         self.assertIn("--ref REVIEWED_REF", run_section)
         self.assertNotIn("--ref main", run_section)
         evidence_section = EVIDENCE_GUIDE.read_text().split("### Diagnostic and Development Compilation\n", 1)[1].split("\n## ", 1)[0]
@@ -1347,7 +1408,9 @@ class GuidanceTests(unittest.TestCase):
         explorer = (ROOT / ".github/workflows/agent-persona-explorer.md").read_text()
         self.assertIn("If 1 or 2 remain, select those before resetting", explorer)
         self.assertIn("If the updated list now contains all 9 personas, reset to an empty list", explorer)
-        self.assertIn('labels: ["agent-research", "cookie"]', explorer)
+        labels = re.search(r"^    labels: (\[.*\])$", explorer.split("\n---", 1)[0], re.MULTILINE)
+        self.assertIsNotNone(labels)
+        self.assertTrue({"agent-research", "cookie"}.issubset(json.loads(labels.group(1))))
         self.assertNotIn("If fewer than 3 remain, reset", explorer)
 
     def test_security_reporting_omits_empty_findings_tables(self):

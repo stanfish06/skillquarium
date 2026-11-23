@@ -14,7 +14,7 @@ created: 2026-08-23
 # clickhouse-best-practices
 
 > [!info] What it does
-> Use when reviewing ClickHouse schemas, queries, or configurations. Contains 31 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.
+> Use when reviewing ClickHouse schemas, queries, native full-text search, or configurations. Contains 36 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.
 
 **Source:** [skills/clickhouse-best-practices/SKILL.md](../../../skills/clickhouse-best-practices/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

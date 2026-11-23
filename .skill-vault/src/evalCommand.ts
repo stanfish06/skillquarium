@@ -4,7 +4,7 @@ import type { Command } from "./cli";
 export const SUBCOMMANDS = ["run", "replay", "report", "runs", "selftest"] as const;
 export type EvalSubcommand = (typeof SUBCOMMANDS)[number];
 
-const USAGE = "usage: skillquarium eval [run|replay|report|runs|selftest] [runId]";
+const USAGE = "usage: skillquarium eval [run|replay|report|runs|selftest|tier1] [runId]";
 
 export const help = `${USAGE}
 
@@ -15,6 +15,8 @@ Run the eval suite in <root>/eval through its own mise toolchain.
   report    print a saved run's report
   runs      list saved runs
   selftest  offline: fixtures, configs, reference solutions through every gate
+  tier1     SkillEvaluator static checks per skill (needs uv, no API key);
+            'skillquarium eval tier1 --help' lists its options
 
 run and selftest install dependencies first via 'mise run setup'. Extra arguments are
 forwarded to eval/src/cli.ts, which accepts a runId for replay and report.`;
@@ -47,6 +49,15 @@ export function evalPlan(root: string, args: string[]): EvalPlan | null {
 }
 
 export const run: Command = async (args, ctx) => {
+  // tier1 runs from the CLI itself: it needs uv, not eval/'s bun/go/rust toolchain or API key.
+  if (args[0] === "tier1") {
+    const tier1 = await import("./eval/tier1");
+    if (args.includes("--help") || args.includes("-h")) {
+      ctx.out(tier1.help);
+      return 0;
+    }
+    return tier1.run(args.slice(1), ctx);
+  }
   const plan = evalPlan(ctx.root, args);
   if (plan === null) {
     ctx.err(`skillquarium eval: unknown subcommand '${args[0]}'`);
