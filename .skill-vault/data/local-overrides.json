@@ -5242,6 +5242,21 @@
       "source": "openai/plugins",
       "find": "> **IMPORTANT**: Beginning **March 2, 2026**, apps joining meetings outside their account must be authorized.",
       "replace": "> **IMPORTANT**: Since **March 2, 2026**, apps joining meetings outside their account must be authorized. This requirement is already in effect."
+    },
+    {
+      "id": "future-authorization-framing-core-workflow",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "> **IMPORTANT (March 2026)**: Apps joining meetings outside their account will require an App Privilege Token (OBF) or ZAK token.",
+      "replace": "> **IMPORTANT (since March 2, 2026)**: Apps joining meetings outside their account require an App Privilege Token (OBF) or ZAK token."
+    },
+    {
+      "id": "stale-zfg-pin-references",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "file": "references/web.md",
+      "find": "    \"@zoom/meetingsdk\": \"3.11.2-zfg\"",
+      "replace": "    \"@zoom/meetingsdk\": \"6.0.2-zfg\""
     }
   ]
 }

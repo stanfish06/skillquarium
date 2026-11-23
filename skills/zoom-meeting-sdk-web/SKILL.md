@@ -292,7 +292,7 @@ The signature encodes:
 - `exp` (expiration timestamp)
 - `tokenExp` (token expiration)
 
-> **IMPORTANT (March 2026)**: Apps joining meetings outside their account will require an App Privilege Token (OBF) or ZAK token. See [Authorization Requirements](#authorization-requirements-2026-update).
+> **IMPORTANT (since March 2, 2026)**: Apps joining meetings outside their account require an App Privilege Token (OBF) or ZAK token. See [Authorization Requirements](#authorization-requirements-2026-update).
 
 ## Core Workflow
 
