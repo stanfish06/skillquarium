@@ -38,8 +38,10 @@ Do not use this skill when:
   `sbx` before choosing commands.
 - The task is about what a sandbox can reach on the network or which
   credentials it uses — use `docker-sandboxes-network-credentials`.
-- The task is authoring or running a declarative `sbxenv.yaml` file — use
-  `docker-sandboxes-env`.
+- The task is authoring or running a declarative `sbxenv.yaml` file — no
+  skill in this catalog owns that file; use `docker-docs` to answer from
+  current Docker Docs, and `docker-sandboxes-kits` for its `agent:`/`kits:`
+  entries.
 - The task is authoring, packaging, signing, or composing a kit `spec.yaml`
   — use `docker-sandboxes-kits`.
 - The task is about `sbx --cloud` (Docker Cloud Sandboxes) — out of scope for
@@ -217,7 +219,8 @@ Do not use this skill when:
 - For network egress policy and service/registry credentials, use
   `docker-sandboxes-network-credentials`.
 - For declarative, checked-in `sbxenv.yaml` environments that wrap this same
-  create/run/rm lifecycle, use `docker-sandboxes-env`.
+  create/run/rm lifecycle, use `docker-docs` (no skill in this catalog owns
+  that file); for its `agent:`/`kits:` entries, use `docker-sandboxes-kits`.
 - For authoring or composing the kit `spec.yaml` an `AGENT` reference can
   point to, use `docker-sandboxes-kits`.
 

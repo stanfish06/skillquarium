@@ -20,7 +20,8 @@ created: 2026-06-09
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [inspiration](../../notes/data-visualization/inspiration.md) — Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout
+- [matplotlib-design](../../notes/data-visualization/matplotlib-design.md) — Create, improve, or reproduce Matplotlib charts with deliberate styling, typography, annotations, custom layouts, and maps
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

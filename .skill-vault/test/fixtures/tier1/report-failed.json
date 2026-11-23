@@ -1,0 +1,288 @@
+{
+  "version": "0.9.0",
+  "generated_at": "2026-11-16T07:41:41.154747+00:00",
+  "target_path": "skills/scanpy",
+  "overall_status": "failed",
+  "overall_passed": false,
+  "severity_counts": {
+    "critical": 0,
+    "high": 2,
+    "medium": 12,
+    "low": 16
+  },
+  "incomplete_scans": [],
+  "quality_summary": [
+    {
+      "overall_score": 77.5,
+      "grade": "C",
+      "skill_name": "scanpy"
+    }
+  ],
+  "results": [
+    {
+      "validator": "Schema & Repository Governance",
+      "status": "failed",
+      "passed": false
+    },
+    {
+      "validator": "Semantic Version Validation",
+      "status": "failed",
+      "passed": false
+    },
+    {
+      "validator": "Security Scan",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "PII Scan",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "License Compliance",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "Code Risk Analysis",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "Secrets Detection",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "Code Integrity & Hygiene",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "Dependency Vulnerability Audit",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "Unicode Smuggling Detection",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "QUALITY",
+      "status": "passed",
+      "passed": true
+    },
+    {
+      "validator": "SCRIPT_LINT",
+      "status": "passed",
+      "passed": true
+    }
+  ],
+  "top_issues": [
+    {
+      "message": "Author not specified in metadata",
+      "severity": "high",
+      "total_count": 1,
+      "category": "SCHEMA",
+      "suggestion": "Add 'metadata.author' field with format 'Name <email@example.com>'"
+    },
+    {
+      "message": "Version '1.8' is not strict semantic version x.y.z",
+      "severity": "high",
+      "total_count": 1,
+      "category": "VERSION",
+      "suggestion": "Use a quoted string in major.minor.patch form, e.g. version: \"1.2.3\" (unquoted YAML values like 1.0 are parsed as numbers and stringified without a patch component)"
+    },
+    {
+      "message": "Privilege Escalation",
+      "severity": "medium",
+      "total_count": 3,
+      "category": "SECURITY",
+      "suggestion": "Commands invoke sudo or root privileges. Verify this elevated access is necessary and justified. Avoid sudo/root unless strictly required. Prefer least-privilege patterns. If elevation is needed, document the justification and scope."
+    },
+    {
+      "message": "Missing recommended section: '## Instructions'",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "SCHEMA",
+      "suggestion": "Consider adding a '## Instructions' or '## Usage' section. Per agentskills.io the body format is unrestricted, so this is a convention nudge — it also gives the quality scorer a stable anchor for instruction-quality heuristics."
+    },
+    {
+      "message": "Missing recommended section: '## Examples'",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "SCHEMA",
+      "suggestion": "Consider adding a '## Examples' section. If examples are already inline under instructions, this can be skipped."
+    },
+    {
+      "message": "MCP Least Privilege",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "SECURITY",
+      "suggestion": "Without declared permissions the skill's intent is opaque and cannot be validated. Declare the skill's tool scope: for Claude Code / Agent Skills SKILL.md, list the tools the skill may invoke in the 'allowed-tools' frontmatter field; for MCP server manifests, add a 'permissions' list naming the required capabilities."
+    },
+    {
+      "message": "Instructions don't mention 'run_script'",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add explicit run_script() call examples"
+    },
+    {
+      "message": "SKILL_SPEC recommended field missing: 'version'",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add 'version' to frontmatter — Semantic version (e.g., \"1.0.0\")"
+    },
+    {
+      "message": "SKILL_SPEC recommended field missing: 'metadata.author'",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add 'author' under metadata: — Author name or team (under metadata:)"
+    },
+    {
+      "message": "SKILL_SPEC recommended field missing: 'metadata.tags'",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add 'tags' under metadata: — Categorization tags (under metadata:, list of 1-5 items)"
+    },
+    {
+      "message": "Large skill (~5051 estimated tokens at 4 characters per token, recommended max <5000; a real tokenizer may count more). Per agentskills.io, SKILL.md should be concise (~500 lines) — large skill bodies increase token cost after invocation; long or unfocused top-level descriptions can degrade agent routing accuracy",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Keep required sections concise; move detailed examples, reference material, and supporting docs to the references/ directory"
+    },
+    {
+      "message": "Deeply nested references in upstream-review.md",
+      "severity": "medium",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Keep references one level deep from SKILL.md"
+    },
+    {
+      "message": "Dangerous Code Execution",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SECURITY",
+      "suggestion": "Dynamic getattr() with a non-literal attribute name can access arbitrary object attributes, potentially bypassing access controls. Replace dynamic getattr() with explicit attribute access or a dictionary lookup with an allowlist of permitted attributes."
+    },
+    {
+      "message": "Description very long (398 chars, recommend 50-150)",
+      "severity": "low",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Keep descriptions concise for progressive disclosure"
+    },
+    {
+      "message": "Description doesn't mention WHEN to use this skill",
+      "severity": "low",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add trigger context: 'Use for...', 'When you need to...'"
+    },
+    {
+      "message": "No '## Purpose' section",
+      "severity": "low",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add purpose section to clarify use cases"
+    },
+    {
+      "message": "Scripts may lack error handling: convert.py",
+      "severity": "low",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Scripts should handle errors explicitly"
+    },
+    {
+      "message": "No prerequisites/requirements documented",
+      "severity": "low",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Document dependencies, API keys, or setup needed"
+    },
+    {
+      "message": "No limitations documented",
+      "severity": "low",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add '## Limitations' section with known issues/constraints"
+    },
+    {
+      "message": "No troubleshooting section documented",
+      "severity": "low",
+      "total_count": 1,
+      "category": "QUALITY",
+      "suggestion": "Add '## Troubleshooting' with Error/Cause/Solution patterns"
+    },
+    {
+      "message": "_common.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "cluster.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "find_markers.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "inspect_data.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "preprocess.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "qc_analysis.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "reduce_dimensions.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "run_pipeline.py contains magic numbers",
+      "severity": "low",
+      "total_count": 1,
+      "category": "SCRIPT_LINT",
+      "suggestion": "Extract magic numbers to named constants"
+    },
+    {
+      "message": "SkillSpector inspected all 26 bundled file(s). 7 missing-reference caveat(s) remain; review referenced paths at SKILL.md:9, SKILL.md:160, SKILL.md:163 (+4 more). Referenced targets were not verified; the scanner's original partial status is retained.",
+      "severity": "info",
+      "total_count": 1,
+      "category": "SCAN",
+      "suggestion": "Review the referenced paths; only files bundled in this skill were inspected."
+    }
+  ]
+}
