@@ -4038,6 +4038,13 @@
       "source": "benchflow-ai/skillsbench",
       "find": "```java\n// Add this to application.properties to monitor queries",
       "replace": "```properties\n# Add this to application.properties to monitor queries"
+    },
+    {
+      "id": "scope-update-from-fix",
+      "issue": 1358,
+      "source": "benchflow-ai/skillsbench",
+      "find": "### Fix Common Issues\n\n```bash\n# Remove \"from\" keyword in update queries\nfind . -name \"*.java\" -type f -exec sed -i 's/update from /update /g' {} +\n```\n",
+      "replace": "### Fix Common Issues\n\nThe \"update from \" pattern only needs fixing inside `@Query`/HQL strings. Review each\nmatch manually instead of blanket-replacing — `sed -i 's/update from /update /g'` across\nevery `.java` file also rewrites comments, log messages, and string literals that happen\nto contain that phrase outside HQL:\n\n```bash\ngrep -rni \"update from \" --include=\"*.java\" .\n```\n"
     }
   ],
   "jakarta-namespace": [
