@@ -156,10 +156,10 @@ Semgrep Rule Progress:
 
 **REQUIRED**: Before writing any rule, use WebFetch to read **all** of these 7 links with Semgrep documentation:
 
-1. [Rule Syntax](https://semgrep.dev/docs/writing-rules/rule-syntax.md)
-2. [Pattern Syntax](https://semgrep.dev/docs/writing-rules/pattern-syntax.md)
-3. [Testing Rules](https://semgrep.dev/docs/writing-rules/testing-rules.md)
-4. [Taint analysis](https://semgrep.dev/docs/writing-rules/data-flow/taint-mode/overview.md)
-5. [Advanced techniques for taint analysis](https://semgrep.dev/docs/writing-rules/data-flow/taint-mode/advanced.md)
-6. [Constant propagation](https://semgrep.dev/docs/writing-rules/data-flow/constant-propagation.md)
+1. [Rule Syntax](https://docs.semgrep.dev/writing-rules/rule-syntax.md)
+2. [Pattern Syntax](https://docs.semgrep.dev/writing-rules/pattern-syntax.md)
+3. [Testing Rules](https://docs.semgrep.dev/writing-rules/testing-rules.md)
+4. [Taint analysis](https://docs.semgrep.dev/writing-rules/data-flow/taint-mode/overview.md)
+5. [Advanced techniques for taint analysis](https://docs.semgrep.dev/writing-rules/data-flow/taint-mode/advanced.md)
+6. [Constant propagation](https://docs.semgrep.dev/writing-rules/data-flow/constant-propagation.md)
 7. [Trail of Bits Testing Handbook - Semgrep chapter](https://raw.githubusercontent.com/trailofbits/testing-handbook/refs/heads/main/content/docs/static-analysis/semgrep/10-advanced.md)
