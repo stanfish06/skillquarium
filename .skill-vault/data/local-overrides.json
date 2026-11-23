@@ -1305,6 +1305,120 @@
       "replace": "uv pip install \"polars[excel,database,fsspec,pandas,numpy]==1.44.2\""
     }
   ],
+  "scanpy": [
+    {
+      "id": "docs-1-13-restructure-pin-links-1",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [Release notes](https://scanpy.readthedocs.io/en/stable/release-notes/index.html):\n",
+      "replace": "- [Release notes](https://scanpy.readthedocs.io/en/1.12.x/release-notes/index.html):\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-2",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [HVG](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.highly_variable_genes.html),\n",
+      "replace": "- [HVG](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.pp.highly_variable_genes.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-3",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [PCA](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.pca.html),\n",
+      "replace": "  [PCA](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.pp.pca.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-4",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [neighbors](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.neighbors.html),\n",
+      "replace": "  [neighbors](https://scanpy.readthedocs.io/en/1.12.x/api/generated/scanpy.pp.neighbors.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-5",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [Leiden](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.leiden.html).\n",
+      "replace": "  [Leiden](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.leiden.html).\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-6",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [Marker ranking](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.rank_genes_groups.html),\n",
+      "replace": "- [Marker ranking](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.rank_genes_groups.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-7",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [aggregation](https://scanpy.readthedocs.io/en/stable/generated/scanpy.get.aggregate.html),\n",
+      "replace": "  [aggregation](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.get.aggregate.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-8",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [gene scoring](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.score_genes.html).\n",
+      "replace": "  [gene scoring](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.score_genes.html).\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-9",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [Harmony](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.harmony_integrate.html)\n",
+      "replace": "- [Harmony](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.external.pp.harmony_integrate.html)\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-10",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [BBKNN](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.bbknn.html)\n",
+      "replace": "  [BBKNN](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.external.pp.bbknn.html)\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-11",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [DPT](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.dpt.html) requires\n",
+      "replace": "- [DPT](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.dpt.html) requires\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-12",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [ingest](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.ingest.html)\n",
+      "replace": "- [ingest](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.ingest.html)\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-13",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [AnnData raw](https://anndata.readthedocs.io/en/stable/generated/anndata.AnnData.raw.html),\n",
+      "replace": "- [AnnData raw](https://anndata.scverse.org/en/stable/generated/anndata.AnnData.raw.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-14",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [backed I/O](https://anndata.readthedocs.io/en/stable/generated/anndata.io.read_h5ad.html),\n",
+      "replace": "  [backed I/O](https://anndata.scverse.org/en/stable/generated/anndata.io.read_h5ad.html),\n"
+    }
+  ],
   "mixpanelyst": [
     {
       "id": "frequency-filter-not-in-query-flow",
