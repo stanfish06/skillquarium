@@ -32,9 +32,12 @@ Configure and operate the **Neo4j Connector for Kafka** (sink and source) and th
 # Self-managed Kafka Connect — download JAR from Confluent Hub or neo4j.com
 confluent-hub install neo4j/kafka-connect-neo4j:latest
 
-# Or download directly
-curl -L https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connector.zip \
-     -o neo4j-kafka-connector.zip
+# Or download directly. The release asset is named neo4j-kafka-connect-neo4j-<version>
+# and carries the version, so there is no static latest/download name — resolve it first.
+VERSION=$(curl -fsSL https://api.github.com/repos/neo4j/neo4j-kafka-connector/releases/latest \
+  | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
+curl -fL "https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connect-neo4j-${VERSION}.zip" \
+     -o "neo4j-kafka-connect-neo4j-${VERSION}.zip"
 ```
 
 Confluent Cloud: Neo4j Sink is available as a fully managed connector — no JAR install required. Select from the Confluent Cloud connector catalog.

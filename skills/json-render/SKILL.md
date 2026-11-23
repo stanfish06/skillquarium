@@ -40,7 +40,7 @@ interface UIMessage {
 // Part types:
 // - { type: 'text', text: string }
 // - { type: 'tool-<toolName>', toolCallId: string, state: string, input?: unknown, output?: unknown }
-//     state values: 'partial-call' | 'call' | 'output-available' | 'approval-requested' | 'approval-responded' | 'output-denied'
+//     state values: 'input-streaming' | 'input-available' | 'approval-requested' | 'approval-responded' | 'output-available' | 'output-error' | 'output-denied'
 // - { type: 'reasoning', text: string }
 // - { type: 'step-start' }  // internal, skip in rendering
 ```
@@ -102,6 +102,7 @@ export function Chat() {
                 state: string
                 input?: unknown
                 output?: unknown
+                errorText?: string
               }
               const toolName = toolPart.type.replace('tool-', '')
 
@@ -113,6 +114,14 @@ export function Chat() {
                 return (
                   <div key={i} className="text-sm text-muted-foreground">
                     {toolName} was denied
+                  </div>
+                )
+              }
+
+              if (toolPart.state === 'output-error') {
+                return (
+                  <div key={i} className="text-sm text-destructive">
+                    {toolName} failed: {toolPart.errorText}
                   </div>
                 )
               }
@@ -320,7 +329,7 @@ import { validateUIMessages, convertToModelMessages, streamText, gateway } from 
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
-  const validatedMessages = validateUIMessages(messages)
+  const validatedMessages = await validateUIMessages({ messages })
   const modelMessages = await convertToModelMessages(validatedMessages)
   // ...
 }

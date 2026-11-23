@@ -11,7 +11,7 @@ Use this skill after `plugin-eval` has already produced findings for a local ski
 
 1. Run `plugin-eval analyze <skill-path> --brief-out <brief.json>`.
 2. Read the improvement brief and group work into required fixes versus recommended fixes.
-3. Apply the `skill-creator` guidance from `/Users/benlesh/.codex/skills/skill-creator/SKILL.md`.
+3. Apply Codex's built-in `skill-creator` skill (invoke it as `$skill-creator`).
 4. Re-run the evaluation and compare before and after outputs.
 
 ## Chat Requests To Recognize

@@ -36,7 +36,7 @@ Use this skill to execute read-only Dataset Viewer API calls for dataset explora
 - `List parquet shards`: `/parquet?dataset=<namespace/repo>`
 - `Get size totals`: `/size?dataset=<namespace/repo>`
 - `Get column statistics`: `/statistics?dataset=<namespace/repo>&config=<config>&split=<split>`
-- `Get Croissant metadata (if available)`: `/croissant?dataset=<namespace/repo>`
+- `Get Croissant metadata (if available)`: `https://huggingface.co/api/datasets/<namespace>/<repo>/croissant` (Hub API, not the Dataset Viewer base URL)
 
 Pagination pattern:
 
