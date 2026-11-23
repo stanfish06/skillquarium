@@ -256,7 +256,7 @@ every `.java` file also rewrites comments, log messages, and string literals tha
 to contain that phrase outside HQL:
 
 ```bash
-grep -rn "update from " --include="*.java" .
+grep -rni "update from " --include="*.java" .
 ```
 
 ## Performance Monitoring
