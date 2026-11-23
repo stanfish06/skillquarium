@@ -5461,6 +5461,15 @@
       "replace": "Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout. Searches"
     }
   ],
+  "langfuse": [
+    {
+      "id": "forward-looking-cli-package-rename",
+      "issue": 1429,
+      "source": "langfuse/skills",
+      "find": "Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required):",
+      "replace": "Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required). Note: Langfuse now publishes the CLI as `@langfuse/cli` and recommends it over `langfuse-cli` ([CLI docs](https://langfuse.com/docs/api-and-data-platform/features/cli)); the old package is identical and will be updated alongside it until the next major version, so the `npx langfuse-cli` commands below still work, and `npx @langfuse/cli` takes the same arguments."
+    }
+  ],
   "mimir": [
     {
       "id": "stale-helm-chart-pin-and-deprecation",
