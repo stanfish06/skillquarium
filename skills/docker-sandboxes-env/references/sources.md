@@ -1,116 +1,25 @@
 # Sources
 
-## Local pinned source (repository docker/sandboxes, commit df5c96ba60484fa2c375469dbac912c205da6c37)
+| Source | Version / date | Used for |
+|---|---|---|
+| [Docker Docs: Sandbox environment files](https://docs.docker.com/ai/sandboxes/configuration/environment-files/) | Retrieved 2026-11-10 | Primary public reference: commands, file placement and protection, merging and user defaults, directory and argument expansion, every field table, lifecycle timing and variables, plan symbols and approval, `--force`, `--skip-host-commands`, `env.rememberHostCommands`, `env exec` creation, update/recreate rules, removal, cloud limits, `kit.allowedSources`. |
+| Installed `sbx env`, `env create/run/plan/exec/rm --help` | sbx v0.51.0 (`7d55286de0c775148b985ed349f760f1eba06203`) | Flags (`-f/--force`, `-d/--detach`, `--skip-host-commands` on plan/create/run/rm, `--prune-bindings`, `--no-input`, `--cloud`), `env exec` exit status 125, derived name, list concatenation. |
+| docker/sandboxes `sandboxlib/sbxenv/types.go`, `sandboxlib/kit/git.go` (internal repository, not publicly verifiable) | `7d55286de0c775148b985ed349f760f1eba06203` (the v0.51.0 build) | Cross-check of the complete key set, `sandboxOptions` disk-size and `nested` keys, `<agent>-<workspace-basename>` default, and the `git+…#ref=…&dir=…` kit source shape. |
+| [docker/sandbox-kit-spec `skills/sbxenv`](https://github.com/docker/sandbox-kit-spec/tree/75b2696a80163497b0d0d1cd73d3fb7ccaa050fe/skills/sbxenv) | `75b2696a80163497b0d0d1cd73d3fb7ccaa050fe` | Adapted authoring workflow (`references/authoring-workflow.md`), kit handle rules, and `scripts/kits.py`, copied from SHA-256 `1ca05d5ff22734f7d7c8e07bf6e26ede2d1fd9f0f9e99f425eb8116fba0e05b8` with one local change: `pin` and pinned `update` fail when the registry returns no digest instead of reporting an unpinned reference. |
 
-Paths below are relative to the repository root.
+## Limitations
 
-- `sandboxlib/sbxenv/types.go` — `Config` struct: `SchemaVersion` (only
-  `"1"` supported — `SupportedSbxEnvVersions`), `Name`, `Args`, `Agent`,
-  `Kits`/`KitEntry`, `Workspace`/`WorkspaceSpec` (bare-string-or-mapping
-  shorthand, `clone`, the `declared` flag distinguishing "omitted" from
-  "blank"), `AdditionalWorkspaces`, `Env`, `SandboxOptions` (including
-  `WritableEnvFiles` doc comment: "Each file a mount would otherwise hand
-  over read-write is bound read-only at its own path instead..."),
-  `Secrets`/`SecretSource` (exactly one of value/ref/command),
-  `Bindings`, `Registries`/`RegistrySource`, `MCP`/`MCPServer`,
-  `Ports`/`PortBinding`, `Lifecycle`. `Validate()`/`validateWorkspaces()` —
-  confirms omitting `workspace:` mounts nothing, a blank path is rejected,
-  and `additionalWorkspaces` requires a primary `workspace:`.
-- `sandboxlib/sbxenv/loader.go` — `DefaultFileName` (`sbxenv.yaml`, the only
-  name read from a directory), `UserBaseFileName` (`.sbxenv.yaml`, home-only
-  base layer), `LoadMergedWithOptions` doc comment (docker-compose `-f`
-  merge semantics: mappings merge key-by-key, sequences concatenate,
-  scalars overridden by the last file), `rejectProjectIdentity`/
-  `rejectEscapedUserBaseWorkspace` (base layer may not set `name:`, and its
-  `workspace:` must resolve at-or-below the project directory),
-  `anchorWorkspacePaths`/`anchorKitSources` (relative workspace and kit
-  paths resolve against the **declaring file's own directory**), `${{
-  env.projectDir }}` / `${{ env.fileDir }}` expansion.
-- `sandboxlib/sbxenv/lifecycle.go` — `LifecyclePhase` constants
-  (`initialize`, `postCreate`, `preRemove`) and their doc comments: phase
-  ordering, "initialize runs before anything is resolved... on both a
-  create and an attach... must be idempotent", `postCreate` "runs once the
-  sandbox exists", `preRemove` "runs before sbx env rm deletes the
-  sandbox... sbx env exec runs no commands at all"; `LifecycleCommand`
-  (`Name`, `Command` run via `sh -c`/`cmd /c`, `Workdir` default =
-  project directory, `Timeout`).
-- `cli-plugin/commands/env_lifecycle.go` — `envContext.teardown` warns on
-  a failed `preRemove`, then calls `recheckDestroy` and `recheckSandbox`
-  before deletion. The failure itself is not fatal; drift from the approved
-  destroy plan or replacement of the sandbox is.
-- `cli-plugin/commands/env_plan_test.go` —
-  `TestTeardown_ACommandThatFailedIsNotADeadEnd` verifies warning-only hook
-  failure; `TestRecheckDestroy_SomethingThatAppearedAfterTheAnswer`,
-  `TestTeardown_WhatAPreRemoveCommandLeftBehind`, and
-  `TestTeardown_ASandboxReplacedWhileTheCommandsRan` verify the
-  post-approval credential/binding/identity guards stop deletion.
-- `sandboxlib/sbxenv/args.go` — `Args` map, `argNamePattern`, the
-  distinction between author bugs (`ErrArgSyntax`, `ErrArgUndeclared`) and
-  caller errors (`ErrArgUnresolved`, `ErrArgInvalid`, `ErrArgUnused`); "A
-  bare `name` with no `=` is rejected rather than resolved from the host
-  environment the way `--env-file` does" (confirms args never read the
-  ambient host environment implicitly).
-- `cli-plugin/commands/env_plan.go` — `valueFingerprint` and
-  `secretSourceFields` replace literal secret values with full `sha256:`
-  digests in both the displayed plan and recorded state.
-- `cli-plugin/commands/env_plan.go` — `reachedEnvFile` (`root` field:
-  whether the file sits directly at the mount's own directory, "where a
-  read-only bind of it cannot be worked around: the mount point is the one
-  directory in the tree the sandbox cannot rename"), `envFileMounts`
-  (excludes only a file that is both read-only AND at the mount root — a
-  file protected read-only in a *subdirectory* is still reported, because
-  "Nothing in the sandbox can rename a mount point" is true only at the
-  root), `envContext.lifecycleResources` and `planOptions.unspoken` (a
-  lifecycle-declaring file's commands are named in the plan every
-  invocation that reaches them).
-- `cli-plugin/commands/env_plan_render.go` — `renderWritableFiles`/
-  `renderEnvFileReach` (exact two-case wording: "mounted read-write into
-  the sandbox... an agent in it can change what a later invocation of this
-  environment runs here" vs. "mounted read-only, inside a directory the
-  sandbox can rename: ... renaming it puts the file back where an agent
-  can change what a later invocation runs here" — the read-only-at-root
-  case is not rendered at all, since `envFileMounts` excludes it),
-  `renderHostCodeNotice` (`askedAgain` case: "nothing in this env plan has
-  changed but commands run on this machine, outside the sandbox, with your
-  own privileges which requires explicit approval on each run" — confirms
-  declared lifecycle commands are asked about every invocation regardless
-  of whether anything changed; the non-`askedAgain`, no-host-code path
-  implies a plan with nothing to add and no lifecycle commands has nothing
-  new to say).
-
-## Captured standalone CLI help, cross-checked against an older installed build
-
-Installed `sbx` reports `v0.42.0-503-g951b7f6d7` (commit
-`951b7f6d7f6bb260fac15077b607109ffe8ae012`), older than the pinned source
-HEAD. Verified with `sbx <cmd> --help` under an isolated `--app-name`, no
-daemon started. The generated help text is long-form prose and matches the
-pinned-source doc comments above closely enough that no source-only schema
-difference was found for the fields this skill covers.
-
-- `sbx env --help` (matches `docs/yml/sbx_env.yaml` at the pinned commit) —
-  full narrative description: file resolution rules, `kits:` bare-vs-mapping
-  shorthand and relative-path anchoring, `workspace:` resolution and naming
-  derivation, the complete `lifecycle:` phase description, the full
-  environment-plan rendering model (`+`/`~`/`-`/`>`/`!` margin symbols,
-  literal `value:` secrets rendered as `sha256:` digests in state),
-  `sandboxOptions.writableEnvFiles`, `--auto-approve`/`-y`,
-  `env.rememberHostCommands` setting.
-- `sbx env create --help`/`sbx env run --help`/`sbx env plan --help`/
-  `sbx env exec --help`/`sbx env rm --help` — per-command flags:
-  `--env-arg`, `--env-args-file`, `--kit-arg`, `--kit-args-file`, `--name`,
-  `--skip-host-commands`, `--clone` (create/run/plan only, overrides
-  `workspace.clone`), `-d/--detached` (`env run` ONLY — `env create` and
-  `env plan` do not have this flag), `--prune-bindings` (rm only); `env
-  exec`'s `[PATH...] -- COMMAND` argument-splitting rule, and its own text
-  stating the sandbox "must already exist" — `env exec` never creates one.
-
-## Not verified / explicitly excluded
-
-- No claim is made about a stable, non-experimental future schema version;
-  at the pinned commit `schemaVersion: "1"` is the only supported value
-  (`sandboxlib/sbxenv/types.go`, `SupportedSbxEnvVersions`).
-- No docs.docker.com URL beyond the canonical product page
-  (https://docs.docker.com/ai/sandboxes/) is cited here: this review did
-  not independently fetch a dedicated `sbxenv.yaml` docs page, so no more
-  specific URL is asserted as a source for any rule above. Every rule above
-  traces to a repository path and/or a captured `--help` output.
+- `sbx env` and schemaVersion `"1"` are experimental; no stable schema is
+  claimed.
+- `scripts/kits.py` was exercised against live Docker Hub on 2026-11-10
+  (`search`, `describe`, `update`, `pin`, missing-repository and
+  connection-failure exits) with Python 3.9. Its output depends on the live
+  catalog; nothing in this skill pins kit versions. Offline release-order,
+  pin, and failure-exit behavior is tested by `scripts/test_kits_helper.py`.
+- Known helper limits, inherited from the source: it does not
+  check the scheme of server-provided URLs (auth realm, pagination,
+  redirects); it classifies any reference ending in `.zip` as local; and
+  date-style numeric tags would outrank dotted releases.
+- The `checks/verification.md` runbook was run once on sbx v0.51.0, macOS
+  arm64 (results in `checks/runtime-results.md`); repository validation does
+  not execute it. The live scenario `evals/scaffold-pin-plan.yaml` runs in CI.

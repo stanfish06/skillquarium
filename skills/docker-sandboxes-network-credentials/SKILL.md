@@ -37,10 +37,10 @@ Do not use this skill when:
   `sbx` before choosing commands.
 - The task is creating, reattaching to, or removing a sandbox itself — use
   `docker-sandboxes-lifecycle`.
-- The task is declaring secrets/registries/bindings inside a checked-in
-  `sbxenv.yaml` file — use `docker-sandboxes-env` for the file format (this
-  skill's rules on precedence and injection scope still apply to what that
-  file provisions).
+- The task is the file format for declaring secrets/registries/bindings
+  inside a checked-in `sbxenv.yaml` file — no skill in this catalog owns it;
+  use `docker-docs` for the format (this skill's rules on precedence and
+  injection scope still apply to what that file provisions).
 - The task is declaring a kit's own `credentials:`/`permissions.network:`
   block in a `spec.yaml` — use `docker-sandboxes-kits` for the schema (this
   skill's model of what those declarations mean at runtime still applies).
@@ -207,9 +207,9 @@ Do not use this skill when:
 
 - For creating, reattaching to, and removing the sandboxes these policies
   and secrets apply to, use `docker-sandboxes-lifecycle`.
-- For declaring `secrets:`/`registries:`/`bindings:` inside a checked-in
+- For the format of `secrets:`/`registries:`/`bindings:` inside a checked-in
   `sbxenv.yaml` file that provisions them at environment-create time, use
-  `docker-sandboxes-env`.
+  `docker-docs`; no skill in this catalog owns that file.
 - For a kit's own `credentials:` and `permissions.network:` declarations
   (what a kit *asks for*, as opposed to what the user has *approved*), use
   `docker-sandboxes-kits`.

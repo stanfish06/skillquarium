@@ -1,279 +1,363 @@
 ---
 name: docker-sandboxes-env
-description: Use this skill when authoring, planning, or running a declarative `sbxenv.yaml` file for Docker Sandboxes (`sbx env create/run/plan/exec/rm`), even if the user just says they want to "check in a sandbox config", "make onboarding reproducible for a sandbox", "run a setup script before the agent starts", or "define arguments for a shared sandbox environment". Covers the sbxenv.yaml schema (schemaVersion, agent, kits, workspace/additionalWorkspaces, args, env, secrets, registries, bindings, mcp, ports, sandboxOptions), host `lifecycle:` commands (initialize/postCreate/preRemove) and their approval-plan model, multi-file merge (`-f`-style deep merge and the user-level `.sbxenv.yaml` base layer), and file-write-protection (`sandboxOptions.writableEnvFiles`).
+description: Use this skill when creating, updating, reviewing, planning, or running a declarative `sbxenv.yaml` file for Docker Sandboxes (`sbx env plan/create/run/exec/rm`), even if the user just says "check in a sandbox config", "set up this project for sbx env", "which kits should this project's sbxenv use", "bump or pin the kits in my sbxenv", or "run a setup script before the agent starts". Covers composing an agent workload and v3 mixin kits chosen from the live Docker Hub catalog with the bundled `scripts/kits.py` helper, kit and environment `args`, secrets/registries/bindings, workspace and mounts, `entrypoint`/`cmd`, ports, MCP servers, `sandboxOptions` (including `writableEnvFiles`), host `lifecycle` commands and the approval plan, multi-file merge, and the `~/.sbxenv.yaml` user defaults.
 license: Apache-2.0
-compatibility: Requires standalone sbx with sbx env support and sbxenv.yaml schemaVersion "1", not the legacy docker sandbox wrapper. Verified against docker/sandboxes df5c96ba60484fa2c375469dbac912c205da6c37; installed-help version and provenance are in references/sources.md. docker_help does not cover standalone sbx.
+compatibility: Requires standalone sbx with experimental `sbx env` support and sbxenv.yaml schemaVersion "1"; help and docs checked against sbx v0.51.0. scripts/kits.py needs Python 3.9+ and anonymous HTTPS access to Docker Hub (PyYAML only for older YAML descriptors). Provenance is in references/sources.md.
 ---
 
 # Docker Sandboxes: Declarative sbxenv.yaml Environments
 
 ## Overview
 
-`sbxenv.yaml` (schemaVersion `"1"`, EXPERIMENTAL) declaratively describes one
-sandbox environment — agent, mixin kits, workspace mounts, environment
-variables, secrets/registries/bindings to provision, MCP servers, ports, and
-host-side lifecycle commands — so `sbx env create|run|plan|exec|rm` can stand
-it up and tear it down reproducibly instead of a long flag invocation. This
-skill owns that file format end to end. It delegates the sandbox lifecycle
-semantics it wraps, the credential/network model it provisions into, and the
-kit schema its `kits:` entries reference, to their own skills.
+`sbxenv.yaml` (schemaVersion `"1"`, EXPERIMENTAL) declares one local or cloud
+sandbox environment: the agent, the kits composed onto it, workspace mounts,
+environment variables, secrets/registries/bindings to provision, MCP servers,
+ports, launch command, and host-side lifecycle commands. `sbx env
+plan|create|run|exec|rm` stand it up and tear it down reproducibly instead of a
+long flag invocation. This skill owns that file end to end: authoring it from
+the project's signals, refreshing its kit references, and explaining how it is
+applied and approved. Decoding is strict — an unknown key anywhere is an error
+— so check `references/env-schema-fields.md` before writing a field you are
+not sure about.
 
 ## When to use this skill
 
 Activate this skill when:
-- The user wants a checked-in, reproducible definition of a sandbox
-  environment instead of a long `sbx create`/`sbx run` command line.
-- The user wants host-side setup/teardown commands (cloning a repo, seeding
-  fixtures, archiving state) tied to a sandbox's create/attach/remove
-  lifecycle.
+- The user wants a checked-in, reproducible sandbox environment instead of a
+  long `sbx create`/`sbx run` command line, or asks to scaffold, create, or
+  review an `sbxenv.yaml` or `~/.sbxenv.yaml`.
+- The user wants kits suggested for a project's `sbxenv.yaml`, or wants the
+  kit references in an existing `sbxenv.yaml` upgraded, bumped, or pinned to
+  digests.
+- The user wants host-side setup or teardown commands (cloning a repo,
+  seeding fixtures, archiving state) tied to the environment's lifecycle.
 - The user wants to parameterize a shared environment file with named
   arguments (`args:` + `--env-arg`).
-- The user is debugging why `sbx env create`/`run` is asking for approval,
-  or why a file, kit, or secret it declares was skipped or flagged.
+- The user is debugging why `sbx env create`/`run` asks for approval, or why a
+  declared change did not take effect on an existing sandbox.
 
 ## Do not use this skill when
 
 Do not use this skill when:
 - The task is the underlying `sbx create`/`run`/`rm` flag-based workflow with
-  no `sbxenv.yaml` file involved — use `docker-sandboxes-lifecycle`.
-- The task is choosing network policy or storing a secret/registry
-  credential independent of any environment file — use
-  `docker-sandboxes-network-credentials` (this skill's `secrets:`/
-  `registries:`/`bindings:` blocks provision into that same store, but do not
-  redefine its rules here).
-- The task is authoring the kit `spec.yaml` a `kits:` entry points at — use
-  `docker-sandboxes-kits`.
+  no `sbxenv.yaml` involved — use `docker-sandboxes-lifecycle`.
+- The task is choosing network policy or storing a secret/registry credential
+  independent of any environment file — use
+  `docker-sandboxes-network-credentials`. This file's `secrets:`/
+  `registries:`/`bindings:` provision into that same store; do not redefine
+  its rules here.
+- The task is authoring, building, publishing, or signing the kit descriptor
+  a `kits:` entry references, or composing kits with `sbx run --kit` flags
+  and no environment file — use `docker-sandboxes-kits`. This skill only
+  selects, configures, and pins kits inside an `sbxenv.yaml`.
 
 ## Core guidance
 
-### File resolution and required fields
+### Ground rules when writing or updating a file
 
-- The file `sbx env` reads from a directory is exactly `sbxenv.yaml` — no
-  other name, and a directory-named `.sbxenv.yaml` at the project level is
-  **not** read as a project's own file (only the home-directory base layer
-  uses that hidden name; see below).
-- Every environment file requires `schemaVersion: "1"` and `agent:` (a
-  built-in agent name or the manifest name of an agent kit supplied via
-  `kits:`). Everything else is optional. `agent: shell` needs no credentials
-  and is the simplest way to validate a file's mechanics.
-- `sbx env create|run|plan|exec|rm` accept one or more `PATH` arguments.
-  Each `PATH` is either a directory (resolved to `<PATH>/sbxenv.yaml`) or the
-  file itself. Passing more than one deep-merges them in declaration order —
-  **`docker compose -f`-style semantics**: later files override earlier ones,
-  mappings merge key-by-key, sequences concatenate.
+- **Look up kits live, every time.** Kits, tags, and digests change daily.
+  Take every kit name, tag, digest, arg, and credential from
+  `scripts/kits.py` in the current run — never from memory, an earlier
+  conversation, or the examples in this skill. If Docker Hub is unreachable
+  the helper exits nonzero; say so and stop suggesting kits rather than
+  guessing.
+- **Pick the highest version tag, not the one pushed last.** Hub lists tags by
+  last update, and a republished old release or a moving tag (`latest`,
+  `edge`) can sit on top. Use `newestRelease`/`suggested` from `kits.py
+  update`, which ranks dotted versions numerically. Do not write a bare
+  untagged reference or `:latest` when a release tag exists.
+- **Prefer v3 kits.** Search results are v3-only by default. If a file uses a
+  v2 kit (often a `-kit` suffix) and a v3 sibling exists, offer the move.
+- **Never write secret values.** Use `ref:` or `command:`, even if asked for a
+  literal: the file is meant to be committed. A binding approves a
+  credential; it never contains one.
+- **Guide, don't interrogate.** Recommend a concrete choice with a one-line
+  reason at each step, batch related questions, and skip what the workspace
+  already answers.
+- **When updating, edit in place.** Keep the user's comments, ordering, and
+  formatting; change only what the user agreed to.
+
+### The `scripts/kits.py` helper
+
+`scripts/kits.py` ships in this skill's directory; substitute the path this
+`SKILL.md` was loaded from for `<skill-dir>`. It uses only the standard
+library, prints JSON, reads public repositories anonymously, and must be run
+with `python3 -I`. A nonzero exit means at least one lookup failed: that entry
+carries `error`, and the other entries remain valid.
+
+| Command | Use |
+|---|---|
+| `kits.py search [TERM …] [--orgs a,b] [--include-v2]` | v3 kits under `sbx/` and `docker/`, ranked by pulls. Each term is a separate Hub search; no term lists the whole catalog for those orgs. |
+| `kits.py describe REF … [--arg [HANDLE.]NAME=VALUE …] [--platform OS/ARCH]` | From the live descriptor: `kind`, `agent`, `handle` (what `agent:` uses), `version`, create-phase `args`, `buildArgs`, `buildSecrets`, `credentials` with a `suggestedBinding`, and `hostGrants`. Pass `--platform` for the machine that runs `sbx` if it differs from this one. |
+| `kits.py update REF … [--pin]` | `suggested` = the highest version release tag (or the same moving tag), with a fresh digest when REF was pinned or `--pin` is given; also `newestRelease` and notes such as major bumps. Local and git sources are skipped. |
+| `kits.py pin REF …` | `TAG@DIGEST` for the tag as written. Never changes the release. Pin a tagged reference: an untagged one comes back digest-only for whatever `latest` points to. |
+| `kits.py tags REF` | Every tag with its digest, in Hub last-updated order. Inspect only; never pick a release from the top of this list. |
+
+```bash
+python3 -I <skill-dir>/scripts/kits.py search go github
+python3 -I <skill-dir>/scripts/kits.py update sbx/playwright
+```
+
+### Create or update workflow
+
+1. **Decide the mode.** `./sbxenv.yaml` exists → update. A project-level
+   `./.sbxenv.yaml` is **not read** (that name is only the home-directory
+   defaults file); offer to rename it to `sbxenv.yaml`. `~/.sbxenv.yaml` is
+   the user's personal defaults — usually bindings and `sandboxOptions`, not
+   project kits. Nothing exists → create.
+2. **Create:** read only the file listing, manifests, and git remote; turn
+   signals into search terms; `search` and `describe` candidates to
+   shortlist; resolve each kit's `newestRelease` and `describe` that exact
+   reference before configuring it; propose a composition table (kit, kind,
+   tag, why); set kit and environment args from that descriptor;
+   add bindings/secrets per credential; set workspace and options; ask tags
+   vs tag+digest; write the file with a prerequisites header; then run the
+   checks.
+3. **Update:** list every `kits:` source and `agent:`; run `kits.py update`
+   on all OCI references in one call; present current → suggested with
+   notes; for each accepted change, `describe` old and new and reconcile
+   args, credentials, host grants, `kind`, and `handle`; apply only accepted
+   edits in place.
+
+The step-by-step procedure, the workspace-signal table, credential and host
+grant handling, and the final checklist are in
+`references/authoring-workflow.md`. Follow it rather than improvising.
+
+### Composition: `agent:` and `kits:`
+
+- A composition has **exactly one workload** and any number of mixins.
+  `agent:` is either a built-in agent (`claude`, `codex`, `shell`, …) or the
+  name of the agent workload kit listed under `kits:` — its `handle` as
+  `kits.py describe` reports it. To add tools to a built-in agent, keep the
+  built-in name in `agent:` and list only mixins.
+- When both `X` and `X-mixin` exist, the plain kit is the workload and the
+  `-mixin` layers that agent onto another workload. Use the mixin only when
+  the user wants a different base.
+- A mixin's `requires` can under-declare what it needs from the workload:
+  `sbx/playwright` reports `requires: []` but its install step needs Node, so
+  on the bare `shell` agent creation fails (`env: 'node': No such file or
+  directory`). Only a disposable `sbx env create` proves a composition; say
+  so when you hand over a file you could not create.
+- An entry is a bare reference or `{source, args}`. Explicit relative paths
+  (`./…`, `../…`, `.`, `..`, or ending in `.zip`) resolve against the
+  **declaring file's directory**; a bare `org/kit` is always a registry
+  reference. Git sources use `git+https://` or `git+ssh://`; pin them for
+  reproducibility with `#ref=<commit>` (plus `&dir=<subdir>` when needed).
+- A published (OCI) kit accepts only its **create-phase** args. `buildArgs`
+  (typically `version`) were fixed at publish time — choose another tag
+  instead. `buildSecrets` are build inputs, never runtime credentials.
+- Remote kit sources must match the `kit.allowedSources` setting; Docker Hub
+  is allowed by default. Setting it replaces the whole allowlist.
+- `--kit-arg`/`--kit-args-file` and `--env-arg`/`--env-args-file` are
+  experimental flags; mention that when you rely on them.
+
+### File resolution, merging, and user defaults
+
+- From a directory, `sbx env` reads exactly `sbxenv.yaml`. Each `PATH`
+  argument is a directory (→ `<PATH>/sbxenv.yaml`) or the file itself.
+- Several paths deep-merge in order, `docker compose -f`-style: mappings merge
+  by key, later scalars win, lists concatenate — **except `entrypoint` and
+  `cmd`, which later files replace**, and `kits` entries naming the same
+  source, which fold into one entry with their `args` merged. Each file must
+  be valid on its own; a later file cannot repair an invalid earlier value.
   ```bash
-  sbx env create sbxenv.yaml override.yaml
+  sbx env run base.sbxenv.yaml local.sbxenv.yaml
   ```
+- With **no `PATH`**, `~/.sbxenv.yaml` is merged underneath the project file;
+  naming any `PATH` skips it. It may not set `name:`, and its `workspace:`
+  must be `${{ env.projectDir }}` or a subdirectory of it.
+- `${{ env.projectDir }}` (directory of the first `PATH`, or cwd) and
+  `${{ env.fileDir }}` (the declaring file's directory) plus
+  `${{ env.args.NAME }}` are the only expansions. A bare `$` is literal, so
+  `PATH: $PATH:/opt/bin` reaches the sandbox unchanged; `$${{ … }}` escapes.
+  References cannot appear in field names or inside the `args:` block.
 
-### Naming, workspace, and the `.sbxenv.yaml` user base layer
+### Naming and workspace
 
-- Unless the file sets `name:` or `--name` overrides it, the sandbox is
-  named after the mounted directory (or the project directory when nothing
-  is mounted) — so an environment that mounts nothing is still the same
-  sandbox every time it is applied. **Two different environment files in the
-  same directory derive the same sandbox name and collide** unless each sets
-  its own `name:` (or you pass a distinct `--name` per invocation) — always
-  give each environment its own explicit `name:` when more than one may
-  exist in the same directory.
-- `workspace:` names the read/write mount, exactly like `sbx create`'s
-  omitted-path behavior: **omitting `workspace:` mounts nothing** at all.
-  A relative `workspace:` path resolves against the **directory of the file
-  that declares it** — `workspace: .` mounts the directory the file sits
-  in. `${{ env.projectDir }}` names the project directory (the one holding
-  the first `PATH`, or cwd when none is named); `${{ env.fileDir }}` names
-  the declaring file's own directory. Nothing else is expanded — a bare `$`
-  is literal text, so a value written for the container
-  (`PATH: $PATH:/opt/bin`) reaches it unchanged.
-  ```yaml
-  workspace: .                       # mounts the directory this file sits in
-  # workspace: ${{ env.projectDir }} # mounts the project directory explicitly
-  ```
-- Relative kit sources follow the same file-directory anchoring rule as
-  `workspace:` (see `docker-sandboxes-kits` for kit reference syntax).
-- **Files within a mounted workspace get default read-only masking, and that
-  protection is complete only when the file sits directly at the mount's own
-  root.** A read-only bind at the mount point cannot be renamed by the
-  sandbox — there is nothing above it inside the mount to rename. But an
-  environment file in a **subdirectory** of a read-write mount is protected
-  only at its current path: the sandbox can rename the containing directory
-  (which it can write to) and then recreate the original path itself,
-  landing a sandbox-controlled file back where the read-only bind no longer
-  applies. `sbx env plan` calls this gap out explicitly for a file that is
-  not at a mount's root. Do not claim renaming the containing directory
-  creates no gap — for anything but the mount root, it does.
-- With **no `PATH`** given, an `.sbxenv.yaml` in the **home directory** is
-  merged underneath as a base layer for defaults shared across projects;
-  naming any `PATH` skips this layer entirely. The base layer may not set
-  `name:` (which identifies one project) and its `workspace:` must be rooted
-  at `${{ env.projectDir }}` — any other value would mount one fixed
-  directory under every project that merges it.
+- Without `name:` or `--name`, the sandbox is named
+  `<agent>-<workspace-basename>`, so any two environments with the same agent
+  and the same workspace directory name collide — even in different parent
+  directories. Give each environment an explicit `name:` when that can
+  happen. If you pass `--name`, pass the same value to every `sbx env`
+  command for that environment.
+- `workspace:` is the primary mount (read/write in bind mode); **omitting it
+  mounts nothing**, so an agent would start without the project. The object
+  form `{path: ., clone: true}` mounts the path read-only and runs the agent
+  on a private clone (`--clone`/`--clone=false` override it per
+  invocation). `additionalWorkspaces:` require a primary `workspace:`.
+
+### Where the environment file lives (write protection)
+
+- **Prefer keeping `sbxenv.yaml` outside every directory you mount** — the
+  primary workspace and each `additionalWorkspaces` entry — for example beside
+  the project directory with `workspace: ./web-app`. The file decides which
+  lifecycle, secret, and MCP commands run on the host, so the agent must not
+  be able to change it.
+- If it must live inside a mount, put it **directly at the mount root**.
+  `sbx` mounts env files read-only by default, but a file in a
+  **subdirectory** can still be replaced: the sandbox renames the writable
+  parent directory and recreates the path. `sbx env plan` calls this out;
+  never claim the rename creates no gap. (One sbx v0.51.0 macOS test refused
+  that rename — see `checks/runtime-results.md` — but the plan and docs
+  still treat the file as unprotected, so do not rely on it.)
+- `sandboxOptions.writableEnvFiles: true` lets the sandbox write its own env
+  files (local only). It is a deliberate security downgrade the plan reports;
+  use it only when the agent is meant to change what future invocations run
+  on the host.
 
 ### `args:` — parameterizing a shared file
 
-- Declare named inputs under `args:`, each with a `default` (making it
-  optional, `default: ""` counts as a real default) or `required: true`
-  (mutually exclusive), plus optional `description`, `enum`, or `pattern`.
-- Reference one as `${{ env.args.NAME }}` anywhere a value appears in the
-  file, and supply it with `--env-arg NAME=VALUE` (repeatable) or
-  `--env-args-file PATH`.
+- Each argument needs exactly one of `default` or `required: true`, plus
+  optional `description` and either `enum` or `pattern` (RE2, whole value).
+- Values come only from `--env-arg NAME=VALUE` or `--env-args-file FILE`; the
+  host environment is never read. An undeclared reference, missing required
+  value, unknown supplied name, or failed `enum`/`pattern` is an error.
+- An unquoted reference is re-read as YAML after substitution (`cpus:
+  ${{ env.args.cpus }}` becomes an integer); quote it to keep a string.
+- Use an environment arg for values callers vary (model, target repo, branch)
+  or one value that feeds several kits; pin a project decision directly in
+  the kit entry's `args:`.
 
-### `lifecycle:` — host commands and the approval plan
+### Secrets, registries, and bindings
 
-- `lifecycle:` declares shell commands that run **on the host, outside the
-  sandbox, with your own privileges** — not inside the container. Three
-  phases, run in this order per invocation:
-  - **`initialize`** — runs on **every** `create` **and** `run`, including
-    one that only attaches to an existing sandbox. It is the one phase that
-    can produce what the environment needs to exist (a cloned workspace, a
-    generated file), so **it must be idempotent** — it reruns on every
-    reattach.
-  - **`postCreate`** — runs once, after the sandbox exists, before an
-    interactive attach takes the terminal.
-  - **`preRemove`** — runs before `sbx env rm` deletes the sandbox, while
-    `sbx env exec` can still reach it. **A failing `preRemove` is only a
-    warning** — the failure itself does not block removal. After the hook,
-    removal rechecks the approved destroy plan and sandbox identity. A new
-    credential or changed binding not covered by that approval, or a
-    replacement sandbox under the same name, stops removal before deletion.
-    Review the new destroy plan before retrying.
-  - `sbx env exec` **runs no lifecycle commands at all, and requires the
-    sandbox to already exist** — it does not create one. Run
-    `sbx env create`/`sbx env run` first.
+- `secrets:` and `registries:` provision into the **same credential store** as
+  `sbx secret set`, at this sandbox's scope, so `sbx env rm` removes them.
+  Each source sets exactly one of `value`/`ref`/`command`; see
+  `docker-sandboxes-network-credentials` for runtime semantics.
+- Secret `command:` sources run on the host from a fresh temporary directory
+  and run whenever the secret is needed, even with `--skip-host-commands`.
+  Use absolute helper paths and keep helpers outside writable mounts.
+- `bindings:` merge into the user's **global** `credentials.yaml` and survive
+  `sbx env rm` unless `--prune-bindings` is passed — which deletes the whole
+  global entry for each declared service, possibly affecting other sandboxes.
+  Bind only the mechanism (`apiKey` or `oauth`) the user will actually use.
+- A literal `value:` appears only as a `sha256:` digest in the plan and state,
+  but the file itself still holds the plaintext. Use `ref:` or `command:`;
+  the plan shows where such a secret comes from, never its resolved value.
+  ```yaml
+  # OPTIONAL fragment — add only if this environment needs the credential.
+  secrets:
+    anthropic:
+      ref: op://Private/Anthropic/api-key   # never a literal `value:`
+      refresh: 55m
+  ```
+
+### `lifecycle:` — host commands
+
+- Commands run **on the host, outside the sandbox, with your privileges**,
+  through the user's shell, from the project directory unless `workdir:` is
+  set. Within a phase they run in order and stop at the first failure. They
+  receive `SBX_LIFECYCLE_PHASE`, `SBX_ENV_FILE(S)`, `SBX_ENV_DIR`,
+  `SBX_SANDBOX_NAME`, `SBX_AGENT`, and `SBX_WORKSPACE`, but **not** the file's
+  `env:` values or resolved secrets.
+  - **`initialize`** — before anything else, on **every** `create` and `run`,
+    including a run that attaches to an existing sandbox. It must be
+    idempotent.
+  - **`postCreate`** — once, after a new sandbox is created and before
+    attachment; not on reattach.
+  - **`preRemove`** — after removal is approved, before deletion. A failure is
+    only a warning. Afterwards `sbx` rebuilds the destroy plan and stops if the
+    commands introduced changes the approval did not cover.
   ```yaml
   lifecycle:
     initialize:
       - command: test -d app || git clone https://github.com/acme/app
     postCreate:
       - command: ./scripts/seed-fixtures.sh
-    preRemove:
-      - command: ./scripts/archive-state.sh
   ```
-- Every command runs through the shell from the **project directory** by
-  default (override per-command with `workdir:`; bound its runtime with
-  `timeout:`).
-- **A file that declares any lifecycle command is asked about on every
-  invocation that reaches it, whether or not this particular invocation
-  changed anything** — approving a command also trusts whatever it invokes,
-  including a script whose contents can change after the answer, so the
-  question is repeated rather than remembered by default. The one exception:
-  `sbx settings set env.rememberHostCommands true` makes it ask again only
-  when the commands actually change. **Never treat an untrusted file's or an
-  untrusted kit's lifecycle commands as pre-approved**, and never enable
-  `rememberHostCommands` for a file whose commands you have not reviewed. An
-  environment that declares **no** host commands at all, and whose config is
-  otherwise unchanged from what was last approved, applies silently with no
-  prompt. Use `--skip-host-commands` to run none of the declared commands
-  for one invocation.
+- Kits own what runs inside the sandbox; use `lifecycle` only for host-side
+  preparation and teardown.
 
-### The environment plan: what it is and is not
+### The plan and approval
 
-- `sbx env plan [PATH...]` prints everything applying the file would set up
-  — host commands, credentials/bindings, MCP registrations, directories,
-  published ports, the sandbox itself, and its variables — compared against
-  what was last applied/approved. **It changes nothing.**
-- `sbx env create`/`sbx env run` show the same plan and require approval
-  before doing any work (`--auto-approve`/`-y` skips the prompt for
-  non-interactive use — **never default to `-y` for a file or kit you have
-  not reviewed**). A secret's literal `value:` is the one field shown both
-  in the plan and recorded to state as a `sha256:` digest rather than in the
-  clear; a `ref:`/`command:` secret shows where the credential comes from,
-  not its resolved value.
+- `sbx env plan [PATH...]` prints what applying would change outside the
+  sandbox — host commands, credentials, bindings, MCP registrations,
+  directories, kits, ports, options, and variables — compared with what was
+  last applied and approved. **It changes, approves, and records nothing.**
+  It also does not resolve kit references: an invented kit or a missing tag
+  plans cleanly. `describe` every OCI reference at the exact tag you write
+  before trusting a clean plan.
+  Margin symbols: `+` add, `~` change, `-` destroy, `>` run a host command
+  again, `!` stop tracking without deleting.
+- `create`, `run`, and `rm` show their plan and ask for approval. Interactive
+  approval is recorded; a later plan with no host commands applies silently
+  until something changes or a resource is missing.
+- Plans with lifecycle commands, credential command sources, or local MCP
+  commands are asked about on **every** invocation by default, even when
+  unchanged. `sbx settings set env.rememberHostCommands true` asks again only
+  when the commands change — never enable it for commands you have not
+  reviewed.
+- `-f`/`--force` approves one `create`/`run` without recording consent (on
+  `rm` it also deletes a sandbox in use). Use it for reviewed, trusted files
+  in automation only — **never for untrusted pull-request content**, because
+  the plan's host commands run with the runner's privileges.
+- `--skip-host-commands` skips lifecycle commands and disables the
+  environment's local MCP commands until a later `env run` without it;
+  credential command sources still run.
+- If `sbx env run` reports a sandbox that "agrees with everything this
+  environment declares" but "nothing was done", its environment state was
+  lost. Rerun `sbx env run` interactively with the same paths and name and
+  confirm adoption only for the intended sandbox; `--force` never confirms
+  adoption, so automation needs this done interactively first.
 
-### Secrets, registries, and bindings scoped to the environment
+### `env exec` and updating an existing environment
 
-- `secrets:` and `registries:` provision into the **same credential store**
-  `sbx secret set` uses, at this environment's **sandbox scope**, so
-  `sbx env rm` can remove exactly what it created. Each entry uses the same
-  `value`/`ref`/`command` shape as `sbx secret set` (exactly one of the
-  three) — see `docker-sandboxes-network-credentials` for what those mean at
-  runtime and why a literal secret value should not otherwise appear in a
-  checked-in file.
-- `bindings:` are per-service credential bindings merged into the user's
-  **global** `credentials.yaml`; unlike `secrets:`/`registries:`, they are
-  **left in place by default** by `sbx env rm` (they are user-wide and may
-  be shared with other sandboxes/environments) — pass `--prune-bindings` to
-  also remove them.
-- **Never write a literal secret value directly into a checked-in
-  `sbxenv.yaml`.** Use `ref:` (1Password/AWS Secrets Manager) or `command:`
-  so the value never lives in the file at all; if a literal `value:` is used
-  transiently, both the plan and state show only its digest, but the
-  original environment file still contains the plaintext secret. See the labeled `secrets:` fragment below for the
-  shape — it is intentionally not part of the minimal asset, which needs no
-  credentials at all to validate.
-  ```yaml
-  # OPTIONAL fragment — add only if this environment actually needs a
-  # credential; the minimal asset omits this entirely.
-  secrets:
-    anthropic:
-      ref: op://Private/Anthropic/api-key   # never a literal `value:` in a checked-in file
-      refresh: 55m
-  ```
+- `sbx env exec [PATH...] -- COMMAND` runs no lifecycle commands for an
+  existing sandbox. If the sandbox is missing, it offers to create it only in
+  an interactive terminal (with the normal approval and lifecycle); with
+  non-interactive stdin or `--no-input` it fails (exit 125) — run
+  `sbx env create` first.
+- On an existing sandbox, `sbx env run` applies changed `env` values and
+  reconciles MCP servers, and `entrypoint`/`cmd` take effect on each run.
+  Changes to workspaces, kits, kit host mounts, ports, secrets, bindings, and
+  `sandboxOptions` apply only on the next creation: `sbx env rm`, then create
+  again.
 
-### `kits:`, `additionalWorkspaces:`, `mcp:`, `ports:`, and `sandboxOptions:`
+### `mounts:`, `ports:`, `mcp:`, `entrypoint`/`cmd`, and `sandboxOptions:`
 
-- `kits:` composes mixin kits (and, exactly once, an agent kit whose name
-  matches `agent:`) onto the base agent; a relative source anchors to the
-  **declaring file's own directory**, the same rule as `workspace:`.
-- `additionalWorkspaces:` mounts extra directories beyond the primary
-  `workspace:` (a file cannot declare one without the other) — the
-  `sbxenv.yaml` equivalent of `sbx run`'s extra positional workspace
-  arguments with `:ro`.
-- `mcp.servers:` registers MCP servers on the host and adds them to the
-  sandbox's fixed (static) MCP set at create time; registrations are
-  host-global and **left in place** by `sbx env rm`.
-- `ports:` pins explicit host-port bindings for container ports the
-  sandbox exposes — the equivalent of `sbx ports --publish` — and is torn
-  down automatically when `sbx env rm` deletes the sandbox.
-- `sandboxOptions:` (beyond `writableEnvFiles`, below) maps onto the
-  remaining `sbx create` flags: `template`, `memory`, `cpus`,
-  `pullPolicy`, `profile`, `skills`.
-
-See `references/env-schema-fields.md` for the exact field shapes, required
-keys, and a YAML example for each of the five blocks above.
-
-### `sandboxOptions.writableEnvFiles` — a deliberate, explicit downgrade
-
-- By default, **every environment file mounted inside the workspace is
-  read-only at its own path**, even though the rest of the mount is
-  writable. This stops an agent editing the very file that decides what
-  host lifecycle commands and secret-resolving commands run on your machine
-  on the next invocation.
-- Set `sandboxOptions.writableEnvFiles: true` only where an agent is
-  deliberately meant to edit its own environment file. This is a real
-  security downgrade — the plan then reports the file as writable — so
-  treat it the same as any other explicit trust decision, not a default.
-- **The protection is complete only at a mount's own root.** A file placed
-  directly at the root of a read-write mount cannot be reached even by
-  renaming, because the sandbox cannot rename the mount point itself. A file
-  in a subdirectory of that mount is a different case: it is read-only at
-  its current path, but the sandbox can rename the directory holding it
-  (which it can write to) and recreate a file at the original path, ending
-  up with a sandbox-controlled file there. `sbx env plan` flags this gap for
-  a file that is not directly at a mount's root — read the plan's output
-  rather than assuming renaming is always harmless.
+These map onto kit host mounts, `sbx ports --publish`, MCP gateway
+registrations, the agent launch argv, and `sbx create` options. Exact field
+shapes, defaults, and what `sbx env rm` leaves behind for each are in
+`references/env-schema-fields.md`.
 
 ## Related skills
 
 - For the `sbx create`/`run`/`rm` flag-based workflow this file wraps, use
   `docker-sandboxes-lifecycle`.
 - For what `secrets:`/`registries:`/`bindings:` mean at runtime, and for
-  configuring network policy independent of any environment file, use
+  network policy independent of any environment file, use
   `docker-sandboxes-network-credentials`.
-- For the schema of the kit `spec.yaml` a `kits:` entry (or `agent:`
-  pointing at an agent kit) references, use `docker-sandboxes-kits`.
+- For authoring, building, publishing, or signing the v3 kit descriptor a
+  `kits:` entry references, use `docker-sandboxes-kits`.
 
 ## References
 
-- `references/sources.md` — provenance for every rule above (help captures, source paths, docs URLs).
-- `references/env-schema-fields.md` — exact field shapes and YAML examples for `kits:`, `additionalWorkspaces:`, `mcp:`, `ports:`, and `sandboxOptions:`.
+- `references/authoring-workflow.md` — step-by-step create and update
+  procedure, workspace-signal table, credential and host-grant handling, and
+  the final checklist.
+- `references/env-schema-fields.md` — every top-level field, its shape and
+  defaults, with YAML examples.
+- `references/sources.md` — provenance for the rules above.
 
 ## Assets
 
 - `assets/sbxenv.yaml` — a complete, minimal, safe example: a `shell` agent
   mounting the declaring file's own directory, one static env var, and no
-  credentials at all — it validates and plans without any onboarding
-  authentication.
+  credentials — it validates and plans without onboarding authentication.
+  It sits at its mount root; for real projects prefer a file outside the
+  mounts.
+
+## Scripts
+
+- `scripts/kits.py` — live Docker Hub kit search, descriptor summary,
+  version-ordered update, and digest pinning for `kits:` entries. Run with
+  `python3 -I`; it only reads public registries.
 
 ## Checks
 
-- `checks/verification.md` — Verification runbook for sbxenv.yaml commands (unexecuted runbook; run manually with an isolated, uniquely-named `--app-name`, never with real secret values or untrusted lifecycle commands auto-approved).
+- `checks/verification.md` — verification runbook for the helper and
+  `sbx env` behavior (run manually with an isolated, uniquely named
+  `--app-name` signed in for the run, never with real secret values or
+  untrusted lifecycle commands force-approved).
+- `checks/runtime-results.md` — recorded results of that runbook on sbx
+  v0.51.0 (macOS arm64), including what the plan does not check.

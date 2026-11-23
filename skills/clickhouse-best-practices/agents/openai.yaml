@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clickhouse Best Practices"
-  short_description: "Invoke this skill explicitly when needed."
-  default_prompt: "Use $clickhouse-best-practices for this task."

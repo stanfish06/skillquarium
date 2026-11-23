@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "410ff3e757f492080a3436d65b7632224f7d898d",
+      "skillFolderHash": "7a38dcb754a13c90da0927b459a442e8afa4638d",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-10T14:51:08.393Z"
+      "updatedAt": "2026-11-21T14:37:17.709Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -1320,9 +1320,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/microsoft/playwright-cli.git",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "skillFolderHash": "cc70f6e5f0cf42b82d3f72f6f1c3a4134694d518",
+      "skillFolderHash": "0cc4729ee620ed1deff6630aa439ace9c0980849",
       "installedAt": "2026-06-09T19:25:48.883Z",
-      "updatedAt": "2026-11-06T14:14:34.235Z"
+      "updatedAt": "2026-11-19T15:42:43.202Z"
     },
     "playwright-best-practices": {
       "source": "currents-dev/playwright-best-practices-skill",
@@ -1365,9 +1365,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
-      "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
+      "skillFolderHash": "8ff770c9b25b9fdb5a97503fc98d86b723813031",
       "installedAt": "2026-06-09T19:26:11.074Z",
-      "updatedAt": "2026-06-09T19:26:11.074Z"
+      "updatedAt": "2026-11-21T14:37:19.292Z"
     },
     "frontend-design": {
       "source": "anthropics/skills",
@@ -1600,9 +1600,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/duckdb/duckdb-skills.git",
       "skillPath": "skills/install-duckdb/SKILL.md",
-      "skillFolderHash": "89eefcf9b31120ca49bce56b1be47ab6988ed765",
+      "skillFolderHash": "9dd12f1567fb520923a4d80de46905ab7fa431db",
       "installedAt": "2026-06-09T19:27:23.743Z",
-      "updatedAt": "2026-06-09T19:27:23.743Z"
+      "updatedAt": "2026-11-17T15:58:05.526Z"
     },
     "query": {
       "source": "duckdb/duckdb-skills",
@@ -2041,9 +2041,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "4c13c5ede55ea8acefa5aba0ec0c9ae7e99dcc7e",
+      "skillFolderHash": "ee63a7e76a7f26a3f47b929568035283d89c8964",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-11-06T14:14:37.450Z"
+      "updatedAt": "2026-11-13T14:32:28.303Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
@@ -2113,9 +2113,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/pymol/SKILL.md",
-      "skillFolderHash": "3e9b232d8f251f49fd51ffb37c29f4788709b242",
+      "skillFolderHash": "ee50a46a15a2b36e1639f05bbba5c345bccaed51",
       "installedAt": "2026-06-25T13:10:41.281Z",
-      "updatedAt": "2026-10-10T12:47:33.184Z"
+      "updatedAt": "2026-11-12T15:10:36.349Z"
     },
     "wandb-primary": {
       "source": "wandb/skills",
@@ -2149,9 +2149,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/qdrant/skills.git",
       "skillPath": "skills/qdrant-clients-sdk/SKILL.md",
-      "skillFolderHash": "004256bb28372c6b67d2c650dc7bf3977294fba8",
+      "skillFolderHash": "c6a1c77596d0ee197770f7288e8c608de5e2e09f",
       "installedAt": "2026-06-25T13:10:59.995Z",
-      "updatedAt": "2026-06-25T13:10:59.995Z"
+      "updatedAt": "2026-11-12T15:10:41.577Z"
     },
     "vllm-deploy-simple": {
       "source": "vllm-project/vllm-skills",
@@ -3086,9 +3086,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-test-migration/skills/migrate-mstest-v3-to-v4/SKILL.md",
-      "skillFolderHash": "a3d6138576938c2078a872754761e08bc079b5a9",
+      "skillFolderHash": "310f38981ca62397a5dadca9814b5a4ad781296b",
       "installedAt": "2026-07-21T05:32:46.545Z",
-      "updatedAt": "2026-10-10T12:48:35.962Z"
+      "updatedAt": "2026-11-19T15:42:55.350Z"
     },
     "nuget-trusted-publishing": {
       "source": "dotnet/skills",
@@ -4256,108 +4256,108 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/attack-path-analysis/SKILL.md",
-      "skillFolderHash": "386280aeaefd4d0dbe0c21183d9f579517987965",
+      "skillFolderHash": "57b8c03f11aaf5c2faa549b7058e647b44427de3",
       "installedAt": "2026-08-07T16:12:47.220Z",
-      "updatedAt": "2026-10-10T12:44:39.577Z"
+      "updatedAt": "2026-11-18T15:36:48.145Z"
     },
     "deep-security-scan": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/deep-security-scan/SKILL.md",
-      "skillFolderHash": "e3fd138ed3a68c2a02bc76aa6a52c48b02216015",
+      "skillFolderHash": "1e9a3337ae0ab36b7c1468e7f90cef8e0b433d82",
       "installedAt": "2026-08-07T16:12:47.221Z",
-      "updatedAt": "2026-10-10T12:44:41.312Z"
+      "updatedAt": "2026-11-18T15:36:49.916Z"
     },
     "finding-discovery": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/finding-discovery/SKILL.md",
-      "skillFolderHash": "eacb17da5de41a3fd9baffb327fe8f35e543f21f",
+      "skillFolderHash": "871c1c64fd09586e6649df5e4e5255f630585bfc",
       "installedAt": "2026-08-07T16:12:47.223Z",
-      "updatedAt": "2026-10-10T12:44:43.025Z"
+      "updatedAt": "2026-11-18T15:36:51.845Z"
     },
     "fix-finding": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/fix-finding/SKILL.md",
-      "skillFolderHash": "5746d5845daae7a4c2c0e31a70a57cab8a060bda",
+      "skillFolderHash": "5e4a0dff8a5b7ce9b7e773c0e8b4c690ce71a205",
       "installedAt": "2026-08-07T16:12:47.225Z",
-      "updatedAt": "2026-10-10T12:44:44.688Z"
+      "updatedAt": "2026-11-18T15:36:53.623Z"
     },
     "propose-security-hardening": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/propose-security-hardening/SKILL.md",
-      "skillFolderHash": "6c17d4536b14653614df235c7ceeaa61e4a71a24",
+      "skillFolderHash": "2cd3b36a35c823a245396e104996209044c10f40",
       "installedAt": "2026-08-07T16:12:47.227Z",
-      "updatedAt": "2026-10-10T12:44:46.360Z"
+      "updatedAt": "2026-11-18T15:36:55.541Z"
     },
     "security-diff-scan": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/security-diff-scan/SKILL.md",
-      "skillFolderHash": "fc9dcde175d57ff908a43670aad3f90e44463f55",
+      "skillFolderHash": "d8f6ddebd2a3bb6c365a3ca58a4fae2a3a47ec67",
       "installedAt": "2026-08-07T16:12:47.229Z",
-      "updatedAt": "2026-10-10T12:44:48.136Z"
+      "updatedAt": "2026-11-18T15:36:57.570Z"
     },
     "security-scan": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/security-scan/SKILL.md",
-      "skillFolderHash": "943f0bb5ccde07ede9714b86b2e124e0731efc54",
+      "skillFolderHash": "ea710ed803f8132c346e032834d4518699897372",
       "installedAt": "2026-08-07T16:12:47.230Z",
-      "updatedAt": "2026-10-10T12:44:49.975Z"
+      "updatedAt": "2026-11-18T15:36:59.796Z"
     },
     "threat-model": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/threat-model/SKILL.md",
-      "skillFolderHash": "6f479659d642ce9576a9a9bd530158e9c9f40938",
+      "skillFolderHash": "184e4cb3e80b2bffb1ffea1508fa00fab2793228",
       "installedAt": "2026-08-07T16:12:47.232Z",
-      "updatedAt": "2026-10-10T12:44:51.679Z"
+      "updatedAt": "2026-11-18T15:37:03.106Z"
     },
     "track-findings": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/track-findings/SKILL.md",
-      "skillFolderHash": "e6d146b1e829f0610ed1aa5d05e2f0718137f356",
+      "skillFolderHash": "edc80f593e80f8bd7feb68c7658d183623af4175",
       "installedAt": "2026-08-07T16:12:47.233Z",
-      "updatedAt": "2026-10-10T12:44:53.747Z"
+      "updatedAt": "2026-11-18T15:37:04.993Z"
     },
     "triage-finding": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/triage-finding/SKILL.md",
-      "skillFolderHash": "33da6cd1ba364a50a48c003517c787377fc49929",
+      "skillFolderHash": "da452d40351e6ee5003dd5f832cee037612f6132",
       "installedAt": "2026-08-07T16:12:47.237Z",
-      "updatedAt": "2026-10-10T12:44:55.914Z"
+      "updatedAt": "2026-11-18T15:37:07.282Z"
     },
     "validation": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/validation/SKILL.md",
-      "skillFolderHash": "d27afa5e412fce7e72e3b709c37d000187506435",
+      "skillFolderHash": "27702bde99260f814eb21657f4292582af3e5458",
       "installedAt": "2026-08-07T16:12:47.238Z",
-      "updatedAt": "2026-10-10T12:44:57.685Z"
+      "updatedAt": "2026-11-18T15:37:09.670Z"
     },
     "vulnerability-writeup": {
       "source": "openai/plugins",
       "sourceType": "github",
       "sourceUrl": "https://github.com/openai/plugins.git",
       "skillPath": "plugins/codex-security/skills/vulnerability-writeup/SKILL.md",
-      "skillFolderHash": "17a225f2d47749d84b10985c6d899926a70c518b",
+      "skillFolderHash": "cce1a0c0b7356f9eabc69e28262494374953171d",
       "installedAt": "2026-08-07T16:12:47.240Z",
-      "updatedAt": "2026-10-10T12:44:59.838Z"
+      "updatedAt": "2026-11-18T15:37:11.512Z"
     },
     "build-model": {
       "source": "openai/plugins",
@@ -8801,9 +8801,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "60b858e7de1485e5cbd37b5b776f2db933f3c8f1",
+      "skillFolderHash": "ffb4e62daba3f1d43556123a5691632de5d25a22",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-08T13:20:07.400Z"
+      "updatedAt": "2026-11-22T14:31:56.273Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,18 +8828,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "2f1d4222b3bf94f92612690a8b77fbfeb7c8bb17",
+      "skillFolderHash": "c29b0d16b4531374652186b4732aae57a5efc3ce",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-10T14:51:41.279Z"
+      "updatedAt": "2026-11-22T14:32:10.100Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/SKILL.md",
-      "skillFolderHash": "c26cde5a6e890c32bf0e9169c4e64716dfd474d8",
+      "skillFolderHash": "2f461cd00e4059127c38806ce599a89cff21bc3a",
       "installedAt": "2026-08-20T02:13:18.927Z",
-      "updatedAt": "2026-10-10T12:49:44.697Z"
+      "updatedAt": "2026-11-15T13:55:57.312Z"
     },
     "api-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -8855,9 +8855,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/apk-reverse/SKILL.md",
-      "skillFolderHash": "66b1c7ad94730144fb8b04fb844bf269e759c472",
+      "skillFolderHash": "60554126d7b0f8c8632984cd3f4be2c84eef58e3",
       "installedAt": "2026-08-20T02:13:18.950Z",
-      "updatedAt": "2026-08-20T02:19:55.494Z"
+      "updatedAt": "2026-11-14T13:30:41.804Z"
     },
     "attack-chain": {
       "source": "zhaoxuya520/reverse-skill",
@@ -8900,9 +8900,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/case-review/SKILL.md",
-      "skillFolderHash": "d002eec42876e05183bb6d27c798dda31541f61b",
+      "skillFolderHash": "5339ca6a32b0e79813e0ae598a1853c979140832",
       "installedAt": "2026-08-20T02:13:19.004Z",
-      "updatedAt": "2026-08-24T07:19:08.659Z"
+      "updatedAt": "2026-11-14T13:30:43.395Z"
     },
     "cloud-k8s": {
       "source": "zhaoxuya520/reverse-skill",
@@ -8954,9 +8954,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/docs-generator/SKILL.md",
-      "skillFolderHash": "9e0c8b411d03b6c7b4bf965c8c6bb8b1c3cd2f22",
+      "skillFolderHash": "8bd2c2e04992133395198257690735a2f95c4682",
       "installedAt": "2026-08-20T02:13:19.507Z",
-      "updatedAt": "2026-08-20T02:19:55.528Z"
+      "updatedAt": "2026-11-14T13:30:44.930Z"
     },
     "dotnet-reverse": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9008,9 +9008,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/go-rust-reverse/SKILL.md",
-      "skillFolderHash": "9982f05d383e388c769597e3abd874575a42f725",
+      "skillFolderHash": "d7ab4d950db5d163753c3e16c542456f537c81ab",
       "installedAt": "2026-08-20T02:13:19.619Z",
-      "updatedAt": "2026-08-20T02:19:55.544Z"
+      "updatedAt": "2026-11-14T13:30:46.563Z"
     },
     "hardware-security": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9026,9 +9026,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/ida-reverse/SKILL.md",
-      "skillFolderHash": "d55b8e80f159025e8b3ffb076e1b30b47f2c5563",
+      "skillFolderHash": "043e18fe105616dabe9be4ab78af55730a8bfa35",
       "installedAt": "2026-08-20T02:13:19.667Z",
-      "updatedAt": "2026-10-10T12:49:46.665Z"
+      "updatedAt": "2026-11-14T13:30:48.291Z"
     },
     "identity-federation": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9080,9 +9080,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/mobile-reverse/SKILL.md",
-      "skillFolderHash": "20cfcd98640acf7aeea60d0d4f1531a32223e568",
+      "skillFolderHash": "c5d335a50c752586f1ea8f2fa1c8abb3d6f2b189",
       "installedAt": "2026-08-20T02:13:19.701Z",
-      "updatedAt": "2026-08-20T02:19:55.570Z"
+      "updatedAt": "2026-11-14T13:30:50.022Z"
     },
     "ot-ics": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9134,9 +9134,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/zhaoxuya520/reverse-skill.git",
       "skillPath": "skills/radare2/SKILL.md",
-      "skillFolderHash": "aa7a391f9e49759b32ec5a67d2ff2c08e8674531",
+      "skillFolderHash": "7df919615c16c8f853383658c0006d51ba3bd037",
       "installedAt": "2026-08-20T02:13:19.737Z",
-      "updatedAt": "2026-08-20T02:19:55.589Z"
+      "updatedAt": "2026-11-15T13:56:00.799Z"
     },
     "radio-sdr": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9537,36 +9537,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "bb7482340804ae632bde3967f90a9179e894c509",
+      "skillFolderHash": "eaf4e64a81eda10ae2a5a882bf150771482cfd9f",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-10-14T11:51:21.974Z"
+      "updatedAt": "2026-11-22T14:32:13.869Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "97b7b4172010602aa303b48b70967e25699cba7d",
+      "skillFolderHash": "d576bb01cc59bc65ac5190de0dd4ef79e20f7894",
       "installedAt": "2026-08-21T01:50:31.549Z",
-      "updatedAt": "2026-10-28T12:48:55.770Z"
+      "updatedAt": "2026-11-19T15:43:08.937Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "9f811d834dffeecf58d7b7f08121925bd0226b49",
+      "skillFolderHash": "2ace297ef2508df0a117e1b55fec7a975e777d44",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-06T14:14:58.750Z"
+      "updatedAt": "2026-11-19T15:43:13.395Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "3b684abe690f118631916b161f68041c2dbbe271",
+      "skillFolderHash": "ef5b067b143385004753dc754720eb1dcecd2dc7",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-11-02T15:46:07.356Z"
+      "updatedAt": "2026-11-21T14:37:41.081Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",
@@ -9756,10 +9756,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/clickhouse-best-practices/SKILL.md",
-      "skillFolderHash": "2a8db28b640349bec00c258b77840928ced7f187",
-      "pluginName": "clickhouse-best-practices",
+      "skillFolderHash": "0dd0af522c5ce2fd56af99b8b6ecbf1d56d1e099",
       "installedAt": "2026-08-23T17:16:56.375Z",
-      "updatedAt": "2026-08-23T17:16:56.375Z"
+      "updatedAt": "2026-11-18T15:37:55.701Z"
     },
     "clickhouse-js-node-coding": {
       "source": "clickhouse/agent-skills",
@@ -9813,18 +9812,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-clickhouse/SKILL.md",
-      "skillFolderHash": "0a7d064aff4374410373295be714d4d5cfbf2780",
+      "skillFolderHash": "f277ab3fe43e209bcdc042f591a726f7a499e166",
       "installedAt": "2026-08-23T17:16:56.407Z",
-      "updatedAt": "2026-11-02T15:46:08.846Z"
+      "updatedAt": "2026-11-20T15:25:38.372Z"
     },
     "infra-postgres": {
       "source": "clickhouse/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-postgres/SKILL.md",
-      "skillFolderHash": "cbb3b15ef4ed20b689daa43958aa899e171eba7b",
+      "skillFolderHash": "ed2a4429c404c8e36268997a7a7b7710c0914796",
       "installedAt": "2026-08-23T17:16:56.410Z",
-      "updatedAt": "2026-11-02T15:46:10.475Z"
+      "updatedAt": "2026-11-20T15:25:39.403Z"
     },
     "cloudformation-to-pulumi": {
       "source": "pulumi/agent-skills",
@@ -10455,9 +10454,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-ai-functions/SKILL.md",
-      "skillFolderHash": "5abf73790e23bf4b54cefb529f0d4de5859488a0",
+      "skillFolderHash": "e1eff984bc2f244a8c668f8c86233e8b9c3b43f1",
       "installedAt": "2026-08-23T17:20:36.096Z",
-      "updatedAt": "2026-10-28T12:49:05.266Z"
+      "updatedAt": "2026-11-19T15:43:16.024Z"
     },
     "databricks-aibi-dashboards": {
       "source": "databricks/databricks-agent-skills",
@@ -10482,9 +10481,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-apps/SKILL.md",
-      "skillFolderHash": "4467eeb7875d6d23b5054ad14c7b4ed145e23ac8",
+      "skillFolderHash": "79c59be9fdefaa7367082da9f13ed07be4797c02",
       "installedAt": "2026-08-23T17:20:36.114Z",
-      "updatedAt": "2026-10-29T12:58:42.660Z"
+      "updatedAt": "2026-11-19T15:43:18.602Z"
     },
     "databricks-apps-python": {
       "source": "databricks/databricks-agent-skills",
@@ -10527,9 +10526,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-dbsql/SKILL.md",
-      "skillFolderHash": "ea1597a204d64d8f9e8bc3deb074e3ae0b7b38b0",
+      "skillFolderHash": "2a42c1ae3c5b080e7ac1246a1e02bcd88ebbcd70",
       "installedAt": "2026-08-23T17:20:36.141Z",
-      "updatedAt": "2026-10-24T10:55:45.133Z"
+      "updatedAt": "2026-11-19T15:43:22.616Z"
     },
     "databricks-docs": {
       "source": "databricks/databricks-agent-skills",
@@ -10554,9 +10553,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-genie-agents/SKILL.md",
-      "skillFolderHash": "853c0d9a92628151cd11cf7bcfe58813b347059f",
+      "skillFolderHash": "f836a80646c8e932cf03041839d114ed2c4fe929",
       "installedAt": "2026-08-23T17:20:36.152Z",
-      "updatedAt": "2026-10-28T12:49:12.179Z"
+      "updatedAt": "2026-11-19T15:43:24.711Z"
     },
     "databricks-iceberg": {
       "source": "databricks/databricks-agent-skills",
@@ -10572,18 +10571,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-jobs/SKILL.md",
-      "skillFolderHash": "0ebef18a32daf9ee1c76653c8933bdddb97c8766",
+      "skillFolderHash": "d19c4918b44532d831135ce25631b593d9f5394c",
       "installedAt": "2026-08-23T17:20:36.160Z",
-      "updatedAt": "2026-10-24T10:55:49.572Z"
+      "updatedAt": "2026-11-21T14:37:44.216Z"
     },
     "databricks-lakebase": {
       "source": "databricks/databricks-agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-lakebase/SKILL.md",
-      "skillFolderHash": "4689c2f0bc57b7252ecfda7b8bbb49a2b137b03e",
+      "skillFolderHash": "5af6000fa359d4a34027dcbde42bf1f58fdf1f4a",
       "installedAt": "2026-08-23T17:20:36.164Z",
-      "updatedAt": "2026-10-29T12:58:46.469Z"
+      "updatedAt": "2026-11-19T15:43:26.753Z"
     },
     "databricks-lakeflow-connect": {
       "source": "databricks/databricks-agent-skills",
@@ -10626,18 +10625,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-model-serving/SKILL.md",
-      "skillFolderHash": "a0d5dd96c26dc7c3e2887eb92c6332181c036c63",
+      "skillFolderHash": "8021bbaaafebc83e24f309eade6a567bacd1d272",
       "installedAt": "2026-08-23T17:20:36.186Z",
-      "updatedAt": "2026-10-28T12:49:18.271Z"
+      "updatedAt": "2026-11-14T13:30:59.913Z"
     },
     "databricks-pipelines": {
       "source": "databricks/databricks-agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-pipelines/SKILL.md",
-      "skillFolderHash": "ddd80842d15e19c4714f89acd88fe64c76f923bf",
+      "skillFolderHash": "4b06eb457cc5beb78aef99f4622b39a3b0f28131",
       "installedAt": "2026-08-23T17:20:36.191Z",
-      "updatedAt": "2026-11-06T14:15:02.281Z"
+      "updatedAt": "2026-11-20T15:25:43.060Z"
     },
     "databricks-python-sdk": {
       "source": "databricks/databricks-agent-skills",
@@ -10653,18 +10652,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-serverless-migration/SKILL.md",
-      "skillFolderHash": "8a682756765bd018d1e465b78e72710c84672d2b",
+      "skillFolderHash": "0be6f60a301697a950361f44fe7f98fb23520d5e",
       "installedAt": "2026-08-23T17:20:36.198Z",
-      "updatedAt": "2026-10-28T12:49:22.187Z"
+      "updatedAt": "2026-11-12T15:11:18.922Z"
     },
     "databricks-spark-structured-streaming": {
       "source": "databricks/databricks-agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-spark-structured-streaming/SKILL.md",
-      "skillFolderHash": "fbc77822caaa75a19138e7a7741ddf698872448d",
+      "skillFolderHash": "4aeb77cd947ccfa142cac6a001141d25cc39cf85",
       "installedAt": "2026-08-23T17:20:36.202Z",
-      "updatedAt": "2026-11-06T14:15:03.945Z"
+      "updatedAt": "2026-11-20T15:25:44.717Z"
     },
     "databricks-synthetic-data-gen": {
       "source": "databricks/databricks-agent-skills",
@@ -10698,9 +10697,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-vector-search/SKILL.md",
-      "skillFolderHash": "d0d9e7f0e060d1165d3c2cffb2d3b6df3995b663",
+      "skillFolderHash": "98b83eb7329c0dbdcd31f7be5c0971dde355ef70",
       "installedAt": "2026-08-23T17:20:36.217Z",
-      "updatedAt": "2026-11-10T14:51:54.146Z"
+      "updatedAt": "2026-11-22T14:32:17.095Z"
     },
     "databricks-zerobus-ingest": {
       "source": "databricks/databricks-agent-skills",
@@ -10983,9 +10982,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/firecrawl/cli.git",
       "skillPath": "skills/firecrawl/SKILL.md",
-      "skillFolderHash": "9bc947edc44567f0a17a4e8143ad6e0e2b606af8",
+      "skillFolderHash": "ac34de54447f1caca723f0a6376380b7d2db424c",
       "installedAt": "2026-08-23T17:20:50.775Z",
-      "updatedAt": "2026-10-23T11:36:57.953Z"
+      "updatedAt": "2026-11-12T15:11:24.627Z"
     },
     "firecrawl-agent": {
       "source": "firecrawl/cli",
@@ -11271,9 +11270,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/langchain-ai/langchain-skills.git",
       "skillPath": "config/skills/managed-deep-agents/SKILL.md",
-      "skillFolderHash": "b688ea60bf2601fad78a7b24ead62ac78408e8e1",
+      "skillFolderHash": "101612cffb63dfb42192bc044a736ccfbec84291",
       "installedAt": "2026-08-23T17:21:03.865Z",
-      "updatedAt": "2026-10-10T12:51:24.302Z"
+      "updatedAt": "2026-11-13T14:32:49.470Z"
     },
     "quarto-authoring": {
       "source": "posit-dev/skills",
@@ -11326,18 +11325,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-use.git",
       "skillPath": "skills/browser-use/SKILL.md",
-      "skillFolderHash": "2e53b6a78483c77913443c70962bd821e7c86062",
+      "skillFolderHash": "b770dd69eada81958fe5d6671739908533de02ed",
       "installedAt": "2026-08-23T17:22:58.895Z",
-      "updatedAt": "2026-11-10T14:52:00.477Z"
+      "updatedAt": "2026-11-18T15:37:59.416Z"
     },
     "remote-browser": {
       "source": "browser-use/browser-use",
       "sourceType": "github",
       "sourceUrl": "https://github.com/browser-use/browser-use.git",
       "skillPath": "skills/remote-browser/SKILL.md",
-      "skillFolderHash": "6d5752f2f948cb00d9af068e38f536f52ce7c3ee",
+      "skillFolderHash": "6f30b0b312a60f8cf5c06a0d399cd5c560acbf55",
       "installedAt": "2026-08-23T17:23:01.265Z",
-      "updatedAt": "2026-08-30T11:52:28.797Z"
+      "updatedAt": "2026-11-18T15:38:01.924Z"
     },
     "sglang-prod-incident-triage": {
       "source": "sgl-project/sglang",
@@ -11380,54 +11379,54 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/alphagenome_single_variant_analysis/SKILL.md",
-      "skillFolderHash": "e6da933553593fb9f46ee88bad5814a49d6fd5fe",
+      "skillFolderHash": "bc2adeff5f640dfbbfa78755458fe4c556036de2",
       "installedAt": "2026-08-23T17:23:44.555Z",
-      "updatedAt": "2026-10-24T10:55:31.015Z"
+      "updatedAt": "2026-11-12T15:10:38.982Z"
     },
     "foldseek-structural-search": {
       "source": "google-deepmind/science-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
       "skillPath": "skills/foldseek_structural_search/SKILL.md",
-      "skillFolderHash": "e7f88ced6421376680950e415b8c574af402dd21",
+      "skillFolderHash": "84a81a5813dfbb0dd6c22a101dcecfacae57e8c7",
       "installedAt": "2026-08-23T17:23:46.743Z",
-      "updatedAt": "2026-08-23T17:23:46.743Z"
+      "updatedAt": "2026-11-12T15:10:40.353Z"
     },
     "next-dev-loop": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-dev-loop/SKILL.md",
-      "skillFolderHash": "070ac9750bf5d8aa2a3051ac2c73ae57c807245e",
+      "skillFolderHash": "454001f64c363b12e5abd187e1b99d52fccaafd0",
       "installedAt": "2026-08-23T17:24:04.384Z",
-      "updatedAt": "2026-11-05T14:37:09.789Z"
+      "updatedAt": "2026-11-20T15:25:48.727Z"
     },
     "next-cache-components-adoption": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-adoption/SKILL.md",
-      "skillFolderHash": "cb42f2d0789f24b1eee203d88d8353d779e64bef",
+      "skillFolderHash": "f05bccf023c7da2d074a11ff4923e2a0fa7d245a",
       "installedAt": "2026-08-23T17:24:15.296Z",
-      "updatedAt": "2026-10-10T12:52:03.605Z"
+      "updatedAt": "2026-11-20T15:25:50.852Z"
     },
     "next-cache-components-optimizer": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-cache-components-optimizer/SKILL.md",
-      "skillFolderHash": "faad4b57c94f652be24ad5606f3a854879c19a4c",
+      "skillFolderHash": "d1a1da28fdbc1f6242167463439ce9e4c2e68665",
       "installedAt": "2026-08-23T17:24:26.730Z",
-      "updatedAt": "2026-11-09T16:13:05.754Z"
+      "updatedAt": "2026-11-20T15:25:53.273Z"
     },
     "next-partial-prefetching-adoption": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel/next.js.git",
       "skillPath": "skills/next-partial-prefetching-adoption/SKILL.md",
-      "skillFolderHash": "b88c39b9633f6aac247ff2ca095ea9e95e626137",
+      "skillFolderHash": "7a2941666b296fa2a407b5ed038ec74ab4431f55",
       "installedAt": "2026-08-23T17:24:38.535Z",
-      "updatedAt": "2026-11-09T16:13:08.000Z"
+      "updatedAt": "2026-11-18T15:38:06.119Z"
     },
     "incident-response": {
       "source": "anthropics/knowledge-work-plugins",
@@ -11985,99 +11984,99 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-agent-config/SKILL.md",
-      "skillFolderHash": "c8bce99844c6532583ae983ac5ccacf00073bc18",
+      "skillFolderHash": "689136e2aed60d4fb8a82612efbbd79b0aa559b6",
       "installedAt": "2026-09-25T17:57:41.706Z",
-      "updatedAt": "2026-10-10T12:52:18.851Z"
+      "updatedAt": "2026-11-13T14:32:54.662Z"
     },
     "docker-agent-deploy": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-agent-deploy/SKILL.md",
-      "skillFolderHash": "ce67932c3dbe1ef2bf465d6f8e999ae204461765",
+      "skillFolderHash": "1f677d1dc9d4314d82165c0844dd2817b4b7c2e4",
       "installedAt": "2026-09-25T17:57:41.715Z",
-      "updatedAt": "2026-10-10T12:52:19.740Z"
+      "updatedAt": "2026-11-13T14:32:56.139Z"
     },
     "docker-agent-run": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-agent-run/SKILL.md",
-      "skillFolderHash": "040dbed350b998a2c62df8dd95e153d0d151bc29",
+      "skillFolderHash": "d937c9339e0e8c69f3cd8dedf8ec7662d4f42d63",
       "installedAt": "2026-09-25T17:57:41.722Z",
-      "updatedAt": "2026-10-10T12:52:20.615Z"
+      "updatedAt": "2026-11-13T14:32:57.458Z"
     },
     "docker-build-strategies": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-build-strategies/SKILL.md",
-      "skillFolderHash": "550661626e962557558052ae594b0e16cb076df4",
+      "skillFolderHash": "a239f1f476a9fc06affba5aa37a28a2f2717e563",
       "installedAt": "2026-09-25T17:57:41.727Z",
-      "updatedAt": "2026-10-10T12:52:21.527Z"
+      "updatedAt": "2026-11-13T14:32:59.169Z"
     },
     "docker-compose-patterns": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-compose-patterns/SKILL.md",
-      "skillFolderHash": "d602abc2459830dbc66a8aae7c91d80820584f25",
+      "skillFolderHash": "5ab49d41419c84de9d528d8cc4d16d341831126a",
       "installedAt": "2026-09-25T17:57:41.733Z",
-      "updatedAt": "2026-10-10T12:52:22.597Z"
+      "updatedAt": "2026-11-13T14:33:02.318Z"
     },
     "docker-destructive-guardrails": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-destructive-guardrails/SKILL.md",
-      "skillFolderHash": "7a2acb5897ea48a3ff3299783574819e61fd24f7",
+      "skillFolderHash": "39018d0abf2e19c2fae1e2c00de43f6e92a3ca33",
       "installedAt": "2026-09-25T17:57:41.741Z",
-      "updatedAt": "2026-09-25T17:57:41.741Z"
+      "updatedAt": "2026-11-13T14:33:03.739Z"
     },
     "docker-project-foundations": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-project-foundations/SKILL.md",
-      "skillFolderHash": "578fa65343962188b00a6ee642e20b1592c25f79",
+      "skillFolderHash": "fda46daf459b9a6eb13795e3d869d9dbb983f103",
       "installedAt": "2026-09-25T17:57:41.746Z",
-      "updatedAt": "2026-10-10T12:52:23.525Z"
+      "updatedAt": "2026-11-13T14:33:05.645Z"
     },
     "docker-sandboxes-env": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-sandboxes-env/SKILL.md",
-      "skillFolderHash": "758b5b341ac32eca8d87d84c891607a8c17a6d2f",
+      "skillFolderHash": "62ef8ec0b701718fa3acde56f2aa062851235200",
       "installedAt": "2026-09-25T17:57:41.750Z",
-      "updatedAt": "2026-09-25T17:57:41.750Z"
+      "updatedAt": "2026-11-12T15:11:30.851Z"
     },
     "docker-sandboxes-kits": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-sandboxes-kits/SKILL.md",
-      "skillFolderHash": "d060b0fea18ea7ae6c5fdf29b5183ff63436afd0",
+      "skillFolderHash": "0af0b9399368a93e24b80620bff0b41fe6960652",
       "installedAt": "2026-09-25T17:57:41.755Z",
-      "updatedAt": "2026-11-03T14:09:36.748Z"
+      "updatedAt": "2026-11-13T14:33:07.432Z"
     },
     "docker-sandboxes-lifecycle": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-sandboxes-lifecycle/SKILL.md",
-      "skillFolderHash": "d148ccc63242835ad6a5f513398fcd4bd7627464",
+      "skillFolderHash": "d3307897d06d28897163f5197823f2d9072f86c6",
       "installedAt": "2026-09-25T17:57:41.762Z",
-      "updatedAt": "2026-11-09T16:13:14.215Z"
+      "updatedAt": "2026-11-13T14:33:08.816Z"
     },
     "docker-sandboxes-network-credentials": {
       "source": "docker/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/docker/skills.git",
       "skillPath": "skills/docker-sandboxes-network-credentials/SKILL.md",
-      "skillFolderHash": "97077df7ed67a94fb52a78157d665d4d74c9754d",
+      "skillFolderHash": "4457a184caac35e568357ce282b6f1f90af8873b",
       "installedAt": "2026-09-25T17:57:41.770Z",
-      "updatedAt": "2026-09-25T17:57:41.770Z"
+      "updatedAt": "2026-11-13T14:33:10.253Z"
     },
     "pnpm": {
       "source": "antfu/skills",
@@ -12102,9 +12101,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/skypilot-org/skypilot.git",
       "skillPath": "agent/skills/skypilot/SKILL.md",
-      "skillFolderHash": "91679eb0d527e4bc66d5a6b0f740335ffb314508",
+      "skillFolderHash": "d42876210c403b6b93daf0cf7d448fca35c44b9f",
       "installedAt": "2026-10-24T15:58:04.348Z",
-      "updatedAt": "2026-11-04T14:30:23.585Z"
+      "updatedAt": "2026-11-19T15:43:40.011Z"
     },
     "lean4": {
       "source": "cameronfreer/lean4-skills",
@@ -12660,9 +12659,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance.git",
       "skillPath": "skills/modern-web-guidance/SKILL.md",
-      "skillFolderHash": "2bafd62db079eae1a4b6c34d0af4f9c3490266a2",
+      "skillFolderHash": "7c7d6612af788857352d452ebe263ad462351658",
       "installedAt": "2026-11-10T21:09:24.000Z",
-      "updatedAt": "2026-11-10T21:09:24.000Z"
+      "updatedAt": "2026-11-16T15:40:29.593Z"
     },
     "chrome-extensions": {
       "source": "GoogleChrome/modern-web-guidance",
@@ -12672,6 +12671,42 @@
       "skillFolderHash": "70ae21f9bbccb4d97c2748dffcc227f9ed07c6cf",
       "installedAt": "2026-11-10T21:09:24.000Z",
       "updatedAt": "2026-11-10T21:09:24.000Z"
+    },
+    "roast-my-chart": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "roast-my-chart/SKILL.md",
+      "skillFolderHash": "e4d7109be58e6f74b5b054c16d8d6028532f2a0d",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
+    },
+    "inspiration": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "inspiration/SKILL.md",
+      "skillFolderHash": "f3835f02fd19d03ceb8ed2e4204128db84b22819",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
+    },
+    "ggplot2": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "ggplot2/SKILL.md",
+      "skillFolderHash": "fbcbc6309338ef2a501eefc3cb01e07df9ebf17f",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
+    },
+    "d3": {
+      "source": "holtzy/dataviz-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/holtzy/dataviz-skills.git",
+      "skillPath": "d3/SKILL.md",
+      "skillFolderHash": "0f69beac13120e3c05fd7c976842e9a8a5068ceb",
+      "installedAt": "2026-11-17T03:43:55.000Z",
+      "updatedAt": "2026-11-17T03:43:55.000Z"
     }
   },
   "dismissed": {
