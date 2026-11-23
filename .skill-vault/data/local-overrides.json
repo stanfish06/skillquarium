@@ -73,7 +73,7 @@
       "issue": 963,
       "source": "posit-dev/skills",
       "find": "- [Quarto Documentation](https://quarto.org/docs/)",
-      "replace": "- [Quarto Documentation](https://quarto.org/docs/guide/)"
+      "replace": "- [Quarto Documentation](https://quarto.org/)"
     },
     {
       "id": "quarto-jupyter-execution-link",
