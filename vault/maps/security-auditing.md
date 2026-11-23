@@ -42,7 +42,7 @@ created: 2026-06-13
 - [constant-time-testing](../notes/security-auditing/constant-time-testing.md) — Measures timing side channels in cryptographic implementations by running them, using dudect for statistical analysis and Timecop over Valgrind for dynamic tracing
 - [coverage-analysis](../notes/security-auditing/coverage-analysis.md) — Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output
 - [database-security](../notes/security-auditing/database-security.md) — Use for authorized database security assessment covering PostgreSQL/MySQL/MSSQL/Mongo/Redis exposure, authz, UDF/command paths, and misconfiguration review
-- [deep-security-scan](../notes/security-auditing/deep-security-scan.md) — Use when the user asks for a deep, exhaustive, multi-pass, or variance-reducing repository-wide or scoped-path Codex Security scan
+- [deep-security-scan](../notes/security-auditing/deep-security-scan.md) — Run repeated Standard security scans of a repository or scoped path when the user requests a deep, exhaustive, or multi-pass audit
 - [differential-review](../notes/security-auditing/differential-review.md) — Performs security-focused differential review of code changes
 - [digital-forensics](../notes/security-auditing/digital-forensics.md) — Use for authorized digital forensics including memory dumps, disk timelines, PCAP investigation, artifact triage, and IR evidence preservation
 - [dotnet-reverse](../notes/security-auditing/dotnet-reverse.md) — .NET / C# 二进制逆向。当目标是 .NET assembly（PE 头含 CLR、.exe/.dll 托管程序）、C# 编译产物（含 NativeAOT）、红队 Sharp* 工具（Rubeus / SharpHound / SharpHound 等）、.NET 混淆程序（ConfuserEx / SmartAssembly / Babel /...
@@ -77,7 +77,7 @@ created: 2026-06-13
 - [pcap-triage-tshark](../notes/security-auditing/pcap-triage-tshark.md) — Fast workflow to inspect PCAPs and extract protocol-level details using tshark
 - [pentest-tools](../notes/security-auditing/pentest-tools.md) — 主动渗透测试工具链。覆盖信息收集、端口扫描、漏洞扫描、Web 渗透、SQL 注入、目录爆破、密码破解等场景。 通过 MCP server（pentestMCP / mcp-security-hub）将 20+ 安全工具暴露给 AI agent。 触发关键词：渗透测试、端口扫描、Nmap、漏洞扫描、Nuclei、SQL...
 - [property-based-testing](../notes/security-auditing/property-based-testing.md) — Writes, reviews, and debugs property-based tests — Hypothesis, fast-check, proptest, jqwik, rapid, and Echidna or Medusa for Solidity invariants
-- [propose-security-hardening](../notes/security-auditing/propose-security-hardening.md) — Develop evidence-backed structural and architectural security hardening proposals from vulnerability disclosures, supplied findings, incident or assessment documents, source code, or a...
+- [propose-security-hardening](../notes/security-auditing/propose-security-hardening.md) — Develop evidence-backed structural security hardening proposals from disclosures, findings, source code, or Codex Security scans
 - [protocol-reverse](../notes/security-auditing/protocol-reverse.md) — Use for authorized reverse engineering of custom binary protocols, Protobuf/gRPC, WebSocket frames, and PCAP-driven protocol recovery
 - [pwn-chain](../notes/security-auditing/pwn-chain.md) — 从逆向走到可用利用 (Working Exploit) 的全链路工程化方法。 适用场景：拿到了二进制 + 漏洞点 + 目标环境，需要写出一个能稳定打通的 exploit（不是只能本地复现一下、远程一打就崩的脚本）。 覆盖三大方向：栈溢出 / 堆利用 / 内核 pwn。强调"CTF 本地通 → 真实远程稳定打通"的工程差距：libc...
 - [radare2](../notes/security-auditing/radare2.md) — Use this skill whenever the user wants to analyze binaries with radare2/r2 from the command line, including reverse engineering, disassembly, function analysis, strings/import...
@@ -90,7 +90,7 @@ created: 2026-06-13
 - [security-audit](../notes/security-auditing/security-audit.md) — Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons
 - [security-best-practices](../notes/security-auditing/security-best-practices.md) — Perform language and framework specific security best-practice reviews and suggest improvements
 - [security-diff-scan](../notes/security-auditing/security-diff-scan.md) — Review a pull request, commit, branch diff, or working-tree patch for security vulnerabilities
-- [security-scan](../notes/security-auditing/security-scan.md) — Use for a standard, single-pass security audit of an entire repository or a scoped path, package, folder, or submodule with no diff to review
+- [security-scan](../notes/security-auditing/security-scan.md) — Find vulnerabilities in the current source of a whole repository or selected paths
 - [semgrep](../notes/security-auditing/semgrep.md) — Runs a Semgrep security scan over a codebase: detects languages, selects rulesets, presents the plan for explicit approval, then runs every approved ruleset through...
 - [semgrep-rule-creator](../notes/security-auditing/semgrep-rule-creator.md) — Creates custom Semgrep rules for detecting security vulnerabilities, bug patterns, and code patterns
 - [sharp-edges](../notes/security-auditing/sharp-edges.md) — Identifies error-prone APIs, dangerous configurations, and footgun designs that enable security mistakes
@@ -108,7 +108,7 @@ created: 2026-06-13
 - [triage-finding](../notes/security-auditing/triage-finding.md) — Triage supplied or imported security findings against a repository using its security policy and static code evidence
 - [trivy-offline-vulnerability-scanning](../notes/security-auditing/trivy-offline-vulnerability-scanning.md) — Use Trivy vulnerability scanner in offline mode to discover security vulnerabilities in dependency files
 - [variant-analysis](../notes/security-auditing/variant-analysis.md) — Hunts for the other instances of a bug already found — the variants of one root cause across a codebase
-- [vulnerability-writeup](../notes/security-auditing/vulnerability-writeup.md) — Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained, sceptically validated, natural-sounding vulnerability reports
+- [vulnerability-writeup](../notes/security-auditing/vulnerability-writeup.md) — Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained vulnerability reports with clearly supported claims
 - [wifi-wireless](../notes/security-auditing/wifi-wireless.md) — Use for authorized wireless security assessment including Wi-Fi capture, WPA handshake analysis, rogue AP detection research, and lab-only deauth testing
 - [windows-ad](../notes/security-auditing/windows-ad.md) — Use for authorized Active Directory and Windows identity attacks including Kerberos, AD CS, BloodHound paths, NTLM relay, and domain privilege escalation research
 - [zeroize-audit](../notes/security-auditing/zeroize-audit.md) — Detects missing zeroization of sensitive data in source code and identifies zeroization removed by compiler optimizations, with assembly-level analysis, and control-flow verification

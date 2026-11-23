@@ -77,9 +77,7 @@ Global Options:
           Override config with inline TOML, e.g. --config-set list.full=true (repeatable)
 
   -v, --verbose...
-          Verbose output (-v: info logs + hook/alias template variables on stderr; -vv: also debug
-          logs and raw subprocess output written to .git/wt/logs/). Set WORKTRUNK_VERBOSE=0|1|2 to
-          apply the same level everywhere — including shell completion, which no flag can reach
+          Verbose output (-v: template variables; -vv: debug logs)
 
   -y, --yes
           Skip approval prompts
@@ -533,6 +531,8 @@ The `target/` directory is huge (often 1-10GB). Copying with reflink cuts first 
 deps = "ln -sf {{ primary_worktree_path }}/node_modules ."
 ```
 
+Git sees the symlink as a file, so `.gitignore` needs `node_modules` without a trailing slash. `node_modules/` matches only directories: the link stays untracked, a commit can pick it up, and merging that commit replaces the primary worktree's `node_modules` with a link to itself.
+
 #### Python
 
 Virtual environments contain absolute paths and can't be copied. Use `uv sync` instead — it's fast enough that copying isn't worth it.
@@ -811,7 +811,7 @@ Bulk-removes worktrees and branches that are integrated into the default branch,
 
 In `wt list`, candidates show `_` (same commit) or `⊂` (content integrated). Run `--dry-run` to preview. See `wt remove --help` for the full integration criteria.
 
-Locked worktrees, worktrees with uncommitted changes, and the main worktree are always skipped. The current worktree is removed last, triggering cd to the primary worktree. Pre-remove and post-remove hooks run for each removal; a candidate whose hooks include an unapproved project command is skipped with `(approval required)` (pre-approve with `wt config approvals add`, or pass `--yes`).
+Locked worktrees, worktrees with uncommitted changes, worktrees containing another worktree, and the main worktree are always skipped. The current worktree is removed last, triggering cd to the primary worktree. Pre-remove and post-remove hooks run for each removal; a candidate whose hooks include an unapproved project command is skipped with `(approval required)` (pre-approve with `wt config approvals add`, or pass `--yes`).
 
 Prune removes worktrees concurrently, so hooks that write shared resources must coordinate those writes.
 

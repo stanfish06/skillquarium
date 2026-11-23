@@ -5214,5 +5214,13 @@
       "find": "ACTIONLINT_VERSION=1.7.7\nACTIONLINT_SHA256=023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757",
       "replace": "ACTIONLINT_VERSION=1.7.12\nACTIONLINT_SHA256=8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8"
     }
+  ],
+  "inspiration": [
+    {
+      "id": "soften-always-trigger",
+      "source": "holtzy/dataviz-skills",
+      "find": "Use BEFORE writing any code that draws a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…), even for a one-line request like \"make a map of X\", \"fais-moi une carte de X\", \"visualise Z\", and even when the work starts with fetching data. Searches",
+      "replace": "Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout. Searches"
+    }
   ]
 }

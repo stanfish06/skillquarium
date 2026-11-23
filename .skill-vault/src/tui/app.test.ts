@@ -2,7 +2,8 @@ import { afterEach, describe, expect, test } from "bun:test"
 import type { BoxRenderable, ScrollBoxRenderable, TextRenderable } from "@opentui/core"
 import { createTestRenderer, type TestRendererSetup } from "@opentui/core/testing"
 
-import { SkillquariumApp, buildBenchItems, filterSkills, fuzzyScore } from "./app"
+import type { Tier1View } from "../eval/tier1Results"
+import { SkillquariumApp, buildBenchItems, filterSkills, fuzzyScore, tier1Label } from "./app"
 import type { Catalog, Product, SkillBackend, SkillRecord } from "./backend"
 import type { ArmStats, EvalRun, EvalSource } from "./evalruns"
 
@@ -203,6 +204,7 @@ describe("OpenTUI interaction", () => {
       ["column-category", "category-a-short-skill"],
       ["column-claude", "claude-a-short-skill"],
       ["column-codex", "codex-a-short-skill"],
+      ["column-tier1", "tier1-a-short-skill"],
     ]) {
       const header = setup.renderer.root.findDescendantById(headerId!)!
       const row = setup.renderer.root.findDescendantById(rowId!)!
@@ -701,5 +703,105 @@ describe("benchmarks tab", () => {
     setup.mockInput.pressKey("ARROW_DOWN")
     await setup.renderOnce()
     expect(detailText("detail-text")).toStartWith("beta")
+  })
+})
+
+function tier1View(skill: string, overrides: Partial<Tier1View> = {}): Tier1View {
+  return {
+    skill,
+    tree: "t",
+    scannedAt: "2026-11-16T07:41:41+00:00",
+    evaluator: "0.9.0",
+    status: "failed",
+    score: 77.5,
+    grade: "C",
+    failedChecks: ["Semantic Version Validation"],
+    incompleteChecks: [],
+    severity: { critical: 0, high: 1, medium: 2, low: 0, info: 0 },
+    issues: [{ severity: "high", category: "VERSION", message: "Version '1.8' is not strict semantic version x.y.z" }],
+    stale: false,
+    ...overrides,
+  }
+}
+
+describe("tier 1 column", () => {
+  test("labels score and grade, marks stale scans, and dashes unscanned skills", () => {
+    expect(tier1Label(tier1View("a"))).toBe("78 C")
+    expect(tier1Label(tier1View("a", { stale: true }))).toBe("78 C*")
+    expect(tier1Label(tier1View("a", { status: "error", score: null, grade: null }))).toBe("err")
+    expect(tier1Label(undefined)).toBe("-")
+  })
+
+  test("shows the result in the table and its findings in the detail pane", async () => {
+    const catalog: Catalog = {
+      skills: [makeSkill("alpha"), makeSkill("beta"), makeSkill("gamma")],
+      categories: ["software-dev"],
+    }
+    const backend = new FakeBackend(catalog)
+    const views = new Map([
+      ["alpha", tier1View("alpha")],
+      ["beta", tier1View("beta", { status: "passed", score: 96, grade: "A", failedChecks: [], issues: [], stale: true })],
+    ])
+    setup = await createTestRenderer({ width: 140, height: 28 })
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog(), "", undefined, { views, error: null })
+    await setup.renderOnce()
+
+    const frame = setup.captureCharFrame()
+    expect(frame).toContain("Tier 1")
+    expect(frame).toContain("78 C")
+    expect(frame).toContain("96 A*")
+    expect(detailText("detail-text")).toContain("Tier 1    failed  77.5/C")
+    expect(detailText("detail-text")).toContain("failed: Semantic Version Validation")
+    expect(detailText("detail-text")).toContain("HIGH VERSION: Version '1.8'")
+
+    const betaRow = setup.renderer.root.findDescendantById("skill-beta") as BoxRenderable
+    await setup.mockMouse.click(betaRow.screenX + 1, betaRow.screenY)
+    await setup.renderOnce()
+    expect(detailText("detail-text")).toContain("stale: skill changed since the scan; ./skillquarium eval tier1 beta")
+
+    const gammaRow = setup.renderer.root.findDescendantById("skill-gamma") as BoxRenderable
+    await setup.mockMouse.click(gammaRow.screenX + 1, gammaRow.screenY)
+    await setup.renderOnce()
+    expect(detailText("detail-text")).toContain("Tier 1    not scanned   ./skillquarium eval tier1 gamma")
+  })
+
+  test("Enter opens the selected skill in an overlay; q and Esc close it without quitting", async () => {
+    const catalog: Catalog = { skills: [makeSkill("alpha"), makeSkill("beta")], categories: ["software-dev"] }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 28 })
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog(), "", undefined, {
+      views: new Map([["beta", tier1View("beta")]]),
+      error: null,
+    })
+    await setup.renderOnce()
+    const overlay = setup.renderer.root.findDescendantById("skill-overlay") as BoxRenderable
+    const betaRow = setup.renderer.root.findDescendantById("skill-beta") as BoxRenderable
+    await setup.mockMouse.click(betaRow.screenX + 1, betaRow.screenY)
+
+    for (const close of [() => setup!.mockInput.pressKey("q"), () => setup!.mockInput.pressEscape()]) {
+      setup.mockInput.pressEnter()
+      await setup.renderOnce()
+      expect(overlay.visible).toBe(true)
+      expect(overlay.title).toBe(" beta ")
+      expect(detailText("skill-overlay-text")).toContain("HIGH VERSION: Version '1.8'")
+      expect(setup.captureCharFrame()).toContain("Q/Esc/Enter close")
+
+      close()
+      // a lone Esc is delivered after the escape-sequence timeout
+      await setup.waitFor(() => !overlay.visible)
+      expect(setup.renderer.isDestroyed).toBe(false)
+    }
+  })
+
+  test("an unreadable results file is reported instead of 'not scanned'", async () => {
+    const catalog: Catalog = { skills: [makeSkill("alpha")], categories: ["software-dev"] }
+    const backend = new FakeBackend(catalog)
+    setup = await createTestRenderer({ width: 140, height: 28 })
+    new SkillquariumApp(setup.renderer, backend, await backend.catalog(), "", undefined, {
+      views: new Map(),
+      error: "results.jsonl: line 2: bad",
+    })
+    await setup.renderOnce()
+    expect(detailText("detail-text")).toContain("Tier 1    unreadable: results.jsonl: line 2: bad")
   })
 })
