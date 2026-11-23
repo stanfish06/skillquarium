@@ -5220,7 +5220,7 @@
       "issue": 1429,
       "source": "langfuse/skills",
       "find": "Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required):",
-      "replace": "Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required). Note: Langfuse's CLI v1 changelog (2026-08-21) introduces `@langfuse/cli` as the forward-looking package name; the `langfuse-cli` package shown below still works and will be maintained until the next major version, but new setups may prefer `npx @langfuse/cli`."
+      "replace": "Use the `langfuse-cli` to interact with the full Langfuse REST API from the command line. Run via npx (no install required). Note: Langfuse now publishes the CLI as `@langfuse/cli` and recommends it over `langfuse-cli` ([CLI docs](https://langfuse.com/docs/api-and-data-platform/features/cli)); the old package is identical and will be updated alongside it until the next major version, so the `npx langfuse-cli` commands below still work, and `npx @langfuse/cli` takes the same arguments."
     }
   ]
 }
