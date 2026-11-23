@@ -18,6 +18,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [databricks-pipelines](../../notes/analytics-engineering/databricks-pipelines.md) — Spark Declarative Pipelines (formerly DLT) in Python or SQL: streaming tables, materialized views, expectations, Auto CDC, Auto Loader, and pipeline settings
 - [sharepoint-powerpoint](../../notes/comms-productivity/sharepoint-powerpoint.md) — Create, edit, restyle, and review PowerPoint `.pptx` files fetched from SharePoint, with emphasis on style preservation, slide cloning, theme-aware updates, and rendered visual QA
 - [sharepoint-shared-doc-maintenance](../../notes/comms-productivity/sharepoint-shared-doc-maintenance.md) — Maintain shared SharePoint strategy, roadmap, planning, or status documents from changing source documents
 - [sharepoint-site-discovery](../../notes/comms-productivity/sharepoint-site-discovery.md) — Resolve the right SharePoint site, library, and folder before file work
