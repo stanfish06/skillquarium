@@ -2491,6 +2491,120 @@
       "replace": "## GPU Acceleration (numba.cuda)\n\nNumba's built-in CUDA target is deprecated; NVIDIA's `numba-cuda` package is where the target\nis now developed. It keeps the same `numba.cuda` namespace, so the code below is unchanged —\ninstall `numba-cuda` alongside `numba` and the examples keep working past the removal.\nSee [the deprecation notice](https://numba.readthedocs.io/en/stable/cuda/overview.html).\n\n### Writing CUDA Kernels"
     }
   ],
+  "temporal-developer": [
+    {
+      "id": "core-link-references-dotnet-gotchas-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/dotnet/gotchas.md",
+      "find": ".NET-specific mistakes and anti-patterns. See also [Common Gotchas](references/core/gotchas.md) for language-agnostic concepts.",
+      "replace": ".NET-specific mistakes and anti-patterns. See also [Common Gotchas](../core/gotchas.md) for language-agnostic concepts."
+    },
+    {
+      "id": "core-link-references-dotnet-standalone-activities-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/dotnet/standalone-activities.md",
+      "find": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](references/core/standalone-activities.md) if you have not already, and then see below for the .NET SDK specific APIs for calling Standalone Activities.",
+      "replace": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](../core/standalone-activities.md) if you have not already, and then see below for the .NET SDK specific APIs for calling Standalone Activities."
+    },
+    {
+      "id": "core-link-references-dotnet-standalone-activities-2",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/dotnet/standalone-activities.md",
+      "find": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](references/core/install_cli.md) if needed. Dev server includes Standalone Activities support.",
+      "replace": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](../core/install_cli.md) if needed. Dev server includes Standalone Activities support."
+    },
+    {
+      "id": "core-link-references-go-gotchas-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/go/gotchas.md",
+      "find": "Go-specific mistakes and anti-patterns. See also [Common Gotchas](references/core/gotchas.md) for language-agnostic concepts.",
+      "replace": "Go-specific mistakes and anti-patterns. See also [Common Gotchas](../core/gotchas.md) for language-agnostic concepts."
+    },
+    {
+      "id": "core-link-references-go-standalone-activities-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/go/standalone-activities.md",
+      "find": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](references/core/standalone-activities.md) if you have not already, and then see below for the Go SDK specific APIs for calling Standalone Activities.",
+      "replace": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](../core/standalone-activities.md) if you have not already, and then see below for the Go SDK specific APIs for calling Standalone Activities."
+    },
+    {
+      "id": "core-link-references-go-standalone-activities-2",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/go/standalone-activities.md",
+      "find": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](references/core/install_cli.md) if needed. The Temporal Dev Server has Standalone Activities enabled by default.",
+      "replace": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](../core/install_cli.md) if needed. The Temporal Dev Server has Standalone Activities enabled by default."
+    },
+    {
+      "id": "core-link-references-java-standalone-activities-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/java/standalone-activities.md",
+      "find": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](references/core/standalone-activities.md) if you have not already, and then see below for the Java SDK specific APIs for calling Standalone Activities.",
+      "replace": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](../core/standalone-activities.md) if you have not already, and then see below for the Java SDK specific APIs for calling Standalone Activities."
+    },
+    {
+      "id": "core-link-references-java-standalone-activities-2",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/java/standalone-activities.md",
+      "find": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](references/core/install_cli.md) if needed. Dev server includes Standalone Activities support.",
+      "replace": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](../core/install_cli.md) if needed. Dev server includes Standalone Activities support."
+    },
+    {
+      "id": "core-link-references-python-gotchas-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/python/gotchas.md",
+      "find": "Python-specific mistakes and anti-patterns. See also [Common Gotchas](references/core/gotchas.md) for language-agnostic concepts.",
+      "replace": "Python-specific mistakes and anti-patterns. See also [Common Gotchas](../core/gotchas.md) for language-agnostic concepts."
+    },
+    {
+      "id": "core-link-references-python-standalone-activities-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/python/standalone-activities.md",
+      "find": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](references/core/standalone-activities.md) if you have not already, and then see below for the Python SDK specific APIs for calling Standalone Activities.",
+      "replace": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](../core/standalone-activities.md) if you have not already, and then see below for the Python SDK specific APIs for calling Standalone Activities."
+    },
+    {
+      "id": "core-link-references-python-standalone-activities-2",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/python/standalone-activities.md",
+      "find": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](references/core/install_cli.md) if needed. Dev server includes Standalone Activities support.",
+      "replace": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](../core/install_cli.md) if needed. Dev server includes Standalone Activities support."
+    },
+    {
+      "id": "core-link-references-ruby-gotchas-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/ruby/gotchas.md",
+      "find": "Ruby-specific mistakes and anti-patterns. See also [Common Gotchas](references/core/gotchas.md) for language-agnostic concepts.",
+      "replace": "Ruby-specific mistakes and anti-patterns. See also [Common Gotchas](../core/gotchas.md) for language-agnostic concepts."
+    },
+    {
+      "id": "core-link-references-typescript-standalone-activities-1",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/typescript/standalone-activities.md",
+      "find": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](references/core/standalone-activities.md) if you have not already, and then see below for the TypeScript SDK specific APIs for calling Standalone Activities.",
+      "replace": "Standalone Activities are conceptually the same across all SDKs. Read the [cross-SDK concept file](../core/standalone-activities.md) if you have not already, and then see below for the TypeScript SDK specific APIs for calling Standalone Activities."
+    },
+    {
+      "id": "core-link-references-typescript-standalone-activities-2",
+      "issue": 1441,
+      "source": "openai/plugins",
+      "file": "references/typescript/standalone-activities.md",
+      "find": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](references/core/install_cli.md) if needed. Dev server includes Standalone Activities support.",
+      "replace": "- Temporal CLI v1.7.0 or higher \u2014 see [Temporal CLI install instructions](../core/install_cli.md) if needed. Dev server includes Standalone Activities support."
+    }
+  ],
   "ncc": [
     {
       "id": "lambda-sdk-v3-externals",
