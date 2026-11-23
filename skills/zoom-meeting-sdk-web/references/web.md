@@ -278,7 +278,7 @@ For government applications, apply for SDK credentials at [ZFG Marketplace](http
 ```json
 {
   "dependencies": {
-    "@zoom/meetingsdk": "3.11.2-zfg"
+    "@zoom/meetingsdk": "6.0.2-zfg"
   }
 }
 ```

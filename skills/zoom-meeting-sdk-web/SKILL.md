@@ -180,7 +180,7 @@ npm install @zoom/meetingsdk --save
 <script src="https://source.zoom.us/zoom-meeting-embedded-{VERSION}.min.js"></script>
 ```
 
-Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `6.2.0`).
+Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `6.10.0`).
 
 ## Quick Start (Client View)
 
@@ -292,7 +292,7 @@ The signature encodes:
 - `exp` (expiration timestamp)
 - `tokenExp` (token expiration)
 
-> **IMPORTANT (March 2026)**: Apps joining meetings outside their account will require an App Privilege Token (OBF) or ZAK token. See [Authorization Requirements](#authorization-requirements-2026-update).
+> **IMPORTANT (since March 2, 2026)**: Apps joining meetings outside their account require an App Privilege Token (OBF) or ZAK token. See [Authorization Requirements](#authorization-requirements-2026-update).
 
 ## Core Workflow
 
@@ -716,7 +716,7 @@ See [concepts/browser-support.md](concepts/browser-support.md) for complete matr
 
 ## Authorization Requirements (2026 Update)
 
-> **IMPORTANT**: Beginning **March 2, 2026**, apps joining meetings outside their account must be authorized.
+> **IMPORTANT**: Since **March 2, 2026**, apps joining meetings outside their account must be authorized. This requirement is already in effect.
 
 ### Options
 
@@ -743,7 +743,7 @@ See [concepts/browser-support.md](concepts/browser-support.md) for complete matr
 ```json
 {
   "dependencies": {
-    "@zoom/meetingsdk": "3.11.2-zfg"
+    "@zoom/meetingsdk": "6.0.2-zfg"
   }
 }
 ```
@@ -1009,7 +1009,7 @@ if (!requirements.browserInfo.isChrome && !requirements.browserInfo.isFirefox) {
 
 ---
 
-**Documentation Version**: Based on Zoom Web Meeting SDK v6.2+ (check https://www.npmjs.com/package/@zoom/meetingsdk for the current version)
+**Documentation Version**: Based on Zoom Web Meeting SDK v6.10+ (check https://www.npmjs.com/package/@zoom/meetingsdk for the current version)
 
 **Need help?** Start with [SKILL.md](SKILL.md) for complete navigation.
 

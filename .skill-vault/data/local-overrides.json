@@ -5461,6 +5461,51 @@
       "replace": "Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout. Searches"
     }
   ],
+  "zoom-meeting-sdk-web": [
+    {
+      "id": "stale-npm-version-example",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `6.2.0`).",
+      "replace": "Replace `{VERSION}` with the [latest version](https://www.npmjs.com/package/@zoom/meetingsdk) (e.g., `6.10.0`)."
+    },
+    {
+      "id": "stale-zfg-pin",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "    \"@zoom/meetingsdk\": \"3.11.2-zfg\"",
+      "replace": "    \"@zoom/meetingsdk\": \"6.0.2-zfg\""
+    },
+    {
+      "id": "stale-doc-version-footer",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "**Documentation Version**: Based on Zoom Web Meeting SDK v6.2+ (check https://www.npmjs.com/package/@zoom/meetingsdk for the current version)",
+      "replace": "**Documentation Version**: Based on Zoom Web Meeting SDK v6.10+ (check https://www.npmjs.com/package/@zoom/meetingsdk for the current version)"
+    },
+    {
+      "id": "future-authorization-framing",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "> **IMPORTANT**: Beginning **March 2, 2026**, apps joining meetings outside their account must be authorized.",
+      "replace": "> **IMPORTANT**: Since **March 2, 2026**, apps joining meetings outside their account must be authorized. This requirement is already in effect."
+    },
+    {
+      "id": "future-authorization-framing-core-workflow",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "find": "> **IMPORTANT (March 2026)**: Apps joining meetings outside their account will require an App Privilege Token (OBF) or ZAK token.",
+      "replace": "> **IMPORTANT (since March 2, 2026)**: Apps joining meetings outside their account require an App Privilege Token (OBF) or ZAK token."
+    },
+    {
+      "id": "stale-zfg-pin-references",
+      "issue": 1428,
+      "source": "openai/plugins",
+      "file": "references/web.md",
+      "find": "    \"@zoom/meetingsdk\": \"3.11.2-zfg\"",
+      "replace": "    \"@zoom/meetingsdk\": \"6.0.2-zfg\""
+    }
+  ],
   "langfuse": [
     {
       "id": "forward-looking-cli-package-rename",
