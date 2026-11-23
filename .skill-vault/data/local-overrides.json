@@ -1365,6 +1365,22 @@
       "file": "references/upstream-review.md",
       "find": "- [ingest](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.ingest.html)\n",
       "replace": "- [ingest](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.ingest.html)\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-13",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "- [AnnData raw](https://anndata.readthedocs.io/en/stable/generated/anndata.AnnData.raw.html),\n",
+      "replace": "- [AnnData raw](https://anndata.scverse.org/en/stable/generated/anndata.AnnData.raw.html),\n"
+    },
+    {
+      "id": "docs-1-13-restructure-pin-links-14",
+      "issue": 1383,
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "file": "references/upstream-review.md",
+      "find": "  [backed I/O](https://anndata.readthedocs.io/en/stable/generated/anndata.io.read_h5ad.html),\n",
+      "replace": "  [backed I/O](https://anndata.scverse.org/en/stable/generated/anndata.io.read_h5ad.html),\n"
     }
   ],
   "mixpanelyst": [

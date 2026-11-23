@@ -77,8 +77,8 @@ partition graph, and cluster heatmaps are not automatically ordered by pseudotim
 - [Marker ranking](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.rank_genes_groups.html),
   [aggregation](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.get.aggregate.html),
   [gene scoring](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.score_genes.html).
-- [AnnData raw](https://anndata.readthedocs.io/en/stable/generated/anndata.AnnData.raw.html),
-  [backed I/O](https://anndata.readthedocs.io/en/stable/generated/anndata.io.read_h5ad.html),
+- [AnnData raw](https://anndata.scverse.org/en/stable/generated/anndata.AnnData.raw.html),
+  [backed I/O](https://anndata.scverse.org/en/stable/generated/anndata.io.read_h5ad.html),
   [released source](https://github.com/scverse/anndata/tree/0.13.4).
 - [Harmony](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.external.pp.harmony_integrate.html)
   changes `X_pca_harmony`, not X. Scanpy 1.12.4 still transposes `Z_corr`,
