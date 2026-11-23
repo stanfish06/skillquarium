@@ -52,7 +52,7 @@ created: 2026-06-13
 - [databricks-ml-training](../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
 - [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow GenAI evaluation and agent improvement on Databricks
 - [databricks-model-serving](../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
-- [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks
+- [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Spark Declarative Pipelines (formerly DLT) in Python or SQL: streaming tables, materialized views, expectations, Auto CDC, Auto Loader, and pipeline settings
 - [databricks-python-sdk](../notes/analytics-engineering/databricks-python-sdk.md) — Databricks development guidance including Python SDK, Databricks Connect, CLI, and REST API
 - [databricks-serverless-migration](../notes/analytics-engineering/databricks-serverless-migration.md) — Make direct code and configuration changes to migrate Databricks workloads from classic compute to serverless
 - [databricks-spark-structured-streaming](../notes/analytics-engineering/databricks-spark-structured-streaming.md) — Comprehensive guide to Spark Structured Streaming for production workloads

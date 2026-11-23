@@ -2123,7 +2123,12 @@
     "llama-cpp": "ml-ai",
     "inspect-ai": "ml-ai",
     "skypilot": "cloud-devops",
-    "google-rust-style": "software-dev"
+    "google-rust-style": "software-dev",
+    "roast-my-chart": "data-visualization",
+    "inspiration": "data-visualization",
+    "ggplot2": "data-visualization",
+    "d3": "data-visualization",
+    "matplotlib-design": "data-visualization"
   },
   "synonyms": {
     "pydeseq2": [

@@ -169,7 +169,7 @@ The OpenCode path follows `$OPENCODE_CONFIG_DIR` > `$XDG_CONFIG_HOME/opencode` >
 
 ### 6. Temporary files (automatic)
 
-Worktrunk creates temporary Git index copies inside `$TMPDIR/worktrunk-temp-index-*` directories. `wt list`, `wt list statusline`, `wt step diff`, `wt step commit --dry-run`, and `wt switch` use them to inspect staged or working-tree state without changing the real index; `wt remove --force` uses them to back up uncommitted changes. `wt list` also creates a `$TMPDIR/worktrunk-list-objects-*` directory so its merge probes do not add unreachable objects to the repository. When the system temp directory is unavailable, both fall back to Git's metadata: `worktrunk-list-objects-*` under the Git common directory and `worktrunk-temp-index-*` under the worktree's Git directory. A normal exit removes these directories. Later commands that create a temporary index reclaim abandoned index directories older than one hour, preserving indexes still in use; object directories left by an interrupted process may still need manual cleanup.
+Worktrunk creates temporary Git index copies inside `$TMPDIR/worktrunk-temp-index-*` directories. `wt list`, `wt list statusline`, `wt step diff`, `wt step commit --dry-run`, `wt step squash --dry-run`, and `wt switch` use them to inspect staged or working-tree state without changing the real index; `wt remove --force` uses them to back up uncommitted changes. `wt list` also creates a `$TMPDIR/worktrunk-list-objects-*` directory so its merge probes do not add unreachable objects to the repository. When the system temp directory is unavailable, both fall back to Git's metadata: `worktrunk-list-objects-*` under the Git common directory and `worktrunk-temp-index-*` under the worktree's Git directory. A normal exit removes these directories. Later commands that create a temporary index reclaim abandoned index directories older than one hour, preserving indexes still in use; object directories left by an interrupted process may still need manual cleanup.
 
 ### What Worktrunk does NOT create
 
@@ -187,6 +187,8 @@ Worktrunk can delete **worktrees** and **branches**. Both have safeguards.
 `wt remove` mirrors `git worktree remove`: it refuses to remove worktrees with uncommitted changes (staged, modified, or untracked files). The `--force` flag removes the worktree anyway, after saving those changes (except ignored files and changes inside submodules) to `refs/wt-backup/<branch>` and printing a command to recover them.
 
 Removal also refuses, `--force` included, when the directory at a registered path no longer holds the worktree registered there — a clone made there after the worktree was deleted, say, or another worktree of the same repository moved onto the path. `--force` waives uncommitted changes, not the check for what the directory holds, and `git worktree remove` refuses the same cases.
+
+It also refuses, `--force` included, a worktree whose directory contains another registered worktree, since that checkout would go with it; remove the nested worktree first. `wt step prune` skips such a worktree.
 
 To protect a worktree from removal entirely (say it holds a local database), lock it:
 
@@ -222,7 +224,7 @@ See [What files does Worktrunk create?](#what-files-does-worktrunk-create) for d
 
 ## What commands does Worktrunk execute?
 
-Worktrunk runs `git` commands internally and optionally runs the forge CLI (`gh`, `glab`, `tea`, or `az`) for CI status. Beyond that, user-defined commands execute in four contexts:
+Worktrunk runs `git` commands internally and optionally runs the forge CLI (`gh`, `glab`, `tea`, or `az`) for CI status and PR/MR lookups. Beyond that, user-defined commands execute in four contexts:
 
 1. **User hooks** (`~/.config/worktrunk/config.toml`) — Personal automation for all repositories
 2. **Project hooks** (`.config/wt.toml`) — Repository-specific automation
