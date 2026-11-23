@@ -34,4 +34,4 @@ Prefer `.ipynb` for interactive exploration, sharing with users who do not use Q
 ## Resources
 
 - [Quarto convert CLI](https://quarto.org/docs/tools/jupyter-lab.html)
-- [Jupyter Kernel Execution](https://quarto.org/docs/computations/jupyter.html)
+- [Jupyter Kernel Execution](https://quarto.org/docs/computations/python.html)

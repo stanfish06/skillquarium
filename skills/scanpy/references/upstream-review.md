@@ -68,25 +68,25 @@ partition graph, and cluster heatmaps are not automatically ordered by pseudotim
 
 ## Optional branches and current upstream references
 
-- [Release notes](https://scanpy.readthedocs.io/en/stable/release-notes/index.html):
+- [Release notes](https://scanpy.readthedocs.io/en/1.12.x/release-notes/index.html):
   1.12.4 released 2026-08-27; Python >=3.12; deprecated Louvain/plot `save` remain.
-- [HVG](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.highly_variable_genes.html),
-  [PCA](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.pca.html),
-  [neighbors](https://scanpy.readthedocs.io/en/stable/generated/scanpy.pp.neighbors.html),
-  [Leiden](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.leiden.html).
-- [Marker ranking](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.rank_genes_groups.html),
-  [aggregation](https://scanpy.readthedocs.io/en/stable/generated/scanpy.get.aggregate.html),
-  [gene scoring](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.score_genes.html).
-- [AnnData raw](https://anndata.readthedocs.io/en/stable/generated/anndata.AnnData.raw.html),
-  [backed I/O](https://anndata.readthedocs.io/en/stable/generated/anndata.io.read_h5ad.html),
+- [HVG](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.pp.highly_variable_genes.html),
+  [PCA](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.pp.pca.html),
+  [neighbors](https://scanpy.readthedocs.io/en/1.12.x/api/generated/scanpy.pp.neighbors.html),
+  [Leiden](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.leiden.html).
+- [Marker ranking](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.rank_genes_groups.html),
+  [aggregation](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.get.aggregate.html),
+  [gene scoring](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.score_genes.html).
+- [AnnData raw](https://anndata.scverse.org/en/stable/generated/anndata.AnnData.raw.html),
+  [backed I/O](https://anndata.scverse.org/en/stable/generated/anndata.io.read_h5ad.html),
   [released source](https://github.com/scverse/anndata/tree/0.13.4).
-- [Harmony](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.harmony_integrate.html)
+- [Harmony](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.external.pp.harmony_integrate.html)
   changes `X_pca_harmony`, not X. Scanpy 1.12.4 still transposes `Z_corr`,
   but [harmonypy 2.0.2](https://github.com/slowkow/harmonypy) returns cells x PCs.
   The wrapper failed a native shape check; toolkit integration calls
   `harmonypy.run_harmony` directly, validates shape/finiteness, and stores
   `Z_corr` without transposition. Rebuild neighbors explicitly on it. 
-  [BBKNN](https://scanpy.readthedocs.io/en/stable/generated/scanpy.external.pp.bbknn.html)
+  [BBKNN](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.external.pp.bbknn.html)
   replaces the neighbor graph; running ordinary neighbors afterward discards it.
   The CLI explicitly selects exact cKDTree (`approx=False, use_faiss=False`):
   native Annoy 1.17.3 returned too few neighbors on the tested macOS ARM/NumPy
@@ -95,10 +95,10 @@ partition graph, and cluster heatmaps are not automatically ordered by pseudotim
   log expression/raw counts for markers/DE. Integration cannot resolve perfectly
   confounded batch and condition. Optional Harmony/BBKNN runtime validation is
   separately reported; ordinary native tests do not establish integration quality.
-- [DPT](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.dpt.html) requires
+- [DPT](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.dpt.html) requires
   neighbors, diffusion components and a justified biological root. An arbitrary
   cluster zero is only an illustrative placeholder; pseudotime is not elapsed time.
-- [ingest](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.ingest.html)
+- [ingest](https://scanpy.readthedocs.io/en/1.12.x/generated/scanpy.tl.ingest.html)
   requires the same ordered gene axis and compatible preprocessing in query and
   reference, with reference neighbors/PCA/UMAP as requested. No atlas mapping was
   executed in this refresh.

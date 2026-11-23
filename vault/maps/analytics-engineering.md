@@ -22,7 +22,7 @@ created: 2026-06-13
 - [chdb-datastore](../notes/analytics-engineering/chdb-datastore.md) — Use when the user has tabular data (pandas DataFrame, parquet, csv, Arrow, json) and wants to filter, group, aggregate, join, or speed up slow pandas
 - [chdb-sql](../notes/analytics-engineering/chdb-sql.md) — Use when the user wants to run SQL — especially analytical SQL — on local files (parquet/csv/json), URLs, S3 paths, or remote databases (Postgres, MySQL, MongoDB, ClickHouse Cloud...
 - [clickhouse-architecture-advisor](../notes/analytics-engineering/clickhouse-architecture-advisor.md) — Use when designing ClickHouse architectures, selecting between ingestion or modeling patterns, or translating best practices into workload-specific system designs
-- [clickhouse-best-practices](../notes/analytics-engineering/clickhouse-best-practices.md) — Use when reviewing ClickHouse schemas, queries, or configurations
+- [clickhouse-best-practices](../notes/analytics-engineering/clickhouse-best-practices.md) — Use when reviewing ClickHouse schemas, queries, native full-text search, or configurations
 - [clickhouse-js-node-coding](../notes/analytics-engineering/clickhouse-js-node-coding.md) — Write idiomatic application code with the ClickHouse Node.js client (`@clickhouse/client`)
 - [clickhouse-js-node-rowbinary](../notes/analytics-engineering/clickhouse-js-node-rowbinary.md) — Generate TypeScript/JavaScript code that reads/decodes AND writes/encodes ClickHouse RowBinary streams for the ClickHouse HTTP server
 - [clickhouse-js-node-troubleshooting](../notes/analytics-engineering/clickhouse-js-node-troubleshooting.md) — Troubleshoot and resolve common issues with the ClickHouse Node.js client (@clickhouse/client)
@@ -52,9 +52,9 @@ created: 2026-06-13
 - [databricks-ml-training](../notes/analytics-engineering/databricks-ml-training.md) — Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring...
 - [databricks-mlflow-evaluation](../notes/analytics-engineering/databricks-mlflow-evaluation.md) — MLflow GenAI evaluation and agent improvement on Databricks
 - [databricks-model-serving](../notes/analytics-engineering/databricks-model-serving.md) — Databricks Model Serving endpoint lifecycle and ops
-- [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks
+- [databricks-pipelines](../notes/analytics-engineering/databricks-pipelines.md) — Spark Declarative Pipelines (formerly DLT) in Python or SQL: streaming tables, materialized views, expectations, Auto CDC, Auto Loader, and pipeline settings
 - [databricks-python-sdk](../notes/analytics-engineering/databricks-python-sdk.md) — Databricks development guidance including Python SDK, Databricks Connect, CLI, and REST API
-- [databricks-serverless-migration](../notes/analytics-engineering/databricks-serverless-migration.md) — Migrate Databricks workloads from classic compute to serverless compute
+- [databricks-serverless-migration](../notes/analytics-engineering/databricks-serverless-migration.md) — Make direct code and configuration changes to migrate Databricks workloads from classic compute to serverless
 - [databricks-spark-structured-streaming](../notes/analytics-engineering/databricks-spark-structured-streaming.md) — Comprehensive guide to Spark Structured Streaming for production workloads
 - [databricks-synthetic-data-gen](../notes/analytics-engineering/databricks-synthetic-data-gen.md) — Generate realistic synthetic data using Spark + Faker (strongly recommended)
 - [databricks-unity-catalog](../notes/analytics-engineering/databricks-unity-catalog.md) — Unity Catalog governance, access control, and observability
