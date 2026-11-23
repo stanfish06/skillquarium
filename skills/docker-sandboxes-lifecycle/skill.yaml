@@ -1,6 +1,6 @@
 schema: v1
 id: docker-sandboxes-lifecycle
-version: 0.1.0
+version: 0.1.1
 title: 'Docker Sandboxes: Local Lifecycle & Workspace Isolation'
 description: Create, reattach to, and tear down local `sbx` sandboxes; choose workspace bind-mount vs --clone isolation.
 owns:
@@ -27,5 +27,5 @@ do_not_use_when:
 delegates_to:
   - docker-agent-run
   - docker-sandboxes-network-credentials
-  - docker-sandboxes-env
+  - docker-docs
   - docker-sandboxes-kits

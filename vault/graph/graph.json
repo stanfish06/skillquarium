@@ -1,34 +1,34 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2209,
+  "skills": 2215,
   "expert_profiles": 503,
-  "nodes": 2282,
-  "edges": 16368,
+  "nodes": 2288,
+  "edges": 16459,
   "generic_names_blocked": 30,
-  "tier1_edges": 4928,
+  "tier1_edges": 4963,
   "tier2_edges": 721,
-  "alias_edges": 4587,
+  "alias_edges": 4583,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
-  "artifact_edges": 523,
+  "artifact_edges": 522,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.85,
+  "mean_skill_degree": 5.87,
   "median_skill_degree": 4,
-  "orphan_count": 130,
-  "orphan_rate": 0.0589,
+  "orphan_count": 126,
+  "orphan_rate": 0.0569,
   "by_provenance": {
-   "EXTRACTED": 15582,
+   "EXTRACTED": 15673,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2209,
-   "references": 12850,
+   "in_domain": 2215,
+   "references": 12936,
    "in_discipline": 599,
-   "touches": 523,
+   "touches": 522,
    "has_step": 69,
    "co_occurs_with": 96,
    "chains_to": 22
@@ -4852,7 +4852,7 @@
    "id": "clickhouse-best-practices",
    "type": "Skill",
    "label": "clickhouse-best-practices",
-   "description": "Use when reviewing ClickHouse schemas, queries, or configurations. Contains 31 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.",
+   "description": "Use when reviewing ClickHouse schemas, queries, native full-text search, or configurations. Contains 36 rules that MUST be checked before providing recommendations. Always read relevant rule files and cite specific rules in responses.",
    "source": "skills/clickhouse-best-practices/SKILL.md",
    "aliases": [
     "clickhouse best practices"
@@ -6748,6 +6748,19 @@
    "deprecated": false
   },
   {
+   "id": "d3",
+   "type": "Skill",
+   "label": "d3",
+   "description": "Use when building, fixing or animating a chart with D3.js inside a React or Next.js app (barplot, scatterplot, line chart, treemap, map…). Covers the D3-for-math / React-for-rendering split, margins and axes, responsiveness with a useDimensions hook, animation with Motion, and switching from SVG to canvas for large datasets. Not for vanilla D3 projects without React.",
+   "source": "skills/d3/SKILL.md",
+   "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "d3-data-visualization",
    "type": "Skill",
    "label": "d3-data-visualization",
@@ -7186,7 +7199,7 @@
    "id": "databricks-jobs",
    "type": "Skill",
    "label": "databricks-jobs",
-   "description": "Develop and deploy Lakeflow Jobs on Databricks via DABs, Python SDK, or the CLI. Use when creating data engineering jobs with notebooks, Python wheels, SQL, dbt, or pipelines. Invoke BEFORE starting implementation. For compute (serverless, performance mode, classic), also use databricks-serverless.",
+   "description": "Develop and deploy Lakeflow Jobs on Databricks via DABs, Python SDK, or the CLI. Use when creating jobs with AI Function tasks, notebooks, Python wheels, SQL, dbt, or pipelines. Invoke BEFORE starting implementation. For configurable compute, also use databricks-serverless.",
    "source": "skills/databricks-jobs/SKILL.md",
    "aliases": [
     "databricks jobs"
@@ -7291,7 +7304,7 @@
    "id": "databricks-pipelines",
    "type": "Skill",
    "label": "databricks-pipelines",
-   "description": "Develop Lakeflow Spark Declarative Pipelines (formerly Delta Live Tables) on Databricks. Use when building batch or streaming data pipelines with Python or SQL, including Auto CDC from event streams or periodic complete snapshots. Invoke BEFORE starting implementation.",
+   "description": "Spark Declarative Pipelines (formerly DLT) in Python or SQL: streaming tables, materialized views, expectations, Auto CDC, Auto Loader, and pipeline settings. Also covers continuous mode, run-as, parameters, rewind, views, sinks and ForEachBatch, append flows, pipeline setup, migrating from legacy DLT, cluster keys, streaming state, and dedup or windowed aggregations. Also file ingestion from volumes, cloud storage, SFTP, Google Drive, SharePoint or OneDrive and document parsing; debugging failed, slow, or flaky updates from the update history; and migrating dbt or Informatica projects to SDP.",
    "source": "skills/databricks-pipelines/SKILL.md",
    "aliases": [
     "databricks pipelines"
@@ -7396,7 +7409,7 @@
    "id": "databricks-vector-search",
    "type": "Skill",
    "label": "databricks-vector-search",
-   "description": "Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search. Use when asked to: create Standard or Storage-Optimized endpoints and Delta Sync or Direct Access indexes with AISearchClient; query with ANN, hybrid, or full-text search and filters; sync, monitor, or migrate indexes; set a target QPS, triage 429s, or load-test an endpoint; wire an index into an agent as a retriever tool. NOT for: no-code document Q&A (databricks-genie-agents); serving-endpoint CRUD (databricks-model-serving); custom ResponsesAgent authoring and deployment (databricks-ml-training).",
+   "description": "Databricks AI Search (formerly Vector Search) endpoints and indexes for RAG and semantic search. Use when asked to: create Standard or Storage-Optimized endpoints and Delta Sync or Direct Access indexes with AISearchClient; query with ANN, hybrid, or full-text search and filters; sync, monitor, or migrate indexes; run the built-in index search quality evaluation; set a target QPS, triage 429s, or load-test an endpoint; wire an index into an agent as a retriever tool. NOT for: MLflow evaluation of RAG apps/agents (databricks-mlflow-evaluation); no-code document Q&A (databricks-genie-agents); serving-endpoint CRUD (databricks-model-serving); custom ResponsesAgent authoring and deployment (databricks-ml-training).",
    "source": "skills/databricks-vector-search/SKILL.md",
    "aliases": [
     "databricks vector search"
@@ -7648,7 +7661,7 @@
    "id": "deep-security-scan",
    "type": "Skill",
    "label": "deep-security-scan",
-   "description": "Use when the user asks for a deep, exhaustive, multi-pass, or variance-reducing repository-wide or scoped-path Codex Security scan. Run repeated complete independent Standard scans with the Codex Security deep-scan tool, which aggregates their validated findings and prepares the canonical artifacts; then complete the same scan once. Do not use for PRs, commits, branch diffs, or working-tree diffs.",
+   "description": "Run repeated Standard security scans of a repository or scoped path when the user requests a deep, exhaustive, or multi-pass audit. For changes to a PR, commit, branch or working tree, use security-diff-scan.",
    "source": "skills/deep-security-scan/SKILL.md",
    "aliases": [
     "deep security scan"
@@ -8486,7 +8499,7 @@
    "id": "docker-sandboxes-kits",
    "type": "Skill",
    "label": "docker-sandboxes-kits",
-   "description": ">- Use this skill when authoring, verifying, publishing, or composing a Docker Sandboxes kit, even if the user just says they want to \"add a tool to a sandbox agent\", \"package a CLI or agent as a kit\", \"publish a kit to a registry\", or \"give a mixin its own credentials and network access\". Covers the v3 kit descriptor (`# syntax=docker/sandbox-kit:3`, `kind: workload` or `mixin`, typed capabilities, provides/requires, content recipes), building with docker buildx, checking with kit-tck and `sbx kit inspect`, composing onto a workload, and publishing and signing. Legacy v2 `spec.yaml` kits are not covered; `sbx kit validate` is not a substitute for kit-tck conformance and runtime checks.",
+   "description": ">- Use this skill when authoring, verifying, publishing, or composing a Docker Sandboxes kit, even if the user just says they want to \"add a tool to a sandbox agent\", \"package a CLI or agent as a kit\", \"publish a kit to a registry\", or \"give a mixin its own credentials and network access\". Covers the v3 kit descriptor (`# syntax=docker/sandbox-kit:3`, `kind: workload` or `mixin`, typed capabilities, provides/requires, content recipes), building with docker buildx, checking with kit-tck and `sbx kit inspect`, composing onto a workload, referencing and pinning a kit from an `sbxenv.yaml` `agent:`/`kits:` entry, and publishing and signing. Legacy v2 `spec.yaml` kits are not covered; `sbx kit validate` is not a substitute for kit-tck conformance and runtime checks.",
    "source": "skills/docker-sandboxes-kits/SKILL.md",
    "aliases": [
     "docker sandboxes kits"
@@ -12243,6 +12256,19 @@
    "deprecated": false
   },
   {
+   "id": "ggplot2",
+   "type": "Skill",
+   "label": "ggplot2",
+   "description": "Generate, review, or refactor ggplot2 code in R following an opinionated set of best practices. Use whenever the user writes ggplot2 code, asks for ggplot2 help, picks a theme, tweaks scales, sets up faceting, or exports a plot. R-specific.",
+   "source": "skills/ggplot2/SKILL.md",
+   "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "gh-address-comments",
    "type": "Skill",
    "label": "gh-address-comments",
@@ -12710,6 +12736,21 @@
    "source": "skills/google-drive-comments/SKILL.md",
    "aliases": [
     "google drive comments"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "google-elephant-goldfish-model",
+   "type": "Skill",
+   "label": "google-elephant-goldfish-model",
+   "description": "Pointer to Google's Elephant-Goldfish Model (EGM) plugin, installed as a Claude Code or Codex plugin rather than copied into this vault. EGM drafts software design specs with full project context (Elephant) and reviews them with fresh-context subagents that never saw the conversation (Goldfish). Use when the user wants to brainstorm a feature into a design doc, draft a spec section by section, run a fresh-eyes review of a design doc, README, or PR plan against the code, check docs for drift from the code, bootstrap directory READMEs, or mentions EGM, egm-review, or elephant-goldfish.",
+   "source": "skills/google-elephant-goldfish-model/SKILL.md",
+   "aliases": [
+    "google elephant goldfish model"
    ],
    "uses": 0,
    "successes": 0,
@@ -14476,10 +14517,23 @@
    "deprecated": false
   },
   {
+   "id": "inspiration",
+   "type": "Skill",
+   "label": "inspiration",
+   "description": "Use when designing a chart, map, plot or dashboard (D3, ggplot2, Matplotlib, geopandas, plotly, Vega…) where published examples would help choose its form, annotation, palette or layout. Searches curated galleries of published dataviz as one catalog (dataviz-inspiration.com, Dataviz Index) for 3–5 real references to borrow ideas from — form, annotation, palette, layout — with links back to each source. Also use when asked for chart ideas, examples or references, or to improve a chart that looks generic. Triggers: carte, graphique, visualisation, dataviz, infographie, tableau de bord, chart, map, plot, graph, figure, dashboard, choropleth.",
+   "source": "skills/inspiration/SKILL.md",
+   "aliases": [],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "install-duckdb",
    "type": "Skill",
    "label": "install-duckdb",
-   "description": "> Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g. magic@community). Pass --update to update extensions instead of installing.",
+   "description": "> Install or update DuckDB extensions. Each argument is either a plain extension name (installs from core) or name@repo (e.g. magic@community). Pass --update to update extensions instead of installing. Also checks that the DuckDB CLI is present and, if it is not, suggests how to install it, system-wide or in a Python virtual environment.",
    "source": "skills/install-duckdb/SKILL.md",
    "aliases": [
     "install duckdb"
@@ -16346,7 +16400,7 @@
    "id": "managed-deep-agents",
    "type": "Skill",
    "label": "managed-deep-agents",
-   "description": "Use when building, testing, or deploying Managed Deep Agents in LangSmith. Walks a user through their first agent end to end — interviewing them about what they want to build, mapping it onto what MDA can actually do, then scaffolding and deploying it. Covers the file-based project layout; define_deep_agent / defineDeepAgent; instructions, skills, memory, identity, tools, MCP servers, connections, middleware, sandboxes, schedules, channels, and evals; the mda CLI; GitHub deployments; and Context Hub.",
+   "description": "Use when building, testing, or deploying Managed Deep Agents in LangSmith. Walks a user through their first agent end to end — interviewing them about what they want to build, mapping it onto what MDA can actually do, then scaffolding and deploying it with the mda CLI. Routes to the official docs page for each capability: instructions, skills, tools, MCP, connections, middleware, sandboxes, browser use, memory, identity, subagents, schedules, channels, runtime, Context Hub, deploy, and evals.",
    "source": "skills/managed-deep-agents/SKILL.md",
    "aliases": [
     "managed deep agents"
@@ -17119,6 +17173,21 @@
    "deprecated": false
   },
   {
+   "id": "matplotlib-design",
+   "type": "Skill",
+   "label": "matplotlib-design",
+   "description": "Create, improve, or reproduce Matplotlib charts with deliberate styling, typography, annotations, custom layouts, and maps. Use when producing Python visualizations or refining existing Matplotlib, Seaborn, or GeoPandas figures. Covers chart design choices; for Matplotlib API reference, plot types, and 3D plots, use matplotlib.",
+   "source": "skills/matplotlib-design/SKILL.md",
+   "aliases": [
+    "matplotlib design"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "maui-app-lifecycle",
    "type": "Skill",
    "label": "maui-app-lifecycle",
@@ -17881,7 +17950,7 @@
    "id": "migrate-mstest-v3-to-v4",
    "type": "Skill",
    "label": "migrate-mstest-v3-to-v4",
-   "description": "> Use this skill before answering, planning, or editing any MSTest 3.x-to-4.x upgrade or post-upgrade failure. Triggers include \"MSTest v4 breaking changes\"; CS0507/CS0103/CS1061/CS1615; ExecuteAsync, CallerInfo, DisplayName, or custom TestMethodAttribute; ClassCleanupBehavior; ContainsKey; ThrowsExactly or ExpectedException; IsInstanceOfType out parameters; TestTimeout.Infinite; ManagedType; net6/net7 compatibility; TestCase.Id history; TestName in ClassInitialize; TreatDiscoveryWarningsAsErrors; discovery errors after a clean build; and MSTest.Sdk/MTP or vstest.console discovery changes. Do not use for v1/v2-to-v3 leftovers, framework conversion, runner-only migration, or a general .NET upgrade.",
+   "description": "> Use this skill before answering, planning, or editing any MSTest 3.x-to-4.x upgrade or post-upgrade failure. Triggers include \"MSTest v4 breaking changes\"; CS0507/CS0103/CS1061/CS1615; ExecuteAsync, CallerInfo, DisplayName, or custom TestMethodAttribute; ClassCleanupBehavior; ContainsKey; ThrowsExactly or ExpectedException; IsInstanceOfType out parameters; TestTimeout.Infinite; removed TestContext properties; ITestMethod changes; StringAssert overloads; MSTEST0056/MSTEST0057; renamed assemblies or executor URI; net6/net7 compatibility; TestCase.Id history; TestName in ClassInitialize; TreatDiscoveryWarningsAsErrors; ReflectionTypeLoadException during discovery; inherited test attributes; custom data-source display names; and MSTest.Sdk/MTP or vstest.console discovery changes. Do not use for v1/v2-to-v3 leftovers, framework conversion, runner-only migration, or a general .NET upgrade.",
    "source": "skills/migrate-mstest-v3-to-v4/SKILL.md",
    "aliases": [
     "migrate mstest v3 to v4"
@@ -23555,7 +23624,7 @@
    "id": "propose-security-hardening",
    "type": "Skill",
    "label": "propose-security-hardening",
-   "description": "Develop evidence-backed structural and architectural security hardening proposals from vulnerability disclosures, supplied findings, incident or assessment documents, source code, or a completed Codex Security scan. Use when a user asks for systemic improvements, alternatives beyond per-finding patches, before-and-after security architecture views, engineering tradeoff analysis, or an implementation-ready plan for a selected hardening option. Also use automatically after a Codex Security scan with reportable findings when the top-level scan workflow requests final-report hardening guidance.",
+   "description": "Develop evidence-backed structural security hardening proposals from disclosures, findings, source code, or Codex Security scans. Use for systemic improvements, alternatives beyond individual patches, architectural tradeoffs, or implementation planning. Also use when a top-level scan requests final-report hardening guidance.",
    "source": "skills/propose-security-hardening/SKILL.md",
    "aliases": [
     "propose security hardening"
@@ -26117,6 +26186,21 @@
    "deprecated": false
   },
   {
+   "id": "roast-my-chart",
+   "type": "Skill",
+   "label": "roast-my-chart",
+   "description": "Review a finished chart, plot, map or dashboard against the 61 Data to Viz caveat flashcards, and report what to fix. Use when the user asks to roast, review, critique, audit or give feedback on a chart, asks \"what's wrong with my chart\" or \"is this chart misleading\", or wants a check before publishing. Works on an image, on plotting code (ggplot2, Matplotlib, D3, Plotly, Vega…), or both.",
+   "source": "skills/roast-my-chart/SKILL.md",
+   "aliases": [
+    "roast my chart"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "robotics-engineer",
    "type": "ExpertProfile",
    "label": "robotics-engineer",
@@ -26983,7 +27067,7 @@
    "id": "security-scan",
    "type": "Skill",
    "label": "security-scan",
-   "description": "Use for a standard, single-pass security audit of an entire repository or a scoped path, package, folder, or submodule with no diff to review. This is the default repository scan. Do not use for PR, commit, branch, or working-tree diffs, or for deep, multi-pass scans.",
+   "description": "Find vulnerabilities in the current source of a whole repository or selected paths. This is the default single-pass audit. Use the diff skill for PR, commit, branch, or working-tree changes and the deep skill for an explicitly requested deep scan.",
    "source": "skills/security-scan/SKILL.md",
    "aliases": [
     "security scan"
@@ -32259,7 +32343,7 @@
    "id": "vulnerability-writeup",
    "type": "Skill",
    "label": "vulnerability-writeup",
-   "description": "Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained, sceptically validated, natural-sounding vulnerability reports. Use for one vulnerability or a disclosure campaign; a Codex Security scan is optional.",
+   "description": "Turn vulnerability notes, disclosure reports, PoCs, source code, or Codex Security findings into self-contained vulnerability reports with clearly supported claims. Use for one vulnerability or a disclosure campaign; a Codex Security scan is optional.",
    "source": "skills/vulnerability-writeup/SKILL.md",
    "aliases": [
     "vulnerability writeup"
@@ -34291,6 +34375,15 @@
   {
    "src": "adjusttext",
    "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in adjusttext/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "adjusttext",
+   "rel": "references",
    "dst": "matplotlib",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -35227,6 +35320,15 @@
   {
    "src": "agentic-workflows",
    "rel": "references",
+   "dst": "cost-management",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "cost-management named in agentic-workflows/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "agentic-workflows",
+   "rel": "references",
    "dst": "github-actions-ci",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -35249,6 +35351,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "agentic-workflows named in technology-selection/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "agentic-workflows",
+   "rel": "references",
+   "dst": "telemetry",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in agentic-workflows/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -38155,7 +38266,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in apk-reverse/SKILL.md body",
+   "justification": "apk-reverse named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -40946,15 +41057,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "attack-path-analysis",
-   "rel": "references",
-   "dst": "finding-discovery",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "attack-path-analysis named in finding-discovery/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -46972,6 +47074,15 @@
   {
    "src": "browser-automation",
    "rel": "references",
+   "dst": "next-dev-loop",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-automation named in next-dev-loop/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "browser-automation",
+   "rel": "references",
    "dst": "next-partial-prefetching-adoption",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -47174,6 +47285,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "browser-use named in logfire-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "browser-use",
+   "rel": "references",
+   "dst": "managed-deep-agents",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-use named in managed-deep-agents/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -49342,7 +49462,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in case-review/SKILL.md body",
+   "justification": "case-review named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -49712,15 +49832,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of caveman appears in databricks-zerobus-ingest/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "caveman",
-   "rel": "references",
-   "dst": "deep-security-scan",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of caveman appears in deep-security-scan/SKILL.md",
    "status": "accepted"
   },
   {
@@ -57709,6 +57820,15 @@
   {
    "src": "computational-chemist",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in computational-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "computational-chemist",
+   "rel": "references",
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -59914,6 +60034,15 @@
   {
    "src": "cost-management",
    "rel": "references",
+   "dst": "agentic-workflows",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "cost-management named in agentic-workflows/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "cost-management",
+   "rel": "references",
    "dst": "alloy",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -61001,6 +61130,15 @@
    "status": "accepted"
   },
   {
+   "src": "cuequivariance",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in cuequivariance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "cuopt-user-rules",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -61172,12 +61310,192 @@
    "status": "accepted"
   },
   {
+   "src": "d3",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "computational-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in computational-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "cuequivariance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in cuequivariance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "d3-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in d3-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "gantt-chart-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in gantt-chart-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "geospatial-and-cartographic-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in geospatial-and-cartographic-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "grammar-of-graphics-and-declarative-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in grammar-of-graphics-and-declarative-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "inorganic-chemist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inorganic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "network-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in network-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "plugin-bundle-size",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in plugin-bundle-size/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "react-and-nextjs-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in react-and-nextjs-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "roast-my-chart",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "scrollytelling-and-parallax-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in scrollytelling-and-parallax-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "string-theorist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in string-theorist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "threejs-data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in threejs-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "typescript-data-visualization-engineering",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in typescript-data-visualization-engineering/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "d3",
+   "rel": "references",
+   "dst": "uml-and-software-architecture-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in uml-and-software-architecture-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "d3-data-visualization",
    "rel": "in_domain",
    "dst": "domain:data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "d3-data-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in d3-data-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -61745,6 +62063,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "data-visualization named in canvas2d-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "data-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in data-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -63478,6 +63805,15 @@
   {
    "src": "databricks-mlflow-evaluation",
    "rel": "references",
+   "dst": "databricks-vector-search",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-mlflow-evaluation named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-mlflow-evaluation",
+   "rel": "references",
    "dst": "design-md-library",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -63612,11 +63948,29 @@
   },
   {
    "src": "databricks-pipelines",
-   "rel": "touches",
-   "dst": "artifact:parquet",
+   "rel": "references",
+   "dst": "google-drive",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "Columnar table named in databricks-pipelines/SKILL.md",
+   "justification": "google-drive named in databricks-pipelines/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-pipelines",
+   "rel": "references",
+   "dst": "read-file",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "read-file named in databricks-pipelines/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-pipelines",
+   "rel": "references",
+   "dst": "sharepoint",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sharepoint named in databricks-pipelines/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -63860,6 +64214,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "databricks-ml-training named in databricks-vector-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-vector-search",
+   "rel": "references",
+   "dst": "databricks-mlflow-evaluation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-mlflow-evaluation named in databricks-vector-search/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -65170,19 +65533,10 @@
   {
    "src": "deep-security-scan",
    "rel": "references",
-   "dst": "caveman",
+   "dst": "security-diff-scan",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "curated alias of caveman appears in deep-security-scan/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "deep-security-scan",
-   "rel": "references",
-   "dst": "neuroscientist",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of neuroscientist appears in deep-security-scan/SKILL.md",
+   "justification": "security-diff-scan named in deep-security-scan/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -65960,6 +66314,15 @@
    "status": "accepted"
   },
   {
+   "src": "design-an-interface",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-an-interface/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "design-control-loop",
    "rel": "in_domain",
    "dst": "domain:vault-meta",
@@ -66443,6 +66806,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "high-end-visual-design named in design-taste-frontend/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "design-taste-frontend",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-taste-frontend/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -68971,7 +69343,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in docs-generator/SKILL.md body",
+   "justification": "docs-generator named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -76157,6 +76529,15 @@
    "status": "accepted"
   },
   {
+   "src": "figma-use-slides",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in figma-use-slides/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "figure-designer",
    "rel": "in_domain",
    "dst": "domain:research-writing",
@@ -76415,15 +76796,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "finding-discovery",
-   "rel": "references",
-   "dst": "attack-path-analysis",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "attack-path-analysis named in finding-discovery/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -78436,6 +78808,15 @@
   {
    "src": "fisheries-scientist",
    "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in fisheries-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "fisheries-scientist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -78458,6 +78839,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "fix-finding",
+   "rel": "references",
+   "dst": "security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-scan named in fix-finding/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -80515,6 +80905,15 @@
   {
    "src": "gantt-chart-visualization",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in gantt-chart-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "gantt-chart-visualization",
+   "rel": "references",
    "dst": "firecrawl-parse",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -82414,6 +82813,24 @@
   {
    "src": "geopandas",
    "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "geopandas",
+   "rel": "references",
+   "dst": "matplotlib-design",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "geopandas",
+   "rel": "references",
    "dst": "optimize-for-gpu",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -82472,6 +82889,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "geospatial-and-cartographic-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in geospatial-and-cartographic-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -83102,6 +83528,78 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "Protein structure named in gget/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "adjusttext",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in adjusttext/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "fisheries-scientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in fisheries-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "marine-biologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in marine-biologist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "nature-figure",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in nature-figure/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "roast-my-chart",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ggplot2",
+   "rel": "references",
+   "dst": "seaborn",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in seaborn/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -84388,7 +84886,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in go-rust-reverse/SKILL.md body",
+   "justification": "go-rust-reverse named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -84610,6 +85108,15 @@
   {
    "src": "google-drive",
    "rel": "references",
+   "dst": "databricks-pipelines",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "google-drive named in databricks-pipelines/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "google-drive",
+   "rel": "references",
    "dst": "doc-coauthoring",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -84731,6 +85238,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "google-drive-comments named in google-drive/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "google-elephant-goldfish-model",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "google-elephant-goldfish-model",
+   "rel": "references",
+   "dst": "marketplace",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "marketplace named in google-elephant-goldfish-model/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -85505,6 +86030,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "grammar-of-graphics-and-declarative-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in grammar-of-graphics-and-declarative-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -91603,6 +92137,15 @@
   {
    "src": "inorganic-chemist",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inorganic-chemist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inorganic-chemist",
+   "rel": "references",
    "dst": "electron",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -91706,6 +92249,87 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "inspect-ai named in huggingface-community-evals/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "design-an-interface",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-an-interface/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "design-taste-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in design-taste-frontend/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "figma-use-slides",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in figma-use-slides/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "geopandas",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "matplotlib-design",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "inspiration",
+   "rel": "references",
+   "dst": "plotly",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in inspiration/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -99676,6 +100300,15 @@
   {
    "src": "managed-deep-agents",
    "rel": "references",
+   "dst": "browser-use",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-use named in managed-deep-agents/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "managed-deep-agents",
+   "rel": "references",
    "dst": "caveman",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -99905,6 +100538,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "marine-biologist",
+   "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in marine-biologist/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -100256,6 +100898,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "marketplace named in firecrawl-search/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "marketplace",
+   "rel": "references",
+   "dst": "google-elephant-goldfish-model",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "marketplace named in google-elephant-goldfish-model/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -103091,6 +103742,42 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "matplotlib referenced in code/link context in viennarna-structure-prediction/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "references",
+   "dst": "geopandas",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "geopandas named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "inspiration named in matplotlib-design/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "matplotlib-design",
+   "rel": "references",
+   "dst": "seaborn",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "seaborn named in matplotlib-design/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -106987,7 +107674,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in mobile-reverse/SKILL.md body",
+   "justification": "mobile-reverse named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -109994,6 +110681,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "data-visualization named in nature-figure/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "nature-figure",
+   "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in nature-figure/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -114202,6 +114898,15 @@
   {
    "src": "network-scientist",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in network-scientist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "network-scientist",
+   "rel": "references",
    "dst": "gerontologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -115048,15 +115753,6 @@
   {
    "src": "neuroscientist",
    "rel": "references",
-   "dst": "deep-security-scan",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of neuroscientist appears in deep-security-scan/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "neuroscientist",
-   "rel": "references",
    "dst": "developmental-biologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -115219,6 +115915,15 @@
   {
    "src": "neuroscientist",
    "rel": "references",
+   "dst": "security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in security-scan/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
    "dst": "seismologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -115367,6 +116072,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "agent-browser named in next-dev-loop/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "next-dev-loop",
+   "rel": "references",
+   "dst": "browser-automation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-automation named in next-dev-loop/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -129061,6 +129775,15 @@
   {
    "src": "plotly",
    "rel": "references",
+   "dst": "inspiration",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in inspiration/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "plotly",
+   "rel": "references",
    "dst": "matplotlib",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -129083,6 +129806,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "plotly named in optuna/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "plotly",
+   "rel": "references",
+   "dst": "roast-my-chart",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in roast-my-chart/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -129155,6 +129887,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "chunk named in plugin-bundle-size/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "plugin-bundle-size",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in plugin-bundle-size/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -137803,7 +138544,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in radare2/SKILL.md body",
+   "justification": "radare2 named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -138448,6 +139189,15 @@
   {
    "src": "react-and-nextjs-data-visualization",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in react-and-nextjs-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "react-and-nextjs-data-visualization",
+   "rel": "references",
    "dst": "data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -138677,6 +139427,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "read-file named in coverage-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "read-file",
+   "rel": "references",
+   "dst": "databricks-pipelines",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "read-file named in databricks-pipelines/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143131,7 +143890,7 @@
    "dst": "apk-reverse",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in apk-reverse/SKILL.md body",
+   "justification": "apk-reverse named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143176,7 +143935,7 @@
    "dst": "case-review",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in case-review/SKILL.md body",
+   "justification": "case-review named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143239,7 +143998,7 @@
    "dst": "docs-generator",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in docs-generator/SKILL.md body",
+   "justification": "docs-generator named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143293,7 +144052,7 @@
    "dst": "go-rust-reverse",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in go-rust-reverse/SKILL.md body",
+   "justification": "go-rust-reverse named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143365,7 +144124,7 @@
    "dst": "mobile-reverse",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in mobile-reverse/SKILL.md body",
+   "justification": "mobile-reverse named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143428,7 +144187,7 @@
    "dst": "radare2",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-skill-router named in radare2/SKILL.md body",
+   "justification": "radare2 named in reverse-skill-router/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -143906,6 +144665,42 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "Count matrix named in rnaseq-de/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "in_domain",
+   "dst": "domain:data-visualization",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in roast-my-chart/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "roast-my-chart",
+   "rel": "references",
+   "dst": "plotly",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "plotly named in roast-my-chart/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -144518,6 +145313,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "run-tests named in using-git-worktrees/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "run-tests",
+   "rel": "references",
+   "dst": "vulnerability-writeup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "run-tests named in vulnerability-writeup/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -152137,6 +152941,15 @@
   {
    "src": "scrollytelling-and-parallax-data-visualization",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in scrollytelling-and-parallax-data-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "scrollytelling-and-parallax-data-visualization",
+   "rel": "references",
    "dst": "d3-data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -152659,6 +153472,15 @@
   {
    "src": "seaborn",
    "rel": "references",
+   "dst": "ggplot2",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ggplot2 named in seaborn/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "seaborn",
+   "rel": "references",
    "dst": "locus-to-gene-mapper-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -152672,6 +153494,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "seaborn named in matplotlib/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "seaborn",
+   "rel": "references",
+   "dst": "matplotlib-design",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "seaborn named in matplotlib-design/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -153208,15 +154039,6 @@
   {
    "src": "security-audit",
    "rel": "references",
-   "dst": "security-scan",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "security-audit named in security-scan/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "security-audit",
-   "rel": "references",
    "dst": "semgrep",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -153334,6 +154156,15 @@
   {
    "src": "security-diff-scan",
    "rel": "references",
+   "dst": "deep-security-scan",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-diff-scan named in deep-security-scan/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-diff-scan",
+   "rel": "references",
    "dst": "finding-discovery",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -153415,6 +154246,24 @@
   {
    "src": "security-scan",
    "rel": "references",
+   "dst": "fix-finding",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "security-scan named in fix-finding/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "security-scan",
+   "rel": "references",
+   "dst": "neuroscientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in security-scan/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "security-scan",
+   "rel": "references",
    "dst": "propose-security-hardening",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -153428,15 +154277,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "security-scan named in secure-workflow-guide/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "security-scan",
-   "rel": "references",
-   "dst": "security-audit",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "security-audit named in security-scan/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -155255,6 +156095,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "sharepoint named in databricks-lakeflow-connect/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "sharepoint",
+   "rel": "references",
+   "dst": "databricks-pipelines",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "sharepoint named in databricks-pipelines/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -159859,6 +160708,15 @@
   {
    "src": "string-theorist",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in string-theorist/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "string-theorist",
+   "rel": "references",
    "dst": "scientific-agents",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -163378,6 +164236,15 @@
   {
    "src": "telemetry",
    "rel": "references",
+   "dst": "agentic-workflows",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "telemetry named in agentic-workflows/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "telemetry",
+   "rel": "references",
    "dst": "alloy",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -165857,6 +166724,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "threejs-data-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in threejs-data-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -171991,6 +172867,15 @@
   {
    "src": "typescript-data-visualization-engineering",
    "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in typescript-data-visualization-engineering/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "typescript-data-visualization-engineering",
+   "rel": "references",
    "dst": "data-visualization",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -172616,6 +173501,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "uml-and-software-architecture-visualization named in accessibility-and-inclusive-visualization/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "uml-and-software-architecture-visualization",
+   "rel": "references",
+   "dst": "d3",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "d3 named in uml-and-software-architecture-visualization/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -176522,6 +177416,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of caveman appears in vulnerability-writeup/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "vulnerability-writeup",
+   "rel": "references",
+   "dst": "run-tests",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "run-tests named in vulnerability-writeup/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -180993,11 +181896,9 @@
   "convert-blazor-server-to-webapp",
   "creating-mermaid-dbt-dag",
   "csharp-scripts",
-  "cuequivariance",
   "dagster-expert",
   "dashboard-expert",
   "defuddle",
-  "design-an-interface",
   "dhdna-profiler",
   "dotnet-maui-doctor",
   "dotnet-pinvoke",
@@ -181016,7 +181917,6 @@
   "fetching-dbt-docs",
   "finite-horizon-lqr",
   "fitness-nutrition",
-  "fix-finding",
   "flowio",
   "full-output-enforcement",
   "fund-comparison",
@@ -181025,7 +181925,6 @@
   "genome-match",
   "git-guardrails-claude-code",
   "gnucobol-mainframe-batch",
-  "grammar-of-graphics-and-declarative-visualization",
   "handoff",
   "hibernate-upgrade",
   "imc-tuning-rules",

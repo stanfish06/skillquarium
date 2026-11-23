@@ -1,9 +1,9 @@
 ---
 name: docker-sandboxes-kits
 description: >-
-  Use this skill when authoring, verifying, publishing, or composing a Docker Sandboxes kit, even if the user just says they want to "add a tool to a sandbox agent", "package a CLI or agent as a kit", "publish a kit to a registry", or "give a mixin its own credentials and network access". Covers the v3 kit descriptor (`# syntax=docker/sandbox-kit:3`, `kind: workload` or `mixin`, typed capabilities, provides/requires, content recipes), building with docker buildx, checking with kit-tck and `sbx kit inspect`, composing onto a workload, and publishing and signing. Legacy v2 `spec.yaml` kits are not covered; `sbx kit validate` is not a substitute for kit-tck conformance and runtime checks.
+  Use this skill when authoring, verifying, publishing, or composing a Docker Sandboxes kit, even if the user just says they want to "add a tool to a sandbox agent", "package a CLI or agent as a kit", "publish a kit to a registry", or "give a mixin its own credentials and network access". Covers the v3 kit descriptor (`# syntax=docker/sandbox-kit:3`, `kind: workload` or `mixin`, typed capabilities, provides/requires, content recipes), building with docker buildx, checking with kit-tck and `sbx kit inspect`, composing onto a workload, referencing and pinning a kit from an `sbxenv.yaml` `agent:`/`kits:` entry, and publishing and signing. Legacy v2 `spec.yaml` kits are not covered; `sbx kit validate` is not a substitute for kit-tck conformance and runtime checks.
 license: Apache-2.0
-compatibility: Experimental. Needs docker buildx, kit-tck, and an sbx release with Kits v3 support (adapted from docker/sandbox-kit-spec at 4d932451613f8df89c8468e2bb7c5286882897ca; build/conformance tested 2026-11-02; authenticated inspect/validate and composition tested on sbx v0.50.1 with optional agent-context@2). Not the legacy docker sandbox wrapper. See references/sources.md.
+compatibility: Experimental. Needs docker buildx, kit-tck, and an sbx release with Kits v3 support (adapted from docker/sandbox-kit-spec at 4d932451613f8df89c8468e2bb7c5286882897ca; build/conformance tested 2026-11-02; authenticated inspect/validate and composition tested on sbx v0.50.1 with optional agent-context@2; sbxenv.yaml kit-reference rules sourced from sbx v0.51.0 docs, help, and earlier runtime records, not re-run here). Not the legacy docker sandbox wrapper. See references/sources.md.
 ---
 
 # Docker Sandboxes: Kits (v3 descriptors)
@@ -58,6 +58,9 @@ Activate this skill when:
 - The user wants to build, check, publish, or sign a kit, or to compose a
   built kit onto a workload and test it.
 - The user has an existing v2 `spec.yaml` and wants it converted to v3.
+- The user wants to reference, configure, or pin a kit from an `sbxenv.yaml`
+  file's `agent:` and `kits:` fields, or asks which file fields a kit's
+  capabilities need (bindings, mounts, ports).
 
 ## Do not use this skill when
 
@@ -69,9 +72,12 @@ Do not use this skill when:
   (proxy injection, allow/deny precedence, the policy a sandbox currently
   has), where a user stores a secret value, or secrets and policy unrelated
   to any kit — use `docker-sandboxes-network-credentials`.
-- The task is the `sbxenv.yaml` file that references kits through its own
-  `kits:` block — use `docker-sandboxes-env` (this skill still owns what goes
-  inside the referenced kit).
+- The task is the rest of an `sbxenv.yaml` file — lifecycle hooks, the
+  approval plan, multi-file merging, user defaults, or the format of its
+  `secrets:`/`registries:` blocks.
+  No skill in this catalog owns those; use `docker-docs` to answer from the
+  current Docker Docs environment files page. This skill owns only the
+  `agent:`/`kits:` references and the fields a kit's capabilities map onto.
 - The task is general Dockerfile or image-build optimization unrelated to a
   kit's recipe — use `docker-build-strategies`.
 - The task is to author, validate, or debug a legacy v2 `spec.yaml`. It is out
@@ -256,6 +262,29 @@ A push writes to a registry and this skill cannot undo it. Get explicit
 approval for the exact registry, repository, and tags first, and use a scratch
 namespace for trials.
 
+### v3: referencing a kit from sbxenv.yaml
+
+An `sbxenv.yaml` (its own `schemaVersion: "1"`) composes kits through
+`agent:` and `kits:`. The full rules and the capability-to-field table are in
+`references/sbxenv-kit-references.md`; the ones that most affect kit authors:
+
+- `agent:` is a built-in agent or the **handle** (last repository path
+  segment, `dir=` basename, or directory name) of the single `kind: workload`
+  kit under `kits:`; every other entry must be a mixin.
+- An entry is a bare reference or `{source, args}`. Only `./…`, `../…`, `.`,
+  `..`, or `*.zip` are local paths (resolved against the declaring file);
+  pin OCI references as `tag@sha256:<digest>` and git ones with
+  `#ref=<commit>`, because tags are republished.
+- A published kit accepts only **create-phase** args; build-phase args such
+  as `version` were fixed at publish time, so consumers change versions by
+  changing the tag.
+- A required `credential@1` without a `bindings:` entry makes create fail;
+  an optional one is skipped silently. A `host-mount@1` path can be bound to
+  a chosen host directory with an optional `mounts:` entry.
+- `sbx env plan` does not resolve kit references, and a mixin that
+  under-declares `requires` still plans cleanly. Only a disposable
+  `sbx env create` proves a composition installs.
+
 ### Safety boundaries and inverse operations
 
 - Never run source examples blindly. Build, run, push, and sign commands here
@@ -292,8 +321,9 @@ additional reference and say that it came from outside this catalog.
   per-sandbox policy is included, where the user stores a secret value), use
   `docker-sandboxes-network-credentials`. That skill's vocabulary is v2-era;
   for v3, the capability rules in this skill apply to what a kit asks for.
-- For the `sbxenv.yaml` file whose `kits:` and `agent:` fields reference a kit,
-  use `docker-sandboxes-env`.
+- For `sbxenv.yaml` fields beyond `agent:`, `kits:`, and the capability
+  mappings above, no skill in this catalog applies; use `docker-docs` to answer
+  from current Docker Docs.
 - For Dockerfile and build practices beyond kit recipes, use
   `docker-build-strategies`.
 - Before removing builders, images, or volumes created while testing a kit,
@@ -304,6 +334,7 @@ additional reference and say that it came from outside this catalog.
 - `references/v3-capabilities.md` — v3 descriptor skeleton, authoring forms, every capability type with common mistakes, volume and host-mount semantics, groups, and final-environment references.
 - `references/v3-recipes.md` — workload and mixin overlay recipes, ownership rules, and how to verify an overlay.
 - `references/v3-publish-and-sign.md` — publishing with buildx, tagging, cosign signing and verification, and tooling notes.
+- `references/sbxenv-kit-references.md` — `agent:`/`kits:` reference shapes, handles, kit args, pinning, the capability-to-`sbxenv.yaml` field mapping, and what `sbx env plan` does not prove.
 - `references/sources.md` — provenance, unverified claims, and conflicts.
 
 ## Assets
