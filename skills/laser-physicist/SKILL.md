@@ -15,11 +15,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 50
   scientific-agents-profile: true
+  local-patches:
+    - sech2-time-bandwidth-product
 ---
 
 # Laser Physicist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -60,7 +64,8 @@ energy, and pulse parameters with traceable metrology.
   grating, distributed feedback) and stable cavity length ( piezo or temperature control).
 - Ultrafast: group velocity dispersion (GVD) and third-order dispersion (TOD) chirp pulses; mode-locking
   (Kerr lens, SESAM, NPR) produces pulse train with repetition rate f_rep = c/(2L). Time-bandwidth product
-  ΔtΔν ≈ 0.44 for transform-limited sech²; chirped pulses exceed this until compressed.
+  ΔtΔν ≈ 0.315 for transform-limited sech² intensity pulses (≈ 0.441 for Gaussian); chirped
+  pulses exceed the applicable transform limit until compressed.
 - Nonlinear optics: intensity I drives n(I) = n₀ + n₂I (Kerr); phase φ = kΔnL; self-phase modulation,
   self-focusing (P_cr ≈ 3.77λ²/(8πn₀n₂)), and damage threshold set peak power limits in fibers and bulk.
 - Frequency conversion: phase matching (birefringent, quasi-phase-matching in PPLN/PPLKTP) for SHG,
