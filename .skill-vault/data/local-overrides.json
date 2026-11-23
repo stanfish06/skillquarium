@@ -495,7 +495,7 @@
       "issue": 1394,
       "source": "openai/plugins",
       "find": "api.get_job_logs(job_id=\"your-job-id\")           # View logs\napi.get_job(job_id=\"your-job-id\")                # Job details",
-      "replace": "api.fetch_job_logs(job_id=\"your-job-id\")         # View logs\napi.inspect_job(job_id=\"your-job-id\")            # Job details"
+      "replace": "for log in api.fetch_job_logs(job_id=\"your-job-id\"):  # View logs\n    print(log)\napi.inspect_job(job_id=\"your-job-id\")            # Job details"
     }
   ],
   "vite": [
