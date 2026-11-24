@@ -4,10 +4,10 @@
   "skills": 2215,
   "expert_profiles": 503,
   "nodes": 2288,
-  "edges": 16461,
+  "edges": 16467,
   "generic_names_blocked": 30,
-  "tier1_edges": 4963,
-  "tier2_edges": 721,
+  "tier1_edges": 4964,
+  "tier2_edges": 723,
   "alias_edges": 4584,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
@@ -17,16 +17,16 @@
   "observations": 0,
   "mean_skill_degree": 5.87,
   "median_skill_degree": 4,
-  "orphan_count": 126,
-  "orphan_rate": 0.0569,
+  "orphan_count": 125,
+  "orphan_rate": 0.0564,
   "by_provenance": {
-   "EXTRACTED": 15675,
+   "EXTRACTED": 15681,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2215,
-   "references": 12938,
+   "references": 12944,
    "in_discipline": 599,
    "touches": 522,
    "has_step": 69,
@@ -7259,7 +7259,7 @@
    "id": "databricks-ml-training",
    "type": "Skill",
    "label": "databricks-ml-training",
-   "description": "Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring (spark_udf for plain models, fe.score_batch for feature-store-backed), custom PyFunc, custom ResponsesAgent (LangGraph + UC Function/Vector Search); UC feature tables + FeatureLookup + point-in-time joins + Lakebase online store; declarative Feature Views (create_feature, DeltaTableSource, RollingWindow/SlidingWindow/TumblingWindow, materialize_features, streaming Kafka features). NOT for: endpoint ops (databricks-model-serving), MLflow evaluation (databricks-mlflow-evaluation).",
+   "description": "Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring (spark_udf for plain models, fe.score_batch for Feature Views-backed), custom PyFunc, custom ResponsesAgent (LangGraph + UC Function/Vector Search); feature engineering with Feature Views (Feature, create_feature, DeltaTableSource/SdpSource/StreamSource/RequestSource, RollingWindow/SawtoothWindow/SlidingWindow/TumblingWindow, compute_features, point-in-time create_training_set, materialize_features to offline Delta + Lakebase online store, streaming features, Feature Serving). NOT for: endpoint ops (databricks-model-serving), MLflow evaluation (databricks-mlflow-evaluation).",
    "source": "skills/databricks-ml-training/SKILL.md",
    "aliases": [
     "databricks ml training"
@@ -19381,7 +19381,7 @@
    "id": "neo4j-driver-go-skill",
    "type": "Skill",
    "label": "neo4j-driver-go-skill",
-   "description": "Covers the Neo4j Go Driver v6 — driver lifecycle, ExecuteQuery, managed and explicit transactions, session config, error handling, data type mapping, and connection tuning. Use when writing Go code that connects to Neo4j, setting up NewDriver or ExecuteQuery, debugging sessions/transactions/result handling, or working with neo4j-go-driver v5→v6 migration. Triggers on NewDriver, ExecuteQuery, SessionConfig, ManagedTransaction, neo4j-go-driver. Does NOT handle Cypher query authoring — use neo4j-cypher-skill. Does NOT cover driver version migration steps — use neo4j-migration-skill.",
+   "description": "Covers the Neo4j Go Driver v6 — driver lifecycle, ExecuteQuery, managed and explicit transactions, session config, error handling, data type mapping, and connection tuning. Use when writing Go code that connects to Neo4j, setting up NewDriver or ExecuteQuery, or debugging sessions/transactions/result handling. Triggers on NewDriver, ExecuteQuery, SessionConfig, ManagedTransaction, neo4j-go-driver. Does NOT handle Cypher query authoring — use neo4j-cypher-skill. Does NOT cover driver version migration steps — use neo4j-migration-skill.",
    "source": "skills/neo4j-driver-go-skill/SKILL.md",
    "aliases": [
     "neo4j driver go skill"
@@ -19488,7 +19488,7 @@
    "id": "neo4j-graphql-skill",
    "type": "Skill",
    "label": "neo4j-graphql-skill",
-   "description": "Build and configure a GraphQL API backed by Neo4j using @neo4j/graphql v7 (current) or v5 (LTS). Covers Neo4jGraphQL constructor, getSchema(), assertIndexesAndConstraints(), type definitions with @node, @relationship (IN/OUT/UNDIRECTED), @cypher for custom resolvers, @authorization/@authentication for JWT/JWKS security, auto-generated queries/mutations, OGM programmatic access, subscriptions via CDC, and Apollo Federation. Use when writing typeDefs, securing fields, or wiring Neo4j to Apollo Server. Does NOT handle raw Cypher outside resolvers — use neo4j-cypher-skill. Does NOT cover Spring Data Neo4j entity mapping — use neo4j-spring-data-skill.",
+   "description": "Build and configure a GraphQL API backed by Neo4j using @neo4j/graphql v7 (current) or v5 (LTS). Covers Neo4jGraphQL constructor, getSchema(), assertIndexesAndConstraints(), type definitions with @node, @relationship (IN/OUT, queryDirection), @cypher for custom resolvers, @authorization/@authentication for JWT/JWKS security, auto-generated queries/mutations, OGM programmatic access, subscriptions via CDC, and Apollo Federation. Use when writing typeDefs, securing fields, or wiring Neo4j to Apollo Server. Does NOT handle raw Cypher outside resolvers — use neo4j-cypher-skill. Does NOT cover Spring Data Neo4j entity mapping — use neo4j-spring-data-skill.",
    "source": "skills/neo4j-graphql-skill/SKILL.md",
    "aliases": [
     "neo4j graphql skill"
@@ -19608,7 +19608,7 @@
    "id": "neo4j-query-tuning-skill",
    "type": "Skill",
    "label": "neo4j-query-tuning-skill",
-   "description": "Diagnoses and fixes slow Neo4j Cypher queries by reading execution plans, identifying bad operators (AllNodesScan, CartesianProduct, Eager, NodeByLabelScan), and prescribing fixes (indexes, hints, query rewrites, runtime selection). Use when a query is slow, when EXPLAIN or PROFILE output needs interpretation, when dbHits or pageCacheHitRatio are poor, when cardinality estimation diverges from actuals, or when deciding between slotted/pipelined/parallel runtimes. Covers USING INDEX / USING SCAN / USING JOIN hints, db.stats.retrieve, SHOW QUERIES, SHOW TRANSACTIONS, TERMINATE TRANSACTION. Does NOT write new Cypher from scratch — use neo4j-cypher-skill. Does NOT cover GDS algorithm tuning — use neo4j-gds-skill. Does NOT cover index/constraint creation syntax details — use neo4j-cypher-skill references/indexes.md.",
+   "description": "Diagnoses and fixes slow Neo4j Cypher queries by reading execution plans, identifying bad operators (AllNodesScan, CartesianProduct, Eager, NodeByLabelScan), and prescribing fixes (indexes, hints, query rewrites, runtime selection). Use when a query is slow, when EXPLAIN or PROFILE output needs interpretation, when dbHits or pageCacheHitRatio are poor, when cardinality estimation diverges from actuals, or when deciding between slotted/pipelined/parallel runtimes. Covers USING INDEX / USING SCAN / USING JOIN hints, db.stats.retrieve, SHOW TRANSACTIONS, TERMINATE TRANSACTION. Does NOT write new Cypher from scratch — use neo4j-cypher-skill. Does NOT cover GDS algorithm tuning — use neo4j-gds-skill. Does NOT cover index/constraint creation syntax details — use neo4j-cypher-skill references/indexes.md.",
    "source": "skills/neo4j-query-tuning-skill/SKILL.md",
    "aliases": [
     "neo4j query tuning skill"
@@ -19656,7 +19656,7 @@
    "id": "neo4j-spark-skill",
    "type": "Skill",
    "label": "neo4j-spark-skill",
-   "description": "Use when reading from or writing to Neo4j with Apache Spark or Databricks using the Neo4j Connector for Apache Spark 6.0 (org.neo4j.connectors:spark) or 5.x (org.neo4j:neo4j-connector-apache-spark). Covers SparkSession setup, DataFrame reads via labels/Cypher/relationship scan, DataFrame writes with SaveMode, node.keys for MERGE, relationship write mapping, partition and batch tuning, PySpark and Scala examples, Databricks cluster config, Databricks secrets for credentials, Delta Lake to Neo4j pipelines. Does NOT handle Cypher authoring — use neo4j-cypher-skill. Does NOT handle the Python bolt driver — use neo4j-driver-python-skill. Does NOT handle GDS algorithms — use neo4j-gds-skill.",
+   "description": "Use when reading from or writing to Neo4j with Apache Spark or Databricks using the Neo4j Connector for Apache Spark 6.x (org.neo4j.connectors:spark) or 5.x (org.neo4j:neo4j-connector-apache-spark). Covers SparkSession setup, DataFrame reads via labels/Cypher/relationship scan, DataFrame writes with SaveMode, node.keys for MERGE, relationship write mapping, partition and batch tuning, PySpark and Scala examples, Databricks cluster config, Databricks secrets for credentials, Delta Lake to Neo4j pipelines. Does NOT handle Cypher authoring — use neo4j-cypher-skill. Does NOT handle the Python bolt driver — use neo4j-driver-python-skill. Does NOT handle GDS algorithms — use neo4j-gds-skill.",
    "source": "skills/neo4j-spark-skill/SKILL.md",
    "aliases": [
     "neo4j spark skill"
@@ -41431,6 +41431,15 @@
   {
    "src": "auth",
    "rel": "references",
+   "dst": "neo4j-security-skill",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "auth referenced in code/link context in neo4j-security-skill/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "auth",
+   "rel": "references",
    "dst": "next-forge",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -47276,15 +47285,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "browser-use named in chip-seq/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "browser-use",
-   "rel": "references",
-   "dst": "logfire-query",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-use named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -87464,6 +87464,15 @@
    "status": "accepted"
   },
   {
+   "src": "handoff",
+   "rel": "references",
+   "dst": "logfire-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "handoff referenced in code/link context in logfire-ui/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "hardware-security",
    "rel": "in_domain",
    "dst": "domain:security-auditing",
@@ -98005,6 +98014,15 @@
   {
    "src": "logfire-instrumentation",
    "rel": "references",
+   "dst": "logfire-query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "logfire-instrumentation named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-instrumentation",
+   "rel": "references",
    "dst": "observability-and-instrumentation",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98050,15 +98068,6 @@
   {
    "src": "logfire-query",
    "rel": "references",
-   "dst": "browser-use",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-use named in logfire-query/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "logfire-query",
-   "rel": "references",
    "dst": "hex",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98068,19 +98077,19 @@
   {
    "src": "logfire-query",
    "rel": "references",
-   "dst": "logfire-ui",
+   "dst": "logfire-instrumentation",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "logfire-ui named in logfire-query/SKILL.md body",
+   "justification": "logfire-instrumentation named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
    "src": "logfire-query",
    "rel": "references",
-   "dst": "opentelemetry",
+   "dst": "logfire-ui",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "opentelemetry named in logfire-query/SKILL.md body",
+   "justification": "logfire-ui named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98099,6 +98108,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "telemetry named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-query",
+   "rel": "references",
+   "dst": "wizard",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98131,6 +98149,15 @@
   {
    "src": "logfire-ui",
    "rel": "references",
+   "dst": "handoff",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "handoff referenced in code/link context in logfire-ui/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-ui",
+   "rel": "references",
    "dst": "logfire-query",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98153,6 +98180,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "telemetry named in logfire-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-ui",
+   "rel": "references",
+   "dst": "wizard",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-ui/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -113971,6 +114007,15 @@
   {
    "src": "neo4j-security-skill",
    "rel": "references",
+   "dst": "auth",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "auth referenced in code/link context in neo4j-security-skill/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neo4j-security-skill",
+   "rel": "references",
    "dst": "neo4j-cli-tools-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -122102,15 +122147,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "opentelemetry named in logfire-instrumentation/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "opentelemetry",
-   "rel": "references",
-   "dst": "logfire-query",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "opentelemetry named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -178870,6 +178906,24 @@
   {
    "src": "wizard",
    "rel": "references",
+   "dst": "logfire-query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "wizard",
+   "rel": "references",
+   "dst": "logfire-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "wizard",
+   "rel": "references",
    "dst": "matlab-build-app",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -181943,7 +181997,6 @@
   "genome-match",
   "git-guardrails-claude-code",
   "gnucobol-mainframe-batch",
-  "handoff",
   "hibernate-upgrade",
   "imc-tuning-rules",
   "internal-comms",

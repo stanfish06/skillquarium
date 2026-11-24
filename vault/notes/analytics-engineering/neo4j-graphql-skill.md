@@ -15,7 +15,7 @@ created: 2026-08-23
 # neo4j-graphql-skill
 
 > [!info] What it does
-> Build and configure a GraphQL API backed by Neo4j using @neo4j/graphql v7 (current) or v5 (LTS). Covers Neo4jGraphQL constructor, getSchema(), assertIndexesAndConstraints(), type definitions with @node, @relationship (IN/OUT/UNDIRECTED), @cypher for custom resolvers, @authorization/@authentication for JWT/JWKS security, auto-generated queries/mutations, OGM programmatic access, subscriptions via CDC, and Apollo Federation. Use when writing typeDefs, securing fields, or wiring Neo4j to Apollo Server. Does NOT handle raw Cypher outside resolvers — use neo4j-cypher-skill. Does NOT cover Spring Data Neo4j entity mapping — use neo4j-spring-data-skill.
+> Build and configure a GraphQL API backed by Neo4j using @neo4j/graphql v7 (current) or v5 (LTS). Covers Neo4jGraphQL constructor, getSchema(), assertIndexesAndConstraints(), type definitions with @node, @relationship (IN/OUT, queryDirection), @cypher for custom resolvers, @authorization/@authentication for JWT/JWKS security, auto-generated queries/mutations, OGM programmatic access, subscriptions via CDC, and Apollo Federation. Use when writing typeDefs, securing fields, or wiring Neo4j to Apollo Server. Does NOT handle raw Cypher outside resolvers — use neo4j-cypher-skill. Does NOT cover Spring Data Neo4j entity mapping — use neo4j-spring-data-skill.
 
 **Source:** [skills/neo4j-graphql-skill/SKILL.md](../../../skills/neo4j-graphql-skill/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 
