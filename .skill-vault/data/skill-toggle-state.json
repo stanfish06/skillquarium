@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-10-30T18:52:00.037000+00:00",
+  "saved_at": "2026-11-25T12:54:16.891000+00:00",
   "root": "/Users/stan/.agents",
   "skills": {
     "academic-paper": {
@@ -987,6 +987,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "casadi-ipopt-nlp": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "case-review": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -1166,6 +1170,10 @@
     "chromatin-biologist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "chrome-extensions": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "chronobiologist": {
       "claude_enabled": false,
@@ -1754,6 +1762,10 @@
     "cytogeneticist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "d3": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "d3-data-visualization": {
       "claude_enabled": true,
@@ -2471,6 +2483,86 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "emil-animate": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-animate-expo": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-animation-performance": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-animation-vocabulary": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-apple-design": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-ask-emil": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-ask-sonner": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-break-ui": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-choreograph": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-design-eng": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-find-animation-opportunities": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-gestures": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-improve-animations": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-learn-taste": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-mobile-native": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-pick-ui-library": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-prototype": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-remove-animations": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-review-animations": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
+    "emil-write-swift": {
+      "claude_enabled": false,
+      "codex_enabled": false
+    },
     "encode-skill": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -2787,6 +2879,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "finite-horizon-lqr": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "finngen-phewas-skill": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -2844,6 +2940,10 @@
       "codex_enabled": false
     },
     "firmware-pentest": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "first-order-model-fitting": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -3159,6 +3259,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "ggplot2": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "gh-address-comments": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -3247,6 +3351,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "gnucobol-mainframe-batch": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "go-rust-reverse": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -3280,6 +3388,10 @@
       "codex_enabled": true
     },
     "google-drive-comments": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "google-elephant-goldfish-model": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -3460,6 +3572,10 @@
       "codex_enabled": false
     },
     "hf-cli": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "hibernate-upgrade": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -3647,6 +3763,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "imc-tuning-rules": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "immunogeneticist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -3755,6 +3875,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "inspiration": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "install-duckdb": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -3824,6 +3948,10 @@
       "codex_enabled": false
     },
     "item-management": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "jakarta-namespace": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -4147,6 +4275,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "logistics-rules-to-optimization": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "loki": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -4154,6 +4286,10 @@
     "loki-label-analyzer": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "lomb-scargle-periodogram": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "loop-me": {
       "claude_enabled": false,
@@ -4451,6 +4587,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "matplotlib-design": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "maui-app-lifecycle": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -4687,6 +4827,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "milp-solver-workflow": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "mimir": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -4710,6 +4854,10 @@
     "mining-geologist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "mip-solver-and-solution-audit": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "mixpanel-auth": {
       "claude_enabled": false,
@@ -4744,6 +4892,10 @@
       "codex_enabled": true
     },
     "modern-typescript": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "modern-web-guidance": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -5595,6 +5747,14 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "ortools-pickup-delivery-routing": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "ortools-routing-modeling": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "ossfuzz": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -5747,6 +5907,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "pcap-triage-tshark": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "pdf": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -5874,6 +6038,10 @@
     "physician-scientist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "pid-controller": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "plan-ui-change": {
       "claude_enabled": true,
@@ -6335,6 +6503,30 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "python-scala-collections": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "python-scala-functional": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "python-scala-idioms": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "python-scala-libraries": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "python-scala-oop": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "python-scala-syntax-mapping": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "pytorch-lightning": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -6759,6 +6951,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "rex": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "rf-microwave-engineer": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -6791,6 +6987,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "roast-my-chart": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "robotics-engineer": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -6800,6 +7000,10 @@
       "codex_enabled": false
     },
     "routing-middleware": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "routing-subtour-elimination": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -6932,6 +7136,14 @@
       "codex_enabled": true
     },
     "scikit-survival": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "scip-opt": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "scipy-curve-fit": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -7243,6 +7455,10 @@
       "claude_enabled": true,
       "codex_enabled": true
     },
+    "simulation-metrics": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "single-cell-biologist": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -7304,6 +7520,10 @@
       "codex_enabled": true
     },
     "snakemake-workflow-engine": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "socratic-tutor": {
       "claude_enabled": true,
       "codex_enabled": true
     },
@@ -7375,6 +7595,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "spring-boot-migration": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "sprite-pipeline": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -7393,6 +7617,10 @@
     },
     "start": {
       "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "statechart": {
+      "claude_enabled": false,
       "codex_enabled": true
     },
     "statistical-analysis": {
@@ -7523,6 +7751,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "suricata-offline-evejson": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "surveyor-geomatics-engineer": {
       "claude_enabled": false,
       "codex_enabled": false
@@ -7590,6 +7822,14 @@
     "systems-neuroscientist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "syz-extract-constants": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "syzlang-ioctl-basics": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "target-authoring": {
       "claude_enabled": true,
@@ -7783,6 +8023,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "timeseries-detrending": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "timesfm-forecasting": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -7839,6 +8083,18 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "transaction-concurrency-control-foundations": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "transaction-protocol-reasoning": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
+    "transaction-trace-analysis": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "transformers": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -7859,6 +8115,10 @@
       "claude_enabled": false,
       "codex_enabled": false
     },
+    "trend-analysis": {
+      "claude_enabled": true,
+      "codex_enabled": true
+    },
     "triage": {
       "claude_enabled": true,
       "codex_enabled": true
@@ -7874,6 +8134,10 @@
     "tribologist": {
       "claude_enabled": false,
       "codex_enabled": false
+    },
+    "trivy-offline-vulnerability-scanning": {
+      "claude_enabled": true,
+      "codex_enabled": true
     },
     "troubleshooting-dbt-job-errors": {
       "claude_enabled": true,
