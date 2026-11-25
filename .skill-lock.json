@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "ffa5a7747c634055d68bc50dfddfc2c059e552a6",
+      "skillFolderHash": "1365a1b5eca8f058bb6f6c51e403786920adcb2f",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-24T17:39:20.958Z"
+      "updatedAt": "2026-11-25T17:10:10.018Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -2654,9 +2654,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-test/skills/assertion-quality/SKILL.md",
-      "skillFolderHash": "6970d72ac3ed98fa5cc862c4dcce6746051f3120",
+      "skillFolderHash": "fd35e05d968ac2de3aab036402196a74586cc5b9",
       "installedAt": "2026-07-21T05:30:50.017Z",
-      "updatedAt": "2026-10-10T12:47:56.562Z"
+      "updatedAt": "2026-11-25T17:10:19.682Z"
     },
     "code-testing-agent": {
       "source": "dotnet/skills",
@@ -9251,9 +9251,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/domain-modeling/SKILL.md",
-      "skillFolderHash": "ea30ee454ba264543dbe40737973b1a5afb9f0e6",
+      "skillFolderHash": "db8ef024fb9a7b2022d57289359ae96cff0d8483",
       "installedAt": "2026-08-20T03:52:19.201Z",
-      "updatedAt": "2026-10-10T12:49:57.277Z"
+      "updatedAt": "2026-11-25T17:10:25.530Z"
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
@@ -9528,9 +9528,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "051041d06d835b75e3359eb18e74f16642f4c46d",
+      "skillFolderHash": "6f017188ec0abe9d3c91e91929d73acadaa16a0a",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-23T18:02:37.983Z"
+      "updatedAt": "2026-11-25T17:10:29.093Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -9555,9 +9555,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "ac2b324253d65190ae29baf0078da14c60f534af",
+      "skillFolderHash": "3d1cfeae31d77ff3e0a9687b628f7bbd3600aee3",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-11-23T18:02:41.503Z"
+      "updatedAt": "2026-11-25T17:10:32.301Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",

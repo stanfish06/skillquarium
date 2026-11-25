@@ -44,7 +44,7 @@ created: 2026-07-21
 - [detect-static-dependencies](../notes/dotnet-development/detect-static-dependencies.md) — ACTIVATION PREREQUISITE: the request or discovered target must explicitly identify C#, .NET, `.cs`, or `.csproj`
 - [directory-build-organization](../notes/dotnet-development/directory-build-organization.md) — USE ONLY for (1) two or more projects with repeated MSBuild policy, targets, or package versions, or (2) an existing Directory.Build.props/targets/rsp hierarchy with an import...
 - [dotnet-aot-compat](../notes/dotnet-development/dotnet-aot-compat.md) — Make .NET projects compatible with Native AOT and trimming by systematically resolving IL trim/AOT analyzer warnings
-- [dotnet-coverage-analysis](../notes/dotnet-development/dotnet-coverage-analysis.md) — Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects
+- [dotnet-coverage-analysis](../notes/dotnet-development/dotnet-coverage-analysis.md) — Activation requires either supplied .NET coverage reports/percentages/line, branch, or condition metrics, or an explicit request to collect .NET coverage for analysis
 - [dotnet-maui-doctor](../notes/dotnet-development/dotnet-maui-doctor.md) — Diagnoses and fixes .NET MAUI development environment issues
 - [dotnet-pinvoke](../notes/dotnet-development/dotnet-pinvoke.md) — Correctly call native (C/C++) libraries from .NET using P/Invoke and LibraryImport
 - [dotnet-trace-collect](../notes/dotnet-development/dotnet-trace-collect.md) — Guide developers through capturing diagnostic artifacts to diagnose production .NET performance issues

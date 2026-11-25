@@ -4,11 +4,11 @@
   "skills": 2235,
   "expert_profiles": 503,
   "nodes": 2308,
-  "edges": 16617,
+  "edges": 16625,
   "generic_names_blocked": 30,
-  "tier1_edges": 5022,
+  "tier1_edges": 5027,
   "tier2_edges": 727,
-  "alias_edges": 4638,
+  "alias_edges": 4643,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 522,
@@ -20,13 +20,13 @@
   "orphan_count": 125,
   "orphan_rate": 0.0559,
   "by_provenance": {
-   "EXTRACTED": 15831,
+   "EXTRACTED": 15839,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2235,
-   "references": 13074,
+   "references": 13082,
    "in_discipline": 599,
    "touches": 522,
    "has_step": 69,
@@ -8910,7 +8910,7 @@
    "id": "dotnet-coverage-analysis",
    "type": "Skill",
    "label": "dotnet-coverage-analysis",
-   "description": "> Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects. Calculates CRAP scores per method and surfaces risk hotspots — complex code with low coverage that is dangerous to modify. Use to diagnose why coverage is stuck or plateaued, identify what methods block improvement, or get project-wide coverage analysis with risk ranking. USE FOR: coverage stuck, coverage plateau, can't increase coverage, what's blocking coverage, coverage gap, CRAP scores, risk hotspots, where to add tests, coverage analysis, coverage report. DO NOT USE FOR: targeted single-method CRAP analysis (use crap-score); auditing test code for coverage-touching or other anti-patterns (use test-anti-patterns); writing tests; running tests (use run-tests). Requires or produces coverage (Cobertura) and CRAP metrics.",
+   "description": "> Activation requires either supplied .NET coverage reports/percentages/line, branch, or condition metrics, or an explicit request to collect .NET coverage for analysis. USE FOR: interpreting that evidence, including Cobertura data, partial conditions, plateaus, target arithmetic, project-wide coverage-backed CRAP, and coverage-backed refactoring safety. Analyze supplied reports directly without rerunning tests or installing tools. DO NOT USE FOR: requests with neither coverage evidence nor explicit coverage-collection intent, including hypothetical change-survival questions (use test-gap-analysis); CRAP or refactoring safety for one named target (use crap-score); or requests owned by test-tagging, find-untested-sources, test-anti-patterns, run-tests, or code-testing.",
    "source": "skills/dotnet-coverage-analysis/SKILL.md",
    "aliases": [
     "dotnet coverage analysis"
@@ -35521,15 +35521,6 @@
   {
    "src": "agentcore",
    "rel": "references",
-   "dst": "core",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "agentcore named in core/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "agentcore",
-   "rel": "references",
    "dst": "twilio-agent-connect",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -47585,6 +47576,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "browser-use named in chip-seq/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "browser-use",
+   "rel": "references",
+   "dst": "core",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "browser-use named in core/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -59956,19 +59956,19 @@
   {
    "src": "core",
    "rel": "references",
-   "dst": "agentcore",
+   "dst": "alerting-irm",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "agentcore named in core/SKILL.md body",
+   "justification": "curated alias of alerting-irm appears in core/SKILL.md",
    "status": "accepted"
   },
   {
    "src": "core",
    "rel": "references",
-   "dst": "alerting-irm",
+   "dst": "browser-use",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "curated alias of alerting-irm appears in core/SKILL.md",
+   "justification": "browser-use named in core/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70765,10 +70765,28 @@
   {
    "src": "dotnet-coverage-analysis",
    "rel": "references",
-   "dst": "platform-detection",
+   "dst": "find-untested-sources",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "curated alias of platform-detection appears in dotnet-coverage-analysis/SKILL.md",
+   "justification": "find-untested-sources named in dotnet-coverage-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "dotnet-coverage-analysis",
+   "rel": "references",
+   "dst": "gap-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "gap-analysis named in dotnet-coverage-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "dotnet-coverage-analysis",
+   "rel": "references",
+   "dst": "report-template",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "report-template named in dotnet-coverage-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -70787,6 +70805,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "test-anti-patterns named in dotnet-coverage-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "dotnet-coverage-analysis",
+   "rel": "references",
+   "dst": "test-gap-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "test-gap-analysis named in dotnet-coverage-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "dotnet-coverage-analysis",
+   "rel": "references",
+   "dst": "test-tagging",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "test-tagging named in dotnet-coverage-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -78280,6 +78316,15 @@
   {
    "src": "find-untested-sources",
    "rel": "references",
+   "dst": "dotnet-coverage-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "find-untested-sources named in dotnet-coverage-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "find-untested-sources",
+   "rel": "references",
    "dst": "gap-analysis",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -82541,6 +82586,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "gap-analysis named in document-quality-check/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "gap-analysis",
+   "rel": "references",
+   "dst": "dotnet-coverage-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "gap-analysis named in dotnet-coverage-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -131056,15 +131110,6 @@
   {
    "src": "platform-detection",
    "rel": "references",
-   "dst": "dotnet-coverage-analysis",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "curated alias of platform-detection appears in dotnet-coverage-analysis/SKILL.md",
-   "status": "accepted"
-  },
-  {
-   "src": "platform-detection",
-   "rel": "references",
    "dst": "exp-test-maintainability",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -144227,6 +144272,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "report-template named in dogfood/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "report-template",
+   "rel": "references",
+   "dst": "dotnet-coverage-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "report-template named in dotnet-coverage-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -167479,6 +167533,15 @@
   {
    "src": "test-gap-analysis",
    "rel": "references",
+   "dst": "dotnet-coverage-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "test-gap-analysis named in dotnet-coverage-analysis/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "test-gap-analysis",
+   "rel": "references",
    "dst": "find-untested-sources",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -167627,6 +167690,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "crap-score named in test-tagging/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "test-tagging",
+   "rel": "references",
+   "dst": "dotnet-coverage-analysis",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "test-tagging named in dotnet-coverage-analysis/SKILL.md body",
    "status": "accepted"
   },
   {
