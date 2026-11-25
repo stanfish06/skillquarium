@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "7a38dcb754a13c90da0927b459a442e8afa4638d",
+      "skillFolderHash": "ffa5a7747c634055d68bc50dfddfc2c059e552a6",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-21T14:37:17.709Z"
+      "updatedAt": "2026-11-24T17:39:20.958Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -2041,18 +2041,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "skillFolderHash": "ee63a7e76a7f26a3f47b929568035283d89c8964",
+      "skillFolderHash": "daa240a23dd90b80552f231061d497a885699da3",
       "installedAt": "2026-06-13T13:27:36.566Z",
-      "updatedAt": "2026-11-13T14:32:28.303Z"
+      "updatedAt": "2026-11-23T18:01:58.449Z"
     },
     "cavecrew": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "skillFolderHash": "e85bda8b46812f2f2030a79d5f825ef0add7fc72",
+      "skillFolderHash": "e2165028c108d999938a3419ab471e07b47ed381",
       "installedAt": "2026-06-13T13:42:44.373Z",
-      "updatedAt": "2026-11-06T14:14:38.529Z"
+      "updatedAt": "2026-11-23T18:01:59.738Z"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -2086,9 +2086,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
       "skillPath": "skills/caveman-stats/SKILL.md",
-      "skillFolderHash": "c7b80bfb2ad324f99f87e0f16a81aca38c5d7257",
+      "skillFolderHash": "95e2371a57cda91058f4a611b8082ea0d0e16683",
       "installedAt": "2026-06-13T13:42:44.381Z",
-      "updatedAt": "2026-10-10T12:47:30.051Z"
+      "updatedAt": "2026-11-23T18:02:00.983Z"
     },
     "docker-expert": {
       "source": "sickn33/agentic-awesome-skills",
@@ -3414,15 +3414,6 @@
       "installedAt": "2026-07-21T05:33:26.457Z",
       "updatedAt": "2026-07-21T05:33:26.457Z"
     },
-    "dotnet-coverage-analysis": {
-      "source": "dotnet/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/dotnet/skills.git",
-      "skillPath": "plugins/dotnet-test/skills/coverage-analysis/SKILL.md",
-      "skillFolderHash": "b44e9281298428c64c74d1184716449660352ced",
-      "installedAt": "2026-07-21T05:40:00.000Z",
-      "updatedAt": "2026-07-21T05:40:00.000Z"
-    },
     "building-pydantic-ai-agents": {
       "source": "pydantic/skills",
       "sourceType": "github",
@@ -3446,18 +3437,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pydantic/skills.git",
       "skillPath": "skills/logfire-query/SKILL.md",
-      "skillFolderHash": "56de0a5f2c0cc1159b1d73d54b578d9ea26d8af6",
+      "skillFolderHash": "7b4a152444af1a9944097a49eb7bd798eab98312",
       "installedAt": "2026-07-21T11:27:04.647Z",
-      "updatedAt": "2026-07-21T11:27:04.647Z"
+      "updatedAt": "2026-11-24T17:39:40.773Z"
     },
     "logfire-ui": {
       "source": "pydantic/skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/pydantic/skills.git",
       "skillPath": "skills/logfire-ui/SKILL.md",
-      "skillFolderHash": "211768b71a9fd50b937228ea4c8d665fbe737b73",
+      "skillFolderHash": "bbbb3b42878835100c07d46f35bb82ea216d57e5",
       "installedAt": "2026-07-21T11:27:04.648Z",
-      "updatedAt": "2026-07-21T11:27:04.648Z"
+      "updatedAt": "2026-11-24T17:39:41.921Z"
     },
     "pydantic-ai-harness": {
       "source": "pydantic/skills",
@@ -8801,9 +8792,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "ffb4e62daba3f1d43556123a5691632de5d25a22",
+      "skillFolderHash": "5481fc8c4cb5675a04d8a0032ac3e0c32bc84c14",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-22T14:31:56.273Z"
+      "updatedAt": "2026-11-23T18:02:20.014Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -8828,9 +8819,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "c29b0d16b4531374652186b4732aae57a5efc3ce",
+      "skillFolderHash": "3abb5e87d93e5cfaa0b758a4b07926f619cb7a33",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-22T14:32:10.100Z"
+      "updatedAt": "2026-11-23T18:02:33.963Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9537,9 +9528,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "eaf4e64a81eda10ae2a5a882bf150771482cfd9f",
+      "skillFolderHash": "051041d06d835b75e3359eb18e74f16642f4c46d",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-22T14:32:13.869Z"
+      "updatedAt": "2026-11-23T18:02:37.983Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
@@ -9564,9 +9555,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "ef5b067b143385004753dc754720eb1dcecd2dc7",
+      "skillFolderHash": "ac2b324253d65190ae29baf0078da14c60f534af",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-11-21T14:37:41.081Z"
+      "updatedAt": "2026-11-23T18:02:41.503Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",
@@ -9812,18 +9803,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-clickhouse/SKILL.md",
-      "skillFolderHash": "f277ab3fe43e209bcdc042f591a726f7a499e166",
+      "skillFolderHash": "7c93d5797fb6d2ce8adbd9d0c08c2e37754a4fa6",
       "installedAt": "2026-08-23T17:16:56.407Z",
-      "updatedAt": "2026-11-20T15:25:38.372Z"
+      "updatedAt": "2026-11-24T17:39:43.194Z"
     },
     "infra-postgres": {
       "source": "clickhouse/agent-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/clickhouse/agent-skills.git",
       "skillPath": "skills/infra-postgres/SKILL.md",
-      "skillFolderHash": "ed2a4429c404c8e36268997a7a7b7710c0914796",
+      "skillFolderHash": "d8513e025d2587a413a725539920c307240417a9",
       "installedAt": "2026-08-23T17:16:56.410Z",
-      "updatedAt": "2026-11-20T15:25:39.403Z"
+      "updatedAt": "2026-11-24T17:39:44.447Z"
     },
     "cloudformation-to-pulumi": {
       "source": "pulumi/agent-skills",
@@ -9884,9 +9875,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/pulumi/agent-skills.git",
       "skillPath": "package-maintenance/skills/pulumi-upgrade-provider/SKILL.md",
-      "skillFolderHash": "2dadfeeeec0a427449a3cd1adc9bf18aef5aa9e9",
+      "skillFolderHash": "8f1a4cad130cfde2243bb30541b2389e9206c9a1",
       "installedAt": "2026-08-23T17:16:59.280Z",
-      "updatedAt": "2026-08-23T17:16:59.280Z"
+      "updatedAt": "2026-11-24T17:39:45.600Z"
     },
     "admission-control": {
       "source": "grafana/skills",
@@ -10607,9 +10598,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-ml-training/SKILL.md",
-      "skillFolderHash": "6d2151593a20b570297152f45331b2690000913f",
+      "skillFolderHash": "4e217340118e8cea7c293e649f533ceb1db8ac37",
       "installedAt": "2026-08-23T17:20:36.176Z",
-      "updatedAt": "2026-10-28T12:49:15.092Z"
+      "updatedAt": "2026-11-24T17:39:49.869Z"
     },
     "databricks-mlflow-evaluation": {
       "source": "databricks/databricks-agent-skills",
@@ -10652,9 +10643,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-serverless-migration/SKILL.md",
-      "skillFolderHash": "0be6f60a301697a950361f44fe7f98fb23520d5e",
+      "skillFolderHash": "28eb0a2daedd95ddcff34ea8703af1ea50787940",
       "installedAt": "2026-08-23T17:20:36.198Z",
-      "updatedAt": "2026-11-12T15:11:18.922Z"
+      "updatedAt": "2026-11-24T17:39:51.905Z"
     },
     "databricks-spark-structured-streaming": {
       "source": "databricks/databricks-agent-skills",
@@ -10715,27 +10706,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-agent-memory-skill/SKILL.md",
-      "skillFolderHash": "098c331fe745c78b2a611148de8af82dfea94345",
+      "skillFolderHash": "b637f154f97b41e2bcefdb93c7641d8838dd7729",
       "installedAt": "2026-08-23T17:20:44.676Z",
-      "updatedAt": "2026-11-03T14:09:10.606Z"
+      "updatedAt": "2026-11-24T17:39:53.218Z"
     },
     "neo4j-aura-agent-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-aura-agent-skill/SKILL.md",
-      "skillFolderHash": "573a8617c4cffc1ed619487dd2cdb46002ac5319",
+      "skillFolderHash": "4c72d9a4e3d3de1291ffc16f74436d1857715911",
       "installedAt": "2026-08-23T17:20:44.693Z",
-      "updatedAt": "2026-10-10T12:51:01.210Z"
+      "updatedAt": "2026-11-24T17:39:55.020Z"
     },
     "neo4j-aura-graph-analytics-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-aura-graph-analytics-skill/SKILL.md",
-      "skillFolderHash": "61e0c65122837b10caa77668797236996b0ed36d",
+      "skillFolderHash": "cbf9d81cd908c613b1235be0d84cd3262c50caef",
       "installedAt": "2026-08-23T17:20:44.702Z",
-      "updatedAt": "2026-11-03T14:09:12.527Z"
+      "updatedAt": "2026-11-24T17:39:57.909Z"
     },
     "neo4j-aura-provisioning-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10751,18 +10742,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-cli-tools-skill/SKILL.md",
-      "skillFolderHash": "ac925356aa71b322cd1ebdc51636f89bbd1300f6",
+      "skillFolderHash": "d2af4d42911ebc17990eef5125fbb35409185f56",
       "installedAt": "2026-08-23T17:20:44.715Z",
-      "updatedAt": "2026-10-10T12:51:03.566Z"
+      "updatedAt": "2026-11-24T17:40:00.939Z"
     },
     "neo4j-cypher-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-cypher-skill/SKILL.md",
-      "skillFolderHash": "463e7920cdda69458838962bb6d71d20a73466ba",
+      "skillFolderHash": "06af29366b497d4d575e40c06ec270725795ee23",
       "installedAt": "2026-08-23T17:20:44.721Z",
-      "updatedAt": "2026-11-03T14:09:14.279Z"
+      "updatedAt": "2026-11-24T17:40:02.612Z"
     },
     "neo4j-document-import-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10778,64 +10769,63 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-dotnet-skill/SKILL.md",
-      "skillFolderHash": "cf9d2da8b623f4ab4cf70aad2e48d71d7424ec3e",
+      "skillFolderHash": "5f7273c8db4c649b31b8d34dfe95351ba4c89759",
       "installedAt": "2026-08-23T17:20:44.732Z",
-      "updatedAt": "2026-11-03T14:09:17.753Z"
+      "updatedAt": "2026-11-24T17:40:05.474Z"
     },
     "neo4j-driver-go-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-go-skill/SKILL.md",
-      "skillFolderHash": "0e8fd3898d058261f188ae592e5074b965c8ac04",
+      "skillFolderHash": "84fa229851076a9b83505bd9500d7eb5e6f7b077",
       "installedAt": "2026-08-23T17:20:44.737Z",
-      "updatedAt": "2026-11-03T14:09:19.512Z"
+      "updatedAt": "2026-11-24T17:40:07.089Z"
     },
     "neo4j-driver-java-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-java-skill/SKILL.md",
-      "skillFolderHash": "b1c3e05a7bafc170c0ea3705cf34da3ceef0a3e6",
+      "skillFolderHash": "2379c28a0a445d1a54ec0100008ecad95ee767dd",
       "installedAt": "2026-08-23T17:20:44.742Z",
-      "updatedAt": "2026-10-10T12:51:07.743Z"
+      "updatedAt": "2026-11-24T17:40:09.652Z"
     },
     "neo4j-driver-javascript-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-javascript-skill/SKILL.md",
-      "skillFolderHash": "5b9c57d10725ecd7e2f022f65e6caca04b618fa1",
+      "skillFolderHash": "1c8e1dbd729333f73ea9581942c725dfc7be7df9",
       "installedAt": "2026-08-23T17:20:44.748Z",
-      "updatedAt": "2026-11-03T14:09:21.521Z"
+      "updatedAt": "2026-11-24T17:40:11.966Z"
     },
     "neo4j-driver-python-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-driver-python-skill/SKILL.md",
-      "skillFolderHash": "3771b2872fc9f1677b8dc714e79151ed0dd2a2dd",
+      "skillFolderHash": "97fedc2a4adaa9b906c590902eae9c190b49f46e",
       "installedAt": "2026-08-23T17:20:44.752Z",
-      "updatedAt": "2026-10-19T13:08:48.145Z"
+      "updatedAt": "2026-11-24T17:40:13.528Z"
     },
     "neo4j-gds-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-gds-skill/SKILL.md",
-      "skillFolderHash": "078ffda70d2be79ca534f78aa8e42e6dc57f1d92",
+      "skillFolderHash": "6091b8eb5482edddba41ac041d9bd1c337316c39",
       "installedAt": "2026-08-23T17:20:44.755Z",
-      "updatedAt": "2026-11-03T14:09:24.803Z"
+      "updatedAt": "2026-11-24T17:40:14.803Z"
     },
     "neo4j-genai-plugin-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-genai-plugin-skill/SKILL.md",
-      "skillFolderHash": "3a0d400e9b4131f21b0c2722c57f8ed61c6795ed",
-      "pluginName": "neo4j-skills",
+      "skillFolderHash": "0bb6f100e57a6eaf4e6f97b7ed5a35a0375e4791",
       "installedAt": "2026-08-23T17:20:44.759Z",
-      "updatedAt": "2026-08-23T17:20:44.759Z"
+      "updatedAt": "2026-11-24T17:40:15.895Z"
     },
     "neo4j-getting-started-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10851,9 +10841,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-graphql-skill/SKILL.md",
-      "skillFolderHash": "9004c0ffdb5e88e2b2eb29fcbf64e39caabdf02a",
+      "skillFolderHash": "60c9a7680e749e45bb4050115edc1ef0a7830b26",
       "installedAt": "2026-08-23T17:20:44.766Z",
-      "updatedAt": "2026-10-10T12:51:12.089Z"
+      "updatedAt": "2026-11-24T17:40:19.148Z"
     },
     "neo4j-graphrag-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10870,10 +10860,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-import-skill/SKILL.md",
-      "skillFolderHash": "5ffe3accdadb649b971050a64242d459adc61e25",
-      "pluginName": "neo4j-skills",
+      "skillFolderHash": "92de9668eeb19fa6ad95e5714aa4c374e0aea1c8",
       "installedAt": "2026-08-23T17:20:44.773Z",
-      "updatedAt": "2026-08-23T17:20:44.773Z"
+      "updatedAt": "2026-11-24T17:40:21.671Z"
     },
     "neo4j-kafka-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10889,19 +10878,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-mcp-skill/SKILL.md",
-      "skillFolderHash": "6f49d4662450c5cc06010b9d5cbdcd68fc4ed917",
-      "pluginName": "neo4j-skills",
+      "skillFolderHash": "b95fd0b8699b273122d37bfd814aa4225d56fdf1",
       "installedAt": "2026-08-23T17:20:44.781Z",
-      "updatedAt": "2026-08-23T17:20:44.781Z"
+      "updatedAt": "2026-11-24T17:40:24.008Z"
     },
     "neo4j-migration-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-migration-skill/SKILL.md",
-      "skillFolderHash": "f5b23b6350f5018e2d3dda300e7cea1ba716d332",
+      "skillFolderHash": "a4883667042c8a544de72e3d1022ec46da5254ad",
       "installedAt": "2026-08-23T17:20:44.785Z",
-      "updatedAt": "2026-11-03T14:09:28.523Z"
+      "updatedAt": "2026-11-24T17:40:25.976Z"
     },
     "neo4j-modeling-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10917,65 +10905,63 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-nvl-skill/SKILL.md",
-      "skillFolderHash": "6ed9e639bcce2fbe9f0656c77c794e9789d648a4",
+      "skillFolderHash": "a711390128ca8b5431b3eabbce0eab44c93c4125",
       "installedAt": "2026-08-23T17:20:44.793Z",
-      "updatedAt": "2026-10-10T12:51:15.778Z"
+      "updatedAt": "2026-11-24T17:40:27.342Z"
     },
     "neo4j-query-tuning-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-query-tuning-skill/SKILL.md",
-      "skillFolderHash": "9f14470e5816bacc0f1939fc3e8a1cf919dcb181",
+      "skillFolderHash": "f6e6eafb0f22bd220a3889f5a55a4eb8f5ae0331",
       "installedAt": "2026-08-23T17:20:44.797Z",
-      "updatedAt": "2026-11-03T14:09:31.693Z"
+      "updatedAt": "2026-11-24T17:40:28.698Z"
     },
     "neo4j-security-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-security-skill/SKILL.md",
-      "skillFolderHash": "dfff6638e55848e0a332a7e84a90ef1a4c6345d2",
+      "skillFolderHash": "8638ccb536697f9ded097ebbdefc640e7a43998d",
       "installedAt": "2026-08-23T17:20:44.802Z",
-      "updatedAt": "2026-11-03T14:09:33.258Z"
+      "updatedAt": "2026-11-24T17:40:30.059Z"
     },
     "neo4j-snowflake-graph-analytics-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-snowflake-graph-analytics-skill/SKILL.md",
-      "skillFolderHash": "a8cef09bbedc719a271fcfd6f187f850d91d90f7",
+      "skillFolderHash": "3cd04ac9e6532d76235f11588ef399cce00c7c52",
       "installedAt": "2026-08-23T17:20:44.806Z",
-      "updatedAt": "2026-10-20T11:33:32.256Z"
+      "updatedAt": "2026-11-24T17:40:31.745Z"
     },
     "neo4j-spark-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-spark-skill/SKILL.md",
-      "skillFolderHash": "b1ee9de35981b712884fa80813858d2cca30e84f",
-      "pluginName": "neo4j-skills",
+      "skillFolderHash": "9b2c1d69d5438cf2008ff60e403fdf6d8d306771",
       "installedAt": "2026-08-23T17:20:44.810Z",
-      "updatedAt": "2026-08-23T17:20:44.810Z"
+      "updatedAt": "2026-11-24T17:40:33.657Z"
     },
     "neo4j-spring-data-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-spring-data-skill/SKILL.md",
-      "skillFolderHash": "3fe485b228327b84ca4cd0fddcd76ade25192871",
-      "pluginName": "neo4j-skills",
+      "skillFolderHash": "6f760c9072801fb56683aa0354278c40948a9b21",
       "installedAt": "2026-08-23T17:20:44.815Z",
-      "updatedAt": "2026-08-23T17:20:44.815Z"
+      "updatedAt": "2026-11-24T17:40:35.315Z"
     },
     "neo4j-vector-index-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-vector-index-skill/SKILL.md",
-      "skillFolderHash": "45b066606a092dae501d781bb460969125eb146d",
+      "skillFolderHash": "8b27e7631fb782eed48989331828e7cd98787638",
       "installedAt": "2026-08-23T17:20:44.822Z",
-      "updatedAt": "2026-10-19T13:08:55.781Z"
+      "updatedAt": "2026-11-24T17:40:36.668Z"
     },
     "firecrawl": {
       "source": "firecrawl/cli",
@@ -12659,9 +12645,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance.git",
       "skillPath": "skills/modern-web-guidance/SKILL.md",
-      "skillFolderHash": "7c7d6612af788857352d452ebe263ad462351658",
+      "skillFolderHash": "94cd548883b7cd735ee0d2bdd723c68a212a0933",
       "installedAt": "2026-11-10T21:09:24.000Z",
-      "updatedAt": "2026-11-16T15:40:29.593Z"
+      "updatedAt": "2026-11-23T18:02:58.891Z"
     },
     "chrome-extensions": {
       "source": "GoogleChrome/modern-web-guidance",

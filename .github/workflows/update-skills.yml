@@ -108,6 +108,21 @@ jobs:
           set -e
           echo "exit_code=$update_exit" >> "$GITHUB_OUTPUT"
 
+      - name: Sync renamed upstream skills
+        id: renamed
+        # The CLI reinstalls by `--skill <lock key>` and matches that against the
+        # upstream `name:` only, so a skill installed under another name never
+        # updated (#827). Those live in .skill-vault/data/renamed-skills.json
+        # instead of the lock; this copies each changed upstream folder over its
+        # renamed one. Before the overrides step, which re-applies their fixes.
+        # Exit 1 means a source or skill failed; the rest still synced.
+        run: |
+          set +e
+          ./skillquarium renamed
+          renamed_exit=$?
+          set -e
+          echo "exit_code=$renamed_exit" >> "$GITHUB_OUTPUT"
+
       - name: Re-apply local fixes to upstream-managed skills
         id: overrides
         # `skills update` reinstalls any skill whose upstream folder changed,
@@ -184,17 +199,20 @@ jobs:
 
       - name: Fail on partial upstream update or stale override
         # Last, so a partial failure never blocks the part that succeeded.
-        #  - update exit != 0: a lock entry whose local name differs from the upstream
-        #    `name:` frontmatter can never match the CLI's --skill selector; 66 such
-        #    entries have never updated once (#827).
+        #  - update exit != 0: the CLI failed to reinstall at least one lock entry.
+        #  - renamed exit != 0: a renamed skill's source could not be cloned or
+        #    its folder could not be copied.
         #  - overrides exit != 0: a recorded local fix no longer applies because
         #    upstream rewrote the region; that skill was quarantined at its old
         #    version and its overrides have to be re-derived by hand.
         # Both keep the problem visible instead of silent.
-        if: steps.update.outputs.exit_code != '0' || steps.overrides.outputs.exit_code != '0'
+        if: steps.update.outputs.exit_code != '0' || steps.renamed.outputs.exit_code != '0' || steps.overrides.outputs.exit_code != '0'
         run: |
           if [ "${{ steps.update.outputs.exit_code }}" != "0" ]; then
             echo "::error::skills update exited ${{ steps.update.outputs.exit_code }}: at least one skill did not update."
+          fi
+          if [ "${{ steps.renamed.outputs.exit_code }}" != "0" ]; then
+            echo "::error::skillquarium renamed exited ${{ steps.renamed.outputs.exit_code }}: see the FAILED lines in the 'Sync renamed upstream skills' step."
           fi
           if [ "${{ steps.overrides.outputs.exit_code }}" != "0" ]; then
             echo "::error::skillquarium overrides exited ${{ steps.overrides.outputs.exit_code }}: the QUARANTINED skills in the 'Re-apply local fixes' step were held at their committed version; re-derive their overrides against current upstream."

@@ -2,6 +2,7 @@ import { appendFileSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import { pyStrip, universalNewlines } from "../catalog";
+import { loadRenamed, renamedPath } from "./renamed";
 
 export const API = "https://api.github.com";
 export const TIMEOUT_MS = 30_000;
@@ -107,14 +108,16 @@ function byName(a: [string, LockEntry], b: [string, LockEntry]): number {
 /**
  * Compare every lock entry's `skillFolderHash` against the git tree-object sha of its folder
  * upstream: absent folder -> unreachable, different sha -> behind, equal -> current.
+ * `extra` adds entries kept outside the lock, such as renamed skills.
  */
 export async function checkLock(
   lockPath: string,
   deps: DriftDeps = {},
+  extra: Record<string, LockEntry> = {},
 ): Promise<{ report: DriftReport; errors: string[] }> {
   const lock = LockSchema.parse(JSON.parse(readFileSync(lockPath, "utf8")));
   const bySource = new Map<string, [string, LockEntry][]>();
-  for (const [name, entry] of Object.entries(lock.skills ?? {})) {
+  for (const [name, entry] of [...Object.entries(lock.skills ?? {}), ...Object.entries(extra)]) {
     const source = entry.source ?? "";
     const items = bySource.get(source);
     if (items) items.push([name, entry]);
@@ -263,7 +266,13 @@ export async function runDrift(
   io: DriftIo,
   deps: DriftDeps = {},
 ): Promise<number> {
-  const { report, errors } = await checkLock(options.lock ?? join(root, ".skill-lock.json"), deps);
+  // Renamed skills drift like lock entries; only GitHub sources have a tree API to ask.
+  const renamed = Object.entries(loadRenamed(renamedPath(root))).filter(([, e]) => e.sourceType === "github");
+  const { report, errors } = await checkLock(
+    options.lock ?? join(root, ".skill-lock.json"),
+    deps,
+    Object.fromEntries(renamed),
+  );
   const profiles = options.skipProfiles ? [] : await checkProfiles(root, deps);
   const [text, drift] = render(report, errors, profiles);
   io.out(text);

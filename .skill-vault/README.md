@@ -15,8 +15,12 @@ Uncategorized.
 ## Sync
 
 `skills update` only touches `sourceType: github` lock entries, and skips one whose `skillPath` is
-gone upstream. Local fixes to those skills go in `data/local-overrides.json`; anything else is
-reverted on the next sync.
+gone upstream. It reinstalls with `--skill <lock key>` and matches that against upstream's
+`name:`, so a skill installed under another name never updates (#827). Those are recorded in
+`data/renamed-skills.json` instead, and `skillquarium renamed` copies each changed upstream folder
+over the renamed one, setting `name:` to the local name. `skillquarium add` creates them.
+Local fixes to either kind go in `data/local-overrides.json`, keyed by local name; anything else
+is reverted on the next sync.
 
 ## Vendored bundles
 

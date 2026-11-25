@@ -2558,6 +2558,229 @@
       "replace": "1. [Rule Syntax](https://docs.semgrep.dev/writing-rules/rule-syntax.md)\n2. [Pattern Syntax](https://docs.semgrep.dev/writing-rules/pattern-syntax.md)\n3. [Testing Rules](https://docs.semgrep.dev/writing-rules/testing-rules.md)\n4. [Taint analysis](https://docs.semgrep.dev/writing-rules/data-flow/taint-mode/overview.md)\n5. [Advanced techniques for taint analysis](https://docs.semgrep.dev/writing-rules/data-flow/taint-mode/advanced.md)\n6. [Constant propagation](https://docs.semgrep.dev/writing-rules/data-flow/constant-propagation.md)"
     }
   ],
+  "emil-animate": [
+    {
+      "id": "rename-ref-improve-animations-1",
+      "source": "emilkowalski/skills",
+      "find": "codebase (that's `improve-animations`",
+      "replace": "codebase (that's `emil-improve-animations`"
+    },
+    {
+      "id": "rename-ref-review-animations-2",
+      "source": "emilkowalski/skills",
+      "find": "diff (that's `review-animations`",
+      "replace": "diff (that's `emil-review-animations`"
+    },
+    {
+      "id": "rename-ref-find-animation-opportunities-3",
+      "source": "emilkowalski/skills",
+      "find": "animate (that's `find-animation-opportunities`",
+      "replace": "animate (that's `emil-find-animation-opportunities`"
+    },
+    {
+      "id": "rename-ref-animate-expo-4",
+      "source": "emilkowalski/skills",
+      "find": "Native (that's `animate-expo`",
+      "replace": "Native (that's `emil-animate-expo`"
+    },
+    {
+      "id": "rename-ref-review-animations-5",
+      "source": "emilkowalski/skills",
+      "find": "same bar `review-animations`",
+      "replace": "same bar `emil-review-animations`"
+    },
+    {
+      "id": "rename-ref-review-animations-6",
+      "source": "emilkowalski/skills",
+      "find": "block in `review-animations`",
+      "replace": "block in `emil-review-animations`"
+    }
+  ],
+  "emil-animate-expo": [
+    {
+      "id": "rename-ref-animate-1",
+      "source": "emilkowalski/skills",
+      "find": "animation use `animate`",
+      "replace": "animation use `emil-animate`"
+    }
+  ],
+  "emil-animation-performance": [
+    {
+      "id": "rename-ref-animate-1",
+      "source": "emilkowalski/skills",
+      "find": "duration (that's `animate`",
+      "replace": "duration (that's `emil-animate`"
+    },
+    {
+      "id": "rename-ref-review-animations-2",
+      "source": "emilkowalski/skills",
+      "find": "exist (that's `review-animations`",
+      "replace": "exist (that's `emil-review-animations`"
+    },
+    {
+      "id": "rename-ref-animate-expo-3",
+      "source": "emilkowalski/skills",
+      "find": "threads (that's `animate-expo`",
+      "replace": "threads (that's `emil-animate-expo`"
+    }
+  ],
+  "emil-break-ui": [
+    {
+      "id": "rename-ref-prototype-1",
+      "source": "emilkowalski/skills",
+      "find": "component (that's `prototype`",
+      "replace": "component (that's `emil-prototype`"
+    },
+    {
+      "id": "rename-ref-review-animations-2",
+      "source": "emilkowalski/skills",
+      "find": "motion (that's `review-animations`",
+      "replace": "motion (that's `emil-review-animations`"
+    }
+  ],
+  "emil-choreograph": [
+    {
+      "id": "rename-ref-animate-1",
+      "source": "emilkowalski/skills",
+      "find": "belong to `animate`",
+      "replace": "belong to `emil-animate`"
+    },
+    {
+      "id": "rename-ref-find-animation-opportunities-2",
+      "source": "emilkowalski/skills",
+      "find": "all is `find-animation-opportunities`",
+      "replace": "all is `emil-find-animation-opportunities`"
+    },
+    {
+      "id": "rename-ref-remove-animations-3",
+      "source": "emilkowalski/skills",
+      "find": "or `remove-animations`",
+      "replace": "or `emil-remove-animations`"
+    }
+  ],
+  "emil-find-animation-opportunities": [
+    {
+      "id": "rename-ref-review-animations-1",
+      "source": "emilkowalski/skills",
+      "find": "animations (that's `review-animations`",
+      "replace": "animations (that's `emil-review-animations`"
+    },
+    {
+      "id": "rename-ref-improve-animations-2",
+      "source": "emilkowalski/skills",
+      "find": "them (that's `improve-animations`",
+      "replace": "them (that's `emil-improve-animations`"
+    }
+  ],
+  "emil-gestures": [
+    {
+      "id": "rename-ref-animation-performance-1",
+      "source": "emilkowalski/skills",
+      "find": "use the `animation-performance`",
+      "replace": "use the `emil-animation-performance`"
+    }
+  ],
+  "emil-improve-animations": [
+    {
+      "id": "rename-ref-plan-template-improve-animations-1",
+      "source": "emilkowalski/skills",
+      "find": "written by `improve-animations`",
+      "replace": "written by `emil-improve-animations`",
+      "file": "PLAN-TEMPLATE.md"
+    },
+    {
+      "id": "rename-ref-review-animations-1",
+      "source": "emilkowalski/skills",
+      "find": "diff (that's `review-animations`",
+      "replace": "diff (that's `emil-review-animations`"
+    }
+  ],
+  "emil-mobile-native": [
+    {
+      "id": "rename-ref-animate-1",
+      "source": "emilkowalski/skills",
+      "find": "motion (that's `animate`",
+      "replace": "motion (that's `emil-animate`"
+    },
+    {
+      "id": "rename-ref-review-animations-2",
+      "source": "emilkowalski/skills",
+      "find": "motion (that's `review-animations`",
+      "replace": "motion (that's `emil-review-animations`"
+    },
+    {
+      "id": "rename-ref-animate-expo-3",
+      "source": "emilkowalski/skills",
+      "find": "Native (that's `animate-expo`",
+      "replace": "Native (that's `emil-animate-expo`"
+    },
+    {
+      "id": "rename-ref-animate-4",
+      "source": "emilkowalski/skills",
+      "find": "uses the `animate`",
+      "replace": "uses the `emil-animate`"
+    }
+  ],
+  "emil-prototype": [
+    {
+      "id": "rename-ref-review-animations-1",
+      "source": "emilkowalski/skills",
+      "find": "UI (that's `review-animations`",
+      "replace": "UI (that's `emil-review-animations`"
+    },
+    {
+      "id": "rename-ref-improve-animations-2",
+      "source": "emilkowalski/skills",
+      "find": "it (that's `improve-animations`",
+      "replace": "it (that's `emil-improve-animations`"
+    },
+    {
+      "id": "rename-ref-pick-ui-library-3",
+      "source": "emilkowalski/skills",
+      "find": "dependencies (that's `pick-ui-library`",
+      "replace": "dependencies (that's `emil-pick-ui-library`"
+    }
+  ],
+  "emil-remove-animations": [
+    {
+      "id": "rename-ref-find-animation-opportunities-1",
+      "source": "emilkowalski/skills",
+      "find": "counterpart to `find-animation-opportunities`",
+      "replace": "counterpart to `emil-find-animation-opportunities`"
+    },
+    {
+      "id": "rename-ref-improve-animations-2",
+      "source": "emilkowalski/skills",
+      "find": "stay (that's `improve-animations`",
+      "replace": "stay (that's `emil-improve-animations`"
+    },
+    {
+      "id": "rename-ref-review-animations-3",
+      "source": "emilkowalski/skills",
+      "find": "and `review-animations`",
+      "replace": "and `emil-review-animations`"
+    },
+    {
+      "id": "rename-ref-improve-animations-4",
+      "source": "emilkowalski/skills",
+      "find": "it for `improve-animations`",
+      "replace": "it for `emil-improve-animations`"
+    },
+    {
+      "id": "rename-ref-improve-animations-5",
+      "source": "emilkowalski/skills",
+      "find": "built, for `improve-animations`",
+      "replace": "built, for `emil-improve-animations`"
+    }
+  ],
+  "matplotlib-design": [
+    {
+      "id": "point-api-questions-at-matplotlib",
+      "source": "holtzy/dataviz-skills",
+      "find": "Seaborn, or GeoPandas figures.\n",
+      "replace": "Seaborn, or GeoPandas figures. Covers chart design choices; for Matplotlib API reference, plot types, and 3D plots, use matplotlib.\n"
+    }
+  ],
   "vercel-functions": [
     {
       "id": "max-duration-hobby",

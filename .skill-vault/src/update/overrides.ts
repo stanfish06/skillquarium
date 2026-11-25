@@ -2,6 +2,7 @@ import { readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { universalNewlines } from "../catalog";
 import { applyLeanAttribution } from "./leanAttribution";
+import { loadRenamed, parseRenamed, type Renamed, renamedPath, writeRenamed } from "./renamed";
 
 /**
  * One recorded local fix: `find` is the upstream defect, `replace` the vault's version.
@@ -162,6 +163,8 @@ function git(root: string, argv: string[]): { code: number; stdout: string; stde
 
 type Lock = { skills: Record<string, unknown> };
 
+const RENAMED = ".skill-vault/data/renamed-skills.json";
+
 /** Parse lock JSON; throws with `label` when it is not an object with a `skills` object. */
 function parseLock(text: string, label: string): Lock {
   const lock = JSON.parse(text) as unknown;
@@ -180,9 +183,10 @@ export interface QuarantineFailure {
 
 /**
  * Hold each skill at its committed version: the folder from HEAD, minus any file upstream added,
- * and the .skill-lock.json entry from HEAD. Restoring the lock entry makes the next sync fetch the
- * skill again; leaving upstream's hash would mark it current while it still holds the old text.
- * Both locks are read before any folder is touched, so an unreadable lock fails every skill.
+ * and its .skill-lock.json or renamed-skills.json entry from HEAD. Restoring the entry makes the
+ * next sync fetch the skill again; leaving upstream's hash would mark it current while it still
+ * holds the old text. Every lock is read before any folder is touched, so an unreadable lock
+ * fails every skill.
  * Returns the skills that could not be restored.
  */
 export function quarantineSkills(root: string, skills: string[]): QuarantineFailure[] {
@@ -194,15 +198,23 @@ export function quarantineSkills(root: string, skills: string[]): QuarantineFail
   let headLock: Lock;
   let lock: Lock;
   let lockText: string;
+  const renamedFile = renamedPath(root);
+  const renamedHead = git(root, ["show", `HEAD:${RENAMED}`]);
+  let headRenamed: Renamed = {};
+  let renamed: Renamed;
   try {
     headLock = parseLock(head.stdout, "HEAD:.skill-lock.json");
     lockText = readFileSync(lockPath, "utf8");
     lock = parseLock(lockText, ".skill-lock.json");
+    // absent at HEAD: nothing renamed was committed yet
+    if (renamedHead.code === 0) headRenamed = parseRenamed(renamedHead.stdout, `HEAD:${RENAMED}`);
+    renamed = loadRenamed(renamedFile);
   } catch (e) {
     return failAll(`lock unreadable: ${e instanceof Error ? e.message : String(e)}`);
   }
 
   const failed: QuarantineFailure[] = [];
+  let renamedTouched = false;
   for (const skill of skills) {
     const dir = `skills/${skill}`;
     // A folder HEAD never had is all untracked, so `clean` alone removes it.
@@ -217,6 +229,13 @@ export function quarantineSkills(root: string, skills: string[]): QuarantineFail
       failed.push({ skill, reason: `git clean: ${clean.stderr}` });
       continue;
     }
+    if (skill in renamed || skill in headRenamed) {
+      const entry = headRenamed[skill];
+      if (entry === undefined) delete renamed[skill];
+      else renamed[skill] = entry;
+      renamedTouched = true;
+      continue;
+    }
     const entry = headLock.skills[skill];
     if (entry === undefined) delete lock.skills[skill];
     else lock.skills[skill] = entry;
@@ -224,6 +243,7 @@ export function quarantineSkills(root: string, skills: string[]): QuarantineFail
   try {
     // The skills CLI writes JSON.stringify(lock, null, 2); keep whatever trailing newline it left.
     writeFileSync(lockPath, JSON.stringify(lock, null, 2) + (lockText.endsWith("\n") ? "\n" : ""), "utf8");
+    if (renamedTouched) writeRenamed(renamedFile, renamed);
   } catch (e) {
     // folders are back at HEAD but their lock entries still carry upstream's hash
     return failAll(`lock not written: ${e instanceof Error ? e.message : String(e)}`);

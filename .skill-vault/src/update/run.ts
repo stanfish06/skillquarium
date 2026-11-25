@@ -8,6 +8,7 @@ import { run as validateCommand } from "../kg/validateCommand";
 import { writeGraph } from "../kg/write";
 import { runDrift } from "./drift";
 import { applyOverrides, loadOverrides, overridesPath, reportOverrides } from "./overrides";
+import { reportRenamed, syncRenamed } from "./renamed";
 import { softenVault } from "./soften";
 
 export interface UpdateOptions {
@@ -57,7 +58,7 @@ function kgStep(ctx: Context): number {
   return 0;
 }
 
-/** The update-skills.yml step chain: fetch, re-apply, rebuild, validate, embed, report. */
+/** The update-skills.yml step chain: fetch, renamed, re-apply, rebuild, validate, embed, report. */
 export async function update(options: UpdateOptions, ctx: Context): Promise<number> {
   const config = await ctx.config();
   let fetchExit = 0;
@@ -69,6 +70,13 @@ export async function update(options: UpdateOptions, ctx: Context): Promise<numb
     // The CLI exits 1 after updating every other skill when one fails (#827), so the rest of the
     // chain still runs and the partial sync gets built and committed.
     if (fetchExit !== 0) ctx.err(`update: skills update exited ${fetchExit}; continuing`);
+    // Renamed skills the CLI cannot match; a failed source is reported like a failed fetch.
+    ctx.err("update: renamed");
+    const renamedExit = reportRenamed(syncRenamed(ctx.root), false, ctx);
+    if (renamedExit !== 0) {
+      ctx.err(`update: renamed exited ${renamedExit}; continuing`);
+      fetchExit ||= renamedExit;
+    }
   }
 
   const steps: [string, () => number | Promise<number>][] = [

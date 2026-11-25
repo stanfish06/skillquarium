@@ -81,9 +81,15 @@ toggles to everyone else's tree.
 
 ## Adding a skill
 
-1. Put the folder at `skills/<id>/SKILL.md`. Keep an upstream folder's original name, or
-   `skills update` will lose track of it.
-2. Upstream skills need a `.skill-lock.json` entry; a skill you wrote does not.
+1. Put the folder at `skills/<id>/SKILL.md`. An upstream skill that keeps its upstream `name:`
+   goes in with `npx skills add <owner/repo> -g --skill <name>`, which writes its
+   `.skill-lock.json` entry. A skill you wrote needs neither.
+2. To install an upstream skill under another name, use
+   `./skillquarium add <owner/repo> --skill <name> --as <new>` (or `--all --prefix <p>`).
+   The skills CLI cannot update a renamed lock entry, because it matches the lock key against
+   upstream's `name:`, so these are recorded in `.skill-vault/data/renamed-skills.json` and
+   `./skillquarium renamed` syncs them. `--rewrite-refs` points `/skill` and `../skill/`
+   references between skills from the same source at the new names.
 3. Record every local edit to an upstream skill in `.skill-vault/data/local-overrides.json`, or
    the next sync silently reverts it. An insertion-only override needs an anchor whose `find`
    text stops matching once applied, otherwise it reports pending forever.

@@ -1,32 +1,32 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2215,
+  "skills": 2235,
   "expert_profiles": 503,
-  "nodes": 2288,
-  "edges": 16461,
+  "nodes": 2308,
+  "edges": 16617,
   "generic_names_blocked": 30,
-  "tier1_edges": 4963,
-  "tier2_edges": 721,
-  "alias_edges": 4584,
+  "tier1_edges": 5022,
+  "tier2_edges": 727,
+  "alias_edges": 4638,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 522,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.87,
+  "mean_skill_degree": 5.88,
   "median_skill_degree": 4,
-  "orphan_count": 126,
-  "orphan_rate": 0.0569,
+  "orphan_count": 125,
+  "orphan_rate": 0.0559,
   "by_provenance": {
-   "EXTRACTED": 15675,
+   "EXTRACTED": 15831,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2215,
-   "references": 12938,
+   "in_domain": 2235,
+   "references": 13074,
    "in_discipline": 599,
    "touches": 522,
    "has_step": 69,
@@ -7259,7 +7259,7 @@
    "id": "databricks-ml-training",
    "type": "Skill",
    "label": "databricks-ml-training",
-   "description": "Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring (spark_udf for plain models, fe.score_batch for feature-store-backed), custom PyFunc, custom ResponsesAgent (LangGraph + UC Function/Vector Search); UC feature tables + FeatureLookup + point-in-time joins + Lakebase online store; declarative Feature Views (create_feature, DeltaTableSource, RollingWindow/SlidingWindow/TumblingWindow, materialize_features, streaming Kafka features). NOT for: endpoint ops (databricks-model-serving), MLflow evaluation (databricks-mlflow-evaluation).",
+   "description": "Train ML models on Databricks. Use for: classification/regression/deep-learning (XGBoost, scikit-learn, LightGBM, PyTorch) with Optuna, @prod/@challenger aliases, batch scoring (spark_udf for plain models, fe.score_batch for Feature Views-backed), custom PyFunc, custom ResponsesAgent (LangGraph + UC Function/Vector Search); feature engineering with Feature Views (Feature, create_feature, DeltaTableSource/SdpSource/StreamSource/RequestSource, RollingWindow/SawtoothWindow/SlidingWindow/TumblingWindow, compute_features, point-in-time create_training_set, materialize_features to offline Delta + Lakebase online store, streaming features, Feature Serving). NOT for: endpoint ops (databricks-model-serving), MLflow evaluation (databricks-mlflow-evaluation).",
    "source": "skills/databricks-ml-training/SKILL.md",
    "aliases": [
     "databricks ml training"
@@ -9598,6 +9598,306 @@
    "source": "skills/emergency-medicine-researcher/SKILL.md",
    "aliases": [
     "emergency medicine researcher"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-animate",
+   "type": "Skill",
+   "label": "emil-animate",
+   "description": "Build an animation from scratch, making the decisions in the order that determines whether it feels right — should it animate at all, what purpose, which tool, which properties, which curve and duration, how it interrupts, how it exits. Writes the implementation. Use when asked to animate something, add motion, make a component feel alive, or build a transition. For critiquing existing motion use review-animations; for auditing a whole codebase use improve-animations.",
+   "source": "skills/emil-animate/SKILL.md",
+   "aliases": [
+    "emil animate"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-animate-expo",
+   "type": "Skill",
+   "label": "emil-animate-expo",
+   "description": "Build animations in React Native and Expo, making the decisions in the order that determines whether they feel right — should it animate, which thread it runs on, which properties, spring or timing, how the gesture hands off, how it degrades. Writes the implementation with Reanimated, Gesture Handler, Expo Router and expo-haptics. Use when animating anything in an Expo app, adding gestures, sheets, screen transitions, press feedback or haptics, or fixing motion that stutters on device. For web animation use `emil-animate`.",
+   "source": "skills/emil-animate-expo/SKILL.md",
+   "aliases": [
+    "emil animate expo"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-animation-performance",
+   "type": "Skill",
+   "label": "emil-animation-performance",
+   "description": "Keep web animations inside the frame budget — animate composite-only properties, keep motion off the main thread when the page is busy, and find the cause when an animation drops frames. Use when an animation is janky, choppy, stutters, or drops frames; when choosing which property to animate; when deciding between CSS and JS animation on performance grounds; or when reaching for `will-change` or GPU layers. For choosing easing, duration, or whether to animate at all use animate; for reviewing motion as a whole use review-animations.",
+   "source": "skills/emil-animation-performance/SKILL.md",
+   "aliases": [
+    "emil animation performance"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-animation-vocabulary",
+   "type": "Skill",
+   "label": "emil-animation-vocabulary",
+   "description": "Reverse-lookup glossary that turns a vague description of a web animation or motion effect into its exact term (\"the bouncy thing when a popover opens\" → Pop in; \"the iOS rubber-band scroll\" → Rubber-banding). Use when the user asks \"what's it called when…\", or describes a motion effect without knowing its name and wants the right word to prompt an AI or designer with. For naming an effect, not designing or building one.",
+   "source": "skills/emil-animation-vocabulary/SKILL.md",
+   "aliases": [
+    "emil animation vocabulary"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-apple-design",
+   "type": "Skill",
+   "label": "emil-apple-design",
+   "description": "Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum and interruptible transitions, translucent materials and depth, typography (optical sizing, tracking, leading), reduced-motion, or the design foundations (feedback, spatial consistency, restraint) behind Apple-style interfaces.",
+   "source": "skills/emil-apple-design/SKILL.md",
+   "aliases": [
+    "emil apple design"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-ask-emil",
+   "type": "Skill",
+   "label": "emil-ask-emil",
+   "description": "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+   "source": "skills/emil-ask-emil/SKILL.md",
+   "aliases": [
+    "emil ask emil"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-ask-sonner",
+   "type": "Skill",
+   "label": "emil-ask-sonner",
+   "description": "Guide to Sonner, the React toast library — install and wire up the Toaster, pick the right toast() call, promise and loading toasts, updating, dismissing and persisting toasts, styling, theming and icons, positioning and multiple toasters. Use when working with Sonner or troubleshooting it — toasts that don't appear, appear twice, lose their styles, ignore Tailwind classes, sit behind a modal, or don't follow dark mode.",
+   "source": "skills/emil-ask-sonner/SKILL.md",
+   "aliases": [
+    "emil ask sonner"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-break-ui",
+   "type": "Skill",
+   "label": "emil-break-ui",
+   "description": "Try to break a piece of UI by feeding it worst-case data — long names, unbreakable emails, one-letter names, missing fields, huge counts, zero items, long labels, non-Latin text, emoji, extreme numbers — then render it behind a \"Demo data / Worst case\" toggle and report everything that broke, with the fix for each. Use when the user asks to stress-test, break, or find edge cases in a component or screen, or to \"try the worst case\". For visual design critique use emil-design-eng; for motion use review-animations.",
+   "source": "skills/emil-break-ui/SKILL.md",
+   "aliases": [
+    "emil break ui"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-choreograph",
+   "type": "Skill",
+   "label": "emil-choreograph",
+   "description": "Coordinate several elements that animate together — decide what moves, in what order, how much they overlap, and what stays still — so a group reads as one intentional motion instead of a pile of separate animations. Use when building or fixing a staggered list, a hero entrance, a view swap inside a container, a multi-step flow, an element leaving while its siblings close the gap, a morph between rich states, or any interaction with several moving parts (icon + background + lines, panel + content, items flying into a target). Triggers on — stagger, sequence, choreography, \"one after another\", crossfade, AnimatePresence mode, hero entrance, multi-step, useAnimate, \"feels mechanical\", \"too much going on\", \"feels slow to open\".",
+   "source": "skills/emil-choreograph/SKILL.md",
+   "aliases": [
+    "emil choreograph"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-design-eng",
+   "type": "Skill",
+   "label": "emil-design-eng",
+   "description": "Emil Kowalski's design-engineering philosophy for UI polish, component design, animation decisions, and the invisible details that make software feel great. Use when building or reviewing a UI component's interactions and polish (press and hover states, popover origin, tooltip timing, transitions vs keyframes, clip-path techniques, drag details) and no narrower skill fits.",
+   "source": "skills/emil-design-eng/SKILL.md",
+   "aliases": [
+    "emil design eng"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-find-animation-opportunities",
+   "type": "Skill",
+   "label": "emil-find-animation-opportunities",
+   "description": "Search a codebase or UI for places that don't animate but should, and reject everything that shouldn't. Read-only; it proposes motion with exact values, it does not implement it. Use when the user asks \"what could be animated here?\" or wants to \"make this feel more alive\". For fixing existing animations, use improve-animations or review-animations instead.",
+   "source": "skills/emil-find-animation-opportunities/SKILL.md",
+   "aliases": [
+    "emil find animation opportunities"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-gestures",
+   "type": "Skill",
+   "label": "emil-gestures",
+   "description": "Build drag, swipe, and sheet interactions that track the finger 1:1 and stay interruptible. Use when building or fixing anything the user drags, swipes, flings, holds, or dismisses with a gesture — drawers, sheets, swipe-to-dismiss toasts and cards, drag-to-reorder, pull-to-refresh, hold-to-confirm — or when a gesture feels laggy, disconnected from the finger, jumps on release, or can't be caught mid-animation. Triggers on — gesture, drag, swipe, fling, sheet, snap points, Vaul, Motion drag props, rubber-band, pull to refresh, hold to delete, touch-action, \"doesn't follow my finger\", \"jumps when I let go\", \"can't grab it mid-animation\".",
+   "source": "skills/emil-gestures/SKILL.md",
+   "aliases": [
+    "emil gestures"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-improve-animations",
+   "type": "Skill",
+   "label": "emil-improve-animations",
+   "description": "Survey a codebase's animation and motion code as a senior motion advisor, then produce a prioritized audit and self-contained implementation plans for other agents (or cheaper models) to execute. Read-only on source code — it plans improvements, it does not apply them. Use when the user asks to \"improve the animations\", \"audit the motion\", \"make this app feel better\", or wants a roadmap of animation fixes rather than a review of a single diff.",
+   "source": "skills/emil-improve-animations/SKILL.md",
+   "aliases": [
+    "emil improve animations"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-learn-taste",
+   "type": "Skill",
+   "label": "emil-learn-taste",
+   "description": "Turn a session's design corrections into rules, with their why, in DESIGN.md, a project skill, or a lint check.",
+   "source": "skills/emil-learn-taste/SKILL.md",
+   "aliases": [
+    "emil learn taste"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-mobile-native",
+   "type": "Skill",
+   "label": "emil-mobile-native",
+   "description": "Make a web app feel native on a phone — the small CSS and meta-tag fixes that separate \"a website in a browser\" from something that feels installed. Covers sticky hover states, tap highlight flashes, the 100vh bug, inputs that zoom the page, laggy taps, pull-to-refresh hijacking scroll, content under the notch, long-press selecting button text, carousels that scroll the wrong way, mismatched status bars, and the rule that you test on real hardware. Use when a web app is being built for or reviewed on mobile, when something \"works in Chrome but feels wrong on my phone\", when building a PWA, a bottom sheet, a carousel, a full-screen layout, or any touch interaction. For motion itself use animate; for React Native use animate-expo.",
+   "source": "skills/emil-mobile-native/SKILL.md",
+   "aliases": [
+    "emil mobile native"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-pick-ui-library",
+   "type": "Skill",
+   "label": "emil-pick-ui-library",
+   "description": "Pick the library for a frontend task from a curated list — primitives, toasts, drawers, command menus, OTP, numbers, charts, virtualization, drag and drop, state, styling.",
+   "source": "skills/emil-pick-ui-library/SKILL.md",
+   "aliases": [
+    "emil pick ui library"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-prototype",
+   "type": "Skill",
+   "label": "emil-prototype",
+   "description": "Build multiple genuinely different versions of a UI piece you describe, rendered behind a visual picker so you can flip through them live and promote the one that feels right.",
+   "source": "skills/emil-prototype/SKILL.md",
+   "aliases": [
+    "emil prototype"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-remove-animations",
+   "type": "Skill",
+   "label": "emil-remove-animations",
+   "description": "Find the animations an interface doesn't need and remove them — motion on keyboard actions, high-frequency surfaces, functional data, and decoration with no purpose — then clean up what they leave behind. Edits code, but only to subtract; it never adds or retunes motion. Use when the user says the app \"feels slow\", \"has too much animation\", \"feels over-animated\", wants to \"tone down the motion\", or asks what animations to remove. For finding places that should animate, use find-animation-opportunities; for fixing animations that should stay, use improve-animations or review-animations.",
+   "source": "skills/emil-remove-animations/SKILL.md",
+   "aliases": [
+    "emil remove animations"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-review-animations",
+   "type": "Skill",
+   "label": "emil-review-animations",
+   "description": "Reviews animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy. Default to flagging; approval is earned.",
+   "source": "skills/emil-review-animations/SKILL.md",
+   "aliases": [
+    "emil review animations"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "emil-write-swift",
+   "type": "Skill",
+   "label": "emil-write-swift",
+   "description": "How to write modern Swift well — modeling with value types, Swift 6 data-race safety and approachable concurrency (@concurrent, main-actor-by-default, actors, task groups), protocols and generics (some vs any), API design, performance and ARC, Swift Testing, macros, and the modern language features agents don't know about yet. Use when writing, reviewing, or migrating Swift, or when a concurrency error, a hang, a data race, a retain cycle, or a performance problem needs fixing.",
+   "source": "skills/emil-write-swift/SKILL.md",
+   "aliases": [
+    "emil write swift"
    ],
    "uses": 0,
    "successes": 0,
@@ -19381,7 +19681,7 @@
    "id": "neo4j-driver-go-skill",
    "type": "Skill",
    "label": "neo4j-driver-go-skill",
-   "description": "Covers the Neo4j Go Driver v6 — driver lifecycle, ExecuteQuery, managed and explicit transactions, session config, error handling, data type mapping, and connection tuning. Use when writing Go code that connects to Neo4j, setting up NewDriver or ExecuteQuery, debugging sessions/transactions/result handling, or working with neo4j-go-driver v5→v6 migration. Triggers on NewDriver, ExecuteQuery, SessionConfig, ManagedTransaction, neo4j-go-driver. Does NOT handle Cypher query authoring — use neo4j-cypher-skill. Does NOT cover driver version migration steps — use neo4j-migration-skill.",
+   "description": "Covers the Neo4j Go Driver v6 — driver lifecycle, ExecuteQuery, managed and explicit transactions, session config, error handling, data type mapping, and connection tuning. Use when writing Go code that connects to Neo4j, setting up NewDriver or ExecuteQuery, or debugging sessions/transactions/result handling. Triggers on NewDriver, ExecuteQuery, SessionConfig, ManagedTransaction, neo4j-go-driver. Does NOT handle Cypher query authoring — use neo4j-cypher-skill. Does NOT cover driver version migration steps — use neo4j-migration-skill.",
    "source": "skills/neo4j-driver-go-skill/SKILL.md",
    "aliases": [
     "neo4j driver go skill"
@@ -19488,7 +19788,7 @@
    "id": "neo4j-graphql-skill",
    "type": "Skill",
    "label": "neo4j-graphql-skill",
-   "description": "Build and configure a GraphQL API backed by Neo4j using @neo4j/graphql v7 (current) or v5 (LTS). Covers Neo4jGraphQL constructor, getSchema(), assertIndexesAndConstraints(), type definitions with @node, @relationship (IN/OUT/UNDIRECTED), @cypher for custom resolvers, @authorization/@authentication for JWT/JWKS security, auto-generated queries/mutations, OGM programmatic access, subscriptions via CDC, and Apollo Federation. Use when writing typeDefs, securing fields, or wiring Neo4j to Apollo Server. Does NOT handle raw Cypher outside resolvers — use neo4j-cypher-skill. Does NOT cover Spring Data Neo4j entity mapping — use neo4j-spring-data-skill.",
+   "description": "Build and configure a GraphQL API backed by Neo4j using @neo4j/graphql v7 (current) or v5 (LTS). Covers Neo4jGraphQL constructor, getSchema(), assertIndexesAndConstraints(), type definitions with @node, @relationship (IN/OUT, queryDirection), @cypher for custom resolvers, @authorization/@authentication for JWT/JWKS security, auto-generated queries/mutations, OGM programmatic access, subscriptions via CDC, and Apollo Federation. Use when writing typeDefs, securing fields, or wiring Neo4j to Apollo Server. Does NOT handle raw Cypher outside resolvers — use neo4j-cypher-skill. Does NOT cover Spring Data Neo4j entity mapping — use neo4j-spring-data-skill.",
    "source": "skills/neo4j-graphql-skill/SKILL.md",
    "aliases": [
     "neo4j graphql skill"
@@ -19608,7 +19908,7 @@
    "id": "neo4j-query-tuning-skill",
    "type": "Skill",
    "label": "neo4j-query-tuning-skill",
-   "description": "Diagnoses and fixes slow Neo4j Cypher queries by reading execution plans, identifying bad operators (AllNodesScan, CartesianProduct, Eager, NodeByLabelScan), and prescribing fixes (indexes, hints, query rewrites, runtime selection). Use when a query is slow, when EXPLAIN or PROFILE output needs interpretation, when dbHits or pageCacheHitRatio are poor, when cardinality estimation diverges from actuals, or when deciding between slotted/pipelined/parallel runtimes. Covers USING INDEX / USING SCAN / USING JOIN hints, db.stats.retrieve, SHOW QUERIES, SHOW TRANSACTIONS, TERMINATE TRANSACTION. Does NOT write new Cypher from scratch — use neo4j-cypher-skill. Does NOT cover GDS algorithm tuning — use neo4j-gds-skill. Does NOT cover index/constraint creation syntax details — use neo4j-cypher-skill references/indexes.md.",
+   "description": "Diagnoses and fixes slow Neo4j Cypher queries by reading execution plans, identifying bad operators (AllNodesScan, CartesianProduct, Eager, NodeByLabelScan), and prescribing fixes (indexes, hints, query rewrites, runtime selection). Use when a query is slow, when EXPLAIN or PROFILE output needs interpretation, when dbHits or pageCacheHitRatio are poor, when cardinality estimation diverges from actuals, or when deciding between slotted/pipelined/parallel runtimes. Covers USING INDEX / USING SCAN / USING JOIN hints, db.stats.retrieve, SHOW TRANSACTIONS, TERMINATE TRANSACTION. Does NOT write new Cypher from scratch — use neo4j-cypher-skill. Does NOT cover GDS algorithm tuning — use neo4j-gds-skill. Does NOT cover index/constraint creation syntax details — use neo4j-cypher-skill references/indexes.md.",
    "source": "skills/neo4j-query-tuning-skill/SKILL.md",
    "aliases": [
     "neo4j query tuning skill"
@@ -19656,7 +19956,7 @@
    "id": "neo4j-spark-skill",
    "type": "Skill",
    "label": "neo4j-spark-skill",
-   "description": "Use when reading from or writing to Neo4j with Apache Spark or Databricks using the Neo4j Connector for Apache Spark 6.0 (org.neo4j.connectors:spark) or 5.x (org.neo4j:neo4j-connector-apache-spark). Covers SparkSession setup, DataFrame reads via labels/Cypher/relationship scan, DataFrame writes with SaveMode, node.keys for MERGE, relationship write mapping, partition and batch tuning, PySpark and Scala examples, Databricks cluster config, Databricks secrets for credentials, Delta Lake to Neo4j pipelines. Does NOT handle Cypher authoring — use neo4j-cypher-skill. Does NOT handle the Python bolt driver — use neo4j-driver-python-skill. Does NOT handle GDS algorithms — use neo4j-gds-skill.",
+   "description": "Use when reading from or writing to Neo4j with Apache Spark or Databricks using the Neo4j Connector for Apache Spark 6.x (org.neo4j.connectors:spark) or 5.x (org.neo4j:neo4j-connector-apache-spark). Covers SparkSession setup, DataFrame reads via labels/Cypher/relationship scan, DataFrame writes with SaveMode, node.keys for MERGE, relationship write mapping, partition and batch tuning, PySpark and Scala examples, Databricks cluster config, Databricks secrets for credentials, Delta Lake to Neo4j pipelines. Does NOT handle Cypher authoring — use neo4j-cypher-skill. Does NOT handle the Python bolt driver — use neo4j-driver-python-skill. Does NOT handle GDS algorithms — use neo4j-gds-skill.",
    "source": "skills/neo4j-spark-skill/SKILL.md",
    "aliases": [
     "neo4j spark skill"
@@ -41431,6 +41731,15 @@
   {
    "src": "auth",
    "rel": "references",
+   "dst": "neo4j-security-skill",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "auth referenced in code/link context in neo4j-security-skill/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "auth",
+   "rel": "references",
    "dst": "next-forge",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -47276,15 +47585,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "browser-use named in chip-seq/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "browser-use",
-   "rel": "references",
-   "dst": "logfire-query",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-use named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -66460,6 +66760,15 @@
   {
    "src": "design-md-library",
    "rel": "references",
+   "dst": "emil-learn-taste",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of design-md-library appears in emil-learn-taste/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "design-md-library",
+   "rel": "references",
    "dst": "eval-engineering",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -72796,6 +73105,15 @@
   {
    "src": "email",
    "rel": "references",
+   "dst": "emil-break-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "email referenced in code/link context in emil-break-ui/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "email",
+   "rel": "references",
    "dst": "firecrawl-monitor",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -73070,6 +73388,1194 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "statistical-analysis named in emergency-medicine-researcher/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-animate-expo",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-animation-performance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-choreograph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-choreograph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-find-animation-opportunities",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-mobile-native",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-mobile-native/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-pick-ui-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate",
+   "rel": "references",
+   "dst": "linear",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "linear referenced in code/link context in emil-animate/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate-expo",
+   "rel": "in_domain",
+   "dst": "domain:mobile-native-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate-expo",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate-expo",
+   "rel": "references",
+   "dst": "emil-animation-performance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate-expo",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animate-expo",
+   "rel": "references",
+   "dst": "emil-mobile-native",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-mobile-native/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-performance",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-performance",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-performance",
+   "rel": "references",
+   "dst": "emil-animate-expo",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-performance",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animation-performance named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-performance",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-performance",
+   "rel": "references",
+   "dst": "gsap",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "gsap named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-vocabulary",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-animation-vocabulary",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animation-vocabulary named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-apple-design",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-apple-design",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-apple-design named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-animate-expo",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-animation-performance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animation-performance named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-animation-vocabulary",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animation-vocabulary named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-apple-design",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-apple-design named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-ask-sonner",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-ask-sonner named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-break-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-break-ui named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-choreograph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-choreograph named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-design-eng",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-design-eng named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-find-animation-opportunities",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-gestures",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-gestures named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-learn-taste",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-learn-taste named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-mobile-native",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-mobile-native named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-pick-ui-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-prototype named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-remove-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-remove-animations named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "emil-write-swift",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-write-swift named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-emil",
+   "rel": "references",
+   "dst": "prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-sonner",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-ask-sonner",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-ask-sonner named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "references",
+   "dst": "email",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "email referenced in code/link context in emil-break-ui/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-break-ui named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "references",
+   "dst": "emil-design-eng",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-design-eng named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "references",
+   "dst": "emil-prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-prototype named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "references",
+   "dst": "prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-break-ui",
+   "rel": "references",
+   "dst": "zod",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "zod named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-choreograph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-choreograph named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "references",
+   "dst": "emil-find-animation-opportunities",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-choreograph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "references",
+   "dst": "emil-remove-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-remove-animations named in emil-choreograph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-choreograph named in emil-review-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "references",
+   "dst": "linear",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "linear referenced in code/link context in emil-choreograph/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-choreograph",
+   "rel": "references",
+   "dst": "neuroscientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in emil-choreograph/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-design-eng",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-design-eng",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-design-eng named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-design-eng",
+   "rel": "references",
+   "dst": "emil-break-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-design-eng named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-find-animation-opportunities",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-find-animation-opportunities",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-find-animation-opportunities",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-find-animation-opportunities",
+   "rel": "references",
+   "dst": "emil-choreograph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-choreograph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-find-animation-opportunities",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-find-animation-opportunities/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-find-animation-opportunities",
+   "rel": "references",
+   "dst": "emil-remove-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-remove-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-find-animation-opportunities",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-find-animation-opportunities/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-gestures",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-gestures",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-gestures named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-gestures",
+   "rel": "references",
+   "dst": "emil-pick-ui-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-gestures/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-gestures",
+   "rel": "references",
+   "dst": "linear",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "linear referenced in code/link context in emil-gestures/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "emil-find-animation-opportunities",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-find-animation-opportunities/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "emil-prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "emil-remove-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-remove-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-improve-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "gsap",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "gsap named in emil-improve-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-improve-animations",
+   "rel": "references",
+   "dst": "shadcn",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "shadcn named in emil-improve-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-learn-taste",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-learn-taste",
+   "rel": "references",
+   "dst": "design-md-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of design-md-library appears in emil-learn-taste/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-learn-taste",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-learn-taste named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-learn-taste",
+   "rel": "references",
+   "dst": "hex",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "hex named in emil-learn-taste/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-learn-taste",
+   "rel": "references",
+   "dst": "vacuum-science-technology-engineer",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of vacuum-science-technology-engineer appears in emil-learn-taste/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-mobile-native",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-mobile-native",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate named in emil-mobile-native/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-mobile-native",
+   "rel": "references",
+   "dst": "emil-animate-expo",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-animate-expo named in emil-mobile-native/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-mobile-native",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-mobile-native named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-mobile-native",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-mobile-native/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-mobile-native",
+   "rel": "references",
+   "dst": "gerontologist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of gerontologist appears in emil-mobile-native/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-pick-ui-library",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-pick-ui-library",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-pick-ui-library",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-pick-ui-library",
+   "rel": "references",
+   "dst": "emil-gestures",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-gestures/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-pick-ui-library",
+   "rel": "references",
+   "dst": "emil-prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-pick-ui-library",
+   "rel": "references",
+   "dst": "neuroscientist",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in emil-pick-ui-library/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-pick-ui-library",
+   "rel": "references",
+   "dst": "satori",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "satori named in emil-pick-ui-library/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-prototype",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-prototype",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-prototype named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-prototype",
+   "rel": "references",
+   "dst": "emil-break-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-prototype named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-prototype",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-prototype",
+   "rel": "references",
+   "dst": "emil-pick-ui-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-pick-ui-library named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-prototype",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-prototype",
+   "rel": "references",
+   "dst": "prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-remove-animations",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-remove-animations",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-remove-animations named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-remove-animations",
+   "rel": "references",
+   "dst": "emil-choreograph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-remove-animations named in emil-choreograph/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-remove-animations",
+   "rel": "references",
+   "dst": "emil-find-animation-opportunities",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-find-animation-opportunities named in emil-remove-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-remove-animations",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-improve-animations named in emil-remove-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-remove-animations",
+   "rel": "references",
+   "dst": "emil-review-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-remove-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "in_domain",
+   "dst": "domain:web-automation-frontend",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-animate/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-animation-performance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-break-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-choreograph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-choreograph named in emil-review-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-find-animation-opportunities",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-find-animation-opportunities/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-improve-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-mobile-native",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-mobile-native/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-review-animations",
+   "rel": "references",
+   "dst": "emil-remove-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-review-animations named in emil-remove-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-write-swift",
+   "rel": "in_domain",
+   "dst": "domain:mobile-native-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "emil-write-swift",
+   "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "emil-write-swift named in emil-ask-emil/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -83074,6 +84580,15 @@
   {
    "src": "gerontologist",
    "rel": "references",
+   "dst": "emil-mobile-native",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of gerontologist appears in emil-mobile-native/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "gerontologist",
+   "rel": "references",
    "dst": "methylation-clock",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -86629,6 +88144,24 @@
   {
    "src": "gsap",
    "rel": "references",
+   "dst": "emil-animation-performance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "gsap named in emil-animation-performance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "gsap",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "gsap named in emil-improve-animations/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "gsap",
+   "rel": "references",
    "dst": "fixing-motion-performance",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -87464,6 +88997,15 @@
    "status": "accepted"
   },
   {
+   "src": "handoff",
+   "rel": "references",
+   "dst": "logfire-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "handoff referenced in code/link context in logfire-ui/SKILL.md",
+   "status": "accepted"
+  },
+  {
    "src": "hardware-security",
    "rel": "in_domain",
    "dst": "domain:security-auditing",
@@ -88154,6 +89696,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "hex named in design-md-library/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "hex",
+   "rel": "references",
+   "dst": "emil-learn-taste",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "hex named in emil-learn-taste/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -96754,6 +98305,33 @@
   {
    "src": "linear",
    "rel": "references",
+   "dst": "emil-animate",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "linear referenced in code/link context in emil-animate/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "linear",
+   "rel": "references",
+   "dst": "emil-choreograph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "linear referenced in code/link context in emil-choreograph/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "linear",
+   "rel": "references",
+   "dst": "emil-gestures",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "linear referenced in code/link context in emil-gestures/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "linear",
+   "rel": "references",
    "dst": "high-end-visual-design",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98005,6 +99583,15 @@
   {
    "src": "logfire-instrumentation",
    "rel": "references",
+   "dst": "logfire-query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "logfire-instrumentation named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-instrumentation",
+   "rel": "references",
    "dst": "observability-and-instrumentation",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98050,15 +99637,6 @@
   {
    "src": "logfire-query",
    "rel": "references",
-   "dst": "browser-use",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-use named in logfire-query/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "logfire-query",
-   "rel": "references",
    "dst": "hex",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98068,19 +99646,19 @@
   {
    "src": "logfire-query",
    "rel": "references",
-   "dst": "logfire-ui",
+   "dst": "logfire-instrumentation",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "logfire-ui named in logfire-query/SKILL.md body",
+   "justification": "logfire-instrumentation named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
    "src": "logfire-query",
    "rel": "references",
-   "dst": "opentelemetry",
+   "dst": "logfire-ui",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "opentelemetry named in logfire-query/SKILL.md body",
+   "justification": "logfire-ui named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98099,6 +99677,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "telemetry named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-query",
+   "rel": "references",
+   "dst": "wizard",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -98131,6 +99718,15 @@
   {
    "src": "logfire-ui",
    "rel": "references",
+   "dst": "handoff",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "handoff referenced in code/link context in logfire-ui/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-ui",
+   "rel": "references",
    "dst": "logfire-query",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -98153,6 +99749,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "telemetry named in logfire-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "logfire-ui",
+   "rel": "references",
+   "dst": "wizard",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-ui/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -113971,6 +115576,15 @@
   {
    "src": "neo4j-security-skill",
    "rel": "references",
+   "dst": "auth",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "auth referenced in code/link context in neo4j-security-skill/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neo4j-security-skill",
+   "rel": "references",
    "dst": "neo4j-cli-tools-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -115775,6 +117389,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of neuroscientist appears in developmental-biologist/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
+   "dst": "emil-choreograph",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in emil-choreograph/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
+   "dst": "emil-pick-ui-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in emil-pick-ui-library/SKILL.md",
    "status": "accepted"
   },
   {
@@ -122102,15 +123734,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "opentelemetry named in logfire-instrumentation/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "opentelemetry",
-   "rel": "references",
-   "dst": "logfire-query",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "opentelemetry named in logfire-query/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -134329,6 +135952,33 @@
   {
    "src": "prototype",
    "rel": "references",
+   "dst": "emil-ask-emil",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in emil-ask-emil/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prototype",
+   "rel": "references",
+   "dst": "emil-break-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prototype",
+   "rel": "references",
+   "dst": "emil-prototype",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prototype named in emil-prototype/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prototype",
+   "rel": "references",
    "dst": "fluid-dynamicist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -146209,6 +147859,15 @@
   {
    "src": "satori",
    "rel": "references",
+   "dst": "emil-pick-ui-library",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "satori named in emil-pick-ui-library/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "satori",
+   "rel": "references",
    "dst": "nextjs",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -156014,6 +157673,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "shadcn named in design-taste-frontend/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "shadcn",
+   "rel": "references",
+   "dst": "emil-improve-animations",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "shadcn named in emil-improve-animations/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -174442,6 +176110,15 @@
   {
    "src": "vacuum-science-technology-engineer",
    "rel": "references",
+   "dst": "emil-learn-taste",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of vacuum-science-technology-engineer appears in emil-learn-taste/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "vacuum-science-technology-engineer",
+   "rel": "references",
    "dst": "geist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -178870,6 +180547,24 @@
   {
    "src": "wizard",
    "rel": "references",
+   "dst": "logfire-query",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-query/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "wizard",
+   "rel": "references",
+   "dst": "logfire-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "wizard named in logfire-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "wizard",
+   "rel": "references",
    "dst": "matlab-build-app",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -180499,6 +182194,15 @@
   {
    "src": "zod",
    "rel": "references",
+   "dst": "emil-break-ui",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "zod named in emil-break-ui/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "zod",
+   "rel": "references",
    "dst": "git-workflow-and-versioning",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -181943,7 +183647,6 @@
   "genome-match",
   "git-guardrails-claude-code",
   "gnucobol-mainframe-batch",
-  "handoff",
   "hibernate-upgrade",
   "imc-tuning-rules",
   "internal-comms",
