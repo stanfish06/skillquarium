@@ -3414,15 +3414,6 @@
       "installedAt": "2026-07-21T05:33:26.457Z",
       "updatedAt": "2026-07-21T05:33:26.457Z"
     },
-    "dotnet-coverage-analysis": {
-      "source": "dotnet/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/dotnet/skills.git",
-      "skillPath": "plugins/dotnet-test/skills/coverage-analysis/SKILL.md",
-      "skillFolderHash": "b44e9281298428c64c74d1184716449660352ced",
-      "installedAt": "2026-07-21T05:40:00.000Z",
-      "updatedAt": "2026-07-21T05:40:00.000Z"
-    },
     "building-pydantic-ai-agents": {
       "source": "pydantic/skills",
       "sourceType": "github",

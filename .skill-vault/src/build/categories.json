@@ -2128,7 +2128,27 @@
     "inspiration": "data-visualization",
     "ggplot2": "data-visualization",
     "d3": "data-visualization",
-    "matplotlib-design": "data-visualization"
+    "matplotlib-design": "data-visualization",
+    "emil-animate": "web-automation-frontend",
+    "emil-animate-expo": "mobile-native-dev",
+    "emil-animation-performance": "web-automation-frontend",
+    "emil-animation-vocabulary": "web-automation-frontend",
+    "emil-apple-design": "web-automation-frontend",
+    "emil-ask-emil": "web-automation-frontend",
+    "emil-ask-sonner": "web-automation-frontend",
+    "emil-break-ui": "web-automation-frontend",
+    "emil-choreograph": "web-automation-frontend",
+    "emil-design-eng": "web-automation-frontend",
+    "emil-find-animation-opportunities": "web-automation-frontend",
+    "emil-gestures": "web-automation-frontend",
+    "emil-improve-animations": "web-automation-frontend",
+    "emil-learn-taste": "web-automation-frontend",
+    "emil-mobile-native": "web-automation-frontend",
+    "emil-pick-ui-library": "web-automation-frontend",
+    "emil-prototype": "web-automation-frontend",
+    "emil-remove-animations": "web-automation-frontend",
+    "emil-review-animations": "web-automation-frontend",
+    "emil-write-swift": "mobile-native-dev"
   },
   "synonyms": {
     "pydeseq2": [

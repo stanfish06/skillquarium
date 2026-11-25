@@ -14,7 +14,7 @@ created: 2026-08-09
 
 **Related maps:** [Web Automation, Frontend & Design](web-automation-frontend.md) | [Software Development & Engineering](software-dev.md) | [Game Development & Interactive 3D](game-development.md)
 
-## Skills (31)
+## Skills (33)
 
 - [android-emulator-qa](../notes/mobile-native-dev/android-emulator-qa.md) — Use when validating Android feature flows in an emulator with adb-driven launch, input, UI-tree inspection, screenshots, and logcat capture
 - [android-performance](../notes/mobile-native-dev/android-performance.md) — Gather and interpret Android performance evidence on an adb target using Simpleperf CPU profiles, Perfetto or Compose traces, gfxinfo frame data, dumpsys meminfo snapshots, Java heap...
@@ -23,6 +23,8 @@ created: 2026-08-09
 - [appkit-interop](../notes/mobile-native-dev/appkit-interop.md) — Bridge macOS SwiftUI into AppKit narrowly
 - [building-native-ui](../notes/mobile-native-dev/building-native-ui.md) — Complete guide for building beautiful apps with Expo Router
 - [codex-expo-run-actions](../notes/mobile-native-dev/codex-expo-run-actions.md) — Wire Expo projects into the Codex app with project-local run scripts and .codex/environments/environment.toml actions
+- [emil-animate-expo](../notes/mobile-native-dev/emil-animate-expo.md) — Build animations in React Native and Expo, making the decisions in the order that determines whether they feel right — should it animate, which thread it runs on, which properties...
+- [emil-write-swift](../notes/mobile-native-dev/emil-write-swift.md) — How to write modern Swift well — modeling with value types, Swift 6 data-race safety and approachable concurrency (@concurrent, main-actor-by-default, actors, task groups), protocols...
 - [expo-api-routes](../notes/mobile-native-dev/expo-api-routes.md) — Guidelines for creating API routes in Expo Router with EAS Hosting
 - [expo-cicd-workflows](../notes/mobile-native-dev/expo-cicd-workflows.md) — Helps understand and write EAS workflow YAML files for Expo projects
 - [expo-deployment](../notes/mobile-native-dev/expo-deployment.md) — Deploying Expo apps to iOS App Store, Android Play Store, web hosting, and API routes

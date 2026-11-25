@@ -210,9 +210,10 @@ affected by the edit, then verify API and scientific claims against primary sour
 
 Keep fixes across the next upstream sync:
 
-- For a skill in `.skill-lock.json`, record each local change as an exact `find`/`replace`
-  entry in `.skill-vault/data/local-overrides.json`. The `find` text must stop matching
-  after replacement so repeated applications remain unchanged.
+- For a skill in `.skill-lock.json` or `.skill-vault/data/renamed-skills.json`, record each
+  local change as an exact `find`/`replace` entry in `.skill-vault/data/local-overrides.json`.
+  The `find` text must stop matching after replacement so repeated applications remain
+  unchanged.
 - For a profile with `metadata.scientific-agents-profile: true`, use
   `.skill-vault/data/scientific-agent-patches.json` instead. Add its patch IDs under
   `metadata.local-patches` and preserve the importer's local-overlay provenance note.

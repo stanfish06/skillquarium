@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Documents, Office & Media](documents-office.md) | [Scientific Writing, Figures & Publishing](research-writing.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (120)
+## Skills (138)
 
 - [accessibility-and-inclusive-visualization](../notes/web-automation-frontend/accessibility-and-inclusive-visualization.md) — Make data visualizations accessible and inclusive
 - [admission-control](../notes/web-automation-frontend/admission-control.md) — Use when the user asks to "write a validator", "add validation", "implement admission control", "write a mutating webhook", "add a mutation handler", "validate incoming resources"...
@@ -46,6 +46,24 @@ created: 2026-06-13
 - [design-taste-frontend-v1](../notes/web-automation-frontend/design-taste-frontend-v1.md) — The original v1 taste-skill, preserved for projects depending on its exact behavior
 - [dogfood](../notes/web-automation-frontend/dogfood.md) — Systematically explore and test a web application to find bugs, UX issues, and other problems
 - [electron](../notes/web-automation-frontend/electron.md) — Automate Electron desktop apps (VS Code, Slack, Discord, Figma, Notion, Spotify, etc.) using agent-browser via Chrome DevTools Protocol
+- [emil-animate](../notes/web-automation-frontend/emil-animate.md) — Build an animation from scratch, making the decisions in the order that determines whether it feels right — should it animate at all, what purpose, which tool, which properties, which...
+- [emil-animation-performance](../notes/web-automation-frontend/emil-animation-performance.md) — Keep web animations inside the frame budget — animate composite-only properties, keep motion off the main thread when the page is busy, and find the cause when an animation drops frames
+- [emil-animation-vocabulary](../notes/web-automation-frontend/emil-animation-vocabulary.md) — Reverse-lookup glossary that turns a vague description of a web animation or motion effect into its exact term ("the bouncy thing when a popover opens" → Pop in
+- [emil-apple-design](../notes/web-automation-frontend/emil-apple-design.md) — Apple's approach to interface design and fluid, physical motion, translated for the web
+- [emil-ask-emil](../notes/web-automation-frontend/emil-ask-emil.md) — Ask which skill or flow fits your situation
+- [emil-ask-sonner](../notes/web-automation-frontend/emil-ask-sonner.md) — Guide to Sonner, the React toast library — install and wire up the Toaster, pick the right toast() call, promise and loading toasts, updating, dismissing and persisting toasts...
+- [emil-break-ui](../notes/web-automation-frontend/emil-break-ui.md) — Try to break a piece of UI by feeding it worst-case data — long names, unbreakable emails, one-letter names, missing fields, huge counts, zero items, long labels, non-Latin text...
+- [emil-choreograph](../notes/web-automation-frontend/emil-choreograph.md) — Coordinate several elements that animate together — decide what moves, in what order, how much they overlap, and what stays still — so a group reads as one intentional motion instead...
+- [emil-design-eng](../notes/web-automation-frontend/emil-design-eng.md) — Emil Kowalski's design-engineering philosophy for UI polish, component design, animation decisions, and the invisible details that make software feel great
+- [emil-find-animation-opportunities](../notes/web-automation-frontend/emil-find-animation-opportunities.md) — Search a codebase or UI for places that don't animate but should, and reject everything that shouldn't
+- [emil-gestures](../notes/web-automation-frontend/emil-gestures.md) — Build drag, swipe, and sheet interactions that track the finger 1:1 and stay interruptible
+- [emil-improve-animations](../notes/web-automation-frontend/emil-improve-animations.md) — Survey a codebase's animation and motion code as a senior motion advisor, then produce a prioritized audit and self-contained implementation plans for other agents (or cheaper models)...
+- [emil-learn-taste](../notes/web-automation-frontend/emil-learn-taste.md) — Turn a session's design corrections into rules, with their why, in DESIGN.md, a project skill, or a lint check
+- [emil-mobile-native](../notes/web-automation-frontend/emil-mobile-native.md) — Make a web app feel native on a phone — the small CSS and meta-tag fixes that separate "a website in a browser" from something that feels installed
+- [emil-pick-ui-library](../notes/web-automation-frontend/emil-pick-ui-library.md) — Pick the library for a frontend task from a curated list — primitives, toasts, drawers, command menus, OTP, numbers, charts, virtualization, drag and drop, state, styling
+- [emil-prototype](../notes/web-automation-frontend/emil-prototype.md) — Build multiple genuinely different versions of a UI piece you describe, rendered behind a visual picker so you can flip through them live and promote the one that feels right
+- [emil-remove-animations](../notes/web-automation-frontend/emil-remove-animations.md) — Find the animations an interface doesn't need and remove them — motion on keyboard actions, high-frequency surfaces, functional data, and decoration with no purpose — then clean up...
+- [emil-review-animations](../notes/web-automation-frontend/emil-review-animations.md) — Reviews animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy
 - [figma-code-connect](../notes/web-automation-frontend/figma-code-connect.md) — Creates and maintains Figma Code Connect template files that map Figma components to code snippets
 - [figma-create-new-file](../notes/web-automation-frontend/figma-create-new-file.md) — Load this skill before every `create_new_file` tool call
 - [figma-design-to-code](../notes/web-automation-frontend/figma-design-to-code.md) — You MUST invoke this skill BEFORE calling the `get_design_context` Figma MCP tool

@@ -7,6 +7,7 @@ import {
   overridesPath,
   reportOverrides,
 } from "./overrides";
+import { addRenamed, reportRenamed, syncRenamed } from "./renamed";
 import { update as runUpdate } from "./run";
 import { softenVault } from "./soften";
 
@@ -44,7 +45,7 @@ Re-apply the fixes recorded in .skill-vault/data/local-overrides.json to upstrea
 Also verify the pinned Lean attribution bundle and restore its per-skill notices after reinstalling.
 
   --check       report without writing; exit 1 when an override is not applied
-  --quarantine  also restore each skill left stale or missing, folder and .skill-lock.json entry,
+  --quarantine  also restore each skill left stale or missing, folder and lock entry,
                 from HEAD; exit 1 when one was quarantined, 2 when one could not be restored.
                 For update-skills.yml: it discards uncommitted edits in those skills`,
   ["--check", "--quarantine"],
@@ -106,11 +107,91 @@ export const drift: CommandModule = {
   },
 };
 
+export const renamed = flagged(
+  `usage: skillquarium renamed [--check]
+
+Sync the upstream skills installed under a new name, recorded in
+.skill-vault/data/renamed-skills.json. The skills CLI cannot update them: it matches a lock
+entry's name against upstream's \`name:\` (#827). Each changed upstream folder is copied over
+skills/<name>, its \`name:\` set to the local name and, for rewriteRefs entries, its \`/skill\`
+and \`../skill/\` references to the same source renamed too. Run overrides afterwards.
+
+  --check  report without writing; exit 1 when a skill is behind`,
+  ["--check"],
+  (flags, ctx) => {
+    const check = flags.has("--check");
+    return reportRenamed(syncRenamed(ctx.root, !check), check, ctx);
+  },
+);
+
+const ADD_HELP = `usage: skillquarium add <owner/repo | git-url> (--skill NAME... | --all)
+                        (--as NAME | --prefix PREFIX) [--rewrite-refs]
+
+Install upstream skills under new names and record them in
+.skill-vault/data/renamed-skills.json, which \`skillquarium renamed\` keeps in sync. For a skill
+that keeps its upstream name, use \`npx skills add <source> -g --skill NAME\` instead.
+
+  --skill NAME    upstream \`name:\` to add; repeat for several
+  --all           every skill in the source
+  --as NAME       local name for a single --skill
+  --prefix P      prepend P to each upstream name that does not already start with it
+  --rewrite-refs  point \`/skill\` and \`../skill/\` references between the added skills at the
+                  new names; mentions in prose still need overrides`;
+
+export const add: CommandModule = {
+  help: ADD_HELP,
+  run: async (args, ctx) => {
+    const skills: string[] = [];
+    let source: string | undefined;
+    let as: string | undefined;
+    let prefix: string | undefined;
+    let all = false;
+    let rewriteRefs = false;
+    const usage = (message: string) => {
+      ctx.err(`skillquarium add: ${message}`);
+      ctx.err(ADD_HELP);
+      return 2;
+    };
+    for (let i = 0; i < args.length; i++) {
+      const arg = args[i] ?? "";
+      const [flag, inline] =
+        arg.startsWith("--") && arg.includes("=")
+          ? [arg.slice(0, arg.indexOf("=")), arg.slice(arg.indexOf("=") + 1)]
+          : [arg, undefined];
+      const value = () => inline ?? args[++i];
+      if (flag === "--skill" || flag === "--as" || flag === "--prefix") {
+        const v = value();
+        if (!v) return usage(`${flag} requires a value`);
+        if (flag === "--skill") skills.push(v);
+        else if (flag === "--as") as = v;
+        else prefix = v;
+      } else if (arg === "--all") all = true;
+      else if (arg === "--rewrite-refs") rewriteRefs = true;
+      else if (arg.startsWith("-")) return usage(`unknown option ${arg}`);
+      else if (source === undefined) source = arg;
+      else return usage(`unexpected argument ${arg}`);
+    }
+    if (source === undefined) return usage("a source is required");
+    if (all === skills.length > 0) return usage("pass either --skill NAME or --all");
+    if ((as === undefined) === (prefix === undefined)) return usage("pass exactly one of --as or --prefix");
+    let added: [string, string][];
+    try {
+      added = addRenamed(ctx.root, { source, skills, all, as, prefix, rewriteRefs });
+    } catch (e) {
+      ctx.err(`skillquarium add: ${e instanceof Error ? e.message : String(e)}`);
+      return 1;
+    }
+    for (const [local, upstream] of added) ctx.out(`added skills/${local} (upstream ${upstream})`);
+    ctx.out("next: assign each a domain in categories.json extraAssignments, then build and validate");
+    return 0;
+  },
+};
+
 export const update = flagged(
   `usage: skillquarium update [--skip-fetch] [--skip-embed] [--fail-on-drift]
 
-Run the upstream sync chain: skills update, overrides, soften, build --prune, kg, validate,
-embed, drift. A failed upstream fetch still runs every later step and reports at the end.
+Run the upstream sync chain: skills update, renamed, overrides, soften, build --prune, kg,
+validate, embed, drift. A failed upstream fetch still runs every later step and reports at the end.
 
   --skip-fetch     start at the overrides step
   --skip-embed     skip the embedding refresh (what CI passes)

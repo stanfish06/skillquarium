@@ -32,6 +32,8 @@ const commands: Record<string, () => Promise<{ run: Command; help: string }>> = 
   drift: () => import("./update/cli").then((m) => m.drift),
   soften: () => import("./update/cli").then((m) => m.soften),
   update: () => import("./update/cli").then((m) => m.update),
+  renamed: () => import("./update/cli").then((m) => m.renamed),
+  add: () => import("./update/cli").then((m) => m.add),
   import: () => import("./import/command"),
   eval: () => import("./evalCommand"),
   query: () => import("./search/command").then((m) => m.query),
