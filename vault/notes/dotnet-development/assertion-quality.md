@@ -14,7 +14,7 @@ created: 2026-07-21
 # assertion-quality
 
 > [!info] What it does
-> Analyze assertion quality, depth, variety, and false confidence in existing tests. Use when asked about weak, shallow, trivial, always-true, self-referential, assertion-free, presence/truthiness-only, or insufficiently diverse assertions, including MSTest, Jest, pytest, and Go. DO NOT USE for direct fixes: writing-mstest-tests owns supplied MSTest assertions; code-testing owns new cases. Use test-gap-analysis when asked whether tests would catch a production change, and test-anti-patterns for general severity-ranked audits.
+> Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions; Contains fragments or totals replacing predictable generated code, JSON, CLI, report, or protocol output. Supports MSTest, Jest, pytest, and Go. DO NOT USE for direct assertion fixes (writing-mstest-tests for MSTest, code-testing for other frameworks), new cases (code-testing), missing scenarios or identified production changes (test-gap-analysis), or general severity-ranked audits (test-anti-patterns).
 
 **Source:** [skills/assertion-quality/SKILL.md](../../../skills/assertion-quality/SKILL.md)  ·  **Domain:** [.NET & C# Development](../../maps/dotnet-development.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

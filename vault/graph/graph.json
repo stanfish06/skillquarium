@@ -4,11 +4,11 @@
   "skills": 2235,
   "expert_profiles": 503,
   "nodes": 2308,
-  "edges": 16625,
+  "edges": 16627,
   "generic_names_blocked": 30,
-  "tier1_edges": 5027,
+  "tier1_edges": 5028,
   "tier2_edges": 727,
-  "alias_edges": 4643,
+  "alias_edges": 4644,
   "discipline_edges": 599,
   "ambiguous_aliases": 35,
   "artifact_edges": 522,
@@ -20,13 +20,13 @@
   "orphan_count": 125,
   "orphan_rate": 0.0559,
   "by_provenance": {
-   "EXTRACTED": 15839,
+   "EXTRACTED": 15841,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2235,
-   "references": 13082,
+   "references": 13084,
    "in_discipline": 599,
    "touches": 522,
    "has_step": 69,
@@ -1495,7 +1495,7 @@
    "id": "assertion-quality",
    "type": "Skill",
    "label": "assertion-quality",
-   "description": "Analyze assertion quality, depth, variety, and false confidence in existing tests. Use when asked about weak, shallow, trivial, always-true, self-referential, assertion-free, presence/truthiness-only, or insufficiently diverse assertions, including MSTest, Jest, pytest, and Go. DO NOT USE for direct fixes: writing-mstest-tests owns supplied MSTest assertions; code-testing owns new cases. Use test-gap-analysis when asked whether tests would catch a production change, and test-anti-patterns for general severity-ranked audits.",
+   "description": "Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions; Contains fragments or totals replacing predictable generated code, JSON, CLI, report, or protocol output. Supports MSTest, Jest, pytest, and Go. DO NOT USE for direct assertion fixes (writing-mstest-tests for MSTest, code-testing for other frameworks), new cases (code-testing), missing scenarios or identified production changes (test-gap-analysis), or general severity-ranked audits (test-anti-patterns).",
    "source": "skills/assertion-quality/SKILL.md",
    "aliases": [
     "assertion quality"
@@ -23630,7 +23630,7 @@
    "id": "prisma-postgres-setup",
    "type": "Skill",
    "label": "prisma-postgres-setup",
-   "description": "Obtain or reuse a Prisma Postgres database and connect an application. Use when the user needs a database and has none configured (\"I need a database\", \"add a Postgres database\", \"set up a database for this app\"), runs or mentions `create-db` or `npx create-db`, or asks to set up or connect Prisma Postgres, including in v0 and the Vercel Marketplace. Hands Prisma ORM configuration to prisma-orm-setup; reuses an existing connection first and honors an explicit provider, driver, alternative ORM, or database-only choice.",
+   "description": "Obtain or reuse a Prisma Postgres database and connect an application. Use when the user needs a database and has none configured (\"I need a database\", \"add a Postgres database\", \"set up a database for this app\"), is about to deploy, host, publish or share an app that has no hosted database yet (\"deploy my app\", \"put it online\", \"share it with a friend\"), runs or mentions `create-db` or `npx create-db`, or asks to set up or connect Prisma Postgres, including in v0 and the Vercel Marketplace. Hands Prisma ORM configuration to prisma-orm-setup; reuses an existing connection first and honors an explicit provider, driver, alternative ORM, or database-only choice.",
    "source": "skills/prisma-postgres-setup/SKILL.md",
    "aliases": [
     "prisma postgres setup"
@@ -133457,6 +133457,15 @@
    "status": "accepted"
   },
   {
+   "src": "prisma-compute",
+   "rel": "references",
+   "dst": "prisma-postgres-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-compute named in prisma-postgres-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "prisma-database-setup",
    "rel": "in_domain",
    "dst": "domain:software-dev",
@@ -133571,6 +133580,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prisma-postgres-setup named in prisma-cli/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-setup",
+   "rel": "references",
+   "dst": "prisma-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-compute named in prisma-postgres-setup/SKILL.md body",
    "status": "accepted"
   },
   {

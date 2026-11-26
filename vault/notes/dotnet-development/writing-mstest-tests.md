@@ -20,7 +20,7 @@ created: 2026-07-21
 
 ## Related skills
 
-- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze assertion quality, depth, variety, and false confidence in existing tests
+- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions
 - [exp-test-maintainability](../../notes/dotnet-development/exp-test-maintainability.md) — Detects duplicate boilerplate, copy-paste tests, and structural maintainability issues across .NET test suites
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
 - [test-anti-patterns](../../notes/dotnet-development/test-anti-patterns.md) — Audit a test file or suite; produce a severity-ranked diagnostic report

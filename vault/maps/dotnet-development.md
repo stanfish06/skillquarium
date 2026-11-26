@@ -19,7 +19,7 @@ created: 2026-07-21
 - [analyzing-dotnet-performance](../notes/dotnet-development/analyzing-dotnet-performance.md) — Scans .NET code for ~50 performance anti-patterns across async, memory, strings, collections, LINQ, regex, serialization, and I/O with tiered severity classification
 - [android-tombstone-symbolication](../notes/dotnet-development/android-tombstone-symbolication.md) — Symbolicate the .NET runtime frames in an Android tombstone file
 - [apple-crash-symbolication](../notes/dotnet-development/apple-crash-symbolication.md) — Symbolicate .NET runtime frames in Apple platform .ips crash logs (iOS, tvOS, Mac Catalyst, macOS)
-- [assertion-quality](../notes/dotnet-development/assertion-quality.md) — Analyze assertion quality, depth, variety, and false confidence in existing tests
+- [assertion-quality](../notes/dotnet-development/assertion-quality.md) — Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions
 - [author-component](../notes/dotnet-development/author-component.md) — Create or review Blazor components (.razor files) with correct architecture
 - [authoring-github-workflows](../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [binlog-failure-analysis](../notes/dotnet-development/binlog-failure-analysis.md) — Analyze MSBuild binary logs to diagnose build failures

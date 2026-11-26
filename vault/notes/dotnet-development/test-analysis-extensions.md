@@ -20,7 +20,7 @@ created: 2026-07-21
 
 ## Related skills
 
-- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze assertion quality, depth, variety, and false confidence in existing tests
+- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions
 - [jest](../../notes/software-dev/jest.md) — JavaScript testing with Jest — unit tests, mocks, spies, snapshot testing, code coverage, and configuration
 - [pytest](../../notes/software-dev/pytest.md) — Testing Python code with pytest — fixtures, parametrization, markers, mocking, coverage, and configuration
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills

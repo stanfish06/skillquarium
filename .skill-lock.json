@@ -2654,9 +2654,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-test/skills/assertion-quality/SKILL.md",
-      "skillFolderHash": "fd35e05d968ac2de3aab036402196a74586cc5b9",
+      "skillFolderHash": "cc566db9b9a3471b5e743f8e9729172c7442de31",
       "installedAt": "2026-07-21T05:30:50.017Z",
-      "updatedAt": "2026-11-25T17:10:19.682Z"
+      "updatedAt": "2026-11-26T16:51:25.524Z"
     },
     "code-testing-agent": {
       "source": "dotnet/skills",
@@ -3338,9 +3338,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-test/skills/test-anti-patterns/SKILL.md",
-      "skillFolderHash": "4cab149b2a8e1ff5fbf85ba617db684431677d60",
+      "skillFolderHash": "7610f3dc4b8005f7ada389cbef86ce45b099d9ab",
       "installedAt": "2026-07-21T05:33:14.026Z",
-      "updatedAt": "2026-10-10T12:49:07.187Z"
+      "updatedAt": "2026-11-26T16:51:27.335Z"
     },
     "support-prerendering": {
       "source": "dotnet/skills",
@@ -8819,9 +8819,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "3abb5e87d93e5cfaa0b758a4b07926f619cb7a33",
+      "skillFolderHash": "bcd934304688b513af64c4bc35cd28c995bf8665",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-23T18:02:33.963Z"
+      "updatedAt": "2026-11-26T16:51:43.842Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9528,27 +9528,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "6f017188ec0abe9d3c91e91929d73acadaa16a0a",
+      "skillFolderHash": "8bc98b9fb4932609af5578f49e477cae5cb750fd",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-25T17:10:29.093Z"
+      "updatedAt": "2026-11-26T16:51:47.496Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "d576bb01cc59bc65ac5190de0dd4ef79e20f7894",
+      "skillFolderHash": "a7065b782ece9cdb34132995f2c34b467469aa46",
       "installedAt": "2026-08-21T01:50:31.549Z",
-      "updatedAt": "2026-11-19T15:43:08.937Z"
+      "updatedAt": "2026-11-26T16:51:50.392Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "2ace297ef2508df0a117e1b55fec7a975e777d44",
+      "skillFolderHash": "2bfc83c369bb5a3a8d5be1fc136d3c6dd161d282",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-19T15:43:13.395Z"
+      "updatedAt": "2026-11-26T16:51:53.206Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -9627,9 +9627,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/prisma/skills.git",
       "skillPath": "prisma-postgres-setup/SKILL.md",
-      "skillFolderHash": "82345cbaffbd0a08a5ad4413de480c3b1ac0d6b1",
+      "skillFolderHash": "6639e43a79c2d483efa0efcfeea2b08acb29cd58",
       "installedAt": "2026-08-23T17:16:28.788Z",
-      "updatedAt": "2026-10-30T12:51:04.650Z"
+      "updatedAt": "2026-11-26T16:51:54.117Z"
     },
     "prisma-upgrade-v7": {
       "source": "prisma/skills",
@@ -10517,9 +10517,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-dbsql/SKILL.md",
-      "skillFolderHash": "2a42c1ae3c5b080e7ac1246a1e02bcd88ebbcd70",
+      "skillFolderHash": "a84e6cbf23f53fb6a5d5b1eeb7c365a843df263e",
       "installedAt": "2026-08-23T17:20:36.141Z",
-      "updatedAt": "2026-11-19T15:43:22.616Z"
+      "updatedAt": "2026-11-26T16:51:57.151Z"
     },
     "databricks-docs": {
       "source": "databricks/databricks-agent-skills",
@@ -12087,9 +12087,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/skypilot-org/skypilot.git",
       "skillPath": "agent/skills/skypilot/SKILL.md",
-      "skillFolderHash": "d42876210c403b6b93daf0cf7d448fca35c44b9f",
+      "skillFolderHash": "8ab33f3d670d8eecf5304673cfea8553f38dbee0",
       "installedAt": "2026-10-24T15:58:04.348Z",
-      "updatedAt": "2026-11-19T15:43:40.011Z"
+      "updatedAt": "2026-11-26T16:52:10.509Z"
     },
     "lean4": {
       "source": "cameronfreer/lean4-skills",

@@ -18,7 +18,7 @@ created: 2026-06-10
 
 ## Related skills
 
-- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze assertion quality, depth, variety, and false confidence in existing tests
+- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions
 - [test-analysis-extensions](../../notes/dotnet-development/test-analysis-extensions.md) — Provides file paths to language-specific reference files for the test ANALYSIS skills (assertion-quality, test-anti-patterns, test-gap-analysis, test-smell-detection, test-tagging)
 - [test-driven-development](../../notes/software-dev/test-driven-development.md) — Use when implementing any feature or bugfix, before writing implementation code
 - [workflow](../../notes/software-dev/workflow.md) — Vercel Workflow DevKit (WDK) expert guidance

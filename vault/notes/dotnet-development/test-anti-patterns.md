@@ -23,7 +23,7 @@ created: 2026-07-21
 
 ## Related skills
 
-- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze assertion quality, depth, variety, and false confidence in existing tests
+- [assertion-quality](../../notes/dotnet-development/assertion-quality.md) — Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions
 - [coverage-analysis](../../notes/security-auditing/coverage-analysis.md) — Measures and interprets what a fuzzing campaign actually reaches, using llvm-cov, lcov, or a fuzzer's own coverage output
 - [crap-score](../../notes/dotnet-development/crap-score.md) — Calculates CRAP (Change Risk Anti-Patterns) for a named .NET method, class, or file
 - [dotnet-coverage-analysis](../../notes/dotnet-development/dotnet-coverage-analysis.md) — Activation requires either supplied .NET coverage reports/percentages/line, branch, or condition metrics, or an explicit request to collect .NET coverage for analysis
