@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [citations](../../notes/literature-discovery/citations.md) — Canonical rules and HTML/CSS contract for inline `[n]` citation references, end-of-document Citations blocks, and optional per-section citation recaps used across Moody's Agentic...
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

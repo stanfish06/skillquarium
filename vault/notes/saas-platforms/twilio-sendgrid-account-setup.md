@@ -20,6 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 - [email](../../notes/comms-productivity/email.md) — Email sending integration guidance — Resend (native Vercel Marketplace) with React Email templates
 - [verification](../../notes/software-dev/verification.md) — Full-story verification — infers what the user is building, then verifies the complete flow end-to-end: browser → API → data → response
 

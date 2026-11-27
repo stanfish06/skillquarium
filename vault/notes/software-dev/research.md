@@ -49,6 +49,8 @@ created: 2026-08-19
 - [initiate](../../notes/vault-meta/initiate.md) — Initiate coverage — generate both research note (HTML) and Excel model (.xlsx)
 - [latex-posters](../../notes/research-writing/latex-posters.md) — Creates research posters in LaTeX using beamerposter, tikzposter, or baposter
 - [literature-review](../../notes/literature-discovery/literature-review.md) — Conducts systematic, scoping, and narrative literature reviews using PubMed, arXiv, bioRxiv, Semantic Scholar, and other appropriate sources
+- [literature-search-arxiv](../../notes/literature-discovery/literature-search-arxiv.md) — Search for scientific papers, preprints, and publications on arXiv
+- [literature-search-openalex](../../notes/literature-discovery/literature-search-openalex.md) — Query the OpenAlex scholarly database for research papers, authors, institutions, topics, sources, publishers, funders, geo-locations, and keywords
 - [market-research-reports](../../notes/documents-office/market-research-reports.md) — Builds evidence-traceable market research reports and assumption-driven market sizing or forecast scenarios
 - [moody-s-company-analysis](../../notes/finance-investment/moody-s-company-analysis.md) — Use when the user asks for Moody's company profiles, ownership, ratings, credit opinions, financial statements, filings, peers, research, or credit-risk analysis for a company
 - [moody-s-explore-mcp](../../notes/finance-investment/moody-s-explore-mcp.md) — Discover and safely explore Moody's MCP tools
@@ -64,6 +66,7 @@ created: 2026-08-19
 - [pathml](../../notes/imaging-signals/pathml.md) — Supports local computational pathology research with PathML: slide loading and tiling, preprocessing and QC, h5path storage, multiplex quantification, spatial graphs, and bounded model...
 - [peer-review](../../notes/research-writing/peer-review.md) — Prepares evidence-bounded, constructive peer-review drafts and structured manuscript assessments
 - [pptx-posters](../../notes/research-writing/pptx-posters.md) — Creates and audits editable scientific posters in macro-free PowerPoint (.pptx) from author-approved local content and assets
+- [pubmed-database](../../notes/literature-discovery/pubmed-database.md) — Search PubMed for scientific literature, including published clinical trials
 - [pubmed-search](../../notes/literature-discovery/pubmed-search.md) — Search PubMed for scientific literature
 - [pubmed-summariser](../../notes/literature-discovery/pubmed-summariser.md) — Search PubMed for a gene name or disease term and generate a structured research briefing of the top recent English-language papers
 - [pydantic-ai-harness](../../notes/ml-ai/pydantic-ai-harness.md) — Extend Pydantic AI agents with capabilities from pydantic-ai-harness -- the Coder coding agent, file and shell tools in local or sandboxed workspaces (Modal, E2B, Sprites, smolvm)...

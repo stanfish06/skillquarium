@@ -19,7 +19,7 @@ created: 2026-07-21
 - [analyzing-dotnet-performance](../notes/dotnet-development/analyzing-dotnet-performance.md) — Scans .NET code for ~50 performance anti-patterns across async, memory, strings, collections, LINQ, regex, serialization, and I/O with tiered severity classification
 - [android-tombstone-symbolication](../notes/dotnet-development/android-tombstone-symbolication.md) — Symbolicate the .NET runtime frames in an Android tombstone file
 - [apple-crash-symbolication](../notes/dotnet-development/apple-crash-symbolication.md) — Symbolicate .NET runtime frames in Apple platform .ips crash logs (iOS, tvOS, Mac Catalyst, macOS)
-- [assertion-quality](../notes/dotnet-development/assertion-quality.md) — Analyze assertion quality, depth, variety, and false confidence in existing tests
+- [assertion-quality](../notes/dotnet-development/assertion-quality.md) — Analyze weak, shallow, trivial, self-referential, assertion-free, or presence-only assertions
 - [author-component](../notes/dotnet-development/author-component.md) — Create or review Blazor components (.razor files) with correct architecture
 - [authoring-github-workflows](../notes/dotnet-development/authoring-github-workflows.md) — Author and review GitHub Actions workflow YAML safely so syntactically-valid YAML can't ship a workflow that GitHub Actions refuses to run
 - [binlog-failure-analysis](../notes/dotnet-development/binlog-failure-analysis.md) — Analyze MSBuild binary logs to diagnose build failures
@@ -44,7 +44,7 @@ created: 2026-07-21
 - [detect-static-dependencies](../notes/dotnet-development/detect-static-dependencies.md) — ACTIVATION PREREQUISITE: the request or discovered target must explicitly identify C#, .NET, `.cs`, or `.csproj`
 - [directory-build-organization](../notes/dotnet-development/directory-build-organization.md) — USE ONLY for (1) two or more projects with repeated MSBuild policy, targets, or package versions, or (2) an existing Directory.Build.props/targets/rsp hierarchy with an import...
 - [dotnet-aot-compat](../notes/dotnet-development/dotnet-aot-compat.md) — Make .NET projects compatible with Native AOT and trimming by systematically resolving IL trim/AOT analyzer warnings
-- [dotnet-coverage-analysis](../notes/dotnet-development/dotnet-coverage-analysis.md) — Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects
+- [dotnet-coverage-analysis](../notes/dotnet-development/dotnet-coverage-analysis.md) — Activation requires either supplied .NET coverage reports/percentages/line, branch, or condition metrics, or an explicit request to collect .NET coverage for analysis
 - [dotnet-maui-doctor](../notes/dotnet-development/dotnet-maui-doctor.md) — Diagnoses and fixes .NET MAUI development environment issues
 - [dotnet-pinvoke](../notes/dotnet-development/dotnet-pinvoke.md) — Correctly call native (C/C++) libraries from .NET using P/Invoke and LibraryImport
 - [dotnet-trace-collect](../notes/dotnet-development/dotnet-trace-collect.md) — Guide developers through capturing diagnostic artifacts to diagnose production .NET performance issues

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Imaging, Microscopy & Biosignals](imaging-signals.md)
 
-## Skills (14)
+## Skills (15)
 
 - [clinical-decision-support](../notes/clinical-medical/clinical-decision-support.md) — Prepares and validates research-only clinical decision-support evaluation, evidence-profile, cohort, survival, biomarker/model, privacy, and governance artifacts
 - [clinical-reports](../notes/clinical-medical/clinical-reports.md) — Creates safety-bounded draft structures and runs local deterministic checks for clinical case, diagnostic, trial, safety, and aggregate research reports
@@ -24,6 +24,7 @@ created: 2026-06-13
 - [iso-13485-certification](../notes/clinical-medical/iso-13485-certification.md) — Comprehensive toolkit for preparing ISO 13485 certification documentation for medical device Quality Management Systems
 - [methylation-clock](../notes/clinical-medical/methylation-clock.md) — Compute epigenetic age from DNA methylation arrays using PyAging clocks from GEO accessions or local files
 - [nutrigx-advisor](../notes/clinical-medical/nutrigx-advisor.md) — Personalised nutrition report from consumer genetic data (23andMe, AncestryDNA, VCF) — interrogates nutritionally-relevant SNPs and generates actionable dietary guidance, all computed...
+- [openfda-database](../notes/clinical-medical/openfda-database.md) — Query, search, and download data from the openFDA API for drugs, devices, foods, tobacco, cosmetics, animal and veterinary products, substances, and transparency data
 - [pharmgx-reporter](../notes/clinical-medical/pharmgx-reporter.md) — Pharmacogenomic report from DTC genetic data (23andMe/AncestryDNA) — 12 genes, 31 SNPs, 51 drugs
 - [profile-report](../notes/clinical-medical/profile-report.md) — Unified personal genomic profile report — reads a PatientProfile JSON and synthesizes all skill results into a single "Your Genomic Profile" document
 - [pyhealth](../notes/clinical-medical/pyhealth.md) — Builds and validates PyHealth clinical machine-learning pipelines for EHR, signals, imaging, and medical codes

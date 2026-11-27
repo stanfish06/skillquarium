@@ -20,6 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 - [openai-platform-api-key](../../notes/ml-ai/openai-platform-api-key.md) — Use when Codex is asked to build, run, test, debug, or configure an OpenAI-backed or provider-unspecified AI app, UI, script, CLI, generator, or tool, especially requests phrased only...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

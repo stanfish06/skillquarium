@@ -14,7 +14,7 @@ created: 2026-08-23
 # prisma-postgres-setup
 
 > [!info] What it does
-> Obtain or reuse a Prisma Postgres database and connect an application. Use when the user needs a database and has none configured ("I need a database", "add a Postgres database", "set up a database for this app"), runs or mentions `create-db` or `npx create-db`, or asks to set up or connect Prisma Postgres, including in v0 and the Vercel Marketplace. Hands Prisma ORM configuration to prisma-orm-setup; reuses an existing connection first and honors an explicit provider, driver, alternative ORM, or database-only choice.
+> Obtain or reuse a Prisma Postgres database and connect an application. Use when the user needs a database and has none configured ("I need a database", "add a Postgres database", "set up a database for this app"), is about to deploy, host, publish or share an app that has no hosted database yet ("deploy my app", "put it online", "share it with a friend"), runs or mentions `create-db` or `npx create-db`, or asks to set up or connect Prisma Postgres, including in v0 and the Vercel Marketplace. Hands Prisma ORM configuration to prisma-orm-setup; reuses an existing connection first and honors an explicit provider, driver, alternative ORM, or database-only choice.
 
 **Source:** [skills/prisma-postgres-setup/SKILL.md](../../../skills/prisma-postgres-setup/SKILL.md)  ·  **Domain:** [Software Development & Engineering](../../maps/software-dev.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

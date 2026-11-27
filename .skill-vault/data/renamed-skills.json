@@ -6,9 +6,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-test/skills/coverage-analysis/SKILL.md",
-      "skillFolderHash": "b44e9281298428c64c74d1184716449660352ced",
+      "skillFolderHash": "8094a3fb6e518ebe2ccf9b13c2343c2087bcfac0",
       "installedAt": "2026-07-21T05:40:00.000Z",
-      "updatedAt": "2026-07-21T05:40:00.000Z"
+      "updatedAt": "2026-11-25T17:10:54.560Z"
     },
     "emil-animate": {
       "upstreamName": "animate",

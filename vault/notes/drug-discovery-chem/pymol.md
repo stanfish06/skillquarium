@@ -18,7 +18,7 @@ created: 2026-06-25
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [protein-sequence-msa](../../notes/sequence-phylogenetics/protein-sequence-msa.md) — Performs multiple sequence alignment of proteins with EBI Clustal Omega
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

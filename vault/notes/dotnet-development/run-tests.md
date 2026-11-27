@@ -20,7 +20,7 @@ created: 2026-07-21
 
 ## Related skills
 
-- [dotnet-coverage-analysis](../../notes/dotnet-development/dotnet-coverage-analysis.md) — Project-wide code coverage and CRAP (Change Risk Anti-Patterns) score analysis for .NET projects
+- [dotnet-coverage-analysis](../../notes/dotnet-development/dotnet-coverage-analysis.md) — Activation requires either supplied .NET coverage reports/percentages/line, branch, or condition metrics, or an explicit request to collect .NET coverage for analysis
 - [filter-syntax](../../notes/dotnet-development/filter-syntax.md) — Reference-only filter syntax for VSTest and MTP with MSTest, NUnit, xUnit v3, and TUnit
 - [mtp-hot-reload](../../notes/dotnet-development/mtp-hot-reload.md) — Set up or recover MTP hot reload for a long-lived console-host edit/re-run loop in a Microsoft Testing Platform project
 - [platform-detection](../../notes/dotnet-development/platform-detection.md) — Identify a .NET project's test platform, framework, command mode, and SDK-style vs classic project system

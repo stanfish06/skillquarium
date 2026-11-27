@@ -20,6 +20,7 @@ created: 2026-08-07
 
 ## Related skills
 
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 - [matplotlib](../../notes/data-science-compute/matplotlib.md) — Creates and customizes scientific plots with Matplotlib
 - [networkx](../../notes/data-science-compute/networkx.md) — Creates, analyzes, and visualizes complex networks and graphs in Python with NetworkX
 - [pandas](../../notes/data-science-compute/pandas.md) — The workhorse library for in-memory tabular data in Python

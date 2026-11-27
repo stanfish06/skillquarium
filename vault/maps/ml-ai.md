@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Data Science, Stats & Scientific Computing](data-science-compute.md) | [Drug Discovery, Cheminformatics & Structural Biology](drug-discovery-chem.md) | [Cloud, Infra & MLOps](cloud-devops.md)
 
-## Skills (79)
+## Skills (80)
 
 - [aeon](../notes/ml-ai/aeon.md) — Use for time series machine learning tasks including classification, regression, clustering, forecasting, anomaly detection, segmentation, and similarity search
 - [agents-sdk](../notes/ml-ai/agents-sdk.md) — Build AI agents on Cloudflare Workers using the Agents SDK
@@ -76,6 +76,7 @@ created: 2026-06-13
 - [openai-api-troubleshooting](../notes/ml-ai/openai-api-troubleshooting.md) — Use when an OpenAI API request fails and Codex needs to classify the likely cause, explain the next step, and route to the right follow-up
 - [openai-platform-api-key](../notes/ml-ai/openai-platform-api-key.md) — Use when Codex is asked to build, run, test, debug, or configure an OpenAI-backed or provider-unspecified AI app, UI, script, CLI, generator, or tool, especially requests phrased only...
 - [optuna](../notes/ml-ai/optuna.md) — Hyperparameter optimization (HPO) for ML models using Optuna
+- [predictingthepast](../notes/ml-ai/predictingthepast.md) — Ancient text restoration, attribution, dating, contextualization, and embedding via Aeneas (Latin) / Ithaca (Ancient Greek)
 - [promptfoo-evals](../notes/ml-ai/promptfoo-evals.md) — Write, refine, run, and QA promptfoo evaluation suites: promptfooconfig.yaml, prompts, providers, vars, tests, assertions, model-graded rubrics, transforms, datasets, exports, and CI...
 - [promptfoo-provider-setup](../notes/ml-ai/promptfoo-provider-setup.md) — Connect Promptfoo to a model, live HTTP API, local Python/JavaScript provider, or app code
 - [promptfoo-redteam-run](../notes/ml-ai/promptfoo-redteam-run.md) — Execute, inspect, and rerun an existing Promptfoo redteam scan

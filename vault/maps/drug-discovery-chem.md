@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Proteomics & Metabolomics](proteomics-metabolomics.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Machine Learning & AI](ml-ai.md)
 
-## Skills (66)
+## Skills (69)
 
 - [adaptyv](../notes/drug-discovery-chem/adaptyv.md) — Uses the Adaptyv Bio Foundry API and Python SDK to design protein characterization experiments, estimate costs, submit sequences, monitor laboratory progress, and retrieve results
 - [alphafold-skill](../notes/drug-discovery-chem/alphafold-skill.md) — Submit compact AlphaFold Protein Structure Database API requests for prediction, UniProt summary, sequence summary, and annotation lookups
@@ -29,6 +29,7 @@ created: 2026-06-13
 - [boltz-structure-and-binding](../notes/drug-discovery-chem/boltz-structure-and-binding.md) — Predict structures and binding for one defined complex with Boltz
 - [boltz2-nim](../notes/drug-discovery-chem/boltz2-nim.md) — Use Boltz2 NIM for biomolecular structure prediction and binding affinity
 - [chebi-skill](../notes/drug-discovery-chem/chebi-skill.md) — Submit compact ChEBI 2.0 API requests for chemical search, compound lookup, ontology traversal, and structure metadata
+- [chembl-database](../notes/drug-discovery-chem/chembl-database.md) — Query the ChEMBL database for bioactive molecules, drug targets, bioactivity data, approved drugs, and chemical structures
 - [chembl-skill](../notes/drug-discovery-chem/chembl-skill.md) — Submit compact ChEMBL API requests for activity, molecule, target, mechanism, and text-search endpoints
 - [cobrapy](../notes/drug-discovery-chem/cobrapy.md) — Performs constraint-based metabolic modeling with COBRApy, including FBA, pFBA, FVA, gene knockouts, flux sampling, growth media, production envelopes, gap filling, and SBML model...
 - [colabfold](../notes/drug-discovery-chem/colabfold.md) — Fast AlphaFold2/ColabFold protein structure prediction
@@ -67,8 +68,10 @@ created: 2026-06-13
 - [omics-target-evidence-mapper](../notes/drug-discovery-chem/omics-target-evidence-mapper.md) — Aggregate public target-level evidence across omics and translational sources for research triage
 - [openfold2-nim](../notes/drug-discovery-chem/openfold2-nim.md) — Use this skill for OpenFold2, NVIDIA's BioNeMo NIM microservice for monomer protein structure prediction
 - [openfold3-nim](../notes/drug-discovery-chem/openfold3-nim.md) — Use this skill for OpenFold3, NVIDIA's BioNeMo NIM microservice for biomolecular structure prediction
+- [pdb-database](../notes/drug-discovery-chem/pdb-database.md) — Use when you want to search for or download experimentally-determined 3D structures for biomolecules (proteins, nucleic acids, bound ligands)
 - [pharmgkb-skill](../notes/drug-discovery-chem/pharmgkb-skill.md) — Submit compact PharmGKB API requests for genes, variants, clinical annotations, dosing guidelines, and search
 - [proteinmpnn-nim](../notes/drug-discovery-chem/proteinmpnn-nim.md) — Run ProteinMPNN inverse folding via NVIDIA NIM to design protein sequences for a target backbone
+- [pubchem-database](../notes/drug-discovery-chem/pubchem-database.md) — Query PubChem, search by name/CID/SMILES, retrieve properties, similarity/substructure searches, bioactivity, for cheminformatics
 - [pubchem-pug-skill](../notes/drug-discovery-chem/pubchem-pug-skill.md) — Submit compact PubChem PUG REST requests for compound properties, descriptions, assay summaries, and substance metadata
 - [pymol](../notes/drug-discovery-chem/pymol.md) — Visualize, analyze, and render protein and molecular structures using PyMOL
 - [pytdc](../notes/drug-discovery-chem/pytdc.md) — Provides Therapeutics Data Commons workflows through PyTDC for registry discovery, dataset access, task-aware splits, evaluator metrics, benchmark groups, and bounded molecular-oracle...

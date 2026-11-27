@@ -1275,9 +1275,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skill-data/core/SKILL.md",
-      "skillFolderHash": "ffa5a7747c634055d68bc50dfddfc2c059e552a6",
+      "skillFolderHash": "1365a1b5eca8f058bb6f6c51e403786920adcb2f",
       "installedAt": "2026-06-09T19:25:40.383Z",
-      "updatedAt": "2026-11-24T17:39:20.958Z"
+      "updatedAt": "2026-11-25T17:10:10.018Z"
     },
     "dogfood": {
       "source": "vercel-labs/agent-browser",
@@ -2654,9 +2654,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-test/skills/assertion-quality/SKILL.md",
-      "skillFolderHash": "6970d72ac3ed98fa5cc862c4dcce6746051f3120",
+      "skillFolderHash": "cc566db9b9a3471b5e743f8e9729172c7442de31",
       "installedAt": "2026-07-21T05:30:50.017Z",
-      "updatedAt": "2026-10-10T12:47:56.562Z"
+      "updatedAt": "2026-11-26T16:51:25.524Z"
     },
     "code-testing-agent": {
       "source": "dotnet/skills",
@@ -3338,9 +3338,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/dotnet/skills.git",
       "skillPath": "plugins/dotnet-test/skills/test-anti-patterns/SKILL.md",
-      "skillFolderHash": "4cab149b2a8e1ff5fbf85ba617db684431677d60",
+      "skillFolderHash": "7610f3dc4b8005f7ada389cbef86ce45b099d9ab",
       "installedAt": "2026-07-21T05:33:14.026Z",
-      "updatedAt": "2026-10-10T12:49:07.187Z"
+      "updatedAt": "2026-11-26T16:51:27.335Z"
     },
     "support-prerendering": {
       "source": "dotnet/skills",
@@ -8819,9 +8819,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/github/gh-aw.git",
       "skillPath": ".github/skills/agentic-workflows/SKILL.md",
-      "skillFolderHash": "3abb5e87d93e5cfaa0b758a4b07926f619cb7a33",
+      "skillFolderHash": "bcd934304688b513af64c4bc35cd28c995bf8665",
       "installedAt": "2026-08-17T03:21:27.911Z",
-      "updatedAt": "2026-11-23T18:02:33.963Z"
+      "updatedAt": "2026-11-26T16:51:43.842Z"
     },
     "reverse-skill-router": {
       "source": "zhaoxuya520/reverse-skill",
@@ -9251,9 +9251,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/domain-modeling/SKILL.md",
-      "skillFolderHash": "ea30ee454ba264543dbe40737973b1a5afb9f0e6",
+      "skillFolderHash": "db8ef024fb9a7b2022d57289359ae96cff0d8483",
       "installedAt": "2026-08-20T03:52:19.201Z",
-      "updatedAt": "2026-10-10T12:49:57.277Z"
+      "updatedAt": "2026-11-25T17:10:25.530Z"
     },
     "grill-with-docs": {
       "source": "mattpocock/skills",
@@ -9528,36 +9528,36 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "051041d06d835b75e3359eb18e74f16642f4c46d",
+      "skillFolderHash": "8bc98b9fb4932609af5578f49e477cae5cb750fd",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-23T18:02:37.983Z"
+      "updatedAt": "2026-11-26T16:51:47.496Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "d576bb01cc59bc65ac5190de0dd4ef79e20f7894",
+      "skillFolderHash": "a7065b782ece9cdb34132995f2c34b467469aa46",
       "installedAt": "2026-08-21T01:50:31.549Z",
-      "updatedAt": "2026-11-19T15:43:08.937Z"
+      "updatedAt": "2026-11-26T16:51:50.392Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "2ace297ef2508df0a117e1b55fec7a975e777d44",
+      "skillFolderHash": "2bfc83c369bb5a3a8d5be1fc136d3c6dd161d282",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-19T15:43:13.395Z"
+      "updatedAt": "2026-11-26T16:51:53.206Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "deep-research/SKILL.md",
-      "skillFolderHash": "ac2b324253d65190ae29baf0078da14c60f534af",
+      "skillFolderHash": "3d1cfeae31d77ff3e0a9687b628f7bbd3600aee3",
       "installedAt": "2026-08-21T01:50:31.555Z",
-      "updatedAt": "2026-11-23T18:02:41.503Z"
+      "updatedAt": "2026-11-25T17:10:32.301Z"
     },
     "prisma-cli": {
       "source": "prisma/skills",
@@ -9627,9 +9627,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/prisma/skills.git",
       "skillPath": "prisma-postgres-setup/SKILL.md",
-      "skillFolderHash": "82345cbaffbd0a08a5ad4413de480c3b1ac0d6b1",
+      "skillFolderHash": "6639e43a79c2d483efa0efcfeea2b08acb29cd58",
       "installedAt": "2026-08-23T17:16:28.788Z",
-      "updatedAt": "2026-10-30T12:51:04.650Z"
+      "updatedAt": "2026-11-26T16:51:54.117Z"
     },
     "prisma-upgrade-v7": {
       "source": "prisma/skills",
@@ -10517,9 +10517,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-dbsql/SKILL.md",
-      "skillFolderHash": "2a42c1ae3c5b080e7ac1246a1e02bcd88ebbcd70",
+      "skillFolderHash": "a84e6cbf23f53fb6a5d5b1eeb7c365a843df263e",
       "installedAt": "2026-08-23T17:20:36.141Z",
-      "updatedAt": "2026-11-19T15:43:22.616Z"
+      "updatedAt": "2026-11-26T16:51:57.151Z"
     },
     "databricks-docs": {
       "source": "databricks/databricks-agent-skills",
@@ -12087,9 +12087,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/skypilot-org/skypilot.git",
       "skillPath": "agent/skills/skypilot/SKILL.md",
-      "skillFolderHash": "d42876210c403b6b93daf0cf7d448fca35c44b9f",
+      "skillFolderHash": "8ab33f3d670d8eecf5304673cfea8553f38dbee0",
       "installedAt": "2026-10-24T15:58:04.348Z",
-      "updatedAt": "2026-11-19T15:43:40.011Z"
+      "updatedAt": "2026-11-26T16:52:10.509Z"
     },
     "lean4": {
       "source": "cameronfreer/lean4-skills",
@@ -12693,6 +12693,339 @@
       "skillFolderHash": "0f69beac13120e3c05fd7c976842e9a8a5068ceb",
       "installedAt": "2026-11-17T03:43:55.000Z",
       "updatedAt": "2026-11-17T03:43:55.000Z"
+    },
+    "alphafold-database-fetch-and-analyze": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/alphafold_database_fetch_and_analyze/SKILL.md",
+      "skillFolderHash": "f0ce66a05639bc13102662153139b0f5e6c86a03",
+      "installedAt": "2026-11-27T01:09:12.221Z",
+      "updatedAt": "2026-11-27T01:09:12.221Z"
+    },
+    "alphagenome-atlas-website-links": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/alphagenome_atlas_website_links/SKILL.md",
+      "skillFolderHash": "541ca3465ab4af57ca16aef1d95878bc6f88e6ae",
+      "installedAt": "2026-11-27T01:09:12.222Z",
+      "updatedAt": "2026-11-27T01:09:12.222Z"
+    },
+    "alphagenome-variant-impact-score": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/alphagenome_variant_impact_score/SKILL.md",
+      "skillFolderHash": "af19e14676725e4529e7c4334dbc7fad599bbb70",
+      "installedAt": "2026-11-27T01:09:12.223Z",
+      "updatedAt": "2026-11-27T01:09:12.223Z"
+    },
+    "chembl-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/chembl_database/SKILL.md",
+      "skillFolderHash": "8f569fb44596b8a3d98634bae7ee4b707bde2671",
+      "installedAt": "2026-11-27T01:09:12.224Z",
+      "updatedAt": "2026-11-27T01:09:12.224Z"
+    },
+    "clinical-trials-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/clinical_trials_database/SKILL.md",
+      "skillFolderHash": "59c3e0d886621627922e8b2c74b1b8714fe3677b",
+      "installedAt": "2026-11-27T01:09:12.225Z",
+      "updatedAt": "2026-11-27T01:09:12.225Z"
+    },
+    "clinvar-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/clinvar_database/SKILL.md",
+      "skillFolderHash": "fe3a60a2f64ef620e84409002af3eee04792e079",
+      "installedAt": "2026-11-27T01:09:12.227Z",
+      "updatedAt": "2026-11-27T01:09:12.227Z"
+    },
+    "credentials": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/credentials/SKILL.md",
+      "skillFolderHash": "fcb3e6265569286278c78b59efc24b516b36fdc3",
+      "installedAt": "2026-11-27T01:09:12.228Z",
+      "updatedAt": "2026-11-27T01:09:12.228Z"
+    },
+    "dbsnp-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/dbsnp_database/SKILL.md",
+      "skillFolderHash": "573b638c763730118536e102d4f2a4eb045172ee",
+      "installedAt": "2026-11-27T01:09:12.229Z",
+      "updatedAt": "2026-11-27T01:09:12.229Z"
+    },
+    "embl-ebi-ols": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/embl_ebi_ols/SKILL.md",
+      "skillFolderHash": "08f6fdbd60b1e04301918f24f774d7d615af12b9",
+      "installedAt": "2026-11-27T01:09:12.230Z",
+      "updatedAt": "2026-11-27T01:09:12.230Z"
+    },
+    "encode-ccres-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/encode_ccres_database/SKILL.md",
+      "skillFolderHash": "a3fa4b01b3cb3caebecca7d986952f0abc2aed34",
+      "installedAt": "2026-11-27T01:09:12.232Z",
+      "updatedAt": "2026-11-27T01:09:12.232Z"
+    },
+    "ensembl-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/ensembl_database/SKILL.md",
+      "skillFolderHash": "bdc9c3960b51d0c83ea774160ccfd0d6c19cf8f4",
+      "installedAt": "2026-11-27T01:09:12.233Z",
+      "updatedAt": "2026-11-27T01:09:12.233Z"
+    },
+    "gnomad-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/gnomad_database/SKILL.md",
+      "skillFolderHash": "157aac01fa480be8919308278e3ba59048807430",
+      "installedAt": "2026-11-27T01:09:12.234Z",
+      "updatedAt": "2026-11-27T01:09:12.234Z"
+    },
+    "gtex-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/gtex_database/SKILL.md",
+      "skillFolderHash": "158ce6dad2572db1f4cd087b8f6605deb16b2262",
+      "installedAt": "2026-11-27T01:09:12.235Z",
+      "updatedAt": "2026-11-27T01:09:12.235Z"
+    },
+    "human-protein-atlas-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/human_protein_atlas_database/SKILL.md",
+      "skillFolderHash": "c36248c33785baa9944075c3fdb8c40d9c222c5d",
+      "installedAt": "2026-11-27T01:09:12.236Z",
+      "updatedAt": "2026-11-27T01:09:12.236Z"
+    },
+    "interpro-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/interpro_database/SKILL.md",
+      "skillFolderHash": "8f107d88cbadfdc6aa1b5eac3b35b2d5831a6029",
+      "installedAt": "2026-11-27T01:09:12.237Z",
+      "updatedAt": "2026-11-27T01:09:12.237Z"
+    },
+    "jaspar-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/jaspar_database/SKILL.md",
+      "skillFolderHash": "f6f0a460c7e811764273dac95df9c217d6b7c3da",
+      "installedAt": "2026-11-27T01:09:12.239Z",
+      "updatedAt": "2026-11-27T01:09:12.239Z"
+    },
+    "literature-search-arxiv": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/literature_search_arxiv/SKILL.md",
+      "skillFolderHash": "48c3b05aa60f9f9f06a38bcce985b54333089cf8",
+      "installedAt": "2026-11-27T01:09:12.240Z",
+      "updatedAt": "2026-11-27T01:09:12.240Z"
+    },
+    "literature-search-biorxiv": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/literature_search_biorxiv/SKILL.md",
+      "skillFolderHash": "7f1b31340bf785e49954df0c5814ce869eb6c5fd",
+      "installedAt": "2026-11-27T01:09:12.241Z",
+      "updatedAt": "2026-11-27T01:09:12.241Z"
+    },
+    "literature-search-europepmc": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/literature_search_europepmc/SKILL.md",
+      "skillFolderHash": "9e5e9ae0fd5ad2415eca99066d1911f55aa75934",
+      "installedAt": "2026-11-27T01:09:12.242Z",
+      "updatedAt": "2026-11-27T01:09:12.242Z"
+    },
+    "literature-search-openalex": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/literature_search_openalex/SKILL.md",
+      "skillFolderHash": "1b1d41478325ab9ae0f3ab36a938efa91d792b46",
+      "installedAt": "2026-11-27T01:09:12.243Z",
+      "updatedAt": "2026-11-27T01:09:12.243Z"
+    },
+    "ncbi-sequence-fetch": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/ncbi_sequence_fetch/SKILL.md",
+      "skillFolderHash": "abc97efe99551edf79de6250b79b63a81b6402a5",
+      "installedAt": "2026-11-27T01:09:12.244Z",
+      "updatedAt": "2026-11-27T01:09:12.244Z"
+    },
+    "openfda-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/openfda_database/SKILL.md",
+      "skillFolderHash": "e310edbda6f737c95219c3134309a80f54ec0c3a",
+      "installedAt": "2026-11-27T01:09:12.245Z",
+      "updatedAt": "2026-11-27T01:09:12.245Z"
+    },
+    "opentargets-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/opentargets_database/SKILL.md",
+      "skillFolderHash": "d577a4a1a80af54cc05802e8b5fe88bf0df241fe",
+      "installedAt": "2026-11-27T01:09:12.247Z",
+      "updatedAt": "2026-11-27T01:09:12.247Z"
+    },
+    "pdb-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/pdb_database/SKILL.md",
+      "skillFolderHash": "1ab4e4d72631278117e184bd00a05c6d44067c2d",
+      "installedAt": "2026-11-27T01:09:12.248Z",
+      "updatedAt": "2026-11-27T01:09:12.248Z"
+    },
+    "predictingthepast": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/predictingthepast/SKILL.md",
+      "skillFolderHash": "eda99ff87469b58d9a8ffe7e607fb9d5425d608d",
+      "installedAt": "2026-11-27T01:09:12.249Z",
+      "updatedAt": "2026-11-27T01:09:12.249Z"
+    },
+    "protein-sequence-msa": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/protein_sequence_msa/SKILL.md",
+      "skillFolderHash": "4eeca59b9e93b75a24e7eea987ac3f9b2e769451",
+      "installedAt": "2026-11-27T01:09:12.250Z",
+      "updatedAt": "2026-11-27T01:09:12.250Z"
+    },
+    "protein-sequence-similarity-search": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/protein_sequence_similarity_search/SKILL.md",
+      "skillFolderHash": "4c54debe942acea4c74140466ec246458886d64c",
+      "installedAt": "2026-11-27T01:09:12.251Z",
+      "updatedAt": "2026-11-27T01:09:12.251Z"
+    },
+    "pubchem-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/pubchem_database/SKILL.md",
+      "skillFolderHash": "9446988ca18555785538044ecf5094d0027f6953",
+      "installedAt": "2026-11-27T01:09:12.252Z",
+      "updatedAt": "2026-11-27T01:09:12.252Z"
+    },
+    "pubmed-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/pubmed_database/SKILL.md",
+      "skillFolderHash": "dea7bf684de24fac9b99873f3e73c5e7c600c85e",
+      "installedAt": "2026-11-27T01:09:12.253Z",
+      "updatedAt": "2026-11-27T01:09:12.253Z"
+    },
+    "quickgo-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/quickgo_database/SKILL.md",
+      "skillFolderHash": "f9eb53171c3b1ca84dc2ee91600fa4d14192ee55",
+      "installedAt": "2026-11-27T01:09:12.254Z",
+      "updatedAt": "2026-11-27T01:09:12.254Z"
+    },
+    "reactome-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/reactome_database/SKILL.md",
+      "skillFolderHash": "b7f77c9666b9c92bc188d124bff918fc9c03ff3e",
+      "installedAt": "2026-11-27T01:09:12.256Z",
+      "updatedAt": "2026-11-27T01:09:12.256Z"
+    },
+    "string-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/string_database/SKILL.md",
+      "skillFolderHash": "3600808570d0782e187ec852b783f0ddf3424b5e",
+      "installedAt": "2026-11-27T01:09:12.257Z",
+      "updatedAt": "2026-11-27T01:09:12.257Z"
+    },
+    "ucsc-conservation-and-tfbs": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/ucsc_conservation_and_tfbs/SKILL.md",
+      "skillFolderHash": "8a1a652db13d18fb8fbd791957f8ffcd646ee96c",
+      "installedAt": "2026-11-27T01:09:12.258Z",
+      "updatedAt": "2026-11-27T01:09:12.258Z"
+    },
+    "unibind-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/unibind_database/SKILL.md",
+      "skillFolderHash": "ff5ef503d1e9cecc814ee851410a87c1bbb25370",
+      "installedAt": "2026-11-27T01:09:12.259Z",
+      "updatedAt": "2026-11-27T01:09:12.259Z"
+    },
+    "uniprot-database": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/uniprot_database/SKILL.md",
+      "skillFolderHash": "c4eece395359975985a028e0b59257c9d69244a3",
+      "installedAt": "2026-11-27T01:09:12.259Z",
+      "updatedAt": "2026-11-27T01:09:12.259Z"
+    },
+    "uv": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/uv/SKILL.md",
+      "skillFolderHash": "086561cfe421d172a2131cc536cb0d5b68930205",
+      "installedAt": "2026-11-27T01:09:12.260Z",
+      "updatedAt": "2026-11-27T01:09:12.260Z"
+    },
+    "workflow-skill-creator": {
+      "source": "google-deepmind/science-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/google-deepmind/science-skills.git",
+      "skillPath": "skills/workflow_skill_creator/SKILL.md",
+      "skillFolderHash": "e4ffbcb9ffcb0fc6ce8df35764692fb793e7bbf7",
+      "installedAt": "2026-11-27T01:09:12.262Z",
+      "updatedAt": "2026-11-27T01:09:12.262Z"
     }
   },
   "dismissed": {

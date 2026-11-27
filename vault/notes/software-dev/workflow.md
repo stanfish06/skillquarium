@@ -87,6 +87,7 @@ created: 2026-08-07
 - [twilio-whatsapp-send-message](../../notes/saas-platforms/twilio-whatsapp-send-message.md) — WhatsApp messaging deep-dive reference. Covers the 24-hour service window rules (free-form vs template mode), sandbox setup for testing, template approval workflow, production sender...
 - [vercel-queues](../../notes/hosting-edge-platforms/vercel-queues.md) — Vercel Queues guidance (public beta) — durable event streaming with topics, consumer groups, retries, and delayed delivery
 - [vibe-research-workflow](../../notes/reasoning-ideation/vibe-research-workflow.md) — Guides AI-assisted research across three sub-flows, Vibe Coding, Vibe Figure, and Vibe Writing, with behavioural rules that keep the user in charge of academic judgment while...
+- [workflow-skill-creator](../../notes/vault-meta/workflow-skill-creator.md) — Distills a completed user workflow or interaction into a reusable agent skill
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

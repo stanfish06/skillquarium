@@ -21,6 +21,7 @@ created: 2026-08-07
 ## Related skills
 
 - [auth](../../notes/security-auditing/auth.md) — Authentication integration guidance — Clerk (native Vercel Marketplace), Descope, and Auth0 setup for Next.js applications
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 - [twilio-organizations-setup](../../notes/saas-platforms/twilio-organizations-setup.md) — Set up and manage Twilio Organizations for centralized account and user governance
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

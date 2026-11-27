@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md)
 
-## Skills (37)
+## Skills (38)
 
 - [ask-matt](../notes/vault-meta/ask-matt.md) — Ask which skill or flow fits your situation
 - [auditing-skills](../notes/vault-meta/auditing-skills.md) — Use when checking skills for security or quality issues, reviewing audit results from skills.sh or Tessl, or remediating findings across published skills
@@ -50,6 +50,7 @@ created: 2026-06-13
 - [skills-hub](../notes/vault-meta/skills-hub.md) — Browse and install community skills from the BioClaw Skills Hub
 - [start](../notes/vault-meta/start.md) — Use when starting Zoom work
 - [template](../notes/vault-meta/template.md) — Canonical rules and HTML/CSS contract for the page chrome (head boilerplate, cover, table of contents, section block, sources-section wrapper, footer, outlook-badge, design tokens)...
+- [workflow-skill-creator](../notes/vault-meta/workflow-skill-creator.md) — Distills a completed user workflow or interaction into a reusable agent skill
 - [writing-for-agents](../notes/vault-meta/writing-for-agents.md) — Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md
 - [writing-great-skills](../notes/vault-meta/writing-great-skills.md) — Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable
 - [yeet](../notes/vault-meta/yeet.md) — Publish local changes to GitHub by confirming scope, committing intentionally, pushing the branch, and opening a draft PR through the GitHub app from this plugin, with `gh` used only...
