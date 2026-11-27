@@ -4,29 +4,29 @@
   "skills": 2272,
   "expert_profiles": 503,
   "nodes": 2345,
-  "edges": 17045,
+  "edges": 17041,
   "generic_names_blocked": 32,
-  "tier1_edges": 5065,
+  "tier1_edges": 5062,
   "tier2_edges": 805,
-  "alias_edges": 4738,
+  "alias_edges": 4736,
   "discipline_edges": 599,
   "ambiguous_aliases": 36,
   "artifact_edges": 543,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.95,
+  "mean_skill_degree": 5.94,
   "median_skill_degree": 4,
   "orphan_count": 123,
   "orphan_rate": 0.0541,
   "by_provenance": {
-   "EXTRACTED": 16259,
+   "EXTRACTED": 16255,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
    "in_domain": 2272,
-   "references": 13444,
+   "references": 13440,
    "in_discipline": 599,
    "touches": 543,
    "has_step": 69,
@@ -20210,7 +20210,7 @@
    "id": "neo4j-nvl-skill",
    "type": "Skill",
    "label": "neo4j-nvl-skill",
-   "description": "Neo4j Visualization Library (NVL) — framework-agnostic graph rendering for the browser. Covers @neo4j-nvl/base (NVL class, nodes/relationships, Canvas vs WebGL renderer), @neo4j-nvl/interaction-handlers (ZoomInteraction, PanInteraction, DragNodeInteraction, ClickInteraction, HoverInteraction, BoxSelectInteraction, LassoInteraction, KeyboardInteraction), and @neo4j-nvl/react (InteractiveNvlWrapper, BasicNvlWrapper, StaticPictureWrapper). Use when rendering a Neo4j graph in a browser, feeding driver results through nvlResultTransformer, choosing Canvas vs WebGL, wiring node/relationship click/hover/drag handlers, or embedding NVL in React, Vite, or vanilla JS apps. Does NOT handle Cypher query authoring — use neo4j-cypher-skill. Does NOT handle driver lifecycle, sessions, or executeQuery setup — use neo4j-driver-javascript-skill. Does NOT handle GraphVisualization/Needle default embed — use @neo4j-ndl/react.",
+   "description": "Neo4j Visualization Library (NVL) — framework-agnostic graph rendering for the browser. Covers @neo4j-nvl/base (NVL class, nodes/relationships, Canvas vs WebGL renderer), @neo4j-nvl/interaction-handlers (zoom, pan, drag, click, hover, box/lasso select, keyboard) and @neo4j-nvl/react (InteractiveNvlWrapper, BasicNvlWrapper, StaticPictureWrapper). Use when rendering a Neo4j graph in a browser, feeding driver results through nvlResultTransformer, choosing Canvas vs WebGL, clustering or laying out nodes, wiring node/relationship/cluster interactions, or embedding NVL in React, Vite or vanilla JS apps. Does NOT handle Cypher authoring — use neo4j-cypher-skill. Does NOT handle driver lifecycle, sessions or executeQuery setup — use neo4j-driver-javascript-skill. Does NOT handle the pre-styled GraphVisualization embed — use @neo4j-ndl/react.",
    "source": "skills/neo4j-nvl-skill/SKILL.md",
    "aliases": [
     "neo4j nvl skill"
@@ -48213,15 +48213,6 @@
   {
    "src": "browser-automation",
    "rel": "references",
-   "dst": "next-dev-loop",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-automation named in next-dev-loop/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "browser-automation",
-   "rel": "references",
    "dst": "next-partial-prefetching-adoption",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -64467,6 +64458,15 @@
   {
    "src": "databricks-apps",
    "rel": "references",
+   "dst": "databricks-data-discovery",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-data-discovery named in databricks-apps/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-apps",
+   "rel": "references",
    "dst": "databricks-lakebase",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -64975,6 +64975,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "databricks-data-discovery",
+   "rel": "references",
+   "dst": "databricks-apps",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "databricks-data-discovery named in databricks-apps/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -116595,15 +116604,6 @@
   {
    "src": "neo4j-aura-graph-analytics-skill",
    "rel": "references",
-   "dst": "neo4j-nvl-skill",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "neo4j-aura-graph-analytics-skill named in neo4j-nvl-skill/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "neo4j-aura-graph-analytics-skill",
-   "rel": "references",
    "dst": "neo4j-snowflake-graph-analytics-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -117459,15 +117459,6 @@
   {
    "src": "neo4j-gds-skill",
    "rel": "references",
-   "dst": "neo4j-nvl-skill",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "neo4j-gds-skill named in neo4j-nvl-skill/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "neo4j-gds-skill",
-   "rel": "references",
    "dst": "neo4j-query-tuning-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -117670,15 +117661,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "neo4j-graphql-skill named in neo4j-modeling-skill/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "neo4j-graphql-skill",
-   "rel": "references",
-   "dst": "neo4j-nvl-skill",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "neo4j-graphql-skill named in neo4j-nvl-skill/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -118116,15 +118098,6 @@
   {
    "src": "neo4j-nvl-skill",
    "rel": "references",
-   "dst": "neo4j-aura-graph-analytics-skill",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "neo4j-aura-graph-analytics-skill named in neo4j-nvl-skill/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "neo4j-nvl-skill",
-   "rel": "references",
    "dst": "neo4j-cypher-skill",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -118143,19 +118116,10 @@
   {
    "src": "neo4j-nvl-skill",
    "rel": "references",
-   "dst": "neo4j-gds-skill",
+   "dst": "neuroscientist",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "neo4j-gds-skill named in neo4j-nvl-skill/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "neo4j-nvl-skill",
-   "rel": "references",
-   "dst": "neo4j-graphql-skill",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "neo4j-graphql-skill named in neo4j-nvl-skill/SKILL.md body",
+   "justification": "curated alias of neuroscientist appears in neo4j-nvl-skill/SKILL.md",
    "status": "accepted"
   },
   {
@@ -120141,6 +120105,15 @@
   {
    "src": "neuroscientist",
    "rel": "references",
+   "dst": "neo4j-nvl-skill",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of neuroscientist appears in neo4j-nvl-skill/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "neuroscientist",
+   "rel": "references",
    "dst": "neuroimaging-scientist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -120370,15 +120343,6 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "agent-browser named in next-dev-loop/SKILL.md body",
-   "status": "accepted"
-  },
-  {
-   "src": "next-dev-loop",
-   "rel": "references",
-   "dst": "browser-automation",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "browser-automation named in next-dev-loop/SKILL.md body",
    "status": "accepted"
   },
   {
