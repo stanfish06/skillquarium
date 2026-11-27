@@ -294,7 +294,7 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 - `'gpu'` - Auto-detect GPU
 - `'cuda'` - NVIDIA CUDA (Node.js with GPU)
 
-See the full list in the [devices.js source](https://github.com/huggingface/transformers.js/blob/main/src/utils/devices.js).
+See the full list in the [devices.js source](https://github.com/huggingface/transformers.js/blob/main/packages/transformers/src/utils/devices.js).
 
 **Per-component device selection:**
 
@@ -350,7 +350,7 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 - `'int8'` - 8-bit integer
 - `'uint8'` - 8-bit unsigned integer
 
-See the full list in the [dtypes.js source](https://github.com/huggingface/transformers.js/blob/main/src/utils/dtypes.js).
+See the full list in the [dtypes.js source](https://github.com/huggingface/transformers.js/blob/main/packages/transformers/src/utils/dtypes.js).
 
 **Per-component data type:**
 

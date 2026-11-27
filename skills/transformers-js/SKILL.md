@@ -3,7 +3,7 @@ name: transformers-js
 description: Use Transformers.js to run state-of-the-art machine learning models directly in JavaScript/TypeScript. Supports NLP (text classification, translation, summarization), computer vision (image classification, object detection), audio (speech recognition, audio classification), and multimodal tasks. Works in Node.js and browsers (with WebGPU/WASM) using pre-trained models from Hugging Face Hub.
 metadata:
   author: huggingface
-  version: "3.8.1"
+  version: "4.3.2"
   category: machine-learning
   repository: https://github.com/huggingface/transformers.js
 ---
@@ -587,7 +587,7 @@ For detailed patterns (React cleanup, servers, browser), see **[Code Examples](.
 - API reference: https://huggingface.co/docs/transformers.js/api/pipelines
 - Model hub: https://huggingface.co/models?library=transformers.js
 - GitHub: https://github.com/huggingface/transformers.js
-- Examples: https://github.com/huggingface/transformers.js/tree/main/examples
+- Examples: https://huggingface.co/collections/webml-community/transformersjs-v4-demos
 
 ## Best Practices
 
