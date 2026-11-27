@@ -20,6 +20,7 @@ created: 2026-09-25
 
 ## Related skills
 
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 - [docker](../../notes/software-dev/docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

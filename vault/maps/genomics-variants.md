@@ -14,16 +14,21 @@ created: 2026-06-13
 
 **Related maps:** [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Sequence Analysis, NGS & Phylogenetics](sequence-phylogenetics.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Clinical, Medical & Pharmacogenomics](clinical-medical.md)
 
-## Skills (55)
+## Skills (65)
 
+- [alphagenome-atlas-website-links](../notes/genomics-variants/alphagenome-atlas-website-links.md) — Constructs deep-links and URLs for the AlphaGenome Atlas website
 - [alphagenome-single-variant-analysis](../notes/genomics-variants/alphagenome-single-variant-analysis.md) — Analyzes genetic variant effects on gene expression (RNA-seq), chromatin accessibility (DNASE), histone marks (ChIP), and transcription factors using the AlphaGenome API
+- [alphagenome-variant-impact-score](../notes/genomics-variants/alphagenome-variant-impact-score.md) — Score, annotate, and analyze the functional impact of genetic variants using AlphaGenome Variant Impact (AVI) scores
 - [archaic-introgression](../notes/genomics-variants/archaic-introgression.md) — Detect Neanderthal and Denisovan introgression segments from modern human genomes
 - [biobankjapan-phewas-skill](../notes/genomics-variants/biobankjapan-phewas-skill.md) — Fetch compact BioBank Japan PheWAS summaries for single variants by accepting rsID, GRCh38, or GRCh37 input and resolving to the required GRCh37 query
 - [civic-skill](../notes/genomics-variants/civic-skill.md) — Submit compact CIViC GraphQL requests for cancer variant interpretation schema inspection and targeted evidence retrieval
 - [claw-ancestry-pca](../notes/genomics-variants/claw-ancestry-pca.md) — Ancestry decomposition PCA against the Simons Genome Diversity Project
 - [clinical-variant-reporter](../notes/genomics-variants/clinical-variant-reporter.md) — Classify germline variants from VCF/BCF files according to the ACMG/AMP 2015 28-criteria evidence framework and generate clinical-grade interpretation reports with per-variant evidence...
+- [clinvar-database](../notes/genomics-variants/clinvar-database.md) — Use when needing clinical significance, pathogenicity classifications (e.g., Pathogenic, Benign, VUS), clinical evidence rationales, or finding "hard positive" benchmark controls for...
 - [clinvar-variation-skill](../notes/genomics-variants/clinvar-variation-skill.md) — Submit compact ClinVar Clinical Tables and NCBI Variation requests for search, VCV, RCV, SCV, and RefSNP lookups
+- [dbsnp-database](../notes/genomics-variants/dbsnp-database.md) — Use when you want to look up, map, and search for short genetic variants (SNPs, indels) in NCBI's dbSNP database
 - [dnasp](../notes/genomics-variants/dnasp.md) — Full reimplementation of DnaSP 6 for population genetics analysis of aligned DNA sequences
+- [encode-ccres-database](../notes/genomics-variants/encode-ccres-database.md) — Query the ENCODE Registry of cis-Regulatory Elements (cCREs) via the SCREEN GraphQL API, or make custom queries to the ENCODE Portal REST API for experiments and files (ChIP-seq peaks...
 - [eqtl-catalogue-region-fetch](../notes/genomics-variants/eqtl-catalogue-region-fetch.md) — Fetch a region of cis-eQTL summary statistics from EBI eQTL Catalogue v7+ via tabix-on-FTP
 - [eqtl-catalogue-skill](../notes/genomics-variants/eqtl-catalogue-skill.md) — Submit compact eQTL Catalogue API requests for association retrieval and documented metadata endpoints
 - [equity-scorer](../notes/genomics-variants/equity-scorer.md) — Compute HEIM diversity and equity metrics from VCF or ancestry data
@@ -35,8 +40,10 @@ created: 2026-06-13
 - [genome-compare](../notes/genomics-variants/genome-compare.md) — Compare your genome to George Church (PGP-1) and estimate ancestry composition via IBS and EM admixture
 - [genome-match](../notes/genomics-variants/genome-match.md) — Score genetic compatibility across all male-female pairings in a Genomebook generation
 - [genomics-workflow-acceleration](../notes/genomics-variants/genomics-workflow-acceleration.md) — Use when accelerating existing genomics workflows with NVIDIA Parabricks, improving runtime or price/performance, converting pipeline steps to GPUs, or comparing CPU and GPU workflow...
+- [gnomad-database](../notes/genomics-variants/gnomad-database.md) — Query the Genome Aggregation Database (gnomAD)
 - [gnomad-graphql-skill](../notes/genomics-variants/gnomad-graphql-skill.md) — Submit compact gnomAD GraphQL requests for frequency, gene constraint, and variant context queries
 - [gtars](../notes/genomics-variants/gtars.md) — Supports Gtars for local genomic interval models and set algebra, overlaps and counts, consensus and coverage, tokenization, fragment processing, and refget/BEDbase planning across...
+- [gtex-database](../notes/genomics-variants/gtex-database.md) — Use when you want to retrieve quantitative RNA expression data and variant eQTL information from the GTEx (Genotype-Tissue Expression) Project across 54 non-diseased tissue sites
 - [gtex-eqtl-skill](../notes/genomics-variants/gtex-eqtl-skill.md) — Fetch GTEx single-tissue eQTL associations from one variant input by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query for the GTEx v2 API
 - [gwas-catalog-region-fetch](../notes/genomics-variants/gwas-catalog-region-fetch.md) — Fetch a region of GWAS summary statistics from the NHGRI-EBI GWAS Catalog harmonised collection via tabix-on-FTP
 - [gwas-catalog-skill](../notes/genomics-variants/gwas-catalog-skill.md) — Submit compact GWAS Catalog REST API v2 requests for studies, associations, SNPs, EFO traits, genes, publications, loci, and metadata
@@ -44,6 +51,7 @@ created: 2026-06-13
 - [gwas-pipeline](../notes/genomics-variants/gwas-pipeline.md) — End-to-end GWAS automation wrapping PLINK2 for genotype QC and REGENIE for two-step whole-genome regression association testing
 - [gwas-prs](../notes/genomics-variants/gwas-prs.md) — Calculate polygenic risk scores from DTC genetic data using the PGS Catalog
 - [hla-typing](../notes/genomics-variants/hla-typing.md) — HLA allele typing from WGS/WES VCF data
+- [jaspar-database](../notes/genomics-variants/jaspar-database.md) — Query the JASPAR database for Transcription Factor (TF) binding profiles
 - [ld-1000g-region-compute](../notes/genomics-variants/ld-1000g-region-compute.md) — Compute pairwise r² between a lead variant and every variant in a window using the 1000 Genomes Phase 3 GRCh38 reference panel, ancestry-stratified
 - [locus-to-gene-mapper-skill](../notes/genomics-variants/locus-to-gene-mapper-skill.md) — Map GWAS loci to ranked candidate genes using a deterministic multi-skill chain (EFO -> GWAS -> coordinates -> Open Targets L2G/coloc -> eQTL -> burden/coding context), with...
 - [locuscompare-region-render](../notes/genomics-variants/locuscompare-region-render.md) — Render a 4-panel regional LocusCompare diagnostic for one (lead variant, exposure study, outcome study) tuple - overlays GWAS Manhattan, QTL Manhattan, GENCODE gene track, and...
@@ -66,8 +74,10 @@ created: 2026-06-13
 - [soul2dna](../notes/genomics-variants/soul2dna.md) — Compile SOUL.md character profiles into synthetic diploid genomes (.genome.json) via trait-to-allele mapping
 - [tiledbvcf](../notes/genomics-variants/tiledbvcf.md) — Stores and retrieves genomic variant calls with TileDB-VCF
 - [tpmi-phewas-skill](../notes/genomics-variants/tpmi-phewas-skill.md) — Fetch compact TPMI PheWAS summaries for single variants by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query
+- [ucsc-conservation-and-tfbs](../notes/genomics-variants/ucsc-conservation-and-tfbs.md) — Fetch Evolutionary Conservation scores (phyloP, phastCons) and Transcription Factor Binding Sites (TFBS) from the UCSC Genome Browser
 - [ukb-ppp-region-fetch](../notes/genomics-variants/ukb-ppp-region-fetch.md) — Fetch a regional slice of plasma pQTL summary statistics from the UK Biobank Pharma Proteomics Project (UKB-PPP
 - [ukb-topmed-phewas-skill](../notes/genomics-variants/ukb-topmed-phewas-skill.md) — Fetch compact UKB-TOPMed PheWAS summaries for single variants by accepting rsID, GRCh37, or GRCh38 input and resolving to the required GRCh38 query
+- [unibind-database](../notes/genomics-variants/unibind-database.md) — Queries the UniBind database for experimentally validated transcription factor (TF) binding sites
 - [variant-annotation](../notes/genomics-variants/variant-annotation.md) — Annotate VCF variants with Ensembl VEP REST, ClinVar significance, gnomAD/population frequency context, and prioritized variant ranking
 - [vcf-annotator](../notes/genomics-variants/vcf-annotator.md) — Annotate VCF variants with Ensembl VEP, ClinVar, and gnomAD
 - [wgs-prs](../notes/genomics-variants/wgs-prs.md) — End-to-end WGS to polygenic risk score pipeline

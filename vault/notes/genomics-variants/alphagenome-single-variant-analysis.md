@@ -23,7 +23,7 @@ created: 2026-08-23
 
 ## Related skills
 
-_None auto-detected. Add your own links here, e.g. `[[scanpy]]`._
+- [alphagenome-atlas-website-links](../../notes/genomics-variants/alphagenome-atlas-website-links.md) — Constructs deep-links and URLs for the AlphaGenome Atlas website
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

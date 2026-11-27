@@ -22,6 +22,7 @@ created: 2026-06-28
 
 - [docker](../../notes/software-dev/docker.md) — Containerizing and shipping applications with Docker — writing efficient Dockerfiles (multi-stage builds, layer caching, small/secure images), docker compose for multi-service local...
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
+- [uv](../../notes/cloud-devops/uv.md) — Checks whether the uv Python package manager is installed and installs it if missing
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

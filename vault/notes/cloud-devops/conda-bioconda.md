@@ -26,6 +26,7 @@ created: 2026-06-10
 
 - [modern-python](../../notes/cloud-devops/modern-python.md) — Configures Python projects with modern tooling (uv, ruff, ty)
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
+- [uv](../../notes/cloud-devops/uv.md) — Checks whether the uv Python package manager is installed and installs it if missing
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

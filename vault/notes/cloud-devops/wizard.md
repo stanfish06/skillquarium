@@ -18,6 +18,7 @@ created: 2026-08-19
 
 ## Related skills
 
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 - [matlab-build-app](../../notes/matlab-development/matlab-build-app.md) — Build MATLAB apps from requirements to working code
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%

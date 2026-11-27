@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (82)
+## Skills (83)
 
 - [adaptive-metrics](../notes/cloud-devops/adaptive-metrics.md) — Cut Grafana Cloud Metrics cost by shrinking active-series count with Adaptive Metrics aggregation rules — auto-recommendations from query history, custom exact/regex rules, label-drop...
 - [airflow](../notes/cloud-devops/airflow.md) — Queries, manages, and troubleshoots Apache Airflow using the `af` CLI
@@ -95,6 +95,7 @@ created: 2026-06-13
 - [synthetic-monitoring-checks](../notes/cloud-devops/synthetic-monitoring-checks.md) — Author Grafana Cloud Synthetic Monitoring checks, with deep coverage of k6 scripted and browser checks: SM's single-VU/single-iteration execution model, assertions that actually fail...
 - [tempo](../notes/cloud-devops/tempo.md) — Stand up Grafana Tempo as a cost-efficient distributed-tracing backend that only needs object storage, and write TraceQL queries against it
 - [terraform](../notes/cloud-devops/terraform.md) — Terraform and OpenTofu infrastructure-as-code (IaC) — declare cloud/SaaS resources in HCL, manage state with remote backends and locking, author and consume modules, and run the...
+- [uv](../notes/cloud-devops/uv.md) — Checks whether the uv Python package manager is installed and installs it if missing
 - [vllm-deploy-simple](../notes/cloud-devops/vllm-deploy-simple.md) — Quick install and deploy vLLM, start serving with a simple LLM, and test OpenAI API
 - [wandb-primary](../notes/cloud-devops/wandb-primary.md) — Primary W&B skill for broad or mixed Weights & Biases work: project overviews, W&B runs and artifacts, Weave traces and evaluations, Reports, Workspaces, Automations, Sweeps, Launch...
 - [wizard](../notes/cloud-devops/wizard.md) — Generate an interactive bash wizard that walks a human through steps only they can perform

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Genomics, Variants & Population Genetics](genomics-variants.md) | [Single-Cell, RNA-seq & Functional Genomics](single-cell-rnaseq.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md)
 
-## Skills (40)
+## Skills (42)
 
 - [alterlab-qiime2-amplicon](../notes/sequence-phylogenetics/alterlab-qiime2-amplicon.md) — Runs 16S/ITS amplicon (microbiome) analysis with the QIIME 2 amplicon distribution (2026.1
 - [analyze-fasta](../notes/sequence-phylogenetics/analyze-fasta.md) — Analyze a single FASTA file (nucleotide or protein), compute sequence-level metrics (GC, ORFs, MW, pI, GRAVY, secondary-structure fractions) with Biopython, and write a Markdown report...
@@ -50,6 +50,8 @@ created: 2026-06-13
 - [ngs-shotgun-metagenomics](../notes/sequence-phylogenetics/ngs-shotgun-metagenomics.md) — Kick off public shotgun metagenomics QC, host-depletion, taxonomic profiling, and functional profiling workflows using nf-core/taxprofiler, Kraken2, Bracken, MetaPhlAn, and HUMAnN
 - [phylogenetics](../notes/sequence-phylogenetics/phylogenetics.md) — Builds and analyzes phylogenetic trees using MAFFT multiple sequence alignment, IQ-TREE maximum likelihood with ModelFinder and branch support, and FastTree approximate inference
 - [phylogenetics-builder](../notes/sequence-phylogenetics/phylogenetics-builder.md) — End-to-end ML phylogenetic tree inference — MSA, trimming, ModelFinder, IQ-TREE2/RAxML-NG
+- [protein-sequence-msa](../notes/sequence-phylogenetics/protein-sequence-msa.md) — Performs multiple sequence alignment of proteins with EBI Clustal Omega
+- [protein-sequence-similarity-search](../notes/sequence-phylogenetics/protein-sequence-similarity-search.md) — Searches for homologous protein sequences using MMseqs2 (fast, default) or BLAST (comprehensive, fallback)
 - [rnacentral-skill](../notes/sequence-phylogenetics/rnacentral-skill.md) — Submit compact RNAcentral API requests for RNA entry browsing, single-entry lookup, and cross-reference retrieval
 - [scikit-bio](../notes/sequence-phylogenetics/scikit-bio.md) — Biological data toolkit. Sequence analysis, alignments, phylogenetic trees, diversity metrics (alpha/beta, UniFrac), ordination (PCoA), PERMANOVA, FASTA/Newick I/O, for microbiome...
 - [seq-wrangler](../notes/sequence-phylogenetics/seq-wrangler.md) — NGS read QC, alignment, and BAM processing pipeline

@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Scientific Writing, Figures & Publishing](research-writing.md) | [Academic Paper & Nature Pipelines](academic-pipelines.md) | [Documents, Office & Media](documents-office.md)
 
-## Skills (20)
+## Skills (25)
 
 - [bgpt-paper-search](../notes/literature-discovery/bgpt-paper-search.md) — Searches BGPT scientific papers by topic or DOI and retrieves claim-level evidence extracted from full text, including experiments, reported statistics, scope, limitations, and...
 - [biorxiv-skill](../notes/literature-discovery/biorxiv-skill.md) — Submit compact bioRxiv and medRxiv API requests for details, publication-linkage, and DOI lookups
@@ -26,11 +26,16 @@ created: 2026-06-13
 - [exa-search](../notes/literature-discovery/exa-search.md) — Searches scientific and technical web content with Exa and extracts page or PDF text from URLs in batches
 - [lit-synthesizer](../notes/literature-discovery/lit-synthesizer.md) — Search PubMed and bioRxiv for bioinformatics literature, synthesise results into a structured report, and build a citation graph — all locally, with a reproducibility bundle
 - [literature-review](../notes/literature-discovery/literature-review.md) — Conducts systematic, scoping, and narrative literature reviews using PubMed, arXiv, bioRxiv, Semantic Scholar, and other appropriate sources
+- [literature-search-arxiv](../notes/literature-discovery/literature-search-arxiv.md) — Search for scientific papers, preprints, and publications on arXiv
+- [literature-search-biorxiv](../notes/literature-discovery/literature-search-biorxiv.md) — Browse and filter life sciences, biology, and medical preprints from bioRxiv and medRxiv
+- [literature-search-europepmc](../notes/literature-discovery/literature-search-europepmc.md) — Search Europe PMC for scientific literature and download open-access full texts and PDFs
+- [literature-search-openalex](../notes/literature-discovery/literature-search-openalex.md) — Query the OpenAlex scholarly database for research papers, authors, institutions, topics, sources, publishers, funders, geo-locations, and keywords
 - [ncbi-pmc-skill](../notes/literature-discovery/ncbi-pmc-skill.md) — Explain and migrate legacy PMC OA Web Service calls when an old workflow invokes ncbi_pmc.py or oa.fcgi
 - [open-notebook](../notes/literature-discovery/open-notebook.md) — Organizes research with the self-hosted Open Notebook alternative to NotebookLM
 - [paper-lookup](../notes/literature-discovery/paper-lookup.md) — Searches 18 scholarly APIs for papers, preprints, citations, open-access full text, repository records, and journal OA status, and returns results with reproducible provenance
 - [paperzilla](../notes/literature-discovery/paperzilla.md) — Reads projects, searches project feeds, and retrieves recommendations and canonical papers in Paperzilla through the pz CLI
 - [parallel-web](../notes/literature-discovery/parallel-web.md) — Uses Parallel CLI for web search, URL extraction, deep research, structured data enrichment, entity discovery, and recurring web monitoring
+- [pubmed-database](../notes/literature-discovery/pubmed-database.md) — Search PubMed for scientific literature, including published clinical trials
 - [pubmed-search](../notes/literature-discovery/pubmed-search.md) — Search PubMed for scientific literature
 - [pubmed-summariser](../notes/literature-discovery/pubmed-summariser.md) — Search PubMed for a gene name or disease term and generate a structured research briefing of the top recent English-language papers
 - [research-lookup](../notes/literature-discovery/research-lookup.md) — Compiles current scholarly evidence for a scientific manuscript or research brief when the user explicitly asks to gather literature, references, background evidence, competing...

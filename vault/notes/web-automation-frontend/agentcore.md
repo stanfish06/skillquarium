@@ -20,6 +20,7 @@ created: 2026-06-09
 
 - [agent-browser](../../notes/web-automation-frontend/agent-browser.md) — Browser automation CLI for AI agents. Use when the user needs to interact with websites, verify dev server output, test web apps, navigate pages, fill forms, click buttons, take...
 - [aws-agentic-ai](../../notes/cloud-devops/aws-agentic-ai.md) — AWS Bedrock AgentCore comprehensive expert for deploying and managing AI agents at scale
+- [credentials](../../notes/security-auditing/credentials.md) — Instructions for handling API keys and credentials safely, verifying their presence, and prompting the user to add them if missing using a safe protocol
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 

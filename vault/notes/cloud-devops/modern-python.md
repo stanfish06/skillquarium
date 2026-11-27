@@ -21,6 +21,7 @@ created: 2026-06-09
 ## Related skills
 
 - [conda-bioconda](../../notes/cloud-devops/conda-bioconda.md) — Reproducible Conda/Mamba/micromamba environment management for bioinformatics, with correct Bioconda channel setup, environment files, version pinning, and lockfiles
+- [uv](../../notes/cloud-devops/uv.md) — Checks whether the uv Python package manager is installed and installs it if missing
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
