@@ -4,7 +4,7 @@ This is the default 3D asset shipping guidance for the plugin.
 
 ## Primary sources
 
-- [Blender glTF exporter manual](https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html)
+- [Blender glTF exporter manual](https://docs.blender.org/manual/en/latest/addons/scene_gltf2.html)
 - [glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html)
 - [glTF Transform](https://gltf-transform.dev/)
 - [PlayCanvas supported formats](https://developer.playcanvas.com/user-manual/assets/supported-formats/) for a good reference on why GLB is the recommended runtime format in browser engines

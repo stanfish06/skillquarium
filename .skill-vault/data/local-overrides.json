@@ -187,6 +187,26 @@
       "replace": "# Or download directly. The release asset is named neo4j-kafka-connect-neo4j-<version>\n# and carries the version, so there is no static latest/download name \u2014 resolve it first.\nVERSION=$(curl -fsSL https://api.github.com/repos/neo4j/neo4j-kafka-connector/releases/latest \\\n  | sed -n 's/.*\"tag_name\": *\"\\([^\"]*\\)\".*/\\1/p')\ncurl -fL \"https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connect-neo4j-${VERSION}.zip\" \\\n     -o \"neo4j-kafka-connect-neo4j-${VERSION}.zip\"\n"
     }
   ],
+  "web-3d-asset-pipeline": [
+    {
+      "id": "blender-gltf-manual-link",
+      "issue": 1476,
+      "source": "openai/plugins",
+      "file": "references/web-3d-asset-pipeline.md",
+      "find": "https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html",
+      "replace": "https://docs.blender.org/manual/en/latest/addons/scene_gltf2.html"
+    }
+  ],
+  "web-game-foundations": [
+    {
+      "id": "blender-gltf-manual-link",
+      "issue": 1476,
+      "source": "openai/plugins",
+      "file": "references/web-3d-asset-pipeline.md",
+      "find": "https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html",
+      "replace": "https://docs.blender.org/manual/en/latest/addons/scene_gltf2.html"
+    }
+  ],
   "ui-toolkit": [
     {
       "id": "videosdk-ui-toolkit-rename-guide",
