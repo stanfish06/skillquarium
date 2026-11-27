@@ -2431,6 +2431,15 @@
       "replace": "rings = GetSymmSSSR(mol)\n```\n\nRDKit 2026.9.1 changed the default smallest-set-of-smallest-rings algorithm; ring\ncounts on cage/macrocyclic structures can differ from RDKit 2026.03.6 and earlier.\nSee the Ring Information section of\n[references/api_reference.md](api_reference.md) for the\n`Chem.SetUseLegacyRingFinding(True)` escape hatch.\n\n**Stereochemistry:**"
     }
   ],
+  "twilio-organizations-setup": [
+    {
+      "id": "twilio-organizations-setup-sso-scim-doc-links",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "- **SSO:** Enforce Single Sign-On at the Organization level via your identity provider (Okta, Azure AD, etc.). See [SSO docs](https://www.twilio.com/docs/iam/organizations/sso).\n- **SCIM:** Automate user provisioning and deprovisioning via the SCIM 2.0 API. See [SCIM docs](https://www.twilio.com/docs/iam/organizations/scim).",
+      "replace": "- **SSO:** Enforce Single Sign-On at the Organization level via your identity provider (Okta, Azure AD, etc.). See [SSO docs](https://www.twilio.com/docs/iam/single-sign-on).\n- **SCIM:** Automate user provisioning and deprovisioning via the SCIM 2.0 API. See [SCIM docs](https://www.twilio.com/docs/iam/scim)."
+    }
+  ],
   "fluidsim": [
     {
       "id": "calver-version-pin-1",

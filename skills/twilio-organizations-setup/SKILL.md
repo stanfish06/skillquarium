@@ -113,8 +113,8 @@ Domain registration also enables Organization merging — the Prime org must hav
 
 ## SSO and SCIM
 
-- **SSO:** Enforce Single Sign-On at the Organization level via your identity provider (Okta, Azure AD, etc.). See [SSO docs](https://www.twilio.com/docs/iam/organizations/sso).
-- **SCIM:** Automate user provisioning and deprovisioning via the SCIM 2.0 API. See [SCIM docs](https://www.twilio.com/docs/iam/organizations/scim).
+- **SSO:** Enforce Single Sign-On at the Organization level via your identity provider (Okta, Azure AD, etc.). See [SSO docs](https://www.twilio.com/docs/iam/single-sign-on).
+- **SCIM:** Automate user provisioning and deprovisioning via the SCIM 2.0 API. See [SCIM docs](https://www.twilio.com/docs/iam/scim).
 
 When SSO is enabled on a verified domain, all users with that domain email must authenticate via SSO.
 
