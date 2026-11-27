@@ -85,7 +85,7 @@ Choose the right tool based on the task type and data volume:
     -   See [SPARQL Examples](references/sparql_examples.md).
 -   **`map`**: Converts IDs between UniProt and 100+ databases. Best for ID
     mapping tasks.
-    -   See [ID Mapping Documentation](references/id_mapping_documentation.md).
+    -   See [ID Mapping Documentation](references/id_mapping_databases.md).
     -   **`search` vs. `map`**: Try `search` first before resorting to `map` if
         not explicitly requested by the user. E.g., an external ID might be
         searchable in UniParc but fail to map to UniProtKB.
@@ -285,7 +285,7 @@ uv run scripts/uniprot_tools.py sparql 'PREFIX up: <http://purl.uniprot.org/core
 
 -   [SPARQL Examples](references/sparql_examples.md)
 -   [Search Query Fields Documentation](references/search_query_fields.md)
--   [ID Mapping Documentation](references/id_mapping_documentation.md)
+-   [ID Mapping Documentation](references/id_mapping_databases.md)
 -   [UniProt Evidence Docs](https://www.uniprot.org/help/evidences)
 -   **Underlying API Endpoints** (Used by `scripts/uniprot_tools.py`):
     -   `get`, `search`, `stream`, `count` -> `rest.uniprot.org/{dataset}/`
