@@ -1489,6 +1489,14 @@
   ],
   "tempo": [
     {
+      "id": "tempo-helm-community-2",
+      "issue": 1439,
+      "source": "grafana/skills",
+      "file": "references/architecture-and-operations.md",
+      "find": "helm repo add grafana https://grafana.github.io/helm-charts\nhelm install tempo grafana/tempo-distributed --version 1.61.3 \\",
+      "replace": "# The chart moved from grafana/helm-charts to grafana-community/helm-charts on 2026-01-30;\n# the old repo no longer receives updates or support.\nhelm repo add grafana-community https://grafana-community.github.io/helm-charts\nhelm install tempo grafana-community/tempo-distributed --version 3.7.0 \\"
+    },
+    {
       "id": "tempo-helm-community-1",
       "issue": 945,
       "source": "grafana/skills",
