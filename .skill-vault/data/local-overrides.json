@@ -184,7 +184,7 @@
       "source": "neo4j-contrib/neo4j-skills",
       "file": "README.md",
       "find": "# Or download directly\ncurl -L https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connector.zip \\\n     -o neo4j-kafka-connector.zip\n",
-      "replace": "# Or download directly. The release asset is named neo4j-kafka-connect-neo4j-<version>\n# and carries the version, so there is no static latest/download name \u2014 resolve it first.\nVERSION=$(curl -fsSL https://api.github.com/repos/neo4j/neo4j-kafka-connector/releases/latest \\\n  | sed -n 's/.*\"tag_name\": *\"\\([^\"]*\\)\".*/\\1/p')\ncurl -fL \"https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connect-neo4j-${VERSION}.zip\" \\\n     -o \"neo4j-kafka-connect-neo4j-${VERSION}.zip\"\n"
+      "replace": "# Or download directly. The release asset is named neo4j-kafka-connect-neo4j-<version>\n# and carries the version, so there is no static latest/download name — resolve it first.\nVERSION=$(curl -fsSL https://api.github.com/repos/neo4j/neo4j-kafka-connector/releases/latest \\\n  | sed -n 's/.*\"tag_name\": *\"\\([^\"]*\\)\".*/\\1/p')\ncurl -fL \"https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connect-neo4j-${VERSION}.zip\" \\\n     -o \"neo4j-kafka-connect-neo4j-${VERSION}.zip\"\n"
     }
   ],
   "ui-toolkit": [
@@ -4202,6 +4202,13 @@
       "source": "benchflow-ai/skillsbench",
       "find": "- [Trivy Documentation](https://aquasecurity.github.io/trivy/)\n- [Trivy Offline Mode Guide](https://aquasecurity.github.io/trivy/latest/docs/advanced/air-gap/)\n",
       "replace": "- [Trivy Documentation](https://trivy.dev/latest/)\n- [Trivy Air-Gapped Environment Guide](https://trivy.dev/latest/docs/advanced/air-gap/)\n"
+    },
+    {
+      "id": "trivy-version-floor-permits-malicious-release",
+      "issue": 1458,
+      "source": "benchflow-ai/skillsbench",
+      "find": "- **Trivy**: Version 0.40.0 or later recommended",
+      "replace": "- **Trivy**: Version 0.76.0 or later recommended. Never use 0.69.4, 0.69.5, or 0.69.6 — those releases were published with compromised maintainer credentials and contain malicious/credential-stealing code (CVE-2026-33634 / GHSA-69fq-xp46-6x23). If any pipeline ran one of those versions, treat its secrets as exposed and rotate them."
     }
   ],
   "syz-extract-constants": [
@@ -4465,6 +4472,20 @@
       "source": "benchflow-ai/skillsbench",
       "find": "1. **Don't change javax.sql or javax.crypto** - These are JDK packages, not Java EE",
       "replace": "1. **Don't change JDK packages** - `javax.sql`, `javax.crypto`, `javax.net`, `javax.naming` and `javax.transaction.xa` are JDK packages, not Java EE; JSR-305 `javax.annotation.Nullable`/`Nonnull` are not Java EE either"
+    },
+    {
+      "id": "jakarta-rewrite-maven-plugin-stale-pin",
+      "issue": 1459,
+      "source": "benchflow-ai/skillsbench",
+      "find": "    <artifactId>rewrite-maven-plugin</artifactId>\n    <version>5.42.0</version>",
+      "replace": "    <artifactId>rewrite-maven-plugin</artifactId>\n    <version>6.9.0</version> <!-- check docs.openrewrite.org/running-recipes/getting-started for the current release before relying on this pin -->\n"
+    },
+    {
+      "id": "jakarta-rewrite-migrate-java-stale-pin",
+      "issue": 1459,
+      "source": "benchflow-ai/skillsbench",
+      "find": "            <artifactId>rewrite-migrate-java</artifactId>\n            <version>2.26.0</version>",
+      "replace": "            <artifactId>rewrite-migrate-java</artifactId>\n            <version>3.45.0</version>"
     }
   ],
   "gnucobol-mainframe-batch": [

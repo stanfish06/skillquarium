@@ -187,7 +187,8 @@ OpenRewrite can automate the entire namespace migration:
 <plugin>
     <groupId>org.openrewrite.maven</groupId>
     <artifactId>rewrite-maven-plugin</artifactId>
-    <version>5.42.0</version>
+    <version>6.9.0</version> <!-- check docs.openrewrite.org/running-recipes/getting-started for the current release before relying on this pin -->
+
     <configuration>
         <activeRecipes>
             <recipe>org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta</recipe>
@@ -197,7 +198,7 @@ OpenRewrite can automate the entire namespace migration:
         <dependency>
             <groupId>org.openrewrite.recipe</groupId>
             <artifactId>rewrite-migrate-java</artifactId>
-            <version>2.26.0</version>
+            <version>3.45.0</version>
         </dependency>
     </dependencies>
 </plugin>
