@@ -187,6 +187,15 @@
       "replace": "# Or download directly. The release asset is named neo4j-kafka-connect-neo4j-<version>\n# and carries the version, so there is no static latest/download name \u2014 resolve it first.\nVERSION=$(curl -fsSL https://api.github.com/repos/neo4j/neo4j-kafka-connector/releases/latest \\\n  | sed -n 's/.*\"tag_name\": *\"\\([^\"]*\\)\".*/\\1/p')\ncurl -fL \"https://github.com/neo4j/neo4j-kafka-connector/releases/latest/download/neo4j-kafka-connect-neo4j-${VERSION}.zip\" \\\n     -o \"neo4j-kafka-connect-neo4j-${VERSION}.zip\"\n"
     }
   ],
+  "uniprot-database": [
+    {
+      "id": "id-mapping-reference-filename",
+      "issue": 1475,
+      "source": "google-deepmind/science-skills",
+      "find": "references/id_mapping_documentation.md",
+      "replace": "references/id_mapping_databases.md"
+    }
+  ],
   "ui-toolkit": [
     {
       "id": "videosdk-ui-toolkit-rename-guide",
