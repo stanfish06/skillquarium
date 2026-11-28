@@ -5790,5 +5790,14 @@
       "find": "dotnet add package Pulumi.Aws --version 7.12.0",
       "replace": "dotnet add package Pulumi.Aws --version 7.55.0"
     }
+  ],
+  "msa-structure-prediction-pipeline": [
+    {
+      "id": "skill-health-1294-diffusion-samples-level",
+      "issue": 1294,
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "find": "        \"output_format\": \"pdb\",\n        \"molecules\": [\n            {\n                \"type\": \"protein\",\n                \"sequence\": query_sequence,\n                \"diffusion_samples\": 1,\n                \"msa\": msa_data\n            }",
+      "replace": "        \"output_format\": \"pdb\",\n        \"diffusion_samples\": 1,\n        \"molecules\": [\n            {\n                \"type\": \"protein\",\n                \"sequence\": query_sequence,\n                \"msa\": msa_data\n            }"
+    }
   ]
 }

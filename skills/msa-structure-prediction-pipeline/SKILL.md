@@ -125,11 +125,11 @@ payload = {
     "inputs": [{
         "input_id": "prediction_with_msa",
         "output_format": "pdb",
+        "diffusion_samples": 1,
         "molecules": [
             {
                 "type": "protein",
                 "sequence": query_sequence,
-                "diffusion_samples": 1,
                 "msa": msa_data
             }
         ]
