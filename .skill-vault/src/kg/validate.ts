@@ -40,8 +40,10 @@ export interface LexiconTerms {
 
 /** vault/embeddings against the skills on disk; null when there is no manifest to compare to. */
 export interface EmbedState {
-  /** Skill ids whose SKILL.md hash differs from the manifest, or that the manifest never saw. */
+  /** Skill ids with a vector whose recorded SKILL.md hash no longer matches. */
   stale: string[];
+  /** Skill ids with no vector at all: no manifest record or no `<id>.f16`. */
+  missing: string[];
   total: number;
 }
 
@@ -392,7 +394,26 @@ function checkCqs(graph: Graph, deps: ValidateDeps, idx: Index, add: AddRow): vo
       `${em.stale.length}/${em.total} skills changed since embedding — run embed`,
     );
   }
+  // A missing vector is worse than a stale one: the skill cannot be a semantic hit at all. Still a
+  // warning, for the same reason as above, but named so an import that skipped embed is visible.
+  // With no manifest the stale row already says so; a second NOT_YET would only repeat it.
+  if (!em) return;
+  if (em.missing.length === 0) {
+    add("EMBED", "missing vectors", "PASS", `every one of ${em.total} skills has a vector`);
+  } else {
+    const shown = em.missing.slice(0, MISSING_SHOWN).join(", ");
+    const more = em.missing.length > MISSING_SHOWN ? `, … +${em.missing.length - MISSING_SHOWN} more` : "";
+    add(
+      "EMBED",
+      "missing vectors",
+      "WARN",
+      `${em.missing.length} skills have no vector and cannot be semantic hits — run embed: ${shown}${more}`,
+    );
+  }
 }
+
+/** How many missing-vector ids the EMBED row names before summarising the rest. */
+const MISSING_SHOWN = 20;
 
 type AddRow = (kind: string, id: string, status: Status, detail: string) => void;
 

@@ -22,6 +22,8 @@ export interface Buckets {
   current: string[];
   behind: string[];
   unreachable: string[];
+  /** Upstream skill folders beside tracked ones that no lock entry names. Reported, never drift. */
+  untracked?: string[];
 }
 
 /** Sources in report order: most lock entries first. */
@@ -32,13 +34,20 @@ export interface ProfileRow {
   /** [commit, how many skills pin it], sorted by commit. */
   commits: [string, number][];
   head: string | null;
+  /** The HEAD lookup was refused for an exhausted rate limit, so `head` is unknown. */
+  rateLimited?: boolean;
 }
 
-/** Seams the tests replace: no network, no ambient env. */
+/** apiGet's answer when GitHub refused the request for an exhausted rate limit. */
+export const RATE_LIMITED = Symbol("rate-limited");
+
+/** Seams the tests replace: no network, no ambient env, no subprocess. */
 export interface DriftDeps {
   fetch?: typeof fetch;
   env?: Record<string, string | undefined>;
-  repoTree?: (source: string) => Promise<RepoTree | null>;
+  repoTree?: (source: string) => Promise<RepoTree | null | typeof RATE_LIMITED>;
+  /** Token fallback when neither GITHUB_TOKEN nor GH_TOKEN is set; defaults to `gh auth token`. */
+  ghToken?: () => string | undefined;
 }
 
 const TreeSchema = z.looseObject({
@@ -57,9 +66,26 @@ type LockEntry = z.infer<typeof LockEntrySchema>;
 
 const LockSchema = z.looseObject({ skills: z.record(z.string(), LockEntrySchema).optional() });
 
+let cachedGhToken: string | undefined | null = null;
+
+/** `gh auth token`, asked once per process; undefined when gh is absent or logged out. */
+export function ghAuthToken(): string | undefined {
+  if (cachedGhToken !== null) return cachedGhToken;
+  cachedGhToken = undefined;
+  try {
+    const proc = Bun.spawnSync(["gh", "auth", "token"], { stdout: "pipe", stderr: "ignore" });
+    const token = proc.stdout.toString().trim();
+    if (proc.exitCode === 0 && token) cachedGhToken = token;
+  } catch {
+    // gh is not installed
+  }
+  return cachedGhToken;
+}
+
 /**
- * GET https://api.github.com{path}. Every failure -- transport, non-2xx, timeout, unparseable
- * body -- returns null, which check_lock turns into an explicit "could not read" error line.
+ * GET https://api.github.com{path}. A 403/429 with `x-ratelimit-remaining: 0` returns
+ * RATE_LIMITED. Every other failure -- transport, non-2xx, timeout, unparseable body -- returns
+ * null, which check_lock turns into an explicit "could not read" error line.
  */
 export async function apiGet(path: string, deps: DriftDeps = {}): Promise<unknown> {
   const doFetch = deps.fetch ?? fetch;
@@ -68,14 +94,20 @@ export async function apiGet(path: string, deps: DriftDeps = {}): Promise<unknow
     Accept: "application/vnd.github+json",
     "User-Agent": "skillquarium-drift",
   };
-  const token = env.GITHUB_TOKEN || env.GH_TOKEN;
-  // Public API; the token only raises the rate limit.
+  // Public API; the token only raises the rate limit (60/hour anonymous is ~20 sources).
+  const token = env.GITHUB_TOKEN || env.GH_TOKEN || (deps.ghToken ?? ghAuthToken)();
   if (token) headers.Authorization = `Bearer ${token}`;
   try {
     const response = await doFetch(`${API}${path}`, {
       headers,
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
+    if (
+      (response.status === 403 || response.status === 429) &&
+      response.headers.get("x-ratelimit-remaining") === "0"
+    ) {
+      return RATE_LIMITED;
+    }
     if (!response.ok) return null;
     return await response.json();
   } catch {
@@ -84,9 +116,15 @@ export async function apiGet(path: string, deps: DriftDeps = {}): Promise<unknow
 }
 
 /** Recursive git tree, trying the refs the skills CLI tries. First non-empty tree wins. */
-export async function repoTree(source: string, deps: DriftDeps = {}): Promise<RepoTree | null> {
+export async function repoTree(
+  source: string,
+  deps: DriftDeps = {},
+): Promise<RepoTree | null | typeof RATE_LIMITED> {
   for (const ref of ["HEAD", "main", "master"]) {
-    const parsed = TreeSchema.safeParse(await apiGet(`/repos/${source}/git/trees/${ref}?recursive=1`, deps));
+    const body = await apiGet(`/repos/${source}/git/trees/${ref}?recursive=1`, deps);
+    // Further refs would only spend more of an exhausted budget.
+    if (body === RATE_LIMITED) return RATE_LIMITED;
+    const parsed = TreeSchema.safeParse(body);
     if (parsed.success && parsed.data.tree?.length) {
       return { tree: parsed.data.tree, truncated: parsed.data.truncated };
     }
@@ -99,6 +137,30 @@ export function folderOf(skillPath: string): string {
   const normalized = skillPath.replace(/\\/g, "/").replace(/\/+$/, "");
   if (normalized.toLowerCase().endsWith("/skill.md")) return normalized.slice(0, -"/SKILL.md".length);
   return normalized;
+}
+
+function parentOf(folder: string): string {
+  const slash = folder.lastIndexOf("/");
+  return slash < 0 ? "" : folder.slice(0, slash);
+}
+
+/**
+ * `*\/SKILL.md` blobs upstream whose folder sits beside a tracked folder (same parent directory)
+ * but is not itself tracked: a skill the source gained, or the new name of a renamed one. A source
+ * whose skillPath is a bare `SKILL.md` is the skill itself and has no siblings to compare.
+ */
+function untrackedFolders(tree: TreeEntry[], tracked: string[]): string[] {
+  if (tracked.some((folder) => folder.toLowerCase() === "skill.md")) return [];
+  const known = new Set(tracked);
+  const parents = new Set(tracked.map(parentOf));
+  const found = new Set<string>();
+  for (const entry of tree) {
+    if (entry.type !== "blob") continue;
+    const folder = folderOf(entry.path);
+    if (folder === entry.path) continue; // not a SKILL.md
+    if (!known.has(folder) && parents.has(parentOf(folder))) found.add(folder);
+  }
+  return [...found].sort();
 }
 
 function byName(a: [string, LockEntry], b: [string, LockEntry]): number {
@@ -114,7 +176,7 @@ export async function checkLock(
   lockPath: string,
   deps: DriftDeps = {},
   extra: Record<string, LockEntry> = {},
-): Promise<{ report: DriftReport; errors: string[] }> {
+): Promise<{ report: DriftReport; errors: string[]; rateLimited: string[] }> {
   const lock = LockSchema.parse(JSON.parse(readFileSync(lockPath, "utf8")));
   const bySource = new Map<string, [string, LockEntry][]>();
   for (const [name, entry] of [...Object.entries(lock.skills ?? {}), ...Object.entries(extra)]) {
@@ -127,11 +189,17 @@ export async function checkLock(
   const tree = deps.repoTree ?? ((source: string) => repoTree(source, deps));
   const report: DriftReport = new Map();
   const errors: string[] = [];
+  const rateLimited: string[] = [];
   // Most entries first; ties keep lock order, as Python's stable sort does.
   const sources = [...bySource.entries()].sort((a, b) => b[1].length - a[1].length);
   for (const [source, items] of sources) {
     if (!source) continue;
     const data = await tree(source);
+    if (data === RATE_LIMITED) {
+      rateLimited.push(source);
+      errors.push(`${source}: rate-limited; totals partial (set GH_TOKEN or run \`gh auth login\`)`);
+      continue;
+    }
     if (data === null) {
       errors.push(`${source}: could not read the upstream git tree`);
       continue;
@@ -140,17 +208,21 @@ export async function checkLock(
     const shas = new Map<string, string>();
     for (const entry of data.tree) if (entry.type === "tree") shas.set(entry.path, entry.sha);
     const buckets: Buckets = { current: [], behind: [], unreachable: [] };
+    const tracked: string[] = [];
     for (const [name, entry] of [...items].sort(byName)) {
       const path = entry.skillPath;
       if (!path) continue;
+      tracked.push(folderOf(path));
       const sha = shas.get(folderOf(path));
       if (sha === undefined) buckets.unreachable.push(name);
       else if (sha !== entry.skillFolderHash) buckets.behind.push(name);
       else buckets.current.push(name);
     }
+    const untracked = untrackedFolders(data.tree, tracked);
+    if (untracked.length) buckets.untracked = untracked;
     report.set(source, buckets);
   }
-  return { report, errors };
+  return { report, errors, rateLimited };
 }
 
 function skillFiles(root: string): string[] {
@@ -199,20 +271,30 @@ export async function checkProfiles(root: string, deps: DriftDeps = {}): Promise
   const pinned = pinnedProfiles(root);
   for (const repo of [...pinned.keys()].sort()) {
     const commits = pinned.get(repo) ?? new Map<string, number>();
-    const head = CommitsSchema.safeParse(await apiGet(`/repos/${repo}/commits?per_page=1`, deps));
+    const body = await apiGet(`/repos/${repo}/commits?per_page=1`, deps);
+    const head = CommitsSchema.safeParse(body);
     const first = head.success ? head.data[0] : undefined;
     rows.push({
       repo,
       commits: [...commits.entries()].sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)),
       head: first?.sha ?? null,
+      ...(body === RATE_LIMITED ? { rateLimited: true } : {}),
     });
   }
   return rows;
 }
 
 /** The markdown report and the drift count that drives the exit code. */
-export function render(report: DriftReport, errors: string[], profiles: ProfileRow[]): [string, number] {
-  const lines = ["| source | tracked | current | behind | unreachable |", "| --- | --- | --- | --- | --- |"];
+export function render(
+  report: DriftReport,
+  errors: string[],
+  profiles: ProfileRow[],
+  rateLimited: string[] = [],
+): [string, number] {
+  const lines = [
+    "| source | tracked | current | behind | unreachable | untracked |",
+    "| --- | --- | --- | --- | --- | --- |",
+  ];
   let behind = 0;
   let unreachable = 0;
   for (const [source, buckets] of report) {
@@ -221,10 +303,15 @@ export function render(report: DriftReport, errors: string[], profiles: ProfileR
     unreachable += buckets.unreachable.length;
     lines.push(
       `| \`${source}\` | ${total} | ${buckets.current.length} | ` +
-        `${buckets.behind.length} | ${buckets.unreachable.length} |`,
+        `${buckets.behind.length} | ${buckets.unreachable.length} | ${buckets.untracked?.length ?? 0} |`,
     );
   }
   lines.push("");
+  const partial = rateLimited.length + profiles.filter((row) => row.rateLimited).length;
+  if (partial) {
+    // Whatever answered before the limit is not a census; say so before the numbers.
+    lines.push(`**Rate-limited; totals partial:** ${partial} sources were never read.`, "");
+  }
   lines.push(
     `**${behind} behind upstream, ${unreachable} unreachable** ` +
       "(recorded `skillPath` no longer exists upstream, so " +
@@ -238,14 +325,30 @@ export function render(report: DriftReport, errors: string[], profiles: ProfileR
     }
   }
 
+  if ([...report.values()].some((buckets) => buckets.untracked?.length)) {
+    // Not drift: a source may hold skills the vault chose not to install. A list to review.
+    lines.push(
+      "",
+      "Untracked upstream (skill folders beside tracked ones with no lock entry; not counted):",
+      "",
+    );
+    for (const [source, buckets] of report) {
+      if (buckets.untracked?.length) lines.push(`- \`${source}\`: ${buckets.untracked.join(", ")}`);
+    }
+  }
+
   let staleProfiles = 0;
   if (profiles.length) {
     lines.push("", "Imported profiles pinned in frontmatter (outside the lock):", "");
     for (const row of profiles) {
       for (const [commit, count] of row.commits) {
         const current = commit === row.head;
-        if (!current) staleProfiles += count;
-        const state = current ? "current" : `behind HEAD \`${(row.head ?? "?").slice(0, 12)}\``;
+        if (!current && !row.rateLimited) staleProfiles += count;
+        const state = current
+          ? "current"
+          : row.rateLimited
+            ? "HEAD unknown (rate-limited; totals partial)"
+            : `behind HEAD \`${(row.head ?? "?").slice(0, 12)}\``;
         lines.push(`- \`${row.repo}\` — ${count} skills pinned at \`${commit.slice(0, 12)}\`, ${state}`);
       }
     }
@@ -275,18 +378,19 @@ export async function runDrift(
 ): Promise<number> {
   // Renamed skills drift like lock entries; only GitHub sources have a tree API to ask.
   const renamed = Object.entries(loadRenamed(renamedPath(root))).filter(([, e]) => e.sourceType === "github");
-  const { report, errors } = await checkLock(
+  const { report, errors, rateLimited } = await checkLock(
     options.lock ?? join(root, ".skill-lock.json"),
     deps,
     Object.fromEntries(renamed),
   );
   const profiles = options.skipProfiles ? [] : await checkProfiles(root, deps);
-  const [text, drift] = render(report, errors, profiles);
+  const [text, drift] = render(report, errors, profiles, rateLimited);
   io.out(text);
 
   const summary = (deps.env ?? process.env).GITHUB_STEP_SUMMARY;
   if (summary) appendFileSync(summary, `## Upstream drift\n\n${text}\n`, "utf8");
 
-  if (errors.length && options.failOnDrift) return 1;
+  // An unread source is not a clean one: rate-limited profiles fail like error lines do.
+  if ((errors.length || profiles.some((row) => row.rateLimited)) && options.failOnDrift) return 1;
   return drift && options.failOnDrift ? 1 : 0;
 }

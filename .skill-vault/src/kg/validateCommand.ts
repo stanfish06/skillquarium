@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { z } from "zod";
 import { discoverSkills, isInstallableExtra } from "../catalog";
 import type { Command } from "../cli";
-import { EMBED_DIR, readManifest, staleSkills } from "../embed/store";
+import { EMBED_DIR, readManifest, vectorGaps } from "../embed/store";
 import type { Graph } from "./types";
 import type { EmbedState, LexiconTerms, ValidateDeps } from "./validate";
 import { failed, renderReport, validateGraph } from "./validate";
@@ -40,7 +40,8 @@ function loadEmbedState(root: string): EmbedState | null {
   const entries = discoverSkills(root, { bundles: false, excludeTransient: true }).filter(
     (e) => !isInstallableExtra(e.id),
   );
-  return { stale: staleSkills(root, manifest, entries), total: entries.length };
+  const { changed, missing } = vectorGaps(root, manifest, entries);
+  return { stale: changed, missing, total: entries.length };
 }
 
 /** schema.json, lexicon.json and vault/embeddings: the inputs the checks need beside the graph. */
