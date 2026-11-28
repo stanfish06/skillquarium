@@ -471,7 +471,7 @@ export async function myAgentWorkflow(userMessage: string) {
   "use workflow";
 
   const agent = new DurableAgent({
-    model: "anthropic/claude-sonnet-4-5",
+    model: "anthropic/claude-sonnet-5.5",
     system: "You are a helpful assistant.",
     tools: {
       lookupData: {

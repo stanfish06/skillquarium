@@ -62,10 +62,10 @@ const result = await generateText({
 
 - Always use `provider/model` format (for example `openai/gpt-5.4`).
 - Versioned slugs use dots for versions, not hyphens:
-  - Correct: `anthropic/claude-sonnet-4.6`
-  - Incorrect: `anthropic/claude-sonnet-4-6`
+  - Correct: `anthropic/claude-sonnet-5.5`
+  - Incorrect: `anthropic/claude-sonnet-5-5`
 - Before hardcoding model IDs, call `gateway.getAvailableModels()` and pick from the returned IDs.
-- Default text models: `openai/gpt-5.4` or `anthropic/claude-sonnet-4.6`.
+- Default text models: `openai/gpt-5.4` or `anthropic/claude-sonnet-5.5`.
 - Do not default to outdated choices like `openai/gpt-4o`.
 
 ```ts
@@ -124,7 +124,7 @@ Configure how AI Gateway routes requests across providers:
 
 ```ts
 const result = await generateText({
-  model: gateway('anthropic/claude-sonnet-4.6'),
+  model: gateway('anthropic/claude-sonnet-5.5'),
   prompt: 'Hello!',
   providerOptions: {
     gateway: {
@@ -347,7 +347,7 @@ When a provider is down, the gateway automatically fails over if you configured 
 
 ```ts
 const result = await generateText({
-  model: gateway('anthropic/claude-sonnet-4.6'),
+  model: gateway('anthropic/claude-sonnet-5.5'),
   prompt: 'Summarize this document',
   providerOptions: {
     gateway: {
@@ -380,7 +380,7 @@ Gateway has a default timeout per provider. For long-running generations, use st
 import { streamText } from 'ai'
 
 const result = streamText({
-  model: 'anthropic/claude-sonnet-4.6',
+  model: 'anthropic/claude-sonnet-5.5',
   prompt: longDocument,
 })
 

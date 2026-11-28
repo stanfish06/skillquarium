@@ -6,7 +6,7 @@ This is a *workflow contract* for agents that already have `ida-pro-mcp` (server
 
 ## ACTION REQUIRED
 
-1. `NOW`: Confirm the sample is authorized (`../field-journal/precedent-reverse.md` + case `auth.status=granted`).
+1. `NOW`: Confirm the sample is authorized (`../../reverse-skill-router/field-journal/precedent-reverse.md` + case `auth.status=granted`).
 2. `NOW`: Start MCP — `scripts/start.ps1` (headless) or `scripts/start-gui.ps1` (GUI debugger path).
 3. `NOW`: Open the binary — `scripts/open.ps1 -Path <sample>` and keep the `session_id`.
 4. `NEXT`: Follow **Debugger enablement** below if the user asks for dynamic debugging.

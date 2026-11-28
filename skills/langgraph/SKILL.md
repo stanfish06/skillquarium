@@ -150,7 +150,7 @@ tools-in-a-loop graph, plus a middleware system:
 from langchain.agents import create_agent
 
 agent = create_agent(
-    model="anthropic:claude-sonnet-4-5",     # provider string needs langchain-anthropic installed
+    model="anthropic:claude-sonnet-5-5",     # provider string needs langchain-anthropic installed
     tools=[search, calculator],              # plain functions or @tool-decorated
     system_prompt="You are a terse research assistant.",   # was `prompt` in create_react_agent
     checkpointer=checkpointer,               # optional: thread memory for free

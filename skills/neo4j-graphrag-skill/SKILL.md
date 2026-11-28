@@ -439,7 +439,7 @@ from neo4j_graphrag.llm import (
 )
 
 llm = OpenAILLM(model_name="gpt-4.1", model_params={"temperature": 0})
-llm = AnthropicLLM(model_name="claude-sonnet-4-6")
+llm = AnthropicLLM(model_name="claude-sonnet-5-5")
 llm = VertexAILLM(model_name="gemini-2.0-flash")
 llm = OllamaLLM(model_name="llama3")           # no API key needed
 llm = BedrockLLM(model_id="us.anthropic.claude-sonnet-4-6")  # use the inference-profile ID; region prefix (us./eu./global.) must match your Bedrock deployment

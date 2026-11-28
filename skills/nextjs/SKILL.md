@@ -506,13 +506,29 @@ Three advisories published 2026-10-14. All of them reach releases that the previ
 | GHSA-673q-mjm6-r5xr — unauthenticated RCE in `use cache` functions returning typed arrays | Critical | `>= 16.0.0, <= 16.4.0` |
 | GHSA-p3m5-59mp-jv5r — denial of service in App Router using Server Actions | High | `>= 13.0.0, <= 15.5.27` and `>= 16.0.0, <= 16.4.0` |
 
-**Mitigation**: upgrade to `15.5.28` or `16.4.1`+. For CVE-2026-96889 alone, forcing `sharp >= 0.35.5` in your lockfile also closes it — fresh installs already resolve a fixed `sharp`.
+**Mitigation**: `15.5.28` / `16.4.1`+ close these three, but both releases sit inside the 2026-11-03 ranges below, so upgrade to the newer floor. For CVE-2026-96889 alone, forcing `sharp >= 0.35.5` in your lockfile also closes it — fresh installs already resolve a fixed `sharp`.
+
+### 2026-11-03 advisory batch — cache disclosure and poisoning
+
+Seven advisories published 2026-11-03, all rated Medium. All of them reach releases that the previous floor (15.5.28 / 16.4.1) called safe; three also affect 15.x:
+
+| Advisory | Vulnerable range |
+|---|---|
+| CVE-2026-119790 (GHSA-mfr8-8qww-v76h) — cross-tenant disclosure across root params when a `use cache` function is called through `unstable_cache()` | `>= 16.3.0, <= 16.4.4` |
+| CVE-2026-119351 (GHSA-vc7v-qv4w-wrv8) — cache leak across root param values in nested `use cache` functions | `>= 16.2.0, <= 16.4.4` |
+| CVE-2026-119350 (GHSA-vvgp-ww4w-46vf) — Cache Components shared fallback-shell poisoning via request-supplied placeholder route params | `>= 16.4.0, <= 16.4.4` |
+| CVE-2026-119349 (GHSA-rhh4-g77r-r9qj) — cross-user cache disclosure and poisoning in `use cache` with binary arguments | `>= 16.0.0, <= 16.4.4` |
+| CVE-2026-119348 (GHSA-pc58-hwjq-p385) — cross-client response injection and disclosure in self-hosted apps forwarding fetched responses | `<= 15.5.28` and `>= 16.0.0, <= 16.4.4` |
+| CVE-2026-119347 (GHSA-7qx7-33qx-rqx2) — SVG rejection bypass in Image Optimization | `>= 15.0.0, <= 15.5.28` and `>= 16.0.0, <= 16.4.4` |
+| CVE-2026-119346 (GHSA-f3mh-rxg3-f5g2) — HttpOnly cookie exposure through an internal response header on Edge runtime routes | `>= 15.0.0, <= 15.5.28` and `>= 16.0.0, <= 16.4.4` |
+
+**Mitigation**: upgrade to `15.5.29` or `16.4.5`+.
 
 ### Patched Versions
 
-Minimum safe version (checked 2026-10-26): **`next@15.5.28`** or **`next@16.4.1`** (both published 2026-10-14), which close the three advisories above. Current stable is `16.4.3`.
+Minimum safe version (checked 2026-11-28): **`next@15.5.29`** or **`next@16.4.5`** (both published 2026-11-03), which close the seven advisories above. Current stable is `16.4.6`.
 
-The previous floor, `15.5.27` / `16.3.8` (both 2026-09-30), fixes the seven advisories published that day, the most severe being CVE-2026-94483 (High, CVSS 8.3): server-side request forgery in Image Optimization through an allow-listed `images.remotePatterns` host. Two of the seven, both SSG/ISR cache poisoning (CVE-2026-94543, CVE-2026-94484), also affect 15.x and are fixed in 15.5.27. On 16.x, anything below 16.3.6 is also exposed to CVE-2026-94545 above. Neither is safe on its own — both sit inside the 2026-10-14 ranges.
+The previous floor, `15.5.28` / `16.4.1` (both 2026-10-14), closes the three 2026-10-14 advisories but sits inside the 2026-11-03 ranges. The floor before that, `15.5.27` / `16.3.8` (both 2026-09-30), fixes the seven advisories published that day, the most severe being CVE-2026-94483 (High, CVSS 8.3): server-side request forgery in Image Optimization through an allow-listed `images.remotePatterns` host. Two of the seven, both SSG/ISR cache poisoning (CVE-2026-94543, CVE-2026-94484), also affect 15.x and are fixed in 15.5.27. On 16.x, anything below 16.3.6 is also exposed to CVE-2026-94545 above. Neither is safe on its own — both sit inside the 2026-10-14 and 2026-11-03 ranges.
 
 There is no per-release-line patch below `15.5.21` / `16.2.11`. The nine advisories published 2026-07-22 (CVE-2026-64641 through CVE-2026-64649, four rated High) have vulnerable ranges `>= 12.0.0, < 15.5.21` and `>= 16.0.0, < 16.2.11`, so 14.x, 15.0.x–15.4.x, 16.0.x and 16.1.x have no fixed release at all — `14.2.35`, `16.0.11` and `16.1.7` are the last patches ever published on those lines and every one of them sits inside the vulnerable range. Remediating those lines requires a minor-version move, not a patch bump.
 

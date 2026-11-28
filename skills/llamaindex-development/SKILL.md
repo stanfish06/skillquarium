@@ -275,7 +275,7 @@ Settings.llm = OpenAI(
 
 # Anthropic
 Settings.llm = Anthropic(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5-5",
     temperature=0.1
 )
 ```

@@ -65,7 +65,7 @@ const sendEmail = tool(
 );
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-5",
+  model: "anthropic:claude-sonnet-5-5",
   tools: [sendEmail],
   checkpointer: new MemorySaver(),
   middleware: [
@@ -345,13 +345,13 @@ HITL requires a checkpointer to persist state.
 ```typescript
 // WRONG: No checkpointer
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-5", tools: [sendEmail],
+  model: "anthropic:claude-sonnet-5-5", tools: [sendEmail],
   middleware: [humanInTheLoopMiddleware({ interruptOn: { send_email: true } })],
 });
 
 // CORRECT: Add checkpointer
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-5", tools: [sendEmail],
+  model: "anthropic:claude-sonnet-5-5", tools: [sendEmail],
   checkpointer: new MemorySaver(),
   middleware: [humanInTheLoopMiddleware({ interruptOn: { send_email: true } })],
 });
