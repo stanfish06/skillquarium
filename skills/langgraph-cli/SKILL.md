@@ -96,18 +96,17 @@ langgraph up --postgres-uri postgresql://...  # external Postgres
 langgraph up --no-pull                     # use local images (after langgraph build)
 langgraph up --image my-image              # skip build, use pre-built image
 langgraph up -d docker-compose.yml         # add extra Docker services
-langgraph up --debugger-port 8124          # serve debugger UI
 langgraph up --wait                        # block until services are healthy
 ```
 
 ### `langgraph deploy`
 
-Build and deploy to LangGraph Platform (LangSmith Deployments). Requires Docker. On Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.
+Build and deploy to LangGraph Platform (LangSmith Deployments). Builds locally with Docker when it is available and remotely otherwise (force either with `--remote` / `--no-remote`). For local builds on Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.
 
 ```bash
 langgraph deploy                           # deploy, name defaults to directory name
 langgraph deploy --name my-agent           # explicit deployment name
-langgraph deploy --deployment-type prod    # production deployment (default: dev)
+langgraph deploy --agent-server-type dedicated  # dedicated (production) Agent Server (default: serverless)
 langgraph deploy --tag v1.2.0              # custom image tag (default: latest)
 langgraph deploy --deployment-id <id>      # update an existing deployment by ID
 langgraph deploy --config ./langgraph.json # explicit config path
@@ -238,7 +237,7 @@ The configuration file used by all CLI commands (`dev`, `build`, `up`, `deploy`)
 
 ## Gotchas
 
-- **`langgraph deploy` requires Docker** — On Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.
+- **`langgraph deploy` does not require Docker** — It builds locally when Docker is available and remotely otherwise (`--remote` / `--no-remote` to force either). For local builds on Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.
 - **`langgraph deploy` can only update its own deployments** — Deployments created through the LangSmith UI or GitHub integration cannot be updated with `langgraph deploy`. Use the UI for those.
 - **`dependencies` must include all packages** — The `dependencies` array in `langgraph.json` must point to where your package config lives (e.g., `"."` for root). The actual packages are resolved from `pyproject.toml`, `requirements.txt`, or `package.json` at that location.
 - **`langgraph dev` runs without Docker** — It runs directly in your environment. If your code depends on system packages (e.g., `ffmpeg`), they must be installed locally. Use `langgraph up` to validate Docker builds.

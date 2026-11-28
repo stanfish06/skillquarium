@@ -5032,6 +5032,34 @@
       "source": "langchain-ai/langchain-skills",
       "find": "langgraph build -t my-image --base-image langchain/langgraph-server:0.2.18  # pin base version\n",
       "replace": "langgraph build -t my-image --base-image langchain/langgraph-server:0.16-py3.12  # pin base version — see https://hub.docker.com/r/langchain/langgraph-server/tags for the current tags\n"
+    },
+    {
+      "id": "skill-health-1355-debugger-port",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "langgraph up --debugger-port 8124          # serve debugger UI\nlanggraph up --wait",
+      "replace": "langgraph up --wait"
+    },
+    {
+      "id": "skill-health-1355-deploy-docker",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "Build and deploy to LangGraph Platform (LangSmith Deployments). Requires Docker. On Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.",
+      "replace": "Build and deploy to LangGraph Platform (LangSmith Deployments). Builds locally with Docker when it is available and remotely otherwise (force either with `--remote` / `--no-remote`). For local builds on Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`."
+    },
+    {
+      "id": "skill-health-1355-agent-server-type",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "langgraph deploy --deployment-type prod    # production deployment (default: dev)",
+      "replace": "langgraph deploy --agent-server-type dedicated  # dedicated (production) Agent Server (default: serverless)"
+    },
+    {
+      "id": "skill-health-1355-gotcha-docker",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "- **`langgraph deploy` requires Docker** — On Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.",
+      "replace": "- **`langgraph deploy` does not require Docker** — It builds locally when Docker is available and remotely otherwise (`--remote` / `--no-remote` to force either). For local builds on Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`."
     }
   ],
   "exploratory-data-analysis": [
