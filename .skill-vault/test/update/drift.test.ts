@@ -3,13 +3,17 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import {
+  apiGet,
   type Buckets,
   checkLock,
+  checkProfiles,
   type DriftReport,
   folderOf,
   pinnedProfiles,
+  RATE_LIMITED,
   type RepoTree,
   render,
+  repoTree,
   runDrift,
 } from "../../src/update/drift";
 
@@ -105,6 +109,88 @@ describe("lock classification", () => {
     );
     expect(drift).toBe(2);
     expect(text).toContain("- `k/s` — 2 skills pinned at `896ed6ed`, behind HEAD `0123456789ab`");
+  });
+});
+
+/** A fetch stub that answers every request with one status and header set, recording calls. */
+function stubFetch(
+  status: number,
+  headers: Record<string, string> = {},
+  body: unknown = {},
+): { fetch: typeof fetch; calls: { url: string; auth: string | null }[] } {
+  const calls: { url: string; auth: string | null }[] = [];
+  const fake = async (url: string | URL | Request, init?: RequestInit) => {
+    calls.push({ url: String(url), auth: new Headers(init?.headers).get("Authorization") });
+    return new Response(JSON.stringify(body), { status, headers });
+  };
+  return { fetch: fake as typeof fetch, calls };
+}
+
+describe("rate limits and tokens", () => {
+  test("an exhausted 403 or 429 is RATE_LIMITED; other failures stay null", async () => {
+    const deps = { env: {}, ghToken: () => undefined };
+    for (const status of [403, 429]) {
+      const { fetch } = stubFetch(status, { "x-ratelimit-remaining": "0" });
+      expect(await apiGet("/x", { ...deps, fetch })).toBe(RATE_LIMITED);
+    }
+    expect(
+      await apiGet("/x", { ...deps, fetch: stubFetch(403, { "x-ratelimit-remaining": "12" }).fetch }),
+    ).toBe(null);
+    expect(await apiGet("/x", { ...deps, fetch: stubFetch(404).fetch })).toBe(null);
+  });
+
+  test("repoTree stops at the first rate-limited ref instead of spending more budget", async () => {
+    const stub = stubFetch(403, { "x-ratelimit-remaining": "0" });
+    const result = await repoTree("o/r", { env: {}, ghToken: () => undefined, fetch: stub.fetch });
+    expect(result).toBe(RATE_LIMITED);
+    expect(stub.calls).toHaveLength(1);
+  });
+
+  test("the env token wins; gh auth token is the fallback; neither means anonymous", async () => {
+    const stub = stubFetch(200);
+    await apiGet("/x", { env: { GH_TOKEN: "env" }, ghToken: () => "gh", fetch: stub.fetch });
+    await apiGet("/x", { env: {}, ghToken: () => "gh", fetch: stub.fetch });
+    await apiGet("/x", { env: {}, ghToken: () => undefined, fetch: stub.fetch });
+    expect(stub.calls.map((call) => call.auth)).toEqual(["Bearer env", "Bearer gh", null]);
+  });
+
+  test("a rate-limited source is reported as partial, not unreadable", async () => {
+    const root = tempRoot();
+    const path = lockFile(root, {
+      x: { source: "o/r", skillPath: "skills/x/SKILL.md", skillFolderHash: "a" },
+      y: { source: "o/s", skillPath: "skills/y/SKILL.md", skillFolderHash: "b" },
+    });
+
+    const { report, errors, rateLimited } = await checkLock(path, {
+      repoTree: async (source) =>
+        source === "o/r" ? RATE_LIMITED : { tree: [{ path: "skills/y", sha: "b", type: "tree" }] },
+    });
+
+    expect(rateLimited).toEqual(["o/r"]);
+    expect(errors).toHaveLength(1);
+    expect(errors[0]).toContain("o/r: rate-limited; totals partial");
+    expect(errors[0]).not.toContain("could not read");
+    const [text] = render(report, errors, [], rateLimited);
+    expect(text).toContain("**Rate-limited; totals partial:** 1 sources were never read.");
+  });
+
+  test("a rate-limited profile HEAD is unknown, not behind", async () => {
+    const root = tempRoot();
+    const file = join(root, "skills", "botanist", "SKILL.md");
+    mkdirSync(dirname(file), { recursive: true });
+    writeFileSync(file, "---\nmetadata:\n  source-repo: k/s\n  source-commit: 896ed6ed\n---\n", "utf8");
+
+    const rows = await checkProfiles(root, {
+      env: {},
+      ghToken: () => undefined,
+      fetch: stubFetch(429, { "x-ratelimit-remaining": "0" }).fetch,
+    });
+
+    expect(rows).toEqual([{ repo: "k/s", commits: [["896ed6ed", 1]], head: null, rateLimited: true }]);
+    const [text, drift] = render(new Map(), [], rows);
+    expect(drift).toBe(0);
+    expect(text).toContain("HEAD unknown (rate-limited; totals partial)");
+    expect(text).toContain("**Rate-limited; totals partial:**");
   });
 });
 
