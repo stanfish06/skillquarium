@@ -5943,5 +5943,30 @@
       "find": "# running discover without it. The non-dry-run mode creates API tokens in\n# Astro Cloud, which is a sensitive action that requires explicit approval.\n",
       "replace": "# running discover without it. The non-dry-run mode writes every discovered\n# instance to config (project-shared .astro/config.yaml inside a project, which is\n# committed). Discovered Astro instances use astro_pat auth: no token is created\n# or stored on disk; it is resolved from the `astro login` session at request time.\n"
     }
+  ],
+  "twilio-agent-connect": [
+    {
+      "id": "skill-health-980-tac-quickstart",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "https://www.twilio.com/docs/platform/tac/quickstart",
+      "replace": "https://www.twilio.com/docs/conversations/agent-connect/quickstart"
+    },
+    {
+      "id": "skill-health-980-tac-overview",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "https://www.twilio.com/docs/platform/tac/overview",
+      "replace": "https://www.twilio.com/docs/conversations/agent-connect/overview"
+    }
+  ],
+  "twilio-isv-sms-best-practices": [
+    {
+      "id": "skill-health-980-onboarding-isv",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "a2p-10dlc/onboarding-is)",
+      "replace": "a2p-10dlc/onboarding-isv)"
+    }
   ]
 }

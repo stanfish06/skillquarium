@@ -430,8 +430,8 @@ const systemPrompt = SYSTEM_INSTRUCTIONS + `\n\n${memoryContext}`;
 
 ## Documentation Links
 
-- **Quickstart Guide**: https://www.twilio.com/docs/platform/tac/quickstart
-- **Overview Documentation**: https://www.twilio.com/docs/platform/tac/overview
+- **Quickstart Guide**: https://www.twilio.com/docs/conversations/agent-connect/quickstart
+- **Overview Documentation**: https://www.twilio.com/docs/conversations/agent-connect/overview
 - **Python SDK**: https://github.com/twilio/twilio-agent-connect-python
 - **TypeScript SDK**: https://github.com/twilio/twilio-agent-connect-typescript
 - **AWS Integration**: https://github.com/twilio/twilio-agent-connect-aws
