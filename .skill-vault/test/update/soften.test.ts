@@ -356,13 +356,9 @@ describe("soften skill descriptions", () => {
   });
 
   // The Python already softened this tree; a port that disagreed would report files to change.
-  // PENDING holds the descriptions the rules added for #1392 now rewrite; update-skills.yml's
-  // soften step rewrites them on the next sync, after which the list is empty.
   test("the tracked tree has no coercive descriptions left", () => {
-    const PENDING = ["skills/figma-design-to-code/SKILL.md", "skills/using-superpowers/SKILL.md"];
     const result = run(REPO_ROOT, true);
     expect(result.err.filter((line) => line.includes("unchanged"))).toEqual([]);
-    const paths = result.out.filter((line) => line.startsWith("would soften skills/"));
-    for (const line of paths) expect(PENDING).toContain(line.slice("would soften ".length));
+    expect(result.out[result.out.length - 1]).toBe("would soften 0 skill descriptions");
   });
 });

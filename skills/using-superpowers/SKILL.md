@@ -1,7 +1,6 @@
 ---
 name: using-superpowers
-description: Use when discovering which skill applies — establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
-
+description: Use when discovering which skill applies — establishes how to find and use skills
 ---
 
 <SUBAGENT-STOP>
