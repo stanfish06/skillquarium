@@ -283,8 +283,8 @@ IERC20(usdt).transferFrom(msg.sender, address(this), amount);
 // No return value check! USDT doesn't return bool
 ```
 
-**Risk:** Silent failures on USDT transfers
-**Exploit:** User appears to deposit, but no tokens moved
+**Risk:** USDT's `transferFrom` returns no data, so this typed `IERC20` call reverts when the compiler decodes the expected `bool` return value: USDT deposits fail outright (denial of service), they are not silently skipped. Silent failure is a different bug: ignoring a `false` return from a standard token, or a low-level `call` whose success flag and optional return data go unchecked.
+**Exploit:** Only those silent-failure paths let a user appear to deposit while no tokens moved (accounting is credited after an unsuccessful transfer). For this typed call, the impact is that the vault cannot accept USDT at all.
 **Fix:** Use OpenZeppelin SafeERC20 wrapper
 
 ---

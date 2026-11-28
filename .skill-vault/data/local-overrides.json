@@ -6018,5 +6018,14 @@
       "find": "](fixtures-hooks.md#authentication-patterns)",
       "replace": "](../core/fixtures-hooks.md#authentication-patterns)"
     }
+  ],
+  "token-integration-analyzer": [
+    {
+      "id": "skill-health-1210-typed-no-return-revert",
+      "issue": 1210,
+      "source": "trailofbits/skills",
+      "find": "**Risk:** Silent failures on USDT transfers\n**Exploit:** User appears to deposit, but no tokens moved\n",
+      "replace": "**Risk:** USDT's `transferFrom` returns no data, so this typed `IERC20` call reverts when the compiler decodes the expected `bool` return value: USDT deposits fail outright (denial of service), they are not silently skipped. Silent failure is a different bug: ignoring a `false` return from a standard token, or a low-level `call` whose success flag and optional return data go unchecked.\n**Exploit:** Only those silent-failure paths let a user appear to deposit while no tokens moved (accounting is credited after an unsuccessful transfer). For this typed call, the impact is that the vault cannot accept USDT at all.\n"
+    }
   ]
 }
