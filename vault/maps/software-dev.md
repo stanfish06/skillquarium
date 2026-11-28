@@ -171,7 +171,7 @@ created: 2026-06-13
 - [use-modern-go](../notes/software-dev/use-modern-go.md) — Use the Modern Go Guidelines CLI whenever writing, modifying, fixing, or refactoring Go code
 - [using-agent-skills](../notes/software-dev/using-agent-skills.md) — Discovers and invokes agent skills. Use when starting a session or when you need to discover which skill applies to the current task
 - [using-git-worktrees](../notes/software-dev/using-git-worktrees.md) — Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git...
-- [using-superpowers](../notes/software-dev/using-superpowers.md) — Use when discovering which skill applies — establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
+- [using-superpowers](../notes/software-dev/using-superpowers.md) — Use when discovering which skill applies — establishes how to find and use skills
 - [validation](../notes/software-dev/validation.md) — Use when Codex is already in the validation phase of a security scan or the user explicitly asks to determine whether one or more candidate security findings are valid
 - [verification](../notes/software-dev/verification.md) — Full-story verification — infers what the user is building, then verifies the complete flow end-to-end: browser → API → data → response
 - [verification-before-completion](../notes/software-dev/verification-before-completion.md) — Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success...

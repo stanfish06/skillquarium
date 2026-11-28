@@ -66,7 +66,7 @@ created: 2026-06-13
 - [emil-review-animations](../notes/web-automation-frontend/emil-review-animations.md) — Reviews animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy
 - [figma-code-connect](../notes/web-automation-frontend/figma-code-connect.md) — Creates and maintains Figma Code Connect template files that map Figma components to code snippets
 - [figma-create-new-file](../notes/web-automation-frontend/figma-create-new-file.md) — Load this skill before every `create_new_file` tool call
-- [figma-design-to-code](../notes/web-automation-frontend/figma-design-to-code.md) — You MUST invoke this skill BEFORE calling the `get_design_context` Figma MCP tool
+- [figma-design-to-code](../notes/web-automation-frontend/figma-design-to-code.md) — Load this skill before calling the `get_design_context` Figma MCP tool
 - [figma-generate-design](../notes/web-automation-frontend/figma-generate-design.md) — Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma
 - [figma-generate-diagram](../notes/web-automation-frontend/figma-generate-diagram.md) — Load this skill BEFORE every `generate_diagram` tool call
 - [figma-generate-library](../notes/web-automation-frontend/figma-generate-library.md) — Build or update a professional-grade design system in Figma from a codebase

@@ -10987,7 +10987,7 @@
    "id": "figma-design-to-code",
    "type": "Skill",
    "label": "figma-design-to-code",
-   "description": "You MUST invoke this skill BEFORE calling the `get_design_context` Figma MCP tool. You MUST trigger this skill whenever the user wants to implement, build, port, or code up a Figma design as code. Example prompts (not exhaustive) are 'implement this Figma design', 'build this screen from Figma', 'turn this Figma into code', 'design to code'. This skill provides critical instructions and steps to the agent on how to correctly implement Figma designs in code and must NOT be skipped.",
+   "description": "Load this skill before calling the `get_design_context` Figma MCP tool. Use whenever the user wants to implement, build, port, or code up a Figma design as code. Example prompts (not exhaustive) are 'implement this Figma design', 'build this screen from Figma', 'turn this Figma into code', 'design to code'. This skill provides critical instructions and steps to the agent on how to correctly implement Figma designs in code.",
    "source": "skills/figma-design-to-code/SKILL.md",
    "aliases": [
     "figma design to code"
@@ -32534,7 +32534,7 @@
    "id": "using-superpowers",
    "type": "Skill",
    "label": "using-superpowers",
-   "description": "Use when discovering which skill applies — establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
+   "description": "Use when discovering which skill applies — establishes how to find and use skills",
    "source": "skills/using-superpowers/SKILL.md",
    "aliases": [
     "using superpowers"
