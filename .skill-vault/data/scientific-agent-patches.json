@@ -98,5 +98,12 @@
       "find": "  - PM₂.₅ — 3-year average of annual 98th percentile of 24-hr concentrations per site; verify 2012\n    annual form (12 µg m⁻³) vs 2006 24-hr form (35 µg m⁻³) drives attainment.\n",
       "replace": "  - PM₂.₅ annual (primary) — 9.0 µg m⁻³ (2024 reconsideration); design value is the annual mean\n    averaged over 3 years.\n  - PM₂.₅ 24-hr — 35 µg m⁻³; design value is the annual 98th percentile of 24-hr concentrations\n    averaged over 3 years. Check which form drives attainment per site against EPA's current\n    NAAQS table.\n"
     }
+  ],
+  "tissue-engineer": [
+    {
+      "id": "hctp-361-all-four-criteria",
+      "find": "  - FDA 21 CFR Part 1271 (HCT/P); 361 vs 351 minimal manipulation/homologous use determines\n    pathway; most engineered cell–scaffold products need IND/IDE or BLA/PMA logic.\n",
+      "replace": "  - FDA 21 CFR Part 1271 (HCT/P): section 361-only regulation requires all four 1271.10(a)\n    criteria — (1) minimal manipulation; (2) homologous use only; (3) manufacture not combined\n    with another article (except water, crystalloids, or a sterilizing, preserving, or storage\n    agent raising no new clinical safety concerns); (4) no systemic effect and no dependence on\n    the metabolic activity of living cells for primary function, or, if so, autologous use,\n    allogeneic use in a first- or second-degree blood relative, or reproductive use. Failing any\n    criterion requires product-specific drug/device/biologic (FD&C Act and/or PHS Act 351) and\n    premarket-pathway analysis; most engineered cell–scaffold products need IND/IDE or BLA/PMA logic.\n"
+    }
   ]
 }
