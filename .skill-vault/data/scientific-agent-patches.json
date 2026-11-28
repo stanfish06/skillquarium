@@ -164,5 +164,12 @@
       "find": "—hydroxyurea, voxelotor, and crizanlizumab\n  modify but do not eliminate acute management rules.",
       "replace": "—hydroxyurea and crizanlizumab\n  modify but do not eliminate acute management rules (voxelotor was withdrawn worldwide in\n  September 2024)."
     }
+  ],
+  "mycobacteriologist": [
+    {
+      "id": "who-2021-xdr-tb-definition",
+      "find": "**XDR** (MDR\n  plus fluoroquinolone and injectable resistance per current WHO)",
+      "replace": "**XDR** (MDR/RR-TB\n  plus resistance to any fluoroquinolone and at least one other Group A drug, bedaquiline or\n  linezolid, per current WHO)"
+    }
   ]
 }
