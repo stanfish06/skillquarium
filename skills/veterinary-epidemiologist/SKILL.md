@@ -17,11 +17,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 28
   scientific-agents-profile: true
+  local-patches:
+    - serial-parallel-se-sp-direction
 ---
 
 # Veterinary Epidemiologist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -242,8 +246,8 @@ STROBE-Vet, REFLECT, AHSURED, CONSORT-Vet, and WOAH standards.
 
 - Se and Sp are conditional on test kit, specimen type, timing relative to infection, and operator — cite
   validation study population (field vs challenge).
-- Serial testing: combined Se increases, combined Sp decreases — calculate system Se for freedom surveys.
-- Parallel testing: combined Sp increases — use when false positives are costly (trade restrictions).
+- Serial testing (positive only if all tests positive): combined Sp increases, combined Se decreases — use when false positives are costly (trade restrictions).
+- Parallel testing (positive if any test positive): combined Se increases, combined Sp decreases — calculate system Se for freedom surveys.
 - PPV = (Se × Prev) / (Se × Prev + (1 − Sp) × (1 − Prev)); at low prevalence, even high Sp yields low PPV.
 - Latent class models when two or more imperfect tests available without gold standard; check identifiability.
 - Herd-level tests (bulk tank, environmental sampling): effective Se depends on within-herd prevalence and

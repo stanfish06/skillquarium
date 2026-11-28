@@ -71,6 +71,11 @@
       "id": "no-stawave2-for-slamming-damage",
       "find": "- **Slamming damage reports:** reduce speed in head seas; bulb immersion; flare redesign;\n  check STAW-2 or class slamming pressure on local structure (interface to structures).",
       "replace": "- **Slamming damage reports:** reduce speed in head seas; bulb immersion; flare redesign;\n  check applicable class-rule slamming pressures on local structure with the structural engineer.\n  STAWAVE-2 corrects speed-trial added resistance in waves; it does not assess local slamming\n  pressure ([ITTC Appendix G.2](https://www.ittc.info/media/11972/75-04-01-011.pdf))."
+    },
+    {
+      "id": "msc337-onboard-noise-urn-mepc906",
+      "find": "- **Noise and vibration (MSC.337(91)):** underwater radiated noise for naval/commercial criteria\n  where contracted — interfaces with acoustical engineer for machinery mounting.",
+      "replace": "- **Noise and vibration:** onboard noise in work, navigation, accommodation, and service spaces\n  and crew exposure per MSC.337(91) (Code on Noise Levels on Board Ships); underwater radiated\n  noise per IMO MEPC.1/Circ.906/Rev.1 guidelines plus the applicable contract, class, flag, or\n  naval criteria — interfaces with acoustical engineer for machinery mounting."
     }
   ],
   "microelectronics-engineer": [
@@ -90,6 +95,88 @@
       "id": "sech2-time-bandwidth-product",
       "find": "- Ultrafast: group velocity dispersion (GVD) and third-order dispersion (TOD) chirp pulses; mode-locking\n  (Kerr lens, SESAM, NPR) produces pulse train with repetition rate f_rep = c/(2L). Time-bandwidth product\n  ΔtΔν ≈ 0.44 for transform-limited sech²; chirped pulses exceed this until compressed.",
       "replace": "- Ultrafast: group velocity dispersion (GVD) and third-order dispersion (TOD) chirp pulses; mode-locking\n  (Kerr lens, SESAM, NPR) produces pulse train with repetition rate f_rep = c/(2L). Time-bandwidth product\n  ΔtΔν ≈ 0.315 for transform-limited sech² intensity pulses (≈ 0.441 for Gaussian); chirped\n  pulses exceed the applicable transform limit until compressed."
+    }
+  ],
+  "air-quality-scientist": [
+    {
+      "id": "pm25-annual-vs-24hr-design-values",
+      "find": "  - PM₂.₅ — 3-year average of annual 98th percentile of 24-hr concentrations per site; verify 2012\n    annual form (12 µg m⁻³) vs 2006 24-hr form (35 µg m⁻³) drives attainment.\n",
+      "replace": "  - PM₂.₅ annual (primary) — 9.0 µg m⁻³ (2024 reconsideration); design value is the annual mean\n    averaged over 3 years.\n  - PM₂.₅ 24-hr — 35 µg m⁻³; design value is the annual 98th percentile of 24-hr concentrations\n    averaged over 3 years. Check which form drives attainment per site against EPA's current\n    NAAQS table.\n"
+    }
+  ],
+  "tissue-engineer": [
+    {
+      "id": "hctp-361-all-four-criteria",
+      "find": "  - FDA 21 CFR Part 1271 (HCT/P); 361 vs 351 minimal manipulation/homologous use determines\n    pathway; most engineered cell–scaffold products need IND/IDE or BLA/PMA logic.\n",
+      "replace": "  - FDA 21 CFR Part 1271 (HCT/P): section 361-only regulation requires all four 1271.10(a)\n    criteria — (1) minimal manipulation; (2) homologous use only; (3) manufacture not combined\n    with another article (except water, crystalloids, or a sterilizing, preserving, or storage\n    agent raising no new clinical safety concerns); (4) no systemic effect and no dependence on\n    the metabolic activity of living cells for primary function, or, if so, autologous use,\n    allogeneic use in a first- or second-degree blood relative, or reproductive use. Failing any\n    criterion requires product-specific drug/device/biologic (FD&C Act and/or PHS Act 351) and\n    premarket-pathway analysis; most engineered cell–scaffold products need IND/IDE or BLA/PMA logic.\n"
+    }
+  ],
+  "veterinary-epidemiologist": [
+    {
+      "id": "serial-parallel-se-sp-direction",
+      "find": "- Serial testing: combined Se increases, combined Sp decreases — calculate system Se for freedom surveys.\n- Parallel testing: combined Sp increases — use when false positives are costly (trade restrictions).\n",
+      "replace": "- Serial testing (positive only if all tests positive): combined Sp increases, combined Se decreases — use when false positives are costly (trade restrictions).\n- Parallel testing (positive if any test positive): combined Se increases, combined Sp decreases — calculate system Se for freedom surveys.\n"
+    }
+  ],
+  "accelerator-physicist": [
+    {
+      "id": "fast-ion-instability-electron-rings",
+      "find": "- **Ion effects** — fast ion instability in positron rings; clearing electrodes and gap voltage scans.",
+      "replace": "- **Ion effects** — fast ion instability in electron rings (electron-cloud instability is the\n  positron-ring counterpart); clearing electrodes and gap voltage scans."
+    }
+  ],
+  "acoustics-physicist": [
+    {
+      "id": "no-astm-e2611-array-phase-matching",
+      "find": "- **ASTM E2611 for array microphones:** Phase match across array for beamforming validity.",
+      "replace": "- **Array microphones:** Phase match across array for beamforming validity. (ASTM E2611 is an\n  impedance-tube transfer-matrix transmission-loss method, not an array phase-matching standard.)"
+    }
+  ],
+  "immunotherapy-scientist": [
+    {
+      "id": "car-t-rems-eliminated-regulatory",
+      "find": "  FACT IEC certification for immune effector cell programs; REMS for approved CAR-T products.",
+      "replace": "  FACT IEC certification for immune effector cell programs; FDA eliminated the REMS for approved\n  autologous CD19/BCMA CAR-T products (Abecma, Breyanzi, Carvykti, Kymriah, Tecartus, Yescarta) in\n  June 2025 — follow current product labeling, 21 CFR 600.80 adverse-event reporting, and 15-year\n  postmarketing studies; verify current FDA labeling for the specific product."
+    },
+    {
+      "id": "car-t-rems-eliminated-ethics",
+      "find": "HIPAA/GCP for clinical data; FDA REMS and JACIE/FACT IEC accreditation\n  for CAR-T programs;",
+      "replace": "HIPAA/GCP for clinical data; current FDA product labeling and\n  postmarketing requirements (CAR-T REMS eliminated June 2025 for approved autologous CD19/BCMA\n  products) and JACIE/FACT IEC accreditation for CAR-T programs;"
+    }
+  ],
+  "hydrologist": [
+    {
+      "id": "nwm-operational-version-v3-1",
+      "find": "know version (v2.1) and forcing (NWM retrospective\n  vs short-range);",
+      "replace": "know version (v3.1 operational from August 2026;\n  confirm against current NOAA configuration and forcing documentation) and forcing (NWM\n  retrospective vs short-range);"
+    }
+  ],
+  "hepatologist": [
+    {
+      "id": "obeticholic-acid-pbc-withdrawn-us",
+      "find": "  second-line obeticholic acid or fibrates per response criteria (Paris II); monitor for pruritus\n",
+      "replace": "  second-line fibrates per response criteria (Paris II) (obeticholic acid's US PBC accelerated\n  approval was withdrawn in November 2025; check current local approvals); monitor for pruritus\n"
+    }
+  ],
+  "hematologist": [
+    {
+      "id": "voxelotor-withdrawn",
+      "find": "—hydroxyurea, voxelotor, and crizanlizumab\n  modify but do not eliminate acute management rules.",
+      "replace": "—hydroxyurea and crizanlizumab\n  modify but do not eliminate acute management rules (voxelotor was withdrawn worldwide in\n  September 2024)."
+    }
+  ],
+  "mycobacteriologist": [
+    {
+      "id": "who-2021-xdr-tb-definition",
+      "find": "**XDR** (MDR\n  plus fluoroquinolone and injectable resistance per current WHO)",
+      "replace": "**XDR** (MDR/RR-TB\n  plus resistance to any fluoroquinolone and at least one other Group A drug, bedaquiline or\n  linezolid, per current WHO)"
+    }
+  ],
+  "nuclear-medicine-scientist": [
+    {
+      "id": "medical-event-10cfr35-3045-thresholds",
+      "find": "- Incident reporting: misadministration with >20% activity error or wrong radiopharmaceutical — notify\n  radiation safety officer and regulatory authority per threshold.",
+      "replace": "- Incident reporting: apply the full 10 CFR 35.3045 medical-event criteria — a ≥20% dose/dosage\n  deviation counts only when the dose difference also exceeds 0.05 Sv effective dose equivalent,\n  0.5 Sv to an organ or tissue, or 0.5 Sv shallow dose equivalent to the skin, and a wrong\n  radioactive drug only when the resulting dose exceeds those thresholds; separate branches cover\n  fractionated dose, wrong route, wrong patient, wrong treatment mode, leaking sources, and\n  permanent implants. Agreement State rules or license conditions may add requirements; notify\n  the radiation safety officer and regulator as required."
     }
   ]
 }

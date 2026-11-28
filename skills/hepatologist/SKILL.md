@@ -16,11 +16,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - obeticholic-acid-pbc-withdrawn-us
 ---
 
 # Hepatologist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -205,7 +209,8 @@ debug preanalytic artifacts, and report management decisions with calibrated cer
   intervention; screen for HCC and CVD concurrently; do not attribute all steatosis to alcohol without
   AUDIT and history.
 - **PBC:** AMA positive in ~95%; ALP and GGT disproportionately elevated; UDCA 13–15 mg/kg first-line;
-  second-line obeticholic acid or fibrates per response criteria (Paris II); monitor for pruritus
+  second-line fibrates per response criteria (Paris II) (obeticholic acid's US PBC accelerated
+  approval was withdrawn in November 2025; check current local approvals); monitor for pruritus
   (bile acid sequestrants, rifampin ladder).
 - **PSC:** MRCP diagnostic; IBD association (~70%); dominant stricture requires ERCP with brushings
   for cholangiocarcinoma; UDCA high-dose not beneficial—manage complications and transplant referral

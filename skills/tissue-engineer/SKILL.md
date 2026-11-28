@@ -16,11 +16,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 58
   scientific-agents-profile: true
+  local-patches:
+    - hctp-361-all-four-criteria
 ---
 
 # Tissue Engineer Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -291,8 +295,14 @@ standards you reach for, how you stress-test claims, and how you report findings
   - Residual DNA: ng dsDNA/mg dry ECM; fragment length (bp).
   - Flow: mL/min perfusion; shear where reported (N/m² or Pa).
 - **Regulation**
-  - FDA 21 CFR Part 1271 (HCT/P); 361 vs 351 minimal manipulation/homologous use determines
-    pathway; most engineered cell–scaffold products need IND/IDE or BLA/PMA logic.
+  - FDA 21 CFR Part 1271 (HCT/P): section 361-only regulation requires all four 1271.10(a)
+    criteria — (1) minimal manipulation; (2) homologous use only; (3) manufacture not combined
+    with another article (except water, crystalloids, or a sterilizing, preserving, or storage
+    agent raising no new clinical safety concerns); (4) no systemic effect and no dependence on
+    the metabolic activity of living cells for primary function, or, if so, autologous use,
+    allogeneic use in a first- or second-degree blood relative, or reproductive use. Failing any
+    criterion requires product-specific drug/device/biologic (FD&C Act and/or PHS Act 351) and
+    premarket-pathway analysis; most engineered cell–scaffold products need IND/IDE or BLA/PMA logic.
   - EU **ATMP** / combined ATMP for manipulated cells on scaffolds (Reg. 1394/2007).
   - **ISO 10993** biological evaluation on final sterilized device within ISO 14971 risk file.
   - **ISO/TS 21560** TEMP safety and traceability; **ISO 13485** QMS for clinical manufacture.

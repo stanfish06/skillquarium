@@ -16,11 +16,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - voxelotor-withdrawn
 ---
 
 # Hematologist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -244,8 +248,9 @@ with the calibrated certainty expected of a senior academic hematologist.
 
 - **Sickle cell disease:** HbS polymerization drives vaso-occlusion; distinguish acute chest syndrome
   (new infiltrate + respiratory symptoms) from pneumonia; transfusion goals differ for stroke prevention
-  (TCD velocity), priapism, and preoperative optimization—hydroxyurea, voxelotor, and crizanlizumab
-  modify but do not eliminate acute management rules.
+  (TCD velocity), priapism, and preoperative optimization—hydroxyurea and crizanlizumab
+  modify but do not eliminate acute management rules (voxelotor was withdrawn worldwide in
+  September 2024).
 - **Thalassemia:** microcytosis with disproportionately low MCV vs iron deficiency; Hb electrophoresis
   pattern (HbA₂ elevation in β-thal trait); iron overload from transfusion requires T2* MRI and
   chelation monitoring—not ferritin alone.

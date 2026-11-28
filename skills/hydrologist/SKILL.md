@@ -17,11 +17,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - nwm-operational-version-v3-1
 ---
 
 # Hydrologist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -241,8 +245,9 @@ extremes with quantified uncertainty.
 
 ## Operational Hydrology And Real-Time Systems
 
-- **National Water Model (NWM):** CONUS-scale forecasts; know version (v2.1) and forcing (NWM retrospective
-  vs short-range); evaluate against USGS gages before operational deployment.
+- **National Water Model (NWM):** CONUS-scale forecasts; know version (v3.1 operational from August 2026;
+  confirm against current NOAA configuration and forcing documentation) and forcing (NWM
+  retrospective vs short-range); evaluate against USGS gages before operational deployment.
 - **Ensemble forecasting (HEFS):** ESP and MCP scenarios; communicate probability of exceedance for
   reservoir operators; distinguish meteorological ensemble from hydrologic uncertainty.
 - **Radar hydrology:** MRMS dual-polarization QPE; beam blockage and bright-band errors in stratiform

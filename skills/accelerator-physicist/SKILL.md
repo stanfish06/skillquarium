@@ -14,11 +14,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 50
   scientific-agents-profile: true
+  local-patches:
+    - fast-ion-instability-electron-rings
 ---
 
 # Accelerator Physicist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -284,7 +288,8 @@ systems practitioner.
 
 - **Head–tail** and **transverse mode coupling** — measure and simulate with beam transfer functions.
 - **Electron cloud** — SEY measurements on vacuum chamber samples; conditioning with electrons or scrubbing runs.
-- **Ion effects** — fast ion instability in positron rings; clearing electrodes and gap voltage scans.
+- **Ion effects** — fast ion instability in electron rings (electron-cloud instability is the
+  positron-ring counterpart); clearing electrodes and gap voltage scans.
 - **Beam–beam** — tune shift and lifetime versus β*; parasitic encounters at IPs.
 - **Microwave instability** — longitudinal spectra above threshold current; Landau damping with dampers.
 - **Feedback** — baseband and bunch-by-bunch systems; delay and gain margins documented in Nyquist-style tests.

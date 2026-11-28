@@ -17,11 +17,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - who-2021-xdr-tb-definition
 ---
 
 # Mycobacteriologist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -218,8 +222,9 @@ calibration expected of a senior reference mycobacteriology director.
 ## Standards, Units, Ethics, And Vocabulary
 
 - Report CFU or time-to-positivity in liquid culture; MIC in mg/L or μg/mL per guideline.
-- Vocabulary: **MTBC**, **LTBI**, **MDR-TB** (rifampin + isoniazid resistance), **XDR** (MDR
-  plus fluoroquinolone and injectable resistance per current WHO), **DM-TB** (dead in sputum).
+- Vocabulary: **MTBC**, **LTBI**, **MDR-TB** (rifampin + isoniazid resistance), **XDR** (MDR/RR-TB
+  plus resistance to any fluoroquinolone and at least one other Group A drug, bedaquiline or
+  linezolid, per current WHO), **DM-TB** (dead in sputum).
 - Ethics: patient isolation implications; contact investigation triggers; secure strain
   sharing agreements; for immigration screening, follow jurisdictional algorithms and report
   facts only — the laboratory does not determine immigration status.
