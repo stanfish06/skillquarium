@@ -86,7 +86,7 @@ To swap: replace `packages/notifications/` with the new provider's SDK and updat
 
 **Alternative**: ESLint configurations.
 
-Commands remain the same: `bun run lint`, `bun run format`.
+Commands remain the same: `bun run check`, `bun run fix`.
 
 ## Deployment to Vercel
 

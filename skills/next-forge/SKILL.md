@@ -187,7 +187,7 @@ After changing `packages/database/prisma/schema.prisma`:
 bun run migrate
 ```
 
-This runs Prisma format, generate, and db push in sequence.
+This runs Prisma format, generate, and `migrate dev` in sequence, which creates and applies a migration (migration history). To sync the schema without creating a migration, run `bun run db:push` instead.
 
 ### Adding shadcn/ui Components
 
@@ -208,8 +208,8 @@ Create a new directory in `/packages/` with a `package.json` using the `@repo/<n
 ### Linting and Formatting
 
 ```bash
-bun run lint                 # Check code style (Ultracite/Biome)
-bun run format               # Fix code style
+bun run check                # Check code style (Ultracite/Biome)
+bun run fix                  # Fix code style
 ```
 
 ### Testing

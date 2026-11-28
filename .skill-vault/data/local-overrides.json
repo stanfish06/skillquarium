@@ -6027,5 +6027,69 @@
       "find": "**Risk:** Silent failures on USDT transfers\n**Exploit:** User appears to deposit, but no tokens moved\n",
       "replace": "**Risk:** USDT's `transferFrom` returns no data, so this typed `IERC20` call reverts when the compiler decodes the expected `bool` return value: USDT deposits fail outright (denial of service), they are not silently skipped. Silent failure is a different bug: ignoring a `false` return from a standard token, or a low-level `call` whose success flag and optional return data go unchecked.\n**Exploit:** Only those silent-failure paths let a user appear to deposit while no tokens moved (accounting is credited after an unsuccessful transfer). For this typed call, the impact is that the vault cannot accept USDT at all.\n"
     }
+  ],
+  "next-forge": [
+    {
+      "id": "skill-health-1270-skill-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "find": "This runs Prisma format, generate, and db push in sequence.\n",
+      "replace": "This runs Prisma format, generate, and `migrate dev` in sequence, which creates and applies a migration (migration history). To sync the schema without creating a migration, run `bun run db:push` instead.\n"
+    },
+    {
+      "id": "skill-health-1270-skill-check-fix",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "find": "bun run lint                 # Check code style (Ultracite/Biome)\nbun run format               # Fix code style\n",
+      "replace": "bun run check                # Check code style (Ultracite/Biome)\nbun run fix                  # Fix code style\n"
+    },
+    {
+      "id": "skill-health-1270-arch-check-fix",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/architecture.md",
+      "find": "| `bun run lint` | Check code style (Ultracite/Biome) |\n| `bun run format` | Fix code style |\n",
+      "replace": "| `bun run check` | Check code style (Ultracite/Biome) |\n| `bun run fix` | Fix code style |\n"
+    },
+    {
+      "id": "skill-health-1270-arch-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/architecture.md",
+      "find": "| `bun run migrate` | Push database schema (format, generate, db push) |\n",
+      "replace": "| `bun run migrate` | Create and apply a migration (format, generate, `prisma migrate dev`) |\n| `bun run migrate:deploy` | Apply pending migrations (generate, `prisma migrate deploy`) |\n| `bun run db:push` | Push the schema without migration history (format, generate, `prisma db push`) |\n"
+    },
+    {
+      "id": "skill-health-1270-arch-release",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/architecture.md",
+      "find": "| `bun run changeset` | Manage changesets for releases |\n| `bun run release` | Publish using changesets |\n",
+      "replace": "| `bun run release` | Publish the package with `npm publish` |\n"
+    },
+    {
+      "id": "skill-health-1270-setup-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/setup.md",
+      "find": "After setting `DATABASE_URL`, push the schema to the database:\n\n```bash\nbun run migrate\n```\n\nThis runs three Prisma commands in sequence:\n1. `prisma format` — formats the schema file\n2. `prisma generate` — generates the Prisma client\n3. `prisma db push` — pushes the schema to the database\n",
+      "replace": "After setting `DATABASE_URL`, create and apply the database migrations:\n\n```bash\nbun run migrate\n```\n\nThis runs three Prisma commands in sequence:\n1. `prisma format` — formats the schema file\n2. `prisma generate` — generates the Prisma client\n3. `prisma migrate dev` — creates a migration from schema changes and applies it to the database\n\nTo push the schema without creating migration history (for example while prototyping), run `bun run db:push` instead.\n"
+    },
+    {
+      "id": "skill-health-1270-packages-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/packages.md",
+      "find": "**Migrations**: `bun run migrate` (format → generate → db push)\n",
+      "replace": "**Migrations**: `bun run migrate` (format → generate → migrate dev); `bun run db:push` pushes the schema without migration history\n"
+    },
+    {
+      "id": "skill-health-1270-customization-check-fix",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/customization.md",
+      "find": "Commands remain the same: `bun run lint`, `bun run format`.\n",
+      "replace": "Commands remain the same: `bun run check`, `bun run fix`.\n"
+    }
   ]
 }

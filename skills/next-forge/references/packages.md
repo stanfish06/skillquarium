@@ -31,7 +31,7 @@ const users = await database.user.findMany();
 ```
 
 **Schema**: `packages/database/prisma/schema.prisma`
-**Migrations**: `bun run migrate` (format → generate → db push)
+**Migrations**: `bun run migrate` (format → generate → migrate dev); `bun run db:push` pushes the schema without migration history
 
 **Swappable to**: Drizzle, PlanetScale, Supabase, Turso, EdgeDB, Prisma Postgres.
 
