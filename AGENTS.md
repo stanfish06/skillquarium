@@ -222,11 +222,15 @@ Keep fixes across the next upstream sync:
 Run from the repository root after the edit:
 
 ```bash
-git diff --check
+git diff --check -- ':!skills/'
 ./skillquarium overrides --check
 ./skillquarium build
 ./skillquarium validate
 ```
+
+`git diff --check` excludes `skills/` because skill markdown often ends lines with two
+trailing spaces on purpose: that is a Markdown hard line break. Keep those spaces on lines you
+edit rather than reformatting around them, and add no other trailing whitespace.
 
 Commit any navigation changes produced by `build`; do not edit generated `vault/` files by
 hand. Validation must report zero violations. Its orphan-rate and stale-vector warnings
