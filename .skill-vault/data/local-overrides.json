@@ -5753,5 +5753,42 @@
       "find": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed)\n",
       "replace": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed) (deprecation notice: [grafana/mimir#17112](https://github.com/grafana/mimir/issues/17112))\n"
     }
+  ],
+  "pulumi-terraform-to-pulumi": [
+    {
+      "id": "skill-health-1375-plugins-json",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "such as `[{\"name\":\"aws\",\"version\":\"7.12.0\"}]`.",
+      "replace": "such as `[{\"name\":\"aws\",\"version\":\"7.55.0\"}]`."
+    },
+    {
+      "id": "skill-health-1375-npm",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "npm install @pulumi/aws@7.12.0",
+      "replace": "npm install @pulumi/aws@7.55.0"
+    },
+    {
+      "id": "skill-health-1375-pip",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "pip install pulumi_aws==7.12.0",
+      "replace": "pip install pulumi_aws==7.55.0"
+    },
+    {
+      "id": "skill-health-1375-go",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "go get github.com/pulumi/pulumi-aws/sdk/v7@v7.12.0",
+      "replace": "go get github.com/pulumi/pulumi-aws/sdk/v7@v7.55.0"
+    },
+    {
+      "id": "skill-health-1375-dotnet",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "dotnet add package Pulumi.Aws --version 7.12.0",
+      "replace": "dotnet add package Pulumi.Aws --version 7.55.0"
+    }
   ]
 }
