@@ -138,5 +138,12 @@
       "find": "HIPAA/GCP for clinical data; FDA REMS and JACIE/FACT IEC accreditation\n  for CAR-T programs;",
       "replace": "HIPAA/GCP for clinical data; current FDA product labeling and\n  postmarketing requirements (CAR-T REMS eliminated June 2025 for approved autologous CD19/BCMA\n  products) and JACIE/FACT IEC accreditation for CAR-T programs;"
     }
+  ],
+  "hydrologist": [
+    {
+      "id": "nwm-operational-version-v3-1",
+      "find": "know version (v2.1) and forcing (NWM retrospective\n  vs short-range);",
+      "replace": "know version (v3.1 operational from August 2026;\n  confirm against current NOAA configuration and forcing documentation) and forcing (NWM\n  retrospective vs short-range);"
+    }
   ]
 }
