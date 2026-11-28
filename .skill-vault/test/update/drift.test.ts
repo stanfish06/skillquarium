@@ -73,6 +73,60 @@ describe("lock classification", () => {
     expect(report.get("o/r")?.unreachable).toEqual(["renamed"]);
   });
 
+  test("skill folders upstream beside tracked ones but absent from the lock are untracked", async () => {
+    const root = tempRoot();
+    const path = lockFile(root, {
+      kept: { source: "o/r", skillPath: "skills/kept/SKILL.md", skillFolderHash: "aaa" },
+      top: { source: "o/flat", skillPath: "top/SKILL.md", skillFolderHash: "t" },
+      solo: { source: "o/solo", skillPath: "SKILL.md", skillFolderHash: "s" },
+    });
+    const trees: Record<string, RepoTree> = {
+      "o/r": {
+        tree: [
+          { path: "skills/kept", sha: "aaa", type: "tree" },
+          { path: "skills/kept/SKILL.md", sha: "1", type: "blob" },
+          { path: "skills/kept/sub/SKILL.md", sha: "2", type: "blob" }, // nested inside a tracked skill
+          { path: "skills/gained/SKILL.md", sha: "3", type: "blob" }, // sibling: untracked
+          { path: "skills/gained/README.md", sha: "4", type: "blob" },
+          { path: "other/elsewhere/SKILL.md", sha: "5", type: "blob" }, // different parent
+        ],
+      },
+      "o/flat": {
+        tree: [
+          { path: "top", sha: "t", type: "tree" },
+          { path: "top/SKILL.md", sha: "6", type: "blob" },
+          { path: "renamed-to/SKILL.md", sha: "7", type: "blob" },
+          { path: "SKILL.md", sha: "8", type: "blob" },
+        ],
+      },
+      "o/solo": {
+        tree: [
+          { path: "", sha: "s", type: "tree" },
+          { path: "SKILL.md", sha: "9", type: "blob" },
+          { path: "examples/demo/SKILL.md", sha: "10", type: "blob" },
+        ],
+      },
+    };
+
+    const { report } = await checkLock(path, { repoTree: async (source) => trees[source] ?? null });
+
+    expect(report.get("o/r")).toEqual({
+      current: ["kept"],
+      behind: [],
+      unreachable: [],
+      untracked: ["skills/gained"],
+    });
+    expect(report.get("o/flat")?.untracked).toEqual(["renamed-to"]);
+    expect(report.get("o/solo")?.untracked).toBeUndefined();
+
+    const [text, drift] = render(report, [], []);
+    expect(drift).toBe(1); // o/solo's bare SKILL.md has no tree entry (unreachable); untracked adds nothing
+    expect(text).toContain("| `o/r` | 1 | 1 | 0 | 0 | 1 |");
+    expect(text).toContain("Untracked upstream (");
+    expect(text).toContain("- `o/r`: skills/gained");
+    expect(text).toContain("- `o/flat`: renamed-to");
+  });
+
   test("an unreadable source is an error, not a silent pass", async () => {
     const root = tempRoot();
     const path = lockFile(root, {
@@ -91,7 +145,7 @@ describe("lock classification", () => {
     const dirty = reportOf([["o/r", { current: [], behind: ["a"], unreachable: ["b"] }]]);
     expect(render(clean, [], [])[1]).toBe(0);
     expect(render(dirty, [], [])[1]).toBe(2);
-    expect(render(dirty, [], [])[0]).toContain("| `o/r` | 2 | 0 | 1 | 1 |");
+    expect(render(dirty, [], [])[0]).toContain("| `o/r` | 2 | 0 | 1 | 1 | 0 |");
     expect(render(clean, [], [])[0]).not.toContain("Unreachable (");
     const named = reportOf([
       ["o/r", { current: [], behind: ["a"], unreachable: ["b", "c"] }],

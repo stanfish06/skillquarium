@@ -22,6 +22,8 @@ export interface Buckets {
   current: string[];
   behind: string[];
   unreachable: string[];
+  /** Upstream skill folders beside tracked ones that no lock entry names. Reported, never drift. */
+  untracked?: string[];
 }
 
 /** Sources in report order: most lock entries first. */
@@ -137,6 +139,30 @@ export function folderOf(skillPath: string): string {
   return normalized;
 }
 
+function parentOf(folder: string): string {
+  const slash = folder.lastIndexOf("/");
+  return slash < 0 ? "" : folder.slice(0, slash);
+}
+
+/**
+ * `*\/SKILL.md` blobs upstream whose folder sits beside a tracked folder (same parent directory)
+ * but is not itself tracked: a skill the source gained, or the new name of a renamed one. A source
+ * whose skillPath is a bare `SKILL.md` is the skill itself and has no siblings to compare.
+ */
+function untrackedFolders(tree: TreeEntry[], tracked: string[]): string[] {
+  if (tracked.some((folder) => folder.toLowerCase() === "skill.md")) return [];
+  const known = new Set(tracked);
+  const parents = new Set(tracked.map(parentOf));
+  const found = new Set<string>();
+  for (const entry of tree) {
+    if (entry.type !== "blob") continue;
+    const folder = folderOf(entry.path);
+    if (folder === entry.path) continue; // not a SKILL.md
+    if (!known.has(folder) && parents.has(parentOf(folder))) found.add(folder);
+  }
+  return [...found].sort();
+}
+
 function byName(a: [string, LockEntry], b: [string, LockEntry]): number {
   return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0;
 }
@@ -182,14 +208,18 @@ export async function checkLock(
     const shas = new Map<string, string>();
     for (const entry of data.tree) if (entry.type === "tree") shas.set(entry.path, entry.sha);
     const buckets: Buckets = { current: [], behind: [], unreachable: [] };
+    const tracked: string[] = [];
     for (const [name, entry] of [...items].sort(byName)) {
       const path = entry.skillPath;
       if (!path) continue;
+      tracked.push(folderOf(path));
       const sha = shas.get(folderOf(path));
       if (sha === undefined) buckets.unreachable.push(name);
       else if (sha !== entry.skillFolderHash) buckets.behind.push(name);
       else buckets.current.push(name);
     }
+    const untracked = untrackedFolders(data.tree, tracked);
+    if (untracked.length) buckets.untracked = untracked;
     report.set(source, buckets);
   }
   return { report, errors, rateLimited };
@@ -261,7 +291,10 @@ export function render(
   profiles: ProfileRow[],
   rateLimited: string[] = [],
 ): [string, number] {
-  const lines = ["| source | tracked | current | behind | unreachable |", "| --- | --- | --- | --- | --- |"];
+  const lines = [
+    "| source | tracked | current | behind | unreachable | untracked |",
+    "| --- | --- | --- | --- | --- | --- |",
+  ];
   let behind = 0;
   let unreachable = 0;
   for (const [source, buckets] of report) {
@@ -270,7 +303,7 @@ export function render(
     unreachable += buckets.unreachable.length;
     lines.push(
       `| \`${source}\` | ${total} | ${buckets.current.length} | ` +
-        `${buckets.behind.length} | ${buckets.unreachable.length} |`,
+        `${buckets.behind.length} | ${buckets.unreachable.length} | ${buckets.untracked?.length ?? 0} |`,
     );
   }
   lines.push("");
@@ -289,6 +322,18 @@ export function render(
     lines.push("", "Unreachable (recorded `skillPath` gone upstream; `skills update` skips these):", "");
     for (const [source, buckets] of report) {
       if (buckets.unreachable.length) lines.push(`- \`${source}\`: ${buckets.unreachable.join(", ")}`);
+    }
+  }
+
+  if ([...report.values()].some((buckets) => buckets.untracked?.length)) {
+    // Not drift: a source may hold skills the vault chose not to install. A list to review.
+    lines.push(
+      "",
+      "Untracked upstream (skill folders beside tracked ones with no lock entry; not counted):",
+      "",
+    );
+    for (const [source, buckets] of report) {
+      if (buckets.untracked?.length) lines.push(`- \`${source}\`: ${buckets.untracked.join(", ")}`);
     }
   }
 
