@@ -3,8 +3,8 @@
  "metrics": {
   "skills": 2277,
   "expert_profiles": 503,
-  "nodes": 2351,
-  "edges": 17097,
+  "nodes": 2350,
+  "edges": 17092,
   "generic_names_blocked": 32,
   "tier1_edges": 5095,
   "tier2_edges": 805,
@@ -20,12 +20,12 @@
   "orphan_count": 122,
   "orphan_rate": 0.0536,
   "by_provenance": {
-   "EXTRACTED": 16311,
+   "EXTRACTED": 16306,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2282,
+   "in_domain": 2277,
    "references": 13486,
    "in_discipline": 599,
    "touches": 543,
@@ -9000,11 +9000,6 @@
    "id": "domain:software-dev",
    "type": "Domain",
    "label": "software-dev"
-  },
-  {
-   "id": "domain:uncategorized",
-   "type": "Domain",
-   "label": "uncategorized"
   },
   {
    "id": "domain:vault-meta",
@@ -97761,15 +97756,6 @@
   },
   {
    "src": "k6-browser-test",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "k6-browser-test",
    "rel": "references",
    "dst": "caveman",
    "weight": 1,
@@ -109301,15 +109287,6 @@
    "src": "megacave",
    "rel": "in_domain",
    "dst": "domain:reasoning-ideation",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "megacave",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
@@ -136695,15 +136672,6 @@
   },
   {
    "src": "prisma-orm-setup",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "prisma-orm-setup",
    "rel": "references",
    "dst": "prisma-cli",
    "weight": 1,
@@ -136886,15 +136854,6 @@
    "src": "prisma-postgres-upgrade",
    "rel": "in_domain",
    "dst": "domain:software-dev",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "prisma-postgres-upgrade",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
@@ -179042,15 +179001,6 @@
    "src": "ultracave",
    "rel": "in_domain",
    "dst": "domain:reasoning-ideation",
-   "weight": 1,
-   "provenance": "EXTRACTED",
-   "justification": "domain from vault/notes layout",
-   "status": "accepted"
-  },
-  {
-   "src": "ultracave",
-   "rel": "in_domain",
-   "dst": "domain:uncategorized",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
