@@ -112,5 +112,12 @@
       "find": "- Serial testing: combined Se increases, combined Sp decreases — calculate system Se for freedom surveys.\n- Parallel testing: combined Sp increases — use when false positives are costly (trade restrictions).\n",
       "replace": "- Serial testing (positive only if all tests positive): combined Sp increases, combined Se decreases — use when false positives are costly (trade restrictions).\n- Parallel testing (positive if any test positive): combined Se increases, combined Sp decreases — calculate system Se for freedom surveys.\n"
     }
+  ],
+  "accelerator-physicist": [
+    {
+      "id": "fast-ion-instability-electron-rings",
+      "find": "- **Ion effects** — fast ion instability in positron rings; clearing electrodes and gap voltage scans.",
+      "replace": "- **Ion effects** — fast ion instability in electron rings (electron-cloud instability is the\n  positron-ring counterpart); clearing electrodes and gap voltage scans."
+    }
   ]
 }

@@ -228,17 +228,20 @@ describe("catalog path safety", () => {
 });
 
 describe("renderSkill parity with the committed tree", () => {
-  test("accelerator-physicist round-trips byte for byte", () => {
+  test("an unpatched profile round-trips byte for byte", () => {
     const catalog = JSON.parse(
       readFileSync(join(REPO_ROOT, "skills/scientific-agents/references/catalog.json"), "utf8"),
     ) as { agents: Agent[] };
-    const agent = catalog.agents.find((a) => a.slug === "accelerator-physicist");
+    // Local patches rewrite the body and stamp metadata after rendering, so compare a profile
+    // that carries none rather than pinning the test to a slug that may later be corrected.
+    const patched = loadLocalPatches();
+    const agent = catalog.agents.find((a) => !(a.slug in patched));
     expect(agent).toBeDefined();
     if (!agent) return;
 
     // The tree carries whatever toggle state the user has loaded; renderSkill never emits that
     // field, so drop it before comparing rather than pinning the test to one toggle state.
-    const committed = readFileSync(join(REPO_ROOT, "skills/accelerator-physicist/SKILL.md"), "utf8").replace(
+    const committed = readFileSync(join(REPO_ROOT, `skills/${agent.slug}/SKILL.md`), "utf8").replace(
       "disable-model-invocation: true\n",
       "",
     );
