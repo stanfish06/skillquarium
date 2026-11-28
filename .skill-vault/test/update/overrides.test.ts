@@ -124,6 +124,32 @@ describe("local override mechanics", () => {
 
     expect(loadOverrides(join(root, "absent.json")).size).toBe(0);
   });
+
+  test("load rejects a skill key that appears twice", () => {
+    const root = tempRoot();
+    const path = join(root, "overrides.json");
+    writeFileSync(
+      path,
+      `{
+  "nextjs": [ { "id": "first", "find": "A", "replace": "B" } ],
+  "other": [ { "id": "nextjs", "find": "{\\"nextjs\\": [", "replace": "D" } ],
+  "nextjs": [ { "id": "second", "find": "C", "replace": "D" } ]
+}`,
+      "utf8",
+    );
+    expect(() => loadOverrides(path)).toThrow("nextjs: skill key appears more than once");
+
+    // Equal keys in nested entries are not top-level duplicates.
+    writeFileSync(
+      path,
+      JSON.stringify({
+        a: [{ id: "x", find: "a", replace: "b" }],
+        b: [{ id: "x", find: "a", replace: "b" }],
+      }),
+      "utf8",
+    );
+    expect(loadOverrides(path).size).toBe(2);
+  });
 });
 
 function git(root: string, ...argv: string[]): void {

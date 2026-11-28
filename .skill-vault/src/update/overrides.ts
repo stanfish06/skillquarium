@@ -51,13 +51,47 @@ function pyList(items: string[]): string {
   return `[${items.map((item) => `'${item}'`).join(", ")}]`;
 }
 
+/**
+ * The first key repeated in the top-level object of `text`, or undefined. JSON.parse keeps the
+ * last of two equal keys, which would silently drop every entry recorded under the first.
+ * Assumes `text` already parsed as JSON.
+ */
+export function duplicateTopLevelKey(text: string): string | undefined {
+  const seen = new Set<string>();
+  let depth = 0;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === "{" || ch === "[") depth++;
+    else if (ch === "}" || ch === "]") depth--;
+    else if (ch === '"') {
+      const start = i;
+      for (i++; text[i] !== '"'; i++) if (text[i] === "\\") i++;
+      if (depth !== 1) continue;
+      let j = i + 1;
+      while (/\s/.test(text[j] ?? "")) j++;
+      if (text[j] !== ":") continue;
+      const key = JSON.parse(text.slice(start, i + 1)) as string;
+      if (seen.has(key)) return key;
+      seen.add(key);
+    }
+  }
+  return undefined;
+}
+
 /** A missing file is an empty set of overrides, as in load_overrides. */
 export function loadOverrides(path: string): Overrides {
   const overrides: Overrides = new Map();
   if (!isFile(path)) return overrides;
-  const data: unknown = JSON.parse(readFileSync(path, "utf8"));
+  const text = readFileSync(path, "utf8");
+  const data: unknown = JSON.parse(text);
   if (!isPlainObject(data)) {
     throw new OverridesError("local overrides file must be an object keyed by skill name");
+  }
+  const duplicate = duplicateTopLevelKey(text);
+  if (duplicate !== undefined) {
+    throw new OverridesError(
+      `${duplicate}: skill key appears more than once; merge its entries into one list`,
+    );
   }
   for (const [skill, entries] of Object.entries(data)) {
     if (!Array.isArray(entries)) throw new OverridesError(`${skill}: overrides must be a list`);
