@@ -20,7 +20,7 @@ Query the STRING API for protein-protein interaction networks.
 import requests
 import json
 
-BASE_URL = "https://version-12-0.string-db.org/api"
+BASE_URL = "https://version-12-5.string-db.org/api"
 
 # 1. Get interaction partners
 def get_interactions(genes, species=9606, score_threshold=400):
