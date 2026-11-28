@@ -72,6 +72,14 @@ export function loadOverrides(path: string): Overrides {
         throw new OverridesError(`${skill}: override id, find and replace must be strings`);
       }
       if (find === replace) throw new OverridesError(`${skill}/${id}: find and replace are identical`);
+      // overrideState tests find first, so a find inside its own replace stays "pending" forever
+      // and every write pass would apply it again.
+      if (replace.includes(find)) {
+        throw new OverridesError(
+          `${skill}/${id}: find is a substring of replace, so the override would re-apply on every sync; ` +
+            "widen find so it no longer matches after replacement",
+        );
+      }
       if (file !== undefined && typeof file !== "string") {
         throw new OverridesError(`${skill}/${id}: file must be a string`);
       }

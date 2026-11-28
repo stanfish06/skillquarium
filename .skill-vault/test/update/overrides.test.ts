@@ -109,6 +109,13 @@ describe("local override mechanics", () => {
     writeFileSync(path, JSON.stringify({ demo: [{ id: "x", find: "a", replace: "a" }] }), "utf8");
     expect(() => loadOverrides(path)).toThrow("demo/x: find and replace are identical");
 
+    writeFileSync(
+      path,
+      JSON.stringify({ demo: [{ id: "x", find: "Python 3.9+", replace: "Python 3.9+ (3.13 untested)" }] }),
+      "utf8",
+    );
+    expect(() => loadOverrides(path)).toThrow("demo/x: find is a substring of replace");
+
     writeFileSync(path, JSON.stringify([1, 2]), "utf8");
     expect(() => loadOverrides(path)).toThrow("must be an object keyed by skill name");
 
