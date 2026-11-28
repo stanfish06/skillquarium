@@ -39,7 +39,7 @@ Do not use this skill when:
   ```yaml
   agents:
     root:
-      model: anthropic/claude-sonnet-4-5
+      model: anthropic/claude-sonnet-5-5
       description: A coding assistant
       instruction: |
         You are an expert developer. Help users write clean,
@@ -67,7 +67,7 @@ Do not use this skill when:
   models:
     claude:
       provider: anthropic
-      model: claude-sonnet-4-5
+      model: claude-sonnet-5-5
       max_tokens: 64000
 
   agents:
@@ -94,7 +94,7 @@ Do not use this skill when:
   ```yaml
   agents:
     root:
-      model: anthropic/claude-sonnet-4-5
+      model: anthropic/claude-sonnet-5-5
       fallback:
         models: [openai/gpt-5, google/gemini-3.5-flash]
         retries: 2      # per model, for 5xx errors

@@ -15,7 +15,7 @@ Skill under test: `skills/docker-agent-config/`
 
 ### Expected behaviors
 - [ ] Produces a valid `agent.yaml` with a top-level `agents:` key and at least a `root` agent.
-- [ ] Sets a valid model (e.g., `model: anthropic/claude-sonnet-4-5`, `model: claude`, or a named model), `description`, and `instruction`.
+- [ ] Sets a valid model (e.g., `model: anthropic/claude-sonnet-5-5`, `model: claude`, or a named model), `description`, and `instruction`.
 - [ ] Adds `toolsets: [{type: filesystem}, {type: shell}]`.
 - [ ] Does not hardcode an `ANTHROPIC_API_KEY` value in the YAML.
 

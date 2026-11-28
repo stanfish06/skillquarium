@@ -141,7 +141,7 @@
       "issue": 895,
       "source": "neo4j-contrib/neo4j-skills",
       "find": "- `AnthropicLLM(model_name=\"claude-3-5-sonnet-20241022\")`",
-      "replace": "- `AnthropicLLM(model_name=\"claude-sonnet-4-6\")`"
+      "replace": "- `AnthropicLLM(model_name=\"claude-sonnet-5-5\")`"
     },
     {
       "id": "bedrock-retired-model",
@@ -167,7 +167,7 @@
       "issue": 895,
       "source": "neo4j-contrib/neo4j-skills",
       "find": "llm = AnthropicLLM(model_name=\"claude-3-5-sonnet-20241022\")",
-      "replace": "llm = AnthropicLLM(model_name=\"claude-sonnet-4-6\")"
+      "replace": "llm = AnthropicLLM(model_name=\"claude-sonnet-5-5\")"
     },
     {
       "id": "bedrock-retired-model",
@@ -6090,6 +6090,114 @@
       "file": "references/customization.md",
       "find": "Commands remain the same: `bun run lint`, `bun run format`.\n",
       "replace": "Commands remain the same: `bun run check`, `bun run fix`.\n"
+    }
+  ],
+  "deep-agents-core": [
+    {
+      "id": "skill-health-1461-sonnet-model-id",
+      "issue": 1461,
+      "source": "langchain-ai/langchain-skills",
+      "find": "\"claude-sonnet-4-5-20250929\"",
+      "replace": "\"claude-sonnet-5-5\""
+    }
+  ],
+  "docker-agent-config": [
+    {
+      "id": "skill-health-1461-inline-sonnet-model",
+      "issue": 1461,
+      "source": "docker/skills",
+      "find": "model: anthropic/claude-sonnet-4-5\n",
+      "replace": "model: anthropic/claude-sonnet-5-5\n"
+    },
+    {
+      "id": "skill-health-1461-named-sonnet-model",
+      "issue": 1461,
+      "source": "docker/skills",
+      "find": "      model: claude-sonnet-4-5\n      max_tokens: 64000",
+      "replace": "      model: claude-sonnet-5-5\n      max_tokens: 64000"
+    },
+    {
+      "id": "skill-health-1461-team-agent-sonnet-model",
+      "issue": 1461,
+      "source": "docker/skills",
+      "file": "assets/team-agent.yaml",
+      "find": "model: anthropic/claude-sonnet-4-5\n",
+      "replace": "model: anthropic/claude-sonnet-5-5\n"
+    },
+    {
+      "id": "skill-health-1461-eval-sonnet-model",
+      "issue": 1461,
+      "source": "docker/skills",
+      "file": "evals/docker-agent-config.md",
+      "find": "`model: anthropic/claude-sonnet-4-5`",
+      "replace": "`model: anthropic/claude-sonnet-5-5`"
+    }
+  ],
+  "langchain-fundamentals": [
+    {
+      "id": "skill-health-1461-provider-string",
+      "issue": 1461,
+      "source": "langchain-ai/langchain-skills",
+      "find": "\"anthropic:claude-sonnet-4-5\"",
+      "replace": "\"anthropic:claude-sonnet-5-5\""
+    },
+    {
+      "id": "skill-health-1461-chatanthropic-model",
+      "issue": 1461,
+      "source": "langchain-ai/langchain-skills",
+      "find": "ChatAnthropic(model=\"claude-sonnet-4-5\"",
+      "replace": "ChatAnthropic(model=\"claude-sonnet-5-5\""
+    }
+  ],
+  "langchain-middleware": [
+    {
+      "id": "skill-health-1461-provider-string",
+      "issue": 1461,
+      "source": "langchain-ai/langchain-skills",
+      "find": "model: \"anthropic:claude-sonnet-4-5\"",
+      "replace": "model: \"anthropic:claude-sonnet-5-5\""
+    }
+  ],
+  "workflow": [
+    {
+      "id": "skill-health-1461-gateway-slug",
+      "issue": 1461,
+      "source": "openai/plugins",
+      "find": "model: \"anthropic/claude-sonnet-4-5\",",
+      "replace": "model: \"anthropic/claude-sonnet-5.5\","
+    }
+  ],
+  "ai-gateway": [
+    {
+      "id": "skill-health-1461-slug-rules",
+      "issue": 1461,
+      "source": "openai/plugins",
+      "find": "  - Correct: `anthropic/claude-sonnet-4.6`\n  - Incorrect: `anthropic/claude-sonnet-4-6`\n- Before hardcoding model IDs, call `gateway.getAvailableModels()` and pick from the returned IDs.\n- Default text models: `openai/gpt-5.4` or `anthropic/claude-sonnet-4.6`.",
+      "replace": "  - Correct: `anthropic/claude-sonnet-5.5`\n  - Incorrect: `anthropic/claude-sonnet-5-5`\n- Before hardcoding model IDs, call `gateway.getAvailableModels()` and pick from the returned IDs.\n- Default text models: `openai/gpt-5.4` or `anthropic/claude-sonnet-5.5`."
+    },
+    {
+      "id": "skill-health-1461-example-slugs",
+      "issue": 1461,
+      "source": "openai/plugins",
+      "find": "'anthropic/claude-sonnet-4.6'",
+      "replace": "'anthropic/claude-sonnet-5.5'"
+    }
+  ],
+  "promptfoo-evals": [
+    {
+      "id": "skill-health-1461-provider-id",
+      "issue": 1461,
+      "source": "promptfoo/promptfoo",
+      "find": "anthropic:messages:claude-sonnet-4-6",
+      "replace": "anthropic:messages:claude-sonnet-5-5"
+    },
+    {
+      "id": "skill-health-1461-cheatsheet-provider-id",
+      "issue": 1461,
+      "source": "promptfoo/promptfoo",
+      "file": "references/cheatsheet.md",
+      "find": "anthropic:messages:claude-sonnet-4-6",
+      "replace": "anthropic:messages:claude-sonnet-5-5"
     }
   ]
 }

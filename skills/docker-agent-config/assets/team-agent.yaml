@@ -10,7 +10,7 @@ agents:
     sub_agents: [coder, reviewer]
 
   coder:
-    model: anthropic/claude-sonnet-4-5
+    model: anthropic/claude-sonnet-5-5
     description: Writes and modifies code.
     instruction: Write clean, tested code. Explain non-obvious decisions briefly.
     toolsets:
@@ -18,7 +18,7 @@ agents:
       - type: shell
 
   reviewer:
-    model: anthropic/claude-sonnet-4-5
+    model: anthropic/claude-sonnet-5-5
     description: Reviews code for bugs, style, and best practices.
     instruction: Review code for correctness, security, and maintainability.
     readonly: true

@@ -16,7 +16,7 @@ Build production agents using `create_agent()`, middleware patterns, and the `@t
 
 | Parameter | Purpose | Example |
 |-----------|---------|---------|
-| `model` | LLM to use | `"anthropic:claude-sonnet-4-5"` or model instance |
+| `model` | LLM to use | `"anthropic:claude-sonnet-5-5"` or model instance |
 | `tools` | List of tools | `[search, calculator]` |
 | `system_prompt` / `systemPrompt` | Agent instructions | `"You are a helpful assistant"` |
 | `checkpointer` | State persistence | `MemorySaver()` |
@@ -40,7 +40,7 @@ def get_weather(location: str) -> str:
     return f"Weather in {location}: Sunny, 72F"
 
 agent = create_agent(
-    model="anthropic:claude-sonnet-4-5",
+    model="anthropic:claude-sonnet-5-5",
     tools=[get_weather],
     system_prompt="You are a helpful assistant."
 )
@@ -68,7 +68,7 @@ const getWeather = tool(
 );
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-5",
+  model: "anthropic:claude-sonnet-5-5",
   tools: [getWeather],
   systemPrompt: "You are a helpful assistant.",
 });
@@ -92,7 +92,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 
 agent = create_agent(
-    model="anthropic:claude-sonnet-4-5",
+    model="anthropic:claude-sonnet-5-5",
     tools=[search],
     checkpointer=checkpointer,
 )
@@ -113,7 +113,7 @@ import { MemorySaver } from "@langchain/langgraph";
 const checkpointer = new MemorySaver();
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-5",
+  model: "anthropic:claude-sonnet-5-5",
   tools: [search],
   checkpointer,
 });
@@ -244,11 +244,11 @@ const response = await structuredModel.invoke("Extract: John, john@example.com, 
 <model_config>
 ## Model Configuration
 
-`create_agent` accepts model strings (`"anthropic:claude-sonnet-4-5"`, `"openai:gpt-4.1"`) or model instances for custom settings:
+`create_agent` accepts model strings (`"anthropic:claude-sonnet-5-5"`, `"openai:gpt-4.1"`) or model instances for custom settings:
 
 ```python
 from langchain_anthropic import ChatAnthropic
-agent = create_agent(model=ChatAnthropic(model="claude-sonnet-4-5", temperature=0), tools=[...])
+agent = create_agent(model=ChatAnthropic(model="claude-sonnet-5-5", temperature=0), tools=[...])
 ```
 </model_config>
 
@@ -306,7 +306,7 @@ Add checkpointer and thread_id for conversation memory across invocations.
 
 ```python
 # WRONG: No persistence - agent forgets between calls
-agent = create_agent(model="anthropic:claude-sonnet-4-5", tools=[search])
+agent = create_agent(model="anthropic:claude-sonnet-5-5", tools=[search])
 agent.invoke({"messages": [{"role": "user", "content": "I'm Bob"}]})
 agent.invoke({"messages": [{"role": "user", "content": "What's my name?"}]})
 # Agent doesn't remember!
@@ -315,7 +315,7 @@ agent.invoke({"messages": [{"role": "user", "content": "What's my name?"}]})
 from langgraph.checkpoint.memory import MemorySaver
 
 agent = create_agent(
-    model="anthropic:claude-sonnet-4-5",
+    model="anthropic:claude-sonnet-5-5",
     tools=[search],
     checkpointer=MemorySaver(),
 )
@@ -330,7 +330,7 @@ Add checkpointer and thread_id for conversation memory across invocations.
 
 ```typescript
 // WRONG: No persistence
-const agent = createAgent({ model: "anthropic:claude-sonnet-4-5", tools: [search] });
+const agent = createAgent({ model: "anthropic:claude-sonnet-5-5", tools: [search] });
 await agent.invoke({ messages: [{ role: "user", content: "I'm Bob" }] });
 await agent.invoke({ messages: [{ role: "user", content: "What's my name?" }] });
 // Agent doesn't remember!
@@ -339,7 +339,7 @@ await agent.invoke({ messages: [{ role: "user", content: "What's my name?" }] })
 import { MemorySaver } from "@langchain/langgraph";
 
 const agent = createAgent({
-  model: "anthropic:claude-sonnet-4-5",
+  model: "anthropic:claude-sonnet-5-5",
   tools: [search],
   checkpointer: new MemorySaver(),
 });
