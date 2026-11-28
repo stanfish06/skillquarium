@@ -14,7 +14,7 @@ Use this skill for codebases pinned to **PufferLib 2.x** (`pufferlib>=2.0,<3.0`)
 
 - Prefer `pufferlib-v2` only for projects pinned to `pufferlib>=2.0,<3.0`, reproducing 2024/early-2025 experiments, or maintaining PufferLib 2.x environments.
 - Prefer `pufferlib-v3` for `pufferlib>=3.0,<4.0` projects or when the code uses newer `pufferlib.pufferl` config helpers.
-- Prefer the legacy `pufferlib` skill only for `pufferlib==1.0.0` code.
+- Prefer the `pufferlib` skill for PyPI `3.0.0` as published, the pinned `4.0` source profile, or the native `5.0` branch — it is version-aware and covers all three.
 
 ## Installation
 
