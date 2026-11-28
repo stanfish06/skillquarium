@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Vault, Skills & Workflow Meta](vault-meta.md) | [Security & Auditing](security-auditing.md) | [Cloud, Infra & MLOps](cloud-devops.md) | [Reasoning, Ideation & Decision](reasoning-ideation.md) | [.NET & C# Development](dotnet-development.md) | [MATLAB Development](matlab-development.md)
 
-## Skills (166)
+## Skills (168)
 
 - [agentic-workflows](../notes/software-dev/agentic-workflows.md) — Route gh-aw design, creation, diagnosis, patching, active debugging, upgrades, and local SDLC issue requests to the right strategies
 - [api-and-interface-design](../notes/software-dev/api-and-interface-design.md) — Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface
@@ -115,8 +115,10 @@ created: 2026-06-13
 - [prisma-database-setup](../notes/software-dev/prisma-database-setup.md) — Deprecated compatibility name for prisma-orm-setup
 - [prisma-driver-adapter-implementation](../notes/software-dev/prisma-driver-adapter-implementation.md) — Required reference for Prisma ORM 7 SQL driver adapter work
 - [prisma-mongodb-upgrade](../notes/software-dev/prisma-mongodb-upgrade.md) — Decision and migration guide for Prisma ORM MongoDB projects on v6, which have no upgrade path to v7
+- [prisma-orm-setup](../notes/software-dev/prisma-orm-setup.md) — Set up Prisma ORM in an application, connect its database, or troubleshoot the connection of an existing Prisma 6, 7, or 8 app
 - [prisma-postgres](../notes/software-dev/prisma-postgres.md) — Deprecated compatibility name for prisma-postgres-setup
 - [prisma-postgres-setup](../notes/software-dev/prisma-postgres-setup.md) — Obtain or reuse a Prisma Postgres database and connect an application
+- [prisma-postgres-upgrade](../notes/software-dev/prisma-postgres-upgrade.md) — Upgrade a PostgreSQL app from Prisma ORM 6 or 7 straight to Prisma 8 in one pass, keeping the existing schema.prisma, database and data
 - [prisma-upgrade-v7](../notes/software-dev/prisma-upgrade-v7.md) — Complete migration guide from Prisma ORM v6 to v7 covering all breaking changes
 - [protobuf](../notes/software-dev/protobuf.md) — Use when working with Protocol Buffer (.proto) files, buf.yaml, buf.gen.yaml, or buf.lock
 - [prototype](../notes/software-dev/prototype.md) — Build a throwaway prototype to answer a design question

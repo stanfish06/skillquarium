@@ -1,32 +1,32 @@
 {
  "schema_version": 1,
  "metrics": {
-  "skills": 2272,
+  "skills": 2277,
   "expert_profiles": 503,
-  "nodes": 2345,
-  "edges": 17041,
+  "nodes": 2351,
+  "edges": 17097,
   "generic_names_blocked": 32,
-  "tier1_edges": 5065,
+  "tier1_edges": 5095,
   "tier2_edges": 805,
-  "alias_edges": 4739,
+  "alias_edges": 4762,
   "discipline_edges": 599,
   "ambiguous_aliases": 36,
   "artifact_edges": 543,
   "asserted_edges": 0,
   "recipes": 7,
   "observations": 0,
-  "mean_skill_degree": 5.94,
+  "mean_skill_degree": 5.95,
   "median_skill_degree": 4,
-  "orphan_count": 123,
-  "orphan_rate": 0.0541,
+  "orphan_count": 122,
+  "orphan_rate": 0.0536,
   "by_provenance": {
-   "EXTRACTED": 16255,
+   "EXTRACTED": 16311,
    "ASSERTED": 668,
    "INFERRED": 118
   },
   "by_relation": {
-   "in_domain": 2272,
-   "references": 13440,
+   "in_domain": 2282,
+   "references": 13486,
    "in_discipline": 599,
    "touches": 543,
    "has_step": 69,
@@ -9002,6 +9002,11 @@
    "label": "software-dev"
   },
   {
+   "id": "domain:uncategorized",
+   "type": "Domain",
+   "label": "uncategorized"
+  },
+  {
    "id": "domain:vault-meta",
    "type": "Domain",
    "label": "vault-meta"
@@ -15452,6 +15457,21 @@
    "deprecated": false
   },
   {
+   "id": "k6-browser-test",
+   "type": "Skill",
+   "label": "k6-browser-test",
+   "description": ">- Generate a working k6 browser test (k6/browser) from a plain-language description of a user journey — no CSS selectors or technical detail needed. Explores the LIVE target site with a throwaway k6/browser session to discover real, verified selectors (getByRole/getByLabel/getByText, etc.), dismisses cookie/consent banners, then writes a functional or load test using expect() from k6-testing (Web-Vitals thresholds for load). Looks up k6/browser APIs via `k6 x docs`; validates with `k6 run`. Use when the user wants to write, author, or generate a k6 browser/UI or load test with a real browser, or says things like \"write a browser test for…\", \"test this login/checkout/search flow with k6\", \"click through my site and verify…\", or describes navigating a site in prose. For a full multi-test performance suite use k6-perf-test-website; for HTTP/protocol (non-browser) tests use the general k6 skills; for browser or scripted checks in Grafana Cloud Synthetic Monitoring, use synthetic-monitoring-checks.",
+   "source": "skills/k6-browser-test/SKILL.md",
+   "aliases": [
+    "k6 browser test"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "k6-cloud-investigate-test",
    "type": "Skill",
    "label": "k6-cloud-investigate-test",
@@ -18132,6 +18152,19 @@
    "aliases": [
     "meeting scheduler"
    ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "megacave",
+   "type": "Skill",
+   "label": "megacave",
+   "description": "> Caveman in Classical Chinese: 文言文 register, far fewer characters, technical terms verbatim. Invoke only with /megacave or /caveman wenyan. Stays on until \"stop caveman\" or \"normal mode\".",
+   "source": "skills/megacave/SKILL.md",
+   "aliases": [],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -23989,6 +24022,21 @@
    "deprecated": false
   },
   {
+   "id": "prisma-orm-setup",
+   "type": "Skill",
+   "label": "prisma-orm-setup",
+   "description": "Set up Prisma ORM in an application, connect its database, or troubleshoot the connection of an existing Prisma 6, 7, or 8 app. Defaults new applications to Prisma ORM 8 and loads the package-owned prisma-8 skill; keeps existing Prisma 6/7 apps on their version with provider references for PostgreSQL, MySQL, SQLite, SQL Server, CockroachDB, MongoDB, and Prisma Postgres.",
+   "source": "skills/prisma-orm-setup/SKILL.md",
+   "aliases": [
+    "prisma orm setup"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
    "id": "prisma-postgres",
    "type": "Skill",
    "label": "prisma-postgres",
@@ -24011,6 +24059,21 @@
    "source": "skills/prisma-postgres-setup/SKILL.md",
    "aliases": [
     "prisma postgres setup"
+   ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "prisma-postgres-upgrade",
+   "type": "Skill",
+   "label": "prisma-postgres-upgrade",
+   "description": "Upgrade a PostgreSQL app from Prisma ORM 6 or 7 straight to Prisma 8 in one pass, keeping the existing schema.prisma, database and data. Use when a Postgres project on Prisma 6 or 7 wants Prisma 8, including before deploying it on Prisma Compute, which runs only Prisma 8. Triggers on \"upgrade prisma 6 to 8\", \"upgrade prisma 7 to 8\", \"upgrade to prisma 8 postgres\", \"prisma7Schema\", \"migrations/app\", \"move off @prisma/client\", \"Console says move to Prisma 8\".",
+   "source": "skills/prisma-postgres-upgrade/SKILL.md",
+   "aliases": [
+    "prisma postgres upgrade"
    ],
    "uses": 0,
    "successes": 0,
@@ -32270,6 +32333,19 @@
    "aliases": [
     "ukb topmed phewas skill"
    ],
+   "uses": 0,
+   "successes": 0,
+   "success_rate": null,
+   "last_used": null,
+   "deprecated": false
+  },
+  {
+   "id": "ultracave",
+   "type": "Skill",
+   "label": "ultracave",
+   "description": "> Caveman at maximum compression: fragments, one word when one word is enough, each fact once. Invoke only with /ultracave or /caveman ultra. Stays on until \"stop caveman\" or \"normal mode\".",
+   "source": "skills/ultracave/SKILL.md",
+   "aliases": [],
    "uses": 0,
    "successes": 0,
    "success_rate": null,
@@ -50803,6 +50879,15 @@
    "status": "accepted"
   },
   {
+   "src": "cavecrew",
+   "rel": "references",
+   "dst": "ultracave",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ultracave named in cavecrew/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "cavekit-design-system",
    "rel": "in_domain",
    "dst": "domain:software-dev",
@@ -51021,6 +51106,15 @@
   {
    "src": "caveman",
    "rel": "references",
+   "dst": "k6-browser-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of caveman appears in k6-browser-test/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "caveman",
+   "rel": "references",
    "dst": "k6-perf-test-website",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -51066,6 +51160,15 @@
   {
    "src": "caveman",
    "rel": "references",
+   "dst": "megacave",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "megacave named in caveman/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "caveman",
+   "rel": "references",
    "dst": "pathologist",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -51079,6 +51182,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "curated alias of caveman appears in qa/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "caveman",
+   "rel": "references",
+   "dst": "ultracave",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ultracave named in caveman/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -51183,10 +51295,28 @@
   {
    "src": "caveman-compress",
    "rel": "references",
+   "dst": "megacave",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "caveman-compress named in megacave/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "caveman-compress",
+   "rel": "references",
    "dst": "run-tests",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "run-tests named in caveman-compress/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "caveman-compress",
+   "rel": "references",
+   "dst": "ultracave",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "caveman-compress named in ultracave/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -51232,6 +51362,24 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "caveman-review named in caveman-help/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "caveman-help",
+   "rel": "references",
+   "dst": "megacave",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "megacave named in caveman-help/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "caveman-help",
+   "rel": "references",
+   "dst": "ultracave",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ultracave named in caveman-help/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -97515,6 +97663,15 @@
   {
    "src": "k6",
    "rel": "references",
+   "dst": "k6-browser-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "k6-browser-test named in k6/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6",
+   "rel": "references",
    "dst": "k6-cloud-investigate-test",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -97591,6 +97748,69 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "k6 named in synthetic-monitoring-checks/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-browser-test",
+   "rel": "in_domain",
+   "dst": "domain:cloud-devops",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-browser-test",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-browser-test",
+   "rel": "references",
+   "dst": "caveman",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "curated alias of caveman appears in k6-browser-test/SKILL.md",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-browser-test",
+   "rel": "references",
+   "dst": "k6",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "k6-browser-test named in k6/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-browser-test",
+   "rel": "references",
+   "dst": "k6-perf-test-website",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "k6-perf-test-website named in k6-browser-test/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-browser-test",
+   "rel": "references",
+   "dst": "k6-test-maintenance",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "k6-browser-test named in k6-test-maintenance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-browser-test",
+   "rel": "references",
+   "dst": "synthetic-monitoring-checks",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "synthetic-monitoring-checks named in k6-browser-test/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -97812,6 +98032,15 @@
   {
    "src": "k6-perf-test-website",
    "rel": "references",
+   "dst": "k6-browser-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "k6-perf-test-website named in k6-browser-test/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-perf-test-website",
+   "rel": "references",
    "dst": "loki",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -97879,6 +98108,15 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "k6 named in k6-test-maintenance/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "k6-test-maintenance",
+   "rel": "references",
+   "dst": "k6-browser-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "k6-browser-test named in k6-test-maintenance/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -109057,6 +109295,51 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "superhuman-mail named in meeting-scheduler/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "megacave",
+   "rel": "in_domain",
+   "dst": "domain:reasoning-ideation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "megacave",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "megacave",
+   "rel": "references",
+   "dst": "caveman",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "megacave named in caveman/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "megacave",
+   "rel": "references",
+   "dst": "caveman-compress",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "caveman-compress named in megacave/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "megacave",
+   "rel": "references",
+   "dst": "caveman-help",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "megacave named in caveman-help/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -136233,6 +136516,15 @@
   {
    "src": "prisma-cli",
    "rel": "references",
+   "dst": "prisma-orm-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-orm-setup named in prisma-cli/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-cli",
+   "rel": "references",
    "dst": "prisma-postgres",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -136312,12 +136604,30 @@
    "status": "accepted"
   },
   {
+   "src": "prisma-compute",
+   "rel": "references",
+   "dst": "prisma-postgres-upgrade",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-compute named in prisma-postgres-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "prisma-database-setup",
    "rel": "in_domain",
    "dst": "domain:software-dev",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-database-setup",
+   "rel": "references",
+   "dst": "prisma-orm-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-orm-setup named in prisma-database-setup/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -136341,6 +136651,24 @@
   {
    "src": "prisma-mongodb-upgrade",
    "rel": "references",
+   "dst": "prisma-orm-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-orm-setup named in prisma-mongodb-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-mongodb-upgrade",
+   "rel": "references",
+   "dst": "prisma-postgres-upgrade",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-mongodb-upgrade named in prisma-postgres-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-mongodb-upgrade",
+   "rel": "references",
    "dst": "prisma-upgrade-v7",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -136354,6 +136682,87 @@
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prototype named in prisma-mongodb-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "references",
+   "dst": "prisma-cli",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-orm-setup named in prisma-cli/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "references",
+   "dst": "prisma-database-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-orm-setup named in prisma-database-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "references",
+   "dst": "prisma-mongodb-upgrade",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-orm-setup named in prisma-mongodb-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "references",
+   "dst": "prisma-postgres",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres named in prisma-orm-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "references",
+   "dst": "prisma-postgres-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres-setup named in prisma-orm-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "references",
+   "dst": "prisma-postgres-upgrade",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres-upgrade named in prisma-orm-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-orm-setup",
+   "rel": "references",
+   "dst": "prisma-upgrade-v7",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-upgrade-v7 named in prisma-orm-setup/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -136386,10 +136795,28 @@
   {
    "src": "prisma-postgres",
    "rel": "references",
+   "dst": "prisma-orm-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres named in prisma-orm-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres",
+   "rel": "references",
    "dst": "prisma-postgres-setup",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prisma-postgres-setup named in prisma-postgres/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres",
+   "rel": "references",
+   "dst": "prisma-postgres-upgrade",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres named in prisma-postgres-upgrade/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -136440,10 +136867,82 @@
   {
    "src": "prisma-postgres-setup",
    "rel": "references",
+   "dst": "prisma-orm-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres-setup named in prisma-orm-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-setup",
+   "rel": "references",
    "dst": "prisma-postgres",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prisma-postgres-setup named in prisma-postgres/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-upgrade",
+   "rel": "in_domain",
+   "dst": "domain:software-dev",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-upgrade",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-upgrade",
+   "rel": "references",
+   "dst": "prisma-compute",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-compute named in prisma-postgres-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-upgrade",
+   "rel": "references",
+   "dst": "prisma-mongodb-upgrade",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-mongodb-upgrade named in prisma-postgres-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-upgrade",
+   "rel": "references",
+   "dst": "prisma-orm-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres-upgrade named in prisma-orm-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-upgrade",
+   "rel": "references",
+   "dst": "prisma-postgres",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-postgres named in prisma-postgres-upgrade/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-postgres-upgrade",
+   "rel": "references",
+   "dst": "prisma-upgrade-v7",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-upgrade-v7 named in prisma-postgres-upgrade/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -136476,10 +136975,28 @@
   {
    "src": "prisma-upgrade-v7",
    "rel": "references",
+   "dst": "prisma-orm-setup",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-upgrade-v7 named in prisma-orm-setup/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-upgrade-v7",
+   "rel": "references",
    "dst": "prisma-postgres",
    "weight": 1,
    "provenance": "EXTRACTED",
    "justification": "prisma-postgres named in prisma-upgrade-v7/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "prisma-upgrade-v7",
+   "rel": "references",
+   "dst": "prisma-postgres-upgrade",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "prisma-upgrade-v7 named in prisma-postgres-upgrade/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -168156,6 +168673,15 @@
   {
    "src": "synthetic-monitoring-checks",
    "rel": "references",
+   "dst": "k6-browser-test",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "synthetic-monitoring-checks named in k6-browser-test/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "synthetic-monitoring-checks",
+   "rel": "references",
    "dst": "terraform",
    "weight": 1,
    "provenance": "EXTRACTED",
@@ -178513,6 +179039,60 @@
    "status": "accepted"
   },
   {
+   "src": "ultracave",
+   "rel": "in_domain",
+   "dst": "domain:reasoning-ideation",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "ultracave",
+   "rel": "in_domain",
+   "dst": "domain:uncategorized",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "domain from vault/notes layout",
+   "status": "accepted"
+  },
+  {
+   "src": "ultracave",
+   "rel": "references",
+   "dst": "cavecrew",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ultracave named in cavecrew/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ultracave",
+   "rel": "references",
+   "dst": "caveman",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ultracave named in caveman/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ultracave",
+   "rel": "references",
+   "dst": "caveman-compress",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "caveman-compress named in ultracave/SKILL.md body",
+   "status": "accepted"
+  },
+  {
+   "src": "ultracave",
+   "rel": "references",
+   "dst": "caveman-help",
+   "weight": 1,
+   "provenance": "EXTRACTED",
+   "justification": "ultracave named in caveman-help/SKILL.md body",
+   "status": "accepted"
+  },
+  {
    "src": "umap-learn",
    "rel": "in_domain",
    "dst": "domain:ml-ai",
@@ -188039,7 +188619,6 @@
   "packaging-notarization",
   "pid-controller",
   "prisma-client-api",
-  "prisma-database-setup",
   "prisma-driver-adapter-implementation",
   "proteinmpnn-nim",
   "proteomexchange-skill",

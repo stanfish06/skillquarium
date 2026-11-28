@@ -14,7 +14,7 @@ created: 2026-06-13
 
 **Related maps:** [Machine Learning & AI](ml-ai.md) | [Bio Databases, Lab & Cloud Platforms](bio-databases-platforms.md) | [Vault, Skills & Workflow Meta](vault-meta.md) | [Analytics Engineering & LLM Operations](analytics-engineering.md) | [Security & Auditing](security-auditing.md) | [Software Development & Engineering](software-dev.md) | [.NET & C# Development](dotnet-development.md)
 
-## Skills (83)
+## Skills (84)
 
 - [adaptive-metrics](../notes/cloud-devops/adaptive-metrics.md) — Cut Grafana Cloud Metrics cost by shrinking active-series count with Adaptive Metrics aggregation rules — auto-recommendations from query history, custom exact/regex rules, label-drop...
 - [airflow](../notes/cloud-devops/airflow.md) — Queries, manages, and troubleshoots Apache Airflow using the `af` CLI
@@ -59,6 +59,7 @@ created: 2026-06-13
 - [hf-cli](../notes/cloud-devops/hf-cli.md) — Hugging Face Hub CLI (`hf`) for downloading, uploading, and managing repositories, models, datasets, and Spaces on the Hugging Face Hub
 - [incident-response](../notes/cloud-devops/incident-response.md) — Run an incident response workflow — triage, communicate, and write postmortem
 - [k6](../notes/cloud-devops/k6.md) — Generate, validate, and review k6 test scripts — load, stress, spike, soak, smoke, breakpoint, functional, and protocol
+- [k6-browser-test](../notes/cloud-devops/k6-browser-test.md) — Generate a working k6 browser test (k6/browser) from a plain-language description of a user journey — no CSS selectors or technical detail needed
 - [k6-cloud-investigate-test](../notes/cloud-devops/k6-cloud-investigate-test.md) — Investigate a Grafana Cloud k6 test — describe the script, list run history, identify pass/fail status, pull raw metric time-series and log lines for one or more runs, and (if asked)...
 - [k6-docs](../notes/cloud-devops/k6-docs.md) — Write or review k6 documentation across the three k6 repositories - k6-DefinitelyTyped (TypeScript types), k6-docs (user documentation), and k6 (release notes / changelog)
 - [k6-manage](../notes/cloud-devops/k6-manage.md) — Interact with Grafana Cloud k6 (GCk6) — manage load tests, test runs, scripts, projects, schedules, env vars, fetch metrics or logs, and run scripts locally — using the `gcx` CLI (or...

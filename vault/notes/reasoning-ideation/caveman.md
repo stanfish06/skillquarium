@@ -25,6 +25,8 @@ created: 2026-06-13
 
 - [caveman-compress](../../notes/reasoning-ideation/caveman-compress.md) — Compress a memory file such as CLAUDE.md or a todo list into caveman format to save input tokens, keeping a readable backup
 - [caveman-help](../../notes/reasoning-ideation/caveman-help.md) — Quick-reference card for the three caveman skills and their commands
+- [megacave](../../notes/reasoning-ideation/megacave.md) — Caveman in Classical Chinese: 文言文 register, far fewer characters, technical terms verbatim
+- [ultracave](../../notes/reasoning-ideation/ultracave.md) — Caveman at maximum compression: fragments, one word when one word is enough, each fact once
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
 
