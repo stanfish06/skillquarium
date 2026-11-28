@@ -92,6 +92,47 @@ describe("local override mechanics", () => {
     expect(reportOverrides(result, false, { out: () => {}, err: () => {} })).toBe(1);
   });
 
+  test("an applied fix whose defect survives in a sibling .md file is incomplete, not a failure", () => {
+    const root = tempRoot();
+    writeSkill(root, "demo", "run docker compose config\n");
+    const refs = join(root, "skills", "demo", "references");
+    mkdirSync(refs, { recursive: true });
+    writeFileSync(join(refs, "b.md"), "docker-compose config\n", "utf8");
+    writeFileSync(join(refs, "a.md"), "also docker-compose config\n", "utf8");
+    writeFileSync(join(refs, "clean.md"), "docker compose config\n", "utf8");
+    writeFileSync(join(refs, "script.sh"), "docker-compose config\n", "utf8"); // not markdown
+    // Covered by its own entry with the same find, so it is that entry's to report.
+    writeFileSync(join(refs, "own.md"), "docker compose config\n", "utf8");
+    const overrides: Overrides = new Map([
+      [
+        "demo",
+        [
+          { id: "compose-v2", find: "docker-compose config", replace: "docker compose config" },
+          {
+            id: "compose-v2-own",
+            find: "docker-compose config",
+            replace: "docker compose config",
+            file: "references/own.md",
+          },
+        ],
+      ],
+    ]);
+
+    const result = applyOverrides(overrides, root, false);
+
+    expect(result.applied).toEqual(["demo/compose-v2", "demo/compose-v2-own"]);
+    expect(result.incomplete).toEqual([
+      "demo/compose-v2 — find text also in references/a.md, references/b.md",
+      "demo/compose-v2-own — find text also in references/a.md, references/b.md",
+    ]);
+    const err: string[] = [];
+    expect(reportOverrides(result, true, { out: () => {}, err: (l) => err.push(l) })).toBe(0);
+    expect(err).toEqual([
+      "  INCOMPLETE: demo/compose-v2 — find text also in references/a.md, references/b.md",
+      "  INCOMPLETE: demo/compose-v2-own — find text also in references/a.md, references/b.md",
+    ]);
+  });
+
   test("every occurrence of the defect is replaced", () => {
     const root = tempRoot();
     const path = writeSkill(root, "demo", "docker-compose config\nand docker-compose config\n");

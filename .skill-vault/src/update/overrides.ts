@@ -1,4 +1,4 @@
-import { readFileSync, statSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { universalNewlines } from "../catalog";
 import { applyLeanAttribution } from "./leanAttribution";
@@ -23,6 +23,8 @@ export interface OverrideResult {
   applied: string[];
   stale: string[];
   missing: string[];
+  /** Applied entries whose `find` text survives in another .md file of the same skill. */
+  incomplete: string[];
 }
 
 export type OverrideState = "pending" | "applied" | "stale";
@@ -131,6 +133,18 @@ export function overrideState(text: string, entry: OverrideEntry): OverrideState
   return "stale";
 }
 
+/** Every .md file under a skill folder, as paths relative to it with `/` separators, sorted. */
+function markdownFiles(dir: string): string[] {
+  try {
+    return (readdirSync(dir, { recursive: true }) as string[])
+      .map((name) => name.replace(/\\/g, "/"))
+      .filter((name) => name.endsWith(".md") && isFile(join(dir, name)))
+      .sort();
+  } catch {
+    return [];
+  }
+}
+
 /**
  * Classify every recorded override against the tree, writing the pending ones back.
  * Skills are visited in sorted order, entries in the order they are recorded.
@@ -138,7 +152,9 @@ export function overrideState(text: string, entry: OverrideEntry): OverrideState
 export function applyOverrides(overrides: Overrides, root: string, write = true): OverrideResult {
   const result = applyLeanAttribution(root, write);
   for (const skill of [...overrides.keys()].sort()) {
-    for (const entry of overrides.get(skill) ?? []) {
+    const entries = overrides.get(skill) ?? [];
+    let siblings: string[] | undefined;
+    for (const entry of entries) {
       const relative = `skills/${skill}/${entry.file ?? "SKILL.md"}`;
       const path = join(root, relative);
       const label = `${skill}/${entry.id}`;
@@ -155,6 +171,17 @@ export function applyOverrides(overrides: Overrides, root: string, write = true)
       } else {
         result[state].push(label);
       }
+      if (state !== "applied") continue;
+      // The fix landed in its file; the same defect copied into a reference file is still live.
+      // Files another entry with this find already targets are that entry's to report.
+      const covered = new Set(entries.filter((e) => e.find === entry.find).map((e) => e.file ?? "SKILL.md"));
+      siblings ??= markdownFiles(join(root, "skills", skill));
+      const hits = siblings.filter(
+        (name) =>
+          !covered.has(name) &&
+          universalNewlines(readFileSync(join(root, "skills", skill, name), "utf8")).includes(entry.find),
+      );
+      if (hits.length) result.incomplete.push(`${label} — find text also in ${hits.join(", ")}`);
     }
   }
   return result;
@@ -183,6 +210,8 @@ export function reportOverrides(result: OverrideResult, check: boolean, io: Over
     io.err(`  STALE: ${label} — ${action}`);
   }
   for (const label of result.missing) io.err(`  MISSING: ${label}`);
+  // A warning only: the recorded file is fixed, so nothing here would re-apply or fail a sync.
+  for (const label of result.incomplete) io.err(`  INCOMPLETE: ${label}`);
 
   if (result.stale.length || result.missing.length) return 1;
   return check && result.pending.length ? 1 : 0;

@@ -28,7 +28,7 @@ const Lock = z.object({
 
 /** Restore notices after the skills CLI replaces a folder; reject updates beyond the reviewed pin. */
 export function applyLeanAttribution(root: string, write: boolean): OverrideResult {
-  const result: OverrideResult = { pending: [], applied: [], stale: [], missing: [] };
+  const result: OverrideResult = { pending: [], applied: [], stale: [], missing: [], incomplete: [] };
   const common = join(root, "skills", "lean-autoformalization-common");
   const lockPath = join(root, ".skill-lock.json");
   if (!existsSync(lockPath)) {
