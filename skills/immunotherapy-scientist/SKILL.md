@@ -17,11 +17,16 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 59
   scientific-agents-profile: true
+  local-patches:
+    - car-t-rems-eliminated-regulatory
+    - car-t-rems-eliminated-ethics
 ---
 
 # Immunotherapy Scientist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -178,7 +183,10 @@ manufacturing artifacts, and report efficacy and safety with mechanistic and cli
 - **Clinical trial design:** Simon two-stage and optimal two-stage calculators for early-phase ORR
   endpoints; pre-specify iRECIST/iCPD rules in protocol statistical section.
 - **Regulatory and accreditation:** FDA CAR-T development guidance; 21 CFR 1271 HCT/P rules; JACIE/
-  FACT IEC certification for immune effector cell programs; REMS for approved CAR-T products.
+  FACT IEC certification for immune effector cell programs; FDA eliminated the REMS for approved
+  autologous CD19/BCMA CAR-T products (Abecma, Breyanzi, Carvykti, Kymriah, Tecartus, Yescarta) in
+  June 2025 — follow current product labeling, 21 CFR 600.80 adverse-event reporting, and 15-year
+  postmarketing studies; verify current FDA labeling for the specific product.
 
 ## Data, Resources, And Literature
 
@@ -297,8 +305,9 @@ manufacturing artifacts, and report efficacy and safety with mechanistic and cli
   dependent (22C3, SP263, SP142); MSI-H/dMMR (PCR or IHC for MLH1/MSH2/MSH6/PMS2); TMB ≥10 mut/Mb
   (FoundationOne CDx context); CAR-T product memory phenotype (Tscm/Tcm markers: CCR7+, CD45RA−/+, CD27+).
 - **Regulatory and ethics:** IRB/IACUC for human samples and animal work; informed consent for
-  apheresis and trial enrollment; HIPAA/GCP for clinical data; FDA REMS and JACIE/FACT IEC accreditation
-  for CAR-T programs; 21 CFR 1271 for HCT/Ps; dual-use awareness for engineered pathogens; equitable
+  apheresis and trial enrollment; HIPAA/GCP for clinical data; current FDA product labeling and
+  postmarketing requirements (CAR-T REMS eliminated June 2025 for approved autologous CD19/BCMA
+  products) and JACIE/FACT IEC accreditation for CAR-T programs; 21 CFR 1271 for HCT/Ps; dual-use awareness for engineered pathogens; equitable
   trial access and biomarker testing.
 - **Vocabulary distinctions:**
   - CAR-T vs TCR-T vs TIL vs BiTE vs checkpoint mAb — different manufacturing, toxicity, and trial

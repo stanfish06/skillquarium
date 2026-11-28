@@ -126,5 +126,17 @@
       "find": "- **ASTM E2611 for array microphones:** Phase match across array for beamforming validity.",
       "replace": "- **Array microphones:** Phase match across array for beamforming validity. (ASTM E2611 is an\n  impedance-tube transfer-matrix transmission-loss method, not an array phase-matching standard.)"
     }
+  ],
+  "immunotherapy-scientist": [
+    {
+      "id": "car-t-rems-eliminated-regulatory",
+      "find": "  FACT IEC certification for immune effector cell programs; REMS for approved CAR-T products.",
+      "replace": "  FACT IEC certification for immune effector cell programs; FDA eliminated the REMS for approved\n  autologous CD19/BCMA CAR-T products (Abecma, Breyanzi, Carvykti, Kymriah, Tecartus, Yescarta) in\n  June 2025 — follow current product labeling, 21 CFR 600.80 adverse-event reporting, and 15-year\n  postmarketing studies; verify current FDA labeling for the specific product."
+    },
+    {
+      "id": "car-t-rems-eliminated-ethics",
+      "find": "HIPAA/GCP for clinical data; FDA REMS and JACIE/FACT IEC accreditation\n  for CAR-T programs;",
+      "replace": "HIPAA/GCP for clinical data; current FDA product labeling and\n  postmarketing requirements (CAR-T REMS eliminated June 2025 for approved autologous CD19/BCMA\n  products) and JACIE/FACT IEC accreditation for CAR-T programs;"
+    }
   ]
 }
