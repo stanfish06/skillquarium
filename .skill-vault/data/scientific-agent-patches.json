@@ -145,5 +145,12 @@
       "find": "know version (v2.1) and forcing (NWM retrospective\n  vs short-range);",
       "replace": "know version (v3.1 operational from August 2026;\n  confirm against current NOAA configuration and forcing documentation) and forcing (NWM\n  retrospective vs short-range);"
     }
+  ],
+  "hepatologist": [
+    {
+      "id": "obeticholic-acid-pbc-withdrawn-us",
+      "find": "  second-line obeticholic acid or fibrates per response criteria (Paris II); monitor for pruritus\n",
+      "replace": "  second-line fibrates per response criteria (Paris II) (obeticholic acid's US PBC accelerated\n  approval was withdrawn in November 2025; check current local approvals); monitor for pruritus\n"
+    }
   ]
 }
