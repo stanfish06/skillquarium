@@ -28,7 +28,6 @@ import { preCommitReset } from "../src/toggle/reset";
 import { loadSnapshot, saveSnapshot } from "../src/toggle/snapshot";
 import { discover, loadSkill } from "../src/toggle/state";
 import golden from "./fixtures/catalog.golden.json";
-import { isInstallableExtra } from "./transientKeys";
 
 const VAULT_ROOT = resolve(import.meta.dir, "..", "..");
 const roots: string[] = [];

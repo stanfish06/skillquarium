@@ -18,7 +18,6 @@ import {
   readScalar,
   splitFrontmatter,
 } from "../src/catalog";
-import { isInstallableExtra } from "./transientKeys";
 
 const tmpDirs: string[] = [];
 function tmp(prefix: string): string {
