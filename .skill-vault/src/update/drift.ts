@@ -230,6 +230,13 @@ export function render(report: DriftReport, errors: string[], profiles: ProfileR
       "(recorded `skillPath` no longer exists upstream, so " +
       "`skills update` skips them permanently).",
   );
+  if (unreachable) {
+    // A work list: each needs its skillPath re-pointed or its lock entry dropped.
+    lines.push("", "Unreachable (recorded `skillPath` gone upstream; `skills update` skips these):", "");
+    for (const [source, buckets] of report) {
+      if (buckets.unreachable.length) lines.push(`- \`${source}\`: ${buckets.unreachable.join(", ")}`);
+    }
+  }
 
   let staleProfiles = 0;
   if (profiles.length) {

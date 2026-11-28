@@ -88,6 +88,15 @@ describe("lock classification", () => {
     expect(render(clean, [], [])[1]).toBe(0);
     expect(render(dirty, [], [])[1]).toBe(2);
     expect(render(dirty, [], [])[0]).toContain("| `o/r` | 2 | 0 | 1 | 1 |");
+    expect(render(clean, [], [])[0]).not.toContain("Unreachable (");
+    const named = reportOf([
+      ["o/r", { current: [], behind: ["a"], unreachable: ["b", "c"] }],
+      ["o/s", { current: ["d"], behind: [], unreachable: [] }],
+    ]);
+    const namedText = render(named, [], [])[0];
+    expect(namedText).toContain("Unreachable (recorded `skillPath` gone upstream");
+    expect(namedText).toContain("- `o/r`: b, c");
+    expect(namedText).not.toContain("- `o/s`");
     expect(render(clean, ["o/r: could not read the upstream git tree"], [])[0]).toContain("Errors:");
     const [text, drift] = render(
       clean,
