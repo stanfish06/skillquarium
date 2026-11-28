@@ -14,7 +14,7 @@ created: 2026-08-23
 # neo4j-cypher-skill
 
 > [!info] What it does
-> Generates, optimizes, and validates Cypher 25 queries for Neo4j 2025.x and 2026.x. Use when writing new Cypher queries, optimizing slow queries, graph pattern matching, vector or fulltext search, subqueries, or batch writes. Covers MATCH, MERGE, CREATE, WITH, RETURN, CALL, UNWIND, FOREACH, LOAD CSV, SEARCH, expressions, functions, indexes, and subqueries. Does NOT handle driver migration or API changes — use neo4j-migration-skill. Does NOT cover DB administration or server ops — use neo4j-cli-tools-skill.
+> Generates, optimizes, and validates Cypher 25 queries for Neo4j 2025.x and 2026.x. Use when writing new Cypher queries, optimizing slow queries, graph pattern matching, vector or fulltext search, subqueries, or batch writes. Covers MATCH, MERGE, CREATE, WITH, RETURN, CALL, UNWIND, FOREACH, LOAD CSV, SEARCH, expressions, functions, indexes, and subqueries. Does NOT handle driver migration or API changes — use neo4j-migration-skill. Does NOT cover DB administration or server ops — use neo4j-cli-tools-skill. Does NOT cover Cypher on the relate embedded engine — use the relate skill.
 
 **Source:** [skills/neo4j-cypher-skill/SKILL.md](../../../skills/neo4j-cypher-skill/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

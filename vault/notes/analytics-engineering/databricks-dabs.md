@@ -15,7 +15,7 @@ created: 2026-08-23
 # databricks-dabs
 
 > [!info] What it does
-> Create, configure, validate, deploy, run, and manage Declarative Automation Bundles (DABs, formerly Databricks Asset Bundles). Use when working with Databricks resources via DABs including dashboards, jobs, pipelines, alerts, volumes, and apps.
+> Create, configure, validate, deploy, run, and manage Declarative Automation Bundles (DABs, formerly Databricks Asset Bundles). Use when working with Databricks resources via DABs including dashboards, jobs, pipelines, alerts, volumes, and apps. Use whenever you read or edit a databricks.yml, or fix bundle validate or deploy errors (for example resource name conflicts between users in a shared workspace).
 
 **Source:** [skills/databricks-dabs/SKILL.md](../../../skills/databricks-dabs/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

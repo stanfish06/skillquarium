@@ -14,7 +14,7 @@ created: 2026-08-23
 # neo4j-cli-tools-skill
 
 > [!info] What it does
-> Use when working with Neo4j command-line tools — neo4j-cli (modern unified CLI — Cypher via Bolt, schema inspection, Aura management, Docker containers, credential management, agent skill catalog install; install with curl -sSfL https://neo4j.sh/install.sh | bash), neo4j-admin (backup, restore, import, memory sizing), cypher-shell (ad-hoc queries, scripting, CI/CD), or neo4j-mcp (quick MCP server install). Does NOT cover Cypher query authoring — use neo4j-cypher-skill. Does NOT cover driver upgrades — use neo4j-migration-skill. Does NOT cover full MCP editor configuration — use neo4j-mcp-skill.
+> Use when working with Neo4j command-line tools — neo4j-cli (modern unified CLI — Cypher via Bolt, schema inspection, Aura management, Docker containers, credential management, agent skill catalog install; install with curl -sSfL https://neo4j.sh/install.sh | bash), neo4j-admin (backup, restore, import, memory sizing), cypher-shell (ad-hoc queries, scripting, CI/CD), or neo4j-mcp (quick MCP server install). Does NOT cover Cypher query authoring — use neo4j-cypher-skill. Does NOT cover driver upgrades — use neo4j-migration-skill. Does NOT cover full MCP editor configuration — use neo4j-mcp-skill. Does NOT cover the relate embedded engine (relatedb.ai) — use the relate skill; choice guide in neo4j-getting-started-skill.
 
 **Source:** [skills/neo4j-cli-tools-skill/SKILL.md](../../../skills/neo4j-cli-tools-skill/SKILL.md)  ·  **Domain:** [Analytics Engineering & LLM Operations](../../maps/analytics-engineering.md)  ·  **Table:** [skills.base](../../skills.base)  ·  **Index:** [Skills Index](../../index.md)
 

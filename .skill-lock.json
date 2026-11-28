@@ -8792,9 +8792,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/max-sixty/worktrunk.git",
       "skillPath": "skills/worktrunk/SKILL.md",
-      "skillFolderHash": "5481fc8c4cb5675a04d8a0032ac3e0c32bc84c14",
+      "skillFolderHash": "caa92f79bf9681e613f200292e1a709e96c07c41",
       "installedAt": "2026-08-13T09:15:09.693Z",
-      "updatedAt": "2026-11-23T18:02:20.014Z"
+      "updatedAt": "2026-11-28T15:29:25.118Z"
     },
     "ast-grep": {
       "source": "ast-grep/agent-skill",
@@ -9336,9 +9336,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/engineering/to-tickets/SKILL.md",
-      "skillFolderHash": "2dee20ad722a31c04ededf9f2d83842473573045",
+      "skillFolderHash": "f0d279fd436cfd2630f2b612cbb3068f3a745e20",
       "installedAt": "2026-08-20T03:52:19.232Z",
-      "updatedAt": "2026-10-10T12:50:01.926Z"
+      "updatedAt": "2026-11-28T15:29:26.213Z"
     },
     "triage": {
       "source": "mattpocock/skills",
@@ -9528,27 +9528,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper/SKILL.md",
-      "skillFolderHash": "f526b5adfc7fdea2bb00a3210dd4804a48161cf4",
+      "skillFolderHash": "2d7981c6652df2f329e1e7a9e43775cee0c37fd3",
       "installedAt": "2026-08-21T01:50:31.544Z",
-      "updatedAt": "2026-11-27T16:37:21.554Z"
+      "updatedAt": "2026-11-28T15:29:29.539Z"
     },
     "academic-paper-reviewer": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-paper-reviewer/SKILL.md",
-      "skillFolderHash": "a7065b782ece9cdb34132995f2c34b467469aa46",
+      "skillFolderHash": "be6e24e9a65195b0d6ad5d9f787cdec59704da58",
       "installedAt": "2026-08-21T01:50:31.549Z",
-      "updatedAt": "2026-11-26T16:51:50.392Z"
+      "updatedAt": "2026-11-28T15:29:32.188Z"
     },
     "academic-pipeline": {
       "source": "Imbad0202/academic-research-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/Imbad0202/academic-research-skills.git",
       "skillPath": "academic-pipeline/SKILL.md",
-      "skillFolderHash": "1ce3b8e54fa8191c9ed1aeed9aa313ccaebc71be",
+      "skillFolderHash": "a27bbcce5ce1f4c2ef6ddd7a91f0216f3ae75dc6",
       "installedAt": "2026-08-21T01:50:31.552Z",
-      "updatedAt": "2026-11-27T16:37:24.427Z"
+      "updatedAt": "2026-11-28T15:29:34.987Z"
     },
     "deep-research": {
       "source": "Imbad0202/academic-research-skills",
@@ -10373,9 +10373,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/apollographql/skills.git",
       "skillPath": "skills/apollo-mcp-server/SKILL.md",
-      "skillFolderHash": "7a6437442ecac05f2d7a3dfc9c9565707ad08594",
+      "skillFolderHash": "a85721810d1a6ff6e309bf26a3c843678b819ef8",
       "installedAt": "2026-08-23T17:17:21.658Z",
-      "updatedAt": "2026-10-28T12:49:03.432Z"
+      "updatedAt": "2026-11-28T15:29:36.066Z"
     },
     "apollo-router": {
       "source": "apollographql/skills",
@@ -10472,9 +10472,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-apps/SKILL.md",
-      "skillFolderHash": "c01c932f055d225773ef09f479a6a96ee9edc4c7",
+      "skillFolderHash": "e9c0250df657b1f92f8efd295d1357ba7a77e54d",
       "installedAt": "2026-08-23T17:20:36.114Z",
-      "updatedAt": "2026-11-27T16:37:29.527Z"
+      "updatedAt": "2026-11-28T15:29:37.689Z"
     },
     "databricks-apps-python": {
       "source": "databricks/databricks-agent-skills",
@@ -10499,9 +10499,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/databricks/databricks-agent-skills.git",
       "skillPath": "skills/databricks-dabs/SKILL.md",
-      "skillFolderHash": "0d9f37f61e3b2d36688f63e5577f87ffe2dcfa22",
+      "skillFolderHash": "2711e7b4d0db7927ed28c08acc4fe4302edc304f",
       "installedAt": "2026-08-23T17:20:36.129Z",
-      "updatedAt": "2026-10-10T12:50:46.688Z"
+      "updatedAt": "2026-11-28T15:29:40.738Z"
     },
     "databricks-data-discovery": {
       "source": "databricks/databricks-agent-skills",
@@ -10706,9 +10706,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-agent-memory-skill/SKILL.md",
-      "skillFolderHash": "e0a217ecfaad3582ce15c2429408a0e434654c07",
+      "skillFolderHash": "d72adab8e3a9c85a1971c8f0ba3421eb07bbc0a2",
       "installedAt": "2026-08-23T17:20:44.676Z",
-      "updatedAt": "2026-11-27T16:37:39.018Z"
+      "updatedAt": "2026-11-28T15:29:42.141Z"
     },
     "neo4j-aura-agent-skill": {
       "source": "neo4j-contrib/neo4j-skills",
@@ -10742,18 +10742,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-cli-tools-skill/SKILL.md",
-      "skillFolderHash": "5b82bb127063d394e1d6d740c5b041136c4b4358",
+      "skillFolderHash": "bc4dd4f42b79aaf351904540952885c0dda2fa6f",
       "installedAt": "2026-08-23T17:20:44.715Z",
-      "updatedAt": "2026-11-27T16:37:43.242Z"
+      "updatedAt": "2026-11-28T15:29:44.322Z"
     },
     "neo4j-cypher-skill": {
       "source": "neo4j-contrib/neo4j-skills",
       "sourceType": "github",
       "sourceUrl": "https://github.com/neo4j-contrib/neo4j-skills.git",
       "skillPath": "neo4j-cypher-skill/SKILL.md",
-      "skillFolderHash": "1e3af4125c2c53f1609b636c332bfa75f37bfcbe",
+      "skillFolderHash": "bcbf8aa21b7369e5a0e6581601adab061c8ccf37",
       "installedAt": "2026-08-23T17:20:44.721Z",
-      "updatedAt": "2026-11-27T16:37:45.365Z"
+      "updatedAt": "2026-11-28T15:29:45.506Z"
     },
     "neo4j-document-import-skill": {
       "source": "neo4j-contrib/neo4j-skills",
