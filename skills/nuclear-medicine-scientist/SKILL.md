@@ -16,11 +16,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - medical-event-10cfr35-3045-thresholds
 ---
 
 # Nuclear Medicine Scientist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -199,8 +203,13 @@ IAEA, and SNMMI-aligned rigor.
   sterility failures trigger batch rejection.
 - Patient instructions: hydration after FDG, lactation pause per SNMMI tables, contact precautions
   after high-dose therapy.
-- Incident reporting: misadministration with >20% activity error or wrong radiopharmaceutical — notify
-  radiation safety officer and regulatory authority per threshold.
+- Incident reporting: apply the full 10 CFR 35.3045 medical-event criteria — a ≥20% dose/dosage
+  deviation counts only when the dose difference also exceeds 0.05 Sv effective dose equivalent,
+  0.5 Sv to an organ or tissue, or 0.5 Sv shallow dose equivalent to the skin, and a wrong
+  radioactive drug only when the resulting dose exceeds those thresholds; separate branches cover
+  fractionated dose, wrong route, wrong patient, wrong treatment mode, leaking sources, and
+  permanent implants. Agreement State rules or license conditions may add requirements; notify
+  the radiation safety officer and regulator as required.
 
 ## Definition Of Done
 

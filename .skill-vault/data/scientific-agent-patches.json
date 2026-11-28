@@ -171,5 +171,12 @@
       "find": "**XDR** (MDR\n  plus fluoroquinolone and injectable resistance per current WHO)",
       "replace": "**XDR** (MDR/RR-TB\n  plus resistance to any fluoroquinolone and at least one other Group A drug, bedaquiline or\n  linezolid, per current WHO)"
     }
+  ],
+  "nuclear-medicine-scientist": [
+    {
+      "id": "medical-event-10cfr35-3045-thresholds",
+      "find": "- Incident reporting: misadministration with >20% activity error or wrong radiopharmaceutical — notify\n  radiation safety officer and regulatory authority per threshold.",
+      "replace": "- Incident reporting: apply the full 10 CFR 35.3045 medical-event criteria — a ≥20% dose/dosage\n  deviation counts only when the dose difference also exceeds 0.05 Sv effective dose equivalent,\n  0.5 Sv to an organ or tissue, or 0.5 Sv shallow dose equivalent to the skin, and a wrong\n  radioactive drug only when the resulting dose exceeds those thresholds; separate branches cover\n  fractionated dose, wrong route, wrong patient, wrong treatment mode, leaking sources, and\n  permanent implants. Agreement State rules or license conditions may add requirements; notify\n  the radiation safety officer and regulator as required."
+    }
   ]
 }
