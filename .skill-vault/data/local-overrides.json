@@ -5856,6 +5856,22 @@
       "source": "zhaoxuya520/reverse-skill",
       "find": "`../scripts/append-evidence.ps1`",
       "replace": "`../reverse-skill-router/scripts/append-evidence.ps1`"
+    },
+    {
+      "id": "skill-safety-1345-src-hunter-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "src-hunter/SKILL.md",
+      "find": "`../../field-journal/precedent-pentest.md`",
+      "replace": "`../../reverse-skill-router/field-journal/precedent-pentest.md`"
+    },
+    {
+      "id": "skill-safety-1345-src-hunter-tool-index",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "src-hunter/SKILL.md",
+      "find": "`../../tool-index.md`",
+      "replace": "`../../reverse-skill-router/tool-index.md`"
     }
   ],
   "ida-reverse": [
@@ -5872,6 +5888,14 @@
       "source": "zhaoxuya520/reverse-skill",
       "find": "`../tool-index.md`",
       "replace": "`../reverse-skill-router/tool-index.md`"
+    },
+    {
+      "id": "skill-safety-1345-debugger-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "references/debugger-and-auto-patch.md",
+      "find": "`../field-journal/precedent-reverse.md`",
+      "replace": "`../../reverse-skill-router/field-journal/precedent-reverse.md`"
     }
   ],
   "reverse-engineering": [
