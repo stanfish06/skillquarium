@@ -91,5 +91,12 @@
       "find": "- Ultrafast: group velocity dispersion (GVD) and third-order dispersion (TOD) chirp pulses; mode-locking\n  (Kerr lens, SESAM, NPR) produces pulse train with repetition rate f_rep = c/(2L). Time-bandwidth product\n  ΔtΔν ≈ 0.44 for transform-limited sech²; chirped pulses exceed this until compressed.",
       "replace": "- Ultrafast: group velocity dispersion (GVD) and third-order dispersion (TOD) chirp pulses; mode-locking\n  (Kerr lens, SESAM, NPR) produces pulse train with repetition rate f_rep = c/(2L). Time-bandwidth product\n  ΔtΔν ≈ 0.315 for transform-limited sech² intensity pulses (≈ 0.441 for Gaussian); chirped\n  pulses exceed the applicable transform limit until compressed."
     }
+  ],
+  "air-quality-scientist": [
+    {
+      "id": "pm25-annual-vs-24hr-design-values",
+      "find": "  - PM₂.₅ — 3-year average of annual 98th percentile of 24-hr concentrations per site; verify 2012\n    annual form (12 µg m⁻³) vs 2006 24-hr form (35 µg m⁻³) drives attainment.\n",
+      "replace": "  - PM₂.₅ annual (primary) — 9.0 µg m⁻³ (2024 reconsideration); design value is the annual mean\n    averaged over 3 years.\n  - PM₂.₅ 24-hr — 35 µg m⁻³; design value is the annual 98th percentile of 24-hr concentrations\n    averaged over 3 years. Check which form drives attainment per site against EPA's current\n    NAAQS table.\n"
+    }
   ]
 }

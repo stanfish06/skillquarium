@@ -17,11 +17,15 @@ metadata:
   upstream-updated: 2026-06-02
   source-count: 52
   scientific-agents-profile: true
+  local-patches:
+    - pm25-annual-vs-24hr-design-values
 ---
 
 # Air Quality Scientist Expert Profile
 
 Imported from [K-Dense-AI/scientific-agents](https://github.com/K-Dense-AI/scientific-agents) at commit `896ed6ed1e1a6686572db06ca59fd1c1b0055ca7`.
+
+Local corrections listed in `metadata.local-patches` are vault overlays, not upstream text.
 
 Use this skill when the task benefits from a senior domain practitioner's
 operating model: how they frame problems, select methods, stress-test
@@ -177,8 +181,11 @@ transport to concentration and dose — not from a single monitor reading alone.
 
 - **Units:** µg m⁻³ for mass; ppb for gases; AQI is a unitless index — do not mix with concentrations.
 - **Design values:**
-  - PM₂.₅ — 3-year average of annual 98th percentile of 24-hr concentrations per site; verify 2012
-    annual form (12 µg m⁻³) vs 2006 24-hr form (35 µg m⁻³) drives attainment.
+  - PM₂.₅ annual (primary) — 9.0 µg m⁻³ (2024 reconsideration); design value is the annual mean
+    averaged over 3 years.
+  - PM₂.₅ 24-hr — 35 µg m⁻³; design value is the annual 98th percentile of 24-hr concentrations
+    averaged over 3 years. Check which form drives attainment per site against EPA's current
+    NAAQS table.
   - O₃ — 3-year average of the fourth-highest daily maximum 8-hr value.
   - NO₂ — 1-hour and annual standards; near-road monitors required in urban cores.
   - Secondary (welfare-based) standards may drive vegetation-focused assessment separate from primary health.
