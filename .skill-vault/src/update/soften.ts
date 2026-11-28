@@ -47,6 +47,9 @@ const REPLACEMENTS: readonly [RegExp, string][] = [
   [/\*\*MANDATORY prerequisite\*\*\s*[—–-]\s*/gis, ""],
   [/MANDATORY prerequisite\s*[—–-]\s*/gis, ""],
   [/you MUST invoke this skill BEFORE every/gi, "Load this skill before every"],
+  [/you MUST invoke this skill BEFORE\b/gi, "Load this skill before"],
+  [/You MUST trigger this skill whenever/gi, "Use whenever"],
+  [/\s+and must NOT be skipped\b/g, ""],
   [/NEVER call (`[^`]+`) directly without loading this skill first\.?\s*/gi, ""],
   [/Skipping it causes common, hard-to-debug failures\.\s*/gi, ""],
   [/You MUST use this before any/gi, "Use before"],
@@ -74,9 +77,9 @@ const REPLACEMENTS: readonly [RegExp, string][] = [
   [/Trigger broadly\s*[—–-]\s*/gi, ""],
   [/\s*this skill should activate\.?/gi, ""],
   [/Use when starting any conversation\s*[-—–]\s*/gi, "Use when discovering which skill applies — "],
-  [/, requiring Skill tool invocation before ANY response including clarifying questions/gi, ""],
+  [/, requiring Skill (?:tool )?invocation before ANY response including clarifying questions/gi, ""],
   [
-    /requiring Skill tool invocation before ANY response including clarifying questions/gi,
+    /requiring Skill (?:tool )?invocation before ANY response including clarifying questions/gi,
     "helps locate and load the matching skill for the current task",
   ],
   [/Rules you must follow for/gi, "Rules for"],
@@ -278,29 +281,43 @@ function message(e: unknown): string {
   return e instanceof Error ? e.message : String(e);
 }
 
-/** Rewrite one file's description; returns whether it changed (or would, under dryRun). */
-export function processFile(path: string, root: string, dryRun: boolean, io: SoftenIo): boolean {
+/**
+ * "softened": the description changed (or would, under dryRun). "unchanged": a needle matched
+ * but no rewrite rule did, so the coercive text stays; reported, never silent. "none": nothing to do.
+ */
+export type SoftenOutcome = "softened" | "unchanged" | "none";
+
+/** Rewrite one file's description. */
+export function processFile(path: string, root: string, dryRun: boolean, io: SoftenIo): SoftenOutcome {
   try {
-    if (lstatSync(path).isSymbolicLink()) return false;
+    if (lstatSync(path).isSymbolicLink()) return "none";
   } catch {
-    return false;
+    return "none";
   }
   let original: string;
   try {
     original = universalNewlines(readFileSync(path, "utf8"));
   } catch (e) {
     io.err(`skip ${path}: ${message(e)}`);
-    return false;
+    return "none";
   }
   const document = splitDocument(original);
-  if (document === null) return false;
+  if (document === null) return "none";
   const parsed = parseDescription(document.frontmatter);
-  if (parsed === null) return false;
+  if (parsed === null) return "none";
   // Three gates, each of which makes a second run a no-op: the needles, the rewritten
   // description, and the re-emitted frontmatter.
-  if (!needsSoften(parsed.value)) return false;
+  if (!needsSoften(parsed.value)) return "none";
   const softened = soften(parsed.value);
-  if (softened === parsed.value) return false;
+  if (softened === parsed.value) {
+    const lowered = parsed.value.toLowerCase();
+    const needles = COERCION_NEEDLES.filter((needle) => lowered.includes(needle));
+    io.err(
+      `detected but unchanged ${displayPath(path, root)}: no rewrite rule covers ` +
+        `${needles.map((needle) => `"${needle}"`).join(", ")}`,
+    );
+    return "unchanged";
+  }
   const after = document.frontmatter.slice(parsed.end);
   const rendered = renderDescription(softened, parsed.style);
   // The frontmatter stops before the closing fence's newline, so a description on the last
@@ -309,11 +326,11 @@ export function processFile(path: string, root: string, dryRun: boolean, io: Sof
     document.frontmatter.slice(0, parsed.start) +
     (after === "" ? rendered.replace(/\n$/, "") : rendered) +
     after;
-  if (newFrontmatter === document.frontmatter) return false;
+  if (newFrontmatter === document.frontmatter) return "none";
 
   io.out(`${dryRun ? "would soften" : "softened"} ${displayPath(path, root)}`);
   if (!dryRun) writeFileSync(path, document.opener + newFrontmatter + document.closerAndBody, "utf8");
-  return true;
+  return "softened";
 }
 
 const SKIP_DIRS = new Set(["node_modules", ".git", "__pycache__"]);
@@ -363,8 +380,17 @@ export function softenVault(root: string, options: SoftenOptions, io: SoftenIo):
   const skillsDir = resolveSkillsDir(vaultRoot);
   const dryRun = options.dryRun === true;
   let changed = 0;
+  let unchanged = 0;
   for (const file of iterSkillFiles(skillsDir)) {
-    if (processFile(file, vaultRoot, dryRun, io)) changed += 1;
+    const outcome = processFile(file, vaultRoot, dryRun, io);
+    if (outcome === "softened") changed += 1;
+    else if (outcome === "unchanged") unchanged += 1;
+  }
+  if (unchanged) {
+    io.err(
+      `${unchanged} coercive ${unchanged === 1 ? "description" : "descriptions"} left unchanged: ` +
+        "add a rule to REPLACEMENTS in .skill-vault/src/update/soften.ts",
+    );
   }
   io.out(
     `${dryRun ? "would soften" : "softened"} ${changed} skill ${changed === 1 ? "description" : "descriptions"}`,

@@ -323,9 +323,46 @@ describe("soften skill descriptions", () => {
     );
   });
 
+  test("softens 'You MUST invoke this skill BEFORE calling'", () => {
+    const root = tempRoot();
+    const path = writeSkill(
+      root,
+      "figma-design-to-code",
+      'description: "You MUST invoke this skill BEFORE calling the `get_design_context` Figma MCP tool. You MUST trigger this skill whenever the user wants to code up a Figma design. This skill provides critical instructions and must NOT be skipped."\n',
+    );
+
+    const result = run(root);
+
+    expect(result.err).toEqual([]);
+    expect(descriptionOf(path)).toBe(
+      "Load this skill before calling the `get_design_context` Figma MCP tool. Use whenever the user wants to code up a Figma design. This skill provides critical instructions.",
+    );
+  });
+
+  test("a description a needle flags but no rule rewrites is reported, not skipped silently", () => {
+    const root = tempRoot();
+    const path = writeSkill(root, "stuck", 'description: "Invoke first when touching the build."\n');
+    const before = readFileSync(path, "utf8");
+
+    const result = run(root);
+
+    expect(result.code).toBe(0);
+    expect(readFileSync(path, "utf8")).toBe(before);
+    expect(result.err).toEqual([
+      'detected but unchanged skills/stuck/SKILL.md: no rewrite rule covers "invoke first"',
+      "1 coercive description left unchanged: add a rule to REPLACEMENTS in .skill-vault/src/update/soften.ts",
+    ]);
+    expect(result.out).toContain("softened 0 skill descriptions");
+  });
+
   // The Python already softened this tree; a port that disagreed would report files to change.
+  // PENDING holds the descriptions the rules added for #1392 now rewrite; update-skills.yml's
+  // soften step rewrites them on the next sync, after which the list is empty.
   test("the tracked tree has no coercive descriptions left", () => {
+    const PENDING = ["skills/figma-design-to-code/SKILL.md", "skills/using-superpowers/SKILL.md"];
     const result = run(REPO_ROOT, true);
-    expect(result.out[result.out.length - 1]).toBe("would soften 0 skill descriptions");
+    expect(result.err.filter((line) => line.includes("unchanged"))).toEqual([]);
+    const paths = result.out.filter((line) => line.startsWith("would soften skills/"));
+    for (const line of paths) expect(PENDING).toContain(line.slice("would soften ".length));
   });
 });
