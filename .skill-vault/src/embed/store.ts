@@ -144,18 +144,26 @@ export function pruneOrphans(root: string, keep: Set<string>): string[] {
 }
 
 /**
- * Manifest ids whose SKILL.md hash differs, ids on disk the manifest never saw, and ids the
- * manifest lists whose `<id>.f16` is gone. Sorted. The row-file check is what makes a lost or
- * hand-deleted row visible: readIndex silently skips it, so hash-only staleness reported the
- * index clean while the skill had dropped out of semantic search.
+ * The two ways a skill on disk can be out of step with the index, each sorted:
+ * - `missing`: no vector at all -- the manifest never saw the id, or its `<id>.f16` is gone. The
+ *   skill cannot be a semantic hit, and readIndex silently skips a lost row file.
+ * - `changed`: a vector exists but its recorded SKILL.md hash no longer matches (or SKILL.md is
+ *   unreadable), so the skill ranks on its previous text.
+ * Entries whose SKILL.md does not exist are not skills and are skipped.
  */
-export function staleSkills(root: string, manifest: Manifest | null, entries: SkillEntry[]): string[] {
+export function vectorGaps(
+  root: string,
+  manifest: Manifest | null,
+  entries: SkillEntry[],
+): { changed: string[]; missing: string[] } {
   const version = manifest?.hashVersion ?? HASH_VERSION;
-  const stale: string[] = [];
+  const changed: string[] = [];
+  const missing: string[] = [];
   for (const e of entries) {
+    if (!existsSync(e.file)) continue;
     const recorded = manifest?.skills[e.id];
-    if (!recorded) {
-      stale.push(e.id);
+    if (!recorded || !existsSync(embedPath(root, `${e.id}.f16`))) {
+      missing.push(e.id);
       continue;
     }
     let text: string;
@@ -163,16 +171,18 @@ export function staleSkills(root: string, manifest: Manifest | null, entries: Sk
       text = readFileSync(e.file, "utf8");
     } catch {
       // Unreadable now but listed as embedded: report it rather than silently keeping the vector.
-      stale.push(e.id);
+      changed.push(e.id);
       continue;
     }
-    if (!matchesRecorded(text, e.file, recorded.sha256, version)) {
-      stale.push(e.id);
-      continue;
-    }
-    if (!existsSync(embedPath(root, `${e.id}.f16`))) stale.push(e.id);
+    if (!matchesRecorded(text, e.file, recorded.sha256, version)) changed.push(e.id);
   }
-  return stale.sort();
+  return { changed: changed.sort(), missing: missing.sort() };
+}
+
+/** Every id vectorGaps reports, changed and missing together: what a refresh re-embeds. Sorted. */
+export function staleSkills(root: string, manifest: Manifest | null, entries: SkillEntry[]): string[] {
+  const { changed, missing } = vectorGaps(root, manifest, entries);
+  return [...changed, ...missing].sort();
 }
 
 /** What migrateHashes did: the rewritten manifest plus the ids on each side of the proof. */

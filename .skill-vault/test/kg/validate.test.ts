@@ -58,8 +58,10 @@ describe.skipIf(!existsSync(COMMITTED))("the committed graph against validate.py
   });
 
   test("the EMBED row reads the real vault/embeddings state", () => {
-    const row = rowOf(validateGraph(graph, loadDeps(REPO)), "stale vectors");
+    const report = validateGraph(graph, loadDeps(REPO));
+    const row = rowOf(report, "stale vectors");
     expect(["PASS", "WARN", "NOT_YET"]).toContain(row.status); // never FAIL
+    for (const r of report.rows.filter((r) => r.kind === "EMBED")) expect(r.status).not.toBe("FAIL");
   });
 });
 
@@ -340,6 +342,45 @@ describe("the EMBED row", () => {
         id: "stale vectors",
         status: "WARN",
         detail: "1/4 skills changed since embedding — run embed",
+      });
+      expect(rowOf(report, "missing vectors").status).toBe("PASS");
+      expect(failed(report)).toEqual([]);
+    } finally {
+      vault.cleanup();
+    }
+  });
+
+  test("names skills with no vector in their own warning row, apart from changed ones", () => {
+    const vault = fixtureRoot();
+    try {
+      // alpha: recorded with a stale hash (changed). beta: recorded but its .f16 is gone. gamma:
+      // never recorded. A folder without SKILL.md is not a skill and is not reported.
+      for (const id of ["alpha", "workflow"]) {
+        writeSkill(vault.root, id, { desc: new Float32Array(4), body: new Float32Array(4) });
+      }
+      write(join(vault.root, "skills/not-a-skill/notes.md"), "# notes\n");
+      write(
+        join(vault.root, "vault/embeddings/manifest.json"),
+        JSON.stringify({
+          dim: 4,
+          hashVersion: HASH_VERSION,
+          model: "test",
+          skills: Object.fromEntries(
+            ["alpha", "beta", "workflow"].map((id) => [
+              id,
+              { sha256: id === "alpha" ? "0".repeat(64) : sha256Of(vault.root, id), updated: "2026-01-01" },
+            ]),
+          ),
+        }),
+      );
+      const graph = JSON.parse(readFileSync(join(vault.root, "vault/graph/graph.json"), "utf8")) as Graph;
+      const report = validateGraph(graph, loadDeps(vault.root));
+      expect(rowOf(report, "stale vectors").detail).toBe("1/4 skills changed since embedding — run embed");
+      expect(rowOf(report, "missing vectors")).toEqual({
+        kind: "EMBED",
+        id: "missing vectors",
+        status: "WARN",
+        detail: "2 skills have no vector and cannot be semantic hits — run embed: beta, gamma",
       });
       expect(failed(report)).toEqual([]);
     } finally {

@@ -15,6 +15,7 @@ import {
   removedSkills,
   removeSkill,
   staleSkills,
+  vectorGaps,
   writeManifest,
   writeSkill,
 } from "../../src/embed/store";
@@ -205,6 +206,29 @@ describe("staleSkills / removedSkills", () => {
     const idx = readIndex(root);
     expect(idx?.ids).toEqual(["a", "c"]);
     expect([...(idx?.stale ?? [])]).toEqual(["b"]);
+  });
+
+  test("vectorGaps splits changed vectors from missing ones and skips folders without SKILL.md", () => {
+    const root = tmp("sq-store-");
+    const entries = ["a", "b", "c", "d"].map((id) => skill(root, id));
+    const manifest: Manifest = { model: "fake-embed", dim: FAKE_DIM, hashVersion: HASH_VERSION, skills: {} };
+    for (const e of entries.slice(0, 3)) {
+      writeSkill(root, e.id, { desc: fakeVector(e.id), body: fakeVector(e.id) });
+      manifest.skills[e.id] = { sha256: skillContentHash(e.file), updated: "2026-01-01" };
+    }
+    manifest.skills.a = { sha256: "deadbeef", updated: "2026-01-01" }; // changed
+    rmSync(join(root, EMBED_DIR, "b.f16")); // recorded, row file gone
+    // d was never recorded; e is a folder with no SKILL.md.
+    const ghost: SkillEntry = {
+      id: "e",
+      dir: join(root, "skills", "e"),
+      file: join(root, "skills", "e", "SKILL.md"),
+    };
+    mkdirSync(ghost.dir, { recursive: true });
+
+    expect(vectorGaps(root, manifest, [...entries, ghost])).toEqual({ changed: ["a"], missing: ["b", "d"] });
+    expect(staleSkills(root, manifest, [...entries, ghost])).toEqual(["a", "b", "d"]);
+    expect(vectorGaps(root, null, entries)).toEqual({ changed: [], missing: ["a", "b", "c", "d"] });
   });
 
   test("hashSkillText matches a known digest of the text it is given", () => {
