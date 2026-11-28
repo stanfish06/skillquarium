@@ -7,7 +7,7 @@ import type { EvalReport } from "./evalSet";
 import { runEval } from "./evalSet";
 import { destroyFinder, type FuzzyRanker, fffRanker } from "./fff";
 import { loadGraph } from "./graph";
-import { grepSkills } from "./grep";
+import { type GrepHit, grepSkills } from "./grep";
 import { type HybridResult, type QueryDeps, type QueryOptions, runQuery, SIGNAL_ORDER } from "./query";
 import { loadVectorIndex, type VectorIndex } from "./vectors";
 
@@ -15,6 +15,8 @@ interface CommandModule {
   run: Command;
   help: string;
 }
+
+const GREP_LIMIT = 200;
 
 const queryHelp = `usage: skillquarium [--json] query <text...> [--k N] [--no-semantic] [--no-fuzzy] [--no-bpe] [--explain] [--eval]
 
@@ -33,10 +35,16 @@ pieces of the model 'skillquarium tokenizer' trains, where the list lacks them. 
   --explain       add each result's per-signal rank, fused contribution and cosine
   --eval          score the pipeline over data/retrieval-eval.jsonl instead of querying`;
 
-const grepHelp = `usage: skillquarium [--json] grep <pattern> [-- rg flags]
+const grepHelp = `usage: skillquarium [--json] grep <pattern> [--limit N] [-- rg flags]
 
 Search the text of skills/ with ripgrep, or with the fff index when rg is not installed.
-Results are grouped by skill.`;
+Results are grouped by skill, after a header with the total match and skill counts.
+
+  --limit N   print at most N matches (default ${GREP_LIMIT}; 0 prints all). A trailer says how
+              many were left out. With --json the array is capped the same way and the
+              trailer goes to stderr.
+  -- flags    passed to ripgrep before the pattern, e.g. \`grep uv -- -w\` to match uv as a
+              whole word instead of inside "Vancouver".`;
 
 interface QueryArgs extends QueryOptions {
   text: string;
@@ -184,31 +192,72 @@ const queryRun: Command = async (args, ctx) => {
   }
 };
 
+function parseGrepArgs(head: string[]): { pattern: string; limit: number } {
+  const words: string[] = [];
+  let limit = GREP_LIMIT;
+  for (let i = 0; i < head.length; i++) {
+    const arg = head[i] ?? "";
+    let value: string | undefined;
+    if (arg === "--limit") value = head[++i];
+    else if (arg.startsWith("--limit=")) value = arg.slice("--limit=".length);
+    else {
+      words.push(arg);
+      continue;
+    }
+    if (value === undefined || !/^\d+$/.test(value)) {
+      throw new UsageError("--limit needs a whole number (0 for no limit)");
+    }
+    limit = Number(value);
+  }
+  const pattern = words[0];
+  if (pattern === undefined || words.length > 1) throw new UsageError("exactly one pattern is required");
+  return { pattern, limit };
+}
+
+function countSkills(hits: GrepHit[]): number {
+  return new Set(hits.map((hit) => hit.skill)).size;
+}
+
 const grepRun: Command = async (args, ctx) => {
   const split = args.indexOf("--");
   const head = split < 0 ? args : args.slice(0, split);
   const rgArgs = split < 0 ? [] : args.slice(split + 1);
-  const pattern = head[0];
-  if (pattern === undefined || head.length > 1) {
-    ctx.err("skillquarium grep: exactly one pattern is required");
+  let pattern: string;
+  let limit: number;
+  try {
+    ({ pattern, limit } = parseGrepArgs(head));
+  } catch (e) {
+    if (!(e instanceof UsageError)) throw e;
+    ctx.err(`skillquarium grep: ${e.message}`);
     ctx.err(grepHelp);
     return 2;
   }
   try {
     const hits = await grepSkills(ctx.root, pattern, { rgArgs });
+    const shown = limit > 0 ? hits.slice(0, limit) : hits;
+    const omitted = hits.slice(shown.length);
+    const trailer = omitted.length
+      ? `… ${omitted.length} more matches in ${countSkills(omitted)} skills (use --limit)`
+      : "";
     if (ctx.json) {
-      ctx.out(JSON.stringify(hits, null, 1));
+      ctx.out(JSON.stringify(shown, null, 1));
+      if (trailer) ctx.err(trailer);
       return 0;
     }
+    if (hits.length === 0) {
+      ctx.err(`no matches for ${pattern}`);
+      return 0;
+    }
+    ctx.out(`${hits.length} matches in ${countSkills(hits)} skills`);
     let current = "";
-    for (const hit of hits) {
+    for (const hit of shown) {
       if (hit.skill !== current) {
         current = hit.skill;
         ctx.out(hit.skill);
       }
       ctx.out(`  ${hit.file}:${hit.line}: ${hit.text.trim()}`);
     }
-    if (hits.length === 0) ctx.err(`no matches for ${pattern}`);
+    if (trailer) ctx.out(trailer);
     return 0;
   } catch (e) {
     ctx.err(`skillquarium grep: ${e instanceof Error ? e.message : String(e)}`);

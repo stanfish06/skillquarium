@@ -1,5 +1,6 @@
 import { afterAll, expect, test } from "bun:test";
-import { copyFileSync, mkdirSync } from "node:fs";
+import { copyFileSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { type ContextOverrides, main } from "../../src/cli";
 import { HASH_VERSION, skillContentHash } from "../../src/embed/hash";
@@ -144,3 +145,42 @@ test("bpe appends after the ASCII list and never reorders or drops it", async ()
     expect(ascii.map((r) => r.skill)).not.toContain(e.skill);
   }
 }, 20_000);
+
+/** A vault holding only skills/: three skills with two "needle" lines each. */
+function grepVault(): string {
+  const root = mkdtempSync(join(tmpdir(), "sq-grep-cmd-"));
+  cleanups.push(() => rmSync(root, { recursive: true, force: true }));
+  for (const id of ["a", "b", "c"]) {
+    mkdirSync(join(root, "skills", id), { recursive: true });
+    writeFileSync(join(root, "skills", id, "SKILL.md"), `---\nname: ${id}\n---\n\nneedle one\nneedle two\n`);
+  }
+  return root;
+}
+
+test("grep prints the totals, caps at --limit and says what it left out", async () => {
+  const root = grepVault();
+  const c = capture();
+  expect(await main(["--root", root, "grep", "needle", "--limit", "3"], c.overrides)).toBe(0);
+  expect(c.out[0]).toBe("6 matches in 3 skills");
+  expect(c.out.filter((l) => l.includes("needle"))).toHaveLength(3);
+  expect(c.out.at(-1)).toBe("… 3 more matches in 2 skills (use --limit)");
+
+  const all = capture();
+  expect(await main(["--root", root, "grep", "needle", "--limit=0"], all.overrides)).toBe(0);
+  expect(all.out.filter((l) => l.includes("needle"))).toHaveLength(6);
+  expect(all.out.some((l) => l.includes("more matches"))).toBe(false);
+}, 20_000);
+
+test("grep --json caps the array and puts the trailer on stderr", async () => {
+  const root = grepVault();
+  const c = capture();
+  expect(await main(["--root", root, "--json", "grep", "needle", "--limit", "2"], c.overrides)).toBe(0);
+  expect(JSON.parse(c.out.join("\n"))).toHaveLength(2);
+  expect(c.err).toEqual(["… 4 more matches in 2 skills (use --limit)"]);
+}, 20_000);
+
+test("grep rejects a --limit that is not a whole number", async () => {
+  const c = capture();
+  expect(await main(["--root", grepVault(), "grep", "needle", "--limit", "-1"], c.overrides)).toBe(2);
+  expect(c.err[0]).toContain("--limit needs a whole number");
+});
