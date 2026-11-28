@@ -5968,5 +5968,55 @@
       "find": "a2p-10dlc/onboarding-is)",
       "replace": "a2p-10dlc/onboarding-isv)"
     }
+  ],
+  "playwright-best-practices": [
+    {
+      "id": "skill-health-1309-network-advanced-error-testing",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "advanced/network-advanced.md",
+      "find": "](error-testing.md#offline-testing)",
+      "replace": "](../debugging/error-testing.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-network-advanced-service-workers",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "advanced/network-advanced.md",
+      "find": "](service-workers.md#offline-testing)",
+      "replace": "](../browser-apis/service-workers.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-service-workers-error-testing",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "browser-apis/service-workers.md",
+      "find": "](error-testing.md#offline-testing)",
+      "replace": "](../debugging/error-testing.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-error-testing-service-workers",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "debugging/error-testing.md",
+      "find": "](service-workers.md#offline-testing)",
+      "replace": "](../browser-apis/service-workers.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-flaky-tests-assertions-waiting",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "debugging/flaky-tests.md",
+      "find": "](assertions-waiting.md#waiting-strategies)",
+      "replace": "](../core/assertions-waiting.md#waiting-strategies)"
+    },
+    {
+      "id": "skill-health-1309-performance-fixtures-hooks",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "infrastructure-ci-cd/performance.md",
+      "find": "](fixtures-hooks.md#authentication-patterns)",
+      "replace": "](../core/fixtures-hooks.md#authentication-patterns)"
+    }
   ]
 }
