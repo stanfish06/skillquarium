@@ -5799,5 +5799,105 @@
       "find": "        \"output_format\": \"pdb\",\n        \"molecules\": [\n            {\n                \"type\": \"protein\",\n                \"sequence\": query_sequence,\n                \"diffusion_samples\": 1,\n                \"msa\": msa_data\n            }",
       "replace": "        \"output_format\": \"pdb\",\n        \"diffusion_samples\": 1,\n        \"molecules\": [\n            {\n                \"type\": \"protein\",\n                \"sequence\": query_sequence,\n                \"msa\": msa_data\n            }"
     }
+  ],
+  "pentest-tools": [
+    {
+      "id": "skill-safety-1345-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../field-journal/precedent-pentest.md`",
+      "replace": "`../reverse-skill-router/field-journal/precedent-pentest.md`"
+    },
+    {
+      "id": "skill-safety-1345-scope-contract",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../ops/scope-contract.md`",
+      "replace": "`../reverse-skill-router/ops/scope-contract.md`"
+    },
+    {
+      "id": "skill-safety-1345-tool-index",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../tool-index.md`",
+      "replace": "`../reverse-skill-router/tool-index.md`"
+    },
+    {
+      "id": "skill-safety-1345-append-evidence",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../scripts/append-evidence.ps1`",
+      "replace": "`../reverse-skill-router/scripts/append-evidence.ps1`"
+    }
+  ],
+  "ida-reverse": [
+    {
+      "id": "skill-safety-1345-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../field-journal/precedent-reverse.md`",
+      "replace": "`../reverse-skill-router/field-journal/precedent-reverse.md`"
+    },
+    {
+      "id": "skill-safety-1345-tool-index",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../tool-index.md`",
+      "replace": "`../reverse-skill-router/tool-index.md`"
+    }
+  ],
+  "reverse-engineering": [
+    {
+      "id": "skill-safety-1345-community-skills",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../references/community-security-skills.md`",
+      "replace": "`../reverse-skill-router/references/community-security-skills.md`"
+    },
+    {
+      "id": "skill-safety-1345-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../field-journal/precedent-reverse.md`",
+      "replace": "`../reverse-skill-router/field-journal/precedent-reverse.md`"
+    },
+    {
+      "id": "skill-safety-1345-tool-index",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../tool-index.md`",
+      "replace": "`../reverse-skill-router/tool-index.md`"
+    },
+    {
+      "id": "skill-safety-1345-adf",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../ops/analysis-decision-framework.md`",
+      "replace": "`../reverse-skill-router/ops/analysis-decision-framework.md`"
+    },
+    {
+      "id": "skill-safety-1345-seed-014",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "languages-compiled.md",
+      "find": "](../field-journal/seed-014_unity-il2cpp-reverse.md)",
+      "replace": "](../reverse-skill-router/field-journal/seed-014_unity-il2cpp-reverse.md)"
+    },
+    {
+      "id": "skill-safety-1345-workflow-adf",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "references/re-agent-workflow.md",
+      "find": "](../../ops/analysis-decision-framework.md)",
+      "replace": "](../../reverse-skill-router/ops/analysis-decision-framework.md)"
+    },
+    {
+      "id": "skill-safety-1345-workflow-blindspot",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "references/re-agent-workflow.md",
+      "find": "](../../ops/analysis-blindspot-cookbook.md)",
+      "replace": "](../../reverse-skill-router/ops/analysis-blindspot-cookbook.md)"
+    }
   ]
 }
