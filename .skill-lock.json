@@ -13026,6 +13026,52 @@
       "skillFolderHash": "e4ffbcb9ffcb0fc6ce8df35764692fb793e7bbf7",
       "installedAt": "2026-11-27T01:09:12.262Z",
       "updatedAt": "2026-11-27T01:09:12.262Z"
+    },
+    "k6-browser-test": {
+      "source": "grafana/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/grafana/skills.git",
+      "skillPath": "skills/grafana-k6/k6-browser-test/SKILL.md",
+      "skillFolderHash": "c397cfe029c2414cdf5b1f2883052b5339fbba4e",
+      "pluginName": "grafana-k6",
+      "installedAt": "2026-11-28T11:25:55.889Z",
+      "updatedAt": "2026-11-28T11:25:55.889Z"
+    },
+    "prisma-orm-setup": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/prisma/skills.git",
+      "skillPath": "prisma-orm-setup/SKILL.md",
+      "skillFolderHash": "b3c0da10711a5e66f7ec6b909525ff7f5873d7c1",
+      "installedAt": "2026-11-28T11:26:06.429Z",
+      "updatedAt": "2026-11-28T11:26:06.429Z"
+    },
+    "prisma-postgres-upgrade": {
+      "source": "prisma/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/prisma/skills.git",
+      "skillPath": "prisma-postgres-upgrade/SKILL.md",
+      "skillFolderHash": "d84ede3340ff9c6dce356b94a74c503eaa8c59f4",
+      "installedAt": "2026-11-28T11:26:06.433Z",
+      "updatedAt": "2026-11-28T11:26:06.433Z"
+    },
+    "megacave": {
+      "source": "juliusbrussee/caveman",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
+      "skillPath": "skills/megacave/SKILL.md",
+      "skillFolderHash": "95ace2804e684d6f4dd80a9b9cc203f66e0d8826",
+      "installedAt": "2026-11-28T11:26:16.636Z",
+      "updatedAt": "2026-11-28T11:26:16.636Z"
+    },
+    "ultracave": {
+      "source": "juliusbrussee/caveman",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/juliusbrussee/caveman.git",
+      "skillPath": "skills/ultracave/SKILL.md",
+      "skillFolderHash": "4046bb0979819379d3f8d052c229bb6ecc2951e6",
+      "installedAt": "2026-11-28T11:26:16.642Z",
+      "updatedAt": "2026-11-28T11:26:16.642Z"
     }
   },
   "dismissed": {

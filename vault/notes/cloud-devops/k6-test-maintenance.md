@@ -21,6 +21,7 @@ created: 2026-08-23
 ## Related skills
 
 - [k6](../../notes/cloud-devops/k6.md) — Generate, validate, and review k6 test scripts — load, stress, spike, soak, smoke, breakpoint, functional, and protocol
+- [k6-browser-test](../../notes/cloud-devops/k6-browser-test.md) — Generate a working k6 browser test (k6/browser) from a plain-language description of a user journey — no CSS selectors or technical detail needed
 - [k6-cloud-investigate-test](../../notes/cloud-devops/k6-cloud-investigate-test.md) — Investigate a Grafana Cloud k6 test — describe the script, list run history, identify pass/fail status, pull raw metric time-series and log lines for one or more runs, and (if asked)...
 - [k6-trend-analysis](../../notes/cloud-devops/k6-trend-analysis.md) — Analyze Grafana Cloud k6 test run trends over time
 

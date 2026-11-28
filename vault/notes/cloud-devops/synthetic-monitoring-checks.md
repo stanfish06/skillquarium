@@ -21,6 +21,7 @@ created: 2026-08-23
 ## Related skills
 
 - [k6](../../notes/cloud-devops/k6.md) — Generate, validate, and review k6 test scripts — load, stress, spike, soak, smoke, breakpoint, functional, and protocol
+- [k6-browser-test](../../notes/cloud-devops/k6-browser-test.md) — Generate a working k6 browser test (k6/browser) from a plain-language description of a user journey — no CSS selectors or technical detail needed
 - [terraform](../../notes/cloud-devops/terraform.md) — Terraform and OpenTofu infrastructure-as-code (IaC) — declare cloud/SaaS resources in HCL, manage state with remote backends and locking, author and consume modules, and run the...
 - [validation](../../notes/software-dev/validation.md) — Use when Codex is already in the validation phase of a security scan or the user explicitly asks to determine whether one or more candidate security findings are valid
 

@@ -20,6 +20,7 @@ created: 2026-08-23
 
 ## Related skills
 
+- [prisma-orm-setup](../../notes/software-dev/prisma-orm-setup.md) — Set up Prisma ORM in an application, connect its database, or troubleshoot the connection of an existing Prisma 6, 7, or 8 app
 - [setup](../../notes/vault-meta/setup.md) — Verify Daloopa MCP connection and show available skills
 
 %% ---8<--- personal notes below are preserved on re-run ---8<--- %%
