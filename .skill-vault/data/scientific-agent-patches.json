@@ -152,5 +152,12 @@
       "find": "  second-line obeticholic acid or fibrates per response criteria (Paris II); monitor for pruritus\n",
       "replace": "  second-line fibrates per response criteria (Paris II) (obeticholic acid's US PBC accelerated\n  approval was withdrawn in November 2025; check current local approvals); monitor for pruritus\n"
     }
+  ],
+  "hematologist": [
+    {
+      "id": "voxelotor-withdrawn",
+      "find": "—hydroxyurea, voxelotor, and crizanlizumab\n  modify but do not eliminate acute management rules.",
+      "replace": "—hydroxyurea and crizanlizumab\n  modify but do not eliminate acute management rules (voxelotor was withdrawn worldwide in\n  September 2024)."
+    }
   ]
 }
