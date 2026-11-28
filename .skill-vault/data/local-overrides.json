@@ -5032,6 +5032,34 @@
       "source": "langchain-ai/langchain-skills",
       "find": "langgraph build -t my-image --base-image langchain/langgraph-server:0.2.18  # pin base version\n",
       "replace": "langgraph build -t my-image --base-image langchain/langgraph-server:0.16-py3.12  # pin base version — see https://hub.docker.com/r/langchain/langgraph-server/tags for the current tags\n"
+    },
+    {
+      "id": "skill-health-1355-debugger-port",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "langgraph up --debugger-port 8124          # serve debugger UI\nlanggraph up --wait",
+      "replace": "langgraph up --wait"
+    },
+    {
+      "id": "skill-health-1355-deploy-docker",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "Build and deploy to LangGraph Platform (LangSmith Deployments). Requires Docker. On Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.",
+      "replace": "Build and deploy to LangGraph Platform (LangSmith Deployments). Builds locally with Docker when it is available and remotely otherwise (force either with `--remote` / `--no-remote`). For local builds on Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`."
+    },
+    {
+      "id": "skill-health-1355-agent-server-type",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "langgraph deploy --deployment-type prod    # production deployment (default: dev)",
+      "replace": "langgraph deploy --agent-server-type dedicated  # dedicated (production) Agent Server (default: serverless)"
+    },
+    {
+      "id": "skill-health-1355-gotcha-docker",
+      "issue": 1355,
+      "source": "langchain-ai/langchain-skills",
+      "find": "- **`langgraph deploy` requires Docker** — On Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`.",
+      "replace": "- **`langgraph deploy` does not require Docker** — It builds locally when Docker is available and remotely otherwise (`--remote` / `--no-remote` to force either). For local builds on Apple Silicon (M1/M2/M3), Docker Buildx is also required for cross-compiling to `linux/amd64`."
     }
   ],
   "exploratory-data-analysis": [
@@ -5752,6 +5780,316 @@
       "source": "grafana/skills",
       "find": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed)\n",
       "replace": "- [Helm chart `mimir-distributed`](https://github.com/grafana/mimir/tree/main/operations/helm/charts/mimir-distributed) (deprecation notice: [grafana/mimir#17112](https://github.com/grafana/mimir/issues/17112))\n"
+    }
+  ],
+  "pulumi-terraform-to-pulumi": [
+    {
+      "id": "skill-health-1375-plugins-json",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "such as `[{\"name\":\"aws\",\"version\":\"7.12.0\"}]`.",
+      "replace": "such as `[{\"name\":\"aws\",\"version\":\"7.55.0\"}]`."
+    },
+    {
+      "id": "skill-health-1375-npm",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "npm install @pulumi/aws@7.12.0",
+      "replace": "npm install @pulumi/aws@7.55.0"
+    },
+    {
+      "id": "skill-health-1375-pip",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "pip install pulumi_aws==7.12.0",
+      "replace": "pip install pulumi_aws==7.55.0"
+    },
+    {
+      "id": "skill-health-1375-go",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "go get github.com/pulumi/pulumi-aws/sdk/v7@v7.12.0",
+      "replace": "go get github.com/pulumi/pulumi-aws/sdk/v7@v7.55.0"
+    },
+    {
+      "id": "skill-health-1375-dotnet",
+      "issue": 1375,
+      "source": "pulumi/agent-skills",
+      "find": "dotnet add package Pulumi.Aws --version 7.12.0",
+      "replace": "dotnet add package Pulumi.Aws --version 7.55.0"
+    }
+  ],
+  "msa-structure-prediction-pipeline": [
+    {
+      "id": "skill-health-1294-diffusion-samples-level",
+      "issue": 1294,
+      "source": "NVIDIA-BioNeMo/bionemo-agent-toolkit",
+      "find": "        \"output_format\": \"pdb\",\n        \"molecules\": [\n            {\n                \"type\": \"protein\",\n                \"sequence\": query_sequence,\n                \"diffusion_samples\": 1,\n                \"msa\": msa_data\n            }",
+      "replace": "        \"output_format\": \"pdb\",\n        \"diffusion_samples\": 1,\n        \"molecules\": [\n            {\n                \"type\": \"protein\",\n                \"sequence\": query_sequence,\n                \"msa\": msa_data\n            }"
+    }
+  ],
+  "pentest-tools": [
+    {
+      "id": "skill-safety-1345-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../field-journal/precedent-pentest.md`",
+      "replace": "`../reverse-skill-router/field-journal/precedent-pentest.md`"
+    },
+    {
+      "id": "skill-safety-1345-scope-contract",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../ops/scope-contract.md`",
+      "replace": "`../reverse-skill-router/ops/scope-contract.md`"
+    },
+    {
+      "id": "skill-safety-1345-tool-index",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../tool-index.md`",
+      "replace": "`../reverse-skill-router/tool-index.md`"
+    },
+    {
+      "id": "skill-safety-1345-append-evidence",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../scripts/append-evidence.ps1`",
+      "replace": "`../reverse-skill-router/scripts/append-evidence.ps1`"
+    }
+  ],
+  "ida-reverse": [
+    {
+      "id": "skill-safety-1345-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../field-journal/precedent-reverse.md`",
+      "replace": "`../reverse-skill-router/field-journal/precedent-reverse.md`"
+    },
+    {
+      "id": "skill-safety-1345-tool-index",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../tool-index.md`",
+      "replace": "`../reverse-skill-router/tool-index.md`"
+    }
+  ],
+  "reverse-engineering": [
+    {
+      "id": "skill-safety-1345-community-skills",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../references/community-security-skills.md`",
+      "replace": "`../reverse-skill-router/references/community-security-skills.md`"
+    },
+    {
+      "id": "skill-safety-1345-field-journal",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../field-journal/precedent-reverse.md`",
+      "replace": "`../reverse-skill-router/field-journal/precedent-reverse.md`"
+    },
+    {
+      "id": "skill-safety-1345-tool-index",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../tool-index.md`",
+      "replace": "`../reverse-skill-router/tool-index.md`"
+    },
+    {
+      "id": "skill-safety-1345-adf",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "find": "`../ops/analysis-decision-framework.md`",
+      "replace": "`../reverse-skill-router/ops/analysis-decision-framework.md`"
+    },
+    {
+      "id": "skill-safety-1345-seed-014",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "languages-compiled.md",
+      "find": "](../field-journal/seed-014_unity-il2cpp-reverse.md)",
+      "replace": "](../reverse-skill-router/field-journal/seed-014_unity-il2cpp-reverse.md)"
+    },
+    {
+      "id": "skill-safety-1345-workflow-adf",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "references/re-agent-workflow.md",
+      "find": "](../../ops/analysis-decision-framework.md)",
+      "replace": "](../../reverse-skill-router/ops/analysis-decision-framework.md)"
+    },
+    {
+      "id": "skill-safety-1345-workflow-blindspot",
+      "issue": 1345,
+      "source": "zhaoxuya520/reverse-skill",
+      "file": "references/re-agent-workflow.md",
+      "find": "](../../ops/analysis-blindspot-cookbook.md)",
+      "replace": "](../../reverse-skill-router/ops/analysis-blindspot-cookbook.md)"
+    }
+  ],
+  "airflow": [
+    {
+      "id": "skill-health-1268-token-env-reference",
+      "issue": 1268,
+      "source": "astronomer/agents",
+      "find": "af instance add prod --url https://airflow.example.com --token \"$API_TOKEN\"\n",
+      "replace": "# Single quotes store the ${VAR} reference, not the secret: inside a project, `add`\n# writes to the committed .astro/config.yaml (use --local/--global for literal tokens)\naf instance add prod --url https://airflow.example.com --token '${AIRFLOW_API_TOKEN}'\n"
+    },
+    {
+      "id": "skill-health-1268-discover-no-token-creation",
+      "issue": 1268,
+      "source": "astronomer/agents",
+      "find": "# running discover without it. The non-dry-run mode creates API tokens in\n# Astro Cloud, which is a sensitive action that requires explicit approval.\n",
+      "replace": "# running discover without it. The non-dry-run mode writes every discovered\n# instance to config (project-shared .astro/config.yaml inside a project, which is\n# committed). Discovered Astro instances use astro_pat auth: no token is created\n# or stored on disk; it is resolved from the `astro login` session at request time.\n"
+    }
+  ],
+  "twilio-agent-connect": [
+    {
+      "id": "skill-health-980-tac-quickstart",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "https://www.twilio.com/docs/platform/tac/quickstart",
+      "replace": "https://www.twilio.com/docs/conversations/agent-connect/quickstart"
+    },
+    {
+      "id": "skill-health-980-tac-overview",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "https://www.twilio.com/docs/platform/tac/overview",
+      "replace": "https://www.twilio.com/docs/conversations/agent-connect/overview"
+    }
+  ],
+  "twilio-isv-sms-best-practices": [
+    {
+      "id": "skill-health-980-onboarding-isv",
+      "issue": 980,
+      "source": "openai/plugins",
+      "find": "a2p-10dlc/onboarding-is)",
+      "replace": "a2p-10dlc/onboarding-isv)"
+    }
+  ],
+  "playwright-best-practices": [
+    {
+      "id": "skill-health-1309-network-advanced-error-testing",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "advanced/network-advanced.md",
+      "find": "](error-testing.md#offline-testing)",
+      "replace": "](../debugging/error-testing.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-network-advanced-service-workers",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "advanced/network-advanced.md",
+      "find": "](service-workers.md#offline-testing)",
+      "replace": "](../browser-apis/service-workers.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-service-workers-error-testing",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "browser-apis/service-workers.md",
+      "find": "](error-testing.md#offline-testing)",
+      "replace": "](../debugging/error-testing.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-error-testing-service-workers",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "debugging/error-testing.md",
+      "find": "](service-workers.md#offline-testing)",
+      "replace": "](../browser-apis/service-workers.md#offline-testing)"
+    },
+    {
+      "id": "skill-health-1309-flaky-tests-assertions-waiting",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "debugging/flaky-tests.md",
+      "find": "](assertions-waiting.md#waiting-strategies)",
+      "replace": "](../core/assertions-waiting.md#waiting-strategies)"
+    },
+    {
+      "id": "skill-health-1309-performance-fixtures-hooks",
+      "issue": 1309,
+      "source": "currents-dev/playwright-best-practices-skill",
+      "file": "infrastructure-ci-cd/performance.md",
+      "find": "](fixtures-hooks.md#authentication-patterns)",
+      "replace": "](../core/fixtures-hooks.md#authentication-patterns)"
+    }
+  ],
+  "token-integration-analyzer": [
+    {
+      "id": "skill-health-1210-typed-no-return-revert",
+      "issue": 1210,
+      "source": "trailofbits/skills",
+      "find": "**Risk:** Silent failures on USDT transfers\n**Exploit:** User appears to deposit, but no tokens moved\n",
+      "replace": "**Risk:** USDT's `transferFrom` returns no data, so this typed `IERC20` call reverts when the compiler decodes the expected `bool` return value: USDT deposits fail outright (denial of service), they are not silently skipped. Silent failure is a different bug: ignoring a `false` return from a standard token, or a low-level `call` whose success flag and optional return data go unchecked.\n**Exploit:** Only those silent-failure paths let a user appear to deposit while no tokens moved (accounting is credited after an unsuccessful transfer). For this typed call, the impact is that the vault cannot accept USDT at all.\n"
+    }
+  ],
+  "next-forge": [
+    {
+      "id": "skill-health-1270-skill-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "find": "This runs Prisma format, generate, and db push in sequence.\n",
+      "replace": "This runs Prisma format, generate, and `migrate dev` in sequence, which creates and applies a migration (migration history). To sync the schema without creating a migration, run `bun run db:push` instead.\n"
+    },
+    {
+      "id": "skill-health-1270-skill-check-fix",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "find": "bun run lint                 # Check code style (Ultracite/Biome)\nbun run format               # Fix code style\n",
+      "replace": "bun run check                # Check code style (Ultracite/Biome)\nbun run fix                  # Fix code style\n"
+    },
+    {
+      "id": "skill-health-1270-arch-check-fix",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/architecture.md",
+      "find": "| `bun run lint` | Check code style (Ultracite/Biome) |\n| `bun run format` | Fix code style |\n",
+      "replace": "| `bun run check` | Check code style (Ultracite/Biome) |\n| `bun run fix` | Fix code style |\n"
+    },
+    {
+      "id": "skill-health-1270-arch-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/architecture.md",
+      "find": "| `bun run migrate` | Push database schema (format, generate, db push) |\n",
+      "replace": "| `bun run migrate` | Create and apply a migration (format, generate, `prisma migrate dev`) |\n| `bun run migrate:deploy` | Apply pending migrations (generate, `prisma migrate deploy`) |\n| `bun run db:push` | Push the schema without migration history (format, generate, `prisma db push`) |\n"
+    },
+    {
+      "id": "skill-health-1270-arch-release",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/architecture.md",
+      "find": "| `bun run changeset` | Manage changesets for releases |\n| `bun run release` | Publish using changesets |\n",
+      "replace": "| `bun run release` | Publish the package with `npm publish` |\n"
+    },
+    {
+      "id": "skill-health-1270-setup-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/setup.md",
+      "find": "After setting `DATABASE_URL`, push the schema to the database:\n\n```bash\nbun run migrate\n```\n\nThis runs three Prisma commands in sequence:\n1. `prisma format` — formats the schema file\n2. `prisma generate` — generates the Prisma client\n3. `prisma db push` — pushes the schema to the database\n",
+      "replace": "After setting `DATABASE_URL`, create and apply the database migrations:\n\n```bash\nbun run migrate\n```\n\nThis runs three Prisma commands in sequence:\n1. `prisma format` — formats the schema file\n2. `prisma generate` — generates the Prisma client\n3. `prisma migrate dev` — creates a migration from schema changes and applies it to the database\n\nTo push the schema without creating migration history (for example while prototyping), run `bun run db:push` instead.\n"
+    },
+    {
+      "id": "skill-health-1270-packages-migrate",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/packages.md",
+      "find": "**Migrations**: `bun run migrate` (format → generate → db push)\n",
+      "replace": "**Migrations**: `bun run migrate` (format → generate → migrate dev); `bun run db:push` pushes the schema without migration history\n"
+    },
+    {
+      "id": "skill-health-1270-customization-check-fix",
+      "issue": 1270,
+      "source": "openai/plugins",
+      "file": "references/customization.md",
+      "find": "Commands remain the same: `bun run lint`, `bun run format`.\n",
+      "replace": "Commands remain the same: `bun run check`, `bun run fix`.\n"
     }
   ]
 }

@@ -6,9 +6,9 @@
   "nodes": 2345,
   "edges": 17041,
   "generic_names_blocked": 32,
-  "tier1_edges": 5062,
+  "tier1_edges": 5065,
   "tier2_edges": 805,
-  "alias_edges": 4736,
+  "alias_edges": 4739,
   "discipline_edges": 599,
   "ambiguous_aliases": 36,
   "artifact_edges": 543,
@@ -94458,7 +94458,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "ida-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ida-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -131088,7 +131088,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "pentest-tools named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in pentest-tools/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -148854,7 +148854,7 @@
    "dst": "reverse-skill-router",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-engineering named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in reverse-engineering/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -149070,7 +149070,7 @@
    "dst": "ida-reverse",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "ida-reverse named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in ida-reverse/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -149151,7 +149151,7 @@
    "dst": "pentest-tools",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "pentest-tools named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in pentest-tools/SKILL.md body",
    "status": "accepted"
   },
   {
@@ -149205,7 +149205,7 @@
    "dst": "reverse-engineering",
    "weight": 1,
    "provenance": "EXTRACTED",
-   "justification": "reverse-engineering named in reverse-skill-router/SKILL.md body",
+   "justification": "reverse-skill-router named in reverse-engineering/SKILL.md body",
    "status": "accepted"
   },
   {

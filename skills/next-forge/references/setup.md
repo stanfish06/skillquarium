@@ -163,7 +163,7 @@ LANGUINE_PROJECT_ID="..."
 
 ## Database Setup
 
-After setting `DATABASE_URL`, push the schema to the database:
+After setting `DATABASE_URL`, create and apply the database migrations:
 
 ```bash
 bun run migrate
@@ -172,7 +172,9 @@ bun run migrate
 This runs three Prisma commands in sequence:
 1. `prisma format` — formats the schema file
 2. `prisma generate` — generates the Prisma client
-3. `prisma db push` — pushes the schema to the database
+3. `prisma migrate dev` — creates a migration from schema changes and applies it to the database
+
+To push the schema without creating migration history (for example while prototyping), run `bun run db:push` instead.
 
 The schema lives at `packages/database/prisma/schema.prisma`. Edit it, then run `bun run migrate` again after changes.
 

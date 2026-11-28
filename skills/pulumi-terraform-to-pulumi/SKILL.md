@@ -46,22 +46,22 @@ user to find or build a Pulumi ESC environment that provides the necessary crede
 
 Read the generated `/tmp/required-providers.json` and install all these Pulumi providers into the new project,
 respecting the suggested versions even if they downgrade an already installed provider. The file will contain records
-such as `[{"name":"aws","version":"7.12.0"}]`.
+such as `[{"name":"aws","version":"7.55.0"}]`.
 
 Install providers as project dependencies using the language-specific package manager (NOT `pulumi plugin install`,
 which only downloads plugins without adding dependencies):
 
     # TypeScript/JavaScript
-    npm install @pulumi/aws@7.12.0
+    npm install @pulumi/aws@7.55.0
 
     # Python
-    pip install pulumi_aws==7.12.0
+    pip install pulumi_aws==7.55.0
 
     # Go
-    go get github.com/pulumi/pulumi-aws/sdk/v7@v7.12.0
+    go get github.com/pulumi/pulumi-aws/sdk/v7@v7.55.0
 
     # C#
-    dotnet add package Pulumi.Aws --version 7.12.0
+    dotnet add package Pulumi.Aws --version 7.55.0
 
 Import the translated state draft (`/tmp/pulumi-state.json`) into the Pulumi stack:
 

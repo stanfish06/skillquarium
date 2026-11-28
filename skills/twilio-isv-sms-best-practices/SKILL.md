@@ -83,7 +83,7 @@ Your company provides messaging services to other businesses, who are represente
 
 Use this flow when your customer needs to send SMS via 10-digit long code (local) numbers in the United States or Canada.
 
-The [full onboarding overview](https://www.twilio.com/docs/messaging/compliance/a2p-10dlc/onboarding-is) includes all necessary API calls to complete A2P campaign registration for your customers.
+The [full onboarding overview](https://www.twilio.com/docs/messaging/compliance/a2p-10dlc/onboarding-isv) includes all necessary API calls to complete A2P campaign registration for your customers.
 
 **Timeline:** 13-20 business days total (3-5 days for Brand + 10-15 days for campaign). Start early.
 

@@ -14,8 +14,8 @@ Use this skill for **PufferLib 3.x** (`pufferlib>=3.0,<4.0`). PufferLib 3.0 was 
 
 - Prefer `pufferlib-v3` for `pufferlib>=3.0,<4.0`, the June 2025 PyPI release line, and docs that show `pufferl.load_config`, `pufferl.load_env`, or `pufferl.load_policy`.
 - Prefer `pufferlib-v2` only for code pinned to `pufferlib>=2.0,<3.0` or reproducing the 1M SPS Ocean release.
-- Prefer the legacy `pufferlib` skill only for `pufferlib==1.0.0`.
-- If a project tracks the 2026 `4.0` branch or `puffer.ai/docs.html`, inspect upstream first; do not assume v3 signatures.
+- Prefer the `pufferlib` skill for PyPI `3.0.0` as published, the pinned `4.0` source profile, or the native `5.0` branch — it is version-aware and covers all three.
+- If a project tracks the native `5.0` branch (upstream's current default) or the pinned `4.0` source, use the `pufferlib` skill; do not assume v3 signatures.
 
 ## Installation
 

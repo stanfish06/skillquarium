@@ -46,7 +46,9 @@ Manage multiple Airflow instances with persistent configuration:
 
 ```bash
 # Add a new instance
-af instance add prod --url https://airflow.example.com --token "$API_TOKEN"
+# Single quotes store the ${VAR} reference, not the secret: inside a project, `add`
+# writes to the committed .astro/config.yaml (use --local/--global for literal tokens)
+af instance add prod --url https://airflow.example.com --token '${AIRFLOW_API_TOKEN}'
 af instance add staging --url https://staging.example.com --username admin --password admin
 
 # List and switch instances
@@ -64,8 +66,10 @@ af instance discover local            # Scan common local Airflow ports
 af instance discover local --scan     # Deep scan all ports 1024-65535
 
 # IMPORTANT: Always run with --dry-run first and ask for user consent before
-# running discover without it. The non-dry-run mode creates API tokens in
-# Astro Cloud, which is a sensitive action that requires explicit approval.
+# running discover without it. The non-dry-run mode writes every discovered
+# instance to config (project-shared .astro/config.yaml inside a project, which is
+# committed). Discovered Astro instances use astro_pat auth: no token is created
+# or stored on disk; it is resolved from the `astro login` session at request time.
 
 # Show where an instance came from (file path + scope)
 af instance show prod

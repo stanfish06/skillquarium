@@ -102,17 +102,18 @@ Global dependencies include `.env.*local` files. Environment mode is loose. The 
 | `bun run dev` | Start all apps in development mode |
 | `bun run build` | Build all apps and packages |
 | `bun run test` | Run tests across the monorepo |
-| `bun run lint` | Check code style (Ultracite/Biome) |
-| `bun run format` | Fix code style |
+| `bun run check` | Check code style (Ultracite/Biome) |
+| `bun run fix` | Fix code style |
 | `bun run analyze` | Run bundle analysis |
 | `bun run translate` | Run i18n translation via Languine |
 | `bun run boundaries` | Check Turborepo workspace boundary violations |
 | `bun run bump-deps` | Update all dependencies |
 | `bun run bump-ui` | Update shadcn/ui components |
-| `bun run migrate` | Push database schema (format, generate, db push) |
+| `bun run migrate` | Create and apply a migration (format, generate, `prisma migrate dev`) |
+| `bun run migrate:deploy` | Apply pending migrations (generate, `prisma migrate deploy`) |
+| `bun run db:push` | Push the schema without migration history (format, generate, `prisma db push`) |
 | `bun run clean` | Remove node_modules across the monorepo |
-| `bun run changeset` | Manage changesets for releases |
-| `bun run release` | Publish using changesets |
+| `bun run release` | Publish the package with `npm publish` |
 
 ## Filtering
 
