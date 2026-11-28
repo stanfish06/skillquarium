@@ -119,5 +119,12 @@
       "find": "- **Ion effects** — fast ion instability in positron rings; clearing electrodes and gap voltage scans.",
       "replace": "- **Ion effects** — fast ion instability in electron rings (electron-cloud instability is the\n  positron-ring counterpart); clearing electrodes and gap voltage scans."
     }
+  ],
+  "acoustics-physicist": [
+    {
+      "id": "no-astm-e2611-array-phase-matching",
+      "find": "- **ASTM E2611 for array microphones:** Phase match across array for beamforming validity.",
+      "replace": "- **Array microphones:** Phase match across array for beamforming validity. (ASTM E2611 is an\n  impedance-tube transfer-matrix transmission-loss method, not an array phase-matching standard.)"
+    }
   ]
 }
