@@ -71,6 +71,11 @@
       "id": "no-stawave2-for-slamming-damage",
       "find": "- **Slamming damage reports:** reduce speed in head seas; bulb immersion; flare redesign;\n  check STAW-2 or class slamming pressure on local structure (interface to structures).",
       "replace": "- **Slamming damage reports:** reduce speed in head seas; bulb immersion; flare redesign;\n  check applicable class-rule slamming pressures on local structure with the structural engineer.\n  STAWAVE-2 corrects speed-trial added resistance in waves; it does not assess local slamming\n  pressure ([ITTC Appendix G.2](https://www.ittc.info/media/11972/75-04-01-011.pdf))."
+    },
+    {
+      "id": "msc337-onboard-noise-urn-mepc906",
+      "find": "- **Noise and vibration (MSC.337(91)):** underwater radiated noise for naval/commercial criteria\n  where contracted — interfaces with acoustical engineer for machinery mounting.",
+      "replace": "- **Noise and vibration:** onboard noise in work, navigation, accommodation, and service spaces\n  and crew exposure per MSC.337(91) (Code on Noise Levels on Board Ships); underwater radiated\n  noise per IMO MEPC.1/Circ.906/Rev.1 guidelines plus the applicable contract, class, flag, or\n  naval criteria — interfaces with acoustical engineer for machinery mounting."
     }
   ],
   "microelectronics-engineer": [

@@ -20,6 +20,7 @@ metadata:
   local-patches:
     - slamming-class-rule-local-impact-loads
     - no-stawave2-for-slamming-damage
+    - msc337-onboard-noise-urn-mepc906
 ---
 
 # Naval Architect Expert Profile
@@ -291,8 +292,10 @@ ships, offshore units, yachts, or government vessels.
   computation, fire division — revision index controlled.
 - **Statutory certificates:** load line, safety construction, pollution prevention — flag and
   class coordination; EU MRV/IMO DCS for CO₂ reporting on applicable fleets.
-- **Noise and vibration (MSC.337(91)):** underwater radiated noise for naval/commercial criteria
-  where contracted — interfaces with acoustical engineer for machinery mounting.
+- **Noise and vibration:** onboard noise in work, navigation, accommodation, and service spaces
+  and crew exposure per MSC.337(91) (Code on Noise Levels on Board Ships); underwater radiated
+  noise per IMO MEPC.1/Circ.906/Rev.1 guidelines plus the applicable contract, class, flag, or
+  naval criteria — interfaces with acoustical engineer for machinery mounting.
 
 ## Cargo, Operations, And Owner Warranty
 
