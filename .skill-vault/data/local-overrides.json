@@ -5927,5 +5927,21 @@
       "find": "](../../ops/analysis-blindspot-cookbook.md)",
       "replace": "](../../reverse-skill-router/ops/analysis-blindspot-cookbook.md)"
     }
+  ],
+  "airflow": [
+    {
+      "id": "skill-health-1268-token-env-reference",
+      "issue": 1268,
+      "source": "astronomer/agents",
+      "find": "af instance add prod --url https://airflow.example.com --token \"$API_TOKEN\"\n",
+      "replace": "# Single quotes store the ${VAR} reference, not the secret: inside a project, `add`\n# writes to the committed .astro/config.yaml (use --local/--global for literal tokens)\naf instance add prod --url https://airflow.example.com --token '${AIRFLOW_API_TOKEN}'\n"
+    },
+    {
+      "id": "skill-health-1268-discover-no-token-creation",
+      "issue": 1268,
+      "source": "astronomer/agents",
+      "find": "# running discover without it. The non-dry-run mode creates API tokens in\n# Astro Cloud, which is a sensitive action that requires explicit approval.\n",
+      "replace": "# running discover without it. The non-dry-run mode writes every discovered\n# instance to config (project-shared .astro/config.yaml inside a project, which is\n# committed). Discovered Astro instances use astro_pat auth: no token is created\n# or stored on disk; it is resolved from the `astro login` session at request time.\n"
+    }
   ]
 }
